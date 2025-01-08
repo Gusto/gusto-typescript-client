@@ -1,0 +1,19 @@
+# PayrollCreditBlockersType
+
+## Example Usage
+
+```typescript
+import { PayrollCreditBlockersType } from "gusto_embedded/models/components";
+
+let value: PayrollCreditBlockersType = {};
+```
+
+## Fields
+
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `blockerType`                                                                                                              | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | The type of blocker that's blocking the payment from being credited.                                                       |
+| `blockerName`                                                                                                              | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | The name of the credit blocker.                                                                                            |
+| `unblockOptions`                                                                                                           | [components.PayrollCreditBlockersTypeUnblockOptions](../../models/components/payrollcreditblockerstypeunblockoptions.md)[] | :heavy_minus_sign:                                                                                                         | The available options to unblock a credit blocker.                                                                         |
+| `selectedOption`                                                                                                           | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | The unblock option that's been selected to resolve the credit blocker.                                                     |
+| `status`                                                                                                                   | [components.PayrollCreditBlockersTypeStatus](../../models/components/payrollcreditblockerstypestatus.md)                   | :heavy_minus_sign:                                                                                                         | The status of the credit blocker                                                                                           |

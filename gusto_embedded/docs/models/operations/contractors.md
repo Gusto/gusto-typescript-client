@@ -1,0 +1,15 @@
+# Contractors
+
+## Example Usage
+
+```typescript
+import { Contractors } from "gusto_embedded/models/operations";
+
+let value: Contractors = {};
+```
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `uuid`             | *string*           | :heavy_minus_sign: | N/A                |

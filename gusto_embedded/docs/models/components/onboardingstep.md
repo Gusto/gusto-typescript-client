@@ -1,0 +1,20 @@
+# OnboardingStep
+
+## Example Usage
+
+```typescript
+import { OnboardingStep } from "gusto_embedded/models/components";
+
+let value: OnboardingStep = {};
+```
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `title`                                                                                                           | *string*                                                                                                          | :heavy_minus_sign:                                                                                                | The display name of the onboarding step                                                                           |
+| `id`                                                                                                              | [components.Id](../../models/components/id.md)                                                                    | :heavy_minus_sign:                                                                                                | The string identifier for each onboarding step                                                                    |
+| `required`                                                                                                        | *boolean*                                                                                                         | :heavy_minus_sign:                                                                                                | The boolean flag indicating whether the step is required or optional                                              |
+| `completed`                                                                                                       | *boolean*                                                                                                         | :heavy_minus_sign:                                                                                                | The boolean flag indicating whether the step is completed or not.                                                 |
+| `skippable`                                                                                                       | *boolean*                                                                                                         | :heavy_minus_sign:                                                                                                | The boolean flag indicating whether the step can be skipped or not.                                               |
+| `requirements`                                                                                                    | [components.Requirements](../../models/components/requirements.md)[]                                              | :heavy_minus_sign:                                                                                                | A list of onboarding step that are required to be completed in order to proceed with the current onboarding step. |

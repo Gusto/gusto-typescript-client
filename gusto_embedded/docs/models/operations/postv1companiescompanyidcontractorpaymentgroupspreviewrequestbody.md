@@ -1,0 +1,29 @@
+# PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody } from "gusto_embedded/models/operations";
+import { RFCDate } from "gusto_embedded/types";
+
+let value: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody = {
+  checkDate: new RFCDate("2020-01-01"),
+  creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
+  contractorPayments: [
+    {
+      wage: 5000,
+      hours: 40,
+      bonus: 500,
+      reimbursement: 20,
+    },
+  ],
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                        | Type                                                                                                                                                                                         | Required                                                                                                                                                                                     | Description                                                                                                                                                                                  | Example                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `checkDate`                                                                                                                                                                                  | [RFCDate](../../types/rfcdate.md)                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                           | The payment check date                                                                                                                                                                       | 2020-01-01                                                                                                                                                                                   |
+| `creationToken`                                                                                                                                                                              | *string*                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                           | Optional token used to make contractor payment group creation idempotent.  If provided, string must be unique for each group you intend to create.                                           | 1d532d13-8f61-4a57-ad3c-b5fac1c6e05e                                                                                                                                                         |
+| `contractorPayments`                                                                                                                                                                         | [operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments](../../models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewcontractorpayments.md)[] | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |                                                                                                                                                                                              |

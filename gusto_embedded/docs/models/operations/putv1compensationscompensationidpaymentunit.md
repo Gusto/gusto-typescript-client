@@ -1,0 +1,17 @@
+# PutV1CompensationsCompensationIdPaymentUnit
+
+The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
+
+## Example Usage
+
+```typescript
+import { PutV1CompensationsCompensationIdPaymentUnit } from "gusto_embedded/models/operations";
+
+let value: PutV1CompensationsCompensationIdPaymentUnit = "Hour";
+```
+
+## Values
+
+```typescript
+"Hour" | "Week" | "Month" | "Year" | "Paycheck"
+```

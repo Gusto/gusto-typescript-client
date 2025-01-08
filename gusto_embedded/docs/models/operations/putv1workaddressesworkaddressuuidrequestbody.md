@@ -1,0 +1,19 @@
+# PutV1WorkAddressesWorkAddressUuidRequestBody
+
+## Example Usage
+
+```typescript
+import { PutV1WorkAddressesWorkAddressUuidRequestBody } from "gusto_embedded/models/operations";
+
+let value: PutV1WorkAddressesWorkAddressUuidRequestBody = {
+  version: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                         | Type                                                                                                                                                                          | Required                                                                                                                                                                      | Description                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `locationUuid`                                                                                                                                                                | *string*                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                            | Reference to a company location                                                                                                                                               |
+| `effectiveDate`                                                                                                                                                               | [RFCDate](../../types/rfcdate.md)                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                            | N/A                                                                                                                                                                           |
+| `version`                                                                                                                                                                     | *string*                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                            | The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field. |

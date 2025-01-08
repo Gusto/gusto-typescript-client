@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyUuidContractorsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyUuidContractorsRequest } from "gusto_embedded/models/operations";
+
+let value: PostV1CompaniesCompanyUuidContractorsRequest = {
+  companyUuid: "<id>",
+  requestBody: {
+    wageType: "Fixed",
+    startDate: "2020-01-11",
+    hourlyRate: "40.0",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [components.VersionHeader](../../models/components/versionheader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [operations.PostV1CompaniesCompanyUuidContractorsRequestBody](../../models/operations/postv1companiescompanyuuidcontractorsrequestbody.md)                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                           | Create an individual or business contractor.                                                                                                                                                                                 |

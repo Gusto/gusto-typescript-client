@@ -1,0 +1,15 @@
+# PutRemovePeopleFromDepartmentContractors
+
+## Example Usage
+
+```typescript
+import { PutRemovePeopleFromDepartmentContractors } from "gusto_embedded/models/operations";
+
+let value: PutRemovePeopleFromDepartmentContractors = {};
+```
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `uuid`             | *string*           | :heavy_minus_sign: | N/A                |
