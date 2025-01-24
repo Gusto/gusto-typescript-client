@@ -5,9 +5,9 @@ Status of the wire in
 ## Example Usage
 
 ```typescript
-import { WireInRequestStatus } from "gusto_embedded/models/components";
+import { WireInRequestStatus } from "gusto-embedded/models/components";
 
-let value: WireInRequestStatus = "pending_review";
+let value: WireInRequestStatus = "awaiting_funds";
 ```
 
 ## Values

@@ -5,9 +5,9 @@ The status of the webhook subscription.
 ## Example Usage
 
 ```typescript
-import { WebhookSubscriptionStatus } from "gusto_embedded/models/components";
+import { WebhookSubscriptionStatus } from "gusto-embedded/models/components";
 
-let value: WebhookSubscriptionStatus = "pending";
+let value: WebhookSubscriptionStatus = "removed";
 ```
 
 ## Values

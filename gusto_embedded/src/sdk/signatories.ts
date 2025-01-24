@@ -4,7 +4,7 @@
 
 import { signatoriesCreate } from "../funcs/signatoriesCreate.js";
 import { signatoriesDelete } from "../funcs/signatoriesDelete.js";
-import { signatoriesGetAll } from "../funcs/signatoriesGetAll.js";
+import { signatoriesGet } from "../funcs/signatoriesGet.js";
 import { signatoriesInvite } from "../funcs/signatoriesInvite.js";
 import { signatoriesUpdate } from "../funcs/signatoriesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -42,11 +42,11 @@ export class Signatories extends ClientSDK {
    *
    * scope: `signatories:read`
    */
-  async getAll(
+  async get(
     request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Signatory>> {
-    return unwrapAsync(signatoriesGetAll(
+    return unwrapAsync(signatoriesGet(
       this,
       request,
       options,

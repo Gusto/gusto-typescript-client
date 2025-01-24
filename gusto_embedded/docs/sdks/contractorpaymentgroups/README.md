@@ -8,8 +8,8 @@
 * [create](#create) - Create a contractor payment group
 * [list](#list) - Get contractor payment groups for a company
 * [preview](#preview) - Preview a contractor payment group
-* [fetch](#fetch) - Fetch a contractor payment group
-* [cancel](#cancel) - Cancel a contractor payment group
+* [get](#get) - Fetch a contractor payment group
+* [delete](#delete) - Cancel a contractor payment group
 * [fund](#fund) - Fund a contractor payment group [DEMO]
 
 ## create
@@ -21,11 +21,11 @@ scope: `payrolls:run`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -35,12 +35,7 @@ async function run() {
       checkDate: new RFCDate("2020-01-01"),
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
-        {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
-        },
+
       ],
     },
   });
@@ -57,14 +52,14 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentGroupsCreate } from "gusto_embedded/funcs/contractorPaymentGroupsCreate.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentGroupsCreate } from "gusto-embedded/funcs/contractorPaymentGroupsCreate.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -74,12 +69,7 @@ async function run() {
       checkDate: new RFCDate("2020-01-01"),
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
-        {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
-        },
+  
       ],
     },
   });
@@ -126,10 +116,10 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -151,13 +141,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentGroupsList } from "gusto_embedded/funcs/contractorPaymentGroupsList.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentGroupsList } from "gusto-embedded/funcs/contractorPaymentGroupsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -208,11 +198,11 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -223,6 +213,7 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
+          paymentMethod: "Direct Deposit",
           wage: 5000,
           hours: 40,
           bonus: 500,
@@ -244,14 +235,14 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentGroupsPreview } from "gusto_embedded/funcs/contractorPaymentGroupsPreview.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentGroupsPreview } from "gusto-embedded/funcs/contractorPaymentGroupsPreview.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -262,6 +253,7 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
+          paymentMethod: "Direct Deposit",
           wage: 5000,
           hours: 40,
           bonus: 500,
@@ -304,7 +296,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## fetch
+## get
 
 Returns a contractor payment group with all associated contractor payments.
 
@@ -313,14 +305,14 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.contractorPaymentGroups.fetch({
+  const result = await gustoEmbedded.contractorPaymentGroups.get({
     contractorPaymentGroupUuid: "<id>",
   });
 
@@ -336,17 +328,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentGroupsFetch } from "gusto_embedded/funcs/contractorPaymentGroupsFetch.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentGroupsGet } from "gusto-embedded/funcs/contractorPaymentGroupsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await contractorPaymentGroupsFetch(gustoEmbedded, {
+  const res = await contractorPaymentGroupsGet(gustoEmbedded, {
     contractorPaymentGroupUuid: "<id>",
   });
 
@@ -382,7 +374,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## cancel
+## delete
 
 Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
 
@@ -391,14 +383,14 @@ scope: `payrolls:run`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  await gustoEmbedded.contractorPaymentGroups.cancel({
+  await gustoEmbedded.contractorPaymentGroups.delete({
     contractorPaymentGroupUuid: "<id>",
   });
 
@@ -413,17 +405,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentGroupsCancel } from "gusto_embedded/funcs/contractorPaymentGroupsCancel.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentGroupsDelete } from "gusto-embedded/funcs/contractorPaymentGroupsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await contractorPaymentGroupsCancel(gustoEmbedded, {
+  const res = await contractorPaymentGroupsDelete(gustoEmbedded, {
     contractorPaymentGroupUuid: "<id>",
   });
 
@@ -472,10 +464,10 @@ scope: `payrolls:run`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -495,13 +487,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentGroupsFund } from "gusto_embedded/funcs/contractorPaymentGroupsFund.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentGroupsFund } from "gusto-embedded/funcs/contractorPaymentGroupsFund.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

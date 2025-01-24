@@ -5,7 +5,7 @@ The subtotals for the payroll.
 ## Example Usage
 
 ```typescript
-import { Totals } from "gusto_embedded/models/components";
+import { Totals } from "gusto-embedded/models/components";
 
 let value: Totals = {};
 ```

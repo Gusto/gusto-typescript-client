@@ -5,7 +5,7 @@ The licensed payroll processor
 ## Example Usage
 
 ```typescript
-import { Licensee } from "gusto_embedded/models/components";
+import { Licensee } from "gusto-embedded/models/components";
 
 let value: Licensee = {};
 ```

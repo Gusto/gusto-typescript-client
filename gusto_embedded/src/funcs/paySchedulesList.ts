@@ -6,6 +6,7 @@ import * as z from "zod";
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -24,20 +25,24 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get the pay schedules for a company
+ * Get pay periods for a company
  *
  * @remarks
- * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+ * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
  *
- * scope: `pay_schedules:read`
+ * By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
+ *
+ * Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+ *
+ * scope: `payrolls:read`
  */
 export async function paySchedulesList(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
+  request: operations.GetV1CompaniesCompanyIdPayPeriodsRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
-    Array<components.PaySchedule>,
+    Array<components.PayPeriod>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -50,8 +55,9 @@ export async function paySchedulesList(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1CompaniesCompanyIdPaySchedulesRequest$outboundSchema
-        .parse(value),
+      operations.GetV1CompaniesCompanyIdPayPeriodsRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -67,23 +73,22 @@ export async function paySchedulesList(
     }),
   };
 
-  const path = pathToFunc("/v1/companies/{company_id}/pay_schedules")(
-    pathParams,
-  );
+  const path = pathToFunc("/v1/companies/{company_id}/pay_periods")(pathParams);
 
   const query = encodeFormQuery({
-    "page": payload.page,
-    "per": payload.per,
+    "end_date": payload.end_date,
+    "payroll_types": payload.payroll_types,
+    "start_date": payload.start_date,
   });
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.companyAccessAuth);
   const securityInput = secConfig == null
@@ -92,7 +97,7 @@ export async function paySchedulesList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "get-v1-companies-company_id-pay_schedules",
+    operationID: "get-v1-companies-company_id-pay_periods",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -131,7 +136,7 @@ export async function paySchedulesList(
   const response = doResult.value;
 
   const [result] = await M.match<
-    Array<components.PaySchedule>,
+    Array<components.PayPeriod>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -140,8 +145,9 @@ export async function paySchedulesList(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, z.array(components.PaySchedule$inboundSchema)),
-    M.fail([404, "4XX", "5XX"]),
+    M.json(200, z.array(components.PayPeriod$inboundSchema)),
+    M.fail([404, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

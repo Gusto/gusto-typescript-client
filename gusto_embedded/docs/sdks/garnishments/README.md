@@ -6,8 +6,8 @@
 ### Available Operations
 
 * [create](#create) - Create a garnishment
-* [listByEmployee](#listbyemployee) - Get garnishments for an employee
-* [get](#get) - Get a garnishment
+* [get](#get) - Get garnishments for an employee
+* [fetch](#fetch) - Get a garnishment
 * [update](#update) - Update a garnishment
 * [getChildSupport](#getchildsupport) - Get child support garnishment data
 
@@ -20,20 +20,24 @@ scope: `garnishments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
   const result = await gustoEmbedded.garnishments.create({
     employeeId: "<id>",
     requestBody: {
+      active: true,
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
+      times: null,
       recurring: true,
+      annualMaximum: null,
+      payPeriodMaximum: null,
       deductAsPercentage: false,
     },
   });
@@ -50,23 +54,27 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { garnishmentsCreate } from "gusto_embedded/funcs/garnishmentsCreate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { garnishmentsCreate } from "gusto-embedded/funcs/garnishmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
   const res = await garnishmentsCreate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
+      active: true,
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
+      times: null,
       recurring: true,
+      annualMaximum: null,
+      payPeriodMaximum: null,
       deductAsPercentage: false,
     },
   });
@@ -104,7 +112,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## listByEmployee
+## get
 
 Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
 
@@ -113,14 +121,14 @@ scope: `garnishments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.garnishments.listByEmployee({
+  const result = await gustoEmbedded.garnishments.get({
     employeeId: "<id>",
   });
 
@@ -136,17 +144,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { garnishmentsListByEmployee } from "gusto_embedded/funcs/garnishmentsListByEmployee.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { garnishmentsGet } from "gusto-embedded/funcs/garnishmentsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await garnishmentsListByEmployee(gustoEmbedded, {
+  const res = await garnishmentsGet(gustoEmbedded, {
     employeeId: "<id>",
   });
 
@@ -182,7 +190,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get
+## fetch
 
 Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
 
@@ -191,14 +199,14 @@ scope: `garnishments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.garnishments.get({
+  const result = await gustoEmbedded.garnishments.fetch({
     garnishmentId: "<id>",
   });
 
@@ -214,17 +222,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { garnishmentsGet } from "gusto_embedded/funcs/garnishmentsGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { garnishmentsFetch } from "gusto-embedded/funcs/garnishmentsFetch.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await garnishmentsGet(gustoEmbedded, {
+  const res = await garnishmentsFetch(gustoEmbedded, {
     garnishmentId: "<id>",
   });
 
@@ -269,10 +277,10 @@ scope: `garnishments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -280,6 +288,11 @@ async function run() {
     garnishmentId: "<id>",
     requestBody: {
       active: false,
+      times: null,
+      recurring: false,
+      annualMaximum: null,
+      payPeriodMaximum: null,
+      deductAsPercentage: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
   });
@@ -296,13 +309,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { garnishmentsUpdate } from "gusto_embedded/funcs/garnishmentsUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { garnishmentsUpdate } from "gusto-embedded/funcs/garnishmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -310,6 +323,11 @@ async function run() {
     garnishmentId: "<id>",
     requestBody: {
       active: false,
+      times: null,
+      recurring: false,
+      annualMaximum: null,
+      payPeriodMaximum: null,
+      deductAsPercentage: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
   });
@@ -356,10 +374,10 @@ scope: `garnishments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -377,13 +395,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { garnishmentsGetChildSupport } from "gusto_embedded/funcs/garnishmentsGetChildSupport.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { garnishmentsGetChildSupport } from "gusto-embedded/funcs/garnishmentsGetChildSupport.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

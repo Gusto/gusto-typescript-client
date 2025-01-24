@@ -6,7 +6,7 @@ see [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts)
 ## Example Usage
 
 ```typescript
-import { PutV1ContractorsContractorIdPaymentMethodType } from "gusto_embedded/models/operations";
+import { PutV1ContractorsContractorIdPaymentMethodType } from "gusto-embedded/models/operations";
 
 let value: PutV1ContractorsContractorIdPaymentMethodType = "Check";
 ```

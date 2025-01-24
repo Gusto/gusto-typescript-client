@@ -5,7 +5,7 @@ Update an employee.
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeesRequestBody } from "gusto_embedded/models/operations";
+import { PutV1EmployeesRequestBody } from "gusto-embedded/models/operations";
 
 let value: PutV1EmployeesRequestBody = {
   version: "<value>",

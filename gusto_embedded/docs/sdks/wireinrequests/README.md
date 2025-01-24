@@ -6,8 +6,8 @@
 ### Available Operations
 
 * [get](#get) - Get a single Wire In Request
-* [update](#update) - Submit a wire in request
-* [list](#list) - Get all Wire In Requests for a company
+* [submitRequest](#submitrequest) - Submit a wire in request
+* [getAll](#getall) - Get all Wire In Requests for a company
 
 ## get
 
@@ -18,10 +18,10 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -41,13 +41,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { wireInRequestsGet } from "gusto_embedded/funcs/wireInRequestsGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { wireInRequestsGet } from "gusto-embedded/funcs/wireInRequestsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -87,7 +87,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update
+## submitRequest
 
 Submit a wire in request for a payment
 
@@ -96,14 +96,14 @@ scope: `payrolls:run`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.wireInRequests.update({
+  const result = await gustoEmbedded.wireInRequests.submitRequest({
     wireInRequestUuid: "<id>",
     requestBody: {
       dateSent: "2024-06-10T00:00:00Z",
@@ -125,17 +125,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { wireInRequestsUpdate } from "gusto_embedded/funcs/wireInRequestsUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { wireInRequestsSubmitRequest } from "gusto-embedded/funcs/wireInRequestsSubmitRequest.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await wireInRequestsUpdate(gustoEmbedded, {
+  const res = await wireInRequestsSubmitRequest(gustoEmbedded, {
     wireInRequestUuid: "<id>",
     requestBody: {
       dateSent: "2024-06-10T00:00:00Z",
@@ -178,7 +178,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
+## getAll
 
 Fetches all Wire In Requests for a company.
 
@@ -187,14 +187,14 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.wireInRequests.list({
+  const result = await gustoEmbedded.wireInRequests.getAll({
     companyUuid: "<id>",
   });
 
@@ -210,17 +210,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { wireInRequestsList } from "gusto_embedded/funcs/wireInRequestsList.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { wireInRequestsGetAll } from "gusto-embedded/funcs/wireInRequestsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await wireInRequestsList(gustoEmbedded, {
+  const res = await wireInRequestsGetAll(gustoEmbedded, {
     companyUuid: "<id>",
   });
 

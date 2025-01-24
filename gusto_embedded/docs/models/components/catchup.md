@@ -5,7 +5,7 @@ Whether the employee should use a benefit’s 'catch up' rate. Only Roth 401k an
 ## Example Usage
 
 ```typescript
-import { CatchUp } from "gusto_embedded/models/components";
+import { CatchUp } from "gusto-embedded/models/components";
 
 let value: CatchUp = {};
 ```

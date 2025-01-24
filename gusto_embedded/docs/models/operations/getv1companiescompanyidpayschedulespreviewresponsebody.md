@@ -5,7 +5,7 @@ Pay schedule preview
 ## Example Usage
 
 ```typescript
-import { GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody } from "gusto_embedded/models/operations";
+import { GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody } from "gusto-embedded/models/operations";
 
 let value: GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody = {};
 ```

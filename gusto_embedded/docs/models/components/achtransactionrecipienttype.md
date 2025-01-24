@@ -5,9 +5,9 @@ The type of recipient associated with the ACH transaction
 ## Example Usage
 
 ```typescript
-import { AchTransactionRecipientType } from "gusto_embedded/models/components";
+import { AchTransactionRecipientType } from "gusto-embedded/models/components";
 
-let value: AchTransactionRecipientType = "Contractor";
+let value: AchTransactionRecipientType = "Employee";
 ```
 
 ## Values

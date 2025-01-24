@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [createCustom](#createcustom) - Create a custom report
+* [create](#create) - Create a custom report
 * [get](#get) - Get a report
 * [getTemplate](#gettemplate) - Get a report template
 
-## createCustom
+## create
 
 Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
 
@@ -18,15 +18,15 @@ scope: `company_reports:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.reports.createCustom({
+  const result = await gustoEmbedded.reports.create({
     companyUuid: "<id>",
     requestBody: {
       columns: [
@@ -38,6 +38,7 @@ async function run() {
         "work_address_state",
       ],
       fileType: "csv",
+      withTotals: false,
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),
@@ -57,18 +58,18 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { reportsCreateCustom } from "gusto_embedded/funcs/reportsCreateCustom.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { reportsCreate } from "gusto-embedded/funcs/reportsCreate.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await reportsCreateCustom(gustoEmbedded, {
+  const res = await reportsCreate(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
       columns: [
@@ -80,6 +81,7 @@ async function run() {
         "work_address_state",
       ],
       fileType: "csv",
+      withTotals: false,
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),
@@ -129,10 +131,10 @@ scope: `company_reports:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -152,13 +154,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { reportsGet } from "gusto_embedded/funcs/reportsGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { reportsGet } from "gusto-embedded/funcs/reportsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -207,10 +209,10 @@ scope: `company_reports:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -231,13 +233,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { reportsGetTemplate } from "gusto_embedded/funcs/reportsGetTemplate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { reportsGetTemplate } from "gusto-embedded/funcs/reportsGetTemplate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

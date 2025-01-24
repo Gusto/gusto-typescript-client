@@ -10,7 +10,7 @@ their limit.
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption } from "gusto_embedded/models/operations";
+import { PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption } from "gusto-embedded/models/operations";
 
 let value: PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption = "Individual";
 ```

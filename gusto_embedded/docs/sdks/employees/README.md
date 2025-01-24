@@ -6,13 +6,14 @@
 ### Available Operations
 
 * [create](#create) - Create an employee
-* [list](#list) - Get employees of a company
+* [get](#get) - Get employees of a company
 * [createHistorical](#createhistorical) - Create a historical employee
 * [updateHistorical](#updatehistorical) - Update a historical employee
-* [get](#get) - Get an employee
+* [retrieve](#retrieve) - Get an employee
 * [update](#update) - Update an employee
 * [delete](#delete) - Delete an onboarding employee
 * [getCustomFields](#getcustomfields) - Get an employee's custom fields
+* [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
 * [getOnboardingStatus](#getonboardingstatus) - Get the employee's onboarding status
 * [updateOnboardingStatus](#updateonboardingstatus) - Update the employee's onboarding status
 * [getTimeOffActivities](#gettimeoffactivities) - Get employee time off activities
@@ -26,10 +27,10 @@ scope: `employees:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -58,13 +59,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesCreate } from "gusto_embedded/funcs/employeesCreate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesCreate } from "gusto-embedded/funcs/employeesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -114,7 +115,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
+## get
 
 Get all of the employees, onboarding, active and terminated, for a given company.
 
@@ -123,14 +124,14 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employees.list({
+  const result = await gustoEmbedded.employees.get({
     companyId: "<id>",
   });
 
@@ -146,17 +147,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesList } from "gusto_embedded/funcs/employeesList.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesGet } from "gusto-embedded/funcs/employeesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeesList(gustoEmbedded, {
+  const res = await employeesGet(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -201,11 +202,11 @@ scope: `employees:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -253,14 +254,14 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesCreateHistorical } from "gusto_embedded/funcs/employeesCreateHistorical.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesCreateHistorical } from "gusto-embedded/funcs/employeesCreateHistorical.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -338,11 +339,11 @@ scope: `employees:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -391,14 +392,14 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesUpdateHistorical } from "gusto_embedded/funcs/employeesUpdateHistorical.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesUpdateHistorical } from "gusto-embedded/funcs/employeesUpdateHistorical.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -467,7 +468,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get
+## retrieve
 
 Get an employee.
 
@@ -477,14 +478,14 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employees.get({
+  const result = await gustoEmbedded.employees.retrieve({
     employeeId: "<id>",
   });
 
@@ -500,17 +501,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesGet } from "gusto_embedded/funcs/employeesGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesRetrieve } from "gusto-embedded/funcs/employeesRetrieve.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeesGet(gustoEmbedded, {
+  const res = await employeesRetrieve(gustoEmbedded, {
     employeeId: "<id>",
   });
 
@@ -555,10 +556,10 @@ scope: `employees:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -589,13 +590,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesUpdate } from "gusto_embedded/funcs/employeesUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesUpdate } from "gusto-embedded/funcs/employeesUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -658,10 +659,10 @@ scope: `employees:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -680,13 +681,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesDelete } from "gusto_embedded/funcs/employeesDelete.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesDelete } from "gusto-embedded/funcs/employeesDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -735,10 +736,10 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -758,13 +759,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesGetCustomFields } from "gusto_embedded/funcs/employeesGetCustomFields.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesGetCustomFields } from "gusto-embedded/funcs/employeesGetCustomFields.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -797,6 +798,90 @@ run();
 ### Response
 
 **Promise\<[operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody](../../models/operations/getv1employeesemployeeidcustomfieldsresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## updateOnboardingDocumentsConfig
+
+Indicate whether to include the Form I-9 for an employee during the onboarding process.
+
+scope: `employees:manage`
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "gusto-embedded";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.updateOnboardingDocumentsConfig({
+    employeeId: "<id>",
+    requestBody: {
+      i9Document: true,
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesUpdateOnboardingDocumentsConfig } from "gusto-embedded/funcs/employeesUpdateOnboardingDocumentsConfig.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesUpdateOnboardingDocumentsConfig(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      i9Document: true,
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest](../../models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequest.md)                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.EmployeeOnboardingDocument](../../models/components/employeeonboardingdocument.md)\>**
 
 ### Errors
 
@@ -849,10 +934,10 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -872,13 +957,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesGetOnboardingStatus } from "gusto_embedded/funcs/employeesGetOnboardingStatus.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesGetOnboardingStatus } from "gusto-embedded/funcs/employeesGetOnboardingStatus.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -936,10 +1021,10 @@ Below is a list of valid onboarding status changes depending on the intended act
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -959,13 +1044,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesUpdateOnboardingStatus } from "gusto_embedded/funcs/employeesUpdateOnboardingStatus.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesUpdateOnboardingStatus } from "gusto-embedded/funcs/employeesUpdateOnboardingStatus.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -1015,10 +1100,10 @@ scope: `employee_time_off_activities:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -1039,13 +1124,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeesGetTimeOffActivities } from "gusto_embedded/funcs/employeesGetTimeOffActivities.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeesGetTimeOffActivities } from "gusto-embedded/funcs/employeesGetTimeOffActivities.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

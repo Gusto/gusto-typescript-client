@@ -5,7 +5,7 @@ Whether the employee deduction reduces taxable income or not. Only valid for Gro
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome } from "gusto_embedded/models/operations";
+import { PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome } from "gusto-embedded/models/operations";
 
 let value: PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome =
   "does_not_reduce_taxable_income";

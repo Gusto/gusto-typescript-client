@@ -5,24 +5,24 @@
 
 ### Available Operations
 
-* [get](#get) - Get info about the current access token
-* [refreshToken](#refreshtoken) - Refresh access token
+* [getTokenInfo](#gettokeninfo) - Get info about the current access token
+* [refreshAccessToken](#refreshaccesstoken) - Refresh access token
 
-## get
+## getTokenInfo
 
 Returns scope and resource information associated with the current access token.
 
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.introspection.get({});
+  const result = await gustoEmbedded.introspection.getTokenInfo({});
 
   // Handle the result
   console.log(result);
@@ -36,17 +36,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { introspectionGet } from "gusto_embedded/funcs/introspectionGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { introspectionGetTokenInfo } from "gusto-embedded/funcs/introspectionGetTokenInfo.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await introspectionGet(gustoEmbedded, {});
+  const res = await introspectionGetTokenInfo(gustoEmbedded, {});
 
   if (!res.ok) {
     throw res.error;
@@ -80,7 +80,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## refreshToken
+## refreshAccessToken
 
 Exchange a refresh token for a new access token.
 
@@ -91,14 +91,14 @@ The `expires_in` value is provided in seconds from when the `access_token` was g
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.introspection.refreshToken({});
+  const result = await gustoEmbedded.introspection.refreshAccessToken({});
 
   // Handle the result
   console.log(result);
@@ -112,17 +112,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { introspectionRefreshToken } from "gusto_embedded/funcs/introspectionRefreshToken.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { introspectionRefreshAccessToken } from "gusto-embedded/funcs/introspectionRefreshAccessToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await introspectionRefreshToken(gustoEmbedded, {});
+  const res = await introspectionRefreshAccessToken(gustoEmbedded, {});
 
   if (!res.ok) {
     throw res.error;

@@ -5,10 +5,10 @@ Example response
 ## Example Usage
 
 ```typescript
-import { Form } from "gusto_embedded/models/components";
+import { Form } from "gusto-embedded/models/components";
 
 let value: Form = {
-  uuid: "b7be2e64-ff3a-41ad-ba66-69ee021358ab",
+  uuid: "08685308-d531-4131-b411-d28c723685cc",
 };
 ```
 

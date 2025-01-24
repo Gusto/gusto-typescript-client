@@ -5,7 +5,7 @@ Requires a policy name, a policy_type, and an accrual_method
 ## Example Usage
 
 ```typescript
-import { PostCompaniesCompanyUuidTimeOffPoliciesRequestBody } from "gusto_embedded/models/operations";
+import { PostCompaniesCompanyUuidTimeOffPoliciesRequestBody } from "gusto-embedded/models/operations";
 
 let value: PostCompaniesCompanyUuidTimeOffPoliciesRequestBody = {
   name: "<value>",

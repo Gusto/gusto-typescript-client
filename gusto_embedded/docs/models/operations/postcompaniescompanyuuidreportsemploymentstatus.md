@@ -5,7 +5,7 @@ Employee employment status to filter by
 ## Example Usage
 
 ```typescript
-import { PostCompaniesCompanyUuidReportsEmploymentStatus } from "gusto_embedded/models/operations";
+import { PostCompaniesCompanyUuidReportsEmploymentStatus } from "gusto-embedded/models/operations";
 
 let value: PostCompaniesCompanyUuidReportsEmploymentStatus =
   "active_part_time_eligible";

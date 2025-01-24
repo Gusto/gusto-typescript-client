@@ -5,7 +5,7 @@ Representation of a Time Off Activity
 ## Example Usage
 
 ```typescript
-import { TimeOffActivity } from "gusto_embedded/models/components";
+import { TimeOffActivity } from "gusto-embedded/models/components";
 
 let value: TimeOffActivity = {};
 ```

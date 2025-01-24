@@ -5,10 +5,10 @@ The representation of a job in Gusto.
 ## Example Usage
 
 ```typescript
-import { Job } from "gusto_embedded/models/components";
+import { Job } from "gusto-embedded/models/components";
 
 let value: Job = {
-  uuid: "ce1c0f98-4e4d-4fc8-b177-36527480ed8d",
+  uuid: "f1aff929-03f5-4a4f-8b5c-163a16485b0a",
 };
 ```
 

@@ -9,11 +9,12 @@ import { payrollsCreate } from "../funcs/payrollsCreate.js";
 import { payrollsDelete } from "../funcs/payrollsDelete.js";
 import { payrollsGeneratePrintableChecks } from "../funcs/payrollsGeneratePrintableChecks.js";
 import { payrollsGet } from "../funcs/payrollsGet.js";
+import { payrollsGetAll } from "../funcs/payrollsGetAll.js";
 import { payrollsGetBlockers } from "../funcs/payrollsGetBlockers.js";
-import { payrollsGetEmployeePayStubs } from "../funcs/payrollsGetEmployeePayStubs.js";
+import { payrollsGetPayStub } from "../funcs/payrollsGetPayStub.js";
+import { payrollsGetPayStubs } from "../funcs/payrollsGetPayStubs.js";
 import { payrollsGetReceipt } from "../funcs/payrollsGetReceipt.js";
-import { payrollsList } from "../funcs/payrollsList.js";
-import { payrollsListReversals } from "../funcs/payrollsListReversals.js";
+import { payrollsGetReversals } from "../funcs/payrollsGetReversals.js";
 import { payrollsPrepareForUpdate } from "../funcs/payrollsPrepareForUpdate.js";
 import { payrollsSkip } from "../funcs/payrollsSkip.js";
 import { payrollsSubmit } from "../funcs/payrollsSubmit.js";
@@ -22,14 +23,8 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-import { GustoEmbeddedEmployees } from "./gustoembeddedemployees.js";
 
 export class Payrolls extends ClientSDK {
-  private _employees?: GustoEmbeddedEmployees;
-  get employees(): GustoEmbeddedEmployees {
-    return (this._employees ??= new GustoEmbeddedEmployees(this._options));
-  }
-
   /**
    * Create an off-cycle payroll
    *
@@ -70,11 +65,11 @@ export class Payrolls extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async list(
+  async getAll(
     request: operations.GetV1CompaniesCompanyIdPayrollsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.PayrollMinimal>> {
-    return unwrapAsync(payrollsList(
+    return unwrapAsync(payrollsGetAll(
       this,
       request,
       options,
@@ -89,11 +84,11 @@ export class Payrolls extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async listReversals(
+  async getReversals(
     request: operations.GetV1CompaniesCompanyIdPayrollReversalsRequest,
     options?: RequestOptions,
   ): Promise<components.PayrollReversal> {
-    return unwrapAsync(payrollsListReversals(
+    return unwrapAsync(payrollsGetReversals(
       this,
       request,
       options,
@@ -349,6 +344,26 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
+   * Get an employee pay stub (pdf)
+   *
+   * @remarks
+   * Get an employee's pay stub for the specified payroll. By default, an application/pdf response will be returned. No other content types are currently supported, but may be supported in the future.
+   *
+   * scope: `pay_stubs:read`
+   */
+  async getPayStub(
+    request:
+      operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(payrollsGetPayStub(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get an employee's pay stubs
    *
    * @remarks
@@ -356,11 +371,11 @@ export class Payrolls extends ClientSDK {
    *
    * scope: `pay_stubs:read`
    */
-  async getEmployeePayStubs(
+  async getPayStubs(
     request: operations.GetV1EmployeesEmployeeUuidPayStubsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.EmployeePayStub>> {
-    return unwrapAsync(payrollsGetEmployeePayStubs(
+    return unwrapAsync(payrollsGetPayStubs(
       this,
       request,
       options,

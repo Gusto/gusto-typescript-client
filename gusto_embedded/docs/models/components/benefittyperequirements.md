@@ -5,7 +5,7 @@ Benefit type requirements response
 ## Example Usage
 
 ```typescript
-import { BenefitTypeRequirements } from "gusto_embedded/models/components";
+import { BenefitTypeRequirements } from "gusto-embedded/models/components";
 
 let value: BenefitTypeRequirements = {};
 ```

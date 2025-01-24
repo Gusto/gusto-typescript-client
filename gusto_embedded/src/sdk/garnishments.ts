@@ -3,9 +3,9 @@
  */
 
 import { garnishmentsCreate } from "../funcs/garnishmentsCreate.js";
+import { garnishmentsFetch } from "../funcs/garnishmentsFetch.js";
 import { garnishmentsGet } from "../funcs/garnishmentsGet.js";
 import { garnishmentsGetChildSupport } from "../funcs/garnishmentsGetChildSupport.js";
-import { garnishmentsListByEmployee } from "../funcs/garnishmentsListByEmployee.js";
 import { garnishmentsUpdate } from "../funcs/garnishmentsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -40,11 +40,11 @@ export class Garnishments extends ClientSDK {
    *
    * scope: `garnishments:read`
    */
-  async listByEmployee(
+  async get(
     request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Garnishment>> {
-    return unwrapAsync(garnishmentsListByEmployee(
+    return unwrapAsync(garnishmentsGet(
       this,
       request,
       options,
@@ -59,11 +59,11 @@ export class Garnishments extends ClientSDK {
    *
    * scope: `garnishments:read`
    */
-  async get(
+  async fetch(
     request: operations.GetV1GarnishmentsGarnishmentIdRequest,
     options?: RequestOptions,
   ): Promise<components.Garnishment> {
-    return unwrapAsync(garnishmentsGet(
+    return unwrapAsync(garnishmentsFetch(
       this,
       request,
       options,

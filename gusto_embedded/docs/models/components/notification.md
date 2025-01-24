@@ -5,10 +5,10 @@ Representation of a notification
 ## Example Usage
 
 ```typescript
-import { Notification } from "gusto_embedded/models/components";
+import { Notification } from "gusto-embedded/models/components";
 
 let value: Notification = {
-  uuid: "bf23bc79-3715-447e-b269-f2e177357df8",
+  uuid: "4bb5659e-2e0a-46cb-87a8-c78494922664",
 };
 ```
 

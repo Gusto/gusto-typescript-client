@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [getPeriodData](#getperioddata) - Retrieve invoicing data for companies
+* [get](#get) - Retrieve invoicing data for companies
 
-## getPeriodData
+## get
 
 Retrieve data for active companies used to calculate invoices for Gusto Embedded Payroll. A company is considered active for an invoice period if they are an active partner managed company, have run payroll or created contractor payments since becoming a partner managed company, and are not suspended at any point during the invoice period.  This endpoint forces pagination, with 100 results returned at a time. You can learn more about our pagination here: [pagination guide](https://docs.gusto.com/embedded-payroll/docs/pagination) 
 
@@ -20,13 +20,13 @@ scope: `invoices:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  const result = await gustoEmbedded.invoices.getPeriodData({
-    systemAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  const result = await gustoEmbedded.invoices.get({
+    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     invoicePeriod: "2020-01",
   });
@@ -43,16 +43,16 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { invoicesGetPeriodData } from "gusto_embedded/funcs/invoicesGetPeriodData.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { invoicesGet } from "gusto-embedded/funcs/invoicesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore();
 
 async function run() {
-  const res = await invoicesGetPeriodData(gustoEmbedded, {
-    systemAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  const res = await invoicesGet(gustoEmbedded, {
+    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     invoicePeriod: "2020-01",
   });

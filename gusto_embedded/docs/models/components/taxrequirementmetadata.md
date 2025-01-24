@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { TaxRequirementMetadata } from "gusto_embedded/models/components";
+import { TaxRequirementMetadata } from "gusto-embedded/models/components";
 
 let value: TaxRequirementMetadata = {
-  type: "currency",
+  type: "account_number",
 };
 ```
 

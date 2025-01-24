@@ -1,19 +1,20 @@
 lockVersion: 2.0.0
-id: b1d02f48-d296-4790-998f-22717928ac51
+id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 1ddd00f6e114298175de2bc373a27ebe
+  docChecksum: 48df5cdac7cad3cda79985e2b0d0ed6f
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.465.1
-  generationVersion: 2.488.4
-  releaseVersion: 0.1.0
-  configChecksum: 97466c705cf7eeade454fe90a5389441
+  speakeasyVersion: 1.476.0
+  generationVersion: 2.496.0
+  releaseVersion: 0.1.4
+  configChecksum: 8652610587ec332b120ebcec95a71243
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.12
+    core: 3.18.18
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
+    devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     errorUnions: 0.1.1
@@ -32,10 +33,12 @@ features:
     unions: 2.85.8
     uploadStreams: 0.1.0
 generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
-  - CONTRIBUTING.md
   - FUNCTIONS.md
   - RUNTIMES.md
   - USAGE.md
@@ -53,6 +56,7 @@ generatedFiles:
   - docs/models/components/applicableif.md
   - docs/models/components/applicabletaxes.md
   - docs/models/components/authentication.md
+  - docs/models/components/authorizationstatus.md
   - docs/models/components/benefits.md
   - docs/models/components/benefitsummary.md
   - docs/models/components/benefitsummaryemployees.md
@@ -162,6 +166,7 @@ generatedFiles:
   - docs/models/components/employeecustomfield.md
   - docs/models/components/employeededuction.md
   - docs/models/components/employeefederaltax.md
+  - docs/models/components/employeeonboardingdocument.md
   - docs/models/components/employeeonboardingstatus.md
   - docs/models/components/employeeonboardingstatusonboardingstep.md
   - docs/models/components/employeepaymentmethod.md
@@ -219,6 +224,10 @@ generatedFiles:
   - docs/models/components/homeaddress.md
   - docs/models/components/hourly.md
   - docs/models/components/hourlycompensations.md
+  - docs/models/components/i9authorization.md
+  - docs/models/components/i9authorizationdocument.md
+  - docs/models/components/i9authorizationdocumentoption.md
+  - docs/models/components/i9authorizationdocumenttype.md
   - docs/models/components/id.md
   - docs/models/components/identityverificationstatus.md
   - docs/models/components/independenceday.md
@@ -240,6 +249,7 @@ generatedFiles:
   - docs/models/components/newyearsday.md
   - docs/models/components/notification.md
   - docs/models/components/offcyclereasontype.md
+  - docs/models/components/onboardingdocumentsconfig.md
   - docs/models/components/onboardingstatus.md
   - docs/models/components/onboardingstep.md
   - docs/models/components/options.md
@@ -322,6 +332,7 @@ generatedFiles:
   - docs/models/components/requirements.md
   - docs/models/components/resources.md
   - docs/models/components/resourcetype.md
+  - docs/models/components/section.md
   - docs/models/components/security.md
   - docs/models/components/signatory.md
   - docs/models/components/sortorder.md
@@ -383,6 +394,7 @@ generatedFiles:
   - docs/models/operations/accounttype.md
   - docs/models/operations/accrualmethod.md
   - docs/models/operations/answers.md
+  - docs/models/operations/authorizationstatus.md
   - docs/models/operations/benefits.md
   - docs/models/operations/category.md
   - docs/models/operations/christmasday.md
@@ -406,6 +418,7 @@ generatedFiles:
   - docs/models/operations/deletev1employeebenefitsemployeebenefitidrequest.md
   - docs/models/operations/deletev1employeerequest.md
   - docs/models/operations/deletev1employeesemployeeidbankaccountsbankaccountidrequest.md
+  - docs/models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentidrequest.md
   - docs/models/operations/deletev1employeesemployeeidrehirerequest.md
   - docs/models/operations/deletev1employeesemployeeidterminationsrequest.md
   - docs/models/operations/deletev1externalpayrollrequest.md
@@ -415,6 +428,8 @@ generatedFiles:
   - docs/models/operations/deletev1webhooksubscriptionuuidsecurity.md
   - docs/models/operations/deletev1workaddressesworkaddressuuidrequest.md
   - docs/models/operations/document.md
+  - docs/models/operations/documents.md
+  - docs/models/operations/documenttype.md
   - docs/models/operations/earnings.md
   - docs/models/operations/earningtype.md
   - docs/models/operations/employeecompensations.md
@@ -520,6 +535,9 @@ generatedFiles:
   - docs/models/operations/getv1employeesemployeeidfederaltaxesrequest.md
   - docs/models/operations/getv1employeesemployeeidgarnishmentsrequest.md
   - docs/models/operations/getv1employeesemployeeidhomeaddressesrequest.md
+  - docs/models/operations/getv1employeesemployeeidi9authorizationdocumentoptionsrequest.md
+  - docs/models/operations/getv1employeesemployeeidi9authorizationdocumentsrequest.md
+  - docs/models/operations/getv1employeesemployeeidi9authorizationrequest.md
   - docs/models/operations/getv1employeesemployeeidjobsqueryparaminclude.md
   - docs/models/operations/getv1employeesemployeeidjobsrequest.md
   - docs/models/operations/getv1employeesemployeeidonboardingstatusrequest.md
@@ -784,6 +802,14 @@ generatedFiles:
   - docs/models/operations/putv1employeesemployeeidbankaccountsrequestbody.md
   - docs/models/operations/putv1employeesemployeeidfederaltaxesrequest.md
   - docs/models/operations/putv1employeesemployeeidfederaltaxesrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationdocumentsrequest.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationdocumentsrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationemployersignrequest.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationemployersignrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationrequest.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequest.md
+  - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequestbody.md
   - docs/models/operations/putv1employeesemployeeidonboardingstatusrequest.md
   - docs/models/operations/putv1employeesemployeeidonboardingstatusrequestbody.md
   - docs/models/operations/putv1employeesemployeeidpaymentmethodrequest.md
@@ -867,6 +893,7 @@ generatedFiles:
   - docs/models/operations/workaddress.md
   - docs/sdks/achtransactions/README.md
   - docs/sdks/bankaccounts/README.md
+  - docs/sdks/benefits/README.md
   - docs/sdks/companies/README.md
   - docs/sdks/companyattachment/README.md
   - docs/sdks/companyattachments/README.md
@@ -876,7 +903,6 @@ generatedFiles:
   - docs/sdks/contractorforms/README.md
   - docs/sdks/contractorpaymentgroups/README.md
   - docs/sdks/contractorpaymentmethod/README.md
-  - docs/sdks/contractorpaymentmethods/README.md
   - docs/sdks/contractorpayments/README.md
   - docs/sdks/contractors/README.md
   - docs/sdks/departments/README.md
@@ -886,25 +912,22 @@ generatedFiles:
   - docs/sdks/employeeemployments/README.md
   - docs/sdks/employeeforms/README.md
   - docs/sdks/employeepaymentmethod/README.md
-  - docs/sdks/employeepaymentmethods/README.md
   - docs/sdks/employees/README.md
   - docs/sdks/employeetaxsetup/README.md
   - docs/sdks/events/README.md
   - docs/sdks/externalpayrolls/README.md
   - docs/sdks/federaltaxdetails/README.md
   - docs/sdks/flows/README.md
+  - docs/sdks/forms/README.md
   - docs/sdks/garnishments/README.md
   - docs/sdks/generateddocuments/README.md
   - docs/sdks/gustoembedded/README.md
-  - docs/sdks/gustoembeddedcontractors/README.md
-  - docs/sdks/gustoembeddedemployees/README.md
   - docs/sdks/holidaypaypolicies/README.md
+  - docs/sdks/i9verification/README.md
   - docs/sdks/industryselection/README.md
   - docs/sdks/introspection/README.md
   - docs/sdks/invoices/README.md
-  - docs/sdks/jobs/README.md
   - docs/sdks/jobsandcompensations/README.md
-  - docs/sdks/jobscompensations/README.md
   - docs/sdks/locations/README.md
   - docs/sdks/notifications/README.md
   - docs/sdks/paymentconfigs/README.md
@@ -917,20 +940,22 @@ generatedFiles:
   - docs/sdks/timeoffpolicies/README.md
   - docs/sdks/webhooks/README.md
   - docs/sdks/wireinrequests/README.md
+  - docs/sdks/workaddresses/README.md
   - docs/types/rfcdate.md
   - jsr.json
   - package.json
   - src/core.ts
-  - src/funcs/achTransactionsGetAll.ts
+  - src/funcs/achTransactionsGet.ts
   - src/funcs/bankAccountsCreate.ts
-  - src/funcs/bankAccountsCreateFromPlaidToken.ts
+  - src/funcs/bankAccountsCreateFromProcessorToken.ts
   - src/funcs/bankAccountsList.ts
   - src/funcs/bankAccountsVerify.ts
   - src/funcs/companiesAcceptTermsOfService.ts
-  - src/funcs/companiesContractorsList.ts
+  - src/funcs/companiesBenefitsList.ts
   - src/funcs/companiesCreateAdmin.ts
   - src/funcs/companiesCreatePartnerManaged.ts
   - src/funcs/companiesFinishOnboarding.ts
+  - src/funcs/companiesFormsList.ts
   - src/funcs/companiesGet.ts
   - src/funcs/companiesGetAdmins.ts
   - src/funcs/companiesGetCustomFields.ts
@@ -938,23 +963,21 @@ generatedFiles:
   - src/funcs/companiesMigrate.ts
   - src/funcs/companiesRetrieveTermsOfService.ts
   - src/funcs/companiesUpdate.ts
-  - src/funcs/companyAttachmentGet.ts
-  - src/funcs/companyAttachmentsCreateAndUpload.ts
-  - src/funcs/companyAttachmentsGetDownloadUrl.ts
-  - src/funcs/companyAttachmentsList.ts
-  - src/funcs/companyBenefitsBulkUpdate.ts
+  - src/funcs/companyAttachmentGetDownloadUrl.ts
+  - src/funcs/companyAttachmentsCreate.ts
+  - src/funcs/companyAttachmentsGetAll.ts
+  - src/funcs/companyAttachmentsGetDetails.ts
+  - src/funcs/companyBenefitsBulkUpdateEmployeeBenefits.ts
   - src/funcs/companyBenefitsCreate.ts
   - src/funcs/companyBenefitsDelete.ts
   - src/funcs/companyBenefitsGet.ts
-  - src/funcs/companyBenefitsGetAllSupported.ts
-  - src/funcs/companyBenefitsGetById.ts
+  - src/funcs/companyBenefitsGetAll.ts
   - src/funcs/companyBenefitsGetEmployeeBenefits.ts
   - src/funcs/companyBenefitsGetRequirements.ts
   - src/funcs/companyBenefitsGetSummary.ts
-  - src/funcs/companyBenefitsList.ts
+  - src/funcs/companyBenefitsGetSupportedBenefit.ts
   - src/funcs/companyBenefitsUpdate.ts
   - src/funcs/companyFormsGet.ts
-  - src/funcs/companyFormsGetAll.ts
   - src/funcs/companyFormsGetPdf.ts
   - src/funcs/companyFormsSign.ts
   - src/funcs/contractorDocumentsGet.ts
@@ -963,29 +986,30 @@ generatedFiles:
   - src/funcs/contractorDocumentsSign.ts
   - src/funcs/contractorFormsGenerate1099.ts
   - src/funcs/contractorFormsGet.ts
-  - src/funcs/contractorFormsGetById.ts
+  - src/funcs/contractorFormsGetAll.ts
   - src/funcs/contractorFormsGetPdf.ts
-  - src/funcs/contractorPaymentGroupsCancel.ts
   - src/funcs/contractorPaymentGroupsCreate.ts
-  - src/funcs/contractorPaymentGroupsFetch.ts
+  - src/funcs/contractorPaymentGroupsDelete.ts
   - src/funcs/contractorPaymentGroupsFund.ts
+  - src/funcs/contractorPaymentGroupsGet.ts
   - src/funcs/contractorPaymentGroupsList.ts
   - src/funcs/contractorPaymentGroupsPreview.ts
   - src/funcs/contractorPaymentMethodCreateBankAccount.ts
   - src/funcs/contractorPaymentMethodGet.ts
-  - src/funcs/contractorPaymentMethodUpdate.ts
-  - src/funcs/contractorPaymentMethodsGetAll.ts
+  - src/funcs/contractorPaymentMethodGetBankAccounts.ts
+  - src/funcs/contractorPaymentMethodUpdatePaymentMethod.ts
+  - src/funcs/contractorPaymentsCancel.ts
   - src/funcs/contractorPaymentsCreate.ts
-  - src/funcs/contractorPaymentsDelete.ts
   - src/funcs/contractorPaymentsFund.ts
   - src/funcs/contractorPaymentsGet.ts
-  - src/funcs/contractorPaymentsGetById.ts
+  - src/funcs/contractorPaymentsGetPayments.ts
   - src/funcs/contractorPaymentsGetReceipt.ts
   - src/funcs/contractorsCreate.ts
   - src/funcs/contractorsDelete.ts
   - src/funcs/contractorsGet.ts
   - src/funcs/contractorsGetAddress.ts
   - src/funcs/contractorsGetOnboardingStatus.ts
+  - src/funcs/contractorsList.ts
   - src/funcs/contractorsUpdate.ts
   - src/funcs/contractorsUpdateAddress.ts
   - src/funcs/contractorsUpdateOnboardingStatus.ts
@@ -997,21 +1021,21 @@ generatedFiles:
   - src/funcs/departmentsRemovePeople.ts
   - src/funcs/departmentsUpdate.ts
   - src/funcs/earningTypesCreate.ts
-  - src/funcs/earningTypesDelete.ts
+  - src/funcs/earningTypesDeactivate.ts
   - src/funcs/earningTypesGetAll.ts
   - src/funcs/earningTypesUpdate.ts
-  - src/funcs/employeeAddressesCreateHomeAddress.ts
-  - src/funcs/employeeAddressesCreateWorkAddress.ts
+  - src/funcs/employeeAddressesCreate.ts
   - src/funcs/employeeAddressesDelete.ts
   - src/funcs/employeeAddressesGet.ts
-  - src/funcs/employeeAddressesGetHomeById.ts
+  - src/funcs/employeeAddressesGetHomeAddress.ts
+  - src/funcs/employeeAddressesGetHomeAddresses.ts
   - src/funcs/employeeAddressesGetWorkAddress.ts
-  - src/funcs/employeeAddressesGetWorkAddresses.ts
-  - src/funcs/employeeAddressesRemove.ts
-  - src/funcs/employeeAddressesUpdate.ts
+  - src/funcs/employeeAddressesRemoveHomeAddress.ts
+  - src/funcs/employeeAddressesUpdateHomeAddress.ts
   - src/funcs/employeeAddressesUpdateWorkAddress.ts
-  - src/funcs/employeeBenefitsCreate.ts
-  - src/funcs/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.ts
+  - src/funcs/employeeAddressesWorkAddressesCreate.ts
+  - src/funcs/employeeBenefitsCreateBenefit.ts
+  - src/funcs/employeeBenefitsCreateYtdAmountsFromDifferentCompany.ts
   - src/funcs/employeeBenefitsDelete.ts
   - src/funcs/employeeBenefitsGet.ts
   - src/funcs/employeeBenefitsGetAll.ts
@@ -1023,18 +1047,18 @@ generatedFiles:
   - src/funcs/employeeEmploymentsGetHistory.ts
   - src/funcs/employeeEmploymentsGetRehire.ts
   - src/funcs/employeeEmploymentsGetTermination.ts
-  - src/funcs/employeeEmploymentsRehire.ts
+  - src/funcs/employeeEmploymentsUpdateRehire.ts
   - src/funcs/employeeEmploymentsUpdateTermination.ts
   - src/funcs/employeeFormsGenerateW2.ts
-  - src/funcs/employeeFormsGet.ts
-  - src/funcs/employeeFormsGetById.ts
+  - src/funcs/employeeFormsGetAll.ts
+  - src/funcs/employeeFormsGetForm.ts
   - src/funcs/employeeFormsGetPdf.ts
   - src/funcs/employeeFormsSign.ts
   - src/funcs/employeePaymentMethodCreateBankAccount.ts
+  - src/funcs/employeePaymentMethodDeleteBankAccount.ts
   - src/funcs/employeePaymentMethodGet.ts
+  - src/funcs/employeePaymentMethodUpdate.ts
   - src/funcs/employeePaymentMethodUpdateBankAccount.ts
-  - src/funcs/employeePaymentMethodsDelete.ts
-  - src/funcs/employeePaymentMethodsUpdate.ts
   - src/funcs/employeeTaxSetupGetFederalTaxes.ts
   - src/funcs/employeeTaxSetupGetStateTaxes.ts
   - src/funcs/employeeTaxSetupUpdateFederalTaxes.ts
@@ -1046,17 +1070,18 @@ generatedFiles:
   - src/funcs/employeesGetCustomFields.ts
   - src/funcs/employeesGetOnboardingStatus.ts
   - src/funcs/employeesGetTimeOffActivities.ts
-  - src/funcs/employeesList.ts
+  - src/funcs/employeesRetrieve.ts
   - src/funcs/employeesUpdate.ts
   - src/funcs/employeesUpdateHistorical.ts
+  - src/funcs/employeesUpdateOnboardingDocumentsConfig.ts
   - src/funcs/employeesUpdateOnboardingStatus.ts
-  - src/funcs/eventsGetAll.ts
-  - src/funcs/externalPayrollsCalculateTaxes.ts
+  - src/funcs/eventsList.ts
   - src/funcs/externalPayrollsCreate.ts
   - src/funcs/externalPayrollsDelete.ts
-  - src/funcs/externalPayrollsFinishTaxLiabilities.ts
+  - src/funcs/externalPayrollsFinalizeTaxLiabilities.ts
   - src/funcs/externalPayrollsGet.ts
   - src/funcs/externalPayrollsGetTaxLiabilities.ts
+  - src/funcs/externalPayrollsGetTaxSuggestions.ts
   - src/funcs/externalPayrollsList.ts
   - src/funcs/externalPayrollsUpdate.ts
   - src/funcs/externalPayrollsUpdateTaxLiabilities.ts
@@ -1064,9 +1089,9 @@ generatedFiles:
   - src/funcs/federalTaxDetailsUpdate.ts
   - src/funcs/flowsCreate.ts
   - src/funcs/garnishmentsCreate.ts
+  - src/funcs/garnishmentsFetch.ts
   - src/funcs/garnishmentsGet.ts
   - src/funcs/garnishmentsGetChildSupport.ts
-  - src/funcs/garnishmentsListByEmployee.ts
   - src/funcs/garnishmentsUpdate.ts
   - src/funcs/generatedDocumentsGet.ts
   - src/funcs/holidayPayPoliciesAddEmployees.ts
@@ -1075,36 +1100,43 @@ generatedFiles:
   - src/funcs/holidayPayPoliciesGet.ts
   - src/funcs/holidayPayPoliciesRemoveEmployees.ts
   - src/funcs/holidayPayPoliciesUpdate.ts
+  - src/funcs/i9VerificationCreateDocuments.ts
+  - src/funcs/i9VerificationCreateOrUpdate.ts
+  - src/funcs/i9VerificationDeleteDocument.ts
+  - src/funcs/i9VerificationEmployerSign.ts
+  - src/funcs/i9VerificationGetAuthorization.ts
+  - src/funcs/i9VerificationGetDocumentOptions.ts
+  - src/funcs/i9VerificationGetDocuments.ts
   - src/funcs/industrySelectionGet.ts
   - src/funcs/industrySelectionUpdate.ts
-  - src/funcs/introspectionGet.ts
-  - src/funcs/introspectionRefreshToken.ts
-  - src/funcs/invoicesGetPeriodData.ts
+  - src/funcs/introspectionGetTokenInfo.ts
+  - src/funcs/introspectionRefreshAccessToken.ts
+  - src/funcs/invoicesGet.ts
   - src/funcs/jobsAndCompensationsCreateCompensation.ts
   - src/funcs/jobsAndCompensationsCreateJob.ts
-  - src/funcs/jobsAndCompensationsGet.ts
+  - src/funcs/jobsAndCompensationsDeleteCompensation.ts
+  - src/funcs/jobsAndCompensationsDeleteJob.ts
   - src/funcs/jobsAndCompensationsGetCompensation.ts
   - src/funcs/jobsAndCompensationsGetCompensations.ts
+  - src/funcs/jobsAndCompensationsGetJob.ts
   - src/funcs/jobsAndCompensationsGetJobs.ts
   - src/funcs/jobsAndCompensationsUpdate.ts
-  - src/funcs/jobsCompensationsDeleteCompensation.ts
-  - src/funcs/jobsCompensationsDeleteJob.ts
-  - src/funcs/jobsUpdateCompensation.ts
+  - src/funcs/jobsAndCompensationsUpdateCompensation.ts
   - src/funcs/locationsCreate.ts
   - src/funcs/locationsGet.ts
+  - src/funcs/locationsGetAll.ts
   - src/funcs/locationsGetMinimumWages.ts
-  - src/funcs/locationsList.ts
   - src/funcs/locationsUpdate.ts
-  - src/funcs/notificationsGetDetails.ts
+  - src/funcs/notificationsGet.ts
   - src/funcs/paySchedulesAssign.ts
-  - src/funcs/paySchedulesAssignmentPreview.ts
   - src/funcs/paySchedulesCreate.ts
   - src/funcs/paySchedulesGet.ts
+  - src/funcs/paySchedulesGetAssignments.ts
+  - src/funcs/paySchedulesGetForCompany.ts
   - src/funcs/paySchedulesList.ts
-  - src/funcs/paySchedulesListAssignments.ts
-  - src/funcs/paySchedulesListPayPeriods.ts
-  - src/funcs/paySchedulesListUnprocessedTerminationPayPeriods.ts
+  - src/funcs/paySchedulesListUnprocessedTerminationPeriods.ts
   - src/funcs/paySchedulesPreview.ts
+  - src/funcs/paySchedulesPreviewAssignment.ts
   - src/funcs/paySchedulesUpdate.ts
   - src/funcs/paymentConfigsGet.ts
   - src/funcs/paymentConfigsUpdate.ts
@@ -1113,50 +1145,50 @@ generatedFiles:
   - src/funcs/payrollsCancel.ts
   - src/funcs/payrollsCreate.ts
   - src/funcs/payrollsDelete.ts
-  - src/funcs/payrollsEmployeesGetPayStub.ts
   - src/funcs/payrollsGeneratePrintableChecks.ts
   - src/funcs/payrollsGet.ts
+  - src/funcs/payrollsGetAll.ts
   - src/funcs/payrollsGetBlockers.ts
-  - src/funcs/payrollsGetEmployeePayStubs.ts
+  - src/funcs/payrollsGetPayStub.ts
+  - src/funcs/payrollsGetPayStubs.ts
   - src/funcs/payrollsGetReceipt.ts
-  - src/funcs/payrollsList.ts
-  - src/funcs/payrollsListReversals.ts
+  - src/funcs/payrollsGetReversals.ts
   - src/funcs/payrollsPrepareForUpdate.ts
   - src/funcs/payrollsSkip.ts
   - src/funcs/payrollsSubmit.ts
   - src/funcs/payrollsUpdate.ts
   - src/funcs/recoveryCasesGetAll.ts
-  - src/funcs/recoveryCasesInitiateRedeit.ts
-  - src/funcs/reportsCreateCustom.ts
+  - src/funcs/recoveryCasesRedebit.ts
+  - src/funcs/reportsCreate.ts
   - src/funcs/reportsGet.ts
   - src/funcs/reportsGetTemplate.ts
   - src/funcs/signatoriesCreate.ts
   - src/funcs/signatoriesDelete.ts
-  - src/funcs/signatoriesGetAll.ts
+  - src/funcs/signatoriesGet.ts
   - src/funcs/signatoriesInvite.ts
   - src/funcs/signatoriesUpdate.ts
   - src/funcs/taxRequirementsGetAll.ts
-  - src/funcs/taxRequirementsGetState.ts
-  - src/funcs/taxRequirementsUpdateState.ts
+  - src/funcs/taxRequirementsGetByState.ts
+  - src/funcs/taxRequirementsUpdate.ts
   - src/funcs/timeOffPoliciesAddEmployees.ts
   - src/funcs/timeOffPoliciesCalculateAccruingHours.ts
   - src/funcs/timeOffPoliciesCreate.ts
   - src/funcs/timeOffPoliciesDeactivate.ts
   - src/funcs/timeOffPoliciesGet.ts
-  - src/funcs/timeOffPoliciesGetById.ts
   - src/funcs/timeOffPoliciesRemoveEmployees.ts
+  - src/funcs/timeOffPoliciesRetrieve.ts
   - src/funcs/timeOffPoliciesUpdate.ts
   - src/funcs/timeOffPoliciesUpdateBalance.ts
-  - src/funcs/webhooksCreate.ts
+  - src/funcs/webhooksCreateSubscription.ts
   - src/funcs/webhooksDelete.ts
-  - src/funcs/webhooksGetSubscription.ts
+  - src/funcs/webhooksGet.ts
   - src/funcs/webhooksListSubscriptions.ts
   - src/funcs/webhooksRequestVerificationToken.ts
-  - src/funcs/webhooksUpdate.ts
-  - src/funcs/webhooksVerify.ts
+  - src/funcs/webhooksUpdateSubscription.ts
+  - src/funcs/webhooksVerifySubscription.ts
   - src/funcs/wireInRequestsGet.ts
-  - src/funcs/wireInRequestsList.ts
-  - src/funcs/wireInRequestsUpdate.ts
+  - src/funcs/wireInRequestsGetAll.ts
+  - src/funcs/wireInRequestsSubmitRequest.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -1165,6 +1197,7 @@ generatedFiles:
   - src/lib/config.ts
   - src/lib/dlv.ts
   - src/lib/encodings.ts
+  - src/lib/env.ts
   - src/lib/files.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
@@ -1221,6 +1254,7 @@ generatedFiles:
   - src/models/components/employeebenefitforcompanybenefit.ts
   - src/models/components/employeecustomfield.ts
   - src/models/components/employeefederaltax.ts
+  - src/models/components/employeeonboardingdocument.ts
   - src/models/components/employeeonboardingstatus.ts
   - src/models/components/employeepaymentmethod.ts
   - src/models/components/employeepaystub.ts
@@ -1248,6 +1282,9 @@ generatedFiles:
   - src/models/components/grossuppay.ts
   - src/models/components/historicalemployeebody.ts
   - src/models/components/holidaypaypolicy.ts
+  - src/models/components/i9authorization.ts
+  - src/models/components/i9authorizationdocument.ts
+  - src/models/components/i9authorizationdocumentoption.ts
   - src/models/components/index.ts
   - src/models/components/industry.ts
   - src/models/components/invoicedata.ts
@@ -1338,6 +1375,7 @@ generatedFiles:
   - src/models/operations/deletev1employee.ts
   - src/models/operations/deletev1employeebenefitsemployeebenefitid.ts
   - src/models/operations/deletev1employeesemployeeidbankaccountsbankaccountid.ts
+  - src/models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentid.ts
   - src/models/operations/deletev1employeesemployeeidrehire.ts
   - src/models/operations/deletev1employeesemployeeidterminations.ts
   - src/models/operations/deletev1externalpayroll.ts
@@ -1427,6 +1465,9 @@ generatedFiles:
   - src/models/operations/getv1employeesemployeeidfederaltaxes.ts
   - src/models/operations/getv1employeesemployeeidgarnishments.ts
   - src/models/operations/getv1employeesemployeeidhomeaddresses.ts
+  - src/models/operations/getv1employeesemployeeidi9authorization.ts
+  - src/models/operations/getv1employeesemployeeidi9authorizationdocumentoptions.ts
+  - src/models/operations/getv1employeesemployeeidi9authorizationdocuments.ts
   - src/models/operations/getv1employeesemployeeidjobs.ts
   - src/models/operations/getv1employeesemployeeidonboardingstatus.ts
   - src/models/operations/getv1employeesemployeeidpaymentmethod.ts
@@ -1538,6 +1579,10 @@ generatedFiles:
   - src/models/operations/putv1employees.ts
   - src/models/operations/putv1employeesemployeeidbankaccounts.ts
   - src/models/operations/putv1employeesemployeeidfederaltaxes.ts
+  - src/models/operations/putv1employeesemployeeidi9authorization.ts
+  - src/models/operations/putv1employeesemployeeidi9authorizationdocuments.ts
+  - src/models/operations/putv1employeesemployeeidi9authorizationemployersign.ts
+  - src/models/operations/putv1employeesemployeeidonboardingdocumentsconfig.ts
   - src/models/operations/putv1employeesemployeeidonboardingstatus.ts
   - src/models/operations/putv1employeesemployeeidpaymentmethod.ts
   - src/models/operations/putv1employeesemployeeidrehire.ts
@@ -1564,6 +1609,7 @@ generatedFiles:
   - src/models/operations/refreshaccesstoken.ts
   - src/sdk/achtransactions.ts
   - src/sdk/bankaccounts.ts
+  - src/sdk/benefits.ts
   - src/sdk/companies.ts
   - src/sdk/companyattachment.ts
   - src/sdk/companyattachments.ts
@@ -1573,7 +1619,6 @@ generatedFiles:
   - src/sdk/contractorforms.ts
   - src/sdk/contractorpaymentgroups.ts
   - src/sdk/contractorpaymentmethod.ts
-  - src/sdk/contractorpaymentmethods.ts
   - src/sdk/contractorpayments.ts
   - src/sdk/contractors.ts
   - src/sdk/departments.ts
@@ -1583,25 +1628,22 @@ generatedFiles:
   - src/sdk/employeeemployments.ts
   - src/sdk/employeeforms.ts
   - src/sdk/employeepaymentmethod.ts
-  - src/sdk/employeepaymentmethods.ts
   - src/sdk/employees.ts
   - src/sdk/employeetaxsetup.ts
   - src/sdk/events.ts
   - src/sdk/externalpayrolls.ts
   - src/sdk/federaltaxdetails.ts
   - src/sdk/flows.ts
+  - src/sdk/forms.ts
   - src/sdk/garnishments.ts
   - src/sdk/generateddocuments.ts
-  - src/sdk/gustoembeddedcontractors.ts
-  - src/sdk/gustoembeddedemployees.ts
   - src/sdk/holidaypaypolicies.ts
+  - src/sdk/i9verification.ts
   - src/sdk/index.ts
   - src/sdk/industryselection.ts
   - src/sdk/introspection.ts
   - src/sdk/invoices.ts
-  - src/sdk/jobs.ts
   - src/sdk/jobsandcompensations.ts
-  - src/sdk/jobscompensations.ts
   - src/sdk/locations.ts
   - src/sdk/notifications.ts
   - src/sdk/paymentconfigs.ts
@@ -1615,6 +1657,7 @@ generatedFiles:
   - src/sdk/timeoffpolicies.ts
   - src/sdk/webhooks.ts
   - src/sdk/wireinrequests.ts
+  - src/sdk/workaddresses.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -2891,7 +2934,7 @@ examples:
         application/json: {"first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "preferred_first_name": "Angel", "date_of_birth": "1995-05-05", "email": "knight0faith@example.com", "ssn": "123456294"}
       responses:
         "201":
-          application/json: {"uuid": "2593d737-d298-41b9-954f-79fed0af3fb4", "first_name": "Marc", "last_name": "Mertz", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}]}
+          application/json: {"uuid": "2593d737-d298-41b9-954f-79fed0af3fb4", "first_name": "Marc", "last_name": "Mertz", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
         "422": {}
     Create Employee Example:
       parameters:
@@ -2900,7 +2943,7 @@ examples:
         header: {}
       responses:
         "201":
-          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "work_email": "angel.jaskolski@example.com"}
+          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "7a621cf0-21cd-49cf-8540-3315211a509a", "i9_document": false}, "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "payment_method": "Check", "work_email": "angel.jaskolski@example.com"}
     Create Historical Employee Example:
       parameters:
         path:
@@ -2908,7 +2951,7 @@ examples:
         header: {}
       responses:
         "201":
-          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "work_email": null}
+          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "080a8e77-4c2b-4ecc-9376-91775e024985", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
     Basic:
       parameters:
         path:
@@ -2942,7 +2985,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "9779767c-6044-48e0-bf68-aeb370b9a2e7", "first_name": "Nicole", "middle_initial": "M", "last_name": "Boehm", "email": "kory7757869450111548@barton-hermiston.io", "company_uuid": "c44d66dc-c41b-4a60-9e25-5e93ff8583f2", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "414dedaca594b77135e0b8d2f398516d", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "5d5e3ce5-ea8f-4885-90e5-7ebaed03f7c5", "version": "91179081a7309c9fbd31bb3cf7b9893e", "employee_uuid": "a987bce1-6d06-43f8-9978-9db886f479fb", "hire_date": "2020-01-20", "title": "Client Support Manager", "primary": true, "rate": "22.00", "payment_unit": "Hour", "current_compensation_uuid": "798a962f-0fcf-491e-9b71-cfa6a1db114f", "compensations": [{"uuid": "94f17a77-cfe5-436a-af94-422bbf8248ff", "version": "233f0096a8015e62d9795fadf1fd300d", "job_uuid": "64711ac0-83ff-4aaf-bec1-db72f5a44e56", "rate": "22.00", "payment_unit": "Hour", "flsa_status": "Nonexempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "71.0", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "8b312f0e-30e7-4810-9c06-1177a6484f2d", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "34.0", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "date_of_birth": "1996-05-08", "has_ssn": true, "ssn": "", "phone": "1234567890", "preferred_first_name": "Vanessa", "work_email": "vanessa.boehm@example.com"}, {"uuid": "d7cb289a-af62-4120-9cd5-acda324b5c04", "first_name": "Maci", "middle_initial": "M", "last_name": "Cassin", "email": "claud_reinger7757869450111549@gutkowski.net", "company_uuid": "4522d043-5731-406d-a129-de1808042a32", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "e867459e1360fa71e78b88142923d341", "department": "Band", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "62a00cf7-342b-465e-a151-ecd295152be0", "version": "d0e719137f89ca3dd334dd4cc248ffbb", "employee_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "hire_date": "2020-01-20", "title": "Account Director", "primary": true, "rate": "78000.00", "payment_unit": "Year", "current_compensation_uuid": "93e5da92-173b-4faa-a0bd-d1a8dee68be0", "compensations": [{"uuid": "1bad5177-c4ed-432e-ab43-66055d40c3a5", "version": "994b75511d1debac5d7e2ddeae13679f", "job_uuid": "1214875b-f43d-4267-bf2f-a6d2c298ff3d", "rate": "78000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "8b312f0e-30e7-4810-9c06-1177a6484f2d", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "74.0", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "0d4c755e-50ac-4c54-b46e-81bdfa03da5b", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "16.0", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1995-09-21", "has_ssn": true, "ssn": "", "phone": "1234567890", "preferred_first_name": "Denis", "work_email": "denis.cassin@example.com"}]
+          application/json: [{"uuid": "9779767c-6044-48e0-bf68-aeb370b9a2e7", "first_name": "Nicole", "middle_initial": "M", "last_name": "Boehm", "email": "kory7757869450111548@barton-hermiston.io", "company_uuid": "c44d66dc-c41b-4a60-9e25-5e93ff8583f2", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "414dedaca594b77135e0b8d2f398516d", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "9d5e3ce5-ea8f-4885-90e5-7ebbed03f7c5", "i9_document": true}, "jobs": [{"uuid": "5d5e3ce5-ea8f-4885-90e5-7ebaed03f7c5", "version": "91179081a7309c9fbd31bb3cf7b9893e", "employee_uuid": "a987bce1-6d06-43f8-9978-9db886f479fb", "hire_date": "2020-01-20", "title": "Client Support Manager", "primary": true, "rate": "22.00", "payment_unit": "Hour", "current_compensation_uuid": "798a962f-0fcf-491e-9b71-cfa6a1db114f", "compensations": [{"uuid": "94f17a77-cfe5-436a-af94-422bbf8248ff", "version": "233f0096a8015e62d9795fadf1fd300d", "job_uuid": "64711ac0-83ff-4aaf-bec1-db72f5a44e56", "rate": "22.00", "payment_unit": "Hour", "flsa_status": "Nonexempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "71.0", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "8b312f0e-30e7-4810-9c06-1177a6484f2d", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "34.0", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "date_of_birth": "1996-05-08", "has_ssn": true, "ssn": "", "phone": "1234567890", "preferred_first_name": "Vanessa", "payment_method": "Check", "work_email": "vanessa.boehm@example.com"}, {"uuid": "d7cb289a-af62-4120-9cd5-acda324b5c04", "first_name": "Maci", "middle_initial": "M", "last_name": "Cassin", "email": "claud_reinger7757869450111549@gutkowski.net", "company_uuid": "4522d043-5731-406d-a129-de1808042a32", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "e867459e1360fa71e78b88142923d341", "department": "Band", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "1d5e3ce5-ea8f-4885-90e5-7ebbed03f7c5", "i9_document": true}, "jobs": [{"uuid": "62a00cf7-342b-465e-a151-ecd295152be0", "version": "d0e719137f89ca3dd334dd4cc248ffbb", "employee_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "hire_date": "2020-01-20", "title": "Account Director", "primary": true, "rate": "78000.00", "payment_unit": "Year", "current_compensation_uuid": "93e5da92-173b-4faa-a0bd-d1a8dee68be0", "compensations": [{"uuid": "1bad5177-c4ed-432e-ab43-66055d40c3a5", "version": "994b75511d1debac5d7e2ddeae13679f", "job_uuid": "1214875b-f43d-4267-bf2f-a6d2c298ff3d", "rate": "78000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "8b312f0e-30e7-4810-9c06-1177a6484f2d", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "74.0", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "0d4c755e-50ac-4c54-b46e-81bdfa03da5b", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "16.0", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1995-09-21", "has_ssn": true, "ssn": "", "phone": "1234567890", "preferred_first_name": "Denis", "payment_method": "Check", "work_email": "denis.cassin@example.com"}]
   post-v1-historical_employees:
     Example:
       parameters:
@@ -2953,7 +2996,7 @@ examples:
         application/json: {"first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "preferred_first_name": "Angel", "date_of_birth": "1995-05-05T00:00:00Z", "ssn": "123456294", "work_address": {"location_uuid": "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a"}, "home_address": {"street_1": "300 3rd Street", "street_2": null, "city": "San Francisco", "state": "CA", "zip": "94107"}, "termination": {"effective_date": "2022-09-15T00:00:00Z"}, "job": {"hire_date": "2018-05-09T00:00:00Z"}, "employee_state_taxes": {"wc_covered": true, "wc_class_code": "20992"}}
       responses:
         "201":
-          application/json: {"uuid": "c5eac208-191a-4d7d-b286-05f8a2516327", "first_name": "Cordelia", "last_name": "Prosacco", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}]}
+          application/json: {"uuid": "c5eac208-191a-4d7d-b286-05f8a2516327", "first_name": "Cordelia", "last_name": "Prosacco", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
         "422": {}
     Create Historical Employee Example:
       parameters:
@@ -2962,7 +3005,7 @@ examples:
         header: {}
       responses:
         "201":
-          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "work_email": null}
+          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "343d0c6d-59cf-406a-b907-c450bb8474b6", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
     Basic:
       parameters:
         path:
@@ -2998,7 +3041,7 @@ examples:
         application/json: {"version": "db0edd04aaac4506f7edab03ac855d56", "first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "date_of_birth": "1995-05-05T00:00:00Z", "ssn": "123456294", "work_address": {"location_uuid": "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a"}, "home_address": {"street_1": "300 3rd Street", "street_2": null, "city": "San Francisco", "state": "CA", "zip": "94107"}, "termination": {"effective_date": "2022-09-15T00:00:00Z"}, "job": {"hire_date": "2018-05-09T00:00:00Z"}, "employee_state_taxes": {"wc_covered": true, "wc_class_code": "20992"}}
       responses:
         "200":
-          application/json: {"uuid": "cd736941-13a7-41a0-9995-88b35305ed27", "first_name": "Allison", "last_name": "Koepp", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}]}
+          application/json: {"uuid": "cd736941-13a7-41a0-9995-88b35305ed27", "first_name": "Allison", "last_name": "Koepp", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
     Create Historical Employee Example:
       parameters:
         path:
@@ -3007,7 +3050,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "work_email": null}
+          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "ecd9fe0f-81b9-48b3-81ea-ea4096bc3300", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
   get-v1-employees:
     Create Employee Example:
       parameters:
@@ -3017,7 +3060,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "work_email": "angel.jaskolski@example.com"}
+          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "5e5518a2-d0ce-4221-9a70-713be839d998", "i9_document": false}, "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "payment_method": "Check", "work_email": "angel.jaskolski@example.com"}
     Create Historical Employee Example:
       parameters:
         path:
@@ -3026,7 +3069,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "work_email": null}
+          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "b8eebcc2-127f-4d47-8297-8c0f6ee88aad", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
   put-v1-employees:
     Example:
       parameters:
@@ -3037,7 +3080,7 @@ examples:
         application/json: {"version": "db0edd04aaac4506f7edab03ac855d56", "first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "preferred_first_name": "Angel", "date_of_birth": "1995-05-05", "email": "knight0faith@example.com", "ssn": "123456294", "two_percent_shareholder": false}
       responses:
         "200":
-          application/json: {"uuid": "0488dda5-9bd2-4e22-8225-091b969a682e", "first_name": "Daphney", "last_name": "Shanahan", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}]}
+          application/json: {"uuid": "0488dda5-9bd2-4e22-8225-091b969a682e", "first_name": "Daphney", "last_name": "Shanahan", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
         "422": {}
     Create Employee Example:
       parameters:
@@ -3046,7 +3089,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "work_email": "angel.jaskolski@example.com"}
+          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "i9_document": false}, "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "payment_method": "Check", "work_email": "angel.jaskolski@example.com"}
     Create Historical Employee Example:
       parameters:
         path:
@@ -3054,7 +3097,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "work_email": null}
+          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "b85898c1-25a1-4907-a1c5-562af6646dad", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
     Basic:
       parameters:
         path:
@@ -3114,6 +3157,17 @@ examples:
       responses:
         "200":
           application/json: {"custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}]}
+  put-v1-employees-employee_id-onboarding_documents_config:
+    Example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"i9_document": true}
+      responses:
+        "200":
+          application/json: {"i9_document": "true"}
   get-v1-employees-employee_id-onboarding_status:
     Example:
       parameters:
@@ -3359,6 +3413,8 @@ examples:
       responses:
         "200":
           application/json: {"uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0", "version": "d487dd0b55dfcacdd920ccbdaeafa351", "employee_uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0", "active": true, "cancelable": true, "effective_date": "2020-03-10", "run_termination_payroll": false}
+        "404":
+          application/json: {"errors": [{"error_key": "employment", "category": "incorrect_state", "message": "The employee's employment is not in the right state."}]}
     Basic:
       parameters:
         path:
@@ -3429,6 +3485,8 @@ examples:
       responses:
         "200":
           application/json: {"version": "2e930d43acbdb241f8f14a2d531fa417", "effective_date": "2024-01-01", "file_new_hire_report": false, "work_location_uuid": "d2c80d44-857b-4d4d-bce4-23ae52cc863b,", "employment_status": "full_time", "two_percent_shareholder": false, "employee_uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0", "active": false}
+        "404":
+          application/json: {"errors": [{"error_key": "employment", "category": "incorrect_state", "message": "The employee's employment is not in the right state."}]}
     Basic:
       parameters:
         path:
@@ -3771,7 +3829,7 @@ examples:
         application/json: {"states": [{"state": "CA", "questions": [{"key": "filing_status", "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "withholding_allowance", "answers": [{"value": "2", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "additional_withholding", "answers": [{"value": "25.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "file_new_hire_report", "answers": [{"value": "true", "valid_from": "2010-01-01", "valid_up_to": null}]}]}]}
       responses:
         "200":
-          application/json: [{"employee_uuid": "<id>", "state": "Ohio", "questions": [{"label": "<value>", "description": "which difficult really", "key": "<key>", "input_question_format": {"type": "<value>"}}]}, {"employee_uuid": "<id>", "state": "Alabama", "questions": []}, {"employee_uuid": "<id>", "state": "Tennessee", "questions": [{"label": "<value>", "description": "notwithstanding yippee now cinch against however unearth outside stiff", "key": "<key>", "input_question_format": {"type": "<value>"}}, {"label": "<value>", "description": "incidentally shadowy cleverly", "key": "<key>", "input_question_format": {"type": "<value>"}}, {"label": "<value>", "description": "off frizz yowza huzzah whose", "key": "<key>", "input_question_format": {"type": "<value>"}}]}]
+          application/json: [{"employee_uuid": "<id>", "state": "Ohio", "questions": [{"label": "<value>", "description": "which difficult really", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}]}]}, {"employee_uuid": "<id>", "state": "Alabama", "questions": []}, {"employee_uuid": "<id>", "state": "Tennessee", "questions": [{"label": "<value>", "description": "notwithstanding yippee now cinch against however unearth outside stiff", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}, {}]}, {"label": "<value>", "description": "incidentally shadowy cleverly", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}, {}]}, {"label": "<value>", "description": "off frizz yowza huzzah whose", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}]}]}]
     Employee-State-Taxes-List-Example:
       parameters:
         path:
@@ -4243,7 +4301,7 @@ examples:
         application/json: {"type": "Individual", "wage_type": "Fixed", "start_date": "2020-04-01", "self_onboarding": true, "email": "johnson@johnson.com", "first_name": "Johnson", "last_name": "Johnson", "file_new_hire_report": "true,", "work_state": "CA"}
       responses:
         "201":
-          application/json: {"uuid": "45c84535-4779-4ecb-af28-3bb833fa3225", "hourly_rate": "50.0"}
+          application/json: {"uuid": "45c84535-4779-4ecb-af28-3bb833fa3225", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
         "422": {}
     Create a Business contractor:
       parameters:
@@ -4251,10 +4309,10 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"type": "Business", "wage_type": "Fixed", "start_date": "2020-04-01", "business_name": "Johnson-Johnson Contractors"}
+        application/json: {"type": "Business", "wage_type": "Fixed", "start_date": "2020-04-01", "self_onboarding": false, "file_new_hire_report": false, "business_name": "Johnson-Johnson Contractors"}
       responses:
         "201":
-          application/json: {"uuid": "4113dafc-14a6-4275-a15f-9c79a520c8a0", "hourly_rate": "50.0"}
+          application/json: {"uuid": "4113dafc-14a6-4275-a15f-9c79a520c8a0", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
         "422": {}
     Individual Contractor:
       parameters:
@@ -4262,7 +4320,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"wage_type": "Fixed", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"type": "Individual", "wage_type": "Fixed", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "201":
           application/json: {"uuid": "c9fc1ad3-c107-4e7b-aa21-2dd4b00a7a07", "company_uuid": "b7457fec-3b76-43bb-9c6e-69cca4688942", "wage_type": "Hourly", "is_active": false, "version": "63859768485e218ccf8a449bb60f14ed", "type": "Individual", "first_name": "Kory", "last_name": "Gottlieb", "middle_initial": "P", "business_name": null, "ein": null, "has_ein": false, "email": "keira.west@mckenzie.org", "start_date": "2022-01-01", "address": null, "hourly_rate": "60.00", "file_new_hire_report": true, "work_state": "FL", "onboarded": true, "onboarding_status": "onboarding_completed", "payment_method": null, "has_ssn": true, "department_uuid": null}
@@ -4272,7 +4330,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"wage_type": "Hourly", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"type": "Individual", "wage_type": "Hourly", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "201":
           application/json: {"uuid": "c7c0659c-21a6-4b4e-b74c-9252576fc68c", "company_uuid": "0ec4ae6e-e436-460d-b63c-94a14503d16f", "wage_type": "Fixed", "is_active": true, "version": "8aab307f1e8ed788697f8986346af559", "type": "Business", "first_name": null, "last_name": null, "middle_initial": null, "business_name": "Labadie-Stroman", "ein": "XX-XXX0001", "has_ein": true, "email": "jonatan@kerluke.info", "start_date": "2022-01-01", "address": null, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "payment_method": null, "has_ssn": false}
@@ -4282,7 +4340,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"wage_type": "Hourly", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"type": "Individual", "wage_type": "Hourly", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
@@ -4292,7 +4350,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"wage_type": "Fixed", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"type": "Individual", "wage_type": "Fixed", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -4302,7 +4360,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"wage_type": "Hourly", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"type": "Individual", "wage_type": "Hourly", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -4340,10 +4398,10 @@ examples:
           contractor_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "b48c46abfed1487b873b442334b3c4ff", "wage_type": "Hourly", "start_date": "2021-01-01", "hourly_rate": "20.00", "first_name": "Chanel", "last_name": "Boyle", "middle_initial": "X", "is_active": true}
+        application/json: {"version": "b48c46abfed1487b873b442334b3c4ff", "type": "Individual", "wage_type": "Hourly", "start_date": "2021-01-01", "hourly_rate": "20.00", "self_onboarding": false, "first_name": "Chanel", "last_name": "Boyle", "middle_initial": "X", "file_new_hire_report": false, "is_active": true}
       responses:
         "200":
-          application/json: {"uuid": "63ba7bbb-da29-4c1b-827d-792289357acf", "hourly_rate": "50.0"}
+          application/json: {"uuid": "63ba7bbb-da29-4c1b-827d-792289357acf", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
         "422": {}
     Update a Business Contractor:
       parameters:
@@ -4351,10 +4409,10 @@ examples:
           contractor_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "b48c46abfed1487b873b442334b3c4ff", "wage_type": "Fixed", "start_date": "2020-01-11", "business_name": "Contracting Solutions", "ein": "991113334", "is_active": false}
+        application/json: {"version": "b48c46abfed1487b873b442334b3c4ff", "type": "Individual", "wage_type": "Fixed", "start_date": "2020-01-11", "self_onboarding": false, "file_new_hire_report": false, "business_name": "Contracting Solutions", "ein": "991113334", "is_active": false}
       responses:
         "200":
-          application/json: {"uuid": "72a92a7e-5b65-4564-908c-30ecaedc35c9", "hourly_rate": "50.0"}
+          application/json: {"uuid": "72a92a7e-5b65-4564-908c-30ecaedc35c9", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
         "422": {}
     Individual Contractor:
       parameters:
@@ -4362,7 +4420,7 @@ examples:
           contractor_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "<value>", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "200":
           application/json: {"uuid": "c9fc1ad3-c107-4e7b-aa21-2dd4b00a7a07", "company_uuid": "b7457fec-3b76-43bb-9c6e-69cca4688942", "wage_type": "Hourly", "is_active": false, "version": "63859768485e218ccf8a449bb60f14ed", "type": "Individual", "first_name": "Kory", "last_name": "Gottlieb", "middle_initial": "P", "business_name": null, "ein": null, "has_ein": false, "email": "keira.west@mckenzie.org", "start_date": "2022-01-01", "address": {"street_1": "621 Jast Row", "street_2": "Apt. 281", "city": "Coral Springs", "state": "FL", "zip": "33065", "country": "USA"}, "hourly_rate": "60.00", "file_new_hire_report": true, "work_state": "FL", "onboarded": true, "onboarding_status": "onboarding_completed", "payment_method": "Direct Deposit", "has_ssn": true, "department_uuid": "56260b3d-c375-415c-b77a-75d99f717193"}
@@ -4372,7 +4430,7 @@ examples:
           contractor_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "<value>", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "200":
           application/json: {"uuid": "c7c0659c-21a6-4b4e-b74c-9252576fc68c", "company_uuid": "0ec4ae6e-e436-460d-b63c-94a14503d16f", "wage_type": "Fixed", "is_active": true, "version": "8aab307f1e8ed788697f8986346af559", "type": "Business", "first_name": null, "last_name": null, "middle_initial": null, "business_name": "Labadie-Stroman", "ein": "XX-XXX0001", "has_ein": true, "email": "jonatan@kerluke.info", "start_date": "2022-01-01", "address": null, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "payment_method": "Direct Deposit", "has_ssn": false}
@@ -4382,7 +4440,7 @@ examples:
           contractor_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "<value>", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
@@ -4392,7 +4450,7 @@ examples:
           contractor_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "<value>", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -4402,7 +4460,7 @@ examples:
           contractor_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "<value>", "start_date": "2020-01-11", "hourly_rate": "40.0"}
+        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -5060,6 +5118,9 @@ examples:
         header: {}
       requestBody:
         application/json: {"payroll_type": "Regular", "start_date": "2023-05-26T00:00:00Z", "end_date": "2023-06-25T00:00:00Z", "pay_schedule_uuid": "85100524-4b42-4d2d-bd62-9d864f9aea64"}
+      responses:
+        "422":
+          application/json: {}
   post-payrolls-gross-up-payroll_uuid:
     Example:
       parameters:
@@ -5068,6 +5129,10 @@ examples:
         header: {}
       requestBody:
         application/json: {"employee_uuid": "be48c41e-142d-4116-9430-5aba2313fac7", "net_pay": "1000.00"}
+      responses:
+        "422":
+          application/json: {}
+        "200": {}
   put-v1-companies-company_id-payrolls-payroll_id-calculate:
     Example:
       parameters:
@@ -5075,6 +5140,9 @@ examples:
           company_id: "<id>"
           payroll_id: "<id>"
         header: {}
+      responses:
+        "422":
+          application/json: {}
   put-v1-companies-company_id-payrolls-payroll_id-submit:
     Example:
       parameters:
@@ -5082,6 +5150,9 @@ examples:
           company_id: "<id>"
           payroll_id: "<id>"
         header: {}
+      responses:
+        "422":
+          application/json: {}
   put-api-v1-companies-company_id-payrolls-payroll_id-cancel:
     Unprocessed:
       parameters:
@@ -5224,7 +5295,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 276218, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 370456, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
     Fixed Policy:
       parameters:
         path:
@@ -5251,7 +5322,7 @@ examples:
         application/json: {"name": "Hourly Vacation Policy", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0"}
       responses:
         "200":
-          application/json: {"uuid": "64a9fdcb-6b72-49e9-938f-aad91c34e607", "company_uuid": "<id>", "name": "<value>", "policy_type": "vacation", "accrual_method": "<value>", "is_active": true}
+          application/json: {"uuid": "64a9fdcb-6b72-49e9-938f-aad91c34e607", "company_uuid": "<id>", "name": "<value>", "policy_type": "vacation", "accrual_method": "<value>", "is_active": true, "employees": [{}]}
         "422": {}
     Unlimited Vacation Policy:
       parameters:
@@ -5260,7 +5331,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 597129, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 857478, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
     Hourly Vacation Policy:
       parameters:
         path:
@@ -5323,7 +5394,7 @@ examples:
         application/json: {"name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0"}
       responses:
         "201":
-          application/json: {"uuid": "8b50daa4-883a-45ac-bf16-67931a204633", "company_uuid": "<id>", "name": "<value>", "policy_type": "vacation", "accrual_method": "<value>", "is_active": false}
+          application/json: {"uuid": "8b50daa4-883a-45ac-bf16-67931a204633", "company_uuid": "<id>", "name": "<value>", "policy_type": "vacation", "accrual_method": "<value>", "is_active": false, "employees": [{}, {}, {}]}
         "422": {}
     Unlimited Vacation Policy:
       parameters:
@@ -5332,7 +5403,7 @@ examples:
         header: {}
       responses:
         "201":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 638424, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 486589, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
     Hourly Vacation Policy:
       parameters:
         path:
@@ -5381,7 +5452,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "1cb0826f-c6d7-4361-b3e7-5e6d8af6853e", "company_uuid": "<id>", "name": "<value>", "policy_type": "vacation", "accrual_method": "<value>", "is_active": true, "employees": []}
+          application/json: {"uuid": "1cb0826f-c6d7-4361-b3e7-5e6d8af6853e", "company_uuid": "<id>", "name": "<value>", "policy_type": "vacation", "accrual_method": "<value>", "is_active": true, "employees": [{}]}
         "422": {}
     Hourly Policy:
       parameters:
@@ -5563,7 +5634,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
+        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
       responses:
         "200":
           application/json: {"uuid": "04552eb9-7829-4b18-ae96-6983552948df", "contractor_uuid": "bc57832c-d8bc-43a7-ae99-3a03380ff037", "bonus": "20.0", "date": "2020-10-19", "hours": "40.0", "payment_method": "Direct Deposit", "reimbursement": "100.0", "status": "Unfunded", "hourly_rate": "18.0", "may_cancel": true, "wage": "0.0", "wage_type": "Hourly", "wage_total": "740.00"}
@@ -5573,7 +5644,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
+        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
@@ -5583,7 +5654,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
+        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -5593,7 +5664,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
+        application/json: {"contractor_uuid": "<id>", "date": "2020-01-01", "payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -5606,6 +5677,9 @@ examples:
           start_date: "2020-01-01"
           end_date: "2020-12-31"
         header: {}
+      responses:
+        "200":
+          application/json: {}
   get-v1-companies-company_id-contractor_payment-contractor-payment:
     Example:
       parameters:
@@ -5661,7 +5735,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
+        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
@@ -5671,7 +5745,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
+        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -5704,7 +5778,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
+        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
       responses:
         "200":
           application/json: {"uuid": "nil", "company_uuid": "c54046f7-1be4-4c54-8194-f4842c30c86d", "check_date": "2024-05-07T00:00:00Z", "debit_date": "2024-05-01T00:00:00Z", "status": "Unfunded", "creation_token": "nil", "totals": {"amount": "2295.0", "debit_amount": "2295.0", "wage_amount": "2220.0", "reimbursement_amount": "75.0"}, "contractor_payments": [{"uuid": "nil", "contractor_uuid": "2e6d0970-31bf-47ce-bdb4-713e4207ecf4", "bonus": "0.0", "hours": "40.0", "payment_method": "Direct Deposit", "reimbursement": "75.0", "status": "Unfunded", "hourly_rate": "18.0", "may_cancel": false, "wage": "0.0", "wage_type": "Hourly", "wage_total": "720.0"}, {"uuid": "nil", "contractor_uuid": "a975fda0-fcf5-469a-a5fd-06e43d1cd99d", "bonus": "0.0", "hours": "0.0", "payment_method": "Check", "reimbursement": "0.0", "status": "Unfunded", "hourly_rate": "0.0", "may_cancel": false, "wage": "1500.0", "wage_type": "Fixed", "wage_total": "1500.0"}]}
@@ -5714,7 +5788,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
+        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
@@ -5724,7 +5798,7 @@ examples:
           company_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
+        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": [{"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}, {"payment_method": "Direct Deposit", "wage": 5000, "hours": 40, "bonus": 500, "reimbursement": 20}]}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -5884,7 +5958,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"columns": ["employee_compensation_time_period", "employee_social_security_tax", "bank_account_account_number"], "groupings": ["work_address_state"], "file_type": "csv", "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
+        application/json: {"columns": ["employee_compensation_time_period", "employee_social_security_tax", "bank_account_account_number"], "groupings": ["work_address_state"], "file_type": "csv", "with_totals": false, "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
       responses:
         "200":
           application/json: {"request_uuid": "p83d0ca8-7d41-42a9-834y-7d218ef6cb20", "company_uuid": "z83d0ca8-7d41-42a9-834y-7d218ef6cb20", "custom_name": "CustomReport", "file_type": "csv"}
@@ -5894,7 +5968,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"columns": [], "groupings": ["employee"], "file_type": "json", "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
+        application/json: {"columns": [], "groupings": ["employee"], "file_type": "json", "with_totals": false, "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
@@ -5904,7 +5978,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"columns": ["employee_taxes", "check_date"], "groupings": ["work_address", "payroll", "work_address"], "file_type": "json", "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
+        application/json: {"columns": ["employee_taxes", "check_date"], "groupings": ["work_address", "payroll", "work_address"], "file_type": "json", "with_totals": false, "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -5914,7 +5988,7 @@ examples:
           company_uuid: "<id>"
         header: {}
       requestBody:
-        application/json: {"columns": [], "groupings": ["work_address_state", "work_address"], "file_type": "csv", "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
+        application/json: {"columns": [], "groupings": ["work_address_state", "work_address"], "file_type": "csv", "with_totals": false, "start_date": "2024-01-01", "end_date": "2024-04-01", "dismissed_start_date": "2024-01-01", "dismissed_end_date": "2024-04-01"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -5989,7 +6063,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false, "employee_benefits": [{"employee_uuid": "ae44a0b2-3c89-41e1-91c8-5f8224a779ca", "company_benefit_uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "deduct_as_percentage": false, "employee_deduction": "3", "company_contribution": "0", "uuid": "9988f241-9aee-4383-bfca-eac79cf58135", "contribution": {"type": "amount", "value": "<value>"}}]}
+          application/json: {"version": "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872", "uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "description": "Kaiser Permanente", "deletable": true, "supports_percentage_amounts": true, "responsible_for_employer_taxes": false, "responsible_for_employee_w2": false, "employee_benefits": [{"employee_uuid": "ae44a0b2-3c89-41e1-91c8-5f8224a779ca", "company_benefit_uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "active": true, "deduct_as_percentage": false, "employee_deduction": "3", "company_contribution": "0", "uuid": "9988f241-9aee-4383-bfca-eac79cf58135", "contribution": {"type": "amount", "value": {}}}]}
   put-v1-company_benefits-company_benefit_id:
     Example:
       parameters:
@@ -6069,7 +6143,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "100.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}]
+          application/json: [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "elective": false, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "100.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}]
   put-v1-company_benefits-company_benefit_id-employee_benefits:
     Example:
       parameters:
@@ -6077,10 +6151,10 @@ examples:
           company_benefit_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"employee_benefits": [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "250.00", "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e"}]}
+        application/json: {"employee_benefits": [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "250.00", "deduct_as_percentage": false, "elective": false, "catch_up": false, "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e"}]}
       responses:
         "200":
-          application/json: [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "100.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}]
+          application/json: [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "elective": false, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "100.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}]
     Basic:
       parameters:
         path:
@@ -6113,7 +6187,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"employee_deduction": {"required": true, "editable": true, "choices": []}, "contribution": {"required": true, "editable": true, "default_value": {"value": "2", "type": "percentage"}, "choices": ["percentage"]}, "deduct_as_percentage": {"required": true, "editable": true, "choices": ["<value>", "<value>", "<value>"]}, "catch_up": {"required": true, "editable": true, "choices": []}, "limit_option": {"required": false, "editable": false, "choices": ["<value>"]}, "company_contribution_annual_maximum": {"required": false, "editable": false, "choices": ["<value>", "<value>"]}, "coverage_salary_multiplier": {"required": false, "editable": false, "choices": ["<value>", "<value>"]}, "coverage_amount": {"required": false, "editable": false, "choices": ["<value>", "<value>", "<value>"]}}
+          application/json: {"employee_deduction": {"required": true, "editable": true, "choices": ["<value>"]}, "contribution": {"required": true, "editable": true, "default_value": {"value": "2", "type": "percentage"}, "choices": ["percentage"]}, "deduct_as_percentage": {"required": true, "editable": true, "choices": ["<value>", "<value>", "<value>"]}, "catch_up": {"required": true, "editable": true, "choices": ["<value>"]}, "limit_option": {"required": false, "editable": false, "choices": ["<value>"]}, "company_contribution_annual_maximum": {"required": false, "editable": false, "choices": ["<value>", "<value>"]}, "coverage_salary_multiplier": {"required": false, "editable": false, "choices": ["<value>", "<value>"]}, "coverage_amount": {"required": false, "editable": false, "choices": ["<value>", "<value>", "<value>"]}}
   post-v1-employees-employee_id-employee_benefits:
     Example:
       parameters:
@@ -6121,10 +6195,10 @@ examples:
           employee_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"company_benefit_uuid": "f68abb42-431e-4392-bc3f-2795627e00f3", "active": true, "employee_deduction": "100.00", "contribution": {"type": "amount", "value": "100.00"}}
+        application/json: {"company_benefit_uuid": "f68abb42-431e-4392-bc3f-2795627e00f3", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "contribution": {"type": "amount", "value": "100.00"}, "elective": false, "catch_up": false, "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false}
       responses:
         "201":
-          application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "contribution": {"type": "amount", "value": "100.00"}, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "employee_uuid": "908123091820398", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
+          application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "contribution": {"type": "amount", "value": "100.00"}, "elective": false, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false, "employee_uuid": "908123091820398", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
     Tiered example:
       parameters:
         path:
@@ -6132,7 +6206,7 @@ examples:
         header: {}
       responses:
         "201":
-          application/json: {"version": "string", "active": true, "employee_deduction": "0.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "string", "contribution": {"type": "tiered", "value": {"tiers": [{"rate": "5.0", "threshold": "2.0", "threshold_delta": "2.0"}, {"rate": "3.0", "threshold": "5.0", "threshold_delta": "3.0"}]}}, "elective": false, "company_contribution_annual_maximum": "string", "limit_option": "string", "catch_up": false, "coverage_amount": "string", "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
+          application/json: {"version": "string", "active": true, "employee_deduction": "0.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "string", "contribution": {"type": "tiered", "value": {"tiers": [{"rate": "5.0", "threshold": "2.0", "threshold_delta": "2.0"}, {"rate": "3.0", "threshold": "5.0", "threshold_delta": "3.0"}]}}, "elective": false, "company_contribution_annual_maximum": "string", "limit_option": "string", "catch_up": false, "coverage_amount": "string", "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
     Basic:
       parameters:
         path:
@@ -6166,7 +6240,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "100.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}]
+          application/json: [{"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "elective": false, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "100.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}]
   get-v1-employee_benefits-employee_benefit_id:
     Example:
       parameters:
@@ -6175,7 +6249,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "contribution": {"type": "amount", "value": "100.00"}, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "employee_uuid": "908123091820398", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
+          application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "contribution": {"type": "amount", "value": "100.00"}, "elective": false, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false, "employee_uuid": "908123091820398", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
     Tiered example:
       parameters:
         path:
@@ -6183,7 +6257,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"version": "string", "active": true, "employee_deduction": "0.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "string", "contribution": {"type": "tiered", "value": {"tiers": [{"rate": "5.0", "threshold": "2.0", "threshold_delta": "2.0"}, {"rate": "3.0", "threshold": "5.0", "threshold_delta": "3.0"}]}}, "elective": false, "company_contribution_annual_maximum": "string", "limit_option": "string", "catch_up": false, "coverage_amount": "string", "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
+          application/json: {"version": "string", "active": true, "employee_deduction": "0.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "string", "contribution": {"type": "tiered", "value": {"tiers": [{"rate": "5.0", "threshold": "2.0", "threshold_delta": "2.0"}, {"rate": "3.0", "threshold": "5.0", "threshold_delta": "3.0"}]}}, "elective": false, "company_contribution_annual_maximum": "string", "limit_option": "string", "catch_up": false, "coverage_amount": "string", "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
   put-v1-employee_benefits-employee_benefit_id:
     Example:
       parameters:
@@ -6191,10 +6265,10 @@ examples:
           employee_benefit_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "employee_deduction": "250.00"}
+        application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "employee_deduction": "250.00", "elective": false, "catch_up": false, "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false}
       responses:
         "200":
-          application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "contribution": {"type": "amount", "value": "100.00"}, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "employee_uuid": "908123091820398", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
+          application/json: {"version": "09j3d29jqdpj92109j9j2d90dq", "active": true, "employee_deduction": "100.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "200.00", "contribution": {"type": "amount", "value": "100.00"}, "elective": false, "company_contribution_annual_maximum": "200.00", "limit_option": null, "catch_up": false, "coverage_amount": null, "deduction_reduces_taxable_income": null, "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false, "employee_uuid": "908123091820398", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
     Tiered example:
       parameters:
         path:
@@ -6202,7 +6276,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"version": "string", "active": true, "employee_deduction": "0.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "string", "contribution": {"type": "tiered", "value": {"tiers": [{"rate": "5.0", "threshold": "2.0", "threshold_delta": "2.0"}, {"rate": "3.0", "threshold": "5.0", "threshold_delta": "3.0"}]}}, "elective": false, "company_contribution_annual_maximum": "string", "limit_option": "string", "catch_up": false, "coverage_amount": "string", "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
+          application/json: {"version": "string", "active": true, "employee_deduction": "0.00", "deduct_as_percentage": false, "employee_deduction_annual_maximum": "string", "contribution": {"type": "tiered", "value": {"tiers": [{"rate": "5.0", "threshold": "2.0", "threshold_delta": "2.0"}, {"rate": "3.0", "threshold": "5.0", "threshold_delta": "3.0"}]}}, "elective": false, "company_contribution_annual_maximum": "string", "limit_option": "string", "catch_up": false, "coverage_amount": "string", "deduction_reduces_taxable_income": "unset", "coverage_salary_multiplier": "0.00", "company_contribution": "0.00", "contribute_as_percentage": false, "employee_uuid": "8f9f3f68-8fd3-499d-ade7-4a052e56494e", "company_benefit_uuid": "54e37c27-43e6-4ae5-a5b2-e29895a133be", "uuid": "e91ca856-a915-4339-9b18-29f9cd66b031"}
     Basic:
       parameters:
         path:
@@ -6265,20 +6339,20 @@ examples:
           employee_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"amount": "150.00", "description": "Back taxes", "court_ordered": true, "recurring": true, "deduct_as_percentage": false}
+        application/json: {"active": true, "amount": "150.00", "description": "Back taxes", "court_ordered": true, "times": null, "recurring": true, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
       responses:
         "201":
-          application/json: {"uuid": "0648730b-e81b-40fd-b400-179e824ec05f"}
+          application/json: {"uuid": "0648730b-e81b-40fd-b400-179e824ec05f", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Child-Support-Example:
       parameters:
         path:
           employee_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"amount": "40", "court_ordered": true, "garnishment_type": "child_support", "recurring": true, "pay_period_maximum": "500.00", "deduct_as_percentage": true, "child_support": {"state": "FL", "payment_period": "Monthly", "case_number": "CS1234"}}
+        application/json: {"active": true, "amount": "40", "court_ordered": true, "garnishment_type": "child_support", "times": null, "recurring": true, "annual_maximum": null, "pay_period_maximum": "500.00", "deduct_as_percentage": true, "child_support": {"state": "FL", "payment_period": "Monthly", "case_number": "CS1234"}}
       responses:
         "201":
-          application/json: {"uuid": "427b9e5b-95d2-4cfd-b063-45dff43ac8aa"}
+          application/json: {"uuid": "427b9e5b-95d2-4cfd-b063-45dff43ac8aa", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Basic:
       parameters:
         path:
@@ -6312,7 +6386,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "39caa188-96f4-4830-be24-a6d697fae9ba"}, {"uuid": "14b77cde-adfe-4059-8d09-738e752d0435"}]
+          application/json: [{"uuid": "b888f774-3e7c-4135-a18c-6b985523c4bc", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}, {"uuid": "e50f7622-81da-484b-9c66-1c8a99c6b71b", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}]
   get-v1-garnishments-garnishment_id:
     Example:
       parameters:
@@ -6321,7 +6395,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "a1b1d4d7-9d85-4c0c-970a-7d2676a05c04"}
+          application/json: {"uuid": "a1b1d4d7-9d85-4c0c-970a-7d2676a05c04", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Child-Support-Example:
       parameters:
         path:
@@ -6329,7 +6403,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "c70f28ce-90e2-4168-b683-1abb1a5f7f21"}
+          application/json: {"uuid": "c70f28ce-90e2-4168-b683-1abb1a5f7f21", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
   put-v1-garnishments-garnishment_id:
     Example:
       parameters:
@@ -6337,10 +6411,10 @@ examples:
           garnishment_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"active": false, "version": "52b7c567242cb7452e89ba2bc02cb476"}
+        application/json: {"active": false, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false, "version": "52b7c567242cb7452e89ba2bc02cb476"}
       responses:
         "200":
-          application/json: {"uuid": "4c044b4e-cf94-4436-a3fb-eaf811f919f4"}
+          application/json: {"uuid": "4c044b4e-cf94-4436-a3fb-eaf811f919f4", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Child-Support-Example:
       parameters:
         path:
@@ -6348,7 +6422,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "b05be711-9e3f-4fc9-8067-cd32e9559970"}
+          application/json: {"uuid": "b05be711-9e3f-4fc9-8067-cd32e9559970", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Basic:
       parameters:
         path:
@@ -6374,6 +6448,145 @@ examples:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
   get-v1-garnishments-child_support: {}
+  get-v1-employees-employee_id-i9_authorization:
+    Example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"uuid": "7fe28e4d-1e30-4ebb-8d22-aae768170b82", "version": "<value>", "authorization_status": "permanent_resident", "employer_signed": false, "employee_signed": false}
+  put-v1-employees-employee_id-i9_authorization:
+    Example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"authorization_status": "citizen", "version": "52b7c567242cb7452e89ba2bc02cb476"}
+      responses:
+        "200":
+          application/json: {"uuid": "4113bed5-50ae-4daa-a9a5-8a55ddb5a141", "version": "<value>", "authorization_status": "citizen", "employer_signed": false, "employee_signed": true}
+    Basic:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
+    Resource:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
+    Nested:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+  get-v1-employees-employee_id-i9_authorization-document_options:
+    Example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: [{"section": "A", "description": "Foreign passport", "document_type": "foreign_passport_w_i94", "document_title": ["Foreign passport"], "common_choice": true}, {"section": "B", "description": "Driver’s license or state-issued ID card", "document_type": "driver_license", "document_title": ["Driver's license", "State ID card"], "common_choice": true}, {"section": "C", "description": "Social Security card", "document_type": "ssn_card", "document_title": ["Social Security card"], "common_choice": true}]
+  get-v1-employees-employee_id-i9_authorization-documents:
+    Example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: [{"uuid": "7f2337f9-9b78-44b9-aeed-be4777b833a8", "document_type": "driver_license", "document_title": "Driver's license", "expiration_date": "2027-01-01", "issuing_authority": "USA"}, {"uuid": "9p2337f9-9b78-44b9-aeed-be4777b833a8", "document_type": "ssn_card", "document_title": "Social Security card", "issuing_authority": "USA"}]
+  put-v1-employees-employee_id-i9_authorization-documents:
+    Example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"documents": [{"document_type": "us_passport", "document_title": "US Passport", "document_number": "F12345678", "expiration_date": "2026-01-01", "issuing_authority": "USA"}]}
+      responses:
+        "200":
+          application/json: [{"uuid": "7f2337f9-9b78-44b9-aeed-be4777b833a8", "document_type": "driver_license", "document_title": "Driver's license", "expiration_date": "2027-01-01", "issuing_authority": "USA"}, {"uuid": "9p2337f9-9b78-44b9-aeed-be4777b833a8", "document_type": "ssn_card", "document_title": "Social Security card", "issuing_authority": "USA"}]
+    Basic:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
+    Resource:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
+    Nested:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+  delete-v1-employees-employee_id-i9_authorization-documents-document_id:
+    speakeasy-default-delete-v1-employees-employee-id-i9-authorization-documents-document-id:
+      parameters:
+        path:
+          employee_id: "<id>"
+          document_id: "<id>"
+        header: {}
+  put-v1-employees-employee_id-i9_authorization-employer_sign:
+    Example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"signature_text": "<value>", "signer_title": "<value>", "signed_by_ip_address": "<value>", "agree": false}
+      responses:
+        "200":
+          application/json: {"uuid": "ab18cec1-6568-4d93-b2ad-8deafd3f650c", "version": "<value>", "authorization_status": "alien", "employer_signed": true, "employee_signed": true}
+    Basic:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll."}]}
+    Resource:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
+    Nested:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
   get-v1-companies-company_uuid-tax_requirements-state:
     Example Tax Requirements for GA:
       parameters:
@@ -6654,7 +6867,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "e83d273e-4ae9-4b61-9c71-4030c2f73093", "company_uuid": "c5e3e3e9-732f-4762-849e-20b5cec9036f", "status": "open", "latest_error_code": "R01", "original_debit_date": "2023-10-11T00:00:00Z", "check_date": "2023-10-13T00:00:00Z", "payroll_uuid": "210f2034-fb4a-4059-b109-6c3b5efe499d", "contractor_payment_uuids": ["<value>"], "amount_outstanding": "10499.43", "event_total_amount": "5912.07"}]
+          application/json: [{"uuid": "e83d273e-4ae9-4b61-9c71-4030c2f73093", "company_uuid": "c5e3e3e9-732f-4762-849e-20b5cec9036f", "status": "open", "latest_error_code": "R01", "original_debit_date": "2023-10-11T00:00:00Z", "check_date": "2023-10-13T00:00:00Z", "payroll_uuid": "210f2034-fb4a-4059-b109-6c3b5efe499d", "contractor_payment_uuids": ["<value>", "<value>"], "amount_outstanding": "10499.43", "event_total_amount": "5912.07"}]
   redebit-recovery-case:
     Basic:
       parameters:
@@ -6747,5 +6960,6 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "rfi", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "5773243", "additional_notes": "Additional Notes", "bank_name": "Chase", "date_sent": "2024-06-10T00:00:00Z", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll,", "payment_uuid": "payroll", "amount_sent": "1054693.52", "requested_amount": "1054693.52", "wire_in_deadline": "2024-06-21T18:00:00Z"}]
+          application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "approved", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "5773243", "additional_notes": "Additional Notes", "bank_name": "Chase", "date_sent": "2024-06-10T00:00:00Z", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll,", "payment_uuid": "payroll", "amount_sent": "1054693.52", "requested_amount": "1054693.52", "wire_in_deadline": "2024-06-21T18:00:00Z"}]
+examplesVersion: 1.0.0
 generatedTests: {}

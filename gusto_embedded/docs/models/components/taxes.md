@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { Taxes } from "gusto_embedded/models/components";
+import { Taxes } from "gusto-embedded/models/components";
 
 let value: Taxes = {
   name: "<value>",
   employer: false,
-  amount: 8453.65,
+  amount: 2441.57,
 };
 ```
 

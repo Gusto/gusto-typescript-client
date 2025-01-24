@@ -7,8 +7,8 @@ import { timeOffPoliciesCalculateAccruingHours } from "../funcs/timeOffPoliciesC
 import { timeOffPoliciesCreate } from "../funcs/timeOffPoliciesCreate.js";
 import { timeOffPoliciesDeactivate } from "../funcs/timeOffPoliciesDeactivate.js";
 import { timeOffPoliciesGet } from "../funcs/timeOffPoliciesGet.js";
-import { timeOffPoliciesGetById } from "../funcs/timeOffPoliciesGetById.js";
 import { timeOffPoliciesRemoveEmployees } from "../funcs/timeOffPoliciesRemoveEmployees.js";
+import { timeOffPoliciesRetrieve } from "../funcs/timeOffPoliciesRetrieve.js";
 import { timeOffPoliciesUpdate } from "../funcs/timeOffPoliciesUpdate.js";
 import { timeOffPoliciesUpdateBalance } from "../funcs/timeOffPoliciesUpdateBalance.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -53,11 +53,11 @@ export class TimeOffPolicies extends ClientSDK {
    *
    * scope: `time_off_policies:read`
    */
-  async getById(
+  async retrieve(
     request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
     options?: RequestOptions,
   ): Promise<components.TimeOffPolicy> {
-    return unwrapAsync(timeOffPoliciesGetById(
+    return unwrapAsync(timeOffPoliciesRetrieve(
       this,
       request,
       options,

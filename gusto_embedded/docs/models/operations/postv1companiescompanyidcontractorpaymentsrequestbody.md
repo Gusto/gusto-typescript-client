@@ -3,8 +3,8 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdContractorPaymentsRequestBody } from "gusto_embedded/models/operations";
-import { RFCDate } from "gusto_embedded/types";
+import { PostV1CompaniesCompanyIdContractorPaymentsRequestBody } from "gusto-embedded/models/operations";
+import { RFCDate } from "gusto-embedded/types";
 
 let value: PostV1CompaniesCompanyIdContractorPaymentsRequestBody = {
   contractorUuid: "<id>",

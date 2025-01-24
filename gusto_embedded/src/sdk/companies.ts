@@ -17,12 +17,18 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-import { GustoEmbeddedContractors } from "./gustoembeddedcontractors.js";
+import { Benefits } from "./benefits.js";
+import { Forms } from "./forms.js";
 
 export class Companies extends ClientSDK {
-  private _contractors?: GustoEmbeddedContractors;
-  get contractors(): GustoEmbeddedContractors {
-    return (this._contractors ??= new GustoEmbeddedContractors(this._options));
+  private _forms?: Forms;
+  get forms(): Forms {
+    return (this._forms ??= new Forms(this._options));
+  }
+
+  private _benefits?: Benefits;
+  get benefits(): Benefits {
+    return (this._benefits ??= new Benefits(this._options));
   }
 
   /**

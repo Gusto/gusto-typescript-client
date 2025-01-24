@@ -5,10 +5,10 @@ The representation of an employee pay stub information.
 ## Example Usage
 
 ```typescript
-import { EmployeePayStub } from "gusto_embedded/models/components";
+import { EmployeePayStub } from "gusto-embedded/models/components";
 
 let value: EmployeePayStub = {
-  uuid: "047a1ac2-687c-4fc1-9c13-238a7f3cd879",
+  uuid: "8f2e12b1-96be-4cd0-b486-34f450d234e3",
 };
 ```
 

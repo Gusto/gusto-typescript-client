@@ -5,16 +5,16 @@ Example response
 ## Example Usage
 
 ```typescript
-import { EmployeeStateTax } from "gusto_embedded/models/components";
+import { EmployeeStateTax } from "gusto-embedded/models/components";
 
 let value: EmployeeStateTax = {
   employeeUuid: "<id>",
-  state: "Wyoming",
+  state: "Maryland",
   questions: [
     {
       label: "<value>",
       description:
-        "yippee gadzooks commemorate suspiciously suddenly well-off although tenderly yawningly whether",
+        "barring hateful since till atrium smuggle less phew pish hungrily",
       key: "<key>",
       inputQuestionFormat: {
         type: "<value>",

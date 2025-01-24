@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [getAll](#getall) - Get all recovery cases for a company
-* [initiateRedeit](#initiateredeit) - Initiate a redebit for a recovery case
+* [redebit](#redebit) - Initiate a redebit for a recovery case
 
 ## getAll
 
@@ -17,10 +17,10 @@ scope: `recovery_cases:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -40,13 +40,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { recoveryCasesGetAll } from "gusto_embedded/funcs/recoveryCasesGetAll.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { recoveryCasesGetAll } from "gusto-embedded/funcs/recoveryCasesGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -86,7 +86,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## initiateRedeit
+## redebit
 
 After resolving the underlying bank error, initiate a redebit for an open recovery case. This submission is asynchronous and a successful request responds with a 202 HTTP status.
 
@@ -99,14 +99,14 @@ scope: `recovery_cases:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  await gustoEmbedded.recoveryCases.initiateRedeit({
+  await gustoEmbedded.recoveryCases.redebit({
     recoveryCaseUuid: "<id>",
   });
 
@@ -121,17 +121,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { recoveryCasesInitiateRedeit } from "gusto_embedded/funcs/recoveryCasesInitiateRedeit.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { recoveryCasesRedebit } from "gusto-embedded/funcs/recoveryCasesRedebit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await recoveryCasesInitiateRedeit(gustoEmbedded, {
+  const res = await recoveryCasesRedebit(gustoEmbedded, {
     recoveryCaseUuid: "<id>",
   });
 

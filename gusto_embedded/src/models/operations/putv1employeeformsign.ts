@@ -15,13 +15,73 @@ export type PutV1EmployeeFormSignRequestBody = {
    */
   signatureText: string;
   /**
-   * whether you agree to sign electronically
+   * Whether you agree to sign electronically
    */
   agree: boolean;
   /**
    * The IP address of the signatory who signed the form. Both IPv4 AND IPv6 are supported.
    */
   signedByIpAddress: string;
+  /**
+   * Whether there is a preparer
+   */
+  preparer?: boolean | undefined;
+  preparerFirstName?: string | undefined;
+  preparerLastName?: string | undefined;
+  preparerStreet1?: string | undefined;
+  preparerStreet2?: string | undefined;
+  preparerCity?: string | undefined;
+  preparerState?: string | undefined;
+  preparerZip?: string | undefined;
+  /**
+   * Whether preparer agrees to sign electronically
+   */
+  preparerAgree?: string | undefined;
+  /**
+   * Whether there is a 2nd preparer
+   */
+  preparer2?: boolean | undefined;
+  preparer2FirstName?: string | undefined;
+  preparer2LastName?: string | undefined;
+  preparer2Street1?: string | undefined;
+  preparer2Street2?: string | undefined;
+  preparer2City?: string | undefined;
+  preparer2State?: string | undefined;
+  preparer2Zip?: string | undefined;
+  /**
+   * Whether 2nd preparer agrees to sign electronically
+   */
+  preparer2Agree?: string | undefined;
+  /**
+   * Whether there is a 3rd preparer
+   */
+  preparer3?: boolean | undefined;
+  preparer3FirstName?: string | undefined;
+  preparer3LastName?: string | undefined;
+  preparer3Street1?: string | undefined;
+  preparer3Street2?: string | undefined;
+  preparer3City?: string | undefined;
+  preparer3State?: string | undefined;
+  preparer3Zip?: string | undefined;
+  /**
+   * Whether 3rd preparer agrees to sign electronically
+   */
+  preparer3Agree?: string | undefined;
+  /**
+   * Whether there is a 4th preparer
+   */
+  preparer4?: boolean | undefined;
+  preparer4FirstName?: string | undefined;
+  preparer4LastName?: string | undefined;
+  preparer4Street1?: string | undefined;
+  preparer4Street2?: string | undefined;
+  preparer4City?: string | undefined;
+  preparer4State?: string | undefined;
+  preparer4Zip?: string | undefined;
+  /**
+   * Whether 4th preparer agrees to sign electronically
+   */
+  preparer4Agree?: string | undefined;
 };
 
 export type PutV1EmployeeFormSignRequest = {
@@ -49,10 +109,78 @@ export const PutV1EmployeeFormSignRequestBody$inboundSchema: z.ZodType<
   signature_text: z.string(),
   agree: z.boolean(),
   signed_by_ip_address: z.string(),
+  preparer: z.boolean().optional(),
+  preparer_first_name: z.string().optional(),
+  preparer_last_name: z.string().optional(),
+  preparer_street_1: z.string().optional(),
+  preparer_street_2: z.string().optional(),
+  preparer_city: z.string().optional(),
+  preparer_state: z.string().optional(),
+  preparer_zip: z.string().optional(),
+  preparer_agree: z.string().optional(),
+  preparer2: z.boolean().optional(),
+  preparer2_first_name: z.string().optional(),
+  preparer2_last_name: z.string().optional(),
+  preparer2_street_1: z.string().optional(),
+  preparer2_street_2: z.string().optional(),
+  preparer2_city: z.string().optional(),
+  preparer2_state: z.string().optional(),
+  preparer2_zip: z.string().optional(),
+  preparer2_agree: z.string().optional(),
+  preparer3: z.boolean().optional(),
+  preparer3_first_name: z.string().optional(),
+  preparer3_last_name: z.string().optional(),
+  preparer3_street_1: z.string().optional(),
+  preparer3_street_2: z.string().optional(),
+  preparer3_city: z.string().optional(),
+  preparer3_state: z.string().optional(),
+  preparer3_zip: z.string().optional(),
+  preparer3_agree: z.string().optional(),
+  preparer4: z.boolean().optional(),
+  preparer4_first_name: z.string().optional(),
+  preparer4_last_name: z.string().optional(),
+  preparer4_street_1: z.string().optional(),
+  preparer4_street_2: z.string().optional(),
+  preparer4_city: z.string().optional(),
+  preparer4_state: z.string().optional(),
+  preparer4_zip: z.string().optional(),
+  preparer4_agree: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "signature_text": "signatureText",
     "signed_by_ip_address": "signedByIpAddress",
+    "preparer_first_name": "preparerFirstName",
+    "preparer_last_name": "preparerLastName",
+    "preparer_street_1": "preparerStreet1",
+    "preparer_street_2": "preparerStreet2",
+    "preparer_city": "preparerCity",
+    "preparer_state": "preparerState",
+    "preparer_zip": "preparerZip",
+    "preparer_agree": "preparerAgree",
+    "preparer2_first_name": "preparer2FirstName",
+    "preparer2_last_name": "preparer2LastName",
+    "preparer2_street_1": "preparer2Street1",
+    "preparer2_street_2": "preparer2Street2",
+    "preparer2_city": "preparer2City",
+    "preparer2_state": "preparer2State",
+    "preparer2_zip": "preparer2Zip",
+    "preparer2_agree": "preparer2Agree",
+    "preparer3_first_name": "preparer3FirstName",
+    "preparer3_last_name": "preparer3LastName",
+    "preparer3_street_1": "preparer3Street1",
+    "preparer3_street_2": "preparer3Street2",
+    "preparer3_city": "preparer3City",
+    "preparer3_state": "preparer3State",
+    "preparer3_zip": "preparer3Zip",
+    "preparer3_agree": "preparer3Agree",
+    "preparer4_first_name": "preparer4FirstName",
+    "preparer4_last_name": "preparer4LastName",
+    "preparer4_street_1": "preparer4Street1",
+    "preparer4_street_2": "preparer4Street2",
+    "preparer4_city": "preparer4City",
+    "preparer4_state": "preparer4State",
+    "preparer4_zip": "preparer4Zip",
+    "preparer4_agree": "preparer4Agree",
   });
 });
 
@@ -61,6 +189,42 @@ export type PutV1EmployeeFormSignRequestBody$Outbound = {
   signature_text: string;
   agree: boolean;
   signed_by_ip_address: string;
+  preparer?: boolean | undefined;
+  preparer_first_name?: string | undefined;
+  preparer_last_name?: string | undefined;
+  preparer_street_1?: string | undefined;
+  preparer_street_2?: string | undefined;
+  preparer_city?: string | undefined;
+  preparer_state?: string | undefined;
+  preparer_zip?: string | undefined;
+  preparer_agree?: string | undefined;
+  preparer2?: boolean | undefined;
+  preparer2_first_name?: string | undefined;
+  preparer2_last_name?: string | undefined;
+  preparer2_street_1?: string | undefined;
+  preparer2_street_2?: string | undefined;
+  preparer2_city?: string | undefined;
+  preparer2_state?: string | undefined;
+  preparer2_zip?: string | undefined;
+  preparer2_agree?: string | undefined;
+  preparer3?: boolean | undefined;
+  preparer3_first_name?: string | undefined;
+  preparer3_last_name?: string | undefined;
+  preparer3_street_1?: string | undefined;
+  preparer3_street_2?: string | undefined;
+  preparer3_city?: string | undefined;
+  preparer3_state?: string | undefined;
+  preparer3_zip?: string | undefined;
+  preparer3_agree?: string | undefined;
+  preparer4?: boolean | undefined;
+  preparer4_first_name?: string | undefined;
+  preparer4_last_name?: string | undefined;
+  preparer4_street_1?: string | undefined;
+  preparer4_street_2?: string | undefined;
+  preparer4_city?: string | undefined;
+  preparer4_state?: string | undefined;
+  preparer4_zip?: string | undefined;
+  preparer4_agree?: string | undefined;
 };
 
 /** @internal */
@@ -72,10 +236,78 @@ export const PutV1EmployeeFormSignRequestBody$outboundSchema: z.ZodType<
   signatureText: z.string(),
   agree: z.boolean(),
   signedByIpAddress: z.string(),
+  preparer: z.boolean().optional(),
+  preparerFirstName: z.string().optional(),
+  preparerLastName: z.string().optional(),
+  preparerStreet1: z.string().optional(),
+  preparerStreet2: z.string().optional(),
+  preparerCity: z.string().optional(),
+  preparerState: z.string().optional(),
+  preparerZip: z.string().optional(),
+  preparerAgree: z.string().optional(),
+  preparer2: z.boolean().optional(),
+  preparer2FirstName: z.string().optional(),
+  preparer2LastName: z.string().optional(),
+  preparer2Street1: z.string().optional(),
+  preparer2Street2: z.string().optional(),
+  preparer2City: z.string().optional(),
+  preparer2State: z.string().optional(),
+  preparer2Zip: z.string().optional(),
+  preparer2Agree: z.string().optional(),
+  preparer3: z.boolean().optional(),
+  preparer3FirstName: z.string().optional(),
+  preparer3LastName: z.string().optional(),
+  preparer3Street1: z.string().optional(),
+  preparer3Street2: z.string().optional(),
+  preparer3City: z.string().optional(),
+  preparer3State: z.string().optional(),
+  preparer3Zip: z.string().optional(),
+  preparer3Agree: z.string().optional(),
+  preparer4: z.boolean().optional(),
+  preparer4FirstName: z.string().optional(),
+  preparer4LastName: z.string().optional(),
+  preparer4Street1: z.string().optional(),
+  preparer4Street2: z.string().optional(),
+  preparer4City: z.string().optional(),
+  preparer4State: z.string().optional(),
+  preparer4Zip: z.string().optional(),
+  preparer4Agree: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     signatureText: "signature_text",
     signedByIpAddress: "signed_by_ip_address",
+    preparerFirstName: "preparer_first_name",
+    preparerLastName: "preparer_last_name",
+    preparerStreet1: "preparer_street_1",
+    preparerStreet2: "preparer_street_2",
+    preparerCity: "preparer_city",
+    preparerState: "preparer_state",
+    preparerZip: "preparer_zip",
+    preparerAgree: "preparer_agree",
+    preparer2FirstName: "preparer2_first_name",
+    preparer2LastName: "preparer2_last_name",
+    preparer2Street1: "preparer2_street_1",
+    preparer2Street2: "preparer2_street_2",
+    preparer2City: "preparer2_city",
+    preparer2State: "preparer2_state",
+    preparer2Zip: "preparer2_zip",
+    preparer2Agree: "preparer2_agree",
+    preparer3FirstName: "preparer3_first_name",
+    preparer3LastName: "preparer3_last_name",
+    preparer3Street1: "preparer3_street_1",
+    preparer3Street2: "preparer3_street_2",
+    preparer3City: "preparer3_city",
+    preparer3State: "preparer3_state",
+    preparer3Zip: "preparer3_zip",
+    preparer3Agree: "preparer3_agree",
+    preparer4FirstName: "preparer4_first_name",
+    preparer4LastName: "preparer4_last_name",
+    preparer4Street1: "preparer4_street_1",
+    preparer4Street2: "preparer4_street_2",
+    preparer4City: "preparer4_city",
+    preparer4State: "preparer4_state",
+    preparer4Zip: "preparer4_zip",
+    preparer4Agree: "preparer4_agree",
   });
 });
 

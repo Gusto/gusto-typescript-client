@@ -5,18 +5,17 @@
 
 ### Available Operations
 
-* [get](#get) - Get an employee's home addresses
-* [createHomeAddress](#createhomeaddress) - Create an employee's home address
-* [getHomeById](#gethomebyid) - Get an employee's home address
-* [update](#update) - Update an employee's home address
-* [delete](#delete) - Delete an employee's home address
-* [getWorkAddresses](#getworkaddresses) - Get an employee's work addresses
-* [createWorkAddress](#createworkaddress) - Create an employee work address
+* [getHomeAddresses](#gethomeaddresses) - Get an employee's home addresses
+* [create](#create) - Create an employee's home address
+* [getHomeAddress](#gethomeaddress) - Get an employee's home address
+* [updateHomeAddress](#updatehomeaddress) - Update an employee's home address
+* [removeHomeAddress](#removehomeaddress) - Delete an employee's home address
+* [get](#get) - Get an employee's work addresses
 * [getWorkAddress](#getworkaddress) - Get an employee work address
 * [updateWorkAddress](#updateworkaddress) - Update an employee work address
-* [remove](#remove) - Delete an employee's work address
+* [delete](#delete) - Delete an employee's work address
 
-## get
+## getHomeAddresses
 
 The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
 
@@ -27,14 +26,14 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeAddresses.get({
+  const result = await gustoEmbedded.employeeAddresses.getHomeAddresses({
     employeeId: "<id>",
   });
 
@@ -50,17 +49,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesGet } from "gusto_embedded/funcs/employeeAddressesGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesGetHomeAddresses } from "gusto-embedded/funcs/employeeAddressesGetHomeAddresses.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeAddressesGet(gustoEmbedded, {
+  const res = await employeeAddressesGetHomeAddresses(gustoEmbedded, {
     employeeId: "<id>",
   });
 
@@ -96,7 +95,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## createHomeAddress
+## create
 
 The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
 
@@ -107,15 +106,15 @@ scope: `employees:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeAddresses.createHomeAddress({
+  const result = await gustoEmbedded.employeeAddresses.create({
     employeeId: "<id>",
     requestBody: {
       street1: "300 3rd Street",
@@ -140,18 +139,18 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesCreateHomeAddress } from "gusto_embedded/funcs/employeeAddressesCreateHomeAddress.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesCreate } from "gusto-embedded/funcs/employeeAddressesCreate.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeAddressesCreateHomeAddress(gustoEmbedded, {
+  const res = await employeeAddressesCreate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
       street1: "300 3rd Street",
@@ -197,7 +196,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getHomeById
+## getHomeAddress
 
 The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
 
@@ -208,14 +207,14 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeAddresses.getHomeById({
+  const result = await gustoEmbedded.employeeAddresses.getHomeAddress({
     homeAddressUuid: "<id>",
   });
 
@@ -231,17 +230,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesGetHomeById } from "gusto_embedded/funcs/employeeAddressesGetHomeById.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesGetHomeAddress } from "gusto-embedded/funcs/employeeAddressesGetHomeAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeAddressesGetHomeById(gustoEmbedded, {
+  const res = await employeeAddressesGetHomeAddress(gustoEmbedded, {
     homeAddressUuid: "<id>",
   });
 
@@ -277,7 +276,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update
+## updateHomeAddress
 
 The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
 
@@ -288,15 +287,15 @@ scope: `employees:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeAddresses.update({
+  const result = await gustoEmbedded.employeeAddresses.updateHomeAddress({
     homeAddressUuid: "<id>",
     requestBody: {
       version: "fe75bd065ff48b91c35fe8ff842f986c",
@@ -322,18 +321,18 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesUpdate } from "gusto_embedded/funcs/employeeAddressesUpdate.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesUpdateHomeAddress } from "gusto-embedded/funcs/employeeAddressesUpdateHomeAddress.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeAddressesUpdate(gustoEmbedded, {
+  const res = await employeeAddressesUpdateHomeAddress(gustoEmbedded, {
     homeAddressUuid: "<id>",
     requestBody: {
       version: "fe75bd065ff48b91c35fe8ff842f986c",
@@ -380,7 +379,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## delete
+## removeHomeAddress
 
 Used for deleting an employee's home address.  Cannot delete the employee's active home address.
 
@@ -389,14 +388,14 @@ scope: `employees:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  await gustoEmbedded.employeeAddresses.delete({
+  await gustoEmbedded.employeeAddresses.removeHomeAddress({
     homeAddressUuid: "<id>",
   });
 
@@ -411,17 +410,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesDelete } from "gusto_embedded/funcs/employeeAddressesDelete.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesRemoveHomeAddress } from "gusto-embedded/funcs/employeeAddressesRemoveHomeAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeAddressesDelete(gustoEmbedded, {
+  const res = await employeeAddressesRemoveHomeAddress(gustoEmbedded, {
     homeAddressUuid: "<id>",
   });
 
@@ -457,7 +456,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getWorkAddresses
+## get
 
 Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
 signifying if it is the currently active work address.
@@ -467,14 +466,14 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeAddresses.getWorkAddresses({
+  const result = await gustoEmbedded.employeeAddresses.get({
     employeeId: "<id>",
   });
 
@@ -490,17 +489,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesGetWorkAddresses } from "gusto_embedded/funcs/employeeAddressesGetWorkAddresses.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesGet } from "gusto-embedded/funcs/employeeAddressesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeAddressesGetWorkAddresses(gustoEmbedded, {
+  const res = await employeeAddressesGet(gustoEmbedded, {
     employeeId: "<id>",
   });
 
@@ -536,95 +535,6 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## createWorkAddress
-
-The work address of an employee describes when an employee began working at an associated company location.
-
-scope: `employees:manage`
-
-### Example Usage
-
-```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
-});
-
-async function run() {
-  const result = await gustoEmbedded.employeeAddresses.createWorkAddress({
-    employeeId: "<id>",
-    requestBody: {
-      locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new RFCDate("2023-05-15"),
-    },
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesCreateWorkAddress } from "gusto_embedded/funcs/employeeAddressesCreateWorkAddress.js";
-import { RFCDate } from "gusto_embedded/types";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
-});
-
-async function run() {
-  const res = await employeeAddressesCreateWorkAddress(gustoEmbedded, {
-    employeeId: "<id>",
-    requestBody: {
-      locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new RFCDate("2023-05-15"),
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostV1EmployeesEmployeeIdWorkAddressesRequest](../../models/operations/postv1employeesemployeeidworkaddressesrequest.md)                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.EmployeeWorkAddress](../../models/components/employeeworkaddress.md)\>**
-
-### Errors
-
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
-
 ## getWorkAddress
 
 The work address of an employee is used for payroll tax purposes.
@@ -634,10 +544,10 @@ scope: `employees:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -657,13 +567,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesGetWorkAddress } from "gusto_embedded/funcs/employeeAddressesGetWorkAddress.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesGetWorkAddress } from "gusto-embedded/funcs/employeeAddressesGetWorkAddress.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -712,11 +622,11 @@ scope: `employees:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbedded } from "gusto-embedded";
+import { RFCDate } from "gusto-embedded/types";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -741,14 +651,14 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesUpdateWorkAddress } from "gusto_embedded/funcs/employeeAddressesUpdateWorkAddress.js";
-import { RFCDate } from "gusto_embedded/types";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesUpdateWorkAddress } from "gusto-embedded/funcs/employeeAddressesUpdateWorkAddress.js";
+import { RFCDate } from "gusto-embedded/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -794,7 +704,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## remove
+## delete
 
 Used for deleting an employee's work address.  Cannot delete the employee's active work address.
 
@@ -803,14 +713,14 @@ scope: `employees:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  await gustoEmbedded.employeeAddresses.remove({
+  await gustoEmbedded.employeeAddresses.delete({
     workAddressUuid: "<id>",
   });
 
@@ -825,17 +735,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeAddressesRemove } from "gusto_embedded/funcs/employeeAddressesRemove.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeAddressesDelete } from "gusto-embedded/funcs/employeeAddressesDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeAddressesRemove(gustoEmbedded, {
+  const res = await employeeAddressesDelete(gustoEmbedded, {
     workAddressUuid: "<id>",
   });
 

@@ -5,9 +5,9 @@ The direction of the payment
 ## Example Usage
 
 ```typescript
-import { PaymentDirection } from "gusto_embedded/models/components";
+import { PaymentDirection } from "gusto-embedded/models/components";
 
-let value: PaymentDirection = "credit";
+let value: PaymentDirection = "debit";
 ```
 
 ## Values

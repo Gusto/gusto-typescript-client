@@ -5,6 +5,7 @@
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -27,7 +28,10 @@ import { Result } from "../types/fp.js";
  * Sign an employee form
  *
  * @remarks
- * Sign an employee form
+ * Sign an employee form.
+ *
+ * The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+ * first name, last name, street address, city, state, and zip for that preparer are all required.
  *
  * scope: `employee_forms:sign`
  */
@@ -75,7 +79,7 @@ export async function employeeFormsSign(
     pathParams,
   );
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
@@ -83,7 +87,7 @@ export async function employeeFormsSign(
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.companyAccessAuth);
   const securityInput = secConfig == null
@@ -145,8 +149,9 @@ export async function employeeFormsSign(
     | ConnectionError
   >(
     M.json(200, components.Form$inboundSchema),
-    M.fail([404, "4XX", "5XX"]),
+    M.fail([404, "4XX"]),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;

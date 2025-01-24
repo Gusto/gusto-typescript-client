@@ -8,7 +8,7 @@
 * [create](#create) - Create a company bank account
 * [list](#list) - Get all company bank accounts
 * [verify](#verify) - Verify a company bank account
-* [createFromPlaidToken](#createfromplaidtoken) - Create a bank account from a plaid processor token
+* [createFromProcessorToken](#createfromprocessortoken) - Create a bank account from a plaid processor token
 
 ## create
 
@@ -28,10 +28,10 @@ scope: `company_bank_accounts:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -56,13 +56,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { bankAccountsCreate } from "gusto_embedded/funcs/bankAccountsCreate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { bankAccountsCreate } from "gusto-embedded/funcs/bankAccountsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -117,10 +117,10 @@ scope: `company_bank_accounts:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -140,13 +140,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { bankAccountsList } from "gusto_embedded/funcs/bankAccountsList.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { bankAccountsList } from "gusto-embedded/funcs/bankAccountsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -208,10 +208,10 @@ scope: `company_bank_accounts:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -236,13 +236,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { bankAccountsVerify } from "gusto_embedded/funcs/bankAccountsVerify.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { bankAccountsVerify } from "gusto-embedded/funcs/bankAccountsVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -288,7 +288,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## createFromPlaidToken
+## createFromProcessorToken
 
 This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
 
@@ -304,14 +304,14 @@ scope: `plaid_processor:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.bankAccounts.createFromPlaidToken({
+  const result = await gustoEmbedded.bankAccounts.createFromProcessorToken({
     requestBody: {
       ownerType: "Company",
       ownerId: "ef279fbd-0fc6-4cf1-a977-6939d621c429",
@@ -331,17 +331,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { bankAccountsCreateFromPlaidToken } from "gusto_embedded/funcs/bankAccountsCreateFromPlaidToken.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { bankAccountsCreateFromProcessorToken } from "gusto-embedded/funcs/bankAccountsCreateFromProcessorToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await bankAccountsCreateFromPlaidToken(gustoEmbedded, {
+  const res = await bankAccountsCreateFromProcessorToken(gustoEmbedded, {
     requestBody: {
       ownerType: "Company",
       ownerId: "ef279fbd-0fc6-4cf1-a977-6939d621c429",

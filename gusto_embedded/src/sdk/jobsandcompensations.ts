@@ -4,11 +4,14 @@
 
 import { jobsAndCompensationsCreateCompensation } from "../funcs/jobsAndCompensationsCreateCompensation.js";
 import { jobsAndCompensationsCreateJob } from "../funcs/jobsAndCompensationsCreateJob.js";
-import { jobsAndCompensationsGet } from "../funcs/jobsAndCompensationsGet.js";
+import { jobsAndCompensationsDeleteCompensation } from "../funcs/jobsAndCompensationsDeleteCompensation.js";
+import { jobsAndCompensationsDeleteJob } from "../funcs/jobsAndCompensationsDeleteJob.js";
 import { jobsAndCompensationsGetCompensation } from "../funcs/jobsAndCompensationsGetCompensation.js";
 import { jobsAndCompensationsGetCompensations } from "../funcs/jobsAndCompensationsGetCompensations.js";
+import { jobsAndCompensationsGetJob } from "../funcs/jobsAndCompensationsGetJob.js";
 import { jobsAndCompensationsGetJobs } from "../funcs/jobsAndCompensationsGetJobs.js";
 import { jobsAndCompensationsUpdate } from "../funcs/jobsAndCompensationsUpdate.js";
+import { jobsAndCompensationsUpdateCompensation } from "../funcs/jobsAndCompensationsUpdateCompensation.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -61,11 +64,11 @@ export class JobsAndCompensations extends ClientSDK {
    *
    * scope: `jobs:read`
    */
-  async get(
+  async getJob(
     request: operations.GetV1JobsJobIdRequest,
     options?: RequestOptions,
   ): Promise<components.Job> {
-    return unwrapAsync(jobsAndCompensationsGet(
+    return unwrapAsync(jobsAndCompensationsGetJob(
       this,
       request,
       options,
@@ -85,6 +88,25 @@ export class JobsAndCompensations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Job> {
     return unwrapAsync(jobsAndCompensationsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an individual job
+   *
+   * @remarks
+   * Deletes a specific job that an employee holds.
+   *
+   * scope: `jobs:write`
+   */
+  async deleteJob(
+    request: operations.DeleteV1JobsJobIdRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(jobsAndCompensationsDeleteJob(
       this,
       request,
       options,
@@ -146,6 +168,44 @@ export class JobsAndCompensations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Compensation> {
     return unwrapAsync(jobsAndCompensationsGetCompensation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a compensation
+   *
+   * @remarks
+   * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+   *
+   * scope: `jobs:write`
+   */
+  async updateCompensation(
+    request: operations.PutV1CompensationsCompensationIdRequest,
+    options?: RequestOptions,
+  ): Promise<components.Compensation> {
+    return unwrapAsync(jobsAndCompensationsUpdateCompensation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a compensation
+   *
+   * @remarks
+   * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
+   *
+   * scope: `jobs:write`
+   */
+  async deleteCompensation(
+    request: operations.DeleteV1CompensationsCompensationIdRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(jobsAndCompensationsDeleteCompensation(
       this,
       request,
       options,

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue } from "gusto_embedded/models/components";
+import { BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue } from "gusto-embedded/models/components";
 
 let value: BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue = {};
 ```

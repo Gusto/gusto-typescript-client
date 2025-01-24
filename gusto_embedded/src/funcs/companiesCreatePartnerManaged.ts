@@ -5,6 +5,7 @@
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { resolveSecurity } from "../lib/security.js";
@@ -73,7 +74,7 @@ export async function companiesCreatePartnerManaged(
 
   const path = pathToFunc("/v1/partner_managed_companies")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
@@ -81,7 +82,7 @@ export async function companiesCreatePartnerManaged(
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const requestSecurity = resolveSecurity(
     [
@@ -150,8 +151,9 @@ export async function companiesCreatePartnerManaged(
       200,
       operations.PostV1PartnerManagedCompaniesResponseBody$inboundSchema,
     ),
-    M.fail([401, "4XX", "5XX"]),
+    M.fail([401, "4XX"]),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesAttachmentRequest } from "gusto_embedded/models/operations";
+import { PostV1CompaniesAttachmentRequest } from "gusto-embedded/models/operations";
 
 // No examples available for this model
 ```

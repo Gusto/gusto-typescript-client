@@ -5,9 +5,9 @@ The Gusto product tier of the company (not applicable to Embedded partner manage
 ## Example Usage
 
 ```typescript
-import { Tier } from "gusto_embedded/models/components";
+import { Tier } from "gusto-embedded/models/components";
 
-let value: Tier = "plus";
+let value: Tier = "basic";
 ```
 
 ## Values

@@ -5,9 +5,9 @@ Bank account type
 ## Example Usage
 
 ```typescript
-import { EmployeeBankAccountAccountType } from "gusto_embedded/models/components";
+import { EmployeeBankAccountAccountType } from "gusto-embedded/models/components";
 
-let value: EmployeeBankAccountAccountType = "Savings";
+let value: EmployeeBankAccountAccountType = "Checking";
 ```
 
 ## Values

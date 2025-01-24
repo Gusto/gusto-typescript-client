@@ -5,10 +5,10 @@ Example response
 ## Example Usage
 
 ```typescript
-import { ContractorBankAccount } from "gusto_embedded/models/components";
+import { ContractorBankAccount } from "gusto-embedded/models/components";
 
 let value: ContractorBankAccount = {
-  uuid: "a53ad0a7-e578-42bd-8040-faf8c556a5ef",
+  uuid: "d62d05ef-ab08-4851-a356-9b55004baccd",
 };
 ```
 

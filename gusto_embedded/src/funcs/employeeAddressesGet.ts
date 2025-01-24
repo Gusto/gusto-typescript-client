@@ -6,6 +6,7 @@ import * as z from "zod";
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -24,22 +25,21 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get an employee's home addresses
+ * Get an employee's work addresses
  *
  * @remarks
- * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
- *
- * Supports home address effective dating and courtesy withholding.
+ * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
+ * signifying if it is the currently active work address.
  *
  * scope: `employees:read`
  */
 export async function employeeAddressesGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
+  request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
-    Array<components.EmployeeAddress>,
+    Array<components.EmployeeWorkAddress>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -52,7 +52,7 @@ export async function employeeAddressesGet(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema
+      operations.GetV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -69,18 +69,18 @@ export async function employeeAddressesGet(
     }),
   };
 
-  const path = pathToFunc("/v1/employees/{employee_id}/home_addresses")(
+  const path = pathToFunc("/v1/employees/{employee_id}/work_addresses")(
     pathParams,
   );
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.companyAccessAuth);
   const securityInput = secConfig == null
@@ -89,7 +89,7 @@ export async function employeeAddressesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "get-v1-employees-employee_id-home_addresses",
+    operationID: "get-v1-employees-employee_id-work_addresses",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -127,7 +127,7 @@ export async function employeeAddressesGet(
   const response = doResult.value;
 
   const [result] = await M.match<
-    Array<components.EmployeeAddress>,
+    Array<components.EmployeeWorkAddress>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -136,8 +136,9 @@ export async function employeeAddressesGet(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, z.array(components.EmployeeAddress$inboundSchema)),
-    M.fail([404, "4XX", "5XX"]),
+    M.json(200, z.array(components.EmployeeWorkAddress$inboundSchema)),
+    M.fail([404, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

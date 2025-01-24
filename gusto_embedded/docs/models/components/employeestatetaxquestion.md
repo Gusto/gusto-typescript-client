@@ -3,11 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { EmployeeStateTaxQuestion } from "gusto_embedded/models/components";
+import { EmployeeStateTaxQuestion } from "gusto-embedded/models/components";
 
 let value: EmployeeStateTaxQuestion = {
   label: "<value>",
-  description: "unnaturally busy whereas any badly impolite",
+  description:
+    "optimistically everlasting specific fray rebuke well-to-do antique reel foot",
   key: "<key>",
   inputQuestionFormat: {
     type: "<value>",

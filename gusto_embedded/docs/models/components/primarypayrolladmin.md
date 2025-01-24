@@ -5,7 +5,7 @@ The primary payroll admin of the company.
 ## Example Usage
 
 ```typescript
-import { PrimaryPayrollAdmin } from "gusto_embedded/models/components";
+import { PrimaryPayrollAdmin } from "gusto-embedded/models/components";
 
 let value: PrimaryPayrollAdmin = {};
 ```

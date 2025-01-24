@@ -5,7 +5,7 @@ Example response
 ## Example Usage
 
 ```typescript
-import { PayrollMinimal } from "gusto_embedded/models/components";
+import { PayrollMinimal } from "gusto-embedded/models/components";
 
 let value: PayrollMinimal = {
   processed: false,

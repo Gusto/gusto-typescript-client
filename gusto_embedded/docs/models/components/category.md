@@ -5,9 +5,9 @@ The category of the company attachment
 ## Example Usage
 
 ```typescript
-import { Category } from "gusto_embedded/models/components";
+import { Category } from "gusto-embedded/models/components";
 
-let value: Category = "other";
+let value: Category = "compliance";
 ```
 
 ## Values

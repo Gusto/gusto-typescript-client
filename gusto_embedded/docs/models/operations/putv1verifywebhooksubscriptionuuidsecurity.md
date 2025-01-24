@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PutV1VerifyWebhookSubscriptionUuidSecurity } from "gusto_embedded/models/operations";
+import { PutV1VerifyWebhookSubscriptionUuidSecurity } from "gusto-embedded/models/operations";
 
 let value: PutV1VerifyWebhookSubscriptionUuidSecurity = {
   systemAccessAuth: "<value>",

@@ -5,9 +5,9 @@ The FLSA status for this compensation. Salaried ('Exempt') employees are paid a 
 ## Example Usage
 
 ```typescript
-import { FlsaStatusType } from "gusto_embedded/models/components";
+import { FlsaStatusType } from "gusto-embedded/models/components";
 
-let value: FlsaStatusType = "Commission Only Nonexempt";
+let value: FlsaStatusType = "Nonexempt";
 ```
 
 ## Values

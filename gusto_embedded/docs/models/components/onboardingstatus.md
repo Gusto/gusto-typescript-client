@@ -5,7 +5,7 @@ The current onboarding status of the employee
 ## Example Usage
 
 ```typescript
-import { OnboardingStatus } from "gusto_embedded/models/components";
+import { OnboardingStatus } from "gusto-embedded/models/components";
 
 let value: OnboardingStatus = "self_onboarding_completed_by_employee";
 ```

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1BenefitsBenefitsIdRequirementsRequest } from "gusto_embedded/models/operations";
+import { GetV1BenefitsBenefitsIdRequirementsRequest } from "gusto-embedded/models/operations";
 
 let value: GetV1BenefitsBenefitsIdRequirementsRequest = {
   benefitId: "<id>",

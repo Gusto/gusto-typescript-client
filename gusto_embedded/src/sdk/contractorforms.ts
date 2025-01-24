@@ -4,7 +4,7 @@
 
 import { contractorFormsGenerate1099 } from "../funcs/contractorFormsGenerate1099.js";
 import { contractorFormsGet } from "../funcs/contractorFormsGet.js";
-import { contractorFormsGetById } from "../funcs/contractorFormsGetById.js";
+import { contractorFormsGetAll } from "../funcs/contractorFormsGetAll.js";
 import { contractorFormsGetPdf } from "../funcs/contractorFormsGetPdf.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -20,11 +20,11 @@ export class ContractorForms extends ClientSDK {
    *
    * scope: `contractor_forms:read`
    */
-  async get(
+  async getAll(
     request: operations.GetV1ContractorFormsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Form1099>> {
-    return unwrapAsync(contractorFormsGet(
+    return unwrapAsync(contractorFormsGetAll(
       this,
       request,
       options,
@@ -39,11 +39,11 @@ export class ContractorForms extends ClientSDK {
    *
    * scope: `contractor_forms:read`
    */
-  async getById(
+  async get(
     request: operations.GetV1ContractorFormRequest,
     options?: RequestOptions,
   ): Promise<components.Form1099> {
-    return unwrapAsync(contractorFormsGetById(
+    return unwrapAsync(contractorFormsGet(
       this,
       request,
       options,

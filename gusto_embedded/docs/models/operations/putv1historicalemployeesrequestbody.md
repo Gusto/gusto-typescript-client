@@ -5,13 +5,13 @@ Update a historical employee.
 ## Example Usage
 
 ```typescript
-import { PutV1HistoricalEmployeesRequestBody } from "gusto_embedded/models/operations";
+import { PutV1HistoricalEmployeesRequestBody } from "gusto-embedded/models/operations";
 
 let value: PutV1HistoricalEmployeesRequestBody = {
   version: "<value>",
   firstName: "Modesta",
   lastName: "Turner",
-  dateOfBirth: "1987-06-30",
+  dateOfBirth: "1987-07-16",
   ssn: "<value>",
   workAddress: {},
   homeAddress: {

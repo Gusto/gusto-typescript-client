@@ -5,7 +5,7 @@ Unique identifier of the payment
 ## Example Usage
 
 ```typescript
-import { PaymentUuid } from "gusto_embedded/models/components";
+import { PaymentUuid } from "gusto-embedded/models/components";
 
 let value: PaymentUuid = "payroll";
 ```

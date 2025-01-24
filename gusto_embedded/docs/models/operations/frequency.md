@@ -5,7 +5,7 @@ The frequency that employees on this pay schedule are paid with Gusto.
 ## Example Usage
 
 ```typescript
-import { Frequency } from "gusto_embedded/models/operations";
+import { Frequency } from "gusto-embedded/models/operations";
 
 let value: Frequency = "Twice per month";
 ```

@@ -3,21 +3,16 @@
 ## Example Usage
 
 ```typescript
-import { EmployeeAddress } from "gusto_embedded/models/components";
-import { RFCDate } from "gusto_embedded/types";
+import { EmployeeAddress } from "gusto-embedded/models/components";
 
 let value: EmployeeAddress = {
-  street1: "333 Kiera Stravenue",
+  street1: "412 Kiera Stravenue",
   street2: "Suite 391",
   city: "San Francisco",
   state: "CA",
   zip: "94107",
   country: "USA",
   active: true,
-  uuid: "9557fe01-f8f8-4c14-a61c-ca6221a9f118",
-  employeeUuid: "da441196-43a9-4d23-ad5d-f37ce6bb99c0",
-  effectiveDate: new RFCDate("2021-01-01"),
-  courtesyWithholding: true,
 };
 ```
 

@@ -5,7 +5,7 @@ An off-cycle payroll
 ## Example Usage
 
 ```typescript
-import { PayrollPrepared } from "gusto_embedded/models/components";
+import { PayrollPrepared } from "gusto-embedded/models/components";
 
 let value: PayrollPrepared = {};
 ```

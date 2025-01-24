@@ -5,10 +5,10 @@ The temporary url to download a Company Attachment File
 ## Example Usage
 
 ```typescript
-import { GetV1CompaniesAttachmentUrlResponseBody } from "gusto_embedded/models/operations";
+import { GetV1CompaniesAttachmentUrlResponseBody } from "gusto-embedded/models/operations";
 
 let value: GetV1CompaniesAttachmentUrlResponseBody = {
-  url: "https://oval-sonata.name/",
+  url: "https://swift-ostrich.org",
 };
 ```
 

@@ -5,10 +5,10 @@ The representation of compensation in Gusto.
 ## Example Usage
 
 ```typescript
-import { Compensation } from "gusto_embedded/models/components";
+import { Compensation } from "gusto-embedded/models/components";
 
 let value: Compensation = {
-  uuid: "aff92903-f5a4-4fb5-bc16-3a16485b0a34",
+  uuid: "cf5d1ac2-6e10-496c-8e46-79fb64f2bea6",
 };
 ```
 

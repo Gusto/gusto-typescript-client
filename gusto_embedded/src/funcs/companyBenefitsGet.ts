@@ -3,8 +3,9 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -23,22 +24,24 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get a supported benefit by ID
+ * Get a company benefit
  *
  * @remarks
- * Returns a benefit supported by Gusto.
+ * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
  *
- * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+ * Note that company benefits can be deactivated only when no employees are enrolled.
  *
- * scope: `benefits:read`
+ * When with_employee_benefits parameter with true value is passed, employee_benefits:read scope is required to return employee_benefits.
+ *
+ * scope: `company_benefits:read`
  */
 export async function companyBenefitsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsBenefitIdRequest,
+  request: operations.GetV1CompanyBenefitsCompanyBenefitIdRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
-    components.SupportedBenefit,
+    components.CompanyBenefitWithEmployeeBenefits,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -51,7 +54,8 @@ export async function companyBenefitsGet(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1BenefitsBenefitIdRequest$outboundSchema.parse(value),
+      operations.GetV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema
+        .parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -61,22 +65,29 @@ export async function companyBenefitsGet(
   const body = null;
 
   const pathParams = {
-    benefit_id: encodeSimple("benefit_id", payload.benefit_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
+    company_benefit_id: encodeSimple(
+      "company_benefit_id",
+      payload.company_benefit_id,
+      { explode: false, charEncoding: "percent" },
+    ),
   };
 
-  const path = pathToFunc("/v1/benefits/{benefit_id}")(pathParams);
+  const path = pathToFunc("/v1/company_benefits/{company_benefit_id}")(
+    pathParams,
+  );
 
-  const headers = new Headers({
+  const query = encodeFormQuery({
+    "with_employee_benefits": payload.with_employee_benefits,
+  });
+
+  const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.companyAccessAuth);
   const securityInput = secConfig == null
@@ -85,7 +96,7 @@ export async function companyBenefitsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "get-v1-benefits-benefit_id",
+    operationID: "get-v1-company_benefits-company_benefit_id",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -103,6 +114,7 @@ export async function companyBenefitsGet(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -123,7 +135,7 @@ export async function companyBenefitsGet(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.SupportedBenefit,
+    components.CompanyBenefitWithEmployeeBenefits,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -132,8 +144,9 @@ export async function companyBenefitsGet(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.SupportedBenefit$inboundSchema),
-    M.fail([404, "4XX", "5XX"]),
+    M.json(200, components.CompanyBenefitWithEmployeeBenefits$inboundSchema),
+    M.fail([404, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

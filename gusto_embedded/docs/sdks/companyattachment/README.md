@@ -5,25 +5,26 @@
 
 ### Available Operations
 
-* [get](#get) - Get Company Attachment Details
+* [getDownloadUrl](#getdownloadurl) - Get a temporary url to download the Company Attachment file
 
-## get
+## getDownloadUrl
 
-Retrieve the detail of an attachment uploaded by the company.
+Retrieve a temporary url to download a attachment file uploaded
+by the company.
 
 scope: `company_attachments:read`
 
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyAttachment.get({
+  const result = await gustoEmbedded.companyAttachment.getDownloadUrl({
     companyId: "<id>",
     companyAttachmentUuid: "<id>",
   });
@@ -40,17 +41,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyAttachmentGet } from "gusto_embedded/funcs/companyAttachmentGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyAttachmentGetDownloadUrl } from "gusto-embedded/funcs/companyAttachmentGetDownloadUrl.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyAttachmentGet(gustoEmbedded, {
+  const res = await companyAttachmentGetDownloadUrl(gustoEmbedded, {
     companyId: "<id>",
     companyAttachmentUuid: "<id>",
   });
@@ -72,14 +73,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompaniesAttachmentRequest](../../models/operations/getv1companiesattachmentrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesAttachmentUrlRequest](../../models/operations/getv1companiesattachmenturlrequest.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.CompanyAttachment](../../models/components/companyattachment.md)\>**
+**Promise\<[operations.GetV1CompaniesAttachmentUrlResponseBody](../../models/operations/getv1companiesattachmenturlresponsebody.md)\>**
 
 ### Errors
 

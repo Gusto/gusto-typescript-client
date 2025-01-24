@@ -5,7 +5,7 @@ An off cycle payroll reason. Select one from the following list.
 ## Example Usage
 
 ```typescript
-import { OffCycleReason } from "gusto_embedded/models/operations";
+import { OffCycleReason } from "gusto-embedded/models/operations";
 
 let value: OffCycleReason = "Bonus";
 ```

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1WebhookSubscriptionRequestBody } from "gusto_embedded/models/operations";
+import { PostV1WebhookSubscriptionRequestBody } from "gusto-embedded/models/operations";
 
 let value: PostV1WebhookSubscriptionRequestBody = {
   url: "https://entire-obesity.com/",

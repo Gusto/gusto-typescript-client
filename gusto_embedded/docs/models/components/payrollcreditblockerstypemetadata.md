@@ -5,7 +5,7 @@ Additional data associated with the unblock option.
 ## Example Usage
 
 ```typescript
-import { PayrollCreditBlockersTypeMetadata } from "gusto_embedded/models/components";
+import { PayrollCreditBlockersTypeMetadata } from "gusto-embedded/models/components";
 
 let value: PayrollCreditBlockersTypeMetadata = {};
 ```

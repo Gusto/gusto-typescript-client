@@ -3,7 +3,7 @@
  */
 
 import { bankAccountsCreate } from "../funcs/bankAccountsCreate.js";
-import { bankAccountsCreateFromPlaidToken } from "../funcs/bankAccountsCreateFromPlaidToken.js";
+import { bankAccountsCreateFromProcessorToken } from "../funcs/bankAccountsCreateFromProcessorToken.js";
 import { bankAccountsList } from "../funcs/bankAccountsList.js";
 import { bankAccountsVerify } from "../funcs/bankAccountsVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -106,11 +106,11 @@ export class BankAccounts extends ClientSDK {
    * >
    * > If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
    */
-  async createFromPlaidToken(
+  async createFromProcessorToken(
     request: operations.PostV1PlaidProcessorTokenRequest,
     options?: RequestOptions,
   ): Promise<operations.PostV1PlaidProcessorTokenResponseBody> {
-    return unwrapAsync(bankAccountsCreateFromPlaidToken(
+    return unwrapAsync(bankAccountsCreateFromProcessorToken(
       this,
       request,
       options,

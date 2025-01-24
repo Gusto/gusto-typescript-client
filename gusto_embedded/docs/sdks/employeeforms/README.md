@@ -6,8 +6,8 @@
 ### Available Operations
 
 * [generateW2](#generatew2) - Generate a W2 form [DEMO]
-* [get](#get) - Get all employee forms
-* [getById](#getbyid) - Get an employee form
+* [getAll](#getall) - Get all employee forms
+* [getForm](#getform) - Get an employee form
 * [getPdf](#getpdf) - Get the employee form pdf
 * [sign](#sign) - Sign an employee form
 
@@ -24,10 +24,10 @@ scope: `employees:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -45,13 +45,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeFormsGenerateW2 } from "gusto_embedded/funcs/employeeFormsGenerateW2.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeFormsGenerateW2 } from "gusto-embedded/funcs/employeeFormsGenerateW2.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -90,7 +90,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## get
+## getAll
 
 Get a list of all employee's forms
 
@@ -99,14 +99,14 @@ scope: `employee_forms:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeForms.get({
+  const result = await gustoEmbedded.employeeForms.getAll({
     employeeId: "<id>",
   });
 
@@ -122,17 +122,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeFormsGet } from "gusto_embedded/funcs/employeeFormsGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeFormsGetAll } from "gusto-embedded/funcs/employeeFormsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeFormsGet(gustoEmbedded, {
+  const res = await employeeFormsGetAll(gustoEmbedded, {
     employeeId: "<id>",
   });
 
@@ -168,7 +168,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getById
+## getForm
 
 Get an employee form
 
@@ -177,14 +177,14 @@ scope: `employee_forms:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeForms.getById({
+  const result = await gustoEmbedded.employeeForms.getForm({
     employeeId: "<id>",
     formId: "<id>",
   });
@@ -201,17 +201,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeFormsGetById } from "gusto_embedded/funcs/employeeFormsGetById.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeFormsGetForm } from "gusto-embedded/funcs/employeeFormsGetForm.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await employeeFormsGetById(gustoEmbedded, {
+  const res = await employeeFormsGetForm(gustoEmbedded, {
     employeeId: "<id>",
     formId: "<id>",
   });
@@ -257,10 +257,10 @@ scope: `employee_forms:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -281,13 +281,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeFormsGetPdf } from "gusto_embedded/funcs/employeeFormsGetPdf.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeFormsGetPdf } from "gusto-embedded/funcs/employeeFormsGetPdf.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -330,17 +330,20 @@ run();
 
 ## sign
 
-Sign an employee form
+Sign an employee form.
+
+The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+first name, last name, street address, city, state, and zip for that preparer are all required.
 
 scope: `employee_forms:sign`
 
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -366,13 +369,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { employeeFormsSign } from "gusto_embedded/funcs/employeeFormsSign.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { employeeFormsSign } from "gusto-embedded/funcs/employeeFormsSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

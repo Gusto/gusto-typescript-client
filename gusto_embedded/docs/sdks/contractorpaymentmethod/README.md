@@ -6,8 +6,9 @@
 ### Available Operations
 
 * [createBankAccount](#createbankaccount) - Create a contractor bank account
+* [getBankAccounts](#getbankaccounts) - Get all contractor bank accounts
 * [get](#get) - Get a contractor's payment method
-* [update](#update) - Update a contractor's payment method
+* [updatePaymentMethod](#updatepaymentmethod) - Update a contractor's payment method
 
 ## createBankAccount
 
@@ -20,10 +21,10 @@ scope: `contractor_payment_methods:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -49,13 +50,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentMethodCreateBankAccount } from "gusto_embedded/funcs/contractorPaymentMethodCreateBankAccount.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentMethodCreateBankAccount } from "gusto-embedded/funcs/contractorPaymentMethodCreateBankAccount.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -102,6 +103,84 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
+## getBankAccounts
+
+Returns all contractor bank accounts.
+
+scope: `contractor_payment_methods:read`
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "gusto-embedded";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPaymentMethod.getBankAccounts({
+    contractorUuid: "<id>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentMethodGetBankAccounts } from "gusto-embedded/funcs/contractorPaymentMethodGetBankAccounts.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentMethodGetBankAccounts(gustoEmbedded, {
+    contractorUuid: "<id>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1ContractorsContractorUuidBankAccountsRequest](../../models/operations/getv1contractorscontractoruuidbankaccountsrequest.md)                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.ContractorBankAccount[]](../../models/.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
 ## get
 
 Fetches a contractor's payment method. A contractor payment method
@@ -113,10 +192,10 @@ scope: `contractor_payment_methods:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -136,13 +215,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentMethodGet } from "gusto_embedded/funcs/contractorPaymentMethodGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentMethodGet } from "gusto-embedded/funcs/contractorPaymentMethodGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -182,7 +261,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update
+## updatePaymentMethod
 
 Updates a contractor's payment method. Note that creating a contractor
 bank account will also update the contractor's payment method.
@@ -192,14 +271,14 @@ scope: `contractor_payment_methods:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.contractorPaymentMethod.update({
+  const result = await gustoEmbedded.contractorPaymentMethod.updatePaymentMethod({
     contractorUuid: "<id>",
     requestBody: {
       version: "63859768485e218ccf8a449bb60f14ed",
@@ -219,17 +298,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { contractorPaymentMethodUpdate } from "gusto_embedded/funcs/contractorPaymentMethodUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { contractorPaymentMethodUpdatePaymentMethod } from "gusto-embedded/funcs/contractorPaymentMethodUpdatePaymentMethod.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await contractorPaymentMethodUpdate(gustoEmbedded, {
+  const res = await contractorPaymentMethodUpdatePaymentMethod(gustoEmbedded, {
     contractorUuid: "<id>",
     requestBody: {
       version: "63859768485e218ccf8a449bb60f14ed",

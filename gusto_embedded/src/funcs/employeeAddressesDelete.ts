@@ -6,6 +6,7 @@ import * as z from "zod";
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -24,16 +25,16 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete an employee's home address
+ * Delete an employee's work address
  *
  * @remarks
- * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+ * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
  *
- * scope: `employees:write`
+ * scope: `employees:manage`
  */
 export async function employeeAddressesDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1HomeAddressesHomeAddressUuidRequest,
+  request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
@@ -51,7 +52,7 @@ export async function employeeAddressesDelete(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema
+      operations.DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -62,23 +63,23 @@ export async function employeeAddressesDelete(
   const body = null;
 
   const pathParams = {
-    home_address_uuid: encodeSimple(
-      "home_address_uuid",
-      payload.home_address_uuid,
+    work_address_uuid: encodeSimple(
+      "work_address_uuid",
+      payload.work_address_uuid,
       { explode: false, charEncoding: "percent" },
     ),
   };
 
-  const path = pathToFunc("/v1/home_addresses/{home_address_uuid}")(pathParams);
+  const path = pathToFunc("/v1/work_addresses/{work_address_uuid}")(pathParams);
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.companyAccessAuth);
   const securityInput = secConfig == null
@@ -87,7 +88,7 @@ export async function employeeAddressesDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "delete-v1-home_addresses-home_address_uuid",
+    operationID: "delete-v1-work_addresses-work_address_uuid",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -140,8 +141,9 @@ export async function employeeAddressesDelete(
     | ConnectionError
   >(
     M.nil(204, z.void()),
-    M.fail([404, "4XX", "5XX"]),
+    M.fail([404, "4XX"]),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;

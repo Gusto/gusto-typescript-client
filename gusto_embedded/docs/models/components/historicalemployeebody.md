@@ -3,19 +3,19 @@
 ## Example Usage
 
 ```typescript
-import { HistoricalEmployeeBody } from "gusto_embedded/models/components";
+import { HistoricalEmployeeBody } from "gusto-embedded/models/components";
 
 let value: HistoricalEmployeeBody = {
-  firstName: "Eliezer",
-  lastName: "Kuhlman",
-  dateOfBirth: "1981-01-28",
+  firstName: "Eloy",
+  lastName: "Towne",
+  dateOfBirth: "1998-04-07",
   ssn: "<value>",
   workAddress: {},
   homeAddress: {
     street1: "<value>",
-    city: "Plano",
-    state: "Maryland",
-    zip: "91796",
+    city: "Heathcotestad",
+    state: "South Dakota",
+    zip: "80880",
   },
   termination: {},
   job: {},

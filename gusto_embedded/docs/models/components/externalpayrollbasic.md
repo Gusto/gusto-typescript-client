@@ -5,10 +5,10 @@ The representation of an external payroll with minimal information.
 ## Example Usage
 
 ```typescript
-import { ExternalPayrollBasic } from "gusto_embedded/models/components";
+import { ExternalPayrollBasic } from "gusto-embedded/models/components";
 
 let value: ExternalPayrollBasic = {
-  uuid: "b2d77799-7da6-46c5-930e-e1521e0f1d95",
+  uuid: "5c5a87e8-db0c-43e0-9517-d425d231b64b",
 };
 ```
 

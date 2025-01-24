@@ -5,10 +5,10 @@ The representation of a company benefit.
 ## Example Usage
 
 ```typescript
-import { CompanyBenefitWithEmployeeBenefits } from "gusto_embedded/models/components";
+import { CompanyBenefitWithEmployeeBenefits } from "gusto-embedded/models/components";
 
 let value: CompanyBenefitWithEmployeeBenefits = {
-  uuid: "97987c22-651d-4c8f-b1c4-53c2da0caeb8",
+  uuid: "caeb8d48-4f30-4580-b8db-9ffd9709fd52",
 };
 ```
 

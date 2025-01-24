@@ -1,7 +1,7 @@
 {
-  "name": "gusto_embedded",
-  "version": "0.1.0",
-  "author": "Gusto Embedded",
+  "name": "gusto-embedded",
+  "version": "0.1.4",
+  "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
   "scripts": {

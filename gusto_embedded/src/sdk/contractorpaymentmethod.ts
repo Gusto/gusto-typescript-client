@@ -4,7 +4,8 @@
 
 import { contractorPaymentMethodCreateBankAccount } from "../funcs/contractorPaymentMethodCreateBankAccount.js";
 import { contractorPaymentMethodGet } from "../funcs/contractorPaymentMethodGet.js";
-import { contractorPaymentMethodUpdate } from "../funcs/contractorPaymentMethodUpdate.js";
+import { contractorPaymentMethodGetBankAccounts } from "../funcs/contractorPaymentMethodGetBankAccounts.js";
+import { contractorPaymentMethodUpdatePaymentMethod } from "../funcs/contractorPaymentMethodUpdatePaymentMethod.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -26,6 +27,25 @@ export class ContractorPaymentMethod extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.ContractorBankAccount> {
     return unwrapAsync(contractorPaymentMethodCreateBankAccount(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get all contractor bank accounts
+   *
+   * @remarks
+   * Returns all contractor bank accounts.
+   *
+   * scope: `contractor_payment_methods:read`
+   */
+  async getBankAccounts(
+    request: operations.GetV1ContractorsContractorUuidBankAccountsRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.ContractorBankAccount>> {
+    return unwrapAsync(contractorPaymentMethodGetBankAccounts(
       this,
       request,
       options,
@@ -62,11 +82,11 @@ export class ContractorPaymentMethod extends ClientSDK {
    *
    * scope: `contractor_payment_methods:write`
    */
-  async update(
+  async updatePaymentMethod(
     request: operations.PutV1ContractorsContractorIdPaymentMethodRequest,
     options?: RequestOptions,
   ): Promise<components.ContractorPaymentMethod> {
-    return unwrapAsync(contractorPaymentMethodUpdate(
+    return unwrapAsync(contractorPaymentMethodUpdatePaymentMethod(
       this,
       request,
       options,

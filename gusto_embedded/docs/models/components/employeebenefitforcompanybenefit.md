@@ -5,7 +5,7 @@ The representation of an employee benefit for a company benefit.
 ## Example Usage
 
 ```typescript
-import { EmployeeBenefitForCompanyBenefit } from "gusto_embedded/models/components";
+import { EmployeeBenefitForCompanyBenefit } from "gusto-embedded/models/components";
 
 let value: EmployeeBenefitForCompanyBenefit = {
   employeeUuid: "<id>",

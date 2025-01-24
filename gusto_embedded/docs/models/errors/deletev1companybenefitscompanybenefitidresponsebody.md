@@ -5,7 +5,7 @@ Unprocessable Entity
 ## Example Usage
 
 ```typescript
-import { DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody } from "gusto_embedded/models/errors";
+import { DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody } from "gusto-embedded/models/errors";
 
 // No examples available for this model
 ```

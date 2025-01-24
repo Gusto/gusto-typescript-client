@@ -3,6 +3,7 @@
  */
 
 import * as components from "../models/components/index.js";
+import { env } from "./env.js";
 
 type OAuth2PasswordFlow = {
   username: string;
@@ -236,7 +237,8 @@ export function resolveGlobalSecurity(
       {
         fieldName: "Authorization",
         type: "http:bearer",
-        value: security?.companyAccessAuth,
+        value: security?.companyAccessAuth
+          ?? env().GUSTOEMBEDDED_COMPANY_ACCESS_AUTH,
       },
     ],
   );

@@ -27,7 +27,7 @@ export type PostV1PlaidProcessorTokenRequestBody = {
    */
   ownerType: OwnerType;
   /**
-   * The owner uuid of the bank account
+   * The owner UUID of the bank account
    */
   ownerId: string;
   /**

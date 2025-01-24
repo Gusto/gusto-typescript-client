@@ -5,13 +5,13 @@ Representation of a Time Off Policy
 ## Example Usage
 
 ```typescript
-import { TimeOffPolicy } from "gusto_embedded/models/components";
+import { TimeOffPolicy } from "gusto-embedded/models/components";
 
 let value: TimeOffPolicy = {
-  uuid: "66b12dc4-6ed9-4306-aadd-0353cc8f2e12",
+  uuid: "e13b3422-7156-4061-97dd-19d3cec10349",
   companyUuid: "<id>",
   name: "<value>",
-  policyType: "vacation",
+  policyType: "sick",
   accrualMethod: "<value>",
   isActive: false,
   employees: [

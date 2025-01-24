@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1PlaidProcessorTokenRequestBody } from "gusto_embedded/models/operations";
+import { PostV1PlaidProcessorTokenRequestBody } from "gusto-embedded/models/operations";
 
 let value: PostV1PlaidProcessorTokenRequestBody = {
   ownerType: "Company",
@@ -17,5 +17,5 @@ let value: PostV1PlaidProcessorTokenRequestBody = {
 | Field                                                        | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `ownerType`                                                  | [operations.OwnerType](../../models/operations/ownertype.md) | :heavy_check_mark:                                           | The owner type of the bank account                           |
-| `ownerId`                                                    | *string*                                                     | :heavy_check_mark:                                           | The owner uuid of the bank account                           |
+| `ownerId`                                                    | *string*                                                     | :heavy_check_mark:                                           | The owner UUID of the bank account                           |
 | `processorToken`                                             | *string*                                                     | :heavy_check_mark:                                           | The Plaid processor token                                    |

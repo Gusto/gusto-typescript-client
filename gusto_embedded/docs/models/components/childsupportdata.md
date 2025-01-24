@@ -5,7 +5,7 @@ Child Support agency data
 ## Example Usage
 
 ```typescript
-import { ChildSupportData } from "gusto_embedded/models/components";
+import { ChildSupportData } from "gusto-embedded/models/components";
 
 let value: ChildSupportData = {};
 ```

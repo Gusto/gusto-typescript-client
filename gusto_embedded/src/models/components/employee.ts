@@ -58,6 +58,20 @@ export const OnboardingStatus = {
 export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
 
 /**
+ * Configuration for an employee onboarding documents during onboarding
+ */
+export type OnboardingDocumentsConfig = {
+  /**
+   * The UUID of the onboarding documents config
+   */
+  uuid?: string | undefined;
+  /**
+   * Whether to include Form I-9 for an employee during onboarding
+   */
+  i9Document?: boolean | undefined;
+};
+
+/**
  * The employee's payment method
  */
 export const PaymentMethod = {
@@ -133,6 +147,10 @@ export type Employee = {
    * The current onboarding status of the employee
    */
   onboardingStatus?: OnboardingStatus | undefined;
+  /**
+   * Configuration for an employee onboarding documents during onboarding
+   */
+  onboardingDocumentsConfig?: OnboardingDocumentsConfig | undefined;
   jobs?: Array<Job> | undefined;
   eligiblePaidTimeOff?: Array<PaidTimeOff> | undefined;
   terminations?: Array<Termination> | undefined;
@@ -185,6 +203,71 @@ export namespace OnboardingStatus$ {
   export const inboundSchema = OnboardingStatus$inboundSchema;
   /** @deprecated use `OnboardingStatus$outboundSchema` instead. */
   export const outboundSchema = OnboardingStatus$outboundSchema;
+}
+
+/** @internal */
+export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
+  OnboardingDocumentsConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  uuid: z.string().optional(),
+  i9_document: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "i9_document": "i9Document",
+  });
+});
+
+/** @internal */
+export type OnboardingDocumentsConfig$Outbound = {
+  uuid?: string | undefined;
+  i9_document?: boolean | undefined;
+};
+
+/** @internal */
+export const OnboardingDocumentsConfig$outboundSchema: z.ZodType<
+  OnboardingDocumentsConfig$Outbound,
+  z.ZodTypeDef,
+  OnboardingDocumentsConfig
+> = z.object({
+  uuid: z.string().optional(),
+  i9Document: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    i9Document: "i9_document",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OnboardingDocumentsConfig$ {
+  /** @deprecated use `OnboardingDocumentsConfig$inboundSchema` instead. */
+  export const inboundSchema = OnboardingDocumentsConfig$inboundSchema;
+  /** @deprecated use `OnboardingDocumentsConfig$outboundSchema` instead. */
+  export const outboundSchema = OnboardingDocumentsConfig$outboundSchema;
+  /** @deprecated use `OnboardingDocumentsConfig$Outbound` instead. */
+  export type Outbound = OnboardingDocumentsConfig$Outbound;
+}
+
+export function onboardingDocumentsConfigToJSON(
+  onboardingDocumentsConfig: OnboardingDocumentsConfig,
+): string {
+  return JSON.stringify(
+    OnboardingDocumentsConfig$outboundSchema.parse(onboardingDocumentsConfig),
+  );
+}
+
+export function onboardingDocumentsConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<OnboardingDocumentsConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OnboardingDocumentsConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OnboardingDocumentsConfig' from JSON`,
+  );
 }
 
 /** @internal */
@@ -248,6 +331,9 @@ export const Employee$inboundSchema: z.ZodType<
   two_percent_shareholder: z.nullable(z.boolean()).optional(),
   onboarded: z.boolean().optional(),
   onboarding_status: OnboardingStatus$inboundSchema.optional(),
+  onboarding_documents_config: z.lazy(() =>
+    OnboardingDocumentsConfig$inboundSchema
+  ).optional(),
   jobs: z.array(Job$inboundSchema).optional(),
   eligible_paid_time_off: z.array(PaidTimeOff$inboundSchema).optional(),
   terminations: z.array(Termination$inboundSchema).optional(),
@@ -271,6 +357,7 @@ export const Employee$inboundSchema: z.ZodType<
     "manager_uuid": "managerUuid",
     "two_percent_shareholder": "twoPercentShareholder",
     "onboarding_status": "onboardingStatus",
+    "onboarding_documents_config": "onboardingDocumentsConfig",
     "eligible_paid_time_off": "eligiblePaidTimeOff",
     "custom_fields": "customFields",
     "date_of_birth": "dateOfBirth",
@@ -297,6 +384,7 @@ export type Employee$Outbound = {
   two_percent_shareholder?: boolean | null | undefined;
   onboarded?: boolean | undefined;
   onboarding_status?: string | undefined;
+  onboarding_documents_config?: OnboardingDocumentsConfig$Outbound | undefined;
   jobs?: Array<Job$Outbound> | undefined;
   eligible_paid_time_off?: Array<PaidTimeOff$Outbound> | undefined;
   terminations?: Array<Termination$Outbound> | undefined;
@@ -331,6 +419,9 @@ export const Employee$outboundSchema: z.ZodType<
   twoPercentShareholder: z.nullable(z.boolean()).optional(),
   onboarded: z.boolean().optional(),
   onboardingStatus: OnboardingStatus$outboundSchema.optional(),
+  onboardingDocumentsConfig: z.lazy(() =>
+    OnboardingDocumentsConfig$outboundSchema
+  ).optional(),
   jobs: z.array(Job$outboundSchema).optional(),
   eligiblePaidTimeOff: z.array(PaidTimeOff$outboundSchema).optional(),
   terminations: z.array(Termination$outboundSchema).optional(),
@@ -354,6 +445,7 @@ export const Employee$outboundSchema: z.ZodType<
     managerUuid: "manager_uuid",
     twoPercentShareholder: "two_percent_shareholder",
     onboardingStatus: "onboarding_status",
+    onboardingDocumentsConfig: "onboarding_documents_config",
     eligiblePaidTimeOff: "eligible_paid_time_off",
     customFields: "custom_fields",
     dateOfBirth: "date_of_birth",

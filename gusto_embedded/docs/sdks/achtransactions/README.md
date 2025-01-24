@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [getAll](#getall) - Get all ACH transactions for a company
+* [get](#get) - Get all ACH transactions for a company
 
-## getAll
+## get
 
 Fetches all ACH transactions for a company.
 
@@ -16,14 +16,14 @@ scope: `ach_transactions:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.achTransactions.getAll({
+  const result = await gustoEmbedded.achTransactions.get({
     companyUuid: "<id>",
   });
 
@@ -39,17 +39,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { achTransactionsGetAll } from "gusto_embedded/funcs/achTransactionsGetAll.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { achTransactionsGet } from "gusto-embedded/funcs/achTransactionsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await achTransactionsGetAll(gustoEmbedded, {
+  const res = await achTransactionsGet(gustoEmbedded, {
     companyUuid: "<id>",
   });
 

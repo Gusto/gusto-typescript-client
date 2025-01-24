@@ -6,6 +6,7 @@ import * as z from "zod";
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -81,14 +82,14 @@ export async function payrollsDelete(
     "async": payload.async,
   });
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "*/*",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.companyAccessAuth);
   const securityInput = secConfig == null
@@ -146,7 +147,8 @@ export async function payrollsDelete(
     | ConnectionError
   >(
     M.nil([202, 204], z.void()),
-    M.fail([404, 422, "4XX", "5XX"]),
+    M.fail([404, 422, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

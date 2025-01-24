@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BenefitTypeRequirementsLimitOptionDefaultValue } from "gusto_embedded/models/components";
+import { BenefitTypeRequirementsLimitOptionDefaultValue } from "gusto-embedded/models/components";
 
 let value: BenefitTypeRequirementsLimitOptionDefaultValue = {};
 ```

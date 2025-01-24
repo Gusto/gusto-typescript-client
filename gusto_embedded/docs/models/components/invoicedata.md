@@ -5,7 +5,7 @@ Representation of a partners invoice data
 ## Example Usage
 
 ```typescript
-import { InvoiceData } from "gusto_embedded/models/components";
+import { InvoiceData } from "gusto-embedded/models/components";
 
 let value: InvoiceData = {};
 ```

@@ -5,7 +5,7 @@ Example response
 ## Example Usage
 
 ```typescript
-import { PayrollCheck } from "gusto_embedded/models/components";
+import { PayrollCheck } from "gusto-embedded/models/components";
 
 let value: PayrollCheck = {};
 ```

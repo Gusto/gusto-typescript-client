@@ -5,7 +5,7 @@ The summary of a contractor payment group.
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentGroupMinimal } from "gusto_embedded/models/components";
+import { ContractorPaymentGroupMinimal } from "gusto-embedded/models/components";
 
 let value: ContractorPaymentGroupMinimal = {};
 ```

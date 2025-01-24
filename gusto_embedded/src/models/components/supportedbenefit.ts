@@ -45,7 +45,7 @@ export type SupportedBenefit = {
    */
   retirement?: boolean | undefined;
   /**
-   * Whether the benefit has a government mandated yearly limit.
+   * Whether the benefit has a government mandated yearly limit. If the benefit has a government mandated yearly limit, employees cannot be added to more than one benefit of this type.
    */
   yearlyLimit?: boolean | undefined;
   /**

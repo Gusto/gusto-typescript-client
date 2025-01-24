@@ -5,10 +5,10 @@ The representation of an employee's onboarding status.
 ## Example Usage
 
 ```typescript
-import { EmployeeOnboardingStatus } from "gusto_embedded/models/components";
+import { EmployeeOnboardingStatus } from "gusto-embedded/models/components";
 
 let value: EmployeeOnboardingStatus = {
-  uuid: "635baedd-e456-48a4-8064-feda58d1c0dc",
+  uuid: "a822c9ff-f1f3-47c3-b921-1506a61142f2",
 };
 ```
 

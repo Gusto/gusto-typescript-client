@@ -5,7 +5,7 @@ Payroll type
 ## Example Usage
 
 ```typescript
-import { PayrollType } from "gusto_embedded/models/operations";
+import { PayrollType } from "gusto-embedded/models/operations";
 
 let value: PayrollType = "Regular";
 ```

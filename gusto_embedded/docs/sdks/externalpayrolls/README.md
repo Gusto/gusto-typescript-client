@@ -10,10 +10,10 @@
 * [get](#get) - Get an external payroll
 * [delete](#delete) - Delete an external payroll
 * [update](#update) - Update an external payroll
-* [calculateTaxes](#calculatetaxes) - Get tax suggestions for an external payroll
+* [getTaxSuggestions](#gettaxsuggestions) - Get tax suggestions for an external payroll
 * [getTaxLiabilities](#gettaxliabilities) - Get tax liabilities
 * [updateTaxLiabilities](#updatetaxliabilities) - Update tax liabilities
-* [finishTaxLiabilities](#finishtaxliabilities) - Finalize tax liabilities options and convert into processed payrolls
+* [finalizeTaxLiabilities](#finalizetaxliabilities) - Finalize tax liabilities options and convert into processed payrolls
 
 ## create
 
@@ -24,10 +24,10 @@ scope: `external_payrolls:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -52,13 +52,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsCreate } from "gusto_embedded/funcs/externalPayrollsCreate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsCreate } from "gusto-embedded/funcs/externalPayrollsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -113,10 +113,10 @@ scope: `external_payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -136,13 +136,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsList } from "gusto_embedded/funcs/externalPayrollsList.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsList } from "gusto-embedded/funcs/externalPayrollsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -191,10 +191,10 @@ scope: `external_payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -215,13 +215,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsGet } from "gusto_embedded/funcs/externalPayrollsGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsGet } from "gusto-embedded/funcs/externalPayrollsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -271,10 +271,10 @@ scope: `external_payrolls:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -294,13 +294,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsDelete } from "gusto_embedded/funcs/externalPayrollsDelete.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsDelete } from "gusto-embedded/funcs/externalPayrollsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -349,10 +349,10 @@ scope: `external_payrolls:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -417,13 +417,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsUpdate } from "gusto_embedded/funcs/externalPayrollsUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsUpdate } from "gusto-embedded/funcs/externalPayrollsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -509,7 +509,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## calculateTaxes
+## getTaxSuggestions
 
 Get tax suggestions for an external payroll. Earnings and/or benefits
 data must be saved prior to the calculation in order to retrieve accurate
@@ -520,14 +520,14 @@ scope: `external_payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.externalPayrolls.calculateTaxes({
+  const result = await gustoEmbedded.externalPayrolls.getTaxSuggestions({
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
@@ -544,17 +544,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsCalculateTaxes } from "gusto_embedded/funcs/externalPayrollsCalculateTaxes.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsGetTaxSuggestions } from "gusto-embedded/funcs/externalPayrollsGetTaxSuggestions.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await externalPayrollsCalculateTaxes(gustoEmbedded, {
+  const res = await externalPayrollsGetTaxSuggestions(gustoEmbedded, {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
@@ -600,10 +600,10 @@ scope: `external_payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -623,13 +623,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsGetTaxLiabilities } from "gusto_embedded/funcs/externalPayrollsGetTaxLiabilities.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsGetTaxLiabilities } from "gusto-embedded/funcs/externalPayrollsGetTaxLiabilities.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -678,10 +678,10 @@ scope: `external_payrolls:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -720,13 +720,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsUpdateTaxLiabilities } from "gusto_embedded/funcs/externalPayrollsUpdateTaxLiabilities.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsUpdateTaxLiabilities } from "gusto-embedded/funcs/externalPayrollsUpdateTaxLiabilities.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -786,7 +786,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## finishTaxLiabilities
+## finalizeTaxLiabilities
 
 Finalizes tax liabilities for a company. All external payrolls edit action will be disabled.
 
@@ -795,14 +795,14 @@ scope: `external_payrolls:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  await gustoEmbedded.externalPayrolls.finishTaxLiabilities({
+  await gustoEmbedded.externalPayrolls.finalizeTaxLiabilities({
     companyUuid: "<id>",
   });
 
@@ -817,17 +817,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { externalPayrollsFinishTaxLiabilities } from "gusto_embedded/funcs/externalPayrollsFinishTaxLiabilities.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { externalPayrollsFinalizeTaxLiabilities } from "gusto-embedded/funcs/externalPayrollsFinalizeTaxLiabilities.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await externalPayrollsFinishTaxLiabilities(gustoEmbedded, {
+  const res = await externalPayrollsFinalizeTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
   });
 

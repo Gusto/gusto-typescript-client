@@ -5,7 +5,7 @@ What type of tax entity the company is
 ## Example Usage
 
 ```typescript
-import { TaxPayerType } from "gusto_embedded/models/operations";
+import { TaxPayerType } from "gusto-embedded/models/operations";
 
 let value: TaxPayerType = "LLC";
 ```

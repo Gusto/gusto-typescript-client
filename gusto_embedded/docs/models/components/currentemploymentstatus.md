@@ -5,9 +5,9 @@ The current employment status of the employee. Full-time employees work 30+ hour
 ## Example Usage
 
 ```typescript
-import { CurrentEmploymentStatus } from "gusto_embedded/models/components";
+import { CurrentEmploymentStatus } from "gusto-embedded/models/components";
 
-let value: CurrentEmploymentStatus = "part_time_under_twenty_hours";
+let value: CurrentEmploymentStatus = "variable";
 ```
 
 ## Values

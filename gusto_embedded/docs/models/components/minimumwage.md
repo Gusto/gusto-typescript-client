@@ -5,14 +5,14 @@ Representation of a Minimum Wage
 ## Example Usage
 
 ```typescript
-import { MinimumWage } from "gusto_embedded/models/components";
-import { RFCDate } from "gusto_embedded/types";
+import { MinimumWage } from "gusto-embedded/models/components";
+import { RFCDate } from "gusto-embedded/types";
 
 let value: MinimumWage = {
-  uuid: "1619391f-e634-470a-966c-bf5ec594d132",
+  uuid: "6b870613-e3dc-4291-9bac-7e04b621d7eb",
   wage: "<value>",
   wageType: "<value>",
-  effectiveDate: new RFCDate("2025-03-27"),
+  effectiveDate: new RFCDate("2024-02-14"),
   authority: "<value>",
 };
 ```

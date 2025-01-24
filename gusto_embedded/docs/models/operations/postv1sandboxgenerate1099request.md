@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1SandboxGenerate1099Request } from "gusto_embedded/models/operations";
+import { PostV1SandboxGenerate1099Request } from "gusto-embedded/models/operations";
 
 let value: PostV1SandboxGenerate1099Request = {};
 ```

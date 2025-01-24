@@ -19,18 +19,18 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { introspectionGet } from "gusto_embedded/funcs/introspectionGet.js";
-import { SDKValidationError } from "gusto_embedded/models/errors/sdkvalidationerror.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { introspectionGetTokenInfo } from "gusto-embedded/funcs/introspectionGetTokenInfo.js";
+import { SDKValidationError } from "gusto-embedded/models/errors/sdkvalidationerror.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await introspectionGet(gustoEmbedded, {});
+  const res = await introspectionGetTokenInfo(gustoEmbedded, {});
 
   switch (true) {
     case res.ok:

@@ -5,7 +5,7 @@ Additional child support order details
 ## Example Usage
 
 ```typescript
-import { GarnishmentChildSupport } from "gusto_embedded/models/components";
+import { GarnishmentChildSupport } from "gusto-embedded/models/components";
 
 let value: GarnishmentChildSupport = {};
 ```

@@ -3,8 +3,8 @@
  */
 
 import { wireInRequestsGet } from "../funcs/wireInRequestsGet.js";
-import { wireInRequestsList } from "../funcs/wireInRequestsList.js";
-import { wireInRequestsUpdate } from "../funcs/wireInRequestsUpdate.js";
+import { wireInRequestsGetAll } from "../funcs/wireInRequestsGetAll.js";
+import { wireInRequestsSubmitRequest } from "../funcs/wireInRequestsSubmitRequest.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -38,11 +38,11 @@ export class WireInRequests extends ClientSDK {
    *
    * scope: `payrolls:run`
    */
-  async update(
+  async submitRequest(
     request: operations.PutWireInRequestsWireInRequestUuidRequest,
     options?: RequestOptions,
   ): Promise<components.WireInRequest> {
-    return unwrapAsync(wireInRequestsUpdate(
+    return unwrapAsync(wireInRequestsSubmitRequest(
       this,
       request,
       options,
@@ -57,11 +57,11 @@ export class WireInRequests extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async list(
+  async getAll(
     request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
     options?: RequestOptions,
   ): Promise<Array<components.WireInRequest>> {
-    return unwrapAsync(wireInRequestsList(
+    return unwrapAsync(wireInRequestsGetAll(
       this,
       request,
       options,

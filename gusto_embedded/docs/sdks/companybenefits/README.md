@@ -6,15 +6,14 @@
 ### Available Operations
 
 * [create](#create) - Create a company benefit
-* [list](#list) - Get benefits for a company
-* [getById](#getbyid) - Get a company benefit
+* [get](#get) - Get a company benefit
 * [update](#update) - Update a company benefit
 * [delete](#delete) - Delete a company benefit
-* [getAllSupported](#getallsupported) - Get all benefits supported by Gusto
-* [get](#get) - Get a supported benefit by ID
+* [getAll](#getall) - Get all benefits supported by Gusto
+* [getSupportedBenefit](#getsupportedbenefit) - Get a supported benefit by ID
 * [getSummary](#getsummary) - Get company benefit summary by company benefit id.
 * [getEmployeeBenefits](#getemployeebenefits) - Get all employee benefits for a company benefit
-* [bulkUpdate](#bulkupdate) - Bulk update employee benefits for a company benefit
+* [bulkUpdateEmployeeBenefits](#bulkupdateemployeebenefits) - Bulk update employee benefits for a company benefit
 * [getRequirements](#getrequirements) - Get benefit fields requirements by ID
 
 ## create
@@ -28,10 +27,10 @@ scope: `company_benefits:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -51,13 +50,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsCreate } from "gusto_embedded/funcs/companyBenefitsCreate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsCreate } from "gusto-embedded/funcs/companyBenefitsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -98,89 +97,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
-
-Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
-
-Note that company benefits can be deactivated only when no employees are enrolled.
-
-Benefits containing PHI are only visible to applications with the `company_benefits:read:phi` scope.
-
-scope: `company_benefits:read`
-
-### Example Usage
-
-```typescript
-import { GustoEmbedded } from "gusto_embedded";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
-});
-
-async function run() {
-  const result = await gustoEmbedded.companyBenefits.list({
-    companyId: "<id>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsList } from "gusto_embedded/funcs/companyBenefitsList.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
-});
-
-async function run() {
-  const res = await companyBenefitsList(gustoEmbedded, {
-    companyId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdCompanyBenefitsRequest](../../models/operations/getv1companiescompanyidcompanybenefitsrequest.md)                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.CompanyBenefit[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## getById
+## get
 
 Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
 
@@ -193,14 +110,14 @@ scope: `company_benefits:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyBenefits.getById({
+  const result = await gustoEmbedded.companyBenefits.get({
     companyBenefitId: "<id>",
   });
 
@@ -216,17 +133,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsGetById } from "gusto_embedded/funcs/companyBenefitsGetById.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsGet } from "gusto-embedded/funcs/companyBenefitsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyBenefitsGetById(gustoEmbedded, {
+  const res = await companyBenefitsGet(gustoEmbedded, {
     companyBenefitId: "<id>",
   });
 
@@ -273,10 +190,10 @@ scope: `company_benefits:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -300,13 +217,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsUpdate } from "gusto_embedded/funcs/companyBenefitsUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsUpdate } from "gusto-embedded/funcs/companyBenefitsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -363,10 +280,10 @@ scope: `company_benefits:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -385,13 +302,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsDelete } from "gusto_embedded/funcs/companyBenefitsDelete.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsDelete } from "gusto-embedded/funcs/companyBenefitsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -431,7 +348,7 @@ run();
 | errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody | 422                                                        | application/json                                           |
 | errors.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
 
-## getAllSupported
+## getAll
 
 Returns all benefits supported by Gusto.
 
@@ -442,14 +359,14 @@ scope: `benefits:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyBenefits.getAllSupported({});
+  const result = await gustoEmbedded.companyBenefits.getAll({});
 
   // Handle the result
   console.log(result);
@@ -463,17 +380,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsGetAllSupported } from "gusto_embedded/funcs/companyBenefitsGetAllSupported.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsGetAll } from "gusto-embedded/funcs/companyBenefitsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyBenefitsGetAllSupported(gustoEmbedded, {});
+  const res = await companyBenefitsGetAll(gustoEmbedded, {});
 
   if (!res.ok) {
     throw res.error;
@@ -507,7 +424,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get
+## getSupportedBenefit
 
 Returns a benefit supported by Gusto.
 
@@ -518,14 +435,14 @@ scope: `benefits:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyBenefits.get({
+  const result = await gustoEmbedded.companyBenefits.getSupportedBenefit({
     benefitId: "<id>",
   });
 
@@ -541,17 +458,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsGet } from "gusto_embedded/funcs/companyBenefitsGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsGetSupportedBenefit } from "gusto-embedded/funcs/companyBenefitsGetSupportedBenefit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyBenefitsGet(gustoEmbedded, {
+  const res = await companyBenefitsGetSupportedBenefit(gustoEmbedded, {
     benefitId: "<id>",
   });
 
@@ -598,10 +515,10 @@ scope: `company_benefits:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -623,13 +540,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsGetSummary } from "gusto_embedded/funcs/companyBenefitsGetSummary.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsGetSummary } from "gusto-embedded/funcs/companyBenefitsGetSummary.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -684,10 +601,10 @@ scope: `employee_benefits:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -707,13 +624,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsGetEmployeeBenefits } from "gusto_embedded/funcs/companyBenefitsGetEmployeeBenefits.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsGetEmployeeBenefits } from "gusto-embedded/funcs/companyBenefitsGetEmployeeBenefits.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -753,7 +670,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## bulkUpdate
+## bulkUpdateEmployeeBenefits
 
 Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
 
@@ -766,14 +683,14 @@ scope: `employee_benefits:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyBenefits.bulkUpdate({
+  const result = await gustoEmbedded.companyBenefits.bulkUpdateEmployeeBenefits({
     companyBenefitId: "<id>",
     requestBody: {
       employeeBenefits: [
@@ -781,6 +698,13 @@ async function run() {
           version: "09j3d29jqdpj92109j9j2d90dq",
           active: true,
           employeeDeduction: "250.00",
+          deductAsPercentage: false,
+          elective: false,
+          catchUp: false,
+          deductionReducesTaxableIncome: "unset",
+          coverageSalaryMultiplier: "0.00",
+          companyContribution: "0.00",
+          contributeAsPercentage: false,
           employeeUuid: "8f9f3f68-8fd3-499d-ade7-4a052e56494e",
         },
       ],
@@ -799,17 +723,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsBulkUpdate } from "gusto_embedded/funcs/companyBenefitsBulkUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsBulkUpdateEmployeeBenefits } from "gusto-embedded/funcs/companyBenefitsBulkUpdateEmployeeBenefits.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyBenefitsBulkUpdate(gustoEmbedded, {
+  const res = await companyBenefitsBulkUpdateEmployeeBenefits(gustoEmbedded, {
     companyBenefitId: "<id>",
     requestBody: {
       employeeBenefits: [
@@ -817,6 +741,13 @@ async function run() {
           version: "09j3d29jqdpj92109j9j2d90dq",
           active: true,
           employeeDeduction: "250.00",
+          deductAsPercentage: false,
+          elective: false,
+          catchUp: false,
+          deductionReducesTaxableIncome: "unset",
+          coverageSalaryMultiplier: "0.00",
+          companyContribution: "0.00",
+          contributeAsPercentage: false,
           employeeUuid: "8f9f3f68-8fd3-499d-ade7-4a052e56494e",
         },
       ],
@@ -865,10 +796,10 @@ scope: `benefits:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -888,13 +819,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyBenefitsGetRequirements } from "gusto_embedded/funcs/companyBenefitsGetRequirements.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyBenefitsGetRequirements } from "gusto-embedded/funcs/companyBenefitsGetRequirements.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

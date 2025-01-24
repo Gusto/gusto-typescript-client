@@ -5,7 +5,7 @@ The status of the contractor payment.  Will transition to `Funded` during paymen
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentForGroupStatus } from "gusto_embedded/models/components";
+import { ContractorPaymentForGroupStatus } from "gusto-embedded/models/components";
 
 let value: ContractorPaymentForGroupStatus = "Funded";
 ```

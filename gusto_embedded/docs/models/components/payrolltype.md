@@ -5,9 +5,9 @@ Whether it is regular pay period or transition pay period.
 ## Example Usage
 
 ```typescript
-import { PayrollType } from "gusto_embedded/models/components";
+import { PayrollType } from "gusto-embedded/models/components";
 
-let value: PayrollType = "transition";
+let value: PayrollType = "regular";
 ```
 
 ## Values

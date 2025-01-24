@@ -5,7 +5,7 @@ The representation of the summary of contractor payments for a given company in 
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentSummaryByDates } from "gusto_embedded/models/components";
+import { ContractorPaymentSummaryByDates } from "gusto-embedded/models/components";
 
 let value: ContractorPaymentSummaryByDates = {};
 ```

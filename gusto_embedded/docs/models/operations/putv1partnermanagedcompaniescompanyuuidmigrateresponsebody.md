@@ -5,7 +5,7 @@ Example response
 ## Example Usage
 
 ```typescript
-import { PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody } from "gusto_embedded/models/operations";
+import { PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody } from "gusto-embedded/models/operations";
 
 let value: PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody = {};
 ```

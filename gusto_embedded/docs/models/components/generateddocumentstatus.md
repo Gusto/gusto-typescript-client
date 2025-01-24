@@ -5,9 +5,9 @@ Current status of the Generated Document
 ## Example Usage
 
 ```typescript
-import { GeneratedDocumentStatus } from "gusto_embedded/models/components";
+import { GeneratedDocumentStatus } from "gusto-embedded/models/components";
 
-let value: GeneratedDocumentStatus = "started";
+let value: GeneratedDocumentStatus = "pending";
 ```
 
 ## Values

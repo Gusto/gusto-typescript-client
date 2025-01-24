@@ -5,28 +5,27 @@
 
 ### Available Operations
 
-* [getDownloadUrl](#getdownloadurl) - Get a temporary url to download the Company Attachment file
-* [list](#list) - Get List of Company Attachments
-* [createAndUpload](#createandupload) - Create Company Attachment and Upload File
+* [getDetails](#getdetails) - Get Company Attachment Details
+* [getAll](#getall) - Get List of Company Attachments
+* [create](#create) - Create Company Attachment and Upload File
 
-## getDownloadUrl
+## getDetails
 
-Retrieve a temporary url to download a attachment file uploaded
-by the company.
+Retrieve the detail of an attachment uploaded by the company.
 
 scope: `company_attachments:read`
 
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyAttachments.getDownloadUrl({
+  const result = await gustoEmbedded.companyAttachments.getDetails({
     companyId: "<id>",
     companyAttachmentUuid: "<id>",
   });
@@ -43,17 +42,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyAttachmentsGetDownloadUrl } from "gusto_embedded/funcs/companyAttachmentsGetDownloadUrl.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyAttachmentsGetDetails } from "gusto-embedded/funcs/companyAttachmentsGetDetails.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyAttachmentsGetDownloadUrl(gustoEmbedded, {
+  const res = await companyAttachmentsGetDetails(gustoEmbedded, {
     companyId: "<id>",
     companyAttachmentUuid: "<id>",
   });
@@ -75,14 +74,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompaniesAttachmentUrlRequest](../../models/operations/getv1companiesattachmenturlrequest.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesAttachmentRequest](../../models/operations/getv1companiesattachmentrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetV1CompaniesAttachmentUrlResponseBody](../../models/operations/getv1companiesattachmenturlresponsebody.md)\>**
+**Promise\<[components.CompanyAttachment](../../models/components/companyattachment.md)\>**
 
 ### Errors
 
@@ -90,7 +89,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## list
+## getAll
 
 Retrieve a list of all the attachments uploaded by the company.
 
@@ -99,14 +98,14 @@ scope: `company_attachments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyAttachments.list({
+  const result = await gustoEmbedded.companyAttachments.getAll({
     companyId: "<id>",
   });
 
@@ -122,17 +121,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyAttachmentsList } from "gusto_embedded/funcs/companyAttachmentsList.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyAttachmentsGetAll } from "gusto-embedded/funcs/companyAttachmentsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyAttachmentsList(gustoEmbedded, {
+  const res = await companyAttachmentsGetAll(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -168,7 +167,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## createAndUpload
+## create
 
 Upload a file and create a company attachment. We recommend uploading
 PDF files for optimal compatibility. However, the following file types are
@@ -179,14 +178,14 @@ scope: `company_attachments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyAttachments.createAndUpload({
+  const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
   });
 
@@ -202,17 +201,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { companyAttachmentsCreateAndUpload } from "gusto_embedded/funcs/companyAttachmentsCreateAndUpload.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { companyAttachmentsCreate } from "gusto-embedded/funcs/companyAttachmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await companyAttachmentsCreateAndUpload(gustoEmbedded, {
+  const res = await companyAttachmentsCreate(gustoEmbedded, {
     companyId: "<id>",
   });
 

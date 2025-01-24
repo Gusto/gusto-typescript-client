@@ -3,14 +3,14 @@
  */
 
 import { paySchedulesAssign } from "../funcs/paySchedulesAssign.js";
-import { paySchedulesAssignmentPreview } from "../funcs/paySchedulesAssignmentPreview.js";
 import { paySchedulesCreate } from "../funcs/paySchedulesCreate.js";
 import { paySchedulesGet } from "../funcs/paySchedulesGet.js";
+import { paySchedulesGetAssignments } from "../funcs/paySchedulesGetAssignments.js";
+import { paySchedulesGetForCompany } from "../funcs/paySchedulesGetForCompany.js";
 import { paySchedulesList } from "../funcs/paySchedulesList.js";
-import { paySchedulesListAssignments } from "../funcs/paySchedulesListAssignments.js";
-import { paySchedulesListPayPeriods } from "../funcs/paySchedulesListPayPeriods.js";
-import { paySchedulesListUnprocessedTerminationPayPeriods } from "../funcs/paySchedulesListUnprocessedTerminationPayPeriods.js";
+import { paySchedulesListUnprocessedTerminationPeriods } from "../funcs/paySchedulesListUnprocessedTerminationPeriods.js";
 import { paySchedulesPreview } from "../funcs/paySchedulesPreview.js";
+import { paySchedulesPreviewAssignment } from "../funcs/paySchedulesPreviewAssignment.js";
 import { paySchedulesUpdate } from "../funcs/paySchedulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -49,11 +49,11 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `pay_schedules:read`
    */
-  async list(
+  async getForCompany(
     request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.PaySchedule>> {
-    return unwrapAsync(paySchedulesList(
+    return unwrapAsync(paySchedulesGetForCompany(
       this,
       request,
       options,
@@ -131,11 +131,11 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async listPayPeriods(
+  async list(
     request: operations.GetV1CompaniesCompanyIdPayPeriodsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.PayPeriod>> {
-    return unwrapAsync(paySchedulesListPayPeriods(
+    return unwrapAsync(paySchedulesList(
       this,
       request,
       options,
@@ -152,12 +152,12 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async listUnprocessedTerminationPayPeriods(
+  async listUnprocessedTerminationPeriods(
     request:
       operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.UnprocessedTerminationPayPeriod>> {
-    return unwrapAsync(paySchedulesListUnprocessedTerminationPayPeriods(
+    return unwrapAsync(paySchedulesListUnprocessedTerminationPeriods(
       this,
       request,
       options,
@@ -172,11 +172,11 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `pay_schedules:read`
    */
-  async listAssignments(
+  async getAssignments(
     request: operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
     options?: RequestOptions,
   ): Promise<components.PayScheduleAssignment> {
-    return unwrapAsync(paySchedulesListAssignments(
+    return unwrapAsync(paySchedulesGetAssignments(
       this,
       request,
       options,
@@ -187,16 +187,16 @@ export class PaySchedules extends ClientSDK {
    * Preview pay schedule assignments for a company
    *
    * @remarks
-   * This endpoints returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
+   * This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
    *
    * scope: `pay_schedules:write`
    */
-  async assignmentPreview(
+  async previewAssignment(
     request:
       operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
     options?: RequestOptions,
   ): Promise<components.PayScheduleAssignmentPreview> {
-    return unwrapAsync(paySchedulesAssignmentPreview(
+    return unwrapAsync(paySchedulesPreviewAssignment(
       this,
       request,
       options,

@@ -5,7 +5,7 @@ Create a job.
 ## Example Usage
 
 ```typescript
-import { PostV1JobsJobIdRequestBody } from "gusto_embedded/models/operations";
+import { PostV1JobsJobIdRequestBody } from "gusto-embedded/models/operations";
 
 let value: PostV1JobsJobIdRequestBody = {
   title: "<value>",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetInvoicesInvoicePeriodRequest } from "gusto_embedded/models/operations";
+import { GetInvoicesInvoicePeriodRequest } from "gusto-embedded/models/operations";
 
 let value: GetInvoicesInvoicePeriodRequest = {
   invoicePeriod: "2020-01",

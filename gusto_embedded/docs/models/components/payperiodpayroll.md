@@ -5,7 +5,7 @@ Information about the payroll for the pay period.
 ## Example Usage
 
 ```typescript
-import { PayPeriodPayroll } from "gusto_embedded/models/components";
+import { PayPeriodPayroll } from "gusto-embedded/models/components";
 
 let value: PayPeriodPayroll = {};
 ```

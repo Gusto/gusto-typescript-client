@@ -5,9 +5,9 @@ Input type for the custom field.
 ## Example Usage
 
 ```typescript
-import { CustomFieldType } from "gusto_embedded/models/components";
+import { CustomFieldType } from "gusto-embedded/models/components";
 
-let value: CustomFieldType = "date";
+let value: CustomFieldType = "radio";
 ```
 
 ## Values

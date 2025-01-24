@@ -3,8 +3,8 @@
  */
 
 import { employeeFormsGenerateW2 } from "../funcs/employeeFormsGenerateW2.js";
-import { employeeFormsGet } from "../funcs/employeeFormsGet.js";
-import { employeeFormsGetById } from "../funcs/employeeFormsGetById.js";
+import { employeeFormsGetAll } from "../funcs/employeeFormsGetAll.js";
+import { employeeFormsGetForm } from "../funcs/employeeFormsGetForm.js";
 import { employeeFormsGetPdf } from "../funcs/employeeFormsGetPdf.js";
 import { employeeFormsSign } from "../funcs/employeeFormsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -44,11 +44,11 @@ export class EmployeeForms extends ClientSDK {
    *
    * scope: `employee_forms:read`
    */
-  async get(
+  async getAll(
     request: operations.GetV1EmployeeFormsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Form>> {
-    return unwrapAsync(employeeFormsGet(
+    return unwrapAsync(employeeFormsGetAll(
       this,
       request,
       options,
@@ -63,11 +63,11 @@ export class EmployeeForms extends ClientSDK {
    *
    * scope: `employee_forms:read`
    */
-  async getById(
+  async getForm(
     request: operations.GetV1EmployeeFormRequest,
     options?: RequestOptions,
   ): Promise<components.Form> {
-    return unwrapAsync(employeeFormsGetById(
+    return unwrapAsync(employeeFormsGetForm(
       this,
       request,
       options,
@@ -97,7 +97,10 @@ export class EmployeeForms extends ClientSDK {
    * Sign an employee form
    *
    * @remarks
-   * Sign an employee form
+   * Sign an employee form.
+   *
+   * The optional preparer attributes are only valid for I-9 form. When a preparer is used, the
+   * first name, last name, street address, city, state, and zip for that preparer are all required.
    *
    * scope: `employee_forms:sign`
    */

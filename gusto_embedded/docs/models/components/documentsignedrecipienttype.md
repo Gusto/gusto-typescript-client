@@ -5,9 +5,9 @@ The type of recipient associated with the document (will be `Contractor` for Con
 ## Example Usage
 
 ```typescript
-import { DocumentSignedRecipientType } from "gusto_embedded/models/components";
+import { DocumentSignedRecipientType } from "gusto-embedded/models/components";
 
-let value: DocumentSignedRecipientType = "Company";
+let value: DocumentSignedRecipientType = "Contractor";
 ```
 
 ## Values

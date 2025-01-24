@@ -3,7 +3,7 @@
  */
 
 import { earningTypesCreate } from "../funcs/earningTypesCreate.js";
-import { earningTypesDelete } from "../funcs/earningTypesDelete.js";
+import { earningTypesDeactivate } from "../funcs/earningTypesDeactivate.js";
 import { earningTypesGetAll } from "../funcs/earningTypesGetAll.js";
 import { earningTypesUpdate } from "../funcs/earningTypesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -86,12 +86,12 @@ export class EarningTypes extends ClientSDK {
    *
    * scope: `payrolls:write`
    */
-  async delete(
+  async deactivate(
     request:
       operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(earningTypesDelete(
+    return unwrapAsync(earningTypesDeactivate(
       this,
       request,
       options,

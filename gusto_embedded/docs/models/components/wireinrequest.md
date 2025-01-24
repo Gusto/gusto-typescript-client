@@ -5,7 +5,7 @@ Representation of a wire in request
 ## Example Usage
 
 ```typescript
-import { WireInRequest } from "gusto_embedded/models/components";
+import { WireInRequest } from "gusto-embedded/models/components";
 
 let value: WireInRequest = {};
 ```

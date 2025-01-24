@@ -9,7 +9,7 @@ import { employeeEmploymentsDeleteTermination } from "../funcs/employeeEmploymen
 import { employeeEmploymentsGetHistory } from "../funcs/employeeEmploymentsGetHistory.js";
 import { employeeEmploymentsGetRehire } from "../funcs/employeeEmploymentsGetRehire.js";
 import { employeeEmploymentsGetTermination } from "../funcs/employeeEmploymentsGetTermination.js";
-import { employeeEmploymentsRehire } from "../funcs/employeeEmploymentsRehire.js";
+import { employeeEmploymentsUpdateRehire } from "../funcs/employeeEmploymentsUpdateRehire.js";
 import { employeeEmploymentsUpdateTermination } from "../funcs/employeeEmploymentsUpdateTermination.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -126,11 +126,11 @@ export class EmployeeEmployments extends ClientSDK {
    *
    * scope: `employments:write`
    */
-  async rehire(
+  async updateRehire(
     request: operations.PutV1EmployeesEmployeeIdRehireRequest,
     options?: RequestOptions,
   ): Promise<components.Rehire> {
-    return unwrapAsync(employeeEmploymentsRehire(
+    return unwrapAsync(employeeEmploymentsUpdateRehire(
       this,
       request,
       options,

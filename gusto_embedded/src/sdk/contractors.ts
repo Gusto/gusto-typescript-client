@@ -7,6 +7,7 @@ import { contractorsDelete } from "../funcs/contractorsDelete.js";
 import { contractorsGet } from "../funcs/contractorsGet.js";
 import { contractorsGetAddress } from "../funcs/contractorsGetAddress.js";
 import { contractorsGetOnboardingStatus } from "../funcs/contractorsGetOnboardingStatus.js";
+import { contractorsList } from "../funcs/contractorsList.js";
 import { contractorsUpdate } from "../funcs/contractorsUpdate.js";
 import { contractorsUpdateAddress } from "../funcs/contractorsUpdateAddress.js";
 import { contractorsUpdateOnboardingStatus } from "../funcs/contractorsUpdateOnboardingStatus.js";
@@ -29,6 +30,25 @@ export class Contractors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Contractor> {
     return unwrapAsync(contractorsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get contractors of a company
+   *
+   * @remarks
+   * Get all contractors, active and inactive, individual and business, for a company.
+   *
+   * scope: `contractors:read`
+   */
+  async list(
+    request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.Contractor>> {
+    return unwrapAsync(contractorsList(
       this,
       request,
       options,

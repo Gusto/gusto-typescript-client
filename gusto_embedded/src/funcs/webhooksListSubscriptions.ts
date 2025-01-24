@@ -6,6 +6,7 @@ import * as z from "zod";
 import { GustoEmbeddedCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { resolveSecurity } from "../lib/security.js";
@@ -66,14 +67,14 @@ export async function webhooksListSubscriptions(
 
   const path = pathToFunc("/v1/webhook_subscriptions")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
       { explode: false, charEncoding: "none" },
     ),
-  });
+  }));
 
   const requestSecurity = resolveSecurity(
     [
@@ -134,7 +135,8 @@ export async function webhooksListSubscriptions(
     | ConnectionError
   >(
     M.json(200, z.array(components.WebhookSubscription$inboundSchema)),
-    M.fail([404, "4XX", "5XX"]),
+    M.fail([404, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

@@ -9,9 +9,10 @@ import { employeesGet } from "../funcs/employeesGet.js";
 import { employeesGetCustomFields } from "../funcs/employeesGetCustomFields.js";
 import { employeesGetOnboardingStatus } from "../funcs/employeesGetOnboardingStatus.js";
 import { employeesGetTimeOffActivities } from "../funcs/employeesGetTimeOffActivities.js";
-import { employeesList } from "../funcs/employeesList.js";
+import { employeesRetrieve } from "../funcs/employeesRetrieve.js";
 import { employeesUpdate } from "../funcs/employeesUpdate.js";
 import { employeesUpdateHistorical } from "../funcs/employeesUpdateHistorical.js";
+import { employeesUpdateOnboardingDocumentsConfig } from "../funcs/employeesUpdateOnboardingDocumentsConfig.js";
 import { employeesUpdateOnboardingStatus } from "../funcs/employeesUpdateOnboardingStatus.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -46,11 +47,11 @@ export class Employees extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async list(
+  async get(
     request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Employee>> {
-    return unwrapAsync(employeesList(
+    return unwrapAsync(employeesGet(
       this,
       request,
       options,
@@ -103,11 +104,11 @@ export class Employees extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async get(
+  async retrieve(
     request: operations.GetV1EmployeesRequest,
     options?: RequestOptions,
   ): Promise<components.Employee> {
-    return unwrapAsync(employeesGet(
+    return unwrapAsync(employeesRetrieve(
       this,
       request,
       options,
@@ -167,6 +168,26 @@ export class Employees extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody> {
     return unwrapAsync(employeesGetCustomFields(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update an employee's onboarding documents config
+   *
+   * @remarks
+   * Indicate whether to include the Form I-9 for an employee during the onboarding process.
+   *
+   * scope: `employees:manage`
+   */
+  async updateOnboardingDocumentsConfig(
+    request:
+      operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+    options?: RequestOptions,
+  ): Promise<components.EmployeeOnboardingDocument> {
+    return unwrapAsync(employeesUpdateOnboardingDocumentsConfig(
       this,
       request,
       options,

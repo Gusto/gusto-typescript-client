@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1GarnishmentsChildSupportRequest } from "gusto_embedded/models/operations";
+import { GetV1GarnishmentsChildSupportRequest } from "gusto-embedded/models/operations";
 
 let value: GetV1GarnishmentsChildSupportRequest = {};
 ```

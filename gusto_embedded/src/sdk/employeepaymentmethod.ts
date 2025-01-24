@@ -3,7 +3,9 @@
  */
 
 import { employeePaymentMethodCreateBankAccount } from "../funcs/employeePaymentMethodCreateBankAccount.js";
+import { employeePaymentMethodDeleteBankAccount } from "../funcs/employeePaymentMethodDeleteBankAccount.js";
 import { employeePaymentMethodGet } from "../funcs/employeePaymentMethodGet.js";
+import { employeePaymentMethodUpdate } from "../funcs/employeePaymentMethodUpdate.js";
 import { employeePaymentMethodUpdateBankAccount } from "../funcs/employeePaymentMethodUpdateBankAccount.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -26,6 +28,27 @@ export class EmployeePaymentMethod extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.EmployeeBankAccount> {
     return unwrapAsync(employeePaymentMethodCreateBankAccount(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an employee bank account
+   *
+   * @remarks
+   * Deletes an employee bank account. To update an employee's bank
+   * account details, delete the bank account first and create a new one.
+   *
+   * scope: `employee_payment_methods:write`
+   */
+  async deleteBankAccount(
+    request:
+      operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(employeePaymentMethodDeleteBankAccount(
       this,
       request,
       options,
@@ -66,6 +89,26 @@ export class EmployeePaymentMethod extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.EmployeePaymentMethod> {
     return unwrapAsync(employeePaymentMethodGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update an employee's payment method
+   *
+   * @remarks
+   * Updates an employee's payment method. Note that creating an employee
+   * bank account will also update the employee's payment method.
+   *
+   * scope: `employee_payment_methods:write`
+   */
+  async update(
+    request: operations.PutV1EmployeesEmployeeIdPaymentMethodRequest,
+    options?: RequestOptions,
+  ): Promise<components.EmployeePaymentMethod> {
+    return unwrapAsync(employeePaymentMethodUpdate(
       this,
       request,
       options,

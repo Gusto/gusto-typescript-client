@@ -10,7 +10,7 @@ their limit.
 ## Example Usage
 
 ```typescript
-import { LimitOption } from "gusto_embedded/models/operations";
+import { LimitOption } from "gusto-embedded/models/operations";
 
 let value: LimitOption = "Joint Filing or Single";
 ```

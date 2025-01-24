@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [getState](#getstate) - Get State Tax Requirements
-* [updateState](#updatestate) - Update State Tax Requirements
+* [getByState](#getbystate) - Get State Tax Requirements
+* [update](#update) - Update State Tax Requirements
 * [getAll](#getall) - Get All Tax Requirement States
 
-## getState
+## getByState
 
 Get all tax requirements for a given state.
 
@@ -58,14 +58,14 @@ scope: `company_tax_requirements:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.taxRequirements.getState({
+  const result = await gustoEmbedded.taxRequirements.getByState({
     companyUuid: "<id>",
     state: "New Mexico",
   });
@@ -82,17 +82,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { taxRequirementsGetState } from "gusto_embedded/funcs/taxRequirementsGetState.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { taxRequirementsGetByState } from "gusto-embedded/funcs/taxRequirementsGetByState.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await taxRequirementsGetState(gustoEmbedded, {
+  const res = await taxRequirementsGetByState(gustoEmbedded, {
     companyUuid: "<id>",
     state: "New Mexico",
   });
@@ -129,7 +129,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## updateState
+## update
 
 Update State Tax Requirements
 
@@ -138,14 +138,14 @@ scope: `company_tax_requirements:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  await gustoEmbedded.taxRequirements.updateState({
+  await gustoEmbedded.taxRequirements.update({
     companyUuid: "<id>",
     state: "New Jersey",
     requestBody: {
@@ -202,17 +202,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { taxRequirementsUpdateState } from "gusto_embedded/funcs/taxRequirementsUpdateState.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { taxRequirementsUpdate } from "gusto-embedded/funcs/taxRequirementsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await taxRequirementsUpdateState(gustoEmbedded, {
+  const res = await taxRequirementsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     state: "New Jersey",
     requestBody: {
@@ -299,10 +299,10 @@ scope: `company_tax_requirements:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -322,13 +322,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { taxRequirementsGetAll } from "gusto_embedded/funcs/taxRequirementsGetAll.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { taxRequirementsGetAll } from "gusto-embedded/funcs/taxRequirementsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

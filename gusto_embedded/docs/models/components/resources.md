@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Resources } from "gusto_embedded/models/components";
+import { Resources } from "gusto-embedded/models/components";
 
 let value: Resources = {
   entityType: "<value>",

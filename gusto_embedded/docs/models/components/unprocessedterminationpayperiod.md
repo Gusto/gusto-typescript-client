@@ -5,7 +5,7 @@ The representation of an unprocessed termination pay period.
 ## Example Usage
 
 ```typescript
-import { UnprocessedTerminationPayPeriod } from "gusto_embedded/models/components";
+import { UnprocessedTerminationPayPeriod } from "gusto-embedded/models/components";
 
 let value: UnprocessedTerminationPayPeriod = {};
 ```

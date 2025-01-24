@@ -8,9 +8,9 @@ The verification type of the bank account.
 ## Example Usage
 
 ```typescript
-import { VerificationType } from "gusto_embedded/models/components";
+import { VerificationType } from "gusto-embedded/models/components";
 
-let value: VerificationType = "bank_deposits";
+let value: VerificationType = "plaid_external";
 ```
 
 ## Values

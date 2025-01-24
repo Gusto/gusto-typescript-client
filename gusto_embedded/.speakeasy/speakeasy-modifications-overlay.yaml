@@ -1,0 +1,2392 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/verify"]["put"]
+    update:
+      x-speakeasy-group: bankAccounts
+      x-speakeasy-name-override: verify
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bank Accounts.put-v1-companies-company_id-bank-accounts-verify()
+      after: sdk.bankAccounts.verify()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/attachments/{company_attachment_uuid}"]["get"]
+    update:
+      x-speakeasy-group: companyAttachments
+      x-speakeasy-name-override: getDetails
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Attachment.get-v1-companies-attachment()
+      after: sdk.companyAttachments.getDetails()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_id}/bank_accounts"]["get"]
+    update:
+      x-speakeasy-group: bankAccounts
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bank Accounts.get-v1-companies-company_id-bank-accounts()
+      after: sdk.bankAccounts.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/i9_authorization/document_options"]["get"]
+    update:
+      x-speakeasy-group: i9Verification
+      x-speakeasy-name-override: getDocumentOptions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.I-9 Verification.get-v1-employees-employee_id-i9_authorization-document_options()
+      after: sdk.i9Verification.getDocumentOptions()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/industry_selection"]["get"]
+    update:
+      x-speakeasy-group: industrySelection
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Industry Selection.get-v1-company-industry()
+      after: sdk.industrySelection.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules/assign"]["post"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: assign
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.post-v1-companies-company_id-pay_schedules-assign()
+      after: sdk.paySchedules.assign()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/partner_managed_companies/{company_uuid}/accept_terms_of_service"]["post"]
+    update:
+      x-speakeasy-name-override: acceptTermsOfService
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.post-partner-managed-companies-company_uuid-accept_terms_of_service()
+      after: sdk.companies.acceptTermsOfService()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employee_benefits/{employee_benefit_id}"]["delete"]
+    update:
+      x-speakeasy-group: employeeBenefits
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Benefits.delete-v1-employee_benefits-employee_benefit_id()
+      after: sdk.employeeBenefits.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/employees/{employee_id}/terminations"]["post"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: createTermination
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.post-v1-employees-employee_id-terminations()
+      after: sdk.employeeEmployments.createTermination()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/webhook_subscriptions"]["get"]
+    update:
+      x-speakeasy-name-override: listSubscriptions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Webhooks.get-v1-webhook-subscriptions()
+      after: sdk.webhooks.listSubscriptions()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/departments"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Departments.get-companies-departments()
+      after: sdk.departments.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/paid_holidays"]["get"]
+    update:
+      x-speakeasy-group: holidayPayPolicies
+      x-speakeasy-name-override: previewHolidays
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Holiday Pay Policies.get-companies-company_uuid-paid_holidays()
+      after: sdk.holidayPayPolicies.previewHolidays()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.get-v1-contractors-contractor_uuid()
+      after: sdk.contractors.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/time_off_policies"]["get"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.get-companies-company_uuid-time_off_policies()
+      after: sdk.timeOffPolicies.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/payrolls/{payroll_uuid}/gross_up"]["post"]
+    update:
+      x-speakeasy-name-override: calculateGrossUp
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.post-payrolls-gross-up-payroll_uuid()
+      after: sdk.payrolls.calculateGrossUp()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/company_benefits"]["post"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.post-v1-companies-company_id-company_benefits()
+      after: sdk.companyBenefits.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify"]["put"]
+    update:
+      x-speakeasy-name-override: verifySubscription
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Webhooks.put-v1-verify-webhook-subscription-uuid()
+      after: sdk.webhooks.verifySubscription()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}"]["put"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.put-v1-companies-company_id-pay_schedules-pay_schedule_id()
+      after: sdk.paySchedules.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/holiday_pay_policy"]["post"]
+    update:
+      x-speakeasy-group: holidayPayPolicies
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Holiday Pay Policies.post-companies-company_uuid-holiday_pay_policy()
+      after: sdk.holidayPayPolicies.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/garnishments/{garnishment_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Garnishments.put-v1-garnishments-garnishment_id()
+      after: sdk.garnishments.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/bank_accounts"]["post"]
+    update:
+      x-speakeasy-group: bankAccounts
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bank Accounts.post-v1-companies-company_id-bank-accounts()
+      after: sdk.bankAccounts.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_uuid}/onboarding_status"]["get"]
+    update:
+      x-speakeasy-name-override: getOnboardingStatus
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.get-v1-company-onboarding-status()
+      after: sdk.companies.getOnboardingStatus()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/bank_accounts"]["get"]
+    update:
+      x-speakeasy-group: contractorPaymentMethod
+      x-speakeasy-name-override: getBankAccounts
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Method.get-v1-contractors-contractor_uuid-bank_accounts()
+      after: sdk.contractorPaymentMethod.getBankAccounts()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_id}/earning_types"]["post"]
+    update:
+      x-speakeasy-group: earningTypes
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Earning Types.post-v1-companies-company_id-earning_types()
+      after: sdk.earningTypes.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/webhook_subscriptions/{webhook_subscription_uuid}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Webhooks.get-v1-webhook-subscription-uuid()
+      after: sdk.webhooks.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/forms/{form_id}"]["get"]
+    update:
+      x-speakeasy-group: companyForms
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Forms.get-v1-company-form()
+      after: sdk.companyForms.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls/{payroll_id}/prepare"]["put"]
+    update:
+      x-speakeasy-name-override: prepareForUpdate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.put-v1-companies-company_id-payrolls-payroll_id-prepare()
+      after: sdk.payrolls.prepareForUpdate()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls"]["get"]
+    update:
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.get-v1-companies-company_id-payrolls()
+      after: sdk.payrolls.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.put-v1-contractors-contractor_uuid()
+      after: sdk.contractors.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/forms/{form_id}/pdf"]["get"]
+    update:
+      x-speakeasy-group: contractorForms
+      x-speakeasy-name-override: getPdf
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Forms.get-v1-contractor-form-pdf()
+      after: sdk.contractorForms.getPdf()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/events"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Events.get-events()
+      after: sdk.events.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}"]["delete"]
+    update:
+      x-speakeasy-group: contractorPayments
+      x-speakeasy-name-override: cancel
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payments.delete-v1-companies-company_id-contractor_payment-contractor-payment()
+      after: sdk.contractorPayments.cancel()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/signatories"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Signatories.get-v1-companies-company_uuid-signatories()
+      after: sdk.signatories.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/employees/{employee_id}/employee_benefits"]["post"]
+    update:
+      x-speakeasy-group: employeeBenefits
+      x-speakeasy-name-override: createBenefit
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Benefits.post-v1-employees-employee_id-employee_benefits()
+      after: sdk.employeeBenefits.createBenefit()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/tax_requirements/{state}"]["get"]
+    update:
+      x-speakeasy-group: taxRequirements
+      x-speakeasy-name-override: getByState
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Tax Requirements.get-v1-companies-company_uuid-tax_requirements-state()
+      after: sdk.taxRequirements.getByState()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/federal_tax_details"]["put"]
+    update:
+      x-speakeasy-group: federalTaxDetails
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Federal Tax Details.put-v1-companies-company_id-federal_tax_details()
+      after: sdk.federalTaxDetails.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/bank_accounts"]["get"]
+    update:
+      x-speakeasy-group: employeePaymentMethods
+      x-speakeasy-name-override: getBankAccounts
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Payment Method.get-v1-employees-employee_id-bank_accounts()
+      after: sdk.employeePaymentMethods.getBankAccounts()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/compensations/{compensation_id}"]["put"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: updateCompensation
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.put-v1-compensations-compensation_id()
+      after: sdk.jobsAndCompensations.updateCompensation()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employee_benefits/{employee_benefit_id}"]["get"]
+    update:
+      x-speakeasy-group: employeeBenefits
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Benefits.get-v1-employee_benefits-employee_benefit_id()
+      after: sdk.employeeBenefits.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/jobs/{job_id}/compensations"]["get"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: getCompensations
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.get-v1-jobs-job_id-compensations()
+      after: sdk.jobsAndCompensations.getCompensations()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/attachments"]["get"]
+    update:
+      x-speakeasy-group: companyAttachments
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Attachment.get-v1-companies-attachments()
+      after: sdk.companyAttachments.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/documents"]["get"]
+    update:
+      x-speakeasy-group: contractorDocuments
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Documents.get-v1-contractor-documents()
+      after: sdk.contractorDocuments.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}"]["put"]
+    update:
+      x-speakeasy-group: employeePaymentMethod
+      x-speakeasy-name-override: updateBankAccount
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Payment Method.put-v1-employees-employee_id-bank_accounts()
+      after: sdk.employeePaymentMethod.updateBankAccount()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/contractor_payment_groups"]["get"]
+    update:
+      x-speakeasy-group: contractorPaymentGroups
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Groups.get-v1-companies-company_id-contractor_payment_groups()
+      after: sdk.contractorPaymentGroups.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/garnishments/{garnishment_id}"]["get"]
+    update:
+      x-speakeasy-name-override: fetch
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Garnishments.get-v1-garnishments-garnishment_id()
+      after: sdk.garnishments.fetch()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/forms/{form_id}/sign"]["put"]
+    update:
+      x-speakeasy-group: companyForms
+      x-speakeasy-name-override: sign
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Forms.put-v1-company-form-sign()
+      after: sdk.companyForms.sign()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/wire_in_requests/{wire_in_request_uuid}"]["put"]
+    update:
+      x-speakeasy-group: wireInRequests
+      x-speakeasy-name-override: submitRequest
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Wire In Requests.put-wire_in_requests-wire_in_request_uuid()
+      after: sdk.wireInRequests.submitRequest()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/employees/{employee_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.delete-v1-employee()
+      after: sdk.employees.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/earning_types"]["get"]
+    update:
+      x-speakeasy-group: earningTypes
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Earning Types.get-v1-companies-company_id-earning_types()
+      after: sdk.earningTypes.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_uuid}/contractors"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.post-v1-companies-company_uuid-contractors()
+      after: sdk.contractors.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/payroll_reversals"]["get"]
+    update:
+      x-speakeasy-name-override: getReversals
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.get-v1-companies-company_id-payroll_reversals()
+      after: sdk.payrolls.getReversals()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/departments/{department_uuid}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Departments.get-department()
+      after: sdk.departments.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/payrolls/{payroll_id}/employees/{employee_id}/pay_stub"]["get"]
+    update:
+      x-speakeasy-name-override: getPayStub
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub()
+      after: sdk.payrolls.getPayStub()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/home_addresses/{home_address_uuid}"]["get"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: getHomeAddress
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.get-v1-home_addresses-home_address_uuid()
+      after: sdk.employeeAddresses.getHomeAddress()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules/assignments"]["get"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: getAssignments
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.get-v1-companies-company_id-pay_schedules-assignments()
+      after: sdk.paySchedules.getAssignments()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/onboarding_status"]["get"]
+    update:
+      x-speakeasy-name-override: getOnboardingStatus
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.get-v1-employees-employee_id-onboarding_status()
+      after: sdk.employees.getOnboardingStatus()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/employee_benefits"]["get"]
+    update:
+      x-speakeasy-group: employeeBenefits
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Benefits.get-v1-employees-employee_id-employee_benefits()
+      after: sdk.employeeBenefits.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules/assignment_preview"]["post"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: previewAssignment
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.post-v1-companies-company_id-pay_schedules-assignment_preview()
+      after: sdk.paySchedules.previewAssignment()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/i9_authorization/employer_sign"]["put"]
+    update:
+      x-speakeasy-group: i9Verification
+      x-speakeasy-name-override: employerSign
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.I-9 Verification.put-v1-employees-employee_id-i9_authorization-employer_sign()
+      after: sdk.i9Verification.employerSign()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_id}/contractor_payments"]["post"]
+    update:
+      x-speakeasy-group: contractorPayments
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payments.post-v1-companies-company_id-contractor_payments()
+      after: sdk.contractorPayments.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/documents/{document_uuid}/sign"]["put"]
+    update:
+      x-speakeasy-group: contractorDocuments
+      x-speakeasy-name-override: sign
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Documents.put-v1-contractor-document-sign()
+      after: sdk.contractorDocuments.sign()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.put-v1-employees()
+      after: sdk.employees.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/onboarding_documents_config"]["put"]
+    update:
+      x-speakeasy-name-override: updateOnboardingDocumentsConfig
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.put-v1-employees-employee_id-onboarding_documents_config()
+      after: sdk.employees.updateOnboardingDocumentsConfig()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/tax_requirements/{state}"]["put"]
+    update:
+      x-speakeasy-group: taxRequirements
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Tax Requirements.put-v1-companies-company_uuid-tax_requirements-state()
+      after: sdk.taxRequirements.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/departments/{department_uuid}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Departments.delete-department()
+      after: sdk.departments.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/rehire"]["get"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: getRehire
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.get-v1-employees-employee_id-rehire()
+      after: sdk.employeeEmployments.getRehire()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls/{payroll_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.delete-v1-companies-company_id-payrolls()
+      after: sdk.payrolls.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/tax_requirements"]["get"]
+    update:
+      x-speakeasy-group: taxRequirements
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Tax Requirements.get-v1-companies-company_uuid-tax_requirements()
+      after: sdk.taxRequirements.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/attachments/{company_attachment_uuid}/download_url"]["get"]
+    update:
+      x-speakeasy-group: companyAttachment
+      x-speakeasy-name-override: getDownloadUrl
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Attachment.get-v1-companies-attachment-url()
+      after: sdk.companyAttachment.getDownloadUrl()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/departments"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Departments.post-departments()
+      after: sdk.departments.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/wire_in_requests"]["get"]
+    update:
+      x-speakeasy-group: wireInRequests
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Wire In Requests.get-companies-company_uuid-wire_in_request_uuid()
+      after: sdk.wireInRequests.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/onboarding_status"]["put"]
+    update:
+      x-speakeasy-name-override: updateOnboardingStatus
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.put-v1-employees-employee_id-onboarding_status()
+      after: sdk.employees.updateOnboardingStatus()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/custom_fields"]["get"]
+    update:
+      x-speakeasy-name-override: getCustomFields
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.get-v1-companies-company_id-custom_fields()
+      after: sdk.companies.getCustomFields()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/home_addresses/{home_address_uuid}"]["put"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: updateHomeAddress
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.put-v1-home_addresses-home_address_uuid()
+      after: sdk.employeeAddresses.updateHomeAddress()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/recovery_cases/{recovery_case_uuid}/redebit"]["put"]
+    update:
+      x-speakeasy-group: recoveryCases
+      x-speakeasy-name-override: redebit
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Recovery Cases.redebit-recovery-case()
+      after: sdk.recoveryCases.redebit()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/benefits/{benefit_id}/requirements"]["get"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: getRequirements
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.get-v1-benefits-benefits_id-requirements()
+      after: sdk.companyBenefits.getRequirements()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/home_addresses"]["post"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.post-v1-employees-employee_id-home_addresses()
+      after: sdk.employeeAddresses.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/employees"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.get-v1-companies-company_id-employees()
+      after: sdk.employees.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/rehire"]["post"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: createRehire
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.post-v1-employees-employee_id-rehire()
+      after: sdk.employeeEmployments.createRehire()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/forms/{form_id}/pdf"]["get"]
+    update:
+      x-speakeasy-group: employeeForms
+      x-speakeasy-name-override: getPdf
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Forms.get-v1-employee-form-pdf()
+      after: sdk.employeeForms.getPdf()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractor_payment_groups/{contractor_payment_group_uuid}"]["get"]
+    update:
+      x-speakeasy-group: contractorPaymentGroups
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Groups.get-v1-contractor_payment_groups-contractor_payment_group_id()
+      after: sdk.contractorPaymentGroups.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/time_off_policies/{time_off_policy_uuid}"]["put"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.put-time_off_policies-time_off_policy_uuid()
+      after: sdk.timeOffPolicies.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/compensations/{compensation_id}"]["delete"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: deleteCompensation
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.delete-v1-compensations-compensation_id()
+      after: sdk.jobsAndCompensations.deleteCompensation()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/flows"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Flows.post-v1-company-flows()
+      after: sdk.flows.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/forms/{form_id}"]["get"]
+    update:
+      x-speakeasy-group: contractorForms
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Forms.get-v1-contractor-form()
+      after: sdk.contractorForms.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_uuid}/holiday_pay_policy"]["delete"]
+    update:
+      x-speakeasy-group: holidayPayPolicies
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Holiday Pay Policies.delete-companies-company_uuid-holiday_pay_policy()
+      after: sdk.holidayPayPolicies.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/holiday_pay_policy/remove"]["put"]
+    update:
+      x-speakeasy-group: holidayPayPolicies
+      x-speakeasy-name-override: removeEmployees
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Holiday Pay Policies.put-companies-company_uuid-holiday_pay_policy-remove()
+      after: sdk.holidayPayPolicies.removeEmployees()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/terminations"]["get"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: getTermination
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.get-v1-employees-employee_id-terminations()
+      after: sdk.employeeEmployments.getTermination()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/payment_method"]["put"]
+    update:
+      x-speakeasy-group: contractorPaymentMethod
+      x-speakeasy-name-override: updatePaymentMethod
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Method.put-v1-contractors-contractor_id-payment_method()
+      after: sdk.contractorPaymentMethod.updatePaymentMethod()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/locations/{location_uuid}/minimum_wages"]["get"]
+    update:
+      x-speakeasy-name-override: getMinimumWages
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Locations.get-v1-locations-location_uuid-minimum_wages()
+      after: sdk.locations.getMinimumWages()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/token_info"]["get"]
+    update:
+      x-speakeasy-name-override: getTokenInfo
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Introspection.get-v1-token-info()
+      after: sdk.introspection.getTokenInfo()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/jobs/{job_id}"]["put"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.put-v1-jobs-job_id()
+      after: sdk.jobsAndCompensations.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_uuid}/federal_taxes"]["get"]
+    update:
+      x-speakeasy-group: employeeTaxSetup
+      x-speakeasy-name-override: getFederalTaxes
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Tax Setup.get-v1-employees-employee_id-federal_taxes()
+      after: sdk.employeeTaxSetup.getFederalTaxes()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/forms"]["get"]
+    update:
+      x-speakeasy-group: employeeForms
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Forms.get-v1-employee-forms()
+      after: sdk.employeeForms.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/signatories/{signatory_uuid}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Signatories.delete-v1-companies-company_uuid-signatories-signatory_uuid()
+      after: sdk.signatories.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/pay_stubs"]["get"]
+    update:
+      x-speakeasy-name-override: getPayStubs
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.get-v1-employees-employee_uuid-pay_stubs()
+      after: sdk.payrolls.getPayStubs()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/forms"]["get"]
+    update:
+      x-speakeasy-group: companies.forms
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Forms.get-v1-company-forms()
+      after: sdk.companies.forms.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls/{payroll_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.put-v1-companies-company_id-payrolls()
+      after: sdk.payrolls.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/forms/{form_id}/pdf"]["get"]
+    update:
+      x-speakeasy-group: companyForms
+      x-speakeasy-name-override: getPdf
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Forms.get-v1-company-form-pdf()
+      after: sdk.companyForms.getPdf()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/home_addresses"]["get"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: getHomeAddresses
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.get-v1-employees-employee_id-home_addresses()
+      after: sdk.employeeAddresses.getHomeAddresses()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/onboarding_status"]["put"]
+    update:
+      x-speakeasy-name-override: updateOnboardingStatus
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.put-v1-contractors-contractor_uuid-onboarding_status()
+      after: sdk.contractors.updateOnboardingStatus()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/locations/{location_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Locations.put-v1-locations-location_id()
+      after: sdk.locations.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}/calculate_taxes"]["get"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: getTaxSuggestions
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.get-v1-external-payroll-calculate-taxes()
+      after: sdk.externalPayrolls.getTaxSuggestions()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractor_payments/{contractor_payment_uuid}/receipt"]["get"]
+    update:
+      x-speakeasy-group: contractorPayments
+      x-speakeasy-name-override: getReceipt
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payments.get-v1-contractor_payments-contractor_payment_uuid-receipt()
+      after: sdk.contractorPayments.getReceipt()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token"]["get"]
+    update:
+      x-speakeasy-name-override: requestVerificationToken
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Webhooks.get-v1-webhook-subscription-verification-token-uuid()
+      after: sdk.webhooks.requestVerificationToken()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/generated_documents/{document_type}/{request_uuid}"]["get"]
+    update:
+      x-speakeasy-group: generatedDocuments
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Generated Documents.get-v1-generated_documents-document_type-request_uuid()
+      after: sdk.generatedDocuments.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours"]["post"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: calculateAccruingHours
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours()
+      after: sdk.timeOffPolicies.calculateAccruingHours()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls/tax_liabilities"]["get"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: getTaxLiabilities
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.get-v1-tax-liabilities()
+      after: sdk.externalPayrolls.getTaxLiabilities()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/i9_authorization/documents"]["put"]
+    update:
+      x-speakeasy-group: i9Verification
+      x-speakeasy-name-override: createDocuments
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.I-9 Verification.put-v1-employees-employee_id-i9_authorization-documents()
+      after: sdk.i9Verification.createDocuments()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/federal_tax_details"]["get"]
+    update:
+      x-speakeasy-group: federalTaxDetails
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Federal Tax Details.get-v1-companies-company_id-federal_tax_details()
+      after: sdk.federalTaxDetails.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_uuid}/state_taxes"]["get"]
+    update:
+      x-speakeasy-group: employeeTaxSetup
+      x-speakeasy-name-override: getStateTaxes
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Tax Setup.get-v1-employees-employee_id-state_taxes()
+      after: sdk.employeeTaxSetup.getStateTaxes()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/rehire"]["put"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: updateRehire
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.put-v1-employees-employee_id-rehire()
+      after: sdk.employeeEmployments.updateRehire()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/signatories/invite"]["post"]
+    update:
+      x-speakeasy-name-override: invite
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Signatories.post-v1-companies-company_uuid-signatories-invite()
+      after: sdk.signatories.invite()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/invoices/{invoice_period}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Invoices.get-invoices-invoice-period()
+      after: sdk.invoices.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/contractor_payment_groups/{contractor_payment_group_uuid}"]["delete"]
+    update:
+      x-speakeasy-group: contractorPaymentGroups
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Groups.delete-v1-contractor_payment_groups-contractor_payment_group_id()
+      after: sdk.contractorPaymentGroups.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/webhook_subscriptions"]["post"]
+    update:
+      x-speakeasy-name-override: createSubscription
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Webhooks.post-v1-webhook-subscription()
+      after: sdk.webhooks.createSubscription()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/plaid/processor_token"]["post"]
+    update:
+      x-speakeasy-group: bankAccounts
+      x-speakeasy-name-override: createFromProcessorToken
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Bank Accounts.post-v1-plaid-processor_token()
+      after: sdk.bankAccounts.createFromProcessorToken()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/recovery_cases"]["get"]
+    update:
+      x-speakeasy-group: recoveryCases
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Recovery Cases.get-recovery-cases()
+      after: sdk.recoveryCases.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/payment_method"]["get"]
+    update:
+      x-speakeasy-group: employeePaymentMethod
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Payment Method.get-v1-employees-employee_id-payment_method()
+      after: sdk.employeePaymentMethod.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/reports"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Reports.post-companies-company_uuid-reports()
+      after: sdk.reports.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/departments/{department_uuid}/remove"]["put"]
+    update:
+      x-speakeasy-name-override: removePeople
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Departments.put-remove-people-from-department()
+      after: sdk.departments.removePeople()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/time_off_policies/{time_off_policy_uuid}/remove_employees"]["put"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: removeEmployees
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.put-v1-time_off_policies-time_off_policy_uuid-remove_employees()
+      after: sdk.timeOffPolicies.removeEmployees()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}"]["put"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.put-v1-external-payroll()
+      after: sdk.externalPayrolls.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/bank_accounts"]["post"]
+    update:
+      x-speakeasy-group: contractorPaymentMethod
+      x-speakeasy-name-override: createBankAccount
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Method.post-v1-contractors-contractor_uuid-bank_accounts()
+      after: sdk.contractorPaymentMethod.createBankAccount()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/terminations"]["delete"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: deleteTermination
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.delete-v1-employees-employee_id-terminations()
+      after: sdk.employeeEmployments.deleteTermination()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/oauth/token"]["post"]
+    update:
+      x-speakeasy-name-override: refreshAccessToken
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Introspection.refresh-access-token()
+      after: sdk.introspection.refreshAccessToken()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules/preview"]["get"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: preview
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.get-v1-companies-company_id-pay_schedules-preview()
+      after: sdk.paySchedules.preview()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/forms/{form_id}"]["get"]
+    update:
+      x-speakeasy-group: employeeForms
+      x-speakeasy-name-override: getForm
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Forms.get-v1-employee-form()
+      after: sdk.employeeForms.getForm()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/partner_managed_companies/{company_uuid}/migrate"]["put"]
+    update:
+      x-speakeasy-name-override: migrate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.put-v1-partner-managed-companies-company-uuid-migrate()
+      after: sdk.companies.migrate()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/company_benefits"]["get"]
+    update:
+      x-speakeasy-group: companies.benefits
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.get-v1-companies-company_id-company_benefits()
+      after: sdk.companies.benefits.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/time_off_policies/{time_off_policy_uuid}"]["get"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: retrieve
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.get-time_off_policies-time_off_policy_uuid()
+      after: sdk.timeOffPolicies.retrieve()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls/tax_liabilities"]["put"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: updateTaxLiabilities
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.put-v1-tax-liabilities()
+      after: sdk.externalPayrolls.updateTaxLiabilities()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/departments/{department_uuid}/add"]["put"]
+    update:
+      x-speakeasy-name-override: addPeople
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Departments.put-add-people-to-department()
+      after: sdk.departments.addPeople()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls"]["get"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.get-v1-company-external-payrolls()
+      after: sdk.externalPayrolls.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/jobs/{job_id}/compensations"]["post"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: createCompensation
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.post-v1-compensations-compensation_id()
+      after: sdk.jobsAndCompensations.createCompensation()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/attachments"]["post"]
+    update:
+      x-speakeasy-group: companyAttachments
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Attachment.post-v1-companies-attachment()
+      after: sdk.companyAttachments.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/employment_history"]["get"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: getHistory
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.get-v1-employees-employee_id-employment_history()
+      after: sdk.employeeEmployments.getHistory()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/work_addresses/{work_address_uuid}"]["delete"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.delete-v1-work_addresses-work_address_uuid()
+      after: sdk.employeeAddresses.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}"]["delete"]
+    update:
+      x-speakeasy-group: employeePaymentMethod
+      x-speakeasy-name-override: deleteBankAccount
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Payment Method.delete-v1-employees-employee_id-bank_accounts-bank_account_id()
+      after: sdk.employeePaymentMethod.deleteBankAccount()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/webhook_subscriptions/{webhook_subscription_uuid}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Webhooks.delete-v1-webhook-subscription-uuid()
+      after: sdk.webhooks.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls/tax_liabilities/finish"]["put"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: finalizeTaxLiabilities
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.put-v1-tax-liabilities-finish()
+      after: sdk.externalPayrolls.finalizeTaxLiabilities()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/holiday_pay_policy"]["put"]
+    update:
+      x-speakeasy-group: holidayPayPolicies
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Holiday Pay Policies.put-companies-company_uuid-holiday_pay_policy()
+      after: sdk.holidayPayPolicies.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/contractors"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.get-v1-companies-company_uuid-contractors()
+      after: sdk.contractors.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}"]["put"]
+    update:
+      x-speakeasy-name-override: updateHistorical
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.put-v1-historical_employees()
+      after: sdk.employees.updateHistorical()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls/{payroll_id}/cancel"]["put"]
+    update:
+      x-speakeasy-name-override: cancel
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.put-api-v1-companies-company_id-payrolls-payroll_id-cancel()
+      after: sdk.payrolls.cancel()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/address"]["put"]
+    update:
+      x-speakeasy-name-override: updateAddress
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.put-v1-contractors-contractor_uuid-address()
+      after: sdk.contractors.updateAddress()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/locations/{location_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Locations.get-v1-locations-location_id()
+      after: sdk.locations.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/home_addresses/{home_address_uuid}"]["delete"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: removeHomeAddress
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.delete-v1-home_addresses-home_address_uuid()
+      after: sdk.employeeAddresses.removeHomeAddress()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/finish_onboarding"]["put"]
+    update:
+      x-speakeasy-name-override: finishOnboarding
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.get-v1-company-finish-onboarding()
+      after: sdk.companies.finishOnboarding()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/admins"]["get"]
+    update:
+      x-speakeasy-name-override: getAdmins
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.get-v1-companies-company_id-admins()
+      after: sdk.companies.getAdmins()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/payrolls/{payroll_uuid}/generated_documents/printable_payroll_checks"]["post"]
+    update:
+      x-speakeasy-name-override: generatePrintableChecks
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks()
+      after: sdk.payrolls.generatePrintableChecks()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/jobs/{job_id}"]["get"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: getJob
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.get-v1-jobs-job_id()
+      after: sdk.jobsAndCompensations.getJob()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/company_benefits/{company_benefit_id}"]["put"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.put-v1-company_benefits-company_benefit_id()
+      after: sdk.companyBenefits.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/payrolls/skip"]["post"]
+    update:
+      x-speakeasy-name-override: skip
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.post-companies-payroll-skip-company_uuid()
+      after: sdk.payrolls.skip()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/time_off_policies/{time_off_policy_uuid}/balance"]["put"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: updateBalance
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.put-version-time_off_policies-time_off_policy_uuid-balance()
+      after: sdk.timeOffPolicies.updateBalance()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/jobs/{job_id}"]["delete"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: deleteJob
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.delete-v1-jobs-job_id()
+      after: sdk.jobsAndCompensations.deleteJob()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/jobs"]["post"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: createJob
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.post-v1-jobs-job_id()
+      after: sdk.jobsAndCompensations.createJob()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/company_benefits/{company_benefit_id}/employee_benefits"]["put"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: bulkUpdateEmployeeBenefits
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.put-v1-company_benefits-company_benefit_id-employee_benefits()
+      after: sdk.companyBenefits.bulkUpdateEmployeeBenefits()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/time_off_policies"]["post"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.post-companies-company_uuid-time_off_policies()
+      after: sdk.timeOffPolicies.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/webhook_subscriptions/{webhook_subscription_uuid}"]["put"]
+    update:
+      x-speakeasy-name-override: updateSubscription
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Webhooks.put-v1-webhook-subscription-uuid()
+      after: sdk.webhooks.updateSubscription()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/i9_authorization/documents"]["get"]
+    update:
+      x-speakeasy-group: i9Verification
+      x-speakeasy-name-override: getDocuments
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.I-9 Verification.get-v1-employees-employee_id-i9_authorization-documents()
+      after: sdk.i9Verification.getDocuments()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractor_payments/{contractor_payment_uuid}/fund"]["put"]
+    update:
+      x-speakeasy-group: contractorPayments
+      x-speakeasy-name-override: fund
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payments.get-v1-contractor_payments-contractor_payment_uuid-fund()
+      after: sdk.contractorPayments.fund()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/payment_method"]["put"]
+    update:
+      x-speakeasy-group: employeePaymentMethod
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Payment Method.put-v1-employees-employee_id-payment_method()
+      after: sdk.employeePaymentMethod.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/partner_managed_companies/{company_uuid}/retrieve_terms_of_service"]["post"]
+    update:
+      x-speakeasy-name-override: retrieveTermsOfService
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.post-partner-managed-companies-company_uuid-retrieve_terms_of_service()
+      after: sdk.companies.retrieveTermsOfService()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.delete-v1-contractors-contractor_uuid()
+      after: sdk.contractors.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/payment_configs"]["put"]
+    update:
+      x-speakeasy-group: paymentConfigs
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payment Configs.put-v1-company-payment-configs()
+      after: sdk.paymentConfigs.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employee_benefits/{employee_benefit_id}"]["put"]
+    update:
+      x-speakeasy-group: employeeBenefits
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Benefits.put-v1-employee_benefits-employee_benefit_id()
+      after: sdk.employeeBenefits.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/holiday_pay_policy"]["get"]
+    update:
+      x-speakeasy-group: holidayPayPolicies
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Holiday Pay Policies.get-companies-company_uuid-holiday_pay_policy()
+      after: sdk.holidayPayPolicies.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/benefits"]["get"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.get-v1-benefits()
+      after: sdk.companyBenefits.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/sandbox/generate_w2"]["post"]
+    update:
+      x-speakeasy-group: employeeForms
+      x-speakeasy-name-override: generateW2
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Forms.post-v1-sandbox-generate_w2()
+      after: sdk.employeeForms.generateW2()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/notifications/{notification_uuid}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Notifications.get-notifications-notification_uuid()
+      after: sdk.notifications.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/pay_periods/unprocessed_termination_pay_periods"]["get"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: listUnprocessedTerminationPeriods
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.get-v1-companies-company_id-unprocessed_termination_pay_periods()
+      after: sdk.paySchedules.listUnprocessedTerminationPeriods()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/garnishments/child_support"]["get"]
+    update:
+      x-speakeasy-name-override: getChildSupport
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Garnishments.get-v1-garnishments-child_support()
+      after: sdk.garnishments.getChildSupport()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/departments/{department_uuid}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Departments.put-departments()
+      after: sdk.departments.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/garnishments"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Garnishments.get-v1-employees-employee_id-garnishments()
+      after: sdk.garnishments.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls/{payroll_id}/submit"]["put"]
+    update:
+      x-speakeasy-name-override: submit
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.put-v1-companies-company_id-payrolls-payroll_id-submit()
+      after: sdk.payrolls.submit()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/contractor_payments"]["get"]
+    update:
+      x-speakeasy-group: contractorPayments
+      x-speakeasy-name-override: getPayments
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payments.get-v1-companies-company_id-contractor_payments()
+      after: sdk.contractorPayments.getPayments()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/garnishments"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Garnishments.post-v1-employees-employee_id-garnishments()
+      after: sdk.garnishments.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/terminations/{employee_id}"]["put"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: updateTermination
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.put-v1-terminations-employee_id()
+      after: sdk.employeeEmployments.updateTermination()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/forms"]["get"]
+    update:
+      x-speakeasy-group: contractorForms
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Forms.get-v1-contractor-forms()
+      after: sdk.contractorForms.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/work_addresses"]["post"]
+    update:
+      x-speakeasy-group: employeeAddresses.workAddresses
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.post-v1-employees-employee_id-work_addresses()
+      after: sdk.employeeAddresses.workAddresses.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/employees"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.post-v1-employees()
+      after: sdk.employees.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls"]["post"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.post-v1-external-payroll()
+      after: sdk.externalPayrolls.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/partner_managed_companies"]["post"]
+    update:
+      x-speakeasy-name-override: createPartnerManaged
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.post-v1-partner-managed-companies()
+      after: sdk.companies.createPartnerManaged()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}"]["get"]
+    update:
+      x-speakeasy-group: contractorPayments
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payments.get-v1-companies-company_id-contractor_payment-contractor-payment()
+      after: sdk.contractorPayments.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_uuid}/signatories/{signatory_uuid}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Signatories.put-v1-companies-company_uuid-signatories-signatory_uuid()
+      after: sdk.signatories.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/industry_selection"]["put"]
+    update:
+      x-speakeasy-group: industrySelection
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Industry Selection.put-v1-company-industry()
+      after: sdk.industrySelection.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/payrolls/blockers"]["get"]
+    update:
+      x-speakeasy-name-override: getBlockers
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.get-v1-companies-payroll-blockers-company_uuid()
+      after: sdk.payrolls.getBlockers()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/bank_accounts"]["post"]
+    update:
+      x-speakeasy-group: employeePaymentMethod
+      x-speakeasy-name-override: createBankAccount
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Payment Method.post-v1-employees-employee_id-bank_accounts()
+      after: sdk.employeePaymentMethod.createBankAccount()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules"]["post"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.post-v1-companies-company_id-pay_schedules()
+      after: sdk.paySchedules.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/payment_method"]["get"]
+    update:
+      x-speakeasy-group: contractorPaymentMethod
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Method.get-v1-contractors-contractor_uuid-payment_method()
+      after: sdk.contractorPaymentMethod.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/payment_configs"]["get"]
+    update:
+      x-speakeasy-group: paymentConfigs
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payment Configs.get-v1-company-payment-configs()
+      after: sdk.paymentConfigs.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/work_addresses/{work_address_uuid}"]["get"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: getWorkAddress
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.get-v1-work_addresses-work_address_uuid()
+      after: sdk.employeeAddresses.getWorkAddress()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_uuid}/federal_taxes"]["put"]
+    update:
+      x-speakeasy-group: employeeTaxSetup
+      x-speakeasy-name-override: updateFederalTaxes
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Tax Setup.put-v1-employees-employee_id-federal_taxes()
+      after: sdk.employeeTaxSetup.updateFederalTaxes()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/payrolls/{payroll_uuid}/receipt"]["get"]
+    update:
+      x-speakeasy-name-override: getReceipt
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.get-v1-payment-receipts-payrolls-payroll_uuid()
+      after: sdk.payrolls.getReceipt()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/locations"]["get"]
+    update:
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Locations.get-v1-companies-company_id-locations()
+      after: sdk.locations.getAll()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company"]["post"]
+    update:
+      x-speakeasy-group: employeeBenefits
+      x-speakeasy-name-override: createYtdAmountsFromDifferentCompany
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Benefits.post-employee-ytd-benefit-amounts-from-different-company()
+      after: sdk.employeeBenefits.createYtdAmountsFromDifferentCompany()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_id}/earning_types/{earning_type_uuid}"]["delete"]
+    update:
+      x-speakeasy-group: earningTypes
+      x-speakeasy-name-override: deactivate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Earning Types.delete-v1-companies-company_id-earning_types-earning_type_uuid()
+      after: sdk.earningTypes.deactivate()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_uuid}/time_off_activities"]["get"]
+    update:
+      x-speakeasy-name-override: getTimeOffActivities
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.get-version-employees-time_off_activities()
+      after: sdk.employees.getTimeOffActivities()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/signatories"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Signatories.post-v1-company-signatories()
+      after: sdk.signatories.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/i9_authorization/documents/{document_id}"]["delete"]
+    update:
+      x-speakeasy-group: i9Verification
+      x-speakeasy-name-override: deleteDocument
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.I-9 Verification.delete-v1-employees-employee_id-i9_authorization-documents-document_id()
+      after: sdk.i9Verification.deleteDocument()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/sandbox/generate_1099"]["post"]
+    update:
+      x-speakeasy-group: contractorForms
+      x-speakeasy-name-override: generate1099
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Forms.post-v1-sandbox-generate_1099()
+      after: sdk.contractorForms.generate1099()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/company_benefits/{company_benefit_id}"]["delete"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.delete-v1-company_benefits-company_benefit_id()
+      after: sdk.companyBenefits.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/onboarding_status"]["get"]
+    update:
+      x-speakeasy-name-override: getOnboardingStatus
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.get-v1-contractors-contractor_uuid-onboarding_status()
+      after: sdk.contractors.getOnboardingStatus()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules"]["get"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: getForCompany
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.get-v1-companies-company_id-pay_schedules()
+      after: sdk.paySchedules.getForCompany()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/work_addresses/{work_address_uuid}"]["put"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: updateWorkAddress
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.put-v1-work_addresses-work_address_uuid()
+      after: sdk.employeeAddresses.updateWorkAddress()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/company_benefits/{company_benefit_id}"]["get"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.get-v1-company_benefits-company_benefit_id()
+      after: sdk.companyBenefits.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}"]["get"]
+    update:
+      x-speakeasy-name-override: retrieve
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.get-v1-employees()
+      after: sdk.employees.retrieve()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/contractor_payment_groups/preview"]["post"]
+    update:
+      x-speakeasy-group: contractorPaymentGroups
+      x-speakeasy-name-override: preview
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Groups.post-v1-companies-company_id-contractor_payment_groups-preview()
+      after: sdk.contractorPaymentGroups.preview()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/historical_employees"]["post"]
+    update:
+      x-speakeasy-name-override: createHistorical
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.post-v1-historical_employees()
+      after: sdk.employees.createHistorical()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/wire_in_requests/{wire_in_request_uuid}"]["get"]
+    update:
+      x-speakeasy-group: wireInRequests
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Wire In Requests.get-wire_in_requests-wire_in_request_uuid()
+      after: sdk.wireInRequests.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_id}/contractor_payment_groups"]["post"]
+    update:
+      x-speakeasy-group: contractorPaymentGroups
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Groups.post-v1-companies-company_id-contractor_payment_groups()
+      after: sdk.contractorPaymentGroups.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/locations"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Locations.post-v1-companies-company_id-locations()
+      after: sdk.locations.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_uuid}/contractor_payments/preview"]["get"]
+    update:
+      x-speakeasy-group: contractorPayments
+      x-speakeasy-name-override: preview
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payments.get-companies-company_uuid-contractor_payments-preview()
+      after: sdk.contractorPayments.preview()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/pay_periods"]["get"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.get-v1-companies-company_id-pay_periods()
+      after: sdk.paySchedules.list()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/work_addresses"]["get"]
+    update:
+      x-speakeasy-group: employeeAddresses
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Addresses.get-v1-employees-employee_id-work_addresses()
+      after: sdk.employeeAddresses.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.post-v1-companies-company_id-payrolls()
+      after: sdk.payrolls.create()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/forms/{form_id}/sign"]["put"]
+    update:
+      x-speakeasy-group: employeeForms
+      x-speakeasy-name-override: sign
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Forms.put-v1-employee-form-sign()
+      after: sdk.employeeForms.sign()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/time_off_policies/{time_off_policy_uuid}/add_employees"]["put"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: addEmployees
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.put-version-time_off_policies-time_off_policy_uuid-add_employees()
+      after: sdk.timeOffPolicies.addEmployees()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/company_benefits/{company_benefit_id}/summary"]["get"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: getSummary
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.get-v1-benefits-company_benefit_id-summary()
+      after: sdk.companyBenefits.getSummary()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/earning_types/{earning_type_uuid}"]["put"]
+    update:
+      x-speakeasy-group: earningTypes
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Earning Types.put-v1-companies-company_id-earning_types-earning_type_uuid()
+      after: sdk.earningTypes.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/employees/{employee_id}/rehire"]["delete"]
+    update:
+      x-speakeasy-group: employeeEmployments
+      x-speakeasy-name-override: deleteRehire
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Employments.delete-v1-employees-employee_id-rehire()
+      after: sdk.employeeEmployments.deleteRehire()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractors/{contractor_uuid}/address"]["get"]
+    update:
+      x-speakeasy-name-override: getAddress
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractors.get-v1-contractors-contractor_uuid-address()
+      after: sdk.contractors.getAddress()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/employees/{employee_uuid}/state_taxes"]["put"]
+    update:
+      x-speakeasy-group: employeeTaxSetup
+      x-speakeasy-name-override: updateStateTaxes
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employee Tax Setup.put-v1-employees-employee_id-state_taxes()
+      after: sdk.employeeTaxSetup.updateStateTaxes()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/i9_authorization"]["put"]
+    update:
+      x-speakeasy-group: i9Verification
+      x-speakeasy-name-override: createOrUpdate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.I-9 Verification.put-v1-employees-employee_id-i9_authorization()
+      after: sdk.i9Verification.createOrUpdate()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/holiday_pay_policy/add"]["put"]
+    update:
+      x-speakeasy-group: holidayPayPolicies
+      x-speakeasy-name-override: addEmployees
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Holiday Pay Policies.put-companies-company_uuid-holiday_pay_policy-add()
+      after: sdk.holidayPayPolicies.addEmployees()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_uuid}/report_templates/{report_type}"]["get"]
+    update:
+      x-speakeasy-name-override: getTemplate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Reports.get-companies-company_uuid-report-templates-report_type()
+      after: sdk.reports.getTemplate()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/jobs"]["get"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: getJobs
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.get-v1-employees-employee_id-jobs()
+      after: sdk.jobsAndCompensations.getJobs()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_uuid}/ach_transactions"]["get"]
+    update:
+      x-speakeasy-group: achTransactions
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.ACH Transactions.get-ach-transactions()
+      after: sdk.achTransactions.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/company_benefits/{company_benefit_id}/employee_benefits"]["get"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: getEmployeeBenefits
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.get-v1-company_benefits-company_benefit_id-employee_benefits()
+      after: sdk.companyBenefits.getEmployeeBenefits()
+      reviewed_at: 1737756176193
+      created_at: 1737756172204
+  - target: $["paths"]["/v1/companies/{company_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.get-v1-companies()
+      after: sdk.companies.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/contractor_payment_groups/{contractor_payment_group_uuid}/fund"]["put"]
+    update:
+      x-speakeasy-group: contractorPaymentGroups
+      x-speakeasy-name-override: fund
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Payment Groups.put-v1-contractor_payment_groups-contractor_payment_group_id-fund()
+      after: sdk.contractorPaymentGroups.fund()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/reports/{report_uuid}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Reports.get-reports-report_uuid()
+      after: sdk.reports.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls/{payroll_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.get-v1-companies-company_id-payrolls-payroll_id()
+      after: sdk.payrolls.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/time_off_policies/{time_off_policy_uuid}/deactivate"]["put"]
+    update:
+      x-speakeasy-group: timeOffPolicies
+      x-speakeasy-name-override: deactivate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Time Off Policies.put-v1-time_off_policies-time_off_policy_uuid-deactivate()
+      after: sdk.timeOffPolicies.deactivate()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}"]["get"]
+    update:
+      x-speakeasy-group: paySchedules
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Pay Schedules.get-v1-companies-company_id-pay_schedules-pay_schedule_id()
+      after: sdk.paySchedules.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}"]["get"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.get-v1-external-payroll()
+      after: sdk.externalPayrolls.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/employees/{employee_id}/custom_fields"]["get"]
+    update:
+      x-speakeasy-name-override: getCustomFields
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Employees.get-v1-employees-employee_id-custom_fields()
+      after: sdk.employees.getCustomFields()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}"]["put"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.put-v1-companies()
+      after: sdk.companies.update()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_id}/admins"]["post"]
+    update:
+      x-speakeasy-name-override: createAdmin
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Companies.post-v1-companies-company_id-admins()
+      after: sdk.companies.createAdmin()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/companies/{company_id}/payrolls/{payroll_id}/calculate"]["put"]
+    update:
+      x-speakeasy-name-override: calculate
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Payrolls.put-v1-companies-company_id-payrolls-payroll_id-calculate()
+      after: sdk.payrolls.calculate()
+      reviewed_at: 1737756176193
+      created_at: 1737756172202
+  - target: $["paths"]["/v1/employees/{employee_id}/i9_authorization"]["get"]
+    update:
+      x-speakeasy-group: i9Verification
+      x-speakeasy-name-override: getAuthorization
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.I-9 Verification.get-v1-employees-employee_id-i9_authorization()
+      after: sdk.i9Verification.getAuthorization()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/documents/{document_uuid}/pdf"]["get"]
+    update:
+      x-speakeasy-group: contractorDocuments
+      x-speakeasy-name-override: getPdf
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Documents.get-v1-contractor-document-pdf()
+      after: sdk.contractorDocuments.getPdf()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/benefits/{benefit_id}"]["get"]
+    update:
+      x-speakeasy-group: companyBenefits
+      x-speakeasy-name-override: getSupportedBenefit
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Company Benefits.get-v1-benefits-benefit_id()
+      after: sdk.companyBenefits.getSupportedBenefit()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}"]["delete"]
+    update:
+      x-speakeasy-group: externalPayrolls
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.External Payrolls.delete-v1-external-payroll()
+      after: sdk.externalPayrolls.delete()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/compensations/{compensation_id}"]["get"]
+    update:
+      x-speakeasy-group: jobsAndCompensations
+      x-speakeasy-name-override: getCompensation
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Jobs and Compensations.get-v1-compensations-compensation_id()
+      after: sdk.jobsAndCompensations.getCompensation()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203
+  - target: $["paths"]["/v1/documents/{document_uuid}"]["get"]
+    update:
+      x-speakeasy-group: contractorDocuments
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.Contractor Documents.get-v1-contractor-document()
+      after: sdk.contractorDocuments.get()
+      reviewed_at: 1737756176193
+      created_at: 1737756172203

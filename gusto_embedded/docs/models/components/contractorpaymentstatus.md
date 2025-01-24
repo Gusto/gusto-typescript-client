@@ -5,7 +5,7 @@ Contractor payment status
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentStatus } from "gusto_embedded/models/components";
+import { ContractorPaymentStatus } from "gusto-embedded/models/components";
 
 let value: ContractorPaymentStatus = "Funded";
 ```

@@ -5,10 +5,10 @@ Representation of a bank account item
 ## Example Usage
 
 ```typescript
-import { PaymentMethodBankAccount } from "gusto_embedded/models/components";
+import { PaymentMethodBankAccount } from "gusto-embedded/models/components";
 
 let value: PaymentMethodBankAccount = {
-  uuid: "9cf02c18-34b0-4d78-98a5-15285ff99fec",
+  uuid: "2544cf8f-6164-47a7-beeb-726b41eb9cd7",
 };
 ```
 

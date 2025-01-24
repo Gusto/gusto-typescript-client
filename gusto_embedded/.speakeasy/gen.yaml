@@ -1,5 +1,8 @@
 configVersion: 2.0.0
 generation:
+  devContainers:
+    enabled: true
+    schemaPath: https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2024-04-01.embedded.yaml?ref=ar/add-speakeasy-github-action
   sdkClassName: GustoEmbedded
   maintainOpenAPIOrder: true
   usageSnippets:
@@ -13,17 +16,19 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 typescript:
-  version: 0.1.0
+  version: 0.1.4
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
-  author: Gusto Embedded
+  author: Speakeasy
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
+  enableCustomCodeRegions: false
   enableReactQuery: false
   enumFormat: union
+  envVarPrefix: GUSTOEMBEDDED
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   imports:
@@ -39,7 +44,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: commonjs
   outputModelSuffix: output
-  packageName: gusto_embedded
+  packageName: gusto-embedded
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

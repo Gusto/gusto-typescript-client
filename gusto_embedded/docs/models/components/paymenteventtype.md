@@ -5,9 +5,9 @@ The type of payment event associated with the ACH transaction
 ## Example Usage
 
 ```typescript
-import { PaymentEventType } from "gusto_embedded/models/components";
+import { PaymentEventType } from "gusto-embedded/models/components";
 
-let value: PaymentEventType = "Payroll";
+let value: PaymentEventType = "ContractorPayment";
 ```
 
 ## Values

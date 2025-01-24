@@ -5,10 +5,10 @@ The representation of an admin user in Gusto.
 ## Example Usage
 
 ```typescript
-import { Admin } from "gusto_embedded/models/components";
+import { Admin } from "gusto-embedded/models/components";
 
 let value: Admin = {
-  uuid: "ea84f576-f25a-4197-a438-575f2159a6f5",
+  uuid: "4f576f25-a197-4438-b575-f2159a6f5bad",
 };
 ```
 

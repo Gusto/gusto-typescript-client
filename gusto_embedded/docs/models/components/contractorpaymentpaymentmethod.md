@@ -5,9 +5,9 @@ The payment method.
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentPaymentMethod } from "gusto_embedded/models/components";
+import { ContractorPaymentPaymentMethod } from "gusto-embedded/models/components";
 
-let value: ContractorPaymentPaymentMethod = "Historical Payment";
+let value: ContractorPaymentPaymentMethod = "Check";
 ```
 
 ## Values

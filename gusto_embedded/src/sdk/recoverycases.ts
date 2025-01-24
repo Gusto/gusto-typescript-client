@@ -3,7 +3,7 @@
  */
 
 import { recoveryCasesGetAll } from "../funcs/recoveryCasesGetAll.js";
-import { recoveryCasesInitiateRedeit } from "../funcs/recoveryCasesInitiateRedeit.js";
+import { recoveryCasesRedebit } from "../funcs/recoveryCasesRedebit.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -41,11 +41,11 @@ export class RecoveryCases extends ClientSDK {
    *
    * scope: `recovery_cases:write`
    */
-  async initiateRedeit(
+  async redebit(
     request: operations.RedebitRecoveryCaseRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(recoveryCasesInitiateRedeit(
+    return unwrapAsync(recoveryCasesRedebit(
       this,
       request,
       options,

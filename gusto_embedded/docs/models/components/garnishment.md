@@ -5,10 +5,10 @@ Garnishments, or employee deductions, are fixed amounts or percentages deducted 
 ## Example Usage
 
 ```typescript
-import { Garnishment } from "gusto_embedded/models/components";
+import { Garnishment } from "gusto-embedded/models/components";
 
 let value: Garnishment = {
-  uuid: "f271ffb5-4428-425a-ab06-ad7f4074d34c",
+  uuid: "b8b60081-0fd2-40f4-b2b1-4fa86c2fd90b",
 };
 ```
 

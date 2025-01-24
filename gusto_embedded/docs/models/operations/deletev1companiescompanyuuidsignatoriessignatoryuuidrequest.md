@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest } from "gusto_embedded/models/operations";
+import { DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest } from "gusto-embedded/models/operations";
 
 let value: DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
   companyUuid: "<id>",

@@ -14,7 +14,6 @@ import { ContractorDocuments } from "./contractordocuments.js";
 import { ContractorForms } from "./contractorforms.js";
 import { ContractorPaymentGroups } from "./contractorpaymentgroups.js";
 import { ContractorPaymentMethod } from "./contractorpaymentmethod.js";
-import { ContractorPaymentMethods } from "./contractorpaymentmethods.js";
 import { ContractorPayments } from "./contractorpayments.js";
 import { Contractors } from "./contractors.js";
 import { Departments } from "./departments.js";
@@ -24,7 +23,6 @@ import { EmployeeBenefits } from "./employeebenefits.js";
 import { EmployeeEmployments } from "./employeeemployments.js";
 import { EmployeeForms } from "./employeeforms.js";
 import { EmployeePaymentMethod } from "./employeepaymentmethod.js";
-import { EmployeePaymentMethods } from "./employeepaymentmethods.js";
 import { Employees } from "./employees.js";
 import { EmployeeTaxSetup } from "./employeetaxsetup.js";
 import { Events } from "./events.js";
@@ -34,12 +32,11 @@ import { Flows } from "./flows.js";
 import { Garnishments } from "./garnishments.js";
 import { GeneratedDocuments } from "./generateddocuments.js";
 import { HolidayPayPolicies } from "./holidaypaypolicies.js";
+import { I9Verification } from "./i9verification.js";
 import { IndustrySelection } from "./industryselection.js";
 import { Introspection } from "./introspection.js";
 import { Invoices } from "./invoices.js";
-import { Jobs } from "./jobs.js";
 import { JobsAndCompensations } from "./jobsandcompensations.js";
-import { JobsCompensations } from "./jobscompensations.js";
 import { Locations } from "./locations.js";
 import { Notifications } from "./notifications.js";
 import { PaymentConfigs } from "./paymentconfigs.js";
@@ -69,14 +66,14 @@ export class GustoEmbedded extends ClientSDK {
     return (this._invoices ??= new Invoices(this._options));
   }
 
-  private _companyAttachment?: CompanyAttachment;
-  get companyAttachment(): CompanyAttachment {
-    return (this._companyAttachment ??= new CompanyAttachment(this._options));
-  }
-
   private _companyAttachments?: CompanyAttachments;
   get companyAttachments(): CompanyAttachments {
     return (this._companyAttachments ??= new CompanyAttachments(this._options));
+  }
+
+  private _companyAttachment?: CompanyAttachment;
+  get companyAttachment(): CompanyAttachment {
+    return (this._companyAttachment ??= new CompanyAttachment(this._options));
   }
 
   private _federalTaxDetails?: FederalTaxDetails;
@@ -158,28 +155,11 @@ export class GustoEmbedded extends ClientSDK {
     ));
   }
 
-  private _employeePaymentMethods?: EmployeePaymentMethods;
-  get employeePaymentMethods(): EmployeePaymentMethods {
-    return (this._employeePaymentMethods ??= new EmployeePaymentMethods(
-      this._options,
-    ));
-  }
-
   private _jobsAndCompensations?: JobsAndCompensations;
   get jobsAndCompensations(): JobsAndCompensations {
     return (this._jobsAndCompensations ??= new JobsAndCompensations(
       this._options,
     ));
-  }
-
-  private _jobsCompensations?: JobsCompensations;
-  get jobsCompensations(): JobsCompensations {
-    return (this._jobsCompensations ??= new JobsCompensations(this._options));
-  }
-
-  private _jobs?: Jobs;
-  get jobs(): Jobs {
-    return (this._jobs ??= new Jobs(this._options));
   }
 
   private _earningTypes?: EarningTypes;
@@ -195,13 +175,6 @@ export class GustoEmbedded extends ClientSDK {
   private _contractorPaymentMethod?: ContractorPaymentMethod;
   get contractorPaymentMethod(): ContractorPaymentMethod {
     return (this._contractorPaymentMethod ??= new ContractorPaymentMethod(
-      this._options,
-    ));
-  }
-
-  private _contractorPaymentMethods?: ContractorPaymentMethods;
-  get contractorPaymentMethods(): ContractorPaymentMethods {
-    return (this._contractorPaymentMethods ??= new ContractorPaymentMethods(
       this._options,
     ));
   }
@@ -278,6 +251,11 @@ export class GustoEmbedded extends ClientSDK {
   private _garnishments?: Garnishments;
   get garnishments(): Garnishments {
     return (this._garnishments ??= new Garnishments(this._options));
+  }
+
+  private _i9Verification?: I9Verification;
+  get i9Verification(): I9Verification {
+    return (this._i9Verification ??= new I9Verification(this._options));
   }
 
   private _taxRequirements?: TaxRequirements;

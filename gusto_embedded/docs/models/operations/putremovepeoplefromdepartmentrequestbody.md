@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PutRemovePeopleFromDepartmentRequestBody } from "gusto_embedded/models/operations";
+import { PutRemovePeopleFromDepartmentRequestBody } from "gusto-embedded/models/operations";
 
 let value: PutRemovePeopleFromDepartmentRequestBody = {};
 ```

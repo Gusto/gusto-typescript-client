@@ -15,7 +15,7 @@ export type PutV1CompanyFormSignRequestBody = {
    */
   signatureText: string;
   /**
-   * whether you agree to sign electronically
+   * Whether you agree to sign electronically
    */
   agree: boolean;
   /**

@@ -15,7 +15,7 @@ import {
 
 export type PaymentSpeedRequiredBody = {
   /**
-   * Fast payment limit. This limit is an aggregate of all fast payrolls amount.
+   * Fast payment limit. This limit is an aggregate of all fast payrolls amount. This limit is only relevant when payment speed is 1-day or 2-day.
    */
   fastPaymentLimit?: string | undefined;
   /**

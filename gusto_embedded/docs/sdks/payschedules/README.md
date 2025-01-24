@@ -6,14 +6,14 @@
 ### Available Operations
 
 * [create](#create) - Create a new pay schedule
-* [list](#list) - Get the pay schedules for a company
+* [getForCompany](#getforcompany) - Get the pay schedules for a company
 * [preview](#preview) - Preview pay schedule dates
 * [get](#get) - Get a pay schedule
 * [update](#update) - Update a pay schedule
-* [listPayPeriods](#listpayperiods) - Get pay periods for a company
-* [listUnprocessedTerminationPayPeriods](#listunprocessedterminationpayperiods) - Get termination pay periods for a company
-* [listAssignments](#listassignments) - Get pay schedule assignments for a company
-* [assignmentPreview](#assignmentpreview) - Preview pay schedule assignments for a company
+* [list](#list) - Get pay periods for a company
+* [listUnprocessedTerminationPeriods](#listunprocessedterminationperiods) - Get termination pay periods for a company
+* [getAssignments](#getassignments) - Get pay schedule assignments for a company
+* [previewAssignment](#previewassignment) - Preview pay schedule assignments for a company
 * [assign](#assign) - Assign pay schedules for a company
 
 ## create
@@ -29,10 +29,10 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -60,13 +60,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesCreate } from "gusto_embedded/funcs/paySchedulesCreate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesCreate } from "gusto-embedded/funcs/paySchedulesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -115,7 +115,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
+## getForCompany
 
 The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
 
@@ -124,14 +124,14 @@ scope: `pay_schedules:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.list({
+  const result = await gustoEmbedded.paySchedules.getForCompany({
     companyId: "<id>",
   });
 
@@ -147,17 +147,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesList } from "gusto_embedded/funcs/paySchedulesList.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesGetForCompany } from "gusto-embedded/funcs/paySchedulesGetForCompany.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await paySchedulesList(gustoEmbedded, {
+  const res = await paySchedulesGetForCompany(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -202,10 +202,10 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -228,13 +228,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesPreview } from "gusto_embedded/funcs/paySchedulesPreview.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesPreview } from "gusto-embedded/funcs/paySchedulesPreview.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -286,10 +286,10 @@ scope: `pay_schedules:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -310,13 +310,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesGet } from "gusto_embedded/funcs/paySchedulesGet.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesGet } from "gusto-embedded/funcs/paySchedulesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -366,10 +366,10 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -400,13 +400,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesUpdate } from "gusto_embedded/funcs/paySchedulesUpdate.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesUpdate } from "gusto-embedded/funcs/paySchedulesUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -458,7 +458,7 @@ run();
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## listPayPeriods
+## list
 
 Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
 
@@ -471,14 +471,14 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.listPayPeriods({
+  const result = await gustoEmbedded.paySchedules.list({
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-01-31",
@@ -496,17 +496,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesListPayPeriods } from "gusto_embedded/funcs/paySchedulesListPayPeriods.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesList } from "gusto-embedded/funcs/paySchedulesList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await paySchedulesListPayPeriods(gustoEmbedded, {
+  const res = await paySchedulesList(gustoEmbedded, {
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-01-31",
@@ -544,7 +544,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listUnprocessedTerminationPayPeriods
+## listUnprocessedTerminationPeriods
 
 When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
 
@@ -555,14 +555,14 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.listUnprocessedTerminationPayPeriods({
+  const result = await gustoEmbedded.paySchedules.listUnprocessedTerminationPeriods({
     companyId: "<id>",
   });
 
@@ -578,17 +578,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesListUnprocessedTerminationPayPeriods } from "gusto_embedded/funcs/paySchedulesListUnprocessedTerminationPayPeriods.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesListUnprocessedTerminationPeriods } from "gusto-embedded/funcs/paySchedulesListUnprocessedTerminationPeriods.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await paySchedulesListUnprocessedTerminationPayPeriods(gustoEmbedded, {
+  const res = await paySchedulesListUnprocessedTerminationPeriods(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -624,7 +624,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listAssignments
+## getAssignments
 
 This endpoint returns the current pay schedule assignment for a company, with pay schedule and employee/department mappings depending on the pay schedule type.
 
@@ -633,14 +633,14 @@ scope: `pay_schedules:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.listAssignments({
+  const result = await gustoEmbedded.paySchedules.getAssignments({
     companyId: "<id>",
   });
 
@@ -656,17 +656,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesListAssignments } from "gusto_embedded/funcs/paySchedulesListAssignments.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesGetAssignments } from "gusto-embedded/funcs/paySchedulesGetAssignments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await paySchedulesListAssignments(gustoEmbedded, {
+  const res = await paySchedulesGetAssignments(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -702,23 +702,23 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## assignmentPreview
+## previewAssignment
 
-This endpoints returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
+This endpoint returns the employee changes, including pay period and transition pay periods, for changing the pay schedule.
 
 scope: `pay_schedules:write`
 
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.assignmentPreview({
+  const result = await gustoEmbedded.paySchedules.previewAssignment({
     companyId: "<id>",
     payScheduleAssignmentBody: {
       type: "by_employee",
@@ -743,17 +743,17 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesAssignmentPreview } from "gusto_embedded/funcs/paySchedulesAssignmentPreview.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesPreviewAssignment } from "gusto-embedded/funcs/paySchedulesPreviewAssignment.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const res = await paySchedulesAssignmentPreview(gustoEmbedded, {
+  const res = await paySchedulesPreviewAssignment(gustoEmbedded, {
     companyId: "<id>",
     payScheduleAssignmentBody: {
       type: "by_employee",
@@ -809,10 +809,10 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto_embedded";
+import { GustoEmbedded } from "gusto-embedded";
 
 const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
@@ -840,13 +840,13 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto_embedded/core.js";
-import { paySchedulesAssign } from "gusto_embedded/funcs/paySchedulesAssign.js";
+import { GustoEmbeddedCore } from "gusto-embedded/core.js";
+import { paySchedulesAssign } from "gusto-embedded/funcs/paySchedulesAssign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: "<YOUR_BEARER_TOKEN_HERE>",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {

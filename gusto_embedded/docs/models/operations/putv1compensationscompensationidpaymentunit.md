@@ -5,7 +5,7 @@ The unit accompanying the compensation rate. If the employee is an owner, rate s
 ## Example Usage
 
 ```typescript
-import { PutV1CompensationsCompensationIdPaymentUnit } from "gusto_embedded/models/operations";
+import { PutV1CompensationsCompensationIdPaymentUnit } from "gusto-embedded/models/operations";
 
 let value: PutV1CompensationsCompensationIdPaymentUnit = "Hour";
 ```

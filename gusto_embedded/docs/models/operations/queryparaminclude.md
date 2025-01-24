@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { QueryParamInclude } from "gusto_embedded/models/operations";
+import { QueryParamInclude } from "gusto-embedded/models/operations";
 
 let value: QueryParamInclude = "custom_fields";
 ```

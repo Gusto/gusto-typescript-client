@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest } from "gusto_embedded/models/operations";
+import { PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest } from "gusto-embedded/models/operations";
 
 let value: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest = {
   timeOffPolicyUuid: "<id>",

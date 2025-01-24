@@ -5,10 +5,10 @@ The representation of an employee benefit.
 ## Example Usage
 
 ```typescript
-import { EmployeeBenefit } from "gusto_embedded/models/components";
+import { EmployeeBenefit } from "gusto-embedded/models/components";
 
 let value: EmployeeBenefit = {
-  uuid: "84f30580-8db9-4ffd-9970-9fd52cbfd817",
+  uuid: "fd817584-dd59-46e2-8bf2-3bc79371547e",
 };
 ```
 
