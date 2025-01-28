@@ -9,7 +9,7 @@ sources:
             - "2024-04-01"
     GustoEmbedded-local:
         sourceNamespace: gusto-embedded-local
-        sourceRevisionDigest: sha256:1e61371af164281cfaeabcf60d150eec4de3bac71a004cee81358865a4bb4d51
+        sourceRevisionDigest: sha256:8e77c761c522732edd4ced93c26737cc27463ebb59d509dca15c510ea901c7b7
         sourceBlobDigest: sha256:27c3ecf78d57b9c1c8cc8e1cc5ea6bd048ee4ef1dd4d29b6c449b809f7713137
         tags:
             - latest
@@ -25,10 +25,10 @@ targets:
     local:
         source: GustoEmbedded-local
         sourceNamespace: gusto-embedded-local
-        sourceRevisionDigest: sha256:1e61371af164281cfaeabcf60d150eec4de3bac71a004cee81358865a4bb4d51
+        sourceRevisionDigest: sha256:8e77c761c522732edd4ced93c26737cc27463ebb59d509dca15c510ea901c7b7
         sourceBlobDigest: sha256:27c3ecf78d57b9c1c8cc8e1cc5ea6bd048ee4ef1dd4d29b6c449b809f7713137
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:1155afa1231a805463b7987cc7e2e5bc0693382f1e9c0ff6a7d05d82b27c494e
+        codeSamplesRevisionDigest: sha256:23ae06a59038a3451180d785a445ed3600bcbd905a6d18bbb6399a5796895f24
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -63,6 +63,7 @@ workflow:
         local:
             target: typescript
             source: GustoEmbedded-local
+            output: ./gusto_embedded
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples

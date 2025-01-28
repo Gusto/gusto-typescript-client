@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InMemoryTokenStore = void 0;
-exports.withAuthorization = withAuthorization;
+exports.withTokenRefresh = withTokenRefresh;
 const z = __importStar(require("zod"));
 const config_1 = require("./lib/config");
 // TypeScript SDKs use Zod for runtime data validation. We can use Zod
@@ -43,6 +43,7 @@ const config_1 = require("./lib/config");
 const tokenResponseSchema = z.object({
     access_token: z.string(),
     expires_in: z.number().positive(),
+    refresh_token: z.string(),
 });
 // This is a rough value that adjusts when we consider an access token to be
 // expired. It accounts for clock drift between the client and server
@@ -53,10 +54,11 @@ const tolerance = 5 * 60 * 1000;
  * with SDKs that require OAuth security. A new token is requested from the
  * OAuth provider when the current token has expired.
  */
-function withAuthorization(clientID, clientSecret, options = {}) {
+function withTokenRefresh(clientID, clientSecret, accessToken, refreshToken, options = {}) {
     const { tokenStore = new InMemoryTokenStore(), 
     // Replace this with your default OAuth provider's access token endpoint.
     url = "https://api.gusto-demo.com/oauth/token", } = options;
+    tokenStore.set({ token: accessToken, refreshToken, expires: 10 });
     return async () => {
         const session = await tokenStore.get();
         // Return the current token if it has not expired yet.
@@ -75,7 +77,8 @@ function withAuthorization(clientID, clientSecret, options = {}) {
                 body: new URLSearchParams({
                     client_id: clientID,
                     client_secret: clientSecret,
-                    grant_type: "system_access",
+                    grant_type: "refresh_token",
+                    refresh_token: refreshToken,
                 }),
             });
             if (!response.ok) {
@@ -83,7 +86,11 @@ function withAuthorization(clientID, clientSecret, options = {}) {
             }
             const json = await response.json();
             const data = tokenResponseSchema.parse(json);
-            await tokenStore.set(data.access_token, Date.now() + data.expires_in * 1000 - tolerance);
+            await tokenStore.set({
+                token: data.access_token,
+                expires: Date.now() + data.expires_in * 1000 - tolerance,
+                refreshToken: data.refresh_token,
+            });
             return data.access_token;
         }
         catch (error) {
@@ -99,14 +106,20 @@ class InMemoryTokenStore {
     constructor() {
         this.token = "";
         this.expires = Date.now();
+        this.refreshToken = "";
     }
     async get() {
-        return { token: this.token, expires: this.expires };
+        return {
+            token: this.token,
+            expires: this.expires,
+            refreshToken: this.refreshToken,
+        };
     }
-    async set(token, expires) {
+    async set({ token, expires, refreshToken, }) {
         this.token = token;
+        this.refreshToken = refreshToken;
         this.expires = expires;
     }
 }
 exports.InMemoryTokenStore = InMemoryTokenStore;
-//# sourceMappingURL=auth.js.map
+//# sourceMappingURL=companyAuth.js.map
