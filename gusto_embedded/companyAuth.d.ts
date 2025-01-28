@@ -3,7 +3,7 @@
  * with SDKs that require OAuth security. A new token is requested from the
  * OAuth provider when the current token has expired.
  */
-export declare function withAuthorization(clientID: string, clientSecret: string, options?: {
+export declare function withTokenRefresh(clientID: string, clientSecret: string, accessToken: string, refreshToken: string, options?: {
     tokenStore?: TokenStore;
     url?: string;
 }): () => Promise<string>;
@@ -15,9 +15,14 @@ export declare function withAuthorization(clientID: string, clientSecret: string
 export interface TokenStore {
     get(): Promise<{
         token: string;
+        refreshToken: string;
         expires: number;
     } | undefined>;
-    set(token: string, expires: number): Promise<void>;
+    set({ token, expires, refreshToken, }: {
+        token: string;
+        expires: number;
+        refreshToken: string;
+    }): Promise<void>;
 }
 /**
  * InMemoryTokenStore holds OAuth access tokens in memory for use by SDKs and
@@ -26,11 +31,17 @@ export interface TokenStore {
 export declare class InMemoryTokenStore implements TokenStore {
     private token;
     private expires;
+    private refreshToken;
     constructor();
     get(): Promise<{
         token: string;
         expires: number;
+        refreshToken: string;
     }>;
-    set(token: string, expires: number): Promise<void>;
+    set({ token, expires, refreshToken, }: {
+        token: string;
+        expires: number;
+        refreshToken: string;
+    }): Promise<void>;
 }
-//# sourceMappingURL=auth.d.ts.map
+//# sourceMappingURL=companyAuth.d.ts.map
