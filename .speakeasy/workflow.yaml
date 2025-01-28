@@ -7,13 +7,14 @@ sources:
               authHeader: Authorization
               authSecret: $openapi_doc_auth_token
         overlays:
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: gusto_embedded/.speakeasy/speakeasy-modifications-overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
 targets:
     gusto-embedded:
         target: typescript
         source: GustoEmbedded-OAS
+        output: ./gusto_embedded
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
