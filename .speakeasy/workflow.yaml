@@ -12,9 +12,9 @@ sources:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
     GustoEmbedded-local:
         inputs:
-            - location: ../../Gusto-Partner-API/generated/embedded/api.v2024-04-01.embedded.yaml
+            - location: ../Gusto-Partner-API/generated/embedded/api.v2024-04-01.embedded.yaml
         overlays:
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: gusto_embedded/.speakeasy/speakeasy-modifications-overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-local
 targets:
@@ -31,6 +31,7 @@ targets:
     local:
         target: typescript
         source: GustoEmbedded-local
+        output: ./gusto_embedded
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
