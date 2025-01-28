@@ -1,0 +1,22 @@
+# Authentication
+
+Example response
+
+## Example Usage
+
+```typescript
+import { Authentication } from "openapi/models/components";
+
+let value: Authentication = {};
+```
+
+## Fields
+
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `accessToken`                                                                                                                        | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | A new access token that can be used for subsequent authenticated requests                                                            |
+| `tokenType`                                                                                                                          | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | The literal string 'bearer'                                                                                                          |
+| `expiresIn`                                                                                                                          | *number*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | The TTL of this token. After this amount of time, you must hit the refresh token endpoint to continue making authenticated requests. |
+| `refreshToken`                                                                                                                       | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | A token that must be passed to the refresh token endpoint to get a new authenticated token.                                          |
+| `createdAt`                                                                                                                          | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | Datetime for when the new access token is created.                                                                                   |
+| `scope`                                                                                                                              | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | All of the scopes for which the access token provides access.                                                                        |

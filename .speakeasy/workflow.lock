@@ -2,33 +2,35 @@ speakeasyVersion: 1.477.0
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:c897ceee2a0487e56abe85425130456b44ce077e3e8d64089db070a08676c07b
-        sourceBlobDigest: sha256:4690b51f54f8cdcd650967cfb7fea502a4fc64250aa9eab064cbfba4531e72d3
+        sourceRevisionDigest: sha256:a22ed2545310248810ad3ca996519401e079cde67b981d10de708278653668e6
+        sourceBlobDigest: sha256:d7f35b866da5c0910df71e8c8f9d5cc0376be9d0c3f45e17a29e52e643846fbe
         tags:
             - latest
-            - "2024-04-01"
+            - speakeasy-sdk-regen-1737760551
+            - "2025-02-01"
     GustoEmbedded-OAS-old:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:afe9d7f74f6c5ab1e4ebddb849a983e0dcfd2acd00cd659351e252ff71622c1c
-        sourceBlobDigest: sha256:42bff6614094c2d95a295989a604aecfd47fd69630cb8fb9affac3669fd36ce2
+        sourceRevisionDigest: sha256:94500aa0553b22e645578ccd99eb9ba0c1112b42b8733053ccbe4427e97d77e0
+        sourceBlobDigest: sha256:a415f727a257a4bc0cee5ecd6284474e08f1a22710550915d7f34e32a1347485
         tags:
             - latest
+            - speakeasy-sdk-regen-1737760551
             - "2024-04-01"
 targets:
     gusto-embedded:
         source: GustoEmbedded-OAS
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:c897ceee2a0487e56abe85425130456b44ce077e3e8d64089db070a08676c07b
-        sourceBlobDigest: sha256:4690b51f54f8cdcd650967cfb7fea502a4fc64250aa9eab064cbfba4531e72d3
+        sourceRevisionDigest: sha256:a22ed2545310248810ad3ca996519401e079cde67b981d10de708278653668e6
+        sourceBlobDigest: sha256:d7f35b866da5c0910df71e8c8f9d5cc0376be9d0c3f45e17a29e52e643846fbe
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:62c9d3eac2b2226a1419963b2eb51681519ee3dfcfddbff9310759b3030ee117
+        codeSamplesRevisionDigest: sha256:50d72c35aa9ed951acdfa3a56eac1a33cf1dd89e6772cd4087ba3bb3991cddd1
     gusto-embedded-old:
         source: GustoEmbedded-OAS-old
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:afe9d7f74f6c5ab1e4ebddb849a983e0dcfd2acd00cd659351e252ff71622c1c
-        sourceBlobDigest: sha256:42bff6614094c2d95a295989a604aecfd47fd69630cb8fb9affac3669fd36ce2
+        sourceRevisionDigest: sha256:94500aa0553b22e645578ccd99eb9ba0c1112b42b8733053ccbe4427e97d77e0
+        sourceBlobDigest: sha256:a415f727a257a4bc0cee5ecd6284474e08f1a22710550915d7f34e32a1347485
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:b260e37d1fead82ed0fb32dafcb2ea9d40baf64fbb391d6fdced6f18adf0817d
+        codeSamplesRevisionDigest: sha256:090cee4d180f64bb6e0e50642acefae34e269d007fb7c41ad668d8d7399c6eb9
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -48,7 +50,7 @@ workflow:
                   authHeader: Authorization
                   authSecret: $openapi_doc_auth_token
             overlays:
-                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+                - location: gusto_embedded_old/.speakeasy/speakeasy-modifications-overlay.yaml
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
     targets:

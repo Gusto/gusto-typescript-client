@@ -5,11 +5,11 @@
 ```typescript
 import { VersionHeader } from "gusto-embedded/models/components";
 
-let value: VersionHeader = "2024-04-01";
+let value: VersionHeader = "2025-02-01";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-02-01"
 ```

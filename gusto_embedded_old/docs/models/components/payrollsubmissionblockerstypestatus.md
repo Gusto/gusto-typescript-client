@@ -1,0 +1,17 @@
+# PayrollSubmissionBlockersTypeStatus
+
+The status of the submission blocker.
+
+## Example Usage
+
+```typescript
+import { PayrollSubmissionBlockersTypeStatus } from "openapi/models/components";
+
+let value: PayrollSubmissionBlockersTypeStatus = "resolved";
+```
+
+## Values
+
+```typescript
+"unresolved" | "resolved"
+```
