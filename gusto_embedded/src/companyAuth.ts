@@ -7,6 +7,7 @@ import { SDK_METADATA } from "./lib/config";
 const tokenResponseSchema = z.object({
   access_token: z.string(),
   expires_in: z.number().positive(),
+  refresh_token: z.string(),
 });
 
 // This is a rough value that adjusts when we consider an access token to be
@@ -19,9 +20,11 @@ const tolerance = 5 * 60 * 1000;
  * with SDKs that require OAuth security. A new token is requested from the
  * OAuth provider when the current token has expired.
  */
-export function withAuthorization(
+export function withTokenRefresh(
   clientID: string,
   clientSecret: string,
+  accessToken: string,
+  refreshToken: string,
   options: { tokenStore?: TokenStore; url?: string } = {}
 ) {
   const {
@@ -29,6 +32,8 @@ export function withAuthorization(
     // Replace this with your default OAuth provider's access token endpoint.
     url = "https://api.gusto-demo.com/oauth/token",
   } = options;
+
+  tokenStore.set({ token: accessToken, refreshToken, expires: 10 });
 
   return async (): Promise<string> => {
     const session = await tokenStore.get();
@@ -50,7 +55,8 @@ export function withAuthorization(
         body: new URLSearchParams({
           client_id: clientID,
           client_secret: clientSecret,
-          grant_type: "system_access",
+          grant_type: "refresh_token",
+          refresh_token: refreshToken,
         }),
       });
 
@@ -61,10 +67,11 @@ export function withAuthorization(
       const json = await response.json();
       const data = tokenResponseSchema.parse(json);
 
-      await tokenStore.set(
-        data.access_token,
-        Date.now() + data.expires_in * 1000 - tolerance
-      );
+      await tokenStore.set({
+        token: data.access_token,
+        expires: Date.now() + data.expires_in * 1000 - tolerance,
+        refreshToken: data.refresh_token,
+      });
 
       return data.access_token;
     } catch (error) {
@@ -79,8 +86,18 @@ export function withAuthorization(
  * a shared cache like Redis or a database table.
  */
 export interface TokenStore {
-  get(): Promise<{ token: string; expires: number } | undefined>;
-  set(token: string, expires: number): Promise<void>;
+  get(): Promise<
+    { token: string; refreshToken: string; expires: number } | undefined
+  >;
+  set({
+    token,
+    expires,
+    refreshToken,
+  }: {
+    token: string;
+    expires: number;
+    refreshToken: string;
+  }): Promise<void>;
 }
 
 /**
@@ -90,15 +107,29 @@ export interface TokenStore {
 export class InMemoryTokenStore implements TokenStore {
   private token = "";
   private expires = Date.now();
+  private refreshToken = "";
 
   constructor() {}
 
   async get() {
-    return { token: this.token, expires: this.expires };
+    return {
+      token: this.token,
+      expires: this.expires,
+      refreshToken: this.refreshToken,
+    };
   }
 
-  async set(token: string, expires: number) {
+  async set({
+    token,
+    expires,
+    refreshToken,
+  }: {
+    token: string;
+    expires: number;
+    refreshToken: string;
+  }) {
     this.token = token;
+    this.refreshToken = refreshToken;
     this.expires = expires;
   }
 }
