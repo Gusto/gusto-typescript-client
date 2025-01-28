@@ -3,11 +3,20 @@ speakeasyVersion: latest
 sources:
     GustoEmbedded-OAS:
         inputs:
-            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2024-04-01.embedded.yaml
+            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/ar/new-version-test/generated/embedded/api.v2025-02-01.embedded.yaml
               authHeader: Authorization
               authSecret: $openapi_doc_auth_token
         overlays:
             - location: gusto_embedded/.speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+    GustoEmbedded-OAS-old:
+        inputs:
+            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2024-04-01.embedded.yaml
+              authHeader: Authorization
+              authSecret: $openapi_doc_auth_token
+        overlays:
+            - location: gusto_embedded_old/.speakeasy/speakeasy-modifications-overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
 targets:
@@ -15,6 +24,16 @@ targets:
         target: typescript
         source: GustoEmbedded-OAS
         output: ./gusto_embedded
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false
+    gusto-embedded-old:
+        target: typescript
+        source: GustoEmbedded-OAS-old
+        output: ./gusto_embedded_old
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples

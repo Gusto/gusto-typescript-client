@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
-id: f0264e24-cbe2-4074-b157-7a6ba8979508
+id: 28ed9b4f-e902-46ff-a98d-17c1ffd3301b
 management:
-  docChecksum: 48df5cdac7cad3cda79985e2b0d0ed6f
+  docChecksum: 36ac2ecb83674d680ce5babff06209db
   docVersion: "2024-04-01"
   speakeasyVersion: 1.477.0
   generationVersion: 2.497.0
-  releaseVersion: 0.1.5
-  configChecksum: ae9f76a24beae379db58f41ac3fd87be
+  releaseVersion: 0.1.1
+  configChecksum: dd763c683e3f001dcca80ec822e80b7f
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -14,7 +14,6 @@ features:
     core: 3.18.18
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
-    devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     errorUnions: 0.1.1
@@ -33,9 +32,6 @@ features:
     unions: 2.85.8
     uploadStreams: 0.1.0
 generatedFiles:
-  - .devcontainer/README.md
-  - .devcontainer/devcontainer.json
-  - .devcontainer/setup.sh
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
@@ -893,16 +889,17 @@ generatedFiles:
   - docs/models/operations/workaddress.md
   - docs/sdks/achtransactions/README.md
   - docs/sdks/bankaccounts/README.md
-  - docs/sdks/benefits/README.md
   - docs/sdks/companies/README.md
   - docs/sdks/companyattachment/README.md
   - docs/sdks/companyattachments/README.md
   - docs/sdks/companybenefits/README.md
   - docs/sdks/companyforms/README.md
+  - docs/sdks/compensations/README.md
   - docs/sdks/contractordocuments/README.md
   - docs/sdks/contractorforms/README.md
   - docs/sdks/contractorpaymentgroups/README.md
   - docs/sdks/contractorpaymentmethod/README.md
+  - docs/sdks/contractorpaymentmethods/README.md
   - docs/sdks/contractorpayments/README.md
   - docs/sdks/contractors/README.md
   - docs/sdks/departments/README.md
@@ -912,18 +909,18 @@ generatedFiles:
   - docs/sdks/employeeemployments/README.md
   - docs/sdks/employeeforms/README.md
   - docs/sdks/employeepaymentmethod/README.md
+  - docs/sdks/employeepaymentmethods/README.md
   - docs/sdks/employees/README.md
   - docs/sdks/employeetaxsetup/README.md
   - docs/sdks/events/README.md
   - docs/sdks/externalpayrolls/README.md
   - docs/sdks/federaltaxdetails/README.md
   - docs/sdks/flows/README.md
-  - docs/sdks/forms/README.md
   - docs/sdks/garnishments/README.md
   - docs/sdks/generateddocuments/README.md
-  - docs/sdks/gustoembedded/README.md
   - docs/sdks/holidaypaypolicies/README.md
   - docs/sdks/i9verification/README.md
+  - docs/sdks/i9verifications/README.md
   - docs/sdks/industryselection/README.md
   - docs/sdks/introspection/README.md
   - docs/sdks/invoices/README.md
@@ -935,27 +932,25 @@ generatedFiles:
   - docs/sdks/payschedules/README.md
   - docs/sdks/recoverycases/README.md
   - docs/sdks/reports/README.md
+  - docs/sdks/sdk/README.md
   - docs/sdks/signatories/README.md
   - docs/sdks/taxrequirements/README.md
   - docs/sdks/timeoffpolicies/README.md
   - docs/sdks/webhooks/README.md
   - docs/sdks/wireinrequests/README.md
-  - docs/sdks/workaddresses/README.md
   - docs/types/rfcdate.md
   - jsr.json
   - package.json
   - src/core.ts
-  - src/funcs/achTransactionsGet.ts
+  - src/funcs/achTransactionsList.ts
   - src/funcs/bankAccountsCreate.ts
   - src/funcs/bankAccountsCreateFromProcessorToken.ts
-  - src/funcs/bankAccountsList.ts
+  - src/funcs/bankAccountsGetAll.ts
   - src/funcs/bankAccountsVerify.ts
   - src/funcs/companiesAcceptTermsOfService.ts
-  - src/funcs/companiesBenefitsList.ts
   - src/funcs/companiesCreateAdmin.ts
   - src/funcs/companiesCreatePartnerManaged.ts
   - src/funcs/companiesFinishOnboarding.ts
-  - src/funcs/companiesFormsList.ts
   - src/funcs/companiesGet.ts
   - src/funcs/companiesGetAdmins.ts
   - src/funcs/companiesGetCustomFields.ts
@@ -963,31 +958,34 @@ generatedFiles:
   - src/funcs/companiesMigrate.ts
   - src/funcs/companiesRetrieveTermsOfService.ts
   - src/funcs/companiesUpdate.ts
+  - src/funcs/companyAttachmentCreate.ts
   - src/funcs/companyAttachmentGetDownloadUrl.ts
-  - src/funcs/companyAttachmentsCreate.ts
-  - src/funcs/companyAttachmentsGetAll.ts
   - src/funcs/companyAttachmentsGetDetails.ts
-  - src/funcs/companyBenefitsBulkUpdateEmployeeBenefits.ts
+  - src/funcs/companyAttachmentsGetList.ts
   - src/funcs/companyBenefitsCreate.ts
   - src/funcs/companyBenefitsDelete.ts
   - src/funcs/companyBenefitsGet.ts
-  - src/funcs/companyBenefitsGetAll.ts
+  - src/funcs/companyBenefitsGetBenefit.ts
   - src/funcs/companyBenefitsGetEmployeeBenefits.ts
   - src/funcs/companyBenefitsGetRequirements.ts
   - src/funcs/companyBenefitsGetSummary.ts
-  - src/funcs/companyBenefitsGetSupportedBenefit.ts
+  - src/funcs/companyBenefitsList.ts
+  - src/funcs/companyBenefitsListAll.ts
   - src/funcs/companyBenefitsUpdate.ts
+  - src/funcs/companyBenefitsUpdateEmployeeBenefits.ts
   - src/funcs/companyFormsGet.ts
+  - src/funcs/companyFormsGetAll.ts
   - src/funcs/companyFormsGetPdf.ts
   - src/funcs/companyFormsSign.ts
+  - src/funcs/compensationsUpdate.ts
   - src/funcs/contractorDocumentsGet.ts
   - src/funcs/contractorDocumentsGetPdf.ts
   - src/funcs/contractorDocumentsList.ts
   - src/funcs/contractorDocumentsSign.ts
-  - src/funcs/contractorFormsGenerate1099.ts
+  - src/funcs/contractorFormsGenerateDemo1099.ts
   - src/funcs/contractorFormsGet.ts
-  - src/funcs/contractorFormsGetAll.ts
   - src/funcs/contractorFormsGetPdf.ts
+  - src/funcs/contractorFormsList.ts
   - src/funcs/contractorPaymentGroupsCreate.ts
   - src/funcs/contractorPaymentGroupsDelete.ts
   - src/funcs/contractorPaymentGroupsFund.ts
@@ -996,14 +994,14 @@ generatedFiles:
   - src/funcs/contractorPaymentGroupsPreview.ts
   - src/funcs/contractorPaymentMethodCreateBankAccount.ts
   - src/funcs/contractorPaymentMethodGet.ts
-  - src/funcs/contractorPaymentMethodGetBankAccounts.ts
-  - src/funcs/contractorPaymentMethodUpdatePaymentMethod.ts
-  - src/funcs/contractorPaymentsCancel.ts
+  - src/funcs/contractorPaymentMethodUpdate.ts
+  - src/funcs/contractorPaymentMethodsGetBankAccounts.ts
   - src/funcs/contractorPaymentsCreate.ts
+  - src/funcs/contractorPaymentsDelete.ts
   - src/funcs/contractorPaymentsFund.ts
   - src/funcs/contractorPaymentsGet.ts
-  - src/funcs/contractorPaymentsGetPayments.ts
   - src/funcs/contractorPaymentsGetReceipt.ts
+  - src/funcs/contractorPaymentsList.ts
   - src/funcs/contractorsCreate.ts
   - src/funcs/contractorsDelete.ts
   - src/funcs/contractorsGet.ts
@@ -1025,63 +1023,63 @@ generatedFiles:
   - src/funcs/earningTypesGetAll.ts
   - src/funcs/earningTypesUpdate.ts
   - src/funcs/employeeAddressesCreate.ts
+  - src/funcs/employeeAddressesCreateWorkAddress.ts
   - src/funcs/employeeAddressesDelete.ts
+  - src/funcs/employeeAddressesDeleteHomeAddress.ts
   - src/funcs/employeeAddressesGet.ts
   - src/funcs/employeeAddressesGetHomeAddress.ts
-  - src/funcs/employeeAddressesGetHomeAddresses.ts
   - src/funcs/employeeAddressesGetWorkAddress.ts
-  - src/funcs/employeeAddressesRemoveHomeAddress.ts
+  - src/funcs/employeeAddressesList.ts
+  - src/funcs/employeeAddressesUpdate.ts
   - src/funcs/employeeAddressesUpdateHomeAddress.ts
-  - src/funcs/employeeAddressesUpdateWorkAddress.ts
-  - src/funcs/employeeAddressesWorkAddressesCreate.ts
-  - src/funcs/employeeBenefitsCreateBenefit.ts
-  - src/funcs/employeeBenefitsCreateYtdAmountsFromDifferentCompany.ts
+  - src/funcs/employeeBenefitsCreate.ts
+  - src/funcs/employeeBenefitsCreateYtdBenefitAmounts.ts
   - src/funcs/employeeBenefitsDelete.ts
   - src/funcs/employeeBenefitsGet.ts
-  - src/funcs/employeeBenefitsGetAll.ts
+  - src/funcs/employeeBenefitsList.ts
   - src/funcs/employeeBenefitsUpdate.ts
-  - src/funcs/employeeEmploymentsCreateRehire.ts
   - src/funcs/employeeEmploymentsCreateTermination.ts
   - src/funcs/employeeEmploymentsDeleteRehire.ts
   - src/funcs/employeeEmploymentsDeleteTermination.ts
   - src/funcs/employeeEmploymentsGetHistory.ts
   - src/funcs/employeeEmploymentsGetRehire.ts
-  - src/funcs/employeeEmploymentsGetTermination.ts
+  - src/funcs/employeeEmploymentsGetTerminations.ts
+  - src/funcs/employeeEmploymentsRehire.ts
   - src/funcs/employeeEmploymentsUpdateRehire.ts
   - src/funcs/employeeEmploymentsUpdateTermination.ts
   - src/funcs/employeeFormsGenerateW2.ts
-  - src/funcs/employeeFormsGetAll.ts
-  - src/funcs/employeeFormsGetForm.ts
+  - src/funcs/employeeFormsGet.ts
   - src/funcs/employeeFormsGetPdf.ts
+  - src/funcs/employeeFormsList.ts
   - src/funcs/employeeFormsSign.ts
-  - src/funcs/employeePaymentMethodCreateBankAccount.ts
-  - src/funcs/employeePaymentMethodDeleteBankAccount.ts
-  - src/funcs/employeePaymentMethodGet.ts
+  - src/funcs/employeePaymentMethodCreateAccount.ts
   - src/funcs/employeePaymentMethodUpdate.ts
   - src/funcs/employeePaymentMethodUpdateBankAccount.ts
-  - src/funcs/employeeTaxSetupGetFederalTaxes.ts
+  - src/funcs/employeePaymentMethodsDelete.ts
+  - src/funcs/employeePaymentMethodsGet.ts
+  - src/funcs/employeeTaxSetupGetFederal.ts
   - src/funcs/employeeTaxSetupGetStateTaxes.ts
-  - src/funcs/employeeTaxSetupUpdateFederalTaxes.ts
+  - src/funcs/employeeTaxSetupUpdateFederal.ts
   - src/funcs/employeeTaxSetupUpdateStateTaxes.ts
   - src/funcs/employeesCreate.ts
   - src/funcs/employeesCreateHistorical.ts
   - src/funcs/employeesDelete.ts
   - src/funcs/employeesGet.ts
+  - src/funcs/employeesGetAll.ts
   - src/funcs/employeesGetCustomFields.ts
   - src/funcs/employeesGetOnboardingStatus.ts
   - src/funcs/employeesGetTimeOffActivities.ts
-  - src/funcs/employeesRetrieve.ts
   - src/funcs/employeesUpdate.ts
-  - src/funcs/employeesUpdateHistorical.ts
+  - src/funcs/employeesUpdateHistoricalEmployee.ts
   - src/funcs/employeesUpdateOnboardingDocumentsConfig.ts
   - src/funcs/employeesUpdateOnboardingStatus.ts
-  - src/funcs/eventsList.ts
+  - src/funcs/eventsGetAll.ts
+  - src/funcs/externalPayrollsCalculateTaxes.ts
   - src/funcs/externalPayrollsCreate.ts
   - src/funcs/externalPayrollsDelete.ts
   - src/funcs/externalPayrollsFinalizeTaxLiabilities.ts
   - src/funcs/externalPayrollsGet.ts
   - src/funcs/externalPayrollsGetTaxLiabilities.ts
-  - src/funcs/externalPayrollsGetTaxSuggestions.ts
   - src/funcs/externalPayrollsList.ts
   - src/funcs/externalPayrollsUpdate.ts
   - src/funcs/externalPayrollsUpdateTaxLiabilities.ts
@@ -1089,52 +1087,51 @@ generatedFiles:
   - src/funcs/federalTaxDetailsUpdate.ts
   - src/funcs/flowsCreate.ts
   - src/funcs/garnishmentsCreate.ts
-  - src/funcs/garnishmentsFetch.ts
   - src/funcs/garnishmentsGet.ts
   - src/funcs/garnishmentsGetChildSupport.ts
+  - src/funcs/garnishmentsList.ts
   - src/funcs/garnishmentsUpdate.ts
   - src/funcs/generatedDocumentsGet.ts
-  - src/funcs/holidayPayPoliciesAddEmployees.ts
+  - src/funcs/holidayPayPoliciesAdd.ts
   - src/funcs/holidayPayPoliciesCreate.ts
   - src/funcs/holidayPayPoliciesDelete.ts
   - src/funcs/holidayPayPoliciesGet.ts
   - src/funcs/holidayPayPoliciesRemoveEmployees.ts
   - src/funcs/holidayPayPoliciesUpdate.ts
   - src/funcs/i9VerificationCreateDocuments.ts
-  - src/funcs/i9VerificationCreateOrUpdate.ts
-  - src/funcs/i9VerificationDeleteDocument.ts
   - src/funcs/i9VerificationEmployerSign.ts
   - src/funcs/i9VerificationGetAuthorization.ts
   - src/funcs/i9VerificationGetDocumentOptions.ts
-  - src/funcs/i9VerificationGetDocuments.ts
+  - src/funcs/i9VerificationsDeleteDocument.ts
+  - src/funcs/i9VerificationsGetDocuments.ts
+  - src/funcs/i9VerificationsUpdate.ts
   - src/funcs/industrySelectionGet.ts
   - src/funcs/industrySelectionUpdate.ts
   - src/funcs/introspectionGetTokenInfo.ts
-  - src/funcs/introspectionRefreshAccessToken.ts
+  - src/funcs/introspectionRefreshToken.ts
   - src/funcs/invoicesGet.ts
   - src/funcs/jobsAndCompensationsCreateCompensation.ts
   - src/funcs/jobsAndCompensationsCreateJob.ts
-  - src/funcs/jobsAndCompensationsDeleteCompensation.ts
+  - src/funcs/jobsAndCompensationsDelete.ts
   - src/funcs/jobsAndCompensationsDeleteJob.ts
-  - src/funcs/jobsAndCompensationsGetCompensation.ts
+  - src/funcs/jobsAndCompensationsGet.ts
   - src/funcs/jobsAndCompensationsGetCompensations.ts
   - src/funcs/jobsAndCompensationsGetJob.ts
-  - src/funcs/jobsAndCompensationsGetJobs.ts
-  - src/funcs/jobsAndCompensationsUpdate.ts
-  - src/funcs/jobsAndCompensationsUpdateCompensation.ts
+  - src/funcs/jobsAndCompensationsList.ts
+  - src/funcs/jobsAndCompensationsUpdateJob.ts
   - src/funcs/locationsCreate.ts
   - src/funcs/locationsGet.ts
   - src/funcs/locationsGetAll.ts
   - src/funcs/locationsGetMinimumWages.ts
   - src/funcs/locationsUpdate.ts
-  - src/funcs/notificationsGet.ts
+  - src/funcs/notificationsGetDetails.ts
   - src/funcs/paySchedulesAssign.ts
   - src/funcs/paySchedulesCreate.ts
   - src/funcs/paySchedulesGet.ts
   - src/funcs/paySchedulesGetAssignments.ts
-  - src/funcs/paySchedulesGetForCompany.ts
+  - src/funcs/paySchedulesGetUnprocessedTerminationPayPeriods.ts
   - src/funcs/paySchedulesList.ts
-  - src/funcs/paySchedulesListUnprocessedTerminationPeriods.ts
+  - src/funcs/paySchedulesListPayPeriods.ts
   - src/funcs/paySchedulesPreview.ts
   - src/funcs/paySchedulesPreviewAssignment.ts
   - src/funcs/paySchedulesUpdate.ts
@@ -1147,18 +1144,18 @@ generatedFiles:
   - src/funcs/payrollsDelete.ts
   - src/funcs/payrollsGeneratePrintableChecks.ts
   - src/funcs/payrollsGet.ts
-  - src/funcs/payrollsGetAll.ts
   - src/funcs/payrollsGetBlockers.ts
   - src/funcs/payrollsGetPayStub.ts
   - src/funcs/payrollsGetPayStubs.ts
   - src/funcs/payrollsGetReceipt.ts
   - src/funcs/payrollsGetReversals.ts
+  - src/funcs/payrollsList.ts
   - src/funcs/payrollsPrepareForUpdate.ts
   - src/funcs/payrollsSkip.ts
   - src/funcs/payrollsSubmit.ts
   - src/funcs/payrollsUpdate.ts
   - src/funcs/recoveryCasesGetAll.ts
-  - src/funcs/recoveryCasesRedebit.ts
+  - src/funcs/recoveryCasesInitiateRedebit.ts
   - src/funcs/reportsCreate.ts
   - src/funcs/reportsGet.ts
   - src/funcs/reportsGetTemplate.ts
@@ -1167,28 +1164,28 @@ generatedFiles:
   - src/funcs/signatoriesGet.ts
   - src/funcs/signatoriesInvite.ts
   - src/funcs/signatoriesUpdate.ts
+  - src/funcs/taxRequirementsGet.ts
   - src/funcs/taxRequirementsGetAll.ts
-  - src/funcs/taxRequirementsGetByState.ts
-  - src/funcs/taxRequirementsUpdate.ts
+  - src/funcs/taxRequirementsUpdateState.ts
   - src/funcs/timeOffPoliciesAddEmployees.ts
   - src/funcs/timeOffPoliciesCalculateAccruingHours.ts
   - src/funcs/timeOffPoliciesCreate.ts
   - src/funcs/timeOffPoliciesDeactivate.ts
   - src/funcs/timeOffPoliciesGet.ts
+  - src/funcs/timeOffPoliciesGetAll.ts
   - src/funcs/timeOffPoliciesRemoveEmployees.ts
-  - src/funcs/timeOffPoliciesRetrieve.ts
   - src/funcs/timeOffPoliciesUpdate.ts
   - src/funcs/timeOffPoliciesUpdateBalance.ts
   - src/funcs/webhooksCreateSubscription.ts
   - src/funcs/webhooksDelete.ts
-  - src/funcs/webhooksGet.ts
+  - src/funcs/webhooksGetSubscription.ts
   - src/funcs/webhooksListSubscriptions.ts
   - src/funcs/webhooksRequestVerificationToken.ts
   - src/funcs/webhooksUpdateSubscription.ts
   - src/funcs/webhooksVerifySubscription.ts
   - src/funcs/wireInRequestsGet.ts
   - src/funcs/wireInRequestsGetAll.ts
-  - src/funcs/wireInRequestsSubmitRequest.ts
+  - src/funcs/wireInRequestsSubmit.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -1197,7 +1194,6 @@ generatedFiles:
   - src/lib/config.ts
   - src/lib/dlv.ts
   - src/lib/encodings.ts
-  - src/lib/env.ts
   - src/lib/files.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
@@ -1609,16 +1605,17 @@ generatedFiles:
   - src/models/operations/refreshaccesstoken.ts
   - src/sdk/achtransactions.ts
   - src/sdk/bankaccounts.ts
-  - src/sdk/benefits.ts
   - src/sdk/companies.ts
   - src/sdk/companyattachment.ts
   - src/sdk/companyattachments.ts
   - src/sdk/companybenefits.ts
   - src/sdk/companyforms.ts
+  - src/sdk/compensations.ts
   - src/sdk/contractordocuments.ts
   - src/sdk/contractorforms.ts
   - src/sdk/contractorpaymentgroups.ts
   - src/sdk/contractorpaymentmethod.ts
+  - src/sdk/contractorpaymentmethods.ts
   - src/sdk/contractorpayments.ts
   - src/sdk/contractors.ts
   - src/sdk/departments.ts
@@ -1628,17 +1625,18 @@ generatedFiles:
   - src/sdk/employeeemployments.ts
   - src/sdk/employeeforms.ts
   - src/sdk/employeepaymentmethod.ts
+  - src/sdk/employeepaymentmethods.ts
   - src/sdk/employees.ts
   - src/sdk/employeetaxsetup.ts
   - src/sdk/events.ts
   - src/sdk/externalpayrolls.ts
   - src/sdk/federaltaxdetails.ts
   - src/sdk/flows.ts
-  - src/sdk/forms.ts
   - src/sdk/garnishments.ts
   - src/sdk/generateddocuments.ts
   - src/sdk/holidaypaypolicies.ts
   - src/sdk/i9verification.ts
+  - src/sdk/i9verifications.ts
   - src/sdk/index.ts
   - src/sdk/industryselection.ts
   - src/sdk/introspection.ts
@@ -1657,7 +1655,6 @@ generatedFiles:
   - src/sdk/timeoffpolicies.ts
   - src/sdk/webhooks.ts
   - src/sdk/wireinrequests.ts
-  - src/sdk/workaddresses.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -3050,7 +3047,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "ecd9fe0f-81b9-48b3-81ea-ea4096bc3300", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
+          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "fb05b0ba-e9a6-4572-bf81-5bec4e85f9ab", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
   get-v1-employees:
     Create Employee Example:
       parameters:
@@ -3060,7 +3057,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "5e5518a2-d0ce-4221-9a70-713be839d998", "i9_document": false}, "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "payment_method": "Check", "work_email": "angel.jaskolski@example.com"}
+          application/json: {"uuid": "4b3f930f-82cd-48a8-b797-798686e12e5e", "first_name": "Isom", "middle_initial": null, "last_name": "Jaskolski", "email": "dane7757869450111550@botsford.net", "company_uuid": "a007e1ab-3595-43c2-ab4b-af7a5af2e365", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "1c7ba9d62c8bafbfff998ffccad5d296", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "b888f774-3e7c-4135-a18c-6b985523c4bc", "i9_document": false}, "jobs": [{"uuid": "428a653a-0745-4db4-9c80-558288d416fa", "version": "6c0ed1521e8b86eb36bd4455a63a2dac", "employee_uuid": "f0689739-1985-49f3-b9ba-84562e71e85f", "hire_date": "2020-01-20", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "c9fd719b-8b07-48f3-8a4c-f447d2c59669", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "31.8", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "ab59de61-239f-4805-933b-0e3360ed291c", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "77.8", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": "1234567890", "preferred_first_name": "Angel", "payment_method": "Check", "work_email": "angel.jaskolski@example.com"}
     Create Historical Employee Example:
       parameters:
         path:
@@ -3069,7 +3066,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "b8eebcc2-127f-4d47-8297-8c0f6ee88aad", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
+          application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "e50f7622-81da-484b-9c66-1c8a99c6b71b", "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
   put-v1-employees:
     Example:
       parameters:
@@ -3413,8 +3410,6 @@ examples:
       responses:
         "200":
           application/json: {"uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0", "version": "d487dd0b55dfcacdd920ccbdaeafa351", "employee_uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0", "active": true, "cancelable": true, "effective_date": "2020-03-10", "run_termination_payroll": false}
-        "404":
-          application/json: {"errors": [{"error_key": "employment", "category": "incorrect_state", "message": "The employee's employment is not in the right state."}]}
     Basic:
       parameters:
         path:
@@ -3485,8 +3480,6 @@ examples:
       responses:
         "200":
           application/json: {"version": "2e930d43acbdb241f8f14a2d531fa417", "effective_date": "2024-01-01", "file_new_hire_report": false, "work_location_uuid": "d2c80d44-857b-4d4d-bce4-23ae52cc863b,", "employment_status": "full_time", "two_percent_shareholder": false, "employee_uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0", "active": false}
-        "404":
-          application/json: {"errors": [{"error_key": "employment", "category": "incorrect_state", "message": "The employee's employment is not in the right state."}]}
     Basic:
       parameters:
         path:
@@ -5295,7 +5288,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 370456, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 700347, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
     Fixed Policy:
       parameters:
         path:
@@ -5372,7 +5365,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 700347, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": "<value>", "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
+          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 461008, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": "<value>", "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
   post-companies-company_uuid-time_off_policies:
     Unlimited Policy:
       parameters:
@@ -6386,7 +6379,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "b888f774-3e7c-4135-a18c-6b985523c4bc", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}, {"uuid": "e50f7622-81da-484b-9c66-1c8a99c6b71b", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}]
+          application/json: [{"uuid": "c8a232aa-0b11-4b8a-b005-71e9e705d0e6", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}, {"uuid": "21e27667-18d6-4d46-812e-0aee1b9ddf12", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}]
   get-v1-garnishments-garnishment_id:
     Example:
       parameters:
@@ -6467,7 +6460,7 @@ examples:
         application/json: {"authorization_status": "citizen", "version": "52b7c567242cb7452e89ba2bc02cb476"}
       responses:
         "200":
-          application/json: {"uuid": "4113bed5-50ae-4daa-a9a5-8a55ddb5a141", "version": "<value>", "authorization_status": "citizen", "employer_signed": false, "employee_signed": true}
+          application/json: {"uuid": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "version": "<value>", "authorization_status": "permanent_resident", "employer_signed": false, "employee_signed": true}
     Basic:
       parameters:
         path:
