@@ -24,7 +24,6 @@ jobs:
       force: ${{ github.event.inputs.force }}
       mode: pr
       set_version: ${{ github.event.inputs.set_version }}
-      working_directory: gusto_embedded
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       openapi_doc_auth_token: ${{ secrets.OPENAPI_DOC_AUTH_TOKEN }}
