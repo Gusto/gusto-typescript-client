@@ -83,10 +83,6 @@ export type PutV1HistoricalEmployeesRequestBody = {
   workAddress: WorkAddress;
   homeAddress: PutV1HistoricalEmployeesHomeAddress;
   termination: Termination;
-  /**
-   * Optional. If provided, the email address will be saved to the employee.
-   */
-  email?: string | undefined;
   job: Job;
   employeeStateTaxes?: EmployeeStateTaxes | undefined;
 };
@@ -450,7 +446,6 @@ export const PutV1HistoricalEmployeesRequestBody$inboundSchema: z.ZodType<
   work_address: z.lazy(() => WorkAddress$inboundSchema),
   home_address: z.lazy(() => PutV1HistoricalEmployeesHomeAddress$inboundSchema),
   termination: z.lazy(() => Termination$inboundSchema),
-  email: z.string().optional(),
   job: z.lazy(() => Job$inboundSchema),
   employee_state_taxes: z.lazy(() => EmployeeStateTaxes$inboundSchema)
     .optional(),
@@ -479,7 +474,6 @@ export type PutV1HistoricalEmployeesRequestBody$Outbound = {
   work_address: WorkAddress$Outbound;
   home_address: PutV1HistoricalEmployeesHomeAddress$Outbound;
   termination: Termination$Outbound;
-  email?: string | undefined;
   job: Job$Outbound;
   employee_state_taxes?: EmployeeStateTaxes$Outbound | undefined;
 };
@@ -500,7 +494,6 @@ export const PutV1HistoricalEmployeesRequestBody$outboundSchema: z.ZodType<
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
   homeAddress: z.lazy(() => PutV1HistoricalEmployeesHomeAddress$outboundSchema),
   termination: z.lazy(() => Termination$outboundSchema),
-  email: z.string().optional(),
   job: z.lazy(() => Job$outboundSchema),
   employeeStateTaxes: z.lazy(() => EmployeeStateTaxes$outboundSchema)
     .optional(),

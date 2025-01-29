@@ -59,10 +59,6 @@ export type HistoricalEmployeeBody = {
   workAddress: WorkAddress;
   homeAddress: HistoricalEmployeeBodyHomeAddress;
   termination: HistoricalEmployeeBodyTermination;
-  /**
-   * Optional. If provided, the email address will be saved to the employee.
-   */
-  email?: string | undefined;
   job: HistoricalEmployeeBodyJob;
   employeeStateTaxes?: EmployeeStateTaxes | undefined;
 };
@@ -413,7 +409,6 @@ export const HistoricalEmployeeBody$inboundSchema: z.ZodType<
   work_address: z.lazy(() => WorkAddress$inboundSchema),
   home_address: z.lazy(() => HistoricalEmployeeBodyHomeAddress$inboundSchema),
   termination: z.lazy(() => HistoricalEmployeeBodyTermination$inboundSchema),
-  email: z.string().optional(),
   job: z.lazy(() => HistoricalEmployeeBodyJob$inboundSchema),
   employee_state_taxes: z.lazy(() => EmployeeStateTaxes$inboundSchema)
     .optional(),
@@ -441,7 +436,6 @@ export type HistoricalEmployeeBody$Outbound = {
   work_address: WorkAddress$Outbound;
   home_address: HistoricalEmployeeBodyHomeAddress$Outbound;
   termination: HistoricalEmployeeBodyTermination$Outbound;
-  email?: string | undefined;
   job: HistoricalEmployeeBodyJob$Outbound;
   employee_state_taxes?: EmployeeStateTaxes$Outbound | undefined;
 };
@@ -461,7 +455,6 @@ export const HistoricalEmployeeBody$outboundSchema: z.ZodType<
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
   homeAddress: z.lazy(() => HistoricalEmployeeBodyHomeAddress$outboundSchema),
   termination: z.lazy(() => HistoricalEmployeeBodyTermination$outboundSchema),
-  email: z.string().optional(),
   job: z.lazy(() => HistoricalEmployeeBodyJob$outboundSchema),
   employeeStateTaxes: z.lazy(() => EmployeeStateTaxes$outboundSchema)
     .optional(),
