@@ -8,7 +8,7 @@ import { HistoricalEmployeeBody } from "gusto-embedded/models/components";
 let value: HistoricalEmployeeBody = {
   firstName: "Eloy",
   lastName: "Towne",
-  dateOfBirth: "1998-04-11",
+  dateOfBirth: "1998-04-07",
   ssn: "<value>",
   workAddress: {},
   homeAddress: {
@@ -35,6 +35,5 @@ let value: HistoricalEmployeeBody = {
 | `workAddress`                                                                                                | [components.WorkAddress](../../models/components/workaddress.md)                                             | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
 | `homeAddress`                                                                                                | [components.HistoricalEmployeeBodyHomeAddress](../../models/components/historicalemployeebodyhomeaddress.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
 | `termination`                                                                                                | [components.HistoricalEmployeeBodyTermination](../../models/components/historicalemployeebodytermination.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
-| `email`                                                                                                      | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Optional. If provided, the email address will be saved to the employee.                                      |
 | `job`                                                                                                        | [components.HistoricalEmployeeBodyJob](../../models/components/historicalemployeebodyjob.md)                 | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
 | `employeeStateTaxes`                                                                                         | [components.EmployeeStateTaxes](../../models/components/employeestatetaxes.md)                               | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |
