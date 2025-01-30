@@ -26,7 +26,7 @@ typescript:
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
   enableCustomCodeRegions: false
-  enableReactQuery: false
+  enableReactQuery: true
   enumFormat: union
   envVarPrefix: GUSTOEMBEDDED
   flattenGlobalSecurity: true
