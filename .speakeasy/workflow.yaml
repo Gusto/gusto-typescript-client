@@ -15,6 +15,9 @@ targets:
         target: typescript
         source: GustoEmbedded-OAS
         output: ./gusto_embedded
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
