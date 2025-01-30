@@ -1,6 +1,6 @@
 {
   "name": "gusto-embedded",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
