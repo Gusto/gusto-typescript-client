@@ -5,10 +5,10 @@ The representation of a pay schedule.
 ## Example Usage
 
 ```typescript
-import { PayScheduleCreateUpdate } from "gusto-embedded/models/components";
+import { PayScheduleCreateUpdate } from "@gusto/embedded-api/models/components";
 
 let value: PayScheduleCreateUpdate = {
-  uuid: "3f242578-de39-4175-b57b-1eb2f8f38449",
+  uuid: "eda58d1c-0dc0-4a82-82c9-fff1f37c3921",
 };
 ```
 

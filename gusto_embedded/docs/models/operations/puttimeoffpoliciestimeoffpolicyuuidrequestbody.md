@@ -5,7 +5,7 @@ Can update any attributes of the time off policy except policy_type, is_active, 
 ## Example Usage
 
 ```typescript
-import { PutTimeOffPoliciesTimeOffPolicyUuidRequestBody } from "gusto-embedded/models/operations";
+import { PutTimeOffPoliciesTimeOffPolicyUuidRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutTimeOffPoliciesTimeOffPolicyUuidRequestBody = {};
 ```

@@ -15,7 +15,7 @@ Returns scope and resource information associated with the current access token.
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -36,8 +36,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { introspectionGetTokenInfo } from "gusto-embedded/funcs/introspectionGetTokenInfo.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { introspectionGetTokenInfo } from "@gusto/embedded-api/funcs/introspectionGetTokenInfo.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -59,6 +59,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useIntrospectionGetTokenInfo,
+  useIntrospectionGetTokenInfoSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchIntrospectionGetTokenInfo,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateIntrospectionGetTokenInfo,
+  invalidateAllIntrospectionGetTokenInfo,
+} from "@gusto/embedded-api/react-query/introspectionGetTokenInfo.js";
 ```
 
 ### Parameters
@@ -91,14 +119,21 @@ The `expires_in` value is provided in seconds from when the `access_token` was g
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.introspection.refreshAccessToken({});
+  const result = await gustoEmbedded.introspection.refreshAccessToken({
+    requestBody: {
+      clientId: "<id>",
+      clientSecret: "<value>",
+      refreshToken: "<value>",
+      grantType: "<value>",
+    },
+  });
 
   // Handle the result
   console.log(result);
@@ -112,8 +147,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { introspectionRefreshAccessToken } from "gusto-embedded/funcs/introspectionRefreshAccessToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { introspectionRefreshAccessToken } from "@gusto/embedded-api/funcs/introspectionRefreshAccessToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -122,7 +157,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await introspectionRefreshAccessToken(gustoEmbedded, {});
+  const res = await introspectionRefreshAccessToken(gustoEmbedded, {
+    requestBody: {
+      clientId: "<id>",
+      clientSecret: "<value>",
+      refreshToken: "<value>",
+      grantType: "<value>",
+    },
+  });
 
   if (!res.ok) {
     throw res.error;
@@ -135,6 +177,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useIntrospectionRefreshAccessTokenMutation
+} from "@gusto/embedded-api/react-query/introspectionRefreshAccessToken.js";
 ```
 
 ### Parameters

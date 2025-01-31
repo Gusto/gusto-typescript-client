@@ -5,9 +5,9 @@ the type of target entity applicable to the flow. This field is optional for com
 ## Example Usage
 
 ```typescript
-import { EntityType } from "gusto-embedded/models/operations";
+import { EntityType } from "@gusto/embedded-api/models/operations";
 
-let value: EntityType = "Employee";
+let value: EntityType = "Company";
 ```
 
 ## Values

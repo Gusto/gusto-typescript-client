@@ -11,9 +11,9 @@
 ## Example Usage
 
 ```typescript
-import { IdentityVerificationStatus } from "gusto-embedded/models/components";
+import { IdentityVerificationStatus } from "@gusto/embedded-api/models/components";
 
-let value: IdentityVerificationStatus = "Pass";
+let value: IdentityVerificationStatus = "Fail";
 ```
 
 ## Values

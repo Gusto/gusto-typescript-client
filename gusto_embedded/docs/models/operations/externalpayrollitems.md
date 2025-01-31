@@ -5,7 +5,7 @@ Submit wages, benefits, taxes for each employee
 ## Example Usage
 
 ```typescript
-import { ExternalPayrollItems } from "gusto-embedded/models/operations";
+import { ExternalPayrollItems } from "@gusto/embedded-api/models/operations";
 
 let value: ExternalPayrollItems = {};
 ```

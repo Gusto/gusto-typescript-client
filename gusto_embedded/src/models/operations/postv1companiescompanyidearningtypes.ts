@@ -25,7 +25,7 @@ export type PostV1CompaniesCompanyIdEarningTypesRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PostV1CompaniesCompanyIdEarningTypesRequestBody | undefined;
+  requestBody: PostV1CompaniesCompanyIdEarningTypesRequestBody;
 };
 
 /** @internal */
@@ -107,7 +107,7 @@ export const PostV1CompaniesCompanyIdEarningTypesRequest$inboundSchema:
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdEarningTypesRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -120,9 +120,7 @@ export const PostV1CompaniesCompanyIdEarningTypesRequest$inboundSchema:
 export type PostV1CompaniesCompanyIdEarningTypesRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PostV1CompaniesCompanyIdEarningTypesRequestBody$Outbound
-    | undefined;
+  RequestBody: PostV1CompaniesCompanyIdEarningTypesRequestBody$Outbound;
 };
 
 /** @internal */
@@ -136,7 +134,7 @@ export const PostV1CompaniesCompanyIdEarningTypesRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdEarningTypesRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

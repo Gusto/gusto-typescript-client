@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody } from "gusto-embedded/models/operations";
+import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value:
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody = {
-    email: "Elvis94@hotmail.com",
-    ipAddress: "58.65.14.111",
+    email: "Yessenia2@hotmail.com",
+    ipAddress: "98.150.212.161",
     externalUserId: "<id>",
   };
 ```

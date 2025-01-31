@@ -5,10 +5,10 @@ The representation of a company in Gusto.
 ## Example Usage
 
 ```typescript
-import { Company } from "gusto-embedded/models/components";
+import { Company } from "@gusto/embedded-api/models/components";
 
 let value: Company = {
-  uuid: "d8e8edfe-026f-442e-a7e2-a71b3000ebea",
+  uuid: "326b8706-13e3-4dc2-b91b-ac7e04b621d7",
   compensations: {
     hourly: [
       {

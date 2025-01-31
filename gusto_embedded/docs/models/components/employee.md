@@ -5,12 +5,12 @@ The representation of an employee in Gusto.
 ## Example Usage
 
 ```typescript
-import { Employee } from "gusto-embedded/models/components";
+import { Employee } from "@gusto/embedded-api/models/components";
 
 let value: Employee = {
-  uuid: "afcd72f2-71ff-4b54-9428-25ab06ad7f40",
-  firstName: "Derrick",
-  lastName: "Feest",
+  uuid: "cbc4c87a-014f-4250-a55f-d60da2f1d46c",
+  firstName: "Treva",
+  lastName: "Boyle",
   eligiblePaidTimeOff: [
     {
       accrualUnit: "Hour",

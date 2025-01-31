@@ -3,9 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { GetV1CompaniesCompanyIdPayrollsQueryParamInclude } from "gusto-embedded/models/operations";
+import { GetV1CompaniesCompanyIdPayrollsQueryParamInclude } from "@gusto/embedded-api/models/operations";
 
-let value: GetV1CompaniesCompanyIdPayrollsQueryParamInclude = "risk_blockers";
+let value: GetV1CompaniesCompanyIdPayrollsQueryParamInclude =
+  "payroll_status_meta";
 ```
 
 ## Values

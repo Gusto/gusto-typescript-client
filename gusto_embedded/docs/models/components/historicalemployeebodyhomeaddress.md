@@ -3,13 +3,13 @@
 ## Example Usage
 
 ```typescript
-import { HistoricalEmployeeBodyHomeAddress } from "gusto-embedded/models/components";
+import { HistoricalEmployeeBodyHomeAddress } from "@gusto/embedded-api/models/components";
 
 let value: HistoricalEmployeeBodyHomeAddress = {
   street1: "<value>",
-  city: "O'Connershire",
-  state: "Utah",
-  zip: "92335-6203",
+  city: "Pocatello",
+  state: "Missouri",
+  zip: "37219",
 };
 ```
 

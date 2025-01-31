@@ -5,7 +5,7 @@ The wage and reimbursement totals for all contractor payments within a given tim
 ## Example Usage
 
 ```typescript
-import { Total } from "gusto-embedded/models/components";
+import { Total } from "@gusto/embedded-api/models/components";
 
 let value: Total = {};
 ```

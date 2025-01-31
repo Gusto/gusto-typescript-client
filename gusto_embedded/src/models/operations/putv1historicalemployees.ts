@@ -67,6 +67,10 @@ export type PutV1HistoricalEmployeesRequestBody = {
   workAddress: WorkAddress;
   homeAddress: PutV1HistoricalEmployeesHomeAddress;
   termination: Termination;
+  /**
+   * Optional. If provided, the email address will be saved to the employee.
+   */
+  email?: string | undefined;
   job: Job;
   employeeStateTaxes?: EmployeeStateTaxes | undefined;
 };
@@ -87,7 +91,7 @@ export type PutV1HistoricalEmployeesRequest = {
   /**
    * Update a historical employee.
    */
-  requestBody?: PutV1HistoricalEmployeesRequestBody | undefined;
+  requestBody: PutV1HistoricalEmployeesRequestBody;
 };
 
 /** @internal */
@@ -422,6 +426,7 @@ export const PutV1HistoricalEmployeesRequestBody$inboundSchema: z.ZodType<
   work_address: z.lazy(() => WorkAddress$inboundSchema),
   home_address: z.lazy(() => PutV1HistoricalEmployeesHomeAddress$inboundSchema),
   termination: z.lazy(() => Termination$inboundSchema),
+  email: z.string().optional(),
   job: z.lazy(() => Job$inboundSchema),
   employee_state_taxes: z.lazy(() => EmployeeStateTaxes$inboundSchema)
     .optional(),
@@ -450,6 +455,7 @@ export type PutV1HistoricalEmployeesRequestBody$Outbound = {
   work_address: WorkAddress$Outbound;
   home_address: PutV1HistoricalEmployeesHomeAddress$Outbound;
   termination: Termination$Outbound;
+  email?: string | undefined;
   job: Job$Outbound;
   employee_state_taxes?: EmployeeStateTaxes$Outbound | undefined;
 };
@@ -470,6 +476,7 @@ export const PutV1HistoricalEmployeesRequestBody$outboundSchema: z.ZodType<
   workAddress: z.lazy(() => WorkAddress$outboundSchema),
   homeAddress: z.lazy(() => PutV1HistoricalEmployeesHomeAddress$outboundSchema),
   termination: z.lazy(() => Termination$outboundSchema),
+  email: z.string().optional(),
   job: z.lazy(() => Job$outboundSchema),
   employeeStateTaxes: z.lazy(() => EmployeeStateTaxes$outboundSchema)
     .optional(),
@@ -531,8 +538,7 @@ export const PutV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
   company_uuid: z.string(),
   historical_employee_uuid: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PutV1HistoricalEmployeesRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PutV1HistoricalEmployeesRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -547,7 +553,7 @@ export type PutV1HistoricalEmployeesRequest$Outbound = {
   company_uuid: string;
   historical_employee_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutV1HistoricalEmployeesRequestBody$Outbound | undefined;
+  RequestBody: PutV1HistoricalEmployeesRequestBody$Outbound;
 };
 
 /** @internal */
@@ -559,8 +565,7 @@ export const PutV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
   companyUuid: z.string(),
   historicalEmployeeUuid: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PutV1HistoricalEmployeesRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PutV1HistoricalEmployeesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

@@ -32,7 +32,7 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -63,8 +63,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesCalculateAccruingHours } from "gusto-embedded/funcs/timeOffPoliciesCalculateAccruingHours.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesCalculateAccruingHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingHours.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -98,6 +98,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesCalculateAccruingHoursMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingHours.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -127,7 +144,7 @@ scope: `time_off_policies:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -150,8 +167,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesRetrieve } from "gusto-embedded/funcs/timeOffPoliciesRetrieve.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesRetrieve } from "@gusto/embedded-api/funcs/timeOffPoliciesRetrieve.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -175,6 +192,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useTimeOffPoliciesRetrieve,
+  useTimeOffPoliciesRetrieveSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchTimeOffPoliciesRetrieve,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateTimeOffPoliciesRetrieve,
+  invalidateAllTimeOffPoliciesRetrieve,
+} from "@gusto/embedded-api/react-query/timeOffPoliciesRetrieve.js";
 ```
 
 ### Parameters
@@ -205,7 +250,7 @@ scope: `time_off_policies:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -239,8 +284,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesUpdate } from "gusto-embedded/funcs/timeOffPoliciesUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesUpdate } from "@gusto/embedded-api/funcs/timeOffPoliciesUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -277,6 +322,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesUpdateMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesUpdate.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -306,7 +368,7 @@ scope: `time_off_policies:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -329,8 +391,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesGet } from "gusto-embedded/funcs/timeOffPoliciesGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesGet } from "@gusto/embedded-api/funcs/timeOffPoliciesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -354,6 +416,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useTimeOffPoliciesGet,
+  useTimeOffPoliciesGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchTimeOffPoliciesGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateTimeOffPoliciesGet,
+  invalidateAllTimeOffPoliciesGet,
+} from "@gusto/embedded-api/react-query/timeOffPoliciesGet.js";
 ```
 
 ### Parameters
@@ -384,7 +474,7 @@ scope: `time_off_policies:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -412,8 +502,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesCreate } from "gusto-embedded/funcs/timeOffPoliciesCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesCreate } from "@gusto/embedded-api/funcs/timeOffPoliciesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -442,6 +532,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesCreateMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesCreate.js";
 ```
 
 ### Parameters
@@ -473,7 +580,7 @@ scope: `time_off_policies:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -497,8 +604,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesAddEmployees } from "gusto-embedded/funcs/timeOffPoliciesAddEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesAddEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesAddEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -523,6 +630,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesAddEmployeesMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesAddEmployees.js";
 ```
 
 ### Parameters
@@ -554,7 +678,7 @@ scope: `time_off_policies:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -578,8 +702,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesRemoveEmployees } from "gusto-embedded/funcs/timeOffPoliciesRemoveEmployees.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -604,6 +728,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesRemoveEmployeesMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
 ```
 
 ### Parameters
@@ -635,7 +776,7 @@ scope: `time_off_policies:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -659,8 +800,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesUpdateBalance } from "gusto-embedded/funcs/timeOffPoliciesUpdateBalance.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesUpdateBalance } from "@gusto/embedded-api/funcs/timeOffPoliciesUpdateBalance.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -685,6 +826,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesUpdateBalanceMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesUpdateBalance.js";
 ```
 
 ### Parameters
@@ -716,7 +874,7 @@ scope: `time_off_policies:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -739,8 +897,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { timeOffPoliciesDeactivate } from "gusto-embedded/funcs/timeOffPoliciesDeactivate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesDeactivate } from "@gusto/embedded-api/funcs/timeOffPoliciesDeactivate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -764,6 +922,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesDeactivateMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesDeactivate.js";
 ```
 
 ### Parameters

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { FastPaymentLimitRequiredBody } from "gusto-embedded/models/components";
+import { FastPaymentLimitRequiredBody } from "@gusto/embedded-api/models/components";
 
 let value: FastPaymentLimitRequiredBody = {
   fastPaymentLimit: "<value>",

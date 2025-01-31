@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { GetV1CompaniesCompanyIdPaySchedulesPreviewRequest } from "gusto-embedded/models/operations";
+import { GetV1CompaniesCompanyIdPaySchedulesPreviewRequest } from "@gusto/embedded-api/models/operations";
 
 let value: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
   companyId: "<id>",
-  frequency: "Twice per month",
+  frequency: "Monthly",
   anchorPayDate: "2020-05-15",
   anchorEndOfPayPeriod: "2020-05-08",
 };

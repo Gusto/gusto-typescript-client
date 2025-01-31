@@ -5,11 +5,11 @@ Create an employee.
 ## Example Usage
 
 ```typescript
-import { PostV1EmployeesRequestBody } from "gusto-embedded/models/operations";
+import { PostV1EmployeesRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1EmployeesRequestBody = {
-  firstName: "Hipolito",
-  lastName: "Leuschke",
+  firstName: "Amanda",
+  lastName: "King",
 };
 ```
 

@@ -5,14 +5,14 @@ Create a company location.
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdLocationsRequestBody } from "gusto-embedded/models/operations";
+import { PostV1CompaniesCompanyIdLocationsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyIdLocationsRequestBody = {
-  phoneNumber: "860-419-4463 x181",
+  phoneNumber: "502-321-0169",
   street1: "<value>",
-  city: "Danaland",
-  state: "Utah",
-  zip: "99730-4210",
+  city: "Huntington",
+  state: "Florida",
+  zip: "49072-2626",
 };
 ```
 

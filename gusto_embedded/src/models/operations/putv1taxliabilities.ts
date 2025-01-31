@@ -37,7 +37,7 @@ export type PutV1TaxLiabilitiesRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PutV1TaxLiabilitiesRequestBody | undefined;
+  requestBody: PutV1TaxLiabilitiesRequestBody;
 };
 
 /** @internal */
@@ -186,8 +186,7 @@ export const PutV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -200,7 +199,7 @@ export const PutV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
 export type PutV1TaxLiabilitiesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutV1TaxLiabilitiesRequestBody$Outbound | undefined;
+  RequestBody: PutV1TaxLiabilitiesRequestBody$Outbound;
 };
 
 /** @internal */
@@ -211,8 +210,7 @@ export const PutV1TaxLiabilitiesRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

@@ -5,9 +5,9 @@ Gusto Embedded supports three payment speeds (1-day, 2-day, and 4-day). For next
 ## Example Usage
 
 ```typescript
-import { PaymentSpeedParam } from "gusto-embedded/models/components";
+import { PaymentSpeedParam } from "@gusto/embedded-api/models/components";
 
-let value: PaymentSpeedParam = "4-day";
+let value: PaymentSpeedParam = "1-day";
 ```
 
 ## Values

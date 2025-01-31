@@ -5,20 +5,20 @@ Update a historical employee.
 ## Example Usage
 
 ```typescript
-import { PutV1HistoricalEmployeesRequestBody } from "gusto-embedded/models/operations";
+import { PutV1HistoricalEmployeesRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1HistoricalEmployeesRequestBody = {
   version: "<value>",
-  firstName: "Modesta",
-  lastName: "Turner",
-  dateOfBirth: "1987-07-16",
+  firstName: "Uriel",
+  lastName: "O'Connell",
+  dateOfBirth: "1981-11-28",
   ssn: "<value>",
   workAddress: {},
   homeAddress: {
     street1: "<value>",
-    city: "Harberfort",
-    state: "New York",
-    zip: "17945",
+    city: "Vincenttown",
+    state: "Ohio",
+    zip: "53704-5602",
   },
   termination: {},
   job: {},
@@ -39,5 +39,6 @@ let value: PutV1HistoricalEmployeesRequestBody = {
 | `workAddress`                                                                                                                                                     | [operations.WorkAddress](../../models/operations/workaddress.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                | N/A                                                                                                                                                               |
 | `homeAddress`                                                                                                                                                     | [operations.PutV1HistoricalEmployeesHomeAddress](../../models/operations/putv1historicalemployeeshomeaddress.md)                                                  | :heavy_check_mark:                                                                                                                                                | N/A                                                                                                                                                               |
 | `termination`                                                                                                                                                     | [operations.Termination](../../models/operations/termination.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                | N/A                                                                                                                                                               |
+| `email`                                                                                                                                                           | *string*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                | Optional. If provided, the email address will be saved to the employee.                                                                                           |
 | `job`                                                                                                                                                             | [operations.Job](../../models/operations/job.md)                                                                                                                  | :heavy_check_mark:                                                                                                                                                | N/A                                                                                                                                                               |
 | `employeeStateTaxes`                                                                                                                                              | [operations.EmployeeStateTaxes](../../models/operations/employeestatetaxes.md)                                                                                    | :heavy_minus_sign:                                                                                                                                                | N/A                                                                                                                                                               |

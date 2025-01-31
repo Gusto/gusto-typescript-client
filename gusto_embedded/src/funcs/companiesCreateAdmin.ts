@@ -143,8 +143,8 @@ export async function companiesCreateAdmin(
     | ConnectionError
   >(
     M.json(200, components.Admin$inboundSchema),
-    M.fail([404, "4XX"]),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

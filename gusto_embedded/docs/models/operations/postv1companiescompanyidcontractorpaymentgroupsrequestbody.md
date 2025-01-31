@@ -3,8 +3,8 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody } from "gusto-embedded/models/operations";
-import { RFCDate } from "gusto-embedded/types";
+import { PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody } from "@gusto/embedded-api/models/operations";
+import { RFCDate } from "@gusto/embedded-api/types";
 
 let value: PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
   checkDate: new RFCDate("2020-01-01"),

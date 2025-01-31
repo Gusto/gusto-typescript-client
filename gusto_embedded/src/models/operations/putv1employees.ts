@@ -45,7 +45,7 @@ export type PutV1EmployeesRequest = {
   /**
    * Update an employee.
    */
-  requestBody?: PutV1EmployeesRequestBody | undefined;
+  requestBody: PutV1EmployeesRequestBody;
 };
 
 /** @internal */
@@ -152,7 +152,7 @@ export const PutV1EmployeesRequest$inboundSchema: z.ZodType<
 > = z.object({
   employee_id: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PutV1EmployeesRequestBody$inboundSchema).optional(),
+  RequestBody: z.lazy(() => PutV1EmployeesRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "employee_id": "employeeId",
@@ -165,7 +165,7 @@ export const PutV1EmployeesRequest$inboundSchema: z.ZodType<
 export type PutV1EmployeesRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutV1EmployeesRequestBody$Outbound | undefined;
+  RequestBody: PutV1EmployeesRequestBody$Outbound;
 };
 
 /** @internal */
@@ -176,8 +176,7 @@ export const PutV1EmployeesRequest$outboundSchema: z.ZodType<
 > = z.object({
   employeeId: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PutV1EmployeesRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PutV1EmployeesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     employeeId: "employee_id",

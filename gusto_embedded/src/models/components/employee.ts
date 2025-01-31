@@ -64,7 +64,7 @@ export type OnboardingDocumentsConfig = {
   /**
    * The UUID of the onboarding documents config
    */
-  uuid?: string | undefined;
+  uuid?: string | null | undefined;
   /**
    * Whether to include Form I-9 for an employee during onboarding
    */
@@ -211,7 +211,7 @@ export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  uuid: z.string().optional(),
+  uuid: z.nullable(z.string()).optional(),
   i9_document: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -221,7 +221,7 @@ export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
 
 /** @internal */
 export type OnboardingDocumentsConfig$Outbound = {
-  uuid?: string | undefined;
+  uuid?: string | null | undefined;
   i9_document?: boolean | undefined;
 };
 
@@ -231,7 +231,7 @@ export const OnboardingDocumentsConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OnboardingDocumentsConfig
 > = z.object({
-  uuid: z.string().optional(),
+  uuid: z.nullable(z.string()).optional(),
   i9Document: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {

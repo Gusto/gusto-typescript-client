@@ -5,12 +5,12 @@ A custom field on a company
 ## Example Usage
 
 ```typescript
-import { CompanyCustomField } from "gusto-embedded/models/components";
+import { CompanyCustomField } from "@gusto/embedded-api/models/components";
 
 let value: CompanyCustomField = {
-  uuid: "7f6d1466-a5ba-4669-b1da-b816650b19ba",
+  uuid: "e0f1d955-c5a8-47e8-8db0-c3e0517d425d",
   name: "<value>",
-  type: "text",
+  type: "currency",
 };
 ```
 

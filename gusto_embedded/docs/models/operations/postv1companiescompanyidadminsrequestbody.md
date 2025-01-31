@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdAdminsRequestBody } from "gusto-embedded/models/operations";
+import { PostV1CompaniesCompanyIdAdminsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyIdAdminsRequestBody = {
-  firstName: "Jacinthe",
-  lastName: "Treutel",
-  email: "Curt.Gislason75@hotmail.com",
+  firstName: "Troy",
+  lastName: "Murray",
+  email: "Elda.Mosciski34@hotmail.com",
 };
 ```
 

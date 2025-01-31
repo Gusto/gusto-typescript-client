@@ -5,7 +5,7 @@ Contains relevant data to identify the resource in question when applicable. For
 ## Example Usage
 
 ```typescript
-import { Metadata } from "gusto-embedded/models/components";
+import { Metadata } from "@gusto/embedded-api/models/components";
 
 let value: Metadata = {};
 ```

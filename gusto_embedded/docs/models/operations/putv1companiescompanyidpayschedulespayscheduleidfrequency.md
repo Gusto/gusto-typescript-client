@@ -5,10 +5,10 @@ The frequency that employees on this pay schedule are paid with Gusto.
 ## Example Usage
 
 ```typescript
-import { PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency } from "gusto-embedded/models/operations";
+import { PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency =
-  "Every week";
+  "Every other week";
 ```
 
 ## Values

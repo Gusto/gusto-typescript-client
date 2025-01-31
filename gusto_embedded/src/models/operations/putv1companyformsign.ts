@@ -33,7 +33,7 @@ export type PutV1CompanyFormSignRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PutV1CompanyFormSignRequestBody | undefined;
+  requestBody: PutV1CompanyFormSignRequestBody;
 };
 
 /** @internal */
@@ -116,8 +116,7 @@ export const PutV1CompanyFormSignRequest$inboundSchema: z.ZodType<
 > = z.object({
   form_id: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "form_id": "formId",
@@ -130,7 +129,7 @@ export const PutV1CompanyFormSignRequest$inboundSchema: z.ZodType<
 export type PutV1CompanyFormSignRequest$Outbound = {
   form_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutV1CompanyFormSignRequestBody$Outbound | undefined;
+  RequestBody: PutV1CompanyFormSignRequestBody$Outbound;
 };
 
 /** @internal */
@@ -141,8 +140,7 @@ export const PutV1CompanyFormSignRequest$outboundSchema: z.ZodType<
 > = z.object({
   formId: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     formId: "form_id",

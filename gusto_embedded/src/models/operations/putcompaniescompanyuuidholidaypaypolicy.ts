@@ -100,7 +100,7 @@ export type PutCompaniesCompanyUuidHolidayPayPolicyRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PutCompaniesCompanyUuidHolidayPayPolicyRequestBody | undefined;
+  requestBody: PutCompaniesCompanyUuidHolidayPayPolicyRequestBody;
 };
 
 /** @internal */
@@ -1130,7 +1130,7 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema:
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -1143,9 +1143,7 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema:
 export type PutCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$Outbound
-    | undefined;
+  RequestBody: PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$Outbound;
 };
 
 /** @internal */
@@ -1159,7 +1157,7 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1SandboxGenerateW2RequestBody } from "gusto-embedded/models/operations";
+import { PostV1SandboxGenerateW2RequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1SandboxGenerateW2RequestBody = {
   employeeId: "<id>",

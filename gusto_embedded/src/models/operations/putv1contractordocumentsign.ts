@@ -44,7 +44,7 @@ export type PutV1ContractorDocumentSignRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PutV1ContractorDocumentSignRequestBody | undefined;
+  requestBody: PutV1ContractorDocumentSignRequestBody;
 };
 
 /** @internal */
@@ -181,7 +181,7 @@ export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
   RequestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$inboundSchema
-  ).optional(),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "document_uuid": "documentUuid",
@@ -194,7 +194,7 @@ export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
 export type PutV1ContractorDocumentSignRequest$Outbound = {
   document_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutV1ContractorDocumentSignRequestBody$Outbound | undefined;
+  RequestBody: PutV1ContractorDocumentSignRequestBody$Outbound;
 };
 
 /** @internal */
@@ -207,7 +207,7 @@ export const PutV1ContractorDocumentSignRequest$outboundSchema: z.ZodType<
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
   requestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$outboundSchema
-  ).optional(),
+  ),
 }).transform((v) => {
   return remap$(v, {
     documentUuid: "document_uuid",

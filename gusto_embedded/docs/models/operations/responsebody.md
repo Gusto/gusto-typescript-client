@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { ResponseBody } from "gusto-embedded/models/operations";
+import { ResponseBody } from "@gusto/embedded-api/models/operations";
 
 let value: ResponseBody = {
-  state: "Massachusetts",
+  state: "Rhode Island",
   setupComplete: false,
 };
 ```

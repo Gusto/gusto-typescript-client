@@ -17,7 +17,7 @@ scope: `recovery_cases:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -40,8 +40,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { recoveryCasesGetAll } from "gusto-embedded/funcs/recoveryCasesGetAll.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { recoveryCasesGetAll } from "@gusto/embedded-api/funcs/recoveryCasesGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -65,6 +65,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useRecoveryCasesGetAll,
+  useRecoveryCasesGetAllSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchRecoveryCasesGetAll,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateRecoveryCasesGetAll,
+  invalidateAllRecoveryCasesGetAll,
+} from "@gusto/embedded-api/react-query/recoveryCasesGetAll.js";
 ```
 
 ### Parameters
@@ -99,7 +127,7 @@ scope: `recovery_cases:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -121,8 +149,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { recoveryCasesRedebit } from "gusto-embedded/funcs/recoveryCasesRedebit.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { recoveryCasesRedebit } from "@gusto/embedded-api/funcs/recoveryCasesRedebit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -145,6 +173,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useRecoveryCasesRedebitMutation
+} from "@gusto/embedded-api/react-query/recoveryCasesRedebit.js";
 ```
 
 ### Parameters

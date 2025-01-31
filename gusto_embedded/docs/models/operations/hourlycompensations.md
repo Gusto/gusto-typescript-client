@@ -5,7 +5,7 @@ An array of hourly compensations for the employee. Hourly compensations include 
 ## Example Usage
 
 ```typescript
-import { HourlyCompensations } from "gusto-embedded/models/operations";
+import { HourlyCompensations } from "@gusto/embedded-api/models/operations";
 
 let value: HourlyCompensations = {};
 ```

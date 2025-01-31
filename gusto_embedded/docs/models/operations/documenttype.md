@@ -10,9 +10,9 @@ The type of document an employee holds, based on their authorization status.
 ## Example Usage
 
 ```typescript
-import { DocumentType } from "gusto-embedded/models/operations";
+import { DocumentType } from "@gusto/embedded-api/models/operations";
 
-let value: DocumentType = "form_i94";
+let value: DocumentType = "foreign_passport";
 ```
 
 ## Values

@@ -65,26 +65,25 @@ export async function companyAttachmentsCreate(
   }
   const payload = parsed.value;
   const body = new FormData();
-  if (payload.RequestBody != null) {
-    appendForm(body, "category", payload.RequestBody.category);
-    if (isBlobLike(payload.RequestBody.document)) {
-      appendForm(body, "document", payload.RequestBody.document);
-    } else if (isReadableStream(payload.RequestBody.document.content)) {
-      const buffer = await readableStreamToArrayBuffer(
-        payload.RequestBody.document.content,
-      );
-      const blob = new Blob([buffer], { type: "application/octet-stream" });
-      appendForm(body, "document", blob);
-    } else {
-      appendForm(
-        body,
-        "document",
-        new Blob([payload.RequestBody.document.content], {
-          type: "application/octet-stream",
-        }),
-        payload.RequestBody.document.fileName,
-      );
-    }
+
+  appendForm(body, "category", payload.RequestBody.category);
+  if (isBlobLike(payload.RequestBody.document)) {
+    appendForm(body, "document", payload.RequestBody.document);
+  } else if (isReadableStream(payload.RequestBody.document.content)) {
+    const buffer = await readableStreamToArrayBuffer(
+      payload.RequestBody.document.content,
+    );
+    const blob = new Blob([buffer], { type: "application/octet-stream" });
+    appendForm(body, "document", blob);
+  } else {
+    appendForm(
+      body,
+      "document",
+      new Blob([payload.RequestBody.document.content], {
+        type: "application/octet-stream",
+      }),
+      payload.RequestBody.document.fileName,
+    );
   }
 
   const pathParams = {
@@ -165,8 +164,8 @@ export async function companyAttachmentsCreate(
     | ConnectionError
   >(
     M.json(201, components.CompanyAttachment$inboundSchema),
-    M.fail([404, "4XX"]),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

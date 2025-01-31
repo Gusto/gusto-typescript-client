@@ -34,9 +34,7 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest = {
   /**
    * A list of employee objects containing the employee uuid
    */
-  requestBody?:
-    | PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody
-    | undefined;
+  requestBody: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody;
 };
 
 /** @internal */
@@ -196,7 +194,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inbound
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "time_off_policy_uuid": "timeOffPolicyUuid",
@@ -210,9 +208,8 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$Outbound
   {
     time_off_policy_uuid: string;
     "X-Gusto-API-Version"?: string | undefined;
-    RequestBody?:
-      | PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound
-      | undefined;
+    RequestBody:
+      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound;
   };
 
 /** @internal */
@@ -226,7 +223,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$outboun
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       timeOffPolicyUuid: "time_off_policy_uuid",

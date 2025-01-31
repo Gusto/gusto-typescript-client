@@ -5,7 +5,7 @@ The full contractor payment group, including associated contractor payments.
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentGroup } from "gusto-embedded/models/components";
+import { ContractorPaymentGroup } from "@gusto/embedded-api/models/components";
 
 let value: ContractorPaymentGroup = {};
 ```

@@ -5,7 +5,7 @@ The primary signatory of the company.
 ## Example Usage
 
 ```typescript
-import { PrimarySignatory } from "gusto-embedded/models/components";
+import { PrimarySignatory } from "@gusto/embedded-api/models/components";
 
 let value: PrimarySignatory = {};
 ```

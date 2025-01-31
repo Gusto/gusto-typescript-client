@@ -5,9 +5,9 @@ The status of the payroll processing request
 ## Example Usage
 
 ```typescript
-import { PayrollProcessingRequestStatus } from "gusto-embedded/models/components";
+import { PayrollProcessingRequestStatus } from "@gusto/embedded-api/models/components";
 
-let value: PayrollProcessingRequestStatus = "processing_failed";
+let value: PayrollProcessingRequestStatus = "submit_success";
 ```
 
 ## Values

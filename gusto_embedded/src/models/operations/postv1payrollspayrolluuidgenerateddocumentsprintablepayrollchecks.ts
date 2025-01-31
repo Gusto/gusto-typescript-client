@@ -44,9 +44,8 @@ export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksReq
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
     xGustoAPIVersion?: components.VersionHeader | undefined;
-    requestBody?:
-      | PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody
-      | undefined;
+    requestBody:
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody;
   };
 
 /** @internal */
@@ -163,7 +162,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "payroll_uuid": "payrollUuid",
@@ -177,9 +176,8 @@ export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksReq
   {
     payroll_uuid: string;
     "X-Gusto-API-Version"?: string | undefined;
-    RequestBody?:
-      | PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$Outbound
-      | undefined;
+    RequestBody:
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$Outbound;
   };
 
 /** @internal */
@@ -193,7 +191,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       payrollUuid: "payroll_uuid",

@@ -5,7 +5,7 @@ Information about the token resource.
 ## Example Usage
 
 ```typescript
-import { Resource } from "gusto-embedded/models/operations";
+import { Resource } from "@gusto/embedded-api/models/operations";
 
 let value: Resource = {
   type: "<value>",

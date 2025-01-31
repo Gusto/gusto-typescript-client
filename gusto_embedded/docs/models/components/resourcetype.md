@@ -5,7 +5,7 @@ Name of the parent resource of the described entity.
 ## Example Usage
 
 ```typescript
-import { ResourceType } from "gusto-embedded/models/components";
+import { ResourceType } from "@gusto/embedded-api/models/components";
 
 let value: ResourceType = "Company";
 ```

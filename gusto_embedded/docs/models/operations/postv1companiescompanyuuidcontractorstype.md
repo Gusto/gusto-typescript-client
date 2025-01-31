@@ -5,9 +5,9 @@ The contractor type.
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyUuidContractorsType } from "gusto-embedded/models/operations";
+import { PostV1CompaniesCompanyUuidContractorsType } from "@gusto/embedded-api/models/operations";
 
-let value: PostV1CompaniesCompanyUuidContractorsType = "Business";
+let value: PostV1CompaniesCompanyUuidContractorsType = "Individual";
 ```
 
 ## Values

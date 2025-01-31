@@ -143,3 +143,4 @@ export * from "./unprocessedterminationpayperiod.js";
 export * from "./versionheader.js";
 export * from "./webhooksubscription.js";
 export * from "./wireinrequest.js";
+export * from "./ytdbenefitamountsfromdifferentcompany.js";

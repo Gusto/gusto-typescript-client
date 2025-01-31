@@ -5,7 +5,7 @@ List of employee work addresses
 ## Example Usage
 
 ```typescript
-import { EmployeeWorkAddress } from "gusto-embedded/models/components";
+import { EmployeeWorkAddress } from "@gusto/embedded-api/models/components";
 
 let value: EmployeeWorkAddress = {
   uuid: "34925ef7-6234-440d-83b8-788a24d0d69a",
@@ -19,7 +19,6 @@ let value: EmployeeWorkAddress = {
   city: "Pink Hill",
   state: "NC",
   zip: "28572",
-  country: "USA",
 };
 ```
 

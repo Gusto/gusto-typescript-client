@@ -5,7 +5,7 @@ The minimum wage record you want to apply to the compensation
 ## Example Usage
 
 ```typescript
-import { PutV1CompensationsCompensationIdMinimumWages } from "gusto-embedded/models/operations";
+import { PutV1CompensationsCompensationIdMinimumWages } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1CompensationsCompensationIdMinimumWages = {};
 ```

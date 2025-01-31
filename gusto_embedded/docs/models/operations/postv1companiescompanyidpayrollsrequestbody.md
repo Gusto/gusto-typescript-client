@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdPayrollsRequestBody } from "gusto-embedded/models/operations";
+import { PostV1CompaniesCompanyIdPayrollsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyIdPayrollsRequestBody = {
   offCycle: false,
-  offCycleReason: "Transition from old pay schedule",
+  offCycleReason: "Correction",
   startDate: "<value>",
   endDate: "<value>",
 };

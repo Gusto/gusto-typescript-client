@@ -88,7 +88,7 @@ export type PostCompaniesCompanyUuidTimeOffPoliciesRequest = {
   /**
    * Requires a policy name, a policy_type, and an accrual_method
    */
-  requestBody?: PostCompaniesCompanyUuidTimeOffPoliciesRequestBody | undefined;
+  requestBody: PostCompaniesCompanyUuidTimeOffPoliciesRequestBody;
 };
 
 /** @internal */
@@ -246,7 +246,7 @@ export const PostCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema:
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -259,9 +259,7 @@ export const PostCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema:
 export type PostCompaniesCompanyUuidTimeOffPoliciesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$Outbound
-    | undefined;
+  RequestBody: PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$Outbound;
 };
 
 /** @internal */
@@ -275,7 +273,7 @@ export const PostCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

@@ -18,7 +18,7 @@ scope: `company_attachments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -42,8 +42,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { companyAttachmentsGetDetails } from "gusto-embedded/funcs/companyAttachmentsGetDetails.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyAttachmentsGetDetails } from "@gusto/embedded-api/funcs/companyAttachmentsGetDetails.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -68,6 +68,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useCompanyAttachmentsGetDetails,
+  useCompanyAttachmentsGetDetailsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchCompanyAttachmentsGetDetails,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateCompanyAttachmentsGetDetails,
+  invalidateAllCompanyAttachmentsGetDetails,
+} from "@gusto/embedded-api/react-query/companyAttachmentsGetDetails.js";
 ```
 
 ### Parameters
@@ -98,7 +126,7 @@ scope: `company_attachments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -121,8 +149,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { companyAttachmentsGetAll } from "gusto-embedded/funcs/companyAttachmentsGetAll.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyAttachmentsGetAll } from "@gusto/embedded-api/funcs/companyAttachmentsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -146,6 +174,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useCompanyAttachmentsGetAll,
+  useCompanyAttachmentsGetAllSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchCompanyAttachmentsGetAll,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateCompanyAttachmentsGetAll,
+  invalidateAllCompanyAttachmentsGetAll,
+} from "@gusto/embedded-api/react-query/companyAttachmentsGetAll.js";
 ```
 
 ### Parameters
@@ -178,7 +234,8 @@ scope: `company_attachments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { openAsBlob } from "node:fs";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -187,6 +244,10 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
+    requestBody: {
+      category: "gep_notice",
+      document: await openAsBlob("example.file"),
+    },
   });
 
   // Handle the result
@@ -201,8 +262,9 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { companyAttachmentsCreate } from "gusto-embedded/funcs/companyAttachmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyAttachmentsCreate } from "@gusto/embedded-api/funcs/companyAttachmentsCreate.js";
+import { openAsBlob } from "node:fs";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -213,6 +275,10 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companyAttachmentsCreate(gustoEmbedded, {
     companyId: "<id>",
+    requestBody: {
+      category: "gep_notice",
+      document: await openAsBlob("example.file"),
+    },
   });
 
   if (!res.ok) {
@@ -226,6 +292,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyAttachmentsCreateMutation
+} from "@gusto/embedded-api/react-query/companyAttachmentsCreate.js";
 ```
 
 ### Parameters

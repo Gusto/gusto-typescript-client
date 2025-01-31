@@ -98,7 +98,7 @@ export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest = {
   /**
    * Attributes related to federal tax details that can be updated via this endpoint include:
    */
-  requestBody?: PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody | undefined;
+  requestBody: PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody;
 };
 
 /** @internal */
@@ -247,7 +247,7 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema:
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -260,9 +260,7 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema:
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound
-    | undefined;
+  RequestBody: PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound;
 };
 
 /** @internal */
@@ -276,7 +274,7 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

@@ -3,9 +3,16 @@
 ## Example Usage
 
 ```typescript
-import { RefreshAccessTokenRequest } from "gusto-embedded/models/operations";
+import { RefreshAccessTokenRequest } from "@gusto/embedded-api/models/operations";
 
-let value: RefreshAccessTokenRequest = {};
+let value: RefreshAccessTokenRequest = {
+  requestBody: {
+    clientId: "<id>",
+    clientSecret: "<value>",
+    refreshToken: "<value>",
+    grantType: "<value>",
+  },
+};
 ```
 
 ## Fields
@@ -13,4 +20,4 @@ let value: RefreshAccessTokenRequest = {};
 | Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [components.VersionHeader](../../models/components/versionheader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [operations.RefreshAccessTokenRequestBody](../../models/operations/refreshaccesstokenrequestbody.md)                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `requestBody`                                                                                                                                                                                                                | [operations.RefreshAccessTokenRequestBody](../../models/operations/refreshaccesstokenrequestbody.md)                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

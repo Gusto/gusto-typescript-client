@@ -5,7 +5,7 @@ A list of employee objects containing the employee uuid
 ## Example Usage
 
 ```typescript
-import { PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody } from "gusto-embedded/models/operations";
+import { PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody = {};
 ```

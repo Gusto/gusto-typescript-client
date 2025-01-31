@@ -82,7 +82,7 @@ export type PutTimeOffPoliciesTimeOffPolicyUuidRequest = {
   /**
    * Can update any attributes of the time off policy except policy_type, is_active, complete & employees
    */
-  requestBody?: PutTimeOffPoliciesTimeOffPolicyUuidRequestBody | undefined;
+  requestBody: PutTimeOffPoliciesTimeOffPolicyUuidRequestBody;
 };
 
 /** @internal */
@@ -228,7 +228,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequest$inboundSchema:
       "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
       RequestBody: z.lazy(() =>
         PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$inboundSchema
-      ).optional(),
+      ),
     }).transform((v) => {
       return remap$(v, {
         "time_off_policy_uuid": "timeOffPolicyUuid",
@@ -241,9 +241,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequest$inboundSchema:
 export type PutTimeOffPoliciesTimeOffPolicyUuidRequest$Outbound = {
   time_off_policy_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$Outbound
-    | undefined;
+  RequestBody: PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$Outbound;
 };
 
 /** @internal */
@@ -257,7 +255,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       timeOffPolicyUuid: "time_off_policy_uuid",

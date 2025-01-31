@@ -7,6 +7,7 @@ import { employeeBenefitsCreateYtdAmountsFromDifferentCompany } from "../funcs/e
 import { employeeBenefitsDelete } from "../funcs/employeeBenefitsDelete.js";
 import { employeeBenefitsGet } from "../funcs/employeeBenefitsGet.js";
 import { employeeBenefitsGetAll } from "../funcs/employeeBenefitsGetAll.js";
+import { employeeBenefitsGetEmployeeYtdBenefitAmountsFromDifferentCompany } from "../funcs/employeeBenefitsGetEmployeeYtdBenefitAmountsFromDifferentCompany.js";
 import { employeeBenefitsUpdate } from "../funcs/employeeBenefitsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -135,5 +136,29 @@ export class EmployeeBenefits extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Get year-to-date benefit amounts from a different company
+   *
+   * @remarks
+   * Retrieves year-to-date benefit amounts that were contributed at a different company for the specified employee.
+   * Returns benefit amounts for the requested tax year (defaults to current year if not specified).
+   *
+   * This endpoint only supports retrieving outside contributions for 401(k) benefits.
+   *
+   * scope: `employee_benefits:read`
+   */
+  async getEmployeeYtdBenefitAmountsFromDifferentCompany(
+    request: operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.YtdBenefitAmountsFromDifferentCompany>> {
+    return unwrapAsync(
+      employeeBenefitsGetEmployeeYtdBenefitAmountsFromDifferentCompany(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

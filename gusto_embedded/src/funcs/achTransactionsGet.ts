@@ -72,8 +72,10 @@ export async function achTransactionsGet(
 
   const query = encodeFormQuery({
     "contractor_payment_uuid": payload.contractor_payment_uuid,
+    "page": payload.page,
     "payment_direction": payload.payment_direction,
     "payroll_uuid": payload.payroll_uuid,
+    "per": payload.per,
     "transaction_type": payload.transaction_type,
   });
 

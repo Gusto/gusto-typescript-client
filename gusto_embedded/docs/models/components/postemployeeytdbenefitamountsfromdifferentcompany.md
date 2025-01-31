@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { PostEmployeeYtdBenefitAmountsFromDifferentCompany } from "gusto-embedded/models/components";
+import { PostEmployeeYtdBenefitAmountsFromDifferentCompany } from "@gusto/embedded-api/models/components";
 
 let value: PostEmployeeYtdBenefitAmountsFromDifferentCompany = {
-  taxYear: 6155.97,
+  taxYear: 2580.36,
 };
 ```
 

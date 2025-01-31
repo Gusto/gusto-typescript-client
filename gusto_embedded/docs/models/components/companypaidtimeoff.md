@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CompanyPaidTimeOff } from "gusto-embedded/models/components";
+import { CompanyPaidTimeOff } from "@gusto/embedded-api/models/components";
 
 let value: CompanyPaidTimeOff = {
   name: "Vacation Hours",

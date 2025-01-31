@@ -200,7 +200,7 @@ export type PrimaryPayrollAdmin = {
   /**
    * The company's primary payroll admin's phone number.
    */
-  phone?: string | undefined;
+  phone?: string | null | undefined;
   /**
    * The company's primary payroll admin's email address.
    */
@@ -218,7 +218,7 @@ export type Company = {
   /**
    * The tax payer type of the company.
    */
-  entityType?: EntityType | undefined;
+  entityType?: EntityType | null | undefined;
   /**
    * Whether the company only supports contractors.
    */
@@ -250,7 +250,7 @@ export type Company = {
   /**
    * The trade name of the company.
    */
-  tradeName?: string | undefined;
+  tradeName?: string | null | undefined;
   /**
    * Whether the company is fully managed by a partner via the API
    */
@@ -262,11 +262,11 @@ export type Company = {
   /**
    * Company's first invoiceable event date
    */
-  joinDate?: string | undefined;
+  joinDate?: string | null | undefined;
   /**
    * Company's default funding type
    */
-  fundingType?: FundingType | undefined;
+  fundingType?: FundingType | null | undefined;
   /**
    * The locations of the company.
    */
@@ -278,7 +278,7 @@ export type Company = {
   /**
    * The primary signatory of the company.
    */
-  primarySignatory?: PrimarySignatory | undefined;
+  primarySignatory?: PrimarySignatory | null | undefined;
   /**
    * The primary payroll admin of the company.
    */
@@ -775,7 +775,7 @@ export const PrimaryPayrollAdmin$inboundSchema: z.ZodType<
 > = z.object({
   first_name: z.string().optional(),
   last_name: z.string().optional(),
-  phone: z.string().optional(),
+  phone: z.nullable(z.string()).optional(),
   email: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -788,7 +788,7 @@ export const PrimaryPayrollAdmin$inboundSchema: z.ZodType<
 export type PrimaryPayrollAdmin$Outbound = {
   first_name?: string | undefined;
   last_name?: string | undefined;
-  phone?: string | undefined;
+  phone?: string | null | undefined;
   email?: string | undefined;
 };
 
@@ -800,7 +800,7 @@ export const PrimaryPayrollAdmin$outboundSchema: z.ZodType<
 > = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  phone: z.string().optional(),
+  phone: z.nullable(z.string()).optional(),
   email: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -844,7 +844,7 @@ export function primaryPayrollAdminFromJSON(
 export const Company$inboundSchema: z.ZodType<Company, z.ZodTypeDef, unknown> =
   z.object({
     ein: z.string().optional(),
-    entity_type: EntityType$inboundSchema.optional(),
+    entity_type: z.nullable(EntityType$inboundSchema).optional(),
     contractor_only: z.boolean().optional(),
     tier: z.nullable(Tier$inboundSchema).optional(),
     is_suspended: z.boolean().optional(),
@@ -852,14 +852,15 @@ export const Company$inboundSchema: z.ZodType<Company, z.ZodTypeDef, unknown> =
     uuid: z.string(),
     name: z.string().optional(),
     slug: z.string().optional(),
-    trade_name: z.string().optional(),
+    trade_name: z.nullable(z.string()).optional(),
     is_partner_managed: z.boolean().optional(),
     pay_schedule_type: z.nullable(PayScheduleType$inboundSchema).optional(),
-    join_date: z.string().optional(),
-    funding_type: FundingType$inboundSchema.optional(),
+    join_date: z.nullable(z.string()).optional(),
+    funding_type: z.nullable(FundingType$inboundSchema).optional(),
     locations: z.array(CompanyAddress$inboundSchema).optional(),
     compensations: z.lazy(() => Compensations$inboundSchema).optional(),
-    primary_signatory: z.lazy(() => PrimarySignatory$inboundSchema).optional(),
+    primary_signatory: z.nullable(z.lazy(() => PrimarySignatory$inboundSchema))
+      .optional(),
     primary_payroll_admin: z.lazy(() => PrimaryPayrollAdmin$inboundSchema)
       .optional(),
   }).transform((v) => {
@@ -881,7 +882,7 @@ export const Company$inboundSchema: z.ZodType<Company, z.ZodTypeDef, unknown> =
 /** @internal */
 export type Company$Outbound = {
   ein?: string | undefined;
-  entity_type?: string | undefined;
+  entity_type?: string | null | undefined;
   contractor_only?: boolean | undefined;
   tier?: string | null | undefined;
   is_suspended?: boolean | undefined;
@@ -889,14 +890,14 @@ export type Company$Outbound = {
   uuid: string;
   name?: string | undefined;
   slug?: string | undefined;
-  trade_name?: string | undefined;
+  trade_name?: string | null | undefined;
   is_partner_managed?: boolean | undefined;
   pay_schedule_type?: string | null | undefined;
-  join_date?: string | undefined;
-  funding_type?: string | undefined;
+  join_date?: string | null | undefined;
+  funding_type?: string | null | undefined;
   locations?: Array<CompanyAddress$Outbound> | undefined;
   compensations?: Compensations$Outbound | undefined;
-  primary_signatory?: PrimarySignatory$Outbound | undefined;
+  primary_signatory?: PrimarySignatory$Outbound | null | undefined;
   primary_payroll_admin?: PrimaryPayrollAdmin$Outbound | undefined;
 };
 
@@ -907,7 +908,7 @@ export const Company$outboundSchema: z.ZodType<
   Company
 > = z.object({
   ein: z.string().optional(),
-  entityType: EntityType$outboundSchema.optional(),
+  entityType: z.nullable(EntityType$outboundSchema).optional(),
   contractorOnly: z.boolean().optional(),
   tier: z.nullable(Tier$outboundSchema).optional(),
   isSuspended: z.boolean().optional(),
@@ -915,14 +916,15 @@ export const Company$outboundSchema: z.ZodType<
   uuid: z.string(),
   name: z.string().optional(),
   slug: z.string().optional(),
-  tradeName: z.string().optional(),
+  tradeName: z.nullable(z.string()).optional(),
   isPartnerManaged: z.boolean().optional(),
   payScheduleType: z.nullable(PayScheduleType$outboundSchema).optional(),
-  joinDate: z.string().optional(),
-  fundingType: FundingType$outboundSchema.optional(),
+  joinDate: z.nullable(z.string()).optional(),
+  fundingType: z.nullable(FundingType$outboundSchema).optional(),
   locations: z.array(CompanyAddress$outboundSchema).optional(),
   compensations: z.lazy(() => Compensations$outboundSchema).optional(),
-  primarySignatory: z.lazy(() => PrimarySignatory$outboundSchema).optional(),
+  primarySignatory: z.nullable(z.lazy(() => PrimarySignatory$outboundSchema))
+    .optional(),
   primaryPayrollAdmin: z.lazy(() => PrimaryPayrollAdmin$outboundSchema)
     .optional(),
 }).transform((v) => {

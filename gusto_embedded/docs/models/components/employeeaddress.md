@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { EmployeeAddress } from "gusto-embedded/models/components";
+import { EmployeeAddress } from "@gusto/embedded-api/models/components";
 
 let value: EmployeeAddress = {
   street1: "412 Kiera Stravenue",
@@ -11,7 +11,6 @@ let value: EmployeeAddress = {
   city: "San Francisco",
   state: "CA",
   zip: "94107",
-  country: "USA",
   active: true,
 };
 ```

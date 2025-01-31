@@ -5,7 +5,7 @@ An object containing federal holiday objects, each containing a boolean selected
 ## Example Usage
 
 ```typescript
-import { PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays } from "gusto-embedded/models/operations";
+import { PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays } from "@gusto/embedded-api/models/operations";
 
 let value: PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays = {};
 ```

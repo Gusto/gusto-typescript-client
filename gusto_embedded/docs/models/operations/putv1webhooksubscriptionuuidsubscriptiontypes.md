@@ -3,9 +3,9 @@
 ## Example Usage
 
 ```typescript
-import { PutV1WebhookSubscriptionUuidSubscriptionTypes } from "gusto-embedded/models/operations";
+import { PutV1WebhookSubscriptionUuidSubscriptionTypes } from "@gusto/embedded-api/models/operations";
 
-let value: PutV1WebhookSubscriptionUuidSubscriptionTypes = "EmployeeBenefit";
+let value: PutV1WebhookSubscriptionUuidSubscriptionTypes = "Employee";
 ```
 
 ## Values

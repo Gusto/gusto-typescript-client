@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ApplicableIf } from "gusto-embedded/models/components";
+import { ApplicableIf } from "@gusto/embedded-api/models/components";
 
 let value: ApplicableIf = {};
 ```

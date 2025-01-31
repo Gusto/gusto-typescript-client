@@ -5,9 +5,9 @@ The Plaid connection status of the bank account. Only applies when verification 
 ## Example Usage
 
 ```typescript
-import { PlaidStatus } from "gusto-embedded/models/components";
+import { PlaidStatus } from "@gusto/embedded-api/models/components";
 
-let value: PlaidStatus = "connected";
+let value: PlaidStatus = "disconnected";
 ```
 
 ## Values

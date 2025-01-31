@@ -41,7 +41,7 @@ export type PostV1CompaniesCompanyIdLocationsRequest = {
   /**
    * Create a company location.
    */
-  requestBody?: PostV1CompaniesCompanyIdLocationsRequestBody | undefined;
+  requestBody: PostV1CompaniesCompanyIdLocationsRequestBody;
 };
 
 /** @internal */
@@ -158,7 +158,7 @@ export const PostV1CompaniesCompanyIdLocationsRequest$inboundSchema: z.ZodType<
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
   RequestBody: z.lazy(() =>
     PostV1CompaniesCompanyIdLocationsRequestBody$inboundSchema
-  ).optional(),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -171,9 +171,7 @@ export const PostV1CompaniesCompanyIdLocationsRequest$inboundSchema: z.ZodType<
 export type PostV1CompaniesCompanyIdLocationsRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PostV1CompaniesCompanyIdLocationsRequestBody$Outbound
-    | undefined;
+  RequestBody: PostV1CompaniesCompanyIdLocationsRequestBody$Outbound;
 };
 
 /** @internal */
@@ -186,7 +184,7 @@ export const PostV1CompaniesCompanyIdLocationsRequest$outboundSchema: z.ZodType<
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
   requestBody: z.lazy(() =>
     PostV1CompaniesCompanyIdLocationsRequestBody$outboundSchema
-  ).optional(),
+  ),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",

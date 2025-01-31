@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PutV1CompanyFormSignRequestBody } from "gusto-embedded/models/operations";
+import { PutV1CompanyFormSignRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1CompanyFormSignRequestBody = {
   signatureText: "<value>",

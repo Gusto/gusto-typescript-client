@@ -5,7 +5,7 @@ The wage type for the payment.
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentForGroupWageType } from "gusto-embedded/models/components";
+import { ContractorPaymentForGroupWageType } from "@gusto/embedded-api/models/components";
 
 let value: ContractorPaymentForGroupWageType = "Fixed";
 ```

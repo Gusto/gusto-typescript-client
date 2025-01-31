@@ -150,12 +150,12 @@ export async function payrollsCalculate(
     | ConnectionError
   >(
     M.nil(202, z.void()),
-    M.fail([404, "4XX"]),
     M.jsonErr(
       422,
       errors
         .PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody$inboundSchema,
     ),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

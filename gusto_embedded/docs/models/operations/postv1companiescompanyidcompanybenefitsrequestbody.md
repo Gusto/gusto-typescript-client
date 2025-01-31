@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdCompanyBenefitsRequestBody } from "gusto-embedded/models/operations";
+import { PostV1CompaniesCompanyIdCompanyBenefitsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyIdCompanyBenefitsRequestBody = {
   description:
-    "however vicinity firm lieu limply decide seemingly almost recount venture",
+    "fuel birdbath hmph hospitalization uselessly mostly aw quarrelsomely since hence",
 };
 ```
 

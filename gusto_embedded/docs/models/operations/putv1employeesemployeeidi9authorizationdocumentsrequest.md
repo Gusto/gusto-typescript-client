@@ -3,10 +3,19 @@
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest } from "gusto-embedded/models/operations";
+import { PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
   employeeId: "<id>",
+  requestBody: {
+    documents: [
+      {
+        documentType: "<value>",
+        documentTitle: "<value>",
+        issuingAuthority: "<value>",
+      },
+    ],
+  },
 };
 ```
 
@@ -16,4 +25,4 @@ let value: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `employeeId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
 | `xGustoAPIVersion`                                                                                                                                                                                                           | [components.VersionHeader](../../models/components/versionheader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
-| `requestBody`                                                                                                                                                                                                                | [operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody](../../models/operations/putv1employeesemployeeidi9authorizationdocumentsrequestbody.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
+| `requestBody`                                                                                                                                                                                                                | [operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody](../../models/operations/putv1employeesemployeeidi9authorizationdocumentsrequestbody.md)                                                             | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

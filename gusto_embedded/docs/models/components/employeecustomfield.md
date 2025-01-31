@@ -5,13 +5,13 @@ A custom field of an employee
 ## Example Usage
 
 ```typescript
-import { EmployeeCustomField } from "gusto-embedded/models/components";
+import { EmployeeCustomField } from "@gusto/embedded-api/models/components";
 
 let value: EmployeeCustomField = {
   id: "<id>",
   companyCustomFieldId: "<id>",
   name: "<value>",
-  type: "currency",
+  type: "radio",
   value: "<value>",
 };
 ```

@@ -5,7 +5,7 @@ Attributes related to federal tax details that can be updated via this endpoint 
 ## Example Usage
 
 ```typescript
-import { PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody } from "gusto-embedded/models/operations";
+import { PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody = {
   version: "<value>",

@@ -24,7 +24,7 @@ scope: `i9_authorizations:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -47,8 +47,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { i9VerificationGetAuthorization } from "gusto-embedded/funcs/i9VerificationGetAuthorization.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { i9VerificationGetAuthorization } from "@gusto/embedded-api/funcs/i9VerificationGetAuthorization.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -72,6 +72,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useI9VerificationGetAuthorization,
+  useI9VerificationGetAuthorizationSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchI9VerificationGetAuthorization,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateI9VerificationGetAuthorization,
+  invalidateAllI9VerificationGetAuthorization,
+} from "@gusto/embedded-api/react-query/i9VerificationGetAuthorization.js";
 ```
 
 ### Parameters
@@ -120,7 +148,7 @@ scope: `i9_authorizations:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -147,8 +175,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { i9VerificationCreateOrUpdate } from "gusto-embedded/funcs/i9VerificationCreateOrUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { i9VerificationCreateOrUpdate } from "@gusto/embedded-api/funcs/i9VerificationCreateOrUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -176,6 +204,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useI9VerificationCreateOrUpdateMutation
+} from "@gusto/embedded-api/react-query/i9VerificationCreateOrUpdate.js";
 ```
 
 ### Parameters
@@ -207,7 +252,7 @@ scope: `i9_authorizations:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -230,8 +275,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { i9VerificationGetDocumentOptions } from "gusto-embedded/funcs/i9VerificationGetDocumentOptions.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { i9VerificationGetDocumentOptions } from "@gusto/embedded-api/funcs/i9VerificationGetDocumentOptions.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -255,6 +300,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useI9VerificationGetDocumentOptions,
+  useI9VerificationGetDocumentOptionsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchI9VerificationGetDocumentOptions,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateI9VerificationGetDocumentOptions,
+  invalidateAllI9VerificationGetDocumentOptions,
+} from "@gusto/embedded-api/react-query/i9VerificationGetDocumentOptions.js";
 ```
 
 ### Parameters
@@ -285,7 +358,7 @@ scope: `i9_authorizations:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -308,8 +381,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { i9VerificationGetDocuments } from "gusto-embedded/funcs/i9VerificationGetDocuments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { i9VerificationGetDocuments } from "@gusto/embedded-api/funcs/i9VerificationGetDocuments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -333,6 +406,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useI9VerificationGetDocuments,
+  useI9VerificationGetDocumentsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchI9VerificationGetDocuments,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateI9VerificationGetDocuments,
+  invalidateAllI9VerificationGetDocuments,
+} from "@gusto/embedded-api/react-query/i9VerificationGetDocuments.js";
 ```
 
 ### Parameters
@@ -370,7 +471,7 @@ scope: `i9_authorizations:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -404,8 +505,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { i9VerificationCreateDocuments } from "gusto-embedded/funcs/i9VerificationCreateDocuments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { i9VerificationCreateDocuments } from "@gusto/embedded-api/funcs/i9VerificationCreateDocuments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -442,6 +543,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useI9VerificationCreateDocumentsMutation
+} from "@gusto/embedded-api/react-query/i9VerificationCreateDocuments.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -471,7 +589,7 @@ scope: `i9_authorizations:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -494,8 +612,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { i9VerificationDeleteDocument } from "gusto-embedded/funcs/i9VerificationDeleteDocument.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { i9VerificationDeleteDocument } from "@gusto/embedded-api/funcs/i9VerificationDeleteDocument.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -519,6 +637,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useI9VerificationDeleteDocumentMutation
+} from "@gusto/embedded-api/react-query/i9VerificationDeleteDocument.js";
 ```
 
 ### Parameters
@@ -549,7 +684,7 @@ scope: `i9_authorizations:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -578,8 +713,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { i9VerificationEmployerSign } from "gusto-embedded/funcs/i9VerificationEmployerSign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { i9VerificationEmployerSign } from "@gusto/embedded-api/funcs/i9VerificationEmployerSign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -609,6 +744,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useI9VerificationEmployerSignMutation
+} from "@gusto/embedded-api/react-query/i9VerificationEmployerSign.js";
 ```
 
 ### Parameters

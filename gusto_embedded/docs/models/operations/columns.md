@@ -3,9 +3,9 @@
 ## Example Usage
 
 ```typescript
-import { Columns } from "gusto-embedded/models/operations";
+import { Columns } from "@gusto/embedded-api/models/operations";
 
-let value: Columns = "employer_additional_taxes";
+let value: Columns = "paid_time_off_rate";
 ```
 
 ## Values

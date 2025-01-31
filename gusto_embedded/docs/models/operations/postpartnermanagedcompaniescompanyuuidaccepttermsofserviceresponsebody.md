@@ -5,7 +5,7 @@ Example response
 ## Example Usage
 
 ```typescript
-import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody } from "gusto-embedded/models/operations";
+import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody } from "@gusto/embedded-api/models/operations";
 
 let value:
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody = {};

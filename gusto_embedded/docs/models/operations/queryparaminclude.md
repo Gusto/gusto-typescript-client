@@ -3,9 +3,9 @@
 ## Example Usage
 
 ```typescript
-import { QueryParamInclude } from "gusto-embedded/models/operations";
+import { QueryParamInclude } from "@gusto/embedded-api/models/operations";
 
-let value: QueryParamInclude = "custom_fields";
+let value: QueryParamInclude = "all_compensations";
 ```
 
 ## Values

@@ -34,9 +34,7 @@ export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?:
-    | PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody
-    | undefined;
+  requestBody: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody;
 };
 
 /**
@@ -158,7 +156,7 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -171,9 +169,8 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound
-    | undefined;
+  RequestBody:
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -187,7 +184,7 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchem
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

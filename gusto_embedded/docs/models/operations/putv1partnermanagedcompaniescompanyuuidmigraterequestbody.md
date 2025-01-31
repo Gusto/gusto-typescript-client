@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody } from "gusto-embedded/models/operations";
+import { PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody = {
-  email: "Michael.Cormier-Stroman61@hotmail.com",
-  ipAddress: "bc81:f9fd:fc07:a3b1:40b4:7ef0:3dc5:edbc",
+  email: "Gwendolyn72@yahoo.com",
+  ipAddress: "c07a:3b14:0b47:ef03:dc5e:dbca:6844:eaa5",
   externalUserId: "<id>",
 };
 ```

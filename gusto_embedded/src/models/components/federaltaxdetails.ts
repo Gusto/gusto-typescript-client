@@ -33,7 +33,7 @@ export type FederalTaxDetails = {
    * - Joint venture
    * - Non-Profit
    */
-  taxPayerType?: string | undefined;
+  taxPayerType?: string | null | undefined;
   /**
    * Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
    *
@@ -84,7 +84,7 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   version: z.string().optional(),
-  tax_payer_type: z.string().optional(),
+  tax_payer_type: z.nullable(z.string()).optional(),
   taxable_as_scorp: z.boolean().optional(),
   filing_form: z.string().optional(),
   has_ein: z.boolean().optional(),
@@ -108,7 +108,7 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
 /** @internal */
 export type FederalTaxDetails$Outbound = {
   version?: string | undefined;
-  tax_payer_type?: string | undefined;
+  tax_payer_type?: string | null | undefined;
   taxable_as_scorp?: boolean | undefined;
   filing_form?: string | undefined;
   has_ein?: boolean | undefined;
@@ -125,7 +125,7 @@ export const FederalTaxDetails$outboundSchema: z.ZodType<
   FederalTaxDetails
 > = z.object({
   version: z.string().optional(),
-  taxPayerType: z.string().optional(),
+  taxPayerType: z.nullable(z.string()).optional(),
   taxableAsScorp: z.boolean().optional(),
   filingForm: z.string().optional(),
   hasEin: z.boolean().optional(),

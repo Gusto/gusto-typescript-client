@@ -5,7 +5,7 @@ The representation of a pay period.
 ## Example Usage
 
 ```typescript
-import { PayPeriod } from "gusto-embedded/models/components";
+import { PayPeriod } from "@gusto/embedded-api/models/components";
 
 let value: PayPeriod = {};
 ```

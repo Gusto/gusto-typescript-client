@@ -33,7 +33,7 @@ export type PostV1ExternalPayrollRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PostV1ExternalPayrollRequestBody | undefined;
+  requestBody: PostV1ExternalPayrollRequestBody;
 };
 
 /** @internal */
@@ -118,8 +118,7 @@ export const PostV1ExternalPayrollRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PostV1ExternalPayrollRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PostV1ExternalPayrollRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -132,7 +131,7 @@ export const PostV1ExternalPayrollRequest$inboundSchema: z.ZodType<
 export type PostV1ExternalPayrollRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PostV1ExternalPayrollRequestBody$Outbound | undefined;
+  RequestBody: PostV1ExternalPayrollRequestBody$Outbound;
 };
 
 /** @internal */
@@ -143,8 +142,7 @@ export const PostV1ExternalPayrollRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PostV1ExternalPayrollRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PostV1ExternalPayrollRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

@@ -45,9 +45,7 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?:
-    | PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody
-    | undefined;
+  requestBody: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
 };
 
 /** @internal */
@@ -157,7 +155,7 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$inbound
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "payroll_id": "payrollId",
@@ -173,9 +171,8 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$Outbound
     payroll_id: string;
     employee_id: string;
     "X-Gusto-API-Version"?: string | undefined;
-    RequestBody?:
-      | PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$Outbound
-      | undefined;
+    RequestBody:
+      PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$Outbound;
   };
 
 /** @internal */
@@ -190,7 +187,7 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$outboun
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       payrollId: "payroll_id",

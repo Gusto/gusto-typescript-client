@@ -31,6 +31,14 @@ export type GetAchTransactionsRequest = {
    */
   paymentDirection?: string | undefined;
   /**
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+   */
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
@@ -47,6 +55,8 @@ export const GetAchTransactionsRequest$inboundSchema: z.ZodType<
   payroll_uuid: z.string().optional(),
   transaction_type: z.string().optional(),
   payment_direction: z.string().optional(),
+  page: z.number().optional(),
+  per: z.number().optional(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -66,6 +76,8 @@ export type GetAchTransactionsRequest$Outbound = {
   payroll_uuid?: string | undefined;
   transaction_type?: string | undefined;
   payment_direction?: string | undefined;
+  page?: number | undefined;
+  per?: number | undefined;
   "X-Gusto-API-Version"?: string | undefined;
 };
 
@@ -80,6 +92,8 @@ export const GetAchTransactionsRequest$outboundSchema: z.ZodType<
   payrollUuid: z.string().optional(),
   transactionType: z.string().optional(),
   paymentDirection: z.string().optional(),
+  page: z.number().optional(),
+  per: z.number().optional(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

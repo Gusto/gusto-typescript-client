@@ -41,7 +41,7 @@ export type PostV1PlaidProcessorTokenRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PostV1PlaidProcessorTokenRequestBody | undefined;
+  requestBody: PostV1PlaidProcessorTokenRequestBody;
 };
 
 /**
@@ -153,8 +153,7 @@ export const PostV1PlaidProcessorTokenRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PostV1PlaidProcessorTokenRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PostV1PlaidProcessorTokenRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "X-Gusto-API-Version": "xGustoAPIVersion",
@@ -165,7 +164,7 @@ export const PostV1PlaidProcessorTokenRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostV1PlaidProcessorTokenRequest$Outbound = {
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PostV1PlaidProcessorTokenRequestBody$Outbound | undefined;
+  RequestBody: PostV1PlaidProcessorTokenRequestBody$Outbound;
 };
 
 /** @internal */
@@ -175,8 +174,9 @@ export const PostV1PlaidProcessorTokenRequest$outboundSchema: z.ZodType<
   PostV1PlaidProcessorTokenRequest
 > = z.object({
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PostV1PlaidProcessorTokenRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() =>
+    PostV1PlaidProcessorTokenRequestBody$outboundSchema
+  ),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

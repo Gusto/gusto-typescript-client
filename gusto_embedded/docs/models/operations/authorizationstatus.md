@@ -11,7 +11,7 @@ The employee's authorization status
 ## Example Usage
 
 ```typescript
-import { AuthorizationStatus } from "gusto-embedded/models/operations";
+import { AuthorizationStatus } from "@gusto/embedded-api/models/operations";
 
 let value: AuthorizationStatus = "noncitizen";
 ```

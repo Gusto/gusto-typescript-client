@@ -8,9 +8,9 @@
 ## Example Usage
 
 ```typescript
-import { RateType } from "gusto-embedded/models/components";
+import { RateType } from "@gusto/embedded-api/models/components";
 
-let value: RateType = "currency_per_hour";
+let value: RateType = "percent";
 ```
 
 ## Values

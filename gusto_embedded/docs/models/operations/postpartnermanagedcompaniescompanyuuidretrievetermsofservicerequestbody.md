@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody } from "gusto-embedded/models/operations";
+import { PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value:
   PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody = {
-    email: "Maurine6@gmail.com",
+    email: "Agnes_Ortiz@gmail.com",
   };
 ```
 

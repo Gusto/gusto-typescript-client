@@ -22,7 +22,7 @@ scope: `signatories:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -31,6 +31,21 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.create({
     companyUuid: "<id>",
+    requestBody: {
+      ssn: "<value>",
+      firstName: "Jed",
+      lastName: "Johnson",
+      email: "Annie.Wiegand16@gmail.com",
+      title: "<value>",
+      phone: "857-932-0220 x31016",
+      birthday: "<value>",
+      homeAddress: {
+        street1: "<value>",
+        city: "North Lilly",
+        state: "North Carolina",
+        zip: "05065",
+      },
+    },
   });
 
   // Handle the result
@@ -45,8 +60,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { signatoriesCreate } from "gusto-embedded/funcs/signatoriesCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { signatoriesCreate } from "@gusto/embedded-api/funcs/signatoriesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -57,6 +72,21 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesCreate(gustoEmbedded, {
     companyUuid: "<id>",
+    requestBody: {
+      ssn: "<value>",
+      firstName: "Jed",
+      lastName: "Johnson",
+      email: "Annie.Wiegand16@gmail.com",
+      title: "<value>",
+      phone: "857-932-0220 x31016",
+      birthday: "<value>",
+      homeAddress: {
+        street1: "<value>",
+        city: "North Lilly",
+        state: "North Carolina",
+        zip: "05065",
+      },
+    },
   });
 
   if (!res.ok) {
@@ -70,6 +100,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useSignatoriesCreateMutation
+} from "@gusto/embedded-api/react-query/signatoriesCreate.js";
 ```
 
 ### Parameters
@@ -101,7 +148,7 @@ scope: `signatories:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -124,8 +171,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { signatoriesGet } from "gusto-embedded/funcs/signatoriesGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { signatoriesGet } from "@gusto/embedded-api/funcs/signatoriesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -149,6 +196,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useSignatoriesGet,
+  useSignatoriesGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchSignatoriesGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateSignatoriesGet,
+  invalidateAllSignatoriesGet,
+} from "@gusto/embedded-api/react-query/signatoriesGet.js";
 ```
 
 ### Parameters
@@ -177,7 +252,7 @@ Create a signatory with minimal information. This signatory can be invited to pr
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -186,6 +261,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.invite({
     companyUuid: "<id>",
+    requestBody: {
+      email: "Maureen_Wyman@yahoo.com",
+    },
   });
 
   // Handle the result
@@ -200,8 +278,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { signatoriesInvite } from "gusto-embedded/funcs/signatoriesInvite.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { signatoriesInvite } from "@gusto/embedded-api/funcs/signatoriesInvite.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -212,6 +290,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesInvite(gustoEmbedded, {
     companyUuid: "<id>",
+    requestBody: {
+      email: "Maureen_Wyman@yahoo.com",
+    },
   });
 
   if (!res.ok) {
@@ -225,6 +306,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useSignatoriesInviteMutation
+} from "@gusto/embedded-api/react-query/signatoriesInvite.js";
 ```
 
 ### Parameters
@@ -256,7 +354,7 @@ scope: `signatories:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -266,6 +364,7 @@ async function run() {
   const result = await gustoEmbedded.signatories.update({
     companyUuid: "<id>",
     signatoryUuid: "<id>",
+    requestBody: {},
   });
 
   // Handle the result
@@ -280,8 +379,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { signatoriesUpdate } from "gusto-embedded/funcs/signatoriesUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { signatoriesUpdate } from "@gusto/embedded-api/funcs/signatoriesUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -293,6 +392,7 @@ async function run() {
   const res = await signatoriesUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     signatoryUuid: "<id>",
+    requestBody: {},
   });
 
   if (!res.ok) {
@@ -306,6 +406,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useSignatoriesUpdateMutation
+} from "@gusto/embedded-api/react-query/signatoriesUpdate.js";
 ```
 
 ### Parameters
@@ -337,7 +454,7 @@ scope: `signatories:manage`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -360,8 +477,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { signatoriesDelete } from "gusto-embedded/funcs/signatoriesDelete.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { signatoriesDelete } from "@gusto/embedded-api/funcs/signatoriesDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -385,6 +502,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useSignatoriesDeleteMutation
+} from "@gusto/embedded-api/react-query/signatoriesDelete.js";
 ```
 
 ### Parameters

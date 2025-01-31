@@ -99,6 +99,10 @@ export type Payroll = {
   /**
    * The UUID of the payroll.
    */
+  uuid?: string | undefined;
+  /**
+   * The UUID of the payroll.
+   */
   payrollUuid?: string | undefined;
   /**
    * The UUID of the company for the payroll.
@@ -179,6 +183,7 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
     processed: z.boolean().optional(),
     processed_date: z.string().optional(),
     calculated_at: z.string().optional(),
+    uuid: z.string().optional(),
     payroll_uuid: z.string().optional(),
     company_uuid: z.string().optional(),
     off_cycle: z.boolean().optional(),
@@ -242,6 +247,7 @@ export type Payroll$Outbound = {
   processed?: boolean | undefined;
   processed_date?: string | undefined;
   calculated_at?: string | undefined;
+  uuid?: string | undefined;
   payroll_uuid?: string | undefined;
   company_uuid?: string | undefined;
   off_cycle?: boolean | undefined;
@@ -279,6 +285,7 @@ export const Payroll$outboundSchema: z.ZodType<
   processed: z.boolean().optional(),
   processedDate: z.string().optional(),
   calculatedAt: z.string().optional(),
+  uuid: z.string().optional(),
   payrollUuid: z.string().optional(),
   companyUuid: z.string().optional(),
   offCycle: z.boolean().optional(),
