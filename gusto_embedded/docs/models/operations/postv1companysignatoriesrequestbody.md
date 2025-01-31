@@ -3,21 +3,21 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompanySignatoriesRequestBody } from "gusto-embedded/models/operations";
+import { PostV1CompanySignatoriesRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompanySignatoriesRequestBody = {
   ssn: "<value>",
-  firstName: "Kylie",
-  lastName: "Carroll",
-  email: "Brendon_Hyatt18@yahoo.com",
+  firstName: "Sabina",
+  lastName: "Glover",
+  email: "Amya68@gmail.com",
   title: "<value>",
-  phone: "497.790.5592 x210",
+  phone: "517-267-7235 x231",
   birthday: "<value>",
   homeAddress: {
     street1: "<value>",
-    city: "Passaic",
-    state: "South Carolina",
-    zip: "50498",
+    city: "Alvenafield",
+    state: "Arkansas",
+    zip: "35960-4556",
   },
 };
 ```

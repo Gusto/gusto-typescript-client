@@ -5,7 +5,7 @@ The document's document type
 ## Example Usage
 
 ```typescript
-import { I9AuthorizationDocumentType } from "gusto-embedded/models/components";
+import { I9AuthorizationDocumentType } from "@gusto/embedded-api/models/components";
 
 let value: I9AuthorizationDocumentType = "foreign_passport";
 ```

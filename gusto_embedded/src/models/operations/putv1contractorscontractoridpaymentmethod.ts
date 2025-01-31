@@ -53,9 +53,7 @@ export type PutV1ContractorsContractorIdPaymentMethodRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?:
-    | PutV1ContractorsContractorIdPaymentMethodRequestBody
-    | undefined;
+  requestBody: PutV1ContractorsContractorIdPaymentMethodRequestBody;
 };
 
 /** @internal */
@@ -163,7 +161,7 @@ export const PutV1ContractorsContractorIdPaymentMethodRequest$inboundSchema:
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutV1ContractorsContractorIdPaymentMethodRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "contractor_uuid": "contractorUuid",
@@ -176,9 +174,7 @@ export const PutV1ContractorsContractorIdPaymentMethodRequest$inboundSchema:
 export type PutV1ContractorsContractorIdPaymentMethodRequest$Outbound = {
   contractor_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PutV1ContractorsContractorIdPaymentMethodRequestBody$Outbound
-    | undefined;
+  RequestBody: PutV1ContractorsContractorIdPaymentMethodRequestBody$Outbound;
 };
 
 /** @internal */
@@ -192,7 +188,7 @@ export const PutV1ContractorsContractorIdPaymentMethodRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutV1ContractorsContractorIdPaymentMethodRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       contractorUuid: "contractor_uuid",

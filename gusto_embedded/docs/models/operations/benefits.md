@@ -5,7 +5,7 @@ An array of benefits for the employee. Depends on your company selections, benef
 ## Example Usage
 
 ```typescript
-import { Benefits } from "gusto-embedded/models/operations";
+import { Benefits } from "@gusto/embedded-api/models/operations";
 
 let value: Benefits = {};
 ```

@@ -5,10 +5,10 @@ The representation of an address in Gusto.
 ## Example Usage
 
 ```typescript
-import { Location } from "gusto-embedded/models/components";
+import { Location } from "@gusto/embedded-api/models/components";
 
 let value: Location = {
-  uuid: "41619391-fe63-4470-8a66-cbf5ec594d13",
+  uuid: "2825ab06-ad7f-4407-b4d3-4cb8b600810f",
 };
 ```
 

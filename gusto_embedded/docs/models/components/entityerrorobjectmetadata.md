@@ -5,7 +5,7 @@ Contains relevant data to identify the resource in question when applicable. For
 ## Example Usage
 
 ```typescript
-import { EntityErrorObjectMetadata } from "gusto-embedded/models/components";
+import { EntityErrorObjectMetadata } from "@gusto/embedded-api/models/components";
 
 let value: EntityErrorObjectMetadata = {};
 ```

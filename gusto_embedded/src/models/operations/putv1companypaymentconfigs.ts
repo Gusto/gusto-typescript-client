@@ -22,10 +22,9 @@ export type PutV1CompanyPaymentConfigsRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?:
+  requestBody:
     | components.FastPaymentLimitRequiredBody
-    | components.PaymentSpeedRequiredBody
-    | undefined;
+    | components.PaymentSpeedRequiredBody;
 };
 
 /** @internal */
@@ -100,7 +99,7 @@ export const PutV1CompanyPaymentConfigsRequest$inboundSchema: z.ZodType<
   RequestBody: z.union([
     components.FastPaymentLimitRequiredBody$inboundSchema,
     components.PaymentSpeedRequiredBody$inboundSchema,
-  ]).optional(),
+  ]),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -113,10 +112,9 @@ export const PutV1CompanyPaymentConfigsRequest$inboundSchema: z.ZodType<
 export type PutV1CompanyPaymentConfigsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
+  RequestBody:
     | components.FastPaymentLimitRequiredBody$Outbound
-    | components.PaymentSpeedRequiredBody$Outbound
-    | undefined;
+    | components.PaymentSpeedRequiredBody$Outbound;
 };
 
 /** @internal */
@@ -130,7 +128,7 @@ export const PutV1CompanyPaymentConfigsRequest$outboundSchema: z.ZodType<
   requestBody: z.union([
     components.FastPaymentLimitRequiredBody$outboundSchema,
     components.PaymentSpeedRequiredBody$outboundSchema,
-  ]).optional(),
+  ]),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

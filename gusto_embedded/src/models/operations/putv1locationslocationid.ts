@@ -46,7 +46,7 @@ export type PutV1LocationsLocationIdRequest = {
   /**
    * Update a location
    */
-  requestBody?: PutV1LocationsLocationIdRequestBody | undefined;
+  requestBody: PutV1LocationsLocationIdRequestBody;
 };
 
 /** @internal */
@@ -159,8 +159,7 @@ export const PutV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
 > = z.object({
   location_id: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "location_id": "locationId",
@@ -173,7 +172,7 @@ export const PutV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
 export type PutV1LocationsLocationIdRequest$Outbound = {
   location_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutV1LocationsLocationIdRequestBody$Outbound | undefined;
+  RequestBody: PutV1LocationsLocationIdRequestBody$Outbound;
 };
 
 /** @internal */
@@ -184,8 +183,7 @@ export const PutV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
 > = z.object({
   locationId: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     locationId: "location_id",

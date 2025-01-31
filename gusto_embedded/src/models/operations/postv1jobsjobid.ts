@@ -47,7 +47,7 @@ export type PostV1JobsJobIdRequest = {
   /**
    * Create a job.
    */
-  requestBody?: PostV1JobsJobIdRequestBody | undefined;
+  requestBody: PostV1JobsJobIdRequestBody;
 };
 
 /** @internal */
@@ -138,8 +138,7 @@ export const PostV1JobsJobIdRequest$inboundSchema: z.ZodType<
 > = z.object({
   employee_id: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PostV1JobsJobIdRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PostV1JobsJobIdRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "employee_id": "employeeId",
@@ -152,7 +151,7 @@ export const PostV1JobsJobIdRequest$inboundSchema: z.ZodType<
 export type PostV1JobsJobIdRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PostV1JobsJobIdRequestBody$Outbound | undefined;
+  RequestBody: PostV1JobsJobIdRequestBody$Outbound;
 };
 
 /** @internal */
@@ -163,8 +162,7 @@ export const PostV1JobsJobIdRequest$outboundSchema: z.ZodType<
 > = z.object({
   employeeId: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PostV1JobsJobIdRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PostV1JobsJobIdRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     employeeId: "employee_id",

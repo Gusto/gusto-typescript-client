@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetEventsSecurity } from "gusto-embedded/models/operations";
+import { GetEventsSecurity } from "@gusto/embedded-api/models/operations";
 
 let value: GetEventsSecurity = {
   systemAccessAuth: "<value>",

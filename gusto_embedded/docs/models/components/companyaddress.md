@@ -5,7 +5,7 @@ The representation of a company's address in Gusto.
 ## Example Usage
 
 ```typescript
-import { CompanyAddress } from "gusto-embedded/models/components";
+import { CompanyAddress } from "@gusto/embedded-api/models/components";
 
 let value: CompanyAddress = {};
 ```

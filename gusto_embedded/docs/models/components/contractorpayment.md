@@ -5,10 +5,10 @@ The representation of a single contractor payment.
 ## Example Usage
 
 ```typescript
-import { ContractorPayment } from "gusto-embedded/models/components";
+import { ContractorPayment } from "@gusto/embedded-api/models/components";
 
 let value: ContractorPayment = {
-  uuid: "ef3c4e2a-1fbd-4979-987c-22651dc8f1c4",
+  uuid: "b7a8c784-9492-4266-9420-047b7e0259d5",
 };
 ```
 

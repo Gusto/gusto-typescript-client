@@ -43,7 +43,7 @@ export type PostV1WebhookSubscriptionRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PostV1WebhookSubscriptionRequestBody | undefined;
+  requestBody: PostV1WebhookSubscriptionRequestBody;
 };
 
 /** @internal */
@@ -209,8 +209,7 @@ export const PostV1WebhookSubscriptionRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PostV1WebhookSubscriptionRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PostV1WebhookSubscriptionRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "X-Gusto-API-Version": "xGustoAPIVersion",
@@ -221,7 +220,7 @@ export const PostV1WebhookSubscriptionRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostV1WebhookSubscriptionRequest$Outbound = {
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PostV1WebhookSubscriptionRequestBody$Outbound | undefined;
+  RequestBody: PostV1WebhookSubscriptionRequestBody$Outbound;
 };
 
 /** @internal */
@@ -231,8 +230,9 @@ export const PostV1WebhookSubscriptionRequest$outboundSchema: z.ZodType<
   PostV1WebhookSubscriptionRequest
 > = z.object({
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PostV1WebhookSubscriptionRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() =>
+    PostV1WebhookSubscriptionRequestBody$outboundSchema
+  ),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

@@ -5,9 +5,9 @@ Type of the time off activity
 ## Example Usage
 
 ```typescript
-import { TimeOffType } from "gusto-embedded/models/components";
+import { TimeOffType } from "@gusto/embedded-api/models/components";
 
-let value: TimeOffType = "sick";
+let value: TimeOffType = "vacation";
 ```
 
 ## Values

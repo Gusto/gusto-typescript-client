@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody } from "gusto-embedded/models/operations";
+import { PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody = {
-  deposit1: 114.27,
-  deposit2: 7705.81,
+  deposit1: 8817.21,
+  deposit2: 2724.37,
 };
 ```
 

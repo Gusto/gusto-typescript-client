@@ -81,6 +81,10 @@ export type PayrollMinimal = {
   /**
    * The UUID of the payroll.
    */
+  uuid: string;
+  /**
+   * The UUID of the payroll.
+   */
   payrollUuid: string;
   /**
    * The UUID of the company for the payroll.
@@ -158,6 +162,7 @@ export const PayrollMinimal$inboundSchema: z.ZodType<
   processed: z.boolean(),
   processed_date: z.string().optional(),
   calculated_at: z.string().optional(),
+  uuid: z.string(),
   payroll_uuid: z.string(),
   company_uuid: z.string(),
   off_cycle: z.boolean().optional(),
@@ -210,6 +215,7 @@ export type PayrollMinimal$Outbound = {
   processed: boolean;
   processed_date?: string | undefined;
   calculated_at?: string | undefined;
+  uuid: string;
   payroll_uuid: string;
   company_uuid: string;
   off_cycle?: boolean | undefined;
@@ -242,6 +248,7 @@ export const PayrollMinimal$outboundSchema: z.ZodType<
   processed: z.boolean(),
   processedDate: z.string().optional(),
   calculatedAt: z.string().optional(),
+  uuid: z.string(),
   payrollUuid: z.string(),
   companyUuid: z.string(),
   offCycle: z.boolean().optional(),

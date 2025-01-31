@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody } from "gusto-embedded/models/operations";
+import { PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody = {
-  email: "Vida_Wiegand@yahoo.com",
+  email: "Finn40@hotmail.com",
 };
 ```
 

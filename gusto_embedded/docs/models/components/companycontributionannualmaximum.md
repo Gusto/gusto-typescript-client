@@ -5,7 +5,7 @@ The maximum company contribution amount per year. A null value signifies no limi
 ## Example Usage
 
 ```typescript
-import { CompanyContributionAnnualMaximum } from "gusto-embedded/models/components";
+import { CompanyContributionAnnualMaximum } from "@gusto/embedded-api/models/components";
 
 let value: CompanyContributionAnnualMaximum = {};
 ```

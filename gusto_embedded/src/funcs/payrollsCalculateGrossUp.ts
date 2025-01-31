@@ -144,11 +144,11 @@ export async function payrollsCalculateGrossUp(
     | ConnectionError
   >(
     M.json(200, components.GrossUpPay$inboundSchema),
-    M.fail([404, "4XX"]),
     M.jsonErr(
       422,
       errors.PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema,
     ),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

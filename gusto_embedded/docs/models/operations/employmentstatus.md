@@ -5,9 +5,9 @@ The employee's employment status. Supplying an invalid option will set the emplo
 ## Example Usage
 
 ```typescript
-import { EmploymentStatus } from "gusto-embedded/models/operations";
+import { EmploymentStatus } from "@gusto/embedded-api/models/operations";
 
-let value: EmploymentStatus = "part_time_eligible";
+let value: EmploymentStatus = "not_set";
 ```
 
 ## Values

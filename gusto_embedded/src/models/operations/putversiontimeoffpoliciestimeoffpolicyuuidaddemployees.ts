@@ -36,9 +36,8 @@ export type PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest = {
   /**
    * A list of employee objects containing the employee uuid
    */
-  requestBody?:
-    | PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody
-    | undefined;
+  requestBody:
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody;
 };
 
 /** @internal */
@@ -201,7 +200,7 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest$inbou
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "time_off_policy_uuid": "timeOffPolicyUuid",
@@ -215,9 +214,8 @@ export type PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest$Outbou
   {
     time_off_policy_uuid: string;
     "X-Gusto-API-Version"?: string | undefined;
-    RequestBody?:
-      | PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$Outbound
-      | undefined;
+    RequestBody:
+      PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$Outbound;
   };
 
 /** @internal */
@@ -231,7 +229,7 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest$outbo
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       timeOffPolicyUuid: "time_off_policy_uuid",

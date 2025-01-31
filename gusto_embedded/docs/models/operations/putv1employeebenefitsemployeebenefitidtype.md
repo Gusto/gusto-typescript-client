@@ -11,9 +11,9 @@ The company contribution scheme.
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeeBenefitsEmployeeBenefitIdType } from "gusto-embedded/models/operations";
+import { PutV1EmployeeBenefitsEmployeeBenefitIdType } from "@gusto/embedded-api/models/operations";
 
-let value: PutV1EmployeeBenefitsEmployeeBenefitIdType = "percentage";
+let value: PutV1EmployeeBenefitsEmployeeBenefitIdType = "amount";
 ```
 
 ## Values

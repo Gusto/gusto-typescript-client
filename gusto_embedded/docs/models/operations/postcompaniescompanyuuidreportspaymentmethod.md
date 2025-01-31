@@ -5,7 +5,7 @@ Payment method to filter by
 ## Example Usage
 
 ```typescript
-import { PostCompaniesCompanyUuidReportsPaymentMethod } from "gusto-embedded/models/operations";
+import { PostCompaniesCompanyUuidReportsPaymentMethod } from "@gusto/embedded-api/models/operations";
 
 let value: PostCompaniesCompanyUuidReportsPaymentMethod = "check";
 ```

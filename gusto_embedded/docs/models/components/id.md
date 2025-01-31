@@ -5,9 +5,9 @@ The string identifier for each onboarding step
 ## Example Usage
 
 ```typescript
-import { Id } from "gusto-embedded/models/components";
+import { Id } from "@gusto/embedded-api/models/components";
 
-let value: Id = "verify_bank_info";
+let value: Id = "add_bank_info";
 ```
 
 ## Values

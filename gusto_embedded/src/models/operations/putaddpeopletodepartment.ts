@@ -41,7 +41,7 @@ export type PutAddPeopleToDepartmentRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PutAddPeopleToDepartmentRequestBody | undefined;
+  requestBody: PutAddPeopleToDepartmentRequestBody;
 };
 
 /** @internal */
@@ -217,8 +217,7 @@ export const PutAddPeopleToDepartmentRequest$inboundSchema: z.ZodType<
 > = z.object({
   department_uuid: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  RequestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "department_uuid": "departmentUuid",
@@ -231,7 +230,7 @@ export const PutAddPeopleToDepartmentRequest$inboundSchema: z.ZodType<
 export type PutAddPeopleToDepartmentRequest$Outbound = {
   department_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutAddPeopleToDepartmentRequestBody$Outbound | undefined;
+  RequestBody: PutAddPeopleToDepartmentRequestBody$Outbound;
 };
 
 /** @internal */
@@ -242,8 +241,7 @@ export const PutAddPeopleToDepartmentRequest$outboundSchema: z.ZodType<
 > = z.object({
   departmentUuid: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  requestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     departmentUuid: "department_uuid",

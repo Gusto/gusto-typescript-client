@@ -19,7 +19,7 @@ export type Industry = {
   /**
    * North American Industry Classification System (NAICS) is used to classify businesses with a six digit number based on the primary type of work the business performs.
    */
-  naicsCode?: string | undefined;
+  naicsCode?: string | null | undefined;
   /**
    * A list of Standard Industrial Classification (SIC) codes, which are four digit number that categorize the industries that companies belong to based on their business activities.
    */
@@ -27,7 +27,7 @@ export type Industry = {
   /**
    * Industry title
    */
-  title?: string | undefined;
+  title?: string | null | undefined;
 };
 
 /** @internal */
@@ -37,9 +37,9 @@ export const Industry$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string().optional(),
-  naics_code: z.string().optional(),
+  naics_code: z.nullable(z.string()).optional(),
   sic_codes: z.array(z.string()).optional(),
-  title: z.string().optional(),
+  title: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -51,9 +51,9 @@ export const Industry$inboundSchema: z.ZodType<
 /** @internal */
 export type Industry$Outbound = {
   company_uuid?: string | undefined;
-  naics_code?: string | undefined;
+  naics_code?: string | null | undefined;
   sic_codes?: Array<string> | undefined;
-  title?: string | undefined;
+  title?: string | null | undefined;
 };
 
 /** @internal */
@@ -63,9 +63,9 @@ export const Industry$outboundSchema: z.ZodType<
   Industry
 > = z.object({
   companyUuid: z.string().optional(),
-  naicsCode: z.string().optional(),
+  naicsCode: z.nullable(z.string()).optional(),
   sicCodes: z.array(z.string()).optional(),
-  title: z.string().optional(),
+  title: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

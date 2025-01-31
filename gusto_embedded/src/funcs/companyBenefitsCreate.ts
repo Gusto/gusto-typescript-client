@@ -145,8 +145,8 @@ export async function companyBenefitsCreate(
     | ConnectionError
   >(
     M.json(201, components.CompanyBenefit$inboundSchema),
-    M.fail([404, "4XX"]),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

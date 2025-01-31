@@ -5,10 +5,10 @@ The representation of an contractor's onboarding status.
 ## Example Usage
 
 ```typescript
-import { ContractorOnboardingStatus } from "gusto-embedded/models/components";
+import { ContractorOnboardingStatus } from "@gusto/embedded-api/models/components";
 
 let value: ContractorOnboardingStatus = {
-  uuid: "ae8bce28-6e1f-4e17-bbbe-c47b2374d95d",
+  uuid: "71560617-dd19-4d3c-bec1-03496b525ef3",
 };
 ```
 

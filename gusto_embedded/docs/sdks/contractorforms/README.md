@@ -19,7 +19,7 @@ scope: `contractor_forms:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -42,8 +42,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { contractorFormsGetAll } from "gusto-embedded/funcs/contractorFormsGetAll.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorFormsGetAll } from "@gusto/embedded-api/funcs/contractorFormsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -67,6 +67,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorFormsGetAll,
+  useContractorFormsGetAllSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorFormsGetAll,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorFormsGetAll,
+  invalidateAllContractorFormsGetAll,
+} from "@gusto/embedded-api/react-query/contractorFormsGetAll.js";
 ```
 
 ### Parameters
@@ -97,7 +125,7 @@ scope: `contractor_forms:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -121,8 +149,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { contractorFormsGet } from "gusto-embedded/funcs/contractorFormsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorFormsGet } from "@gusto/embedded-api/funcs/contractorFormsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -147,6 +175,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorFormsGet,
+  useContractorFormsGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorFormsGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorFormsGet,
+  invalidateAllContractorFormsGet,
+} from "@gusto/embedded-api/react-query/contractorFormsGet.js";
 ```
 
 ### Parameters
@@ -177,7 +233,7 @@ scope: `contractor_forms:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -201,8 +257,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { contractorFormsGetPdf } from "gusto-embedded/funcs/contractorFormsGetPdf.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorFormsGetPdf } from "@gusto/embedded-api/funcs/contractorFormsGetPdf.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -227,6 +283,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorFormsGetPdf,
+  useContractorFormsGetPdfSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorFormsGetPdf,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorFormsGetPdf,
+  invalidateAllContractorFormsGetPdf,
+} from "@gusto/embedded-api/react-query/contractorFormsGetPdf.js";
 ```
 
 ### Parameters
@@ -261,14 +345,18 @@ scope: `contractors:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gustoEmbedded.contractorForms.generate1099({});
+  const result = await gustoEmbedded.contractorForms.generate1099({
+    requestBody: {
+      contractorId: "<id>",
+    },
+  });
 
   // Handle the result
   console.log(result);
@@ -282,8 +370,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { contractorFormsGenerate1099 } from "gusto-embedded/funcs/contractorFormsGenerate1099.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorFormsGenerate1099 } from "@gusto/embedded-api/funcs/contractorFormsGenerate1099.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -292,7 +380,11 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await contractorFormsGenerate1099(gustoEmbedded, {});
+  const res = await contractorFormsGenerate1099(gustoEmbedded, {
+    requestBody: {
+      contractorId: "<id>",
+    },
+  });
 
   if (!res.ok) {
     throw res.error;
@@ -305,6 +397,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorFormsGenerate1099Mutation
+} from "@gusto/embedded-api/react-query/contractorFormsGenerate1099.js";
 ```
 
 ### Parameters

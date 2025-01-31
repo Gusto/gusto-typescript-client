@@ -26,7 +26,7 @@ scope: `webhook_subscriptions:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -55,8 +55,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { webhooksCreateSubscription } from "gusto-embedded/funcs/webhooksCreateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksCreateSubscription } from "@gusto/embedded-api/funcs/webhooksCreateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -86,6 +86,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWebhooksCreateSubscriptionMutation
+} from "@gusto/embedded-api/react-query/webhooksCreateSubscription.js";
 ```
 
 ### Parameters
@@ -122,7 +139,7 @@ scope: `webhook_subscriptions:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -143,8 +160,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { webhooksListSubscriptions } from "gusto-embedded/funcs/webhooksListSubscriptions.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksListSubscriptions } from "@gusto/embedded-api/funcs/webhooksListSubscriptions.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -166,6 +183,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWebhooksListSubscriptions,
+  useWebhooksListSubscriptionsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWebhooksListSubscriptions,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWebhooksListSubscriptions,
+  invalidateAllWebhooksListSubscriptions,
+} from "@gusto/embedded-api/react-query/webhooksListSubscriptions.js";
 ```
 
 ### Parameters
@@ -202,7 +247,7 @@ scope: `webhook_subscriptions:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -231,8 +276,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { webhooksUpdateSubscription } from "gusto-embedded/funcs/webhooksUpdateSubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksUpdateSubscription } from "@gusto/embedded-api/funcs/webhooksUpdateSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -262,6 +307,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWebhooksUpdateSubscriptionMutation
+} from "@gusto/embedded-api/react-query/webhooksUpdateSubscription.js";
 ```
 
 ### Parameters
@@ -299,7 +361,7 @@ scope: `webhook_subscriptions:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -322,8 +384,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { webhooksGet } from "gusto-embedded/funcs/webhooksGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksGet } from "@gusto/embedded-api/funcs/webhooksGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -347,6 +409,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWebhooksGet,
+  useWebhooksGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWebhooksGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWebhooksGet,
+  invalidateAllWebhooksGet,
+} from "@gusto/embedded-api/react-query/webhooksGet.js";
 ```
 
 ### Parameters
@@ -383,7 +473,7 @@ scope: `webhook_subscriptions:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -405,8 +495,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { webhooksDelete } from "gusto-embedded/funcs/webhooksDelete.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksDelete } from "@gusto/embedded-api/funcs/webhooksDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -429,6 +519,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWebhooksDeleteMutation
+} from "@gusto/embedded-api/react-query/webhooksDelete.js";
 ```
 
 ### Parameters
@@ -467,7 +574,7 @@ scope: `webhook_subscriptions:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -493,8 +600,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { webhooksVerifySubscription } from "gusto-embedded/funcs/webhooksVerifySubscription.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksVerifySubscription } from "@gusto/embedded-api/funcs/webhooksVerifySubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -521,6 +628,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWebhooksVerifySubscriptionMutation
+} from "@gusto/embedded-api/react-query/webhooksVerifySubscription.js";
 ```
 
 ### Parameters
@@ -558,7 +682,7 @@ scope: `webhook_subscriptions:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -580,8 +704,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { webhooksRequestVerificationToken } from "gusto-embedded/funcs/webhooksRequestVerificationToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksRequestVerificationToken } from "@gusto/embedded-api/funcs/webhooksRequestVerificationToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -604,6 +728,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWebhooksRequestVerificationToken,
+  useWebhooksRequestVerificationTokenSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWebhooksRequestVerificationToken,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWebhooksRequestVerificationToken,
+  invalidateAllWebhooksRequestVerificationToken,
+} from "@gusto/embedded-api/react-query/webhooksRequestVerificationToken.js";
 ```
 
 ### Parameters

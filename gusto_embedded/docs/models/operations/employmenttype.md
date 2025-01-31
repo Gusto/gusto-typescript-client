@@ -5,7 +5,7 @@ Employee employment type to filter by
 ## Example Usage
 
 ```typescript
-import { EmploymentType } from "gusto-embedded/models/operations";
+import { EmploymentType } from "@gusto/embedded-api/models/operations";
 
 let value: EmploymentType = "nonexempt";
 ```

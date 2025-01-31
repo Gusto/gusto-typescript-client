@@ -5,7 +5,7 @@ OK
 ## Example Usage
 
 ```typescript
-import { GetV1EmployeesEmployeeIdCustomFieldsResponseBody } from "gusto-embedded/models/operations";
+import { GetV1EmployeesEmployeeIdCustomFieldsResponseBody } from "@gusto/embedded-api/models/operations";
 
 let value: GetV1EmployeesEmployeeIdCustomFieldsResponseBody = {};
 ```

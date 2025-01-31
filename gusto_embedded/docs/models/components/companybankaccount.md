@@ -5,10 +5,10 @@ The company bank account
 ## Example Usage
 
 ```typescript
-import { CompanyBankAccount } from "gusto-embedded/models/components";
+import { CompanyBankAccount } from "@gusto/embedded-api/models/components";
 
 let value: CompanyBankAccount = {
-  uuid: "beb2725e-e459-4f24-bd7e-2855765ebb49",
+  uuid: "c8177365-2748-40ed-98df-1aff92903f5a",
 };
 ```
 

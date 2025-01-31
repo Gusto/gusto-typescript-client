@@ -5,7 +5,7 @@ An array of fixed compensations for the employee. Fixed compensations include ti
 ## Example Usage
 
 ```typescript
-import { FixedCompensations } from "gusto-embedded/models/operations";
+import { FixedCompensations } from "@gusto/embedded-api/models/operations";
 
 let value: FixedCompensations = {};
 ```

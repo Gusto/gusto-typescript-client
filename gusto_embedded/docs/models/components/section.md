@@ -5,9 +5,9 @@ The document option's section in the list of acceptable documents on the Form I-
 ## Example Usage
 
 ```typescript
-import { Section } from "gusto-embedded/models/components";
+import { Section } from "@gusto/embedded-api/models/components";
 
-let value: Section = "B";
+let value: Section = "C";
 ```
 
 ## Values

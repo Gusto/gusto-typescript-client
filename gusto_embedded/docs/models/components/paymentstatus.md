@@ -5,7 +5,7 @@ The status of the ACH transaction
 ## Example Usage
 
 ```typescript
-import { PaymentStatus } from "gusto-embedded/models/components";
+import { PaymentStatus } from "@gusto/embedded-api/models/components";
 
 let value: PaymentStatus = "successful";
 ```

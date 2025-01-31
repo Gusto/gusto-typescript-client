@@ -5,13 +5,13 @@ The signatory's home address
 ## Example Usage
 
 ```typescript
-import { HomeAddress } from "gusto-embedded/models/operations";
+import { HomeAddress } from "@gusto/embedded-api/models/operations";
 
 let value: HomeAddress = {
   street1: "<value>",
-  city: "Fort Marshallberg",
-  state: "West Virginia",
-  zip: "22502-4342",
+  city: "South Darionville",
+  state: "Arizona",
+  zip: "07100-6245",
 };
 ```
 

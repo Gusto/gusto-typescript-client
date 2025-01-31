@@ -18,8 +18,8 @@ scope: `company_reports:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
-import { RFCDate } from "gusto-embedded/types";
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -38,7 +38,6 @@ async function run() {
         "work_address_state",
       ],
       fileType: "csv",
-      withTotals: false,
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),
@@ -58,9 +57,9 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { reportsCreate } from "gusto-embedded/funcs/reportsCreate.js";
-import { RFCDate } from "gusto-embedded/types";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsCreate } from "@gusto/embedded-api/funcs/reportsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -81,7 +80,6 @@ async function run() {
         "work_address_state",
       ],
       fileType: "csv",
-      withTotals: false,
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),
@@ -100,6 +98,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsCreateMutation
+} from "@gusto/embedded-api/react-query/reportsCreate.js";
 ```
 
 ### Parameters
@@ -131,7 +146,7 @@ scope: `company_reports:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -154,8 +169,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { reportsGet } from "gusto-embedded/funcs/reportsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsGet } from "@gusto/embedded-api/funcs/reportsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -179,6 +194,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useReportsGet,
+  useReportsGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchReportsGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateReportsGet,
+  invalidateAllReportsGet,
+} from "@gusto/embedded-api/react-query/reportsGet.js";
 ```
 
 ### Parameters
@@ -209,7 +252,7 @@ scope: `company_reports:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -233,8 +276,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { reportsGetTemplate } from "gusto-embedded/funcs/reportsGetTemplate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsGetTemplate } from "@gusto/embedded-api/funcs/reportsGetTemplate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -259,6 +302,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useReportsGetTemplate,
+  useReportsGetTemplateSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchReportsGetTemplate,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateReportsGetTemplate,
+  invalidateAllReportsGetTemplate,
+} from "@gusto/embedded-api/react-query/reportsGetTemplate.js";
 ```
 
 ### Parameters

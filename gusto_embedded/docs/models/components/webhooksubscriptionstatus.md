@@ -5,7 +5,7 @@ The status of the webhook subscription.
 ## Example Usage
 
 ```typescript
-import { WebhookSubscriptionStatus } from "gusto-embedded/models/components";
+import { WebhookSubscriptionStatus } from "@gusto/embedded-api/models/components";
 
 let value: WebhookSubscriptionStatus = "removed";
 ```

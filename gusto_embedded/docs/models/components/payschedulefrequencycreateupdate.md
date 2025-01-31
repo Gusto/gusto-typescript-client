@@ -5,9 +5,9 @@ The frequency that employees on this pay schedule are paid with Gusto.
 ## Example Usage
 
 ```typescript
-import { PayScheduleFrequencyCreateUpdate } from "gusto-embedded/models/components";
+import { PayScheduleFrequencyCreateUpdate } from "@gusto/embedded-api/models/components";
 
-let value: PayScheduleFrequencyCreateUpdate = "Monthly";
+let value: PayScheduleFrequencyCreateUpdate = "Every other week";
 ```
 
 ## Values

@@ -1,24 +1,38 @@
 {
-  "name": "gusto-embedded",
-  "version": "0.1.4",
+  "name": "@gusto/embedded-api",
+  "version": "0.1.5",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gusto/gusto-typescript-client.git",
+    "directory": "gusto_embedded"
+  },
   "scripts": {
-    "lint": "eslint --max-warnings=0 src",
+    "lint": "eslint --cache --max-warnings=0 src",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
+    "@tanstack/react-query": "^5",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
     "zod": ">= 3"
   },
+  "peerDependenciesMeta": {
+    "@tanstack/react-query": {"optional":true},
+    "react": {"optional":true},
+    "react-dom": {"optional":true}
+  },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
-    "eslint": "^8.57.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
+    "@eslint/js": "^9.19.0",
+    "@tanstack/react-query": "^5.61.4",
+    "@types/react": "^18.3.12",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^8.22.0",
     "zod": "^3.23.4"
   },
   "dependencies": {

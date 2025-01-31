@@ -5,7 +5,7 @@ The coverage amount as a multiple of the employee's salary. Only applicable for 
 ## Example Usage
 
 ```typescript
-import { CoverageSalaryMultiplier } from "gusto-embedded/models/components";
+import { CoverageSalaryMultiplier } from "@gusto/embedded-api/models/components";
 
 let value: CoverageSalaryMultiplier = {};
 ```

@@ -69,7 +69,7 @@ export type PutV1GarnishmentsGarnishmentIdRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PutV1GarnishmentsGarnishmentIdRequestBody | undefined;
+  requestBody: PutV1GarnishmentsGarnishmentIdRequestBody;
 };
 
 /** @internal */
@@ -206,7 +206,7 @@ export const PutV1GarnishmentsGarnishmentIdRequest$inboundSchema: z.ZodType<
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
   RequestBody: z.lazy(() =>
     PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema
-  ).optional(),
+  ),
 }).transform((v) => {
   return remap$(v, {
     "garnishment_id": "garnishmentId",
@@ -219,7 +219,7 @@ export const PutV1GarnishmentsGarnishmentIdRequest$inboundSchema: z.ZodType<
 export type PutV1GarnishmentsGarnishmentIdRequest$Outbound = {
   garnishment_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?: PutV1GarnishmentsGarnishmentIdRequestBody$Outbound | undefined;
+  RequestBody: PutV1GarnishmentsGarnishmentIdRequestBody$Outbound;
 };
 
 /** @internal */
@@ -232,7 +232,7 @@ export const PutV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
   requestBody: z.lazy(() =>
     PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema
-  ).optional(),
+  ),
 }).transform((v) => {
   return remap$(v, {
     garnishmentId: "garnishment_id",

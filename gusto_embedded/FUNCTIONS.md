@@ -19,9 +19,9 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { introspectionGetTokenInfo } from "gusto-embedded/funcs/introspectionGetTokenInfo.js";
-import { SDKValidationError } from "gusto-embedded/models/errors/sdkvalidationerror.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { introspectionGetTokenInfo } from "@gusto/embedded-api/funcs/introspectionGetTokenInfo.js";
+import { SDKValidationError } from "@gusto/embedded-api/models/errors/sdkvalidationerror.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

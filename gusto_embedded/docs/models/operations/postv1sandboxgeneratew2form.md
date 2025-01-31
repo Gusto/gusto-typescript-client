@@ -5,10 +5,10 @@ OK
 ## Example Usage
 
 ```typescript
-import { PostV1SandboxGenerateW2Form } from "gusto-embedded/models/operations";
+import { PostV1SandboxGenerateW2Form } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1SandboxGenerateW2Form = {
-  uuid: "4342019f-f62a-47f1-8c43-a3a8684b65de",
+  uuid: "dfecb521-368c-4f11-89bd-ef662aad1793",
 };
 ```
 

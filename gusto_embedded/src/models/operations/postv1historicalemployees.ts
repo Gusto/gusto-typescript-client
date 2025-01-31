@@ -21,7 +21,7 @@ export type PostV1HistoricalEmployeesRequest = {
   /**
    * Create a historical employee.
    */
-  historicalEmployeeBody?: components.HistoricalEmployeeBody | undefined;
+  historicalEmployeeBody: components.HistoricalEmployeeBody;
 };
 
 /** @internal */
@@ -32,8 +32,7 @@ export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
-  "Historical-Employee-Body": components.HistoricalEmployeeBody$inboundSchema
-    .optional(),
+  "Historical-Employee-Body": components.HistoricalEmployeeBody$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -46,9 +45,7 @@ export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
 export type PostV1HistoricalEmployeesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  "Historical-Employee-Body"?:
-    | components.HistoricalEmployeeBody$Outbound
-    | undefined;
+  "Historical-Employee-Body": components.HistoricalEmployeeBody$Outbound;
 };
 
 /** @internal */
@@ -59,8 +56,7 @@ export const PostV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
-  historicalEmployeeBody: components.HistoricalEmployeeBody$outboundSchema
-    .optional(),
+  historicalEmployeeBody: components.HistoricalEmployeeBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

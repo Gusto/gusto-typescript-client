@@ -5,7 +5,7 @@ The type of check stock being printed. Check the "Types of check stock" section 
 ## Example Usage
 
 ```typescript
-import { PrintingFormat } from "gusto-embedded/models/operations";
+import { PrintingFormat } from "@gusto/embedded-api/models/operations";
 
 let value: PrintingFormat = "bottom";
 ```

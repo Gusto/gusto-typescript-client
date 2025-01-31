@@ -20,7 +20,7 @@ scope: `garnishments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -30,15 +30,9 @@ async function run() {
   const result = await gustoEmbedded.garnishments.create({
     employeeId: "<id>",
     requestBody: {
-      active: true,
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
-      times: null,
-      recurring: true,
-      annualMaximum: null,
-      payPeriodMaximum: null,
-      deductAsPercentage: false,
     },
   });
 
@@ -54,8 +48,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { garnishmentsCreate } from "gusto-embedded/funcs/garnishmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { garnishmentsCreate } from "@gusto/embedded-api/funcs/garnishmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -67,15 +61,9 @@ async function run() {
   const res = await garnishmentsCreate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      active: true,
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
-      times: null,
-      recurring: true,
-      annualMaximum: null,
-      payPeriodMaximum: null,
-      deductAsPercentage: false,
     },
   });
 
@@ -90,6 +78,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGarnishmentsCreateMutation
+} from "@gusto/embedded-api/react-query/garnishmentsCreate.js";
 ```
 
 ### Parameters
@@ -121,7 +126,7 @@ scope: `garnishments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -144,8 +149,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { garnishmentsGet } from "gusto-embedded/funcs/garnishmentsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { garnishmentsGet } from "@gusto/embedded-api/funcs/garnishmentsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -169,6 +174,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGarnishmentsGet,
+  useGarnishmentsGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGarnishmentsGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGarnishmentsGet,
+  invalidateAllGarnishmentsGet,
+} from "@gusto/embedded-api/react-query/garnishmentsGet.js";
 ```
 
 ### Parameters
@@ -199,7 +232,7 @@ scope: `garnishments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -222,8 +255,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { garnishmentsFetch } from "gusto-embedded/funcs/garnishmentsFetch.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { garnishmentsFetch } from "@gusto/embedded-api/funcs/garnishmentsFetch.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -247,6 +280,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGarnishmentsFetch,
+  useGarnishmentsFetchSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGarnishmentsFetch,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGarnishmentsFetch,
+  invalidateAllGarnishmentsFetch,
+} from "@gusto/embedded-api/react-query/garnishmentsFetch.js";
 ```
 
 ### Parameters
@@ -277,7 +338,7 @@ scope: `garnishments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -287,12 +348,6 @@ async function run() {
   const result = await gustoEmbedded.garnishments.update({
     garnishmentId: "<id>",
     requestBody: {
-      active: false,
-      times: null,
-      recurring: false,
-      annualMaximum: null,
-      payPeriodMaximum: null,
-      deductAsPercentage: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
   });
@@ -309,8 +364,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { garnishmentsUpdate } from "gusto-embedded/funcs/garnishmentsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { garnishmentsUpdate } from "@gusto/embedded-api/funcs/garnishmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -322,12 +377,6 @@ async function run() {
   const res = await garnishmentsUpdate(gustoEmbedded, {
     garnishmentId: "<id>",
     requestBody: {
-      active: false,
-      times: null,
-      recurring: false,
-      annualMaximum: null,
-      payPeriodMaximum: null,
-      deductAsPercentage: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
   });
@@ -343,6 +392,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGarnishmentsUpdateMutation
+} from "@gusto/embedded-api/react-query/garnishmentsUpdate.js";
 ```
 
 ### Parameters
@@ -374,7 +440,7 @@ scope: `garnishments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -395,8 +461,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { garnishmentsGetChildSupport } from "gusto-embedded/funcs/garnishmentsGetChildSupport.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { garnishmentsGetChildSupport } from "@gusto/embedded-api/funcs/garnishmentsGetChildSupport.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -418,6 +484,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGarnishmentsGetChildSupport,
+  useGarnishmentsGetChildSupportSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGarnishmentsGetChildSupport,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGarnishmentsGetChildSupport,
+  invalidateAllGarnishmentsGetChildSupport,
+} from "@gusto/embedded-api/react-query/garnishmentsGetChildSupport.js";
 ```
 
 ### Parameters

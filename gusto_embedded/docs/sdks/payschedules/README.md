@@ -29,7 +29,7 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -60,8 +60,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesCreate } from "gusto-embedded/funcs/paySchedulesCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesCreate } from "@gusto/embedded-api/funcs/paySchedulesCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -95,6 +95,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePaySchedulesCreateMutation
+} from "@gusto/embedded-api/react-query/paySchedulesCreate.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -124,7 +141,7 @@ scope: `pay_schedules:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -147,8 +164,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesGetForCompany } from "gusto-embedded/funcs/paySchedulesGetForCompany.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesGetForCompany } from "@gusto/embedded-api/funcs/paySchedulesGetForCompany.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -172,6 +189,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePaySchedulesGetForCompany,
+  usePaySchedulesGetForCompanySuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPaySchedulesGetForCompany,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePaySchedulesGetForCompany,
+  invalidateAllPaySchedulesGetForCompany,
+} from "@gusto/embedded-api/react-query/paySchedulesGetForCompany.js";
 ```
 
 ### Parameters
@@ -202,7 +247,7 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -228,8 +273,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesPreview } from "gusto-embedded/funcs/paySchedulesPreview.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesPreview } from "@gusto/embedded-api/funcs/paySchedulesPreview.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -256,6 +301,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePaySchedulesPreview,
+  usePaySchedulesPreviewSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPaySchedulesPreview,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePaySchedulesPreview,
+  invalidateAllPaySchedulesPreview,
+} from "@gusto/embedded-api/react-query/paySchedulesPreview.js";
 ```
 
 ### Parameters
@@ -286,7 +359,7 @@ scope: `pay_schedules:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -310,8 +383,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesGet } from "gusto-embedded/funcs/paySchedulesGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesGet } from "@gusto/embedded-api/funcs/paySchedulesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -336,6 +409,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePaySchedulesGet,
+  usePaySchedulesGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPaySchedulesGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePaySchedulesGet,
+  invalidateAllPaySchedulesGet,
+} from "@gusto/embedded-api/react-query/paySchedulesGet.js";
 ```
 
 ### Parameters
@@ -366,7 +467,7 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -400,8 +501,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesUpdate } from "gusto-embedded/funcs/paySchedulesUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesUpdate } from "@gusto/embedded-api/funcs/paySchedulesUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -438,6 +539,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePaySchedulesUpdateMutation
+} from "@gusto/embedded-api/react-query/paySchedulesUpdate.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -471,7 +589,7 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -496,8 +614,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesList } from "gusto-embedded/funcs/paySchedulesList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesList } from "@gusto/embedded-api/funcs/paySchedulesList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -523,6 +641,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePaySchedulesList,
+  usePaySchedulesListSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPaySchedulesList,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePaySchedulesList,
+  invalidateAllPaySchedulesList,
+} from "@gusto/embedded-api/react-query/paySchedulesList.js";
 ```
 
 ### Parameters
@@ -555,7 +701,7 @@ scope: `payrolls:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -578,8 +724,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesListUnprocessedTerminationPeriods } from "gusto-embedded/funcs/paySchedulesListUnprocessedTerminationPeriods.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesListUnprocessedTerminationPeriods } from "@gusto/embedded-api/funcs/paySchedulesListUnprocessedTerminationPeriods.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -603,6 +749,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePaySchedulesListUnprocessedTerminationPeriods,
+  usePaySchedulesListUnprocessedTerminationPeriodsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPaySchedulesListUnprocessedTerminationPeriods,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePaySchedulesListUnprocessedTerminationPeriods,
+  invalidateAllPaySchedulesListUnprocessedTerminationPeriods,
+} from "@gusto/embedded-api/react-query/paySchedulesListUnprocessedTerminationPeriods.js";
 ```
 
 ### Parameters
@@ -633,7 +807,7 @@ scope: `pay_schedules:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -656,8 +830,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesGetAssignments } from "gusto-embedded/funcs/paySchedulesGetAssignments.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesGetAssignments } from "@gusto/embedded-api/funcs/paySchedulesGetAssignments.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -681,6 +855,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePaySchedulesGetAssignments,
+  usePaySchedulesGetAssignmentsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPaySchedulesGetAssignments,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePaySchedulesGetAssignments,
+  invalidateAllPaySchedulesGetAssignments,
+} from "@gusto/embedded-api/react-query/paySchedulesGetAssignments.js";
 ```
 
 ### Parameters
@@ -711,7 +913,7 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -743,8 +945,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesPreviewAssignment } from "gusto-embedded/funcs/paySchedulesPreviewAssignment.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesPreviewAssignment } from "@gusto/embedded-api/funcs/paySchedulesPreviewAssignment.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -779,6 +981,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePaySchedulesPreviewAssignmentMutation
+} from "@gusto/embedded-api/react-query/paySchedulesPreviewAssignment.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -809,7 +1028,7 @@ scope: `pay_schedules:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -840,8 +1059,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { paySchedulesAssign } from "gusto-embedded/funcs/paySchedulesAssign.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { paySchedulesAssign } from "@gusto/embedded-api/funcs/paySchedulesAssign.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -873,6 +1092,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePaySchedulesAssignMutation
+} from "@gusto/embedded-api/react-query/paySchedulesAssign.js";
 ```
 
 ### Parameters

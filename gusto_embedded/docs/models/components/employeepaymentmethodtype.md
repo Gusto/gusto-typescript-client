@@ -5,9 +5,9 @@ The payment method type. If type is Check, then split_by and splits do not need 
 ## Example Usage
 
 ```typescript
-import { EmployeePaymentMethodType } from "gusto-embedded/models/components";
+import { EmployeePaymentMethodType } from "@gusto/embedded-api/models/components";
 
-let value: EmployeePaymentMethodType = "Direct Deposit";
+let value: EmployeePaymentMethodType = "Check";
 ```
 
 ## Values

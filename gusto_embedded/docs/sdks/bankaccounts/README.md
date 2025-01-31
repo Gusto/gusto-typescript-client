@@ -28,7 +28,7 @@ scope: `company_bank_accounts:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -56,8 +56,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { bankAccountsCreate } from "gusto-embedded/funcs/bankAccountsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { bankAccountsCreate } from "@gusto/embedded-api/funcs/bankAccountsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -86,6 +86,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useBankAccountsCreateMutation
+} from "@gusto/embedded-api/react-query/bankAccountsCreate.js";
 ```
 
 ### Parameters
@@ -117,7 +134,7 @@ scope: `company_bank_accounts:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -140,8 +157,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { bankAccountsList } from "gusto-embedded/funcs/bankAccountsList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { bankAccountsList } from "@gusto/embedded-api/funcs/bankAccountsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -165,6 +182,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useBankAccountsList,
+  useBankAccountsListSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchBankAccountsList,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateBankAccountsList,
+  invalidateAllBankAccountsList,
+} from "@gusto/embedded-api/react-query/bankAccountsList.js";
 ```
 
 ### Parameters
@@ -208,7 +253,7 @@ scope: `company_bank_accounts:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -236,8 +281,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { bankAccountsVerify } from "gusto-embedded/funcs/bankAccountsVerify.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { bankAccountsVerify } from "@gusto/embedded-api/funcs/bankAccountsVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -266,6 +311,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useBankAccountsVerifyMutation
+} from "@gusto/embedded-api/react-query/bankAccountsVerify.js";
 ```
 
 ### Parameters
@@ -304,7 +366,7 @@ scope: `plaid_processor:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -331,8 +393,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { bankAccountsCreateFromProcessorToken } from "gusto-embedded/funcs/bankAccountsCreateFromProcessorToken.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { bankAccountsCreateFromProcessorToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromProcessorToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -360,6 +422,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useBankAccountsCreateFromProcessorTokenMutation
+} from "@gusto/embedded-api/react-query/bankAccountsCreateFromProcessorToken.js";
 ```
 
 ### Parameters

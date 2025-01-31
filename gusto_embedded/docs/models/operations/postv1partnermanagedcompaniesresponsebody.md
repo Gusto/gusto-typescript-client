@@ -5,7 +5,7 @@ Object returned when creating a partner managed company
 ## Example Usage
 
 ```typescript
-import { PostV1PartnerManagedCompaniesResponseBody } from "gusto-embedded/models/operations";
+import { PostV1PartnerManagedCompaniesResponseBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1PartnerManagedCompaniesResponseBody = {};
 ```

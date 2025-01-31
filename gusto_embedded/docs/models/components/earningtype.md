@@ -5,10 +5,10 @@ Example response
 ## Example Usage
 
 ```typescript
-import { EarningType } from "gusto-embedded/models/components";
+import { EarningType } from "@gusto/embedded-api/models/components";
 
 let value: EarningType = {
-  uuid: "e4988f4f-e7dc-4a53-bad0-a7e5782bd040",
+  uuid: "96866b12-dc46-4ed9-b306-add0353cc8f2",
 };
 ```
 

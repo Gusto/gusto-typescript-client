@@ -5,7 +5,7 @@ Example response
 ## Example Usage
 
 ```typescript
-import { GetV1TokenInfoResponseBody } from "gusto-embedded/models/operations";
+import { GetV1TokenInfoResponseBody } from "@gusto/embedded-api/models/operations";
 
 let value: GetV1TokenInfoResponseBody = {
   scope: "<value>",

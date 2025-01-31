@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod } from "gusto-embedded/models/operations";
+import { PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod =
-  "Direct Deposit";
+  "Historical Payment";
 ```
 
 ## Values

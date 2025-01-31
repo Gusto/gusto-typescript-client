@@ -30,6 +30,7 @@ Gusto API: Welcome to Gusto's Embedded Payroll API documentation!
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
+  * [React hooks with TanStack Query](#react-hooks-with-tanstack-query)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -45,34 +46,38 @@ Gusto API: Welcome to Gusto's Embedded Payroll API documentation!
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add @gusto/embedded-api
+# Install optional peer dependencies if you plan to use React hooks
+npm add @tanstack/react-query react react-dom
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add @gusto/embedded-api
+# Install optional peer dependencies if you plan to use React hooks
+pnpm add @tanstack/react-query react react-dom
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add @gusto/embedded-api
+# Install optional peer dependencies if you plan to use React hooks
+bun add @tanstack/react-query react react-dom
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add @gusto/embedded-api zod
+# Install optional peer dependencies if you plan to use React hooks
+yarn add @tanstack/react-query react react-dom
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -91,7 +96,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ### Example
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -122,7 +127,7 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `companyAccessAuth` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -143,7 +148,7 @@ run();
 
 Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -336,6 +341,7 @@ run();
 * [update](docs/sdks/employeebenefits/README.md#update) - Update an employee benefit
 * [delete](docs/sdks/employeebenefits/README.md#delete) - Delete an employee benefit
 * [createYtdAmountsFromDifferentCompany](docs/sdks/employeebenefits/README.md#createytdamountsfromdifferentcompany) - Create year-to-date benefit amounts from a different company
+* [getEmployeeYtdBenefitAmountsFromDifferentCompany](docs/sdks/employeebenefits/README.md#getemployeeytdbenefitamountsfromdifferentcompany) - Get year-to-date benefit amounts from a different company
 
 ### [employeeEmployments](docs/sdks/employeeemployments/README.md)
 
@@ -364,6 +370,10 @@ run();
 * [updateBankAccount](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
 * [get](docs/sdks/employeepaymentmethod/README.md#get) - Get an employee's payment method
 * [update](docs/sdks/employeepaymentmethod/README.md#update) - Update an employee's payment method
+
+### [employeePaymentMethods](docs/sdks/employeepaymentmethods/README.md)
+
+* [getBankAccounts](docs/sdks/employeepaymentmethods/README.md#getbankaccounts) - Get all employee bank accounts
 
 ### [employees](docs/sdks/employees/README.md)
 
@@ -686,6 +696,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeeBenefitsDelete`](docs/sdks/employeebenefits/README.md#delete) - Delete an employee benefit
 - [`employeeBenefitsGet`](docs/sdks/employeebenefits/README.md#get) - Get an employee benefit
 - [`employeeBenefitsGetAll`](docs/sdks/employeebenefits/README.md#getall) - Get all benefits for an employee
+- [`employeeBenefitsGetEmployeeYtdBenefitAmountsFromDifferentCompany`](docs/sdks/employeebenefits/README.md#getemployeeytdbenefitamountsfromdifferentcompany) - Get year-to-date benefit amounts from a different company
 - [`employeeBenefitsUpdate`](docs/sdks/employeebenefits/README.md#update) - Update an employee benefit
 - [`employeeEmploymentsCreateRehire`](docs/sdks/employeeemployments/README.md#createrehire) - Create an employee rehire
 - [`employeeEmploymentsCreateTermination`](docs/sdks/employeeemployments/README.md#createtermination) - Create an employee termination
@@ -704,6 +715,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeePaymentMethodCreateBankAccount`](docs/sdks/employeepaymentmethod/README.md#createbankaccount) - Create an employee bank account
 - [`employeePaymentMethodDeleteBankAccount`](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
 - [`employeePaymentMethodGet`](docs/sdks/employeepaymentmethod/README.md#get) - Get an employee's payment method
+- [`employeePaymentMethodsGetBankAccounts`](docs/sdks/employeepaymentmethods/README.md#getbankaccounts) - Get all employee bank accounts
 - [`employeePaymentMethodUpdate`](docs/sdks/employeepaymentmethod/README.md#update) - Update an employee's payment method
 - [`employeePaymentMethodUpdateBankAccount`](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
 - [`employeesCreate`](docs/sdks/employees/README.md#create) - Create an employee
@@ -840,6 +852,278 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
 
+<!-- Start React hooks with TanStack Query [react-query] -->
+## React hooks with TanStack Query
+
+React hooks built on [TanStack Query][tanstack-query] are included in this SDK.
+These hooks and the utility functions provided alongside them can be used to
+build rich applications that pull data from the API using one of the most
+popular asynchronous state management library.
+
+[tanstack-query]: https://tanstack.com/query/v5/docs/framework/react/overview
+
+To learn about this feature and how to get started, check
+[REACT_QUERY.md](./REACT_QUERY.md).
+
+> [!WARNING]
+>
+> This feature is currently in **preview** and is subject to breaking changes
+> within the current major version of the SDK as we gather user feedback on it.
+
+<details>
+
+<summary>Available React hooks</summary>
+
+- [`useAchTransactionsGet`](docs/sdks/achtransactions/README.md#get) - Get all ACH transactions for a company
+- [`useBankAccountsCreateFromProcessorTokenMutation`](docs/sdks/bankaccounts/README.md#createfromprocessortoken) - Create a bank account from a plaid processor token
+- [`useBankAccountsCreateMutation`](docs/sdks/bankaccounts/README.md#create) - Create a company bank account
+- [`useBankAccountsList`](docs/sdks/bankaccounts/README.md#list) - Get all company bank accounts
+- [`useBankAccountsVerifyMutation`](docs/sdks/bankaccounts/README.md#verify) - Verify a company bank account
+- [`useCompaniesAcceptTermsOfServiceMutation`](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
+- [`useCompaniesBenefitsList`](docs/sdks/benefits/README.md#list) - Get benefits for a company
+- [`useCompaniesCreateAdminMutation`](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
+- [`useCompaniesCreatePartnerManagedMutation`](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
+- [`useCompaniesFinishOnboardingMutation`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
+- [`useCompaniesFormsList`](docs/sdks/forms/README.md#list) - Get all company forms
+- [`useCompaniesGet`](docs/sdks/companies/README.md#get) - Get a company
+- [`useCompaniesGetAdmins`](docs/sdks/companies/README.md#getadmins) - Get all the admins at a company
+- [`useCompaniesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
+- [`useCompaniesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+- [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
+- [`useCompaniesRetrieveTermsOfServiceMutation`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
+- [`useCompaniesUpdateMutation`](docs/sdks/companies/README.md#update) - Update a company
+- [`useCompanyAttachmentGetDownloadUrl`](docs/sdks/companyattachment/README.md#getdownloadurl) - Get a temporary url to download the Company Attachment file
+- [`useCompanyAttachmentsCreateMutation`](docs/sdks/companyattachments/README.md#create) - Create Company Attachment and Upload File
+- [`useCompanyAttachmentsGetAll`](docs/sdks/companyattachments/README.md#getall) - Get List of Company Attachments
+- [`useCompanyAttachmentsGetDetails`](docs/sdks/companyattachments/README.md#getdetails) - Get Company Attachment Details
+- [`useCompanyBenefitsBulkUpdateEmployeeBenefitsMutation`](docs/sdks/companybenefits/README.md#bulkupdateemployeebenefits) - Bulk update employee benefits for a company benefit
+- [`useCompanyBenefitsCreateMutation`](docs/sdks/companybenefits/README.md#create) - Create a company benefit
+- [`useCompanyBenefitsDeleteMutation`](docs/sdks/companybenefits/README.md#delete) - Delete a company benefit
+- [`useCompanyBenefitsGet`](docs/sdks/companybenefits/README.md#get) - Get a company benefit
+- [`useCompanyBenefitsGetAll`](docs/sdks/companybenefits/README.md#getall) - Get all benefits supported by Gusto
+- [`useCompanyBenefitsGetEmployeeBenefits`](docs/sdks/companybenefits/README.md#getemployeebenefits) - Get all employee benefits for a company benefit
+- [`useCompanyBenefitsGetRequirements`](docs/sdks/companybenefits/README.md#getrequirements) - Get benefit fields requirements by ID
+- [`useCompanyBenefitsGetSummary`](docs/sdks/companybenefits/README.md#getsummary) - Get company benefit summary by company benefit id.
+- [`useCompanyBenefitsGetSupportedBenefit`](docs/sdks/companybenefits/README.md#getsupportedbenefit) - Get a supported benefit by ID
+- [`useCompanyBenefitsUpdateMutation`](docs/sdks/companybenefits/README.md#update) - Update a company benefit
+- [`useCompanyFormsGet`](docs/sdks/companyforms/README.md#get) - Get a company form
+- [`useCompanyFormsGetPdf`](docs/sdks/companyforms/README.md#getpdf) - Get a company form pdf
+- [`useCompanyFormsSignMutation`](docs/sdks/companyforms/README.md#sign) - Sign a company form
+- [`useContractorDocumentsGet`](docs/sdks/contractordocuments/README.md#get) - Get a contractor document
+- [`useContractorDocumentsGetPdf`](docs/sdks/contractordocuments/README.md#getpdf) - Get the contractor document pdf
+- [`useContractorDocumentsList`](docs/sdks/contractordocuments/README.md#list) - Get all contractor documents
+- [`useContractorDocumentsSignMutation`](docs/sdks/contractordocuments/README.md#sign) - Sign a contractor document
+- [`useContractorFormsGenerate1099Mutation`](docs/sdks/contractorforms/README.md#generate1099) - Generate a 1099 form [DEMO]
+- [`useContractorFormsGet`](docs/sdks/contractorforms/README.md#get) - Get a contractor form
+- [`useContractorFormsGetAll`](docs/sdks/contractorforms/README.md#getall) - Get all contractor forms
+- [`useContractorFormsGetPdf`](docs/sdks/contractorforms/README.md#getpdf) - Get the contractor form pdf
+- [`useContractorPaymentGroupsCreateMutation`](docs/sdks/contractorpaymentgroups/README.md#create) - Create a contractor payment group
+- [`useContractorPaymentGroupsDeleteMutation`](docs/sdks/contractorpaymentgroups/README.md#delete) - Cancel a contractor payment group
+- [`useContractorPaymentGroupsFundMutation`](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
+- [`useContractorPaymentGroupsGet`](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
+- [`useContractorPaymentGroupsList`](docs/sdks/contractorpaymentgroups/README.md#list) - Get contractor payment groups for a company
+- [`useContractorPaymentGroupsPreviewMutation`](docs/sdks/contractorpaymentgroups/README.md#preview) - Preview a contractor payment group
+- [`useContractorPaymentMethodCreateBankAccountMutation`](docs/sdks/contractorpaymentmethod/README.md#createbankaccount) - Create a contractor bank account
+- [`useContractorPaymentMethodGet`](docs/sdks/contractorpaymentmethod/README.md#get) - Get a contractor's payment method
+- [`useContractorPaymentMethodGetBankAccounts`](docs/sdks/contractorpaymentmethod/README.md#getbankaccounts) - Get all contractor bank accounts
+- [`useContractorPaymentMethodUpdatePaymentMethodMutation`](docs/sdks/contractorpaymentmethod/README.md#updatepaymentmethod) - Update a contractor's payment method
+- [`useContractorPaymentsCancelMutation`](docs/sdks/contractorpayments/README.md#cancel) - Cancel a contractor payment
+- [`useContractorPaymentsCreateMutation`](docs/sdks/contractorpayments/README.md#create) - Create a contractor payment
+- [`useContractorPaymentsFundMutation`](docs/sdks/contractorpayments/README.md#fund) - Fund a contractor payment [DEMO]
+- [`useContractorPaymentsGet`](docs/sdks/contractorpayments/README.md#get) - Get a single contractor payment
+- [`useContractorPaymentsGetPayments`](docs/sdks/contractorpayments/README.md#getpayments) - Get contractor payments for a company
+- [`useContractorPaymentsGetReceipt`](docs/sdks/contractorpayments/README.md#getreceipt) - Get a single contractor payment receipt
+- [`useContractorsCreateMutation`](docs/sdks/contractors/README.md#create) - Create a contractor
+- [`useContractorsDeleteMutation`](docs/sdks/contractors/README.md#delete) - Delete a contractor
+- [`useContractorsGet`](docs/sdks/contractors/README.md#get) - Get a contractor
+- [`useContractorsGetAddress`](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
+- [`useContractorsGetOnboardingStatus`](docs/sdks/contractors/README.md#getonboardingstatus) - Get the contractor's onboarding status
+- [`useContractorsList`](docs/sdks/contractors/README.md#list) - Get contractors of a company
+- [`useContractorsUpdateAddressMutation`](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
+- [`useContractorsUpdateMutation`](docs/sdks/contractors/README.md#update) - Update a contractor
+- [`useContractorsUpdateOnboardingStatusMutation`](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
+- [`useDepartmentsAddPeopleMutation`](docs/sdks/departments/README.md#addpeople) - Add people to a department
+- [`useDepartmentsCreateMutation`](docs/sdks/departments/README.md#create) - Create a department
+- [`useDepartmentsDeleteMutation`](docs/sdks/departments/README.md#delete) - Delete a department
+- [`useDepartmentsGet`](docs/sdks/departments/README.md#get) - Get a department
+- [`useDepartmentsList`](docs/sdks/departments/README.md#list) - Get all departments of a company
+- [`useDepartmentsRemovePeopleMutation`](docs/sdks/departments/README.md#removepeople) - Remove people from a department
+- [`useDepartmentsUpdateMutation`](docs/sdks/departments/README.md#update) - Update a department
+- [`useEarningTypesCreateMutation`](docs/sdks/earningtypes/README.md#create) - Create a custom earning type
+- [`useEarningTypesDeactivateMutation`](docs/sdks/earningtypes/README.md#deactivate) - Deactivate an earning type
+- [`useEarningTypesGetAll`](docs/sdks/earningtypes/README.md#getall) - Get all earning types for a company
+- [`useEarningTypesUpdateMutation`](docs/sdks/earningtypes/README.md#update) - Update an earning type
+- [`useEmployeeAddressesCreateMutation`](docs/sdks/employeeaddresses/README.md#create) - Create an employee's home address
+- [`useEmployeeAddressesDeleteMutation`](docs/sdks/employeeaddresses/README.md#delete) - Delete an employee's work address
+- [`useEmployeeAddressesGet`](docs/sdks/employeeaddresses/README.md#get) - Get an employee's work addresses
+- [`useEmployeeAddressesGetHomeAddress`](docs/sdks/employeeaddresses/README.md#gethomeaddress) - Get an employee's home address
+- [`useEmployeeAddressesGetHomeAddresses`](docs/sdks/employeeaddresses/README.md#gethomeaddresses) - Get an employee's home addresses
+- [`useEmployeeAddressesGetWorkAddress`](docs/sdks/employeeaddresses/README.md#getworkaddress) - Get an employee work address
+- [`useEmployeeAddressesRemoveHomeAddressMutation`](docs/sdks/employeeaddresses/README.md#removehomeaddress) - Delete an employee's home address
+- [`useEmployeeAddressesUpdateHomeAddressMutation`](docs/sdks/employeeaddresses/README.md#updatehomeaddress) - Update an employee's home address
+- [`useEmployeeAddressesUpdateWorkAddressMutation`](docs/sdks/employeeaddresses/README.md#updateworkaddress) - Update an employee work address
+- [`useEmployeeAddressesWorkAddressesCreateMutation`](docs/sdks/workaddresses/README.md#create) - Create an employee work address
+- [`useEmployeeBenefitsCreateBenefitMutation`](docs/sdks/employeebenefits/README.md#createbenefit) - Create an employee benefit
+- [`useEmployeeBenefitsCreateYtdAmountsFromDifferentCompanyMutation`](docs/sdks/employeebenefits/README.md#createytdamountsfromdifferentcompany) - Create year-to-date benefit amounts from a different company
+- [`useEmployeeBenefitsDeleteMutation`](docs/sdks/employeebenefits/README.md#delete) - Delete an employee benefit
+- [`useEmployeeBenefitsGet`](docs/sdks/employeebenefits/README.md#get) - Get an employee benefit
+- [`useEmployeeBenefitsGetAll`](docs/sdks/employeebenefits/README.md#getall) - Get all benefits for an employee
+- [`useEmployeeBenefitsGetEmployeeYtdBenefitAmountsFromDifferentCompany`](docs/sdks/employeebenefits/README.md#getemployeeytdbenefitamountsfromdifferentcompany) - Get year-to-date benefit amounts from a different company
+- [`useEmployeeBenefitsUpdateMutation`](docs/sdks/employeebenefits/README.md#update) - Update an employee benefit
+- [`useEmployeeEmploymentsCreateRehireMutation`](docs/sdks/employeeemployments/README.md#createrehire) - Create an employee rehire
+- [`useEmployeeEmploymentsCreateTerminationMutation`](docs/sdks/employeeemployments/README.md#createtermination) - Create an employee termination
+- [`useEmployeeEmploymentsDeleteRehireMutation`](docs/sdks/employeeemployments/README.md#deleterehire) - Delete an employee rehire
+- [`useEmployeeEmploymentsDeleteTerminationMutation`](docs/sdks/employeeemployments/README.md#deletetermination) - Delete an employee termination
+- [`useEmployeeEmploymentsGetHistory`](docs/sdks/employeeemployments/README.md#gethistory) - Get employment history for an employee
+- [`useEmployeeEmploymentsGetRehire`](docs/sdks/employeeemployments/README.md#getrehire) - Get an employee rehire
+- [`useEmployeeEmploymentsGetTermination`](docs/sdks/employeeemployments/README.md#gettermination) - Get terminations for an employee
+- [`useEmployeeEmploymentsUpdateRehireMutation`](docs/sdks/employeeemployments/README.md#updaterehire) - Update an employee rehire
+- [`useEmployeeEmploymentsUpdateTerminationMutation`](docs/sdks/employeeemployments/README.md#updatetermination) - Update an employee termination
+- [`useEmployeeFormsGenerateW2Mutation`](docs/sdks/employeeforms/README.md#generatew2) - Generate a W2 form [DEMO]
+- [`useEmployeeFormsGetAll`](docs/sdks/employeeforms/README.md#getall) - Get all employee forms
+- [`useEmployeeFormsGetForm`](docs/sdks/employeeforms/README.md#getform) - Get an employee form
+- [`useEmployeeFormsGetPdf`](docs/sdks/employeeforms/README.md#getpdf) - Get the employee form pdf
+- [`useEmployeeFormsSignMutation`](docs/sdks/employeeforms/README.md#sign) - Sign an employee form
+- [`useEmployeePaymentMethodCreateBankAccountMutation`](docs/sdks/employeepaymentmethod/README.md#createbankaccount) - Create an employee bank account
+- [`useEmployeePaymentMethodDeleteBankAccountMutation`](docs/sdks/employeepaymentmethod/README.md#deletebankaccount) - Delete an employee bank account
+- [`useEmployeePaymentMethodGet`](docs/sdks/employeepaymentmethod/README.md#get) - Get an employee's payment method
+- [`useEmployeePaymentMethodsGetBankAccounts`](docs/sdks/employeepaymentmethods/README.md#getbankaccounts) - Get all employee bank accounts
+- [`useEmployeePaymentMethodUpdateBankAccountMutation`](docs/sdks/employeepaymentmethod/README.md#updatebankaccount) - Update an employee bank account
+- [`useEmployeePaymentMethodUpdateMutation`](docs/sdks/employeepaymentmethod/README.md#update) - Update an employee's payment method
+- [`useEmployeesCreateHistoricalMutation`](docs/sdks/employees/README.md#createhistorical) - Create a historical employee
+- [`useEmployeesCreateMutation`](docs/sdks/employees/README.md#create) - Create an employee
+- [`useEmployeesDeleteMutation`](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
+- [`useEmployeesGet`](docs/sdks/employees/README.md#get) - Get employees of a company
+- [`useEmployeesGetCustomFields`](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
+- [`useEmployeesGetOnboardingStatus`](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
+- [`useEmployeesGetTimeOffActivities`](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
+- [`useEmployeesRetrieve`](docs/sdks/employees/README.md#retrieve) - Get an employee
+- [`useEmployeesUpdateHistoricalMutation`](docs/sdks/employees/README.md#updatehistorical) - Update a historical employee
+- [`useEmployeesUpdateMutation`](docs/sdks/employees/README.md#update) - Update an employee
+- [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+- [`useEmployeesUpdateOnboardingStatusMutation`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
+- [`useEmployeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
+- [`useEmployeeTaxSetupGetStateTaxes`](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
+- [`useEmployeeTaxSetupUpdateFederalTaxesMutation`](docs/sdks/employeetaxsetup/README.md#updatefederaltaxes) - Update an employee's federal taxes
+- [`useEmployeeTaxSetupUpdateStateTaxesMutation`](docs/sdks/employeetaxsetup/README.md#updatestatetaxes) - Update an employee's state taxes
+- [`useEventsList`](docs/sdks/events/README.md#list) - Get all events
+- [`useExternalPayrollsCreateMutation`](docs/sdks/externalpayrolls/README.md#create) - Create a new external payroll for a company
+- [`useExternalPayrollsDeleteMutation`](docs/sdks/externalpayrolls/README.md#delete) - Delete an external payroll
+- [`useExternalPayrollsFinalizeTaxLiabilitiesMutation`](docs/sdks/externalpayrolls/README.md#finalizetaxliabilities) - Finalize tax liabilities options and convert into processed payrolls
+- [`useExternalPayrollsGet`](docs/sdks/externalpayrolls/README.md#get) - Get an external payroll
+- [`useExternalPayrollsGetTaxLiabilities`](docs/sdks/externalpayrolls/README.md#gettaxliabilities) - Get tax liabilities
+- [`useExternalPayrollsGetTaxSuggestions`](docs/sdks/externalpayrolls/README.md#gettaxsuggestions) - Get tax suggestions for an external payroll
+- [`useExternalPayrollsList`](docs/sdks/externalpayrolls/README.md#list) - Get external payrolls for a company
+- [`useExternalPayrollsUpdateMutation`](docs/sdks/externalpayrolls/README.md#update) - Update an external payroll
+- [`useExternalPayrollsUpdateTaxLiabilitiesMutation`](docs/sdks/externalpayrolls/README.md#updatetaxliabilities) - Update tax liabilities
+- [`useFederalTaxDetailsGet`](docs/sdks/federaltaxdetails/README.md#get) - Get Federal Tax Details
+- [`useFederalTaxDetailsUpdateMutation`](docs/sdks/federaltaxdetails/README.md#update) - Update Federal Tax Details
+- [`useFlowsCreateMutation`](docs/sdks/flows/README.md#create) - Create a flow
+- [`useGarnishmentsCreateMutation`](docs/sdks/garnishments/README.md#create) - Create a garnishment
+- [`useGarnishmentsFetch`](docs/sdks/garnishments/README.md#fetch) - Get a garnishment
+- [`useGarnishmentsGet`](docs/sdks/garnishments/README.md#get) - Get garnishments for an employee
+- [`useGarnishmentsGetChildSupport`](docs/sdks/garnishments/README.md#getchildsupport) - Get child support garnishment data
+- [`useGarnishmentsUpdateMutation`](docs/sdks/garnishments/README.md#update) - Update a garnishment
+- [`useGeneratedDocumentsGet`](docs/sdks/generateddocuments/README.md#get) - Get a generated document
+- [`useHolidayPayPoliciesAddEmployeesMutation`](docs/sdks/holidaypaypolicies/README.md#addemployees) - Add employees to a company's holiday pay policy
+- [`useHolidayPayPoliciesCreateMutation`](docs/sdks/holidaypaypolicies/README.md#create) - Create a holiday pay policy for a company
+- [`useHolidayPayPoliciesDeleteMutation`](docs/sdks/holidaypaypolicies/README.md#delete) - Delete a company's holiday pay policy
+- [`useHolidayPayPoliciesGet`](docs/sdks/holidaypaypolicies/README.md#get) - Get a company's holiday pay policy
+- [`useHolidayPayPoliciesRemoveEmployeesMutation`](docs/sdks/holidaypaypolicies/README.md#removeemployees) - Remove employees from a company's holiday pay policy
+- [`useHolidayPayPoliciesUpdateMutation`](docs/sdks/holidaypaypolicies/README.md#update) - Update a company's holiday pay policy
+- [`useI9VerificationCreateDocumentsMutation`](docs/sdks/i9verification/README.md#createdocuments) - Create an employee's I-9 authorization verification documents
+- [`useI9VerificationCreateOrUpdateMutation`](docs/sdks/i9verification/README.md#createorupdate) - Create or update an employee's I-9 authorization
+- [`useI9VerificationDeleteDocumentMutation`](docs/sdks/i9verification/README.md#deletedocument) - Delete an employee's I-9 verification document
+- [`useI9VerificationEmployerSignMutation`](docs/sdks/i9verification/README.md#employersign) - Employer sign an employee's Form I-9
+- [`useI9VerificationGetAuthorization`](docs/sdks/i9verification/README.md#getauthorization) - Get an employee's I-9 authorization
+- [`useI9VerificationGetDocumentOptions`](docs/sdks/i9verification/README.md#getdocumentoptions) - Get an employee's I-9 verification document options
+- [`useI9VerificationGetDocuments`](docs/sdks/i9verification/README.md#getdocuments) - Get an employee's I-9 verification documents
+- [`useIndustrySelectionGet`](docs/sdks/industryselection/README.md#get) - Get a company industry selection
+- [`useIndustrySelectionUpdateMutation`](docs/sdks/industryselection/README.md#update) - Update a company industry selection
+- [`useIntrospectionGetTokenInfo`](docs/sdks/introspection/README.md#gettokeninfo) - Get info about the current access token
+- [`useIntrospectionRefreshAccessTokenMutation`](docs/sdks/introspection/README.md#refreshaccesstoken) - Refresh access token
+- [`useInvoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve invoicing data for companies
+- [`useJobsAndCompensationsCreateCompensationMutation`](docs/sdks/jobsandcompensations/README.md#createcompensation) - Create a compensation
+- [`useJobsAndCompensationsCreateJobMutation`](docs/sdks/jobsandcompensations/README.md#createjob) - Create a job
+- [`useJobsAndCompensationsDeleteCompensationMutation`](docs/sdks/jobsandcompensations/README.md#deletecompensation) - Delete a compensation
+- [`useJobsAndCompensationsDeleteJobMutation`](docs/sdks/jobsandcompensations/README.md#deletejob) - Delete an individual job
+- [`useJobsAndCompensationsGetCompensation`](docs/sdks/jobsandcompensations/README.md#getcompensation) - Get a compensation
+- [`useJobsAndCompensationsGetCompensations`](docs/sdks/jobsandcompensations/README.md#getcompensations) - Get compensations for a job
+- [`useJobsAndCompensationsGetJob`](docs/sdks/jobsandcompensations/README.md#getjob) - Get a job
+- [`useJobsAndCompensationsGetJobs`](docs/sdks/jobsandcompensations/README.md#getjobs) - Get jobs for an employee
+- [`useJobsAndCompensationsUpdateCompensationMutation`](docs/sdks/jobsandcompensations/README.md#updatecompensation) - Update a compensation
+- [`useJobsAndCompensationsUpdateMutation`](docs/sdks/jobsandcompensations/README.md#update) - Update a job
+- [`useLocationsCreateMutation`](docs/sdks/locations/README.md#create) - Create a company location
+- [`useLocationsGet`](docs/sdks/locations/README.md#get) - Get a location
+- [`useLocationsGetAll`](docs/sdks/locations/README.md#getall) - Get company locations
+- [`useLocationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
+- [`useLocationsUpdateMutation`](docs/sdks/locations/README.md#update) - Update a location
+- [`useNotificationsGet`](docs/sdks/notifications/README.md#get) - Get a notification's details
+- [`usePaymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
+- [`usePaymentConfigsUpdateMutation`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
+- [`usePayrollsCalculateGrossUpMutation`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up
+- [`usePayrollsCalculateMutation`](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
+- [`usePayrollsCancelMutation`](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
+- [`usePayrollsCreateMutation`](docs/sdks/payrolls/README.md#create) - Create an off-cycle payroll
+- [`usePayrollsDeleteMutation`](docs/sdks/payrolls/README.md#delete) - Delete a payroll
+- [`usePayrollsGeneratePrintableChecksMutation`](docs/sdks/payrolls/README.md#generateprintablechecks) - Generate printable payroll checks (pdf)
+- [`usePayrollsGet`](docs/sdks/payrolls/README.md#get) - Get a single payroll
+- [`usePayrollsGetAll`](docs/sdks/payrolls/README.md#getall) - Get all payrolls for a company
+- [`usePayrollsGetBlockers`](docs/sdks/payrolls/README.md#getblockers) - Get all payroll blockers for a company
+- [`usePayrollsGetPayStub`](docs/sdks/payrolls/README.md#getpaystub) - Get an employee pay stub (pdf)
+- [`usePayrollsGetPayStubs`](docs/sdks/payrolls/README.md#getpaystubs) - Get an employee's pay stubs
+- [`usePayrollsGetReceipt`](docs/sdks/payrolls/README.md#getreceipt) - Get a single payroll receipt
+- [`usePayrollsGetReversals`](docs/sdks/payrolls/README.md#getreversals) - Get approved payroll reversals
+- [`usePayrollsPrepareForUpdateMutation`](docs/sdks/payrolls/README.md#prepareforupdate) - Prepare a payroll for update
+- [`usePayrollsSkipMutation`](docs/sdks/payrolls/README.md#skip) - Skip a payroll
+- [`usePayrollsSubmitMutation`](docs/sdks/payrolls/README.md#submit) - Submit payroll
+- [`usePayrollsUpdateMutation`](docs/sdks/payrolls/README.md#update) - Update a payroll by ID
+- [`usePaySchedulesAssignMutation`](docs/sdks/payschedules/README.md#assign) - Assign pay schedules for a company
+- [`usePaySchedulesCreateMutation`](docs/sdks/payschedules/README.md#create) - Create a new pay schedule
+- [`usePaySchedulesGet`](docs/sdks/payschedules/README.md#get) - Get a pay schedule
+- [`usePaySchedulesGetAssignments`](docs/sdks/payschedules/README.md#getassignments) - Get pay schedule assignments for a company
+- [`usePaySchedulesGetForCompany`](docs/sdks/payschedules/README.md#getforcompany) - Get the pay schedules for a company
+- [`usePaySchedulesList`](docs/sdks/payschedules/README.md#list) - Get pay periods for a company
+- [`usePaySchedulesListUnprocessedTerminationPeriods`](docs/sdks/payschedules/README.md#listunprocessedterminationperiods) - Get termination pay periods for a company
+- [`usePaySchedulesPreview`](docs/sdks/payschedules/README.md#preview) - Preview pay schedule dates
+- [`usePaySchedulesPreviewAssignmentMutation`](docs/sdks/payschedules/README.md#previewassignment) - Preview pay schedule assignments for a company
+- [`usePaySchedulesUpdateMutation`](docs/sdks/payschedules/README.md#update) - Update a pay schedule
+- [`useRecoveryCasesGetAll`](docs/sdks/recoverycases/README.md#getall) - Get all recovery cases for a company
+- [`useRecoveryCasesRedebitMutation`](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
+- [`useReportsCreateMutation`](docs/sdks/reports/README.md#create) - Create a custom report
+- [`useReportsGet`](docs/sdks/reports/README.md#get) - Get a report
+- [`useReportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
+- [`useSignatoriesCreateMutation`](docs/sdks/signatories/README.md#create) - Create a signatory
+- [`useSignatoriesDeleteMutation`](docs/sdks/signatories/README.md#delete) - Delete a signatory
+- [`useSignatoriesGet`](docs/sdks/signatories/README.md#get) - Get all company signatories
+- [`useSignatoriesInviteMutation`](docs/sdks/signatories/README.md#invite) - Invite a signatory
+- [`useSignatoriesUpdateMutation`](docs/sdks/signatories/README.md#update) - Update a signatory
+- [`useTaxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
+- [`useTaxRequirementsGetByState`](docs/sdks/taxrequirements/README.md#getbystate) - Get State Tax Requirements
+- [`useTaxRequirementsUpdateMutation`](docs/sdks/taxrequirements/README.md#update) - Update State Tax Requirements
+- [`useTimeOffPoliciesAddEmployeesMutation`](docs/sdks/timeoffpolicies/README.md#addemployees) - Add employees to a time off policy
+- [`useTimeOffPoliciesCalculateAccruingHoursMutation`](docs/sdks/timeoffpolicies/README.md#calculateaccruinghours) - Calculate accruing time off hours
+- [`useTimeOffPoliciesCreateMutation`](docs/sdks/timeoffpolicies/README.md#create) - Create a time off policy
+- [`useTimeOffPoliciesDeactivateMutation`](docs/sdks/timeoffpolicies/README.md#deactivate) - Deactivate a time off policy
+- [`useTimeOffPoliciesGet`](docs/sdks/timeoffpolicies/README.md#get) - Get all time off policies
+- [`useTimeOffPoliciesRemoveEmployeesMutation`](docs/sdks/timeoffpolicies/README.md#removeemployees) - Remove employees from a time off policy
+- [`useTimeOffPoliciesRetrieve`](docs/sdks/timeoffpolicies/README.md#retrieve) - Get a time off policy
+- [`useTimeOffPoliciesUpdateBalanceMutation`](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off hour balances
+- [`useTimeOffPoliciesUpdateMutation`](docs/sdks/timeoffpolicies/README.md#update) - Update a time off policy
+- [`useWebhooksCreateSubscriptionMutation`](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
+- [`useWebhooksDeleteMutation`](docs/sdks/webhooks/README.md#delete) - Delete a webhook subscription
+- [`useWebhooksGet`](docs/sdks/webhooks/README.md#get) - Get a webhook subscription
+- [`useWebhooksListSubscriptions`](docs/sdks/webhooks/README.md#listsubscriptions) - List webhook subscriptions
+- [`useWebhooksRequestVerificationToken`](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
+- [`useWebhooksUpdateSubscriptionMutation`](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
+- [`useWebhooksVerifySubscriptionMutation`](docs/sdks/webhooks/README.md#verifysubscription) - Verify the webhook subscription
+- [`useWireInRequestsGet`](docs/sdks/wireinrequests/README.md#get) - Get a single Wire In Request
+- [`useWireInRequestsGetAll`](docs/sdks/wireinrequests/README.md#getall) - Get all Wire In Requests for a company
+- [`useWireInRequestsSubmitRequestMutation`](docs/sdks/wireinrequests/README.md#submitrequest) - Submit a wire in request
+
+</details>
+<!-- End React hooks with TanStack Query [react-query] -->
+
 <!-- Start File uploads [file-upload] -->
 ## File uploads
 
@@ -855,7 +1139,8 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 > - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { openAsBlob } from "node:fs";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -864,6 +1149,10 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
+    requestBody: {
+      category: "gep_notice",
+      document: await openAsBlob("example.file"),
+    },
   });
 
   // Handle the result
@@ -882,7 +1171,7 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -912,7 +1201,7 @@ run();
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   retryConfig: {
@@ -953,11 +1242,11 @@ Some methods specify known errors which can be thrown. All the known errors are 
 If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 import {
   SDKValidationError,
   UnprocessableEntityErrorObject,
-} from "gusto-embedded/models/errors";
+} from "@gusto/embedded-api/models/errors";
 
 const gustoEmbedded = new GustoEmbedded();
 
@@ -1032,7 +1321,7 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   serverURL: "https://api.gusto-demo.com",
@@ -1069,8 +1358,8 @@ custom header and a timeout to requests and how to use the `"requestError"` hook
 to log errors:
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
-import { HTTPClient } from "gusto-embedded/lib/http";
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { HTTPClient } from "@gusto/embedded-api/lib/http";
 
 const httpClient = new HTTPClient({
   // fetcher takes a function that has the same signature as native `fetch`.
@@ -1111,7 +1400,7 @@ You can pass a logger that matches `console`'s interface as an SDK option.
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const sdk = new GustoEmbedded({ debugLogger: console });
 ```

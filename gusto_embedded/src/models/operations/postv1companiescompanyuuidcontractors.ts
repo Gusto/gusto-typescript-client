@@ -148,7 +148,7 @@ export type PostV1CompaniesCompanyUuidContractorsRequest = {
   /**
    * Create an individual or business contractor.
    */
-  requestBody?: PostV1CompaniesCompanyUuidContractorsRequestBody | undefined;
+  requestBody: PostV1CompaniesCompanyUuidContractorsRequestBody;
 };
 
 /** @internal */
@@ -346,7 +346,7 @@ export const PostV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyUuidContractorsRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -359,9 +359,7 @@ export const PostV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
 export type PostV1CompaniesCompanyUuidContractorsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PostV1CompaniesCompanyUuidContractorsRequestBody$Outbound
-    | undefined;
+  RequestBody: PostV1CompaniesCompanyUuidContractorsRequestBody$Outbound;
 };
 
 /** @internal */
@@ -375,7 +373,7 @@ export const PostV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyUuidContractorsRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

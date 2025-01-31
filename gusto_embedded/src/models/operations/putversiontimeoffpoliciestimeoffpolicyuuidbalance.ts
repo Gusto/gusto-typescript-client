@@ -35,9 +35,7 @@ export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest = {
   /**
    * A list of employee objects containing the employee uuid and time off hours balance
    */
-  requestBody?:
-    | PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody
-    | undefined;
+  requestBody: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody;
 };
 
 /** @internal */
@@ -200,7 +198,7 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSch
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "time_off_policy_uuid": "timeOffPolicyUuid",
@@ -214,9 +212,8 @@ export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$Outbound =
   {
     time_off_policy_uuid: string;
     "X-Gusto-API-Version"?: string | undefined;
-    RequestBody?:
-      | PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$Outbound
-      | undefined;
+    RequestBody:
+      PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$Outbound;
   };
 
 /** @internal */
@@ -230,7 +227,7 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$outboundSc
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       timeOffPolicyUuid: "time_off_policy_uuid",

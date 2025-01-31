@@ -23,6 +23,7 @@ import { EmployeeBenefits } from "./employeebenefits.js";
 import { EmployeeEmployments } from "./employeeemployments.js";
 import { EmployeeForms } from "./employeeforms.js";
 import { EmployeePaymentMethod } from "./employeepaymentmethod.js";
+import { EmployeePaymentMethods } from "./employeepaymentmethods.js";
 import { Employees } from "./employees.js";
 import { EmployeeTaxSetup } from "./employeetaxsetup.js";
 import { Events } from "./events.js";
@@ -151,6 +152,13 @@ export class GustoEmbedded extends ClientSDK {
   private _employeePaymentMethod?: EmployeePaymentMethod;
   get employeePaymentMethod(): EmployeePaymentMethod {
     return (this._employeePaymentMethod ??= new EmployeePaymentMethod(
+      this._options,
+    ));
+  }
+
+  private _employeePaymentMethods?: EmployeePaymentMethods;
+  get employeePaymentMethods(): EmployeePaymentMethods {
+    return (this._employeePaymentMethods ??= new EmployeePaymentMethods(
       this._options,
     ));
   }

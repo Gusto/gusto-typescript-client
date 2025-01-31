@@ -5,7 +5,7 @@ Information for the user who will be the primary payroll administrator for the n
 ## Example Usage
 
 ```typescript
-import { User } from "gusto-embedded/models/operations";
+import { User } from "@gusto/embedded-api/models/operations";
 
 let value: User = {
   firstName: "Elisha",

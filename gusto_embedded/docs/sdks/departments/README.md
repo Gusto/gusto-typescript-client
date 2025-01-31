@@ -22,7 +22,7 @@ scope: `departments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -48,8 +48,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { departmentsCreate } from "gusto-embedded/funcs/departmentsCreate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsCreate } from "@gusto/embedded-api/funcs/departmentsCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -76,6 +76,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsCreateMutation
+} from "@gusto/embedded-api/react-query/departmentsCreate.js";
 ```
 
 ### Parameters
@@ -107,7 +124,7 @@ scope: `departments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -130,8 +147,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { departmentsList } from "gusto-embedded/funcs/departmentsList.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsList } from "@gusto/embedded-api/funcs/departmentsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -155,6 +172,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useDepartmentsList,
+  useDepartmentsListSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchDepartmentsList,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateDepartmentsList,
+  invalidateAllDepartmentsList,
+} from "@gusto/embedded-api/react-query/departmentsList.js";
 ```
 
 ### Parameters
@@ -186,7 +231,7 @@ scope: `departments:read`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -209,8 +254,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { departmentsGet } from "gusto-embedded/funcs/departmentsGet.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsGet } from "@gusto/embedded-api/funcs/departmentsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -234,6 +279,34 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useDepartmentsGet,
+  useDepartmentsGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchDepartmentsGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateDepartmentsGet,
+  invalidateAllDepartmentsGet,
+} from "@gusto/embedded-api/react-query/departmentsGet.js";
 ```
 
 ### Parameters
@@ -264,7 +337,7 @@ scope: `departments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -291,8 +364,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { departmentsUpdate } from "gusto-embedded/funcs/departmentsUpdate.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsUpdate } from "@gusto/embedded-api/funcs/departmentsUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -320,6 +393,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsUpdateMutation
+} from "@gusto/embedded-api/react-query/departmentsUpdate.js";
 ```
 
 ### Parameters
@@ -352,7 +442,7 @@ scope: `departments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -374,8 +464,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { departmentsDelete } from "gusto-embedded/funcs/departmentsDelete.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsDelete } from "@gusto/embedded-api/funcs/departmentsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -398,6 +488,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsDeleteMutation
+} from "@gusto/embedded-api/react-query/departmentsDelete.js";
 ```
 
 ### Parameters
@@ -430,7 +537,7 @@ scope: `departments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -439,6 +546,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.addPeople({
     departmentUuid: "<id>",
+    requestBody: {},
   });
 
   // Handle the result
@@ -453,8 +561,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { departmentsAddPeople } from "gusto-embedded/funcs/departmentsAddPeople.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsAddPeople } from "@gusto/embedded-api/funcs/departmentsAddPeople.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -465,6 +573,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsAddPeople(gustoEmbedded, {
     departmentUuid: "<id>",
+    requestBody: {},
   });
 
   if (!res.ok) {
@@ -478,6 +587,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsAddPeopleMutation
+} from "@gusto/embedded-api/react-query/departmentsAddPeople.js";
 ```
 
 ### Parameters
@@ -509,7 +635,7 @@ scope: `departments:write`
 ### Example Usage
 
 ```typescript
-import { GustoEmbedded } from "gusto-embedded";
+import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -518,6 +644,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.departments.removePeople({
     departmentUuid: "<id>",
+    requestBody: {},
   });
 
   // Handle the result
@@ -532,8 +659,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { GustoEmbeddedCore } from "gusto-embedded/core.js";
-import { departmentsRemovePeople } from "gusto-embedded/funcs/departmentsRemovePeople.js";
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsRemovePeople } from "@gusto/embedded-api/funcs/departmentsRemovePeople.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -544,6 +671,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await departmentsRemovePeople(gustoEmbedded, {
     departmentUuid: "<id>",
+    requestBody: {},
   });
 
   if (!res.ok) {
@@ -557,6 +685,23 @@ async function run() {
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsRemovePeopleMutation
+} from "@gusto/embedded-api/react-query/departmentsRemovePeople.js";
 ```
 
 ### Parameters

@@ -5,9 +5,9 @@ The contractor's wage type, either "Fixed" or "Hourly".
 ## Example Usage
 
 ```typescript
-import { WageType } from "gusto-embedded/models/components";
+import { WageType } from "@gusto/embedded-api/models/components";
 
-let value: WageType = "Hourly";
+let value: WageType = "Fixed";
 ```
 
 ## Values

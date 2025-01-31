@@ -151,8 +151,8 @@ export async function companiesCreatePartnerManaged(
       200,
       operations.PostV1PartnerManagedCompaniesResponseBody$inboundSchema,
     ),
-    M.fail([401, "4XX"]),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail([401, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

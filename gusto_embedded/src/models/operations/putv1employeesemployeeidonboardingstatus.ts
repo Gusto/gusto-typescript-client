@@ -25,7 +25,7 @@ export type PutV1EmployeesEmployeeIdOnboardingStatusRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody?: PutV1EmployeesEmployeeIdOnboardingStatusRequestBody | undefined;
+  requestBody: PutV1EmployeesEmployeeIdOnboardingStatusRequestBody;
 };
 
 /** @internal */
@@ -115,7 +115,7 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema:
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -128,9 +128,7 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema:
 export type PutV1EmployeesEmployeeIdOnboardingStatusRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version"?: string | undefined;
-  RequestBody?:
-    | PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$Outbound
-    | undefined;
+  RequestBody: PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$Outbound;
 };
 
 /** @internal */
@@ -144,7 +142,7 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema:
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$outboundSchema
-    ).optional(),
+    ),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

@@ -5,7 +5,7 @@ The type of file to generate
 ## Example Usage
 
 ```typescript
-import { FileType } from "gusto-embedded/models/operations";
+import { FileType } from "@gusto/embedded-api/models/operations";
 
 let value: FileType = "csv";
 ```

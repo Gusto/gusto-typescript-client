@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { PayScheduleAssignmentBody } from "gusto-embedded/models/components";
+import { PayScheduleAssignmentBody } from "@gusto/embedded-api/models/components";
 
 let value: PayScheduleAssignmentBody = {
-  type: "by_employee",
+  type: "hourly_salaried",
 };
 ```
 

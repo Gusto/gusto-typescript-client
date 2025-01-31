@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompanyFlowsRequestBody } from "gusto-embedded/models/operations";
+import { PostV1CompanyFlowsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompanyFlowsRequestBody = {
   flowType: "<value>",
