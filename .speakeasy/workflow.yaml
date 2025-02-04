@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     GustoEmbedded-OAS:
         inputs:
-            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/ar/add-oauth-to-openapispec/generated/embedded/api.v2024-04-01.embedded.yaml
+            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2024-04-01.embedded.yaml
               authHeader: Authorization
               authSecret: $openapi_doc_auth_token
         overlays:
