@@ -18,7 +18,6 @@ import {
 type Credentials = {
   clientID: string;
   clientSecret: string;
-  tokenURL: string | undefined;
 };
 
 type Session = {
@@ -46,11 +45,6 @@ export class ClientCredentialsHook
     hookCtx: BeforeRequestContext,
     request: Request
   ): Promise<Request> {
-    if (!hookCtx.oAuth2Scopes) {
-      // OAuth2 not in use
-      return request;
-    }
-
     const credentials = await this.getCredentials(hookCtx.securitySource);
     if (!credentials) {
       return request;
@@ -61,12 +55,12 @@ export class ClientCredentialsHook
     let session = this.sessions[sessionKey];
     if (
       !session ||
-      !this.hasRequiredScopes(session.scopes, hookCtx.oAuth2Scopes) ||
+      !this.hasRequiredScopes(session.scopes, hookCtx.oAuth2Scopes || []) ||
       this.hasTokenExpired(session.expiresAt)
     ) {
       session = await this.doTokenRequest(
         credentials,
-        this.getScopes(hookCtx.oAuth2Scopes, session)
+        this.getScopes(hookCtx.oAuth2Scopes || [], session)
       );
 
       this.sessions[sessionKey] = session;
@@ -82,11 +76,8 @@ export class ClientCredentialsHook
     response: Response | null,
     error: unknown
   ): Promise<{ response: Response | null; error: unknown }> {
-    if (!hookCtx.oAuth2Scopes) {
-      // OAuth2 not in use
-      return { response, error };
-    }
-
+    // TODO I wonder if this only works if we don't define a 401 error on each
+    // request
     if (error) {
       return { response, error };
     }
@@ -117,7 +108,7 @@ export class ClientCredentialsHook
       formData.append("scope", scopes.join(" "));
     }
 
-    const tokenURL = new URL(credentials.tokenURL ?? "", this.baseURL ?? "");
+    const tokenURL = `${this.baseURL}/oauth/token`;
 
     const request = new Request(tokenURL, {
       method: "POST",
@@ -181,10 +172,12 @@ export class ClientCredentialsHook
     );
 
     return {
-      clientID: out?.clientID ?? env().GUSTOEMBEDDED_CLIENT_ID ?? "",
+      clientID:
+        out?.SystemAccessAuth?.clientId ?? env().GUSTOEMBEDDED_CLIENT_ID ?? "",
       clientSecret:
-        out?.clientSecret ?? env().GUSTOEMBEDDED_CLIENT_SECRET ?? "",
-      tokenURL: out?.tokenURL ?? env().GUSTOEMBEDDED_TOKEN_URL ?? "",
+        out?.SystemAccessAuth?.clientSecret ??
+        env().GUSTOEMBEDDED_CLIENT_SECRET ??
+        "",
     };
   }
 
