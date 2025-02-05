@@ -7,6 +7,11 @@ info:
     before: ""
     type: speakeasy-modifications
 actions:
+  - target: $["servers"]
+    update:
+      - url: https://api.gusto.com
+        description: Prod
+        x-speakeasy-server-id: prod
   - target: $["paths"]["/v1/companies/{company_id}/bank_accounts/{bank_account_uuid}/verify"]["put"]
     update:
       x-speakeasy-group: bankAccounts
