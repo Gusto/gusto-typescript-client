@@ -56,19 +56,19 @@ workflows:
               }
             type: simple
     x-speakeasy-test-group: Introspection
-  - workflowId: company-onboarding-2
+  - workflowId: company-onboarding
     steps:
       - stepId: create_partner_managed_company
         x-speakeasy-test-security:
           value:
-            systemAccessAuth: o7pmswDNpGc0vMaXSTM-o2Ub6IXScGwCtFVAG0cVaFg
+            SystemAccessAuth: "x-env: SYSTEM_ACCESS_AUTH"
         operationId: post-v1-partner-managed-companies
         requestBody:
           contentType: application/json
           payload:
             company:
               contractor_only: false
-              ein: "123456789"
+              ein: "475936507"
               name: Frank's Ocean
               trade_name: Frank’s Ocean
             user:
@@ -79,20 +79,19 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.header.Content-Type == application/json
-            # - condition: $response.body#/accessToken != null
-            # - condition: $response.body#/comanyUuid != null
-            # outputs:
-            #   accessToken: $response.body#/accessToken
-            #   companyId: $response.body#/companyUuid
-            # - stepId: get-company-admins
-            #   operationId: get-v1-companies-company_id-admins
-            #   parameters:
-            #     - name: company_id
-            #       in: path
-            #       value: 123 # $steps.create_partner_managed_company.outputs.companyId
-            #   successCriteria:
-            #     - condition: $statusCode == 200
-            #     - condition: $response.header.Content-Type == application/json
+          - condition: !($response.body#/access_token == null)
+        outputs:
+          accessToken: $response.body#/access_token
+          companyId: $response.body#/company_uuid
+      - stepId: get-company-admins
+        operationId: get-v1-companies-company_id-admins
+        parameters:
+          - name: company_id
+            in: path
+            value: $steps.create_partner_managed_company.outputs.companyId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
     x-speakeasy-test-group: Companies
   - workflowId: post-v1-partner-managed-companies-Basic
     steps:
@@ -1679,6 +1678,7 @@ workflows:
             title: <value>
         successCriteria:
           - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/json
     x-speakeasy-test-group: Signatories
   - workflowId: post-v1-company-signatories-Nested
     steps:
@@ -17965,3 +17965,54 @@ workflows:
               ]
             type: simple
     x-speakeasy-test-group: wireInRequests
+  - workflowId: get-v1-employees-employee_id-terminations-Example
+    steps:
+      - stepId: test
+        operationId: get-v1-employees-employee_id-terminations
+        parameters:
+          - name: employee_id
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              [
+                {
+                  "uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0",
+                  "version": "d487dd0b55dfcacdd920ccbdaeafa351",
+                  "employee_uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0",
+                  "active": true,
+                  "cancelable": true,
+                  "effective_date": "2020-03-10",
+                  "run_termination_payroll": false
+                }
+              ]
+            type: simple
+    x-speakeasy-test-group: employeeEmployments
+  - workflowId: get-v1-employees-employee_id-rehire-Example
+    steps:
+      - stepId: test
+        operationId: get-v1-employees-employee_id-rehire
+        parameters:
+          - name: employee_id
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "version": "2e930d43acbdb241f8f14a2d531fa417",
+                "effective_date": "2024-01-01",
+                "file_new_hire_report": false,
+                "work_location_uuid": "d2c80d44-857b-4d4d-bce4-23ae52cc863b,",
+                "employment_status": "full_time",
+                "two_percent_shareholder": false,
+                "employee_uuid": "da441196-43a9-4d23-ad5d-f37ce6bb99c0",
+                "active": false
+              }
+            type: simple
+    x-speakeasy-test-group: employeeEmployments
