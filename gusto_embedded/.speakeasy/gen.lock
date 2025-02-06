@@ -5,8 +5,8 @@ management:
   docVersion: "2024-04-01"
   speakeasyVersion: 1.486.0
   generationVersion: 2.505.0
-  releaseVersion: 0.1.11
-  configChecksum: e1d7b7204b7ec25286a4c2dd9aa4b56d
+  releaseVersion: 0.1.18
+  configChecksum: b77aaf0cea460fc35a217fc36e0fe618
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
