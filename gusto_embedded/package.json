@@ -1,6 +1,6 @@
 {
   "name": "@gusto/embedded-api",
-  "version": "0.1.11",
+  "version": "0.1.18",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
