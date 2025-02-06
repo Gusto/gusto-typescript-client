@@ -7,11 +7,19 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * An allowed value to answer the question
+ */
+export type EmployeeStateTaxInputQuestionFormatValue =
+  | string
+  | boolean
+  | number;
+
 export type Options = {
   /**
    * An allowed value to answer the question
    */
-  value?: string | undefined;
+  value?: string | boolean | number | undefined;
   /**
    * A display label that corresponds to the answer value
    */
@@ -30,15 +38,77 @@ export type EmployeeStateTaxInputQuestionFormat = {
 };
 
 /** @internal */
+export const EmployeeStateTaxInputQuestionFormatValue$inboundSchema: z.ZodType<
+  EmployeeStateTaxInputQuestionFormatValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.boolean(), z.number()]);
+
+/** @internal */
+export type EmployeeStateTaxInputQuestionFormatValue$Outbound =
+  | string
+  | boolean
+  | number;
+
+/** @internal */
+export const EmployeeStateTaxInputQuestionFormatValue$outboundSchema: z.ZodType<
+  EmployeeStateTaxInputQuestionFormatValue$Outbound,
+  z.ZodTypeDef,
+  EmployeeStateTaxInputQuestionFormatValue
+> = z.union([z.string(), z.boolean(), z.number()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EmployeeStateTaxInputQuestionFormatValue$ {
+  /** @deprecated use `EmployeeStateTaxInputQuestionFormatValue$inboundSchema` instead. */
+  export const inboundSchema =
+    EmployeeStateTaxInputQuestionFormatValue$inboundSchema;
+  /** @deprecated use `EmployeeStateTaxInputQuestionFormatValue$outboundSchema` instead. */
+  export const outboundSchema =
+    EmployeeStateTaxInputQuestionFormatValue$outboundSchema;
+  /** @deprecated use `EmployeeStateTaxInputQuestionFormatValue$Outbound` instead. */
+  export type Outbound = EmployeeStateTaxInputQuestionFormatValue$Outbound;
+}
+
+export function employeeStateTaxInputQuestionFormatValueToJSON(
+  employeeStateTaxInputQuestionFormatValue:
+    EmployeeStateTaxInputQuestionFormatValue,
+): string {
+  return JSON.stringify(
+    EmployeeStateTaxInputQuestionFormatValue$outboundSchema.parse(
+      employeeStateTaxInputQuestionFormatValue,
+    ),
+  );
+}
+
+export function employeeStateTaxInputQuestionFormatValueFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  EmployeeStateTaxInputQuestionFormatValue,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      EmployeeStateTaxInputQuestionFormatValue$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'EmployeeStateTaxInputQuestionFormatValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const Options$inboundSchema: z.ZodType<Options, z.ZodTypeDef, unknown> =
   z.object({
-    value: z.string().optional(),
+    value: z.union([z.string(), z.boolean(), z.number()]).optional(),
     label: z.string(),
   });
 
 /** @internal */
 export type Options$Outbound = {
-  value?: string | undefined;
+  value?: string | boolean | number | undefined;
   label: string;
 };
 
@@ -48,7 +118,7 @@ export const Options$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Options
 > = z.object({
-  value: z.string().optional(),
+  value: z.union([z.string(), z.boolean(), z.number()]).optional(),
   label: z.string(),
 });
 

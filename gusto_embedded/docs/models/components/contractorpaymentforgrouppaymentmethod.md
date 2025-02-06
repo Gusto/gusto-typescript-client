@@ -7,7 +7,7 @@ The payment method.
 ```typescript
 import { ContractorPaymentForGroupPaymentMethod } from "@gusto/embedded-api/models/components";
 
-let value: ContractorPaymentForGroupPaymentMethod = "Correction Payment";
+let value: ContractorPaymentForGroupPaymentMethod = "Historical Payment";
 ```
 
 ## Values

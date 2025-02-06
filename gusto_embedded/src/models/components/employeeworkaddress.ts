@@ -35,7 +35,7 @@ export type EmployeeWorkAddress = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
-  version?: string | undefined;
+  version: string;
   street1?: string | undefined;
   street2?: string | null | undefined;
   city?: string | undefined;
@@ -55,7 +55,7 @@ export const EmployeeWorkAddress$inboundSchema: z.ZodType<
   active: z.boolean().optional(),
   location_uuid: z.string().optional(),
   employee_uuid: z.string().optional(),
-  version: z.string().optional(),
+  version: z.string(),
   street_1: z.string().optional(),
   street_2: z.nullable(z.string()).optional(),
   city: z.string().optional(),
@@ -79,7 +79,7 @@ export type EmployeeWorkAddress$Outbound = {
   active?: boolean | undefined;
   location_uuid?: string | undefined;
   employee_uuid?: string | undefined;
-  version?: string | undefined;
+  version: string;
   street_1?: string | undefined;
   street_2?: string | null | undefined;
   city?: string | undefined;
@@ -99,7 +99,7 @@ export const EmployeeWorkAddress$outboundSchema: z.ZodType<
   active: z.boolean().optional(),
   locationUuid: z.string().optional(),
   employeeUuid: z.string().optional(),
-  version: z.string().optional(),
+  version: z.string(),
   street1: z.string().optional(),
   street2: z.nullable(z.string()).optional(),
   city: z.string().optional(),

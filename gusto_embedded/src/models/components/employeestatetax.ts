@@ -26,7 +26,7 @@ export type EmployeeStateTax = {
    * Two letter US state abbreviation
    */
   state: string;
-  fileNewHireReport?: boolean | undefined;
+  fileNewHireReport?: boolean | null | undefined;
   isWorkState?: boolean | undefined;
   questions: Array<EmployeeStateTaxQuestion>;
 };
@@ -39,7 +39,7 @@ export const EmployeeStateTax$inboundSchema: z.ZodType<
 > = z.object({
   employee_uuid: z.string(),
   state: z.string(),
-  file_new_hire_report: z.boolean().optional(),
+  file_new_hire_report: z.nullable(z.boolean()).optional(),
   is_work_state: z.boolean().optional(),
   questions: z.array(EmployeeStateTaxQuestion$inboundSchema),
 }).transform((v) => {
@@ -54,7 +54,7 @@ export const EmployeeStateTax$inboundSchema: z.ZodType<
 export type EmployeeStateTax$Outbound = {
   employee_uuid: string;
   state: string;
-  file_new_hire_report?: boolean | undefined;
+  file_new_hire_report?: boolean | null | undefined;
   is_work_state?: boolean | undefined;
   questions: Array<EmployeeStateTaxQuestion$Outbound>;
 };
@@ -67,7 +67,7 @@ export const EmployeeStateTax$outboundSchema: z.ZodType<
 > = z.object({
   employeeUuid: z.string(),
   state: z.string(),
-  fileNewHireReport: z.boolean().optional(),
+  fileNewHireReport: z.nullable(z.boolean()).optional(),
   isWorkState: z.boolean().optional(),
   questions: z.array(EmployeeStateTaxQuestion$outboundSchema),
 }).transform((v) => {

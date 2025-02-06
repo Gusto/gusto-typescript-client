@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 51cedd0c66dc2dc3391a6fde1802f480
+  docChecksum: f57a8deae4b93b973939a10950d25dcb
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.481.1
-  generationVersion: 2.500.5
-  releaseVersion: 0.1.5
-  configChecksum: 6749bdabf4f72dea0373366593e1de9f
+  speakeasyVersion: 1.486.0
+  generationVersion: 2.505.0
+  releaseVersion: 0.1.11
+  configChecksum: e1d7b7204b7ec25286a4c2dd9aa4b56d
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.22
+    core: 3.19.0
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.0
@@ -35,6 +35,7 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
+    serverIDs: 2.81.2
     unions: 2.85.8
     uploadStreams: 0.1.0
 generatedFiles:
@@ -166,6 +167,7 @@ generatedFiles:
   - docs/models/components/employeebenefitforcompanybenefitdeductionreducestaxableincome.md
   - docs/models/components/employeebenefitforcompanybenefitvalue.md
   - docs/models/components/employeebenefits.md
+  - docs/models/components/employeebenefitvalue.md
   - docs/models/components/employeechecknumbermapping.md
   - docs/models/components/employeecompensations.md
   - docs/models/components/employeecustomfield.md
@@ -182,6 +184,7 @@ generatedFiles:
   - docs/models/components/employeestatetaxanswer.md
   - docs/models/components/employeestatetaxes.md
   - docs/models/components/employeestatetaxinputquestionformat.md
+  - docs/models/components/employeestatetaxinputquestionformatvalue.md
   - docs/models/components/employeestatetaxquestion.md
   - docs/models/components/employeeworkaddress.md
   - docs/models/components/employmenthistorylist.md
@@ -352,6 +355,7 @@ generatedFiles:
   - docs/models/components/taxrequirementmetadataoptions.md
   - docs/models/components/taxrequirementmetadatatype.md
   - docs/models/components/taxrequirementmetadatavalidationtype.md
+  - docs/models/components/taxrequirementmetadatavalue.md
   - docs/models/components/taxrequirementset.md
   - docs/models/components/taxrequirementsstate.md
   - docs/models/components/taxrequirementvalue.md
@@ -2466,6 +2470,8 @@ examples:
       responses:
         "201":
           application/json: {"uuid": "f8c653dc-0094-41fb-8670-45d6399afade", "first_name": "Bob", "last_name": "Johnson", "title": "Owner", "phone": "4239879876", "email": "olin.okuneva@denesik.us", "birthday": "2002-10-31", "is_admin": false, "has_ssn": true, "version": "49ea586f528411f5cfadfd54452b2423", "identity_verification_status": "Skipped", "home_address": {"street_1": "524 Roob Divide", "street_2": "Suite 565", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA"}}
+        "200":
+          application/json: {"uuid": "f8c653dc-0094-41fb-8670-45d6399afade", "first_name": "Bob", "last_name": "Johnson", "title": "Owner", "phone": "4239879876", "email": "olin.okuneva@denesik.us", "birthday": "2002-10-31", "is_admin": false, "has_ssn": true, "version": "49ea586f528411f5cfadfd54452b2423", "identity_verification_status": "Skipped", "home_address": {"street_1": "524 Roob Divide", "street_2": "Suite 565", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA"}}
     Basic:
       parameters:
         path:
@@ -4069,6 +4075,8 @@ examples:
       responses:
         "200":
           application/json: {"street_1": "644 Fay Vista", "street_2": "Suite 842", "city": "Richmond", "state": "VA", "zip": "23218", "country": "USA", "active": false, "uuid": "56260b3d-c375-415c-b77a-75d99f717193", "effective_date": "2021-01-01", "courtesy_withholding": true}
+        "201":
+          application/json: {"street_1": "644 Fay Vista", "street_2": "Suite 842", "city": "Richmond", "state": "VA", "zip": "23218", "country": "USA", "active": false, "uuid": "56260b3d-c375-415c-b77a-75d99f717193", "effective_date": "2021-01-01", "courtesy_withholding": true}
     Basic:
       parameters:
         path:
@@ -4193,7 +4201,7 @@ examples:
         application/json: {"location_uuid": "6a119be7-b4b0-4e27-aaa0-89d5f2524635", "effective_date": "2023-05-15"}
       responses:
         "201":
-          application/json: {"uuid": "56260b3d-c375-415c-b77a-75d99f717193", "effective_date": "2021-01-01", "active": false, "location_uuid": "6a27753a-3093-41c1-9f25-ea64f15e8266", "employee_uuid": "7087a288-8349-4632-b92e-bc94fb79f29e", "street_1": "644 Fay Vista", "street_2": "Suite 842", "city": "Richmond", "state": "VA", "zip": "23218", "country": "USA"}
+          application/json: {"uuid": "56260b3d-c375-415c-b77a-75d99f717193", "effective_date": "2021-01-01", "active": false, "location_uuid": "6a27753a-3093-41c1-9f25-ea64f15e8266", "employee_uuid": "7087a288-8349-4632-b92e-bc94fb79f29e", "version": "<value>", "street_1": "644 Fay Vista", "street_2": "Suite 842", "city": "Richmond", "state": "VA", "zip": "23218", "country": "USA"}
     Basic:
       parameters:
         path:
@@ -4357,7 +4365,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"employee_uuid": "92fa4d30-e284-43d0-a26e-605619c04beb", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "S", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='http://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "input_question_format": {"type": "Number"}, "answers": [{"value": "1", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "input_question_format": {"type": "Select"}, "answers": [{"value": "true", "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
+          application/json: [{"employee_uuid": "92fa4d30-e284-43d0-a26e-605619c04beb", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "S", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='http://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "input_question_format": {"type": "Number"}, "answers": [{"value": 1, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "input_question_format": {"type": "Select"}, "answers": [{"value": true, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
   put-v1-employees-employee_id-state_taxes:
     Employee-State-Taxes-Update-Example:
       parameters:
@@ -4378,7 +4386,7 @@ examples:
         application/json: {"states": [{"state": "Minnesota"}]}
       responses:
         "200":
-          application/json: [{"employee_uuid": "92fa4d30-e284-43d0-a26e-605619c04beb", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "S", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='http://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "input_question_format": {"type": "Number"}, "answers": [{"value": "1", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "input_question_format": {"type": "Select"}, "answers": [{"value": "true", "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
+          application/json: [{"employee_uuid": "92fa4d30-e284-43d0-a26e-605619c04beb", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "S", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='99' href='http://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "input_question_format": {"type": "Number"}, "answers": [{"value": 1, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "input_question_format": {"type": "Select"}, "answers": [{"value": true, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
   post-v1-employees-employee_id-bank_accounts:
     Example:
       parameters:
@@ -6120,7 +6128,7 @@ examples:
         application/json: {"name": "<value>", "policy_type": "<value>", "accrual_method": "per_anniversary_year"}
       responses:
         "201":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 638424, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 486589, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
     Hourly Vacation Policy:
       parameters:
         path:

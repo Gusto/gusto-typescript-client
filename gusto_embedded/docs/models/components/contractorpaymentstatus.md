@@ -7,7 +7,7 @@ Contractor payment status
 ```typescript
 import { ContractorPaymentStatus } from "@gusto/embedded-api/models/components";
 
-let value: ContractorPaymentStatus = "Funded";
+let value: ContractorPaymentStatus = "Unfunded";
 ```
 
 ## Values

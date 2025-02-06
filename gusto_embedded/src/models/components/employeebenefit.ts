@@ -44,7 +44,7 @@ export type Two = {
  *
  * For the `tiered` contribution type, an array of tiers.
  */
-export type Value = Two | string;
+export type EmployeeBenefitValue = Two | string;
 
 /**
  * An object representing the type and value of the company contribution.
@@ -288,43 +288,50 @@ export function twoFromJSON(
 }
 
 /** @internal */
-export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
-  .union([z.lazy(() => Two$inboundSchema), z.string()]);
-
-/** @internal */
-export type Value$Outbound = Two$Outbound | string;
-
-/** @internal */
-export const Value$outboundSchema: z.ZodType<
-  Value$Outbound,
+export const EmployeeBenefitValue$inboundSchema: z.ZodType<
+  EmployeeBenefitValue,
   z.ZodTypeDef,
-  Value
+  unknown
+> = z.union([z.lazy(() => Two$inboundSchema), z.string()]);
+
+/** @internal */
+export type EmployeeBenefitValue$Outbound = Two$Outbound | string;
+
+/** @internal */
+export const EmployeeBenefitValue$outboundSchema: z.ZodType<
+  EmployeeBenefitValue$Outbound,
+  z.ZodTypeDef,
+  EmployeeBenefitValue
 > = z.union([z.lazy(() => Two$outboundSchema), z.string()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Value$ {
-  /** @deprecated use `Value$inboundSchema` instead. */
-  export const inboundSchema = Value$inboundSchema;
-  /** @deprecated use `Value$outboundSchema` instead. */
-  export const outboundSchema = Value$outboundSchema;
-  /** @deprecated use `Value$Outbound` instead. */
-  export type Outbound = Value$Outbound;
+export namespace EmployeeBenefitValue$ {
+  /** @deprecated use `EmployeeBenefitValue$inboundSchema` instead. */
+  export const inboundSchema = EmployeeBenefitValue$inboundSchema;
+  /** @deprecated use `EmployeeBenefitValue$outboundSchema` instead. */
+  export const outboundSchema = EmployeeBenefitValue$outboundSchema;
+  /** @deprecated use `EmployeeBenefitValue$Outbound` instead. */
+  export type Outbound = EmployeeBenefitValue$Outbound;
 }
 
-export function valueToJSON(value: Value): string {
-  return JSON.stringify(Value$outboundSchema.parse(value));
+export function employeeBenefitValueToJSON(
+  employeeBenefitValue: EmployeeBenefitValue,
+): string {
+  return JSON.stringify(
+    EmployeeBenefitValue$outboundSchema.parse(employeeBenefitValue),
+  );
 }
 
-export function valueFromJSON(
+export function employeeBenefitValueFromJSON(
   jsonString: string,
-): SafeParseResult<Value, SDKValidationError> {
+): SafeParseResult<EmployeeBenefitValue, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Value$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Value' from JSON`,
+    (x) => EmployeeBenefitValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeeBenefitValue' from JSON`,
   );
 }
 

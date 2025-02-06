@@ -8,11 +8,16 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The answer to the corresponding question - this may be a string, number, boolean, or null.
+ */
+export type Value = string | number | boolean;
+
 export type EmployeeStateTaxAnswer = {
   /**
    * The answer to the corresponding question - this may be a string, number, boolean, or null.
    */
-  value?: string | undefined;
+  value?: string | number | boolean | null | undefined;
   /**
    * The effective date of the answer - currently always “2010-01-01”.
    */
@@ -24,12 +29,53 @@ export type EmployeeStateTaxAnswer = {
 };
 
 /** @internal */
+export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
+  .union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type Value$Outbound = string | number | boolean;
+
+/** @internal */
+export const Value$outboundSchema: z.ZodType<
+  Value$Outbound,
+  z.ZodTypeDef,
+  Value
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Value$ {
+  /** @deprecated use `Value$inboundSchema` instead. */
+  export const inboundSchema = Value$inboundSchema;
+  /** @deprecated use `Value$outboundSchema` instead. */
+  export const outboundSchema = Value$outboundSchema;
+  /** @deprecated use `Value$Outbound` instead. */
+  export type Outbound = Value$Outbound;
+}
+
+export function valueToJSON(value: Value): string {
+  return JSON.stringify(Value$outboundSchema.parse(value));
+}
+
+export function valueFromJSON(
+  jsonString: string,
+): SafeParseResult<Value, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Value$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Value' from JSON`,
+  );
+}
+
+/** @internal */
 export const EmployeeStateTaxAnswer$inboundSchema: z.ZodType<
   EmployeeStateTaxAnswer,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  value: z.string().optional(),
+  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
   valid_from: z.string().optional(),
   valid_up_to: z.nullable(z.any()).optional(),
 }).transform((v) => {
@@ -41,7 +87,7 @@ export const EmployeeStateTaxAnswer$inboundSchema: z.ZodType<
 
 /** @internal */
 export type EmployeeStateTaxAnswer$Outbound = {
-  value?: string | undefined;
+  value?: string | number | boolean | null | undefined;
   valid_from?: string | undefined;
   valid_up_to?: any | null | undefined;
 };
@@ -52,7 +98,7 @@ export const EmployeeStateTaxAnswer$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmployeeStateTaxAnswer
 > = z.object({
-  value: z.string().optional(),
+  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
   validFrom: z.string().optional(),
   validUpTo: z.nullable(z.any()).optional(),
 }).transform((v) => {
