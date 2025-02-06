@@ -143,7 +143,7 @@ export async function signatoriesCreate(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(201, components.Signatory$inboundSchema),
+    M.json(200, components.Signatory$inboundSchema),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

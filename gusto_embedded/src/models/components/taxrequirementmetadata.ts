@@ -51,6 +51,11 @@ export type TaxRequirementMetadataType = ClosedEnum<
   typeof TaxRequirementMetadataType
 >;
 
+/**
+ * The actual value to be submitted
+ */
+export type TaxRequirementMetadataValue = string | boolean;
+
 export type TaxRequirementMetadataOptions = {
   /**
    * A customer facing label for the answer
@@ -59,7 +64,7 @@ export type TaxRequirementMetadataOptions = {
   /**
    * The actual value to be submitted
    */
-  value: string;
+  value: string | boolean;
   /**
    * A less verbose label that may sometimes be available
    */
@@ -177,11 +182,11 @@ export type TaxRequirementMetadata = {
    * - mask: `WHT-######` represents `WHT-` followed by 5 digits, e.g. `WHT-33421`
    * - mask: `%####-^^` supports values of `75544-AB` and `Z7654-HK`
    */
-  mask?: string | undefined;
+  mask?: string | null | undefined;
   /**
    * [for `account_number`] A value that precedes the value to be collected - useful for display, but should not be submitted as part of the value. E.g. some tax agencies use an account number that is a company's federal ein plus two digits. In that case the mask would be `##` and the prefix `XXXXX1234`.
    */
-  prefix?: string | undefined;
+  prefix?: string | null | undefined;
   /**
    * [for `tax_rate`] Describes the validation required for the tax rate
    */
@@ -210,13 +215,63 @@ export namespace TaxRequirementMetadataType$ {
 }
 
 /** @internal */
+export const TaxRequirementMetadataValue$inboundSchema: z.ZodType<
+  TaxRequirementMetadataValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.boolean()]);
+
+/** @internal */
+export type TaxRequirementMetadataValue$Outbound = string | boolean;
+
+/** @internal */
+export const TaxRequirementMetadataValue$outboundSchema: z.ZodType<
+  TaxRequirementMetadataValue$Outbound,
+  z.ZodTypeDef,
+  TaxRequirementMetadataValue
+> = z.union([z.string(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TaxRequirementMetadataValue$ {
+  /** @deprecated use `TaxRequirementMetadataValue$inboundSchema` instead. */
+  export const inboundSchema = TaxRequirementMetadataValue$inboundSchema;
+  /** @deprecated use `TaxRequirementMetadataValue$outboundSchema` instead. */
+  export const outboundSchema = TaxRequirementMetadataValue$outboundSchema;
+  /** @deprecated use `TaxRequirementMetadataValue$Outbound` instead. */
+  export type Outbound = TaxRequirementMetadataValue$Outbound;
+}
+
+export function taxRequirementMetadataValueToJSON(
+  taxRequirementMetadataValue: TaxRequirementMetadataValue,
+): string {
+  return JSON.stringify(
+    TaxRequirementMetadataValue$outboundSchema.parse(
+      taxRequirementMetadataValue,
+    ),
+  );
+}
+
+export function taxRequirementMetadataValueFromJSON(
+  jsonString: string,
+): SafeParseResult<TaxRequirementMetadataValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TaxRequirementMetadataValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TaxRequirementMetadataValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const TaxRequirementMetadataOptions$inboundSchema: z.ZodType<
   TaxRequirementMetadataOptions,
   z.ZodTypeDef,
   unknown
 > = z.object({
   label: z.string(),
-  value: z.string(),
+  value: z.union([z.string(), z.boolean()]),
   short_label: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -227,7 +282,7 @@ export const TaxRequirementMetadataOptions$inboundSchema: z.ZodType<
 /** @internal */
 export type TaxRequirementMetadataOptions$Outbound = {
   label: string;
-  value: string;
+  value: string | boolean;
   short_label?: string | undefined;
 };
 
@@ -238,7 +293,7 @@ export const TaxRequirementMetadataOptions$outboundSchema: z.ZodType<
   TaxRequirementMetadataOptions
 > = z.object({
   label: z.string(),
-  value: z.string(),
+  value: z.union([z.string(), z.boolean()]),
   shortLabel: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -393,8 +448,8 @@ export const TaxRequirementMetadata$inboundSchema: z.ZodType<
   risk_class_code: z.string().optional(),
   risk_class_description: z.string().optional(),
   rate_type: RateType$inboundSchema.optional(),
-  mask: z.string().optional(),
-  prefix: z.string().optional(),
+  mask: z.nullable(z.string()).optional(),
+  prefix: z.nullable(z.string()).optional(),
   validation: z.lazy(() => Validation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -411,8 +466,8 @@ export type TaxRequirementMetadata$Outbound = {
   risk_class_code?: string | undefined;
   risk_class_description?: string | undefined;
   rate_type?: string | undefined;
-  mask?: string | undefined;
-  prefix?: string | undefined;
+  mask?: string | null | undefined;
+  prefix?: string | null | undefined;
   validation?: Validation$Outbound | undefined;
 };
 
@@ -428,8 +483,8 @@ export const TaxRequirementMetadata$outboundSchema: z.ZodType<
   riskClassCode: z.string().optional(),
   riskClassDescription: z.string().optional(),
   rateType: RateType$outboundSchema.optional(),
-  mask: z.string().optional(),
-  prefix: z.string().optional(),
+  mask: z.nullable(z.string()).optional(),
+  prefix: z.nullable(z.string()).optional(),
   validation: z.lazy(() => Validation$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

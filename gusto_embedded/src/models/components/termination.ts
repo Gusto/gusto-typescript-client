@@ -23,7 +23,7 @@ export type Termination = {
   /**
    * The UUID of the employee to which this termination is attached.
    */
-  employeeUuid?: number | undefined;
+  employeeUuid?: string | undefined;
   /**
    * Whether the employee's termination has gone into effect.
    */
@@ -50,7 +50,7 @@ export const Termination$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string(),
   version: z.string().optional(),
-  employee_uuid: z.number().int().optional(),
+  employee_uuid: z.string().optional(),
   active: z.boolean().optional(),
   cancelable: z.boolean().optional(),
   effective_date: z.string().optional(),
@@ -67,7 +67,7 @@ export const Termination$inboundSchema: z.ZodType<
 export type Termination$Outbound = {
   uuid: string;
   version?: string | undefined;
-  employee_uuid?: number | undefined;
+  employee_uuid?: string | undefined;
   active?: boolean | undefined;
   cancelable?: boolean | undefined;
   effective_date?: string | undefined;
@@ -82,7 +82,7 @@ export const Termination$outboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string(),
   version: z.string().optional(),
-  employeeUuid: z.number().int().optional(),
+  employeeUuid: z.string().optional(),
   active: z.boolean().optional(),
   cancelable: z.boolean().optional(),
   effectiveDate: z.string().optional(),

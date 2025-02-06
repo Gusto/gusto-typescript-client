@@ -7,7 +7,7 @@ The payment schedule tax rate the payroll is based on. Only included for off-cyc
 ```typescript
 import { PayrollWithholdingPayPeriodType } from "@gusto/embedded-api/models/components";
 
-let value: PayrollWithholdingPayPeriodType = "Every week";
+let value: PayrollWithholdingPayPeriodType = "Semiannually";
 ```
 
 ## Values

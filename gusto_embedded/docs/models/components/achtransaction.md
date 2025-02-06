@@ -8,7 +8,7 @@ Representation of an ACH transaction
 import { AchTransaction } from "@gusto/embedded-api/models/components";
 
 let value: AchTransaction = {
-  uuid: "e2460137-4e5e-4f73-94c4-679f354515e4",
+  uuid: "4679f354-515e-445f-bb8c-1713256f47cd",
 };
 ```
 

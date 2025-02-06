@@ -27,7 +27,7 @@ export type ApplicableIf = {
   /**
    * The required value of the requirement identified by `key`
    */
-  value?: boolean | string | number | undefined;
+  value?: boolean | string | number | null | undefined;
 };
 
 export type TaxRequirement = {
@@ -50,7 +50,7 @@ export type TaxRequirement = {
   /**
    * The "answer"
    */
-  value?: string | undefined;
+  value?: string | null | undefined;
   metadata?: TaxRequirementMetadata | undefined;
 };
 
@@ -109,13 +109,13 @@ export const ApplicableIf$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string().optional(),
-  value: z.union([z.boolean(), z.string(), z.number()]).optional(),
+  value: z.nullable(z.union([z.boolean(), z.string(), z.number()])).optional(),
 });
 
 /** @internal */
 export type ApplicableIf$Outbound = {
   key?: string | undefined;
-  value?: boolean | string | number | undefined;
+  value?: boolean | string | number | null | undefined;
 };
 
 /** @internal */
@@ -125,7 +125,7 @@ export const ApplicableIf$outboundSchema: z.ZodType<
   ApplicableIf
 > = z.object({
   key: z.string().optional(),
-  value: z.union([z.boolean(), z.string(), z.number()]).optional(),
+  value: z.nullable(z.union([z.boolean(), z.string(), z.number()])).optional(),
 });
 
 /**
@@ -165,7 +165,7 @@ export const TaxRequirement$inboundSchema: z.ZodType<
   applicable_if: z.array(z.lazy(() => ApplicableIf$inboundSchema)).optional(),
   label: z.string().optional(),
   description: z.string().optional(),
-  value: z.string().optional(),
+  value: z.nullable(z.string()).optional(),
   metadata: TaxRequirementMetadata$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -179,7 +179,7 @@ export type TaxRequirement$Outbound = {
   applicable_if?: Array<ApplicableIf$Outbound> | undefined;
   label?: string | undefined;
   description?: string | undefined;
-  value?: string | undefined;
+  value?: string | null | undefined;
   metadata?: TaxRequirementMetadata$Outbound | undefined;
 };
 
@@ -193,7 +193,7 @@ export const TaxRequirement$outboundSchema: z.ZodType<
   applicableIf: z.array(z.lazy(() => ApplicableIf$outboundSchema)).optional(),
   label: z.string().optional(),
   description: z.string().optional(),
-  value: z.string().optional(),
+  value: z.nullable(z.string()).optional(),
   metadata: TaxRequirementMetadata$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

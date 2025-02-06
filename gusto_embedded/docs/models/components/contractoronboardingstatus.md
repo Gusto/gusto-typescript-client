@@ -8,7 +8,7 @@ The representation of an contractor's onboarding status.
 import { ContractorOnboardingStatus } from "@gusto/embedded-api/models/components";
 
 let value: ContractorOnboardingStatus = {
-  uuid: "71560617-dd19-4d3c-bec1-03496b525ef3",
+  uuid: "560617dd-19d3-4cec-b103-496b525ef3c4",
 };
 ```
 
