@@ -8,14 +8,20 @@ import { RetryConfig } from "./retries.js";
 import { Params, pathToFunc } from "./url.js";
 
 /**
+ * Demo
+ */
+export const ServerDemo = "demo";
+/**
+ * Prod
+ */
+export const ServerProd = "prod";
+/**
  * Contains the list of servers available to the SDK
  */
-export const ServerList = [
-  /**
-   * Demo
-   */
-  "https://api.gusto-demo.com",
-] as const;
+export const ServerList = {
+  [ServerDemo]: "https://api.gusto-demo.com",
+  [ServerProd]: "https://api.gusto.com",
+} as const;
 
 export type SDKOptions = {
   companyAccessAuth?: string | (() => Promise<string>);
@@ -24,7 +30,7 @@ export type SDKOptions = {
   /**
    * Allows overriding the default server used by the SDK
    */
-  serverIdx?: number;
+  server?: keyof typeof ServerList;
   /**
    * Allows overriding the default server URL used by the SDK
    */
@@ -43,11 +49,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
   const params: Params = {};
 
   if (!serverURL) {
-    const serverIdx = options.serverIdx ?? 0;
-    if (serverIdx < 0 || serverIdx >= ServerList.length) {
-      throw new Error(`Invalid server index ${serverIdx}`);
-    }
-    serverURL = ServerList[serverIdx] || "";
+    const server = options.server ?? ServerDemo;
+    serverURL = ServerList[server] || "";
   }
 
   const u = pathToFunc(serverURL)(params);
@@ -57,8 +60,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "2024-04-01",
-  sdkVersion: "0.1.5",
-  genVersion: "2.500.5",
+  sdkVersion: "0.1.11",
+  genVersion: "2.505.0",
   userAgent:
-    "speakeasy-sdk/typescript 0.1.5 2.500.5 2024-04-01 @gusto/embedded-api",
+    "speakeasy-sdk/typescript 0.1.11 2.505.0 2024-04-01 @gusto/embedded-api",
 } as const;

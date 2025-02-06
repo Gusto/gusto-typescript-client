@@ -10,7 +10,7 @@ let value: PostV1HistoricalEmployeesRequest = {
   historicalEmployeeBody: {
     firstName: "Lilyan",
     lastName: "Doyle",
-    dateOfBirth: "1965-08-12",
+    dateOfBirth: "1965-08-18",
     ssn: "<value>",
     workAddress: {},
     homeAddress: {

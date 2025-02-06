@@ -144,7 +144,7 @@ export async function employeeAddressesCreate(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.EmployeeAddress$inboundSchema),
+    M.json(201, components.EmployeeAddress$inboundSchema),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

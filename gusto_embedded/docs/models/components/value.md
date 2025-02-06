@@ -1,8 +1,6 @@
 # Value
 
-For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
-
-For the `tiered` contribution type, an array of tiers.
+The answer to the corresponding question - this may be a string, number, boolean, or null.
 
 
 ## Supported Types
@@ -13,9 +11,15 @@ For the `tiered` contribution type, an array of tiers.
 const value: string = "<value>";
 ```
 
-### `components.Two`
+### `number`
 
 ```typescript
-const value: components.Two = {};
+const value: number = 7137.18;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = false;
 ```
 

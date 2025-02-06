@@ -1317,6 +1317,36 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
+### Select Server by Name
+
+You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+
+| Name   | Server                       |
+| ------ | ---------------------------- |
+| `demo` | `https://api.gusto-demo.com` |
+| `prod` | `https://api.gusto.com`      |
+
+#### Example
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  server: "prod",
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.introspection.getTokenInfo({});
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
