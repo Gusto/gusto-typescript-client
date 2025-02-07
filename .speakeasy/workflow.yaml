@@ -31,18 +31,18 @@ targets:
             labelOverride:
                 fixedValue: Typescript (SDK)
             blocking: false
-    local:
-        target: typescript
-        source: GustoEmbedded-local
-        output: ./gusto_embedded
-        # Maybe a bug in speakeay's tool, but the publishing GH action
-        # doesn't work unless all targets have a configured publish section.
-        publish:
-            npm:
-                token: ''
-        codeSamples:
-            registry:
-                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
-            labelOverride:
-                fixedValue: Typescript (SDK)
-            blocking: false
+            # local:
+            #     target: typescript
+            #     source: GustoEmbedded-local
+            #     output: ./gusto_embedded
+            #     # Maybe a bug in speakeay's tool, but the publishing GH action
+            #     # doesn't work unless all targets have a configured publish section.
+            #     publish:
+            #         npm:
+            #             token: ''
+            #     codeSamples:
+            #         registry:
+            #             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
+            #         labelOverride:
+            #             fixedValue: Typescript (SDK)
+            #         blocking: false
