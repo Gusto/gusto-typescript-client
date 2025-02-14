@@ -89,6 +89,7 @@ export async function externalPayrollsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-external-payroll",
     oAuth2Scopes: [],
 

@@ -7,7 +7,7 @@ The status of the contractor payment group.  Will be `Funded` if all payments th
 ```typescript
 import { ContractorPaymentGroupMinimalStatus } from "@gusto/embedded-api/models/components";
 
-let value: ContractorPaymentGroupMinimalStatus = "Unfunded";
+let value: ContractorPaymentGroupMinimalStatus = "Funded";
 ```
 
 ## Values

@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [getDetails](#getdetails) - Get Company Attachment Details
-* [getAll](#getall) - Get List of Company Attachments
+* [getList](#getlist) - Get List of Company Attachments
 * [create](#create) - Create Company Attachment and Upload File
 
 ## getDetails
@@ -117,7 +117,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getAll
+## getList
 
 Retrieve a list of all the attachments uploaded by the company.
 
@@ -133,7 +133,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.companyAttachments.getAll({
+  const result = await gustoEmbedded.companyAttachments.getList({
     companyId: "<id>",
   });
 
@@ -150,7 +150,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { companyAttachmentsGetAll } from "@gusto/embedded-api/funcs/companyAttachmentsGetAll.js";
+import { companyAttachmentsGetList } from "@gusto/embedded-api/funcs/companyAttachmentsGetList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -159,7 +159,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await companyAttachmentsGetAll(gustoEmbedded, {
+  const res = await companyAttachmentsGetList(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -189,19 +189,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useCompanyAttachmentsGetAll,
-  useCompanyAttachmentsGetAllSuspense,
+  useCompanyAttachmentsGetList,
+  useCompanyAttachmentsGetListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchCompanyAttachmentsGetAll,
+  prefetchCompanyAttachmentsGetList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateCompanyAttachmentsGetAll,
-  invalidateAllCompanyAttachmentsGetAll,
-} from "@gusto/embedded-api/react-query/companyAttachmentsGetAll.js";
+  invalidateCompanyAttachmentsGetList,
+  invalidateAllCompanyAttachmentsGetList,
+} from "@gusto/embedded-api/react-query/companyAttachmentsGetList.js";
 ```
 
 ### Parameters

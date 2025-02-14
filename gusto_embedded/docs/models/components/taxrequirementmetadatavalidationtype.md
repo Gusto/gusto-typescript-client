@@ -7,7 +7,7 @@ Describes the type of tax_rate validation rule
 ```typescript
 import { TaxRequirementMetadataValidationType } from "@gusto/embedded-api/models/components";
 
-let value: TaxRequirementMetadataValidationType = "min_max";
+let value: TaxRequirementMetadataValidationType = "one_of";
 ```
 
 ## Values

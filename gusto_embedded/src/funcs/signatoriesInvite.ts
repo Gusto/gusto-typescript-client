@@ -89,6 +89,7 @@ export async function signatoriesInvite(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-companies-company_uuid-signatories-invite",
     oAuth2Scopes: [],
 

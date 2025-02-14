@@ -87,6 +87,7 @@ export async function locationsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-locations-location_id",
     oAuth2Scopes: [],
 

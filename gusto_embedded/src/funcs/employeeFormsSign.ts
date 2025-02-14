@@ -96,6 +96,7 @@ export async function employeeFormsSign(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employee-form-sign",
     oAuth2Scopes: [],
 

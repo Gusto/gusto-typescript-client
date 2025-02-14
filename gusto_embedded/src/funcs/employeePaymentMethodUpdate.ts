@@ -91,6 +91,7 @@ export async function employeePaymentMethodUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees-employee_id-payment_method",
     oAuth2Scopes: [],
 

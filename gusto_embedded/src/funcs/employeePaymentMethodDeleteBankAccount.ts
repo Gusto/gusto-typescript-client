@@ -95,6 +95,7 @@ export async function employeePaymentMethodDeleteBankAccount(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "delete-v1-employees-employee_id-bank_accounts-bank_account_id",
     oAuth2Scopes: [],

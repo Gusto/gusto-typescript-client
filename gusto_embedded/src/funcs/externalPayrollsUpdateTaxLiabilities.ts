@@ -90,6 +90,7 @@ export async function externalPayrollsUpdateTaxLiabilities(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-tax-liabilities",
     oAuth2Scopes: [],
 

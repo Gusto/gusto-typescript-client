@@ -96,6 +96,7 @@ export async function contractorPaymentGroupsFund(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "put-v1-contractor_payment_groups-contractor_payment_group_id-fund",
     oAuth2Scopes: [],

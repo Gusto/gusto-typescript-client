@@ -50,10 +50,10 @@ from TanStack Query.
 [use-query]: https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
 
 ```tsx
-import { useIntrospectionGetTokenInfo } from "@gusto/embedded-api/react-query/introspectionGetTokenInfo.js";
+import { useIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
 
 export function Example() {
-  const { data, error, status } = useIntrospectionGetTokenInfo({});
+  const { data, error, status } = useIntrospectionGetInfo({});
 
   // Render the UI here...
 }
@@ -66,11 +66,11 @@ more options provided by the query hooks to control these behaviors.
 
 ```tsx
 import { useState } from "react";
-import { useIntrospectionGetTokenInfo } from "@gusto/embedded-api/react-query/introspectionGetTokenInfo.js";
+import { useIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
 
 export function ExampleWithOptions() {
   const [enabled, setEnabled] = useState(true);
-  const { data, error, status } = useIntrospectionGetTokenInfo(
+  const { data, error, status } = useIntrospectionGetInfo(
     {},
     {
       // TanStack Query options:
@@ -108,10 +108,10 @@ Query.
 [use-mutation]: https://tanstack.com/query/v5/docs/framework/react/reference/useMutation
 
 ```tsx
-import { useIntrospectionRefreshAccessTokenMutation } from "@gusto/embedded-api/react-query/introspectionRefreshAccessToken.js";
+import { useIntrospectionRefreshTokenMutation } from "@gusto/embedded-api/react-query/introspectionRefreshToken.js";
 
 export function Example() {
-  const { mutate, status } = useIntrospectionRefreshAccessTokenMutation();
+  const { mutate, status } = useIntrospectionRefreshTokenMutation();
 
   return (
     <form
@@ -143,10 +143,10 @@ Since the underlying SDK handles request timeouts and retries, there are a few
 more options provided by the mutation hooks to control these behaviors.
 
 ```tsx
-import { useIntrospectionRefreshAccessTokenMutation } from "@gusto/embedded-api/react-query/introspectionRefreshAccessToken.js";
+import { useIntrospectionRefreshTokenMutation } from "@gusto/embedded-api/react-query/introspectionRefreshToken.js";
 
 export function ExampleWithOptions() {
-  const { mutate, status } = useIntrospectionRefreshAccessTokenMutation({
+  const { mutate, status } = useIntrospectionRefreshTokenMutation({
     // TanStack Query options:
     networkMode: "online",
     gcTime: 5 * 60 * 1000, // 5 minutes
@@ -178,7 +178,7 @@ query hook there are two functions that help invalidate cached data:
 
 ```tsx
 import { useQueryClient } from "@tanstack/react-query";
-import { invalidateIntrospectionGetTokenInfo, invalidateAllIntrospectionGetTokenInfo } from "@gusto/embedded-api/react-query/introspectionGetTokenInfo.js";
+import { invalidateIntrospectionGetInfo, invalidateAllIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
 // Replace this with a real mutation
 import { useExampleMutation } from "@gusto/embedded-api/react-query/example.js";
 
@@ -196,9 +196,9 @@ export function Example() {
         mutate(formData, {
           onSuccess: () => {
             // Invalidate a single cache entry:
-            invalidateIntrospectionGetTokenInfo(queryClient, /* ... arguments ... */);
+            invalidateIntrospectionGetInfo(queryClient, /* ... arguments ... */);
             // OR, invalidate all cache entries for the query targets:
-            invalidateAllIntrospectionGetTokenInfo(queryClient);
+            invalidateAllIntrospectionGetInfo(queryClient);
           },
         });
       }}
@@ -226,7 +226,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { GustoEmbeddedCore } from "@gusto/embedded-api";
 import { GustoEmbeddedProvider } from "@gusto/embedded-api/react-query";
-import { useIntrospectionGetTokenInfoSuspense } from "@gusto/embedded-api/react-query/introspectionGetTokenInfo.js";
+import { useIntrospectionGetInfoSuspense } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
 
 const queryClient = new QueryClient();
 const gustoEmbedded = new GustoEmbeddedCore({
@@ -261,7 +261,7 @@ export function App() {
 }
 
 function Example() {
-  const { data } = useIntrospectionGetTokenInfoSuspense({});
+  const { data } = useIntrospectionGetInfoSuspense({});
 
   // Render the UI here...
 }
@@ -281,7 +281,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { GustoEmbeddedCore } from "@gusto/embedded-api";
-import { prefetchIntrospectionGetTokenInfo } from "@gusto/embedded-api/react-query/introspectionGetTokenInfo.js";
+import { prefetchIntrospectionGetInfo } from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -289,7 +289,7 @@ export default async function Page() {
     companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
   });
 
-  await prefetchIntrospectionGetTokenInfo(queryClient, gustoEmbedded, {});
+  await prefetchIntrospectionGetInfo(queryClient, gustoEmbedded, {});
 
   return (
     // HydrationBoundary is a Client Component, so hydration will happen there.

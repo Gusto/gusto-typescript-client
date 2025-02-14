@@ -92,6 +92,7 @@ export async function i9VerificationEmployerSign(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees-employee_id-i9_authorization-employer_sign",
     oAuth2Scopes: [],
 

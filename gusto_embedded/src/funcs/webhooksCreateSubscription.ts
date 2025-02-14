@@ -89,6 +89,7 @@ export async function webhooksCreateSubscription(
   );
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-webhook-subscription",
     oAuth2Scopes: [],
 

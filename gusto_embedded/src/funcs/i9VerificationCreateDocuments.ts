@@ -98,6 +98,7 @@ export async function i9VerificationCreateDocuments(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees-employee_id-i9_authorization-documents",
     oAuth2Scopes: [],
 

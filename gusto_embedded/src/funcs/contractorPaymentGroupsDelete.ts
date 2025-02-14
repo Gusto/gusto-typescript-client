@@ -92,6 +92,7 @@ export async function contractorPaymentGroupsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "delete-v1-contractor_payment_groups-contractor_payment_group_id",
     oAuth2Scopes: [],

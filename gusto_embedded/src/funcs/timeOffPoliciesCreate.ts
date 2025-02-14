@@ -90,6 +90,7 @@ export async function timeOffPoliciesCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-companies-company_uuid-time_off_policies",
     oAuth2Scopes: [],
 

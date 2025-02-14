@@ -85,6 +85,7 @@ export async function jobsAndCompensationsDeleteCompensation(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-compensations-compensation_id",
     oAuth2Scopes: [],
 

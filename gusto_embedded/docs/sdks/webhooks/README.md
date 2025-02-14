@@ -8,9 +8,9 @@
 * [createSubscription](#createsubscription) - Create a webhook subscription
 * [listSubscriptions](#listsubscriptions) - List webhook subscriptions
 * [updateSubscription](#updatesubscription) - Update a webhook subscription
-* [get](#get) - Get a webhook subscription
-* [delete](#delete) - Delete a webhook subscription
-* [verifySubscription](#verifysubscription) - Verify the webhook subscription
+* [getSubscription](#getsubscription) - Get a webhook subscription
+* [deleteSubscription](#deletesubscription) - Delete a webhook subscription
+* [verify](#verify) - Verify the webhook subscription
 * [requestVerificationToken](#requestverificationtoken) - Request the webhook subscription verification_token
 
 ## createSubscription
@@ -347,7 +347,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## get
+## getSubscription
 
 Returns the Webhook Subscription associated with the provided UUID.
 
@@ -366,7 +366,7 @@ import { GustoEmbedded } from "@gusto/embedded-api";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  const result = await gustoEmbedded.webhooks.get({
+  const result = await gustoEmbedded.webhooks.getSubscription({
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
@@ -385,14 +385,14 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksGet } from "@gusto/embedded-api/funcs/webhooksGet.js";
+import { webhooksGetSubscription } from "@gusto/embedded-api/funcs/webhooksGetSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore();
 
 async function run() {
-  const res = await webhooksGet(gustoEmbedded, {
+  const res = await webhooksGetSubscription(gustoEmbedded, {
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
@@ -424,19 +424,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useWebhooksGet,
-  useWebhooksGetSuspense,
+  useWebhooksGetSubscription,
+  useWebhooksGetSubscriptionSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchWebhooksGet,
+  prefetchWebhooksGetSubscription,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateWebhooksGet,
-  invalidateAllWebhooksGet,
-} from "@gusto/embedded-api/react-query/webhooksGet.js";
+  invalidateWebhooksGetSubscription,
+  invalidateAllWebhooksGetSubscription,
+} from "@gusto/embedded-api/react-query/webhooksGetSubscription.js";
 ```
 
 ### Parameters
@@ -459,7 +459,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## delete
+## deleteSubscription
 
 Deletes the Webhook Subscription associated with the provided UUID.
 
@@ -478,7 +478,7 @@ import { GustoEmbedded } from "@gusto/embedded-api";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  await gustoEmbedded.webhooks.delete({
+  await gustoEmbedded.webhooks.deleteSubscription({
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
@@ -496,14 +496,14 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksDelete } from "@gusto/embedded-api/funcs/webhooksDelete.js";
+import { webhooksDeleteSubscription } from "@gusto/embedded-api/funcs/webhooksDeleteSubscription.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore();
 
 async function run() {
-  const res = await webhooksDelete(gustoEmbedded, {
+  const res = await webhooksDeleteSubscription(gustoEmbedded, {
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
@@ -534,8 +534,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useWebhooksDeleteMutation
-} from "@gusto/embedded-api/react-query/webhooksDelete.js";
+  useWebhooksDeleteSubscriptionMutation
+} from "@gusto/embedded-api/react-query/webhooksDeleteSubscription.js";
 ```
 
 ### Parameters
@@ -558,7 +558,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## verifySubscription
+## verify
 
 When a webhook subscription is created, a `verification_token` is POSTed to the registered webhook subscription URL. This `verify` endpoint needs to be called with `verification_token` before webhook events can be sent to the registered webhook URL.
 
@@ -579,7 +579,7 @@ import { GustoEmbedded } from "@gusto/embedded-api";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  const result = await gustoEmbedded.webhooks.verifySubscription({
+  const result = await gustoEmbedded.webhooks.verify({
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
@@ -601,14 +601,14 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { webhooksVerifySubscription } from "@gusto/embedded-api/funcs/webhooksVerifySubscription.js";
+import { webhooksVerify } from "@gusto/embedded-api/funcs/webhooksVerify.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore();
 
 async function run() {
-  const res = await webhooksVerifySubscription(gustoEmbedded, {
+  const res = await webhooksVerify(gustoEmbedded, {
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
@@ -643,8 +643,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useWebhooksVerifySubscriptionMutation
-} from "@gusto/embedded-api/react-query/webhooksVerifySubscription.js";
+  useWebhooksVerifyMutation
+} from "@gusto/embedded-api/react-query/webhooksVerify.js";
 ```
 
 ### Parameters

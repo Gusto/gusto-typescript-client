@@ -11,7 +11,7 @@ The verification status of the bank account.
 ```typescript
 import { VerificationStatus } from "@gusto/embedded-api/models/components";
 
-let value: VerificationStatus = "awaiting_deposits";
+let value: VerificationStatus = "ready_for_verification";
 ```
 
 ## Values

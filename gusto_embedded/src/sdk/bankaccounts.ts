@@ -3,8 +3,8 @@
  */
 
 import { bankAccountsCreate } from "../funcs/bankAccountsCreate.js";
-import { bankAccountsCreateFromProcessorToken } from "../funcs/bankAccountsCreateFromProcessorToken.js";
-import { bankAccountsList } from "../funcs/bankAccountsList.js";
+import { bankAccountsCreateFromPlaidToken } from "../funcs/bankAccountsCreateFromPlaidToken.js";
+import { bankAccountsGet } from "../funcs/bankAccountsGet.js";
 import { bankAccountsVerify } from "../funcs/bankAccountsVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -48,11 +48,11 @@ export class BankAccounts extends ClientSDK {
    *
    * scope: `company_bank_accounts:read`
    */
-  async list(
+  async get(
     request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.CompanyBankAccount>> {
-    return unwrapAsync(bankAccountsList(
+    return unwrapAsync(bankAccountsGet(
       this,
       request,
       options,
@@ -106,11 +106,11 @@ export class BankAccounts extends ClientSDK {
    * >
    * > If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
    */
-  async createFromProcessorToken(
+  async createFromPlaidToken(
     request: operations.PostV1PlaidProcessorTokenRequest,
     options?: RequestOptions,
   ): Promise<operations.PostV1PlaidProcessorTokenResponseBody> {
-    return unwrapAsync(bankAccountsCreateFromProcessorToken(
+    return unwrapAsync(bankAccountsCreateFromPlaidToken(
       this,
       request,
       options,

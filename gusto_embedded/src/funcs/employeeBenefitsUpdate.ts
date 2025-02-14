@@ -91,6 +91,7 @@ export async function employeeBenefitsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employee_benefits-employee_benefit_id",
     oAuth2Scopes: [],
 

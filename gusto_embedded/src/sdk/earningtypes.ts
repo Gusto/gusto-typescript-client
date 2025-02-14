@@ -3,8 +3,8 @@
  */
 
 import { earningTypesCreate } from "../funcs/earningTypesCreate.js";
-import { earningTypesDeactivate } from "../funcs/earningTypesDeactivate.js";
-import { earningTypesGetAll } from "../funcs/earningTypesGetAll.js";
+import { earningTypesDelete } from "../funcs/earningTypesDelete.js";
+import { earningTypesList } from "../funcs/earningTypesList.js";
 import { earningTypesUpdate } from "../funcs/earningTypesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -47,11 +47,11 @@ export class EarningTypes extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async getAll(
+  async list(
     request: operations.GetV1CompaniesCompanyIdEarningTypesRequest,
     options?: RequestOptions,
   ): Promise<components.EarningTypeList> {
-    return unwrapAsync(earningTypesGetAll(
+    return unwrapAsync(earningTypesList(
       this,
       request,
       options,
@@ -86,12 +86,12 @@ export class EarningTypes extends ClientSDK {
    *
    * scope: `payrolls:write`
    */
-  async deactivate(
+  async delete(
     request:
       operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(earningTypesDeactivate(
+    return unwrapAsync(earningTypesDelete(
       this,
       request,
       options,

@@ -5,17 +5,17 @@
 
 ### Available Operations
 
-* [calculateAccruingHours](#calculateaccruinghours) - Calculate accruing time off hours
-* [retrieve](#retrieve) - Get a time off policy
+* [calculateAccruingTimeOffHours](#calculateaccruingtimeoffhours) - Calculate accruing time off hours
+* [get](#get) - Get a time off policy
 * [update](#update) - Update a time off policy
-* [get](#get) - Get all time off policies
+* [getAll](#getall) - Get all time off policies
 * [create](#create) - Create a time off policy
 * [addEmployees](#addemployees) - Add employees to a time off policy
 * [removeEmployees](#removeemployees) - Remove employees from a time off policy
 * [updateBalance](#updatebalance) - Update employee time off hour balances
 * [deactivate](#deactivate) - Deactivate a time off policy
 
-## calculateAccruingHours
+## calculateAccruingTimeOffHours
 
 Returns a list of accruing time off for each time off policy associated with the employee.
 
@@ -39,7 +39,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.timeOffPolicies.calculateAccruingHours({
+  const result = await gustoEmbedded.timeOffPolicies.calculateAccruingTimeOffHours({
     payrollId: "<id>",
     employeeId: "<id>",
     requestBody: {
@@ -64,7 +64,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesCalculateAccruingHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingHours.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -73,7 +73,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await timeOffPoliciesCalculateAccruingHours(gustoEmbedded, {
+  const res = await timeOffPoliciesCalculateAccruingTimeOffHours(gustoEmbedded, {
     payrollId: "<id>",
     employeeId: "<id>",
     requestBody: {
@@ -111,8 +111,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useTimeOffPoliciesCalculateAccruingHoursMutation
-} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingHours.js";
+  useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 ```
 
 ### Parameters
@@ -135,7 +135,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## retrieve
+## get
 
 Get a time off policy
 
@@ -151,7 +151,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.timeOffPolicies.retrieve({
+  const result = await gustoEmbedded.timeOffPolicies.get({
     timeOffPolicyUuid: "<id>",
   });
 
@@ -168,7 +168,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesRetrieve } from "@gusto/embedded-api/funcs/timeOffPoliciesRetrieve.js";
+import { timeOffPoliciesGet } from "@gusto/embedded-api/funcs/timeOffPoliciesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -177,7 +177,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await timeOffPoliciesRetrieve(gustoEmbedded, {
+  const res = await timeOffPoliciesGet(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
   });
 
@@ -207,19 +207,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTimeOffPoliciesRetrieve,
-  useTimeOffPoliciesRetrieveSuspense,
+  useTimeOffPoliciesGet,
+  useTimeOffPoliciesGetSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTimeOffPoliciesRetrieve,
+  prefetchTimeOffPoliciesGet,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTimeOffPoliciesRetrieve,
-  invalidateAllTimeOffPoliciesRetrieve,
-} from "@gusto/embedded-api/react-query/timeOffPoliciesRetrieve.js";
+  invalidateTimeOffPoliciesGet,
+  invalidateAllTimeOffPoliciesGet,
+} from "@gusto/embedded-api/react-query/timeOffPoliciesGet.js";
 ```
 
 ### Parameters
@@ -359,7 +359,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## get
+## getAll
 
 Get all time off policies for a company
 
@@ -375,7 +375,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.timeOffPolicies.get({
+  const result = await gustoEmbedded.timeOffPolicies.getAll({
     companyUuid: "<id>",
   });
 
@@ -392,7 +392,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { timeOffPoliciesGet } from "@gusto/embedded-api/funcs/timeOffPoliciesGet.js";
+import { timeOffPoliciesGetAll } from "@gusto/embedded-api/funcs/timeOffPoliciesGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -401,7 +401,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await timeOffPoliciesGet(gustoEmbedded, {
+  const res = await timeOffPoliciesGetAll(gustoEmbedded, {
     companyUuid: "<id>",
   });
 
@@ -431,19 +431,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTimeOffPoliciesGet,
-  useTimeOffPoliciesGetSuspense,
+  useTimeOffPoliciesGetAll,
+  useTimeOffPoliciesGetAllSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTimeOffPoliciesGet,
+  prefetchTimeOffPoliciesGetAll,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTimeOffPoliciesGet,
-  invalidateAllTimeOffPoliciesGet,
-} from "@gusto/embedded-api/react-query/timeOffPoliciesGet.js";
+  invalidateTimeOffPoliciesGetAll,
+  invalidateAllTimeOffPoliciesGetAll,
+} from "@gusto/embedded-api/react-query/timeOffPoliciesGetAll.js";
 ```
 
 ### Parameters

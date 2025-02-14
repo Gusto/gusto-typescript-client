@@ -87,6 +87,7 @@ export async function taxRequirementsGetAll(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-companies-company_uuid-tax_requirements",
     oAuth2Scopes: [],
 

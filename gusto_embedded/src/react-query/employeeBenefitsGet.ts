@@ -26,20 +26,22 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeBenefitsGetQueryData = components.EmployeeBenefit;
+export type EmployeeBenefitsGetQueryData = Array<components.EmployeeBenefit>;
 
 /**
- * Get an employee benefit
+ * Get all benefits for an employee
  *
  * @remarks
  * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+ *
+ * Returns an array of all employee benefits for this employee
  *
  * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
  *
  * scope: `employee_benefits:read`
  */
 export function useEmployeeBenefitsGet(
-  request: operations.GetV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: QueryHookOptions<EmployeeBenefitsGetQueryData>,
 ): UseQueryResult<EmployeeBenefitsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -54,17 +56,19 @@ export function useEmployeeBenefitsGet(
 }
 
 /**
- * Get an employee benefit
+ * Get all benefits for an employee
  *
  * @remarks
  * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+ *
+ * Returns an array of all employee benefits for this employee
  *
  * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
  *
  * scope: `employee_benefits:read`
  */
 export function useEmployeeBenefitsGetSuspense(
-  request: operations.GetV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: SuspenseQueryHookOptions<EmployeeBenefitsGetQueryData>,
 ): UseSuspenseQueryResult<EmployeeBenefitsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -81,7 +85,7 @@ export function useEmployeeBenefitsGetSuspense(
 export function prefetchEmployeeBenefitsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeBenefitsGetQuery(
@@ -94,8 +98,12 @@ export function prefetchEmployeeBenefitsGet(
 export function setEmployeeBenefitsGetData(
   client: QueryClient,
   queryKeyBase: [
-    employeeBenefitId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    employeeId: string,
+    parameters: {
+      page?: number | undefined;
+      per?: number | undefined;
+      xGustoAPIVersion?: components.VersionHeader | undefined;
+    },
   ],
   data: EmployeeBenefitsGetQueryData,
 ): EmployeeBenefitsGetQueryData | undefined {
@@ -108,8 +116,12 @@ export function invalidateEmployeeBenefitsGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
-      employeeBenefitId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      employeeId: string,
+      parameters: {
+        page?: number | undefined;
+        per?: number | undefined;
+        xGustoAPIVersion?: components.VersionHeader | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -137,7 +149,7 @@ export function invalidateAllEmployeeBenefitsGet(
 
 export function buildEmployeeBenefitsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -146,7 +158,9 @@ export function buildEmployeeBenefitsGetQuery(
   ) => Promise<EmployeeBenefitsGetQueryData>;
 } {
   return {
-    queryKey: queryKeyEmployeeBenefitsGet(request.employeeBenefitId, {
+    queryKey: queryKeyEmployeeBenefitsGet(request.employeeId, {
+      page: request.page,
+      per: request.per,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function employeeBenefitsGetQueryFn(
@@ -168,14 +182,18 @@ export function buildEmployeeBenefitsGetQuery(
 }
 
 export function queryKeyEmployeeBenefitsGet(
-  employeeBenefitId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  employeeId: string,
+  parameters: {
+    page?: number | undefined;
+    per?: number | undefined;
+    xGustoAPIVersion?: components.VersionHeader | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",
     "employeeBenefits",
     "get",
-    employeeBenefitId,
+    employeeId,
     parameters,
   ];
 }

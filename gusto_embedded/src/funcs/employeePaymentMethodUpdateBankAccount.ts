@@ -95,6 +95,7 @@ export async function employeePaymentMethodUpdateBankAccount(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees-employee_id-bank_accounts",
     oAuth2Scopes: [],
 

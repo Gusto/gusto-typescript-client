@@ -92,6 +92,7 @@ export async function timeOffPoliciesUpdateBalance(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-version-time_off_policies-time_off_policy_uuid-balance",
     oAuth2Scopes: [],
 

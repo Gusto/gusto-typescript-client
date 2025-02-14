@@ -6,9 +6,9 @@
 ### Available Operations
 
 * [create](#create) - Create a company bank account
-* [list](#list) - Get all company bank accounts
+* [get](#get) - Get all company bank accounts
 * [verify](#verify) - Verify a company bank account
-* [createFromProcessorToken](#createfromprocessortoken) - Create a bank account from a plaid processor token
+* [createFromPlaidToken](#createfromplaidtoken) - Create a bank account from a plaid processor token
 
 ## create
 
@@ -125,7 +125,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
+## get
 
 Returns company bank accounts. Currently, we only support a single default bank account per company.
 
@@ -141,7 +141,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.bankAccounts.list({
+  const result = await gustoEmbedded.bankAccounts.get({
     companyId: "<id>",
   });
 
@@ -158,7 +158,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsList } from "@gusto/embedded-api/funcs/bankAccountsList.js";
+import { bankAccountsGet } from "@gusto/embedded-api/funcs/bankAccountsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -167,7 +167,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await bankAccountsList(gustoEmbedded, {
+  const res = await bankAccountsGet(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -197,19 +197,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useBankAccountsList,
-  useBankAccountsListSuspense,
+  useBankAccountsGet,
+  useBankAccountsGetSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchBankAccountsList,
+  prefetchBankAccountsGet,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateBankAccountsList,
-  invalidateAllBankAccountsList,
-} from "@gusto/embedded-api/react-query/bankAccountsList.js";
+  invalidateBankAccountsGet,
+  invalidateAllBankAccountsGet,
+} from "@gusto/embedded-api/react-query/bankAccountsGet.js";
 ```
 
 ### Parameters
@@ -350,7 +350,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## createFromProcessorToken
+## createFromPlaidToken
 
 This endpoint creates a new **verified** bank account by using a plaid processor token to retrieve its information.
 
@@ -373,7 +373,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.bankAccounts.createFromProcessorToken({
+  const result = await gustoEmbedded.bankAccounts.createFromPlaidToken({
     requestBody: {
       ownerType: "Company",
       ownerId: "ef279fbd-0fc6-4cf1-a977-6939d621c429",
@@ -394,7 +394,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { bankAccountsCreateFromProcessorToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromProcessorToken.js";
+import { bankAccountsCreateFromPlaidToken } from "@gusto/embedded-api/funcs/bankAccountsCreateFromPlaidToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -403,7 +403,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await bankAccountsCreateFromProcessorToken(gustoEmbedded, {
+  const res = await bankAccountsCreateFromPlaidToken(gustoEmbedded, {
     requestBody: {
       ownerType: "Company",
       ownerId: "ef279fbd-0fc6-4cf1-a977-6939d621c429",
@@ -437,8 +437,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useBankAccountsCreateFromProcessorTokenMutation
-} from "@gusto/embedded-api/react-query/bankAccountsCreateFromProcessorToken.js";
+  useBankAccountsCreateFromPlaidTokenMutation
+} from "@gusto/embedded-api/react-query/bankAccountsCreateFromPlaidToken.js";
 ```
 
 ### Parameters

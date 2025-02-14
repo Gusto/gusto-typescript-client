@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [list](#list) - Get all contractor documents
+* [getAll](#getall) - Get all contractor documents
 * [get](#get) - Get a contractor document
 * [getPdf](#getpdf) - Get the contractor document pdf
 * [sign](#sign) - Sign a contractor document
 
-## list
+## getAll
 
 Get a list of all contractor's documents
 
@@ -26,7 +26,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.contractorDocuments.list({
+  const result = await gustoEmbedded.contractorDocuments.getAll({
     contractorUuid: "<id>",
   });
 
@@ -43,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorDocumentsList } from "@gusto/embedded-api/funcs/contractorDocumentsList.js";
+import { contractorDocumentsGetAll } from "@gusto/embedded-api/funcs/contractorDocumentsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -52,7 +52,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await contractorDocumentsList(gustoEmbedded, {
+  const res = await contractorDocumentsGetAll(gustoEmbedded, {
     contractorUuid: "<id>",
   });
 
@@ -82,19 +82,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useContractorDocumentsList,
-  useContractorDocumentsListSuspense,
+  useContractorDocumentsGetAll,
+  useContractorDocumentsGetAllSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchContractorDocumentsList,
+  prefetchContractorDocumentsGetAll,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateContractorDocumentsList,
-  invalidateAllContractorDocumentsList,
-} from "@gusto/embedded-api/react-query/contractorDocumentsList.js";
+  invalidateContractorDocumentsGetAll,
+  invalidateAllContractorDocumentsGetAll,
+} from "@gusto/embedded-api/react-query/contractorDocumentsGetAll.js";
 ```
 
 ### Parameters

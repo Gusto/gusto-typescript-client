@@ -8,10 +8,10 @@ Representation of a Time Off Policy
 import { TimeOffPolicy } from "@gusto/embedded-api/models/components";
 
 let value: TimeOffPolicy = {
-  uuid: "28622f4f-1720-481b-ab2f-b4bb5659e2e0",
+  uuid: "92ecf432-fc28-4622-af4f-172081bb2fb4",
   companyUuid: "<id>",
   name: "<value>",
-  policyType: "vacation",
+  policyType: "sick",
   accrualMethod: "<value>",
   isActive: false,
   employees: [

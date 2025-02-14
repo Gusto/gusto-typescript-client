@@ -95,6 +95,7 @@ export async function signatoriesUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-companies-company_uuid-signatories-signatory_uuid",
     oAuth2Scopes: [],
 

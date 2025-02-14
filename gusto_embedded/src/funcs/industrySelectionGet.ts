@@ -86,6 +86,7 @@ export async function industrySelectionGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-company-industry",
     oAuth2Scopes: [],
 

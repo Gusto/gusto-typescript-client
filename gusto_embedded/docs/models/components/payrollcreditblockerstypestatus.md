@@ -7,7 +7,7 @@ The status of the credit blocker
 ```typescript
 import { PayrollCreditBlockersTypeStatus } from "@gusto/embedded-api/models/components";
 
-let value: PayrollCreditBlockersTypeStatus = "pending_review";
+let value: PayrollCreditBlockersTypeStatus = "unresolved";
 ```
 
 ## Values

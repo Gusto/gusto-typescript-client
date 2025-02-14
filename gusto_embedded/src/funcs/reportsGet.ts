@@ -84,6 +84,7 @@ export async function reportsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-reports-report_uuid",
     oAuth2Scopes: [],
 

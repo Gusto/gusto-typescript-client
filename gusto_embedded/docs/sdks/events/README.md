@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [list](#list) - Get all events
+* [get](#get) - Get all events
 
-## list
+## get
 
 Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
 
@@ -25,7 +25,7 @@ import { GustoEmbedded } from "@gusto/embedded-api";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  const result = await gustoEmbedded.events.list({
+  const result = await gustoEmbedded.events.get({
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     sortOrder: "asc",
@@ -44,14 +44,14 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { eventsList } from "@gusto/embedded-api/funcs/eventsList.js";
+import { eventsGet } from "@gusto/embedded-api/funcs/eventsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const gustoEmbedded = new GustoEmbeddedCore();
 
 async function run() {
-  const res = await eventsList(gustoEmbedded, {
+  const res = await eventsGet(gustoEmbedded, {
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     sortOrder: "asc",
@@ -83,19 +83,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useEventsList,
-  useEventsListSuspense,
+  useEventsGet,
+  useEventsGetSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchEventsList,
+  prefetchEventsGet,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateEventsList,
-  invalidateAllEventsList,
-} from "@gusto/embedded-api/react-query/eventsList.js";
+  invalidateEventsGet,
+  invalidateAllEventsGet,
+} from "@gusto/embedded-api/react-query/eventsGet.js";
 ```
 
 ### Parameters

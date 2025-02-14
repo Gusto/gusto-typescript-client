@@ -6,8 +6,8 @@
 ### Available Operations
 
 * [generateW2](#generatew2) - Generate a W2 form [DEMO]
-* [getAll](#getall) - Get all employee forms
-* [getForm](#getform) - Get an employee form
+* [list](#list) - Get all employee forms
+* [get](#get) - Get an employee form
 * [getPdf](#getpdf) - Get the employee form pdf
 * [sign](#sign) - Sign an employee form
 
@@ -115,7 +115,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getAll
+## list
 
 Get a list of all employee's forms
 
@@ -131,7 +131,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeForms.getAll({
+  const result = await gustoEmbedded.employeeForms.list({
     employeeId: "<id>",
   });
 
@@ -148,7 +148,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeFormsGetAll } from "@gusto/embedded-api/funcs/employeeFormsGetAll.js";
+import { employeeFormsList } from "@gusto/embedded-api/funcs/employeeFormsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -157,7 +157,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeeFormsGetAll(gustoEmbedded, {
+  const res = await employeeFormsList(gustoEmbedded, {
     employeeId: "<id>",
   });
 
@@ -187,19 +187,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useEmployeeFormsGetAll,
-  useEmployeeFormsGetAllSuspense,
+  useEmployeeFormsList,
+  useEmployeeFormsListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchEmployeeFormsGetAll,
+  prefetchEmployeeFormsList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateEmployeeFormsGetAll,
-  invalidateAllEmployeeFormsGetAll,
-} from "@gusto/embedded-api/react-query/employeeFormsGetAll.js";
+  invalidateEmployeeFormsList,
+  invalidateAllEmployeeFormsList,
+} from "@gusto/embedded-api/react-query/employeeFormsList.js";
 ```
 
 ### Parameters
@@ -221,7 +221,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getForm
+## get
 
 Get an employee form
 
@@ -237,7 +237,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeForms.getForm({
+  const result = await gustoEmbedded.employeeForms.get({
     employeeId: "<id>",
     formId: "<id>",
   });
@@ -255,7 +255,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeFormsGetForm } from "@gusto/embedded-api/funcs/employeeFormsGetForm.js";
+import { employeeFormsGet } from "@gusto/embedded-api/funcs/employeeFormsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -264,7 +264,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeeFormsGetForm(gustoEmbedded, {
+  const res = await employeeFormsGet(gustoEmbedded, {
     employeeId: "<id>",
     formId: "<id>",
   });
@@ -295,19 +295,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useEmployeeFormsGetForm,
-  useEmployeeFormsGetFormSuspense,
+  useEmployeeFormsGet,
+  useEmployeeFormsGetSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchEmployeeFormsGetForm,
+  prefetchEmployeeFormsGet,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateEmployeeFormsGetForm,
-  invalidateAllEmployeeFormsGetForm,
-} from "@gusto/embedded-api/react-query/employeeFormsGetForm.js";
+  invalidateEmployeeFormsGet,
+  invalidateAllEmployeeFormsGet,
+} from "@gusto/embedded-api/react-query/employeeFormsGet.js";
 ```
 
 ### Parameters

@@ -92,6 +92,7 @@ export async function companyBenefitsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-companies-company_id-company_benefits",
     oAuth2Scopes: [],
 

@@ -8,7 +8,7 @@ import { PostV1CompaniesCompanyIdCompanyBenefitsRequest } from "@gusto/embedded-
 let value: PostV1CompaniesCompanyIdCompanyBenefitsRequest = {
   companyId: "<id>",
   requestBody: {
-    description: "yearly defiantly cool briefly waist",
+    description: "since hence weary exactly tepid gratefully whoa",
   },
 };
 ```

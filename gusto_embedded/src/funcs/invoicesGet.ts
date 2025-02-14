@@ -101,6 +101,7 @@ export async function invoicesGet(
   );
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-invoices-invoice-period",
     oAuth2Scopes: [],
 

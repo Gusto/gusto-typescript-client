@@ -90,6 +90,7 @@ export async function garnishmentsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-employees-employee_id-garnishments",
     oAuth2Scopes: [],
 

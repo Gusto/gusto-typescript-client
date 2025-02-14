@@ -18,7 +18,7 @@ export type EmployeeOnboardingStatusOnboardingStep = {
    */
   id?: string | undefined;
   /**
-   * When true, this step has been completed.
+   * When true, this step is required.
    */
   required?: boolean | undefined;
   /**

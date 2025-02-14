@@ -85,6 +85,7 @@ export async function departmentsAddPeople(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-add-people-to-department",
     oAuth2Scopes: [],
 

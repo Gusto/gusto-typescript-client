@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: f57a8deae4b93b973939a10950d25dcb
+  docChecksum: 29c0a68ff8e4c6ee1ad5406dff3c5929
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.486.0
-  generationVersion: 2.505.0
-  releaseVersion: 0.1.18
-  configChecksum: b77aaf0cea460fc35a217fc36e0fe618
+  speakeasyVersion: 1.492.0
+  generationVersion: 2.512.4
+  releaseVersion: 0.1.19
+  configChecksum: 1ecc36577aae974766832e522ab8cc6c
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -22,13 +22,13 @@ features:
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     errorUnions: 0.1.1
-    globalSecurity: 2.82.12
+    globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
     groups: 2.81.2
     inputOutputModels: 2.82.0
-    methodSecurity: 2.82.5
+    methodSecurity: 2.82.6
     nameOverrides: 2.81.2
     nullables: 0.1.0
     reactQueryHooks: 0.2.2
@@ -905,7 +905,6 @@ generatedFiles:
   - docs/models/operations/workaddress.md
   - docs/sdks/achtransactions/README.md
   - docs/sdks/bankaccounts/README.md
-  - docs/sdks/benefits/README.md
   - docs/sdks/companies/README.md
   - docs/sdks/companyattachment/README.md
   - docs/sdks/companyattachments/README.md
@@ -915,6 +914,7 @@ generatedFiles:
   - docs/sdks/contractorforms/README.md
   - docs/sdks/contractorpaymentgroups/README.md
   - docs/sdks/contractorpaymentmethod/README.md
+  - docs/sdks/contractorpaymentmethods/README.md
   - docs/sdks/contractorpayments/README.md
   - docs/sdks/contractors/README.md
   - docs/sdks/departments/README.md
@@ -931,10 +931,10 @@ generatedFiles:
   - docs/sdks/externalpayrolls/README.md
   - docs/sdks/federaltaxdetails/README.md
   - docs/sdks/flows/README.md
-  - docs/sdks/forms/README.md
   - docs/sdks/garnishments/README.md
   - docs/sdks/generateddocuments/README.md
   - docs/sdks/gustoembedded/README.md
+  - docs/sdks/historicalemployees/README.md
   - docs/sdks/holidaypaypolicies/README.md
   - docs/sdks/i9verification/README.md
   - docs/sdks/industryselection/README.md
@@ -953,35 +953,31 @@ generatedFiles:
   - docs/sdks/timeoffpolicies/README.md
   - docs/sdks/webhooks/README.md
   - docs/sdks/wireinrequests/README.md
-  - docs/sdks/workaddresses/README.md
   - docs/types/rfcdate.md
   - eslint.config.mjs
   - jsr.json
   - package.json
   - src/core.ts
-  - src/funcs/achTransactionsGet.ts
+  - src/funcs/achTransactionsGetAll.ts
   - src/funcs/bankAccountsCreate.ts
-  - src/funcs/bankAccountsCreateFromProcessorToken.ts
-  - src/funcs/bankAccountsList.ts
+  - src/funcs/bankAccountsCreateFromPlaidToken.ts
+  - src/funcs/bankAccountsGet.ts
   - src/funcs/bankAccountsVerify.ts
   - src/funcs/companiesAcceptTermsOfService.ts
-  - src/funcs/companiesBenefitsList.ts
   - src/funcs/companiesCreateAdmin.ts
   - src/funcs/companiesCreatePartnerManaged.ts
   - src/funcs/companiesFinishOnboarding.ts
-  - src/funcs/companiesFormsList.ts
   - src/funcs/companiesGet.ts
-  - src/funcs/companiesGetAdmins.ts
   - src/funcs/companiesGetCustomFields.ts
   - src/funcs/companiesGetOnboardingStatus.ts
+  - src/funcs/companiesListAdmins.ts
   - src/funcs/companiesMigrate.ts
   - src/funcs/companiesRetrieveTermsOfService.ts
   - src/funcs/companiesUpdate.ts
   - src/funcs/companyAttachmentGetDownloadUrl.ts
   - src/funcs/companyAttachmentsCreate.ts
-  - src/funcs/companyAttachmentsGetAll.ts
   - src/funcs/companyAttachmentsGetDetails.ts
-  - src/funcs/companyBenefitsBulkUpdateEmployeeBenefits.ts
+  - src/funcs/companyAttachmentsGetList.ts
   - src/funcs/companyBenefitsCreate.ts
   - src/funcs/companyBenefitsDelete.ts
   - src/funcs/companyBenefitsGet.ts
@@ -989,35 +985,38 @@ generatedFiles:
   - src/funcs/companyBenefitsGetEmployeeBenefits.ts
   - src/funcs/companyBenefitsGetRequirements.ts
   - src/funcs/companyBenefitsGetSummary.ts
-  - src/funcs/companyBenefitsGetSupportedBenefit.ts
+  - src/funcs/companyBenefitsGetSupported.ts
+  - src/funcs/companyBenefitsList.ts
   - src/funcs/companyBenefitsUpdate.ts
+  - src/funcs/companyBenefitsUpdateEmployeeBenefits.ts
   - src/funcs/companyFormsGet.ts
+  - src/funcs/companyFormsGetAll.ts
   - src/funcs/companyFormsGetPdf.ts
   - src/funcs/companyFormsSign.ts
   - src/funcs/contractorDocumentsGet.ts
+  - src/funcs/contractorDocumentsGetAll.ts
   - src/funcs/contractorDocumentsGetPdf.ts
-  - src/funcs/contractorDocumentsList.ts
   - src/funcs/contractorDocumentsSign.ts
   - src/funcs/contractorFormsGenerate1099.ts
   - src/funcs/contractorFormsGet.ts
-  - src/funcs/contractorFormsGetAll.ts
   - src/funcs/contractorFormsGetPdf.ts
+  - src/funcs/contractorFormsList.ts
   - src/funcs/contractorPaymentGroupsCreate.ts
   - src/funcs/contractorPaymentGroupsDelete.ts
   - src/funcs/contractorPaymentGroupsFund.ts
   - src/funcs/contractorPaymentGroupsGet.ts
-  - src/funcs/contractorPaymentGroupsList.ts
+  - src/funcs/contractorPaymentGroupsGetList.ts
   - src/funcs/contractorPaymentGroupsPreview.ts
-  - src/funcs/contractorPaymentMethodCreateBankAccount.ts
   - src/funcs/contractorPaymentMethodGet.ts
   - src/funcs/contractorPaymentMethodGetBankAccounts.ts
-  - src/funcs/contractorPaymentMethodUpdatePaymentMethod.ts
-  - src/funcs/contractorPaymentsCancel.ts
+  - src/funcs/contractorPaymentMethodUpdate.ts
+  - src/funcs/contractorPaymentMethodsCreateBankAccount.ts
   - src/funcs/contractorPaymentsCreate.ts
+  - src/funcs/contractorPaymentsDelete.ts
   - src/funcs/contractorPaymentsFund.ts
   - src/funcs/contractorPaymentsGet.ts
-  - src/funcs/contractorPaymentsGetPayments.ts
   - src/funcs/contractorPaymentsGetReceipt.ts
+  - src/funcs/contractorPaymentsList.ts
   - src/funcs/contractorsCreate.ts
   - src/funcs/contractorsDelete.ts
   - src/funcs/contractorsGet.ts
@@ -1031,29 +1030,29 @@ generatedFiles:
   - src/funcs/departmentsCreate.ts
   - src/funcs/departmentsDelete.ts
   - src/funcs/departmentsGet.ts
-  - src/funcs/departmentsList.ts
+  - src/funcs/departmentsGetAll.ts
   - src/funcs/departmentsRemovePeople.ts
   - src/funcs/departmentsUpdate.ts
   - src/funcs/earningTypesCreate.ts
-  - src/funcs/earningTypesDeactivate.ts
-  - src/funcs/earningTypesGetAll.ts
+  - src/funcs/earningTypesDelete.ts
+  - src/funcs/earningTypesList.ts
   - src/funcs/earningTypesUpdate.ts
   - src/funcs/employeeAddressesCreate.ts
+  - src/funcs/employeeAddressesCreateWorkAddress.ts
   - src/funcs/employeeAddressesDelete.ts
+  - src/funcs/employeeAddressesDeleteWorkAddress.ts
   - src/funcs/employeeAddressesGet.ts
-  - src/funcs/employeeAddressesGetHomeAddress.ts
-  - src/funcs/employeeAddressesGetHomeAddresses.ts
-  - src/funcs/employeeAddressesGetWorkAddress.ts
-  - src/funcs/employeeAddressesRemoveHomeAddress.ts
-  - src/funcs/employeeAddressesUpdateHomeAddress.ts
+  - src/funcs/employeeAddressesGetWorkAddresses.ts
+  - src/funcs/employeeAddressesRetrieveHomeAddress.ts
+  - src/funcs/employeeAddressesRetrieveWorkAddress.ts
+  - src/funcs/employeeAddressesUpdate.ts
   - src/funcs/employeeAddressesUpdateWorkAddress.ts
-  - src/funcs/employeeAddressesWorkAddressesCreate.ts
-  - src/funcs/employeeBenefitsCreateBenefit.ts
-  - src/funcs/employeeBenefitsCreateYtdAmountsFromDifferentCompany.ts
+  - src/funcs/employeeBenefitsCreate.ts
+  - src/funcs/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.ts
   - src/funcs/employeeBenefitsDelete.ts
   - src/funcs/employeeBenefitsGet.ts
-  - src/funcs/employeeBenefitsGetAll.ts
-  - src/funcs/employeeBenefitsGetEmployeeYtdBenefitAmountsFromDifferentCompany.ts
+  - src/funcs/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.ts
+  - src/funcs/employeeBenefitsRetrieve.ts
   - src/funcs/employeeBenefitsUpdate.ts
   - src/funcs/employeeEmploymentsCreateRehire.ts
   - src/funcs/employeeEmploymentsCreateTermination.ts
@@ -1061,15 +1060,15 @@ generatedFiles:
   - src/funcs/employeeEmploymentsDeleteTermination.ts
   - src/funcs/employeeEmploymentsGetHistory.ts
   - src/funcs/employeeEmploymentsGetRehire.ts
-  - src/funcs/employeeEmploymentsGetTermination.ts
-  - src/funcs/employeeEmploymentsUpdateRehire.ts
+  - src/funcs/employeeEmploymentsGetTerminations.ts
+  - src/funcs/employeeEmploymentsRehire.ts
   - src/funcs/employeeEmploymentsUpdateTermination.ts
   - src/funcs/employeeFormsGenerateW2.ts
-  - src/funcs/employeeFormsGetAll.ts
-  - src/funcs/employeeFormsGetForm.ts
+  - src/funcs/employeeFormsGet.ts
   - src/funcs/employeeFormsGetPdf.ts
+  - src/funcs/employeeFormsList.ts
   - src/funcs/employeeFormsSign.ts
-  - src/funcs/employeePaymentMethodCreateBankAccount.ts
+  - src/funcs/employeePaymentMethodCreate.ts
   - src/funcs/employeePaymentMethodDeleteBankAccount.ts
   - src/funcs/employeePaymentMethodGet.ts
   - src/funcs/employeePaymentMethodUpdate.ts
@@ -1086,30 +1085,30 @@ generatedFiles:
   - src/funcs/employeesGetCustomFields.ts
   - src/funcs/employeesGetOnboardingStatus.ts
   - src/funcs/employeesGetTimeOffActivities.ts
-  - src/funcs/employeesRetrieve.ts
+  - src/funcs/employeesList.ts
   - src/funcs/employeesUpdate.ts
-  - src/funcs/employeesUpdateHistorical.ts
   - src/funcs/employeesUpdateOnboardingDocumentsConfig.ts
   - src/funcs/employeesUpdateOnboardingStatus.ts
-  - src/funcs/eventsList.ts
+  - src/funcs/eventsGet.ts
+  - src/funcs/externalPayrollsCalculateTaxes.ts
   - src/funcs/externalPayrollsCreate.ts
   - src/funcs/externalPayrollsDelete.ts
   - src/funcs/externalPayrollsFinalizeTaxLiabilities.ts
   - src/funcs/externalPayrollsGet.ts
-  - src/funcs/externalPayrollsGetTaxLiabilities.ts
-  - src/funcs/externalPayrollsGetTaxSuggestions.ts
-  - src/funcs/externalPayrollsList.ts
+  - src/funcs/externalPayrollsListTaxLiabilities.ts
+  - src/funcs/externalPayrollsRetrieve.ts
   - src/funcs/externalPayrollsUpdate.ts
   - src/funcs/externalPayrollsUpdateTaxLiabilities.ts
   - src/funcs/federalTaxDetailsGet.ts
   - src/funcs/federalTaxDetailsUpdate.ts
   - src/funcs/flowsCreate.ts
   - src/funcs/garnishmentsCreate.ts
-  - src/funcs/garnishmentsFetch.ts
   - src/funcs/garnishmentsGet.ts
-  - src/funcs/garnishmentsGetChildSupport.ts
+  - src/funcs/garnishmentsGetChildSupportData.ts
+  - src/funcs/garnishmentsList.ts
   - src/funcs/garnishmentsUpdate.ts
   - src/funcs/generatedDocumentsGet.ts
+  - src/funcs/historicalEmployeesUpdate.ts
   - src/funcs/holidayPayPoliciesAddEmployees.ts
   - src/funcs/holidayPayPoliciesCreate.ts
   - src/funcs/holidayPayPoliciesDelete.ts
@@ -1117,21 +1116,21 @@ generatedFiles:
   - src/funcs/holidayPayPoliciesRemoveEmployees.ts
   - src/funcs/holidayPayPoliciesUpdate.ts
   - src/funcs/i9VerificationCreateDocuments.ts
-  - src/funcs/i9VerificationCreateOrUpdate.ts
   - src/funcs/i9VerificationDeleteDocument.ts
   - src/funcs/i9VerificationEmployerSign.ts
   - src/funcs/i9VerificationGetAuthorization.ts
   - src/funcs/i9VerificationGetDocumentOptions.ts
   - src/funcs/i9VerificationGetDocuments.ts
+  - src/funcs/i9VerificationUpdate.ts
   - src/funcs/industrySelectionGet.ts
   - src/funcs/industrySelectionUpdate.ts
-  - src/funcs/introspectionGetTokenInfo.ts
-  - src/funcs/introspectionRefreshAccessToken.ts
+  - src/funcs/introspectionGetInfo.ts
+  - src/funcs/introspectionRefreshToken.ts
   - src/funcs/invoicesGet.ts
   - src/funcs/jobsAndCompensationsCreateCompensation.ts
   - src/funcs/jobsAndCompensationsCreateJob.ts
+  - src/funcs/jobsAndCompensationsDelete.ts
   - src/funcs/jobsAndCompensationsDeleteCompensation.ts
-  - src/funcs/jobsAndCompensationsDeleteJob.ts
   - src/funcs/jobsAndCompensationsGetCompensation.ts
   - src/funcs/jobsAndCompensationsGetCompensations.ts
   - src/funcs/jobsAndCompensationsGetJob.ts
@@ -1140,18 +1139,18 @@ generatedFiles:
   - src/funcs/jobsAndCompensationsUpdateCompensation.ts
   - src/funcs/locationsCreate.ts
   - src/funcs/locationsGet.ts
-  - src/funcs/locationsGetAll.ts
   - src/funcs/locationsGetMinimumWages.ts
+  - src/funcs/locationsRetrieve.ts
   - src/funcs/locationsUpdate.ts
-  - src/funcs/notificationsGet.ts
+  - src/funcs/notificationsGetDetails.ts
   - src/funcs/paySchedulesAssign.ts
   - src/funcs/paySchedulesCreate.ts
   - src/funcs/paySchedulesGet.ts
+  - src/funcs/paySchedulesGetAll.ts
   - src/funcs/paySchedulesGetAssignments.ts
-  - src/funcs/paySchedulesGetForCompany.ts
-  - src/funcs/paySchedulesList.ts
-  - src/funcs/paySchedulesListUnprocessedTerminationPeriods.ts
-  - src/funcs/paySchedulesPreview.ts
+  - src/funcs/paySchedulesGetPayPeriods.ts
+  - src/funcs/paySchedulesGetPreview.ts
+  - src/funcs/paySchedulesGetUnprocessedTerminationPeriods.ts
   - src/funcs/paySchedulesPreviewAssignment.ts
   - src/funcs/paySchedulesUpdate.ts
   - src/funcs/paymentConfigsGet.ts
@@ -1159,52 +1158,52 @@ generatedFiles:
   - src/funcs/payrollsCalculate.ts
   - src/funcs/payrollsCalculateGrossUp.ts
   - src/funcs/payrollsCancel.ts
-  - src/funcs/payrollsCreate.ts
+  - src/funcs/payrollsCreateOffCycle.ts
   - src/funcs/payrollsDelete.ts
   - src/funcs/payrollsGeneratePrintableChecks.ts
   - src/funcs/payrollsGet.ts
-  - src/funcs/payrollsGetAll.ts
+  - src/funcs/payrollsGetApprovedReversals.ts
   - src/funcs/payrollsGetBlockers.ts
   - src/funcs/payrollsGetPayStub.ts
   - src/funcs/payrollsGetPayStubs.ts
   - src/funcs/payrollsGetReceipt.ts
-  - src/funcs/payrollsGetReversals.ts
-  - src/funcs/payrollsPrepareForUpdate.ts
+  - src/funcs/payrollsList.ts
+  - src/funcs/payrollsPrepare.ts
   - src/funcs/payrollsSkip.ts
   - src/funcs/payrollsSubmit.ts
   - src/funcs/payrollsUpdate.ts
-  - src/funcs/recoveryCasesGetAll.ts
+  - src/funcs/recoveryCasesGet.ts
   - src/funcs/recoveryCasesRedebit.ts
-  - src/funcs/reportsCreate.ts
+  - src/funcs/reportsCreateCustom.ts
   - src/funcs/reportsGet.ts
   - src/funcs/reportsGetTemplate.ts
   - src/funcs/signatoriesCreate.ts
   - src/funcs/signatoriesDelete.ts
-  - src/funcs/signatoriesGet.ts
   - src/funcs/signatoriesInvite.ts
+  - src/funcs/signatoriesList.ts
   - src/funcs/signatoriesUpdate.ts
+  - src/funcs/taxRequirementsGet.ts
   - src/funcs/taxRequirementsGetAll.ts
-  - src/funcs/taxRequirementsGetByState.ts
-  - src/funcs/taxRequirementsUpdate.ts
+  - src/funcs/taxRequirementsUpdateState.ts
   - src/funcs/timeOffPoliciesAddEmployees.ts
-  - src/funcs/timeOffPoliciesCalculateAccruingHours.ts
+  - src/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.ts
   - src/funcs/timeOffPoliciesCreate.ts
   - src/funcs/timeOffPoliciesDeactivate.ts
   - src/funcs/timeOffPoliciesGet.ts
+  - src/funcs/timeOffPoliciesGetAll.ts
   - src/funcs/timeOffPoliciesRemoveEmployees.ts
-  - src/funcs/timeOffPoliciesRetrieve.ts
   - src/funcs/timeOffPoliciesUpdate.ts
   - src/funcs/timeOffPoliciesUpdateBalance.ts
   - src/funcs/webhooksCreateSubscription.ts
-  - src/funcs/webhooksDelete.ts
-  - src/funcs/webhooksGet.ts
+  - src/funcs/webhooksDeleteSubscription.ts
+  - src/funcs/webhooksGetSubscription.ts
   - src/funcs/webhooksListSubscriptions.ts
   - src/funcs/webhooksRequestVerificationToken.ts
   - src/funcs/webhooksUpdateSubscription.ts
-  - src/funcs/webhooksVerifySubscription.ts
+  - src/funcs/webhooksVerify.ts
   - src/funcs/wireInRequestsGet.ts
-  - src/funcs/wireInRequestsGetAll.ts
-  - src/funcs/wireInRequestsSubmitRequest.ts
+  - src/funcs/wireInRequestsList.ts
+  - src/funcs/wireInRequestsSubmit.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -1628,29 +1627,26 @@ generatedFiles:
   - src/models/operations/refreshaccesstoken.ts
   - src/react-query/_context.tsx
   - src/react-query/_types.ts
-  - src/react-query/achTransactionsGet.ts
+  - src/react-query/achTransactionsGetAll.ts
   - src/react-query/bankAccountsCreate.ts
-  - src/react-query/bankAccountsCreateFromProcessorToken.ts
-  - src/react-query/bankAccountsList.ts
+  - src/react-query/bankAccountsCreateFromPlaidToken.ts
+  - src/react-query/bankAccountsGet.ts
   - src/react-query/bankAccountsVerify.ts
   - src/react-query/companiesAcceptTermsOfService.ts
-  - src/react-query/companiesBenefitsList.ts
   - src/react-query/companiesCreateAdmin.ts
   - src/react-query/companiesCreatePartnerManaged.ts
   - src/react-query/companiesFinishOnboarding.ts
-  - src/react-query/companiesFormsList.ts
   - src/react-query/companiesGet.ts
-  - src/react-query/companiesGetAdmins.ts
   - src/react-query/companiesGetCustomFields.ts
   - src/react-query/companiesGetOnboardingStatus.ts
+  - src/react-query/companiesListAdmins.ts
   - src/react-query/companiesMigrate.ts
   - src/react-query/companiesRetrieveTermsOfService.ts
   - src/react-query/companiesUpdate.ts
   - src/react-query/companyAttachmentGetDownloadUrl.ts
   - src/react-query/companyAttachmentsCreate.ts
-  - src/react-query/companyAttachmentsGetAll.ts
   - src/react-query/companyAttachmentsGetDetails.ts
-  - src/react-query/companyBenefitsBulkUpdateEmployeeBenefits.ts
+  - src/react-query/companyAttachmentsGetList.ts
   - src/react-query/companyBenefitsCreate.ts
   - src/react-query/companyBenefitsDelete.ts
   - src/react-query/companyBenefitsGet.ts
@@ -1658,35 +1654,38 @@ generatedFiles:
   - src/react-query/companyBenefitsGetEmployeeBenefits.ts
   - src/react-query/companyBenefitsGetRequirements.ts
   - src/react-query/companyBenefitsGetSummary.ts
-  - src/react-query/companyBenefitsGetSupportedBenefit.ts
+  - src/react-query/companyBenefitsGetSupported.ts
+  - src/react-query/companyBenefitsList.ts
   - src/react-query/companyBenefitsUpdate.ts
+  - src/react-query/companyBenefitsUpdateEmployeeBenefits.ts
   - src/react-query/companyFormsGet.ts
+  - src/react-query/companyFormsGetAll.ts
   - src/react-query/companyFormsGetPdf.ts
   - src/react-query/companyFormsSign.ts
   - src/react-query/contractorDocumentsGet.ts
+  - src/react-query/contractorDocumentsGetAll.ts
   - src/react-query/contractorDocumentsGetPdf.ts
-  - src/react-query/contractorDocumentsList.ts
   - src/react-query/contractorDocumentsSign.ts
   - src/react-query/contractorFormsGenerate1099.ts
   - src/react-query/contractorFormsGet.ts
-  - src/react-query/contractorFormsGetAll.ts
   - src/react-query/contractorFormsGetPdf.ts
+  - src/react-query/contractorFormsList.ts
   - src/react-query/contractorPaymentGroupsCreate.ts
   - src/react-query/contractorPaymentGroupsDelete.ts
   - src/react-query/contractorPaymentGroupsFund.ts
   - src/react-query/contractorPaymentGroupsGet.ts
-  - src/react-query/contractorPaymentGroupsList.ts
+  - src/react-query/contractorPaymentGroupsGetList.ts
   - src/react-query/contractorPaymentGroupsPreview.ts
-  - src/react-query/contractorPaymentMethodCreateBankAccount.ts
   - src/react-query/contractorPaymentMethodGet.ts
   - src/react-query/contractorPaymentMethodGetBankAccounts.ts
-  - src/react-query/contractorPaymentMethodUpdatePaymentMethod.ts
-  - src/react-query/contractorPaymentsCancel.ts
+  - src/react-query/contractorPaymentMethodUpdate.ts
+  - src/react-query/contractorPaymentMethodsCreateBankAccount.ts
   - src/react-query/contractorPaymentsCreate.ts
+  - src/react-query/contractorPaymentsDelete.ts
   - src/react-query/contractorPaymentsFund.ts
   - src/react-query/contractorPaymentsGet.ts
-  - src/react-query/contractorPaymentsGetPayments.ts
   - src/react-query/contractorPaymentsGetReceipt.ts
+  - src/react-query/contractorPaymentsList.ts
   - src/react-query/contractorsCreate.ts
   - src/react-query/contractorsDelete.ts
   - src/react-query/contractorsGet.ts
@@ -1700,29 +1699,29 @@ generatedFiles:
   - src/react-query/departmentsCreate.ts
   - src/react-query/departmentsDelete.ts
   - src/react-query/departmentsGet.ts
-  - src/react-query/departmentsList.ts
+  - src/react-query/departmentsGetAll.ts
   - src/react-query/departmentsRemovePeople.ts
   - src/react-query/departmentsUpdate.ts
   - src/react-query/earningTypesCreate.ts
-  - src/react-query/earningTypesDeactivate.ts
-  - src/react-query/earningTypesGetAll.ts
+  - src/react-query/earningTypesDelete.ts
+  - src/react-query/earningTypesList.ts
   - src/react-query/earningTypesUpdate.ts
   - src/react-query/employeeAddressesCreate.ts
+  - src/react-query/employeeAddressesCreateWorkAddress.ts
   - src/react-query/employeeAddressesDelete.ts
+  - src/react-query/employeeAddressesDeleteWorkAddress.ts
   - src/react-query/employeeAddressesGet.ts
-  - src/react-query/employeeAddressesGetHomeAddress.ts
-  - src/react-query/employeeAddressesGetHomeAddresses.ts
-  - src/react-query/employeeAddressesGetWorkAddress.ts
-  - src/react-query/employeeAddressesRemoveHomeAddress.ts
-  - src/react-query/employeeAddressesUpdateHomeAddress.ts
+  - src/react-query/employeeAddressesGetWorkAddresses.ts
+  - src/react-query/employeeAddressesRetrieveHomeAddress.ts
+  - src/react-query/employeeAddressesRetrieveWorkAddress.ts
+  - src/react-query/employeeAddressesUpdate.ts
   - src/react-query/employeeAddressesUpdateWorkAddress.ts
-  - src/react-query/employeeAddressesWorkAddressesCreate.ts
-  - src/react-query/employeeBenefitsCreateBenefit.ts
-  - src/react-query/employeeBenefitsCreateYtdAmountsFromDifferentCompany.ts
+  - src/react-query/employeeBenefitsCreate.ts
+  - src/react-query/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.ts
   - src/react-query/employeeBenefitsDelete.ts
   - src/react-query/employeeBenefitsGet.ts
-  - src/react-query/employeeBenefitsGetAll.ts
-  - src/react-query/employeeBenefitsGetEmployeeYtdBenefitAmountsFromDifferentCompany.ts
+  - src/react-query/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.ts
+  - src/react-query/employeeBenefitsRetrieve.ts
   - src/react-query/employeeBenefitsUpdate.ts
   - src/react-query/employeeEmploymentsCreateRehire.ts
   - src/react-query/employeeEmploymentsCreateTermination.ts
@@ -1730,15 +1729,15 @@ generatedFiles:
   - src/react-query/employeeEmploymentsDeleteTermination.ts
   - src/react-query/employeeEmploymentsGetHistory.ts
   - src/react-query/employeeEmploymentsGetRehire.ts
-  - src/react-query/employeeEmploymentsGetTermination.ts
-  - src/react-query/employeeEmploymentsUpdateRehire.ts
+  - src/react-query/employeeEmploymentsGetTerminations.ts
+  - src/react-query/employeeEmploymentsRehire.ts
   - src/react-query/employeeEmploymentsUpdateTermination.ts
   - src/react-query/employeeFormsGenerateW2.ts
-  - src/react-query/employeeFormsGetAll.ts
-  - src/react-query/employeeFormsGetForm.ts
+  - src/react-query/employeeFormsGet.ts
   - src/react-query/employeeFormsGetPdf.ts
+  - src/react-query/employeeFormsList.ts
   - src/react-query/employeeFormsSign.ts
-  - src/react-query/employeePaymentMethodCreateBankAccount.ts
+  - src/react-query/employeePaymentMethodCreate.ts
   - src/react-query/employeePaymentMethodDeleteBankAccount.ts
   - src/react-query/employeePaymentMethodGet.ts
   - src/react-query/employeePaymentMethodUpdate.ts
@@ -1755,30 +1754,30 @@ generatedFiles:
   - src/react-query/employeesGetCustomFields.ts
   - src/react-query/employeesGetOnboardingStatus.ts
   - src/react-query/employeesGetTimeOffActivities.ts
-  - src/react-query/employeesRetrieve.ts
+  - src/react-query/employeesList.ts
   - src/react-query/employeesUpdate.ts
-  - src/react-query/employeesUpdateHistorical.ts
   - src/react-query/employeesUpdateOnboardingDocumentsConfig.ts
   - src/react-query/employeesUpdateOnboardingStatus.ts
-  - src/react-query/eventsList.ts
+  - src/react-query/eventsGet.ts
+  - src/react-query/externalPayrollsCalculateTaxes.ts
   - src/react-query/externalPayrollsCreate.ts
   - src/react-query/externalPayrollsDelete.ts
   - src/react-query/externalPayrollsFinalizeTaxLiabilities.ts
   - src/react-query/externalPayrollsGet.ts
-  - src/react-query/externalPayrollsGetTaxLiabilities.ts
-  - src/react-query/externalPayrollsGetTaxSuggestions.ts
-  - src/react-query/externalPayrollsList.ts
+  - src/react-query/externalPayrollsListTaxLiabilities.ts
+  - src/react-query/externalPayrollsRetrieve.ts
   - src/react-query/externalPayrollsUpdate.ts
   - src/react-query/externalPayrollsUpdateTaxLiabilities.ts
   - src/react-query/federalTaxDetailsGet.ts
   - src/react-query/federalTaxDetailsUpdate.ts
   - src/react-query/flowsCreate.ts
   - src/react-query/garnishmentsCreate.ts
-  - src/react-query/garnishmentsFetch.ts
   - src/react-query/garnishmentsGet.ts
-  - src/react-query/garnishmentsGetChildSupport.ts
+  - src/react-query/garnishmentsGetChildSupportData.ts
+  - src/react-query/garnishmentsList.ts
   - src/react-query/garnishmentsUpdate.ts
   - src/react-query/generatedDocumentsGet.ts
+  - src/react-query/historicalEmployeesUpdate.ts
   - src/react-query/holidayPayPoliciesAddEmployees.ts
   - src/react-query/holidayPayPoliciesCreate.ts
   - src/react-query/holidayPayPoliciesDelete.ts
@@ -1786,22 +1785,22 @@ generatedFiles:
   - src/react-query/holidayPayPoliciesRemoveEmployees.ts
   - src/react-query/holidayPayPoliciesUpdate.ts
   - src/react-query/i9VerificationCreateDocuments.ts
-  - src/react-query/i9VerificationCreateOrUpdate.ts
   - src/react-query/i9VerificationDeleteDocument.ts
   - src/react-query/i9VerificationEmployerSign.ts
   - src/react-query/i9VerificationGetAuthorization.ts
   - src/react-query/i9VerificationGetDocumentOptions.ts
   - src/react-query/i9VerificationGetDocuments.ts
+  - src/react-query/i9VerificationUpdate.ts
   - src/react-query/index.ts
   - src/react-query/industrySelectionGet.ts
   - src/react-query/industrySelectionUpdate.ts
-  - src/react-query/introspectionGetTokenInfo.ts
-  - src/react-query/introspectionRefreshAccessToken.ts
+  - src/react-query/introspectionGetInfo.ts
+  - src/react-query/introspectionRefreshToken.ts
   - src/react-query/invoicesGet.ts
   - src/react-query/jobsAndCompensationsCreateCompensation.ts
   - src/react-query/jobsAndCompensationsCreateJob.ts
+  - src/react-query/jobsAndCompensationsDelete.ts
   - src/react-query/jobsAndCompensationsDeleteCompensation.ts
-  - src/react-query/jobsAndCompensationsDeleteJob.ts
   - src/react-query/jobsAndCompensationsGetCompensation.ts
   - src/react-query/jobsAndCompensationsGetCompensations.ts
   - src/react-query/jobsAndCompensationsGetJob.ts
@@ -1810,18 +1809,18 @@ generatedFiles:
   - src/react-query/jobsAndCompensationsUpdateCompensation.ts
   - src/react-query/locationsCreate.ts
   - src/react-query/locationsGet.ts
-  - src/react-query/locationsGetAll.ts
   - src/react-query/locationsGetMinimumWages.ts
+  - src/react-query/locationsRetrieve.ts
   - src/react-query/locationsUpdate.ts
-  - src/react-query/notificationsGet.ts
+  - src/react-query/notificationsGetDetails.ts
   - src/react-query/paySchedulesAssign.ts
   - src/react-query/paySchedulesCreate.ts
   - src/react-query/paySchedulesGet.ts
+  - src/react-query/paySchedulesGetAll.ts
   - src/react-query/paySchedulesGetAssignments.ts
-  - src/react-query/paySchedulesGetForCompany.ts
-  - src/react-query/paySchedulesList.ts
-  - src/react-query/paySchedulesListUnprocessedTerminationPeriods.ts
-  - src/react-query/paySchedulesPreview.ts
+  - src/react-query/paySchedulesGetPayPeriods.ts
+  - src/react-query/paySchedulesGetPreview.ts
+  - src/react-query/paySchedulesGetUnprocessedTerminationPeriods.ts
   - src/react-query/paySchedulesPreviewAssignment.ts
   - src/react-query/paySchedulesUpdate.ts
   - src/react-query/paymentConfigsGet.ts
@@ -1829,55 +1828,54 @@ generatedFiles:
   - src/react-query/payrollsCalculate.ts
   - src/react-query/payrollsCalculateGrossUp.ts
   - src/react-query/payrollsCancel.ts
-  - src/react-query/payrollsCreate.ts
+  - src/react-query/payrollsCreateOffCycle.ts
   - src/react-query/payrollsDelete.ts
   - src/react-query/payrollsGeneratePrintableChecks.ts
   - src/react-query/payrollsGet.ts
-  - src/react-query/payrollsGetAll.ts
+  - src/react-query/payrollsGetApprovedReversals.ts
   - src/react-query/payrollsGetBlockers.ts
   - src/react-query/payrollsGetPayStub.ts
   - src/react-query/payrollsGetPayStubs.ts
   - src/react-query/payrollsGetReceipt.ts
-  - src/react-query/payrollsGetReversals.ts
-  - src/react-query/payrollsPrepareForUpdate.ts
+  - src/react-query/payrollsList.ts
+  - src/react-query/payrollsPrepare.ts
   - src/react-query/payrollsSkip.ts
   - src/react-query/payrollsSubmit.ts
   - src/react-query/payrollsUpdate.ts
-  - src/react-query/recoveryCasesGetAll.ts
+  - src/react-query/recoveryCasesGet.ts
   - src/react-query/recoveryCasesRedebit.ts
-  - src/react-query/reportsCreate.ts
+  - src/react-query/reportsCreateCustom.ts
   - src/react-query/reportsGet.ts
   - src/react-query/reportsGetTemplate.ts
   - src/react-query/signatoriesCreate.ts
   - src/react-query/signatoriesDelete.ts
-  - src/react-query/signatoriesGet.ts
   - src/react-query/signatoriesInvite.ts
+  - src/react-query/signatoriesList.ts
   - src/react-query/signatoriesUpdate.ts
+  - src/react-query/taxRequirementsGet.ts
   - src/react-query/taxRequirementsGetAll.ts
-  - src/react-query/taxRequirementsGetByState.ts
-  - src/react-query/taxRequirementsUpdate.ts
+  - src/react-query/taxRequirementsUpdateState.ts
   - src/react-query/timeOffPoliciesAddEmployees.ts
-  - src/react-query/timeOffPoliciesCalculateAccruingHours.ts
+  - src/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.ts
   - src/react-query/timeOffPoliciesCreate.ts
   - src/react-query/timeOffPoliciesDeactivate.ts
   - src/react-query/timeOffPoliciesGet.ts
+  - src/react-query/timeOffPoliciesGetAll.ts
   - src/react-query/timeOffPoliciesRemoveEmployees.ts
-  - src/react-query/timeOffPoliciesRetrieve.ts
   - src/react-query/timeOffPoliciesUpdate.ts
   - src/react-query/timeOffPoliciesUpdateBalance.ts
   - src/react-query/webhooksCreateSubscription.ts
-  - src/react-query/webhooksDelete.ts
-  - src/react-query/webhooksGet.ts
+  - src/react-query/webhooksDeleteSubscription.ts
+  - src/react-query/webhooksGetSubscription.ts
   - src/react-query/webhooksListSubscriptions.ts
   - src/react-query/webhooksRequestVerificationToken.ts
   - src/react-query/webhooksUpdateSubscription.ts
-  - src/react-query/webhooksVerifySubscription.ts
+  - src/react-query/webhooksVerify.ts
   - src/react-query/wireInRequestsGet.ts
-  - src/react-query/wireInRequestsGetAll.ts
-  - src/react-query/wireInRequestsSubmitRequest.ts
+  - src/react-query/wireInRequestsList.ts
+  - src/react-query/wireInRequestsSubmit.ts
   - src/sdk/achtransactions.ts
   - src/sdk/bankaccounts.ts
-  - src/sdk/benefits.ts
   - src/sdk/companies.ts
   - src/sdk/companyattachment.ts
   - src/sdk/companyattachments.ts
@@ -1887,6 +1885,7 @@ generatedFiles:
   - src/sdk/contractorforms.ts
   - src/sdk/contractorpaymentgroups.ts
   - src/sdk/contractorpaymentmethod.ts
+  - src/sdk/contractorpaymentmethods.ts
   - src/sdk/contractorpayments.ts
   - src/sdk/contractors.ts
   - src/sdk/departments.ts
@@ -1903,9 +1902,9 @@ generatedFiles:
   - src/sdk/externalpayrolls.ts
   - src/sdk/federaltaxdetails.ts
   - src/sdk/flows.ts
-  - src/sdk/forms.ts
   - src/sdk/garnishments.ts
   - src/sdk/generateddocuments.ts
+  - src/sdk/historicalemployees.ts
   - src/sdk/holidaypaypolicies.ts
   - src/sdk/i9verification.ts
   - src/sdk/index.ts
@@ -1926,7 +1925,6 @@ generatedFiles:
   - src/sdk/timeoffpolicies.ts
   - src/sdk/webhooks.ts
   - src/sdk/wireinrequests.ts
-  - src/sdk/workaddresses.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -5694,7 +5692,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "created_at": "2021-02-01T22:00:00Z"}, {"payroll_deadline": "2021-02-28", "check_date": "2021-03-01", "processed": false, "processed_date": "nil", "calculated_at": "nil", "uuid": "709a0790-cc23-4f27-84a6-4b0d278a6af5", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "external": false, "pay_period": {"start_date": "2021-02-16", "end_date": "2021-03-01", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "created_at": "2022-02-01T22:00:00Z"}]
+          application/json: [{"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "created_at": "2021-02-01T22:00:00Z"}, {"payroll_deadline": "2021-02-28", "check_date": "2021-03-01", "processed": false, "processed_date": "nil", "calculated_at": "nil", "uuid": "c8a232aa-0b11-4b8a-b005-71e9e705d0e6", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "external": false, "pay_period": {"start_date": "2021-02-16", "end_date": "2021-03-01", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "created_at": "2022-02-01T22:00:00Z"}]
   get-v1-companies-company_id-payroll_reversals:
     Example:
       parameters:
@@ -6008,7 +6006,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 370456, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 700347, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
     Fixed Policy:
       parameters:
         path:
@@ -6095,7 +6093,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 700347, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": "<value>", "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
+          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 461008, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": "<value>", "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
   post-companies-company_uuid-time_off_policies:
     Unlimited Policy:
       parameters:
@@ -7201,7 +7199,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "b888f774-3e7c-4135-a18c-6b985523c4bc", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}, {"uuid": "e50f7622-81da-484b-9c66-1c8a99c6b71b", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}]
+          application/json: [{"uuid": "c8a232aa-0b11-4b8a-b005-71e9e705d0e6", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}, {"uuid": "21e27667-18d6-4d46-812e-0aee1b9ddf12", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}]
   get-v1-garnishments-garnishment_id:
     Example:
       parameters:
@@ -7290,7 +7288,7 @@ examples:
         application/json: {"authorization_status": "citizen", "version": "52b7c567242cb7452e89ba2bc02cb476"}
       responses:
         "200":
-          application/json: {"uuid": "4113bed5-50ae-4daa-a9a5-8a55ddb5a141", "version": "<value>", "authorization_status": "citizen", "employer_signed": false, "employee_signed": true}
+          application/json: {"uuid": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "version": "<value>", "authorization_status": "permanent_resident", "employer_signed": false, "employee_signed": true}
     Basic:
       parameters:
         path:
@@ -7738,7 +7736,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "e83d273e-4ae9-4b61-9c71-4030c2f73093", "company_uuid": "c5e3e3e9-732f-4762-849e-20b5cec9036f", "status": "open", "latest_error_code": "R01", "original_debit_date": "2023-10-11T00:00:00Z", "check_date": "2023-10-13T00:00:00Z", "payroll_uuid": "210f2034-fb4a-4059-b109-6c3b5efe499d", "contractor_payment_uuids": ["<value>", "<value>"], "amount_outstanding": "10499.43", "event_total_amount": "5912.07"}]
+          application/json: [{"uuid": "e83d273e-4ae9-4b61-9c71-4030c2f73093", "company_uuid": "c5e3e3e9-732f-4762-849e-20b5cec9036f", "status": "open", "latest_error_code": "R01", "original_debit_date": "2023-10-11T00:00:00Z", "check_date": "2023-10-13T00:00:00Z", "payroll_uuid": "210f2034-fb4a-4059-b109-6c3b5efe499d", "contractor_payment_uuids": ["<value>", "<value>", "<value>"], "amount_outstanding": "10499.43", "event_total_amount": "5912.07"}]
   redebit-recovery-case:
     Basic:
       parameters:
@@ -7839,7 +7837,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "approved", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "5773243", "additional_notes": "Additional Notes", "bank_name": "Chase", "date_sent": "2024-06-10T00:00:00Z", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll,", "payment_uuid": "payroll", "amount_sent": "1054693.52", "requested_amount": "1054693.52", "wire_in_deadline": "2024-06-21T18:00:00Z"}]
+          application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "rfi", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "5773243", "additional_notes": "Additional Notes", "bank_name": "Chase", "date_sent": "2024-06-10T00:00:00Z", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll,", "payment_uuid": "payroll", "amount_sent": "1054693.52", "requested_amount": "1054693.52", "wire_in_deadline": "2024-06-21T18:00:00Z"}]
   get-v1-employees-employee_id-bank_accounts:
     Example:
       parameters:

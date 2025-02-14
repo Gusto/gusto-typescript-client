@@ -7,7 +7,7 @@ Company's default funding type
 ```typescript
 import { FundingType } from "@gusto/embedded-api/models/components";
 
-let value: FundingType = "ach";
+let value: FundingType = "brex";
 ```
 
 ## Values

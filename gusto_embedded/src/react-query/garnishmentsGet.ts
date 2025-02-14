@@ -26,10 +26,10 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type GarnishmentsGetQueryData = Array<components.Garnishment>;
+export type GarnishmentsGetQueryData = components.Garnishment;
 
 /**
- * Get garnishments for an employee
+ * Get a garnishment
  *
  * @remarks
  * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
@@ -37,7 +37,7 @@ export type GarnishmentsGetQueryData = Array<components.Garnishment>;
  * scope: `garnishments:read`
  */
 export function useGarnishmentsGet(
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: operations.GetV1GarnishmentsGarnishmentIdRequest,
   options?: QueryHookOptions<GarnishmentsGetQueryData>,
 ): UseQueryResult<GarnishmentsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -52,7 +52,7 @@ export function useGarnishmentsGet(
 }
 
 /**
- * Get garnishments for an employee
+ * Get a garnishment
  *
  * @remarks
  * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
@@ -60,7 +60,7 @@ export function useGarnishmentsGet(
  * scope: `garnishments:read`
  */
 export function useGarnishmentsGetSuspense(
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: operations.GetV1GarnishmentsGarnishmentIdRequest,
   options?: SuspenseQueryHookOptions<GarnishmentsGetQueryData>,
 ): UseSuspenseQueryResult<GarnishmentsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +77,7 @@ export function useGarnishmentsGetSuspense(
 export function prefetchGarnishmentsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: operations.GetV1GarnishmentsGarnishmentIdRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildGarnishmentsGetQuery(
@@ -90,12 +90,8 @@ export function prefetchGarnishmentsGet(
 export function setGarnishmentsGetData(
   client: QueryClient,
   queryKeyBase: [
-    employeeId: string,
-    parameters: {
-      page?: number | undefined;
-      per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
-    },
+    garnishmentId: string,
+    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
   ],
   data: GarnishmentsGetQueryData,
 ): GarnishmentsGetQueryData | undefined {
@@ -108,12 +104,8 @@ export function invalidateGarnishmentsGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
-      employeeId: string,
-      parameters: {
-        page?: number | undefined;
-        per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
-      },
+      garnishmentId: string,
+      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -136,16 +128,14 @@ export function invalidateAllGarnishmentsGet(
 
 export function buildGarnishmentsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: operations.GetV1GarnishmentsGarnishmentIdRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
   queryFn: (context: QueryFunctionContext) => Promise<GarnishmentsGetQueryData>;
 } {
   return {
-    queryKey: queryKeyGarnishmentsGet(request.employeeId, {
-      page: request.page,
-      per: request.per,
+    queryKey: queryKeyGarnishmentsGet(request.garnishmentId, {
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function garnishmentsGetQueryFn(
@@ -167,12 +157,14 @@ export function buildGarnishmentsGetQuery(
 }
 
 export function queryKeyGarnishmentsGet(
-  employeeId: string,
-  parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
-  },
+  garnishmentId: string,
+  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Garnishments", "get", employeeId, parameters];
+  return [
+    "@gusto/embedded-api",
+    "Garnishments",
+    "get",
+    garnishmentId,
+    parameters,
+  ];
 }

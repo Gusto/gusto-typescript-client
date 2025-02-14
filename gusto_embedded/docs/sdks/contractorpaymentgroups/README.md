@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [create](#create) - Create a contractor payment group
-* [list](#list) - Get contractor payment groups for a company
+* [getList](#getlist) - Get contractor payment groups for a company
 * [preview](#preview) - Preview a contractor payment group
 * [get](#get) - Fetch a contractor payment group
 * [delete](#delete) - Cancel a contractor payment group
@@ -124,7 +124,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
+## getList
 
 Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
 
@@ -140,7 +140,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.contractorPaymentGroups.list({
+  const result = await gustoEmbedded.contractorPaymentGroups.getList({
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-12-31",
@@ -159,7 +159,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorPaymentGroupsList } from "@gusto/embedded-api/funcs/contractorPaymentGroupsList.js";
+import { contractorPaymentGroupsGetList } from "@gusto/embedded-api/funcs/contractorPaymentGroupsGetList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -168,7 +168,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await contractorPaymentGroupsList(gustoEmbedded, {
+  const res = await contractorPaymentGroupsGetList(gustoEmbedded, {
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-12-31",
@@ -200,19 +200,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useContractorPaymentGroupsList,
-  useContractorPaymentGroupsListSuspense,
+  useContractorPaymentGroupsGetList,
+  useContractorPaymentGroupsGetListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchContractorPaymentGroupsList,
+  prefetchContractorPaymentGroupsGetList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateContractorPaymentGroupsList,
-  invalidateAllContractorPaymentGroupsList,
-} from "@gusto/embedded-api/react-query/contractorPaymentGroupsList.js";
+  invalidateContractorPaymentGroupsGetList,
+  invalidateAllContractorPaymentGroupsGetList,
+} from "@gusto/embedded-api/react-query/contractorPaymentGroupsGetList.js";
 ```
 
 ### Parameters

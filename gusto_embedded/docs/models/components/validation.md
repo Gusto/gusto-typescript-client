@@ -8,7 +8,7 @@
 import { Validation } from "@gusto/embedded-api/models/components";
 
 let value: Validation = {
-  type: "min_max",
+  type: "one_of",
 };
 ```
 

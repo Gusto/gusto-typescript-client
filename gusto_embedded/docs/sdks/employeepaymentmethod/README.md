@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [createBankAccount](#createbankaccount) - Create an employee bank account
+* [create](#create) - Create an employee bank account
 * [deleteBankAccount](#deletebankaccount) - Delete an employee bank account
 * [updateBankAccount](#updatebankaccount) - Update an employee bank account
 * [get](#get) - Get an employee's payment method
 * [update](#update) - Update an employee's payment method
 
-## createBankAccount
+## create
 
 Creates an employee bank account. An employee can have multiple
 bank accounts. Note that creating an employee bank account will also update
@@ -29,7 +29,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeePaymentMethod.createBankAccount({
+  const result = await gustoEmbedded.employeePaymentMethod.create({
     employeeId: "<id>",
     requestBody: {
       name: "BoA Checking Account",
@@ -52,7 +52,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeePaymentMethodCreateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodCreateBankAccount.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -61,7 +61,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeePaymentMethodCreateBankAccount(gustoEmbedded, {
+  const res = await employeePaymentMethodCreate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
       name: "BoA Checking Account",
@@ -97,8 +97,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useEmployeePaymentMethodCreateBankAccountMutation
-} from "@gusto/embedded-api/react-query/employeePaymentMethodCreateBankAccount.js";
+  useEmployeePaymentMethodCreateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
 ```
 
 ### Parameters

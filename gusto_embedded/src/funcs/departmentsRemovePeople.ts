@@ -89,6 +89,7 @@ export async function departmentsRemovePeople(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-remove-people-from-department",
     oAuth2Scopes: [],
 

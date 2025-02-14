@@ -89,6 +89,7 @@ export async function employeeEmploymentsCreateRehire(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-employees-employee_id-rehire",
     oAuth2Scopes: [],
 

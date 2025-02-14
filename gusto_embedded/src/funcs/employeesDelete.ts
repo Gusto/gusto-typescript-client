@@ -87,6 +87,7 @@ export async function employeesDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-employee",
     oAuth2Scopes: [],
 

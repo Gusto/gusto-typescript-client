@@ -96,6 +96,7 @@ export async function earningTypesUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-companies-company_id-earning_types-earning_type_uuid",
     oAuth2Scopes: [],
 

@@ -94,6 +94,7 @@ export async function externalPayrollsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-external-payroll",
     oAuth2Scopes: [],
 

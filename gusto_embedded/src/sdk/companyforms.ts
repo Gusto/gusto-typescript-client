@@ -3,6 +3,7 @@
  */
 
 import { companyFormsGet } from "../funcs/companyFormsGet.js";
+import { companyFormsGetAll } from "../funcs/companyFormsGetAll.js";
 import { companyFormsGetPdf } from "../funcs/companyFormsGetPdf.js";
 import { companyFormsSign } from "../funcs/companyFormsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -11,6 +12,25 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyForms extends ClientSDK {
+  /**
+   * Get all company forms
+   *
+   * @remarks
+   * Get a list of all company's forms
+   *
+   * scope: `company_forms:read`
+   */
+  async getAll(
+    request: operations.GetV1CompanyFormsRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.Form>> {
+    return unwrapAsync(companyFormsGetAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Get a company form
    *

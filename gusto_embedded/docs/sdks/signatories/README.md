@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [create](#create) - Create a signatory
-* [get](#get) - Get all company signatories
+* [list](#list) - Get all company signatories
 * [invite](#invite) - Invite a signatory
 * [update](#update) - Update a signatory
 * [delete](#delete) - Delete a signatory
@@ -139,7 +139,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## get
+## list
 
 Returns company signatories. Currently we only support a single signatory per company.
 
@@ -155,7 +155,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.signatories.get({
+  const result = await gustoEmbedded.signatories.list({
     companyUuid: "<id>",
   });
 
@@ -172,7 +172,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { signatoriesGet } from "@gusto/embedded-api/funcs/signatoriesGet.js";
+import { signatoriesList } from "@gusto/embedded-api/funcs/signatoriesList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -181,7 +181,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await signatoriesGet(gustoEmbedded, {
+  const res = await signatoriesList(gustoEmbedded, {
     companyUuid: "<id>",
   });
 
@@ -211,19 +211,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useSignatoriesGet,
-  useSignatoriesGetSuspense,
+  useSignatoriesList,
+  useSignatoriesListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchSignatoriesGet,
+  prefetchSignatoriesList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateSignatoriesGet,
-  invalidateAllSignatoriesGet,
-} from "@gusto/embedded-api/react-query/signatoriesGet.js";
+  invalidateSignatoriesList,
+  invalidateAllSignatoriesList,
+} from "@gusto/embedded-api/react-query/signatoriesList.js";
 ```
 
 ### Parameters

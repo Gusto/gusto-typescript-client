@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [getTokenInfo](#gettokeninfo) - Get info about the current access token
-* [refreshAccessToken](#refreshaccesstoken) - Refresh access token
+* [getInfo](#getinfo) - Get info about the current access token
+* [refreshToken](#refreshtoken) - Refresh access token
 
-## getTokenInfo
+## getInfo
 
 Returns scope and resource information associated with the current access token.
 
@@ -22,7 +22,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.introspection.getTokenInfo({});
+  const result = await gustoEmbedded.introspection.getInfo({});
 
   // Handle the result
   console.log(result);
@@ -37,7 +37,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { introspectionGetTokenInfo } from "@gusto/embedded-api/funcs/introspectionGetTokenInfo.js";
+import { introspectionGetInfo } from "@gusto/embedded-api/funcs/introspectionGetInfo.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -46,7 +46,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await introspectionGetTokenInfo(gustoEmbedded, {});
+  const res = await introspectionGetInfo(gustoEmbedded, {});
 
   if (!res.ok) {
     throw res.error;
@@ -74,19 +74,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useIntrospectionGetTokenInfo,
-  useIntrospectionGetTokenInfoSuspense,
+  useIntrospectionGetInfo,
+  useIntrospectionGetInfoSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchIntrospectionGetTokenInfo,
+  prefetchIntrospectionGetInfo,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateIntrospectionGetTokenInfo,
-  invalidateAllIntrospectionGetTokenInfo,
-} from "@gusto/embedded-api/react-query/introspectionGetTokenInfo.js";
+  invalidateIntrospectionGetInfo,
+  invalidateAllIntrospectionGetInfo,
+} from "@gusto/embedded-api/react-query/introspectionGetInfo.js";
 ```
 
 ### Parameters
@@ -108,7 +108,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## refreshAccessToken
+## refreshToken
 
 Exchange a refresh token for a new access token.
 
@@ -126,7 +126,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.introspection.refreshAccessToken({
+  const result = await gustoEmbedded.introspection.refreshToken({
     requestBody: {
       clientId: "<id>",
       clientSecret: "<value>",
@@ -148,7 +148,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { introspectionRefreshAccessToken } from "@gusto/embedded-api/funcs/introspectionRefreshAccessToken.js";
+import { introspectionRefreshToken } from "@gusto/embedded-api/funcs/introspectionRefreshToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -157,7 +157,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await introspectionRefreshAccessToken(gustoEmbedded, {
+  const res = await introspectionRefreshToken(gustoEmbedded, {
     requestBody: {
       clientId: "<id>",
       clientSecret: "<value>",
@@ -192,8 +192,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useIntrospectionRefreshAccessTokenMutation
-} from "@gusto/embedded-api/react-query/introspectionRefreshAccessToken.js";
+  useIntrospectionRefreshTokenMutation
+} from "@gusto/embedded-api/react-query/introspectionRefreshToken.js";
 ```
 
 ### Parameters

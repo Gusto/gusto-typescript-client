@@ -8,7 +8,7 @@ The representation of a pay schedule.
 import { PaySchedule } from "@gusto/embedded-api/models/components";
 
 let value: PaySchedule = {
-  uuid: "06a61142-f2c9-498f-b5c8-6f916cbe4c79",
+  uuid: "679fb64f-2bea-4635-bbae-dde4568a4064",
 };
 ```
 

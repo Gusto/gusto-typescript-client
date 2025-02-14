@@ -6,9 +6,9 @@
 ### Available Operations
 
 * [create](#create) - Create a custom earning type
-* [getAll](#getall) - Get all earning types for a company
+* [list](#list) - Get all earning types for a company
 * [update](#update) - Update an earning type
-* [deactivate](#deactivate) - Deactivate an earning type
+* [delete](#delete) - Deactivate an earning type
 
 ## create
 
@@ -114,7 +114,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getAll
+## list
 
 A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
 
@@ -136,7 +136,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.earningTypes.getAll({
+  const result = await gustoEmbedded.earningTypes.list({
     companyId: "<id>",
   });
 
@@ -153,7 +153,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { earningTypesGetAll } from "@gusto/embedded-api/funcs/earningTypesGetAll.js";
+import { earningTypesList } from "@gusto/embedded-api/funcs/earningTypesList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -162,7 +162,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await earningTypesGetAll(gustoEmbedded, {
+  const res = await earningTypesList(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -192,19 +192,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useEarningTypesGetAll,
-  useEarningTypesGetAllSuspense,
+  useEarningTypesList,
+  useEarningTypesListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchEarningTypesGetAll,
+  prefetchEarningTypesList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateEarningTypesGetAll,
-  invalidateAllEarningTypesGetAll,
-} from "@gusto/embedded-api/react-query/earningTypesGetAll.js";
+  invalidateEarningTypesList,
+  invalidateAllEarningTypesList,
+} from "@gusto/embedded-api/react-query/earningTypesList.js";
 ```
 
 ### Parameters
@@ -330,7 +330,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## deactivate
+## delete
 
 Deactivate an earning type.
 
@@ -346,7 +346,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.earningTypes.deactivate({
+  await gustoEmbedded.earningTypes.delete({
     companyId: "<id>",
     earningTypeUuid: "<id>",
   });
@@ -363,7 +363,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { earningTypesDeactivate } from "@gusto/embedded-api/funcs/earningTypesDeactivate.js";
+import { earningTypesDelete } from "@gusto/embedded-api/funcs/earningTypesDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -372,7 +372,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await earningTypesDeactivate(gustoEmbedded, {
+  const res = await earningTypesDelete(gustoEmbedded, {
     companyId: "<id>",
     earningTypeUuid: "<id>",
   });
@@ -402,8 +402,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useEarningTypesDeactivateMutation
-} from "@gusto/embedded-api/react-query/earningTypesDeactivate.js";
+  useEarningTypesDeleteMutation
+} from "@gusto/embedded-api/react-query/earningTypesDelete.js";
 ```
 
 ### Parameters

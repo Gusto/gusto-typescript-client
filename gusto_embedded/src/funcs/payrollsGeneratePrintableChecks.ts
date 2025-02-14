@@ -92,6 +92,7 @@ export async function payrollsGeneratePrintableChecks(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks",
     oAuth2Scopes: [],

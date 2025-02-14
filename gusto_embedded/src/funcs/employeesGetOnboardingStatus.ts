@@ -123,6 +123,7 @@ export async function employeesGetOnboardingStatus(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-employees-employee_id-onboarding_status",
     oAuth2Scopes: [],
 

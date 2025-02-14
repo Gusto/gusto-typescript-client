@@ -92,6 +92,7 @@ export async function employeeAddressesCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-employees-employee_id-home_addresses",
     oAuth2Scopes: [],
 

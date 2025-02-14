@@ -7,7 +7,7 @@ Payroll type
 ```typescript
 import { PayrollType } from "@gusto/embedded-api/models/operations";
 
-let value: PayrollType = "Hired employee";
+let value: PayrollType = "Regular";
 ```
 
 ## Values

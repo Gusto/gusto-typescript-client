@@ -91,6 +91,7 @@ export async function timeOffPoliciesDeactivate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-time_off_policies-time_off_policy_uuid-deactivate",
     oAuth2Scopes: [],
 

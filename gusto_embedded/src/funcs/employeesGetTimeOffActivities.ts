@@ -91,6 +91,7 @@ export async function employeesGetTimeOffActivities(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-version-employees-time_off_activities",
     oAuth2Scopes: [],
 

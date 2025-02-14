@@ -86,6 +86,7 @@ export async function contractorsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-contractors-contractor_uuid",
     oAuth2Scopes: [],
 

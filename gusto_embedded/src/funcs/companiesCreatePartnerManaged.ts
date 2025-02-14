@@ -95,6 +95,7 @@ export async function companiesCreatePartnerManaged(
   );
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-partner-managed-companies",
     oAuth2Scopes: [],
 

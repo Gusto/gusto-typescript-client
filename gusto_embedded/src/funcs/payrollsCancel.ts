@@ -96,6 +96,7 @@ export async function payrollsCancel(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-api-v1-companies-company_id-payrolls-payroll_id-cancel",
     oAuth2Scopes: [],
 

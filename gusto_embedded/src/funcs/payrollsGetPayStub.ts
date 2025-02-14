@@ -93,6 +93,7 @@ export async function payrollsGetPayStub(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub",
     oAuth2Scopes: [],

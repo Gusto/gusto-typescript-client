@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [getAll](#getall) - Get all recovery cases for a company
+* [get](#get) - Get all recovery cases for a company
 * [redebit](#redebit) - Initiate a redebit for a recovery case
 
-## getAll
+## get
 
 Fetch all recovery cases for a company.
 
@@ -24,7 +24,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.recoveryCases.getAll({
+  const result = await gustoEmbedded.recoveryCases.get({
     companyUuid: "<id>",
   });
 
@@ -41,7 +41,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { recoveryCasesGetAll } from "@gusto/embedded-api/funcs/recoveryCasesGetAll.js";
+import { recoveryCasesGet } from "@gusto/embedded-api/funcs/recoveryCasesGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -50,7 +50,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await recoveryCasesGetAll(gustoEmbedded, {
+  const res = await recoveryCasesGet(gustoEmbedded, {
     companyUuid: "<id>",
   });
 
@@ -80,19 +80,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useRecoveryCasesGetAll,
-  useRecoveryCasesGetAllSuspense,
+  useRecoveryCasesGet,
+  useRecoveryCasesGetSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchRecoveryCasesGetAll,
+  prefetchRecoveryCasesGet,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateRecoveryCasesGetAll,
-  invalidateAllRecoveryCasesGetAll,
-} from "@gusto/embedded-api/react-query/recoveryCasesGetAll.js";
+  invalidateRecoveryCasesGet,
+  invalidateAllRecoveryCasesGet,
+} from "@gusto/embedded-api/react-query/recoveryCasesGet.js";
 ```
 
 ### Parameters

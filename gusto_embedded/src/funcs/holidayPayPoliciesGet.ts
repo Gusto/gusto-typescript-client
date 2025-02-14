@@ -87,6 +87,7 @@ export async function holidayPayPoliciesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-companies-company_uuid-holiday_pay_policy",
     oAuth2Scopes: [],
 

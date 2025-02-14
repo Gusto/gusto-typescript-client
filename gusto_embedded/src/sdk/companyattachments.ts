@@ -3,8 +3,8 @@
  */
 
 import { companyAttachmentsCreate } from "../funcs/companyAttachmentsCreate.js";
-import { companyAttachmentsGetAll } from "../funcs/companyAttachmentsGetAll.js";
 import { companyAttachmentsGetDetails } from "../funcs/companyAttachmentsGetDetails.js";
+import { companyAttachmentsGetList } from "../funcs/companyAttachmentsGetList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -38,11 +38,11 @@ export class CompanyAttachments extends ClientSDK {
    *
    * scope: `company_attachments:read`
    */
-  async getAll(
+  async getList(
     request: operations.GetV1CompaniesAttachmentsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.CompanyAttachment>> {
-    return unwrapAsync(companyAttachmentsGetAll(
+    return unwrapAsync(companyAttachmentsGetList(
       this,
       request,
       options,

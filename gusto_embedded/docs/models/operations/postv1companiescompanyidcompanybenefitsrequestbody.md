@@ -7,7 +7,7 @@ import { PostV1CompaniesCompanyIdCompanyBenefitsRequestBody } from "@gusto/embed
 
 let value: PostV1CompaniesCompanyIdCompanyBenefitsRequestBody = {
   description:
-    "fuel birdbath hmph hospitalization uselessly mostly aw quarrelsomely since hence",
+    "or astride baseboard councilman ambitious hefty flawless doubtfully",
 };
 ```
 

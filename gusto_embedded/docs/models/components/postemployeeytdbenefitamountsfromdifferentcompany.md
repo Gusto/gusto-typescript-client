@@ -6,7 +6,7 @@
 import { PostEmployeeYtdBenefitAmountsFromDifferentCompany } from "@gusto/embedded-api/models/components";
 
 let value: PostEmployeeYtdBenefitAmountsFromDifferentCompany = {
-  taxYear: 8341.77,
+  taxYear: 4281.99,
 };
 ```
 

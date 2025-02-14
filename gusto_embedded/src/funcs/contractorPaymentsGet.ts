@@ -93,6 +93,7 @@ export async function contractorPaymentsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "get-v1-companies-company_id-contractor_payment-contractor-payment",
     oAuth2Scopes: [],

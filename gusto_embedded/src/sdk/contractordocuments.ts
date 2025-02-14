@@ -3,8 +3,8 @@
  */
 
 import { contractorDocumentsGet } from "../funcs/contractorDocumentsGet.js";
+import { contractorDocumentsGetAll } from "../funcs/contractorDocumentsGetAll.js";
 import { contractorDocumentsGetPdf } from "../funcs/contractorDocumentsGetPdf.js";
-import { contractorDocumentsList } from "../funcs/contractorDocumentsList.js";
 import { contractorDocumentsSign } from "../funcs/contractorDocumentsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -20,11 +20,11 @@ export class ContractorDocuments extends ClientSDK {
    *
    * scope: `contractor_documents:read`
    */
-  async list(
+  async getAll(
     request: operations.GetV1ContractorDocumentsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Document>> {
-    return unwrapAsync(contractorDocumentsList(
+    return unwrapAsync(contractorDocumentsGetAll(
       this,
       request,
       options,

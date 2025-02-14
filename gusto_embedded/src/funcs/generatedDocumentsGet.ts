@@ -92,6 +92,7 @@ export async function generatedDocumentsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-generated_documents-document_type-request_uuid",
     oAuth2Scopes: [],
 

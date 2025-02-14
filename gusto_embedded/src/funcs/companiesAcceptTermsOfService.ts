@@ -92,6 +92,7 @@ export async function companiesAcceptTermsOfService(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "post-partner-managed-companies-company_uuid-accept_terms_of_service",
     oAuth2Scopes: [],

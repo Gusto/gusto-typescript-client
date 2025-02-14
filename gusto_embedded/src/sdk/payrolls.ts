@@ -5,17 +5,17 @@
 import { payrollsCalculate } from "../funcs/payrollsCalculate.js";
 import { payrollsCalculateGrossUp } from "../funcs/payrollsCalculateGrossUp.js";
 import { payrollsCancel } from "../funcs/payrollsCancel.js";
-import { payrollsCreate } from "../funcs/payrollsCreate.js";
+import { payrollsCreateOffCycle } from "../funcs/payrollsCreateOffCycle.js";
 import { payrollsDelete } from "../funcs/payrollsDelete.js";
 import { payrollsGeneratePrintableChecks } from "../funcs/payrollsGeneratePrintableChecks.js";
 import { payrollsGet } from "../funcs/payrollsGet.js";
-import { payrollsGetAll } from "../funcs/payrollsGetAll.js";
+import { payrollsGetApprovedReversals } from "../funcs/payrollsGetApprovedReversals.js";
 import { payrollsGetBlockers } from "../funcs/payrollsGetBlockers.js";
 import { payrollsGetPayStub } from "../funcs/payrollsGetPayStub.js";
 import { payrollsGetPayStubs } from "../funcs/payrollsGetPayStubs.js";
 import { payrollsGetReceipt } from "../funcs/payrollsGetReceipt.js";
-import { payrollsGetReversals } from "../funcs/payrollsGetReversals.js";
-import { payrollsPrepareForUpdate } from "../funcs/payrollsPrepareForUpdate.js";
+import { payrollsList } from "../funcs/payrollsList.js";
+import { payrollsPrepare } from "../funcs/payrollsPrepare.js";
 import { payrollsSkip } from "../funcs/payrollsSkip.js";
 import { payrollsSubmit } from "../funcs/payrollsSubmit.js";
 import { payrollsUpdate } from "../funcs/payrollsUpdate.js";
@@ -40,11 +40,11 @@ export class Payrolls extends ClientSDK {
    *
    * scope: `payrolls:run`
    */
-  async create(
+  async createOffCycle(
     request: operations.PostV1CompaniesCompanyIdPayrollsRequest,
     options?: RequestOptions,
   ): Promise<components.PayrollPrepared> {
-    return unwrapAsync(payrollsCreate(
+    return unwrapAsync(payrollsCreateOffCycle(
       this,
       request,
       options,
@@ -65,11 +65,11 @@ export class Payrolls extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async getAll(
+  async list(
     request: operations.GetV1CompaniesCompanyIdPayrollsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.PayrollMinimal>> {
-    return unwrapAsync(payrollsGetAll(
+    return unwrapAsync(payrollsList(
       this,
       request,
       options,
@@ -84,11 +84,11 @@ export class Payrolls extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async getReversals(
+  async getApprovedReversals(
     request: operations.GetV1CompaniesCompanyIdPayrollReversalsRequest,
     options?: RequestOptions,
   ): Promise<components.PayrollReversal> {
-    return unwrapAsync(payrollsGetReversals(
+    return unwrapAsync(payrollsGetApprovedReversals(
       this,
       request,
       options,
@@ -177,11 +177,11 @@ export class Payrolls extends ClientSDK {
    *
    * scope: `payrolls:write`
    */
-  async prepareForUpdate(
+  async prepare(
     request: operations.PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
     options?: RequestOptions,
   ): Promise<components.PayrollPrepared> {
-    return unwrapAsync(payrollsPrepareForUpdate(
+    return unwrapAsync(payrollsPrepare(
       this,
       request,
       options,

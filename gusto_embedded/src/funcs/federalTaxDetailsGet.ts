@@ -87,6 +87,7 @@ export async function federalTaxDetailsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-companies-company_id-federal_tax_details",
     oAuth2Scopes: [],
 

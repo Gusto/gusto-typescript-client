@@ -86,6 +86,7 @@ export async function employeesCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-employees",
     oAuth2Scopes: [],
 

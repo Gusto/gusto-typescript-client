@@ -91,6 +91,7 @@ export async function payrollsCalculateGrossUp(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-payrolls-gross-up-payroll_uuid",
     oAuth2Scopes: [],
 

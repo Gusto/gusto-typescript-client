@@ -90,6 +90,7 @@ export async function contractorsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-companies-company_uuid-contractors",
     oAuth2Scopes: [],
 

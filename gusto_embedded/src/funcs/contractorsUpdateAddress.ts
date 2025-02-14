@@ -90,6 +90,7 @@ export async function contractorsUpdateAddress(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-contractors-contractor_uuid-address",
     oAuth2Scopes: [],
 

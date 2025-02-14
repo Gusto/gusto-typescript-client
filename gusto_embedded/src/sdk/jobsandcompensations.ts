@@ -4,8 +4,8 @@
 
 import { jobsAndCompensationsCreateCompensation } from "../funcs/jobsAndCompensationsCreateCompensation.js";
 import { jobsAndCompensationsCreateJob } from "../funcs/jobsAndCompensationsCreateJob.js";
+import { jobsAndCompensationsDelete } from "../funcs/jobsAndCompensationsDelete.js";
 import { jobsAndCompensationsDeleteCompensation } from "../funcs/jobsAndCompensationsDeleteCompensation.js";
-import { jobsAndCompensationsDeleteJob } from "../funcs/jobsAndCompensationsDeleteJob.js";
 import { jobsAndCompensationsGetCompensation } from "../funcs/jobsAndCompensationsGetCompensation.js";
 import { jobsAndCompensationsGetCompensations } from "../funcs/jobsAndCompensationsGetCompensations.js";
 import { jobsAndCompensationsGetJob } from "../funcs/jobsAndCompensationsGetJob.js";
@@ -102,11 +102,11 @@ export class JobsAndCompensations extends ClientSDK {
    *
    * scope: `jobs:write`
    */
-  async deleteJob(
+  async delete(
     request: operations.DeleteV1JobsJobIdRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(jobsAndCompensationsDeleteJob(
+    return unwrapAsync(jobsAndCompensationsDelete(
       this,
       request,
       options,

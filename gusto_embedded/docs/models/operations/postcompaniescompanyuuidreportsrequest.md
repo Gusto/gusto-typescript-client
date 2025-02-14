@@ -10,7 +10,7 @@ let value: PostCompaniesCompanyUuidReportsRequest = {
   companyUuid: "<id>",
   requestBody: {
     columns: [
-      "home_address",
+      "commission",
     ],
     groupings: [
       "work_address",
