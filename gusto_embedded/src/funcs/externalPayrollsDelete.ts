@@ -91,6 +91,7 @@ export async function externalPayrollsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-external-payroll",
     oAuth2Scopes: [],
 

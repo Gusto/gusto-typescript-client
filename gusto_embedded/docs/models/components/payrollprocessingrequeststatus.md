@@ -7,7 +7,7 @@ The status of the payroll processing request
 ```typescript
 import { PayrollProcessingRequestStatus } from "@gusto/embedded-api/models/components";
 
-let value: PayrollProcessingRequestStatus = "submit_success";
+let value: PayrollProcessingRequestStatus = "calculating";
 ```
 
 ## Values

@@ -98,6 +98,7 @@ export async function payrollsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-companies-company_id-payrolls",
     oAuth2Scopes: [],
 

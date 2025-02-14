@@ -96,6 +96,7 @@ export async function companyBenefitsGetSummary(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-benefits-company_benefit_id-summary",
     oAuth2Scopes: [],
 

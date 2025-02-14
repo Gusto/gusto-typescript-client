@@ -89,6 +89,7 @@ export async function i9VerificationGetAuthorization(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-employees-employee_id-i9_authorization",
     oAuth2Scopes: [],
 

@@ -5,7 +5,7 @@
 ```typescript
 import { SubscriptionTypes } from "@gusto/embedded-api/models/components";
 
-let value: SubscriptionTypes = "ExternalPayroll";
+let value: SubscriptionTypes = "PaySchedule";
 ```
 
 ## Values

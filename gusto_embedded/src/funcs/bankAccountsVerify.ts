@@ -108,6 +108,7 @@ export async function bankAccountsVerify(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-companies-company_id-bank-accounts-verify",
     oAuth2Scopes: [],
 

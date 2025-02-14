@@ -91,6 +91,7 @@ export async function holidayPayPoliciesDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-companies-company_uuid-holiday_pay_policy",
     oAuth2Scopes: [],
 

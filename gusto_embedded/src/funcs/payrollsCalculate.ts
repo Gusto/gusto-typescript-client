@@ -97,6 +97,7 @@ export async function payrollsCalculate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-companies-company_id-payrolls-payroll_id-calculate",
     oAuth2Scopes: [],
 

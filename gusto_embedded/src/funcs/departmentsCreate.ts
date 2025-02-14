@@ -88,6 +88,7 @@ export async function departmentsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-departments",
     oAuth2Scopes: [],
 

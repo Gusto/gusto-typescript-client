@@ -93,6 +93,7 @@ export async function timeOffPoliciesAddEmployees(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "put-version-time_off_policies-time_off_policy_uuid-add_employees",
     oAuth2Scopes: [],

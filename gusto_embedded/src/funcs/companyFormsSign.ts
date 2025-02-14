@@ -87,6 +87,7 @@ export async function companyFormsSign(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-company-form-sign",
     oAuth2Scopes: [],
 

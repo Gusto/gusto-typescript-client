@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [create](#create) - Create a department
-* [list](#list) - Get all departments of a company
+* [getAll](#getall) - Get all departments of a company
 * [get](#get) - Get a department
 * [update](#update) - Update a department
 * [delete](#delete) - Delete a department
@@ -115,7 +115,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
+## getAll
 
 Get all of the departments for a given company with the employees and contractors assigned to that department.
 
@@ -131,7 +131,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.departments.list({
+  const result = await gustoEmbedded.departments.getAll({
     companyUuid: "<id>",
   });
 
@@ -148,7 +148,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { departmentsList } from "@gusto/embedded-api/funcs/departmentsList.js";
+import { departmentsGetAll } from "@gusto/embedded-api/funcs/departmentsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -157,7 +157,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await departmentsList(gustoEmbedded, {
+  const res = await departmentsGetAll(gustoEmbedded, {
     companyUuid: "<id>",
   });
 
@@ -187,19 +187,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useDepartmentsList,
-  useDepartmentsListSuspense,
+  useDepartmentsGetAll,
+  useDepartmentsGetAllSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchDepartmentsList,
+  prefetchDepartmentsGetAll,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateDepartmentsList,
-  invalidateAllDepartmentsList,
-} from "@gusto/embedded-api/react-query/departmentsList.js";
+  invalidateDepartmentsGetAll,
+  invalidateAllDepartmentsGetAll,
+} from "@gusto/embedded-api/react-query/departmentsGetAll.js";
 ```
 
 ### Parameters

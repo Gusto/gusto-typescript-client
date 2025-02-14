@@ -17,19 +17,19 @@ import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeAddressesDeleteMutationVariables = {
-  request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest;
+  request: operations.DeleteV1HomeAddressesHomeAddressUuidRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeAddressesDeleteMutationData = void;
 
 /**
- * Delete an employee's work address
+ * Delete an employee's home address
  *
  * @remarks
- * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+ * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
  *
- * scope: `employees:manage`
+ * scope: `employees:write`
  */
 export function useEmployeeAddressesDeleteMutation(
   options?: MutationHookOptions<

@@ -91,6 +91,7 @@ export async function federalTaxDetailsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-companies-company_id-federal_tax_details",
     oAuth2Scopes: [],
 

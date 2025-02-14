@@ -8,12 +8,12 @@ import { RFCDate } from "@gusto/embedded-api/types";
 
 let value: PostCompaniesCompanyUuidReportsRequestBody = {
   columns: [
-    "bank_account_type",
+    "employee_phone_number",
   ],
   groupings: [
-    "work_address",
+    "payroll",
   ],
-  fileType: "csv",
+  fileType: "json",
   startDate: new RFCDate("2024-01-01"),
   endDate: new RFCDate("2024-04-01"),
   dismissedStartDate: new RFCDate("2024-01-01"),

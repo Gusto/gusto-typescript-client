@@ -5,8 +5,7 @@
 ```typescript
 import { PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod } from "@gusto/embedded-api/models/operations";
 
-let value: PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod =
-  "Direct Deposit";
+let value: PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod = "Check";
 ```
 
 ## Values

@@ -7,7 +7,7 @@ The unit accompanying the compensation rate. If the employee is an owner, rate s
 ```typescript
 import { PaymentUnit } from "@gusto/embedded-api/models/components";
 
-let value: PaymentUnit = "Paycheck";
+let value: PaymentUnit = "Year";
 ```
 
 ## Values

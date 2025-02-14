@@ -3,12 +3,12 @@
  */
 
 import { timeOffPoliciesAddEmployees } from "../funcs/timeOffPoliciesAddEmployees.js";
-import { timeOffPoliciesCalculateAccruingHours } from "../funcs/timeOffPoliciesCalculateAccruingHours.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "../funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 import { timeOffPoliciesCreate } from "../funcs/timeOffPoliciesCreate.js";
 import { timeOffPoliciesDeactivate } from "../funcs/timeOffPoliciesDeactivate.js";
 import { timeOffPoliciesGet } from "../funcs/timeOffPoliciesGet.js";
+import { timeOffPoliciesGetAll } from "../funcs/timeOffPoliciesGetAll.js";
 import { timeOffPoliciesRemoveEmployees } from "../funcs/timeOffPoliciesRemoveEmployees.js";
-import { timeOffPoliciesRetrieve } from "../funcs/timeOffPoliciesRetrieve.js";
 import { timeOffPoliciesUpdate } from "../funcs/timeOffPoliciesUpdate.js";
 import { timeOffPoliciesUpdateBalance } from "../funcs/timeOffPoliciesUpdateBalance.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -33,12 +33,12 @@ export class TimeOffPolicies extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async calculateAccruingHours(
+  async calculateAccruingTimeOffHours(
     request:
       operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest,
     options?: RequestOptions,
   ): Promise<Array<components.AccruingTimeOffHour>> {
-    return unwrapAsync(timeOffPoliciesCalculateAccruingHours(
+    return unwrapAsync(timeOffPoliciesCalculateAccruingTimeOffHours(
       this,
       request,
       options,
@@ -53,11 +53,11 @@ export class TimeOffPolicies extends ClientSDK {
    *
    * scope: `time_off_policies:read`
    */
-  async retrieve(
+  async get(
     request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
     options?: RequestOptions,
   ): Promise<components.TimeOffPolicy> {
-    return unwrapAsync(timeOffPoliciesRetrieve(
+    return unwrapAsync(timeOffPoliciesGet(
       this,
       request,
       options,
@@ -91,11 +91,11 @@ export class TimeOffPolicies extends ClientSDK {
    *
    * scope: `time_off_policies:read`
    */
-  async get(
+  async getAll(
     request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.TimeOffPolicy>> {
-    return unwrapAsync(timeOffPoliciesGet(
+    return unwrapAsync(timeOffPoliciesGetAll(
       this,
       request,
       options,

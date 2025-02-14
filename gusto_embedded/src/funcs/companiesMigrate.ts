@@ -92,6 +92,7 @@ export async function companiesMigrate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-partner-managed-companies-company-uuid-migrate",
     oAuth2Scopes: [],
 

@@ -111,6 +111,7 @@ export async function companyAttachmentsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-companies-attachment",
     oAuth2Scopes: [],
 

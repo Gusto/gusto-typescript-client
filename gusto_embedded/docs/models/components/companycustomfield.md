@@ -8,9 +8,9 @@ A custom field on a company
 import { CompanyCustomField } from "@gusto/embedded-api/models/components";
 
 let value: CompanyCustomField = {
-  uuid: "e0f1d955-c5a8-47e8-8db0-c3e0517d425d",
+  uuid: "1e0f1d95-5c5a-487e-b8db-0c3e0517d425",
   name: "<value>",
-  type: "currency",
+  type: "text",
 };
 ```
 

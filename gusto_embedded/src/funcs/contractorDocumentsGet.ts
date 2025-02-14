@@ -84,6 +84,7 @@ export async function contractorDocumentsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-contractor-document",
     oAuth2Scopes: [],
 

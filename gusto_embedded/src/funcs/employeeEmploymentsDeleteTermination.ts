@@ -89,6 +89,7 @@ export async function employeeEmploymentsDeleteTermination(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-employees-employee_id-terminations",
     oAuth2Scopes: [],
 

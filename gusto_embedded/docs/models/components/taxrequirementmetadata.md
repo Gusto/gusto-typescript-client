@@ -6,7 +6,7 @@
 import { TaxRequirementMetadata } from "@gusto/embedded-api/models/components";
 
 let value: TaxRequirementMetadata = {
-  type: "percent",
+  type: "tax_rate",
 };
 ```
 

@@ -95,6 +95,7 @@ export async function paySchedulesAssign(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-companies-company_id-pay_schedules-assign",
     oAuth2Scopes: [],
 

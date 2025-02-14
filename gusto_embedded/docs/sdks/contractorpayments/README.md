@@ -8,9 +8,9 @@
 * [getReceipt](#getreceipt) - Get a single contractor payment receipt
 * [fund](#fund) - Fund a contractor payment [DEMO]
 * [create](#create) - Create a contractor payment
-* [getPayments](#getpayments) - Get contractor payments for a company
+* [list](#list) - Get contractor payments for a company
 * [get](#get) - Get a single contractor payment
-* [cancel](#cancel) - Cancel a contractor payment
+* [delete](#delete) - Cancel a contractor payment
 
 ## getReceipt
 
@@ -339,7 +339,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getPayments
+## list
 
 Returns an object containing individual contractor payments, within a given time period, including totals.
 
@@ -355,7 +355,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.contractorPayments.getPayments({
+  const result = await gustoEmbedded.contractorPayments.list({
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-12-31",
@@ -374,7 +374,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorPaymentsGetPayments } from "@gusto/embedded-api/funcs/contractorPaymentsGetPayments.js";
+import { contractorPaymentsList } from "@gusto/embedded-api/funcs/contractorPaymentsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -383,7 +383,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await contractorPaymentsGetPayments(gustoEmbedded, {
+  const res = await contractorPaymentsList(gustoEmbedded, {
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-12-31",
@@ -415,19 +415,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useContractorPaymentsGetPayments,
-  useContractorPaymentsGetPaymentsSuspense,
+  useContractorPaymentsList,
+  useContractorPaymentsListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchContractorPaymentsGetPayments,
+  prefetchContractorPaymentsList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateContractorPaymentsGetPayments,
-  invalidateAllContractorPaymentsGetPayments,
-} from "@gusto/embedded-api/react-query/contractorPaymentsGetPayments.js";
+  invalidateContractorPaymentsList,
+  invalidateAllContractorPaymentsList,
+} from "@gusto/embedded-api/react-query/contractorPaymentsList.js";
 ```
 
 ### Parameters
@@ -556,7 +556,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## cancel
+## delete
 
 Cancels and deletes a contractor payment. If the contractor payment has already started processing ("may_cancel": true), the payment cannot be cancelled.
 
@@ -572,7 +572,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.contractorPayments.cancel({
+  await gustoEmbedded.contractorPayments.delete({
     companyId: "<id>",
     contractorPaymentId: "<id>",
   });
@@ -589,7 +589,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorPaymentsCancel } from "@gusto/embedded-api/funcs/contractorPaymentsCancel.js";
+import { contractorPaymentsDelete } from "@gusto/embedded-api/funcs/contractorPaymentsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -598,7 +598,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await contractorPaymentsCancel(gustoEmbedded, {
+  const res = await contractorPaymentsDelete(gustoEmbedded, {
     companyId: "<id>",
     contractorPaymentId: "<id>",
   });
@@ -628,8 +628,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useContractorPaymentsCancelMutation
-} from "@gusto/embedded-api/react-query/contractorPaymentsCancel.js";
+  useContractorPaymentsDeleteMutation
+} from "@gusto/embedded-api/react-query/contractorPaymentsDelete.js";
 ```
 
 ### Parameters

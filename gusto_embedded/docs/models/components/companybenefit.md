@@ -8,7 +8,7 @@ The representation of a company benefit.
 import { CompanyBenefit } from "@gusto/embedded-api/models/components";
 
 let value: CompanyBenefit = {
-  uuid: "f38449ec-b8e7-4dd3-8c05-38b18f3a907b",
+  uuid: "540d69f0-2ccc-48f6-8916-b3fa4c1f0e4c",
 };
 ```
 

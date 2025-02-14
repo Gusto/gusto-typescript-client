@@ -5,11 +5,11 @@
 import { paySchedulesAssign } from "../funcs/paySchedulesAssign.js";
 import { paySchedulesCreate } from "../funcs/paySchedulesCreate.js";
 import { paySchedulesGet } from "../funcs/paySchedulesGet.js";
+import { paySchedulesGetAll } from "../funcs/paySchedulesGetAll.js";
 import { paySchedulesGetAssignments } from "../funcs/paySchedulesGetAssignments.js";
-import { paySchedulesGetForCompany } from "../funcs/paySchedulesGetForCompany.js";
-import { paySchedulesList } from "../funcs/paySchedulesList.js";
-import { paySchedulesListUnprocessedTerminationPeriods } from "../funcs/paySchedulesListUnprocessedTerminationPeriods.js";
-import { paySchedulesPreview } from "../funcs/paySchedulesPreview.js";
+import { paySchedulesGetPayPeriods } from "../funcs/paySchedulesGetPayPeriods.js";
+import { paySchedulesGetPreview } from "../funcs/paySchedulesGetPreview.js";
+import { paySchedulesGetUnprocessedTerminationPeriods } from "../funcs/paySchedulesGetUnprocessedTerminationPeriods.js";
 import { paySchedulesPreviewAssignment } from "../funcs/paySchedulesPreviewAssignment.js";
 import { paySchedulesUpdate } from "../funcs/paySchedulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -49,11 +49,11 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `pay_schedules:read`
    */
-  async getForCompany(
+  async getAll(
     request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.PaySchedule>> {
-    return unwrapAsync(paySchedulesGetForCompany(
+    return unwrapAsync(paySchedulesGetAll(
       this,
       request,
       options,
@@ -68,13 +68,13 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `pay_schedules:write`
    */
-  async preview(
+  async getPreview(
     request: operations.GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
     options?: RequestOptions,
   ): Promise<
     operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody
   > {
-    return unwrapAsync(paySchedulesPreview(
+    return unwrapAsync(paySchedulesGetPreview(
       this,
       request,
       options,
@@ -131,11 +131,11 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async list(
+  async getPayPeriods(
     request: operations.GetV1CompaniesCompanyIdPayPeriodsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.PayPeriod>> {
-    return unwrapAsync(paySchedulesList(
+    return unwrapAsync(paySchedulesGetPayPeriods(
       this,
       request,
       options,
@@ -152,12 +152,12 @@ export class PaySchedules extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async listUnprocessedTerminationPeriods(
+  async getUnprocessedTerminationPeriods(
     request:
       operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.UnprocessedTerminationPayPeriod>> {
-    return unwrapAsync(paySchedulesListUnprocessedTerminationPeriods(
+    return unwrapAsync(paySchedulesGetUnprocessedTerminationPeriods(
       this,
       request,
       options,

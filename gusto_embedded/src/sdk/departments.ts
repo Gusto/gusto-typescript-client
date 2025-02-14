@@ -6,7 +6,7 @@ import { departmentsAddPeople } from "../funcs/departmentsAddPeople.js";
 import { departmentsCreate } from "../funcs/departmentsCreate.js";
 import { departmentsDelete } from "../funcs/departmentsDelete.js";
 import { departmentsGet } from "../funcs/departmentsGet.js";
-import { departmentsList } from "../funcs/departmentsList.js";
+import { departmentsGetAll } from "../funcs/departmentsGetAll.js";
 import { departmentsRemovePeople } from "../funcs/departmentsRemovePeople.js";
 import { departmentsUpdate } from "../funcs/departmentsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -42,11 +42,11 @@ export class Departments extends ClientSDK {
    *
    * scope: `departments:read`
    */
-  async list(
+  async getAll(
     request: operations.GetCompaniesDepartmentsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Department>> {
-    return unwrapAsync(departmentsList(
+    return unwrapAsync(departmentsGetAll(
       this,
       request,
       options,

@@ -88,6 +88,7 @@ export async function employeeEmploymentsGetRehire(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-employees-employee_id-rehire",
     oAuth2Scopes: [],
 

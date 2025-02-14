@@ -6,7 +6,7 @@
 import { PayScheduleAssignmentBody } from "@gusto/embedded-api/models/components";
 
 let value: PayScheduleAssignmentBody = {
-  type: "hourly_salaried",
+  type: "by_department",
 };
 ```
 

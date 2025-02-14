@@ -89,6 +89,7 @@ export async function industrySelectionUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-company-industry",
     oAuth2Scopes: [],
 

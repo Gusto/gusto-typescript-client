@@ -88,6 +88,7 @@ export async function employeeEmploymentsDeleteRehire(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-employees-employee_id-rehire",
     oAuth2Scopes: [],
 

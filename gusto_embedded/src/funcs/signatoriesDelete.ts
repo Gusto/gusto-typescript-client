@@ -93,6 +93,7 @@ export async function signatoriesDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-companies-company_uuid-signatories-signatory_uuid",
     oAuth2Scopes: [],
 

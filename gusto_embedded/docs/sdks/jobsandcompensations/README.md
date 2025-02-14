@@ -9,7 +9,7 @@
 * [getJobs](#getjobs) - Get jobs for an employee
 * [getJob](#getjob) - Get a job
 * [update](#update) - Update a job
-* [deleteJob](#deletejob) - Delete an individual job
+* [delete](#delete) - Delete an individual job
 * [getCompensations](#getcompensations) - Get compensations for a job
 * [createCompensation](#createcompensation) - Create a compensation
 * [getCompensation](#getcompensation) - Get a compensation
@@ -438,7 +438,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## deleteJob
+## delete
 
 Deletes a specific job that an employee holds.
 
@@ -454,7 +454,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.jobsAndCompensations.deleteJob({
+  await gustoEmbedded.jobsAndCompensations.delete({
     jobId: "<id>",
   });
 
@@ -470,7 +470,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { jobsAndCompensationsDeleteJob } from "@gusto/embedded-api/funcs/jobsAndCompensationsDeleteJob.js";
+import { jobsAndCompensationsDelete } from "@gusto/embedded-api/funcs/jobsAndCompensationsDelete.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -479,7 +479,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await jobsAndCompensationsDeleteJob(gustoEmbedded, {
+  const res = await jobsAndCompensationsDelete(gustoEmbedded, {
     jobId: "<id>",
   });
 
@@ -508,8 +508,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useJobsAndCompensationsDeleteJobMutation
-} from "@gusto/embedded-api/react-query/jobsAndCompensationsDeleteJob.js";
+  useJobsAndCompensationsDeleteMutation
+} from "@gusto/embedded-api/react-query/jobsAndCompensationsDelete.js";
 ```
 
 ### Parameters

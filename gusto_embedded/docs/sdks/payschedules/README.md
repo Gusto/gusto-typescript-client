@@ -6,12 +6,12 @@
 ### Available Operations
 
 * [create](#create) - Create a new pay schedule
-* [getForCompany](#getforcompany) - Get the pay schedules for a company
-* [preview](#preview) - Preview pay schedule dates
+* [getAll](#getall) - Get the pay schedules for a company
+* [getPreview](#getpreview) - Preview pay schedule dates
 * [get](#get) - Get a pay schedule
 * [update](#update) - Update a pay schedule
-* [list](#list) - Get pay periods for a company
-* [listUnprocessedTerminationPeriods](#listunprocessedterminationperiods) - Get termination pay periods for a company
+* [getPayPeriods](#getpayperiods) - Get pay periods for a company
+* [getUnprocessedTerminationPeriods](#getunprocessedterminationperiods) - Get termination pay periods for a company
 * [getAssignments](#getassignments) - Get pay schedule assignments for a company
 * [previewAssignment](#previewassignment) - Preview pay schedule assignments for a company
 * [assign](#assign) - Assign pay schedules for a company
@@ -132,7 +132,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getForCompany
+## getAll
 
 The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
 
@@ -148,7 +148,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.getForCompany({
+  const result = await gustoEmbedded.paySchedules.getAll({
     companyId: "<id>",
   });
 
@@ -165,7 +165,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { paySchedulesGetForCompany } from "@gusto/embedded-api/funcs/paySchedulesGetForCompany.js";
+import { paySchedulesGetAll } from "@gusto/embedded-api/funcs/paySchedulesGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -174,7 +174,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await paySchedulesGetForCompany(gustoEmbedded, {
+  const res = await paySchedulesGetAll(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -204,19 +204,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePaySchedulesGetForCompany,
-  usePaySchedulesGetForCompanySuspense,
+  usePaySchedulesGetAll,
+  usePaySchedulesGetAllSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPaySchedulesGetForCompany,
+  prefetchPaySchedulesGetAll,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePaySchedulesGetForCompany,
-  invalidateAllPaySchedulesGetForCompany,
-} from "@gusto/embedded-api/react-query/paySchedulesGetForCompany.js";
+  invalidatePaySchedulesGetAll,
+  invalidateAllPaySchedulesGetAll,
+} from "@gusto/embedded-api/react-query/paySchedulesGetAll.js";
 ```
 
 ### Parameters
@@ -238,7 +238,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## preview
+## getPreview
 
 Provides a preview of a pay schedule with the specified parameters for the next 18 months.
 
@@ -254,7 +254,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.preview({
+  const result = await gustoEmbedded.paySchedules.getPreview({
     companyId: "<id>",
     frequency: "Monthly",
     anchorPayDate: "2020-05-15",
@@ -274,7 +274,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { paySchedulesPreview } from "@gusto/embedded-api/funcs/paySchedulesPreview.js";
+import { paySchedulesGetPreview } from "@gusto/embedded-api/funcs/paySchedulesGetPreview.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -283,7 +283,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await paySchedulesPreview(gustoEmbedded, {
+  const res = await paySchedulesGetPreview(gustoEmbedded, {
     companyId: "<id>",
     frequency: "Monthly",
     anchorPayDate: "2020-05-15",
@@ -316,19 +316,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePaySchedulesPreview,
-  usePaySchedulesPreviewSuspense,
+  usePaySchedulesGetPreview,
+  usePaySchedulesGetPreviewSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPaySchedulesPreview,
+  prefetchPaySchedulesGetPreview,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePaySchedulesPreview,
-  invalidateAllPaySchedulesPreview,
-} from "@gusto/embedded-api/react-query/paySchedulesPreview.js";
+  invalidatePaySchedulesGetPreview,
+  invalidateAllPaySchedulesGetPreview,
+} from "@gusto/embedded-api/react-query/paySchedulesGetPreview.js";
 ```
 
 ### Parameters
@@ -576,7 +576,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
+## getPayPeriods
 
 Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
 
@@ -596,7 +596,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.list({
+  const result = await gustoEmbedded.paySchedules.getPayPeriods({
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-01-31",
@@ -615,7 +615,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { paySchedulesList } from "@gusto/embedded-api/funcs/paySchedulesList.js";
+import { paySchedulesGetPayPeriods } from "@gusto/embedded-api/funcs/paySchedulesGetPayPeriods.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -624,7 +624,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await paySchedulesList(gustoEmbedded, {
+  const res = await paySchedulesGetPayPeriods(gustoEmbedded, {
     companyId: "<id>",
     startDate: "2020-01-01",
     endDate: "2020-01-31",
@@ -656,19 +656,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePaySchedulesList,
-  usePaySchedulesListSuspense,
+  usePaySchedulesGetPayPeriods,
+  usePaySchedulesGetPayPeriodsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPaySchedulesList,
+  prefetchPaySchedulesGetPayPeriods,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePaySchedulesList,
-  invalidateAllPaySchedulesList,
-} from "@gusto/embedded-api/react-query/paySchedulesList.js";
+  invalidatePaySchedulesGetPayPeriods,
+  invalidateAllPaySchedulesGetPayPeriods,
+} from "@gusto/embedded-api/react-query/paySchedulesGetPayPeriods.js";
 ```
 
 ### Parameters
@@ -690,7 +690,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listUnprocessedTerminationPeriods
+## getUnprocessedTerminationPeriods
 
 When a payroll admin terminates an employee and selects "Dismissal Payroll" as the employee's final payroll, their last pay period will appear on the list.
 
@@ -708,7 +708,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.paySchedules.listUnprocessedTerminationPeriods({
+  const result = await gustoEmbedded.paySchedules.getUnprocessedTerminationPeriods({
     companyId: "<id>",
   });
 
@@ -725,7 +725,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { paySchedulesListUnprocessedTerminationPeriods } from "@gusto/embedded-api/funcs/paySchedulesListUnprocessedTerminationPeriods.js";
+import { paySchedulesGetUnprocessedTerminationPeriods } from "@gusto/embedded-api/funcs/paySchedulesGetUnprocessedTerminationPeriods.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -734,7 +734,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await paySchedulesListUnprocessedTerminationPeriods(gustoEmbedded, {
+  const res = await paySchedulesGetUnprocessedTerminationPeriods(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -764,19 +764,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePaySchedulesListUnprocessedTerminationPeriods,
-  usePaySchedulesListUnprocessedTerminationPeriodsSuspense,
+  usePaySchedulesGetUnprocessedTerminationPeriods,
+  usePaySchedulesGetUnprocessedTerminationPeriodsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPaySchedulesListUnprocessedTerminationPeriods,
+  prefetchPaySchedulesGetUnprocessedTerminationPeriods,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePaySchedulesListUnprocessedTerminationPeriods,
-  invalidateAllPaySchedulesListUnprocessedTerminationPeriods,
-} from "@gusto/embedded-api/react-query/paySchedulesListUnprocessedTerminationPeriods.js";
+  invalidatePaySchedulesGetUnprocessedTerminationPeriods,
+  invalidateAllPaySchedulesGetUnprocessedTerminationPeriods,
+} from "@gusto/embedded-api/react-query/paySchedulesGetUnprocessedTerminationPeriods.js";
 ```
 
 ### Parameters

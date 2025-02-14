@@ -25,16 +25,16 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete an employee's work address
+ * Delete an employee's home address
  *
  * @remarks
- * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+ * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
  *
- * scope: `employees:manage`
+ * scope: `employees:write`
  */
 export async function employeeAddressesDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest,
+  request: operations.DeleteV1HomeAddressesHomeAddressUuidRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
@@ -52,7 +52,7 @@ export async function employeeAddressesDelete(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema
+      operations.DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -63,14 +63,14 @@ export async function employeeAddressesDelete(
   const body = null;
 
   const pathParams = {
-    work_address_uuid: encodeSimple(
-      "work_address_uuid",
-      payload.work_address_uuid,
+    home_address_uuid: encodeSimple(
+      "home_address_uuid",
+      payload.home_address_uuid,
       { explode: false, charEncoding: "percent" },
     ),
   };
 
-  const path = pathToFunc("/v1/work_addresses/{work_address_uuid}")(pathParams);
+  const path = pathToFunc("/v1/home_addresses/{home_address_uuid}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -88,7 +88,8 @@ export async function employeeAddressesDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "delete-v1-work_addresses-work_address_uuid",
+    baseURL: options?.serverURL ?? "",
+    operationID: "delete-v1-home_addresses-home_address_uuid",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,

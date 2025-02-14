@@ -7,7 +7,7 @@ The type of recipient associated with the document (will be `Contractor` for Con
 ```typescript
 import { RecipientType } from "@gusto/embedded-api/models/components";
 
-let value: RecipientType = "Employee";
+let value: RecipientType = "Company";
 ```
 
 ## Values

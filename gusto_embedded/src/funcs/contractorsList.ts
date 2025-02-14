@@ -94,6 +94,7 @@ export async function contractorsList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-companies-company_uuid-contractors",
     oAuth2Scopes: [],
 

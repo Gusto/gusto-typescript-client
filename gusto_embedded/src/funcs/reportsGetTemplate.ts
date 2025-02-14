@@ -92,6 +92,7 @@ export async function reportsGetTemplate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-companies-company_uuid-report-templates-report_type",
     oAuth2Scopes: [],
 

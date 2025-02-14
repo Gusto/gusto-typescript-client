@@ -8,8 +8,8 @@ import { employeeEmploymentsDeleteRehire } from "../funcs/employeeEmploymentsDel
 import { employeeEmploymentsDeleteTermination } from "../funcs/employeeEmploymentsDeleteTermination.js";
 import { employeeEmploymentsGetHistory } from "../funcs/employeeEmploymentsGetHistory.js";
 import { employeeEmploymentsGetRehire } from "../funcs/employeeEmploymentsGetRehire.js";
-import { employeeEmploymentsGetTermination } from "../funcs/employeeEmploymentsGetTermination.js";
-import { employeeEmploymentsUpdateRehire } from "../funcs/employeeEmploymentsUpdateRehire.js";
+import { employeeEmploymentsGetTerminations } from "../funcs/employeeEmploymentsGetTerminations.js";
+import { employeeEmploymentsRehire } from "../funcs/employeeEmploymentsRehire.js";
 import { employeeEmploymentsUpdateTermination } from "../funcs/employeeEmploymentsUpdateTermination.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -48,11 +48,11 @@ export class EmployeeEmployments extends ClientSDK {
    *
    * scope: `employments:read`
    */
-  async getTermination(
+  async getTerminations(
     request: operations.GetV1EmployeesEmployeeIdTerminationsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Termination>> {
-    return unwrapAsync(employeeEmploymentsGetTermination(
+    return unwrapAsync(employeeEmploymentsGetTerminations(
       this,
       request,
       options,
@@ -126,11 +126,11 @@ export class EmployeeEmployments extends ClientSDK {
    *
    * scope: `employments:write`
    */
-  async updateRehire(
+  async rehire(
     request: operations.PutV1EmployeesEmployeeIdRehireRequest,
     options?: RequestOptions,
   ): Promise<components.Rehire> {
-    return unwrapAsync(employeeEmploymentsUpdateRehire(
+    return unwrapAsync(employeeEmploymentsRehire(
       this,
       request,
       options,

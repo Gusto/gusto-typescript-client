@@ -91,6 +91,7 @@ export async function contractorPaymentGroupsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-companies-company_id-contractor_payment_groups",
     oAuth2Scopes: [],
 

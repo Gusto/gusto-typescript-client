@@ -26,18 +26,20 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type LocationsGetQueryData = components.Location;
+export type LocationsGetQueryData = Array<components.Location>;
 
 /**
- * Get a location
+ * Get company locations
  *
  * @remarks
- * Get a location.
+ * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+ *
+ * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
  *
  * scope: `companies:read`
  */
 export function useLocationsGet(
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: operations.GetV1CompaniesCompanyIdLocationsRequest,
   options?: QueryHookOptions<LocationsGetQueryData>,
 ): UseQueryResult<LocationsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -52,15 +54,17 @@ export function useLocationsGet(
 }
 
 /**
- * Get a location
+ * Get company locations
  *
  * @remarks
- * Get a location.
+ * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+ *
+ * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
  *
  * scope: `companies:read`
  */
 export function useLocationsGetSuspense(
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: operations.GetV1CompaniesCompanyIdLocationsRequest,
   options?: SuspenseQueryHookOptions<LocationsGetQueryData>,
 ): UseSuspenseQueryResult<LocationsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +81,7 @@ export function useLocationsGetSuspense(
 export function prefetchLocationsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: operations.GetV1CompaniesCompanyIdLocationsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildLocationsGetQuery(
@@ -90,8 +94,12 @@ export function prefetchLocationsGet(
 export function setLocationsGetData(
   client: QueryClient,
   queryKeyBase: [
-    locationId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    companyId: string,
+    parameters: {
+      page?: number | undefined;
+      per?: number | undefined;
+      xGustoAPIVersion?: components.VersionHeader | undefined;
+    },
   ],
   data: LocationsGetQueryData,
 ): LocationsGetQueryData | undefined {
@@ -104,8 +112,12 @@ export function invalidateLocationsGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
-      locationId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      companyId: string,
+      parameters: {
+        page?: number | undefined;
+        per?: number | undefined;
+        xGustoAPIVersion?: components.VersionHeader | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -128,14 +140,16 @@ export function invalidateAllLocationsGet(
 
 export function buildLocationsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: operations.GetV1CompaniesCompanyIdLocationsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
   queryFn: (context: QueryFunctionContext) => Promise<LocationsGetQueryData>;
 } {
   return {
-    queryKey: queryKeyLocationsGet(request.locationId, {
+    queryKey: queryKeyLocationsGet(request.companyId, {
+      page: request.page,
+      per: request.per,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function locationsGetQueryFn(
@@ -157,8 +171,12 @@ export function buildLocationsGetQuery(
 }
 
 export function queryKeyLocationsGet(
-  locationId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  companyId: string,
+  parameters: {
+    page?: number | undefined;
+    per?: number | undefined;
+    xGustoAPIVersion?: components.VersionHeader | undefined;
+  },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Locations", "get", locationId, parameters];
+  return ["@gusto/embedded-api", "Locations", "get", companyId, parameters];
 }

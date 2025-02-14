@@ -93,6 +93,7 @@ export async function companyBenefitsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "delete-v1-company_benefits-company_benefit_id",
     oAuth2Scopes: [],
 

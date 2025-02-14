@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [create](#create) - Create a custom report
+* [createCustom](#createcustom) - Create a custom report
 * [get](#get) - Get a report
 * [getTemplate](#gettemplate) - Get a report template
 
-## create
+## createCustom
 
 Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint.
 
@@ -26,7 +26,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.reports.create({
+  const result = await gustoEmbedded.reports.createCustom({
     companyUuid: "<id>",
     requestBody: {
       columns: [
@@ -58,7 +58,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { reportsCreate } from "@gusto/embedded-api/funcs/reportsCreate.js";
+import { reportsCreateCustom } from "@gusto/embedded-api/funcs/reportsCreateCustom.js";
 import { RFCDate } from "@gusto/embedded-api/types";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
@@ -68,7 +68,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await reportsCreate(gustoEmbedded, {
+  const res = await reportsCreateCustom(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
       columns: [
@@ -113,8 +113,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useReportsCreateMutation
-} from "@gusto/embedded-api/react-query/reportsCreate.js";
+  useReportsCreateCustomMutation
+} from "@gusto/embedded-api/react-query/reportsCreateCustom.js";
 ```
 
 ### Parameters

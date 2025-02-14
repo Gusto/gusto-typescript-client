@@ -6,12 +6,12 @@
 ### Available Operations
 
 * [create](#create) - Create a new external payroll for a company
-* [list](#list) - Get external payrolls for a company
-* [get](#get) - Get an external payroll
+* [get](#get) - Get external payrolls for a company
+* [retrieve](#retrieve) - Get an external payroll
 * [delete](#delete) - Delete an external payroll
 * [update](#update) - Update an external payroll
-* [getTaxSuggestions](#gettaxsuggestions) - Get tax suggestions for an external payroll
-* [getTaxLiabilities](#gettaxliabilities) - Get tax liabilities
+* [calculateTaxes](#calculatetaxes) - Get tax suggestions for an external payroll
+* [listTaxLiabilities](#listtaxliabilities) - Get tax liabilities
 * [updateTaxLiabilities](#updatetaxliabilities) - Update tax liabilities
 * [finalizeTaxLiabilities](#finalizetaxliabilities) - Finalize tax liabilities options and convert into processed payrolls
 
@@ -121,112 +121,6 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## list
-
-Get an external payroll for a given company.
-
-scope: `external_payrolls:read`
-
-### Example Usage
-
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.externalPayrolls.list({
-    companyUuid: "<id>",
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { externalPayrollsList } from "@gusto/embedded-api/funcs/externalPayrollsList.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await externalPayrollsList(gustoEmbedded, {
-    companyUuid: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Query hooks for fetching data.
-  useExternalPayrollsList,
-  useExternalPayrollsListSuspense,
-
-  // Utility for prefetching data during server-side rendering and in React
-  // Server Components that will be immediately available to client components
-  // using the hooks.
-  prefetchExternalPayrollsList,
-  
-  // Utilities to invalidate the query cache for this query in response to
-  // mutations and other user actions.
-  invalidateExternalPayrollsList,
-  invalidateAllExternalPayrollsList,
-} from "@gusto/embedded-api/react-query/externalPayrollsList.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompanyExternalPayrollsRequest](../../models/operations/getv1companyexternalpayrollsrequest.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.ExternalPayrollBasic[]](../../models/.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
 ## get
 
 Get an external payroll for a given company.
@@ -245,7 +139,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.externalPayrolls.get({
     companyUuid: "<id>",
-    externalPayrollId: "<id>",
   });
 
   // Handle the result
@@ -272,7 +165,6 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await externalPayrollsGet(gustoEmbedded, {
     companyUuid: "<id>",
-    externalPayrollId: "<id>",
   });
 
   if (!res.ok) {
@@ -314,6 +206,114 @@ import {
   invalidateExternalPayrollsGet,
   invalidateAllExternalPayrollsGet,
 } from "@gusto/embedded-api/react-query/externalPayrollsGet.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1CompanyExternalPayrollsRequest](../../models/operations/getv1companyexternalpayrollsrequest.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.ExternalPayrollBasic[]](../../models/.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## retrieve
+
+Get an external payroll for a given company.
+
+scope: `external_payrolls:read`
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.externalPayrolls.retrieve({
+    companyUuid: "<id>",
+    externalPayrollId: "<id>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { externalPayrollsRetrieve } from "@gusto/embedded-api/funcs/externalPayrollsRetrieve.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await externalPayrollsRetrieve(gustoEmbedded, {
+    companyUuid: "<id>",
+    externalPayrollId: "<id>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useExternalPayrollsRetrieve,
+  useExternalPayrollsRetrieveSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchExternalPayrollsRetrieve,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateExternalPayrollsRetrieve,
+  invalidateAllExternalPayrollsRetrieve,
+} from "@gusto/embedded-api/react-query/externalPayrollsRetrieve.js";
 ```
 
 ### Parameters
@@ -616,7 +616,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getTaxSuggestions
+## calculateTaxes
 
 Get tax suggestions for an external payroll. Earnings and/or benefits
 data must be saved prior to the calculation in order to retrieve accurate
@@ -634,7 +634,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.externalPayrolls.getTaxSuggestions({
+  const result = await gustoEmbedded.externalPayrolls.calculateTaxes({
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
@@ -652,7 +652,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { externalPayrollsGetTaxSuggestions } from "@gusto/embedded-api/funcs/externalPayrollsGetTaxSuggestions.js";
+import { externalPayrollsCalculateTaxes } from "@gusto/embedded-api/funcs/externalPayrollsCalculateTaxes.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -661,7 +661,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await externalPayrollsGetTaxSuggestions(gustoEmbedded, {
+  const res = await externalPayrollsCalculateTaxes(gustoEmbedded, {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
@@ -692,19 +692,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useExternalPayrollsGetTaxSuggestions,
-  useExternalPayrollsGetTaxSuggestionsSuspense,
+  useExternalPayrollsCalculateTaxes,
+  useExternalPayrollsCalculateTaxesSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchExternalPayrollsGetTaxSuggestions,
+  prefetchExternalPayrollsCalculateTaxes,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateExternalPayrollsGetTaxSuggestions,
-  invalidateAllExternalPayrollsGetTaxSuggestions,
-} from "@gusto/embedded-api/react-query/externalPayrollsGetTaxSuggestions.js";
+  invalidateExternalPayrollsCalculateTaxes,
+  invalidateAllExternalPayrollsCalculateTaxes,
+} from "@gusto/embedded-api/react-query/externalPayrollsCalculateTaxes.js";
 ```
 
 ### Parameters
@@ -726,7 +726,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getTaxLiabilities
+## listTaxLiabilities
 
 Get tax liabilities from aggregate external payrolls for a company.
 
@@ -742,7 +742,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.externalPayrolls.getTaxLiabilities({
+  const result = await gustoEmbedded.externalPayrolls.listTaxLiabilities({
     companyUuid: "<id>",
   });
 
@@ -759,7 +759,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { externalPayrollsGetTaxLiabilities } from "@gusto/embedded-api/funcs/externalPayrollsGetTaxLiabilities.js";
+import { externalPayrollsListTaxLiabilities } from "@gusto/embedded-api/funcs/externalPayrollsListTaxLiabilities.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -768,7 +768,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await externalPayrollsGetTaxLiabilities(gustoEmbedded, {
+  const res = await externalPayrollsListTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
   });
 
@@ -798,19 +798,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useExternalPayrollsGetTaxLiabilities,
-  useExternalPayrollsGetTaxLiabilitiesSuspense,
+  useExternalPayrollsListTaxLiabilities,
+  useExternalPayrollsListTaxLiabilitiesSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchExternalPayrollsGetTaxLiabilities,
+  prefetchExternalPayrollsListTaxLiabilities,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateExternalPayrollsGetTaxLiabilities,
-  invalidateAllExternalPayrollsGetTaxLiabilities,
-} from "@gusto/embedded-api/react-query/externalPayrollsGetTaxLiabilities.js";
+  invalidateExternalPayrollsListTaxLiabilities,
+  invalidateAllExternalPayrollsListTaxLiabilities,
+} from "@gusto/embedded-api/react-query/externalPayrollsListTaxLiabilities.js";
 ```
 
 ### Parameters

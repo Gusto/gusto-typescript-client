@@ -101,6 +101,7 @@ export async function webhooksUpdateSubscription(
   );
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-webhook-subscription-uuid",
     oAuth2Scopes: [],
 

@@ -98,6 +98,7 @@ export async function payrollsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-companies-company_id-payrolls",
     oAuth2Scopes: [],
 

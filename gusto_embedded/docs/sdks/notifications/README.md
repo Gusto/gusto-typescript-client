@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get](#get) - Get a notification's details
+* [getDetails](#getdetails) - Get a notification's details
 
-## get
+## getDetails
 
 Upon receiving a notification webhook event, use this endpoint to fetch the notification's details. The notification details include basic suggested content that can help you build notifications in your platform.
 
@@ -27,7 +27,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.notifications.get({
+  const result = await gustoEmbedded.notifications.getDetails({
     notificationUuid: "<id>",
   });
 
@@ -44,7 +44,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { notificationsGet } from "@gusto/embedded-api/funcs/notificationsGet.js";
+import { notificationsGetDetails } from "@gusto/embedded-api/funcs/notificationsGetDetails.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -53,7 +53,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await notificationsGet(gustoEmbedded, {
+  const res = await notificationsGetDetails(gustoEmbedded, {
     notificationUuid: "<id>",
   });
 
@@ -83,19 +83,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useNotificationsGet,
-  useNotificationsGetSuspense,
+  useNotificationsGetDetails,
+  useNotificationsGetDetailsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchNotificationsGet,
+  prefetchNotificationsGetDetails,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateNotificationsGet,
-  invalidateAllNotificationsGet,
-} from "@gusto/embedded-api/react-query/notificationsGet.js";
+  invalidateNotificationsGetDetails,
+  invalidateAllNotificationsGetDetails,
+} from "@gusto/embedded-api/react-query/notificationsGetDetails.js";
 ```
 
 ### Parameters

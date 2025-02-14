@@ -83,6 +83,7 @@ export async function companyFormsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-company-form",
     oAuth2Scopes: [],
 

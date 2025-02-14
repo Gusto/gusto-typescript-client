@@ -99,6 +99,7 @@ export async function employeesUpdateOnboardingStatus(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees-employee_id-onboarding_status",
     oAuth2Scopes: [],
 

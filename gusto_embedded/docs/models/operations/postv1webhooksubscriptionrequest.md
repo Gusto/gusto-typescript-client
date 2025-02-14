@@ -7,9 +7,9 @@ import { PostV1WebhookSubscriptionRequest } from "@gusto/embedded-api/models/ope
 
 let value: PostV1WebhookSubscriptionRequest = {
   requestBody: {
-    url: "https://palatable-permafrost.info/",
+    url: "https://growing-mousse.name/",
     subscriptionTypes: [
-      "Signatory",
+      "Employee",
     ],
   },
 };

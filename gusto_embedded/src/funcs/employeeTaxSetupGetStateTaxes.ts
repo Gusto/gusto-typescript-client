@@ -100,6 +100,7 @@ export async function employeeTaxSetupGetStateTaxes(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-employees-employee_id-state_taxes",
     oAuth2Scopes: [],
 

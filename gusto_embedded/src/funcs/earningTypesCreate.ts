@@ -92,6 +92,7 @@ export async function earningTypesCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-companies-company_id-earning_types",
     oAuth2Scopes: [],
 

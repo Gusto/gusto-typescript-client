@@ -4,8 +4,8 @@
 
 import { contractorFormsGenerate1099 } from "../funcs/contractorFormsGenerate1099.js";
 import { contractorFormsGet } from "../funcs/contractorFormsGet.js";
-import { contractorFormsGetAll } from "../funcs/contractorFormsGetAll.js";
 import { contractorFormsGetPdf } from "../funcs/contractorFormsGetPdf.js";
+import { contractorFormsList } from "../funcs/contractorFormsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -20,11 +20,11 @@ export class ContractorForms extends ClientSDK {
    *
    * scope: `contractor_forms:read`
    */
-  async getAll(
+  async list(
     request: operations.GetV1ContractorFormsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Form1099>> {
-    return unwrapAsync(contractorFormsGetAll(
+    return unwrapAsync(contractorFormsList(
       this,
       request,
       options,

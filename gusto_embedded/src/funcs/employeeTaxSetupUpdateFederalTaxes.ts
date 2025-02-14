@@ -90,6 +90,7 @@ export async function employeeTaxSetupUpdateFederalTaxes(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees-employee_id-federal_taxes",
     oAuth2Scopes: [],
 

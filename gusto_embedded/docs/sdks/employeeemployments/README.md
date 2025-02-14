@@ -6,11 +6,11 @@
 ### Available Operations
 
 * [createTermination](#createtermination) - Create an employee termination
-* [getTermination](#gettermination) - Get terminations for an employee
+* [getTerminations](#getterminations) - Get terminations for an employee
 * [deleteTermination](#deletetermination) - Delete an employee termination
 * [updateTermination](#updatetermination) - Update an employee termination
 * [createRehire](#createrehire) - Create an employee rehire
-* [updateRehire](#updaterehire) - Update an employee rehire
+* [rehire](#rehire) - Update an employee rehire
 * [getRehire](#getrehire) - Get an employee rehire
 * [deleteRehire](#deleterehire) - Delete an employee rehire
 * [getHistory](#gethistory) - Get employment history for an employee
@@ -121,7 +121,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getTermination
+## getTerminations
 
 Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
 
@@ -139,7 +139,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeEmployments.getTermination({
+  const result = await gustoEmbedded.employeeEmployments.getTerminations({
     employeeId: "<id>",
   });
 
@@ -156,7 +156,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeEmploymentsGetTermination } from "@gusto/embedded-api/funcs/employeeEmploymentsGetTermination.js";
+import { employeeEmploymentsGetTerminations } from "@gusto/embedded-api/funcs/employeeEmploymentsGetTerminations.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -165,7 +165,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeeEmploymentsGetTermination(gustoEmbedded, {
+  const res = await employeeEmploymentsGetTerminations(gustoEmbedded, {
     employeeId: "<id>",
   });
 
@@ -195,19 +195,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useEmployeeEmploymentsGetTermination,
-  useEmployeeEmploymentsGetTerminationSuspense,
+  useEmployeeEmploymentsGetTerminations,
+  useEmployeeEmploymentsGetTerminationsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchEmployeeEmploymentsGetTermination,
+  prefetchEmployeeEmploymentsGetTerminations,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateEmployeeEmploymentsGetTermination,
-  invalidateAllEmployeeEmploymentsGetTermination,
-} from "@gusto/embedded-api/react-query/employeeEmploymentsGetTermination.js";
+  invalidateEmployeeEmploymentsGetTerminations,
+  invalidateAllEmployeeEmploymentsGetTerminations,
+} from "@gusto/embedded-api/react-query/employeeEmploymentsGetTerminations.js";
 ```
 
 ### Parameters
@@ -537,7 +537,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## updateRehire
+## rehire
 
 Update an employee's rehire.
 
@@ -553,7 +553,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.employeeEmployments.updateRehire({
+  const result = await gustoEmbedded.employeeEmployments.rehire({
     employeeId: "<id>",
     requestBody: {
       version: "1928d0c378e519e9c03fb959bc959a6b",
@@ -576,7 +576,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeeEmploymentsUpdateRehire } from "@gusto/embedded-api/funcs/employeeEmploymentsUpdateRehire.js";
+import { employeeEmploymentsRehire } from "@gusto/embedded-api/funcs/employeeEmploymentsRehire.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -585,7 +585,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await employeeEmploymentsUpdateRehire(gustoEmbedded, {
+  const res = await employeeEmploymentsRehire(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
       version: "1928d0c378e519e9c03fb959bc959a6b",
@@ -621,8 +621,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useEmployeeEmploymentsUpdateRehireMutation
-} from "@gusto/embedded-api/react-query/employeeEmploymentsUpdateRehire.js";
+  useEmployeeEmploymentsRehireMutation
+} from "@gusto/embedded-api/react-query/employeeEmploymentsRehire.js";
 ```
 
 ### Parameters

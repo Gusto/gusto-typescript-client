@@ -6,7 +6,7 @@
 import { GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude } from "@gusto/embedded-api/models/operations";
 
 let value: GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude =
-  "payroll_status_meta";
+  "deductions";
 ```
 
 ## Values

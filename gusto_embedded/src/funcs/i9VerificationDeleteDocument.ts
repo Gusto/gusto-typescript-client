@@ -93,6 +93,7 @@ export async function i9VerificationDeleteDocument(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID:
       "delete-v1-employees-employee_id-i9_authorization-documents-document_id",
     oAuth2Scopes: [],

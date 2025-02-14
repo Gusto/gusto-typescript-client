@@ -6,8 +6,8 @@
 ### Available Operations
 
 * [get](#get) - Get a single Wire In Request
-* [submitRequest](#submitrequest) - Submit a wire in request
-* [getAll](#getall) - Get all Wire In Requests for a company
+* [submit](#submit) - Submit a wire in request
+* [list](#list) - Get all Wire In Requests for a company
 
 ## get
 
@@ -115,7 +115,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## submitRequest
+## submit
 
 Submit a wire in request for a payment
 
@@ -131,7 +131,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.wireInRequests.submitRequest({
+  const result = await gustoEmbedded.wireInRequests.submit({
     wireInRequestUuid: "<id>",
     requestBody: {
       dateSent: "2024-06-10T00:00:00Z",
@@ -154,7 +154,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsSubmitRequest } from "@gusto/embedded-api/funcs/wireInRequestsSubmitRequest.js";
+import { wireInRequestsSubmit } from "@gusto/embedded-api/funcs/wireInRequestsSubmit.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -163,7 +163,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await wireInRequestsSubmitRequest(gustoEmbedded, {
+  const res = await wireInRequestsSubmit(gustoEmbedded, {
     wireInRequestUuid: "<id>",
     requestBody: {
       dateSent: "2024-06-10T00:00:00Z",
@@ -199,8 +199,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useWireInRequestsSubmitRequestMutation
-} from "@gusto/embedded-api/react-query/wireInRequestsSubmitRequest.js";
+  useWireInRequestsSubmitMutation
+} from "@gusto/embedded-api/react-query/wireInRequestsSubmit.js";
 ```
 
 ### Parameters
@@ -223,7 +223,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getAll
+## list
 
 Fetches all Wire In Requests for a company.
 
@@ -239,7 +239,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.wireInRequests.getAll({
+  const result = await gustoEmbedded.wireInRequests.list({
     companyUuid: "<id>",
   });
 
@@ -256,7 +256,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { wireInRequestsGetAll } from "@gusto/embedded-api/funcs/wireInRequestsGetAll.js";
+import { wireInRequestsList } from "@gusto/embedded-api/funcs/wireInRequestsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -265,7 +265,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await wireInRequestsGetAll(gustoEmbedded, {
+  const res = await wireInRequestsList(gustoEmbedded, {
     companyUuid: "<id>",
   });
 
@@ -295,19 +295,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useWireInRequestsGetAll,
-  useWireInRequestsGetAllSuspense,
+  useWireInRequestsList,
+  useWireInRequestsListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchWireInRequestsGetAll,
+  prefetchWireInRequestsList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateWireInRequestsGetAll,
-  invalidateAllWireInRequestsGetAll,
-} from "@gusto/embedded-api/react-query/wireInRequestsGetAll.js";
+  invalidateWireInRequestsList,
+  invalidateAllWireInRequestsList,
+} from "@gusto/embedded-api/react-query/wireInRequestsList.js";
 ```
 
 ### Parameters

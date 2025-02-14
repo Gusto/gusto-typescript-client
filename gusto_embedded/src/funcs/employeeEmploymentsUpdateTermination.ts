@@ -89,6 +89,7 @@ export async function employeeEmploymentsUpdateTermination(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-terminations-employee_id",
     oAuth2Scopes: [],
 

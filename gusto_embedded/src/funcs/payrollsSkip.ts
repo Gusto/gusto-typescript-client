@@ -92,6 +92,7 @@ export async function payrollsSkip(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-companies-payroll-skip-company_uuid",
     oAuth2Scopes: [],
 

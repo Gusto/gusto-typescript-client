@@ -26,18 +26,18 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type TimeOffPoliciesGetQueryData = Array<components.TimeOffPolicy>;
+export type TimeOffPoliciesGetQueryData = components.TimeOffPolicy;
 
 /**
- * Get all time off policies
+ * Get a time off policy
  *
  * @remarks
- * Get all time off policies for a company
+ * Get a time off policy
  *
  * scope: `time_off_policies:read`
  */
 export function useTimeOffPoliciesGet(
-  request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
   options?: QueryHookOptions<TimeOffPoliciesGetQueryData>,
 ): UseQueryResult<TimeOffPoliciesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -52,15 +52,15 @@ export function useTimeOffPoliciesGet(
 }
 
 /**
- * Get all time off policies
+ * Get a time off policy
  *
  * @remarks
- * Get all time off policies for a company
+ * Get a time off policy
  *
  * scope: `time_off_policies:read`
  */
 export function useTimeOffPoliciesGetSuspense(
-  request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
   options?: SuspenseQueryHookOptions<TimeOffPoliciesGetQueryData>,
 ): UseSuspenseQueryResult<TimeOffPoliciesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +77,7 @@ export function useTimeOffPoliciesGetSuspense(
 export function prefetchTimeOffPoliciesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildTimeOffPoliciesGetQuery(
@@ -90,7 +90,7 @@ export function prefetchTimeOffPoliciesGet(
 export function setTimeOffPoliciesGetData(
   client: QueryClient,
   queryKeyBase: [
-    companyUuid: string,
+    timeOffPolicyUuid: string,
     parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
   ],
   data: TimeOffPoliciesGetQueryData,
@@ -104,7 +104,7 @@ export function invalidateTimeOffPoliciesGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
-      companyUuid: string,
+      timeOffPolicyUuid: string,
       parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
     ]
   >,
@@ -133,7 +133,7 @@ export function invalidateAllTimeOffPoliciesGet(
 
 export function buildTimeOffPoliciesGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -142,7 +142,7 @@ export function buildTimeOffPoliciesGetQuery(
   ) => Promise<TimeOffPoliciesGetQueryData>;
 } {
   return {
-    queryKey: queryKeyTimeOffPoliciesGet(request.companyUuid, {
+    queryKey: queryKeyTimeOffPoliciesGet(request.timeOffPolicyUuid, {
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function timeOffPoliciesGetQueryFn(
@@ -164,14 +164,14 @@ export function buildTimeOffPoliciesGetQuery(
 }
 
 export function queryKeyTimeOffPoliciesGet(
-  companyUuid: string,
+  timeOffPolicyUuid: string,
   parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",
     "timeOffPolicies",
     "get",
-    companyUuid,
+    timeOffPolicyUuid,
     parameters,
   ];
 }

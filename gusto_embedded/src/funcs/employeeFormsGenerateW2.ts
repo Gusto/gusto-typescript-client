@@ -83,6 +83,7 @@ export async function employeeFormsGenerateW2(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-sandbox-generate_w2",
     oAuth2Scopes: [],
 

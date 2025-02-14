@@ -86,6 +86,7 @@ export async function companiesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-companies",
     oAuth2Scopes: [],
 

@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [create](#create) - Create an off-cycle payroll
-* [getAll](#getall) - Get all payrolls for a company
-* [getReversals](#getreversals) - Get approved payroll reversals
+* [createOffCycle](#createoffcycle) - Create an off-cycle payroll
+* [list](#list) - Get all payrolls for a company
+* [getApprovedReversals](#getapprovedreversals) - Get approved payroll reversals
 * [get](#get) - Get a single payroll
 * [update](#update) - Update a payroll by ID
 * [delete](#delete) - Delete a payroll
-* [prepareForUpdate](#prepareforupdate) - Prepare a payroll for update
+* [prepare](#prepare) - Prepare a payroll for update
 * [getReceipt](#getreceipt) - Get a single payroll receipt
 * [getBlockers](#getblockers) - Get all payroll blockers for a company
 * [skip](#skip) - Skip a payroll
@@ -23,7 +23,7 @@
 * [getPayStubs](#getpaystubs) - Get an employee's pay stubs
 * [generatePrintableChecks](#generateprintablechecks) - Generate printable payroll checks (pdf)
 
-## create
+## createOffCycle
 
 Creates a new, unprocessed, off-cycle payroll.
 
@@ -46,7 +46,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.payrolls.create({
+  const result = await gustoEmbedded.payrolls.createOffCycle({
     companyId: "<id>",
     requestBody: {
       offCycle: true,
@@ -69,7 +69,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { payrollsCreate } from "@gusto/embedded-api/funcs/payrollsCreate.js";
+import { payrollsCreateOffCycle } from "@gusto/embedded-api/funcs/payrollsCreateOffCycle.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -78,7 +78,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await payrollsCreate(gustoEmbedded, {
+  const res = await payrollsCreateOffCycle(gustoEmbedded, {
     companyId: "<id>",
     requestBody: {
       offCycle: true,
@@ -114,8 +114,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  usePayrollsCreateMutation
-} from "@gusto/embedded-api/react-query/payrollsCreate.js";
+  usePayrollsCreateOffCycleMutation
+} from "@gusto/embedded-api/react-query/payrollsCreateOffCycle.js";
 ```
 
 ### Parameters
@@ -138,7 +138,7 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## getAll
+## list
 
 Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
 
@@ -160,7 +160,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.payrolls.getAll({
+  const result = await gustoEmbedded.payrolls.list({
     companyId: "<id>",
     sortOrder: "asc",
   });
@@ -178,7 +178,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { payrollsGetAll } from "@gusto/embedded-api/funcs/payrollsGetAll.js";
+import { payrollsList } from "@gusto/embedded-api/funcs/payrollsList.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -187,7 +187,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await payrollsGetAll(gustoEmbedded, {
+  const res = await payrollsList(gustoEmbedded, {
     companyId: "<id>",
     sortOrder: "asc",
   });
@@ -218,19 +218,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePayrollsGetAll,
-  usePayrollsGetAllSuspense,
+  usePayrollsList,
+  usePayrollsListSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPayrollsGetAll,
+  prefetchPayrollsList,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePayrollsGetAll,
-  invalidateAllPayrollsGetAll,
-} from "@gusto/embedded-api/react-query/payrollsGetAll.js";
+  invalidatePayrollsList,
+  invalidateAllPayrollsList,
+} from "@gusto/embedded-api/react-query/payrollsList.js";
 ```
 
 ### Parameters
@@ -252,7 +252,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getReversals
+## getApprovedReversals
 
 Returns all approved Payroll Reversals for a Company.
 
@@ -268,7 +268,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.payrolls.getReversals({
+  const result = await gustoEmbedded.payrolls.getApprovedReversals({
     companyId: "<id>",
   });
 
@@ -285,7 +285,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { payrollsGetReversals } from "@gusto/embedded-api/funcs/payrollsGetReversals.js";
+import { payrollsGetApprovedReversals } from "@gusto/embedded-api/funcs/payrollsGetApprovedReversals.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -294,7 +294,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await payrollsGetReversals(gustoEmbedded, {
+  const res = await payrollsGetApprovedReversals(gustoEmbedded, {
     companyId: "<id>",
   });
 
@@ -324,19 +324,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  usePayrollsGetReversals,
-  usePayrollsGetReversalsSuspense,
+  usePayrollsGetApprovedReversals,
+  usePayrollsGetApprovedReversalsSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchPayrollsGetReversals,
+  prefetchPayrollsGetApprovedReversals,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidatePayrollsGetReversals,
-  invalidateAllPayrollsGetReversals,
-} from "@gusto/embedded-api/react-query/payrollsGetReversals.js";
+  invalidatePayrollsGetApprovedReversals,
+  invalidateAllPayrollsGetApprovedReversals,
+} from "@gusto/embedded-api/react-query/payrollsGetApprovedReversals.js";
 ```
 
 ### Parameters
@@ -686,7 +686,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## prepareForUpdate
+## prepare
 
 This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates & times.
 
@@ -706,7 +706,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.payrolls.prepareForUpdate({
+  const result = await gustoEmbedded.payrolls.prepare({
     companyId: "<id>",
     payrollId: "<id>",
   });
@@ -724,7 +724,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { payrollsPrepareForUpdate } from "@gusto/embedded-api/funcs/payrollsPrepareForUpdate.js";
+import { payrollsPrepare } from "@gusto/embedded-api/funcs/payrollsPrepare.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -733,7 +733,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await payrollsPrepareForUpdate(gustoEmbedded, {
+  const res = await payrollsPrepare(gustoEmbedded, {
     companyId: "<id>",
     payrollId: "<id>",
   });
@@ -764,8 +764,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  usePayrollsPrepareForUpdateMutation
-} from "@gusto/embedded-api/react-query/payrollsPrepareForUpdate.js";
+  usePayrollsPrepareMutation
+} from "@gusto/embedded-api/react-query/payrollsPrepare.js";
 ```
 
 ### Parameters

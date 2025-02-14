@@ -7,7 +7,7 @@ The employee's compensation payment method. Invalid values will be ignored.
 ```typescript
 import { PaymentMethod } from "@gusto/embedded-api/models/operations";
 
-let value: PaymentMethod = "Direct Deposit";
+let value: PaymentMethod = "Check";
 ```
 
 ## Values

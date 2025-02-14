@@ -8,8 +8,9 @@ An employee's I-9 verification document option based on the authorization status
 import { I9AuthorizationDocumentOption } from "@gusto/embedded-api/models/components";
 
 let value: I9AuthorizationDocumentOption = {
-  section: "C",
-  description: "until enroll upsell pish newsprint bitter how delight",
+  section: "A3",
+  description:
+    "pish newsprint bitter how delight inasmuch lovingly strictly boiling loaf",
   documentType: "<value>",
   documentTitle: [
     "<value>",

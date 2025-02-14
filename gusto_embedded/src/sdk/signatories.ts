@@ -4,8 +4,8 @@
 
 import { signatoriesCreate } from "../funcs/signatoriesCreate.js";
 import { signatoriesDelete } from "../funcs/signatoriesDelete.js";
-import { signatoriesGet } from "../funcs/signatoriesGet.js";
 import { signatoriesInvite } from "../funcs/signatoriesInvite.js";
+import { signatoriesList } from "../funcs/signatoriesList.js";
 import { signatoriesUpdate } from "../funcs/signatoriesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -42,11 +42,11 @@ export class Signatories extends ClientSDK {
    *
    * scope: `signatories:read`
    */
-  async get(
+  async list(
     request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Signatory>> {
-    return unwrapAsync(signatoriesGet(
+    return unwrapAsync(signatoriesList(
       this,
       request,
       options,

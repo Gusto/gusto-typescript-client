@@ -89,6 +89,7 @@ export async function employeesUpdateOnboardingDocumentsConfig(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees-employee_id-onboarding_documents_config",
     oAuth2Scopes: [],
 

@@ -86,6 +86,7 @@ export async function paymentConfigsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-company-payment-configs",
     oAuth2Scopes: [],
 

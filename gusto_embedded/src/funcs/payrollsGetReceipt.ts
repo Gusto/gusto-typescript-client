@@ -90,6 +90,7 @@ export async function payrollsGetReceipt(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-payment-receipts-payrolls-payroll_uuid",
     oAuth2Scopes: [],
 

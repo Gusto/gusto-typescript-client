@@ -26,18 +26,18 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeesGetQueryData = Array<components.Employee>;
+export type EmployeesGetQueryData = components.Employee;
 
 /**
- * Get employees of a company
+ * Get an employee
  *
  * @remarks
- * Get all of the employees, onboarding, active and terminated, for a given company.
+ * Get an employee.
  *
  * scope: `employees:read`
  */
 export function useEmployeesGet(
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: operations.GetV1EmployeesRequest,
   options?: QueryHookOptions<EmployeesGetQueryData>,
 ): UseQueryResult<EmployeesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -52,15 +52,15 @@ export function useEmployeesGet(
 }
 
 /**
- * Get employees of a company
+ * Get an employee
  *
  * @remarks
- * Get all of the employees, onboarding, active and terminated, for a given company.
+ * Get an employee.
  *
  * scope: `employees:read`
  */
 export function useEmployeesGetSuspense(
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: operations.GetV1EmployeesRequest,
   options?: SuspenseQueryHookOptions<EmployeesGetQueryData>,
 ): UseSuspenseQueryResult<EmployeesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +77,7 @@ export function useEmployeesGetSuspense(
 export function prefetchEmployeesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: operations.GetV1EmployeesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeesGetQuery(
@@ -90,13 +90,9 @@ export function prefetchEmployeesGet(
 export function setEmployeesGetData(
   client: QueryClient,
   queryKeyBase: [
-    companyId: string,
+    employeeId: string,
     parameters: {
-      terminated?: boolean | undefined;
-      include?: Array<operations.Include> | undefined;
-      page?: number | undefined;
-      per?: number | undefined;
-      searchTerm?: string | undefined;
+      include?: Array<operations.QueryParamInclude> | undefined;
       xGustoAPIVersion?: components.VersionHeader | undefined;
     },
   ],
@@ -111,13 +107,9 @@ export function invalidateEmployeesGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
-      companyId: string,
+      employeeId: string,
       parameters: {
-        terminated?: boolean | undefined;
-        include?: Array<operations.Include> | undefined;
-        page?: number | undefined;
-        per?: number | undefined;
-        searchTerm?: string | undefined;
+        include?: Array<operations.QueryParamInclude> | undefined;
         xGustoAPIVersion?: components.VersionHeader | undefined;
       },
     ]
@@ -142,19 +134,15 @@ export function invalidateAllEmployeesGet(
 
 export function buildEmployeesGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: operations.GetV1EmployeesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
   queryFn: (context: QueryFunctionContext) => Promise<EmployeesGetQueryData>;
 } {
   return {
-    queryKey: queryKeyEmployeesGet(request.companyId, {
-      terminated: request.terminated,
+    queryKey: queryKeyEmployeesGet(request.employeeId, {
       include: request.include,
-      page: request.page,
-      per: request.per,
-      searchTerm: request.searchTerm,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function employeesGetQueryFn(
@@ -176,15 +164,11 @@ export function buildEmployeesGetQuery(
 }
 
 export function queryKeyEmployeesGet(
-  companyId: string,
+  employeeId: string,
   parameters: {
-    terminated?: boolean | undefined;
-    include?: Array<operations.Include> | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-    searchTerm?: string | undefined;
+    include?: Array<operations.QueryParamInclude> | undefined;
     xGustoAPIVersion?: components.VersionHeader | undefined;
   },
 ): QueryKey {
-  return ["@gusto/embedded-api", "Employees", "get", companyId, parameters];
+  return ["@gusto/embedded-api", "Employees", "get", employeeId, parameters];
 }

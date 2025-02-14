@@ -92,6 +92,7 @@ export async function locationsGetMinimumWages(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-locations-location_uuid-minimum_wages",
     oAuth2Scopes: [],
 

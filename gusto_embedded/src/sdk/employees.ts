@@ -9,9 +9,8 @@ import { employeesGet } from "../funcs/employeesGet.js";
 import { employeesGetCustomFields } from "../funcs/employeesGetCustomFields.js";
 import { employeesGetOnboardingStatus } from "../funcs/employeesGetOnboardingStatus.js";
 import { employeesGetTimeOffActivities } from "../funcs/employeesGetTimeOffActivities.js";
-import { employeesRetrieve } from "../funcs/employeesRetrieve.js";
+import { employeesList } from "../funcs/employeesList.js";
 import { employeesUpdate } from "../funcs/employeesUpdate.js";
-import { employeesUpdateHistorical } from "../funcs/employeesUpdateHistorical.js";
 import { employeesUpdateOnboardingDocumentsConfig } from "../funcs/employeesUpdateOnboardingDocumentsConfig.js";
 import { employeesUpdateOnboardingStatus } from "../funcs/employeesUpdateOnboardingStatus.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -47,11 +46,11 @@ export class Employees extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async get(
+  async list(
     request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Employee>> {
-    return unwrapAsync(employeesGet(
+    return unwrapAsync(employeesList(
       this,
       request,
       options,
@@ -78,25 +77,6 @@ export class Employees extends ClientSDK {
   }
 
   /**
-   * Update a historical employee
-   *
-   * @remarks
-   * Update a historical employee, an employee that was previously dismissed from the company in the current year.
-   *
-   * scope: `employees:manage`
-   */
-  async updateHistorical(
-    request: operations.PutV1HistoricalEmployeesRequest,
-    options?: RequestOptions,
-  ): Promise<components.Employee> {
-    return unwrapAsync(employeesUpdateHistorical(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get an employee
    *
    * @remarks
@@ -104,11 +84,11 @@ export class Employees extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async retrieve(
+  async get(
     request: operations.GetV1EmployeesRequest,
     options?: RequestOptions,
   ): Promise<components.Employee> {
-    return unwrapAsync(employeesRetrieve(
+    return unwrapAsync(employeesGet(
       this,
       request,
       options,

@@ -84,6 +84,7 @@ export async function contractorFormsGenerate1099(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-sandbox-generate_1099",
     oAuth2Scopes: [],
 

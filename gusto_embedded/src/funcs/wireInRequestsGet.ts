@@ -89,6 +89,7 @@ export async function wireInRequestsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-wire_in_requests-wire_in_request_uuid",
     oAuth2Scopes: [],
 

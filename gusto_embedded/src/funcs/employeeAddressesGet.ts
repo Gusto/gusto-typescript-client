@@ -25,21 +25,22 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get an employee's work addresses
+ * Get an employee's home addresses
  *
  * @remarks
- * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
- * signifying if it is the currently active work address.
+ * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+ *
+ * Supports home address effective dating and courtesy withholding.
  *
  * scope: `employees:read`
  */
 export async function employeeAddressesGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
+  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
-    Array<components.EmployeeWorkAddress>,
+    Array<components.EmployeeAddress>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -52,7 +53,7 @@ export async function employeeAddressesGet(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema
+      operations.GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -69,7 +70,7 @@ export async function employeeAddressesGet(
     }),
   };
 
-  const path = pathToFunc("/v1/employees/{employee_id}/work_addresses")(
+  const path = pathToFunc("/v1/employees/{employee_id}/home_addresses")(
     pathParams,
   );
 
@@ -89,7 +90,8 @@ export async function employeeAddressesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "get-v1-employees-employee_id-work_addresses",
+    baseURL: options?.serverURL ?? "",
+    operationID: "get-v1-employees-employee_id-home_addresses",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -127,7 +129,7 @@ export async function employeeAddressesGet(
   const response = doResult.value;
 
   const [result] = await M.match<
-    Array<components.EmployeeWorkAddress>,
+    Array<components.EmployeeAddress>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -136,7 +138,7 @@ export async function employeeAddressesGet(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, z.array(components.EmployeeWorkAddress$inboundSchema)),
+    M.json(200, z.array(components.EmployeeAddress$inboundSchema)),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response);

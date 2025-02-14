@@ -90,6 +90,7 @@ export async function employeeAddressesUpdateWorkAddress(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-work_addresses-work_address_uuid",
     oAuth2Scopes: [],
 

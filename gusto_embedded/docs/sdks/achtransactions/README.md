@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get](#get) - Get all ACH transactions for a company
+* [getAll](#getall) - Get all ACH transactions for a company
 
-## get
+## getAll
 
 Fetches all ACH transactions for a company.
 
@@ -23,7 +23,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.achTransactions.get({
+  const result = await gustoEmbedded.achTransactions.getAll({
     companyUuid: "<id>",
   });
 
@@ -40,7 +40,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { achTransactionsGet } from "@gusto/embedded-api/funcs/achTransactionsGet.js";
+import { achTransactionsGetAll } from "@gusto/embedded-api/funcs/achTransactionsGetAll.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -49,7 +49,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await achTransactionsGet(gustoEmbedded, {
+  const res = await achTransactionsGetAll(gustoEmbedded, {
     companyUuid: "<id>",
   });
 
@@ -79,19 +79,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useAchTransactionsGet,
-  useAchTransactionsGetSuspense,
+  useAchTransactionsGetAll,
+  useAchTransactionsGetAllSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchAchTransactionsGet,
+  prefetchAchTransactionsGetAll,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateAchTransactionsGet,
-  invalidateAllAchTransactionsGet,
-} from "@gusto/embedded-api/react-query/achTransactionsGet.js";
+  invalidateAchTransactionsGetAll,
+  invalidateAllAchTransactionsGetAll,
+} from "@gusto/embedded-api/react-query/achTransactionsGetAll.js";
 ```
 
 ### Parameters

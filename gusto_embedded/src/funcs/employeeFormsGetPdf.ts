@@ -90,6 +90,7 @@ export async function employeeFormsGetPdf(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-employee-form-pdf",
     oAuth2Scopes: [],
 

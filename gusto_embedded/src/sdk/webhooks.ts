@@ -3,12 +3,12 @@
  */
 
 import { webhooksCreateSubscription } from "../funcs/webhooksCreateSubscription.js";
-import { webhooksDelete } from "../funcs/webhooksDelete.js";
-import { webhooksGet } from "../funcs/webhooksGet.js";
+import { webhooksDeleteSubscription } from "../funcs/webhooksDeleteSubscription.js";
+import { webhooksGetSubscription } from "../funcs/webhooksGetSubscription.js";
 import { webhooksListSubscriptions } from "../funcs/webhooksListSubscriptions.js";
 import { webhooksRequestVerificationToken } from "../funcs/webhooksRequestVerificationToken.js";
 import { webhooksUpdateSubscription } from "../funcs/webhooksUpdateSubscription.js";
-import { webhooksVerifySubscription } from "../funcs/webhooksVerifySubscription.js";
+import { webhooksVerify } from "../funcs/webhooksVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -102,12 +102,12 @@ export class Webhooks extends ClientSDK {
    *
    * scope: `webhook_subscriptions:read`
    */
-  async get(
+  async getSubscription(
     security: operations.GetV1WebhookSubscriptionUuidSecurity,
     request: operations.GetV1WebhookSubscriptionUuidRequest,
     options?: RequestOptions,
   ): Promise<components.WebhookSubscription> {
-    return unwrapAsync(webhooksGet(
+    return unwrapAsync(webhooksGetSubscription(
       this,
       security,
       request,
@@ -127,12 +127,12 @@ export class Webhooks extends ClientSDK {
    *
    * scope: `webhook_subscriptions:write`
    */
-  async delete(
+  async deleteSubscription(
     security: operations.DeleteV1WebhookSubscriptionUuidSecurity,
     request: operations.DeleteV1WebhookSubscriptionUuidRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(webhooksDelete(
+    return unwrapAsync(webhooksDeleteSubscription(
       this,
       security,
       request,
@@ -154,12 +154,12 @@ export class Webhooks extends ClientSDK {
    *
    * scope: `webhook_subscriptions:write`
    */
-  async verifySubscription(
+  async verify(
     security: operations.PutV1VerifyWebhookSubscriptionUuidSecurity,
     request: operations.PutV1VerifyWebhookSubscriptionUuidRequest,
     options?: RequestOptions,
   ): Promise<components.WebhookSubscription> {
-    return unwrapAsync(webhooksVerifySubscription(
+    return unwrapAsync(webhooksVerify(
       this,
       security,
       request,

@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [getByState](#getbystate) - Get State Tax Requirements
-* [update](#update) - Update State Tax Requirements
+* [get](#get) - Get State Tax Requirements
+* [updateState](#updatestate) - Update State Tax Requirements
 * [getAll](#getall) - Get All Tax Requirement States
 
-## getByState
+## get
 
 Get all tax requirements for a given state.
 
@@ -65,7 +65,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.taxRequirements.getByState({
+  const result = await gustoEmbedded.taxRequirements.get({
     companyUuid: "<id>",
     state: "New Mexico",
   });
@@ -83,7 +83,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsGetByState } from "@gusto/embedded-api/funcs/taxRequirementsGetByState.js";
+import { taxRequirementsGet } from "@gusto/embedded-api/funcs/taxRequirementsGet.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -92,7 +92,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await taxRequirementsGetByState(gustoEmbedded, {
+  const res = await taxRequirementsGet(gustoEmbedded, {
     companyUuid: "<id>",
     state: "New Mexico",
   });
@@ -123,19 +123,19 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useTaxRequirementsGetByState,
-  useTaxRequirementsGetByStateSuspense,
+  useTaxRequirementsGet,
+  useTaxRequirementsGetSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchTaxRequirementsGetByState,
+  prefetchTaxRequirementsGet,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateTaxRequirementsGetByState,
-  invalidateAllTaxRequirementsGetByState,
-} from "@gusto/embedded-api/react-query/taxRequirementsGetByState.js";
+  invalidateTaxRequirementsGet,
+  invalidateAllTaxRequirementsGet,
+} from "@gusto/embedded-api/react-query/taxRequirementsGet.js";
 ```
 
 ### Parameters
@@ -157,7 +157,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update
+## updateState
 
 Update State Tax Requirements
 
@@ -173,7 +173,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.taxRequirements.update({
+  await gustoEmbedded.taxRequirements.updateState({
     companyUuid: "<id>",
     state: "New Jersey",
     requestBody: {
@@ -231,7 +231,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { taxRequirementsUpdate } from "@gusto/embedded-api/funcs/taxRequirementsUpdate.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -240,7 +240,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await taxRequirementsUpdate(gustoEmbedded, {
+  const res = await taxRequirementsUpdateState(gustoEmbedded, {
     companyUuid: "<id>",
     state: "New Jersey",
     requestBody: {
@@ -311,8 +311,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useTaxRequirementsUpdateMutation
-} from "@gusto/embedded-api/react-query/taxRequirementsUpdate.js";
+  useTaxRequirementsUpdateStateMutation
+} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
 ```
 
 ### Parameters

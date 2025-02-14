@@ -87,6 +87,7 @@ export async function jobsAndCompensationsGetJob(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-jobs-job_id",
     oAuth2Scopes: [],
 

@@ -91,6 +91,7 @@ export async function signatoriesCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-company-signatories",
     oAuth2Scopes: [],
 

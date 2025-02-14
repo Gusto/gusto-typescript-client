@@ -4,8 +4,8 @@
 
 import { locationsCreate } from "../funcs/locationsCreate.js";
 import { locationsGet } from "../funcs/locationsGet.js";
-import { locationsGetAll } from "../funcs/locationsGetAll.js";
 import { locationsGetMinimumWages } from "../funcs/locationsGetMinimumWages.js";
+import { locationsRetrieve } from "../funcs/locationsRetrieve.js";
 import { locationsUpdate } from "../funcs/locationsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -44,11 +44,11 @@ export class Locations extends ClientSDK {
    *
    * scope: `companies:read`
    */
-  async getAll(
+  async get(
     request: operations.GetV1CompaniesCompanyIdLocationsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Location>> {
-    return unwrapAsync(locationsGetAll(
+    return unwrapAsync(locationsGet(
       this,
       request,
       options,
@@ -63,11 +63,11 @@ export class Locations extends ClientSDK {
    *
    * scope: `companies:read`
    */
-  async get(
+  async retrieve(
     request: operations.GetV1LocationsLocationIdRequest,
     options?: RequestOptions,
   ): Promise<components.Location> {
-    return unwrapAsync(locationsGet(
+    return unwrapAsync(locationsRetrieve(
       this,
       request,
       options,

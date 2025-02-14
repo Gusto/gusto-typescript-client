@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [getAuthorization](#getauthorization) - Get an employee's I-9 authorization
-* [createOrUpdate](#createorupdate) - Create or update an employee's I-9 authorization
+* [update](#update) - Create or update an employee's I-9 authorization
 * [getDocumentOptions](#getdocumentoptions) - Get an employee's I-9 verification document options
 * [getDocuments](#getdocuments) - Get an employee's I-9 verification documents
 * [createDocuments](#createdocuments) - Create an employee's I-9 authorization verification documents
@@ -121,7 +121,7 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## createOrUpdate
+## update
 
 An employee's I-9 authorization stores information about an employee's authorization status, as well as signatures and other information required to complete the Form I-9 for employment eligibility verification.
 
@@ -155,7 +155,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.i9Verification.createOrUpdate({
+  const result = await gustoEmbedded.i9Verification.update({
     employeeId: "<id>",
     requestBody: {
       authorizationStatus: "citizen",
@@ -176,7 +176,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { i9VerificationCreateOrUpdate } from "@gusto/embedded-api/funcs/i9VerificationCreateOrUpdate.js";
+import { i9VerificationUpdate } from "@gusto/embedded-api/funcs/i9VerificationUpdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -185,7 +185,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await i9VerificationCreateOrUpdate(gustoEmbedded, {
+  const res = await i9VerificationUpdate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
       authorizationStatus: "citizen",
@@ -219,8 +219,8 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useI9VerificationCreateOrUpdateMutation
-} from "@gusto/embedded-api/react-query/i9VerificationCreateOrUpdate.js";
+  useI9VerificationUpdateMutation
+} from "@gusto/embedded-api/react-query/i9VerificationUpdate.js";
 ```
 
 ### Parameters

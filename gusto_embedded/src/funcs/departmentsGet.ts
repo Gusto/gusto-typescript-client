@@ -83,6 +83,7 @@ export async function departmentsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-department",
     oAuth2Scopes: [],
 

@@ -91,6 +91,7 @@ export async function companyAttachmentsGetDetails(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-companies-attachment",
     oAuth2Scopes: [],
 

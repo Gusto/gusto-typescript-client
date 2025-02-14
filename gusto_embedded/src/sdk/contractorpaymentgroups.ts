@@ -6,7 +6,7 @@ import { contractorPaymentGroupsCreate } from "../funcs/contractorPaymentGroupsC
 import { contractorPaymentGroupsDelete } from "../funcs/contractorPaymentGroupsDelete.js";
 import { contractorPaymentGroupsFund } from "../funcs/contractorPaymentGroupsFund.js";
 import { contractorPaymentGroupsGet } from "../funcs/contractorPaymentGroupsGet.js";
-import { contractorPaymentGroupsList } from "../funcs/contractorPaymentGroupsList.js";
+import { contractorPaymentGroupsGetList } from "../funcs/contractorPaymentGroupsGetList.js";
 import { contractorPaymentGroupsPreview } from "../funcs/contractorPaymentGroupsPreview.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -41,11 +41,11 @@ export class ContractorPaymentGroups extends ClientSDK {
    *
    * scope: `payrolls:read`
    */
-  async list(
+  async getList(
     request: operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.ContractorPaymentGroupMinimal>> {
-    return unwrapAsync(contractorPaymentGroupsList(
+    return unwrapAsync(contractorPaymentGroupsGetList(
       this,
       request,
       options,

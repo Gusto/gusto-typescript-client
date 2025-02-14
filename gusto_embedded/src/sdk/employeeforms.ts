@@ -3,9 +3,9 @@
  */
 
 import { employeeFormsGenerateW2 } from "../funcs/employeeFormsGenerateW2.js";
-import { employeeFormsGetAll } from "../funcs/employeeFormsGetAll.js";
-import { employeeFormsGetForm } from "../funcs/employeeFormsGetForm.js";
+import { employeeFormsGet } from "../funcs/employeeFormsGet.js";
 import { employeeFormsGetPdf } from "../funcs/employeeFormsGetPdf.js";
+import { employeeFormsList } from "../funcs/employeeFormsList.js";
 import { employeeFormsSign } from "../funcs/employeeFormsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -44,11 +44,11 @@ export class EmployeeForms extends ClientSDK {
    *
    * scope: `employee_forms:read`
    */
-  async getAll(
+  async list(
     request: operations.GetV1EmployeeFormsRequest,
     options?: RequestOptions,
   ): Promise<Array<components.Form>> {
-    return unwrapAsync(employeeFormsGetAll(
+    return unwrapAsync(employeeFormsList(
       this,
       request,
       options,
@@ -63,11 +63,11 @@ export class EmployeeForms extends ClientSDK {
    *
    * scope: `employee_forms:read`
    */
-  async getForm(
+  async get(
     request: operations.GetV1EmployeeFormRequest,
     options?: RequestOptions,
   ): Promise<components.Form> {
-    return unwrapAsync(employeeFormsGetForm(
+    return unwrapAsync(employeeFormsGet(
       this,
       request,
       options,

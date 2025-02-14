@@ -3,12 +3,12 @@
  */
 
 import { i9VerificationCreateDocuments } from "../funcs/i9VerificationCreateDocuments.js";
-import { i9VerificationCreateOrUpdate } from "../funcs/i9VerificationCreateOrUpdate.js";
 import { i9VerificationDeleteDocument } from "../funcs/i9VerificationDeleteDocument.js";
 import { i9VerificationEmployerSign } from "../funcs/i9VerificationEmployerSign.js";
 import { i9VerificationGetAuthorization } from "../funcs/i9VerificationGetAuthorization.js";
 import { i9VerificationGetDocumentOptions } from "../funcs/i9VerificationGetDocumentOptions.js";
 import { i9VerificationGetDocuments } from "../funcs/i9VerificationGetDocuments.js";
+import { i9VerificationUpdate } from "../funcs/i9VerificationUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -61,11 +61,11 @@ export class I9Verification extends ClientSDK {
    *
    * scope: `i9_authorizations:write`
    */
-  async createOrUpdate(
+  async update(
     request: operations.PutV1EmployeesEmployeeIdI9AuthorizationRequest,
     options?: RequestOptions,
   ): Promise<components.I9Authorization> {
-    return unwrapAsync(i9VerificationCreateOrUpdate(
+    return unwrapAsync(i9VerificationUpdate(
       this,
       request,
       options,

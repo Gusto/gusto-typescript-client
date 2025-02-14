@@ -97,6 +97,7 @@ export async function contractorPaymentsGetReceipt(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-contractor_payments-contractor_payment_uuid-receipt",
     oAuth2Scopes: [],
 

@@ -86,6 +86,7 @@ export async function employeesUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-employees",
     oAuth2Scopes: [],
 

@@ -3,26 +3,21 @@
  */
 
 import { employeeAddressesCreate } from "../funcs/employeeAddressesCreate.js";
+import { employeeAddressesCreateWorkAddress } from "../funcs/employeeAddressesCreateWorkAddress.js";
 import { employeeAddressesDelete } from "../funcs/employeeAddressesDelete.js";
+import { employeeAddressesDeleteWorkAddress } from "../funcs/employeeAddressesDeleteWorkAddress.js";
 import { employeeAddressesGet } from "../funcs/employeeAddressesGet.js";
-import { employeeAddressesGetHomeAddress } from "../funcs/employeeAddressesGetHomeAddress.js";
-import { employeeAddressesGetHomeAddresses } from "../funcs/employeeAddressesGetHomeAddresses.js";
-import { employeeAddressesGetWorkAddress } from "../funcs/employeeAddressesGetWorkAddress.js";
-import { employeeAddressesRemoveHomeAddress } from "../funcs/employeeAddressesRemoveHomeAddress.js";
-import { employeeAddressesUpdateHomeAddress } from "../funcs/employeeAddressesUpdateHomeAddress.js";
+import { employeeAddressesGetWorkAddresses } from "../funcs/employeeAddressesGetWorkAddresses.js";
+import { employeeAddressesRetrieveHomeAddress } from "../funcs/employeeAddressesRetrieveHomeAddress.js";
+import { employeeAddressesRetrieveWorkAddress } from "../funcs/employeeAddressesRetrieveWorkAddress.js";
+import { employeeAddressesUpdate } from "../funcs/employeeAddressesUpdate.js";
 import { employeeAddressesUpdateWorkAddress } from "../funcs/employeeAddressesUpdateWorkAddress.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-import { WorkAddresses } from "./workaddresses.js";
 
 export class EmployeeAddresses extends ClientSDK {
-  private _workAddresses?: WorkAddresses;
-  get workAddresses(): WorkAddresses {
-    return (this._workAddresses ??= new WorkAddresses(this._options));
-  }
-
   /**
    * Get an employee's home addresses
    *
@@ -33,11 +28,11 @@ export class EmployeeAddresses extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async getHomeAddresses(
+  async get(
     request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.EmployeeAddress>> {
-    return unwrapAsync(employeeAddressesGetHomeAddresses(
+    return unwrapAsync(employeeAddressesGet(
       this,
       request,
       options,
@@ -75,11 +70,11 @@ export class EmployeeAddresses extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async getHomeAddress(
+  async retrieveHomeAddress(
     request: operations.GetV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
   ): Promise<components.EmployeeAddress> {
-    return unwrapAsync(employeeAddressesGetHomeAddress(
+    return unwrapAsync(employeeAddressesRetrieveHomeAddress(
       this,
       request,
       options,
@@ -96,11 +91,11 @@ export class EmployeeAddresses extends ClientSDK {
    *
    * scope: `employees:write`
    */
-  async updateHomeAddress(
+  async update(
     request: operations.PutV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
   ): Promise<components.EmployeeAddress> {
-    return unwrapAsync(employeeAddressesUpdateHomeAddress(
+    return unwrapAsync(employeeAddressesUpdate(
       this,
       request,
       options,
@@ -115,11 +110,11 @@ export class EmployeeAddresses extends ClientSDK {
    *
    * scope: `employees:write`
    */
-  async removeHomeAddress(
+  async delete(
     request: operations.DeleteV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(employeeAddressesRemoveHomeAddress(
+    return unwrapAsync(employeeAddressesDelete(
       this,
       request,
       options,
@@ -135,11 +130,30 @@ export class EmployeeAddresses extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async get(
+  async getWorkAddresses(
     request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
     options?: RequestOptions,
   ): Promise<Array<components.EmployeeWorkAddress>> {
-    return unwrapAsync(employeeAddressesGet(
+    return unwrapAsync(employeeAddressesGetWorkAddresses(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an employee work address
+   *
+   * @remarks
+   * The work address of an employee describes when an employee began working at an associated company location.
+   *
+   * scope: `employees:manage`
+   */
+  async createWorkAddress(
+    request: operations.PostV1EmployeesEmployeeIdWorkAddressesRequest,
+    options?: RequestOptions,
+  ): Promise<components.EmployeeWorkAddress> {
+    return unwrapAsync(employeeAddressesCreateWorkAddress(
       this,
       request,
       options,
@@ -154,11 +168,11 @@ export class EmployeeAddresses extends ClientSDK {
    *
    * scope: `employees:read`
    */
-  async getWorkAddress(
+  async retrieveWorkAddress(
     request: operations.GetV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
   ): Promise<components.EmployeeWorkAddress> {
-    return unwrapAsync(employeeAddressesGetWorkAddress(
+    return unwrapAsync(employeeAddressesRetrieveWorkAddress(
       this,
       request,
       options,
@@ -192,11 +206,11 @@ export class EmployeeAddresses extends ClientSDK {
    *
    * scope: `employees:manage`
    */
-  async delete(
+  async deleteWorkAddress(
     request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(employeeAddressesDelete(
+    return unwrapAsync(employeeAddressesDeleteWorkAddress(
       this,
       request,
       options,

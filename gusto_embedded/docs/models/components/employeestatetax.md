@@ -9,12 +9,11 @@ import { EmployeeStateTax } from "@gusto/embedded-api/models/components";
 
 let value: EmployeeStateTax = {
   employeeUuid: "<id>",
-  state: "Missouri",
+  state: "Connecticut",
   questions: [
     {
       label: "<value>",
-      description:
-        "around glaring untrue suspension expatiate whether inexperienced palate geez afterwards",
+      description: "service mob skeleton yuck cooperative till",
       key: "<key>",
       inputQuestionFormat: {
         type: "<value>",

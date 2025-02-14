@@ -8,7 +8,7 @@ import { PostV1CompaniesCompanyUuidContractorsRequest } from "@gusto/embedded-ap
 let value: PostV1CompaniesCompanyUuidContractorsRequest = {
   companyUuid: "<id>",
   requestBody: {
-    wageType: "Fixed",
+    wageType: "Hourly",
     startDate: "2020-01-11",
     hourlyRate: "40.0",
   },

@@ -26,21 +26,20 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeAddressesGetQueryData = Array<
-  components.EmployeeWorkAddress
->;
+export type EmployeeAddressesGetQueryData = Array<components.EmployeeAddress>;
 
 /**
- * Get an employee's work addresses
+ * Get an employee's home addresses
  *
  * @remarks
- * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
- * signifying if it is the currently active work address.
+ * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+ *
+ * Supports home address effective dating and courtesy withholding.
  *
  * scope: `employees:read`
  */
 export function useEmployeeAddressesGet(
-  request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
+  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
   options?: QueryHookOptions<EmployeeAddressesGetQueryData>,
 ): UseQueryResult<EmployeeAddressesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -55,16 +54,17 @@ export function useEmployeeAddressesGet(
 }
 
 /**
- * Get an employee's work addresses
+ * Get an employee's home addresses
  *
  * @remarks
- * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
- * signifying if it is the currently active work address.
+ * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+ *
+ * Supports home address effective dating and courtesy withholding.
  *
  * scope: `employees:read`
  */
 export function useEmployeeAddressesGetSuspense(
-  request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
+  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
   options?: SuspenseQueryHookOptions<EmployeeAddressesGetQueryData>,
 ): UseSuspenseQueryResult<EmployeeAddressesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -81,7 +81,7 @@ export function useEmployeeAddressesGetSuspense(
 export function prefetchEmployeeAddressesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
+  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeAddressesGetQuery(
@@ -137,7 +137,7 @@ export function invalidateAllEmployeeAddressesGet(
 
 export function buildEmployeeAddressesGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
+  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;

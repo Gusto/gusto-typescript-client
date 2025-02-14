@@ -89,6 +89,7 @@ export async function garnishmentsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "put-v1-garnishments-garnishment_id",
     oAuth2Scopes: [],
 

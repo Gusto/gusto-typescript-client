@@ -90,6 +90,7 @@ export async function payrollsGetBlockers(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-companies-payroll-blockers-company_uuid",
     oAuth2Scopes: [],
 

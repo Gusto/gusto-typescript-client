@@ -98,6 +98,7 @@ export async function webhooksRequestVerificationToken(
   );
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "get-v1-webhook-subscription-verification-token-uuid",
     oAuth2Scopes: [],
 

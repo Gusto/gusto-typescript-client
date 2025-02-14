@@ -91,6 +91,7 @@ export async function employeesCreateHistorical(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "post-v1-historical_employees",
     oAuth2Scopes: [],
 

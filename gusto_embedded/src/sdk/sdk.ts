@@ -14,6 +14,7 @@ import { ContractorDocuments } from "./contractordocuments.js";
 import { ContractorForms } from "./contractorforms.js";
 import { ContractorPaymentGroups } from "./contractorpaymentgroups.js";
 import { ContractorPaymentMethod } from "./contractorpaymentmethod.js";
+import { ContractorPaymentMethods } from "./contractorpaymentmethods.js";
 import { ContractorPayments } from "./contractorpayments.js";
 import { Contractors } from "./contractors.js";
 import { Departments } from "./departments.js";
@@ -32,6 +33,7 @@ import { FederalTaxDetails } from "./federaltaxdetails.js";
 import { Flows } from "./flows.js";
 import { Garnishments } from "./garnishments.js";
 import { GeneratedDocuments } from "./generateddocuments.js";
+import { HistoricalEmployees } from "./historicalemployees.js";
 import { HolidayPayPolicies } from "./holidaypaypolicies.js";
 import { I9Verification } from "./i9verification.js";
 import { IndustrySelection } from "./industryselection.js";
@@ -127,6 +129,13 @@ export class GustoEmbedded extends ClientSDK {
     return (this._employees ??= new Employees(this._options));
   }
 
+  private _historicalEmployees?: HistoricalEmployees;
+  get historicalEmployees(): HistoricalEmployees {
+    return (this._historicalEmployees ??= new HistoricalEmployees(
+      this._options,
+    ));
+  }
+
   private _departments?: Departments;
   get departments(): Departments {
     return (this._departments ??= new Departments(this._options));
@@ -178,6 +187,13 @@ export class GustoEmbedded extends ClientSDK {
   private _contractors?: Contractors;
   get contractors(): Contractors {
     return (this._contractors ??= new Contractors(this._options));
+  }
+
+  private _contractorPaymentMethods?: ContractorPaymentMethods;
+  get contractorPaymentMethods(): ContractorPaymentMethods {
+    return (this._contractorPaymentMethods ??= new ContractorPaymentMethods(
+      this._options,
+    ));
   }
 
   private _contractorPaymentMethod?: ContractorPaymentMethod;

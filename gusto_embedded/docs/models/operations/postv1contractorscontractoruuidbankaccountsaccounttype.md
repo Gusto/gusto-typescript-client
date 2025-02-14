@@ -5,7 +5,7 @@
 ```typescript
 import { PostV1ContractorsContractorUuidBankAccountsAccountType } from "@gusto/embedded-api/models/operations";
 
-let value: PostV1ContractorsContractorUuidBankAccountsAccountType = "Checking";
+let value: PostV1ContractorsContractorUuidBankAccountsAccountType = "Savings";
 ```
 
 ## Values
