@@ -22,6 +22,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -32,11 +33,11 @@ import { Result } from "../types/fp.js";
  *
  * scope: `contractor_documents:read`
  */
-export async function contractorDocumentsGetAll(
+export function contractorDocumentsGetAll(
   client: GustoEmbeddedCore,
   request: operations.GetV1ContractorDocumentsRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     Array<components.Document>,
     | APIError
@@ -48,6 +49,32 @@ export async function contractorDocumentsGetAll(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.GetV1ContractorDocumentsRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      Array<components.Document>,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -55,7 +82,7 @@ export async function contractorDocumentsGetAll(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -87,7 +114,7 @@ export async function contractorDocumentsGetAll(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get-v1-contractor-documents",
     oAuth2Scopes: [],
 
@@ -110,7 +137,7 @@ export async function contractorDocumentsGetAll(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -121,7 +148,7 @@ export async function contractorDocumentsGetAll(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -140,8 +167,8 @@ export async function contractorDocumentsGetAll(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

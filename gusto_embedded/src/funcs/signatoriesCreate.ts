@@ -22,6 +22,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -34,11 +35,11 @@ import { Result } from "../types/fp.js";
  *
  * scope: `signatories:manage`
  */
-export async function signatoriesCreate(
+export function signatoriesCreate(
   client: GustoEmbeddedCore,
   request: operations.PostV1CompanySignatoriesRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.Signatory,
     | errors.UnprocessableEntityErrorObject
@@ -51,6 +52,33 @@ export async function signatoriesCreate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.PostV1CompanySignatoriesRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.Signatory,
+      | errors.UnprocessableEntityErrorObject
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -58,7 +86,7 @@ export async function signatoriesCreate(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -91,7 +119,7 @@ export async function signatoriesCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "post-v1-company-signatories",
     oAuth2Scopes: [],
 
@@ -114,7 +142,7 @@ export async function signatoriesCreate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -125,7 +153,7 @@ export async function signatoriesCreate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -150,8 +178,8 @@ export async function signatoriesCreate(
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }
