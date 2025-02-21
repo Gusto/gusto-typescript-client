@@ -21,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -31,12 +32,12 @@ import { Result } from "../types/fp.js";
  *
  * scope: `i9_authorizations:manage`
  */
-export async function i9VerificationDeleteDocument(
+export function i9VerificationDeleteDocument(
   client: GustoEmbeddedCore,
   request:
     operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     void,
     | APIError
@@ -48,6 +49,33 @@ export async function i9VerificationDeleteDocument(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request:
+    operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      void,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -57,7 +85,7 @@ export async function i9VerificationDeleteDocument(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -93,7 +121,7 @@ export async function i9VerificationDeleteDocument(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "delete-v1-employees-employee_id-i9_authorization-documents-document_id",
     oAuth2Scopes: [],
@@ -117,7 +145,7 @@ export async function i9VerificationDeleteDocument(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -128,7 +156,7 @@ export async function i9VerificationDeleteDocument(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -147,8 +175,8 @@ export async function i9VerificationDeleteDocument(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

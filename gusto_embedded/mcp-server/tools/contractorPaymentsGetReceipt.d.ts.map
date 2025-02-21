@@ -1,0 +1,1 @@
+{"version":3,"file":"contractorPaymentsGetReceipt.d.ts","sourceRoot":"","sources":["../../src/mcp-server/tools/contractorPaymentsGetReceipt.ts"],"names":[],"mappings":"AAKA,OAAO,KAAK,UAAU,MAAM,kCAAkC,CAAC;AAC/D,OAAO,EAAgB,cAAc,EAAE,MAAM,aAAa,CAAC;AAE3D,QAAA,MAAM,IAAI;;CAIT,CAAC;AAEF,eAAO,MAAM,iCAAiC,EAAE,cAAc,CAAC,OAAO,IAAI,CAiCzE,CAAC"}

@@ -20,6 +20,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -28,11 +29,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns scope and resource information associated with the current access token.
  */
-export async function introspectionGetInfo(
+export function introspectionGetInfo(
   client: GustoEmbeddedCore,
   request: operations.GetV1TokenInfoRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.GetV1TokenInfoResponseBody,
     | APIError
@@ -44,13 +45,39 @@ export async function introspectionGetInfo(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.GetV1TokenInfoRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.GetV1TokenInfoResponseBody,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.GetV1TokenInfoRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -73,7 +100,7 @@ export async function introspectionGetInfo(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get-v1-token-info",
     oAuth2Scopes: [],
 
@@ -96,7 +123,7 @@ export async function introspectionGetInfo(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -107,7 +134,7 @@ export async function introspectionGetInfo(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -126,8 +153,8 @@ export async function introspectionGetInfo(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

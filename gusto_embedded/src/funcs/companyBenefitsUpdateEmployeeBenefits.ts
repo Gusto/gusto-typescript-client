@@ -23,6 +23,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -37,12 +38,12 @@ import { Result } from "../types/fp.js";
  *
  * scope: `employee_benefits:write`
  */
-export async function companyBenefitsUpdateEmployeeBenefits(
+export function companyBenefitsUpdateEmployeeBenefits(
   client: GustoEmbeddedCore,
   request:
     operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     Array<components.EmployeeBenefit>,
     | errors.UnprocessableEntityErrorObject
@@ -55,6 +56,34 @@ export async function companyBenefitsUpdateEmployeeBenefits(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request:
+    operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      Array<components.EmployeeBenefit>,
+      | errors.UnprocessableEntityErrorObject
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -64,7 +93,7 @@ export async function companyBenefitsUpdateEmployeeBenefits(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -98,7 +127,7 @@ export async function companyBenefitsUpdateEmployeeBenefits(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "put-v1-company_benefits-company_benefit_id-employee_benefits",
     oAuth2Scopes: [],
 
@@ -121,7 +150,7 @@ export async function companyBenefitsUpdateEmployeeBenefits(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -132,7 +161,7 @@ export async function companyBenefitsUpdateEmployeeBenefits(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -157,8 +186,8 @@ export async function companyBenefitsUpdateEmployeeBenefits(
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

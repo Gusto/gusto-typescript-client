@@ -21,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -31,11 +32,11 @@ import { Result } from "../types/fp.js";
  *
  *  scope: `employee_federal_taxes:read`
  */
-export async function employeeTaxSetupGetFederalTaxes(
+export function employeeTaxSetupGetFederalTaxes(
   client: GustoEmbeddedCore,
   request: operations.GetV1EmployeesEmployeeIdFederalTaxesRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.EmployeeFederalTax,
     | APIError
@@ -47,6 +48,32 @@ export async function employeeTaxSetupGetFederalTaxes(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.GetV1EmployeesEmployeeIdFederalTaxesRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.EmployeeFederalTax,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -55,7 +82,7 @@ export async function employeeTaxSetupGetFederalTaxes(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -87,7 +114,7 @@ export async function employeeTaxSetupGetFederalTaxes(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get-v1-employees-employee_id-federal_taxes",
     oAuth2Scopes: [],
 
@@ -110,7 +137,7 @@ export async function employeeTaxSetupGetFederalTaxes(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -121,7 +148,7 @@ export async function employeeTaxSetupGetFederalTaxes(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -140,8 +167,8 @@ export async function employeeTaxSetupGetFederalTaxes(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }
