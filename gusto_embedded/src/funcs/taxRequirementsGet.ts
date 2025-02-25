@@ -21,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -70,11 +71,11 @@ import { Result } from "../types/fp.js";
  *
  * scope: `company_tax_requirements:read`
  */
-export async function taxRequirementsGet(
+export function taxRequirementsGet(
   client: GustoEmbeddedCore,
   request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.TaxRequirementsState,
     | APIError
@@ -86,6 +87,32 @@ export async function taxRequirementsGet(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.TaxRequirementsState,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -95,7 +122,7 @@ export async function taxRequirementsGet(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -135,7 +162,7 @@ export async function taxRequirementsGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get-v1-companies-company_uuid-tax_requirements-state",
     oAuth2Scopes: [],
 
@@ -159,7 +186,7 @@ export async function taxRequirementsGet(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -170,7 +197,7 @@ export async function taxRequirementsGet(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -189,8 +216,8 @@ export async function taxRequirementsGet(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }
