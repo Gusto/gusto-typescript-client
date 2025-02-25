@@ -22,6 +22,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -32,11 +33,11 @@ import { Result } from "../types/fp.js";
  *
  * scope: `employees:read`
  */
-export async function employeesList(
+export function employeesList(
   client: GustoEmbeddedCore,
   request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     Array<components.Employee>,
     | APIError
@@ -48,6 +49,32 @@ export async function employeesList(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      Array<components.Employee>,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -57,7 +84,7 @@ export async function employeesList(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -99,7 +126,7 @@ export async function employeesList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get-v1-companies-company_id-employees",
     oAuth2Scopes: [],
 
@@ -123,7 +150,7 @@ export async function employeesList(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -134,7 +161,7 @@ export async function employeesList(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -153,8 +180,8 @@ export async function employeesList(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

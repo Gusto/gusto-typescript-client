@@ -19,24 +19,31 @@ export type FormPdf = {
   /**
    * the URL of the form
    */
-  documentUrl?: string | undefined;
+  documentUrl?: string | null | undefined;
+  /**
+   * The content type of the associated document. Most forms are PDFs with a content type of `application/pdf`. Some tax file packages will be zip files (containing PDFs) with a content type of `application/zip`. This attribute will be `null` when the document has not been prepared.
+   */
+  documentContentType?: string | null | undefined;
 };
 
 /** @internal */
 export const FormPdf$inboundSchema: z.ZodType<FormPdf, z.ZodTypeDef, unknown> =
   z.object({
     uuid: z.string(),
-    document_url: z.string().optional(),
+    document_url: z.nullable(z.string()).optional(),
+    document_content_type: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "document_url": "documentUrl",
+      "document_content_type": "documentContentType",
     });
   });
 
 /** @internal */
 export type FormPdf$Outbound = {
   uuid: string;
-  document_url?: string | undefined;
+  document_url?: string | null | undefined;
+  document_content_type?: string | null | undefined;
 };
 
 /** @internal */
@@ -46,10 +53,12 @@ export const FormPdf$outboundSchema: z.ZodType<
   FormPdf
 > = z.object({
   uuid: z.string(),
-  documentUrl: z.string().optional(),
+  documentUrl: z.nullable(z.string()).optional(),
+  documentContentType: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     documentUrl: "document_url",
+    documentContentType: "document_content_type",
   });
 });
 

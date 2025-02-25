@@ -42,6 +42,10 @@ export type Form1099 = {
    */
   requiresSigning?: boolean | undefined;
   /**
+   * The content type of the associated document. Most forms are PDFs with a content type of `application/pdf`. Some tax file packages will be zip files (containing PDFs) with a content type of `application/zip`. This attribute will be `null` when the document has not been prepared.
+   */
+  documentContentType?: string | null | undefined;
+  /**
    * The contractor UUID
    */
   contractorUuid?: string | undefined;
@@ -61,10 +65,12 @@ export const Form1099$inboundSchema: z.ZodType<
   year: z.nullable(z.number().int()).optional(),
   quarter: z.nullable(z.number().int()).optional(),
   requires_signing: z.boolean().optional(),
+  document_content_type: z.nullable(z.string()).optional(),
   contractor_uuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "requires_signing": "requiresSigning",
+    "document_content_type": "documentContentType",
     "contractor_uuid": "contractorUuid",
   });
 });
@@ -79,6 +85,7 @@ export type Form1099$Outbound = {
   year?: number | null | undefined;
   quarter?: number | null | undefined;
   requires_signing?: boolean | undefined;
+  document_content_type?: string | null | undefined;
   contractor_uuid?: string | undefined;
 };
 
@@ -96,10 +103,12 @@ export const Form1099$outboundSchema: z.ZodType<
   year: z.nullable(z.number().int()).optional(),
   quarter: z.nullable(z.number().int()).optional(),
   requiresSigning: z.boolean().optional(),
+  documentContentType: z.nullable(z.string()).optional(),
   contractorUuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresSigning: "requires_signing",
+    documentContentType: "document_content_type",
     contractorUuid: "contractor_uuid",
   });
 });

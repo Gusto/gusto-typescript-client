@@ -44,6 +44,10 @@ export type Form = {
    * A boolean flag that indicates whether the form needs signing or not. Note that this value will change after the form is signed.
    */
   requiresSigning?: boolean | undefined;
+  /**
+   * The content type of the associated document. Most forms are PDFs with a content type of `application/pdf`. Some tax file packages will be zip files (containing PDFs) with a content type of `application/zip`. This attribute will be `null` when the document has not been prepared.
+   */
+  documentContentType?: string | null | undefined;
 };
 
 /** @internal */
@@ -57,9 +61,11 @@ export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
     year: z.nullable(z.number().int()).optional(),
     quarter: z.nullable(z.number().int()).optional(),
     requires_signing: z.boolean().optional(),
+    document_content_type: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "requires_signing": "requiresSigning",
+      "document_content_type": "documentContentType",
     });
   });
 
@@ -73,6 +79,7 @@ export type Form$Outbound = {
   year?: number | null | undefined;
   quarter?: number | null | undefined;
   requires_signing?: boolean | undefined;
+  document_content_type?: string | null | undefined;
 };
 
 /** @internal */
@@ -86,9 +93,11 @@ export const Form$outboundSchema: z.ZodType<Form$Outbound, z.ZodTypeDef, Form> =
     year: z.nullable(z.number().int()).optional(),
     quarter: z.nullable(z.number().int()).optional(),
     requiresSigning: z.boolean().optional(),
+    documentContentType: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresSigning: "requires_signing",
+      documentContentType: "document_content_type",
     });
   });
 
