@@ -82,6 +82,58 @@ yarn add @tanstack/react-query react react-dom
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
 ```
+
+
+
+### Model Context Protocol (MCP) Server
+
+This SDK is also an installable MCP server where the various SDK methods are
+exposed as tools that can be invoked by AI applications.
+
+> Node.js v20 or greater is required to run the MCP server.
+
+<details>
+<summary>Claude installation steps</summary>
+
+Add the following server definition to your `claude_desktop_config.json` file:
+
+```json
+{
+  "mcpServers": {
+    "GustoEmbedded": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "@gusto/embedded-api",
+        "--",
+        "mcp", "start",
+        "--company-access-auth", "..."
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Cursor installation steps</summary>
+
+Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
+
+- Name: GustoEmbedded
+- Type: `command`
+- Command:
+```sh
+npx -y --package @gusto/embedded-api -- mcp start --company-access-auth ... 
+```
+
+</details>
+
+For a full list of server arguments, run:
+
+```sh
+npx -y --package @gusto/embedded-api -- mcp start --help
+```
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -1318,10 +1370,10 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name   | Server                       |
-| ------ | ---------------------------- |
-| `demo` | `https://api.gusto-demo.com` |
-| `prod` | `https://api.gusto.com`      |
+| Name   | Server                       | Description |
+| ------ | ---------------------------- | ----------- |
+| `demo` | `https://api.gusto-demo.com` | Demo        |
+| `prod` | `https://api.gusto.com`      | Prod        |
 
 #### Example
 

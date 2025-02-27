@@ -59,6 +59,10 @@ export type HourlyCompensations = {
    * The amount multiplied by the base rate to calculate total compensation per hour worked.
    */
   compensationMultiplier?: number | undefined;
+  /**
+   * The FLSA Status of the employee's primary job compensation
+   */
+  flsaStatus?: string | undefined;
 };
 
 export type PayrollEmployeeCompensationsTypePaidTimeOff = {
@@ -258,10 +262,12 @@ export const HourlyCompensations$inboundSchema: z.ZodType<
   amount: z.string().optional(),
   job_uuid: z.string().optional(),
   compensation_multiplier: z.number().optional(),
+  flsa_status: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_uuid": "jobUuid",
     "compensation_multiplier": "compensationMultiplier",
+    "flsa_status": "flsaStatus",
   });
 });
 
@@ -272,6 +278,7 @@ export type HourlyCompensations$Outbound = {
   amount?: string | undefined;
   job_uuid?: string | undefined;
   compensation_multiplier?: number | undefined;
+  flsa_status?: string | undefined;
 };
 
 /** @internal */
@@ -285,10 +292,12 @@ export const HourlyCompensations$outboundSchema: z.ZodType<
   amount: z.string().optional(),
   jobUuid: z.string().optional(),
   compensationMultiplier: z.number().optional(),
+  flsaStatus: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     jobUuid: "job_uuid",
     compensationMultiplier: "compensation_multiplier",
+    flsaStatus: "flsa_status",
   });
 });
 

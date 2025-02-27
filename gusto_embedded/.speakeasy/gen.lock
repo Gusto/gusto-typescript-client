@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 29c0a68ff8e4c6ee1ad5406dff3c5929
+  docChecksum: 697b4d10d5cf07f835aaf0ae283a81de
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.492.0
-  generationVersion: 2.512.4
-  releaseVersion: 0.1.19
-  configChecksum: 1ecc36577aae974766832e522ab8cc6c
+  speakeasyVersion: 1.505.1
+  generationVersion: 2.531.0
+  releaseVersion: 0.2.0
+  configChecksum: e2467369fcb8a78d13aae035de0db49e
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.19.0
+    core: 3.21.3
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.0
@@ -28,9 +28,10 @@ features:
     globalServerURLs: 2.82.4
     groups: 2.81.2
     inputOutputModels: 2.82.0
+    mcpServer: 0.3.0
     methodSecurity: 2.82.6
     nameOverrides: 2.81.2
-    nullables: 0.1.0
+    nullables: 0.1.1
     reactQueryHooks: 0.2.2
     responseFormat: 0.2.3
     retries: 2.83.0
@@ -1224,6 +1225,253 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/achTransactionsGetAll.ts
+  - src/mcp-server/tools/bankAccountsCreate.ts
+  - src/mcp-server/tools/bankAccountsCreateFromPlaidToken.ts
+  - src/mcp-server/tools/bankAccountsGet.ts
+  - src/mcp-server/tools/bankAccountsVerify.ts
+  - src/mcp-server/tools/companiesAcceptTermsOfService.ts
+  - src/mcp-server/tools/companiesCreateAdmin.ts
+  - src/mcp-server/tools/companiesFinishOnboarding.ts
+  - src/mcp-server/tools/companiesGet.ts
+  - src/mcp-server/tools/companiesGetCustomFields.ts
+  - src/mcp-server/tools/companiesGetOnboardingStatus.ts
+  - src/mcp-server/tools/companiesListAdmins.ts
+  - src/mcp-server/tools/companiesMigrate.ts
+  - src/mcp-server/tools/companiesRetrieveTermsOfService.ts
+  - src/mcp-server/tools/companiesUpdate.ts
+  - src/mcp-server/tools/companyAttachmentGetDownloadUrl.ts
+  - src/mcp-server/tools/companyAttachmentsCreate.ts
+  - src/mcp-server/tools/companyAttachmentsGetDetails.ts
+  - src/mcp-server/tools/companyAttachmentsGetList.ts
+  - src/mcp-server/tools/companyBenefitsCreate.ts
+  - src/mcp-server/tools/companyBenefitsDelete.ts
+  - src/mcp-server/tools/companyBenefitsGet.ts
+  - src/mcp-server/tools/companyBenefitsGetAll.ts
+  - src/mcp-server/tools/companyBenefitsGetEmployeeBenefits.ts
+  - src/mcp-server/tools/companyBenefitsGetRequirements.ts
+  - src/mcp-server/tools/companyBenefitsGetSummary.ts
+  - src/mcp-server/tools/companyBenefitsGetSupported.ts
+  - src/mcp-server/tools/companyBenefitsList.ts
+  - src/mcp-server/tools/companyBenefitsUpdate.ts
+  - src/mcp-server/tools/companyBenefitsUpdateEmployeeBenefits.ts
+  - src/mcp-server/tools/companyFormsGet.ts
+  - src/mcp-server/tools/companyFormsGetAll.ts
+  - src/mcp-server/tools/companyFormsGetPdf.ts
+  - src/mcp-server/tools/companyFormsSign.ts
+  - src/mcp-server/tools/contractorDocumentsGet.ts
+  - src/mcp-server/tools/contractorDocumentsGetAll.ts
+  - src/mcp-server/tools/contractorDocumentsGetPdf.ts
+  - src/mcp-server/tools/contractorDocumentsSign.ts
+  - src/mcp-server/tools/contractorFormsGenerate1099.ts
+  - src/mcp-server/tools/contractorFormsGet.ts
+  - src/mcp-server/tools/contractorFormsGetPdf.ts
+  - src/mcp-server/tools/contractorFormsList.ts
+  - src/mcp-server/tools/contractorPaymentGroupsCreate.ts
+  - src/mcp-server/tools/contractorPaymentGroupsDelete.ts
+  - src/mcp-server/tools/contractorPaymentGroupsFund.ts
+  - src/mcp-server/tools/contractorPaymentGroupsGet.ts
+  - src/mcp-server/tools/contractorPaymentGroupsGetList.ts
+  - src/mcp-server/tools/contractorPaymentGroupsPreview.ts
+  - src/mcp-server/tools/contractorPaymentMethodGet.ts
+  - src/mcp-server/tools/contractorPaymentMethodGetBankAccounts.ts
+  - src/mcp-server/tools/contractorPaymentMethodUpdate.ts
+  - src/mcp-server/tools/contractorPaymentMethodsCreateBankAccount.ts
+  - src/mcp-server/tools/contractorPaymentsCreate.ts
+  - src/mcp-server/tools/contractorPaymentsDelete.ts
+  - src/mcp-server/tools/contractorPaymentsFund.ts
+  - src/mcp-server/tools/contractorPaymentsGet.ts
+  - src/mcp-server/tools/contractorPaymentsGetReceipt.ts
+  - src/mcp-server/tools/contractorPaymentsList.ts
+  - src/mcp-server/tools/contractorsCreate.ts
+  - src/mcp-server/tools/contractorsDelete.ts
+  - src/mcp-server/tools/contractorsGet.ts
+  - src/mcp-server/tools/contractorsGetAddress.ts
+  - src/mcp-server/tools/contractorsGetOnboardingStatus.ts
+  - src/mcp-server/tools/contractorsList.ts
+  - src/mcp-server/tools/contractorsUpdate.ts
+  - src/mcp-server/tools/contractorsUpdateAddress.ts
+  - src/mcp-server/tools/contractorsUpdateOnboardingStatus.ts
+  - src/mcp-server/tools/departmentsAddPeople.ts
+  - src/mcp-server/tools/departmentsCreate.ts
+  - src/mcp-server/tools/departmentsDelete.ts
+  - src/mcp-server/tools/departmentsGet.ts
+  - src/mcp-server/tools/departmentsGetAll.ts
+  - src/mcp-server/tools/departmentsRemovePeople.ts
+  - src/mcp-server/tools/departmentsUpdate.ts
+  - src/mcp-server/tools/earningTypesCreate.ts
+  - src/mcp-server/tools/earningTypesDelete.ts
+  - src/mcp-server/tools/earningTypesList.ts
+  - src/mcp-server/tools/earningTypesUpdate.ts
+  - src/mcp-server/tools/employeeAddressesCreate.ts
+  - src/mcp-server/tools/employeeAddressesCreateWorkAddress.ts
+  - src/mcp-server/tools/employeeAddressesDelete.ts
+  - src/mcp-server/tools/employeeAddressesDeleteWorkAddress.ts
+  - src/mcp-server/tools/employeeAddressesGet.ts
+  - src/mcp-server/tools/employeeAddressesGetWorkAddresses.ts
+  - src/mcp-server/tools/employeeAddressesRetrieveHomeAddress.ts
+  - src/mcp-server/tools/employeeAddressesRetrieveWorkAddress.ts
+  - src/mcp-server/tools/employeeAddressesUpdate.ts
+  - src/mcp-server/tools/employeeAddressesUpdateWorkAddress.ts
+  - src/mcp-server/tools/employeeBenefitsCreate.ts
+  - src/mcp-server/tools/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.ts
+  - src/mcp-server/tools/employeeBenefitsDelete.ts
+  - src/mcp-server/tools/employeeBenefitsGet.ts
+  - src/mcp-server/tools/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.ts
+  - src/mcp-server/tools/employeeBenefitsRetrieve.ts
+  - src/mcp-server/tools/employeeBenefitsUpdate.ts
+  - src/mcp-server/tools/employeeEmploymentsCreateRehire.ts
+  - src/mcp-server/tools/employeeEmploymentsCreateTermination.ts
+  - src/mcp-server/tools/employeeEmploymentsDeleteRehire.ts
+  - src/mcp-server/tools/employeeEmploymentsDeleteTermination.ts
+  - src/mcp-server/tools/employeeEmploymentsGetHistory.ts
+  - src/mcp-server/tools/employeeEmploymentsGetRehire.ts
+  - src/mcp-server/tools/employeeEmploymentsGetTerminations.ts
+  - src/mcp-server/tools/employeeEmploymentsRehire.ts
+  - src/mcp-server/tools/employeeEmploymentsUpdateTermination.ts
+  - src/mcp-server/tools/employeeFormsGenerateW2.ts
+  - src/mcp-server/tools/employeeFormsGet.ts
+  - src/mcp-server/tools/employeeFormsGetPdf.ts
+  - src/mcp-server/tools/employeeFormsList.ts
+  - src/mcp-server/tools/employeeFormsSign.ts
+  - src/mcp-server/tools/employeePaymentMethodCreate.ts
+  - src/mcp-server/tools/employeePaymentMethodDeleteBankAccount.ts
+  - src/mcp-server/tools/employeePaymentMethodGet.ts
+  - src/mcp-server/tools/employeePaymentMethodUpdate.ts
+  - src/mcp-server/tools/employeePaymentMethodUpdateBankAccount.ts
+  - src/mcp-server/tools/employeePaymentMethodsGetBankAccounts.ts
+  - src/mcp-server/tools/employeeTaxSetupGetFederalTaxes.ts
+  - src/mcp-server/tools/employeeTaxSetupGetStateTaxes.ts
+  - src/mcp-server/tools/employeeTaxSetupUpdateFederalTaxes.ts
+  - src/mcp-server/tools/employeeTaxSetupUpdateStateTaxes.ts
+  - src/mcp-server/tools/employeesCreate.ts
+  - src/mcp-server/tools/employeesCreateHistorical.ts
+  - src/mcp-server/tools/employeesDelete.ts
+  - src/mcp-server/tools/employeesGet.ts
+  - src/mcp-server/tools/employeesGetCustomFields.ts
+  - src/mcp-server/tools/employeesGetOnboardingStatus.ts
+  - src/mcp-server/tools/employeesGetTimeOffActivities.ts
+  - src/mcp-server/tools/employeesList.ts
+  - src/mcp-server/tools/employeesUpdate.ts
+  - src/mcp-server/tools/employeesUpdateOnboardingDocumentsConfig.ts
+  - src/mcp-server/tools/employeesUpdateOnboardingStatus.ts
+  - src/mcp-server/tools/externalPayrollsCalculateTaxes.ts
+  - src/mcp-server/tools/externalPayrollsCreate.ts
+  - src/mcp-server/tools/externalPayrollsDelete.ts
+  - src/mcp-server/tools/externalPayrollsFinalizeTaxLiabilities.ts
+  - src/mcp-server/tools/externalPayrollsGet.ts
+  - src/mcp-server/tools/externalPayrollsListTaxLiabilities.ts
+  - src/mcp-server/tools/externalPayrollsRetrieve.ts
+  - src/mcp-server/tools/externalPayrollsUpdate.ts
+  - src/mcp-server/tools/externalPayrollsUpdateTaxLiabilities.ts
+  - src/mcp-server/tools/federalTaxDetailsGet.ts
+  - src/mcp-server/tools/federalTaxDetailsUpdate.ts
+  - src/mcp-server/tools/flowsCreate.ts
+  - src/mcp-server/tools/garnishmentsCreate.ts
+  - src/mcp-server/tools/garnishmentsGet.ts
+  - src/mcp-server/tools/garnishmentsGetChildSupportData.ts
+  - src/mcp-server/tools/garnishmentsList.ts
+  - src/mcp-server/tools/garnishmentsUpdate.ts
+  - src/mcp-server/tools/generatedDocumentsGet.ts
+  - src/mcp-server/tools/historicalEmployeesUpdate.ts
+  - src/mcp-server/tools/holidayPayPoliciesAddEmployees.ts
+  - src/mcp-server/tools/holidayPayPoliciesCreate.ts
+  - src/mcp-server/tools/holidayPayPoliciesDelete.ts
+  - src/mcp-server/tools/holidayPayPoliciesGet.ts
+  - src/mcp-server/tools/holidayPayPoliciesRemoveEmployees.ts
+  - src/mcp-server/tools/holidayPayPoliciesUpdate.ts
+  - src/mcp-server/tools/i9VerificationCreateDocuments.ts
+  - src/mcp-server/tools/i9VerificationDeleteDocument.ts
+  - src/mcp-server/tools/i9VerificationEmployerSign.ts
+  - src/mcp-server/tools/i9VerificationGetAuthorization.ts
+  - src/mcp-server/tools/i9VerificationGetDocumentOptions.ts
+  - src/mcp-server/tools/i9VerificationGetDocuments.ts
+  - src/mcp-server/tools/i9VerificationUpdate.ts
+  - src/mcp-server/tools/industrySelectionGet.ts
+  - src/mcp-server/tools/industrySelectionUpdate.ts
+  - src/mcp-server/tools/introspectionGetInfo.ts
+  - src/mcp-server/tools/introspectionRefreshToken.ts
+  - src/mcp-server/tools/jobsAndCompensationsCreateCompensation.ts
+  - src/mcp-server/tools/jobsAndCompensationsCreateJob.ts
+  - src/mcp-server/tools/jobsAndCompensationsDelete.ts
+  - src/mcp-server/tools/jobsAndCompensationsDeleteCompensation.ts
+  - src/mcp-server/tools/jobsAndCompensationsGetCompensation.ts
+  - src/mcp-server/tools/jobsAndCompensationsGetCompensations.ts
+  - src/mcp-server/tools/jobsAndCompensationsGetJob.ts
+  - src/mcp-server/tools/jobsAndCompensationsGetJobs.ts
+  - src/mcp-server/tools/jobsAndCompensationsUpdate.ts
+  - src/mcp-server/tools/jobsAndCompensationsUpdateCompensation.ts
+  - src/mcp-server/tools/locationsCreate.ts
+  - src/mcp-server/tools/locationsGet.ts
+  - src/mcp-server/tools/locationsGetMinimumWages.ts
+  - src/mcp-server/tools/locationsRetrieve.ts
+  - src/mcp-server/tools/locationsUpdate.ts
+  - src/mcp-server/tools/notificationsGetDetails.ts
+  - src/mcp-server/tools/paySchedulesAssign.ts
+  - src/mcp-server/tools/paySchedulesCreate.ts
+  - src/mcp-server/tools/paySchedulesGet.ts
+  - src/mcp-server/tools/paySchedulesGetAll.ts
+  - src/mcp-server/tools/paySchedulesGetAssignments.ts
+  - src/mcp-server/tools/paySchedulesGetPayPeriods.ts
+  - src/mcp-server/tools/paySchedulesGetPreview.ts
+  - src/mcp-server/tools/paySchedulesGetUnprocessedTerminationPeriods.ts
+  - src/mcp-server/tools/paySchedulesPreviewAssignment.ts
+  - src/mcp-server/tools/paySchedulesUpdate.ts
+  - src/mcp-server/tools/paymentConfigsGet.ts
+  - src/mcp-server/tools/paymentConfigsUpdate.ts
+  - src/mcp-server/tools/payrollsCalculate.ts
+  - src/mcp-server/tools/payrollsCalculateGrossUp.ts
+  - src/mcp-server/tools/payrollsCancel.ts
+  - src/mcp-server/tools/payrollsCreateOffCycle.ts
+  - src/mcp-server/tools/payrollsDelete.ts
+  - src/mcp-server/tools/payrollsGeneratePrintableChecks.ts
+  - src/mcp-server/tools/payrollsGet.ts
+  - src/mcp-server/tools/payrollsGetApprovedReversals.ts
+  - src/mcp-server/tools/payrollsGetBlockers.ts
+  - src/mcp-server/tools/payrollsGetPayStub.ts
+  - src/mcp-server/tools/payrollsGetPayStubs.ts
+  - src/mcp-server/tools/payrollsGetReceipt.ts
+  - src/mcp-server/tools/payrollsList.ts
+  - src/mcp-server/tools/payrollsPrepare.ts
+  - src/mcp-server/tools/payrollsSkip.ts
+  - src/mcp-server/tools/payrollsSubmit.ts
+  - src/mcp-server/tools/payrollsUpdate.ts
+  - src/mcp-server/tools/recoveryCasesGet.ts
+  - src/mcp-server/tools/recoveryCasesRedebit.ts
+  - src/mcp-server/tools/reportsCreateCustom.ts
+  - src/mcp-server/tools/reportsGet.ts
+  - src/mcp-server/tools/reportsGetTemplate.ts
+  - src/mcp-server/tools/signatoriesCreate.ts
+  - src/mcp-server/tools/signatoriesDelete.ts
+  - src/mcp-server/tools/signatoriesInvite.ts
+  - src/mcp-server/tools/signatoriesList.ts
+  - src/mcp-server/tools/signatoriesUpdate.ts
+  - src/mcp-server/tools/taxRequirementsGet.ts
+  - src/mcp-server/tools/taxRequirementsGetAll.ts
+  - src/mcp-server/tools/taxRequirementsUpdateState.ts
+  - src/mcp-server/tools/timeOffPoliciesAddEmployees.ts
+  - src/mcp-server/tools/timeOffPoliciesCalculateAccruingTimeOffHours.ts
+  - src/mcp-server/tools/timeOffPoliciesCreate.ts
+  - src/mcp-server/tools/timeOffPoliciesDeactivate.ts
+  - src/mcp-server/tools/timeOffPoliciesGet.ts
+  - src/mcp-server/tools/timeOffPoliciesGetAll.ts
+  - src/mcp-server/tools/timeOffPoliciesRemoveEmployees.ts
+  - src/mcp-server/tools/timeOffPoliciesUpdate.ts
+  - src/mcp-server/tools/timeOffPoliciesUpdateBalance.ts
+  - src/mcp-server/tools/wireInRequestsGet.ts
+  - src/mcp-server/tools/wireInRequestsList.ts
+  - src/mcp-server/tools/wireInRequestsSubmit.ts
   - src/models/components/accruingtimeoffhour.ts
   - src/models/components/achtransaction.ts
   - src/models/components/admin.ts
@@ -1925,6 +2173,7 @@ generatedFiles:
   - src/sdk/timeoffpolicies.ts
   - src/sdk/webhooks.ts
   - src/sdk/wireinrequests.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -5428,7 +5677,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "US_1099", "title": "Form 1099: 2020", "description": "Form 1099 records your annual income as a contractor.", "draft": false, "year": 2020, "quarter": null, "requires_signing": false, "contractor_uuid": "123dd616-6dbc-4724-938a-403f6217a933"}]
+          application/json: [{"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "US_1099", "title": "Form 1099: 2020", "description": "Form 1099 records your annual income as a contractor.", "draft": false, "year": 2020, "quarter": null, "requires_signing": false, "document_content_type": "application/pdf", "contractor_uuid": "123dd616-6dbc-4724-938a-403f6217a933"}]
   get-v1-contractor-form:
     Example:
       parameters:
@@ -5438,7 +5687,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "US_1099", "title": "Form 1099: 2020", "description": "Form 1099 records your annual income as a contractor.", "draft": false, "year": 2020, "quarter": null, "requires_signing": false, "contractor_uuid": "123dd616-6dbc-4724-938a-403f6217a933"}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "US_1099", "title": "Form 1099: 2020", "description": "Form 1099 records your annual income as a contractor.", "draft": false, "year": 2020, "quarter": null, "requires_signing": false, "document_content_type": "application/pdf", "contractor_uuid": "123dd616-6dbc-4724-938a-403f6217a933"}
   get-v1-contractor-form-pdf:
     Example:
       parameters:
@@ -5448,7 +5697,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "document_url": "https://app.gusto-demo.com/assets/forms/7757842065202782/original/company_direct_deposit20211007-48226-gsqo8k.pdf?1633667020"}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "document_url": "https://app.gusto-demo.com/assets/forms/7757842065202782/original/company_direct_deposit20211007-48226-gsqo8k.pdf?1633667020", "document_content_type": "application/pdf"}
   post-v1-sandbox-generate_1099:
     Example:
       requestBody:
@@ -5575,7 +5824,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "requires_signing": true}]
+          application/json: [{"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "year": null, "quarter": null, "requires_signing": true, "document_content_type": "application/pdf"}]
   get-v1-employee-form:
     Example:
       parameters:
@@ -5585,7 +5834,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "requires_signing": true}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "year": null, "quarter": null, "requires_signing": true, "document_content_type": "application/pdf"}
   get-v1-employee-form-pdf:
     Example:
       parameters:
@@ -5595,7 +5844,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "document_url": "https://app.gusto-demo.com/assets/forms/7757842065202782/original/company_direct_deposit20211007-48226-gsqo8k.pdf?1633667020"}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "document_url": "https://app.gusto-demo.com/assets/forms/7757842065202782/original/company_direct_deposit20211007-48226-gsqo8k.pdf?1633667020", "document_content_type": "application/pdf"}
   put-v1-employee-form-sign:
     Example:
       parameters:
@@ -5607,7 +5856,7 @@ examples:
         application/json: {"signature_text": "Jane Smith", "agree": true, "signed_by_ip_address": "192.168.0.1"}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "requires_signing": true}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "year": null, "quarter": null, "requires_signing": true, "document_content_type": "application/pdf"}
     Basic:
       parameters:
         path:
@@ -5651,7 +5900,7 @@ examples:
         application/json: {"off_cycle": true, "off_cycle_reason": "Dismissed employee", "start_date": "<value>", "end_date": "<value>"}
       responses:
         "200":
-          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": "<value>", "calculated_at": "<value>", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": true, "off_cycle_reason": "Bonus", "auto_pilot": false, "external": false, "final_termination_payroll": false, "withholding_pay_period": "Every other week", "skip_regular_deductions": true, "fixed_withholding_rate": true, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "payment_method": "Direct Deposit", "memo": null, "fixed_compensations": [], "hourly_compensations": [{"name": "Regular Hours", "hours": "0.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "0.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2}, {"name": "Regular Hours", "hours": "0.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "0.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2}], "paid_time_off": []}], "created_at": "2022-02-01T22:00:00Z", "processing_request": null}
+          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": "<value>", "calculated_at": "<value>", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": true, "off_cycle_reason": "Bonus", "auto_pilot": false, "external": false, "final_termination_payroll": false, "withholding_pay_period": "Every other week", "skip_regular_deductions": true, "fixed_withholding_rate": true, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "payment_method": "Direct Deposit", "memo": null, "fixed_compensations": [], "hourly_compensations": [{"name": "Regular Hours", "hours": "0.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "0.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "0.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "0.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": []}], "created_at": "2022-02-01T22:00:00Z", "processing_request": null}
     Basic:
       parameters:
         path:
@@ -5723,7 +5972,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}], "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10T00:00:00Z"}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
+          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}], "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10T00:00:00Z"}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
   put-v1-companies-company_id-payrolls:
     Example:
       parameters:
@@ -5735,7 +5984,7 @@ examples:
         application/json: {"employee_compensations": [{}, {}, {}]}
       responses:
         "200":
-          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": "<value>", "calculated_at": "<value>", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "off_cycle_reason": null, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "version": "4ba36d23a78c7393b4900ef38019d8ff", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "version": "ff083257a5583291fb86656ad0df1b42", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "version": "259816479e3729bf855318af9b9adddf", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}], "created_at": "2022-02-01T22:00:00Z", "fixed_compensation_types": [{"name": "Bonus"}, {"name": "Commission"}, {"name": "Paycheck Tips"}, {"name": "Cash Tips"}, {"name": "Correction Payment"}, {"name": "Anniversary Bonus"}, {"name": "Internet Stipend"}, {"name": "Reimbursement"}], "processing_request": null}
+          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": "<value>", "calculated_at": "<value>", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "off_cycle_reason": null, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "version": "4ba36d23a78c7393b4900ef38019d8ff", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "version": "ff083257a5583291fb86656ad0df1b42", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "version": "259816479e3729bf855318af9b9adddf", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}], "created_at": "2022-02-01T22:00:00Z", "fixed_compensation_types": [{"name": "Bonus"}, {"name": "Commission"}, {"name": "Paycheck Tips"}, {"name": "Cash Tips"}, {"name": "Correction Payment"}, {"name": "Anniversary Bonus"}, {"name": "Internet Stipend"}, {"name": "Reimbursement"}], "processing_request": null}
     Basic:
       parameters:
         path:
@@ -5786,7 +6035,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": "<value>", "calculated_at": "<value>", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "off_cycle_reason": null, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "version": "4ba36d23a78c7393b4900ef38019d8ff", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "version": "ff083257a5583291fb86656ad0df1b42", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "version": "259816479e3729bf855318af9b9adddf", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}], "created_at": "2022-02-01T22:00:00Z", "fixed_compensation_types": [{"name": "Bonus"}, {"name": "Commission"}, {"name": "Paycheck Tips"}, {"name": "Cash Tips"}, {"name": "Correction Payment"}, {"name": "Anniversary Bonus"}, {"name": "Internet Stipend"}, {"name": "Reimbursement"}], "processing_request": null}
+          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": "<value>", "calculated_at": "<value>", "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "off_cycle_reason": null, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "version": "4ba36d23a78c7393b4900ef38019d8ff", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "version": "ff083257a5583291fb86656ad0df1b42", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "version": "259816479e3729bf855318af9b9adddf", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}], "created_at": "2022-02-01T22:00:00Z", "fixed_compensation_types": [{"name": "Bonus"}, {"name": "Commission"}, {"name": "Paycheck Tips"}, {"name": "Cash Tips"}, {"name": "Correction Payment"}, {"name": "Anniversary Bonus"}, {"name": "Internet Stipend"}, {"name": "Reimbursement"}], "processing_request": null}
   get-v1-payment-receipts-payrolls-payroll_uuid:
     Example:
       parameters:
@@ -5868,7 +6117,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}], "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10T00:00:00Z"}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
+          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "gross_pay": "2791.25", "net_pay": "1953.31", "check_amount": "1953.31", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": true}, {"name": "401K", "employee_deduction": "100.00", "company_contribution": "50.00", "imputed": false}], "deductions": [{"name": "Child Support", "amount": "80.00"}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": "646.69"}, {"name": "Social Security", "employer": true, "amount": "191.25"}]}], "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10T00:00:00Z"}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
     Basic:
       parameters:
         path:
@@ -6646,7 +6895,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "requires_signing": true}]
+          application/json: [{"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "year": null, "quarter": null, "requires_signing": true, "document_content_type": "application/pdf"}]
   get-v1-company-form:
     Example:
       parameters:
@@ -6655,7 +6904,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "requires_signing": true}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "year": null, "quarter": null, "requires_signing": true, "document_content_type": "application/pdf"}
   get-v1-company-form-pdf:
     Example:
       parameters:
@@ -6664,7 +6913,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "document_url": "https://app.gusto-demo.com/assets/forms/7757842065202782/original/company_direct_deposit20211007-48226-gsqo8k.pdf?1633667020"}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "document_url": "https://app.gusto-demo.com/assets/forms/7757842065202782/original/company_direct_deposit20211007-48226-gsqo8k.pdf?1633667020", "document_content_type": "application/pdf"}
   put-v1-company-form-sign:
     Example:
       parameters:
@@ -6675,7 +6924,7 @@ examples:
         application/json: {"signature_text": "Jane Smith", "agree": true, "signed_by_ip_address": "192.168.0.1"}
       responses:
         "200":
-          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "requires_signing": true}
+          application/json: {"uuid": "48cdd5ec-a4dd-4840-a424-ad79f38d8408", "name": "company_direct_deposit", "title": "Direct Deposit Authorization", "description": "We need you to sign paperwork to authorize us to debit and credit your bank account and file and pay your taxes.", "draft": false, "year": null, "quarter": null, "requires_signing": true, "document_content_type": "application/pdf"}
     Basic:
       parameters:
         path:
