@@ -21,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -31,11 +32,11 @@ import { Result } from "../types/fp.js";
  *
  * scope: `departments:write`
  */
-export async function departmentsRemovePeople(
+export function departmentsRemovePeople(
   client: GustoEmbeddedCore,
   request: operations.PutRemovePeopleFromDepartmentRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.Department,
     | APIError
@@ -47,6 +48,32 @@ export async function departmentsRemovePeople(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.PutRemovePeopleFromDepartmentRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.Department,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -56,7 +83,7 @@ export async function departmentsRemovePeople(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -89,7 +116,7 @@ export async function departmentsRemovePeople(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "put-remove-people-from-department",
     oAuth2Scopes: [],
 
@@ -112,7 +139,7 @@ export async function departmentsRemovePeople(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -123,7 +150,7 @@ export async function departmentsRemovePeople(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -142,8 +169,8 @@ export async function departmentsRemovePeople(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

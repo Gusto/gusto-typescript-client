@@ -22,6 +22,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -41,11 +42,11 @@ import { Result } from "../types/fp.js";
  * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
  * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
  */
-export async function employeesUpdateOnboardingStatus(
+export function employeesUpdateOnboardingStatus(
   client: GustoEmbeddedCore,
   request: operations.PutV1EmployeesEmployeeIdOnboardingStatusRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.EmployeeOnboardingStatus,
     | errors.UnprocessableEntityErrorObject
@@ -58,6 +59,33 @@ export async function employeesUpdateOnboardingStatus(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request: operations.PutV1EmployeesEmployeeIdOnboardingStatusRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.EmployeeOnboardingStatus,
+      | errors.UnprocessableEntityErrorObject
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -66,7 +94,7 @@ export async function employeesUpdateOnboardingStatus(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -99,7 +127,7 @@ export async function employeesUpdateOnboardingStatus(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "put-v1-employees-employee_id-onboarding_status",
     oAuth2Scopes: [],
 
@@ -122,7 +150,7 @@ export async function employeesUpdateOnboardingStatus(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -133,7 +161,7 @@ export async function employeesUpdateOnboardingStatus(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -158,8 +186,8 @@ export async function employeesUpdateOnboardingStatus(
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

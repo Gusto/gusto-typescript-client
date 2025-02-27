@@ -21,6 +21,7 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -32,12 +33,12 @@ import { Result } from "../types/fp.js";
  *
  * scope: `terms_of_services:write`
  */
-export async function companiesAcceptTermsOfService(
+export function companiesAcceptTermsOfService(
   client: GustoEmbeddedCore,
   request:
     operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody,
     | errors.UnprocessableEntityErrorObject
@@ -50,6 +51,34 @@ export async function companiesAcceptTermsOfService(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: GustoEmbeddedCore,
+  request:
+    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody,
+      | errors.UnprocessableEntityErrorObject
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -59,7 +88,7 @@ export async function companiesAcceptTermsOfService(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
@@ -92,7 +121,7 @@ export async function companiesAcceptTermsOfService(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "post-partner-managed-companies-company_uuid-accept_terms_of_service",
     oAuth2Scopes: [],
@@ -116,7 +145,7 @@ export async function companiesAcceptTermsOfService(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -127,7 +156,7 @@ export async function companiesAcceptTermsOfService(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -156,8 +185,8 @@ export async function companiesAcceptTermsOfService(
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }
