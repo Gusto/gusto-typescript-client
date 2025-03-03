@@ -112,6 +112,8 @@ export function setPayrollsListData(
       startDate?: string | undefined;
       endDate?: string | undefined;
       sortOrder?: components.SortOrder | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
       xGustoAPIVersion?: components.VersionHeader | undefined;
     },
   ],
@@ -136,6 +138,8 @@ export function invalidatePayrollsList(
         startDate?: string | undefined;
         endDate?: string | undefined;
         sortOrder?: components.SortOrder | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
         xGustoAPIVersion?: components.VersionHeader | undefined;
       },
     ]
@@ -174,6 +178,8 @@ export function buildPayrollsListQuery(
       startDate: request.startDate,
       endDate: request.endDate,
       sortOrder: request.sortOrder,
+      page: request.page,
+      per: request.per,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function payrollsListQueryFn(
@@ -205,6 +211,8 @@ export function queryKeyPayrollsList(
     startDate?: string | undefined;
     endDate?: string | undefined;
     sortOrder?: components.SortOrder | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
     xGustoAPIVersion?: components.VersionHeader | undefined;
   },
 ): QueryKey {

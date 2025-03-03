@@ -112,6 +112,8 @@ async function $do(
     }, { explode: false }),
     encodeFormQuery({
       "end_date": payload.end_date,
+      "page": payload.page,
+      "per": payload.per,
       "sort_order": payload.sort_order,
       "start_date": payload.start_date,
     }),

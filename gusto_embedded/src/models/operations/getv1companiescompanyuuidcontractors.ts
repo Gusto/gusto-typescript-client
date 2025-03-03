@@ -40,8 +40,8 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
     unknown
   > = z.object({
     company_uuid: z.string(),
-    page: z.number().optional(),
-    per: z.number().optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     search_term: z.string().optional(),
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
   }).transform((v) => {
@@ -69,8 +69,8 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     GetV1CompaniesCompanyUuidContractorsRequest
   > = z.object({
     companyUuid: z.string(),
-    page: z.number().optional(),
-    per: z.number().optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     searchTerm: z.string().optional(),
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
   }).transform((v) => {

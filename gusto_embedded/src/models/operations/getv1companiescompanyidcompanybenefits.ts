@@ -15,6 +15,10 @@ export type GetV1CompaniesCompanyIdCompanyBenefitsRequest = {
    */
   companyId: string;
   /**
+   * Whether the benefit is currently active
+   */
+  active?: boolean | undefined;
+  /**
    * Whether to return employee enrollment count
    */
   enrollmentCount?: boolean | undefined;
@@ -32,6 +36,7 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
+    active: z.boolean().optional(),
     enrollment_count: z.boolean().optional(),
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
   }).transform((v) => {
@@ -45,6 +50,7 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$inboundSchema:
 /** @internal */
 export type GetV1CompaniesCompanyIdCompanyBenefitsRequest$Outbound = {
   company_id: string;
+  active?: boolean | undefined;
   enrollment_count?: boolean | undefined;
   "X-Gusto-API-Version"?: string | undefined;
 };
@@ -57,6 +63,7 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema:
     GetV1CompaniesCompanyIdCompanyBenefitsRequest
   > = z.object({
     companyId: z.string(),
+    active: z.boolean().optional(),
     enrollmentCount: z.boolean().optional(),
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
   }).transform((v) => {

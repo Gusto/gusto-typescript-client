@@ -37,7 +37,7 @@ export const YtdBenefitAmountsFromDifferentCompany$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   uuid: z.string(),
-  benefit_type: z.number(),
+  benefit_type: z.number().int(),
   ytd_employee_deduction_amount: z.string(),
   ytd_company_contribution_amount: z.string(),
 }).transform((v) => {
@@ -63,7 +63,7 @@ export const YtdBenefitAmountsFromDifferentCompany$outboundSchema: z.ZodType<
   YtdBenefitAmountsFromDifferentCompany
 > = z.object({
   uuid: z.string(),
-  benefitType: z.number(),
+  benefitType: z.number().int(),
   ytdEmployeeDeductionAmount: z.string(),
   ytdCompanyContributionAmount: z.string(),
 }).transform((v) => {

@@ -85,8 +85,8 @@ export const GetV1EmployeesEmployeeIdJobsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_id: z.string(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   include: GetV1EmployeesEmployeeIdJobsQueryParamInclude$inboundSchema
     .optional(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
@@ -113,8 +113,8 @@ export const GetV1EmployeesEmployeeIdJobsRequest$outboundSchema: z.ZodType<
   GetV1EmployeesEmployeeIdJobsRequest
 > = z.object({
   employeeId: z.string(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   include: GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema
     .optional(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),

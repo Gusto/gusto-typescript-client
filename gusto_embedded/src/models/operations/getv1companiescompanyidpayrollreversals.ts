@@ -36,8 +36,8 @@ export const GetV1CompaniesCompanyIdPayrollReversalsRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
-    page: z.number().optional(),
-    per: z.number().optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -62,8 +62,8 @@ export const GetV1CompaniesCompanyIdPayrollReversalsRequest$outboundSchema:
     GetV1CompaniesCompanyIdPayrollReversalsRequest
   > = z.object({
     companyId: z.string(),
-    page: z.number().optional(),
-    per: z.number().optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {

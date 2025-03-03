@@ -46,8 +46,8 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema
     company_id: z.string(),
     start_date: z.string().optional(),
     end_date: z.string().optional(),
-    page: z.number().optional(),
-    per: z.number().optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -78,8 +78,8 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchem
     companyId: z.string(),
     startDate: z.string().optional(),
     endDate: z.string().optional(),
-    page: z.number().optional(),
-    per: z.number().optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {

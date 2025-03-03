@@ -107,8 +107,8 @@ export const GetInvoicesInvoicePeriodRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   invoice_period: z.string(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   company_uuids: z.string().optional(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
 }).transform((v) => {
@@ -135,8 +135,8 @@ export const GetInvoicesInvoicePeriodRequest$outboundSchema: z.ZodType<
   GetInvoicesInvoicePeriodRequest
 > = z.object({
   invoicePeriod: z.string(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   companyUuids: z.string().optional(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
 }).transform((v) => {

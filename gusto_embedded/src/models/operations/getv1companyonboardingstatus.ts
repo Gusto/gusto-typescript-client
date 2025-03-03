@@ -15,6 +15,10 @@ export type GetV1CompanyOnboardingStatusRequest = {
    */
   companyUuid: string;
   /**
+   * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+   */
+  additionalSteps?: string | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
@@ -27,10 +31,12 @@ export const GetV1CompanyOnboardingStatusRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
+  additional_steps: z.string().optional(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
+    "additional_steps": "additionalSteps",
     "X-Gusto-API-Version": "xGustoAPIVersion",
   });
 });
@@ -38,6 +44,7 @@ export const GetV1CompanyOnboardingStatusRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1CompanyOnboardingStatusRequest$Outbound = {
   company_uuid: string;
+  additional_steps?: string | undefined;
   "X-Gusto-API-Version"?: string | undefined;
 };
 
@@ -48,10 +55,12 @@ export const GetV1CompanyOnboardingStatusRequest$outboundSchema: z.ZodType<
   GetV1CompanyOnboardingStatusRequest
 > = z.object({
   companyUuid: z.string(),
+  additionalSteps: z.string().optional(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
+    additionalSteps: "additional_steps",
     xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });

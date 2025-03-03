@@ -1,6 +1,6 @@
 {
   "name": "@gusto/embedded-api",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Speakeasy",
   "bin": {
     "mcp": "bin/mcp-server.js"

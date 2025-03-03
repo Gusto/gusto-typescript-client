@@ -94,7 +94,10 @@ export function setCompaniesGetOnboardingStatusData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: {
+      additionalSteps?: string | undefined;
+      xGustoAPIVersion?: components.VersionHeader | undefined;
+    },
   ],
   data: CompaniesGetOnboardingStatusQueryData,
 ): CompaniesGetOnboardingStatusQueryData | undefined {
@@ -108,7 +111,10 @@ export function invalidateCompaniesGetOnboardingStatus(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: {
+        additionalSteps?: string | undefined;
+        xGustoAPIVersion?: components.VersionHeader | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -146,6 +152,7 @@ export function buildCompaniesGetOnboardingStatusQuery(
 } {
   return {
     queryKey: queryKeyCompaniesGetOnboardingStatus(request.companyUuid, {
+      additionalSteps: request.additionalSteps,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function companiesGetOnboardingStatusQueryFn(
@@ -168,7 +175,10 @@ export function buildCompaniesGetOnboardingStatusQuery(
 
 export function queryKeyCompaniesGetOnboardingStatus(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: {
+    additionalSteps?: string | undefined;
+    xGustoAPIVersion?: components.VersionHeader | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

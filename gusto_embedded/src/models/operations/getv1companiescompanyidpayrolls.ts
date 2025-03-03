@@ -62,6 +62,14 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    */
   sortOrder?: components.SortOrder | undefined;
   /**
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+   */
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: components.VersionHeader | undefined;
@@ -145,6 +153,8 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   start_date: z.string().optional(),
   end_date: z.string().optional(),
   sort_order: components.SortOrder$inboundSchema.optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -167,6 +177,8 @@ export type GetV1CompaniesCompanyIdPayrollsRequest$Outbound = {
   start_date?: string | undefined;
   end_date?: string | undefined;
   sort_order?: string | undefined;
+  page?: number | undefined;
+  per?: number | undefined;
   "X-Gusto-API-Version"?: string | undefined;
 };
 
@@ -185,6 +197,8 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   sortOrder: components.SortOrder$outboundSchema.optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
