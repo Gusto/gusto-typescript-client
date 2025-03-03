@@ -909,6 +909,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companies.getOnboardingStatus({
     companyUuid: "<id>",
+    additionalSteps: "external_payroll",
   });
 
   // Handle the result
@@ -935,6 +936,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await companiesGetOnboardingStatus(gustoEmbedded, {
     companyUuid: "<id>",
+    additionalSteps: "external_payroll",
   });
 
   if (!res.ok) {

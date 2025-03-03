@@ -60,7 +60,7 @@ export const SupportedBenefit$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  benefit_type: z.number().optional(),
+  benefit_type: z.number().int().optional(),
   name: z.string().optional(),
   description: z.string().optional(),
   pretax: z.boolean().optional(),
@@ -97,7 +97,7 @@ export const SupportedBenefit$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SupportedBenefit
 > = z.object({
-  benefitType: z.number().optional(),
+  benefitType: z.number().int().optional(),
   name: z.string().optional(),
   description: z.string().optional(),
   pretax: z.boolean().optional(),

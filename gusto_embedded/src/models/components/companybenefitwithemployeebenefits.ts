@@ -114,6 +114,10 @@ export type CompanyBenefitWithEmployeeBenefits = {
    */
   version?: string | undefined;
   /**
+   * The UUID of the company.
+   */
+  companyUuid?: string | undefined;
+  /**
    * The UUID of the company benefit.
    */
   uuid: string;
@@ -551,8 +555,9 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   version: z.string().optional(),
+  company_uuid: z.string().optional(),
   uuid: z.string(),
-  benefit_type: z.number().optional(),
+  benefit_type: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
   deletable: z.boolean().optional(),
@@ -563,6 +568,7 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    "company_uuid": "companyUuid",
     "benefit_type": "benefitType",
     "supports_percentage_amounts": "supportsPercentageAmounts",
     "responsible_for_employer_taxes": "responsibleForEmployerTaxes",
@@ -574,6 +580,7 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
 /** @internal */
 export type CompanyBenefitWithEmployeeBenefits$Outbound = {
   version?: string | undefined;
+  company_uuid?: string | undefined;
   uuid: string;
   benefit_type?: number | undefined;
   active: boolean;
@@ -592,8 +599,9 @@ export const CompanyBenefitWithEmployeeBenefits$outboundSchema: z.ZodType<
   CompanyBenefitWithEmployeeBenefits
 > = z.object({
   version: z.string().optional(),
+  companyUuid: z.string().optional(),
   uuid: z.string(),
-  benefitType: z.number().optional(),
+  benefitType: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
   deletable: z.boolean().optional(),
@@ -604,6 +612,7 @@ export const CompanyBenefitWithEmployeeBenefits$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    companyUuid: "company_uuid",
     benefitType: "benefit_type",
     supportsPercentageAmounts: "supports_percentage_amounts",
     responsibleForEmployerTaxes: "responsible_for_employer_taxes",

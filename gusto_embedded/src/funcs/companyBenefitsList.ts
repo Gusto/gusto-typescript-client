@@ -104,6 +104,7 @@ async function $do(
   );
 
   const query = encodeFormQuery({
+    "active": payload.active,
     "enrollment_count": payload.enrollment_count,
   });
 

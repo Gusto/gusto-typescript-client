@@ -34,7 +34,7 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    benefit_type: z.number().optional(),
+    benefit_type: z.number().int().optional(),
     tax_year: z.number(),
     ytd_employee_deduction_amount: z.string().default("0.00"),
     ytd_company_contribution_amount: z.string().default("0.00"),
@@ -62,7 +62,7 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema:
     z.ZodTypeDef,
     PostEmployeeYtdBenefitAmountsFromDifferentCompany
   > = z.object({
-    benefitType: z.number().optional(),
+    benefitType: z.number().int().optional(),
     taxYear: z.number(),
     ytdEmployeeDeductionAmount: z.string().default("0.00"),
     ytdCompanyContributionAmount: z.string().default("0.00"),

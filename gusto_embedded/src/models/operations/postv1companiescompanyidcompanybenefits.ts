@@ -51,7 +51,7 @@ export const PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    benefit_type: z.number().optional(),
+    benefit_type: z.number().int().optional(),
     active: z.boolean().default(true),
     description: z.string(),
     responsible_for_employer_taxes: z.boolean().optional(),
@@ -80,7 +80,7 @@ export const PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdCompanyBenefitsRequestBody
   > = z.object({
-    benefitType: z.number().optional(),
+    benefitType: z.number().int().optional(),
     active: z.boolean().default(true),
     description: z.string(),
     responsibleForEmployerTaxes: z.boolean().optional(),

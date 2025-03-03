@@ -79,8 +79,8 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
   company_id: z.string(),
   terminated: z.boolean().optional(),
   include: z.array(Include$inboundSchema).optional(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   search_term: z.string().optional(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
 }).transform((v) => {
@@ -111,8 +111,8 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
   companyId: z.string(),
   terminated: z.boolean().optional(),
   include: z.array(Include$outboundSchema).optional(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   searchTerm: z.string().optional(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
 }).transform((v) => {

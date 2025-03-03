@@ -55,8 +55,8 @@ export const GetAchTransactionsRequest$inboundSchema: z.ZodType<
   payroll_uuid: z.string().optional(),
   transaction_type: z.string().optional(),
   payment_direction: z.string().optional(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -92,8 +92,8 @@ export const GetAchTransactionsRequest$outboundSchema: z.ZodType<
   payrollUuid: z.string().optional(),
   transactionType: z.string().optional(),
   paymentDirection: z.string().optional(),
-  page: z.number().optional(),
-  per: z.number().optional(),
+  page: z.number().int().optional(),
+  per: z.number().int().optional(),
   xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

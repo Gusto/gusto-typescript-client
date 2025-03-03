@@ -17,6 +17,14 @@ export type CompanyBenefit = {
    */
   version?: string | undefined;
   /**
+   * The number of employees enrolled in the benefit, only returned when enrollment_count query param is set to true.
+   */
+  enrollmentCount?: number | undefined;
+  /**
+   * The UUID of the company.
+   */
+  companyUuid?: string | undefined;
+  /**
    * The UUID of the company benefit.
    */
   uuid: string;
@@ -57,8 +65,10 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   version: z.string().optional(),
+  enrollment_count: z.number().int().optional(),
+  company_uuid: z.string().optional(),
   uuid: z.string(),
-  benefit_type: z.number().optional(),
+  benefit_type: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
   deletable: z.boolean().optional(),
@@ -67,6 +77,8 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
   responsible_for_employee_w2: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "enrollment_count": "enrollmentCount",
+    "company_uuid": "companyUuid",
     "benefit_type": "benefitType",
     "supports_percentage_amounts": "supportsPercentageAmounts",
     "responsible_for_employer_taxes": "responsibleForEmployerTaxes",
@@ -77,6 +89,8 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
 /** @internal */
 export type CompanyBenefit$Outbound = {
   version?: string | undefined;
+  enrollment_count?: number | undefined;
+  company_uuid?: string | undefined;
   uuid: string;
   benefit_type?: number | undefined;
   active: boolean;
@@ -94,8 +108,10 @@ export const CompanyBenefit$outboundSchema: z.ZodType<
   CompanyBenefit
 > = z.object({
   version: z.string().optional(),
+  enrollmentCount: z.number().int().optional(),
+  companyUuid: z.string().optional(),
   uuid: z.string(),
-  benefitType: z.number().optional(),
+  benefitType: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
   deletable: z.boolean().optional(),
@@ -104,6 +120,8 @@ export const CompanyBenefit$outboundSchema: z.ZodType<
   responsibleForEmployeeW2: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
+    enrollmentCount: "enrollment_count",
+    companyUuid: "company_uuid",
     benefitType: "benefit_type",
     supportsPercentageAmounts: "supports_percentage_amounts",
     responsibleForEmployerTaxes: "responsible_for_employer_taxes",

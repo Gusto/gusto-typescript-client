@@ -9,7 +9,7 @@ import { YtdBenefitAmountsFromDifferentCompany } from "@gusto/embedded-api/model
 
 let value: YtdBenefitAmountsFromDifferentCompany = {
   uuid: "b606e65f-a51c-4be3-a1b3-25d807a893d8",
-  benefitType: 9818.65,
+  benefitType: 981865,
   ytdEmployeeDeductionAmount: "<value>",
   ytdCompanyContributionAmount: "<value>",
 };

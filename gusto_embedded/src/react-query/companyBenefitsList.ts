@@ -100,6 +100,7 @@ export function setCompanyBenefitsListData(
   queryKeyBase: [
     companyId: string,
     parameters: {
+      active?: boolean | undefined;
       enrollmentCount?: boolean | undefined;
       xGustoAPIVersion?: components.VersionHeader | undefined;
     },
@@ -117,6 +118,7 @@ export function invalidateCompanyBenefitsList(
     [
       companyId: string,
       parameters: {
+        active?: boolean | undefined;
         enrollmentCount?: boolean | undefined;
         xGustoAPIVersion?: components.VersionHeader | undefined;
       },
@@ -157,6 +159,7 @@ export function buildCompanyBenefitsListQuery(
 } {
   return {
     queryKey: queryKeyCompanyBenefitsList(request.companyId, {
+      active: request.active,
       enrollmentCount: request.enrollmentCount,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
@@ -181,6 +184,7 @@ export function buildCompanyBenefitsListQuery(
 export function queryKeyCompanyBenefitsList(
   companyId: string,
   parameters: {
+    active?: boolean | undefined;
     enrollmentCount?: boolean | undefined;
     xGustoAPIVersion?: components.VersionHeader | undefined;
   },
