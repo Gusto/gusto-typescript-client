@@ -33,7 +33,9 @@ export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$inbound
   > = z.object({
     employee_id: z.string(),
     bank_account_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -47,7 +49,7 @@ export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$Outbound
   {
     employee_id: string;
     bank_account_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -59,7 +61,9 @@ export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboun
   > = z.object({
     employeeId: z.string(),
     bankAccountUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

@@ -27,7 +27,9 @@ export const GetV1ContractorDocumentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   document_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "document_uuid": "documentUuid",
@@ -38,7 +40,7 @@ export const GetV1ContractorDocumentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1ContractorDocumentRequest$Outbound = {
   document_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -48,7 +50,9 @@ export const GetV1ContractorDocumentRequest$outboundSchema: z.ZodType<
   GetV1ContractorDocumentRequest
 > = z.object({
   documentUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     documentUuid: "document_uuid",

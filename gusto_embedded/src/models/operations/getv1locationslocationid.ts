@@ -27,7 +27,9 @@ export const GetV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   location_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "location_id": "locationId",
@@ -38,7 +40,7 @@ export const GetV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1LocationsLocationIdRequest$Outbound = {
   location_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -48,7 +50,9 @@ export const GetV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
   GetV1LocationsLocationIdRequest
 > = z.object({
   locationId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     locationId: "location_id",

@@ -28,7 +28,9 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$inb
     unknown
   > = z.object({
     contractor_payment_group_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "contractor_payment_group_uuid": "contractorPaymentGroupUuid",
@@ -40,7 +42,7 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$inb
 export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$Outbound =
   {
     contractor_payment_group_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -51,7 +53,9 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$out
     PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest
   > = z.object({
     contractorPaymentGroupUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       contractorPaymentGroupUuid: "contractor_payment_group_uuid",

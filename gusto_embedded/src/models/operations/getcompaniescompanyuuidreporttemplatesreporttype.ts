@@ -33,7 +33,9 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSche
   > = z.object({
     company_uuid: z.string(),
     report_type: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -46,7 +48,7 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSche
 export type GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$Outbound = {
   company_uuid: string;
   report_type: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -58,7 +60,9 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSch
   > = z.object({
     companyUuid: z.string(),
     reportType: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

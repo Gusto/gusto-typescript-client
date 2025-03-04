@@ -146,7 +146,9 @@ export const PutV1HomeAddressesHomeAddressUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   home_address_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema
   ),
@@ -161,7 +163,7 @@ export const PutV1HomeAddressesHomeAddressUuidRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutV1HomeAddressesHomeAddressUuidRequest$Outbound = {
   home_address_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1HomeAddressesHomeAddressUuidRequestBody$Outbound;
 };
 
@@ -172,7 +174,9 @@ export const PutV1HomeAddressesHomeAddressUuidRequest$outboundSchema: z.ZodType<
   PutV1HomeAddressesHomeAddressUuidRequest
 > = z.object({
   homeAddressUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PutV1HomeAddressesHomeAddressUuidRequestBody$outboundSchema
   ),

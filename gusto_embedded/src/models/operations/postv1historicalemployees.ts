@@ -31,7 +31,9 @@ export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   "Historical-Employee-Body": components.HistoricalEmployeeBody$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -44,7 +46,7 @@ export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostV1HistoricalEmployeesRequest$Outbound = {
   company_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   "Historical-Employee-Body": components.HistoricalEmployeeBody$Outbound;
 };
 
@@ -55,7 +57,9 @@ export const PostV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
   PostV1HistoricalEmployeesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   historicalEmployeeBody: components.HistoricalEmployeeBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {

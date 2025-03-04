@@ -25,7 +25,9 @@ export const GetTimeOffPoliciesTimeOffPolicyUuidRequest$inboundSchema:
   z.ZodType<GetTimeOffPoliciesTimeOffPolicyUuidRequest, z.ZodTypeDef, unknown> =
     z.object({
       time_off_policy_uuid: z.string(),
-      "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+      "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+        "2024-04-01",
+      ),
     }).transform((v) => {
       return remap$(v, {
         "time_off_policy_uuid": "timeOffPolicyUuid",
@@ -36,7 +38,7 @@ export const GetTimeOffPoliciesTimeOffPolicyUuidRequest$inboundSchema:
 /** @internal */
 export type GetTimeOffPoliciesTimeOffPolicyUuidRequest$Outbound = {
   time_off_policy_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -47,7 +49,9 @@ export const GetTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema:
     GetTimeOffPoliciesTimeOffPolicyUuidRequest
   > = z.object({
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       timeOffPolicyUuid: "time_off_policy_uuid",

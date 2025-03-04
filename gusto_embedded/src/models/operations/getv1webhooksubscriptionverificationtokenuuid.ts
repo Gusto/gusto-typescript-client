@@ -108,7 +108,9 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$inboundSchema:
     unknown
   > = z.object({
     webhook_subscription_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "webhook_subscription_uuid": "webhookSubscriptionUuid",
@@ -119,7 +121,7 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$inboundSchema:
 /** @internal */
 export type GetV1WebhookSubscriptionVerificationTokenUuidRequest$Outbound = {
   webhook_subscription_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -130,7 +132,9 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema
     GetV1WebhookSubscriptionVerificationTokenUuidRequest
   > = z.object({
     webhookSubscriptionUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       webhookSubscriptionUuid: "webhook_subscription_uuid",

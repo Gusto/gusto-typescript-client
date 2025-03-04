@@ -73,7 +73,9 @@ export const GetV1TokenInfoRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "X-Gusto-API-Version": "xGustoAPIVersion",
@@ -82,7 +84,7 @@ export const GetV1TokenInfoRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetV1TokenInfoRequest$Outbound = {
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -91,7 +93,9 @@ export const GetV1TokenInfoRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1TokenInfoRequest
 > = z.object({
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",

@@ -43,7 +43,9 @@ export const GetV1BenefitsCompanyBenefitIdSummaryRequest$inboundSchema:
     start_date: z.string().optional(),
     end_date: z.string().optional(),
     detailed: z.boolean().optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_benefit_id": "companyBenefitId",
@@ -59,7 +61,7 @@ export type GetV1BenefitsCompanyBenefitIdSummaryRequest$Outbound = {
   start_date?: string | undefined;
   end_date?: string | undefined;
   detailed?: boolean | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -73,7 +75,9 @@ export const GetV1BenefitsCompanyBenefitIdSummaryRequest$outboundSchema:
     startDate: z.string().optional(),
     endDate: z.string().optional(),
     detailed: z.boolean().optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyBenefitId: "company_benefit_id",

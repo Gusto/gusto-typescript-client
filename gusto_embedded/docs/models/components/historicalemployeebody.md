@@ -8,7 +8,7 @@ import { HistoricalEmployeeBody } from "@gusto/embedded-api/models/components";
 let value: HistoricalEmployeeBody = {
   firstName: "Kamren",
   lastName: "Hegmann",
-  dateOfBirth: "1950-07-17",
+  dateOfBirth: "1950-07-19",
   ssn: "<value>",
   workAddress: {},
   homeAddress: {

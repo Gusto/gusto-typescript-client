@@ -28,7 +28,9 @@ export const PostV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   "Rehire-Body": components.RehireBody$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -41,7 +43,7 @@ export const PostV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostV1EmployeesEmployeeIdRehireRequest$Outbound = {
   employee_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   "Rehire-Body": components.RehireBody$Outbound;
 };
 
@@ -52,7 +54,9 @@ export const PostV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   PostV1EmployeesEmployeeIdRehireRequest
 > = z.object({
   employeeId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   rehireBody: components.RehireBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {

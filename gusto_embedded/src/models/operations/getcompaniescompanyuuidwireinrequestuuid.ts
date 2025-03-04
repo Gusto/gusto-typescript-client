@@ -28,7 +28,9 @@ export const GetCompaniesCompanyUuidWireInRequestUuidRequest$inboundSchema:
     unknown
   > = z.object({
     company_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -39,7 +41,7 @@ export const GetCompaniesCompanyUuidWireInRequestUuidRequest$inboundSchema:
 /** @internal */
 export type GetCompaniesCompanyUuidWireInRequestUuidRequest$Outbound = {
   company_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -50,7 +52,9 @@ export const GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema:
     GetCompaniesCompanyUuidWireInRequestUuidRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

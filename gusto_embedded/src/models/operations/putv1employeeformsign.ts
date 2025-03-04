@@ -352,7 +352,9 @@ export const PutV1EmployeeFormSignRequest$inboundSchema: z.ZodType<
 > = z.object({
   employee_id: z.string(),
   form_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() => PutV1EmployeeFormSignRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -367,7 +369,7 @@ export const PutV1EmployeeFormSignRequest$inboundSchema: z.ZodType<
 export type PutV1EmployeeFormSignRequest$Outbound = {
   employee_id: string;
   form_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1EmployeeFormSignRequestBody$Outbound;
 };
 
@@ -379,7 +381,9 @@ export const PutV1EmployeeFormSignRequest$outboundSchema: z.ZodType<
 > = z.object({
   employeeId: z.string(),
   formId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() => PutV1EmployeeFormSignRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

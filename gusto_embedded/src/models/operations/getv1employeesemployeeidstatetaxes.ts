@@ -27,7 +27,9 @@ export const GetV1EmployeesEmployeeIdStateTaxesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -38,7 +40,7 @@ export const GetV1EmployeesEmployeeIdStateTaxesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1EmployeesEmployeeIdStateTaxesRequest$Outbound = {
   employee_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -49,7 +51,9 @@ export const GetV1EmployeesEmployeeIdStateTaxesRequest$outboundSchema:
     GetV1EmployeesEmployeeIdStateTaxesRequest
   > = z.object({
     employeeUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       employeeUuid: "employee_uuid",

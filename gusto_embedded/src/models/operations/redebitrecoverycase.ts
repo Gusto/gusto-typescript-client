@@ -27,7 +27,9 @@ export const RedebitRecoveryCaseRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   recovery_case_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "recovery_case_uuid": "recoveryCaseUuid",
@@ -38,7 +40,7 @@ export const RedebitRecoveryCaseRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type RedebitRecoveryCaseRequest$Outbound = {
   recovery_case_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -48,7 +50,9 @@ export const RedebitRecoveryCaseRequest$outboundSchema: z.ZodType<
   RedebitRecoveryCaseRequest
 > = z.object({
   recoveryCaseUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     recoveryCaseUuid: "recovery_case_uuid",

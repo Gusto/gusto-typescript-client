@@ -29,7 +29,9 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboun
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     "Pay-Schedule-Assignment-Body":
       components.PayScheduleAssignmentBody$inboundSchema,
   }).transform((v) => {
@@ -44,7 +46,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboun
 export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$Outbound =
   {
     company_id: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
     "Pay-Schedule-Assignment-Body":
       components.PayScheduleAssignmentBody$Outbound;
   };
@@ -57,7 +59,9 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outbou
     PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     payScheduleAssignmentBody:
       components.PayScheduleAssignmentBody$outboundSchema,
   }).transform((v) => {

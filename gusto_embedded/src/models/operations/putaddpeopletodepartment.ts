@@ -216,7 +216,9 @@ export const PutAddPeopleToDepartmentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   department_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -229,7 +231,7 @@ export const PutAddPeopleToDepartmentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutAddPeopleToDepartmentRequest$Outbound = {
   department_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutAddPeopleToDepartmentRequestBody$Outbound;
 };
 
@@ -240,7 +242,9 @@ export const PutAddPeopleToDepartmentRequest$outboundSchema: z.ZodType<
   PutAddPeopleToDepartmentRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

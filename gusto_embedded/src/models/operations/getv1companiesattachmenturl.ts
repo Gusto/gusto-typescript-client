@@ -42,7 +42,9 @@ export const GetV1CompaniesAttachmentUrlRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_id: z.string(),
   company_attachment_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -55,7 +57,7 @@ export const GetV1CompaniesAttachmentUrlRequest$inboundSchema: z.ZodType<
 export type GetV1CompaniesAttachmentUrlRequest$Outbound = {
   company_id: string;
   company_attachment_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -66,7 +68,9 @@ export const GetV1CompaniesAttachmentUrlRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyId: z.string(),
   companyAttachmentUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",

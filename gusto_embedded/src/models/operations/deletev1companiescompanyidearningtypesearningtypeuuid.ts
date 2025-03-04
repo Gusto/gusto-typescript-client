@@ -33,7 +33,9 @@ export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboun
   > = z.object({
     company_id: z.string(),
     earning_type_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -47,7 +49,7 @@ export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outboun
   {
     company_id: string;
     earning_type_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -59,7 +61,9 @@ export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outbou
   > = z.object({
     companyId: z.string(),
     earningTypeUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

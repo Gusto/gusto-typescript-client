@@ -245,7 +245,9 @@ export const PostV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   job_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PostV1CompensationsCompensationIdRequestBody$inboundSchema
   ),
@@ -260,7 +262,7 @@ export const PostV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostV1CompensationsCompensationIdRequest$Outbound = {
   job_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PostV1CompensationsCompensationIdRequestBody$Outbound;
 };
 
@@ -271,7 +273,9 @@ export const PostV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<
   PostV1CompensationsCompensationIdRequest
 > = z.object({
   jobId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PostV1CompensationsCompensationIdRequestBody$outboundSchema
   ),

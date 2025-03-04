@@ -259,7 +259,9 @@ export const PutRemovePeopleFromDepartmentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   department_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PutRemovePeopleFromDepartmentRequestBody$inboundSchema
   ),
@@ -274,7 +276,7 @@ export const PutRemovePeopleFromDepartmentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutRemovePeopleFromDepartmentRequest$Outbound = {
   department_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutRemovePeopleFromDepartmentRequestBody$Outbound;
 };
 
@@ -285,7 +287,9 @@ export const PutRemovePeopleFromDepartmentRequest$outboundSchema: z.ZodType<
   PutRemovePeopleFromDepartmentRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PutRemovePeopleFromDepartmentRequestBody$outboundSchema
   ),

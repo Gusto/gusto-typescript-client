@@ -191,7 +191,9 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inbound
     unknown
   > = z.object({
     time_off_policy_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$inboundSchema
     ),
@@ -207,7 +209,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inbound
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$Outbound =
   {
     time_off_policy_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
     RequestBody:
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound;
   };
@@ -220,7 +222,9 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$outboun
     PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest
   > = z.object({
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$outboundSchema
     ),

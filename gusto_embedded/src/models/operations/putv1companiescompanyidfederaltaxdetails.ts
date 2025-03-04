@@ -244,7 +244,9 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$inboundSchema
     ),
@@ -259,7 +261,7 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema:
 /** @internal */
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest$Outbound = {
   company_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound;
 };
 
@@ -271,7 +273,9 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema:
     PutV1CompaniesCompanyIdFederalTaxDetailsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema
     ),

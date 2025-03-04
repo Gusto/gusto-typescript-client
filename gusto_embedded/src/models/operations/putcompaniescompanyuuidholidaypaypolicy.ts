@@ -1127,7 +1127,9 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema:
     unknown
   > = z.object({
     company_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$inboundSchema
     ),
@@ -1142,7 +1144,7 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema:
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound = {
   company_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$Outbound;
 };
 
@@ -1154,7 +1156,9 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema:
     PutCompaniesCompanyUuidHolidayPayPolicyRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$outboundSchema
     ),

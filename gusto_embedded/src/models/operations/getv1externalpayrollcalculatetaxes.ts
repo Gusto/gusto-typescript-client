@@ -32,7 +32,9 @@ export const GetV1ExternalPayrollCalculateTaxesRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   external_payroll_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -45,7 +47,7 @@ export const GetV1ExternalPayrollCalculateTaxesRequest$inboundSchema: z.ZodType<
 export type GetV1ExternalPayrollCalculateTaxesRequest$Outbound = {
   company_uuid: string;
   external_payroll_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -57,7 +59,9 @@ export const GetV1ExternalPayrollCalculateTaxesRequest$outboundSchema:
   > = z.object({
     companyUuid: z.string(),
     externalPayrollId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

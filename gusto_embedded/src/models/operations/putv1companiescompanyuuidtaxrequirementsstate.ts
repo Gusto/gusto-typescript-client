@@ -261,7 +261,9 @@ export const PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema:
   > = z.object({
     company_uuid: z.string(),
     state: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$inboundSchema
     ),
@@ -277,7 +279,7 @@ export const PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema:
 export type PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$Outbound = {
   company_uuid: string;
   state: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody:
     PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$Outbound;
 };
@@ -291,7 +293,9 @@ export const PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
   > = z.object({
     companyUuid: z.string(),
     state: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyUuidTaxRequirementsStateRequestBody$outboundSchema
     ),

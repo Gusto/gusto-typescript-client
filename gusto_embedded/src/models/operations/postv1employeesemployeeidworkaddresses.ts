@@ -123,7 +123,9 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema
     ),
@@ -138,7 +140,7 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema:
 /** @internal */
 export type PostV1EmployeesEmployeeIdWorkAddressesRequest$Outbound = {
   employee_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PostV1EmployeesEmployeeIdWorkAddressesRequestBody$Outbound;
 };
 
@@ -150,7 +152,9 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema:
     PostV1EmployeesEmployeeIdWorkAddressesRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdWorkAddressesRequestBody$outboundSchema
     ),

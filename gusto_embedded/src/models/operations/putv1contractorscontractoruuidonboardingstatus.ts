@@ -148,7 +148,9 @@ export const PutV1ContractorsContractorUuidOnboardingStatusRequest$inboundSchema
     unknown
   > = z.object({
     contractor_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1ContractorsContractorUuidOnboardingStatusRequestBody$inboundSchema
     ),
@@ -163,7 +165,7 @@ export const PutV1ContractorsContractorUuidOnboardingStatusRequest$inboundSchema
 /** @internal */
 export type PutV1ContractorsContractorUuidOnboardingStatusRequest$Outbound = {
   contractor_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody:
     PutV1ContractorsContractorUuidOnboardingStatusRequestBody$Outbound;
 };
@@ -176,7 +178,9 @@ export const PutV1ContractorsContractorUuidOnboardingStatusRequest$outboundSchem
     PutV1ContractorsContractorUuidOnboardingStatusRequest
   > = z.object({
     contractorUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1ContractorsContractorUuidOnboardingStatusRequestBody$outboundSchema
     ),

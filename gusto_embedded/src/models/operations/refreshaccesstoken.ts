@@ -130,7 +130,9 @@ export const RefreshAccessTokenRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() => RefreshAccessTokenRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -141,7 +143,7 @@ export const RefreshAccessTokenRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RefreshAccessTokenRequest$Outbound = {
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: RefreshAccessTokenRequestBody$Outbound;
 };
 
@@ -151,7 +153,9 @@ export const RefreshAccessTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RefreshAccessTokenRequest
 > = z.object({
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() => RefreshAccessTokenRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

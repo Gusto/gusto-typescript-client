@@ -28,7 +28,9 @@ export const GetV1EmployeesEmployeeIdPaymentMethodRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -39,7 +41,7 @@ export const GetV1EmployeesEmployeeIdPaymentMethodRequest$inboundSchema:
 /** @internal */
 export type GetV1EmployeesEmployeeIdPaymentMethodRequest$Outbound = {
   employee_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -50,7 +52,9 @@ export const GetV1EmployeesEmployeeIdPaymentMethodRequest$outboundSchema:
     GetV1EmployeesEmployeeIdPaymentMethodRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

@@ -33,7 +33,9 @@ export const GetV1CompanyBenefitsCompanyBenefitIdRequest$inboundSchema:
   > = z.object({
     company_benefit_id: z.string(),
     with_employee_benefits: z.boolean().optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_benefit_id": "companyBenefitId",
@@ -46,7 +48,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdRequest$inboundSchema:
 export type GetV1CompanyBenefitsCompanyBenefitIdRequest$Outbound = {
   company_benefit_id: string;
   with_employee_benefits?: boolean | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -58,7 +60,9 @@ export const GetV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
   > = z.object({
     companyBenefitId: z.string(),
     withEmployeeBenefits: z.boolean().optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyBenefitId: "company_benefit_id",

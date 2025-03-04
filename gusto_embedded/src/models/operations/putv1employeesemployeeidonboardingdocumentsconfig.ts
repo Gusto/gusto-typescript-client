@@ -111,7 +111,9 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSch
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema
     ),
@@ -127,7 +129,7 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSch
 export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$Outbound =
   {
     employee_id: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
     RequestBody:
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$Outbound;
   };
@@ -140,7 +142,9 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSc
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outboundSchema
     ),

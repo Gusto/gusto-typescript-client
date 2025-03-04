@@ -118,7 +118,9 @@ export const PostPayrollsGrossUpPayrollUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   payroll_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PostPayrollsGrossUpPayrollUuidRequestBody$inboundSchema
   ),
@@ -133,7 +135,7 @@ export const PostPayrollsGrossUpPayrollUuidRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostPayrollsGrossUpPayrollUuidRequest$Outbound = {
   payroll_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PostPayrollsGrossUpPayrollUuidRequestBody$Outbound;
 };
 
@@ -144,7 +146,9 @@ export const PostPayrollsGrossUpPayrollUuidRequest$outboundSchema: z.ZodType<
   PostPayrollsGrossUpPayrollUuidRequest
 > = z.object({
   payrollUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PostPayrollsGrossUpPayrollUuidRequestBody$outboundSchema
   ),

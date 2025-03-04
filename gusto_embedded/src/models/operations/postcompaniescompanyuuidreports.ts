@@ -518,7 +518,9 @@ export const PostCompaniesCompanyUuidReportsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PostCompaniesCompanyUuidReportsRequestBody$inboundSchema
   ),
@@ -533,7 +535,7 @@ export const PostCompaniesCompanyUuidReportsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostCompaniesCompanyUuidReportsRequest$Outbound = {
   company_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PostCompaniesCompanyUuidReportsRequestBody$Outbound;
 };
 
@@ -544,7 +546,9 @@ export const PostCompaniesCompanyUuidReportsRequest$outboundSchema: z.ZodType<
   PostCompaniesCompanyUuidReportsRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PostCompaniesCompanyUuidReportsRequestBody$outboundSchema
   ),

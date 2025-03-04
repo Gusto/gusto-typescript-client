@@ -27,7 +27,9 @@ export const GetV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   compensation_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "compensation_id": "compensationId",
@@ -38,7 +40,7 @@ export const GetV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1CompensationsCompensationIdRequest$Outbound = {
   compensation_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -48,7 +50,9 @@ export const GetV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<
   GetV1CompensationsCompensationIdRequest
 > = z.object({
   compensationId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     compensationId: "compensation_id",
