@@ -110,7 +110,9 @@ export const GetInvoicesInvoicePeriodRequest$inboundSchema: z.ZodType<
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   company_uuids: z.string().optional(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "invoice_period": "invoicePeriod",
@@ -125,7 +127,7 @@ export type GetInvoicesInvoicePeriodRequest$Outbound = {
   page?: number | undefined;
   per?: number | undefined;
   company_uuids?: string | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -138,7 +140,9 @@ export const GetInvoicesInvoicePeriodRequest$outboundSchema: z.ZodType<
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   companyUuids: z.string().optional(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     invoicePeriod: "invoice_period",

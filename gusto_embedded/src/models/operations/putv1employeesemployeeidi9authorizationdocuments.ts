@@ -204,7 +204,9 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$inboundSche
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$inboundSchema
     ),
@@ -219,7 +221,7 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$inboundSche
 /** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$Outbound = {
   employee_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody:
     PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$Outbound;
 };
@@ -232,7 +234,9 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$outboundSch
     PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody$outboundSchema
     ),

@@ -152,7 +152,9 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$inbound
   > = z.object({
     payroll_id: z.string(),
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$inboundSchema
     ),
@@ -170,7 +172,7 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$Outbound
   {
     payroll_id: string;
     employee_id: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
     RequestBody:
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$Outbound;
   };
@@ -184,7 +186,9 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$outboun
   > = z.object({
     payrollId: z.string(),
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$outboundSchema
     ),

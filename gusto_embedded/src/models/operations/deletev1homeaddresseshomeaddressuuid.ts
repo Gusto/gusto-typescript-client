@@ -28,7 +28,9 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema:
     unknown
   > = z.object({
     home_address_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "home_address_uuid": "homeAddressUuid",
@@ -39,7 +41,7 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema:
 /** @internal */
 export type DeleteV1HomeAddressesHomeAddressUuidRequest$Outbound = {
   home_address_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -50,7 +52,9 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema:
     DeleteV1HomeAddressesHomeAddressUuidRequest
   > = z.object({
     homeAddressUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       homeAddressUuid: "home_address_uuid",

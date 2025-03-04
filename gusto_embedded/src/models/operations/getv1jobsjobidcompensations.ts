@@ -89,7 +89,9 @@ export const GetV1JobsJobIdCompensationsRequest$inboundSchema: z.ZodType<
   per: z.number().int().optional(),
   include: GetV1JobsJobIdCompensationsQueryParamInclude$inboundSchema
     .optional(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "job_id": "jobId",
@@ -103,7 +105,7 @@ export type GetV1JobsJobIdCompensationsRequest$Outbound = {
   page?: number | undefined;
   per?: number | undefined;
   include?: string | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -117,7 +119,9 @@ export const GetV1JobsJobIdCompensationsRequest$outboundSchema: z.ZodType<
   per: z.number().int().optional(),
   include: GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema
     .optional(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     jobId: "job_id",

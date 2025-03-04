@@ -162,7 +162,9 @@ export const PutV1EmployeesEmployeeIdBankAccountsRequest$inboundSchema:
   > = z.object({
     employee_id: z.string(),
     bank_account_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdBankAccountsRequestBody$inboundSchema
     ),
@@ -179,7 +181,7 @@ export const PutV1EmployeesEmployeeIdBankAccountsRequest$inboundSchema:
 export type PutV1EmployeesEmployeeIdBankAccountsRequest$Outbound = {
   employee_id: string;
   bank_account_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1EmployeesEmployeeIdBankAccountsRequestBody$Outbound;
 };
 
@@ -192,7 +194,9 @@ export const PutV1EmployeesEmployeeIdBankAccountsRequest$outboundSchema:
   > = z.object({
     employeeId: z.string(),
     bankAccountUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdBankAccountsRequestBody$outboundSchema
     ),

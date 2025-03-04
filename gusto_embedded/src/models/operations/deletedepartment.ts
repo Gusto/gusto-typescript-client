@@ -27,7 +27,9 @@ export const DeleteDepartmentRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   department_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "department_uuid": "departmentUuid",
@@ -38,7 +40,7 @@ export const DeleteDepartmentRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type DeleteDepartmentRequest$Outbound = {
   department_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -48,7 +50,9 @@ export const DeleteDepartmentRequest$outboundSchema: z.ZodType<
   DeleteDepartmentRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     departmentUuid: "department_uuid",

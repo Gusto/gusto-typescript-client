@@ -28,7 +28,9 @@ export const GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest$inboundS
     unknown
   > = z.object({
     contractor_payment_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "contractor_payment_uuid": "contractorPaymentUuid",
@@ -40,7 +42,7 @@ export const GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest$inboundS
 export type GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest$Outbound =
   {
     contractor_payment_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -51,7 +53,9 @@ export const GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest$outbound
     GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest
   > = z.object({
     contractorPaymentUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       contractorPaymentUuid: "contractor_payment_uuid",

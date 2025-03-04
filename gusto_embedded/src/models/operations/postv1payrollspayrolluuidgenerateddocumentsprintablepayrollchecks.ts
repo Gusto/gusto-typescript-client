@@ -159,7 +159,9 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     unknown
   > = z.object({
     payroll_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$inboundSchema
     ),
@@ -175,7 +177,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
 export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest$Outbound =
   {
     payroll_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
     RequestBody:
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$Outbound;
   };
@@ -188,7 +190,9 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest
   > = z.object({
     payrollUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$outboundSchema
     ),

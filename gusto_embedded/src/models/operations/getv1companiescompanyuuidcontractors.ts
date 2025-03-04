@@ -43,7 +43,9 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     search_term: z.string().optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -58,7 +60,7 @@ export type GetV1CompaniesCompanyUuidContractorsRequest$Outbound = {
   page?: number | undefined;
   per?: number | undefined;
   search_term?: string | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -72,7 +74,9 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     searchTerm: z.string().optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

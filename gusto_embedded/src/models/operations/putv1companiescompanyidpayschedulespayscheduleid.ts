@@ -222,7 +222,9 @@ export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSche
   > = z.object({
     company_id: z.string(),
     pay_schedule_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$inboundSchema
     ),
@@ -239,7 +241,7 @@ export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSche
 export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$Outbound = {
   company_id: string;
   pay_schedule_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody:
     PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$Outbound;
 };
@@ -253,7 +255,9 @@ export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSch
   > = z.object({
     companyId: z.string(),
     payScheduleId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$outboundSchema
     ),

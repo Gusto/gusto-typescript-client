@@ -33,7 +33,9 @@ export const GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$in
   > = z.object({
     company_id: z.string(),
     contractor_payment_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -47,7 +49,7 @@ export type GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$Out
   {
     company_id: string;
     contractor_payment_id: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -59,7 +61,9 @@ export const GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$ou
   > = z.object({
     companyId: z.string(),
     contractorPaymentId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

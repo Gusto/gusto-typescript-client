@@ -28,7 +28,9 @@ export const DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema:
     unknown
   > = z.object({
     employee_benefit_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "employee_benefit_id": "employeeBenefitId",
@@ -39,7 +41,7 @@ export const DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema:
 /** @internal */
 export type DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$Outbound = {
   employee_benefit_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -50,7 +52,9 @@ export const DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema:
     DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest
   > = z.object({
     employeeBenefitId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       employeeBenefitId: "employee_benefit_id",

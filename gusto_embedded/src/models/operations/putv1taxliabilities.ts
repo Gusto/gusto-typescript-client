@@ -185,7 +185,9 @@ export const PutV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -198,7 +200,7 @@ export const PutV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutV1TaxLiabilitiesRequest$Outbound = {
   company_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1TaxLiabilitiesRequestBody$Outbound;
 };
 
@@ -209,7 +211,9 @@ export const PutV1TaxLiabilitiesRequest$outboundSchema: z.ZodType<
   PutV1TaxLiabilitiesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

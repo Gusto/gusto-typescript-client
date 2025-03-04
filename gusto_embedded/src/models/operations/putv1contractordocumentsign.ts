@@ -178,7 +178,9 @@ export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   document_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$inboundSchema
   ),
@@ -193,7 +195,7 @@ export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutV1ContractorDocumentSignRequest$Outbound = {
   document_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1ContractorDocumentSignRequestBody$Outbound;
 };
 
@@ -204,7 +206,9 @@ export const PutV1ContractorDocumentSignRequest$outboundSchema: z.ZodType<
   PutV1ContractorDocumentSignRequest
 > = z.object({
   documentUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$outboundSchema
   ),

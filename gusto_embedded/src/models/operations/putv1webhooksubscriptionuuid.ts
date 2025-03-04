@@ -225,7 +225,9 @@ export const PutV1WebhookSubscriptionUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   webhook_subscription_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PutV1WebhookSubscriptionUuidRequestBody$inboundSchema
   ),
@@ -240,7 +242,7 @@ export const PutV1WebhookSubscriptionUuidRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutV1WebhookSubscriptionUuidRequest$Outbound = {
   webhook_subscription_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1WebhookSubscriptionUuidRequestBody$Outbound;
 };
 
@@ -251,7 +253,9 @@ export const PutV1WebhookSubscriptionUuidRequest$outboundSchema: z.ZodType<
   PutV1WebhookSubscriptionUuidRequest
 > = z.object({
   webhookSubscriptionUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PutV1WebhookSubscriptionUuidRequestBody$outboundSchema
   ),

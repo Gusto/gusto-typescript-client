@@ -223,7 +223,9 @@ export const PostV1CompanySignatoriesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() => PostV1CompanySignatoriesRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -236,7 +238,7 @@ export const PostV1CompanySignatoriesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostV1CompanySignatoriesRequest$Outbound = {
   company_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PostV1CompanySignatoriesRequestBody$Outbound;
 };
 
@@ -247,7 +249,9 @@ export const PostV1CompanySignatoriesRequest$outboundSchema: z.ZodType<
   PostV1CompanySignatoriesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() => PostV1CompanySignatoriesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

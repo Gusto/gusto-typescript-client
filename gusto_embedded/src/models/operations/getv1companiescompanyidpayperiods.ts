@@ -39,7 +39,9 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$inboundSchema: z.ZodType<
   start_date: z.string().optional(),
   end_date: z.string().optional(),
   payroll_types: z.string().optional(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -56,7 +58,7 @@ export type GetV1CompaniesCompanyIdPayPeriodsRequest$Outbound = {
   start_date?: string | undefined;
   end_date?: string | undefined;
   payroll_types?: string | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -69,7 +71,9 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$outboundSchema: z.ZodType<
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   payrollTypes: z.string().optional(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",

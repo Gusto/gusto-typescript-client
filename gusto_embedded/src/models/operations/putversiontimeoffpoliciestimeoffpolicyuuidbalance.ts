@@ -195,7 +195,9 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSch
     unknown
   > = z.object({
     time_off_policy_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema
     ),
@@ -211,7 +213,7 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSch
 export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$Outbound =
   {
     time_off_policy_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
     RequestBody:
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$Outbound;
   };
@@ -224,7 +226,9 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$outboundSc
     PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest
   > = z.object({
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$outboundSchema
     ),

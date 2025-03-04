@@ -276,7 +276,9 @@ export const PutV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   compensation_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PutV1CompensationsCompensationIdRequestBody$inboundSchema
   ),
@@ -291,7 +293,7 @@ export const PutV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutV1CompensationsCompensationIdRequest$Outbound = {
   compensation_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1CompensationsCompensationIdRequestBody$Outbound;
 };
 
@@ -302,7 +304,9 @@ export const PutV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<
   PutV1CompensationsCompensationIdRequest
 > = z.object({
   compensationId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
   requestBody: z.lazy(() =>
     PutV1CompensationsCompensationIdRequestBody$outboundSchema
   ),

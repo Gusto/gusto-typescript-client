@@ -108,7 +108,9 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSc
   > = z.object({
     company_id: z.string(),
     earning_type_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema
     ),
@@ -126,7 +128,7 @@ export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outbound =
   {
     company_id: string;
     earning_type_uuid: string;
-    "X-Gusto-API-Version"?: string | undefined;
+    "X-Gusto-API-Version": string;
     RequestBody:
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$Outbound;
   };
@@ -140,7 +142,9 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundS
   > = z.object({
     companyId: z.string(),
     earningTypeUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outboundSchema
     ),

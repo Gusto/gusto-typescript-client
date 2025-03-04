@@ -28,7 +28,9 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdRequest$inboundSchema:
     unknown
   > = z.object({
     company_benefit_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_benefit_id": "companyBenefitId",
@@ -39,7 +41,7 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdRequest$inboundSchema:
 /** @internal */
 export type DeleteV1CompanyBenefitsCompanyBenefitIdRequest$Outbound = {
   company_benefit_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -50,7 +52,9 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
     DeleteV1CompanyBenefitsCompanyBenefitIdRequest
   > = z.object({
     companyBenefitId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyBenefitId: "company_benefit_id",

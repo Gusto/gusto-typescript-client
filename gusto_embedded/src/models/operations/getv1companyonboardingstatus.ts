@@ -32,7 +32,9 @@ export const GetV1CompanyOnboardingStatusRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   additional_steps: z.string().optional(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -45,7 +47,7 @@ export const GetV1CompanyOnboardingStatusRequest$inboundSchema: z.ZodType<
 export type GetV1CompanyOnboardingStatusRequest$Outbound = {
   company_uuid: string;
   additional_steps?: string | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -56,7 +58,9 @@ export const GetV1CompanyOnboardingStatusRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   additionalSteps: z.string().optional(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+    "2024-04-01",
+  ),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

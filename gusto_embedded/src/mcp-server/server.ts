@@ -247,6 +247,7 @@ import { tool$wireInRequestsSubmit } from "./tools/wireInRequestsSubmit.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
+  allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
   companyAccessAuth?: SDKOptions["companyAccessAuth"] | undefined;
@@ -254,7 +255,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "GustoEmbedded",
-    version: "0.2.1",
+    version: "0.3.0",
   });
 
   const client = new GustoEmbeddedCore({
@@ -263,7 +264,14 @@ export function createMCPServer(deps: {
     server: deps.server,
   });
   const scopes = new Set(deps.scopes ?? mcpScopes);
-  const tool = createRegisterTool(deps.logger, server, client, scopes);
+  const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
+  const tool = createRegisterTool(
+    deps.logger,
+    server,
+    client,
+    scopes,
+    allowedTools,
+  );
 
   tool(tool$introspectionGetInfo);
   tool(tool$introspectionRefreshToken);

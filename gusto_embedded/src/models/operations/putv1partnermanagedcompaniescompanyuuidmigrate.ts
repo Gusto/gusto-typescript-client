@@ -153,7 +153,9 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema
     unknown
   > = z.object({
     company_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema
     ),
@@ -168,7 +170,7 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema
 /** @internal */
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$Outbound = {
   company_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody:
     PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound;
 };
@@ -181,7 +183,9 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchem
     PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema
     ),

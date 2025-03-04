@@ -279,7 +279,9 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchem
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema
     ),
@@ -294,7 +296,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchem
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$Outbound = {
   company_id: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody:
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound;
 };
@@ -307,7 +309,9 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSche
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outboundSchema
     ),

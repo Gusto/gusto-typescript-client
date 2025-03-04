@@ -281,7 +281,9 @@ export const PutV1EmployeesEmployeeIdStateTaxesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+    "2024-04-01",
+  ),
   RequestBody: z.lazy(() =>
     PutV1EmployeesEmployeeIdStateTaxesRequestBody$inboundSchema
   ),
@@ -296,7 +298,7 @@ export const PutV1EmployeesEmployeeIdStateTaxesRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutV1EmployeesEmployeeIdStateTaxesRequest$Outbound = {
   employee_uuid: string;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   RequestBody: PutV1EmployeesEmployeeIdStateTaxesRequestBody$Outbound;
 };
 
@@ -308,7 +310,9 @@ export const PutV1EmployeesEmployeeIdStateTaxesRequest$outboundSchema:
     PutV1EmployeesEmployeeIdStateTaxesRequest
   > = z.object({
     employeeUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdStateTaxesRequestBody$outboundSchema
     ),

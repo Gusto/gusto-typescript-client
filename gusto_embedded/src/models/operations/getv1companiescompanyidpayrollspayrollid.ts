@@ -77,7 +77,9 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$inboundSchema:
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$inboundSchema,
     ).optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.optional(),
+    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -91,7 +93,7 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$Outbound = {
   company_id: string;
   payroll_id: string;
   include?: Array<string> | undefined;
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -106,7 +108,9 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$outboundSchema:
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$outboundSchema,
     ).optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.optional(),
+    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
+      "2024-04-01",
+    ),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
