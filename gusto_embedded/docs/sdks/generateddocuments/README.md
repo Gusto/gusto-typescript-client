@@ -107,7 +107,7 @@ import {
 
 ### Response
 
-**Promise\<[components.GeneratedDocument](../../models/components/generateddocument.md)\>**
+**Promise\<[operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse](../../models/operations/getv1generateddocumentsdocumenttyperequestuuidresponse.md)\>**
 
 ### Errors
 

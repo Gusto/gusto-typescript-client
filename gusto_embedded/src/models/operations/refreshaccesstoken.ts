@@ -40,6 +40,25 @@ export type RefreshAccessTokenRequest = {
   requestBody: RefreshAccessTokenRequestBody;
 };
 
+export type RefreshAccessTokenResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  authentication?: components.Authentication | undefined;
+};
+
 /** @internal */
 export const RefreshAccessTokenRequestBody$inboundSchema: z.ZodType<
   RefreshAccessTokenRequestBody,
@@ -192,5 +211,84 @@ export function refreshAccessTokenRequestFromJSON(
     jsonString,
     (x) => RefreshAccessTokenRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RefreshAccessTokenRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const RefreshAccessTokenResponse$inboundSchema: z.ZodType<
+  RefreshAccessTokenResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Authentication: components.Authentication$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Authentication": "authentication",
+  });
+});
+
+/** @internal */
+export type RefreshAccessTokenResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Authentication?: components.Authentication$Outbound | undefined;
+};
+
+/** @internal */
+export const RefreshAccessTokenResponse$outboundSchema: z.ZodType<
+  RefreshAccessTokenResponse$Outbound,
+  z.ZodTypeDef,
+  RefreshAccessTokenResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  authentication: components.Authentication$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    authentication: "Authentication",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RefreshAccessTokenResponse$ {
+  /** @deprecated use `RefreshAccessTokenResponse$inboundSchema` instead. */
+  export const inboundSchema = RefreshAccessTokenResponse$inboundSchema;
+  /** @deprecated use `RefreshAccessTokenResponse$outboundSchema` instead. */
+  export const outboundSchema = RefreshAccessTokenResponse$outboundSchema;
+  /** @deprecated use `RefreshAccessTokenResponse$Outbound` instead. */
+  export type Outbound = RefreshAccessTokenResponse$Outbound;
+}
+
+export function refreshAccessTokenResponseToJSON(
+  refreshAccessTokenResponse: RefreshAccessTokenResponse,
+): string {
+  return JSON.stringify(
+    RefreshAccessTokenResponse$outboundSchema.parse(refreshAccessTokenResponse),
+  );
+}
+
+export function refreshAccessTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<RefreshAccessTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RefreshAccessTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RefreshAccessTokenResponse' from JSON`,
   );
 }

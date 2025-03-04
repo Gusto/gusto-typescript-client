@@ -21,7 +21,7 @@ export type EmployeesDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeesDeleteMutationData = void;
+export type EmployeesDeleteMutationData = operations.DeleteV1EmployeeResponse;
 
 /**
  * Delete an onboarding employee

@@ -4,7 +4,6 @@
 
 import { eventsGet } from "../funcs/eventsGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -25,7 +24,7 @@ export class Events extends ClientSDK {
     security: operations.GetEventsSecurity,
     request: operations.GetEventsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Event>> {
+  ): Promise<operations.GetEventsResponse> {
     return unwrapAsync(eventsGet(
       this,
       security,

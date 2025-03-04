@@ -5,7 +5,6 @@
 import { industrySelectionGet } from "../funcs/industrySelectionGet.js";
 import { industrySelectionUpdate } from "../funcs/industrySelectionUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -21,7 +20,7 @@ export class IndustrySelection extends ClientSDK {
   async get(
     request: operations.GetV1CompanyIndustryRequest,
     options?: RequestOptions,
-  ): Promise<components.Industry> {
+  ): Promise<operations.GetV1CompanyIndustryResponse> {
     return unwrapAsync(industrySelectionGet(
       this,
       request,
@@ -40,7 +39,7 @@ export class IndustrySelection extends ClientSDK {
   async update(
     request: operations.PutV1CompanyIndustryRequest,
     options?: RequestOptions,
-  ): Promise<components.Industry> {
+  ): Promise<operations.PutV1CompanyIndustryResponse> {
     return unwrapAsync(industrySelectionUpdate(
       this,
       request,

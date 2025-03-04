@@ -44,6 +44,25 @@ export type GetAchTransactionsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetAchTransactionsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  achTransactionList?: Array<components.AchTransaction> | undefined;
+};
+
 /** @internal */
 export const GetAchTransactionsRequest$inboundSchema: z.ZodType<
   GetAchTransactionsRequest,
@@ -138,5 +157,88 @@ export function getAchTransactionsRequestFromJSON(
     jsonString,
     (x) => GetAchTransactionsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAchTransactionsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAchTransactionsResponse$inboundSchema: z.ZodType<
+  GetAchTransactionsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Ach-Transaction-List": z.array(components.AchTransaction$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Ach-Transaction-List": "achTransactionList",
+  });
+});
+
+/** @internal */
+export type GetAchTransactionsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Ach-Transaction-List"?:
+    | Array<components.AchTransaction$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetAchTransactionsResponse$outboundSchema: z.ZodType<
+  GetAchTransactionsResponse$Outbound,
+  z.ZodTypeDef,
+  GetAchTransactionsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  achTransactionList: z.array(components.AchTransaction$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    achTransactionList: "Ach-Transaction-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAchTransactionsResponse$ {
+  /** @deprecated use `GetAchTransactionsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetAchTransactionsResponse$inboundSchema;
+  /** @deprecated use `GetAchTransactionsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetAchTransactionsResponse$outboundSchema;
+  /** @deprecated use `GetAchTransactionsResponse$Outbound` instead. */
+  export type Outbound = GetAchTransactionsResponse$Outbound;
+}
+
+export function getAchTransactionsResponseToJSON(
+  getAchTransactionsResponse: GetAchTransactionsResponse,
+): string {
+  return JSON.stringify(
+    GetAchTransactionsResponse$outboundSchema.parse(getAchTransactionsResponse),
+  );
+}
+
+export function getAchTransactionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAchTransactionsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAchTransactionsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAchTransactionsResponse' from JSON`,
   );
 }

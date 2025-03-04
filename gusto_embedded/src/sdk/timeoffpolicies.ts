@@ -12,7 +12,6 @@ import { timeOffPoliciesRemoveEmployees } from "../funcs/timeOffPoliciesRemoveEm
 import { timeOffPoliciesUpdate } from "../funcs/timeOffPoliciesUpdate.js";
 import { timeOffPoliciesUpdateBalance } from "../funcs/timeOffPoliciesUpdateBalance.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -37,7 +36,9 @@ export class TimeOffPolicies extends ClientSDK {
     request:
       operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.AccruingTimeOffHour>> {
+  ): Promise<
+    operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse
+  > {
     return unwrapAsync(timeOffPoliciesCalculateAccruingTimeOffHours(
       this,
       request,
@@ -56,7 +57,7 @@ export class TimeOffPolicies extends ClientSDK {
   async get(
     request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffPolicy> {
+  ): Promise<operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse> {
     return unwrapAsync(timeOffPoliciesGet(
       this,
       request,
@@ -75,7 +76,7 @@ export class TimeOffPolicies extends ClientSDK {
   async update(
     request: operations.PutTimeOffPoliciesTimeOffPolicyUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffPolicy> {
+  ): Promise<operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse> {
     return unwrapAsync(timeOffPoliciesUpdate(
       this,
       request,
@@ -94,7 +95,7 @@ export class TimeOffPolicies extends ClientSDK {
   async getAll(
     request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.TimeOffPolicy>> {
+  ): Promise<operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse> {
     return unwrapAsync(timeOffPoliciesGetAll(
       this,
       request,
@@ -113,7 +114,7 @@ export class TimeOffPolicies extends ClientSDK {
   async create(
     request: operations.PostCompaniesCompanyUuidTimeOffPoliciesRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffPolicy> {
+  ): Promise<operations.PostCompaniesCompanyUuidTimeOffPoliciesResponse> {
     return unwrapAsync(timeOffPoliciesCreate(
       this,
       request,
@@ -133,7 +134,9 @@ export class TimeOffPolicies extends ClientSDK {
     request:
       operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffPolicy> {
+  ): Promise<
+    operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse
+  > {
     return unwrapAsync(timeOffPoliciesAddEmployees(
       this,
       request,
@@ -153,7 +156,9 @@ export class TimeOffPolicies extends ClientSDK {
     request:
       operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffPolicy> {
+  ): Promise<
+    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse
+  > {
     return unwrapAsync(timeOffPoliciesRemoveEmployees(
       this,
       request,
@@ -173,7 +178,9 @@ export class TimeOffPolicies extends ClientSDK {
     request:
       operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffPolicy> {
+  ): Promise<
+    operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse
+  > {
     return unwrapAsync(timeOffPoliciesUpdateBalance(
       this,
       request,
@@ -192,7 +199,9 @@ export class TimeOffPolicies extends ClientSDK {
   async deactivate(
     request: operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffPolicy> {
+  ): Promise<
+    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse
+  > {
     return unwrapAsync(timeOffPoliciesDeactivate(
       this,
       request,

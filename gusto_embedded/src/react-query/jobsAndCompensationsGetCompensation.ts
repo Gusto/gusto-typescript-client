@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type JobsAndCompensationsGetCompensationQueryData =
-  components.Compensation;
+  operations.GetV1CompensationsCompensationIdResponse;
 
 /**
  * Get a compensation

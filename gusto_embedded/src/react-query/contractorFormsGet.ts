@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorFormsGetQueryData = components.Form1099;
+export type ContractorFormsGetQueryData =
+  operations.GetV1ContractorFormResponse;
 
 /**
  * Get a contractor form

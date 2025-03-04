@@ -8,7 +8,6 @@ import { employeePaymentMethodGet } from "../funcs/employeePaymentMethodGet.js";
 import { employeePaymentMethodUpdate } from "../funcs/employeePaymentMethodUpdate.js";
 import { employeePaymentMethodUpdateBankAccount } from "../funcs/employeePaymentMethodUpdateBankAccount.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -26,7 +25,7 @@ export class EmployeePaymentMethod extends ClientSDK {
   async create(
     request: operations.PostV1EmployeesEmployeeIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeBankAccount> {
+  ): Promise<operations.PostV1EmployeesEmployeeIdBankAccountsResponse> {
     return unwrapAsync(employeePaymentMethodCreate(
       this,
       request,
@@ -47,7 +46,9 @@ export class EmployeePaymentMethod extends ClientSDK {
     request:
       operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse
+  > {
     return unwrapAsync(employeePaymentMethodDeleteBankAccount(
       this,
       request,
@@ -66,7 +67,7 @@ export class EmployeePaymentMethod extends ClientSDK {
   async updateBankAccount(
     request: operations.PutV1EmployeesEmployeeIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeBankAccount> {
+  ): Promise<operations.PutV1EmployeesEmployeeIdBankAccountsResponse> {
     return unwrapAsync(employeePaymentMethodUpdateBankAccount(
       this,
       request,
@@ -87,7 +88,7 @@ export class EmployeePaymentMethod extends ClientSDK {
   async get(
     request: operations.GetV1EmployeesEmployeeIdPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeePaymentMethod> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdPaymentMethodResponse> {
     return unwrapAsync(employeePaymentMethodGet(
       this,
       request,
@@ -107,7 +108,7 @@ export class EmployeePaymentMethod extends ClientSDK {
   async update(
     request: operations.PutV1EmployeesEmployeeIdPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeePaymentMethod> {
+  ): Promise<operations.PutV1EmployeesEmployeeIdPaymentMethodResponse> {
     return unwrapAsync(employeePaymentMethodUpdate(
       this,
       request,

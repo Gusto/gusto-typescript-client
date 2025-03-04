@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeTaxSetupGetStateTaxesQueryData = Array<
-  components.EmployeeStateTax
->;
+export type EmployeeTaxSetupGetStateTaxesQueryData =
+  operations.GetV1EmployeesEmployeeIdStateTaxesResponse;
 
 /**
  * Get an employee's state taxes

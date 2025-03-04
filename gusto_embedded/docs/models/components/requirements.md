@@ -5,7 +5,7 @@
 ```typescript
 import { Requirements } from "@gusto/embedded-api/models/components";
 
-let value: Requirements = "add_bank_info";
+let value: Requirements = "verify_bank_info";
 ```
 
 ## Values

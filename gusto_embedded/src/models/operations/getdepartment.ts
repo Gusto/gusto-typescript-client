@@ -20,6 +20,25 @@ export type GetDepartmentRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetDepartmentResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Department Object Example
+   */
+  department?: components.Department | undefined;
+};
+
 /** @internal */
 export const GetDepartmentRequest$inboundSchema: z.ZodType<
   GetDepartmentRequest,
@@ -88,5 +107,84 @@ export function getDepartmentRequestFromJSON(
     jsonString,
     (x) => GetDepartmentRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetDepartmentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetDepartmentResponse$inboundSchema: z.ZodType<
+  GetDepartmentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Department: components.Department$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Department": "department",
+  });
+});
+
+/** @internal */
+export type GetDepartmentResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Department?: components.Department$Outbound | undefined;
+};
+
+/** @internal */
+export const GetDepartmentResponse$outboundSchema: z.ZodType<
+  GetDepartmentResponse$Outbound,
+  z.ZodTypeDef,
+  GetDepartmentResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  department: components.Department$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    department: "Department",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetDepartmentResponse$ {
+  /** @deprecated use `GetDepartmentResponse$inboundSchema` instead. */
+  export const inboundSchema = GetDepartmentResponse$inboundSchema;
+  /** @deprecated use `GetDepartmentResponse$outboundSchema` instead. */
+  export const outboundSchema = GetDepartmentResponse$outboundSchema;
+  /** @deprecated use `GetDepartmentResponse$Outbound` instead. */
+  export type Outbound = GetDepartmentResponse$Outbound;
+}
+
+export function getDepartmentResponseToJSON(
+  getDepartmentResponse: GetDepartmentResponse,
+): string {
+  return JSON.stringify(
+    GetDepartmentResponse$outboundSchema.parse(getDepartmentResponse),
+  );
+}
+
+export function getDepartmentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetDepartmentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetDepartmentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetDepartmentResponse' from JSON`,
   );
 }

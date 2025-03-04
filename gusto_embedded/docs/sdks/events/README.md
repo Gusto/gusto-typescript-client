@@ -110,7 +110,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Event[]](../../models/.md)\>**
+**Promise\<[operations.GetEventsResponse](../../models/operations/geteventsresponse.md)\>**
 
 ### Errors
 

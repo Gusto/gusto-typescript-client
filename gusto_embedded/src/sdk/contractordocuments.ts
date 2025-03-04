@@ -7,7 +7,6 @@ import { contractorDocumentsGetAll } from "../funcs/contractorDocumentsGetAll.js
 import { contractorDocumentsGetPdf } from "../funcs/contractorDocumentsGetPdf.js";
 import { contractorDocumentsSign } from "../funcs/contractorDocumentsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -23,7 +22,7 @@ export class ContractorDocuments extends ClientSDK {
   async getAll(
     request: operations.GetV1ContractorDocumentsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Document>> {
+  ): Promise<operations.GetV1ContractorDocumentsResponse> {
     return unwrapAsync(contractorDocumentsGetAll(
       this,
       request,
@@ -42,7 +41,7 @@ export class ContractorDocuments extends ClientSDK {
   async get(
     request: operations.GetV1ContractorDocumentRequest,
     options?: RequestOptions,
-  ): Promise<components.Document> {
+  ): Promise<operations.GetV1ContractorDocumentResponse> {
     return unwrapAsync(contractorDocumentsGet(
       this,
       request,
@@ -61,7 +60,7 @@ export class ContractorDocuments extends ClientSDK {
   async getPdf(
     request: operations.GetV1ContractorDocumentPdfRequest,
     options?: RequestOptions,
-  ): Promise<components.DocumentPdf> {
+  ): Promise<operations.GetV1ContractorDocumentPdfResponse> {
     return unwrapAsync(contractorDocumentsGetPdf(
       this,
       request,
@@ -80,7 +79,7 @@ export class ContractorDocuments extends ClientSDK {
   async sign(
     request: operations.PutV1ContractorDocumentSignRequest,
     options?: RequestOptions,
-  ): Promise<components.DocumentSigned> {
+  ): Promise<operations.PutV1ContractorDocumentSignResponse> {
     return unwrapAsync(contractorDocumentsSign(
       this,
       request,

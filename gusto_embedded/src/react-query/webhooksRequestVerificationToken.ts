@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type WebhooksRequestVerificationTokenQueryData = void;
+export type WebhooksRequestVerificationTokenQueryData =
+  operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse;
 
 /**
  * Request the webhook subscription verification_token

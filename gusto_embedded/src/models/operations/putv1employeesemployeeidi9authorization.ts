@@ -131,6 +131,25 @@ export type PutV1EmployeesEmployeeIdI9AuthorizationRequest = {
   requestBody: PutV1EmployeesEmployeeIdI9AuthorizationRequestBody;
 };
 
+export type PutV1EmployeesEmployeeIdI9AuthorizationResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  i9Authorization?: components.I9Authorization | undefined;
+};
+
 /** @internal */
 export const AuthorizationStatus$inboundSchema: z.ZodNativeEnum<
   typeof AuthorizationStatus
@@ -359,5 +378,98 @@ export function putV1EmployeesEmployeeIdI9AuthorizationRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1EmployeesEmployeeIdI9AuthorizationRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "I9-Authorization": components.I9Authorization$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "I9-Authorization": "i9Authorization",
+    });
+  });
+
+/** @internal */
+export type PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "I9-Authorization"?: components.I9Authorization$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    i9Authorization: components.I9Authorization$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      i9Authorization: "I9-Authorization",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdI9AuthorizationResponse$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound;
+}
+
+export function putV1EmployeesEmployeeIdI9AuthorizationResponseToJSON(
+  putV1EmployeesEmployeeIdI9AuthorizationResponse:
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema.parse(
+      putV1EmployeesEmployeeIdI9AuthorizationResponse,
+    ),
+  );
+}
+
+export function putV1EmployeesEmployeeIdI9AuthorizationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1EmployeesEmployeeIdI9AuthorizationResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1EmployeesEmployeeIdI9AuthorizationResponse' from JSON`,
   );
 }

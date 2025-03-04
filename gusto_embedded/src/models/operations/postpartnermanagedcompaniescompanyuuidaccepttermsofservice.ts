@@ -50,6 +50,28 @@ export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBo
     latestTermsAccepted?: boolean | undefined;
   };
 
+export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse =
+  {
+    /**
+     * HTTP response content type for this operation
+     */
+    contentType: string;
+    /**
+     * HTTP response status code for this operation
+     */
+    statusCode: number;
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
+    rawResponse: Response;
+    /**
+     * Example response
+     */
+    object?:
+      | PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody
+      | undefined;
+  };
+
 /** @internal */
 export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$inboundSchema:
   z.ZodType<
@@ -303,5 +325,103 @@ export function postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRespon
       PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$inboundSchema:
+  z.ZodType<
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    object: z.lazy(() =>
+      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    object?:
+      | PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$outboundSchema:
+  z.ZodType<
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$Outbound,
+    z.ZodTypeDef,
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    object: z.lazy(() =>
+      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$ {
+  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$inboundSchema;
+  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$outboundSchema;
+  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$Outbound` instead. */
+  export type Outbound =
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$Outbound;
+}
+
+export function postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseToJSON(
+  postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse:
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
+): string {
+  return JSON.stringify(
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$outboundSchema
+      .parse(
+        postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
+      ),
+  );
+}
+
+export function postPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse' from JSON`,
   );
 }

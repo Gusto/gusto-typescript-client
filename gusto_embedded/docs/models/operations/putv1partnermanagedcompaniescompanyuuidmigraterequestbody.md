@@ -6,8 +6,8 @@
 import { PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody = {
-  email: "Gwendolyn72@yahoo.com",
-  ipAddress: "c07a:3b14:0b47:ef03:dc5e:dbca:6844:eaa5",
+  email: "Deontae.Leannon@hotmail.com",
+  ipAddress: "118.71.150.221",
   externalUserId: "<id>",
 };
 ```

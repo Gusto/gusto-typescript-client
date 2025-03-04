@@ -40,6 +40,27 @@ export type PutV1ContractorsContractorUuidOnboardingStatusRequest = {
   requestBody: PutV1ContractorsContractorUuidOnboardingStatusRequestBody;
 };
 
+export type PutV1ContractorsContractorUuidOnboardingStatusResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response.
+   */
+  contractorOnboardingStatus?:
+    | components.ContractorOnboardingStatus
+    | undefined;
+};
+
 /** @internal */
 export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
   typeof OnboardingStatus
@@ -232,5 +253,101 @@ export function putV1ContractorsContractorUuidOnboardingStatusRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1ContractorsContractorUuidOnboardingStatusRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1ContractorsContractorUuidOnboardingStatusResponse$inboundSchema:
+  z.ZodType<
+    PutV1ContractorsContractorUuidOnboardingStatusResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Contractor-Onboarding-Status": components
+      .ContractorOnboardingStatus$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor-Onboarding-Status": "contractorOnboardingStatus",
+    });
+  });
+
+/** @internal */
+export type PutV1ContractorsContractorUuidOnboardingStatusResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Contractor-Onboarding-Status"?:
+    | components.ContractorOnboardingStatus$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const PutV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema:
+  z.ZodType<
+    PutV1ContractorsContractorUuidOnboardingStatusResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1ContractorsContractorUuidOnboardingStatusResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractorOnboardingStatus: components
+      .ContractorOnboardingStatus$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractorOnboardingStatus: "Contractor-Onboarding-Status",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1ContractorsContractorUuidOnboardingStatusResponse$ {
+  /** @deprecated use `PutV1ContractorsContractorUuidOnboardingStatusResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1ContractorsContractorUuidOnboardingStatusResponse$inboundSchema;
+  /** @deprecated use `PutV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema;
+  /** @deprecated use `PutV1ContractorsContractorUuidOnboardingStatusResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1ContractorsContractorUuidOnboardingStatusResponse$Outbound;
+}
+
+export function putV1ContractorsContractorUuidOnboardingStatusResponseToJSON(
+  putV1ContractorsContractorUuidOnboardingStatusResponse:
+    PutV1ContractorsContractorUuidOnboardingStatusResponse,
+): string {
+  return JSON.stringify(
+    PutV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema.parse(
+      putV1ContractorsContractorUuidOnboardingStatusResponse,
+    ),
+  );
+}
+
+export function putV1ContractorsContractorUuidOnboardingStatusResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1ContractorsContractorUuidOnboardingStatusResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1ContractorsContractorUuidOnboardingStatusResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1ContractorsContractorUuidOnboardingStatusResponse' from JSON`,
   );
 }

@@ -22,7 +22,7 @@ export type CompaniesMigrateMutationVariables = {
 };
 
 export type CompaniesMigrateMutationData =
-  operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody;
+  operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse;
 
 /**
  * Migrate company to embedded payroll

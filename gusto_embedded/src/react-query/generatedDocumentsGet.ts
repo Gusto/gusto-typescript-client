@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type GeneratedDocumentsGetQueryData = components.GeneratedDocument;
+export type GeneratedDocumentsGetQueryData =
+  operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse;
 
 /**
  * Get a generated document

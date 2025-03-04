@@ -21,7 +21,8 @@ export type EmployeeEmploymentsDeleteTerminationMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeeEmploymentsDeleteTerminationMutationData = void;
+export type EmployeeEmploymentsDeleteTerminationMutationData =
+  operations.DeleteV1EmployeesEmployeeIdTerminationsResponse;
 
 /**
  * Delete an employee termination

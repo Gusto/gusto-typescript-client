@@ -20,6 +20,21 @@ export type DeleteV1EmployeeRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1EmployeeResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1EmployeeRequest$inboundSchema: z.ZodType<
   DeleteV1EmployeeRequest,
@@ -88,5 +103,79 @@ export function deleteV1EmployeeRequestFromJSON(
     jsonString,
     (x) => DeleteV1EmployeeRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteV1EmployeeRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1EmployeeResponse$inboundSchema: z.ZodType<
+  DeleteV1EmployeeResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type DeleteV1EmployeeResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const DeleteV1EmployeeResponse$outboundSchema: z.ZodType<
+  DeleteV1EmployeeResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteV1EmployeeResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1EmployeeResponse$ {
+  /** @deprecated use `DeleteV1EmployeeResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteV1EmployeeResponse$inboundSchema;
+  /** @deprecated use `DeleteV1EmployeeResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteV1EmployeeResponse$outboundSchema;
+  /** @deprecated use `DeleteV1EmployeeResponse$Outbound` instead. */
+  export type Outbound = DeleteV1EmployeeResponse$Outbound;
+}
+
+export function deleteV1EmployeeResponseToJSON(
+  deleteV1EmployeeResponse: DeleteV1EmployeeResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1EmployeeResponse$outboundSchema.parse(deleteV1EmployeeResponse),
+  );
+}
+
+export function deleteV1EmployeeResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteV1EmployeeResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteV1EmployeeResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteV1EmployeeResponse' from JSON`,
   );
 }

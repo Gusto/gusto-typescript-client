@@ -20,6 +20,25 @@ export type GetV1PaymentReceiptsPayrollsPayrollUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1PaymentReceiptsPayrollsPayrollUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payrollReceipt?: components.PayrollReceipt | undefined;
+};
+
 /** @internal */
 export const GetV1PaymentReceiptsPayrollsPayrollUuidRequest$inboundSchema:
   z.ZodType<
@@ -102,5 +121,98 @@ export function getV1PaymentReceiptsPayrollsPayrollUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1PaymentReceiptsPayrollsPayrollUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1PaymentReceiptsPayrollsPayrollUuidResponse$inboundSchema:
+  z.ZodType<
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Payroll-Receipt": components.PayrollReceipt$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Payroll-Receipt": "payrollReceipt",
+    });
+  });
+
+/** @internal */
+export type GetV1PaymentReceiptsPayrollsPayrollUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Payroll-Receipt"?: components.PayrollReceipt$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1PaymentReceiptsPayrollsPayrollUuidResponse$outboundSchema:
+  z.ZodType<
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payrollReceipt: components.PayrollReceipt$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payrollReceipt: "Payroll-Receipt",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1PaymentReceiptsPayrollsPayrollUuidResponse$ {
+  /** @deprecated use `GetV1PaymentReceiptsPayrollsPayrollUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse$inboundSchema;
+  /** @deprecated use `GetV1PaymentReceiptsPayrollsPayrollUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse$outboundSchema;
+  /** @deprecated use `GetV1PaymentReceiptsPayrollsPayrollUuidResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse$Outbound;
+}
+
+export function getV1PaymentReceiptsPayrollsPayrollUuidResponseToJSON(
+  getV1PaymentReceiptsPayrollsPayrollUuidResponse:
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse,
+): string {
+  return JSON.stringify(
+    GetV1PaymentReceiptsPayrollsPayrollUuidResponse$outboundSchema.parse(
+      getV1PaymentReceiptsPayrollsPayrollUuidResponse,
+    ),
+  );
+}
+
+export function getV1PaymentReceiptsPayrollsPayrollUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1PaymentReceiptsPayrollsPayrollUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1PaymentReceiptsPayrollsPayrollUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1PaymentReceiptsPayrollsPayrollUuidResponse' from JSON`,
   );
 }

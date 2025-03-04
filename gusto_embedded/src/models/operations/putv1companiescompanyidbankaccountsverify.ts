@@ -36,6 +36,25 @@ export type PutV1CompaniesCompanyIdBankAccountsVerifyRequest = {
   requestBody: PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody;
 };
 
+export type PutV1CompaniesCompanyIdBankAccountsVerifyResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyBankAccount?: components.CompanyBankAccount | undefined;
+};
+
 /** @internal */
 export const PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$inboundSchema:
   z.ZodType<
@@ -213,5 +232,99 @@ export function putV1CompaniesCompanyIdBankAccountsVerifyRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1CompaniesCompanyIdBankAccountsVerifyRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Company-Bank-Account": components.CompanyBankAccount$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Company-Bank-Account": "companyBankAccount",
+    });
+  });
+
+/** @internal */
+export type PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Bank-Account"?: components.CompanyBankAccount$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    companyBankAccount: components.CompanyBankAccount$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      companyBankAccount: "Company-Bank-Account",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompaniesCompanyIdBankAccountsVerifyResponse$ {
+  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound;
+}
+
+export function putV1CompaniesCompanyIdBankAccountsVerifyResponseToJSON(
+  putV1CompaniesCompanyIdBankAccountsVerifyResponse:
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+): string {
+  return JSON.stringify(
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema.parse(
+      putV1CompaniesCompanyIdBankAccountsVerifyResponse,
+    ),
+  );
+}
+
+export function putV1CompaniesCompanyIdBankAccountsVerifyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1CompaniesCompanyIdBankAccountsVerifyResponse' from JSON`,
   );
 }

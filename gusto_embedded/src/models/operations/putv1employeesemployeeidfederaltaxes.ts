@@ -35,6 +35,25 @@ export type PutV1EmployeesEmployeeIdFederalTaxesRequest = {
   requestBody: PutV1EmployeesEmployeeIdFederalTaxesRequestBody;
 };
 
+export type PutV1EmployeesEmployeeIdFederalTaxesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeFederalTax?: components.EmployeeFederalTax | undefined;
+};
+
 /** @internal */
 export const PutV1EmployeesEmployeeIdFederalTaxesRequestBody$inboundSchema:
   z.ZodType<
@@ -232,5 +251,98 @@ export function putV1EmployeesEmployeeIdFederalTaxesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1EmployeesEmployeeIdFederalTaxesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdFederalTaxesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Federal-Tax": components.EmployeeFederalTax$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Federal-Tax": "employeeFederalTax",
+    });
+  });
+
+/** @internal */
+export type PutV1EmployeesEmployeeIdFederalTaxesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Federal-Tax"?: components.EmployeeFederalTax$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdFederalTaxesResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeesEmployeeIdFederalTaxesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeFederalTax: components.EmployeeFederalTax$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeFederalTax: "Employee-Federal-Tax",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdFederalTaxesResponse$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdFederalTaxesResponse$Outbound` instead. */
+  export type Outbound = PutV1EmployeesEmployeeIdFederalTaxesResponse$Outbound;
+}
+
+export function putV1EmployeesEmployeeIdFederalTaxesResponseToJSON(
+  putV1EmployeesEmployeeIdFederalTaxesResponse:
+    PutV1EmployeesEmployeeIdFederalTaxesResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema.parse(
+      putV1EmployeesEmployeeIdFederalTaxesResponse,
+    ),
+  );
+}
+
+export function putV1EmployeesEmployeeIdFederalTaxesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1EmployeesEmployeeIdFederalTaxesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1EmployeesEmployeeIdFederalTaxesResponse' from JSON`,
   );
 }

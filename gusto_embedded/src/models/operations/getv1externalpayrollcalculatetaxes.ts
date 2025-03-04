@@ -24,6 +24,27 @@ export type GetV1ExternalPayrollCalculateTaxesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1ExternalPayrollCalculateTaxesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  externalPayrollTaxSuggestionsList?:
+    | Array<components.ExternalPayrollTaxSuggestions>
+    | undefined;
+};
+
 /** @internal */
 export const GetV1ExternalPayrollCalculateTaxesRequest$inboundSchema: z.ZodType<
   GetV1ExternalPayrollCalculateTaxesRequest,
@@ -109,5 +130,102 @@ export function getV1ExternalPayrollCalculateTaxesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1ExternalPayrollCalculateTaxesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema:
+  z.ZodType<GetV1ExternalPayrollCalculateTaxesResponse, z.ZodTypeDef, unknown> =
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      "External-Payroll-Tax-Suggestions-List": z.array(
+        components.ExternalPayrollTaxSuggestions$inboundSchema,
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "External-Payroll-Tax-Suggestions-List":
+          "externalPayrollTaxSuggestionsList",
+      });
+    });
+
+/** @internal */
+export type GetV1ExternalPayrollCalculateTaxesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "External-Payroll-Tax-Suggestions-List"?:
+    | Array<components.ExternalPayrollTaxSuggestions$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1ExternalPayrollCalculateTaxesResponse$outboundSchema:
+  z.ZodType<
+    GetV1ExternalPayrollCalculateTaxesResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1ExternalPayrollCalculateTaxesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    externalPayrollTaxSuggestionsList: z.array(
+      components.ExternalPayrollTaxSuggestions$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      externalPayrollTaxSuggestionsList:
+        "External-Payroll-Tax-Suggestions-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1ExternalPayrollCalculateTaxesResponse$ {
+  /** @deprecated use `GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema;
+  /** @deprecated use `GetV1ExternalPayrollCalculateTaxesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1ExternalPayrollCalculateTaxesResponse$outboundSchema;
+  /** @deprecated use `GetV1ExternalPayrollCalculateTaxesResponse$Outbound` instead. */
+  export type Outbound = GetV1ExternalPayrollCalculateTaxesResponse$Outbound;
+}
+
+export function getV1ExternalPayrollCalculateTaxesResponseToJSON(
+  getV1ExternalPayrollCalculateTaxesResponse:
+    GetV1ExternalPayrollCalculateTaxesResponse,
+): string {
+  return JSON.stringify(
+    GetV1ExternalPayrollCalculateTaxesResponse$outboundSchema.parse(
+      getV1ExternalPayrollCalculateTaxesResponse,
+    ),
+  );
+}
+
+export function getV1ExternalPayrollCalculateTaxesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1ExternalPayrollCalculateTaxesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1ExternalPayrollCalculateTaxesResponse' from JSON`,
   );
 }

@@ -122,7 +122,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Employee](../../models/components/employee.md)\>**
+**Promise\<[operations.PostV1EmployeesResponse](../../models/operations/postv1employeesresponse.md)\>**
 
 ### Errors
 
@@ -229,7 +229,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Employee[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdEmployeesResponse](../../models/operations/getv1companiescompanyidemployeesresponse.md)\>**
 
 ### Errors
 
@@ -382,7 +382,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Employee](../../models/components/employee.md)\>**
+**Promise\<[operations.PostV1HistoricalEmployeesResponse](../../models/operations/postv1historicalemployeesresponse.md)\>**
 
 ### Errors
 
@@ -490,7 +490,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Employee](../../models/components/employee.md)\>**
+**Promise\<[operations.GetV1EmployeesResponse](../../models/operations/getv1employeesresponse.md)\>**
 
 ### Errors
 
@@ -607,7 +607,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Employee](../../models/components/employee.md)\>**
+**Promise\<[operations.PutV1EmployeesResponse](../../models/operations/putv1employeesresponse.md)\>**
 
 ### Errors
 
@@ -634,11 +634,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employees.delete({
+  const result = await gustoEmbedded.employees.delete({
     employeeId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -669,7 +670,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -703,7 +705,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1EmployeeResponse](../../models/operations/deletev1employeeresponse.md)\>**
 
 ### Errors
 
@@ -810,7 +812,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody](../../models/operations/getv1employeesemployeeidcustomfieldsresponsebody.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdCustomFieldsResponse](../../models/operations/getv1employeesemployeeidcustomfieldsresponse.md)\>**
 
 ### Errors
 
@@ -911,7 +913,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeOnboardingDocument](../../models/components/employeeonboardingdocument.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse](../../models/operations/putv1employeesemployeeidonboardingdocumentsconfigresponse.md)\>**
 
 ### Errors
 
@@ -1053,7 +1055,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeOnboardingStatus](../../models/components/employeeonboardingstatus.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse](../../models/operations/getv1employeesemployeeidonboardingstatusresponse.md)\>**
 
 ### Errors
 
@@ -1163,7 +1165,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeOnboardingStatus](../../models/components/employeeonboardingstatus.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdOnboardingStatusResponse](../../models/operations/putv1employeesemployeeidonboardingstatusresponse.md)\>**
 
 ### Errors
 
@@ -1272,7 +1274,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffActivity](../../models/components/timeoffactivity.md)\>**
+**Promise\<[operations.GetVersionEmployeesTimeOffActivitiesResponse](../../models/operations/getversionemployeestimeoffactivitiesresponse.md)\>**
 
 ### Errors
 

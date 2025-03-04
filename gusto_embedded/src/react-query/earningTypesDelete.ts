@@ -22,7 +22,8 @@ export type EarningTypesDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EarningTypesDeleteMutationData = void;
+export type EarningTypesDeleteMutationData =
+  operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
 
 /**
  * Deactivate an earning type

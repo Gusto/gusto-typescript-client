@@ -20,6 +20,25 @@ export type GetV1EmployeesEmployeeUuidPayStubsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeUuidPayStubsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeePayStubsList?: Array<components.EmployeePayStub> | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeUuidPayStubsRequest$inboundSchema: z.ZodType<
   GetV1EmployeesEmployeeUuidPayStubsRequest,
@@ -100,5 +119,99 @@ export function getV1EmployeesEmployeeUuidPayStubsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeUuidPayStubsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema:
+  z.ZodType<GetV1EmployeesEmployeeUuidPayStubsResponse, z.ZodTypeDef, unknown> =
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      "Employee-Pay-Stubs-List": z.array(
+        components.EmployeePayStub$inboundSchema,
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "Employee-Pay-Stubs-List": "employeePayStubsList",
+      });
+    });
+
+/** @internal */
+export type GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Pay-Stubs-List"?:
+    | Array<components.EmployeePayStub$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeUuidPayStubsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeePayStubsList: z.array(components.EmployeePayStub$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeePayStubsList: "Employee-Pay-Stubs-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeUuidPayStubsResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound` instead. */
+  export type Outbound = GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeUuidPayStubsResponseToJSON(
+  getV1EmployeesEmployeeUuidPayStubsResponse:
+    GetV1EmployeesEmployeeUuidPayStubsResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeUuidPayStubsResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeUuidPayStubsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeUuidPayStubsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeUuidPayStubsResponse' from JSON`,
   );
 }

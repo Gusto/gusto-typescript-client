@@ -48,7 +48,7 @@ export function companiesCreatePartnerManaged(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1PartnerManagedCompaniesResponseBody,
+    operations.PostV1PartnerManagedCompaniesResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -75,7 +75,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.PostV1PartnerManagedCompaniesResponseBody,
+      operations.PostV1PartnerManagedCompaniesResponse,
       | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
@@ -164,11 +164,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    operations.PostV1PartnerManagedCompaniesResponseBody,
+    operations.PostV1PartnerManagedCompaniesResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -180,7 +184,8 @@ async function $do(
   >(
     M.json(
       200,
-      operations.PostV1PartnerManagedCompaniesResponseBody$inboundSchema,
+      operations.PostV1PartnerManagedCompaniesResponse$inboundSchema,
+      { key: "object" },
     ),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([401, "4XX"]),

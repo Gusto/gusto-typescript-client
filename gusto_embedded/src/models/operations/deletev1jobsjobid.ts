@@ -20,6 +20,21 @@ export type DeleteV1JobsJobIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1JobsJobIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1JobsJobIdRequest$inboundSchema: z.ZodType<
   DeleteV1JobsJobIdRequest,
@@ -88,5 +103,79 @@ export function deleteV1JobsJobIdRequestFromJSON(
     jsonString,
     (x) => DeleteV1JobsJobIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteV1JobsJobIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1JobsJobIdResponse$inboundSchema: z.ZodType<
+  DeleteV1JobsJobIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type DeleteV1JobsJobIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const DeleteV1JobsJobIdResponse$outboundSchema: z.ZodType<
+  DeleteV1JobsJobIdResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteV1JobsJobIdResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1JobsJobIdResponse$ {
+  /** @deprecated use `DeleteV1JobsJobIdResponse$inboundSchema` instead. */
+  export const inboundSchema = DeleteV1JobsJobIdResponse$inboundSchema;
+  /** @deprecated use `DeleteV1JobsJobIdResponse$outboundSchema` instead. */
+  export const outboundSchema = DeleteV1JobsJobIdResponse$outboundSchema;
+  /** @deprecated use `DeleteV1JobsJobIdResponse$Outbound` instead. */
+  export type Outbound = DeleteV1JobsJobIdResponse$Outbound;
+}
+
+export function deleteV1JobsJobIdResponseToJSON(
+  deleteV1JobsJobIdResponse: DeleteV1JobsJobIdResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1JobsJobIdResponse$outboundSchema.parse(deleteV1JobsJobIdResponse),
+  );
+}
+
+export function deleteV1JobsJobIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteV1JobsJobIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteV1JobsJobIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteV1JobsJobIdResponse' from JSON`,
   );
 }

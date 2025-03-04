@@ -65,6 +65,25 @@ export type PutV1EmployeesEmployeeIdRehireRequest = {
   requestBody: PutV1EmployeesEmployeeIdRehireRequestBody;
 };
 
+export type PutV1EmployeesEmployeeIdRehireResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  rehire?: components.Rehire | undefined;
+};
+
 /** @internal */
 export const EmploymentStatus$inboundSchema: z.ZodNativeEnum<
   typeof EmploymentStatus
@@ -265,5 +284,90 @@ export function putV1EmployeesEmployeeIdRehireRequestFromJSON(
     (x) =>
       PutV1EmployeesEmployeeIdRehireRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1EmployeesEmployeeIdRehireRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdRehireResponse$inboundSchema: z.ZodType<
+  PutV1EmployeesEmployeeIdRehireResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Rehire: components.Rehire$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Rehire": "rehire",
+  });
+});
+
+/** @internal */
+export type PutV1EmployeesEmployeeIdRehireResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Rehire?: components.Rehire$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdRehireResponse$outboundSchema: z.ZodType<
+  PutV1EmployeesEmployeeIdRehireResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1EmployeesEmployeeIdRehireResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  rehire: components.Rehire$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    rehire: "Rehire",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdRehireResponse$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdRehireResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdRehireResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdRehireResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdRehireResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdRehireResponse$Outbound` instead. */
+  export type Outbound = PutV1EmployeesEmployeeIdRehireResponse$Outbound;
+}
+
+export function putV1EmployeesEmployeeIdRehireResponseToJSON(
+  putV1EmployeesEmployeeIdRehireResponse:
+    PutV1EmployeesEmployeeIdRehireResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdRehireResponse$outboundSchema.parse(
+      putV1EmployeesEmployeeIdRehireResponse,
+    ),
+  );
+}
+
+export function putV1EmployeesEmployeeIdRehireResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1EmployeesEmployeeIdRehireResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeesEmployeeIdRehireResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1EmployeesEmployeeIdRehireResponse' from JSON`,
   );
 }

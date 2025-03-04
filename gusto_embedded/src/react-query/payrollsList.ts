@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PayrollsListQueryData = Array<components.PayrollMinimal>;
+export type PayrollsListQueryData =
+  operations.GetV1CompaniesCompanyIdPayrollsResponse;
 
 /**
  * Get all payrolls for a company

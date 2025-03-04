@@ -16,6 +16,25 @@ export type GetV1GarnishmentsChildSupportRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1GarnishmentsChildSupportResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  childSupportData?: components.ChildSupportData | undefined;
+};
+
 /** @internal */
 export const GetV1GarnishmentsChildSupportRequest$inboundSchema: z.ZodType<
   GetV1GarnishmentsChildSupportRequest,
@@ -84,5 +103,89 @@ export function getV1GarnishmentsChildSupportRequestFromJSON(
     (x) =>
       GetV1GarnishmentsChildSupportRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1GarnishmentsChildSupportRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1GarnishmentsChildSupportResponse$inboundSchema: z.ZodType<
+  GetV1GarnishmentsChildSupportResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Child-Support-Data": components.ChildSupportData$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Child-Support-Data": "childSupportData",
+  });
+});
+
+/** @internal */
+export type GetV1GarnishmentsChildSupportResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Child-Support-Data"?: components.ChildSupportData$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1GarnishmentsChildSupportResponse$outboundSchema: z.ZodType<
+  GetV1GarnishmentsChildSupportResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1GarnishmentsChildSupportResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  childSupportData: components.ChildSupportData$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    childSupportData: "Child-Support-Data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1GarnishmentsChildSupportResponse$ {
+  /** @deprecated use `GetV1GarnishmentsChildSupportResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1GarnishmentsChildSupportResponse$inboundSchema;
+  /** @deprecated use `GetV1GarnishmentsChildSupportResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1GarnishmentsChildSupportResponse$outboundSchema;
+  /** @deprecated use `GetV1GarnishmentsChildSupportResponse$Outbound` instead. */
+  export type Outbound = GetV1GarnishmentsChildSupportResponse$Outbound;
+}
+
+export function getV1GarnishmentsChildSupportResponseToJSON(
+  getV1GarnishmentsChildSupportResponse: GetV1GarnishmentsChildSupportResponse,
+): string {
+  return JSON.stringify(
+    GetV1GarnishmentsChildSupportResponse$outboundSchema.parse(
+      getV1GarnishmentsChildSupportResponse,
+    ),
+  );
+}
+
+export function getV1GarnishmentsChildSupportResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1GarnishmentsChildSupportResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1GarnishmentsChildSupportResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1GarnishmentsChildSupportResponse' from JSON`,
   );
 }

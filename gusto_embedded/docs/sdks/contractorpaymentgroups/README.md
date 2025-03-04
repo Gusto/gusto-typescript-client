@@ -115,7 +115,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentGroup](../../models/components/contractorpaymentgroup.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdContractorPaymentGroupsResponse](../../models/operations/postv1companiescompanyidcontractorpaymentgroupsresponse.md)\>**
 
 ### Errors
 
@@ -226,7 +226,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentGroupMinimal[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse](../../models/operations/getv1companiescompanyidcontractorpaymentgroupsresponse.md)\>**
 
 ### Errors
 
@@ -347,7 +347,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentGroup](../../models/components/contractorpaymentgroup.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse](../../models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewresponse.md)\>**
 
 ### Errors
 
@@ -454,7 +454,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentGroup](../../models/components/contractorpaymentgroup.md)\>**
+**Promise\<[operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse](../../models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidresponse.md)\>**
 
 ### Errors
 
@@ -478,11 +478,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.contractorPaymentGroups.delete({
+  const result = await gustoEmbedded.contractorPaymentGroups.delete({
     contractorPaymentGroupUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -513,7 +514,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -547,7 +549,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse](../../models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupidresponse.md)\>**
 
 ### Errors
 
@@ -647,7 +649,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentGroup](../../models/components/contractorpaymentgroup.md)\>**
+**Promise\<[operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse](../../models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfundresponse.md)\>**
 
 ### Errors
 

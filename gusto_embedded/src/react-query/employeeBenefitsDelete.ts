@@ -21,7 +21,8 @@ export type EmployeeBenefitsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeeBenefitsDeleteMutationData = void;
+export type EmployeeBenefitsDeleteMutationData =
+  operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse;
 
 /**
  * Delete an employee benefit

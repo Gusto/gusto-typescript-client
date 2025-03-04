@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type GarnishmentsListQueryData = Array<components.Garnishment>;
+export type GarnishmentsListQueryData =
+  operations.GetV1EmployeesEmployeeIdGarnishmentsResponse;
 
 /**
  * Get garnishments for an employee

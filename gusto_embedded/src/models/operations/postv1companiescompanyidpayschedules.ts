@@ -63,6 +63,25 @@ export type PostV1CompaniesCompanyIdPaySchedulesRequest = {
   requestBody: PostV1CompaniesCompanyIdPaySchedulesRequestBody;
 };
 
+export type PostV1CompaniesCompanyIdPaySchedulesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payScheduleCreateUpdate?: components.PayScheduleCreateUpdate | undefined;
+};
+
 /** @internal */
 export const Frequency$inboundSchema: z.ZodNativeEnum<typeof Frequency> = z
   .nativeEnum(Frequency);
@@ -271,5 +290,101 @@ export function postV1CompaniesCompanyIdPaySchedulesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyIdPaySchedulesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdPaySchedulesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Pay-Schedule-Create-Update": components
+      .PayScheduleCreateUpdate$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Pay-Schedule-Create-Update": "payScheduleCreateUpdate",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyIdPaySchedulesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Pay-Schedule-Create-Update"?:
+    | components.PayScheduleCreateUpdate$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdPaySchedulesResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdPaySchedulesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payScheduleCreateUpdate: components.PayScheduleCreateUpdate$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payScheduleCreateUpdate: "Pay-Schedule-Create-Update",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdPaySchedulesResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesResponse$Outbound` instead. */
+  export type Outbound = PostV1CompaniesCompanyIdPaySchedulesResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdPaySchedulesResponseToJSON(
+  postV1CompaniesCompanyIdPaySchedulesResponse:
+    PostV1CompaniesCompanyIdPaySchedulesResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema.parse(
+      postV1CompaniesCompanyIdPaySchedulesResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyIdPaySchedulesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyIdPaySchedulesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyIdPaySchedulesResponse' from JSON`,
   );
 }

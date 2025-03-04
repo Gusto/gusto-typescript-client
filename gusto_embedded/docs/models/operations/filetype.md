@@ -7,7 +7,7 @@ The type of file to generate
 ```typescript
 import { FileType } from "@gusto/embedded-api/models/operations";
 
-let value: FileType = "json";
+let value: FileType = "csv";
 ```
 
 ## Values

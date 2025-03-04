@@ -8,7 +8,7 @@ Example response
 import { EarningType } from "@gusto/embedded-api/models/components";
 
 let value: EarningType = {
-  uuid: "abefadc4-e004-47a1-aac2-687cfc1c1323",
+  uuid: "cf0ec5e4-61a0-47ad-a2cb-89196d596e41",
 };
 ```
 

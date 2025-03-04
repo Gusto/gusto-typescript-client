@@ -7,7 +7,7 @@ The contractor's payment method.
 ```typescript
 import { ContractorPaymentMethod1 } from "@gusto/embedded-api/models/components";
 
-let value: ContractorPaymentMethod1 = "Direct Deposit";
+let value: ContractorPaymentMethod1 = "Check";
 ```
 
 ## Values

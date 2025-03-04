@@ -14,7 +14,6 @@ import { companyBenefitsList } from "../funcs/companyBenefitsList.js";
 import { companyBenefitsUpdate } from "../funcs/companyBenefitsUpdate.js";
 import { companyBenefitsUpdateEmployeeBenefits } from "../funcs/companyBenefitsUpdateEmployeeBenefits.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -32,7 +31,7 @@ export class CompanyBenefits extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesCompanyIdCompanyBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyBenefit> {
+  ): Promise<operations.PostV1CompaniesCompanyIdCompanyBenefitsResponse> {
     return unwrapAsync(companyBenefitsCreate(
       this,
       request,
@@ -55,7 +54,7 @@ export class CompanyBenefits extends ClientSDK {
   async list(
     request: operations.GetV1CompaniesCompanyIdCompanyBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.CompanyBenefit>> {
+  ): Promise<operations.GetV1CompaniesCompanyIdCompanyBenefitsResponse> {
     return unwrapAsync(companyBenefitsList(
       this,
       request,
@@ -78,7 +77,7 @@ export class CompanyBenefits extends ClientSDK {
   async get(
     request: operations.GetV1CompanyBenefitsCompanyBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyBenefitWithEmployeeBenefits> {
+  ): Promise<operations.GetV1CompanyBenefitsCompanyBenefitIdResponse> {
     return unwrapAsync(companyBenefitsGet(
       this,
       request,
@@ -99,7 +98,7 @@ export class CompanyBenefits extends ClientSDK {
   async update(
     request: operations.PutV1CompanyBenefitsCompanyBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyBenefit> {
+  ): Promise<operations.PutV1CompanyBenefitsCompanyBenefitIdResponse> {
     return unwrapAsync(companyBenefitsUpdate(
       this,
       request,
@@ -121,7 +120,7 @@ export class CompanyBenefits extends ClientSDK {
   async delete(
     request: operations.DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse> {
     return unwrapAsync(companyBenefitsDelete(
       this,
       request,
@@ -142,7 +141,7 @@ export class CompanyBenefits extends ClientSDK {
   async getAll(
     request: operations.GetV1BenefitsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.SupportedBenefit>> {
+  ): Promise<operations.GetV1BenefitsResponse> {
     return unwrapAsync(companyBenefitsGetAll(
       this,
       request,
@@ -163,7 +162,7 @@ export class CompanyBenefits extends ClientSDK {
   async getSupported(
     request: operations.GetV1BenefitsBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<components.SupportedBenefit> {
+  ): Promise<operations.GetV1BenefitsBenefitIdResponse> {
     return unwrapAsync(companyBenefitsGetSupported(
       this,
       request,
@@ -184,7 +183,7 @@ export class CompanyBenefits extends ClientSDK {
   async getSummary(
     request: operations.GetV1BenefitsCompanyBenefitIdSummaryRequest,
     options?: RequestOptions,
-  ): Promise<components.BenefitSummary> {
+  ): Promise<operations.GetV1BenefitsCompanyBenefitIdSummaryResponse> {
     return unwrapAsync(companyBenefitsGetSummary(
       this,
       request,
@@ -208,7 +207,9 @@ export class CompanyBenefits extends ClientSDK {
     request:
       operations.GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmployeeBenefit>> {
+  ): Promise<
+    operations.GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse
+  > {
     return unwrapAsync(companyBenefitsGetEmployeeBenefits(
       this,
       request,
@@ -232,7 +233,9 @@ export class CompanyBenefits extends ClientSDK {
     request:
       operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmployeeBenefit>> {
+  ): Promise<
+    operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse
+  > {
     return unwrapAsync(companyBenefitsUpdateEmployeeBenefits(
       this,
       request,
@@ -251,7 +254,7 @@ export class CompanyBenefits extends ClientSDK {
   async getRequirements(
     request: operations.GetV1BenefitsBenefitsIdRequirementsRequest,
     options?: RequestOptions,
-  ): Promise<components.BenefitTypeRequirements> {
+  ): Promise<operations.GetV1BenefitsBenefitsIdRequirementsResponse> {
     return unwrapAsync(companyBenefitsGetRequirements(
       this,
       request,

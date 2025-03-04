@@ -13,7 +13,6 @@ import { employeeAddressesRetrieveWorkAddress } from "../funcs/employeeAddresses
 import { employeeAddressesUpdate } from "../funcs/employeeAddressesUpdate.js";
 import { employeeAddressesUpdateWorkAddress } from "../funcs/employeeAddressesUpdateWorkAddress.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -31,7 +30,7 @@ export class EmployeeAddresses extends ClientSDK {
   async get(
     request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmployeeAddress>> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdHomeAddressesResponse> {
     return unwrapAsync(employeeAddressesGet(
       this,
       request,
@@ -52,7 +51,7 @@ export class EmployeeAddresses extends ClientSDK {
   async create(
     request: operations.PostV1EmployeesEmployeeIdHomeAddressesRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeAddress> {
+  ): Promise<operations.PostV1EmployeesEmployeeIdHomeAddressesResponse> {
     return unwrapAsync(employeeAddressesCreate(
       this,
       request,
@@ -73,7 +72,7 @@ export class EmployeeAddresses extends ClientSDK {
   async retrieveHomeAddress(
     request: operations.GetV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeAddress> {
+  ): Promise<operations.GetV1HomeAddressesHomeAddressUuidResponse> {
     return unwrapAsync(employeeAddressesRetrieveHomeAddress(
       this,
       request,
@@ -94,7 +93,7 @@ export class EmployeeAddresses extends ClientSDK {
   async update(
     request: operations.PutV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeAddress> {
+  ): Promise<operations.PutV1HomeAddressesHomeAddressUuidResponse> {
     return unwrapAsync(employeeAddressesUpdate(
       this,
       request,
@@ -113,7 +112,7 @@ export class EmployeeAddresses extends ClientSDK {
   async delete(
     request: operations.DeleteV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1HomeAddressesHomeAddressUuidResponse> {
     return unwrapAsync(employeeAddressesDelete(
       this,
       request,
@@ -133,7 +132,7 @@ export class EmployeeAddresses extends ClientSDK {
   async getWorkAddresses(
     request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmployeeWorkAddress>> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdWorkAddressesResponse> {
     return unwrapAsync(employeeAddressesGetWorkAddresses(
       this,
       request,
@@ -152,7 +151,7 @@ export class EmployeeAddresses extends ClientSDK {
   async createWorkAddress(
     request: operations.PostV1EmployeesEmployeeIdWorkAddressesRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeWorkAddress> {
+  ): Promise<operations.PostV1EmployeesEmployeeIdWorkAddressesResponse> {
     return unwrapAsync(employeeAddressesCreateWorkAddress(
       this,
       request,
@@ -171,7 +170,7 @@ export class EmployeeAddresses extends ClientSDK {
   async retrieveWorkAddress(
     request: operations.GetV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeWorkAddress> {
+  ): Promise<operations.GetV1WorkAddressesWorkAddressUuidResponse> {
     return unwrapAsync(employeeAddressesRetrieveWorkAddress(
       this,
       request,
@@ -190,7 +189,7 @@ export class EmployeeAddresses extends ClientSDK {
   async updateWorkAddress(
     request: operations.PutV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeWorkAddress> {
+  ): Promise<operations.PutV1WorkAddressesWorkAddressUuidResponse> {
     return unwrapAsync(employeeAddressesUpdateWorkAddress(
       this,
       request,
@@ -209,7 +208,7 @@ export class EmployeeAddresses extends ClientSDK {
   async deleteWorkAddress(
     request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1WorkAddressesWorkAddressUuidResponse> {
     return unwrapAsync(employeeAddressesDeleteWorkAddress(
       this,
       request,

@@ -4,7 +4,6 @@
 
 import { notificationsGetDetails } from "../funcs/notificationsGetDetails.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -24,7 +23,7 @@ export class Notifications extends ClientSDK {
   async getDetails(
     request: operations.GetNotificationsNotificationUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.Notification> {
+  ): Promise<operations.GetNotificationsNotificationUuidResponse> {
     return unwrapAsync(notificationsGetDetails(
       this,
       request,

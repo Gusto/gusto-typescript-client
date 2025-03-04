@@ -24,6 +24,25 @@ export type GetV1ExternalPayrollRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1ExternalPayrollResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  externalPayroll?: components.ExternalPayroll | undefined;
+};
+
 /** @internal */
 export const GetV1ExternalPayrollRequest$inboundSchema: z.ZodType<
   GetV1ExternalPayrollRequest,
@@ -99,5 +118,86 @@ export function getV1ExternalPayrollRequestFromJSON(
     jsonString,
     (x) => GetV1ExternalPayrollRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1ExternalPayrollRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1ExternalPayrollResponse$inboundSchema: z.ZodType<
+  GetV1ExternalPayrollResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "External-Payroll": components.ExternalPayroll$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "External-Payroll": "externalPayroll",
+  });
+});
+
+/** @internal */
+export type GetV1ExternalPayrollResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "External-Payroll"?: components.ExternalPayroll$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1ExternalPayrollResponse$outboundSchema: z.ZodType<
+  GetV1ExternalPayrollResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1ExternalPayrollResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  externalPayroll: components.ExternalPayroll$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    externalPayroll: "External-Payroll",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1ExternalPayrollResponse$ {
+  /** @deprecated use `GetV1ExternalPayrollResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1ExternalPayrollResponse$inboundSchema;
+  /** @deprecated use `GetV1ExternalPayrollResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1ExternalPayrollResponse$outboundSchema;
+  /** @deprecated use `GetV1ExternalPayrollResponse$Outbound` instead. */
+  export type Outbound = GetV1ExternalPayrollResponse$Outbound;
+}
+
+export function getV1ExternalPayrollResponseToJSON(
+  getV1ExternalPayrollResponse: GetV1ExternalPayrollResponse,
+): string {
+  return JSON.stringify(
+    GetV1ExternalPayrollResponse$outboundSchema.parse(
+      getV1ExternalPayrollResponse,
+    ),
+  );
+}
+
+export function getV1ExternalPayrollResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1ExternalPayrollResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1ExternalPayrollResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1ExternalPayrollResponse' from JSON`,
   );
 }

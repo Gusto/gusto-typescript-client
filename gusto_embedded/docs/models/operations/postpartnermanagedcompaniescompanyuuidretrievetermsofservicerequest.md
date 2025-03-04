@@ -9,7 +9,7 @@ let value: PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest =
   {
     companyUuid: "<id>",
     requestBody: {
-      email: "Jeanette23@gmail.com",
+      email: "Luciano_Collins@yahoo.com",
     },
   };
 ```

@@ -109,7 +109,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyAttachment](../../models/components/companyattachment.md)\>**
+**Promise\<[operations.GetV1CompaniesAttachmentResponse](../../models/operations/getv1companiesattachmentresponse.md)\>**
 
 ### Errors
 
@@ -215,7 +215,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyAttachment[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesAttachmentsResponse](../../models/operations/getv1companiesattachmentsresponse.md)\>**
 
 ### Errors
 
@@ -322,7 +322,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyAttachment](../../models/components/companyattachment.md)\>**
+**Promise\<[operations.PostV1CompaniesAttachmentResponse](../../models/operations/postv1companiesattachmentresponse.md)\>**
 
 ### Errors
 

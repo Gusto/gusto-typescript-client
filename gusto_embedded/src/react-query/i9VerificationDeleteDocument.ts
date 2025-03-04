@@ -22,7 +22,8 @@ export type I9VerificationDeleteDocumentMutationVariables = {
   options?: RequestOptions;
 };
 
-export type I9VerificationDeleteDocumentMutationData = void;
+export type I9VerificationDeleteDocumentMutationData =
+  operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse;
 
 /**
  * Delete an employee's I-9 verification document

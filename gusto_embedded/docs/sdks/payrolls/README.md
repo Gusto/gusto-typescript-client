@@ -129,7 +129,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollPrepared](../../models/components/payrollprepared.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdPayrollsResponse](../../models/operations/postv1companiescompanyidpayrollsresponse.md)\>**
 
 ### Errors
 
@@ -244,7 +244,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollMinimal[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPayrollsResponse](../../models/operations/getv1companiescompanyidpayrollsresponse.md)\>**
 
 ### Errors
 
@@ -350,7 +350,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollReversal](../../models/components/payrollreversal.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPayrollReversalsResponse](../../models/operations/getv1companiescompanyidpayrollreversalsresponse.md)\>**
 
 ### Errors
 
@@ -466,7 +466,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Payroll](../../models/components/payroll.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPayrollsPayrollIdResponse](../../models/operations/getv1companiescompanyidpayrollspayrollidresponse.md)\>**
 
 ### Errors
 
@@ -580,7 +580,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollPrepared](../../models/components/payrollprepared.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdPayrollsResponse](../../models/operations/putv1companiescompanyidpayrollsresponse.md)\>**
 
 ### Errors
 
@@ -607,12 +607,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.payrolls.delete({
+  const result = await gustoEmbedded.payrolls.delete({
     companyId: "<id>",
     payrollId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -644,7 +645,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -678,7 +680,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1CompaniesCompanyIdPayrollsResponse](../../models/operations/deletev1companiescompanyidpayrollsresponse.md)\>**
 
 ### Errors
 
@@ -779,7 +781,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollPrepared](../../models/components/payrollprepared.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse](../../models/operations/putv1companiescompanyidpayrollspayrollidprepareresponse.md)\>**
 
 ### Errors
 
@@ -890,7 +892,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollReceipt](../../models/components/payrollreceipt.md)\>**
+**Promise\<[operations.GetV1PaymentReceiptsPayrollsPayrollUuidResponse](../../models/operations/getv1paymentreceiptspayrollspayrolluuidresponse.md)\>**
 
 ### Errors
 
@@ -998,7 +1000,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollBlocker[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesPayrollBlockersCompanyUuidResponse](../../models/operations/getv1companiespayrollblockerscompanyuuidresponse.md)\>**
 
 ### Errors
 
@@ -1024,7 +1026,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.payrolls.skip({
+  const result = await gustoEmbedded.payrolls.skip({
     companyUuid: "<id>",
     requestBody: {
       payrollType: "Regular",
@@ -1034,7 +1036,8 @@ async function run() {
     },
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1071,7 +1074,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1105,15 +1109,15 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PostCompaniesPayrollSkipCompanyUuidResponse](../../models/operations/postcompaniespayrollskipcompanyuuidresponse.md)\>**
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.PayrollBlockersError           | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.UnprocessableEntityErrorObject1 | 422                                    | application/json                       |
+| errors.PayrollBlockersError            | 422                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## calculateGrossUp
 
@@ -1212,15 +1216,15 @@ import {
 
 ### Response
 
-**Promise\<[components.GrossUpPay](../../models/components/grossuppay.md)\>**
+**Promise\<[operations.PostPayrollsGrossUpPayrollUuidResponse](../../models/operations/postpayrollsgrossuppayrolluuidresponse.md)\>**
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.PayrollBlockersError           | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.UnprocessableEntityErrorObject1 | 422                                    | application/json                       |
+| errors.PayrollBlockersError            | 422                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## calculate
 
@@ -1241,12 +1245,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.payrolls.calculate({
+  const result = await gustoEmbedded.payrolls.calculate({
     companyId: "<id>",
     payrollId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1278,7 +1283,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1312,15 +1318,15 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse](../../models/operations/putv1companiescompanyidpayrollspayrollidcalculateresponse.md)\>**
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.PayrollBlockersError           | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.UnprocessableEntityErrorObject1 | 422                                    | application/json                       |
+| errors.PayrollBlockersError            | 422                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## submit
 
@@ -1342,13 +1348,14 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.payrolls.submit({
+  const result = await gustoEmbedded.payrolls.submit({
     companyId: "<id>",
     payrollId: "<id>",
     requestBody: {},
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1381,7 +1388,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1415,15 +1423,15 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse](../../models/operations/putv1companiescompanyidpayrollspayrollidsubmitresponse.md)\>**
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.PayrollBlockersError           | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.UnprocessableEntityErrorObject1 | 422                                    | application/json                       |
+| errors.PayrollBlockersError            | 422                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
 ## cancel
 
@@ -1517,7 +1525,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Payroll](../../models/components/payroll.md)\>**
+**Promise\<[operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse](../../models/operations/putapiv1companiescompanyidpayrollspayrollidcancelresponse.md)\>**
 
 ### Errors
 
@@ -1542,12 +1550,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.payrolls.getPayStub({
+  const result = await gustoEmbedded.payrolls.getPayStub({
     payrollId: "<id>",
     employeeId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1579,7 +1588,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1624,7 +1634,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse](../../models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubresponse.md)\>**
 
 ### Errors
 
@@ -1730,7 +1740,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeePayStub[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeUuidPayStubsResponse](../../models/operations/getv1employeesemployeeuuidpaystubsresponse.md)\>**
 
 ### Errors
 
@@ -1831,7 +1841,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayrollCheck](../../models/components/payrollcheck.md)\>**
+**Promise\<[operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse](../../models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecksresponse.md)\>**
 
 ### Errors
 

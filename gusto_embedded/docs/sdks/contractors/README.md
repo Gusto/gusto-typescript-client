@@ -118,7 +118,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Contractor](../../models/components/contractor.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyUuidContractorsResponse](../../models/operations/postv1companiescompanyuuidcontractorsresponse.md)\>**
 
 ### Errors
 
@@ -225,7 +225,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Contractor[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyUuidContractorsResponse](../../models/operations/getv1companiescompanyuuidcontractorsresponse.md)\>**
 
 ### Errors
 
@@ -331,7 +331,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Contractor](../../models/components/contractor.md)\>**
+**Promise\<[operations.GetV1ContractorsContractorUuidResponse](../../models/operations/getv1contractorscontractoruuidresponse.md)\>**
 
 ### Errors
 
@@ -450,7 +450,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Contractor](../../models/components/contractor.md)\>**
+**Promise\<[operations.PutV1ContractorsContractorUuidResponse](../../models/operations/putv1contractorscontractoruuidresponse.md)\>**
 
 ### Errors
 
@@ -475,11 +475,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.contractors.delete({
+  const result = await gustoEmbedded.contractors.delete({
     contractorUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -510,7 +511,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -544,7 +546,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1ContractorsContractorUuidResponse](../../models/operations/deletev1contractorscontractoruuidresponse.md)\>**
 
 ### Errors
 
@@ -681,7 +683,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorOnboardingStatus](../../models/components/contractoronboardingstatus.md)\>**
+**Promise\<[operations.GetV1ContractorsContractorUuidOnboardingStatusResponse](../../models/operations/getv1contractorscontractoruuidonboardingstatusresponse.md)\>**
 
 ### Errors
 
@@ -788,7 +790,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorOnboardingStatus](../../models/components/contractoronboardingstatus.md)\>**
+**Promise\<[operations.PutV1ContractorsContractorUuidOnboardingStatusResponse](../../models/operations/putv1contractorscontractoruuidonboardingstatusresponse.md)\>**
 
 ### Errors
 
@@ -895,7 +897,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorAddress](../../models/components/contractoraddress.md)\>**
+**Promise\<[operations.GetV1ContractorsContractorUuidAddressResponse](../../models/operations/getv1contractorscontractoruuidaddressresponse.md)\>**
 
 ### Errors
 
@@ -1006,7 +1008,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorAddress](../../models/components/contractoraddress.md)\>**
+**Promise\<[operations.PutV1ContractorsContractorUuidAddressResponse](../../models/operations/putv1contractorscontractoruuidaddressresponse.md)\>**
 
 ### Errors
 

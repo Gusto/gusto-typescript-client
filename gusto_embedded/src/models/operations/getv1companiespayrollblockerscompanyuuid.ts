@@ -20,6 +20,25 @@ export type GetV1CompaniesPayrollBlockersCompanyUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesPayrollBlockersCompanyUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payrollBlockerList?: Array<components.PayrollBlocker> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesPayrollBlockersCompanyUuidRequest$inboundSchema:
   z.ZodType<
@@ -102,5 +121,102 @@ export function getV1CompaniesPayrollBlockersCompanyUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesPayrollBlockersCompanyUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Payroll-Blocker-List": z.array(components.PayrollBlocker$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Payroll-Blocker-List": "payrollBlockerList",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Payroll-Blocker-List"?:
+    | Array<components.PayrollBlocker$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payrollBlockerList: z.array(components.PayrollBlocker$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payrollBlockerList: "Payroll-Blocker-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesPayrollBlockersCompanyUuidResponse$ {
+  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound;
+}
+
+export function getV1CompaniesPayrollBlockersCompanyUuidResponseToJSON(
+  getV1CompaniesPayrollBlockersCompanyUuidResponse:
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema.parse(
+      getV1CompaniesPayrollBlockersCompanyUuidResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesPayrollBlockersCompanyUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesPayrollBlockersCompanyUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesPayrollBlockersCompanyUuidResponse' from JSON`,
   );
 }

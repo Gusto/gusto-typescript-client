@@ -20,6 +20,25 @@ export type GetCompaniesDepartmentsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetCompaniesDepartmentsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * List of departments
+   */
+  departmentList?: Array<components.Department> | undefined;
+};
+
 /** @internal */
 export const GetCompaniesDepartmentsRequest$inboundSchema: z.ZodType<
   GetCompaniesDepartmentsRequest,
@@ -90,5 +109,86 @@ export function getCompaniesDepartmentsRequestFromJSON(
     jsonString,
     (x) => GetCompaniesDepartmentsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetCompaniesDepartmentsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetCompaniesDepartmentsResponse$inboundSchema: z.ZodType<
+  GetCompaniesDepartmentsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Department-List": z.array(components.Department$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Department-List": "departmentList",
+  });
+});
+
+/** @internal */
+export type GetCompaniesDepartmentsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Department-List"?: Array<components.Department$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetCompaniesDepartmentsResponse$outboundSchema: z.ZodType<
+  GetCompaniesDepartmentsResponse$Outbound,
+  z.ZodTypeDef,
+  GetCompaniesDepartmentsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  departmentList: z.array(components.Department$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    departmentList: "Department-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCompaniesDepartmentsResponse$ {
+  /** @deprecated use `GetCompaniesDepartmentsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetCompaniesDepartmentsResponse$inboundSchema;
+  /** @deprecated use `GetCompaniesDepartmentsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetCompaniesDepartmentsResponse$outboundSchema;
+  /** @deprecated use `GetCompaniesDepartmentsResponse$Outbound` instead. */
+  export type Outbound = GetCompaniesDepartmentsResponse$Outbound;
+}
+
+export function getCompaniesDepartmentsResponseToJSON(
+  getCompaniesDepartmentsResponse: GetCompaniesDepartmentsResponse,
+): string {
+  return JSON.stringify(
+    GetCompaniesDepartmentsResponse$outboundSchema.parse(
+      getCompaniesDepartmentsResponse,
+    ),
+  );
+}
+
+export function getCompaniesDepartmentsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetCompaniesDepartmentsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetCompaniesDepartmentsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetCompaniesDepartmentsResponse' from JSON`,
   );
 }

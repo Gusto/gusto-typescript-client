@@ -8,7 +8,7 @@ The temporary url to download a Company Attachment File
 import { GetV1CompaniesAttachmentUrlResponseBody } from "@gusto/embedded-api/models/operations";
 
 let value: GetV1CompaniesAttachmentUrlResponseBody = {
-  url: "https://windy-version.org",
+  url: "https://outstanding-dress.info/",
 };
 ```
 

@@ -28,6 +28,25 @@ export type GetV1CompaniesCompanyIdPaySchedulesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdPaySchedulesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payScheduleList?: Array<components.PaySchedule> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdPaySchedulesRequest$inboundSchema:
   z.ZodType<GetV1CompaniesCompanyIdPaySchedulesRequest, z.ZodTypeDef, unknown> =
@@ -112,5 +131,98 @@ export function getV1CompaniesCompanyIdPaySchedulesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPaySchedulesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Pay-Schedule-List": z.array(components.PaySchedule$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Pay-Schedule-List": "payScheduleList",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdPaySchedulesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Pay-Schedule-List"?: Array<components.PaySchedule$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPaySchedulesResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdPaySchedulesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payScheduleList: z.array(components.PaySchedule$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payScheduleList: "Pay-Schedule-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdPaySchedulesResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesCompanyIdPaySchedulesResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdPaySchedulesResponseToJSON(
+  getV1CompaniesCompanyIdPaySchedulesResponse:
+    GetV1CompaniesCompanyIdPaySchedulesResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdPaySchedulesResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdPaySchedulesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdPaySchedulesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesResponse' from JSON`,
   );
 }

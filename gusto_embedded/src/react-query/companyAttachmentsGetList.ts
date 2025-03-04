@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompanyAttachmentsGetListQueryData = Array<
-  components.CompanyAttachment
->;
+export type CompanyAttachmentsGetListQueryData =
+  operations.GetV1CompaniesAttachmentsResponse;
 
 /**
  * Get List of Company Attachments

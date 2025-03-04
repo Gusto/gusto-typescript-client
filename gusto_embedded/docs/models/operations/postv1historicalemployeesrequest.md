@@ -8,16 +8,16 @@ import { PostV1HistoricalEmployeesRequest } from "@gusto/embedded-api/models/ope
 let value: PostV1HistoricalEmployeesRequest = {
   companyUuid: "<id>",
   historicalEmployeeBody: {
-    firstName: "Lilyan",
-    lastName: "Doyle",
-    dateOfBirth: "1965-09-13",
+    firstName: "Keenan",
+    lastName: "Klocko",
+    dateOfBirth: "1953-11-02",
     ssn: "<value>",
     workAddress: {},
     homeAddress: {
       street1: "<value>",
-      city: "Thielstad",
-      state: "Iowa",
-      zip: "70359",
+      city: "South Juliusbury",
+      state: "South Carolina",
+      zip: "90838-6973",
     },
     termination: {},
     job: {},

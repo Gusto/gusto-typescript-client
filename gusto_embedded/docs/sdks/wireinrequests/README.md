@@ -107,7 +107,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WireInRequest](../../models/components/wireinrequest.md)\>**
+**Promise\<[operations.GetWireInRequestsWireInRequestUuidResponse](../../models/operations/getwireinrequestswireinrequestuuidresponse.md)\>**
 
 ### Errors
 
@@ -214,7 +214,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WireInRequest](../../models/components/wireinrequest.md)\>**
+**Promise\<[operations.PutWireInRequestsWireInRequestUuidResponse](../../models/operations/putwireinrequestswireinrequestuuidresponse.md)\>**
 
 ### Errors
 
@@ -321,7 +321,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WireInRequest[]](../../models/.md)\>**
+**Promise\<[operations.GetCompaniesCompanyUuidWireInRequestUuidResponse](../../models/operations/getcompaniescompanyuuidwireinrequestuuidresponse.md)\>**
 
 ### Errors
 

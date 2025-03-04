@@ -113,6 +113,25 @@ export type PutV1ExternalPayrollRequest = {
   requestBody: PutV1ExternalPayrollRequestBody;
 };
 
+export type PutV1ExternalPayrollResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  externalPayroll?: components.ExternalPayroll | undefined;
+};
+
 /** @internal */
 export const EarningType$inboundSchema: z.ZodNativeEnum<typeof EarningType> = z
   .nativeEnum(EarningType);
@@ -551,5 +570,86 @@ export function putV1ExternalPayrollRequestFromJSON(
     jsonString,
     (x) => PutV1ExternalPayrollRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1ExternalPayrollRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1ExternalPayrollResponse$inboundSchema: z.ZodType<
+  PutV1ExternalPayrollResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "External-Payroll": components.ExternalPayroll$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "External-Payroll": "externalPayroll",
+  });
+});
+
+/** @internal */
+export type PutV1ExternalPayrollResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "External-Payroll"?: components.ExternalPayroll$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1ExternalPayrollResponse$outboundSchema: z.ZodType<
+  PutV1ExternalPayrollResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1ExternalPayrollResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  externalPayroll: components.ExternalPayroll$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    externalPayroll: "External-Payroll",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1ExternalPayrollResponse$ {
+  /** @deprecated use `PutV1ExternalPayrollResponse$inboundSchema` instead. */
+  export const inboundSchema = PutV1ExternalPayrollResponse$inboundSchema;
+  /** @deprecated use `PutV1ExternalPayrollResponse$outboundSchema` instead. */
+  export const outboundSchema = PutV1ExternalPayrollResponse$outboundSchema;
+  /** @deprecated use `PutV1ExternalPayrollResponse$Outbound` instead. */
+  export type Outbound = PutV1ExternalPayrollResponse$Outbound;
+}
+
+export function putV1ExternalPayrollResponseToJSON(
+  putV1ExternalPayrollResponse: PutV1ExternalPayrollResponse,
+): string {
+  return JSON.stringify(
+    PutV1ExternalPayrollResponse$outboundSchema.parse(
+      putV1ExternalPayrollResponse,
+    ),
+  );
+}
+
+export function putV1ExternalPayrollResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1ExternalPayrollResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutV1ExternalPayrollResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1ExternalPayrollResponse' from JSON`,
   );
 }

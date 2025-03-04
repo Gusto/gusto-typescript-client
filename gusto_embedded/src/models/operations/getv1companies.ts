@@ -20,6 +20,25 @@ export type GetV1CompaniesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  company?: components.Company | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesRequest$inboundSchema: z.ZodType<
   GetV1CompaniesRequest,
@@ -88,5 +107,84 @@ export function getV1CompaniesRequestFromJSON(
     jsonString,
     (x) => GetV1CompaniesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompaniesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesResponse$inboundSchema: z.ZodType<
+  GetV1CompaniesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Company: components.Company$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Company": "company",
+  });
+});
+
+/** @internal */
+export type GetV1CompaniesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Company?: components.Company$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesResponse$outboundSchema: z.ZodType<
+  GetV1CompaniesResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1CompaniesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  company: components.Company$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    company: "Company",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesResponse$ {
+  /** @deprecated use `GetV1CompaniesResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1CompaniesResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1CompaniesResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesResponse$Outbound;
+}
+
+export function getV1CompaniesResponseToJSON(
+  getV1CompaniesResponse: GetV1CompaniesResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesResponse$outboundSchema.parse(getV1CompaniesResponse),
+  );
+}
+
+export function getV1CompaniesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompaniesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1CompaniesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompaniesResponse' from JSON`,
   );
 }

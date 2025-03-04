@@ -7,7 +7,7 @@ The document's document type
 ```typescript
 import { I9AuthorizationDocumentType } from "@gusto/embedded-api/models/components";
 
-let value: I9AuthorizationDocumentType = "uscis_alien_registration_number";
+let value: I9AuthorizationDocumentType = "foreign_passport";
 ```
 
 ## Values

@@ -5,8 +5,8 @@ management:
   docVersion: "2024-04-01"
   speakeasyVersion: 1.509.1
   generationVersion: 2.539.1
-  releaseVersion: 0.3.0
-  configChecksum: f35af84b8399504ac7ed0f5a6ee6b8d8
+  releaseVersion: 0.4.0
+  configChecksum: 685efd43a662dda45d93d98441d2c177
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -28,7 +28,6 @@ features:
     globalServerURLs: 2.82.4
     groups: 2.81.2
     inputOutputModels: 2.82.0
-    mcpServer: 0.4.1
     methodSecurity: 2.82.6
     nameOverrides: 2.81.2
     nullables: 0.1.1
@@ -402,6 +401,7 @@ generatedFiles:
   - docs/models/errors/putv1companiescompanyidpayrollspayrollidcalculateresponsebody.md
   - docs/models/errors/putv1companiescompanyidpayrollspayrollidsubmitresponsebody.md
   - docs/models/errors/unprocessableentityerrorobject.md
+  - docs/models/errors/unprocessableentityerrorobject1.md
   - docs/models/operations/accounttype.md
   - docs/models/operations/accrualmethod.md
   - docs/models/operations/answers.md
@@ -417,27 +417,48 @@ generatedFiles:
   - docs/models/operations/contribution.md
   - docs/models/operations/deductionreducestaxableincome.md
   - docs/models/operations/deletecompaniescompanyuuidholidaypaypolicyrequest.md
+  - docs/models/operations/deletecompaniescompanyuuidholidaypaypolicyresponse.md
   - docs/models/operations/deletedepartmentrequest.md
+  - docs/models/operations/deletedepartmentresponse.md
   - docs/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpaymentrequest.md
+  - docs/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpaymentresponse.md
   - docs/models/operations/deletev1companiescompanyidearningtypesearningtypeuuidrequest.md
+  - docs/models/operations/deletev1companiescompanyidearningtypesearningtypeuuidresponse.md
   - docs/models/operations/deletev1companiescompanyidpayrollsrequest.md
+  - docs/models/operations/deletev1companiescompanyidpayrollsresponse.md
   - docs/models/operations/deletev1companiescompanyuuidsignatoriessignatoryuuidrequest.md
+  - docs/models/operations/deletev1companiescompanyuuidsignatoriessignatoryuuidresponse.md
   - docs/models/operations/deletev1companybenefitscompanybenefitidrequest.md
+  - docs/models/operations/deletev1companybenefitscompanybenefitidresponse.md
   - docs/models/operations/deletev1compensationscompensationidrequest.md
+  - docs/models/operations/deletev1compensationscompensationidresponse.md
   - docs/models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupidrequest.md
+  - docs/models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupidresponse.md
   - docs/models/operations/deletev1contractorscontractoruuidrequest.md
+  - docs/models/operations/deletev1contractorscontractoruuidresponse.md
   - docs/models/operations/deletev1employeebenefitsemployeebenefitidrequest.md
+  - docs/models/operations/deletev1employeebenefitsemployeebenefitidresponse.md
   - docs/models/operations/deletev1employeerequest.md
+  - docs/models/operations/deletev1employeeresponse.md
   - docs/models/operations/deletev1employeesemployeeidbankaccountsbankaccountidrequest.md
+  - docs/models/operations/deletev1employeesemployeeidbankaccountsbankaccountidresponse.md
   - docs/models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentidrequest.md
+  - docs/models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentidresponse.md
   - docs/models/operations/deletev1employeesemployeeidrehirerequest.md
+  - docs/models/operations/deletev1employeesemployeeidrehireresponse.md
   - docs/models/operations/deletev1employeesemployeeidterminationsrequest.md
+  - docs/models/operations/deletev1employeesemployeeidterminationsresponse.md
   - docs/models/operations/deletev1externalpayrollrequest.md
+  - docs/models/operations/deletev1externalpayrollresponse.md
   - docs/models/operations/deletev1homeaddresseshomeaddressuuidrequest.md
+  - docs/models/operations/deletev1homeaddresseshomeaddressuuidresponse.md
   - docs/models/operations/deletev1jobsjobidrequest.md
+  - docs/models/operations/deletev1jobsjobidresponse.md
   - docs/models/operations/deletev1webhooksubscriptionuuidrequest.md
+  - docs/models/operations/deletev1webhooksubscriptionuuidresponse.md
   - docs/models/operations/deletev1webhooksubscriptionuuidsecurity.md
   - docs/models/operations/deletev1workaddressesworkaddressuuidrequest.md
+  - docs/models/operations/deletev1workaddressesworkaddressuuidresponse.md
   - docs/models/operations/document.md
   - docs/models/operations/documents.md
   - docs/models/operations/documenttype.md
@@ -458,136 +479,251 @@ generatedFiles:
   - docs/models/operations/frequency.md
   - docs/models/operations/garnishmenttype.md
   - docs/models/operations/getachtransactionsrequest.md
+  - docs/models/operations/getachtransactionsresponse.md
   - docs/models/operations/getcompaniescompanyuuidholidaypaypolicyrequest.md
+  - docs/models/operations/getcompaniescompanyuuidholidaypaypolicyresponse.md
   - docs/models/operations/getcompaniescompanyuuidreporttemplatesreporttyperequest.md
+  - docs/models/operations/getcompaniescompanyuuidreporttemplatesreporttyperesponse.md
   - docs/models/operations/getcompaniescompanyuuidtimeoffpoliciesrequest.md
+  - docs/models/operations/getcompaniescompanyuuidtimeoffpoliciesresponse.md
   - docs/models/operations/getcompaniescompanyuuidwireinrequestuuidrequest.md
+  - docs/models/operations/getcompaniescompanyuuidwireinrequestuuidresponse.md
   - docs/models/operations/getcompaniesdepartmentsrequest.md
+  - docs/models/operations/getcompaniesdepartmentsresponse.md
   - docs/models/operations/getdepartmentrequest.md
+  - docs/models/operations/getdepartmentresponse.md
   - docs/models/operations/getemployeeytdbenefitamountsfromdifferentcompanyrequest.md
+  - docs/models/operations/getemployeeytdbenefitamountsfromdifferentcompanyresponse.md
   - docs/models/operations/geteventsrequest.md
+  - docs/models/operations/geteventsresponse.md
   - docs/models/operations/geteventssecurity.md
   - docs/models/operations/getinvoicesinvoiceperiodrequest.md
+  - docs/models/operations/getinvoicesinvoiceperiodresponse.md
   - docs/models/operations/getinvoicesinvoiceperiodsecurity.md
   - docs/models/operations/getnotificationsnotificationuuidrequest.md
+  - docs/models/operations/getnotificationsnotificationuuidresponse.md
   - docs/models/operations/getrecoverycasesrequest.md
+  - docs/models/operations/getrecoverycasesresponse.md
   - docs/models/operations/getreportsreportuuidrequest.md
+  - docs/models/operations/getreportsreportuuidresponse.md
   - docs/models/operations/gettimeoffpoliciestimeoffpolicyuuidrequest.md
+  - docs/models/operations/gettimeoffpoliciestimeoffpolicyuuidresponse.md
   - docs/models/operations/getv1benefitsbenefitidrequest.md
+  - docs/models/operations/getv1benefitsbenefitidresponse.md
   - docs/models/operations/getv1benefitsbenefitsidrequirementsrequest.md
+  - docs/models/operations/getv1benefitsbenefitsidrequirementsresponse.md
   - docs/models/operations/getv1benefitscompanybenefitidsummaryrequest.md
+  - docs/models/operations/getv1benefitscompanybenefitidsummaryresponse.md
   - docs/models/operations/getv1benefitsrequest.md
+  - docs/models/operations/getv1benefitsresponse.md
   - docs/models/operations/getv1companiesattachmentrequest.md
+  - docs/models/operations/getv1companiesattachmentresponse.md
   - docs/models/operations/getv1companiesattachmentsrequest.md
+  - docs/models/operations/getv1companiesattachmentsresponse.md
   - docs/models/operations/getv1companiesattachmenturlrequest.md
+  - docs/models/operations/getv1companiesattachmenturlresponse.md
   - docs/models/operations/getv1companiesattachmenturlresponsebody.md
   - docs/models/operations/getv1companiescompanyidadminsrequest.md
+  - docs/models/operations/getv1companiescompanyidadminsresponse.md
   - docs/models/operations/getv1companiescompanyidbankaccountsrequest.md
+  - docs/models/operations/getv1companiescompanyidbankaccountsresponse.md
   - docs/models/operations/getv1companiescompanyidcompanybenefitsrequest.md
+  - docs/models/operations/getv1companiescompanyidcompanybenefitsresponse.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentcontractorpaymentrequest.md
+  - docs/models/operations/getv1companiescompanyidcontractorpaymentcontractorpaymentresponse.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentgroupsrequest.md
+  - docs/models/operations/getv1companiescompanyidcontractorpaymentgroupsresponse.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentsrequest.md
+  - docs/models/operations/getv1companiescompanyidcontractorpaymentsresponse.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentsresponsebody.md
   - docs/models/operations/getv1companiescompanyidcustomfieldsrequest.md
+  - docs/models/operations/getv1companiescompanyidcustomfieldsresponse.md
   - docs/models/operations/getv1companiescompanyidearningtypesrequest.md
+  - docs/models/operations/getv1companiescompanyidearningtypesresponse.md
   - docs/models/operations/getv1companiescompanyidemployeesrequest.md
+  - docs/models/operations/getv1companiescompanyidemployeesresponse.md
   - docs/models/operations/getv1companiescompanyidfederaltaxdetailsrequest.md
+  - docs/models/operations/getv1companiescompanyidfederaltaxdetailsresponse.md
   - docs/models/operations/getv1companiescompanyidlocationsrequest.md
+  - docs/models/operations/getv1companiescompanyidlocationsresponse.md
   - docs/models/operations/getv1companiescompanyidpayperiodsrequest.md
+  - docs/models/operations/getv1companiescompanyidpayperiodsresponse.md
   - docs/models/operations/getv1companiescompanyidpayrollreversalsrequest.md
+  - docs/models/operations/getv1companiescompanyidpayrollreversalsresponse.md
   - docs/models/operations/getv1companiescompanyidpayrollspayrollidqueryparaminclude.md
   - docs/models/operations/getv1companiescompanyidpayrollspayrollidrequest.md
+  - docs/models/operations/getv1companiescompanyidpayrollspayrollidresponse.md
   - docs/models/operations/getv1companiescompanyidpayrollsqueryparaminclude.md
   - docs/models/operations/getv1companiescompanyidpayrollsrequest.md
+  - docs/models/operations/getv1companiescompanyidpayrollsresponse.md
   - docs/models/operations/getv1companiescompanyidpayschedulesassignmentsrequest.md
+  - docs/models/operations/getv1companiescompanyidpayschedulesassignmentsresponse.md
   - docs/models/operations/getv1companiescompanyidpayschedulespayscheduleidrequest.md
+  - docs/models/operations/getv1companiescompanyidpayschedulespayscheduleidresponse.md
   - docs/models/operations/getv1companiescompanyidpayschedulespreviewrequest.md
+  - docs/models/operations/getv1companiescompanyidpayschedulespreviewresponse.md
   - docs/models/operations/getv1companiescompanyidpayschedulespreviewresponsebody.md
   - docs/models/operations/getv1companiescompanyidpayschedulesrequest.md
+  - docs/models/operations/getv1companiescompanyidpayschedulesresponse.md
   - docs/models/operations/getv1companiescompanyidunprocessedterminationpayperiodsrequest.md
+  - docs/models/operations/getv1companiescompanyidunprocessedterminationpayperiodsresponse.md
   - docs/models/operations/getv1companiescompanyuuidcontractorsrequest.md
+  - docs/models/operations/getv1companiescompanyuuidcontractorsresponse.md
   - docs/models/operations/getv1companiescompanyuuidsignatoriesrequest.md
+  - docs/models/operations/getv1companiescompanyuuidsignatoriesresponse.md
   - docs/models/operations/getv1companiescompanyuuidtaxrequirementsrequest.md
+  - docs/models/operations/getv1companiescompanyuuidtaxrequirementsresponse.md
   - docs/models/operations/getv1companiescompanyuuidtaxrequirementsstaterequest.md
+  - docs/models/operations/getv1companiescompanyuuidtaxrequirementsstateresponse.md
   - docs/models/operations/getv1companiespayrollblockerscompanyuuidrequest.md
+  - docs/models/operations/getv1companiespayrollblockerscompanyuuidresponse.md
   - docs/models/operations/getv1companiesrequest.md
+  - docs/models/operations/getv1companiesresponse.md
   - docs/models/operations/getv1companybenefitscompanybenefitidemployeebenefitsrequest.md
+  - docs/models/operations/getv1companybenefitscompanybenefitidemployeebenefitsresponse.md
   - docs/models/operations/getv1companybenefitscompanybenefitidrequest.md
+  - docs/models/operations/getv1companybenefitscompanybenefitidresponse.md
   - docs/models/operations/getv1companyexternalpayrollsrequest.md
+  - docs/models/operations/getv1companyexternalpayrollsresponse.md
   - docs/models/operations/getv1companyfinishonboardingrequest.md
+  - docs/models/operations/getv1companyfinishonboardingresponse.md
   - docs/models/operations/getv1companyformpdfrequest.md
+  - docs/models/operations/getv1companyformpdfresponse.md
   - docs/models/operations/getv1companyformrequest.md
+  - docs/models/operations/getv1companyformresponse.md
   - docs/models/operations/getv1companyformsrequest.md
+  - docs/models/operations/getv1companyformsresponse.md
   - docs/models/operations/getv1companyindustryrequest.md
+  - docs/models/operations/getv1companyindustryresponse.md
   - docs/models/operations/getv1companyonboardingstatusrequest.md
+  - docs/models/operations/getv1companyonboardingstatusresponse.md
   - docs/models/operations/getv1companypaymentconfigsrequest.md
+  - docs/models/operations/getv1companypaymentconfigsresponse.md
   - docs/models/operations/getv1compensationscompensationidrequest.md
+  - docs/models/operations/getv1compensationscompensationidresponse.md
   - docs/models/operations/getv1contractordocumentpdfrequest.md
+  - docs/models/operations/getv1contractordocumentpdfresponse.md
   - docs/models/operations/getv1contractordocumentrequest.md
+  - docs/models/operations/getv1contractordocumentresponse.md
   - docs/models/operations/getv1contractordocumentsrequest.md
+  - docs/models/operations/getv1contractordocumentsresponse.md
   - docs/models/operations/getv1contractorformpdfrequest.md
+  - docs/models/operations/getv1contractorformpdfresponse.md
   - docs/models/operations/getv1contractorformrequest.md
+  - docs/models/operations/getv1contractorformresponse.md
   - docs/models/operations/getv1contractorformsrequest.md
+  - docs/models/operations/getv1contractorformsresponse.md
   - docs/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidrequest.md
+  - docs/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidresponse.md
   - docs/models/operations/getv1contractorpaymentscontractorpaymentuuidfundrequest.md
+  - docs/models/operations/getv1contractorpaymentscontractorpaymentuuidfundresponse.md
   - docs/models/operations/getv1contractorpaymentscontractorpaymentuuidreceiptrequest.md
+  - docs/models/operations/getv1contractorpaymentscontractorpaymentuuidreceiptresponse.md
   - docs/models/operations/getv1contractorscontractoruuidaddressrequest.md
+  - docs/models/operations/getv1contractorscontractoruuidaddressresponse.md
   - docs/models/operations/getv1contractorscontractoruuidbankaccountsrequest.md
+  - docs/models/operations/getv1contractorscontractoruuidbankaccountsresponse.md
   - docs/models/operations/getv1contractorscontractoruuidonboardingstatusrequest.md
+  - docs/models/operations/getv1contractorscontractoruuidonboardingstatusresponse.md
   - docs/models/operations/getv1contractorscontractoruuidpaymentmethodrequest.md
+  - docs/models/operations/getv1contractorscontractoruuidpaymentmethodresponse.md
   - docs/models/operations/getv1contractorscontractoruuidrequest.md
+  - docs/models/operations/getv1contractorscontractoruuidresponse.md
   - docs/models/operations/getv1employeebenefitsemployeebenefitidrequest.md
+  - docs/models/operations/getv1employeebenefitsemployeebenefitidresponse.md
   - docs/models/operations/getv1employeeformpdfrequest.md
+  - docs/models/operations/getv1employeeformpdfresponse.md
   - docs/models/operations/getv1employeeformrequest.md
+  - docs/models/operations/getv1employeeformresponse.md
   - docs/models/operations/getv1employeeformsrequest.md
+  - docs/models/operations/getv1employeeformsresponse.md
   - docs/models/operations/getv1employeesemployeeidbankaccountsrequest.md
+  - docs/models/operations/getv1employeesemployeeidbankaccountsresponse.md
   - docs/models/operations/getv1employeesemployeeidcustomfieldsrequest.md
+  - docs/models/operations/getv1employeesemployeeidcustomfieldsresponse.md
   - docs/models/operations/getv1employeesemployeeidcustomfieldsresponsebody.md
   - docs/models/operations/getv1employeesemployeeidemployeebenefitsrequest.md
+  - docs/models/operations/getv1employeesemployeeidemployeebenefitsresponse.md
   - docs/models/operations/getv1employeesemployeeidemploymenthistoryrequest.md
+  - docs/models/operations/getv1employeesemployeeidemploymenthistoryresponse.md
   - docs/models/operations/getv1employeesemployeeidfederaltaxesrequest.md
+  - docs/models/operations/getv1employeesemployeeidfederaltaxesresponse.md
   - docs/models/operations/getv1employeesemployeeidgarnishmentsrequest.md
+  - docs/models/operations/getv1employeesemployeeidgarnishmentsresponse.md
   - docs/models/operations/getv1employeesemployeeidhomeaddressesrequest.md
+  - docs/models/operations/getv1employeesemployeeidhomeaddressesresponse.md
   - docs/models/operations/getv1employeesemployeeidi9authorizationdocumentoptionsrequest.md
+  - docs/models/operations/getv1employeesemployeeidi9authorizationdocumentoptionsresponse.md
   - docs/models/operations/getv1employeesemployeeidi9authorizationdocumentsrequest.md
+  - docs/models/operations/getv1employeesemployeeidi9authorizationdocumentsresponse.md
   - docs/models/operations/getv1employeesemployeeidi9authorizationrequest.md
+  - docs/models/operations/getv1employeesemployeeidi9authorizationresponse.md
   - docs/models/operations/getv1employeesemployeeidjobsqueryparaminclude.md
   - docs/models/operations/getv1employeesemployeeidjobsrequest.md
+  - docs/models/operations/getv1employeesemployeeidjobsresponse.md
   - docs/models/operations/getv1employeesemployeeidonboardingstatusrequest.md
+  - docs/models/operations/getv1employeesemployeeidonboardingstatusresponse.md
   - docs/models/operations/getv1employeesemployeeidpaymentmethodrequest.md
+  - docs/models/operations/getv1employeesemployeeidpaymentmethodresponse.md
   - docs/models/operations/getv1employeesemployeeidrehirerequest.md
+  - docs/models/operations/getv1employeesemployeeidrehireresponse.md
   - docs/models/operations/getv1employeesemployeeidstatetaxesrequest.md
+  - docs/models/operations/getv1employeesemployeeidstatetaxesresponse.md
   - docs/models/operations/getv1employeesemployeeidterminationsrequest.md
+  - docs/models/operations/getv1employeesemployeeidterminationsresponse.md
   - docs/models/operations/getv1employeesemployeeidworkaddressesrequest.md
+  - docs/models/operations/getv1employeesemployeeidworkaddressesresponse.md
   - docs/models/operations/getv1employeesemployeeuuidpaystubsrequest.md
+  - docs/models/operations/getv1employeesemployeeuuidpaystubsresponse.md
   - docs/models/operations/getv1employeesrequest.md
+  - docs/models/operations/getv1employeesresponse.md
   - docs/models/operations/getv1externalpayrollcalculatetaxesrequest.md
+  - docs/models/operations/getv1externalpayrollcalculatetaxesresponse.md
   - docs/models/operations/getv1externalpayrollrequest.md
+  - docs/models/operations/getv1externalpayrollresponse.md
   - docs/models/operations/getv1garnishmentschildsupportrequest.md
+  - docs/models/operations/getv1garnishmentschildsupportresponse.md
   - docs/models/operations/getv1garnishmentsgarnishmentidrequest.md
+  - docs/models/operations/getv1garnishmentsgarnishmentidresponse.md
   - docs/models/operations/getv1generateddocumentsdocumenttyperequestuuidrequest.md
+  - docs/models/operations/getv1generateddocumentsdocumenttyperequestuuidresponse.md
   - docs/models/operations/getv1homeaddresseshomeaddressuuidrequest.md
+  - docs/models/operations/getv1homeaddresseshomeaddressuuidresponse.md
   - docs/models/operations/getv1jobsjobidcompensationsqueryparaminclude.md
   - docs/models/operations/getv1jobsjobidcompensationsrequest.md
+  - docs/models/operations/getv1jobsjobidcompensationsresponse.md
   - docs/models/operations/getv1jobsjobidqueryparaminclude.md
   - docs/models/operations/getv1jobsjobidrequest.md
+  - docs/models/operations/getv1jobsjobidresponse.md
   - docs/models/operations/getv1locationslocationidrequest.md
+  - docs/models/operations/getv1locationslocationidresponse.md
   - docs/models/operations/getv1locationslocationuuidminimumwagesrequest.md
+  - docs/models/operations/getv1locationslocationuuidminimumwagesresponse.md
   - docs/models/operations/getv1paymentreceiptspayrollspayrolluuidrequest.md
+  - docs/models/operations/getv1paymentreceiptspayrollspayrolluuidresponse.md
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubrequest.md
+  - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubresponse.md
   - docs/models/operations/getv1taxliabilitiesrequest.md
+  - docs/models/operations/getv1taxliabilitiesresponse.md
   - docs/models/operations/getv1tokeninforequest.md
+  - docs/models/operations/getv1tokeninforesponse.md
   - docs/models/operations/getv1tokeninforesponsebody.md
   - docs/models/operations/getv1tokeninfotype.md
   - docs/models/operations/getv1webhooksubscriptionsrequest.md
+  - docs/models/operations/getv1webhooksubscriptionsresponse.md
   - docs/models/operations/getv1webhooksubscriptionssecurity.md
   - docs/models/operations/getv1webhooksubscriptionuuidrequest.md
+  - docs/models/operations/getv1webhooksubscriptionuuidresponse.md
   - docs/models/operations/getv1webhooksubscriptionuuidsecurity.md
   - docs/models/operations/getv1webhooksubscriptionverificationtokenuuidrequest.md
+  - docs/models/operations/getv1webhooksubscriptionverificationtokenuuidresponse.md
   - docs/models/operations/getv1webhooksubscriptionverificationtokenuuidsecurity.md
   - docs/models/operations/getv1workaddressesworkaddressuuidrequest.md
+  - docs/models/operations/getv1workaddressesworkaddressuuidresponse.md
   - docs/models/operations/getversionemployeestimeoffactivitiesrequest.md
+  - docs/models/operations/getversionemployeestimeoffactivitiesresponse.md
   - docs/models/operations/getwireinrequestswireinrequestuuidrequest.md
+  - docs/models/operations/getwireinrequestswireinrequestuuidresponse.md
   - docs/models/operations/groupings.md
   - docs/models/operations/homeaddress.md
   - docs/models/operations/hourlycompensations.md
@@ -614,118 +750,167 @@ generatedFiles:
   - docs/models/operations/payrolltypes.md
   - docs/models/operations/postcompaniescompanyuuidholidaypaypolicyrequest.md
   - docs/models/operations/postcompaniescompanyuuidholidaypaypolicyrequestbody.md
+  - docs/models/operations/postcompaniescompanyuuidholidaypaypolicyresponse.md
   - docs/models/operations/postcompaniescompanyuuidreportsemploymentstatus.md
   - docs/models/operations/postcompaniescompanyuuidreportspaymentmethod.md
   - docs/models/operations/postcompaniescompanyuuidreportsrequest.md
   - docs/models/operations/postcompaniescompanyuuidreportsrequestbody.md
+  - docs/models/operations/postcompaniescompanyuuidreportsresponse.md
   - docs/models/operations/postcompaniescompanyuuidtimeoffpoliciesaccrualmethod.md
   - docs/models/operations/postcompaniescompanyuuidtimeoffpoliciesrequest.md
   - docs/models/operations/postcompaniescompanyuuidtimeoffpoliciesrequestbody.md
+  - docs/models/operations/postcompaniescompanyuuidtimeoffpoliciesresponse.md
   - docs/models/operations/postcompaniespayrollskipcompanyuuidrequest.md
   - docs/models/operations/postcompaniespayrollskipcompanyuuidrequestbody.md
+  - docs/models/operations/postcompaniespayrollskipcompanyuuidresponse.md
   - docs/models/operations/postdepartmentsrequest.md
   - docs/models/operations/postdepartmentsrequestbody.md
+  - docs/models/operations/postdepartmentsresponse.md
   - docs/models/operations/postemployeeytdbenefitamountsfromdifferentcompanyrequest.md
+  - docs/models/operations/postemployeeytdbenefitamountsfromdifferentcompanyresponse.md
   - docs/models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofservicerequest.md
   - docs/models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofservicerequestbody.md
+  - docs/models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofserviceresponse.md
   - docs/models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofserviceresponsebody.md
   - docs/models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofservicerequest.md
   - docs/models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofservicerequestbody.md
+  - docs/models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofserviceresponse.md
   - docs/models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofserviceresponsebody.md
   - docs/models/operations/postpayrollsgrossuppayrolluuidrequest.md
   - docs/models/operations/postpayrollsgrossuppayrolluuidrequestbody.md
+  - docs/models/operations/postpayrollsgrossuppayrolluuidresponse.md
   - docs/models/operations/postv1companiesattachmentrequest.md
   - docs/models/operations/postv1companiesattachmentrequestbody.md
+  - docs/models/operations/postv1companiesattachmentresponse.md
   - docs/models/operations/postv1companiescompanyidadminsrequest.md
   - docs/models/operations/postv1companiescompanyidadminsrequestbody.md
+  - docs/models/operations/postv1companiescompanyidadminsresponse.md
   - docs/models/operations/postv1companiescompanyidbankaccountsrequest.md
   - docs/models/operations/postv1companiescompanyidbankaccountsrequestbody.md
+  - docs/models/operations/postv1companiescompanyidbankaccountsresponse.md
   - docs/models/operations/postv1companiescompanyidcompanybenefitsrequest.md
   - docs/models/operations/postv1companiescompanyidcompanybenefitsrequestbody.md
+  - docs/models/operations/postv1companiescompanyidcompanybenefitsresponse.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspaymentmethod.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewcontractorpayments.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewpaymentmethod.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewrequest.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewrequestbody.md
+  - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewresponse.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupsrequest.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupsrequestbody.md
+  - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupsresponse.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentspaymentmethod.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentsrequest.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentsrequestbody.md
+  - docs/models/operations/postv1companiescompanyidcontractorpaymentsresponse.md
   - docs/models/operations/postv1companiescompanyidearningtypesrequest.md
   - docs/models/operations/postv1companiescompanyidearningtypesrequestbody.md
+  - docs/models/operations/postv1companiescompanyidearningtypesresponse.md
   - docs/models/operations/postv1companiescompanyidlocationsrequest.md
   - docs/models/operations/postv1companiescompanyidlocationsrequestbody.md
+  - docs/models/operations/postv1companiescompanyidlocationsresponse.md
   - docs/models/operations/postv1companiescompanyidpayrollsrequest.md
   - docs/models/operations/postv1companiescompanyidpayrollsrequestbody.md
+  - docs/models/operations/postv1companiescompanyidpayrollsresponse.md
   - docs/models/operations/postv1companiescompanyidpayschedulesassignmentpreviewrequest.md
+  - docs/models/operations/postv1companiescompanyidpayschedulesassignmentpreviewresponse.md
   - docs/models/operations/postv1companiescompanyidpayschedulesassignrequest.md
+  - docs/models/operations/postv1companiescompanyidpayschedulesassignresponse.md
   - docs/models/operations/postv1companiescompanyidpayschedulesrequest.md
   - docs/models/operations/postv1companiescompanyidpayschedulesrequestbody.md
+  - docs/models/operations/postv1companiescompanyidpayschedulesresponse.md
   - docs/models/operations/postv1companiescompanyuuidcontractorsrequest.md
   - docs/models/operations/postv1companiescompanyuuidcontractorsrequestbody.md
+  - docs/models/operations/postv1companiescompanyuuidcontractorsresponse.md
   - docs/models/operations/postv1companiescompanyuuidcontractorstype.md
   - docs/models/operations/postv1companiescompanyuuidsignatoriesinviterequest.md
   - docs/models/operations/postv1companiescompanyuuidsignatoriesinviterequestbody.md
+  - docs/models/operations/postv1companiescompanyuuidsignatoriesinviteresponse.md
   - docs/models/operations/postv1companyflowsrequest.md
   - docs/models/operations/postv1companyflowsrequestbody.md
+  - docs/models/operations/postv1companyflowsresponse.md
   - docs/models/operations/postv1companysignatoriesrequest.md
   - docs/models/operations/postv1companysignatoriesrequestbody.md
+  - docs/models/operations/postv1companysignatoriesresponse.md
   - docs/models/operations/postv1compensationscompensationidrequest.md
   - docs/models/operations/postv1compensationscompensationidrequestbody.md
+  - docs/models/operations/postv1compensationscompensationidresponse.md
   - docs/models/operations/postv1contractorscontractoruuidbankaccountsaccounttype.md
   - docs/models/operations/postv1contractorscontractoruuidbankaccountsrequest.md
   - docs/models/operations/postv1contractorscontractoruuidbankaccountsrequestbody.md
+  - docs/models/operations/postv1contractorscontractoruuidbankaccountsresponse.md
   - docs/models/operations/postv1employeesemployeeidbankaccountsaccounttype.md
   - docs/models/operations/postv1employeesemployeeidbankaccountsrequest.md
   - docs/models/operations/postv1employeesemployeeidbankaccountsrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidbankaccountsresponse.md
   - docs/models/operations/postv1employeesemployeeidemployeebenefitsrequest.md
   - docs/models/operations/postv1employeesemployeeidemployeebenefitsrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidemployeebenefitsresponse.md
   - docs/models/operations/postv1employeesemployeeidemployeebenefitstype.md
   - docs/models/operations/postv1employeesemployeeidgarnishmentsrequest.md
   - docs/models/operations/postv1employeesemployeeidgarnishmentsrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidgarnishmentsresponse.md
   - docs/models/operations/postv1employeesemployeeidhomeaddressesrequest.md
   - docs/models/operations/postv1employeesemployeeidhomeaddressesrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidhomeaddressesresponse.md
   - docs/models/operations/postv1employeesemployeeidrehirerequest.md
+  - docs/models/operations/postv1employeesemployeeidrehireresponse.md
   - docs/models/operations/postv1employeesemployeeidterminationsrequest.md
   - docs/models/operations/postv1employeesemployeeidterminationsrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidterminationsresponse.md
   - docs/models/operations/postv1employeesemployeeidworkaddressesrequest.md
   - docs/models/operations/postv1employeesemployeeidworkaddressesrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidworkaddressesresponse.md
   - docs/models/operations/postv1employeesrequest.md
   - docs/models/operations/postv1employeesrequestbody.md
+  - docs/models/operations/postv1employeesresponse.md
   - docs/models/operations/postv1externalpayrollrequest.md
   - docs/models/operations/postv1externalpayrollrequestbody.md
+  - docs/models/operations/postv1externalpayrollresponse.md
   - docs/models/operations/postv1historicalemployeesrequest.md
+  - docs/models/operations/postv1historicalemployeesresponse.md
   - docs/models/operations/postv1jobsjobidrequest.md
   - docs/models/operations/postv1jobsjobidrequestbody.md
+  - docs/models/operations/postv1jobsjobidresponse.md
   - docs/models/operations/postv1partnermanagedcompaniesrequest.md
   - docs/models/operations/postv1partnermanagedcompaniesrequestbody.md
+  - docs/models/operations/postv1partnermanagedcompaniesresponse.md
   - docs/models/operations/postv1partnermanagedcompaniesresponsebody.md
   - docs/models/operations/postv1partnermanagedcompaniessecurity.md
   - docs/models/operations/postv1payrollspayrollidcalculateaccruingtimeoffhoursrequest.md
   - docs/models/operations/postv1payrollspayrollidcalculateaccruingtimeoffhoursrequestbody.md
+  - docs/models/operations/postv1payrollspayrollidcalculateaccruingtimeoffhoursresponse.md
   - docs/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecksrequest.md
   - docs/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecksrequestbody.md
+  - docs/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecksresponse.md
   - docs/models/operations/postv1plaidprocessortokenrequest.md
   - docs/models/operations/postv1plaidprocessortokenrequestbody.md
+  - docs/models/operations/postv1plaidprocessortokenresponse.md
   - docs/models/operations/postv1plaidprocessortokenresponsebody.md
   - docs/models/operations/postv1sandboxgenerate1099request.md
   - docs/models/operations/postv1sandboxgenerate1099requestbody.md
+  - docs/models/operations/postv1sandboxgenerate1099response.md
   - docs/models/operations/postv1sandboxgeneratew2form.md
   - docs/models/operations/postv1sandboxgeneratew2request.md
   - docs/models/operations/postv1sandboxgeneratew2requestbody.md
+  - docs/models/operations/postv1sandboxgeneratew2response.md
   - docs/models/operations/postv1webhooksubscriptionrequest.md
   - docs/models/operations/postv1webhooksubscriptionrequestbody.md
+  - docs/models/operations/postv1webhooksubscriptionresponse.md
   - docs/models/operations/postv1webhooksubscriptionsecurity.md
   - docs/models/operations/presidentsday.md
   - docs/models/operations/printingformat.md
   - docs/models/operations/processingstatuses.md
   - docs/models/operations/putaddpeopletodepartmentrequest.md
   - docs/models/operations/putaddpeopletodepartmentrequestbody.md
+  - docs/models/operations/putaddpeopletodepartmentresponse.md
   - docs/models/operations/putapiv1companiescompanyidpayrollspayrollidcancelrequest.md
+  - docs/models/operations/putapiv1companiescompanyidpayrollspayrollidcancelresponse.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyaddemployees.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyaddrequest.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyaddrequestbody.md
+  - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyaddresponse.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicychristmasday.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicycolumbusday.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyfederalholidays.md
@@ -739,66 +924,94 @@ generatedFiles:
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyremoveemployees.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyremoverequest.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyremoverequestbody.md
+  - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyremoveresponse.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyrequest.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyrequestbody.md
+  - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyresponse.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicythanksgiving.md
   - docs/models/operations/putcompaniescompanyuuidholidaypaypolicyveteransday.md
   - docs/models/operations/putdepartmentsrequest.md
   - docs/models/operations/putdepartmentsrequestbody.md
+  - docs/models/operations/putdepartmentsresponse.md
   - docs/models/operations/putremovepeoplefromdepartmentcontractors.md
   - docs/models/operations/putremovepeoplefromdepartmentemployees.md
   - docs/models/operations/putremovepeoplefromdepartmentrequest.md
   - docs/models/operations/putremovepeoplefromdepartmentrequestbody.md
+  - docs/models/operations/putremovepeoplefromdepartmentresponse.md
   - docs/models/operations/puttimeoffpoliciestimeoffpolicyuuidrequest.md
   - docs/models/operations/puttimeoffpoliciestimeoffpolicyuuidrequestbody.md
+  - docs/models/operations/puttimeoffpoliciestimeoffpolicyuuidresponse.md
   - docs/models/operations/putv1companiescompanyidbankaccountsverifyrequest.md
   - docs/models/operations/putv1companiescompanyidbankaccountsverifyrequestbody.md
+  - docs/models/operations/putv1companiescompanyidbankaccountsverifyresponse.md
   - docs/models/operations/putv1companiescompanyidearningtypesearningtypeuuidrequest.md
   - docs/models/operations/putv1companiescompanyidearningtypesearningtypeuuidrequestbody.md
+  - docs/models/operations/putv1companiescompanyidearningtypesearningtypeuuidresponse.md
   - docs/models/operations/putv1companiescompanyidfederaltaxdetailsrequest.md
   - docs/models/operations/putv1companiescompanyidfederaltaxdetailsrequestbody.md
+  - docs/models/operations/putv1companiescompanyidfederaltaxdetailsresponse.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidcalculaterequest.md
+  - docs/models/operations/putv1companiescompanyidpayrollspayrollidcalculateresponse.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidpreparerequest.md
+  - docs/models/operations/putv1companiescompanyidpayrollspayrollidprepareresponse.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidsubmitrequest.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidsubmitrequestbody.md
+  - docs/models/operations/putv1companiescompanyidpayrollspayrollidsubmitresponse.md
   - docs/models/operations/putv1companiescompanyidpayrollsrequest.md
   - docs/models/operations/putv1companiescompanyidpayrollsrequestbody.md
+  - docs/models/operations/putv1companiescompanyidpayrollsresponse.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidfrequency.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidrequest.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidrequestbody.md
+  - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidresponse.md
   - docs/models/operations/putv1companiescompanyuuidsignatoriessignatoryuuidhomeaddress.md
   - docs/models/operations/putv1companiescompanyuuidsignatoriessignatoryuuidrequest.md
   - docs/models/operations/putv1companiescompanyuuidsignatoriessignatoryuuidrequestbody.md
+  - docs/models/operations/putv1companiescompanyuuidsignatoriessignatoryuuidresponse.md
   - docs/models/operations/putv1companiescompanyuuidtaxrequirementsstaterequest.md
   - docs/models/operations/putv1companiescompanyuuidtaxrequirementsstaterequestbody.md
+  - docs/models/operations/putv1companiescompanyuuidtaxrequirementsstateresponse.md
   - docs/models/operations/putv1companiesrequest.md
   - docs/models/operations/putv1companiesrequestbody.md
+  - docs/models/operations/putv1companiesresponse.md
   - docs/models/operations/putv1companybenefitscompanybenefitidemployeebenefitsrequest.md
   - docs/models/operations/putv1companybenefitscompanybenefitidemployeebenefitsrequestbody.md
+  - docs/models/operations/putv1companybenefitscompanybenefitidemployeebenefitsresponse.md
   - docs/models/operations/putv1companybenefitscompanybenefitidrequest.md
   - docs/models/operations/putv1companybenefitscompanybenefitidrequestbody.md
+  - docs/models/operations/putv1companybenefitscompanybenefitidresponse.md
   - docs/models/operations/putv1companyformsignrequest.md
   - docs/models/operations/putv1companyformsignrequestbody.md
+  - docs/models/operations/putv1companyformsignresponse.md
   - docs/models/operations/putv1companyindustryrequest.md
   - docs/models/operations/putv1companyindustryrequestbody.md
+  - docs/models/operations/putv1companyindustryresponse.md
   - docs/models/operations/putv1companypaymentconfigsrequest.md
   - docs/models/operations/putv1companypaymentconfigsrequestbody.md
+  - docs/models/operations/putv1companypaymentconfigsresponse.md
   - docs/models/operations/putv1compensationscompensationidminimumwages.md
   - docs/models/operations/putv1compensationscompensationidpaymentunit.md
   - docs/models/operations/putv1compensationscompensationidrequest.md
   - docs/models/operations/putv1compensationscompensationidrequestbody.md
+  - docs/models/operations/putv1compensationscompensationidresponse.md
   - docs/models/operations/putv1contractordocumentsignrequest.md
   - docs/models/operations/putv1contractordocumentsignrequestbody.md
+  - docs/models/operations/putv1contractordocumentsignresponse.md
   - docs/models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfundrequest.md
+  - docs/models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfundresponse.md
   - docs/models/operations/putv1contractorscontractoridpaymentmethodrequest.md
   - docs/models/operations/putv1contractorscontractoridpaymentmethodrequestbody.md
+  - docs/models/operations/putv1contractorscontractoridpaymentmethodresponse.md
   - docs/models/operations/putv1contractorscontractoridpaymentmethodtype.md
   - docs/models/operations/putv1contractorscontractoruuidaddressrequest.md
   - docs/models/operations/putv1contractorscontractoruuidaddressrequestbody.md
+  - docs/models/operations/putv1contractorscontractoruuidaddressresponse.md
   - docs/models/operations/putv1contractorscontractoruuidonboardingstatusrequest.md
   - docs/models/operations/putv1contractorscontractoruuidonboardingstatusrequestbody.md
+  - docs/models/operations/putv1contractorscontractoruuidonboardingstatusresponse.md
   - docs/models/operations/putv1contractorscontractoruuidrequest.md
   - docs/models/operations/putv1contractorscontractoruuidrequestbody.md
+  - docs/models/operations/putv1contractorscontractoruuidresponse.md
   - docs/models/operations/putv1contractorscontractoruuidtype.md
   - docs/models/operations/putv1contractorscontractoruuidwagetype.md
   - docs/models/operations/putv1employeebenefitsemployeebenefitidcontribution.md
@@ -806,81 +1019,114 @@ generatedFiles:
   - docs/models/operations/putv1employeebenefitsemployeebenefitidlimitoption.md
   - docs/models/operations/putv1employeebenefitsemployeebenefitidrequest.md
   - docs/models/operations/putv1employeebenefitsemployeebenefitidrequestbody.md
+  - docs/models/operations/putv1employeebenefitsemployeebenefitidresponse.md
   - docs/models/operations/putv1employeebenefitsemployeebenefitidtype.md
   - docs/models/operations/putv1employeebenefitsemployeebenefitidvalue.md
   - docs/models/operations/putv1employeeformsignrequest.md
   - docs/models/operations/putv1employeeformsignrequestbody.md
+  - docs/models/operations/putv1employeeformsignresponse.md
   - docs/models/operations/putv1employeesemployeeidbankaccountsaccounttype.md
   - docs/models/operations/putv1employeesemployeeidbankaccountsrequest.md
   - docs/models/operations/putv1employeesemployeeidbankaccountsrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidbankaccountsresponse.md
   - docs/models/operations/putv1employeesemployeeidfederaltaxesrequest.md
   - docs/models/operations/putv1employeesemployeeidfederaltaxesrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidfederaltaxesresponse.md
   - docs/models/operations/putv1employeesemployeeidi9authorizationdocumentsrequest.md
   - docs/models/operations/putv1employeesemployeeidi9authorizationdocumentsrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationdocumentsresponse.md
   - docs/models/operations/putv1employeesemployeeidi9authorizationemployersignrequest.md
   - docs/models/operations/putv1employeesemployeeidi9authorizationemployersignrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationemployersignresponse.md
   - docs/models/operations/putv1employeesemployeeidi9authorizationrequest.md
   - docs/models/operations/putv1employeesemployeeidi9authorizationrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidi9authorizationresponse.md
   - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequest.md
   - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigresponse.md
   - docs/models/operations/putv1employeesemployeeidonboardingstatusrequest.md
   - docs/models/operations/putv1employeesemployeeidonboardingstatusrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidonboardingstatusresponse.md
   - docs/models/operations/putv1employeesemployeeidpaymentmethodrequest.md
   - docs/models/operations/putv1employeesemployeeidpaymentmethodrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidpaymentmethodresponse.md
   - docs/models/operations/putv1employeesemployeeidrehirerequest.md
   - docs/models/operations/putv1employeesemployeeidrehirerequestbody.md
+  - docs/models/operations/putv1employeesemployeeidrehireresponse.md
   - docs/models/operations/putv1employeesemployeeidstatetaxesrequest.md
   - docs/models/operations/putv1employeesemployeeidstatetaxesrequestbody.md
+  - docs/models/operations/putv1employeesemployeeidstatetaxesresponse.md
   - docs/models/operations/putv1employeesrequest.md
   - docs/models/operations/putv1employeesrequestbody.md
+  - docs/models/operations/putv1employeesresponse.md
   - docs/models/operations/putv1externalpayrollrequest.md
   - docs/models/operations/putv1externalpayrollrequestbody.md
+  - docs/models/operations/putv1externalpayrollresponse.md
   - docs/models/operations/putv1garnishmentsgarnishmentidrequest.md
   - docs/models/operations/putv1garnishmentsgarnishmentidrequestbody.md
+  - docs/models/operations/putv1garnishmentsgarnishmentidresponse.md
   - docs/models/operations/putv1historicalemployeeshomeaddress.md
   - docs/models/operations/putv1historicalemployeesrequest.md
   - docs/models/operations/putv1historicalemployeesrequestbody.md
+  - docs/models/operations/putv1historicalemployeesresponse.md
   - docs/models/operations/putv1homeaddresseshomeaddressuuidrequest.md
   - docs/models/operations/putv1homeaddresseshomeaddressuuidrequestbody.md
+  - docs/models/operations/putv1homeaddresseshomeaddressuuidresponse.md
   - docs/models/operations/putv1jobsjobidrequest.md
   - docs/models/operations/putv1jobsjobidrequestbody.md
+  - docs/models/operations/putv1jobsjobidresponse.md
   - docs/models/operations/putv1locationslocationidrequest.md
   - docs/models/operations/putv1locationslocationidrequestbody.md
+  - docs/models/operations/putv1locationslocationidresponse.md
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigraterequest.md
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigraterequestbody.md
+  - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponse.md
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponsebody.md
   - docs/models/operations/putv1taxliabilitiesfinishrequest.md
+  - docs/models/operations/putv1taxliabilitiesfinishresponse.md
   - docs/models/operations/putv1taxliabilitiesrequest.md
   - docs/models/operations/putv1taxliabilitiesrequestbody.md
+  - docs/models/operations/putv1taxliabilitiesresponse.md
   - docs/models/operations/putv1terminationsemployeeidrequest.md
   - docs/models/operations/putv1terminationsemployeeidrequestbody.md
+  - docs/models/operations/putv1terminationsemployeeidresponse.md
   - docs/models/operations/putv1timeoffpoliciestimeoffpolicyuuiddeactivaterequest.md
+  - docs/models/operations/putv1timeoffpoliciestimeoffpolicyuuiddeactivateresponse.md
   - docs/models/operations/putv1timeoffpoliciestimeoffpolicyuuidremoveemployeesemployees.md
   - docs/models/operations/putv1timeoffpoliciestimeoffpolicyuuidremoveemployeesrequest.md
   - docs/models/operations/putv1timeoffpoliciestimeoffpolicyuuidremoveemployeesrequestbody.md
+  - docs/models/operations/putv1timeoffpoliciestimeoffpolicyuuidremoveemployeesresponse.md
   - docs/models/operations/putv1verifywebhooksubscriptionuuidrequest.md
   - docs/models/operations/putv1verifywebhooksubscriptionuuidrequestbody.md
+  - docs/models/operations/putv1verifywebhooksubscriptionuuidresponse.md
   - docs/models/operations/putv1verifywebhooksubscriptionuuidsecurity.md
   - docs/models/operations/putv1webhooksubscriptionuuidrequest.md
   - docs/models/operations/putv1webhooksubscriptionuuidrequestbody.md
+  - docs/models/operations/putv1webhooksubscriptionuuidresponse.md
   - docs/models/operations/putv1webhooksubscriptionuuidsecurity.md
   - docs/models/operations/putv1webhooksubscriptionuuidsubscriptiontypes.md
   - docs/models/operations/putv1workaddressesworkaddressuuidrequest.md
   - docs/models/operations/putv1workaddressesworkaddressuuidrequestbody.md
+  - docs/models/operations/putv1workaddressesworkaddressuuidresponse.md
   - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployeesemployees.md
   - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployeesrequest.md
   - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployeesrequestbody.md
+  - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployeesresponse.md
   - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalanceemployees.md
   - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalancerequest.md
   - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalancerequestbody.md
+  - docs/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalanceresponse.md
   - docs/models/operations/putwireinrequestswireinrequestuuidrequest.md
   - docs/models/operations/putwireinrequestswireinrequestuuidrequestbody.md
+  - docs/models/operations/putwireinrequestswireinrequestuuidresponse.md
   - docs/models/operations/queryparamfrequency.md
   - docs/models/operations/queryparaminclude.md
   - docs/models/operations/questions.md
   - docs/models/operations/redebitrecoverycaserequest.md
+  - docs/models/operations/redebitrecoverycaseresponse.md
   - docs/models/operations/refreshaccesstokenrequest.md
   - docs/models/operations/refreshaccesstokenrequestbody.md
+  - docs/models/operations/refreshaccesstokenresponse.md
   - docs/models/operations/requirements.md
   - docs/models/operations/requirementsets.md
   - docs/models/operations/resource.md
@@ -1225,253 +1471,6 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
-  - src/mcp-server/build.mts
-  - src/mcp-server/cli.ts
-  - src/mcp-server/cli/start/command.ts
-  - src/mcp-server/cli/start/impl.ts
-  - src/mcp-server/console-logger.ts
-  - src/mcp-server/mcp-server.ts
-  - src/mcp-server/resources.ts
-  - src/mcp-server/scopes.ts
-  - src/mcp-server/server.ts
-  - src/mcp-server/shared.ts
-  - src/mcp-server/tools.ts
-  - src/mcp-server/tools/achTransactionsGetAll.ts
-  - src/mcp-server/tools/bankAccountsCreate.ts
-  - src/mcp-server/tools/bankAccountsCreateFromPlaidToken.ts
-  - src/mcp-server/tools/bankAccountsGet.ts
-  - src/mcp-server/tools/bankAccountsVerify.ts
-  - src/mcp-server/tools/companiesAcceptTermsOfService.ts
-  - src/mcp-server/tools/companiesCreateAdmin.ts
-  - src/mcp-server/tools/companiesFinishOnboarding.ts
-  - src/mcp-server/tools/companiesGet.ts
-  - src/mcp-server/tools/companiesGetCustomFields.ts
-  - src/mcp-server/tools/companiesGetOnboardingStatus.ts
-  - src/mcp-server/tools/companiesListAdmins.ts
-  - src/mcp-server/tools/companiesMigrate.ts
-  - src/mcp-server/tools/companiesRetrieveTermsOfService.ts
-  - src/mcp-server/tools/companiesUpdate.ts
-  - src/mcp-server/tools/companyAttachmentGetDownloadUrl.ts
-  - src/mcp-server/tools/companyAttachmentsCreate.ts
-  - src/mcp-server/tools/companyAttachmentsGetDetails.ts
-  - src/mcp-server/tools/companyAttachmentsGetList.ts
-  - src/mcp-server/tools/companyBenefitsCreate.ts
-  - src/mcp-server/tools/companyBenefitsDelete.ts
-  - src/mcp-server/tools/companyBenefitsGet.ts
-  - src/mcp-server/tools/companyBenefitsGetAll.ts
-  - src/mcp-server/tools/companyBenefitsGetEmployeeBenefits.ts
-  - src/mcp-server/tools/companyBenefitsGetRequirements.ts
-  - src/mcp-server/tools/companyBenefitsGetSummary.ts
-  - src/mcp-server/tools/companyBenefitsGetSupported.ts
-  - src/mcp-server/tools/companyBenefitsList.ts
-  - src/mcp-server/tools/companyBenefitsUpdate.ts
-  - src/mcp-server/tools/companyBenefitsUpdateEmployeeBenefits.ts
-  - src/mcp-server/tools/companyFormsGet.ts
-  - src/mcp-server/tools/companyFormsGetAll.ts
-  - src/mcp-server/tools/companyFormsGetPdf.ts
-  - src/mcp-server/tools/companyFormsSign.ts
-  - src/mcp-server/tools/contractorDocumentsGet.ts
-  - src/mcp-server/tools/contractorDocumentsGetAll.ts
-  - src/mcp-server/tools/contractorDocumentsGetPdf.ts
-  - src/mcp-server/tools/contractorDocumentsSign.ts
-  - src/mcp-server/tools/contractorFormsGenerate1099.ts
-  - src/mcp-server/tools/contractorFormsGet.ts
-  - src/mcp-server/tools/contractorFormsGetPdf.ts
-  - src/mcp-server/tools/contractorFormsList.ts
-  - src/mcp-server/tools/contractorPaymentGroupsCreate.ts
-  - src/mcp-server/tools/contractorPaymentGroupsDelete.ts
-  - src/mcp-server/tools/contractorPaymentGroupsFund.ts
-  - src/mcp-server/tools/contractorPaymentGroupsGet.ts
-  - src/mcp-server/tools/contractorPaymentGroupsGetList.ts
-  - src/mcp-server/tools/contractorPaymentGroupsPreview.ts
-  - src/mcp-server/tools/contractorPaymentMethodGet.ts
-  - src/mcp-server/tools/contractorPaymentMethodGetBankAccounts.ts
-  - src/mcp-server/tools/contractorPaymentMethodUpdate.ts
-  - src/mcp-server/tools/contractorPaymentMethodsCreateBankAccount.ts
-  - src/mcp-server/tools/contractorPaymentsCreate.ts
-  - src/mcp-server/tools/contractorPaymentsDelete.ts
-  - src/mcp-server/tools/contractorPaymentsFund.ts
-  - src/mcp-server/tools/contractorPaymentsGet.ts
-  - src/mcp-server/tools/contractorPaymentsGetReceipt.ts
-  - src/mcp-server/tools/contractorPaymentsList.ts
-  - src/mcp-server/tools/contractorsCreate.ts
-  - src/mcp-server/tools/contractorsDelete.ts
-  - src/mcp-server/tools/contractorsGet.ts
-  - src/mcp-server/tools/contractorsGetAddress.ts
-  - src/mcp-server/tools/contractorsGetOnboardingStatus.ts
-  - src/mcp-server/tools/contractorsList.ts
-  - src/mcp-server/tools/contractorsUpdate.ts
-  - src/mcp-server/tools/contractorsUpdateAddress.ts
-  - src/mcp-server/tools/contractorsUpdateOnboardingStatus.ts
-  - src/mcp-server/tools/departmentsAddPeople.ts
-  - src/mcp-server/tools/departmentsCreate.ts
-  - src/mcp-server/tools/departmentsDelete.ts
-  - src/mcp-server/tools/departmentsGet.ts
-  - src/mcp-server/tools/departmentsGetAll.ts
-  - src/mcp-server/tools/departmentsRemovePeople.ts
-  - src/mcp-server/tools/departmentsUpdate.ts
-  - src/mcp-server/tools/earningTypesCreate.ts
-  - src/mcp-server/tools/earningTypesDelete.ts
-  - src/mcp-server/tools/earningTypesList.ts
-  - src/mcp-server/tools/earningTypesUpdate.ts
-  - src/mcp-server/tools/employeeAddressesCreate.ts
-  - src/mcp-server/tools/employeeAddressesCreateWorkAddress.ts
-  - src/mcp-server/tools/employeeAddressesDelete.ts
-  - src/mcp-server/tools/employeeAddressesDeleteWorkAddress.ts
-  - src/mcp-server/tools/employeeAddressesGet.ts
-  - src/mcp-server/tools/employeeAddressesGetWorkAddresses.ts
-  - src/mcp-server/tools/employeeAddressesRetrieveHomeAddress.ts
-  - src/mcp-server/tools/employeeAddressesRetrieveWorkAddress.ts
-  - src/mcp-server/tools/employeeAddressesUpdate.ts
-  - src/mcp-server/tools/employeeAddressesUpdateWorkAddress.ts
-  - src/mcp-server/tools/employeeBenefitsCreate.ts
-  - src/mcp-server/tools/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.ts
-  - src/mcp-server/tools/employeeBenefitsDelete.ts
-  - src/mcp-server/tools/employeeBenefitsGet.ts
-  - src/mcp-server/tools/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.ts
-  - src/mcp-server/tools/employeeBenefitsRetrieve.ts
-  - src/mcp-server/tools/employeeBenefitsUpdate.ts
-  - src/mcp-server/tools/employeeEmploymentsCreateRehire.ts
-  - src/mcp-server/tools/employeeEmploymentsCreateTermination.ts
-  - src/mcp-server/tools/employeeEmploymentsDeleteRehire.ts
-  - src/mcp-server/tools/employeeEmploymentsDeleteTermination.ts
-  - src/mcp-server/tools/employeeEmploymentsGetHistory.ts
-  - src/mcp-server/tools/employeeEmploymentsGetRehire.ts
-  - src/mcp-server/tools/employeeEmploymentsGetTerminations.ts
-  - src/mcp-server/tools/employeeEmploymentsRehire.ts
-  - src/mcp-server/tools/employeeEmploymentsUpdateTermination.ts
-  - src/mcp-server/tools/employeeFormsGenerateW2.ts
-  - src/mcp-server/tools/employeeFormsGet.ts
-  - src/mcp-server/tools/employeeFormsGetPdf.ts
-  - src/mcp-server/tools/employeeFormsList.ts
-  - src/mcp-server/tools/employeeFormsSign.ts
-  - src/mcp-server/tools/employeePaymentMethodCreate.ts
-  - src/mcp-server/tools/employeePaymentMethodDeleteBankAccount.ts
-  - src/mcp-server/tools/employeePaymentMethodGet.ts
-  - src/mcp-server/tools/employeePaymentMethodUpdate.ts
-  - src/mcp-server/tools/employeePaymentMethodUpdateBankAccount.ts
-  - src/mcp-server/tools/employeePaymentMethodsGetBankAccounts.ts
-  - src/mcp-server/tools/employeeTaxSetupGetFederalTaxes.ts
-  - src/mcp-server/tools/employeeTaxSetupGetStateTaxes.ts
-  - src/mcp-server/tools/employeeTaxSetupUpdateFederalTaxes.ts
-  - src/mcp-server/tools/employeeTaxSetupUpdateStateTaxes.ts
-  - src/mcp-server/tools/employeesCreate.ts
-  - src/mcp-server/tools/employeesCreateHistorical.ts
-  - src/mcp-server/tools/employeesDelete.ts
-  - src/mcp-server/tools/employeesGet.ts
-  - src/mcp-server/tools/employeesGetCustomFields.ts
-  - src/mcp-server/tools/employeesGetOnboardingStatus.ts
-  - src/mcp-server/tools/employeesGetTimeOffActivities.ts
-  - src/mcp-server/tools/employeesList.ts
-  - src/mcp-server/tools/employeesUpdate.ts
-  - src/mcp-server/tools/employeesUpdateOnboardingDocumentsConfig.ts
-  - src/mcp-server/tools/employeesUpdateOnboardingStatus.ts
-  - src/mcp-server/tools/externalPayrollsCalculateTaxes.ts
-  - src/mcp-server/tools/externalPayrollsCreate.ts
-  - src/mcp-server/tools/externalPayrollsDelete.ts
-  - src/mcp-server/tools/externalPayrollsFinalizeTaxLiabilities.ts
-  - src/mcp-server/tools/externalPayrollsGet.ts
-  - src/mcp-server/tools/externalPayrollsListTaxLiabilities.ts
-  - src/mcp-server/tools/externalPayrollsRetrieve.ts
-  - src/mcp-server/tools/externalPayrollsUpdate.ts
-  - src/mcp-server/tools/externalPayrollsUpdateTaxLiabilities.ts
-  - src/mcp-server/tools/federalTaxDetailsGet.ts
-  - src/mcp-server/tools/federalTaxDetailsUpdate.ts
-  - src/mcp-server/tools/flowsCreate.ts
-  - src/mcp-server/tools/garnishmentsCreate.ts
-  - src/mcp-server/tools/garnishmentsGet.ts
-  - src/mcp-server/tools/garnishmentsGetChildSupportData.ts
-  - src/mcp-server/tools/garnishmentsList.ts
-  - src/mcp-server/tools/garnishmentsUpdate.ts
-  - src/mcp-server/tools/generatedDocumentsGet.ts
-  - src/mcp-server/tools/historicalEmployeesUpdate.ts
-  - src/mcp-server/tools/holidayPayPoliciesAddEmployees.ts
-  - src/mcp-server/tools/holidayPayPoliciesCreate.ts
-  - src/mcp-server/tools/holidayPayPoliciesDelete.ts
-  - src/mcp-server/tools/holidayPayPoliciesGet.ts
-  - src/mcp-server/tools/holidayPayPoliciesRemoveEmployees.ts
-  - src/mcp-server/tools/holidayPayPoliciesUpdate.ts
-  - src/mcp-server/tools/i9VerificationCreateDocuments.ts
-  - src/mcp-server/tools/i9VerificationDeleteDocument.ts
-  - src/mcp-server/tools/i9VerificationEmployerSign.ts
-  - src/mcp-server/tools/i9VerificationGetAuthorization.ts
-  - src/mcp-server/tools/i9VerificationGetDocumentOptions.ts
-  - src/mcp-server/tools/i9VerificationGetDocuments.ts
-  - src/mcp-server/tools/i9VerificationUpdate.ts
-  - src/mcp-server/tools/industrySelectionGet.ts
-  - src/mcp-server/tools/industrySelectionUpdate.ts
-  - src/mcp-server/tools/introspectionGetInfo.ts
-  - src/mcp-server/tools/introspectionRefreshToken.ts
-  - src/mcp-server/tools/jobsAndCompensationsCreateCompensation.ts
-  - src/mcp-server/tools/jobsAndCompensationsCreateJob.ts
-  - src/mcp-server/tools/jobsAndCompensationsDelete.ts
-  - src/mcp-server/tools/jobsAndCompensationsDeleteCompensation.ts
-  - src/mcp-server/tools/jobsAndCompensationsGetCompensation.ts
-  - src/mcp-server/tools/jobsAndCompensationsGetCompensations.ts
-  - src/mcp-server/tools/jobsAndCompensationsGetJob.ts
-  - src/mcp-server/tools/jobsAndCompensationsGetJobs.ts
-  - src/mcp-server/tools/jobsAndCompensationsUpdate.ts
-  - src/mcp-server/tools/jobsAndCompensationsUpdateCompensation.ts
-  - src/mcp-server/tools/locationsCreate.ts
-  - src/mcp-server/tools/locationsGet.ts
-  - src/mcp-server/tools/locationsGetMinimumWages.ts
-  - src/mcp-server/tools/locationsRetrieve.ts
-  - src/mcp-server/tools/locationsUpdate.ts
-  - src/mcp-server/tools/notificationsGetDetails.ts
-  - src/mcp-server/tools/paySchedulesAssign.ts
-  - src/mcp-server/tools/paySchedulesCreate.ts
-  - src/mcp-server/tools/paySchedulesGet.ts
-  - src/mcp-server/tools/paySchedulesGetAll.ts
-  - src/mcp-server/tools/paySchedulesGetAssignments.ts
-  - src/mcp-server/tools/paySchedulesGetPayPeriods.ts
-  - src/mcp-server/tools/paySchedulesGetPreview.ts
-  - src/mcp-server/tools/paySchedulesGetUnprocessedTerminationPeriods.ts
-  - src/mcp-server/tools/paySchedulesPreviewAssignment.ts
-  - src/mcp-server/tools/paySchedulesUpdate.ts
-  - src/mcp-server/tools/paymentConfigsGet.ts
-  - src/mcp-server/tools/paymentConfigsUpdate.ts
-  - src/mcp-server/tools/payrollsCalculate.ts
-  - src/mcp-server/tools/payrollsCalculateGrossUp.ts
-  - src/mcp-server/tools/payrollsCancel.ts
-  - src/mcp-server/tools/payrollsCreateOffCycle.ts
-  - src/mcp-server/tools/payrollsDelete.ts
-  - src/mcp-server/tools/payrollsGeneratePrintableChecks.ts
-  - src/mcp-server/tools/payrollsGet.ts
-  - src/mcp-server/tools/payrollsGetApprovedReversals.ts
-  - src/mcp-server/tools/payrollsGetBlockers.ts
-  - src/mcp-server/tools/payrollsGetPayStub.ts
-  - src/mcp-server/tools/payrollsGetPayStubs.ts
-  - src/mcp-server/tools/payrollsGetReceipt.ts
-  - src/mcp-server/tools/payrollsList.ts
-  - src/mcp-server/tools/payrollsPrepare.ts
-  - src/mcp-server/tools/payrollsSkip.ts
-  - src/mcp-server/tools/payrollsSubmit.ts
-  - src/mcp-server/tools/payrollsUpdate.ts
-  - src/mcp-server/tools/recoveryCasesGet.ts
-  - src/mcp-server/tools/recoveryCasesRedebit.ts
-  - src/mcp-server/tools/reportsCreateCustom.ts
-  - src/mcp-server/tools/reportsGet.ts
-  - src/mcp-server/tools/reportsGetTemplate.ts
-  - src/mcp-server/tools/signatoriesCreate.ts
-  - src/mcp-server/tools/signatoriesDelete.ts
-  - src/mcp-server/tools/signatoriesInvite.ts
-  - src/mcp-server/tools/signatoriesList.ts
-  - src/mcp-server/tools/signatoriesUpdate.ts
-  - src/mcp-server/tools/taxRequirementsGet.ts
-  - src/mcp-server/tools/taxRequirementsGetAll.ts
-  - src/mcp-server/tools/taxRequirementsUpdateState.ts
-  - src/mcp-server/tools/timeOffPoliciesAddEmployees.ts
-  - src/mcp-server/tools/timeOffPoliciesCalculateAccruingTimeOffHours.ts
-  - src/mcp-server/tools/timeOffPoliciesCreate.ts
-  - src/mcp-server/tools/timeOffPoliciesDeactivate.ts
-  - src/mcp-server/tools/timeOffPoliciesGet.ts
-  - src/mcp-server/tools/timeOffPoliciesGetAll.ts
-  - src/mcp-server/tools/timeOffPoliciesRemoveEmployees.ts
-  - src/mcp-server/tools/timeOffPoliciesUpdate.ts
-  - src/mcp-server/tools/timeOffPoliciesUpdateBalance.ts
-  - src/mcp-server/tools/wireInRequestsGet.ts
-  - src/mcp-server/tools/wireInRequestsList.ts
-  - src/mcp-server/tools/wireInRequestsSubmit.ts
   - src/models/components/accruingtimeoffhour.ts
   - src/models/components/achtransaction.ts
   - src/models/components/admin.ts
@@ -1626,6 +1625,7 @@ generatedFiles:
   - src/models/errors/putv1companiescompanyidpayrollspayrollidsubmit.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/errors/unprocessableentityerrorobject.ts
+  - src/models/errors/unprocessableentityerrorobject1.ts
   - src/models/operations/deletecompaniescompanyuuidholidaypaypolicy.ts
   - src/models/operations/deletedepartment.ts
   - src/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpayment.ts

@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeePaymentMethodsGetBankAccountsQueryData = Array<
-  components.EmployeeBankAccount
->;
+export type EmployeePaymentMethodsGetBankAccountsQueryData =
+  operations.GetV1EmployeesEmployeeIdBankAccountsResponse;
 
 /**
  * Get all employee bank accounts

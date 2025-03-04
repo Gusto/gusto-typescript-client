@@ -47,6 +47,25 @@ export type PostV1CompanySignatoriesRequest = {
   requestBody: PostV1CompanySignatoriesRequestBody;
 };
 
+export type PostV1CompanySignatoriesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  signatory?: components.Signatory | undefined;
+};
+
 /** @internal */
 export const HomeAddress$inboundSchema: z.ZodType<
   HomeAddress,
@@ -291,5 +310,86 @@ export function postV1CompanySignatoriesRequestFromJSON(
     jsonString,
     (x) => PostV1CompanySignatoriesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1CompanySignatoriesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompanySignatoriesResponse$inboundSchema: z.ZodType<
+  PostV1CompanySignatoriesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Signatory: components.Signatory$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Signatory": "signatory",
+  });
+});
+
+/** @internal */
+export type PostV1CompanySignatoriesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Signatory?: components.Signatory$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompanySignatoriesResponse$outboundSchema: z.ZodType<
+  PostV1CompanySignatoriesResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1CompanySignatoriesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  signatory: components.Signatory$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    signatory: "Signatory",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompanySignatoriesResponse$ {
+  /** @deprecated use `PostV1CompanySignatoriesResponse$inboundSchema` instead. */
+  export const inboundSchema = PostV1CompanySignatoriesResponse$inboundSchema;
+  /** @deprecated use `PostV1CompanySignatoriesResponse$outboundSchema` instead. */
+  export const outboundSchema = PostV1CompanySignatoriesResponse$outboundSchema;
+  /** @deprecated use `PostV1CompanySignatoriesResponse$Outbound` instead. */
+  export type Outbound = PostV1CompanySignatoriesResponse$Outbound;
+}
+
+export function postV1CompanySignatoriesResponseToJSON(
+  postV1CompanySignatoriesResponse: PostV1CompanySignatoriesResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompanySignatoriesResponse$outboundSchema.parse(
+      postV1CompanySignatoriesResponse,
+    ),
+  );
+}
+
+export function postV1CompanySignatoriesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1CompanySignatoriesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1CompanySignatoriesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1CompanySignatoriesResponse' from JSON`,
   );
 }

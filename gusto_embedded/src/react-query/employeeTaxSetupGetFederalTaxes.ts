@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeTaxSetupGetFederalTaxesQueryData =
-  components.EmployeeFederalTax;
+  operations.GetV1EmployeesEmployeeIdFederalTaxesResponse;
 
 /**
  * Get an employee's federal taxes

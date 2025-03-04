@@ -32,6 +32,25 @@ export type PostV1EmployeesEmployeeIdTerminationsRequest = {
   requestBody: PostV1EmployeesEmployeeIdTerminationsRequestBody;
 };
 
+export type PostV1EmployeesEmployeeIdTerminationsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example Response
+   */
+  termination?: components.Termination | undefined;
+};
+
 /** @internal */
 export const PostV1EmployeesEmployeeIdTerminationsRequestBody$inboundSchema:
   z.ZodType<
@@ -203,5 +222,97 @@ export function postV1EmployeesEmployeeIdTerminationsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1EmployeesEmployeeIdTerminationsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdTerminationsResponse$inboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdTerminationsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    Termination: components.Termination$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Termination": "termination",
+    });
+  });
+
+/** @internal */
+export type PostV1EmployeesEmployeeIdTerminationsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Termination?: components.Termination$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdTerminationsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1EmployeesEmployeeIdTerminationsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    termination: components.Termination$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      termination: "Termination",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesEmployeeIdTerminationsResponse$ {
+  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesEmployeeIdTerminationsResponse$inboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsResponse$Outbound` instead. */
+  export type Outbound = PostV1EmployeesEmployeeIdTerminationsResponse$Outbound;
+}
+
+export function postV1EmployeesEmployeeIdTerminationsResponseToJSON(
+  postV1EmployeesEmployeeIdTerminationsResponse:
+    PostV1EmployeesEmployeeIdTerminationsResponse,
+): string {
+  return JSON.stringify(
+    PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema.parse(
+      postV1EmployeesEmployeeIdTerminationsResponse,
+    ),
+  );
+}
+
+export function postV1EmployeesEmployeeIdTerminationsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EmployeesEmployeeIdTerminationsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EmployeesEmployeeIdTerminationsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EmployeesEmployeeIdTerminationsResponse' from JSON`,
   );
 }

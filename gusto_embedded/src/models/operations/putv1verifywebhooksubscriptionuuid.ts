@@ -32,6 +32,25 @@ export type PutV1VerifyWebhookSubscriptionUuidRequest = {
   requestBody: PutV1VerifyWebhookSubscriptionUuidRequestBody;
 };
 
+export type PutV1VerifyWebhookSubscriptionUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  webhookSubscription?: components.WebhookSubscription | undefined;
+};
+
 /** @internal */
 export const PutV1VerifyWebhookSubscriptionUuidSecurity$inboundSchema:
   z.ZodType<PutV1VerifyWebhookSubscriptionUuidSecurity, z.ZodTypeDef, unknown> =
@@ -268,5 +287,96 @@ export function putV1VerifyWebhookSubscriptionUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1VerifyWebhookSubscriptionUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1VerifyWebhookSubscriptionUuidResponse$inboundSchema:
+  z.ZodType<PutV1VerifyWebhookSubscriptionUuidResponse, z.ZodTypeDef, unknown> =
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      "Webhook-Subscription": components.WebhookSubscription$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "Webhook-Subscription": "webhookSubscription",
+      });
+    });
+
+/** @internal */
+export type PutV1VerifyWebhookSubscriptionUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Webhook-Subscription"?: components.WebhookSubscription$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema:
+  z.ZodType<
+    PutV1VerifyWebhookSubscriptionUuidResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1VerifyWebhookSubscriptionUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    webhookSubscription: components.WebhookSubscription$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      webhookSubscription: "Webhook-Subscription",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1VerifyWebhookSubscriptionUuidResponse$ {
+  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1VerifyWebhookSubscriptionUuidResponse$inboundSchema;
+  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema;
+  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidResponse$Outbound` instead. */
+  export type Outbound = PutV1VerifyWebhookSubscriptionUuidResponse$Outbound;
+}
+
+export function putV1VerifyWebhookSubscriptionUuidResponseToJSON(
+  putV1VerifyWebhookSubscriptionUuidResponse:
+    PutV1VerifyWebhookSubscriptionUuidResponse,
+): string {
+  return JSON.stringify(
+    PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema.parse(
+      putV1VerifyWebhookSubscriptionUuidResponse,
+    ),
+  );
+}
+
+export function putV1VerifyWebhookSubscriptionUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1VerifyWebhookSubscriptionUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1VerifyWebhookSubscriptionUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1VerifyWebhookSubscriptionUuidResponse' from JSON`,
   );
 }

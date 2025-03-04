@@ -24,6 +24,21 @@ export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema:
   z.ZodType<
@@ -110,5 +125,92 @@ export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestFrom
       DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema:
+  z.ZodType<
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+  };
+
+/** @internal */
+export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema:
+  z.ZodType<
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$ {
+  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema;
+  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema;
+  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound` instead. */
+  export type Outbound =
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound;
+}
+
+export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponseToJSON(
+  deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse:
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema
+      .parse(deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse),
+  );
+}
+
+export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse' from JSON`,
   );
 }

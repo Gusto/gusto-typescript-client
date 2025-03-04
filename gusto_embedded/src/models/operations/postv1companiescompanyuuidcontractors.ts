@@ -151,6 +151,25 @@ export type PostV1CompaniesCompanyUuidContractorsRequest = {
   requestBody: PostV1CompaniesCompanyUuidContractorsRequestBody;
 };
 
+export type PostV1CompaniesCompanyUuidContractorsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  contractor?: components.Contractor | undefined;
+};
+
 /** @internal */
 export const PostV1CompaniesCompanyUuidContractorsType$inboundSchema:
   z.ZodNativeEnum<typeof PostV1CompaniesCompanyUuidContractorsType> = z
@@ -425,5 +444,97 @@ export function postV1CompaniesCompanyUuidContractorsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyUuidContractorsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyUuidContractorsResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyUuidContractorsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    Contractor: components.Contractor$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor": "contractor",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyUuidContractorsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Contractor?: components.Contractor$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyUuidContractorsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyUuidContractorsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractor: components.Contractor$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractor: "Contractor",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyUuidContractorsResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyUuidContractorsResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsResponse$Outbound` instead. */
+  export type Outbound = PostV1CompaniesCompanyUuidContractorsResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyUuidContractorsResponseToJSON(
+  postV1CompaniesCompanyUuidContractorsResponse:
+    PostV1CompaniesCompanyUuidContractorsResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema.parse(
+      postV1CompaniesCompanyUuidContractorsResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyUuidContractorsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyUuidContractorsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyUuidContractorsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyUuidContractorsResponse' from JSON`,
   );
 }

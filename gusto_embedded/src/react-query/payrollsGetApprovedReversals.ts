@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PayrollsGetApprovedReversalsQueryData = components.PayrollReversal;
+export type PayrollsGetApprovedReversalsQueryData =
+  operations.GetV1CompaniesCompanyIdPayrollReversalsResponse;
 
 /**
  * Get approved payroll reversals

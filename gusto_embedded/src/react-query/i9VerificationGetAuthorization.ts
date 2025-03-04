@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type I9VerificationGetAuthorizationQueryData =
-  components.I9Authorization;
+  operations.GetV1EmployeesEmployeeIdI9AuthorizationResponse;
 
 /**
  * Get an employee's I-9 authorization

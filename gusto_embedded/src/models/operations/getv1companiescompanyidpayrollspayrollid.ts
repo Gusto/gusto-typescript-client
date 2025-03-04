@@ -40,6 +40,25 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payroll?: components.Payroll | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$inboundSchema:
   z.ZodNativeEnum<
@@ -159,5 +178,98 @@ export function getV1CompaniesCompanyIdPayrollsPayrollIdRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyIdPayrollsPayrollIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    Payroll: components.Payroll$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Payroll": "payroll",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Payroll?: components.Payroll$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payroll: components.Payroll$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payroll: "Payroll",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdPayrollsPayrollIdResponseToJSON(
+  getV1CompaniesCompanyIdPayrollsPayrollIdResponse:
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdPayrollsPayrollIdResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdPayrollsPayrollIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyIdPayrollsPayrollIdResponse' from JSON`,
   );
 }

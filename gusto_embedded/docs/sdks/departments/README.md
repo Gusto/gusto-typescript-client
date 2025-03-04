@@ -106,7 +106,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Department](../../models/components/department.md)\>**
+**Promise\<[operations.PostDepartmentsResponse](../../models/operations/postdepartmentsresponse.md)\>**
 
 ### Errors
 
@@ -213,7 +213,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Department[]](../../models/.md)\>**
+**Promise\<[operations.GetCompaniesDepartmentsResponse](../../models/operations/getcompaniesdepartmentsresponse.md)\>**
 
 ### Errors
 
@@ -320,7 +320,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Department](../../models/components/department.md)\>**
+**Promise\<[operations.GetDepartmentResponse](../../models/operations/getdepartmentresponse.md)\>**
 
 ### Errors
 
@@ -423,7 +423,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Department](../../models/components/department.md)\>**
+**Promise\<[operations.PutDepartmentsResponse](../../models/operations/putdepartmentsresponse.md)\>**
 
 ### Errors
 
@@ -449,11 +449,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.departments.delete({
+  const result = await gustoEmbedded.departments.delete({
     departmentUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -484,7 +485,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -518,7 +520,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteDepartmentResponse](../../models/operations/deletedepartmentresponse.md)\>**
 
 ### Errors
 
@@ -617,7 +619,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Department](../../models/components/department.md)\>**
+**Promise\<[operations.PutAddPeopleToDepartmentResponse](../../models/operations/putaddpeopletodepartmentresponse.md)\>**
 
 ### Errors
 
@@ -715,7 +717,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Department](../../models/components/department.md)\>**
+**Promise\<[operations.PutRemovePeopleFromDepartmentResponse](../../models/operations/putremovepeoplefromdepartmentresponse.md)\>**
 
 ### Errors
 

@@ -36,6 +36,25 @@ export type PutV1TerminationsEmployeeIdRequest = {
   requestBody: PutV1TerminationsEmployeeIdRequestBody;
 };
 
+export type PutV1TerminationsEmployeeIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example Response
+   */
+  termination?: components.Termination | undefined;
+};
+
 /** @internal */
 export const PutV1TerminationsEmployeeIdRequestBody$inboundSchema: z.ZodType<
   PutV1TerminationsEmployeeIdRequestBody,
@@ -193,5 +212,89 @@ export function putV1TerminationsEmployeeIdRequestFromJSON(
     (x) =>
       PutV1TerminationsEmployeeIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1TerminationsEmployeeIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1TerminationsEmployeeIdResponse$inboundSchema: z.ZodType<
+  PutV1TerminationsEmployeeIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Termination: components.Termination$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Termination": "termination",
+  });
+});
+
+/** @internal */
+export type PutV1TerminationsEmployeeIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Termination?: components.Termination$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1TerminationsEmployeeIdResponse$outboundSchema: z.ZodType<
+  PutV1TerminationsEmployeeIdResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1TerminationsEmployeeIdResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  termination: components.Termination$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    termination: "Termination",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1TerminationsEmployeeIdResponse$ {
+  /** @deprecated use `PutV1TerminationsEmployeeIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1TerminationsEmployeeIdResponse$inboundSchema;
+  /** @deprecated use `PutV1TerminationsEmployeeIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1TerminationsEmployeeIdResponse$outboundSchema;
+  /** @deprecated use `PutV1TerminationsEmployeeIdResponse$Outbound` instead. */
+  export type Outbound = PutV1TerminationsEmployeeIdResponse$Outbound;
+}
+
+export function putV1TerminationsEmployeeIdResponseToJSON(
+  putV1TerminationsEmployeeIdResponse: PutV1TerminationsEmployeeIdResponse,
+): string {
+  return JSON.stringify(
+    PutV1TerminationsEmployeeIdResponse$outboundSchema.parse(
+      putV1TerminationsEmployeeIdResponse,
+    ),
+  );
+}
+
+export function putV1TerminationsEmployeeIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1TerminationsEmployeeIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1TerminationsEmployeeIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1TerminationsEmployeeIdResponse' from JSON`,
   );
 }

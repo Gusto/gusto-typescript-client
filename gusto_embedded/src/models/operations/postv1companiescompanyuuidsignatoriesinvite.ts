@@ -28,6 +28,25 @@ export type PostV1CompaniesCompanyUuidSignatoriesInviteRequest = {
   requestBody: PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody;
 };
 
+export type PostV1CompaniesCompanyUuidSignatoriesInviteResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  signatory?: components.Signatory | undefined;
+};
+
 /** @internal */
 export const PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody$inboundSchema:
   z.ZodType<
@@ -205,5 +224,98 @@ export function postV1CompaniesCompanyUuidSignatoriesInviteRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyUuidSignatoriesInviteRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyUuidSignatoriesInviteResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    Signatory: components.Signatory$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Signatory": "signatory",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyUuidSignatoriesInviteResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Signatory?: components.Signatory$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyUuidSignatoriesInviteResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    signatory: components.Signatory$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      signatory: "Signatory",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyUuidSignatoriesInviteResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyUuidSignatoriesInviteResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyUuidSignatoriesInviteResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyUuidSignatoriesInviteResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyUuidSignatoriesInviteResponseToJSON(
+  postV1CompaniesCompanyUuidSignatoriesInviteResponse:
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyUuidSignatoriesInviteResponse$outboundSchema.parse(
+      postV1CompaniesCompanyUuidSignatoriesInviteResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyUuidSignatoriesInviteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyUuidSignatoriesInviteResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyUuidSignatoriesInviteResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyUuidSignatoriesInviteResponse' from JSON`,
   );
 }

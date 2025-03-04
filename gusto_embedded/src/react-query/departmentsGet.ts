@@ -26,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type DepartmentsGetQueryData = components.Department;
+export type DepartmentsGetQueryData = operations.GetDepartmentResponse;
 
 /**
  * Get a department

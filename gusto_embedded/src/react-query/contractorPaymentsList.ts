@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentsListQueryData =
-  operations.GetV1CompaniesCompanyIdContractorPaymentsResponseBody;
+  operations.GetV1CompaniesCompanyIdContractorPaymentsResponse;
 
 /**
  * Get contractor payments for a company

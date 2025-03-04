@@ -108,7 +108,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Garnishment](../../models/components/garnishment.md)\>**
+**Promise\<[operations.PostV1EmployeesEmployeeIdGarnishmentsResponse](../../models/operations/postv1employeesemployeeidgarnishmentsresponse.md)\>**
 
 ### Errors
 
@@ -215,7 +215,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Garnishment[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdGarnishmentsResponse](../../models/operations/getv1employeesemployeeidgarnishmentsresponse.md)\>**
 
 ### Errors
 
@@ -321,7 +321,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Garnishment](../../models/components/garnishment.md)\>**
+**Promise\<[operations.GetV1GarnishmentsGarnishmentIdResponse](../../models/operations/getv1garnishmentsgarnishmentidresponse.md)\>**
 
 ### Errors
 
@@ -422,7 +422,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Garnishment](../../models/components/garnishment.md)\>**
+**Promise\<[operations.PutV1GarnishmentsGarnishmentIdResponse](../../models/operations/putv1garnishmentsgarnishmentidresponse.md)\>**
 
 ### Errors
 
@@ -525,7 +525,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ChildSupportData](../../models/components/childsupportdata.md)\>**
+**Promise\<[operations.GetV1GarnishmentsChildSupportResponse](../../models/operations/getv1garnishmentschildsupportresponse.md)\>**
 
 ### Errors
 

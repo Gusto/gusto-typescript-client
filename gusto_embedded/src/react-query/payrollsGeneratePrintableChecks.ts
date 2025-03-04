@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGeneratePrintableChecks } from "../funcs/payrollsGeneratePrintableChecks.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -24,7 +23,7 @@ export type PayrollsGeneratePrintableChecksMutationVariables = {
 };
 
 export type PayrollsGeneratePrintableChecksMutationData =
-  components.PayrollCheck;
+  operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
 
 /**
  * Generate printable payroll checks (pdf)

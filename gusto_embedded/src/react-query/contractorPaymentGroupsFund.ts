@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsFund } from "../funcs/contractorPaymentGroupsFund.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -24,7 +23,7 @@ export type ContractorPaymentGroupsFundMutationVariables = {
 };
 
 export type ContractorPaymentGroupsFundMutationData =
-  components.ContractorPaymentGroup;
+  operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse;
 
 /**
  * Fund a contractor payment group [DEMO]

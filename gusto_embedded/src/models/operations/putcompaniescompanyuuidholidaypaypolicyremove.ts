@@ -38,6 +38,25 @@ export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest = {
   requestBody: PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody;
 };
 
+export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Holiday Pay Policy Object Example
+   */
+  holidayPayPolicy?: components.HolidayPayPolicy | undefined;
+};
+
 /** @internal */
 export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$inboundSchema:
   z.ZodType<
@@ -277,5 +296,98 @@ export function putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema:
+  z.ZodType<
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Holiday-Pay-Policy": components.HolidayPayPolicy$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Holiday-Pay-Policy": "holidayPayPolicy",
+    });
+  });
+
+/** @internal */
+export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Holiday-Pay-Policy"?: components.HolidayPayPolicy$Outbound | undefined;
+};
+
+/** @internal */
+export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema:
+  z.ZodType<
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound,
+    z.ZodTypeDef,
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    holidayPayPolicy: components.HolidayPayPolicy$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      holidayPayPolicy: "Holiday-Pay-Policy",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$ {
+  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema;
+  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema;
+  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound` instead. */
+  export type Outbound =
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound;
+}
+
+export function putCompaniesCompanyUuidHolidayPayPolicyRemoveResponseToJSON(
+  putCompaniesCompanyUuidHolidayPayPolicyRemoveResponse:
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+): string {
+  return JSON.stringify(
+    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema.parse(
+      putCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+    ),
+  );
+}
+
+export function putCompaniesCompanyUuidHolidayPayPolicyRemoveResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse' from JSON`,
   );
 }

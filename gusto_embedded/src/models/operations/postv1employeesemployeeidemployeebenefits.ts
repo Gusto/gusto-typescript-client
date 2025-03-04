@@ -228,6 +228,25 @@ export type PostV1EmployeesEmployeeIdEmployeeBenefitsRequest = {
   requestBody: PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody;
 };
 
+export type PostV1EmployeesEmployeeIdEmployeeBenefitsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeBenefit?: components.EmployeeBenefit | undefined;
+};
+
 /** @internal */
 export const PostV1EmployeesEmployeeIdEmployeeBenefitsType$inboundSchema:
   z.ZodNativeEnum<typeof PostV1EmployeesEmployeeIdEmployeeBenefitsType> = z
@@ -669,5 +688,98 @@ export function postV1EmployeesEmployeeIdEmployeeBenefitsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1EmployeesEmployeeIdEmployeeBenefitsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Benefit": components.EmployeeBenefit$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Benefit": "employeeBenefit",
+    });
+  });
+
+/** @internal */
+export type PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Benefit"?: components.EmployeeBenefit$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeBenefit: components.EmployeeBenefit$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeBenefit: "Employee-Benefit",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$ {
+  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound;
+}
+
+export function postV1EmployeesEmployeeIdEmployeeBenefitsResponseToJSON(
+  postV1EmployeesEmployeeIdEmployeeBenefitsResponse:
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+): string {
+  return JSON.stringify(
+    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema.parse(
+      postV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+    ),
+  );
+}
+
+export function postV1EmployeesEmployeeIdEmployeeBenefitsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EmployeesEmployeeIdEmployeeBenefitsResponse' from JSON`,
   );
 }

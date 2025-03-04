@@ -7,17 +7,17 @@ import { PostV1CompanySignatoriesRequestBody } from "@gusto/embedded-api/models/
 
 let value: PostV1CompanySignatoriesRequestBody = {
   ssn: "<value>",
-  firstName: "Sabina",
-  lastName: "Glover",
-  email: "Amya68@gmail.com",
+  firstName: "Jacques",
+  lastName: "Koch",
+  email: "Green32@hotmail.com",
   title: "<value>",
-  phone: "517-267-7235 x231",
+  phone: "1-317-945-8495 x8981",
   birthday: "<value>",
   homeAddress: {
     street1: "<value>",
-    city: "Alvenafield",
-    state: "Arkansas",
-    zip: "35960-4556",
+    city: "Jacobiton",
+    state: "Michigan",
+    zip: "80933",
   },
 };
 ```

@@ -10,7 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -40,7 +39,7 @@ export function employeeAddressesRetrieveHomeAddress(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.EmployeeAddress,
+    operations.GetV1HomeAddressesHomeAddressUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -64,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.EmployeeAddress,
+      operations.GetV1HomeAddressesHomeAddressUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -154,8 +153,16 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
+  };
+
   const [result] = await M.match<
-    components.EmployeeAddress,
+    operations.GetV1HomeAddressesHomeAddressUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -164,10 +171,14 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.EmployeeAddress$inboundSchema),
+    M.json(
+      200,
+      operations.GetV1HomeAddressesHomeAddressUuidResponse$inboundSchema,
+      { key: "Employee-Address" },
+    ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
-  )(response);
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

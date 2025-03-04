@@ -48,6 +48,26 @@ export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksReq
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody;
   };
 
+export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse =
+  {
+    /**
+     * HTTP response content type for this operation
+     */
+    contentType: string;
+    /**
+     * HTTP response status code for this operation
+     */
+    statusCode: number;
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
+    rawResponse: Response;
+    /**
+     * Example response
+     */
+    payrollCheck?: components.PayrollCheck | undefined;
+  };
+
 /** @internal */
 export const PrintingFormat$inboundSchema: z.ZodNativeEnum<
   typeof PrintingFormat
@@ -244,5 +264,99 @@ export function postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollCheck
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema:
+  z.ZodType<
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Payroll-Check": components.PayrollCheck$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Payroll-Check": "payrollCheck",
+    });
+  });
+
+/** @internal */
+export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Payroll-Check"?: components.PayrollCheck$Outbound | undefined;
+  };
+
+/** @internal */
+export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$outboundSchema:
+  z.ZodType<
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payrollCheck: components.PayrollCheck$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payrollCheck: "Payroll-Check",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$ {
+  /** @deprecated use `PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema;
+  /** @deprecated use `PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$outboundSchema;
+  /** @deprecated use `PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$Outbound;
+}
+
+export function postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponseToJSON(
+  postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse:
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+): string {
+  return JSON.stringify(
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$outboundSchema
+      .parse(
+        postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+      ),
+  );
+}
+
+export function postV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse' from JSON`,
   );
 }

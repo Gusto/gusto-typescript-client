@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type ContractorsGetOnboardingStatusQueryData =
-  components.ContractorOnboardingStatus;
+  operations.GetV1ContractorsContractorUuidOnboardingStatusResponse;
 
 /**
  * Get the contractor's onboarding status

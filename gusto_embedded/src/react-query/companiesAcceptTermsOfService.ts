@@ -23,7 +23,7 @@ export type CompaniesAcceptTermsOfServiceMutationVariables = {
 };
 
 export type CompaniesAcceptTermsOfServiceMutationData =
-  operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody;
+  operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse;
 
 /**
  * Accept terms of service for a company user

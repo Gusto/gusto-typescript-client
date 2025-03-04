@@ -44,6 +44,25 @@ export type PutAddPeopleToDepartmentRequest = {
   requestBody: PutAddPeopleToDepartmentRequestBody;
 };
 
+export type PutAddPeopleToDepartmentResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Department Object Example
+   */
+  department?: components.Department | undefined;
+};
+
 /** @internal */
 export const Employees$inboundSchema: z.ZodType<
   Employees,
@@ -284,5 +303,86 @@ export function putAddPeopleToDepartmentRequestFromJSON(
     jsonString,
     (x) => PutAddPeopleToDepartmentRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutAddPeopleToDepartmentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutAddPeopleToDepartmentResponse$inboundSchema: z.ZodType<
+  PutAddPeopleToDepartmentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Department: components.Department$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Department": "department",
+  });
+});
+
+/** @internal */
+export type PutAddPeopleToDepartmentResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Department?: components.Department$Outbound | undefined;
+};
+
+/** @internal */
+export const PutAddPeopleToDepartmentResponse$outboundSchema: z.ZodType<
+  PutAddPeopleToDepartmentResponse$Outbound,
+  z.ZodTypeDef,
+  PutAddPeopleToDepartmentResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  department: components.Department$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    department: "Department",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutAddPeopleToDepartmentResponse$ {
+  /** @deprecated use `PutAddPeopleToDepartmentResponse$inboundSchema` instead. */
+  export const inboundSchema = PutAddPeopleToDepartmentResponse$inboundSchema;
+  /** @deprecated use `PutAddPeopleToDepartmentResponse$outboundSchema` instead. */
+  export const outboundSchema = PutAddPeopleToDepartmentResponse$outboundSchema;
+  /** @deprecated use `PutAddPeopleToDepartmentResponse$Outbound` instead. */
+  export type Outbound = PutAddPeopleToDepartmentResponse$Outbound;
+}
+
+export function putAddPeopleToDepartmentResponseToJSON(
+  putAddPeopleToDepartmentResponse: PutAddPeopleToDepartmentResponse,
+): string {
+  return JSON.stringify(
+    PutAddPeopleToDepartmentResponse$outboundSchema.parse(
+      putAddPeopleToDepartmentResponse,
+    ),
+  );
+}
+
+export function putAddPeopleToDepartmentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutAddPeopleToDepartmentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutAddPeopleToDepartmentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutAddPeopleToDepartmentResponse' from JSON`,
   );
 }

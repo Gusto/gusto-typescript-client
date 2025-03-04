@@ -105,7 +105,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBankAccount[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdBankAccountsResponse](../../models/operations/getv1employeesemployeeidbankaccountsresponse.md)\>**
 
 ### Errors
 

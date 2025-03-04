@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PayrollsGetBlockersQueryData = Array<components.PayrollBlocker>;
+export type PayrollsGetBlockersQueryData =
+  operations.GetV1CompaniesPayrollBlockersCompanyUuidResponse;
 
 /**
  * Get all payroll blockers for a company

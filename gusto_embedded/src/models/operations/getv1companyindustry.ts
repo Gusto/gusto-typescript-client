@@ -20,6 +20,25 @@ export type GetV1CompanyIndustryRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompanyIndustryResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  industry?: components.Industry | undefined;
+};
+
 /** @internal */
 export const GetV1CompanyIndustryRequest$inboundSchema: z.ZodType<
   GetV1CompanyIndustryRequest,
@@ -90,5 +109,86 @@ export function getV1CompanyIndustryRequestFromJSON(
     jsonString,
     (x) => GetV1CompanyIndustryRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompanyIndustryRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyIndustryResponse$inboundSchema: z.ZodType<
+  GetV1CompanyIndustryResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Industry: components.Industry$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Industry": "industry",
+  });
+});
+
+/** @internal */
+export type GetV1CompanyIndustryResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Industry?: components.Industry$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1CompanyIndustryResponse$outboundSchema: z.ZodType<
+  GetV1CompanyIndustryResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1CompanyIndustryResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  industry: components.Industry$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    industry: "Industry",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompanyIndustryResponse$ {
+  /** @deprecated use `GetV1CompanyIndustryResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1CompanyIndustryResponse$inboundSchema;
+  /** @deprecated use `GetV1CompanyIndustryResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1CompanyIndustryResponse$outboundSchema;
+  /** @deprecated use `GetV1CompanyIndustryResponse$Outbound` instead. */
+  export type Outbound = GetV1CompanyIndustryResponse$Outbound;
+}
+
+export function getV1CompanyIndustryResponseToJSON(
+  getV1CompanyIndustryResponse: GetV1CompanyIndustryResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompanyIndustryResponse$outboundSchema.parse(
+      getV1CompanyIndustryResponse,
+    ),
+  );
+}
+
+export function getV1CompanyIndustryResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompanyIndustryResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1CompanyIndustryResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompanyIndustryResponse' from JSON`,
   );
 }

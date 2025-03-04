@@ -21,7 +21,8 @@ export type TaxRequirementsUpdateStateMutationVariables = {
   options?: RequestOptions;
 };
 
-export type TaxRequirementsUpdateStateMutationData = void;
+export type TaxRequirementsUpdateStateMutationData =
+  operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse;
 
 /**
  * Update State Tax Requirements

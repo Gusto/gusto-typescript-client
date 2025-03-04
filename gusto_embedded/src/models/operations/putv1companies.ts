@@ -28,6 +28,25 @@ export type PutV1CompaniesRequest = {
   requestBody: PutV1CompaniesRequestBody;
 };
 
+export type PutV1CompaniesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  company?: components.Company | undefined;
+};
+
 /** @internal */
 export const PutV1CompaniesRequestBody$inboundSchema: z.ZodType<
   PutV1CompaniesRequestBody,
@@ -163,5 +182,84 @@ export function putV1CompaniesRequestFromJSON(
     jsonString,
     (x) => PutV1CompaniesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1CompaniesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1CompaniesResponse$inboundSchema: z.ZodType<
+  PutV1CompaniesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Company: components.Company$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Company": "company",
+  });
+});
+
+/** @internal */
+export type PutV1CompaniesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Company?: components.Company$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1CompaniesResponse$outboundSchema: z.ZodType<
+  PutV1CompaniesResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1CompaniesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  company: components.Company$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    company: "Company",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompaniesResponse$ {
+  /** @deprecated use `PutV1CompaniesResponse$inboundSchema` instead. */
+  export const inboundSchema = PutV1CompaniesResponse$inboundSchema;
+  /** @deprecated use `PutV1CompaniesResponse$outboundSchema` instead. */
+  export const outboundSchema = PutV1CompaniesResponse$outboundSchema;
+  /** @deprecated use `PutV1CompaniesResponse$Outbound` instead. */
+  export type Outbound = PutV1CompaniesResponse$Outbound;
+}
+
+export function putV1CompaniesResponseToJSON(
+  putV1CompaniesResponse: PutV1CompaniesResponse,
+): string {
+  return JSON.stringify(
+    PutV1CompaniesResponse$outboundSchema.parse(putV1CompaniesResponse),
+  );
+}
+
+export function putV1CompaniesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1CompaniesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutV1CompaniesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1CompaniesResponse' from JSON`,
   );
 }

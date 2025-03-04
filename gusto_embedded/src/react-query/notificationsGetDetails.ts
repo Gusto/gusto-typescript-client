@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type NotificationsGetDetailsQueryData = components.Notification;
+export type NotificationsGetDetailsQueryData =
+  operations.GetNotificationsNotificationUuidResponse;
 
 /**
  * Get a notification's details

@@ -92,6 +92,25 @@ export type PostV1PartnerManagedCompaniesResponseBody = {
   expiresIn?: number | undefined;
 };
 
+export type PostV1PartnerManagedCompaniesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  object?: PostV1PartnerManagedCompaniesResponseBody | undefined;
+};
+
 /** @internal */
 export const PostV1PartnerManagedCompaniesSecurity$inboundSchema: z.ZodType<
   PostV1PartnerManagedCompaniesSecurity,
@@ -522,5 +541,89 @@ export function postV1PartnerManagedCompaniesResponseBodyFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1PartnerManagedCompaniesResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1PartnerManagedCompaniesResponse$inboundSchema: z.ZodType<
+  PostV1PartnerManagedCompaniesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  object: z.lazy(() => PostV1PartnerManagedCompaniesResponseBody$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type PostV1PartnerManagedCompaniesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  object?: PostV1PartnerManagedCompaniesResponseBody$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1PartnerManagedCompaniesResponse$outboundSchema: z.ZodType<
+  PostV1PartnerManagedCompaniesResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1PartnerManagedCompaniesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  object: z.lazy(() => PostV1PartnerManagedCompaniesResponseBody$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1PartnerManagedCompaniesResponse$ {
+  /** @deprecated use `PostV1PartnerManagedCompaniesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1PartnerManagedCompaniesResponse$inboundSchema;
+  /** @deprecated use `PostV1PartnerManagedCompaniesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1PartnerManagedCompaniesResponse$outboundSchema;
+  /** @deprecated use `PostV1PartnerManagedCompaniesResponse$Outbound` instead. */
+  export type Outbound = PostV1PartnerManagedCompaniesResponse$Outbound;
+}
+
+export function postV1PartnerManagedCompaniesResponseToJSON(
+  postV1PartnerManagedCompaniesResponse: PostV1PartnerManagedCompaniesResponse,
+): string {
+  return JSON.stringify(
+    PostV1PartnerManagedCompaniesResponse$outboundSchema.parse(
+      postV1PartnerManagedCompaniesResponse,
+    ),
+  );
+}
+
+export function postV1PartnerManagedCompaniesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1PartnerManagedCompaniesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1PartnerManagedCompaniesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1PartnerManagedCompaniesResponse' from JSON`,
   );
 }

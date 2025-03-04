@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesFinishOnboarding } from "../funcs/companiesFinishOnboarding.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -23,7 +22,7 @@ export type CompaniesFinishOnboardingMutationVariables = {
 };
 
 export type CompaniesFinishOnboardingMutationData =
-  components.CompanyOnboardingStatus;
+  operations.GetV1CompanyFinishOnboardingResponse;
 
 /**
  * Finish company onboarding

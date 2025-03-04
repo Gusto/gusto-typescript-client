@@ -123,7 +123,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayScheduleCreateUpdate](../../models/components/payschedulecreateupdate.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdPaySchedulesResponse](../../models/operations/postv1companiescompanyidpayschedulesresponse.md)\>**
 
 ### Errors
 
@@ -230,7 +230,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PaySchedule[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPaySchedulesResponse](../../models/operations/getv1companiescompanyidpayschedulesresponse.md)\>**
 
 ### Errors
 
@@ -342,7 +342,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody](../../models/operations/getv1companiescompanyidpayschedulespreviewresponsebody.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse](../../models/operations/getv1companiescompanyidpayschedulespreviewresponse.md)\>**
 
 ### Errors
 
@@ -450,7 +450,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PaySchedule](../../models/components/payschedule.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse](../../models/operations/getv1companiescompanyidpayschedulespayscheduleidresponse.md)\>**
 
 ### Errors
 
@@ -567,7 +567,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayScheduleCreateUpdate](../../models/components/payschedulecreateupdate.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse](../../models/operations/putv1companiescompanyidpayschedulespayscheduleidresponse.md)\>**
 
 ### Errors
 
@@ -682,7 +682,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayPeriod[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPayPeriodsResponse](../../models/operations/getv1companiescompanyidpayperiodsresponse.md)\>**
 
 ### Errors
 
@@ -790,7 +790,7 @@ import {
 
 ### Response
 
-**Promise\<[components.UnprocessedTerminationPayPeriod[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse](../../models/operations/getv1companiescompanyidunprocessedterminationpayperiodsresponse.md)\>**
 
 ### Errors
 
@@ -896,7 +896,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayScheduleAssignment](../../models/components/payscheduleassignment.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse](../../models/operations/getv1companiescompanyidpayschedulesassignmentsresponse.md)\>**
 
 ### Errors
 
@@ -1009,7 +1009,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PayScheduleAssignmentPreview](../../models/components/payscheduleassignmentpreview.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse](../../models/operations/postv1companiescompanyidpayschedulesassignmentpreviewresponse.md)\>**
 
 ### Errors
 
@@ -1035,7 +1035,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.paySchedules.assign({
+  const result = await gustoEmbedded.paySchedules.assign({
     companyId: "<id>",
     payScheduleAssignmentBody: {
       type: "by_employee",
@@ -1048,7 +1048,8 @@ async function run() {
     },
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1088,7 +1089,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1122,7 +1124,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdPaySchedulesAssignResponse](../../models/operations/postv1companiescompanyidpayschedulesassignresponse.md)\>**
 
 ### Errors
 

@@ -110,7 +110,7 @@ import {
 
 ### Response
 
-**Promise\<[components.InvoiceData](../../models/components/invoicedata.md)\>**
+**Promise\<[operations.GetInvoicesInvoicePeriodResponse](../../models/operations/getinvoicesinvoiceperiodresponse.md)\>**
 
 ### Errors
 

@@ -21,7 +21,8 @@ export type ContractorsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type ContractorsDeleteMutationData = void;
+export type ContractorsDeleteMutationData =
+  operations.DeleteV1ContractorsContractorUuidResponse;
 
 /**
  * Delete a contractor

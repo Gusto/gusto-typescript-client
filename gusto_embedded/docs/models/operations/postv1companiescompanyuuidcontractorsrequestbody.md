@@ -8,7 +8,7 @@ Create an individual or business contractor.
 import { PostV1CompaniesCompanyUuidContractorsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyUuidContractorsRequestBody = {
-  wageType: "Fixed",
+  wageType: "Hourly",
   startDate: "2020-01-11",
   hourlyRate: "40.0",
 };

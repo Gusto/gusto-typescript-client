@@ -5,7 +5,6 @@
 import { paymentConfigsGet } from "../funcs/paymentConfigsGet.js";
 import { paymentConfigsUpdate } from "../funcs/paymentConfigsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -21,7 +20,7 @@ export class PaymentConfigs extends ClientSDK {
   async get(
     request: operations.GetV1CompanyPaymentConfigsRequest,
     options?: RequestOptions,
-  ): Promise<components.PaymentConfigs> {
+  ): Promise<operations.GetV1CompanyPaymentConfigsResponse> {
     return unwrapAsync(paymentConfigsGet(
       this,
       request,
@@ -40,7 +39,7 @@ export class PaymentConfigs extends ClientSDK {
   async update(
     request: operations.PutV1CompanyPaymentConfigsRequest,
     options?: RequestOptions,
-  ): Promise<components.PaymentConfigs> {
+  ): Promise<operations.PutV1CompanyPaymentConfigsResponse> {
     return unwrapAsync(paymentConfigsUpdate(
       this,
       request,

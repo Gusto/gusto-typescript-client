@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorDocumentsGetPdfQueryData = components.DocumentPdf;
+export type ContractorDocumentsGetPdfQueryData =
+  operations.GetV1ContractorDocumentPdfResponse;
 
 /**
  * Get the contractor document pdf

@@ -20,6 +20,27 @@ export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  i9AuthorizationDocumentsObject?:
+    | Array<components.I9AuthorizationDocument>
+    | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$inboundSchema:
   z.ZodType<
@@ -100,5 +121,103 @@ export function getV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestFromJSON(
       GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "I9-Authorization-Documents-Object": z.array(
+      components.I9AuthorizationDocument$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "I9-Authorization-Documents-Object": "i9AuthorizationDocumentsObject",
+    });
+  });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "I9-Authorization-Documents-Object"?:
+      | Array<components.I9AuthorizationDocument$Outbound>
+      | undefined;
+  };
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    i9AuthorizationDocumentsObject: z.array(
+      components.I9AuthorizationDocument$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      i9AuthorizationDocumentsObject: "I9-Authorization-Documents-Object",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdI9AuthorizationDocumentsResponseToJSON(
+  getV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse:
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$outboundSchema
+      .parse(getV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse),
+  );
+}
+
+export function getV1EmployeesEmployeeIdI9AuthorizationDocumentsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse' from JSON`,
   );
 }

@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { holidayPayPoliciesCreate } from "../funcs/holidayPayPoliciesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,7 +21,8 @@ export type HolidayPayPoliciesCreateMutationVariables = {
   options?: RequestOptions;
 };
 
-export type HolidayPayPoliciesCreateMutationData = components.HolidayPayPolicy;
+export type HolidayPayPoliciesCreateMutationData =
+  operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse;
 
 /**
  * Create a holiday pay policy for a company

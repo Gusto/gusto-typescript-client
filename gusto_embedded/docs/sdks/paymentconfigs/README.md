@@ -106,7 +106,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PaymentConfigs](../../models/components/paymentconfigs.md)\>**
+**Promise\<[operations.GetV1CompanyPaymentConfigsResponse](../../models/operations/getv1companypaymentconfigsresponse.md)\>**
 
 ### Errors
 
@@ -209,7 +209,7 @@ import {
 
 ### Response
 
-**Promise\<[components.PaymentConfigs](../../models/components/paymentconfigs.md)\>**
+**Promise\<[operations.PutV1CompanyPaymentConfigsResponse](../../models/operations/putv1companypaymentconfigsresponse.md)\>**
 
 ### Errors
 

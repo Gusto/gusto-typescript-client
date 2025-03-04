@@ -107,7 +107,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorBankAccount[]](../../models/.md)\>**
+**Promise\<[operations.GetV1ContractorsContractorUuidBankAccountsResponse](../../models/operations/getv1contractorscontractoruuidbankaccountsresponse.md)\>**
 
 ### Errors
 
@@ -215,7 +215,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentMethod](../../models/components/contractorpaymentmethod.md)\>**
+**Promise\<[operations.GetV1ContractorsContractorUuidPaymentMethodResponse](../../models/operations/getv1contractorscontractoruuidpaymentmethodresponse.md)\>**
 
 ### Errors
 
@@ -319,7 +319,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentMethod](../../models/components/contractorpaymentmethod.md)\>**
+**Promise\<[operations.PutV1ContractorsContractorIdPaymentMethodResponse](../../models/operations/putv1contractorscontractoridpaymentmethodresponse.md)\>**
 
 ### Errors
 

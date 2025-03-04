@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompanyBenefitsListQueryData = Array<components.CompanyBenefit>;
+export type CompanyBenefitsListQueryData =
+  operations.GetV1CompaniesCompanyIdCompanyBenefitsResponse;
 
 /**
  * Get benefits for a company

@@ -28,6 +28,25 @@ export type GetV1CompaniesCompanyIdAdminsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdAdminsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  adminList?: Array<components.Admin> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdAdminsRequest$inboundSchema: z.ZodType<
   GetV1CompaniesCompanyIdAdminsRequest,
@@ -107,5 +126,89 @@ export function getV1CompaniesCompanyIdAdminsRequestFromJSON(
     (x) =>
       GetV1CompaniesCompanyIdAdminsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompaniesCompanyIdAdminsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdAdminsResponse$inboundSchema: z.ZodType<
+  GetV1CompaniesCompanyIdAdminsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Admin-List": z.array(components.Admin$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Admin-List": "adminList",
+  });
+});
+
+/** @internal */
+export type GetV1CompaniesCompanyIdAdminsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Admin-List"?: Array<components.Admin$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdAdminsResponse$outboundSchema: z.ZodType<
+  GetV1CompaniesCompanyIdAdminsResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1CompaniesCompanyIdAdminsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  adminList: z.array(components.Admin$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    adminList: "Admin-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdAdminsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdAdminsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdAdminsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdAdminsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdAdminsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdAdminsResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesCompanyIdAdminsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdAdminsResponseToJSON(
+  getV1CompaniesCompanyIdAdminsResponse: GetV1CompaniesCompanyIdAdminsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdAdminsResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdAdminsResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdAdminsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompaniesCompanyIdAdminsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdAdminsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompaniesCompanyIdAdminsResponse' from JSON`,
   );
 }

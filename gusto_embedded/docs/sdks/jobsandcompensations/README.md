@@ -111,7 +111,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Job](../../models/components/job.md)\>**
+**Promise\<[operations.PostV1JobsJobIdResponse](../../models/operations/postv1jobsjobidresponse.md)\>**
 
 ### Errors
 
@@ -218,7 +218,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Job[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdJobsResponse](../../models/operations/getv1employeesemployeeidjobsresponse.md)\>**
 
 ### Errors
 
@@ -324,7 +324,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Job](../../models/components/job.md)\>**
+**Promise\<[operations.GetV1JobsJobIdResponse](../../models/operations/getv1jobsjobidresponse.md)\>**
 
 ### Errors
 
@@ -429,7 +429,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Job](../../models/components/job.md)\>**
+**Promise\<[operations.PutV1JobsJobIdResponse](../../models/operations/putv1jobsjobidresponse.md)\>**
 
 ### Errors
 
@@ -454,11 +454,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.jobsAndCompensations.delete({
+  const result = await gustoEmbedded.jobsAndCompensations.delete({
     jobId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -489,7 +490,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -523,7 +525,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1JobsJobIdResponse](../../models/operations/deletev1jobsjobidresponse.md)\>**
 
 ### Errors
 
@@ -633,7 +635,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Compensation[]](../../models/.md)\>**
+**Promise\<[operations.GetV1JobsJobIdCompensationsResponse](../../models/operations/getv1jobsjobidcompensationsresponse.md)\>**
 
 ### Errors
 
@@ -738,7 +740,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Compensation](../../models/components/compensation.md)\>**
+**Promise\<[operations.PostV1CompensationsCompensationIdResponse](../../models/operations/postv1compensationscompensationidresponse.md)\>**
 
 ### Errors
 
@@ -846,7 +848,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Compensation](../../models/components/compensation.md)\>**
+**Promise\<[operations.GetV1CompensationsCompensationIdResponse](../../models/operations/getv1compensationscompensationidresponse.md)\>**
 
 ### Errors
 
@@ -953,7 +955,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Compensation](../../models/components/compensation.md)\>**
+**Promise\<[operations.PutV1CompensationsCompensationIdResponse](../../models/operations/putv1compensationscompensationidresponse.md)\>**
 
 ### Errors
 
@@ -979,11 +981,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.jobsAndCompensations.deleteCompensation({
+  const result = await gustoEmbedded.jobsAndCompensations.deleteCompensation({
     compensationId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1014,7 +1017,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1048,7 +1052,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1CompensationsCompensationIdResponse](../../models/operations/deletev1compensationscompensationidresponse.md)\>**
 
 ### Errors
 

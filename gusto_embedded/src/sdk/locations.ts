@@ -8,7 +8,6 @@ import { locationsGetMinimumWages } from "../funcs/locationsGetMinimumWages.js";
 import { locationsRetrieve } from "../funcs/locationsRetrieve.js";
 import { locationsUpdate } from "../funcs/locationsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -26,7 +25,7 @@ export class Locations extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesCompanyIdLocationsRequest,
     options?: RequestOptions,
-  ): Promise<components.Location> {
+  ): Promise<operations.PostV1CompaniesCompanyIdLocationsResponse> {
     return unwrapAsync(locationsCreate(
       this,
       request,
@@ -47,7 +46,7 @@ export class Locations extends ClientSDK {
   async get(
     request: operations.GetV1CompaniesCompanyIdLocationsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Location>> {
+  ): Promise<operations.GetV1CompaniesCompanyIdLocationsResponse> {
     return unwrapAsync(locationsGet(
       this,
       request,
@@ -66,7 +65,7 @@ export class Locations extends ClientSDK {
   async retrieve(
     request: operations.GetV1LocationsLocationIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Location> {
+  ): Promise<operations.GetV1LocationsLocationIdResponse> {
     return unwrapAsync(locationsRetrieve(
       this,
       request,
@@ -85,7 +84,7 @@ export class Locations extends ClientSDK {
   async update(
     request: operations.PutV1LocationsLocationIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Location> {
+  ): Promise<operations.PutV1LocationsLocationIdResponse> {
     return unwrapAsync(locationsUpdate(
       this,
       request,
@@ -104,7 +103,7 @@ export class Locations extends ClientSDK {
   async getMinimumWages(
     request: operations.GetV1LocationsLocationUuidMinimumWagesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.MinimumWage>> {
+  ): Promise<operations.GetV1LocationsLocationUuidMinimumWagesResponse> {
     return unwrapAsync(locationsGetMinimumWages(
       this,
       request,

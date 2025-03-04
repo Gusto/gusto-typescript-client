@@ -24,6 +24,27 @@ export type GetV1CompanyBenefitsCompanyBenefitIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompanyBenefitsCompanyBenefitIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyBenefitWithEmployeeBenefits?:
+    | components.CompanyBenefitWithEmployeeBenefits
+    | undefined;
+};
+
 /** @internal */
 export const GetV1CompanyBenefitsCompanyBenefitIdRequest$inboundSchema:
   z.ZodType<
@@ -110,5 +131,103 @@ export function getV1CompanyBenefitsCompanyBenefitIdRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompanyBenefitsCompanyBenefitIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompanyBenefitsCompanyBenefitIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Company-Benefit-With-Employee-Benefits": components
+      .CompanyBenefitWithEmployeeBenefits$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Company-Benefit-With-Employee-Benefits":
+        "companyBenefitWithEmployeeBenefits",
+    });
+  });
+
+/** @internal */
+export type GetV1CompanyBenefitsCompanyBenefitIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Benefit-With-Employee-Benefits"?:
+    | components.CompanyBenefitWithEmployeeBenefits$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const GetV1CompanyBenefitsCompanyBenefitIdResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompanyBenefitsCompanyBenefitIdResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompanyBenefitsCompanyBenefitIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    companyBenefitWithEmployeeBenefits: components
+      .CompanyBenefitWithEmployeeBenefits$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      companyBenefitWithEmployeeBenefits:
+        "Company-Benefit-With-Employee-Benefits",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompanyBenefitsCompanyBenefitIdResponse$ {
+  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema;
+  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompanyBenefitsCompanyBenefitIdResponse$outboundSchema;
+  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdResponse$Outbound` instead. */
+  export type Outbound = GetV1CompanyBenefitsCompanyBenefitIdResponse$Outbound;
+}
+
+export function getV1CompanyBenefitsCompanyBenefitIdResponseToJSON(
+  getV1CompanyBenefitsCompanyBenefitIdResponse:
+    GetV1CompanyBenefitsCompanyBenefitIdResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompanyBenefitsCompanyBenefitIdResponse$outboundSchema.parse(
+      getV1CompanyBenefitsCompanyBenefitIdResponse,
+    ),
+  );
+}
+
+export function getV1CompanyBenefitsCompanyBenefitIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompanyBenefitsCompanyBenefitIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompanyBenefitsCompanyBenefitIdResponse' from JSON`,
   );
 }

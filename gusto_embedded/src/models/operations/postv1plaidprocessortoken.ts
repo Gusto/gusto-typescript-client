@@ -50,6 +50,25 @@ export type PostV1PlaidProcessorTokenRequest = {
 export type PostV1PlaidProcessorTokenResponseBody =
   components.CompanyBankAccount;
 
+export type PostV1PlaidProcessorTokenResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * A JSON object containing bank information
+   */
+  oneOf?: components.CompanyBankAccount | undefined;
+};
+
 /** @internal */
 export const OwnerType$inboundSchema: z.ZodNativeEnum<typeof OwnerType> = z
   .nativeEnum(OwnerType);
@@ -272,5 +291,85 @@ export function postV1PlaidProcessorTokenResponseBodyFromJSON(
     (x) =>
       PostV1PlaidProcessorTokenResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1PlaidProcessorTokenResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1PlaidProcessorTokenResponse$inboundSchema: z.ZodType<
+  PostV1PlaidProcessorTokenResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  oneOf: components.CompanyBankAccount$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type PostV1PlaidProcessorTokenResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  oneOf?: components.CompanyBankAccount$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1PlaidProcessorTokenResponse$outboundSchema: z.ZodType<
+  PostV1PlaidProcessorTokenResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1PlaidProcessorTokenResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  oneOf: components.CompanyBankAccount$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1PlaidProcessorTokenResponse$ {
+  /** @deprecated use `PostV1PlaidProcessorTokenResponse$inboundSchema` instead. */
+  export const inboundSchema = PostV1PlaidProcessorTokenResponse$inboundSchema;
+  /** @deprecated use `PostV1PlaidProcessorTokenResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1PlaidProcessorTokenResponse$outboundSchema;
+  /** @deprecated use `PostV1PlaidProcessorTokenResponse$Outbound` instead. */
+  export type Outbound = PostV1PlaidProcessorTokenResponse$Outbound;
+}
+
+export function postV1PlaidProcessorTokenResponseToJSON(
+  postV1PlaidProcessorTokenResponse: PostV1PlaidProcessorTokenResponse,
+): string {
+  return JSON.stringify(
+    PostV1PlaidProcessorTokenResponse$outboundSchema.parse(
+      postV1PlaidProcessorTokenResponse,
+    ),
+  );
+}
+
+export function postV1PlaidProcessorTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1PlaidProcessorTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1PlaidProcessorTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1PlaidProcessorTokenResponse' from JSON`,
   );
 }

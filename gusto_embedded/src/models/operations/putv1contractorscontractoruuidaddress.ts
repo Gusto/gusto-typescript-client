@@ -33,6 +33,25 @@ export type PutV1ContractorsContractorUuidAddressRequest = {
   requestBody: PutV1ContractorsContractorUuidAddressRequestBody;
 };
 
+export type PutV1ContractorsContractorUuidAddressResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  contractorAddress?: components.ContractorAddress | undefined;
+};
+
 /** @internal */
 export const PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema:
   z.ZodType<
@@ -216,5 +235,97 @@ export function putV1ContractorsContractorUuidAddressRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1ContractorsContractorUuidAddressRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1ContractorsContractorUuidAddressResponse$inboundSchema:
+  z.ZodType<
+    PutV1ContractorsContractorUuidAddressResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Contractor-Address": components.ContractorAddress$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor-Address": "contractorAddress",
+    });
+  });
+
+/** @internal */
+export type PutV1ContractorsContractorUuidAddressResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Contractor-Address"?: components.ContractorAddress$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1ContractorsContractorUuidAddressResponse$outboundSchema:
+  z.ZodType<
+    PutV1ContractorsContractorUuidAddressResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1ContractorsContractorUuidAddressResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractorAddress: components.ContractorAddress$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractorAddress: "Contractor-Address",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1ContractorsContractorUuidAddressResponse$ {
+  /** @deprecated use `PutV1ContractorsContractorUuidAddressResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1ContractorsContractorUuidAddressResponse$inboundSchema;
+  /** @deprecated use `PutV1ContractorsContractorUuidAddressResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1ContractorsContractorUuidAddressResponse$outboundSchema;
+  /** @deprecated use `PutV1ContractorsContractorUuidAddressResponse$Outbound` instead. */
+  export type Outbound = PutV1ContractorsContractorUuidAddressResponse$Outbound;
+}
+
+export function putV1ContractorsContractorUuidAddressResponseToJSON(
+  putV1ContractorsContractorUuidAddressResponse:
+    PutV1ContractorsContractorUuidAddressResponse,
+): string {
+  return JSON.stringify(
+    PutV1ContractorsContractorUuidAddressResponse$outboundSchema.parse(
+      putV1ContractorsContractorUuidAddressResponse,
+    ),
+  );
+}
+
+export function putV1ContractorsContractorUuidAddressResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1ContractorsContractorUuidAddressResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1ContractorsContractorUuidAddressResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1ContractorsContractorUuidAddressResponse' from JSON`,
   );
 }

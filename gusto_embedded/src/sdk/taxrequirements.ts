@@ -6,7 +6,6 @@ import { taxRequirementsGet } from "../funcs/taxRequirementsGet.js";
 import { taxRequirementsGetAll } from "../funcs/taxRequirementsGetAll.js";
 import { taxRequirementsUpdateState } from "../funcs/taxRequirementsUpdateState.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -61,7 +60,7 @@ export class TaxRequirements extends ClientSDK {
   async get(
     request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
     options?: RequestOptions,
-  ): Promise<components.TaxRequirementsState> {
+  ): Promise<operations.GetV1CompaniesCompanyUuidTaxRequirementsStateResponse> {
     return unwrapAsync(taxRequirementsGet(
       this,
       request,
@@ -80,7 +79,7 @@ export class TaxRequirements extends ClientSDK {
   async updateState(
     request: operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse> {
     return unwrapAsync(taxRequirementsUpdateState(
       this,
       request,
@@ -99,7 +98,7 @@ export class TaxRequirements extends ClientSDK {
   async getAll(
     request: operations.GetV1CompaniesCompanyUuidTaxRequirementsRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
+  ): Promise<operations.GetV1CompaniesCompanyUuidTaxRequirementsResponse> {
     return unwrapAsync(taxRequirementsGetAll(
       this,
       request,

@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsUpdate } from "../funcs/jobsAndCompensationsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,7 +21,8 @@ export type JobsAndCompensationsUpdateMutationVariables = {
   options?: RequestOptions;
 };
 
-export type JobsAndCompensationsUpdateMutationData = components.Job;
+export type JobsAndCompensationsUpdateMutationData =
+  operations.PutV1JobsJobIdResponse;
 
 /**
  * Update a job

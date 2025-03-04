@@ -116,7 +116,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyBankAccount](../../models/components/companybankaccount.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdBankAccountsResponse](../../models/operations/postv1companiescompanyidbankaccountsresponse.md)\>**
 
 ### Errors
 
@@ -223,7 +223,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyBankAccount[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdBankAccountsResponse](../../models/operations/getv1companiescompanyidbankaccountsresponse.md)\>**
 
 ### Errors
 
@@ -341,7 +341,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyBankAccount](../../models/components/companybankaccount.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdBankAccountsVerifyResponse](../../models/operations/putv1companiescompanyidbankaccountsverifyresponse.md)\>**
 
 ### Errors
 
@@ -452,7 +452,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.PostV1PlaidProcessorTokenResponseBody](../../models/operations/postv1plaidprocessortokenresponsebody.md)\>**
+**Promise\<[operations.PostV1PlaidProcessorTokenResponse](../../models/operations/postv1plaidprocessortokenresponse.md)\>**
 
 ### Errors
 

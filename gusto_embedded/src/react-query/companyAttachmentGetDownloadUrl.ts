@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type CompanyAttachmentGetDownloadUrlQueryData =
-  operations.GetV1CompaniesAttachmentUrlResponseBody;
+  operations.GetV1CompaniesAttachmentUrlResponse;
 
 /**
  * Get a temporary url to download the Company Attachment file

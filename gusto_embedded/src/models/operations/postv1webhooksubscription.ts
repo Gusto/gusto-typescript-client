@@ -46,6 +46,25 @@ export type PostV1WebhookSubscriptionRequest = {
   requestBody: PostV1WebhookSubscriptionRequestBody;
 };
 
+export type PostV1WebhookSubscriptionResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  webhookSubscription?: components.WebhookSubscription | undefined;
+};
+
 /** @internal */
 export const PostV1WebhookSubscriptionSecurity$inboundSchema: z.ZodType<
   PostV1WebhookSubscriptionSecurity,
@@ -274,5 +293,88 @@ export function postV1WebhookSubscriptionRequestFromJSON(
     jsonString,
     (x) => PostV1WebhookSubscriptionRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1WebhookSubscriptionRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1WebhookSubscriptionResponse$inboundSchema: z.ZodType<
+  PostV1WebhookSubscriptionResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Webhook-Subscription": components.WebhookSubscription$inboundSchema
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Webhook-Subscription": "webhookSubscription",
+  });
+});
+
+/** @internal */
+export type PostV1WebhookSubscriptionResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Webhook-Subscription"?: components.WebhookSubscription$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1WebhookSubscriptionResponse$outboundSchema: z.ZodType<
+  PostV1WebhookSubscriptionResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1WebhookSubscriptionResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  webhookSubscription: components.WebhookSubscription$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    webhookSubscription: "Webhook-Subscription",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1WebhookSubscriptionResponse$ {
+  /** @deprecated use `PostV1WebhookSubscriptionResponse$inboundSchema` instead. */
+  export const inboundSchema = PostV1WebhookSubscriptionResponse$inboundSchema;
+  /** @deprecated use `PostV1WebhookSubscriptionResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1WebhookSubscriptionResponse$outboundSchema;
+  /** @deprecated use `PostV1WebhookSubscriptionResponse$Outbound` instead. */
+  export type Outbound = PostV1WebhookSubscriptionResponse$Outbound;
+}
+
+export function postV1WebhookSubscriptionResponseToJSON(
+  postV1WebhookSubscriptionResponse: PostV1WebhookSubscriptionResponse,
+): string {
+  return JSON.stringify(
+    PostV1WebhookSubscriptionResponse$outboundSchema.parse(
+      postV1WebhookSubscriptionResponse,
+    ),
+  );
+}
+
+export function postV1WebhookSubscriptionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1WebhookSubscriptionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1WebhookSubscriptionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1WebhookSubscriptionResponse' from JSON`,
   );
 }

@@ -21,7 +21,8 @@ export type ExternalPayrollsFinalizeTaxLiabilitiesMutationVariables = {
   options?: RequestOptions;
 };
 
-export type ExternalPayrollsFinalizeTaxLiabilitiesMutationData = void;
+export type ExternalPayrollsFinalizeTaxLiabilitiesMutationData =
+  operations.PutV1TaxLiabilitiesFinishResponse;
 
 /**
  * Finalize tax liabilities options and convert into processed payrolls

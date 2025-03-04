@@ -12,7 +12,6 @@ import { contractorsUpdate } from "../funcs/contractorsUpdate.js";
 import { contractorsUpdateAddress } from "../funcs/contractorsUpdateAddress.js";
 import { contractorsUpdateOnboardingStatus } from "../funcs/contractorsUpdateOnboardingStatus.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -28,7 +27,7 @@ export class Contractors extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesCompanyUuidContractorsRequest,
     options?: RequestOptions,
-  ): Promise<components.Contractor> {
+  ): Promise<operations.PostV1CompaniesCompanyUuidContractorsResponse> {
     return unwrapAsync(contractorsCreate(
       this,
       request,
@@ -47,7 +46,7 @@ export class Contractors extends ClientSDK {
   async list(
     request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Contractor>> {
+  ): Promise<operations.GetV1CompaniesCompanyUuidContractorsResponse> {
     return unwrapAsync(contractorsList(
       this,
       request,
@@ -66,7 +65,7 @@ export class Contractors extends ClientSDK {
   async get(
     request: operations.GetV1ContractorsContractorUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.Contractor> {
+  ): Promise<operations.GetV1ContractorsContractorUuidResponse> {
     return unwrapAsync(contractorsGet(
       this,
       request,
@@ -89,7 +88,7 @@ export class Contractors extends ClientSDK {
   async update(
     request: operations.PutV1ContractorsContractorUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.Contractor> {
+  ): Promise<operations.PutV1ContractorsContractorUuidResponse> {
     return unwrapAsync(contractorsUpdate(
       this,
       request,
@@ -108,7 +107,7 @@ export class Contractors extends ClientSDK {
   async delete(
     request: operations.DeleteV1ContractorsContractorUuidRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1ContractorsContractorUuidResponse> {
     return unwrapAsync(contractorsDelete(
       this,
       request,
@@ -158,7 +157,9 @@ export class Contractors extends ClientSDK {
   async getOnboardingStatus(
     request: operations.GetV1ContractorsContractorUuidOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorOnboardingStatus> {
+  ): Promise<
+    operations.GetV1ContractorsContractorUuidOnboardingStatusResponse
+  > {
     return unwrapAsync(contractorsGetOnboardingStatus(
       this,
       request,
@@ -187,7 +188,9 @@ export class Contractors extends ClientSDK {
   async updateOnboardingStatus(
     request: operations.PutV1ContractorsContractorUuidOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorOnboardingStatus> {
+  ): Promise<
+    operations.PutV1ContractorsContractorUuidOnboardingStatusResponse
+  > {
     return unwrapAsync(contractorsUpdateOnboardingStatus(
       this,
       request,
@@ -206,7 +209,7 @@ export class Contractors extends ClientSDK {
   async getAddress(
     request: operations.GetV1ContractorsContractorUuidAddressRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorAddress> {
+  ): Promise<operations.GetV1ContractorsContractorUuidAddressResponse> {
     return unwrapAsync(contractorsGetAddress(
       this,
       request,
@@ -225,7 +228,7 @@ export class Contractors extends ClientSDK {
   async updateAddress(
     request: operations.PutV1ContractorsContractorUuidAddressRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorAddress> {
+  ): Promise<operations.PutV1ContractorsContractorUuidAddressResponse> {
     return unwrapAsync(contractorsUpdateAddress(
       this,
       request,

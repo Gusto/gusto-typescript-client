@@ -6,7 +6,7 @@
 import { PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
-  "Historical Payment";
+  "Direct Deposit";
 ```
 
 ## Values

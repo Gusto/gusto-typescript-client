@@ -20,6 +20,25 @@ export type GetV1ContractorsContractorUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1ContractorsContractorUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  contractor?: components.Contractor | undefined;
+};
+
 /** @internal */
 export const GetV1ContractorsContractorUuidRequest$inboundSchema: z.ZodType<
   GetV1ContractorsContractorUuidRequest,
@@ -93,5 +112,90 @@ export function getV1ContractorsContractorUuidRequestFromJSON(
     (x) =>
       GetV1ContractorsContractorUuidRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1ContractorsContractorUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1ContractorsContractorUuidResponse$inboundSchema: z.ZodType<
+  GetV1ContractorsContractorUuidResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Contractor: components.Contractor$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Contractor": "contractor",
+  });
+});
+
+/** @internal */
+export type GetV1ContractorsContractorUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Contractor?: components.Contractor$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1ContractorsContractorUuidResponse$outboundSchema: z.ZodType<
+  GetV1ContractorsContractorUuidResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1ContractorsContractorUuidResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  contractor: components.Contractor$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    contractor: "Contractor",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1ContractorsContractorUuidResponse$ {
+  /** @deprecated use `GetV1ContractorsContractorUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1ContractorsContractorUuidResponse$inboundSchema;
+  /** @deprecated use `GetV1ContractorsContractorUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1ContractorsContractorUuidResponse$outboundSchema;
+  /** @deprecated use `GetV1ContractorsContractorUuidResponse$Outbound` instead. */
+  export type Outbound = GetV1ContractorsContractorUuidResponse$Outbound;
+}
+
+export function getV1ContractorsContractorUuidResponseToJSON(
+  getV1ContractorsContractorUuidResponse:
+    GetV1ContractorsContractorUuidResponse,
+): string {
+  return JSON.stringify(
+    GetV1ContractorsContractorUuidResponse$outboundSchema.parse(
+      getV1ContractorsContractorUuidResponse,
+    ),
+  );
+}
+
+export function getV1ContractorsContractorUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1ContractorsContractorUuidResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1ContractorsContractorUuidResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1ContractorsContractorUuidResponse' from JSON`,
   );
 }

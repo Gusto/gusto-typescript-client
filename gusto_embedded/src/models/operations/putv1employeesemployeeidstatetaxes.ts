@@ -41,6 +41,25 @@ export type PutV1EmployeesEmployeeIdStateTaxesRequest = {
   requestBody: PutV1EmployeesEmployeeIdStateTaxesRequestBody;
 };
 
+export type PutV1EmployeesEmployeeIdStateTaxesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeStateTaxesList?: Array<components.EmployeeStateTax> | undefined;
+};
+
 /** @internal */
 export const Answers$inboundSchema: z.ZodType<Answers, z.ZodTypeDef, unknown> =
   z.object({
@@ -363,5 +382,99 @@ export function putV1EmployeesEmployeeIdStateTaxesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1EmployeesEmployeeIdStateTaxesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema:
+  z.ZodType<PutV1EmployeesEmployeeIdStateTaxesResponse, z.ZodTypeDef, unknown> =
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      "Employee-State-Taxes-List": z.array(
+        components.EmployeeStateTax$inboundSchema,
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "Employee-State-Taxes-List": "employeeStateTaxesList",
+      });
+    });
+
+/** @internal */
+export type PutV1EmployeesEmployeeIdStateTaxesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-State-Taxes-List"?:
+    | Array<components.EmployeeStateTax$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdStateTaxesResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeesEmployeeIdStateTaxesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeStateTaxesList: z.array(components.EmployeeStateTax$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeStateTaxesList: "Employee-State-Taxes-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdStateTaxesResponse$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdStateTaxesResponse$Outbound` instead. */
+  export type Outbound = PutV1EmployeesEmployeeIdStateTaxesResponse$Outbound;
+}
+
+export function putV1EmployeesEmployeeIdStateTaxesResponseToJSON(
+  putV1EmployeesEmployeeIdStateTaxesResponse:
+    PutV1EmployeesEmployeeIdStateTaxesResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema.parse(
+      putV1EmployeesEmployeeIdStateTaxesResponse,
+    ),
+  );
+}
+
+export function putV1EmployeesEmployeeIdStateTaxesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1EmployeesEmployeeIdStateTaxesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1EmployeesEmployeeIdStateTaxesResponse' from JSON`,
   );
 }

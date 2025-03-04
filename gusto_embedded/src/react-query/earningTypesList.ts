@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EarningTypesListQueryData = components.EarningTypeList;
+export type EarningTypesListQueryData =
+  operations.GetV1CompaniesCompanyIdEarningTypesResponse;
 
 /**
  * Get all earning types for a company

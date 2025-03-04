@@ -7,7 +7,7 @@ The earning type for the compensation.
 ```typescript
 import { EarningType } from "@gusto/embedded-api/models/operations";
 
-let value: EarningType = "CompanyEarningType";
+let value: EarningType = "CompanyPayType";
 ```
 
 ## Values

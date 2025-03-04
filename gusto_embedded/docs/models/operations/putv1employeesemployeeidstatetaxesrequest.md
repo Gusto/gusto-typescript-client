@@ -10,7 +10,7 @@ let value: PutV1EmployeesEmployeeIdStateTaxesRequest = {
   requestBody: {
     states: [
       {
-        state: "Virginia",
+        state: "Washington",
       },
     ],
   },

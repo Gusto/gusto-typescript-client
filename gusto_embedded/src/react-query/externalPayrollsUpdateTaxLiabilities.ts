@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsUpdateTaxLiabilities } from "../funcs/externalPayrollsUpdateTaxLiabilities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,9 +21,8 @@ export type ExternalPayrollsUpdateTaxLiabilitiesMutationVariables = {
   options?: RequestOptions;
 };
 
-export type ExternalPayrollsUpdateTaxLiabilitiesMutationData = Array<
-  Array<components.TaxLiabilitiesSelections>
->;
+export type ExternalPayrollsUpdateTaxLiabilitiesMutationData =
+  operations.PutV1TaxLiabilitiesResponse;
 
 /**
  * Update tax liabilities

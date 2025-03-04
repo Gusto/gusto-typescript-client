@@ -7,7 +7,7 @@ The status of the external payroll. The status will be `unprocessed` when the ex
 ```typescript
 import { Status } from "@gusto/embedded-api/models/components";
 
-let value: Status = "unprocessed";
+let value: Status = "processed";
 ```
 
 ## Values

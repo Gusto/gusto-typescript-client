@@ -36,6 +36,25 @@ export type GetInvoicesInvoicePeriodRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetInvoicesInvoicePeriodResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  invoiceData?: components.InvoiceData | undefined;
+};
+
 /** @internal */
 export const GetInvoicesInvoicePeriodSecurity$inboundSchema: z.ZodType<
   GetInvoicesInvoicePeriodSecurity,
@@ -181,5 +200,86 @@ export function getInvoicesInvoicePeriodRequestFromJSON(
     jsonString,
     (x) => GetInvoicesInvoicePeriodRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetInvoicesInvoicePeriodRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetInvoicesInvoicePeriodResponse$inboundSchema: z.ZodType<
+  GetInvoicesInvoicePeriodResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Invoice-Data": components.InvoiceData$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Invoice-Data": "invoiceData",
+  });
+});
+
+/** @internal */
+export type GetInvoicesInvoicePeriodResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Invoice-Data"?: components.InvoiceData$Outbound | undefined;
+};
+
+/** @internal */
+export const GetInvoicesInvoicePeriodResponse$outboundSchema: z.ZodType<
+  GetInvoicesInvoicePeriodResponse$Outbound,
+  z.ZodTypeDef,
+  GetInvoicesInvoicePeriodResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  invoiceData: components.InvoiceData$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    invoiceData: "Invoice-Data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetInvoicesInvoicePeriodResponse$ {
+  /** @deprecated use `GetInvoicesInvoicePeriodResponse$inboundSchema` instead. */
+  export const inboundSchema = GetInvoicesInvoicePeriodResponse$inboundSchema;
+  /** @deprecated use `GetInvoicesInvoicePeriodResponse$outboundSchema` instead. */
+  export const outboundSchema = GetInvoicesInvoicePeriodResponse$outboundSchema;
+  /** @deprecated use `GetInvoicesInvoicePeriodResponse$Outbound` instead. */
+  export type Outbound = GetInvoicesInvoicePeriodResponse$Outbound;
+}
+
+export function getInvoicesInvoicePeriodResponseToJSON(
+  getInvoicesInvoicePeriodResponse: GetInvoicesInvoicePeriodResponse,
+): string {
+  return JSON.stringify(
+    GetInvoicesInvoicePeriodResponse$outboundSchema.parse(
+      getInvoicesInvoicePeriodResponse,
+    ),
+  );
+}
+
+export function getInvoicesInvoicePeriodResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetInvoicesInvoicePeriodResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetInvoicesInvoicePeriodResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetInvoicesInvoicePeriodResponse' from JSON`,
   );
 }

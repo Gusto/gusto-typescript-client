@@ -22,6 +22,21 @@ export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
     components.PostEmployeeYtdBenefitAmountsFromDifferentCompany;
 };
 
+export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema:
   z.ZodType<
@@ -116,5 +131,92 @@ export function postEmployeeYtdBenefitAmountsFromDifferentCompanyRequestFromJSON
       PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema:
+  z.ZodType<
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+  };
+
+/** @internal */
+export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema:
+  z.ZodType<
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound,
+    z.ZodTypeDef,
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$ {
+  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema;
+  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema;
+  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound` instead. */
+  export type Outbound =
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound;
+}
+
+export function postEmployeeYtdBenefitAmountsFromDifferentCompanyResponseToJSON(
+  postEmployeeYtdBenefitAmountsFromDifferentCompanyResponse:
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+): string {
+  return JSON.stringify(
+    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema
+      .parse(postEmployeeYtdBenefitAmountsFromDifferentCompanyResponse),
+  );
+}
+
+export function postEmployeeYtdBenefitAmountsFromDifferentCompanyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse' from JSON`,
   );
 }

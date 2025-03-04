@@ -6,7 +6,6 @@ import { wireInRequestsGet } from "../funcs/wireInRequestsGet.js";
 import { wireInRequestsList } from "../funcs/wireInRequestsList.js";
 import { wireInRequestsSubmit } from "../funcs/wireInRequestsSubmit.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +21,7 @@ export class WireInRequests extends ClientSDK {
   async get(
     request: operations.GetWireInRequestsWireInRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.WireInRequest> {
+  ): Promise<operations.GetWireInRequestsWireInRequestUuidResponse> {
     return unwrapAsync(wireInRequestsGet(
       this,
       request,
@@ -41,7 +40,7 @@ export class WireInRequests extends ClientSDK {
   async submit(
     request: operations.PutWireInRequestsWireInRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.WireInRequest> {
+  ): Promise<operations.PutWireInRequestsWireInRequestUuidResponse> {
     return unwrapAsync(wireInRequestsSubmit(
       this,
       request,
@@ -60,7 +59,7 @@ export class WireInRequests extends ClientSDK {
   async list(
     request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.WireInRequest>> {
+  ): Promise<operations.GetCompaniesCompanyUuidWireInRequestUuidResponse> {
     return unwrapAsync(wireInRequestsList(
       this,
       request,

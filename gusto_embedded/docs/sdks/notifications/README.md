@@ -109,7 +109,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Notification](../../models/components/notification.md)\>**
+**Promise\<[operations.GetNotificationsNotificationUuidResponse](../../models/operations/getnotificationsnotificationuuidresponse.md)\>**
 
 ### Errors
 

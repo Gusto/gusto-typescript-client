@@ -100,7 +100,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetV1TokenInfoResponseBody](../../models/operations/getv1tokeninforesponsebody.md)\>**
+**Promise\<[operations.GetV1TokenInfoResponse](../../models/operations/getv1tokeninforesponse.md)\>**
 
 ### Errors
 
@@ -207,7 +207,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Authentication](../../models/components/authentication.md)\>**
+**Promise\<[operations.RefreshAccessTokenResponse](../../models/operations/refreshaccesstokenresponse.md)\>**
 
 ### Errors
 

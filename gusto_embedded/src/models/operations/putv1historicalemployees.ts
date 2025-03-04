@@ -94,6 +94,25 @@ export type PutV1HistoricalEmployeesRequest = {
   requestBody: PutV1HistoricalEmployeesRequestBody;
 };
 
+export type PutV1HistoricalEmployeesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employee?: components.Employee | undefined;
+};
+
 /** @internal */
 export const WorkAddress$inboundSchema: z.ZodType<
   WorkAddress,
@@ -609,5 +628,86 @@ export function putV1HistoricalEmployeesRequestFromJSON(
     jsonString,
     (x) => PutV1HistoricalEmployeesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1HistoricalEmployeesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1HistoricalEmployeesResponse$inboundSchema: z.ZodType<
+  PutV1HistoricalEmployeesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Employee: components.Employee$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Employee": "employee",
+  });
+});
+
+/** @internal */
+export type PutV1HistoricalEmployeesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Employee?: components.Employee$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1HistoricalEmployeesResponse$outboundSchema: z.ZodType<
+  PutV1HistoricalEmployeesResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1HistoricalEmployeesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  employee: components.Employee$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    employee: "Employee",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1HistoricalEmployeesResponse$ {
+  /** @deprecated use `PutV1HistoricalEmployeesResponse$inboundSchema` instead. */
+  export const inboundSchema = PutV1HistoricalEmployeesResponse$inboundSchema;
+  /** @deprecated use `PutV1HistoricalEmployeesResponse$outboundSchema` instead. */
+  export const outboundSchema = PutV1HistoricalEmployeesResponse$outboundSchema;
+  /** @deprecated use `PutV1HistoricalEmployeesResponse$Outbound` instead. */
+  export type Outbound = PutV1HistoricalEmployeesResponse$Outbound;
+}
+
+export function putV1HistoricalEmployeesResponseToJSON(
+  putV1HistoricalEmployeesResponse: PutV1HistoricalEmployeesResponse,
+): string {
+  return JSON.stringify(
+    PutV1HistoricalEmployeesResponse$outboundSchema.parse(
+      putV1HistoricalEmployeesResponse,
+    ),
+  );
+}
+
+export function putV1HistoricalEmployeesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1HistoricalEmployeesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutV1HistoricalEmployeesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1HistoricalEmployeesResponse' from JSON`,
   );
 }

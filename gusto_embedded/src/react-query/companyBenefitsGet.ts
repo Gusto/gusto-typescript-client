@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type CompanyBenefitsGetQueryData =
-  components.CompanyBenefitWithEmployeeBenefits;
+  operations.GetV1CompanyBenefitsCompanyBenefitIdResponse;
 
 /**
  * Get a company benefit

@@ -22,7 +22,8 @@ export type SignatoriesDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type SignatoriesDeleteMutationData = void;
+export type SignatoriesDeleteMutationData =
+  operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
 /**
  * Delete a signatory

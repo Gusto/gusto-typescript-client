@@ -78,6 +78,25 @@ export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest = {
   requestBody: PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody;
 };
 
+export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payScheduleCreateUpdate?: components.PayScheduleCreateUpdate | undefined;
+};
+
 /** @internal */
 export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$inboundSchema:
   z.ZodNativeEnum<
@@ -308,5 +327,101 @@ export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestFromJSON(
       PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Pay-Schedule-Create-Update": components
+      .PayScheduleCreateUpdate$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Pay-Schedule-Create-Update": "payScheduleCreateUpdate",
+    });
+  });
+
+/** @internal */
+export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Pay-Schedule-Create-Update"?:
+      | components.PayScheduleCreateUpdate$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payScheduleCreateUpdate: components.PayScheduleCreateUpdate$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payScheduleCreateUpdate: "Pay-Schedule-Create-Update",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$ {
+  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound;
+}
+
+export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseToJSON(
+  putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse:
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+): string {
+  return JSON.stringify(
+    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema
+      .parse(putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse),
+  );
+}
+
+export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse' from JSON`,
   );
 }

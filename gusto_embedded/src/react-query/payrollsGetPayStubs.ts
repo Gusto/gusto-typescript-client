@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PayrollsGetPayStubsQueryData = Array<components.EmployeePayStub>;
+export type PayrollsGetPayStubsQueryData =
+  operations.GetV1EmployeesEmployeeUuidPayStubsResponse;
 
 /**
  * Get an employee's pay stubs

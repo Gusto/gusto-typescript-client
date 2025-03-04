@@ -32,6 +32,25 @@ export type PostPayrollsGrossUpPayrollUuidRequest = {
   requestBody: PostPayrollsGrossUpPayrollUuidRequestBody;
 };
 
+export type PostPayrollsGrossUpPayrollUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  grossUpPay?: components.GrossUpPay | undefined;
+};
+
 /** @internal */
 export const PostPayrollsGrossUpPayrollUuidRequestBody$inboundSchema: z.ZodType<
   PostPayrollsGrossUpPayrollUuidRequestBody,
@@ -193,5 +212,90 @@ export function postPayrollsGrossUpPayrollUuidRequestFromJSON(
     (x) =>
       PostPayrollsGrossUpPayrollUuidRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostPayrollsGrossUpPayrollUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostPayrollsGrossUpPayrollUuidResponse$inboundSchema: z.ZodType<
+  PostPayrollsGrossUpPayrollUuidResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Gross-Up-Pay": components.GrossUpPay$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Gross-Up-Pay": "grossUpPay",
+  });
+});
+
+/** @internal */
+export type PostPayrollsGrossUpPayrollUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Gross-Up-Pay"?: components.GrossUpPay$Outbound | undefined;
+};
+
+/** @internal */
+export const PostPayrollsGrossUpPayrollUuidResponse$outboundSchema: z.ZodType<
+  PostPayrollsGrossUpPayrollUuidResponse$Outbound,
+  z.ZodTypeDef,
+  PostPayrollsGrossUpPayrollUuidResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  grossUpPay: components.GrossUpPay$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    grossUpPay: "Gross-Up-Pay",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostPayrollsGrossUpPayrollUuidResponse$ {
+  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostPayrollsGrossUpPayrollUuidResponse$inboundSchema;
+  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostPayrollsGrossUpPayrollUuidResponse$outboundSchema;
+  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponse$Outbound` instead. */
+  export type Outbound = PostPayrollsGrossUpPayrollUuidResponse$Outbound;
+}
+
+export function postPayrollsGrossUpPayrollUuidResponseToJSON(
+  postPayrollsGrossUpPayrollUuidResponse:
+    PostPayrollsGrossUpPayrollUuidResponse,
+): string {
+  return JSON.stringify(
+    PostPayrollsGrossUpPayrollUuidResponse$outboundSchema.parse(
+      postPayrollsGrossUpPayrollUuidResponse,
+    ),
+  );
+}
+
+export function postPayrollsGrossUpPayrollUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostPayrollsGrossUpPayrollUuidResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostPayrollsGrossUpPayrollUuidResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostPayrollsGrossUpPayrollUuidResponse' from JSON`,
   );
 }

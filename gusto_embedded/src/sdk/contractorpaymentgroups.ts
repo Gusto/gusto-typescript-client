@@ -9,7 +9,6 @@ import { contractorPaymentGroupsGet } from "../funcs/contractorPaymentGroupsGet.
 import { contractorPaymentGroupsGetList } from "../funcs/contractorPaymentGroupsGetList.js";
 import { contractorPaymentGroupsPreview } from "../funcs/contractorPaymentGroupsPreview.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -25,7 +24,9 @@ export class ContractorPaymentGroups extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesCompanyIdContractorPaymentGroupsRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPaymentGroup> {
+  ): Promise<
+    operations.PostV1CompaniesCompanyIdContractorPaymentGroupsResponse
+  > {
     return unwrapAsync(contractorPaymentGroupsCreate(
       this,
       request,
@@ -44,7 +45,9 @@ export class ContractorPaymentGroups extends ClientSDK {
   async getList(
     request: operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ContractorPaymentGroupMinimal>> {
+  ): Promise<
+    operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse
+  > {
     return unwrapAsync(contractorPaymentGroupsGetList(
       this,
       request,
@@ -64,7 +67,9 @@ export class ContractorPaymentGroups extends ClientSDK {
     request:
       operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPaymentGroup> {
+  ): Promise<
+    operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse
+  > {
     return unwrapAsync(contractorPaymentGroupsPreview(
       this,
       request,
@@ -84,7 +89,9 @@ export class ContractorPaymentGroups extends ClientSDK {
     request:
       operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPaymentGroup> {
+  ): Promise<
+    operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse
+  > {
     return unwrapAsync(contractorPaymentGroupsGet(
       this,
       request,
@@ -104,7 +111,9 @@ export class ContractorPaymentGroups extends ClientSDK {
     request:
       operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse
+  > {
     return unwrapAsync(contractorPaymentGroupsDelete(
       this,
       request,
@@ -128,7 +137,9 @@ export class ContractorPaymentGroups extends ClientSDK {
     request:
       operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPaymentGroup> {
+  ): Promise<
+    operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse
+  > {
     return unwrapAsync(contractorPaymentGroupsFund(
       this,
       request,

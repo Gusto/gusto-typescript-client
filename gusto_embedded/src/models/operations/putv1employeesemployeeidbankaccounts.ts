@@ -41,6 +41,25 @@ export type PutV1EmployeesEmployeeIdBankAccountsRequest = {
   requestBody: PutV1EmployeesEmployeeIdBankAccountsRequestBody;
 };
 
+export type PutV1EmployeesEmployeeIdBankAccountsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeBankAccount?: components.EmployeeBankAccount | undefined;
+};
+
 /** @internal */
 export const PutV1EmployeesEmployeeIdBankAccountsAccountType$inboundSchema:
   z.ZodNativeEnum<typeof PutV1EmployeesEmployeeIdBankAccountsAccountType> = z
@@ -248,5 +267,99 @@ export function putV1EmployeesEmployeeIdBankAccountsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1EmployeesEmployeeIdBankAccountsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdBankAccountsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Bank-Account": components.EmployeeBankAccount$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Bank-Account": "employeeBankAccount",
+    });
+  });
+
+/** @internal */
+export type PutV1EmployeesEmployeeIdBankAccountsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Bank-Account"?: components.EmployeeBankAccount$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdBankAccountsResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeesEmployeeIdBankAccountsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeBankAccount: components.EmployeeBankAccount$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeBankAccount: "Employee-Bank-Account",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdBankAccountsResponse$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdBankAccountsResponse$Outbound` instead. */
+  export type Outbound = PutV1EmployeesEmployeeIdBankAccountsResponse$Outbound;
+}
+
+export function putV1EmployeesEmployeeIdBankAccountsResponseToJSON(
+  putV1EmployeesEmployeeIdBankAccountsResponse:
+    PutV1EmployeesEmployeeIdBankAccountsResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema.parse(
+      putV1EmployeesEmployeeIdBankAccountsResponse,
+    ),
+  );
+}
+
+export function putV1EmployeesEmployeeIdBankAccountsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1EmployeesEmployeeIdBankAccountsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1EmployeesEmployeeIdBankAccountsResponse' from JSON`,
   );
 }

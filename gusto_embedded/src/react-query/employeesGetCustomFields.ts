@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type EmployeesGetCustomFieldsQueryData =
-  operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody;
+  operations.GetV1EmployeesEmployeeIdCustomFieldsResponse;
 
 /**
  * Get an employee's custom fields

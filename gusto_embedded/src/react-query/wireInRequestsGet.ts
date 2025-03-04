@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type WireInRequestsGetQueryData = components.WireInRequest;
+export type WireInRequestsGetQueryData =
+  operations.GetWireInRequestsWireInRequestUuidResponse;
 
 /**
  * Get a single Wire In Request

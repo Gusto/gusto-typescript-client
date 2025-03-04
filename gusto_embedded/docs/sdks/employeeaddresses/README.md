@@ -116,7 +116,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeAddress[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdHomeAddressesResponse](../../models/operations/getv1employeesemployeeidhomeaddressesresponse.md)\>**
 
 ### Errors
 
@@ -233,7 +233,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeAddress](../../models/components/employeeaddress.md)\>**
+**Promise\<[operations.PostV1EmployeesEmployeeIdHomeAddressesResponse](../../models/operations/postv1employeesemployeeidhomeaddressesresponse.md)\>**
 
 ### Errors
 
@@ -342,7 +342,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeAddress](../../models/components/employeeaddress.md)\>**
+**Promise\<[operations.GetV1HomeAddressesHomeAddressUuidResponse](../../models/operations/getv1homeaddresseshomeaddressuuidresponse.md)\>**
 
 ### Errors
 
@@ -461,7 +461,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeAddress](../../models/components/employeeaddress.md)\>**
+**Promise\<[operations.PutV1HomeAddressesHomeAddressUuidResponse](../../models/operations/putv1homeaddresseshomeaddressuuidresponse.md)\>**
 
 ### Errors
 
@@ -486,11 +486,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employeeAddresses.delete({
+  const result = await gustoEmbedded.employeeAddresses.delete({
     homeAddressUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -521,7 +522,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -555,7 +557,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1HomeAddressesHomeAddressUuidResponse](../../models/operations/deletev1homeaddresseshomeaddressuuidresponse.md)\>**
 
 ### Errors
 
@@ -663,7 +665,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeWorkAddress[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdWorkAddressesResponse](../../models/operations/getv1employeesemployeeidworkaddressesresponse.md)\>**
 
 ### Errors
 
@@ -768,7 +770,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeWorkAddress](../../models/components/employeeworkaddress.md)\>**
+**Promise\<[operations.PostV1EmployeesEmployeeIdWorkAddressesResponse](../../models/operations/postv1employeesemployeeidworkaddressesresponse.md)\>**
 
 ### Errors
 
@@ -875,7 +877,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeWorkAddress](../../models/components/employeeworkaddress.md)\>**
+**Promise\<[operations.GetV1WorkAddressesWorkAddressUuidResponse](../../models/operations/getv1workaddressesworkaddressuuidresponse.md)\>**
 
 ### Errors
 
@@ -982,7 +984,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeWorkAddress](../../models/components/employeeworkaddress.md)\>**
+**Promise\<[operations.PutV1WorkAddressesWorkAddressUuidResponse](../../models/operations/putv1workaddressesworkaddressuuidresponse.md)\>**
 
 ### Errors
 
@@ -1007,11 +1009,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employeeAddresses.deleteWorkAddress({
+  const result = await gustoEmbedded.employeeAddresses.deleteWorkAddress({
     workAddressUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1042,7 +1045,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1076,7 +1080,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1WorkAddressesWorkAddressUuidResponse](../../models/operations/deletev1workaddressesworkaddressuuidresponse.md)\>**
 
 ### Errors
 

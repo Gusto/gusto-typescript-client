@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompanyBenefitsGetSupportedQueryData = components.SupportedBenefit;
+export type CompanyBenefitsGetSupportedQueryData =
+  operations.GetV1BenefitsBenefitIdResponse;
 
 /**
  * Get a supported benefit by ID

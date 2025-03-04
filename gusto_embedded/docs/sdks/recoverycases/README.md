@@ -106,7 +106,7 @@ import {
 
 ### Response
 
-**Promise\<[components.RecoveryCase[]](../../models/.md)\>**
+**Promise\<[operations.GetRecoveryCasesResponse](../../models/operations/getrecoverycasesresponse.md)\>**
 
 ### Errors
 
@@ -134,11 +134,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.recoveryCases.redebit({
+  const result = await gustoEmbedded.recoveryCases.redebit({
     recoveryCaseUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -169,7 +170,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -203,7 +205,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.RedebitRecoveryCaseResponse](../../models/operations/redebitrecoverycaseresponse.md)\>**
 
 ### Errors
 

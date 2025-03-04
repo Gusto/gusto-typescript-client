@@ -49,6 +49,25 @@ export type PostV1CompanyFlowsRequest = {
   requestBody: PostV1CompanyFlowsRequestBody;
 };
 
+export type PostV1CompanyFlowsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  flow?: components.Flow | undefined;
+};
+
 /** @internal */
 export const EntityType$inboundSchema: z.ZodNativeEnum<typeof EntityType> = z
   .nativeEnum(EntityType);
@@ -215,5 +234,84 @@ export function postV1CompanyFlowsRequestFromJSON(
     jsonString,
     (x) => PostV1CompanyFlowsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1CompanyFlowsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompanyFlowsResponse$inboundSchema: z.ZodType<
+  PostV1CompanyFlowsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Flow: components.Flow$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Flow": "flow",
+  });
+});
+
+/** @internal */
+export type PostV1CompanyFlowsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Flow?: components.Flow$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompanyFlowsResponse$outboundSchema: z.ZodType<
+  PostV1CompanyFlowsResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1CompanyFlowsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  flow: components.Flow$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    flow: "Flow",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompanyFlowsResponse$ {
+  /** @deprecated use `PostV1CompanyFlowsResponse$inboundSchema` instead. */
+  export const inboundSchema = PostV1CompanyFlowsResponse$inboundSchema;
+  /** @deprecated use `PostV1CompanyFlowsResponse$outboundSchema` instead. */
+  export const outboundSchema = PostV1CompanyFlowsResponse$outboundSchema;
+  /** @deprecated use `PostV1CompanyFlowsResponse$Outbound` instead. */
+  export type Outbound = PostV1CompanyFlowsResponse$Outbound;
+}
+
+export function postV1CompanyFlowsResponseToJSON(
+  postV1CompanyFlowsResponse: PostV1CompanyFlowsResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompanyFlowsResponse$outboundSchema.parse(postV1CompanyFlowsResponse),
+  );
+}
+
+export function postV1CompanyFlowsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1CompanyFlowsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1CompanyFlowsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1CompanyFlowsResponse' from JSON`,
   );
 }

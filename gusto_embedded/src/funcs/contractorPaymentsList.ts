@@ -37,7 +37,7 @@ export function contractorPaymentsList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdContractorPaymentsResponseBody,
+    operations.GetV1CompaniesCompanyIdContractorPaymentsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -61,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdContractorPaymentsResponseBody,
+      operations.GetV1CompaniesCompanyIdContractorPaymentsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -161,8 +161,16 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
+  };
+
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdContractorPaymentsResponseBody,
+    operations.GetV1CompaniesCompanyIdContractorPaymentsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -174,11 +182,12 @@ async function $do(
     M.json(
       200,
       operations
-        .GetV1CompaniesCompanyIdContractorPaymentsResponseBody$inboundSchema,
+        .GetV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema,
+      { key: "oneOf" },
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
-  )(response);
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

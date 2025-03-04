@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsUpdate } from "../funcs/locationsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,7 +21,8 @@ export type LocationsUpdateMutationVariables = {
   options?: RequestOptions;
 };
 
-export type LocationsUpdateMutationData = components.Location;
+export type LocationsUpdateMutationData =
+  operations.PutV1LocationsLocationIdResponse;
 
 /**
  * Update a location

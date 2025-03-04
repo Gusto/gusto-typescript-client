@@ -105,7 +105,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EarningType](../../models/components/earningtype.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdEarningTypesResponse](../../models/operations/postv1companiescompanyidearningtypesresponse.md)\>**
 
 ### Errors
 
@@ -218,7 +218,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EarningTypeList](../../models/components/earningtypelist.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdEarningTypesResponse](../../models/operations/getv1companiescompanyidearningtypesresponse.md)\>**
 
 ### Errors
 
@@ -321,7 +321,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EarningType](../../models/components/earningtype.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse](../../models/operations/putv1companiescompanyidearningtypesearningtypeuuidresponse.md)\>**
 
 ### Errors
 
@@ -346,12 +346,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.earningTypes.delete({
+  const result = await gustoEmbedded.earningTypes.delete({
     companyId: "<id>",
     earningTypeUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -383,7 +384,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -417,7 +419,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse](../../models/operations/deletev1companiescompanyidearningtypesearningtypeuuidresponse.md)\>**
 
 ### Errors
 

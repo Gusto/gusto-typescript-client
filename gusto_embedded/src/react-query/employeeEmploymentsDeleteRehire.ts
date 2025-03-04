@@ -21,7 +21,8 @@ export type EmployeeEmploymentsDeleteRehireMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeeEmploymentsDeleteRehireMutationData = void;
+export type EmployeeEmploymentsDeleteRehireMutationData =
+  operations.DeleteV1EmployeesEmployeeIdRehireResponse;
 
 /**
  * Delete an employee rehire

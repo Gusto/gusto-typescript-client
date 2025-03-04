@@ -112,7 +112,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ExternalPayroll](../../models/components/externalpayroll.md)\>**
+**Promise\<[operations.PostV1ExternalPayrollResponse](../../models/operations/postv1externalpayrollresponse.md)\>**
 
 ### Errors
 
@@ -219,7 +219,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ExternalPayrollBasic[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompanyExternalPayrollsResponse](../../models/operations/getv1companyexternalpayrollsresponse.md)\>**
 
 ### Errors
 
@@ -327,7 +327,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ExternalPayroll](../../models/components/externalpayroll.md)\>**
+**Promise\<[operations.GetV1ExternalPayrollResponse](../../models/operations/getv1externalpayrollresponse.md)\>**
 
 ### Errors
 
@@ -351,12 +351,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.externalPayrolls.delete({
+  const result = await gustoEmbedded.externalPayrolls.delete({
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -388,7 +389,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -422,7 +424,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1ExternalPayrollResponse](../../models/operations/deletev1externalpayrollresponse.md)\>**
 
 ### Errors
 
@@ -607,7 +609,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ExternalPayroll](../../models/components/externalpayroll.md)\>**
+**Promise\<[operations.PutV1ExternalPayrollResponse](../../models/operations/putv1externalpayrollresponse.md)\>**
 
 ### Errors
 
@@ -718,7 +720,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ExternalPayrollTaxSuggestions[]](../../models/.md)\>**
+**Promise\<[operations.GetV1ExternalPayrollCalculateTaxesResponse](../../models/operations/getv1externalpayrollcalculatetaxesresponse.md)\>**
 
 ### Errors
 
@@ -824,7 +826,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TaxLiabilitiesSelections[][]](../../models/.md)\>**
+**Promise\<[operations.GetV1TaxLiabilitiesResponse](../../models/operations/getv1taxliabilitiesresponse.md)\>**
 
 ### Errors
 
@@ -957,7 +959,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TaxLiabilitiesSelections[][]](../../models/.md)\>**
+**Promise\<[operations.PutV1TaxLiabilitiesResponse](../../models/operations/putv1taxliabilitiesresponse.md)\>**
 
 ### Errors
 
@@ -982,11 +984,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.externalPayrolls.finalizeTaxLiabilities({
+  const result = await gustoEmbedded.externalPayrolls.finalizeTaxLiabilities({
     companyUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1017,7 +1020,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -1051,7 +1055,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PutV1TaxLiabilitiesFinishResponse](../../models/operations/putv1taxliabilitiesfinishresponse.md)\>**
 
 ### Errors
 

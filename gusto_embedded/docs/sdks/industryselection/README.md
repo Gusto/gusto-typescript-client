@@ -106,7 +106,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Industry](../../models/components/industry.md)\>**
+**Promise\<[operations.GetV1CompanyIndustryResponse](../../models/operations/getv1companyindustryresponse.md)\>**
 
 ### Errors
 
@@ -215,7 +215,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Industry](../../models/components/industry.md)\>**
+**Promise\<[operations.PutV1CompanyIndustryResponse](../../models/operations/putv1companyindustryresponse.md)\>**
 
 ### Errors
 

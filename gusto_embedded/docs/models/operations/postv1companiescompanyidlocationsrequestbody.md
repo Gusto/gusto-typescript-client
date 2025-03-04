@@ -8,11 +8,11 @@ Create a company location.
 import { PostV1CompaniesCompanyIdLocationsRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1CompaniesCompanyIdLocationsRequestBody = {
-  phoneNumber: "502-321-0169",
+  phoneNumber: "482.696.8976 x994",
   street1: "<value>",
-  city: "Huntington",
-  state: "Florida",
-  zip: "49072-2626",
+  city: "West Camylleview",
+  state: "Connecticut",
+  zip: "38952-5845",
 };
 ```
 

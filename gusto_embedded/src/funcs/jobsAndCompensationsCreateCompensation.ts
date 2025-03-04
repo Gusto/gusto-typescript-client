@@ -10,7 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -39,7 +38,7 @@ export function jobsAndCompensationsCreateCompensation(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.Compensation,
+    operations.PostV1CompensationsCompensationIdResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -64,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.Compensation,
+      operations.PostV1CompensationsCompensationIdResponse,
       | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
@@ -156,11 +155,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    components.Compensation,
+    operations.PostV1CompensationsCompensationIdResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -170,7 +173,11 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(201, components.Compensation$inboundSchema),
+    M.json(
+      201,
+      operations.PostV1CompensationsCompensationIdResponse$inboundSchema,
+      { key: "Compensation" },
+    ),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

@@ -5,7 +5,7 @@
 ```typescript
 import { ProcessingStatuses } from "@gusto/embedded-api/models/operations";
 
-let value: ProcessingStatuses = "unprocessed";
+let value: ProcessingStatuses = "processed";
 ```
 
 ## Values

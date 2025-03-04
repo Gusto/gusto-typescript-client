@@ -25,6 +25,22 @@ export type DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest 
     xGustoAPIVersion?: components.VersionHeader | undefined;
   };
 
+export type DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse =
+  {
+    /**
+     * HTTP response content type for this operation
+     */
+    contentType: string;
+    /**
+     * HTTP response status code for this operation
+     */
+    statusCode: number;
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
+    rawResponse: Response;
+  };
+
 /** @internal */
 export const DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$inboundSchema:
   z.ZodType<
@@ -113,5 +129,94 @@ export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequ
       DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$inboundSchema:
+  z.ZodType<
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+  };
+
+/** @internal */
+export const DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema:
+  z.ZodType<
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$ {
+  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$inboundSchema;
+  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema;
+  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound` instead. */
+  export type Outbound =
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound;
+}
+
+export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponseToJSON(
+  deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse:
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema
+      .parse(
+        deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
+      ),
+  );
+}
+
+export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse' from JSON`,
   );
 }

@@ -5,7 +5,6 @@
 import { federalTaxDetailsGet } from "../funcs/federalTaxDetailsGet.js";
 import { federalTaxDetailsUpdate } from "../funcs/federalTaxDetailsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -21,7 +20,7 @@ export class FederalTaxDetails extends ClientSDK {
   async get(
     request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
     options?: RequestOptions,
-  ): Promise<components.FederalTaxDetails> {
+  ): Promise<operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse> {
     return unwrapAsync(federalTaxDetailsGet(
       this,
       request,
@@ -41,7 +40,7 @@ export class FederalTaxDetails extends ClientSDK {
   async update(
     request: operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
     options?: RequestOptions,
-  ): Promise<components.FederalTaxDetails> {
+  ): Promise<operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse> {
     return unwrapAsync(federalTaxDetailsUpdate(
       this,
       request,

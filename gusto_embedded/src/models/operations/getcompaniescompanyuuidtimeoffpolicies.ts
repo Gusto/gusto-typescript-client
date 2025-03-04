@@ -20,6 +20,25 @@ export type GetCompaniesCompanyUuidTimeOffPoliciesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetCompaniesCompanyUuidTimeOffPoliciesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  timeOffPolicyList?: Array<components.TimeOffPolicy> | undefined;
+};
+
 /** @internal */
 export const GetCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +120,100 @@ export function getCompaniesCompanyUuidTimeOffPoliciesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetCompaniesCompanyUuidTimeOffPoliciesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema:
+  z.ZodType<
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Time-Off-Policy-List": z.array(components.TimeOffPolicy$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Time-Off-Policy-List": "timeOffPolicyList",
+    });
+  });
+
+/** @internal */
+export type GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Time-Off-Policy-List"?: Array<components.TimeOffPolicy$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema:
+  z.ZodType<
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound,
+    z.ZodTypeDef,
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    timeOffPolicyList: z.array(components.TimeOffPolicy$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      timeOffPolicyList: "Time-Off-Policy-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCompaniesCompanyUuidTimeOffPoliciesResponse$ {
+  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema;
+  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema;
+  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound` instead. */
+  export type Outbound =
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound;
+}
+
+export function getCompaniesCompanyUuidTimeOffPoliciesResponseToJSON(
+  getCompaniesCompanyUuidTimeOffPoliciesResponse:
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+): string {
+  return JSON.stringify(
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema.parse(
+      getCompaniesCompanyUuidTimeOffPoliciesResponse,
+    ),
+  );
+}
+
+export function getCompaniesCompanyUuidTimeOffPoliciesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetCompaniesCompanyUuidTimeOffPoliciesResponse' from JSON`,
   );
 }

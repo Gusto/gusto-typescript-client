@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type I9VerificationGetDocumentsQueryData = Array<
-  components.I9AuthorizationDocument
->;
+export type I9VerificationGetDocumentsQueryData =
+  operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
 
 /**
  * Get an employee's I-9 verification documents

@@ -44,6 +44,25 @@ export type PostV1CompaniesCompanyIdCompanyBenefitsRequest = {
   requestBody: PostV1CompaniesCompanyIdCompanyBenefitsRequestBody;
 };
 
+export type PostV1CompaniesCompanyIdCompanyBenefitsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyBenefit?: components.CompanyBenefit | undefined;
+};
+
 /** @internal */
 export const PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$inboundSchema:
   z.ZodType<
@@ -227,5 +246,98 @@ export function postV1CompaniesCompanyIdCompanyBenefitsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyIdCompanyBenefitsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Company-Benefit": components.CompanyBenefit$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Company-Benefit": "companyBenefit",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Benefit"?: components.CompanyBenefit$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    companyBenefit: components.CompanyBenefit$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      companyBenefit: "Company-Benefit",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdCompanyBenefitsResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdCompanyBenefitsResponseToJSON(
+  postV1CompaniesCompanyIdCompanyBenefitsResponse:
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema.parse(
+      postV1CompaniesCompanyIdCompanyBenefitsResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyIdCompanyBenefitsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyIdCompanyBenefitsResponse' from JSON`,
   );
 }

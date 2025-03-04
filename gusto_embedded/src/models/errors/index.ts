@@ -12,3 +12,4 @@ export * from "./putv1companiescompanyidpayrollspayrollidcalculate.js";
 export * from "./putv1companiescompanyidpayrollspayrollidsubmit.js";
 export * from "./sdkvalidationerror.js";
 export * from "./unprocessableentityerrorobject.js";
+export * from "./unprocessableentityerrorobject1.js";

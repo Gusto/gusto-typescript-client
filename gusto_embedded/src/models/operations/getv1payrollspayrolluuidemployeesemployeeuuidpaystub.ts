@@ -24,6 +24,21 @@ export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$inboundSchema:
   z.ZodType<
@@ -110,5 +125,92 @@ export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestFromJ
       GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema:
+  z.ZodType<
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+  };
+
+/** @internal */
+export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema:
+  z.ZodType<
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$ {
+  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema;
+  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema;
+  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound;
+}
+
+export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponseToJSON(
+  getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse:
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+): string {
+  return JSON.stringify(
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema
+      .parse(getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse),
+  );
+}
+
+export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse' from JSON`,
   );
 }

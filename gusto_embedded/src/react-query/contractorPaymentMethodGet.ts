@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentMethodGetQueryData =
-  components.ContractorPaymentMethod;
+  operations.GetV1ContractorsContractorUuidPaymentMethodResponse;
 
 /**
  * Get a contractor's payment method

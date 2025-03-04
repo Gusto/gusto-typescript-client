@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorPaymentGroupsGetListQueryData = Array<
-  components.ContractorPaymentGroupMinimal
->;
+export type ContractorPaymentGroupsGetListQueryData =
+  operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 
 /**
  * Get contractor payment groups for a company

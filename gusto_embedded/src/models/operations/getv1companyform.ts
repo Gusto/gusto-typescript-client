@@ -20,6 +20,25 @@ export type GetV1CompanyFormRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompanyFormResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  form?: components.Form | undefined;
+};
+
 /** @internal */
 export const GetV1CompanyFormRequest$inboundSchema: z.ZodType<
   GetV1CompanyFormRequest,
@@ -88,5 +107,84 @@ export function getV1CompanyFormRequestFromJSON(
     jsonString,
     (x) => GetV1CompanyFormRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompanyFormRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyFormResponse$inboundSchema: z.ZodType<
+  GetV1CompanyFormResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Form: components.Form$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Form": "form",
+  });
+});
+
+/** @internal */
+export type GetV1CompanyFormResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Form?: components.Form$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1CompanyFormResponse$outboundSchema: z.ZodType<
+  GetV1CompanyFormResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1CompanyFormResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  form: components.Form$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    form: "Form",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompanyFormResponse$ {
+  /** @deprecated use `GetV1CompanyFormResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1CompanyFormResponse$inboundSchema;
+  /** @deprecated use `GetV1CompanyFormResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1CompanyFormResponse$outboundSchema;
+  /** @deprecated use `GetV1CompanyFormResponse$Outbound` instead. */
+  export type Outbound = GetV1CompanyFormResponse$Outbound;
+}
+
+export function getV1CompanyFormResponseToJSON(
+  getV1CompanyFormResponse: GetV1CompanyFormResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompanyFormResponse$outboundSchema.parse(getV1CompanyFormResponse),
+  );
+}
+
+export function getV1CompanyFormResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompanyFormResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1CompanyFormResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompanyFormResponse' from JSON`,
   );
 }

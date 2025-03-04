@@ -8,7 +8,6 @@ import { signatoriesInvite } from "../funcs/signatoriesInvite.js";
 import { signatoriesList } from "../funcs/signatoriesList.js";
 import { signatoriesUpdate } from "../funcs/signatoriesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -26,7 +25,7 @@ export class Signatories extends ClientSDK {
   async create(
     request: operations.PostV1CompanySignatoriesRequest,
     options?: RequestOptions,
-  ): Promise<components.Signatory> {
+  ): Promise<operations.PostV1CompanySignatoriesResponse> {
     return unwrapAsync(signatoriesCreate(
       this,
       request,
@@ -45,7 +44,7 @@ export class Signatories extends ClientSDK {
   async list(
     request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Signatory>> {
+  ): Promise<operations.GetV1CompaniesCompanyUuidSignatoriesResponse> {
     return unwrapAsync(signatoriesList(
       this,
       request,
@@ -62,7 +61,7 @@ export class Signatories extends ClientSDK {
   async invite(
     request: operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
     options?: RequestOptions,
-  ): Promise<components.Signatory> {
+  ): Promise<operations.PostV1CompaniesCompanyUuidSignatoriesInviteResponse> {
     return unwrapAsync(signatoriesInvite(
       this,
       request,
@@ -82,7 +81,9 @@ export class Signatories extends ClientSDK {
     request:
       operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.Signatory> {
+  ): Promise<
+    operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse
+  > {
     return unwrapAsync(signatoriesUpdate(
       this,
       request,
@@ -102,7 +103,9 @@ export class Signatories extends ClientSDK {
     request:
       operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse
+  > {
     return unwrapAsync(signatoriesDelete(
       this,
       request,

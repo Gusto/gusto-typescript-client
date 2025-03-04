@@ -32,6 +32,25 @@ export type GetV1CompaniesCompanyUuidContractorsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyUuidContractorsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  contractorList?: Array<components.Contractor> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
   z.ZodType<
@@ -124,5 +143,97 @@ export function getV1CompaniesCompanyUuidContractorsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyUuidContractorsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidContractorsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Contractor-List": z.array(components.Contractor$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor-List": "contractorList",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyUuidContractorsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Contractor-List"?: Array<components.Contractor$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidContractorsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyUuidContractorsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractorList: z.array(components.Contractor$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractorList: "Contractor-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyUuidContractorsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesCompanyUuidContractorsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyUuidContractorsResponseToJSON(
+  getV1CompaniesCompanyUuidContractorsResponse:
+    GetV1CompaniesCompanyUuidContractorsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema.parse(
+      getV1CompaniesCompanyUuidContractorsResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyUuidContractorsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyUuidContractorsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyUuidContractorsResponse' from JSON`,
   );
 }

@@ -29,6 +29,25 @@ export type PutDepartmentsRequest = {
   requestBody: PutDepartmentsRequestBody;
 };
 
+export type PutDepartmentsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Department Object Example
+   */
+  department?: components.Department | undefined;
+};
+
 /** @internal */
 export const PutDepartmentsRequestBody$inboundSchema: z.ZodType<
   PutDepartmentsRequestBody,
@@ -159,5 +178,84 @@ export function putDepartmentsRequestFromJSON(
     jsonString,
     (x) => PutDepartmentsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutDepartmentsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutDepartmentsResponse$inboundSchema: z.ZodType<
+  PutDepartmentsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Department: components.Department$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Department": "department",
+  });
+});
+
+/** @internal */
+export type PutDepartmentsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Department?: components.Department$Outbound | undefined;
+};
+
+/** @internal */
+export const PutDepartmentsResponse$outboundSchema: z.ZodType<
+  PutDepartmentsResponse$Outbound,
+  z.ZodTypeDef,
+  PutDepartmentsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  department: components.Department$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    department: "Department",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutDepartmentsResponse$ {
+  /** @deprecated use `PutDepartmentsResponse$inboundSchema` instead. */
+  export const inboundSchema = PutDepartmentsResponse$inboundSchema;
+  /** @deprecated use `PutDepartmentsResponse$outboundSchema` instead. */
+  export const outboundSchema = PutDepartmentsResponse$outboundSchema;
+  /** @deprecated use `PutDepartmentsResponse$Outbound` instead. */
+  export type Outbound = PutDepartmentsResponse$Outbound;
+}
+
+export function putDepartmentsResponseToJSON(
+  putDepartmentsResponse: PutDepartmentsResponse,
+): string {
+  return JSON.stringify(
+    PutDepartmentsResponse$outboundSchema.parse(putDepartmentsResponse),
+  );
+}
+
+export function putDepartmentsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutDepartmentsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutDepartmentsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutDepartmentsResponse' from JSON`,
   );
 }

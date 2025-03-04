@@ -49,6 +49,25 @@ export type PostV1CompaniesCompanyIdBankAccountsRequest = {
   requestBody: PostV1CompaniesCompanyIdBankAccountsRequestBody;
 };
 
+export type PostV1CompaniesCompanyIdBankAccountsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyBankAccount?: components.CompanyBankAccount | undefined;
+};
+
 /** @internal */
 export const AccountType$inboundSchema: z.ZodNativeEnum<typeof AccountType> = z
   .nativeEnum(AccountType);
@@ -244,5 +263,98 @@ export function postV1CompaniesCompanyIdBankAccountsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyIdBankAccountsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdBankAccountsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Company-Bank-Account": components.CompanyBankAccount$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Company-Bank-Account": "companyBankAccount",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyIdBankAccountsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Bank-Account"?: components.CompanyBankAccount$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdBankAccountsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdBankAccountsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    companyBankAccount: components.CompanyBankAccount$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      companyBankAccount: "Company-Bank-Account",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdBankAccountsResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsResponse$Outbound` instead. */
+  export type Outbound = PostV1CompaniesCompanyIdBankAccountsResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdBankAccountsResponseToJSON(
+  postV1CompaniesCompanyIdBankAccountsResponse:
+    PostV1CompaniesCompanyIdBankAccountsResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema.parse(
+      postV1CompaniesCompanyIdBankAccountsResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyIdBankAccountsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyIdBankAccountsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyIdBankAccountsResponse' from JSON`,
   );
 }

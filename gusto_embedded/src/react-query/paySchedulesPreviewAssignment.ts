@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesPreviewAssignment } from "../funcs/paySchedulesPreviewAssignment.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -24,7 +23,7 @@ export type PaySchedulesPreviewAssignmentMutationVariables = {
 };
 
 export type PaySchedulesPreviewAssignmentMutationData =
-  components.PayScheduleAssignmentPreview;
+  operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse;
 
 /**
  * Preview pay schedule assignments for a company

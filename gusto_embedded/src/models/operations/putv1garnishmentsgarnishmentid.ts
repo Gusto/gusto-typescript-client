@@ -72,6 +72,25 @@ export type PutV1GarnishmentsGarnishmentIdRequest = {
   requestBody: PutV1GarnishmentsGarnishmentIdRequestBody;
 };
 
+export type PutV1GarnishmentsGarnishmentIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  garnishment?: components.Garnishment | undefined;
+};
+
 /** @internal */
 export const PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema: z.ZodType<
   PutV1GarnishmentsGarnishmentIdRequestBody,
@@ -278,5 +297,90 @@ export function putV1GarnishmentsGarnishmentIdRequestFromJSON(
     (x) =>
       PutV1GarnishmentsGarnishmentIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1GarnishmentsGarnishmentIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1GarnishmentsGarnishmentIdResponse$inboundSchema: z.ZodType<
+  PutV1GarnishmentsGarnishmentIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Garnishment: components.Garnishment$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Garnishment": "garnishment",
+  });
+});
+
+/** @internal */
+export type PutV1GarnishmentsGarnishmentIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Garnishment?: components.Garnishment$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1GarnishmentsGarnishmentIdResponse$outboundSchema: z.ZodType<
+  PutV1GarnishmentsGarnishmentIdResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1GarnishmentsGarnishmentIdResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  garnishment: components.Garnishment$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    garnishment: "Garnishment",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1GarnishmentsGarnishmentIdResponse$ {
+  /** @deprecated use `PutV1GarnishmentsGarnishmentIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1GarnishmentsGarnishmentIdResponse$inboundSchema;
+  /** @deprecated use `PutV1GarnishmentsGarnishmentIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1GarnishmentsGarnishmentIdResponse$outboundSchema;
+  /** @deprecated use `PutV1GarnishmentsGarnishmentIdResponse$Outbound` instead. */
+  export type Outbound = PutV1GarnishmentsGarnishmentIdResponse$Outbound;
+}
+
+export function putV1GarnishmentsGarnishmentIdResponseToJSON(
+  putV1GarnishmentsGarnishmentIdResponse:
+    PutV1GarnishmentsGarnishmentIdResponse,
+): string {
+  return JSON.stringify(
+    PutV1GarnishmentsGarnishmentIdResponse$outboundSchema.parse(
+      putV1GarnishmentsGarnishmentIdResponse,
+    ),
+  );
+}
+
+export function putV1GarnishmentsGarnishmentIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1GarnishmentsGarnishmentIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1GarnishmentsGarnishmentIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1GarnishmentsGarnishmentIdResponse' from JSON`,
   );
 }

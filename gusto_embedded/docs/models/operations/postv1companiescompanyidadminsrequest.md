@@ -8,9 +8,9 @@ import { PostV1CompaniesCompanyIdAdminsRequest } from "@gusto/embedded-api/model
 let value: PostV1CompaniesCompanyIdAdminsRequest = {
   companyId: "<id>",
   requestBody: {
-    firstName: "Willie",
-    lastName: "Kuphal",
-    email: "Freeman.Schuster51@yahoo.com",
+    firstName: "Mohammed",
+    lastName: "Russel",
+    email: "Arjun.Osinski@gmail.com",
   },
 };
 ```

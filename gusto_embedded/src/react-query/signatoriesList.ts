@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type SignatoriesListQueryData = Array<components.Signatory>;
+export type SignatoriesListQueryData =
+  operations.GetV1CompaniesCompanyUuidSignatoriesResponse;
 
 /**
  * Get all company signatories

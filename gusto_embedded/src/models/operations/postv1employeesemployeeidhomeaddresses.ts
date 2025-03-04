@@ -32,6 +32,25 @@ export type PostV1EmployeesEmployeeIdHomeAddressesRequest = {
   requestBody: PostV1EmployeesEmployeeIdHomeAddressesRequestBody;
 };
 
+export type PostV1EmployeesEmployeeIdHomeAddressesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeAddress?: components.EmployeeAddress | undefined;
+};
+
 /** @internal */
 export const PostV1EmployeesEmployeeIdHomeAddressesRequestBody$inboundSchema:
   z.ZodType<
@@ -223,5 +242,98 @@ export function postV1EmployeesEmployeeIdHomeAddressesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1EmployeesEmployeeIdHomeAddressesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdHomeAddressesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Address": components.EmployeeAddress$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Address": "employeeAddress",
+    });
+  });
+
+/** @internal */
+export type PostV1EmployeesEmployeeIdHomeAddressesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Address"?: components.EmployeeAddress$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdHomeAddressesResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1EmployeesEmployeeIdHomeAddressesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeAddress: components.EmployeeAddress$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeAddress: "Employee-Address",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesEmployeeIdHomeAddressesResponse$ {
+  /** @deprecated use `PostV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdHomeAddressesResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1EmployeesEmployeeIdHomeAddressesResponse$Outbound;
+}
+
+export function postV1EmployeesEmployeeIdHomeAddressesResponseToJSON(
+  postV1EmployeesEmployeeIdHomeAddressesResponse:
+    PostV1EmployeesEmployeeIdHomeAddressesResponse,
+): string {
+  return JSON.stringify(
+    PostV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema.parse(
+      postV1EmployeesEmployeeIdHomeAddressesResponse,
+    ),
+  );
+}
+
+export function postV1EmployeesEmployeeIdHomeAddressesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EmployeesEmployeeIdHomeAddressesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EmployeesEmployeeIdHomeAddressesResponse' from JSON`,
   );
 }

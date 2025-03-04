@@ -27,6 +27,25 @@ export type PutV1CompanyPaymentConfigsRequest = {
     | components.PaymentSpeedRequiredBody;
 };
 
+export type PutV1CompanyPaymentConfigsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  paymentConfigs?: components.PaymentConfigs | undefined;
+};
+
 /** @internal */
 export const PutV1CompanyPaymentConfigsRequestBody$inboundSchema: z.ZodType<
   PutV1CompanyPaymentConfigsRequestBody,
@@ -172,5 +191,88 @@ export function putV1CompanyPaymentConfigsRequestFromJSON(
     jsonString,
     (x) => PutV1CompanyPaymentConfigsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1CompanyPaymentConfigsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1CompanyPaymentConfigsResponse$inboundSchema: z.ZodType<
+  PutV1CompanyPaymentConfigsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Payment-Configs": components.PaymentConfigs$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Payment-Configs": "paymentConfigs",
+  });
+});
+
+/** @internal */
+export type PutV1CompanyPaymentConfigsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Payment-Configs"?: components.PaymentConfigs$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1CompanyPaymentConfigsResponse$outboundSchema: z.ZodType<
+  PutV1CompanyPaymentConfigsResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1CompanyPaymentConfigsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  paymentConfigs: components.PaymentConfigs$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    paymentConfigs: "Payment-Configs",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompanyPaymentConfigsResponse$ {
+  /** @deprecated use `PutV1CompanyPaymentConfigsResponse$inboundSchema` instead. */
+  export const inboundSchema = PutV1CompanyPaymentConfigsResponse$inboundSchema;
+  /** @deprecated use `PutV1CompanyPaymentConfigsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1CompanyPaymentConfigsResponse$outboundSchema;
+  /** @deprecated use `PutV1CompanyPaymentConfigsResponse$Outbound` instead. */
+  export type Outbound = PutV1CompanyPaymentConfigsResponse$Outbound;
+}
+
+export function putV1CompanyPaymentConfigsResponseToJSON(
+  putV1CompanyPaymentConfigsResponse: PutV1CompanyPaymentConfigsResponse,
+): string {
+  return JSON.stringify(
+    PutV1CompanyPaymentConfigsResponse$outboundSchema.parse(
+      putV1CompanyPaymentConfigsResponse,
+    ),
+  );
+}
+
+export function putV1CompanyPaymentConfigsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1CompanyPaymentConfigsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1CompanyPaymentConfigsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1CompanyPaymentConfigsResponse' from JSON`,
   );
 }

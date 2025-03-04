@@ -22,7 +22,7 @@ export type EmployeeFormsGenerateW2MutationVariables = {
 };
 
 export type EmployeeFormsGenerateW2MutationData =
-  operations.PostV1SandboxGenerateW2Form;
+  operations.PostV1SandboxGenerateW2Response;
 
 /**
  * Generate a W2 form [DEMO]

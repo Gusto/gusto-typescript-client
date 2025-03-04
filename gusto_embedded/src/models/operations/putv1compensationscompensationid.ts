@@ -75,6 +75,25 @@ export type PutV1CompensationsCompensationIdRequest = {
   requestBody: PutV1CompensationsCompensationIdRequestBody;
 };
 
+export type PutV1CompensationsCompensationIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  compensation?: components.Compensation | undefined;
+};
+
 /** @internal */
 export const PutV1CompensationsCompensationIdPaymentUnit$inboundSchema:
   z.ZodNativeEnum<typeof PutV1CompensationsCompensationIdPaymentUnit> = z
@@ -357,5 +376,95 @@ export function putV1CompensationsCompensationIdRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1CompensationsCompensationIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1CompensationsCompensationIdResponse$inboundSchema: z.ZodType<
+  PutV1CompensationsCompensationIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Compensation: components.Compensation$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Compensation": "compensation",
+  });
+});
+
+/** @internal */
+export type PutV1CompensationsCompensationIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Compensation?: components.Compensation$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1CompensationsCompensationIdResponse$outboundSchema: z.ZodType<
+  PutV1CompensationsCompensationIdResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1CompensationsCompensationIdResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  compensation: components.Compensation$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    compensation: "Compensation",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompensationsCompensationIdResponse$ {
+  /** @deprecated use `PutV1CompensationsCompensationIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1CompensationsCompensationIdResponse$inboundSchema;
+  /** @deprecated use `PutV1CompensationsCompensationIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1CompensationsCompensationIdResponse$outboundSchema;
+  /** @deprecated use `PutV1CompensationsCompensationIdResponse$Outbound` instead. */
+  export type Outbound = PutV1CompensationsCompensationIdResponse$Outbound;
+}
+
+export function putV1CompensationsCompensationIdResponseToJSON(
+  putV1CompensationsCompensationIdResponse:
+    PutV1CompensationsCompensationIdResponse,
+): string {
+  return JSON.stringify(
+    PutV1CompensationsCompensationIdResponse$outboundSchema.parse(
+      putV1CompensationsCompensationIdResponse,
+    ),
+  );
+}
+
+export function putV1CompensationsCompensationIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1CompensationsCompensationIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1CompensationsCompensationIdResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1CompensationsCompensationIdResponse' from JSON`,
   );
 }

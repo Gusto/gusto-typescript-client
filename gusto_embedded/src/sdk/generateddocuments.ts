@@ -4,7 +4,6 @@
 
 import { generatedDocumentsGet } from "../funcs/generatedDocumentsGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -20,7 +19,9 @@ export class GeneratedDocuments extends ClientSDK {
   async get(
     request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.GeneratedDocument> {
+  ): Promise<
+    operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse
+  > {
     return unwrapAsync(generatedDocumentsGet(
       this,
       request,

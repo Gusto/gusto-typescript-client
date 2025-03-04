@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type LocationsRetrieveQueryData = components.Location;
+export type LocationsRetrieveQueryData =
+  operations.GetV1LocationsLocationIdResponse;
 
 /**
  * Get a location

@@ -6,7 +6,6 @@ import { reportsCreateCustom } from "../funcs/reportsCreateCustom.js";
 import { reportsGet } from "../funcs/reportsGet.js";
 import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +21,7 @@ export class Reports extends ClientSDK {
   async createCustom(
     request: operations.PostCompaniesCompanyUuidReportsRequest,
     options?: RequestOptions,
-  ): Promise<components.CreateReport> {
+  ): Promise<operations.PostCompaniesCompanyUuidReportsResponse> {
     return unwrapAsync(reportsCreateCustom(
       this,
       request,
@@ -41,7 +40,7 @@ export class Reports extends ClientSDK {
   async get(
     request: operations.GetReportsReportUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.Report> {
+  ): Promise<operations.GetReportsReportUuidResponse> {
     return unwrapAsync(reportsGet(
       this,
       request,
@@ -60,7 +59,9 @@ export class Reports extends ClientSDK {
   async getTemplate(
     request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
     options?: RequestOptions,
-  ): Promise<components.ReportTemplate> {
+  ): Promise<
+    operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse
+  > {
     return unwrapAsync(reportsGetTemplate(
       this,
       request,

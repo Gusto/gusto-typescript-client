@@ -22,7 +22,8 @@ export type ContractorPaymentsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type ContractorPaymentsDeleteMutationData = void;
+export type ContractorPaymentsDeleteMutationData =
+  operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse;
 
 /**
  * Cancel a contractor payment

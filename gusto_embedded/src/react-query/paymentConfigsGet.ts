@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PaymentConfigsGetQueryData = components.PaymentConfigs;
+export type PaymentConfigsGetQueryData =
+  operations.GetV1CompanyPaymentConfigsResponse;
 
 /**
  * Get a company's payment configs

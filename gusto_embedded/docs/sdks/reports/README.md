@@ -128,7 +128,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CreateReport](../../models/components/createreport.md)\>**
+**Promise\<[operations.PostCompaniesCompanyUuidReportsResponse](../../models/operations/postcompaniescompanyuuidreportsresponse.md)\>**
 
 ### Errors
 
@@ -235,7 +235,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Report](../../models/components/report.md)\>**
+**Promise\<[operations.GetReportsReportUuidResponse](../../models/operations/getreportsreportuuidresponse.md)\>**
 
 ### Errors
 
@@ -343,7 +343,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ReportTemplate](../../models/components/reporttemplate.md)\>**
+**Promise\<[operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse](../../models/operations/getcompaniescompanyuuidreporttemplatesreporttyperesponse.md)\>**
 
 ### Errors
 

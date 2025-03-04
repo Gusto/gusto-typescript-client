@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeEmploymentsGetHistoryQueryData = Array<
-  components.EmploymentHistoryList
->;
+export type EmployeeEmploymentsGetHistoryQueryData =
+  operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse;
 
 /**
  * Get employment history for an employee

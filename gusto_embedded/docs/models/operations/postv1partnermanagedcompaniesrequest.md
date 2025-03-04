@@ -8,9 +8,9 @@ import { PostV1PartnerManagedCompaniesRequest } from "@gusto/embedded-api/models
 let value: PostV1PartnerManagedCompaniesRequest = {
   requestBody: {
     user: {
-      firstName: "Tevin",
-      lastName: "Zulauf",
-      email: "Sanford84@gmail.com",
+      firstName: "Sanford",
+      lastName: "Morissette",
+      email: "Rosendo6@gmail.com",
     },
     company: {
       name: "<value>",

@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type AchTransactionsGetAllQueryData = Array<components.AchTransaction>;
+export type AchTransactionsGetAllQueryData =
+  operations.GetAchTransactionsResponse;
 
 /**
  * Get all ACH transactions for a company

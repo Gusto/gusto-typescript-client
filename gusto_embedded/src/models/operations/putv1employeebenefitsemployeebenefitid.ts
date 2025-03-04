@@ -237,6 +237,25 @@ export type PutV1EmployeeBenefitsEmployeeBenefitIdRequest = {
   requestBody: PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody;
 };
 
+export type PutV1EmployeeBenefitsEmployeeBenefitIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeBenefit?: components.EmployeeBenefit | undefined;
+};
+
 /** @internal */
 export const PutV1EmployeeBenefitsEmployeeBenefitIdType$inboundSchema:
   z.ZodNativeEnum<typeof PutV1EmployeeBenefitsEmployeeBenefitIdType> = z
@@ -741,5 +760,98 @@ export function putV1EmployeeBenefitsEmployeeBenefitIdRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1EmployeeBenefitsEmployeeBenefitIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema:
+  z.ZodType<
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Benefit": components.EmployeeBenefit$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Benefit": "employeeBenefit",
+    });
+  });
+
+/** @internal */
+export type PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Benefit"?: components.EmployeeBenefit$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema:
+  z.ZodType<
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeBenefit: components.EmployeeBenefit$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeBenefit: "Employee-Benefit",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeeBenefitsEmployeeBenefitIdResponse$ {
+  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound;
+}
+
+export function putV1EmployeeBenefitsEmployeeBenefitIdResponseToJSON(
+  putV1EmployeeBenefitsEmployeeBenefitIdResponse:
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema.parse(
+      putV1EmployeeBenefitsEmployeeBenefitIdResponse,
+    ),
+  );
+}
+
+export function putV1EmployeeBenefitsEmployeeBenefitIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1EmployeeBenefitsEmployeeBenefitIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1EmployeeBenefitsEmployeeBenefitIdResponse' from JSON`,
   );
 }

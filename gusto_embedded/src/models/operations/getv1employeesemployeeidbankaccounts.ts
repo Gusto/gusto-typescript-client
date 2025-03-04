@@ -28,6 +28,25 @@ export type GetV1EmployeesEmployeeIdBankAccountsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdBankAccountsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeBankAccountList?: Array<components.EmployeeBankAccount> | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdBankAccountsRequest$inboundSchema:
   z.ZodType<
@@ -115,5 +134,103 @@ export function getV1EmployeesEmployeeIdBankAccountsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeIdBankAccountsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdBankAccountsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Bank-Account-List": z.array(
+      components.EmployeeBankAccount$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Bank-Account-List": "employeeBankAccountList",
+    });
+  });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdBankAccountsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Bank-Account-List"?:
+    | Array<components.EmployeeBankAccount$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdBankAccountsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdBankAccountsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeBankAccountList: z.array(
+      components.EmployeeBankAccount$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeBankAccountList: "Employee-Bank-Account-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdBankAccountsResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdBankAccountsResponse$Outbound` instead. */
+  export type Outbound = GetV1EmployeesEmployeeIdBankAccountsResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdBankAccountsResponseToJSON(
+  getV1EmployeesEmployeeIdBankAccountsResponse:
+    GetV1EmployeesEmployeeIdBankAccountsResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeIdBankAccountsResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeIdBankAccountsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdBankAccountsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeIdBankAccountsResponse' from JSON`,
   );
 }

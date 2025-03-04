@@ -55,6 +55,25 @@ export type GetV1JobsJobIdCompensationsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1JobsJobIdCompensationsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  compensationList?: Array<components.Compensation> | undefined;
+};
+
 /** @internal */
 export const GetV1JobsJobIdCompensationsQueryParamInclude$inboundSchema:
   z.ZodNativeEnum<typeof GetV1JobsJobIdCompensationsQueryParamInclude> = z
@@ -161,5 +180,90 @@ export function getV1JobsJobIdCompensationsRequestFromJSON(
     (x) =>
       GetV1JobsJobIdCompensationsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1JobsJobIdCompensationsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1JobsJobIdCompensationsResponse$inboundSchema: z.ZodType<
+  GetV1JobsJobIdCompensationsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Compensation-List": z.array(components.Compensation$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Compensation-List": "compensationList",
+  });
+});
+
+/** @internal */
+export type GetV1JobsJobIdCompensationsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Compensation-List"?: Array<components.Compensation$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1JobsJobIdCompensationsResponse$outboundSchema: z.ZodType<
+  GetV1JobsJobIdCompensationsResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1JobsJobIdCompensationsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  compensationList: z.array(components.Compensation$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    compensationList: "Compensation-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1JobsJobIdCompensationsResponse$ {
+  /** @deprecated use `GetV1JobsJobIdCompensationsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1JobsJobIdCompensationsResponse$inboundSchema;
+  /** @deprecated use `GetV1JobsJobIdCompensationsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1JobsJobIdCompensationsResponse$outboundSchema;
+  /** @deprecated use `GetV1JobsJobIdCompensationsResponse$Outbound` instead. */
+  export type Outbound = GetV1JobsJobIdCompensationsResponse$Outbound;
+}
+
+export function getV1JobsJobIdCompensationsResponseToJSON(
+  getV1JobsJobIdCompensationsResponse: GetV1JobsJobIdCompensationsResponse,
+): string {
+  return JSON.stringify(
+    GetV1JobsJobIdCompensationsResponse$outboundSchema.parse(
+      getV1JobsJobIdCompensationsResponse,
+    ),
+  );
+}
+
+export function getV1JobsJobIdCompensationsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1JobsJobIdCompensationsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1JobsJobIdCompensationsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1JobsJobIdCompensationsResponse' from JSON`,
   );
 }

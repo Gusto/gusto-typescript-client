@@ -54,6 +54,25 @@ export type PostV1CompaniesAttachmentRequest = {
   requestBody: PostV1CompaniesAttachmentRequestBody;
 };
 
+export type PostV1CompaniesAttachmentResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyAttachment?: components.CompanyAttachment | undefined;
+};
+
 /** @internal */
 export const Document$inboundSchema: z.ZodType<
   Document,
@@ -275,5 +294,87 @@ export function postV1CompaniesAttachmentRequestFromJSON(
     jsonString,
     (x) => PostV1CompaniesAttachmentRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1CompaniesAttachmentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesAttachmentResponse$inboundSchema: z.ZodType<
+  PostV1CompaniesAttachmentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Company-Attachment": components.CompanyAttachment$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Company-Attachment": "companyAttachment",
+  });
+});
+
+/** @internal */
+export type PostV1CompaniesAttachmentResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Attachment"?: components.CompanyAttachment$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesAttachmentResponse$outboundSchema: z.ZodType<
+  PostV1CompaniesAttachmentResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1CompaniesAttachmentResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  companyAttachment: components.CompanyAttachment$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    companyAttachment: "Company-Attachment",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesAttachmentResponse$ {
+  /** @deprecated use `PostV1CompaniesAttachmentResponse$inboundSchema` instead. */
+  export const inboundSchema = PostV1CompaniesAttachmentResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesAttachmentResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesAttachmentResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesAttachmentResponse$Outbound` instead. */
+  export type Outbound = PostV1CompaniesAttachmentResponse$Outbound;
+}
+
+export function postV1CompaniesAttachmentResponseToJSON(
+  postV1CompaniesAttachmentResponse: PostV1CompaniesAttachmentResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesAttachmentResponse$outboundSchema.parse(
+      postV1CompaniesAttachmentResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesAttachmentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1CompaniesAttachmentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1CompaniesAttachmentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1CompaniesAttachmentResponse' from JSON`,
   );
 }

@@ -30,6 +30,25 @@ export type PostV1SandboxGenerate1099Request = {
   requestBody: PostV1SandboxGenerate1099RequestBody;
 };
 
+export type PostV1SandboxGenerate1099Response = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  form1099?: components.Form1099 | undefined;
+};
+
 /** @internal */
 export const PostV1SandboxGenerate1099RequestBody$inboundSchema: z.ZodType<
   PostV1SandboxGenerate1099RequestBody,
@@ -172,5 +191,87 @@ export function postV1SandboxGenerate1099RequestFromJSON(
     jsonString,
     (x) => PostV1SandboxGenerate1099Request$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1SandboxGenerate1099Request' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1SandboxGenerate1099Response$inboundSchema: z.ZodType<
+  PostV1SandboxGenerate1099Response,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Form_1099: components.Form1099$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Form_1099": "form1099",
+  });
+});
+
+/** @internal */
+export type PostV1SandboxGenerate1099Response$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Form_1099?: components.Form1099$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1SandboxGenerate1099Response$outboundSchema: z.ZodType<
+  PostV1SandboxGenerate1099Response$Outbound,
+  z.ZodTypeDef,
+  PostV1SandboxGenerate1099Response
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  form1099: components.Form1099$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    form1099: "Form_1099",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1SandboxGenerate1099Response$ {
+  /** @deprecated use `PostV1SandboxGenerate1099Response$inboundSchema` instead. */
+  export const inboundSchema = PostV1SandboxGenerate1099Response$inboundSchema;
+  /** @deprecated use `PostV1SandboxGenerate1099Response$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1SandboxGenerate1099Response$outboundSchema;
+  /** @deprecated use `PostV1SandboxGenerate1099Response$Outbound` instead. */
+  export type Outbound = PostV1SandboxGenerate1099Response$Outbound;
+}
+
+export function postV1SandboxGenerate1099ResponseToJSON(
+  postV1SandboxGenerate1099Response: PostV1SandboxGenerate1099Response,
+): string {
+  return JSON.stringify(
+    PostV1SandboxGenerate1099Response$outboundSchema.parse(
+      postV1SandboxGenerate1099Response,
+    ),
+  );
+}
+
+export function postV1SandboxGenerate1099ResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1SandboxGenerate1099Response, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1SandboxGenerate1099Response$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1SandboxGenerate1099Response' from JSON`,
   );
 }

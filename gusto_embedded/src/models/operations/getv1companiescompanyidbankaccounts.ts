@@ -20,6 +20,25 @@ export type GetV1CompaniesCompanyIdBankAccountsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdBankAccountsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyBankAccountList?: Array<components.CompanyBankAccount> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdBankAccountsRequest$inboundSchema:
   z.ZodType<GetV1CompaniesCompanyIdBankAccountsRequest, z.ZodTypeDef, unknown> =
@@ -98,5 +117,103 @@ export function getV1CompaniesCompanyIdBankAccountsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyIdBankAccountsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdBankAccountsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Company-Bank-Account-List": z.array(
+      components.CompanyBankAccount$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Company-Bank-Account-List": "companyBankAccountList",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdBankAccountsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Bank-Account-List"?:
+    | Array<components.CompanyBankAccount$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdBankAccountsResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdBankAccountsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdBankAccountsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    companyBankAccountList: z.array(
+      components.CompanyBankAccount$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      companyBankAccountList: "Company-Bank-Account-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdBankAccountsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdBankAccountsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdBankAccountsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdBankAccountsResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesCompanyIdBankAccountsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdBankAccountsResponseToJSON(
+  getV1CompaniesCompanyIdBankAccountsResponse:
+    GetV1CompaniesCompanyIdBankAccountsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdBankAccountsResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdBankAccountsResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdBankAccountsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdBankAccountsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyIdBankAccountsResponse' from JSON`,
   );
 }

@@ -20,6 +20,25 @@ export type GetV1EmployeesEmployeeIdTerminationsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdTerminationsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  terminationList?: Array<components.Termination> | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdTerminationsRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +120,98 @@ export function getV1EmployeesEmployeeIdTerminationsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeIdTerminationsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdTerminationsResponse$inboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdTerminationsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Termination-List": z.array(components.Termination$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Termination-List": "terminationList",
+    });
+  });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdTerminationsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Termination-List"?: Array<components.Termination$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdTerminationsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdTerminationsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    terminationList: z.array(components.Termination$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      terminationList: "Termination-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdTerminationsResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdTerminationsResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsResponse$Outbound` instead. */
+  export type Outbound = GetV1EmployeesEmployeeIdTerminationsResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdTerminationsResponseToJSON(
+  getV1EmployeesEmployeeIdTerminationsResponse:
+    GetV1EmployeesEmployeeIdTerminationsResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeIdTerminationsResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeIdTerminationsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdTerminationsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdTerminationsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeIdTerminationsResponse' from JSON`,
   );
 }

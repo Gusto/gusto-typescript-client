@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type EmployeePaymentMethodGetQueryData =
-  components.EmployeePaymentMethod;
+  operations.GetV1EmployeesEmployeeIdPaymentMethodResponse;
 
 /**
  * Get an employee's payment method

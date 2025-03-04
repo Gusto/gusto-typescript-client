@@ -5,7 +5,6 @@
 import { introspectionGetInfo } from "../funcs/introspectionGetInfo.js";
 import { introspectionRefreshToken } from "../funcs/introspectionRefreshToken.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -19,7 +18,7 @@ export class Introspection extends ClientSDK {
   async getInfo(
     request: operations.GetV1TokenInfoRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1TokenInfoResponseBody> {
+  ): Promise<operations.GetV1TokenInfoResponse> {
     return unwrapAsync(introspectionGetInfo(
       this,
       request,
@@ -40,7 +39,7 @@ export class Introspection extends ClientSDK {
   async refreshToken(
     request: operations.RefreshAccessTokenRequest,
     options?: RequestOptions,
-  ): Promise<components.Authentication> {
+  ): Promise<operations.RefreshAccessTokenResponse> {
     return unwrapAsync(introspectionRefreshToken(
       this,
       request,

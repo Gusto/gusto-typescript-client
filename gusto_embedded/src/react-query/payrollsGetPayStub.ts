@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PayrollsGetPayStubQueryData = void;
+export type PayrollsGetPayStubQueryData =
+  operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse;
 
 /**
  * Get an employee pay stub (pdf)

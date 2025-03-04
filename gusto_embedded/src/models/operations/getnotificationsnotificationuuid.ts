@@ -20,6 +20,25 @@ export type GetNotificationsNotificationUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetNotificationsNotificationUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  notification?: components.Notification | undefined;
+};
+
 /** @internal */
 export const GetNotificationsNotificationUuidRequest$inboundSchema: z.ZodType<
   GetNotificationsNotificationUuidRequest,
@@ -99,5 +118,95 @@ export function getNotificationsNotificationUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetNotificationsNotificationUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetNotificationsNotificationUuidResponse$inboundSchema: z.ZodType<
+  GetNotificationsNotificationUuidResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Notification: components.Notification$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Notification": "notification",
+  });
+});
+
+/** @internal */
+export type GetNotificationsNotificationUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Notification?: components.Notification$Outbound | undefined;
+};
+
+/** @internal */
+export const GetNotificationsNotificationUuidResponse$outboundSchema: z.ZodType<
+  GetNotificationsNotificationUuidResponse$Outbound,
+  z.ZodTypeDef,
+  GetNotificationsNotificationUuidResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  notification: components.Notification$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    notification: "Notification",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetNotificationsNotificationUuidResponse$ {
+  /** @deprecated use `GetNotificationsNotificationUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetNotificationsNotificationUuidResponse$inboundSchema;
+  /** @deprecated use `GetNotificationsNotificationUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetNotificationsNotificationUuidResponse$outboundSchema;
+  /** @deprecated use `GetNotificationsNotificationUuidResponse$Outbound` instead. */
+  export type Outbound = GetNotificationsNotificationUuidResponse$Outbound;
+}
+
+export function getNotificationsNotificationUuidResponseToJSON(
+  getNotificationsNotificationUuidResponse:
+    GetNotificationsNotificationUuidResponse,
+): string {
+  return JSON.stringify(
+    GetNotificationsNotificationUuidResponse$outboundSchema.parse(
+      getNotificationsNotificationUuidResponse,
+    ),
+  );
+}
+
+export function getNotificationsNotificationUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetNotificationsNotificationUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetNotificationsNotificationUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetNotificationsNotificationUuidResponse' from JSON`,
   );
 }

@@ -106,7 +106,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.PostV1SandboxGenerateW2Form](../../models/operations/postv1sandboxgeneratew2form.md)\>**
+**Promise\<[operations.PostV1SandboxGenerateW2Response](../../models/operations/postv1sandboxgeneratew2response.md)\>**
 
 ### Errors
 
@@ -213,7 +213,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeeFormsResponse](../../models/operations/getv1employeeformsresponse.md)\>**
 
 ### Errors
 
@@ -321,7 +321,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form](../../models/components/form.md)\>**
+**Promise\<[operations.GetV1EmployeeFormResponse](../../models/operations/getv1employeeformresponse.md)\>**
 
 ### Errors
 
@@ -429,7 +429,7 @@ import {
 
 ### Response
 
-**Promise\<[components.FormPdf](../../models/components/formpdf.md)\>**
+**Promise\<[operations.GetV1EmployeeFormPdfResponse](../../models/operations/getv1employeeformpdfresponse.md)\>**
 
 ### Errors
 
@@ -539,7 +539,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form](../../models/components/form.md)\>**
+**Promise\<[operations.PutV1EmployeeFormSignResponse](../../models/operations/putv1employeeformsignresponse.md)\>**
 
 ### Errors
 

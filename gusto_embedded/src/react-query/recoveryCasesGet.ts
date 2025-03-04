@@ -26,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type RecoveryCasesGetQueryData = Array<components.RecoveryCase>;
+export type RecoveryCasesGetQueryData = operations.GetRecoveryCasesResponse;
 
 /**
  * Get all recovery cases for a company

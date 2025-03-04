@@ -37,7 +37,7 @@ export function paySchedulesGetPreview(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody,
+    operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -61,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody,
+      operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -162,8 +162,16 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
+  };
+
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody,
+    operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -175,11 +183,12 @@ async function $do(
     M.json(
       200,
       operations
-        .GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema,
+        .GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema,
+      { key: "object" },
     ),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response);
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

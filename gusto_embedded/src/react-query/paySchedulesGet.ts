@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PaySchedulesGetQueryData = components.PaySchedule;
+export type PaySchedulesGetQueryData =
+  operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse;
 
 /**
  * Get a pay schedule
