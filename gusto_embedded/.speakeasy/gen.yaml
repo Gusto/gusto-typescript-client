@@ -49,6 +49,6 @@ typescript:
   moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@gusto/embedded-api'
-  responseFormat: flat
+  responseFormat: envelope
   templateVersion: v2
   useIndexModules: true
