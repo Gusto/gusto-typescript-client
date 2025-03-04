@@ -12,7 +12,6 @@ import { externalPayrollsRetrieve } from "../funcs/externalPayrollsRetrieve.js";
 import { externalPayrollsUpdate } from "../funcs/externalPayrollsUpdate.js";
 import { externalPayrollsUpdateTaxLiabilities } from "../funcs/externalPayrollsUpdateTaxLiabilities.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -28,7 +27,7 @@ export class ExternalPayrolls extends ClientSDK {
   async create(
     request: operations.PostV1ExternalPayrollRequest,
     options?: RequestOptions,
-  ): Promise<components.ExternalPayroll> {
+  ): Promise<operations.PostV1ExternalPayrollResponse> {
     return unwrapAsync(externalPayrollsCreate(
       this,
       request,
@@ -47,7 +46,7 @@ export class ExternalPayrolls extends ClientSDK {
   async get(
     request: operations.GetV1CompanyExternalPayrollsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ExternalPayrollBasic>> {
+  ): Promise<operations.GetV1CompanyExternalPayrollsResponse> {
     return unwrapAsync(externalPayrollsGet(
       this,
       request,
@@ -66,7 +65,7 @@ export class ExternalPayrolls extends ClientSDK {
   async retrieve(
     request: operations.GetV1ExternalPayrollRequest,
     options?: RequestOptions,
-  ): Promise<components.ExternalPayroll> {
+  ): Promise<operations.GetV1ExternalPayrollResponse> {
     return unwrapAsync(externalPayrollsRetrieve(
       this,
       request,
@@ -85,7 +84,7 @@ export class ExternalPayrolls extends ClientSDK {
   async delete(
     request: operations.DeleteV1ExternalPayrollRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1ExternalPayrollResponse> {
     return unwrapAsync(externalPayrollsDelete(
       this,
       request,
@@ -104,7 +103,7 @@ export class ExternalPayrolls extends ClientSDK {
   async update(
     request: operations.PutV1ExternalPayrollRequest,
     options?: RequestOptions,
-  ): Promise<components.ExternalPayroll> {
+  ): Promise<operations.PutV1ExternalPayrollResponse> {
     return unwrapAsync(externalPayrollsUpdate(
       this,
       request,
@@ -125,7 +124,7 @@ export class ExternalPayrolls extends ClientSDK {
   async calculateTaxes(
     request: operations.GetV1ExternalPayrollCalculateTaxesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ExternalPayrollTaxSuggestions>> {
+  ): Promise<operations.GetV1ExternalPayrollCalculateTaxesResponse> {
     return unwrapAsync(externalPayrollsCalculateTaxes(
       this,
       request,
@@ -144,7 +143,7 @@ export class ExternalPayrolls extends ClientSDK {
   async listTaxLiabilities(
     request: operations.GetV1TaxLiabilitiesRequest,
     options?: RequestOptions,
-  ): Promise<Array<Array<components.TaxLiabilitiesSelections>>> {
+  ): Promise<operations.GetV1TaxLiabilitiesResponse> {
     return unwrapAsync(externalPayrollsListTaxLiabilities(
       this,
       request,
@@ -163,7 +162,7 @@ export class ExternalPayrolls extends ClientSDK {
   async updateTaxLiabilities(
     request: operations.PutV1TaxLiabilitiesRequest,
     options?: RequestOptions,
-  ): Promise<Array<Array<components.TaxLiabilitiesSelections>>> {
+  ): Promise<operations.PutV1TaxLiabilitiesResponse> {
     return unwrapAsync(externalPayrollsUpdateTaxLiabilities(
       this,
       request,
@@ -182,7 +181,7 @@ export class ExternalPayrolls extends ClientSDK {
   async finalizeTaxLiabilities(
     request: operations.PutV1TaxLiabilitiesFinishRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.PutV1TaxLiabilitiesFinishResponse> {
     return unwrapAsync(externalPayrollsFinalizeTaxLiabilities(
       this,
       request,

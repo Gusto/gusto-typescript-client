@@ -21,7 +21,8 @@ export type HolidayPayPoliciesDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type HolidayPayPoliciesDeleteMutationData = void;
+export type HolidayPayPoliciesDeleteMutationData =
+  operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse;
 
 /**
  * Delete a company's holiday pay policy

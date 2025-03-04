@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksVerify } from "../funcs/webhooksVerify.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -23,7 +22,8 @@ export type WebhooksVerifyMutationVariables = {
   options?: RequestOptions;
 };
 
-export type WebhooksVerifyMutationData = components.WebhookSubscription;
+export type WebhooksVerifyMutationData =
+  operations.PutV1VerifyWebhookSubscriptionUuidResponse;
 
 /**
  * Verify the webhook subscription

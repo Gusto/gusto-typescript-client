@@ -36,6 +36,25 @@ export type PutV1CompanyFormSignRequest = {
   requestBody: PutV1CompanyFormSignRequestBody;
 };
 
+export type PutV1CompanyFormSignResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  form?: components.Form | undefined;
+};
+
 /** @internal */
 export const PutV1CompanyFormSignRequestBody$inboundSchema: z.ZodType<
   PutV1CompanyFormSignRequestBody,
@@ -183,5 +202,86 @@ export function putV1CompanyFormSignRequestFromJSON(
     jsonString,
     (x) => PutV1CompanyFormSignRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1CompanyFormSignRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1CompanyFormSignResponse$inboundSchema: z.ZodType<
+  PutV1CompanyFormSignResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Form: components.Form$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Form": "form",
+  });
+});
+
+/** @internal */
+export type PutV1CompanyFormSignResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Form?: components.Form$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1CompanyFormSignResponse$outboundSchema: z.ZodType<
+  PutV1CompanyFormSignResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1CompanyFormSignResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  form: components.Form$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    form: "Form",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompanyFormSignResponse$ {
+  /** @deprecated use `PutV1CompanyFormSignResponse$inboundSchema` instead. */
+  export const inboundSchema = PutV1CompanyFormSignResponse$inboundSchema;
+  /** @deprecated use `PutV1CompanyFormSignResponse$outboundSchema` instead. */
+  export const outboundSchema = PutV1CompanyFormSignResponse$outboundSchema;
+  /** @deprecated use `PutV1CompanyFormSignResponse$Outbound` instead. */
+  export type Outbound = PutV1CompanyFormSignResponse$Outbound;
+}
+
+export function putV1CompanyFormSignResponseToJSON(
+  putV1CompanyFormSignResponse: PutV1CompanyFormSignResponse,
+): string {
+  return JSON.stringify(
+    PutV1CompanyFormSignResponse$outboundSchema.parse(
+      putV1CompanyFormSignResponse,
+    ),
+  );
+}
+
+export function putV1CompanyFormSignResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1CompanyFormSignResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutV1CompanyFormSignResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1CompanyFormSignResponse' from JSON`,
   );
 }

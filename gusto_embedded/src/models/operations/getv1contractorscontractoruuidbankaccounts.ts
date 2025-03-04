@@ -20,6 +20,27 @@ export type GetV1ContractorsContractorUuidBankAccountsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1ContractorsContractorUuidBankAccountsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  contractorBankAccountList?:
+    | Array<components.ContractorBankAccount>
+    | undefined;
+};
+
 /** @internal */
 export const GetV1ContractorsContractorUuidBankAccountsRequest$inboundSchema:
   z.ZodType<
@@ -102,5 +123,104 @@ export function getV1ContractorsContractorUuidBankAccountsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1ContractorsContractorUuidBankAccountsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema:
+  z.ZodType<
+    GetV1ContractorsContractorUuidBankAccountsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Contractor-Bank-Account-List": z.array(
+      components.ContractorBankAccount$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor-Bank-Account-List": "contractorBankAccountList",
+    });
+  });
+
+/** @internal */
+export type GetV1ContractorsContractorUuidBankAccountsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Contractor-Bank-Account-List"?:
+    | Array<components.ContractorBankAccount$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema:
+  z.ZodType<
+    GetV1ContractorsContractorUuidBankAccountsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1ContractorsContractorUuidBankAccountsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractorBankAccountList: z.array(
+      components.ContractorBankAccount$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractorBankAccountList: "Contractor-Bank-Account-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1ContractorsContractorUuidBankAccountsResponse$ {
+  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema;
+  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema;
+  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1ContractorsContractorUuidBankAccountsResponse$Outbound;
+}
+
+export function getV1ContractorsContractorUuidBankAccountsResponseToJSON(
+  getV1ContractorsContractorUuidBankAccountsResponse:
+    GetV1ContractorsContractorUuidBankAccountsResponse,
+): string {
+  return JSON.stringify(
+    GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema.parse(
+      getV1ContractorsContractorUuidBankAccountsResponse,
+    ),
+  );
+}
+
+export function getV1ContractorsContractorUuidBankAccountsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1ContractorsContractorUuidBankAccountsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1ContractorsContractorUuidBankAccountsResponse' from JSON`,
   );
 }

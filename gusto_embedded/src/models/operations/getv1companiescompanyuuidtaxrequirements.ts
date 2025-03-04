@@ -35,6 +35,25 @@ export type ResponseBody = {
   setupComplete: boolean;
 };
 
+export type GetV1CompaniesCompanyUuidTaxRequirementsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  responseBodies?: Array<ResponseBody> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyUuidTaxRequirementsRequest$inboundSchema:
   z.ZodType<
@@ -178,5 +197,98 @@ export function responseBodyFromJSON(
     jsonString,
     (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidTaxRequirementsResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    responseBodies: z.array(z.lazy(() => ResponseBody$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyUuidTaxRequirementsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  responseBodies?: Array<ResponseBody$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidTaxRequirementsResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    responseBodies: z.array(z.lazy(() => ResponseBody$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyUuidTaxRequirementsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyUuidTaxRequirementsResponseToJSON(
+  getV1CompaniesCompanyUuidTaxRequirementsResponse:
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyUuidTaxRequirementsResponse$outboundSchema.parse(
+      getV1CompaniesCompanyUuidTaxRequirementsResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyUuidTaxRequirementsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyUuidTaxRequirementsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyUuidTaxRequirementsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyUuidTaxRequirementsResponse' from JSON`,
   );
 }

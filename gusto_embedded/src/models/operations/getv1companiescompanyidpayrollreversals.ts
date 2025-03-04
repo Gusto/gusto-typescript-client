@@ -28,6 +28,25 @@ export type GetV1CompaniesCompanyIdPayrollReversalsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdPayrollReversalsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payrollReversal?: components.PayrollReversal | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdPayrollReversalsRequest$inboundSchema:
   z.ZodType<
@@ -116,5 +135,98 @@ export function getV1CompaniesCompanyIdPayrollReversalsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyIdPayrollReversalsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPayrollReversalsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Payroll-Reversal": components.PayrollReversal$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Payroll-Reversal": "payrollReversal",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Payroll-Reversal"?: components.PayrollReversal$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdPayrollReversalsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payrollReversal: components.PayrollReversal$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payrollReversal: "Payroll-Reversal",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdPayrollReversalsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdPayrollReversalsResponseToJSON(
+  getV1CompaniesCompanyIdPayrollReversalsResponse:
+    GetV1CompaniesCompanyIdPayrollReversalsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdPayrollReversalsResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdPayrollReversalsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdPayrollReversalsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyIdPayrollReversalsResponse' from JSON`,
   );
 }

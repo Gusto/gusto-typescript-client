@@ -67,6 +67,25 @@ export type GetV1TokenInfoResponseBody = {
   resourceOwner: ResourceOwner | null;
 };
 
+export type GetV1TokenInfoResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  object?: GetV1TokenInfoResponseBody | undefined;
+};
+
 /** @internal */
 export const GetV1TokenInfoRequest$inboundSchema: z.ZodType<
   GetV1TokenInfoRequest,
@@ -325,5 +344,82 @@ export function getV1TokenInfoResponseBodyFromJSON(
     jsonString,
     (x) => GetV1TokenInfoResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1TokenInfoResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1TokenInfoResponse$inboundSchema: z.ZodType<
+  GetV1TokenInfoResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  object: z.lazy(() => GetV1TokenInfoResponseBody$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type GetV1TokenInfoResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  object?: GetV1TokenInfoResponseBody$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1TokenInfoResponse$outboundSchema: z.ZodType<
+  GetV1TokenInfoResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1TokenInfoResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  object: z.lazy(() => GetV1TokenInfoResponseBody$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1TokenInfoResponse$ {
+  /** @deprecated use `GetV1TokenInfoResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1TokenInfoResponse$inboundSchema;
+  /** @deprecated use `GetV1TokenInfoResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1TokenInfoResponse$outboundSchema;
+  /** @deprecated use `GetV1TokenInfoResponse$Outbound` instead. */
+  export type Outbound = GetV1TokenInfoResponse$Outbound;
+}
+
+export function getV1TokenInfoResponseToJSON(
+  getV1TokenInfoResponse: GetV1TokenInfoResponse,
+): string {
+  return JSON.stringify(
+    GetV1TokenInfoResponse$outboundSchema.parse(getV1TokenInfoResponse),
+  );
+}
+
+export function getV1TokenInfoResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1TokenInfoResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1TokenInfoResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1TokenInfoResponse' from JSON`,
   );
 }

@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type CompanyBenefitsGetRequirementsQueryData =
-  components.BenefitTypeRequirements;
+  operations.GetV1BenefitsBenefitsIdRequirementsResponse;
 
 /**
  * Get benefit fields requirements by ID

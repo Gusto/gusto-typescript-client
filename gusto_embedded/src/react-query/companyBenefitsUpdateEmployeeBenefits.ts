@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsUpdateEmployeeBenefits } from "../funcs/companyBenefitsUpdateEmployeeBenefits.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -23,9 +22,8 @@ export type CompanyBenefitsUpdateEmployeeBenefitsMutationVariables = {
   options?: RequestOptions;
 };
 
-export type CompanyBenefitsUpdateEmployeeBenefitsMutationData = Array<
-  components.EmployeeBenefit
->;
+export type CompanyBenefitsUpdateEmployeeBenefitsMutationData =
+  operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse;
 
 /**
  * Bulk update employee benefits for a company benefit

@@ -23,7 +23,7 @@ export type CompaniesRetrieveTermsOfServiceMutationVariables = {
 };
 
 export type CompaniesRetrieveTermsOfServiceMutationData =
-  operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody;
+  operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse;
 
 /**
  * Retrieve terms of service status for a company user

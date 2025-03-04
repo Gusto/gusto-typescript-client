@@ -50,6 +50,25 @@ export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
   requestBody: PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody;
 };
 
+export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  signatory?: components.Signatory | undefined;
+};
+
 /** @internal */
 export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$inboundSchema:
   z.ZodType<
@@ -346,5 +365,97 @@ export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestFromJSON
       PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    Signatory: components.Signatory$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Signatory": "signatory",
+    });
+  });
+
+/** @internal */
+export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    Signatory?: components.Signatory$Outbound | undefined;
+  };
+
+/** @internal */
+export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    signatory: components.Signatory$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      signatory: "Signatory",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$ {
+  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound;
+}
+
+export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponseToJSON(
+  putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse:
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+): string {
+  return JSON.stringify(
+    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema
+      .parse(putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse),
+  );
+}
+
+export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse' from JSON`,
   );
 }

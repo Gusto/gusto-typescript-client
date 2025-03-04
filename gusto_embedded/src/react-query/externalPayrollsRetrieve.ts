@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ExternalPayrollsRetrieveQueryData = components.ExternalPayroll;
+export type ExternalPayrollsRetrieveQueryData =
+  operations.GetV1ExternalPayrollResponse;
 
 /**
  * Get an external payroll

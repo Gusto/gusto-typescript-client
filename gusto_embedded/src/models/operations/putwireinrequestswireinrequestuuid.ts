@@ -40,6 +40,25 @@ export type PutWireInRequestsWireInRequestUuidRequest = {
   requestBody: PutWireInRequestsWireInRequestUuidRequestBody;
 };
 
+export type PutWireInRequestsWireInRequestUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  wireInRequest?: components.WireInRequest | undefined;
+};
+
 /** @internal */
 export const PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema:
   z.ZodType<
@@ -219,5 +238,94 @@ export function putWireInRequestsWireInRequestUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutWireInRequestsWireInRequestUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutWireInRequestsWireInRequestUuidResponse$inboundSchema:
+  z.ZodType<PutWireInRequestsWireInRequestUuidResponse, z.ZodTypeDef, unknown> =
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      "Wire-In-Request": components.WireInRequest$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "Wire-In-Request": "wireInRequest",
+      });
+    });
+
+/** @internal */
+export type PutWireInRequestsWireInRequestUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Wire-In-Request"?: components.WireInRequest$Outbound | undefined;
+};
+
+/** @internal */
+export const PutWireInRequestsWireInRequestUuidResponse$outboundSchema:
+  z.ZodType<
+    PutWireInRequestsWireInRequestUuidResponse$Outbound,
+    z.ZodTypeDef,
+    PutWireInRequestsWireInRequestUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    wireInRequest: components.WireInRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      wireInRequest: "Wire-In-Request",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutWireInRequestsWireInRequestUuidResponse$ {
+  /** @deprecated use `PutWireInRequestsWireInRequestUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutWireInRequestsWireInRequestUuidResponse$inboundSchema;
+  /** @deprecated use `PutWireInRequestsWireInRequestUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutWireInRequestsWireInRequestUuidResponse$outboundSchema;
+  /** @deprecated use `PutWireInRequestsWireInRequestUuidResponse$Outbound` instead. */
+  export type Outbound = PutWireInRequestsWireInRequestUuidResponse$Outbound;
+}
+
+export function putWireInRequestsWireInRequestUuidResponseToJSON(
+  putWireInRequestsWireInRequestUuidResponse:
+    PutWireInRequestsWireInRequestUuidResponse,
+): string {
+  return JSON.stringify(
+    PutWireInRequestsWireInRequestUuidResponse$outboundSchema.parse(
+      putWireInRequestsWireInRequestUuidResponse,
+    ),
+  );
+}
+
+export function putWireInRequestsWireInRequestUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutWireInRequestsWireInRequestUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutWireInRequestsWireInRequestUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutWireInRequestsWireInRequestUuidResponse' from JSON`,
   );
 }

@@ -149,7 +149,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TaxRequirementsState](../../models/components/taxrequirementsstate.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyUuidTaxRequirementsStateResponse](../../models/operations/getv1companiescompanyuuidtaxrequirementsstateresponse.md)\>**
 
 ### Errors
 
@@ -173,7 +173,7 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.taxRequirements.updateState({
+  const result = await gustoEmbedded.taxRequirements.updateState({
     companyUuid: "<id>",
     state: "New Jersey",
     requestBody: {
@@ -219,7 +219,8 @@ async function run() {
     },
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -292,7 +293,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -326,7 +328,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse](../../models/operations/putv1companiescompanyuuidtaxrequirementsstateresponse.md)\>**
 
 ### Errors
 
@@ -433,7 +435,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyUuidTaxRequirementsResponse](../../models/operations/getv1companiescompanyuuidtaxrequirementsresponse.md)\>**
 
 ### Errors
 

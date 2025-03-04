@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompaniesListAdminsQueryData = Array<components.Admin>;
+export type CompaniesListAdminsQueryData =
+  operations.GetV1CompaniesCompanyIdAdminsResponse;
 
 /**
  * Get all the admins at a company

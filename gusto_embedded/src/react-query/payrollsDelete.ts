@@ -21,7 +21,8 @@ export type PayrollsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type PayrollsDeleteMutationData = void;
+export type PayrollsDeleteMutationData =
+  operations.DeleteV1CompaniesCompanyIdPayrollsResponse;
 
 /**
  * Delete a payroll

@@ -40,7 +40,7 @@ export function companiesMigrate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
+    operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
+      operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
       | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
@@ -159,11 +159,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
+    operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -176,7 +180,8 @@ async function $do(
     M.json(
       200,
       operations
-        .PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema,
+        .PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema,
+      { key: "object" },
     ),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),

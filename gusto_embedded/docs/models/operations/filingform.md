@@ -9,7 +9,7 @@ The form used by the company for federal tax filing. One of:
 ```typescript
 import { FilingForm } from "@gusto/embedded-api/models/operations";
 
-let value: FilingForm = "941";
+let value: FilingForm = "944";
 ```
 
 ## Values

@@ -24,6 +24,25 @@ export type PostV1HistoricalEmployeesRequest = {
   historicalEmployeeBody: components.HistoricalEmployeeBody;
 };
 
+export type PostV1HistoricalEmployeesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employee?: components.Employee | undefined;
+};
+
 /** @internal */
 export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
   PostV1HistoricalEmployeesRequest,
@@ -99,5 +118,87 @@ export function postV1HistoricalEmployeesRequestFromJSON(
     jsonString,
     (x) => PostV1HistoricalEmployeesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1HistoricalEmployeesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1HistoricalEmployeesResponse$inboundSchema: z.ZodType<
+  PostV1HistoricalEmployeesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Employee: components.Employee$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Employee": "employee",
+  });
+});
+
+/** @internal */
+export type PostV1HistoricalEmployeesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Employee?: components.Employee$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1HistoricalEmployeesResponse$outboundSchema: z.ZodType<
+  PostV1HistoricalEmployeesResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1HistoricalEmployeesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  employee: components.Employee$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    employee: "Employee",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1HistoricalEmployeesResponse$ {
+  /** @deprecated use `PostV1HistoricalEmployeesResponse$inboundSchema` instead. */
+  export const inboundSchema = PostV1HistoricalEmployeesResponse$inboundSchema;
+  /** @deprecated use `PostV1HistoricalEmployeesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1HistoricalEmployeesResponse$outboundSchema;
+  /** @deprecated use `PostV1HistoricalEmployeesResponse$Outbound` instead. */
+  export type Outbound = PostV1HistoricalEmployeesResponse$Outbound;
+}
+
+export function postV1HistoricalEmployeesResponseToJSON(
+  postV1HistoricalEmployeesResponse: PostV1HistoricalEmployeesResponse,
+): string {
+  return JSON.stringify(
+    PostV1HistoricalEmployeesResponse$outboundSchema.parse(
+      postV1HistoricalEmployeesResponse,
+    ),
+  );
+}
+
+export function postV1HistoricalEmployeesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1HistoricalEmployeesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1HistoricalEmployeesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1HistoricalEmployeesResponse' from JSON`,
   );
 }

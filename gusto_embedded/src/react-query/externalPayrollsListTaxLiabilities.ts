@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ExternalPayrollsListTaxLiabilitiesQueryData = Array<
-  Array<components.TaxLiabilitiesSelections>
->;
+export type ExternalPayrollsListTaxLiabilitiesQueryData =
+  operations.GetV1TaxLiabilitiesResponse;
 
 /**
  * Get tax liabilities

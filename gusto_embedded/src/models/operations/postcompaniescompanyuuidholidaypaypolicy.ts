@@ -89,6 +89,25 @@ export type PostCompaniesCompanyUuidHolidayPayPolicyRequest = {
   requestBody: PostCompaniesCompanyUuidHolidayPayPolicyRequestBody;
 };
 
+export type PostCompaniesCompanyUuidHolidayPayPolicyResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Holiday Pay Policy Object Example
+   */
+  holidayPayPolicy?: components.HolidayPayPolicy | undefined;
+};
+
 /** @internal */
 export const NewYearsDay$inboundSchema: z.ZodType<
   NewYearsDay,
@@ -911,5 +930,98 @@ export function postCompaniesCompanyUuidHolidayPayPolicyRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostCompaniesCompanyUuidHolidayPayPolicyRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema:
+  z.ZodType<
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Holiday-Pay-Policy": components.HolidayPayPolicy$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Holiday-Pay-Policy": "holidayPayPolicy",
+    });
+  });
+
+/** @internal */
+export type PostCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Holiday-Pay-Policy"?: components.HolidayPayPolicy$Outbound | undefined;
+};
+
+/** @internal */
+export const PostCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema:
+  z.ZodType<
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound,
+    z.ZodTypeDef,
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    holidayPayPolicy: components.HolidayPayPolicy$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      holidayPayPolicy: "Holiday-Pay-Policy",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostCompaniesCompanyUuidHolidayPayPolicyResponse$ {
+  /** @deprecated use `PostCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema;
+  /** @deprecated use `PostCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema;
+  /** @deprecated use `PostCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound` instead. */
+  export type Outbound =
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound;
+}
+
+export function postCompaniesCompanyUuidHolidayPayPolicyResponseToJSON(
+  postCompaniesCompanyUuidHolidayPayPolicyResponse:
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+): string {
+  return JSON.stringify(
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema.parse(
+      postCompaniesCompanyUuidHolidayPayPolicyResponse,
+    ),
+  );
+}
+
+export function postCompaniesCompanyUuidHolidayPayPolicyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostCompaniesCompanyUuidHolidayPayPolicyResponse' from JSON`,
   );
 }

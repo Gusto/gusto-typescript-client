@@ -20,6 +20,25 @@ export type GetV1CompaniesCompanyUuidSignatoriesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyUuidSignatoriesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  signatoryList?: Array<components.Signatory> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyUuidSignatoriesRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +120,97 @@ export function getV1CompaniesCompanyUuidSignatoriesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyUuidSignatoriesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidSignatoriesResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidSignatoriesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Signatory-List": z.array(components.Signatory$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Signatory-List": "signatoryList",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyUuidSignatoriesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Signatory-List"?: Array<components.Signatory$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidSignatoriesResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidSignatoriesResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyUuidSignatoriesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    signatoryList: z.array(components.Signatory$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      signatoryList: "Signatory-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyUuidSignatoriesResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyUuidSignatoriesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyUuidSignatoriesResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidSignatoriesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyUuidSignatoriesResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidSignatoriesResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesCompanyUuidSignatoriesResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyUuidSignatoriesResponseToJSON(
+  getV1CompaniesCompanyUuidSignatoriesResponse:
+    GetV1CompaniesCompanyUuidSignatoriesResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyUuidSignatoriesResponse$outboundSchema.parse(
+      getV1CompaniesCompanyUuidSignatoriesResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyUuidSignatoriesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyUuidSignatoriesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyUuidSignatoriesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyUuidSignatoriesResponse' from JSON`,
   );
 }

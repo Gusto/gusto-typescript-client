@@ -17,7 +17,7 @@ Describes the type of requirement - each type may have additional metadata prope
 ```typescript
 import { TaxRequirementMetadataType } from "@gusto/embedded-api/models/components";
 
-let value: TaxRequirementMetadataType = "account_number";
+let value: TaxRequirementMetadataType = "select";
 ```
 
 ## Values

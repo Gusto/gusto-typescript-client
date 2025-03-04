@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeAddressesRetrieveHomeAddressQueryData =
-  components.EmployeeAddress;
+  operations.GetV1HomeAddressesHomeAddressUuidResponse;
 
 /**
  * Get an employee's home address

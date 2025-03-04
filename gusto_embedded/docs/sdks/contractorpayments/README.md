@@ -117,7 +117,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPaymentReceipt](../../models/components/contractorpaymentreceipt.md)\>**
+**Promise\<[operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse](../../models/operations/getv1contractorpaymentscontractorpaymentuuidreceiptresponse.md)\>**
 
 ### Errors
 
@@ -216,7 +216,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPayment](../../models/components/contractorpayment.md)\>**
+**Promise\<[operations.GetV1ContractorPaymentsContractorPaymentUuidFundResponse](../../models/operations/getv1contractorpaymentscontractorpaymentuuidfundresponse.md)\>**
 
 ### Errors
 
@@ -330,7 +330,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPayment](../../models/components/contractorpayment.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdContractorPaymentsResponse](../../models/operations/postv1companiescompanyidcontractorpaymentsresponse.md)\>**
 
 ### Errors
 
@@ -441,7 +441,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetV1CompaniesCompanyIdContractorPaymentsResponseBody](../../models/operations/getv1companiescompanyidcontractorpaymentsresponsebody.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdContractorPaymentsResponse](../../models/operations/getv1companiescompanyidcontractorpaymentsresponse.md)\>**
 
 ### Errors
 
@@ -548,7 +548,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorPayment](../../models/components/contractorpayment.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse](../../models/operations/getv1companiescompanyidcontractorpaymentcontractorpaymentresponse.md)\>**
 
 ### Errors
 
@@ -572,12 +572,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.contractorPayments.delete({
+  const result = await gustoEmbedded.contractorPayments.delete({
     companyId: "<id>",
     contractorPaymentId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -609,7 +610,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -643,7 +645,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse](../../models/operations/deletev1companiescompanyidcontractorpaymentcontractorpaymentresponse.md)\>**
 
 ### Errors
 

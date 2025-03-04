@@ -26,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompanyBenefitsGetAllQueryData = Array<components.SupportedBenefit>;
+export type CompanyBenefitsGetAllQueryData = operations.GetV1BenefitsResponse;
 
 /**
  * Get all benefits supported by Gusto

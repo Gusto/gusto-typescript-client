@@ -14,7 +14,6 @@ import { employeesUpdate } from "../funcs/employeesUpdate.js";
 import { employeesUpdateOnboardingDocumentsConfig } from "../funcs/employeesUpdateOnboardingDocumentsConfig.js";
 import { employeesUpdateOnboardingStatus } from "../funcs/employeesUpdateOnboardingStatus.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -30,7 +29,7 @@ export class Employees extends ClientSDK {
   async create(
     request: operations.PostV1EmployeesRequest,
     options?: RequestOptions,
-  ): Promise<components.Employee> {
+  ): Promise<operations.PostV1EmployeesResponse> {
     return unwrapAsync(employeesCreate(
       this,
       request,
@@ -49,7 +48,7 @@ export class Employees extends ClientSDK {
   async list(
     request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Employee>> {
+  ): Promise<operations.GetV1CompaniesCompanyIdEmployeesResponse> {
     return unwrapAsync(employeesList(
       this,
       request,
@@ -68,7 +67,7 @@ export class Employees extends ClientSDK {
   async createHistorical(
     request: operations.PostV1HistoricalEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<components.Employee> {
+  ): Promise<operations.PostV1HistoricalEmployeesResponse> {
     return unwrapAsync(employeesCreateHistorical(
       this,
       request,
@@ -87,7 +86,7 @@ export class Employees extends ClientSDK {
   async get(
     request: operations.GetV1EmployeesRequest,
     options?: RequestOptions,
-  ): Promise<components.Employee> {
+  ): Promise<operations.GetV1EmployeesResponse> {
     return unwrapAsync(employeesGet(
       this,
       request,
@@ -106,7 +105,7 @@ export class Employees extends ClientSDK {
   async update(
     request: operations.PutV1EmployeesRequest,
     options?: RequestOptions,
-  ): Promise<components.Employee> {
+  ): Promise<operations.PutV1EmployeesResponse> {
     return unwrapAsync(employeesUpdate(
       this,
       request,
@@ -127,7 +126,7 @@ export class Employees extends ClientSDK {
   async delete(
     request: operations.DeleteV1EmployeeRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1EmployeeResponse> {
     return unwrapAsync(employeesDelete(
       this,
       request,
@@ -146,7 +145,7 @@ export class Employees extends ClientSDK {
   async getCustomFields(
     request: operations.GetV1EmployeesEmployeeIdCustomFieldsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdCustomFieldsResponse> {
     return unwrapAsync(employeesGetCustomFields(
       this,
       request,
@@ -166,7 +165,9 @@ export class Employees extends ClientSDK {
     request:
       operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeOnboardingDocument> {
+  ): Promise<
+    operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse
+  > {
     return unwrapAsync(employeesUpdateOnboardingDocumentsConfig(
       this,
       request,
@@ -221,7 +222,7 @@ export class Employees extends ClientSDK {
   async getOnboardingStatus(
     request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeOnboardingStatus> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse> {
     return unwrapAsync(employeesGetOnboardingStatus(
       this,
       request,
@@ -249,7 +250,7 @@ export class Employees extends ClientSDK {
   async updateOnboardingStatus(
     request: operations.PutV1EmployeesEmployeeIdOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeOnboardingStatus> {
+  ): Promise<operations.PutV1EmployeesEmployeeIdOnboardingStatusResponse> {
     return unwrapAsync(employeesUpdateOnboardingStatus(
       this,
       request,
@@ -268,7 +269,7 @@ export class Employees extends ClientSDK {
   async getTimeOffActivities(
     request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
     options?: RequestOptions,
-  ): Promise<components.TimeOffActivity> {
+  ): Promise<operations.GetVersionEmployeesTimeOffActivitiesResponse> {
     return unwrapAsync(employeesGetTimeOffActivities(
       this,
       request,

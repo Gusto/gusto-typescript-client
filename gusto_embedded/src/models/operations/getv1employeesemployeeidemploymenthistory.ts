@@ -20,6 +20,25 @@ export type GetV1EmployeesEmployeeIdEmploymentHistoryRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdEmploymentHistoryResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employmentHistoryList?: Array<components.EmploymentHistoryList> | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdEmploymentHistoryRequest$inboundSchema:
   z.ZodType<
@@ -102,5 +121,104 @@ export function getV1EmployeesEmployeeIdEmploymentHistoryRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeIdEmploymentHistoryRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdEmploymentHistoryResponse$inboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employment-History-List": z.array(
+      components.EmploymentHistoryList$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employment-History-List": "employmentHistoryList",
+    });
+  });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdEmploymentHistoryResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employment-History-List"?:
+    | Array<components.EmploymentHistoryList$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdEmploymentHistoryResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employmentHistoryList: z.array(
+      components.EmploymentHistoryList$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employmentHistoryList: "Employment-History-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdEmploymentHistoryResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdEmploymentHistoryResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdEmploymentHistoryResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdEmploymentHistoryResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdEmploymentHistoryResponseToJSON(
+  getV1EmployeesEmployeeIdEmploymentHistoryResponse:
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeIdEmploymentHistoryResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeIdEmploymentHistoryResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdEmploymentHistoryResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeIdEmploymentHistoryResponse' from JSON`,
   );
 }

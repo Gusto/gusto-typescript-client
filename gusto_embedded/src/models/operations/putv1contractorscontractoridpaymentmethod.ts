@@ -56,6 +56,25 @@ export type PutV1ContractorsContractorIdPaymentMethodRequest = {
   requestBody: PutV1ContractorsContractorIdPaymentMethodRequestBody;
 };
 
+export type PutV1ContractorsContractorIdPaymentMethodResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  contractorPaymentMethod?: components.ContractorPaymentMethod | undefined;
+};
+
 /** @internal */
 export const PutV1ContractorsContractorIdPaymentMethodType$inboundSchema:
   z.ZodNativeEnum<typeof PutV1ContractorsContractorIdPaymentMethodType> = z
@@ -241,5 +260,102 @@ export function putV1ContractorsContractorIdPaymentMethodRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1ContractorsContractorIdPaymentMethodRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1ContractorsContractorIdPaymentMethodResponse$inboundSchema:
+  z.ZodType<
+    PutV1ContractorsContractorIdPaymentMethodResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Contractor-Payment-Method": components
+      .ContractorPaymentMethod$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor-Payment-Method": "contractorPaymentMethod",
+    });
+  });
+
+/** @internal */
+export type PutV1ContractorsContractorIdPaymentMethodResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Contractor-Payment-Method"?:
+    | components.ContractorPaymentMethod$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema:
+  z.ZodType<
+    PutV1ContractorsContractorIdPaymentMethodResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1ContractorsContractorIdPaymentMethodResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractorPaymentMethod: components.ContractorPaymentMethod$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractorPaymentMethod: "Contractor-Payment-Method",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1ContractorsContractorIdPaymentMethodResponse$ {
+  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1ContractorsContractorIdPaymentMethodResponse$inboundSchema;
+  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema;
+  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1ContractorsContractorIdPaymentMethodResponse$Outbound;
+}
+
+export function putV1ContractorsContractorIdPaymentMethodResponseToJSON(
+  putV1ContractorsContractorIdPaymentMethodResponse:
+    PutV1ContractorsContractorIdPaymentMethodResponse,
+): string {
+  return JSON.stringify(
+    PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema.parse(
+      putV1ContractorsContractorIdPaymentMethodResponse,
+    ),
+  );
+}
+
+export function putV1ContractorsContractorIdPaymentMethodResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1ContractorsContractorIdPaymentMethodResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1ContractorsContractorIdPaymentMethodResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1ContractorsContractorIdPaymentMethodResponse' from JSON`,
   );
 }

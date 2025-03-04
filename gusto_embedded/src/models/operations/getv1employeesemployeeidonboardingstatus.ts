@@ -20,6 +20,25 @@ export type GetV1EmployeesEmployeeIdOnboardingStatusRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdOnboardingStatusResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response.
+   */
+  employeeOnboardingStatus?: components.EmployeeOnboardingStatus | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema:
   z.ZodType<
@@ -102,5 +121,102 @@ export function getV1EmployeesEmployeeIdOnboardingStatusRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeIdOnboardingStatusRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Onboarding-Status": components
+      .EmployeeOnboardingStatus$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Onboarding-Status": "employeeOnboardingStatus",
+    });
+  });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Onboarding-Status"?:
+    | components.EmployeeOnboardingStatus$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeOnboardingStatus: components.EmployeeOnboardingStatus$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeOnboardingStatus: "Employee-Onboarding-Status",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdOnboardingStatusResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdOnboardingStatusResponseToJSON(
+  getV1EmployeesEmployeeIdOnboardingStatusResponse:
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeIdOnboardingStatusResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeIdOnboardingStatusResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeIdOnboardingStatusResponse' from JSON`,
   );
 }

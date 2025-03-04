@@ -20,6 +20,25 @@ export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Full contractor payment group object
+   */
+  contractorPaymentGroup?: components.ContractorPaymentGroup | undefined;
+};
+
 /** @internal */
 export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +120,101 @@ export function putV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequestF
       PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema:
+  z.ZodType<
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Contractor-Payment-Group": components.ContractorPaymentGroup$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor-Payment-Group": "contractorPaymentGroup",
+    });
+  });
+
+/** @internal */
+export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Contractor-Payment-Group"?:
+      | components.ContractorPaymentGroup$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$outboundSchema:
+  z.ZodType<
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractorPaymentGroup: components.ContractorPaymentGroup$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractorPaymentGroup: "Contractor-Payment-Group",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$ {
+  /** @deprecated use `PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema;
+  /** @deprecated use `PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$outboundSchema;
+  /** @deprecated use `PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$Outbound;
+}
+
+export function putV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponseToJSON(
+  putV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse:
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+): string {
+  return JSON.stringify(
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$outboundSchema
+      .parse(putV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse),
+  );
+}
+
+export function putV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse' from JSON`,
   );
 }

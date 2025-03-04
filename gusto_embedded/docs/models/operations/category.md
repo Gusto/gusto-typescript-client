@@ -7,7 +7,7 @@ The category of a company attachment.
 ```typescript
 import { Category } from "@gusto/embedded-api/models/operations";
 
-let value: Category = "gep_notice";
+let value: Category = "compliance";
 ```
 
 ## Values

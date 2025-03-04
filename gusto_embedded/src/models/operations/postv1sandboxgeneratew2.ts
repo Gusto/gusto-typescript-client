@@ -76,6 +76,25 @@ export type PostV1SandboxGenerateW2Form = {
   documentContentType?: string | null | undefined;
 };
 
+export type PostV1SandboxGenerateW2Response = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  form?: PostV1SandboxGenerateW2Form | undefined;
+};
+
 /** @internal */
 export const PostV1SandboxGenerateW2RequestBody$inboundSchema: z.ZodType<
   PostV1SandboxGenerateW2RequestBody,
@@ -310,5 +329,86 @@ export function postV1SandboxGenerateW2FormFromJSON(
     jsonString,
     (x) => PostV1SandboxGenerateW2Form$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1SandboxGenerateW2Form' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1SandboxGenerateW2Response$inboundSchema: z.ZodType<
+  PostV1SandboxGenerateW2Response,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Form: z.lazy(() => PostV1SandboxGenerateW2Form$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Form": "form",
+  });
+});
+
+/** @internal */
+export type PostV1SandboxGenerateW2Response$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Form?: PostV1SandboxGenerateW2Form$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1SandboxGenerateW2Response$outboundSchema: z.ZodType<
+  PostV1SandboxGenerateW2Response$Outbound,
+  z.ZodTypeDef,
+  PostV1SandboxGenerateW2Response
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  form: z.lazy(() => PostV1SandboxGenerateW2Form$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    form: "Form",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1SandboxGenerateW2Response$ {
+  /** @deprecated use `PostV1SandboxGenerateW2Response$inboundSchema` instead. */
+  export const inboundSchema = PostV1SandboxGenerateW2Response$inboundSchema;
+  /** @deprecated use `PostV1SandboxGenerateW2Response$outboundSchema` instead. */
+  export const outboundSchema = PostV1SandboxGenerateW2Response$outboundSchema;
+  /** @deprecated use `PostV1SandboxGenerateW2Response$Outbound` instead. */
+  export type Outbound = PostV1SandboxGenerateW2Response$Outbound;
+}
+
+export function postV1SandboxGenerateW2ResponseToJSON(
+  postV1SandboxGenerateW2Response: PostV1SandboxGenerateW2Response,
+): string {
+  return JSON.stringify(
+    PostV1SandboxGenerateW2Response$outboundSchema.parse(
+      postV1SandboxGenerateW2Response,
+    ),
+  );
+}
+
+export function postV1SandboxGenerateW2ResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1SandboxGenerateW2Response, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1SandboxGenerateW2Response$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1SandboxGenerateW2Response' from JSON`,
   );
 }

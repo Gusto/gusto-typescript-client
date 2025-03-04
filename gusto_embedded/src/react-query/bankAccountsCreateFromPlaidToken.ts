@@ -22,7 +22,7 @@ export type BankAccountsCreateFromPlaidTokenMutationVariables = {
 };
 
 export type BankAccountsCreateFromPlaidTokenMutationData =
-  operations.PostV1PlaidProcessorTokenResponseBody;
+  operations.PostV1PlaidProcessorTokenResponse;
 
 /**
  * Create a bank account from a plaid processor token

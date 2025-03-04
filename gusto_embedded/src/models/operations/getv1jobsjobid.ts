@@ -47,6 +47,25 @@ export type GetV1JobsJobIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1JobsJobIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  job?: components.Job | undefined;
+};
+
 /** @internal */
 export const GetV1JobsJobIdQueryParamInclude$inboundSchema: z.ZodNativeEnum<
   typeof GetV1JobsJobIdQueryParamInclude
@@ -139,5 +158,84 @@ export function getV1JobsJobIdRequestFromJSON(
     jsonString,
     (x) => GetV1JobsJobIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1JobsJobIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1JobsJobIdResponse$inboundSchema: z.ZodType<
+  GetV1JobsJobIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Job: components.Job$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Job": "job",
+  });
+});
+
+/** @internal */
+export type GetV1JobsJobIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Job?: components.Job$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1JobsJobIdResponse$outboundSchema: z.ZodType<
+  GetV1JobsJobIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1JobsJobIdResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  job: components.Job$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    job: "Job",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1JobsJobIdResponse$ {
+  /** @deprecated use `GetV1JobsJobIdResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1JobsJobIdResponse$inboundSchema;
+  /** @deprecated use `GetV1JobsJobIdResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1JobsJobIdResponse$outboundSchema;
+  /** @deprecated use `GetV1JobsJobIdResponse$Outbound` instead. */
+  export type Outbound = GetV1JobsJobIdResponse$Outbound;
+}
+
+export function getV1JobsJobIdResponseToJSON(
+  getV1JobsJobIdResponse: GetV1JobsJobIdResponse,
+): string {
+  return JSON.stringify(
+    GetV1JobsJobIdResponse$outboundSchema.parse(getV1JobsJobIdResponse),
+  );
+}
+
+export function getV1JobsJobIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1JobsJobIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1JobsJobIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1JobsJobIdResponse' from JSON`,
   );
 }

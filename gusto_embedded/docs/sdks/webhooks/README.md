@@ -117,7 +117,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WebhookSubscription](../../models/components/webhooksubscription.md)\>**
+**Promise\<[operations.PostV1WebhookSubscriptionResponse](../../models/operations/postv1webhooksubscriptionresponse.md)\>**
 
 ### Errors
 
@@ -225,7 +225,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WebhookSubscription[]](../../models/.md)\>**
+**Promise\<[operations.GetV1WebhookSubscriptionsResponse](../../models/operations/getv1webhooksubscriptionsresponse.md)\>**
 
 ### Errors
 
@@ -338,7 +338,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WebhookSubscription](../../models/components/webhooksubscription.md)\>**
+**Promise\<[operations.PutV1WebhookSubscriptionUuidResponse](../../models/operations/putv1webhooksubscriptionuuidresponse.md)\>**
 
 ### Errors
 
@@ -451,7 +451,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WebhookSubscription](../../models/components/webhooksubscription.md)\>**
+**Promise\<[operations.GetV1WebhookSubscriptionUuidResponse](../../models/operations/getv1webhooksubscriptionuuidresponse.md)\>**
 
 ### Errors
 
@@ -478,13 +478,14 @@ import { GustoEmbedded } from "@gusto/embedded-api";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  await gustoEmbedded.webhooks.deleteSubscription({
+  const result = await gustoEmbedded.webhooks.deleteSubscription({
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -515,7 +516,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -550,7 +552,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1WebhookSubscriptionUuidResponse](../../models/operations/deletev1webhooksubscriptionuuidresponse.md)\>**
 
 ### Errors
 
@@ -659,7 +661,7 @@ import {
 
 ### Response
 
-**Promise\<[components.WebhookSubscription](../../models/components/webhooksubscription.md)\>**
+**Promise\<[operations.PutV1VerifyWebhookSubscriptionUuidResponse](../../models/operations/putv1verifywebhooksubscriptionuuidresponse.md)\>**
 
 ### Errors
 
@@ -687,13 +689,14 @@ import { GustoEmbedded } from "@gusto/embedded-api";
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  await gustoEmbedded.webhooks.requestVerificationToken({
+  const result = await gustoEmbedded.webhooks.requestVerificationToken({
     systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
   }, {
     webhookSubscriptionUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -724,7 +727,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -770,7 +774,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse](../../models/operations/getv1webhooksubscriptionverificationtokenuuidresponse.md)\>**
 
 ### Errors
 

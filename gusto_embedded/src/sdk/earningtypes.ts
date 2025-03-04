@@ -7,7 +7,6 @@ import { earningTypesDelete } from "../funcs/earningTypesDelete.js";
 import { earningTypesList } from "../funcs/earningTypesList.js";
 import { earningTypesUpdate } from "../funcs/earningTypesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -25,7 +24,7 @@ export class EarningTypes extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesCompanyIdEarningTypesRequest,
     options?: RequestOptions,
-  ): Promise<components.EarningType> {
+  ): Promise<operations.PostV1CompaniesCompanyIdEarningTypesResponse> {
     return unwrapAsync(earningTypesCreate(
       this,
       request,
@@ -50,7 +49,7 @@ export class EarningTypes extends ClientSDK {
   async list(
     request: operations.GetV1CompaniesCompanyIdEarningTypesRequest,
     options?: RequestOptions,
-  ): Promise<components.EarningTypeList> {
+  ): Promise<operations.GetV1CompaniesCompanyIdEarningTypesResponse> {
     return unwrapAsync(earningTypesList(
       this,
       request,
@@ -70,7 +69,9 @@ export class EarningTypes extends ClientSDK {
     request:
       operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
     options?: RequestOptions,
-  ): Promise<components.EarningType> {
+  ): Promise<
+    operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse
+  > {
     return unwrapAsync(earningTypesUpdate(
       this,
       request,
@@ -90,7 +91,9 @@ export class EarningTypes extends ClientSDK {
     request:
       operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse
+  > {
     return unwrapAsync(earningTypesDelete(
       this,
       request,

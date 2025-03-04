@@ -8,8 +8,8 @@ import { PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest } from "@gusto/em
 let value: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest = {
   companyUuid: "<id>",
   requestBody: {
-    email: "Anderson_Hahn37@gmail.com",
-    ipAddress: "17.173.116.137",
+    email: "Joseph.Raynor56@gmail.com",
+    ipAddress: "124.91.240.195",
     externalUserId: "<id>",
   },
 };

@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PayrollsGetReceiptQueryData = components.PayrollReceipt;
+export type PayrollsGetReceiptQueryData =
+  operations.GetV1PaymentReceiptsPayrollsPayrollUuidResponse;
 
 /**
  * Get a single payroll receipt

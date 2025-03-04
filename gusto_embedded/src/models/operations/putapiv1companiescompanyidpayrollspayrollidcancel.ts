@@ -24,6 +24,25 @@ export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payroll?: components.Payroll | undefined;
+};
+
 /** @internal */
 export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$inboundSchema:
   z.ZodType<
@@ -110,5 +129,97 @@ export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestFromJSON
       PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema:
+  z.ZodType<
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    Payroll: components.Payroll$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Payroll": "payroll",
+    });
+  });
+
+/** @internal */
+export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    Payroll?: components.Payroll$Outbound | undefined;
+  };
+
+/** @internal */
+export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema:
+  z.ZodType<
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound,
+    z.ZodTypeDef,
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payroll: components.Payroll$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payroll: "Payroll",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$ {
+  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema;
+  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema;
+  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound` instead. */
+  export type Outbound =
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound;
+}
+
+export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponseToJSON(
+  putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse:
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+): string {
+  return JSON.stringify(
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema
+      .parse(putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse),
+  );
+}
+
+export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse' from JSON`,
   );
 }

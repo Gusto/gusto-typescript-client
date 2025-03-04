@@ -34,6 +34,25 @@ export type PutV1WorkAddressesWorkAddressUuidRequest = {
   requestBody: PutV1WorkAddressesWorkAddressUuidRequestBody;
 };
 
+export type PutV1WorkAddressesWorkAddressUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeWorkAddress?: components.EmployeeWorkAddress | undefined;
+};
+
 /** @internal */
 export const PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema:
   z.ZodType<
@@ -206,5 +225,98 @@ export function putV1WorkAddressesWorkAddressUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1WorkAddressesWorkAddressUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1WorkAddressesWorkAddressUuidResponse$inboundSchema: z.ZodType<
+  PutV1WorkAddressesWorkAddressUuidResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Employee-Work-Address": components.EmployeeWorkAddress$inboundSchema
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Employee-Work-Address": "employeeWorkAddress",
+  });
+});
+
+/** @internal */
+export type PutV1WorkAddressesWorkAddressUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Work-Address"?: components.EmployeeWorkAddress$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema:
+  z.ZodType<
+    PutV1WorkAddressesWorkAddressUuidResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1WorkAddressesWorkAddressUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeWorkAddress: components.EmployeeWorkAddress$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeWorkAddress: "Employee-Work-Address",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1WorkAddressesWorkAddressUuidResponse$ {
+  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1WorkAddressesWorkAddressUuidResponse$inboundSchema;
+  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema;
+  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidResponse$Outbound` instead. */
+  export type Outbound = PutV1WorkAddressesWorkAddressUuidResponse$Outbound;
+}
+
+export function putV1WorkAddressesWorkAddressUuidResponseToJSON(
+  putV1WorkAddressesWorkAddressUuidResponse:
+    PutV1WorkAddressesWorkAddressUuidResponse,
+): string {
+  return JSON.stringify(
+    PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema.parse(
+      putV1WorkAddressesWorkAddressUuidResponse,
+    ),
+  );
+}
+
+export function putV1WorkAddressesWorkAddressUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1WorkAddressesWorkAddressUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1WorkAddressesWorkAddressUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1WorkAddressesWorkAddressUuidResponse' from JSON`,
   );
 }

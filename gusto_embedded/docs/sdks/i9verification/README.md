@@ -113,7 +113,7 @@ import {
 
 ### Response
 
-**Promise\<[components.I9Authorization](../../models/components/i9authorization.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdI9AuthorizationResponse](../../models/operations/getv1employeesemployeeidi9authorizationresponse.md)\>**
 
 ### Errors
 
@@ -234,7 +234,7 @@ import {
 
 ### Response
 
-**Promise\<[components.I9Authorization](../../models/components/i9authorization.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdI9AuthorizationResponse](../../models/operations/putv1employeesemployeeidi9authorizationresponse.md)\>**
 
 ### Errors
 
@@ -341,7 +341,7 @@ import {
 
 ### Response
 
-**Promise\<[components.I9AuthorizationDocumentOption[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse](../../models/operations/getv1employeesemployeeidi9authorizationdocumentoptionsresponse.md)\>**
 
 ### Errors
 
@@ -447,7 +447,7 @@ import {
 
 ### Response
 
-**Promise\<[components.I9AuthorizationDocument[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse](../../models/operations/getv1employeesemployeeidi9authorizationdocumentsresponse.md)\>**
 
 ### Errors
 
@@ -571,7 +571,7 @@ import {
 
 ### Response
 
-**Promise\<[components.I9AuthorizationDocument[]](../../models/.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse](../../models/operations/putv1employeesemployeeidi9authorizationdocumentsresponse.md)\>**
 
 ### Errors
 
@@ -596,12 +596,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.i9Verification.deleteDocument({
+  const result = await gustoEmbedded.i9Verification.deleteDocument({
     employeeId: "<id>",
     documentId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -633,7 +634,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -667,7 +669,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse](../../models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentidresponse.md)\>**
 
 ### Errors
 
@@ -774,7 +776,7 @@ import {
 
 ### Response
 
-**Promise\<[components.I9Authorization](../../models/components/i9authorization.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse](../../models/operations/putv1employeesemployeeidi9authorizationemployersignresponse.md)\>**
 
 ### Errors
 

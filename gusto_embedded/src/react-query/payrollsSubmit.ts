@@ -21,7 +21,8 @@ export type PayrollsSubmitMutationVariables = {
   options?: RequestOptions;
 };
 
-export type PayrollsSubmitMutationData = void;
+export type PayrollsSubmitMutationData =
+  operations.PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse;
 
 /**
  * Submit payroll

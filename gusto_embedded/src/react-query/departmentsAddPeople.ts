@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsAddPeople } from "../funcs/departmentsAddPeople.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,7 +21,8 @@ export type DepartmentsAddPeopleMutationVariables = {
   options?: RequestOptions;
 };
 
-export type DepartmentsAddPeopleMutationData = components.Department;
+export type DepartmentsAddPeopleMutationData =
+  operations.PutAddPeopleToDepartmentResponse;
 
 /**
  * Add people to a department

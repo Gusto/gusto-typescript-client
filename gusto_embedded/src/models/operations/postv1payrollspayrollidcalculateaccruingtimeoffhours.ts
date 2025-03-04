@@ -48,6 +48,25 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest = {
   requestBody: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
 };
 
+export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  accruingTimeOffHourObject?: Array<components.AccruingTimeOffHour> | undefined;
+};
+
 /** @internal */
 export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$inboundSchema:
   z.ZodType<
@@ -239,5 +258,103 @@ export function postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestFromJ
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboundSchema:
+  z.ZodType<
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Accruing-Time-Off-Hour-Object": z.array(
+      components.AccruingTimeOffHour$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Accruing-Time-Off-Hour-Object": "accruingTimeOffHourObject",
+    });
+  });
+
+/** @internal */
+export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Accruing-Time-Off-Hour-Object"?:
+      | Array<components.AccruingTimeOffHour$Outbound>
+      | undefined;
+  };
+
+/** @internal */
+export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$outboundSchema:
+  z.ZodType<
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    accruingTimeOffHourObject: z.array(
+      components.AccruingTimeOffHour$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      accruingTimeOffHourObject: "Accruing-Time-Off-Hour-Object",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$ {
+  /** @deprecated use `PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboundSchema;
+  /** @deprecated use `PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$outboundSchema;
+  /** @deprecated use `PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$Outbound;
+}
+
+export function postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponseToJSON(
+  postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse:
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+): string {
+  return JSON.stringify(
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$outboundSchema
+      .parse(postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse),
+  );
+}
+
+export function postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse' from JSON`,
   );
 }

@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type WebhooksListSubscriptionsQueryData = Array<
-  components.WebhookSubscription
->;
+export type WebhooksListSubscriptionsQueryData =
+  operations.GetV1WebhookSubscriptionsResponse;
 
 /**
  * List webhook subscriptions

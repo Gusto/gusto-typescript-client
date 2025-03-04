@@ -8,7 +8,7 @@ The representation of an employee pay stub information.
 import { EmployeePayStub } from "@gusto/embedded-api/models/components";
 
 let value: EmployeePayStub = {
-  uuid: "920e81df-7016-4e2d-a07a-09f2b92008fa",
+  uuid: "d2792c1f-7516-4a14-8da3-2e42f4176e21",
 };
 ```
 

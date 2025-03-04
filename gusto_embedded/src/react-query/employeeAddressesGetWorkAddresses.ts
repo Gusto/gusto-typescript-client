@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeAddressesGetWorkAddressesQueryData = Array<
-  components.EmployeeWorkAddress
->;
+export type EmployeeAddressesGetWorkAddressesQueryData =
+  operations.GetV1EmployeesEmployeeIdWorkAddressesResponse;
 
 /**
  * Get an employee's work addresses

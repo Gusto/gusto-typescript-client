@@ -21,6 +21,27 @@ export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest = {
   payScheduleAssignmentBody: components.PayScheduleAssignmentBody;
 };
 
+export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payScheduleAssignmentPreview?:
+    | components.PayScheduleAssignmentPreview
+    | undefined;
+};
+
 /** @internal */
 export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboundSchema:
   z.ZodType<
@@ -110,5 +131,101 @@ export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestFrom
       PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Pay-Schedule-Assignment-Preview": components
+      .PayScheduleAssignmentPreview$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Pay-Schedule-Assignment-Preview": "payScheduleAssignmentPreview",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Pay-Schedule-Assignment-Preview"?:
+      | components.PayScheduleAssignmentPreview$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payScheduleAssignmentPreview: components
+      .PayScheduleAssignmentPreview$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payScheduleAssignmentPreview: "Pay-Schedule-Assignment-Preview",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponseToJSON(
+  postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse:
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema
+      .parse(postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse),
+  );
+}
+
+export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse' from JSON`,
   );
 }

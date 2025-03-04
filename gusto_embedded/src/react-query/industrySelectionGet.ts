@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type IndustrySelectionGetQueryData = components.Industry;
+export type IndustrySelectionGetQueryData =
+  operations.GetV1CompanyIndustryResponse;
 
 /**
  * Get a company industry selection

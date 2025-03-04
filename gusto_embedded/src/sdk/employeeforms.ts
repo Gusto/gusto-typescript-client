@@ -8,7 +8,6 @@ import { employeeFormsGetPdf } from "../funcs/employeeFormsGetPdf.js";
 import { employeeFormsList } from "../funcs/employeeFormsList.js";
 import { employeeFormsSign } from "../funcs/employeeFormsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -28,7 +27,7 @@ export class EmployeeForms extends ClientSDK {
   async generateW2(
     request: operations.PostV1SandboxGenerateW2Request,
     options?: RequestOptions,
-  ): Promise<operations.PostV1SandboxGenerateW2Form> {
+  ): Promise<operations.PostV1SandboxGenerateW2Response> {
     return unwrapAsync(employeeFormsGenerateW2(
       this,
       request,
@@ -47,7 +46,7 @@ export class EmployeeForms extends ClientSDK {
   async list(
     request: operations.GetV1EmployeeFormsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Form>> {
+  ): Promise<operations.GetV1EmployeeFormsResponse> {
     return unwrapAsync(employeeFormsList(
       this,
       request,
@@ -66,7 +65,7 @@ export class EmployeeForms extends ClientSDK {
   async get(
     request: operations.GetV1EmployeeFormRequest,
     options?: RequestOptions,
-  ): Promise<components.Form> {
+  ): Promise<operations.GetV1EmployeeFormResponse> {
     return unwrapAsync(employeeFormsGet(
       this,
       request,
@@ -85,7 +84,7 @@ export class EmployeeForms extends ClientSDK {
   async getPdf(
     request: operations.GetV1EmployeeFormPdfRequest,
     options?: RequestOptions,
-  ): Promise<components.FormPdf> {
+  ): Promise<operations.GetV1EmployeeFormPdfResponse> {
     return unwrapAsync(employeeFormsGetPdf(
       this,
       request,
@@ -107,7 +106,7 @@ export class EmployeeForms extends ClientSDK {
   async sign(
     request: operations.PutV1EmployeeFormSignRequest,
     options?: RequestOptions,
-  ): Promise<components.Form> {
+  ): Promise<operations.PutV1EmployeeFormSignResponse> {
     return unwrapAsync(employeeFormsSign(
       this,
       request,

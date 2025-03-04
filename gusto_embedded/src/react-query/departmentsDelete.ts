@@ -21,7 +21,7 @@ export type DepartmentsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type DepartmentsDeleteMutationData = void;
+export type DepartmentsDeleteMutationData = operations.DeleteDepartmentResponse;
 
 /**
  * Delete a department

@@ -20,6 +20,21 @@ export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +116,92 @@ export function deleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequestFr
       DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema:
+  z.ZodType<
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+  };
+
+/** @internal */
+export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$outboundSchema:
+  z.ZodType<
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$ {
+  /** @deprecated use `DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema;
+  /** @deprecated use `DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$outboundSchema;
+  /** @deprecated use `DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$Outbound` instead. */
+  export type Outbound =
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$Outbound;
+}
+
+export function deleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponseToJSON(
+  deleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse:
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$outboundSchema
+      .parse(deleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse),
+  );
+}
+
+export function deleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse' from JSON`,
   );
 }

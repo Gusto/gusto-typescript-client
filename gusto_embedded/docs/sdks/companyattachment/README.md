@@ -108,7 +108,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetV1CompaniesAttachmentUrlResponseBody](../../models/operations/getv1companiesattachmenturlresponsebody.md)\>**
+**Promise\<[operations.GetV1CompaniesAttachmentUrlResponse](../../models/operations/getv1companiesattachmenturlresponse.md)\>**
 
 ### Errors
 

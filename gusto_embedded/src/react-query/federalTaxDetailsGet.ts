@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type FederalTaxDetailsGetQueryData = components.FederalTaxDetails;
+export type FederalTaxDetailsGetQueryData =
+  operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse;
 
 /**
  * Get Federal Tax Details

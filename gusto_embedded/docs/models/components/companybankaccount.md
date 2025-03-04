@@ -8,7 +8,7 @@ The company bank account
 import { CompanyBankAccount } from "@gusto/embedded-api/models/components";
 
 let value: CompanyBankAccount = {
-  uuid: "ab06ad7f-4074-4d34-9cb8-b600810fd20f",
+  uuid: "12d4ad9f-b18b-4c0b-9db8-78be9eb18445",
 };
 ```
 

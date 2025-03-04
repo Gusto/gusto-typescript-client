@@ -7,7 +7,7 @@ The bank account type
 ```typescript
 import { AccountType } from "@gusto/embedded-api/models/operations";
 
-let value: AccountType = "Savings";
+let value: AccountType = "Checking";
 ```
 
 ## Values

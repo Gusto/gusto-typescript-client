@@ -38,6 +38,25 @@ export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest = {
   requestBody: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody;
 };
 
+export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  timeOffPolicy?: components.TimeOffPolicy | undefined;
+};
+
 /** @internal */
 export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$inboundSchema:
   z.ZodType<
@@ -278,5 +297,97 @@ export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestFromJSON
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$inboundSchema:
+  z.ZodType<
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Time-Off-Policy": components.TimeOffPolicy$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Time-Off-Policy": "timeOffPolicy",
+    });
+  });
+
+/** @internal */
+export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Time-Off-Policy"?: components.TimeOffPolicy$Outbound | undefined;
+  };
+
+/** @internal */
+export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema:
+  z.ZodType<
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound,
+    z.ZodTypeDef,
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    timeOffPolicy: components.TimeOffPolicy$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      timeOffPolicy: "Time-Off-Policy",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$ {
+  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$inboundSchema;
+  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema;
+  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound` instead. */
+  export type Outbound =
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound;
+}
+
+export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponseToJSON(
+  putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse:
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
+): string {
+  return JSON.stringify(
+    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema
+      .parse(putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse),
+  );
+}
+
+export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse' from JSON`,
   );
 }

@@ -21,7 +21,8 @@ export type JobsAndCompensationsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type JobsAndCompensationsDeleteMutationData = void;
+export type JobsAndCompensationsDeleteMutationData =
+  operations.DeleteV1JobsJobIdResponse;
 
 /**
  * Delete an individual job

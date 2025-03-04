@@ -4,7 +4,6 @@
 
 import { invoicesGet } from "../funcs/invoicesGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -25,7 +24,7 @@ export class Invoices extends ClientSDK {
     security: operations.GetInvoicesInvoicePeriodSecurity,
     request: operations.GetInvoicesInvoicePeriodRequest,
     options?: RequestOptions,
-  ): Promise<components.InvoiceData> {
+  ): Promise<operations.GetInvoicesInvoicePeriodResponse> {
     return unwrapAsync(invoicesGet(
       this,
       security,

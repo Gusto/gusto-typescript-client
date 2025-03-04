@@ -241,6 +241,25 @@ export type PostCompaniesCompanyUuidReportsRequest = {
   requestBody: PostCompaniesCompanyUuidReportsRequestBody;
 };
 
+export type PostCompaniesCompanyUuidReportsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  createReport?: components.CreateReport | undefined;
+};
+
 /** @internal */
 export const Columns$inboundSchema: z.ZodNativeEnum<typeof Columns> = z
   .nativeEnum(Columns);
@@ -594,5 +613,95 @@ export function postCompaniesCompanyUuidReportsRequestFromJSON(
     (x) =>
       PostCompaniesCompanyUuidReportsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostCompaniesCompanyUuidReportsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostCompaniesCompanyUuidReportsResponse$inboundSchema: z.ZodType<
+  PostCompaniesCompanyUuidReportsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Create-Report": components.CreateReport$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Create-Report": "createReport",
+  });
+});
+
+/** @internal */
+export type PostCompaniesCompanyUuidReportsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Create-Report"?: components.CreateReport$Outbound | undefined;
+};
+
+/** @internal */
+export const PostCompaniesCompanyUuidReportsResponse$outboundSchema: z.ZodType<
+  PostCompaniesCompanyUuidReportsResponse$Outbound,
+  z.ZodTypeDef,
+  PostCompaniesCompanyUuidReportsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  createReport: components.CreateReport$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    createReport: "Create-Report",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostCompaniesCompanyUuidReportsResponse$ {
+  /** @deprecated use `PostCompaniesCompanyUuidReportsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostCompaniesCompanyUuidReportsResponse$inboundSchema;
+  /** @deprecated use `PostCompaniesCompanyUuidReportsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostCompaniesCompanyUuidReportsResponse$outboundSchema;
+  /** @deprecated use `PostCompaniesCompanyUuidReportsResponse$Outbound` instead. */
+  export type Outbound = PostCompaniesCompanyUuidReportsResponse$Outbound;
+}
+
+export function postCompaniesCompanyUuidReportsResponseToJSON(
+  postCompaniesCompanyUuidReportsResponse:
+    PostCompaniesCompanyUuidReportsResponse,
+): string {
+  return JSON.stringify(
+    PostCompaniesCompanyUuidReportsResponse$outboundSchema.parse(
+      postCompaniesCompanyUuidReportsResponse,
+    ),
+  );
+}
+
+export function postCompaniesCompanyUuidReportsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostCompaniesCompanyUuidReportsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostCompaniesCompanyUuidReportsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostCompaniesCompanyUuidReportsResponse' from JSON`,
   );
 }

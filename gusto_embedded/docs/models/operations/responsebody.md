@@ -6,7 +6,7 @@
 import { ResponseBody } from "@gusto/embedded-api/models/operations";
 
 let value: ResponseBody = {
-  state: "Vermont",
+  state: "Louisiana",
   setupComplete: false,
 };
 ```

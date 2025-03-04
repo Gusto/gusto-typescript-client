@@ -8,7 +8,7 @@ Representation of a recovery case
 import { RecoveryCase } from "@gusto/embedded-api/models/components";
 
 let value: RecoveryCase = {
-  uuid: "4679f354-515e-445f-bb8c-1713256f47cd",
+  uuid: "dd999493-26b9-4fa2-9213-9de68c492727",
 };
 ```
 

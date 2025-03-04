@@ -24,6 +24,21 @@ export type GetV1WebhookSubscriptionVerificationTokenUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1WebhookSubscriptionVerificationTokenUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const GetV1WebhookSubscriptionVerificationTokenUuidSecurity$inboundSchema:
   z.ZodType<
@@ -182,5 +197,93 @@ export function getV1WebhookSubscriptionVerificationTokenUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1WebhookSubscriptionVerificationTokenUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema:
+  z.ZodType<
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema:
+  z.ZodType<
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1WebhookSubscriptionVerificationTokenUuidResponse$ {
+  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema;
+  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema;
+  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound;
+}
+
+export function getV1WebhookSubscriptionVerificationTokenUuidResponseToJSON(
+  getV1WebhookSubscriptionVerificationTokenUuidResponse:
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+): string {
+  return JSON.stringify(
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema.parse(
+      getV1WebhookSubscriptionVerificationTokenUuidResponse,
+    ),
+  );
+}
+
+export function getV1WebhookSubscriptionVerificationTokenUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1WebhookSubscriptionVerificationTokenUuidResponse' from JSON`,
   );
 }

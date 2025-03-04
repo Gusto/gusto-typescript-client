@@ -20,6 +20,21 @@ export type DeleteV1ContractorsContractorUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1ContractorsContractorUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1ContractorsContractorUuidRequest$inboundSchema: z.ZodType<
   DeleteV1ContractorsContractorUuidRequest,
@@ -99,5 +114,91 @@ export function deleteV1ContractorsContractorUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'DeleteV1ContractorsContractorUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1ContractorsContractorUuidResponse$inboundSchema: z.ZodType<
+  DeleteV1ContractorsContractorUuidResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type DeleteV1ContractorsContractorUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const DeleteV1ContractorsContractorUuidResponse$outboundSchema:
+  z.ZodType<
+    DeleteV1ContractorsContractorUuidResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteV1ContractorsContractorUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1ContractorsContractorUuidResponse$ {
+  /** @deprecated use `DeleteV1ContractorsContractorUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1ContractorsContractorUuidResponse$inboundSchema;
+  /** @deprecated use `DeleteV1ContractorsContractorUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1ContractorsContractorUuidResponse$outboundSchema;
+  /** @deprecated use `DeleteV1ContractorsContractorUuidResponse$Outbound` instead. */
+  export type Outbound = DeleteV1ContractorsContractorUuidResponse$Outbound;
+}
+
+export function deleteV1ContractorsContractorUuidResponseToJSON(
+  deleteV1ContractorsContractorUuidResponse:
+    DeleteV1ContractorsContractorUuidResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1ContractorsContractorUuidResponse$outboundSchema.parse(
+      deleteV1ContractorsContractorUuidResponse,
+    ),
+  );
+}
+
+export function deleteV1ContractorsContractorUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1ContractorsContractorUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1ContractorsContractorUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteV1ContractorsContractorUuidResponse' from JSON`,
   );
 }

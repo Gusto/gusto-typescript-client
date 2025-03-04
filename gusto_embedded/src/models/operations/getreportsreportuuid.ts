@@ -20,6 +20,25 @@ export type GetReportsReportUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetReportsReportUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  report?: components.Report | undefined;
+};
+
 /** @internal */
 export const GetReportsReportUuidRequest$inboundSchema: z.ZodType<
   GetReportsReportUuidRequest,
@@ -90,5 +109,86 @@ export function getReportsReportUuidRequestFromJSON(
     jsonString,
     (x) => GetReportsReportUuidRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetReportsReportUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetReportsReportUuidResponse$inboundSchema: z.ZodType<
+  GetReportsReportUuidResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Report: components.Report$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Report": "report",
+  });
+});
+
+/** @internal */
+export type GetReportsReportUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Report?: components.Report$Outbound | undefined;
+};
+
+/** @internal */
+export const GetReportsReportUuidResponse$outboundSchema: z.ZodType<
+  GetReportsReportUuidResponse$Outbound,
+  z.ZodTypeDef,
+  GetReportsReportUuidResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  report: components.Report$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    report: "Report",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetReportsReportUuidResponse$ {
+  /** @deprecated use `GetReportsReportUuidResponse$inboundSchema` instead. */
+  export const inboundSchema = GetReportsReportUuidResponse$inboundSchema;
+  /** @deprecated use `GetReportsReportUuidResponse$outboundSchema` instead. */
+  export const outboundSchema = GetReportsReportUuidResponse$outboundSchema;
+  /** @deprecated use `GetReportsReportUuidResponse$Outbound` instead. */
+  export type Outbound = GetReportsReportUuidResponse$Outbound;
+}
+
+export function getReportsReportUuidResponseToJSON(
+  getReportsReportUuidResponse: GetReportsReportUuidResponse,
+): string {
+  return JSON.stringify(
+    GetReportsReportUuidResponse$outboundSchema.parse(
+      getReportsReportUuidResponse,
+    ),
+  );
+}
+
+export function getReportsReportUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetReportsReportUuidResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetReportsReportUuidResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetReportsReportUuidResponse' from JSON`,
   );
 }

@@ -106,7 +106,7 @@ import {
 
 ### Response
 
-**Promise\<[components.FederalTaxDetails](../../models/components/federaltaxdetails.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse](../../models/operations/getv1companiescompanyidfederaltaxdetailsresponse.md)\>**
 
 ### Errors
 
@@ -216,7 +216,7 @@ import {
 
 ### Response
 
-**Promise\<[components.FederalTaxDetails](../../models/components/federaltaxdetails.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse](../../models/operations/putv1companiescompanyidfederaltaxdetailsresponse.md)\>**
 
 ### Errors
 

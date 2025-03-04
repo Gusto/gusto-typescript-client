@@ -6,9 +6,9 @@
 import { PostV1WebhookSubscriptionRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostV1WebhookSubscriptionRequestBody = {
-  url: "https://lasting-fit.org/",
+  url: "https://worst-whack.org",
   subscriptionTypes: [
-    "CompanyBenefit",
+    "Company",
   ],
 };
 ```

@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeFormsGetPdfQueryData = components.FormPdf;
+export type EmployeeFormsGetPdfQueryData =
+  operations.GetV1EmployeeFormPdfResponse;
 
 /**
  * Get the employee form pdf

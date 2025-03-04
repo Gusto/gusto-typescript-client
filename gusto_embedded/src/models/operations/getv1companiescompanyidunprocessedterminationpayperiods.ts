@@ -20,6 +20,27 @@ export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  unprocessedTerminationPayPeriodList?:
+    | Array<components.UnprocessedTerminationPayPeriod>
+    | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +122,105 @@ export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestFr
       GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Unprocessed-Termination-Pay-Period-List": z.array(
+      components.UnprocessedTerminationPayPeriod$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Unprocessed-Termination-Pay-Period-List":
+        "unprocessedTerminationPayPeriodList",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Unprocessed-Termination-Pay-Period-List"?:
+      | Array<components.UnprocessedTerminationPayPeriod$Outbound>
+      | undefined;
+  };
+
+/** @internal */
+export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    unprocessedTerminationPayPeriodList: z.array(
+      components.UnprocessedTerminationPayPeriod$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      unprocessedTerminationPayPeriodList:
+        "Unprocessed-Termination-Pay-Period-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponseToJSON(
+  getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse:
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema
+      .parse(getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse),
+  );
+}
+
+export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse' from JSON`,
   );
 }

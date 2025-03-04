@@ -37,6 +37,25 @@ export type PostV1EmployeesEmployeeIdBankAccountsRequest = {
   requestBody: PostV1EmployeesEmployeeIdBankAccountsRequestBody;
 };
 
+export type PostV1EmployeesEmployeeIdBankAccountsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeBankAccount?: components.EmployeeBankAccount | undefined;
+};
+
 /** @internal */
 export const PostV1EmployeesEmployeeIdBankAccountsAccountType$inboundSchema:
   z.ZodNativeEnum<typeof PostV1EmployeesEmployeeIdBankAccountsAccountType> = z
@@ -241,5 +260,99 @@ export function postV1EmployeesEmployeeIdBankAccountsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1EmployeesEmployeeIdBankAccountsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdBankAccountsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Bank-Account": components.EmployeeBankAccount$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Bank-Account": "employeeBankAccount",
+    });
+  });
+
+/** @internal */
+export type PostV1EmployeesEmployeeIdBankAccountsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Bank-Account"?: components.EmployeeBankAccount$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdBankAccountsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1EmployeesEmployeeIdBankAccountsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeBankAccount: components.EmployeeBankAccount$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeBankAccount: "Employee-Bank-Account",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesEmployeeIdBankAccountsResponse$ {
+  /** @deprecated use `PostV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdBankAccountsResponse$Outbound` instead. */
+  export type Outbound = PostV1EmployeesEmployeeIdBankAccountsResponse$Outbound;
+}
+
+export function postV1EmployeesEmployeeIdBankAccountsResponseToJSON(
+  postV1EmployeesEmployeeIdBankAccountsResponse:
+    PostV1EmployeesEmployeeIdBankAccountsResponse,
+): string {
+  return JSON.stringify(
+    PostV1EmployeesEmployeeIdBankAccountsResponse$outboundSchema.parse(
+      postV1EmployeesEmployeeIdBankAccountsResponse,
+    ),
+  );
+}
+
+export function postV1EmployeesEmployeeIdBankAccountsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EmployeesEmployeeIdBankAccountsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EmployeesEmployeeIdBankAccountsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EmployeesEmployeeIdBankAccountsResponse' from JSON`,
   );
 }

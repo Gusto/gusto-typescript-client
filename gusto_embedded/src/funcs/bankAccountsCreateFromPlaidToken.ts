@@ -45,7 +45,7 @@ export function bankAccountsCreateFromPlaidToken(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1PlaidProcessorTokenResponseBody,
+    operations.PostV1PlaidProcessorTokenResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -70,7 +70,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.PostV1PlaidProcessorTokenResponseBody,
+      operations.PostV1PlaidProcessorTokenResponse,
       | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
@@ -153,11 +153,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    operations.PostV1PlaidProcessorTokenResponseBody,
+    operations.PostV1PlaidProcessorTokenResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -167,7 +171,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(201, operations.PostV1PlaidProcessorTokenResponseBody$inboundSchema),
+    M.json(201, operations.PostV1PlaidProcessorTokenResponse$inboundSchema, {
+      key: "oneOf",
+    }),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

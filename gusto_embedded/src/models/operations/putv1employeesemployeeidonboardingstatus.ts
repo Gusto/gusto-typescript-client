@@ -28,6 +28,25 @@ export type PutV1EmployeesEmployeeIdOnboardingStatusRequest = {
   requestBody: PutV1EmployeesEmployeeIdOnboardingStatusRequestBody;
 };
 
+export type PutV1EmployeesEmployeeIdOnboardingStatusResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response.
+   */
+  employeeOnboardingStatus?: components.EmployeeOnboardingStatus | undefined;
+};
+
 /** @internal */
 export const PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema:
   z.ZodType<
@@ -195,5 +214,102 @@ export function putV1EmployeesEmployeeIdOnboardingStatusRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingStatusRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Onboarding-Status": components
+      .EmployeeOnboardingStatus$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Onboarding-Status": "employeeOnboardingStatus",
+    });
+  });
+
+/** @internal */
+export type PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Onboarding-Status"?:
+    | components.EmployeeOnboardingStatus$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeOnboardingStatus: components.EmployeeOnboardingStatus$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeOnboardingStatus: "Employee-Onboarding-Status",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdOnboardingStatusResponse$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound;
+}
+
+export function putV1EmployeesEmployeeIdOnboardingStatusResponseToJSON(
+  putV1EmployeesEmployeeIdOnboardingStatusResponse:
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema.parse(
+      putV1EmployeesEmployeeIdOnboardingStatusResponse,
+    ),
+  );
+}
+
+export function putV1EmployeesEmployeeIdOnboardingStatusResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1EmployeesEmployeeIdOnboardingStatusResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingStatusResponse' from JSON`,
   );
 }

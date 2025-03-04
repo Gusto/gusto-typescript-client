@@ -9,7 +9,6 @@ import { holidayPayPoliciesGet } from "../funcs/holidayPayPoliciesGet.js";
 import { holidayPayPoliciesRemoveEmployees } from "../funcs/holidayPayPoliciesRemoveEmployees.js";
 import { holidayPayPoliciesUpdate } from "../funcs/holidayPayPoliciesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -25,7 +24,7 @@ export class HolidayPayPolicies extends ClientSDK {
   async get(
     request: operations.GetCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<components.HolidayPayPolicy> {
+  ): Promise<operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesGet(
       this,
       request,
@@ -44,7 +43,7 @@ export class HolidayPayPolicies extends ClientSDK {
   async create(
     request: operations.PostCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<components.HolidayPayPolicy> {
+  ): Promise<operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesCreate(
       this,
       request,
@@ -63,7 +62,7 @@ export class HolidayPayPolicies extends ClientSDK {
   async update(
     request: operations.PutCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<components.HolidayPayPolicy> {
+  ): Promise<operations.PutCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesUpdate(
       this,
       request,
@@ -82,7 +81,7 @@ export class HolidayPayPolicies extends ClientSDK {
   async delete(
     request: operations.DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesDelete(
       this,
       request,
@@ -101,7 +100,7 @@ export class HolidayPayPolicies extends ClientSDK {
   async addEmployees(
     request: operations.PutCompaniesCompanyUuidHolidayPayPolicyAddRequest,
     options?: RequestOptions,
-  ): Promise<components.HolidayPayPolicy> {
+  ): Promise<operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse> {
     return unwrapAsync(holidayPayPoliciesAddEmployees(
       this,
       request,
@@ -120,7 +119,7 @@ export class HolidayPayPolicies extends ClientSDK {
   async removeEmployees(
     request: operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
     options?: RequestOptions,
-  ): Promise<components.HolidayPayPolicy> {
+  ): Promise<operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse> {
     return unwrapAsync(holidayPayPoliciesRemoveEmployees(
       this,
       request,

@@ -8,7 +8,7 @@ The representation of compensation in Gusto.
 import { Compensation } from "@gusto/embedded-api/models/components";
 
 let value: Compensation = {
-  uuid: "fbc256a4-45c9-4115-8cbb-c488bf4ca9cf",
+  uuid: "18af9ffa-87e0-411c-95a9-68af991f8c06",
 };
 ```
 

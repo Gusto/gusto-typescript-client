@@ -24,6 +24,25 @@ export type GetCompaniesCompanyUuidReportTemplatesReportTypeRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetCompaniesCompanyUuidReportTemplatesReportTypeResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  reportTemplate?: components.ReportTemplate | undefined;
+};
+
 /** @internal */
 export const GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSchema:
   z.ZodType<
@@ -109,5 +128,97 @@ export function getCompaniesCompanyUuidReportTemplatesReportTypeRequestFromJSON(
       GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'GetCompaniesCompanyUuidReportTemplatesReportTypeRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema:
+  z.ZodType<
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Report-Template": components.ReportTemplate$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Report-Template": "reportTemplate",
+    });
+  });
+
+/** @internal */
+export type GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Report-Template"?: components.ReportTemplate$Outbound | undefined;
+  };
+
+/** @internal */
+export const GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema:
+  z.ZodType<
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound,
+    z.ZodTypeDef,
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    reportTemplate: components.ReportTemplate$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      reportTemplate: "Report-Template",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$ {
+  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema;
+  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema;
+  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound` instead. */
+  export type Outbound =
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound;
+}
+
+export function getCompaniesCompanyUuidReportTemplatesReportTypeResponseToJSON(
+  getCompaniesCompanyUuidReportTemplatesReportTypeResponse:
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+): string {
+  return JSON.stringify(
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema
+      .parse(getCompaniesCompanyUuidReportTemplatesReportTypeResponse),
+  );
+}
+
+export function getCompaniesCompanyUuidReportTemplatesReportTypeResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetCompaniesCompanyUuidReportTemplatesReportTypeResponse' from JSON`,
   );
 }

@@ -5,7 +5,7 @@
 ```typescript
 import { GetV1CompaniesCompanyIdPayrollsQueryParamInclude } from "@gusto/embedded-api/models/operations";
 
-let value: GetV1CompaniesCompanyIdPayrollsQueryParamInclude = "risk_blockers";
+let value: GetV1CompaniesCompanyIdPayrollsQueryParamInclude = "totals";
 ```
 
 ## Values

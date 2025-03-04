@@ -20,6 +20,25 @@ export type GetV1CompanyFinishOnboardingRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompanyFinishOnboardingResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyOnboardingStatus?: components.CompanyOnboardingStatus | undefined;
+};
+
 /** @internal */
 export const GetV1CompanyFinishOnboardingRequest$inboundSchema: z.ZodType<
   GetV1CompanyFinishOnboardingRequest,
@@ -93,5 +112,93 @@ export function getV1CompanyFinishOnboardingRequestFromJSON(
     (x) =>
       GetV1CompanyFinishOnboardingRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompanyFinishOnboardingRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyFinishOnboardingResponse$inboundSchema: z.ZodType<
+  GetV1CompanyFinishOnboardingResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Company-Onboarding-Status": components.CompanyOnboardingStatus$inboundSchema
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Company-Onboarding-Status": "companyOnboardingStatus",
+  });
+});
+
+/** @internal */
+export type GetV1CompanyFinishOnboardingResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Onboarding-Status"?:
+    | components.CompanyOnboardingStatus$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const GetV1CompanyFinishOnboardingResponse$outboundSchema: z.ZodType<
+  GetV1CompanyFinishOnboardingResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1CompanyFinishOnboardingResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  companyOnboardingStatus: components.CompanyOnboardingStatus$outboundSchema
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    companyOnboardingStatus: "Company-Onboarding-Status",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompanyFinishOnboardingResponse$ {
+  /** @deprecated use `GetV1CompanyFinishOnboardingResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompanyFinishOnboardingResponse$inboundSchema;
+  /** @deprecated use `GetV1CompanyFinishOnboardingResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompanyFinishOnboardingResponse$outboundSchema;
+  /** @deprecated use `GetV1CompanyFinishOnboardingResponse$Outbound` instead. */
+  export type Outbound = GetV1CompanyFinishOnboardingResponse$Outbound;
+}
+
+export function getV1CompanyFinishOnboardingResponseToJSON(
+  getV1CompanyFinishOnboardingResponse: GetV1CompanyFinishOnboardingResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompanyFinishOnboardingResponse$outboundSchema.parse(
+      getV1CompanyFinishOnboardingResponse,
+    ),
+  );
+}
+
+export function getV1CompanyFinishOnboardingResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompanyFinishOnboardingResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompanyFinishOnboardingResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompanyFinishOnboardingResponse' from JSON`,
   );
 }

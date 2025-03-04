@@ -20,6 +20,25 @@ export type GetRecoveryCasesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetRecoveryCasesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  recoveryCaseList?: Array<components.RecoveryCase> | undefined;
+};
+
 /** @internal */
 export const GetRecoveryCasesRequest$inboundSchema: z.ZodType<
   GetRecoveryCasesRequest,
@@ -88,5 +107,85 @@ export function getRecoveryCasesRequestFromJSON(
     jsonString,
     (x) => GetRecoveryCasesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetRecoveryCasesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetRecoveryCasesResponse$inboundSchema: z.ZodType<
+  GetRecoveryCasesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Recovery-Case-List": z.array(components.RecoveryCase$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Recovery-Case-List": "recoveryCaseList",
+  });
+});
+
+/** @internal */
+export type GetRecoveryCasesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Recovery-Case-List"?: Array<components.RecoveryCase$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetRecoveryCasesResponse$outboundSchema: z.ZodType<
+  GetRecoveryCasesResponse$Outbound,
+  z.ZodTypeDef,
+  GetRecoveryCasesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  recoveryCaseList: z.array(components.RecoveryCase$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    recoveryCaseList: "Recovery-Case-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetRecoveryCasesResponse$ {
+  /** @deprecated use `GetRecoveryCasesResponse$inboundSchema` instead. */
+  export const inboundSchema = GetRecoveryCasesResponse$inboundSchema;
+  /** @deprecated use `GetRecoveryCasesResponse$outboundSchema` instead. */
+  export const outboundSchema = GetRecoveryCasesResponse$outboundSchema;
+  /** @deprecated use `GetRecoveryCasesResponse$Outbound` instead. */
+  export type Outbound = GetRecoveryCasesResponse$Outbound;
+}
+
+export function getRecoveryCasesResponseToJSON(
+  getRecoveryCasesResponse: GetRecoveryCasesResponse,
+): string {
+  return JSON.stringify(
+    GetRecoveryCasesResponse$outboundSchema.parse(getRecoveryCasesResponse),
+  );
+}
+
+export function getRecoveryCasesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetRecoveryCasesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetRecoveryCasesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetRecoveryCasesResponse' from JSON`,
   );
 }

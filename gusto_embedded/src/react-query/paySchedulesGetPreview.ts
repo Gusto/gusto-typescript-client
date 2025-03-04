@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type PaySchedulesGetPreviewQueryData =
-  operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody;
+  operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse;
 
 /**
  * Preview pay schedule dates

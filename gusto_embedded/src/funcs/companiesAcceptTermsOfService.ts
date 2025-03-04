@@ -40,7 +40,7 @@ export function companiesAcceptTermsOfService(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody,
+    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -66,7 +66,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody,
+      operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
       | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
@@ -161,11 +161,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody,
+    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -178,7 +182,8 @@ async function $do(
     M.json(
       200,
       operations
-        .PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody$inboundSchema,
+        .PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse$inboundSchema,
+      { key: "object" },
     ),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),

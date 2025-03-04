@@ -26,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeFormsListQueryData = Array<components.Form>;
+export type EmployeeFormsListQueryData = operations.GetV1EmployeeFormsResponse;
 
 /**
  * Get all employee forms

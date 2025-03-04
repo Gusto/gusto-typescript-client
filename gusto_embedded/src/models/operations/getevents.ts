@@ -40,6 +40,25 @@ export type GetEventsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetEventsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  eventList?: Array<components.Event> | undefined;
+};
+
 /** @internal */
 export const GetEventsSecurity$inboundSchema: z.ZodType<
   GetEventsSecurity,
@@ -188,5 +207,84 @@ export function getEventsRequestFromJSON(
     jsonString,
     (x) => GetEventsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetEventsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEventsResponse$inboundSchema: z.ZodType<
+  GetEventsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Event-List": z.array(components.Event$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Event-List": "eventList",
+  });
+});
+
+/** @internal */
+export type GetEventsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Event-List"?: Array<components.Event$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetEventsResponse$outboundSchema: z.ZodType<
+  GetEventsResponse$Outbound,
+  z.ZodTypeDef,
+  GetEventsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  eventList: z.array(components.Event$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    eventList: "Event-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetEventsResponse$ {
+  /** @deprecated use `GetEventsResponse$inboundSchema` instead. */
+  export const inboundSchema = GetEventsResponse$inboundSchema;
+  /** @deprecated use `GetEventsResponse$outboundSchema` instead. */
+  export const outboundSchema = GetEventsResponse$outboundSchema;
+  /** @deprecated use `GetEventsResponse$Outbound` instead. */
+  export type Outbound = GetEventsResponse$Outbound;
+}
+
+export function getEventsResponseToJSON(
+  getEventsResponse: GetEventsResponse,
+): string {
+  return JSON.stringify(
+    GetEventsResponse$outboundSchema.parse(getEventsResponse),
+  );
+}
+
+export function getEventsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEventsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEventsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEventsResponse' from JSON`,
   );
 }

@@ -47,6 +47,25 @@ export type PutV1ContractorDocumentSignRequest = {
   requestBody: PutV1ContractorDocumentSignRequestBody;
 };
 
+export type PutV1ContractorDocumentSignResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  documentSigned?: components.DocumentSigned | undefined;
+};
+
 /** @internal */
 export const Fields$inboundSchema: z.ZodType<Fields, z.ZodTypeDef, unknown> = z
   .object({
@@ -252,5 +271,89 @@ export function putV1ContractorDocumentSignRequestFromJSON(
     (x) =>
       PutV1ContractorDocumentSignRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1ContractorDocumentSignRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1ContractorDocumentSignResponse$inboundSchema: z.ZodType<
+  PutV1ContractorDocumentSignResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Document-Signed": components.DocumentSigned$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Document-Signed": "documentSigned",
+  });
+});
+
+/** @internal */
+export type PutV1ContractorDocumentSignResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Document-Signed"?: components.DocumentSigned$Outbound | undefined;
+};
+
+/** @internal */
+export const PutV1ContractorDocumentSignResponse$outboundSchema: z.ZodType<
+  PutV1ContractorDocumentSignResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1ContractorDocumentSignResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  documentSigned: components.DocumentSigned$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    documentSigned: "Document-Signed",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1ContractorDocumentSignResponse$ {
+  /** @deprecated use `PutV1ContractorDocumentSignResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1ContractorDocumentSignResponse$inboundSchema;
+  /** @deprecated use `PutV1ContractorDocumentSignResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1ContractorDocumentSignResponse$outboundSchema;
+  /** @deprecated use `PutV1ContractorDocumentSignResponse$Outbound` instead. */
+  export type Outbound = PutV1ContractorDocumentSignResponse$Outbound;
+}
+
+export function putV1ContractorDocumentSignResponseToJSON(
+  putV1ContractorDocumentSignResponse: PutV1ContractorDocumentSignResponse,
+): string {
+  return JSON.stringify(
+    PutV1ContractorDocumentSignResponse$outboundSchema.parse(
+      putV1ContractorDocumentSignResponse,
+    ),
+  );
+}
+
+export function putV1ContractorDocumentSignResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1ContractorDocumentSignResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1ContractorDocumentSignResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1ContractorDocumentSignResponse' from JSON`,
   );
 }

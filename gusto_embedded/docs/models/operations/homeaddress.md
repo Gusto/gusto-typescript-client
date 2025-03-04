@@ -9,9 +9,9 @@ import { HomeAddress } from "@gusto/embedded-api/models/operations";
 
 let value: HomeAddress = {
   street1: "<value>",
-  city: "South Darionville",
-  state: "Arizona",
-  zip: "07100-6245",
+  city: "Kailynchester",
+  state: "Indiana",
+  zip: "39195",
 };
 ```
 

@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData =
-  Array<components.YtdBenefitAmountsFromDifferentCompany>;
+  operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
 
 /**
  * Get year-to-date benefit amounts from a different company

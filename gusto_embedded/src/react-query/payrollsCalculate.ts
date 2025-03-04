@@ -21,7 +21,8 @@ export type PayrollsCalculateMutationVariables = {
   options?: RequestOptions;
 };
 
-export type PayrollsCalculateMutationData = void;
+export type PayrollsCalculateMutationData =
+  operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse;
 
 /**
  * Calculate a payroll

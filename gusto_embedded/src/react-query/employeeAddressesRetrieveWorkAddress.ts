@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeAddressesRetrieveWorkAddressQueryData =
-  components.EmployeeWorkAddress;
+  operations.GetV1WorkAddressesWorkAddressUuidResponse;
 
 /**
  * Get an employee work address

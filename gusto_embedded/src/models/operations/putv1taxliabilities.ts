@@ -40,6 +40,27 @@ export type PutV1TaxLiabilitiesRequest = {
   requestBody: PutV1TaxLiabilitiesRequestBody;
 };
 
+export type PutV1TaxLiabilitiesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  taxLiabilitiesList?:
+    | Array<Array<components.TaxLiabilitiesSelections>>
+    | undefined;
+};
+
 /** @internal */
 export const LiabilitySelections$inboundSchema: z.ZodType<
   LiabilitySelections,
@@ -251,5 +272,92 @@ export function putV1TaxLiabilitiesRequestFromJSON(
     jsonString,
     (x) => PutV1TaxLiabilitiesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1TaxLiabilitiesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1TaxLiabilitiesResponse$inboundSchema: z.ZodType<
+  PutV1TaxLiabilitiesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Tax-Liabilities-List": z.array(
+    z.array(components.TaxLiabilitiesSelections$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Tax-Liabilities-List": "taxLiabilitiesList",
+  });
+});
+
+/** @internal */
+export type PutV1TaxLiabilitiesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Tax-Liabilities-List"?:
+    | Array<Array<components.TaxLiabilitiesSelections$Outbound>>
+    | undefined;
+};
+
+/** @internal */
+export const PutV1TaxLiabilitiesResponse$outboundSchema: z.ZodType<
+  PutV1TaxLiabilitiesResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1TaxLiabilitiesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  taxLiabilitiesList: z.array(
+    z.array(components.TaxLiabilitiesSelections$outboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    taxLiabilitiesList: "Tax-Liabilities-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1TaxLiabilitiesResponse$ {
+  /** @deprecated use `PutV1TaxLiabilitiesResponse$inboundSchema` instead. */
+  export const inboundSchema = PutV1TaxLiabilitiesResponse$inboundSchema;
+  /** @deprecated use `PutV1TaxLiabilitiesResponse$outboundSchema` instead. */
+  export const outboundSchema = PutV1TaxLiabilitiesResponse$outboundSchema;
+  /** @deprecated use `PutV1TaxLiabilitiesResponse$Outbound` instead. */
+  export type Outbound = PutV1TaxLiabilitiesResponse$Outbound;
+}
+
+export function putV1TaxLiabilitiesResponseToJSON(
+  putV1TaxLiabilitiesResponse: PutV1TaxLiabilitiesResponse,
+): string {
+  return JSON.stringify(
+    PutV1TaxLiabilitiesResponse$outboundSchema.parse(
+      putV1TaxLiabilitiesResponse,
+    ),
+  );
+}
+
+export function putV1TaxLiabilitiesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1TaxLiabilitiesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutV1TaxLiabilitiesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1TaxLiabilitiesResponse' from JSON`,
   );
 }

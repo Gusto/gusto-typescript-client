@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeEmploymentsGetRehireQueryData = components.Rehire;
+export type EmployeeEmploymentsGetRehireQueryData =
+  operations.GetV1EmployeesEmployeeIdRehireResponse;
 
 /**
  * Get an employee rehire

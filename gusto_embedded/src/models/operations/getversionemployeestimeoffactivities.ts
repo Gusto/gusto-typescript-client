@@ -24,6 +24,25 @@ export type GetVersionEmployeesTimeOffActivitiesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetVersionEmployeesTimeOffActivitiesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  timeOffActivity?: components.TimeOffActivity | undefined;
+};
+
 /** @internal */
 export const GetVersionEmployeesTimeOffActivitiesRequest$inboundSchema:
   z.ZodType<
@@ -110,5 +129,97 @@ export function getVersionEmployeesTimeOffActivitiesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetVersionEmployeesTimeOffActivitiesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema:
+  z.ZodType<
+    GetVersionEmployeesTimeOffActivitiesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Time-Off-Activity": components.TimeOffActivity$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Time-Off-Activity": "timeOffActivity",
+    });
+  });
+
+/** @internal */
+export type GetVersionEmployeesTimeOffActivitiesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Time-Off-Activity"?: components.TimeOffActivity$Outbound | undefined;
+};
+
+/** @internal */
+export const GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema:
+  z.ZodType<
+    GetVersionEmployeesTimeOffActivitiesResponse$Outbound,
+    z.ZodTypeDef,
+    GetVersionEmployeesTimeOffActivitiesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    timeOffActivity: components.TimeOffActivity$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      timeOffActivity: "Time-Off-Activity",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetVersionEmployeesTimeOffActivitiesResponse$ {
+  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema;
+  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema;
+  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesResponse$Outbound` instead. */
+  export type Outbound = GetVersionEmployeesTimeOffActivitiesResponse$Outbound;
+}
+
+export function getVersionEmployeesTimeOffActivitiesResponseToJSON(
+  getVersionEmployeesTimeOffActivitiesResponse:
+    GetVersionEmployeesTimeOffActivitiesResponse,
+): string {
+  return JSON.stringify(
+    GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema.parse(
+      getVersionEmployeesTimeOffActivitiesResponse,
+    ),
+  );
+}
+
+export function getVersionEmployeesTimeOffActivitiesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetVersionEmployeesTimeOffActivitiesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetVersionEmployeesTimeOffActivitiesResponse' from JSON`,
   );
 }

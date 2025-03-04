@@ -8,7 +8,7 @@ import { PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksReques
 let value:
   PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody =
     {
-      printingFormat: "bottom",
+      printingFormat: "top",
     };
 ```
 

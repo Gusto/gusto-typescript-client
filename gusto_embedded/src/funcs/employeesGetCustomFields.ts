@@ -37,7 +37,7 @@ export function employeesGetCustomFields(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody,
+    operations.GetV1EmployeesEmployeeIdCustomFieldsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -61,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody,
+      operations.GetV1EmployeesEmployeeIdCustomFieldsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -157,8 +157,16 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
+  };
+
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody,
+    operations.GetV1EmployeesEmployeeIdCustomFieldsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -169,11 +177,12 @@ async function $do(
   >(
     M.json(
       200,
-      operations.GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema,
+      operations.GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema,
+      { key: "object" },
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
-  )(response);
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

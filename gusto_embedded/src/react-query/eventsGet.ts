@@ -26,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EventsGetQueryData = Array<components.Event>;
+export type EventsGetQueryData = operations.GetEventsResponse;
 
 /**
  * Get all events

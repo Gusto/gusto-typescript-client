@@ -20,6 +20,25 @@ export type GetV1LocationsLocationIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1LocationsLocationIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  location?: components.Location | undefined;
+};
+
 /** @internal */
 export const GetV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
   GetV1LocationsLocationIdRequest,
@@ -90,5 +109,86 @@ export function getV1LocationsLocationIdRequestFromJSON(
     jsonString,
     (x) => GetV1LocationsLocationIdRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1LocationsLocationIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1LocationsLocationIdResponse$inboundSchema: z.ZodType<
+  GetV1LocationsLocationIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Location: components.Location$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Location": "location",
+  });
+});
+
+/** @internal */
+export type GetV1LocationsLocationIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Location?: components.Location$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1LocationsLocationIdResponse$outboundSchema: z.ZodType<
+  GetV1LocationsLocationIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1LocationsLocationIdResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  location: components.Location$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    location: "Location",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1LocationsLocationIdResponse$ {
+  /** @deprecated use `GetV1LocationsLocationIdResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1LocationsLocationIdResponse$inboundSchema;
+  /** @deprecated use `GetV1LocationsLocationIdResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1LocationsLocationIdResponse$outboundSchema;
+  /** @deprecated use `GetV1LocationsLocationIdResponse$Outbound` instead. */
+  export type Outbound = GetV1LocationsLocationIdResponse$Outbound;
+}
+
+export function getV1LocationsLocationIdResponseToJSON(
+  getV1LocationsLocationIdResponse: GetV1LocationsLocationIdResponse,
+): string {
+  return JSON.stringify(
+    GetV1LocationsLocationIdResponse$outboundSchema.parse(
+      getV1LocationsLocationIdResponse,
+    ),
+  );
+}
+
+export function getV1LocationsLocationIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1LocationsLocationIdResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1LocationsLocationIdResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1LocationsLocationIdResponse' from JSON`,
   );
 }

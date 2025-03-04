@@ -7,7 +7,7 @@ What type of tax entity the company is
 ```typescript
 import { TaxPayerType } from "@gusto/embedded-api/models/operations";
 
-let value: TaxPayerType = "General partnership";
+let value: TaxPayerType = "C-Corporation";
 ```
 
 ## Values

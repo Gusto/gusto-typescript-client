@@ -21,7 +21,8 @@ export type PaySchedulesAssignMutationVariables = {
   options?: RequestOptions;
 };
 
-export type PaySchedulesAssignMutationData = void;
+export type PaySchedulesAssignMutationData =
+  operations.PostV1CompaniesCompanyIdPaySchedulesAssignResponse;
 
 /**
  * Assign pay schedules for a company

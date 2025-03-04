@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type PaySchedulesGetAssignmentsQueryData =
-  components.PayScheduleAssignment;
+  operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse;
 
 /**
  * Get pay schedule assignments for a company

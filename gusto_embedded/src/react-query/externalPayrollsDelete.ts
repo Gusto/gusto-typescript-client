@@ -21,7 +21,8 @@ export type ExternalPayrollsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type ExternalPayrollsDeleteMutationData = void;
+export type ExternalPayrollsDeleteMutationData =
+  operations.DeleteV1ExternalPayrollResponse;
 
 /**
  * Delete an external payroll

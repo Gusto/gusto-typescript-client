@@ -91,6 +91,25 @@ export type PostCompaniesCompanyUuidTimeOffPoliciesRequest = {
   requestBody: PostCompaniesCompanyUuidTimeOffPoliciesRequestBody;
 };
 
+export type PostCompaniesCompanyUuidTimeOffPoliciesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Created
+   */
+  timeOffPolicy?: components.TimeOffPolicy | undefined;
+};
+
 /** @internal */
 export const PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$inboundSchema:
   z.ZodNativeEnum<typeof PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod> =
@@ -326,5 +345,98 @@ export function postCompaniesCompanyUuidTimeOffPoliciesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostCompaniesCompanyUuidTimeOffPoliciesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema:
+  z.ZodType<
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Time-Off-Policy": components.TimeOffPolicy$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Time-Off-Policy": "timeOffPolicy",
+    });
+  });
+
+/** @internal */
+export type PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Time-Off-Policy"?: components.TimeOffPolicy$Outbound | undefined;
+};
+
+/** @internal */
+export const PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema:
+  z.ZodType<
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound,
+    z.ZodTypeDef,
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    timeOffPolicy: components.TimeOffPolicy$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      timeOffPolicy: "Time-Off-Policy",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostCompaniesCompanyUuidTimeOffPoliciesResponse$ {
+  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema;
+  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema;
+  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound` instead. */
+  export type Outbound =
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound;
+}
+
+export function postCompaniesCompanyUuidTimeOffPoliciesResponseToJSON(
+  postCompaniesCompanyUuidTimeOffPoliciesResponse:
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse,
+): string {
+  return JSON.stringify(
+    PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema.parse(
+      postCompaniesCompanyUuidTimeOffPoliciesResponse,
+    ),
+  );
+}
+
+export function postCompaniesCompanyUuidTimeOffPoliciesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostCompaniesCompanyUuidTimeOffPoliciesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostCompaniesCompanyUuidTimeOffPoliciesResponse' from JSON`,
   );
 }

@@ -10,7 +10,6 @@ import { employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany } from "../fun
 import { employeeBenefitsRetrieve } from "../funcs/employeeBenefitsRetrieve.js";
 import { employeeBenefitsUpdate } from "../funcs/employeeBenefitsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -26,7 +25,7 @@ export class EmployeeBenefits extends ClientSDK {
   async create(
     request: operations.PostV1EmployeesEmployeeIdEmployeeBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeBenefit> {
+  ): Promise<operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse> {
     return unwrapAsync(employeeBenefitsCreate(
       this,
       request,
@@ -49,7 +48,7 @@ export class EmployeeBenefits extends ClientSDK {
   async get(
     request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmployeeBenefit>> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdEmployeeBenefitsResponse> {
     return unwrapAsync(employeeBenefitsGet(
       this,
       request,
@@ -70,7 +69,7 @@ export class EmployeeBenefits extends ClientSDK {
   async retrieve(
     request: operations.GetV1EmployeeBenefitsEmployeeBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeBenefit> {
+  ): Promise<operations.GetV1EmployeeBenefitsEmployeeBenefitIdResponse> {
     return unwrapAsync(employeeBenefitsRetrieve(
       this,
       request,
@@ -89,7 +88,7 @@ export class EmployeeBenefits extends ClientSDK {
   async update(
     request: operations.PutV1EmployeeBenefitsEmployeeBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeBenefit> {
+  ): Promise<operations.PutV1EmployeeBenefitsEmployeeBenefitIdResponse> {
     return unwrapAsync(employeeBenefitsUpdate(
       this,
       request,
@@ -108,7 +107,7 @@ export class EmployeeBenefits extends ClientSDK {
   async delete(
     request: operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse> {
     return unwrapAsync(employeeBenefitsDelete(
       this,
       request,
@@ -130,7 +129,9 @@ export class EmployeeBenefits extends ClientSDK {
   async getYtdBenefitAmountsFromDifferentCompany(
     request: operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.YtdBenefitAmountsFromDifferentCompany>> {
+  ): Promise<
+    operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse
+  > {
     return unwrapAsync(employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
       this,
       request,
@@ -152,7 +153,9 @@ export class EmployeeBenefits extends ClientSDK {
     request:
       operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse
+  > {
     return unwrapAsync(
       employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(
         this,

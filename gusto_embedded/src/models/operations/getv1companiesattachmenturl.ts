@@ -34,6 +34,25 @@ export type GetV1CompaniesAttachmentUrlResponseBody = {
   url: string;
 };
 
+export type GetV1CompaniesAttachmentUrlResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  object?: GetV1CompaniesAttachmentUrlResponseBody | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesAttachmentUrlRequest$inboundSchema: z.ZodType<
   GetV1CompaniesAttachmentUrlRequest,
@@ -176,5 +195,89 @@ export function getV1CompaniesAttachmentUrlResponseBodyFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesAttachmentUrlResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesAttachmentUrlResponse$inboundSchema: z.ZodType<
+  GetV1CompaniesAttachmentUrlResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  object: z.lazy(() => GetV1CompaniesAttachmentUrlResponseBody$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type GetV1CompaniesAttachmentUrlResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  object?: GetV1CompaniesAttachmentUrlResponseBody$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesAttachmentUrlResponse$outboundSchema: z.ZodType<
+  GetV1CompaniesAttachmentUrlResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1CompaniesAttachmentUrlResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  object: z.lazy(() => GetV1CompaniesAttachmentUrlResponseBody$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesAttachmentUrlResponse$ {
+  /** @deprecated use `GetV1CompaniesAttachmentUrlResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesAttachmentUrlResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesAttachmentUrlResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesAttachmentUrlResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesAttachmentUrlResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesAttachmentUrlResponse$Outbound;
+}
+
+export function getV1CompaniesAttachmentUrlResponseToJSON(
+  getV1CompaniesAttachmentUrlResponse: GetV1CompaniesAttachmentUrlResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesAttachmentUrlResponse$outboundSchema.parse(
+      getV1CompaniesAttachmentUrlResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesAttachmentUrlResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompaniesAttachmentUrlResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesAttachmentUrlResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompaniesAttachmentUrlResponse' from JSON`,
   );
 }

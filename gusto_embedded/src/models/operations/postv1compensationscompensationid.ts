@@ -71,6 +71,25 @@ export type PostV1CompensationsCompensationIdRequest = {
   requestBody: PostV1CompensationsCompensationIdRequestBody;
 };
 
+export type PostV1CompensationsCompensationIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  compensation?: components.Compensation | undefined;
+};
+
 /** @internal */
 export const PaymentUnit$inboundSchema: z.ZodNativeEnum<typeof PaymentUnit> = z
   .nativeEnum(PaymentUnit);
@@ -326,5 +345,96 @@ export function postV1CompensationsCompensationIdRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompensationsCompensationIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompensationsCompensationIdResponse$inboundSchema: z.ZodType<
+  PostV1CompensationsCompensationIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Compensation: components.Compensation$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Compensation": "compensation",
+  });
+});
+
+/** @internal */
+export type PostV1CompensationsCompensationIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Compensation?: components.Compensation$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompensationsCompensationIdResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompensationsCompensationIdResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompensationsCompensationIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    compensation: components.Compensation$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      compensation: "Compensation",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompensationsCompensationIdResponse$ {
+  /** @deprecated use `PostV1CompensationsCompensationIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompensationsCompensationIdResponse$inboundSchema;
+  /** @deprecated use `PostV1CompensationsCompensationIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompensationsCompensationIdResponse$outboundSchema;
+  /** @deprecated use `PostV1CompensationsCompensationIdResponse$Outbound` instead. */
+  export type Outbound = PostV1CompensationsCompensationIdResponse$Outbound;
+}
+
+export function postV1CompensationsCompensationIdResponseToJSON(
+  postV1CompensationsCompensationIdResponse:
+    PostV1CompensationsCompensationIdResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompensationsCompensationIdResponse$outboundSchema.parse(
+      postV1CompensationsCompensationIdResponse,
+    ),
+  );
+}
+
+export function postV1CompensationsCompensationIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompensationsCompensationIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompensationsCompensationIdResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompensationsCompensationIdResponse' from JSON`,
   );
 }

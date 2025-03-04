@@ -110,7 +110,7 @@ import {
 
 ### Response
 
-**Promise\<[components.HolidayPayPolicy](../../models/components/holidaypaypolicy.md)\>**
+**Promise\<[operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/getcompaniescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
@@ -249,7 +249,7 @@ import {
 
 ### Response
 
-**Promise\<[components.HolidayPayPolicy](../../models/components/holidaypaypolicy.md)\>**
+**Promise\<[operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/postcompaniescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
@@ -391,7 +391,7 @@ import {
 
 ### Response
 
-**Promise\<[components.HolidayPayPolicy](../../models/components/holidaypaypolicy.md)\>**
+**Promise\<[operations.PutCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/putcompaniescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
@@ -416,11 +416,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.holidayPayPolicies.delete({
+  const result = await gustoEmbedded.holidayPayPolicies.delete({
     companyUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -451,7 +452,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -485,7 +487,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/deletecompaniescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
@@ -603,7 +605,7 @@ import {
 
 ### Response
 
-**Promise\<[components.HolidayPayPolicy](../../models/components/holidaypaypolicy.md)\>**
+**Promise\<[operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse](../../models/operations/putcompaniescompanyuuidholidaypaypolicyaddresponse.md)\>**
 
 ### Errors
 
@@ -721,7 +723,7 @@ import {
 
 ### Response
 
-**Promise\<[components.HolidayPayPolicy](../../models/components/holidaypaypolicy.md)\>**
+**Promise\<[operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse](../../models/operations/putcompaniescompanyuuidholidaypaypolicyremoveresponse.md)\>**
 
 ### Errors
 

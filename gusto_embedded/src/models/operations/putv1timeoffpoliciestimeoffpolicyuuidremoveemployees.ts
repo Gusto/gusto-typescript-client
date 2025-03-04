@@ -37,6 +37,25 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest = {
   requestBody: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody;
 };
 
+export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  timeOffPolicy?: components.TimeOffPolicy | undefined;
+};
+
 /** @internal */
 export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$inboundSchema:
   z.ZodType<
@@ -274,5 +293,97 @@ export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestFromJ
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboundSchema:
+  z.ZodType<
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Time-Off-Policy": components.TimeOffPolicy$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Time-Off-Policy": "timeOffPolicy",
+    });
+  });
+
+/** @internal */
+export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Time-Off-Policy"?: components.TimeOffPolicy$Outbound | undefined;
+  };
+
+/** @internal */
+export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema:
+  z.ZodType<
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    timeOffPolicy: components.TimeOffPolicy$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      timeOffPolicy: "Time-Off-Policy",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$ {
+  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboundSchema;
+  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema;
+  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound;
+}
+
+export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponseToJSON(
+  putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse:
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
+): string {
+  return JSON.stringify(
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema
+      .parse(putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse),
+  );
+}
+
+export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse' from JSON`,
   );
 }

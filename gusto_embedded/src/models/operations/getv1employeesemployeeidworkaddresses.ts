@@ -20,6 +20,25 @@ export type GetV1EmployeesEmployeeIdWorkAddressesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdWorkAddressesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * List of employee work addresses
+   */
+  employeeWorkAddressList?: Array<components.EmployeeWorkAddress> | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +120,103 @@ export function getV1EmployeesEmployeeIdWorkAddressesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeIdWorkAddressesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdWorkAddressesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Work-Address-List": z.array(
+      components.EmployeeWorkAddress$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Work-Address-List": "employeeWorkAddressList",
+    });
+  });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdWorkAddressesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-Work-Address-List"?:
+    | Array<components.EmployeeWorkAddress$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdWorkAddressesResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdWorkAddressesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeWorkAddressList: z.array(
+      components.EmployeeWorkAddress$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeWorkAddressList: "Employee-Work-Address-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdWorkAddressesResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdWorkAddressesResponse$Outbound` instead. */
+  export type Outbound = GetV1EmployeesEmployeeIdWorkAddressesResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdWorkAddressesResponseToJSON(
+  getV1EmployeesEmployeeIdWorkAddressesResponse:
+    GetV1EmployeesEmployeeIdWorkAddressesResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeIdWorkAddressesResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeIdWorkAddressesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdWorkAddressesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeIdWorkAddressesResponse' from JSON`,
   );
 }

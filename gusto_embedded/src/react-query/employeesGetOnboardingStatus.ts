@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type EmployeesGetOnboardingStatusQueryData =
-  components.EmployeeOnboardingStatus;
+  operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse;
 
 /**
  * Get the employee's onboarding status

@@ -23,6 +23,10 @@ export type DeleteV1CompanyBenefitsCompanyBenefitIdErrors = {
  */
 export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData = {
   errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors | undefined;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse?: Response | undefined;
 };
 
 /**
@@ -30,6 +34,10 @@ export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData = {
  */
 export class DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody extends Error {
   errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors | undefined;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse?: Response | undefined;
 
   /** The original data that was passed to this error instance. */
   data$: DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData;
@@ -42,6 +50,7 @@ export class DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody extends Error {
     this.data$ = err;
 
     if (err.errors != null) this.errors = err.errors;
+    if (err.rawResponse != null) this.rawResponse = err.rawResponse;
 
     this.name = "DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody";
   }
@@ -182,14 +191,20 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema:
     errors: z.lazy(() =>
       DeleteV1CompanyBenefitsCompanyBenefitIdErrors$inboundSchema
     ).optional(),
+    RawResponse: z.instanceof(Response).optional(),
   })
     .transform((v) => {
-      return new DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody(v);
+      const remapped = remap$(v, {
+        "RawResponse": "rawResponse",
+      });
+
+      return new DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody(remapped);
     });
 
 /** @internal */
 export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$Outbound = {
   errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors$Outbound | undefined;
+  RawResponse?: never | undefined;
 };
 
 /** @internal */
@@ -200,11 +215,20 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$outboundSchema:
     DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
   > = z.instanceof(DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody)
     .transform(v => v.data$)
-    .pipe(z.object({
-      errors: z.lazy(() =>
-        DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema
-      ).optional(),
-    }));
+    .pipe(
+      z.object({
+        errors: z.lazy(() =>
+          DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema
+        ).optional(),
+        rawResponse: z.instanceof(Response).transform(() => {
+          throw new Error("Response cannot be serialized");
+        }).optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          rawResponse: "RawResponse",
+        });
+      }),
+    );
 
 /**
  * @internal

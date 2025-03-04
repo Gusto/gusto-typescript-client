@@ -28,6 +28,25 @@ export type GetV1CompaniesCompanyIdCustomFieldsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdCustomFieldsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  companyCustomFieldList?: components.CompanyCustomFieldList | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdCustomFieldsRequest$inboundSchema:
   z.ZodType<GetV1CompaniesCompanyIdCustomFieldsRequest, z.ZodTypeDef, unknown> =
@@ -112,5 +131,101 @@ export function getV1CompaniesCompanyIdCustomFieldsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyIdCustomFieldsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdCustomFieldsResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdCustomFieldsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Company-Custom-Field-List": components.CompanyCustomFieldList$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Company-Custom-Field-List": "companyCustomFieldList",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Company-Custom-Field-List"?:
+    | components.CompanyCustomFieldList$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdCustomFieldsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    companyCustomFieldList: components.CompanyCustomFieldList$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      companyCustomFieldList: "Company-Custom-Field-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdCustomFieldsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdCustomFieldsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdCustomFieldsResponseToJSON(
+  getV1CompaniesCompanyIdCustomFieldsResponse:
+    GetV1CompaniesCompanyIdCustomFieldsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdCustomFieldsResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdCustomFieldsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdCustomFieldsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdCustomFieldsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyIdCustomFieldsResponse' from JSON`,
   );
 }

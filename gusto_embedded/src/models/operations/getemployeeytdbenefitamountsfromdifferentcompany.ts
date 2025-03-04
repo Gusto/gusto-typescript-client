@@ -24,6 +24,27 @@ export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * List of Ytd Benefit Amounts From Different Company List
+   */
+  ytdBenefitAmountsFromDifferentCompanyList?:
+    | Array<components.YtdBenefitAmountsFromDifferentCompany>
+    | undefined;
+};
+
 /** @internal */
 export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema:
   z.ZodType<
@@ -109,5 +130,105 @@ export function getEmployeeYtdBenefitAmountsFromDifferentCompanyRequestFromJSON(
       GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema:
+  z.ZodType<
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Ytd-Benefit-Amounts-From-Different-Company-List": z.array(
+      components.YtdBenefitAmountsFromDifferentCompany$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Ytd-Benefit-Amounts-From-Different-Company-List":
+        "ytdBenefitAmountsFromDifferentCompanyList",
+    });
+  });
+
+/** @internal */
+export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Ytd-Benefit-Amounts-From-Different-Company-List"?:
+      | Array<components.YtdBenefitAmountsFromDifferentCompany$Outbound>
+      | undefined;
+  };
+
+/** @internal */
+export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema:
+  z.ZodType<
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound,
+    z.ZodTypeDef,
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    ytdBenefitAmountsFromDifferentCompanyList: z.array(
+      components.YtdBenefitAmountsFromDifferentCompany$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      ytdBenefitAmountsFromDifferentCompanyList:
+        "Ytd-Benefit-Amounts-From-Different-Company-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$ {
+  /** @deprecated use `GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema;
+  /** @deprecated use `GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema;
+  /** @deprecated use `GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound` instead. */
+  export type Outbound =
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound;
+}
+
+export function getEmployeeYtdBenefitAmountsFromDifferentCompanyResponseToJSON(
+  getEmployeeYtdBenefitAmountsFromDifferentCompanyResponse:
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+): string {
+  return JSON.stringify(
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema
+      .parse(getEmployeeYtdBenefitAmountsFromDifferentCompanyResponse),
+  );
+}
+
+export function getEmployeeYtdBenefitAmountsFromDifferentCompanyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse' from JSON`,
   );
 }

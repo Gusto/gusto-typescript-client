@@ -28,6 +28,25 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  taxRequirementsState?: components.TaxRequirementsState | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema:
   z.ZodType<
@@ -116,5 +135,102 @@ export function getV1CompaniesCompanyUuidTaxRequirementsStateRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyUuidTaxRequirementsStateRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Tax-Requirements-State": components.TaxRequirementsState$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Tax-Requirements-State": "taxRequirementsState",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Tax-Requirements-State"?:
+    | components.TaxRequirementsState$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    taxRequirementsState: components.TaxRequirementsState$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      taxRequirementsState: "Tax-Requirements-State",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyUuidTaxRequirementsStateResponseToJSON(
+  getV1CompaniesCompanyUuidTaxRequirementsStateResponse:
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema.parse(
+      getV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyUuidTaxRequirementsStateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyUuidTaxRequirementsStateResponse' from JSON`,
   );
 }

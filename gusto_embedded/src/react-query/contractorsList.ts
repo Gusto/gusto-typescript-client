@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorsListQueryData = Array<components.Contractor>;
+export type ContractorsListQueryData =
+  operations.GetV1CompaniesCompanyUuidContractorsResponse;
 
 /**
  * Get contractors of a company

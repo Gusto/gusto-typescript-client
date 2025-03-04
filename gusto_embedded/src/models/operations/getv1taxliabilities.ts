@@ -20,6 +20,27 @@ export type GetV1TaxLiabilitiesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1TaxLiabilitiesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  taxLiabilitiesList?:
+    | Array<Array<components.TaxLiabilitiesSelections>>
+    | undefined;
+};
+
 /** @internal */
 export const GetV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
   GetV1TaxLiabilitiesRequest,
@@ -88,5 +109,92 @@ export function getV1TaxLiabilitiesRequestFromJSON(
     jsonString,
     (x) => GetV1TaxLiabilitiesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1TaxLiabilitiesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1TaxLiabilitiesResponse$inboundSchema: z.ZodType<
+  GetV1TaxLiabilitiesResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Tax-Liabilities-List": z.array(
+    z.array(components.TaxLiabilitiesSelections$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Tax-Liabilities-List": "taxLiabilitiesList",
+  });
+});
+
+/** @internal */
+export type GetV1TaxLiabilitiesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Tax-Liabilities-List"?:
+    | Array<Array<components.TaxLiabilitiesSelections$Outbound>>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1TaxLiabilitiesResponse$outboundSchema: z.ZodType<
+  GetV1TaxLiabilitiesResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1TaxLiabilitiesResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  taxLiabilitiesList: z.array(
+    z.array(components.TaxLiabilitiesSelections$outboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    taxLiabilitiesList: "Tax-Liabilities-List",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1TaxLiabilitiesResponse$ {
+  /** @deprecated use `GetV1TaxLiabilitiesResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1TaxLiabilitiesResponse$inboundSchema;
+  /** @deprecated use `GetV1TaxLiabilitiesResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1TaxLiabilitiesResponse$outboundSchema;
+  /** @deprecated use `GetV1TaxLiabilitiesResponse$Outbound` instead. */
+  export type Outbound = GetV1TaxLiabilitiesResponse$Outbound;
+}
+
+export function getV1TaxLiabilitiesResponseToJSON(
+  getV1TaxLiabilitiesResponse: GetV1TaxLiabilitiesResponse,
+): string {
+  return JSON.stringify(
+    GetV1TaxLiabilitiesResponse$outboundSchema.parse(
+      getV1TaxLiabilitiesResponse,
+    ),
+  );
+}
+
+export function getV1TaxLiabilitiesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1TaxLiabilitiesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1TaxLiabilitiesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1TaxLiabilitiesResponse' from JSON`,
   );
 }

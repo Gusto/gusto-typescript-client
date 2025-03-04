@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type CompanyAttachmentsGetDetailsQueryData =
-  components.CompanyAttachment;
+  operations.GetV1CompaniesAttachmentResponse;
 
 /**
  * Get Company Attachment Details

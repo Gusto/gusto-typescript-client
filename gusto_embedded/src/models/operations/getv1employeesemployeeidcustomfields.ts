@@ -35,6 +35,25 @@ export type GetV1EmployeesEmployeeIdCustomFieldsResponseBody = {
   customFields?: Array<components.EmployeeCustomField> | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdCustomFieldsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  object?: GetV1EmployeesEmployeeIdCustomFieldsResponseBody | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdCustomFieldsRequest$inboundSchema:
   z.ZodType<
@@ -200,5 +219,101 @@ export function getV1EmployeesEmployeeIdCustomFieldsResponseBodyFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeIdCustomFieldsResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdCustomFieldsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    object: z.lazy(() =>
+      GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  object?:
+    | GetV1EmployeesEmployeeIdCustomFieldsResponseBody$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdCustomFieldsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    object: z.lazy(() =>
+      GetV1EmployeesEmployeeIdCustomFieldsResponseBody$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdCustomFieldsResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound` instead. */
+  export type Outbound = GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdCustomFieldsResponseToJSON(
+  getV1EmployeesEmployeeIdCustomFieldsResponse:
+    GetV1EmployeesEmployeeIdCustomFieldsResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeIdCustomFieldsResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeIdCustomFieldsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdCustomFieldsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeIdCustomFieldsResponse' from JSON`,
   );
 }

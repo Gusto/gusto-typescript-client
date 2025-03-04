@@ -112,7 +112,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Termination](../../models/components/termination.md)\>**
+**Promise\<[operations.PostV1EmployeesEmployeeIdTerminationsResponse](../../models/operations/postv1employeesemployeeidterminationsresponse.md)\>**
 
 ### Errors
 
@@ -221,7 +221,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Termination[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdTerminationsResponse](../../models/operations/getv1employeesemployeeidterminationsresponse.md)\>**
 
 ### Errors
 
@@ -245,11 +245,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employeeEmployments.deleteTermination({
+  const result = await gustoEmbedded.employeeEmployments.deleteTermination({
     employeeId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -280,7 +281,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -314,7 +316,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1EmployeesEmployeeIdTerminationsResponse](../../models/operations/deletev1employeesemployeeidterminationsresponse.md)\>**
 
 ### Errors
 
@@ -422,7 +424,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Termination](../../models/components/termination.md)\>**
+**Promise\<[operations.PutV1TerminationsEmployeeIdResponse](../../models/operations/putv1terminationsemployeeidresponse.md)\>**
 
 ### Errors
 
@@ -528,7 +530,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Rehire](../../models/components/rehire.md)\>**
+**Promise\<[operations.PostV1EmployeesEmployeeIdRehireResponse](../../models/operations/postv1employeesemployeeidrehireresponse.md)\>**
 
 ### Errors
 
@@ -636,7 +638,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Rehire](../../models/components/rehire.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdRehireResponse](../../models/operations/putv1employeesemployeeidrehireresponse.md)\>**
 
 ### Errors
 
@@ -743,7 +745,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Rehire](../../models/components/rehire.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdRehireResponse](../../models/operations/getv1employeesemployeeidrehireresponse.md)\>**
 
 ### Errors
 
@@ -768,11 +770,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employeeEmployments.deleteRehire({
+  const result = await gustoEmbedded.employeeEmployments.deleteRehire({
     employeeId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -803,7 +806,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -837,7 +841,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1EmployeesEmployeeIdRehireResponse](../../models/operations/deletev1employeesemployeeidrehireresponse.md)\>**
 
 ### Errors
 
@@ -944,7 +948,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmploymentHistoryList[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse](../../models/operations/getv1employeesemployeeidemploymenthistoryresponse.md)\>**
 
 ### Errors
 

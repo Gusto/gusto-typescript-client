@@ -24,7 +24,7 @@ export type EmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMutationV
   };
 
 export type EmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMutationData =
-  void;
+  operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
 
 /**
  * Create year-to-date benefit amounts from a different company

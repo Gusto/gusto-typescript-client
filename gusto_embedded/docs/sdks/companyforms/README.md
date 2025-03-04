@@ -108,7 +108,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompanyFormsResponse](../../models/operations/getv1companyformsresponse.md)\>**
 
 ### Errors
 
@@ -214,7 +214,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form](../../models/components/form.md)\>**
+**Promise\<[operations.GetV1CompanyFormResponse](../../models/operations/getv1companyformresponse.md)\>**
 
 ### Errors
 
@@ -320,7 +320,7 @@ import {
 
 ### Response
 
-**Promise\<[components.FormPdf](../../models/components/formpdf.md)\>**
+**Promise\<[operations.GetV1CompanyFormPdfResponse](../../models/operations/getv1companyformpdfresponse.md)\>**
 
 ### Errors
 
@@ -425,7 +425,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form](../../models/components/form.md)\>**
+**Promise\<[operations.PutV1CompanyFormSignResponse](../../models/operations/putv1companyformsignresponse.md)\>**
 
 ### Errors
 

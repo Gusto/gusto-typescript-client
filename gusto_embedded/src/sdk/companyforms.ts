@@ -7,7 +7,6 @@ import { companyFormsGetAll } from "../funcs/companyFormsGetAll.js";
 import { companyFormsGetPdf } from "../funcs/companyFormsGetPdf.js";
 import { companyFormsSign } from "../funcs/companyFormsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -23,7 +22,7 @@ export class CompanyForms extends ClientSDK {
   async getAll(
     request: operations.GetV1CompanyFormsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Form>> {
+  ): Promise<operations.GetV1CompanyFormsResponse> {
     return unwrapAsync(companyFormsGetAll(
       this,
       request,
@@ -42,7 +41,7 @@ export class CompanyForms extends ClientSDK {
   async get(
     request: operations.GetV1CompanyFormRequest,
     options?: RequestOptions,
-  ): Promise<components.Form> {
+  ): Promise<operations.GetV1CompanyFormResponse> {
     return unwrapAsync(companyFormsGet(
       this,
       request,
@@ -61,7 +60,7 @@ export class CompanyForms extends ClientSDK {
   async getPdf(
     request: operations.GetV1CompanyFormPdfRequest,
     options?: RequestOptions,
-  ): Promise<components.FormPdf> {
+  ): Promise<operations.GetV1CompanyFormPdfResponse> {
     return unwrapAsync(companyFormsGetPdf(
       this,
       request,
@@ -80,7 +79,7 @@ export class CompanyForms extends ClientSDK {
   async sign(
     request: operations.PutV1CompanyFormSignRequest,
     options?: RequestOptions,
-  ): Promise<components.Form> {
+  ): Promise<operations.PutV1CompanyFormSignResponse> {
     return unwrapAsync(companyFormsSign(
       this,
       request,

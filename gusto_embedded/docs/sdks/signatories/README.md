@@ -130,7 +130,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Signatory](../../models/components/signatory.md)\>**
+**Promise\<[operations.PostV1CompanySignatoriesResponse](../../models/operations/postv1companysignatoriesresponse.md)\>**
 
 ### Errors
 
@@ -237,7 +237,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Signatory[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyUuidSignatoriesResponse](../../models/operations/getv1companiescompanyuuidsignatoriesresponse.md)\>**
 
 ### Errors
 
@@ -336,7 +336,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Signatory](../../models/components/signatory.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyUuidSignatoriesInviteResponse](../../models/operations/postv1companiescompanyuuidsignatoriesinviteresponse.md)\>**
 
 ### Errors
 
@@ -436,7 +436,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Signatory](../../models/components/signatory.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse](../../models/operations/putv1companiescompanyuuidsignatoriessignatoryuuidresponse.md)\>**
 
 ### Errors
 
@@ -461,12 +461,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.signatories.delete({
+  const result = await gustoEmbedded.signatories.delete({
     companyUuid: "<id>",
     signatoryUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -498,7 +499,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -532,7 +534,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse](../../models/operations/deletev1companiescompanyuuidsignatoriessignatoryuuidresponse.md)\>**
 
 ### Errors
 

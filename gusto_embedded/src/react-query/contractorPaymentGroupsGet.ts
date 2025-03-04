@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentGroupsGetQueryData =
-  components.ContractorPaymentGroup;
+  operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 
 /**
  * Fetch a contractor payment group

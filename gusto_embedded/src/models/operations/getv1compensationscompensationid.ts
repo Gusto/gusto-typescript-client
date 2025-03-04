@@ -20,6 +20,25 @@ export type GetV1CompensationsCompensationIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompensationsCompensationIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  compensation?: components.Compensation | undefined;
+};
+
 /** @internal */
 export const GetV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
   GetV1CompensationsCompensationIdRequest,
@@ -99,5 +118,95 @@ export function getV1CompensationsCompensationIdRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompensationsCompensationIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompensationsCompensationIdResponse$inboundSchema: z.ZodType<
+  GetV1CompensationsCompensationIdResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Compensation: components.Compensation$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Compensation": "compensation",
+  });
+});
+
+/** @internal */
+export type GetV1CompensationsCompensationIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Compensation?: components.Compensation$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1CompensationsCompensationIdResponse$outboundSchema: z.ZodType<
+  GetV1CompensationsCompensationIdResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1CompensationsCompensationIdResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  compensation: components.Compensation$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    compensation: "Compensation",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompensationsCompensationIdResponse$ {
+  /** @deprecated use `GetV1CompensationsCompensationIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompensationsCompensationIdResponse$inboundSchema;
+  /** @deprecated use `GetV1CompensationsCompensationIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompensationsCompensationIdResponse$outboundSchema;
+  /** @deprecated use `GetV1CompensationsCompensationIdResponse$Outbound` instead. */
+  export type Outbound = GetV1CompensationsCompensationIdResponse$Outbound;
+}
+
+export function getV1CompensationsCompensationIdResponseToJSON(
+  getV1CompensationsCompensationIdResponse:
+    GetV1CompensationsCompensationIdResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompensationsCompensationIdResponse$outboundSchema.parse(
+      getV1CompensationsCompensationIdResponse,
+    ),
+  );
+}
+
+export function getV1CompensationsCompensationIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompensationsCompensationIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompensationsCompensationIdResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompensationsCompensationIdResponse' from JSON`,
   );
 }

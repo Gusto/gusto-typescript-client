@@ -126,7 +126,7 @@ import {
 
 ### Response
 
-**Promise\<[components.AccruingTimeOffHour[]](../../models/.md)\>**
+**Promise\<[operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse](../../models/operations/postv1payrollspayrollidcalculateaccruingtimeoffhoursresponse.md)\>**
 
 ### Errors
 
@@ -233,7 +233,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy](../../models/components/timeoffpolicy.md)\>**
+**Promise\<[operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/gettimeoffpoliciestimeoffpolicyuuidresponse.md)\>**
 
 ### Errors
 
@@ -350,7 +350,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy](../../models/components/timeoffpolicy.md)\>**
+**Promise\<[operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/puttimeoffpoliciestimeoffpolicyuuidresponse.md)\>**
 
 ### Errors
 
@@ -457,7 +457,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy[]](../../models/.md)\>**
+**Promise\<[operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse](../../models/operations/getcompaniescompanyuuidtimeoffpoliciesresponse.md)\>**
 
 ### Errors
 
@@ -562,7 +562,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy](../../models/components/timeoffpolicy.md)\>**
+**Promise\<[operations.PostCompaniesCompanyUuidTimeOffPoliciesResponse](../../models/operations/postcompaniescompanyuuidtimeoffpoliciesresponse.md)\>**
 
 ### Errors
 
@@ -660,7 +660,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy](../../models/components/timeoffpolicy.md)\>**
+**Promise\<[operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse](../../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployeesresponse.md)\>**
 
 ### Errors
 
@@ -758,7 +758,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy](../../models/components/timeoffpolicy.md)\>**
+**Promise\<[operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuidremoveemployeesresponse.md)\>**
 
 ### Errors
 
@@ -856,7 +856,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy](../../models/components/timeoffpolicy.md)\>**
+**Promise\<[operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse](../../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalanceresponse.md)\>**
 
 ### Errors
 
@@ -952,7 +952,7 @@ import {
 
 ### Response
 
-**Promise\<[components.TimeOffPolicy](../../models/components/timeoffpolicy.md)\>**
+**Promise\<[operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuiddeactivateresponse.md)\>**
 
 ### Errors
 

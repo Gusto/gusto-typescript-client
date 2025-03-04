@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type HolidayPayPoliciesGetQueryData = components.HolidayPayPolicy;
+export type HolidayPayPoliciesGetQueryData =
+  operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse;
 
 /**
  * Get a company's holiday pay policy

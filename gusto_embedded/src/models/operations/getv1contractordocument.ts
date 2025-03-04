@@ -20,6 +20,25 @@ export type GetV1ContractorDocumentRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1ContractorDocumentResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  document?: components.Document | undefined;
+};
+
 /** @internal */
 export const GetV1ContractorDocumentRequest$inboundSchema: z.ZodType<
   GetV1ContractorDocumentRequest,
@@ -90,5 +109,86 @@ export function getV1ContractorDocumentRequestFromJSON(
     jsonString,
     (x) => GetV1ContractorDocumentRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1ContractorDocumentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1ContractorDocumentResponse$inboundSchema: z.ZodType<
+  GetV1ContractorDocumentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Document: components.Document$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Document": "document",
+  });
+});
+
+/** @internal */
+export type GetV1ContractorDocumentResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Document?: components.Document$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1ContractorDocumentResponse$outboundSchema: z.ZodType<
+  GetV1ContractorDocumentResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1ContractorDocumentResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  document: components.Document$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    document: "Document",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1ContractorDocumentResponse$ {
+  /** @deprecated use `GetV1ContractorDocumentResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1ContractorDocumentResponse$inboundSchema;
+  /** @deprecated use `GetV1ContractorDocumentResponse$outboundSchema` instead. */
+  export const outboundSchema = GetV1ContractorDocumentResponse$outboundSchema;
+  /** @deprecated use `GetV1ContractorDocumentResponse$Outbound` instead. */
+  export type Outbound = GetV1ContractorDocumentResponse$Outbound;
+}
+
+export function getV1ContractorDocumentResponseToJSON(
+  getV1ContractorDocumentResponse: GetV1ContractorDocumentResponse,
+): string {
+  return JSON.stringify(
+    GetV1ContractorDocumentResponse$outboundSchema.parse(
+      getV1ContractorDocumentResponse,
+    ),
+  );
+}
+
+export function getV1ContractorDocumentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1ContractorDocumentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1ContractorDocumentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1ContractorDocumentResponse' from JSON`,
   );
 }

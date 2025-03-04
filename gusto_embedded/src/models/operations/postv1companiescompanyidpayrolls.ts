@@ -96,6 +96,25 @@ export type PostV1CompaniesCompanyIdPayrollsRequest = {
   requestBody: PostV1CompaniesCompanyIdPayrollsRequestBody;
 };
 
+export type PostV1CompaniesCompanyIdPayrollsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * An off-cycle payroll
+   */
+  payrollPrepared?: components.PayrollPrepared | undefined;
+};
+
 /** @internal */
 export const OffCycleReason$inboundSchema: z.ZodNativeEnum<
   typeof OffCycleReason
@@ -346,5 +365,95 @@ export function postV1CompaniesCompanyIdPayrollsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyIdPayrollsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
+  PostV1CompaniesCompanyIdPayrollsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Payroll-Prepared": components.PayrollPrepared$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Payroll-Prepared": "payrollPrepared",
+  });
+});
+
+/** @internal */
+export type PostV1CompaniesCompanyIdPayrollsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Payroll-Prepared"?: components.PayrollPrepared$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema: z.ZodType<
+  PostV1CompaniesCompanyIdPayrollsResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1CompaniesCompanyIdPayrollsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  payrollPrepared: components.PayrollPrepared$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    payrollPrepared: "Payroll-Prepared",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdPayrollsResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsResponse$Outbound` instead. */
+  export type Outbound = PostV1CompaniesCompanyIdPayrollsResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdPayrollsResponseToJSON(
+  postV1CompaniesCompanyIdPayrollsResponse:
+    PostV1CompaniesCompanyIdPayrollsResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema.parse(
+      postV1CompaniesCompanyIdPayrollsResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyIdPayrollsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyIdPayrollsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyIdPayrollsResponse' from JSON`,
   );
 }

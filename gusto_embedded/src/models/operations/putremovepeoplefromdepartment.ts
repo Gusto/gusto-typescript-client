@@ -44,6 +44,25 @@ export type PutRemovePeopleFromDepartmentRequest = {
   requestBody: PutRemovePeopleFromDepartmentRequestBody;
 };
 
+export type PutRemovePeopleFromDepartmentResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Department Object Example
+   */
+  department?: components.Department | undefined;
+};
+
 /** @internal */
 export const PutRemovePeopleFromDepartmentEmployees$inboundSchema: z.ZodType<
   PutRemovePeopleFromDepartmentEmployees,
@@ -334,5 +353,89 @@ export function putRemovePeopleFromDepartmentRequestFromJSON(
     (x) =>
       PutRemovePeopleFromDepartmentRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutRemovePeopleFromDepartmentRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutRemovePeopleFromDepartmentResponse$inboundSchema: z.ZodType<
+  PutRemovePeopleFromDepartmentResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Department: components.Department$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Department": "department",
+  });
+});
+
+/** @internal */
+export type PutRemovePeopleFromDepartmentResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Department?: components.Department$Outbound | undefined;
+};
+
+/** @internal */
+export const PutRemovePeopleFromDepartmentResponse$outboundSchema: z.ZodType<
+  PutRemovePeopleFromDepartmentResponse$Outbound,
+  z.ZodTypeDef,
+  PutRemovePeopleFromDepartmentResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  department: components.Department$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    department: "Department",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutRemovePeopleFromDepartmentResponse$ {
+  /** @deprecated use `PutRemovePeopleFromDepartmentResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutRemovePeopleFromDepartmentResponse$inboundSchema;
+  /** @deprecated use `PutRemovePeopleFromDepartmentResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutRemovePeopleFromDepartmentResponse$outboundSchema;
+  /** @deprecated use `PutRemovePeopleFromDepartmentResponse$Outbound` instead. */
+  export type Outbound = PutRemovePeopleFromDepartmentResponse$Outbound;
+}
+
+export function putRemovePeopleFromDepartmentResponseToJSON(
+  putRemovePeopleFromDepartmentResponse: PutRemovePeopleFromDepartmentResponse,
+): string {
+  return JSON.stringify(
+    PutRemovePeopleFromDepartmentResponse$outboundSchema.parse(
+      putRemovePeopleFromDepartmentResponse,
+    ),
+  );
+}
+
+export function putRemovePeopleFromDepartmentResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutRemovePeopleFromDepartmentResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutRemovePeopleFromDepartmentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutRemovePeopleFromDepartmentResponse' from JSON`,
   );
 }

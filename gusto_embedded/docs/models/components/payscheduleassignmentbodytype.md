@@ -7,7 +7,7 @@ The pay schedule assignment type.
 ```typescript
 import { PayScheduleAssignmentBodyType } from "@gusto/embedded-api/models/components";
 
-let value: PayScheduleAssignmentBodyType = "by_employee";
+let value: PayScheduleAssignmentBodyType = "single";
 ```
 
 ## Values

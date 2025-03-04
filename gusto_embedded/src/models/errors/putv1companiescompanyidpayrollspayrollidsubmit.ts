@@ -13,17 +13,17 @@ import {
 } from "./payrollblockerserror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-  UnprocessableEntityErrorObject$Outbound,
-  UnprocessableEntityErrorObject$outboundSchema,
-} from "./unprocessableentityerrorobject.js";
+  UnprocessableEntityErrorObject1,
+  UnprocessableEntityErrorObject1$inboundSchema,
+  UnprocessableEntityErrorObject1$Outbound,
+  UnprocessableEntityErrorObject1$outboundSchema,
+} from "./unprocessableentityerrorobject1.js";
 
 /**
  * Unprocessable Entity
  */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody =
-  | UnprocessableEntityErrorObject
+  | UnprocessableEntityErrorObject1
   | PayrollBlockersError;
 
 /** @internal */
@@ -33,13 +33,13 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$inboundS
     z.ZodTypeDef,
     unknown
   > = z.union([
-    UnprocessableEntityErrorObject$inboundSchema,
+    UnprocessableEntityErrorObject1$inboundSchema,
     PayrollBlockersError$inboundSchema,
   ]);
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$Outbound =
-  | UnprocessableEntityErrorObject$Outbound
+  | UnprocessableEntityErrorObject1$Outbound
   | PayrollBlockersError$Outbound;
 
 /** @internal */
@@ -49,7 +49,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$outbound
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody
   > = z.union([
-    UnprocessableEntityErrorObject$outboundSchema,
+    UnprocessableEntityErrorObject1$outboundSchema,
     PayrollBlockersError$outboundSchema,
   ]);
 

@@ -59,6 +59,21 @@ export type PostCompaniesPayrollSkipCompanyUuidRequest = {
   requestBody: PostCompaniesPayrollSkipCompanyUuidRequestBody;
 };
 
+export type PostCompaniesPayrollSkipCompanyUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const PayrollType$inboundSchema: z.ZodNativeEnum<typeof PayrollType> = z
   .nativeEnum(PayrollType);
@@ -261,5 +276,92 @@ export function postCompaniesPayrollSkipCompanyUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostCompaniesPayrollSkipCompanyUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema:
+  z.ZodType<
+    PostCompaniesPayrollSkipCompanyUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type PostCompaniesPayrollSkipCompanyUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema:
+  z.ZodType<
+    PostCompaniesPayrollSkipCompanyUuidResponse$Outbound,
+    z.ZodTypeDef,
+    PostCompaniesPayrollSkipCompanyUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostCompaniesPayrollSkipCompanyUuidResponse$ {
+  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema;
+  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema;
+  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponse$Outbound` instead. */
+  export type Outbound = PostCompaniesPayrollSkipCompanyUuidResponse$Outbound;
+}
+
+export function postCompaniesPayrollSkipCompanyUuidResponseToJSON(
+  postCompaniesPayrollSkipCompanyUuidResponse:
+    PostCompaniesPayrollSkipCompanyUuidResponse,
+): string {
+  return JSON.stringify(
+    PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema.parse(
+      postCompaniesPayrollSkipCompanyUuidResponse,
+    ),
+  );
+}
+
+export function postCompaniesPayrollSkipCompanyUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostCompaniesPayrollSkipCompanyUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostCompaniesPayrollSkipCompanyUuidResponse' from JSON`,
   );
 }

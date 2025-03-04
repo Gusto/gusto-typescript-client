@@ -20,6 +20,21 @@ export type DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema:
   z.ZodType<
@@ -102,5 +117,93 @@ export function deleteV1EmployeeBenefitsEmployeeBenefitIdRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema:
+  z.ZodType<
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema:
+  z.ZodType<
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$ {
+  /** @deprecated use `DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema;
+  /** @deprecated use `DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema;
+  /** @deprecated use `DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound` instead. */
+  export type Outbound =
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound;
+}
+
+export function deleteV1EmployeeBenefitsEmployeeBenefitIdResponseToJSON(
+  deleteV1EmployeeBenefitsEmployeeBenefitIdResponse:
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema.parse(
+      deleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+    ),
+  );
+}
+
+export function deleteV1EmployeeBenefitsEmployeeBenefitIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse' from JSON`,
   );
 }

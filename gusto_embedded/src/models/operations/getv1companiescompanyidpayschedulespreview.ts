@@ -88,6 +88,25 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody = {
   holidays?: Array<string> | undefined;
 };
 
+export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  object?: GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody | undefined;
+};
+
 /** @internal */
 export const QueryParamFrequency$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamFrequency
@@ -365,5 +384,102 @@ export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseBodyFromJSON(
       GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    object: z.lazy(() =>
+      GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  object?:
+    | GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    object: z.lazy(() =>
+      GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseToJSON(
+  getV1CompaniesCompanyIdPaySchedulesPreviewResponse:
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesPreviewResponse' from JSON`,
   );
 }

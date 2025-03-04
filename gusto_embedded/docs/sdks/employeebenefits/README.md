@@ -114,7 +114,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBenefit](../../models/components/employeebenefit.md)\>**
+**Promise\<[operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse](../../models/operations/postv1employeesemployeeidemployeebenefitsresponse.md)\>**
 
 ### Errors
 
@@ -225,7 +225,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBenefit[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdEmployeeBenefitsResponse](../../models/operations/getv1employeesemployeeidemployeebenefitsresponse.md)\>**
 
 ### Errors
 
@@ -333,7 +333,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBenefit](../../models/components/employeebenefit.md)\>**
+**Promise\<[operations.GetV1EmployeeBenefitsEmployeeBenefitIdResponse](../../models/operations/getv1employeebenefitsemployeebenefitidresponse.md)\>**
 
 ### Errors
 
@@ -434,7 +434,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBenefit](../../models/components/employeebenefit.md)\>**
+**Promise\<[operations.PutV1EmployeeBenefitsEmployeeBenefitIdResponse](../../models/operations/putv1employeebenefitsemployeebenefitidresponse.md)\>**
 
 ### Errors
 
@@ -459,11 +459,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employeeBenefits.delete({
+  const result = await gustoEmbedded.employeeBenefits.delete({
     employeeBenefitId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -494,7 +495,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -528,7 +530,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse](../../models/operations/deletev1employeebenefitsemployeebenefitidresponse.md)\>**
 
 ### Errors
 
@@ -639,7 +641,7 @@ import {
 
 ### Response
 
-**Promise\<[components.YtdBenefitAmountsFromDifferentCompany[]](../../models/.md)\>**
+**Promise\<[operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse](../../models/operations/getemployeeytdbenefitamountsfromdifferentcompanyresponse.md)\>**
 
 ### Errors
 
@@ -665,14 +667,15 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employeeBenefits.createYtdBenefitAmountsFromDifferentCompany({
+  const result = await gustoEmbedded.employeeBenefits.createYtdBenefitAmountsFromDifferentCompany({
     employeeId: "<id>",
     postEmployeeYtdBenefitAmountsFromDifferentCompany: {
       taxYear: 2422.08,
     },
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -706,7 +709,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -740,7 +744,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse](../../models/operations/postemployeeytdbenefitamountsfromdifferentcompanyresponse.md)\>**
 
 ### Errors
 

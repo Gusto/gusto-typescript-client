@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationCreateDocuments } from "../funcs/i9VerificationCreateDocuments.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,9 +21,8 @@ export type I9VerificationCreateDocumentsMutationVariables = {
   options?: RequestOptions;
 };
 
-export type I9VerificationCreateDocumentsMutationData = Array<
-  components.I9AuthorizationDocument
->;
+export type I9VerificationCreateDocumentsMutationData =
+  operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
 
 /**
  * Create an employee's I-9 authorization verification documents

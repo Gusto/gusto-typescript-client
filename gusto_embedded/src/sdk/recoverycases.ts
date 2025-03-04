@@ -5,7 +5,6 @@
 import { recoveryCasesGet } from "../funcs/recoveryCasesGet.js";
 import { recoveryCasesRedebit } from "../funcs/recoveryCasesRedebit.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -21,7 +20,7 @@ export class RecoveryCases extends ClientSDK {
   async get(
     request: operations.GetRecoveryCasesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.RecoveryCase>> {
+  ): Promise<operations.GetRecoveryCasesResponse> {
     return unwrapAsync(recoveryCasesGet(
       this,
       request,
@@ -44,7 +43,7 @@ export class RecoveryCases extends ClientSDK {
   async redebit(
     request: operations.RedebitRecoveryCaseRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.RedebitRecoveryCaseResponse> {
     return unwrapAsync(recoveryCasesRedebit(
       this,
       request,

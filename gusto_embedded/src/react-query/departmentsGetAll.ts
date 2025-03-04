@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type DepartmentsGetAllQueryData = Array<components.Department>;
+export type DepartmentsGetAllQueryData =
+  operations.GetCompaniesDepartmentsResponse;
 
 /**
  * Get all departments of a company

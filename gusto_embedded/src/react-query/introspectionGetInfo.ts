@@ -26,8 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type IntrospectionGetInfoQueryData =
-  operations.GetV1TokenInfoResponseBody;
+export type IntrospectionGetInfoQueryData = operations.GetV1TokenInfoResponse;
 
 /**
  * Get info about the current access token

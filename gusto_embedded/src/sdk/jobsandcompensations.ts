@@ -13,7 +13,6 @@ import { jobsAndCompensationsGetJobs } from "../funcs/jobsAndCompensationsGetJob
 import { jobsAndCompensationsUpdate } from "../funcs/jobsAndCompensationsUpdate.js";
 import { jobsAndCompensationsUpdateCompensation } from "../funcs/jobsAndCompensationsUpdateCompensation.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -29,7 +28,7 @@ export class JobsAndCompensations extends ClientSDK {
   async createJob(
     request: operations.PostV1JobsJobIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Job> {
+  ): Promise<operations.PostV1JobsJobIdResponse> {
     return unwrapAsync(jobsAndCompensationsCreateJob(
       this,
       request,
@@ -48,7 +47,7 @@ export class JobsAndCompensations extends ClientSDK {
   async getJobs(
     request: operations.GetV1EmployeesEmployeeIdJobsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Job>> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdJobsResponse> {
     return unwrapAsync(jobsAndCompensationsGetJobs(
       this,
       request,
@@ -67,7 +66,7 @@ export class JobsAndCompensations extends ClientSDK {
   async getJob(
     request: operations.GetV1JobsJobIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Job> {
+  ): Promise<operations.GetV1JobsJobIdResponse> {
     return unwrapAsync(jobsAndCompensationsGetJob(
       this,
       request,
@@ -86,7 +85,7 @@ export class JobsAndCompensations extends ClientSDK {
   async update(
     request: operations.PutV1JobsJobIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Job> {
+  ): Promise<operations.PutV1JobsJobIdResponse> {
     return unwrapAsync(jobsAndCompensationsUpdate(
       this,
       request,
@@ -105,7 +104,7 @@ export class JobsAndCompensations extends ClientSDK {
   async delete(
     request: operations.DeleteV1JobsJobIdRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1JobsJobIdResponse> {
     return unwrapAsync(jobsAndCompensationsDelete(
       this,
       request,
@@ -128,7 +127,7 @@ export class JobsAndCompensations extends ClientSDK {
   async getCompensations(
     request: operations.GetV1JobsJobIdCompensationsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Compensation>> {
+  ): Promise<operations.GetV1JobsJobIdCompensationsResponse> {
     return unwrapAsync(jobsAndCompensationsGetCompensations(
       this,
       request,
@@ -147,7 +146,7 @@ export class JobsAndCompensations extends ClientSDK {
   async createCompensation(
     request: operations.PostV1CompensationsCompensationIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Compensation> {
+  ): Promise<operations.PostV1CompensationsCompensationIdResponse> {
     return unwrapAsync(jobsAndCompensationsCreateCompensation(
       this,
       request,
@@ -166,7 +165,7 @@ export class JobsAndCompensations extends ClientSDK {
   async getCompensation(
     request: operations.GetV1CompensationsCompensationIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Compensation> {
+  ): Promise<operations.GetV1CompensationsCompensationIdResponse> {
     return unwrapAsync(jobsAndCompensationsGetCompensation(
       this,
       request,
@@ -185,7 +184,7 @@ export class JobsAndCompensations extends ClientSDK {
   async updateCompensation(
     request: operations.PutV1CompensationsCompensationIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Compensation> {
+  ): Promise<operations.PutV1CompensationsCompensationIdResponse> {
     return unwrapAsync(jobsAndCompensationsUpdateCompensation(
       this,
       request,
@@ -204,7 +203,7 @@ export class JobsAndCompensations extends ClientSDK {
   async deleteCompensation(
     request: operations.DeleteV1CompensationsCompensationIdRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.DeleteV1CompensationsCompensationIdResponse> {
     return unwrapAsync(jobsAndCompensationsDeleteCompensation(
       this,
       request,

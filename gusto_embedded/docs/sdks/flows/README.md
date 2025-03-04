@@ -100,7 +100,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Flow](../../models/components/flow.md)\>**
+**Promise\<[operations.PostV1CompanyFlowsResponse](../../models/operations/postv1companyflowsresponse.md)\>**
 
 ### Errors
 

@@ -5,7 +5,7 @@
 ```typescript
 import { Columns } from "@gusto/embedded-api/models/operations";
 
-let value: Columns = "one_time_reimbursements";
+let value: Columns = "overtime_hours";
 ```
 
 ## Values

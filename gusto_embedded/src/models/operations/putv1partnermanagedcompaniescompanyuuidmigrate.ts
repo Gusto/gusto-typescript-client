@@ -62,6 +62,27 @@ export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody = {
   migrationStatus?: MigrationStatus | undefined;
 };
 
+export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  object?:
+    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+    | undefined;
+};
+
 /** @internal */
 export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema:
   z.ZodType<
@@ -338,5 +359,101 @@ export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseBodyFromJS
       PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema:
+  z.ZodType<
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    object: z.lazy(() =>
+      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  object?:
+    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema:
+  z.ZodType<
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    object: z.lazy(() =>
+      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$ {
+  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema;
+  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema;
+  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound;
+}
+
+export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseToJSON(
+  putV1PartnerManagedCompaniesCompanyUuidMigrateResponse:
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
+): string {
+  return JSON.stringify(
+    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema.parse(
+      putV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
+    ),
+  );
+}
+
+export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse' from JSON`,
   );
 }

@@ -21,6 +21,25 @@ export type GetV1LocationsLocationUuidMinimumWagesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1LocationsLocationUuidMinimumWagesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  minimumWageList?: Array<components.MinimumWage> | undefined;
+};
+
 /** @internal */
 export const GetV1LocationsLocationUuidMinimumWagesRequest$inboundSchema:
   z.ZodType<
@@ -107,5 +126,99 @@ export function getV1LocationsLocationUuidMinimumWagesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1LocationsLocationUuidMinimumWagesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1LocationsLocationUuidMinimumWagesResponse$inboundSchema:
+  z.ZodType<
+    GetV1LocationsLocationUuidMinimumWagesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Minimum-Wage-List": z.array(components.MinimumWage$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Minimum-Wage-List": "minimumWageList",
+    });
+  });
+
+/** @internal */
+export type GetV1LocationsLocationUuidMinimumWagesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Minimum-Wage-List"?: Array<components.MinimumWage$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1LocationsLocationUuidMinimumWagesResponse$outboundSchema:
+  z.ZodType<
+    GetV1LocationsLocationUuidMinimumWagesResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1LocationsLocationUuidMinimumWagesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    minimumWageList: z.array(components.MinimumWage$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      minimumWageList: "Minimum-Wage-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1LocationsLocationUuidMinimumWagesResponse$ {
+  /** @deprecated use `GetV1LocationsLocationUuidMinimumWagesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1LocationsLocationUuidMinimumWagesResponse$inboundSchema;
+  /** @deprecated use `GetV1LocationsLocationUuidMinimumWagesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1LocationsLocationUuidMinimumWagesResponse$outboundSchema;
+  /** @deprecated use `GetV1LocationsLocationUuidMinimumWagesResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1LocationsLocationUuidMinimumWagesResponse$Outbound;
+}
+
+export function getV1LocationsLocationUuidMinimumWagesResponseToJSON(
+  getV1LocationsLocationUuidMinimumWagesResponse:
+    GetV1LocationsLocationUuidMinimumWagesResponse,
+): string {
+  return JSON.stringify(
+    GetV1LocationsLocationUuidMinimumWagesResponse$outboundSchema.parse(
+      getV1LocationsLocationUuidMinimumWagesResponse,
+    ),
+  );
+}
+
+export function getV1LocationsLocationUuidMinimumWagesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1LocationsLocationUuidMinimumWagesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1LocationsLocationUuidMinimumWagesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1LocationsLocationUuidMinimumWagesResponse' from JSON`,
   );
 }

@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ReportsGetTemplateQueryData = components.ReportTemplate;
+export type ReportsGetTemplateQueryData =
+  operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
 
 /**
  * Get a report template

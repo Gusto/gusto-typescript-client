@@ -20,6 +20,25 @@ export type GetWireInRequestsWireInRequestUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetWireInRequestsWireInRequestUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  wireInRequest?: components.WireInRequest | undefined;
+};
+
 /** @internal */
 export const GetWireInRequestsWireInRequestUuidRequest$inboundSchema: z.ZodType<
   GetWireInRequestsWireInRequestUuidRequest,
@@ -100,5 +119,94 @@ export function getWireInRequestsWireInRequestUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetWireInRequestsWireInRequestUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetWireInRequestsWireInRequestUuidResponse$inboundSchema:
+  z.ZodType<GetWireInRequestsWireInRequestUuidResponse, z.ZodTypeDef, unknown> =
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      "Wire-In-Request": components.WireInRequest$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "Wire-In-Request": "wireInRequest",
+      });
+    });
+
+/** @internal */
+export type GetWireInRequestsWireInRequestUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Wire-In-Request"?: components.WireInRequest$Outbound | undefined;
+};
+
+/** @internal */
+export const GetWireInRequestsWireInRequestUuidResponse$outboundSchema:
+  z.ZodType<
+    GetWireInRequestsWireInRequestUuidResponse$Outbound,
+    z.ZodTypeDef,
+    GetWireInRequestsWireInRequestUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    wireInRequest: components.WireInRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      wireInRequest: "Wire-In-Request",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetWireInRequestsWireInRequestUuidResponse$ {
+  /** @deprecated use `GetWireInRequestsWireInRequestUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetWireInRequestsWireInRequestUuidResponse$inboundSchema;
+  /** @deprecated use `GetWireInRequestsWireInRequestUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetWireInRequestsWireInRequestUuidResponse$outboundSchema;
+  /** @deprecated use `GetWireInRequestsWireInRequestUuidResponse$Outbound` instead. */
+  export type Outbound = GetWireInRequestsWireInRequestUuidResponse$Outbound;
+}
+
+export function getWireInRequestsWireInRequestUuidResponseToJSON(
+  getWireInRequestsWireInRequestUuidResponse:
+    GetWireInRequestsWireInRequestUuidResponse,
+): string {
+  return JSON.stringify(
+    GetWireInRequestsWireInRequestUuidResponse$outboundSchema.parse(
+      getWireInRequestsWireInRequestUuidResponse,
+    ),
+  );
+}
+
+export function getWireInRequestsWireInRequestUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetWireInRequestsWireInRequestUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetWireInRequestsWireInRequestUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetWireInRequestsWireInRequestUuidResponse' from JSON`,
   );
 }

@@ -85,6 +85,25 @@ export type PutTimeOffPoliciesTimeOffPolicyUuidRequest = {
   requestBody: PutTimeOffPoliciesTimeOffPolicyUuidRequestBody;
 };
 
+export type PutTimeOffPoliciesTimeOffPolicyUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * OK
+   */
+  timeOffPolicy?: components.TimeOffPolicy | undefined;
+};
+
 /** @internal */
 export const AccrualMethod$inboundSchema: z.ZodNativeEnum<
   typeof AccrualMethod
@@ -307,5 +326,97 @@ export function putTimeOffPoliciesTimeOffPolicyUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PutTimeOffPoliciesTimeOffPolicyUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema:
+  z.ZodType<
+    PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Time-Off-Policy": components.TimeOffPolicy$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Time-Off-Policy": "timeOffPolicy",
+    });
+  });
+
+/** @internal */
+export type PutTimeOffPoliciesTimeOffPolicyUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Time-Off-Policy"?: components.TimeOffPolicy$Outbound | undefined;
+};
+
+/** @internal */
+export const PutTimeOffPoliciesTimeOffPolicyUuidResponse$outboundSchema:
+  z.ZodType<
+    PutTimeOffPoliciesTimeOffPolicyUuidResponse$Outbound,
+    z.ZodTypeDef,
+    PutTimeOffPoliciesTimeOffPolicyUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    timeOffPolicy: components.TimeOffPolicy$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      timeOffPolicy: "Time-Off-Policy",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutTimeOffPoliciesTimeOffPolicyUuidResponse$ {
+  /** @deprecated use `PutTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema;
+  /** @deprecated use `PutTimeOffPoliciesTimeOffPolicyUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutTimeOffPoliciesTimeOffPolicyUuidResponse$outboundSchema;
+  /** @deprecated use `PutTimeOffPoliciesTimeOffPolicyUuidResponse$Outbound` instead. */
+  export type Outbound = PutTimeOffPoliciesTimeOffPolicyUuidResponse$Outbound;
+}
+
+export function putTimeOffPoliciesTimeOffPolicyUuidResponseToJSON(
+  putTimeOffPoliciesTimeOffPolicyUuidResponse:
+    PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+): string {
+  return JSON.stringify(
+    PutTimeOffPoliciesTimeOffPolicyUuidResponse$outboundSchema.parse(
+      putTimeOffPoliciesTimeOffPolicyUuidResponse,
+    ),
+  );
+}
+
+export function putTimeOffPoliciesTimeOffPolicyUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutTimeOffPoliciesTimeOffPolicyUuidResponse' from JSON`,
   );
 }

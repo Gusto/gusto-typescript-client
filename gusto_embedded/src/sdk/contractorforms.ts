@@ -7,7 +7,6 @@ import { contractorFormsGet } from "../funcs/contractorFormsGet.js";
 import { contractorFormsGetPdf } from "../funcs/contractorFormsGetPdf.js";
 import { contractorFormsList } from "../funcs/contractorFormsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -23,7 +22,7 @@ export class ContractorForms extends ClientSDK {
   async list(
     request: operations.GetV1ContractorFormsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Form1099>> {
+  ): Promise<operations.GetV1ContractorFormsResponse> {
     return unwrapAsync(contractorFormsList(
       this,
       request,
@@ -42,7 +41,7 @@ export class ContractorForms extends ClientSDK {
   async get(
     request: operations.GetV1ContractorFormRequest,
     options?: RequestOptions,
-  ): Promise<components.Form1099> {
+  ): Promise<operations.GetV1ContractorFormResponse> {
     return unwrapAsync(contractorFormsGet(
       this,
       request,
@@ -61,7 +60,7 @@ export class ContractorForms extends ClientSDK {
   async getPdf(
     request: operations.GetV1ContractorFormPdfRequest,
     options?: RequestOptions,
-  ): Promise<components.FormPdf> {
+  ): Promise<operations.GetV1ContractorFormPdfResponse> {
     return unwrapAsync(contractorFormsGetPdf(
       this,
       request,
@@ -84,7 +83,7 @@ export class ContractorForms extends ClientSDK {
   async generate1099(
     request: operations.PostV1SandboxGenerate1099Request,
     options?: RequestOptions,
-  ): Promise<components.Form1099> {
+  ): Promise<operations.PostV1SandboxGenerate1099Response> {
     return unwrapAsync(contractorFormsGenerate1099(
       this,
       request,

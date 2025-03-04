@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentsGetReceiptQueryData =
-  components.ContractorPaymentReceipt;
+  operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
 
 /**
  * Get a single contractor payment receipt

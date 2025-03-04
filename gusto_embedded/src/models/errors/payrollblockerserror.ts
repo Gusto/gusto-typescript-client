@@ -40,6 +40,10 @@ export type Errors = {
  */
 export type PayrollBlockersErrorData = {
   errors?: Array<Errors> | undefined;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse?: Response | undefined;
 };
 
 /**
@@ -51,6 +55,10 @@ export type PayrollBlockersErrorData = {
  */
 export class PayrollBlockersError extends Error {
   errors?: Array<Errors> | undefined;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse?: Response | undefined;
 
   /** The original data that was passed to this error instance. */
   data$: PayrollBlockersErrorData;
@@ -63,6 +71,7 @@ export class PayrollBlockersError extends Error {
     this.data$ = err;
 
     if (err.errors != null) this.errors = err.errors;
+    if (err.rawResponse != null) this.rawResponse = err.rawResponse;
 
     this.name = "PayrollBlockersError";
   }
@@ -189,14 +198,20 @@ export const PayrollBlockersError$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
+  RawResponse: z.instanceof(Response).optional(),
 })
   .transform((v) => {
-    return new PayrollBlockersError(v);
+    const remapped = remap$(v, {
+      "RawResponse": "rawResponse",
+    });
+
+    return new PayrollBlockersError(remapped);
   });
 
 /** @internal */
 export type PayrollBlockersError$Outbound = {
   errors?: Array<Errors$Outbound> | undefined;
+  RawResponse?: never | undefined;
 };
 
 /** @internal */
@@ -206,9 +221,18 @@ export const PayrollBlockersError$outboundSchema: z.ZodType<
   PayrollBlockersError
 > = z.instanceof(PayrollBlockersError)
   .transform(v => v.data$)
-  .pipe(z.object({
-    errors: z.array(z.lazy(() => Errors$outboundSchema)).optional(),
-  }));
+  .pipe(
+    z.object({
+      errors: z.array(z.lazy(() => Errors$outboundSchema)).optional(),
+      rawResponse: z.instanceof(Response).transform(() => {
+        throw new Error("Response cannot be serialized");
+      }).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        rawResponse: "RawResponse",
+      });
+    }),
+  );
 
 /**
  * @internal

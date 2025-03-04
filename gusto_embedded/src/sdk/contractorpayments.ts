@@ -9,7 +9,6 @@ import { contractorPaymentsGet } from "../funcs/contractorPaymentsGet.js";
 import { contractorPaymentsGetReceipt } from "../funcs/contractorPaymentsGetReceipt.js";
 import { contractorPaymentsList } from "../funcs/contractorPaymentsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -33,7 +32,9 @@ export class ContractorPayments extends ClientSDK {
     request:
       operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPaymentReceipt> {
+  ): Promise<
+    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse
+  > {
     return unwrapAsync(contractorPaymentsGetReceipt(
       this,
       request,
@@ -56,7 +57,9 @@ export class ContractorPayments extends ClientSDK {
   async fund(
     request: operations.GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPayment> {
+  ): Promise<
+    operations.GetV1ContractorPaymentsContractorPaymentUuidFundResponse
+  > {
     return unwrapAsync(contractorPaymentsFund(
       this,
       request,
@@ -75,7 +78,7 @@ export class ContractorPayments extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesCompanyIdContractorPaymentsRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPayment> {
+  ): Promise<operations.PostV1CompaniesCompanyIdContractorPaymentsResponse> {
     return unwrapAsync(contractorPaymentsCreate(
       this,
       request,
@@ -94,7 +97,7 @@ export class ContractorPayments extends ClientSDK {
   async list(
     request: operations.GetV1CompaniesCompanyIdContractorPaymentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdContractorPaymentsResponseBody> {
+  ): Promise<operations.GetV1CompaniesCompanyIdContractorPaymentsResponse> {
     return unwrapAsync(contractorPaymentsList(
       this,
       request,
@@ -113,7 +116,9 @@ export class ContractorPayments extends ClientSDK {
     request:
       operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPayment> {
+  ): Promise<
+    operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse
+  > {
     return unwrapAsync(contractorPaymentsGet(
       this,
       request,
@@ -133,7 +138,9 @@ export class ContractorPayments extends ClientSDK {
     request:
       operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<
+    operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse
+  > {
     return unwrapAsync(contractorPaymentsDelete(
       this,
       request,

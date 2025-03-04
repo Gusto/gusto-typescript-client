@@ -28,6 +28,25 @@ export type PostV1CompaniesCompanyIdEarningTypesRequest = {
   requestBody: PostV1CompaniesCompanyIdEarningTypesRequestBody;
 };
 
+export type PostV1CompaniesCompanyIdEarningTypesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  earningType?: components.EarningType | undefined;
+};
+
 /** @internal */
 export const PostV1CompaniesCompanyIdEarningTypesRequestBody$inboundSchema:
   z.ZodType<
@@ -186,5 +205,97 @@ export function postV1CompaniesCompanyIdEarningTypesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyIdEarningTypesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdEarningTypesResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdEarningTypesResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Earning-Type": components.EarningType$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Earning-Type": "earningType",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyIdEarningTypesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Earning-Type"?: components.EarningType$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyIdEarningTypesResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdEarningTypesResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdEarningTypesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    earningType: components.EarningType$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      earningType: "Earning-Type",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdEarningTypesResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdEarningTypesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdEarningTypesResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdEarningTypesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdEarningTypesResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdEarningTypesResponse$Outbound` instead. */
+  export type Outbound = PostV1CompaniesCompanyIdEarningTypesResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdEarningTypesResponseToJSON(
+  postV1CompaniesCompanyIdEarningTypesResponse:
+    PostV1CompaniesCompanyIdEarningTypesResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdEarningTypesResponse$outboundSchema.parse(
+      postV1CompaniesCompanyIdEarningTypesResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyIdEarningTypesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyIdEarningTypesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdEarningTypesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyIdEarningTypesResponse' from JSON`,
   );
 }

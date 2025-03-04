@@ -8,7 +8,6 @@ import { garnishmentsGetChildSupportData } from "../funcs/garnishmentsGetChildSu
 import { garnishmentsList } from "../funcs/garnishmentsList.js";
 import { garnishmentsUpdate } from "../funcs/garnishmentsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -24,7 +23,7 @@ export class Garnishments extends ClientSDK {
   async create(
     request: operations.PostV1EmployeesEmployeeIdGarnishmentsRequest,
     options?: RequestOptions,
-  ): Promise<components.Garnishment> {
+  ): Promise<operations.PostV1EmployeesEmployeeIdGarnishmentsResponse> {
     return unwrapAsync(garnishmentsCreate(
       this,
       request,
@@ -43,7 +42,7 @@ export class Garnishments extends ClientSDK {
   async list(
     request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Garnishment>> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdGarnishmentsResponse> {
     return unwrapAsync(garnishmentsList(
       this,
       request,
@@ -62,7 +61,7 @@ export class Garnishments extends ClientSDK {
   async get(
     request: operations.GetV1GarnishmentsGarnishmentIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Garnishment> {
+  ): Promise<operations.GetV1GarnishmentsGarnishmentIdResponse> {
     return unwrapAsync(garnishmentsGet(
       this,
       request,
@@ -81,7 +80,7 @@ export class Garnishments extends ClientSDK {
   async update(
     request: operations.PutV1GarnishmentsGarnishmentIdRequest,
     options?: RequestOptions,
-  ): Promise<components.Garnishment> {
+  ): Promise<operations.PutV1GarnishmentsGarnishmentIdResponse> {
     return unwrapAsync(garnishmentsUpdate(
       this,
       request,
@@ -100,7 +99,7 @@ export class Garnishments extends ClientSDK {
   async getChildSupportData(
     request: operations.GetV1GarnishmentsChildSupportRequest,
     options?: RequestOptions,
-  ): Promise<components.ChildSupportData> {
+  ): Promise<operations.GetV1GarnishmentsChildSupportResponse> {
     return unwrapAsync(garnishmentsGetChildSupportData(
       this,
       request,

@@ -10,7 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -40,7 +39,7 @@ export function timeOffPoliciesRemoveEmployees(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.TimeOffPolicy,
+    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -66,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.TimeOffPolicy,
+      operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
       | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
@@ -162,11 +161,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    components.TimeOffPolicy,
+    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -176,7 +179,12 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.TimeOffPolicy$inboundSchema),
+    M.json(
+      200,
+      operations
+        .PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboundSchema,
+      { key: "Time-Off-Policy" },
+    ),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

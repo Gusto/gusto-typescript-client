@@ -7,7 +7,7 @@ import { PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody
 
 let value:
   PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody = {
-    email: "Agnes_Ortiz@gmail.com",
+    email: "Liam.Heidenreich@hotmail.com",
   };
 ```
 

@@ -108,7 +108,7 @@ import {
 
 ### Response
 
-**Promise\<[components.ContractorBankAccount](../../models/components/contractorbankaccount.md)\>**
+**Promise\<[operations.PostV1ContractorsContractorUuidBankAccountsResponse](../../models/operations/postv1contractorscontractoruuidbankaccountsresponse.md)\>**
 
 ### Errors
 

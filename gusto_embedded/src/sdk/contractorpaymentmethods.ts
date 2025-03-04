@@ -4,7 +4,6 @@
 
 import { contractorPaymentMethodsCreateBankAccount } from "../funcs/contractorPaymentMethodsCreateBankAccount.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +21,7 @@ export class ContractorPaymentMethods extends ClientSDK {
   async createBankAccount(
     request: operations.PostV1ContractorsContractorUuidBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorBankAccount> {
+  ): Promise<operations.PostV1ContractorsContractorUuidBankAccountsResponse> {
     return unwrapAsync(contractorPaymentMethodsCreateBankAccount(
       this,
       request,

@@ -21,7 +21,8 @@ export type RecoveryCasesRedebitMutationVariables = {
   options?: RequestOptions;
 };
 
-export type RecoveryCasesRedebitMutationData = void;
+export type RecoveryCasesRedebitMutationData =
+  operations.RedebitRecoveryCaseResponse;
 
 /**
  * Initiate a redebit for a recovery case

@@ -108,7 +108,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Document[]](../../models/.md)\>**
+**Promise\<[operations.GetV1ContractorDocumentsResponse](../../models/operations/getv1contractordocumentsresponse.md)\>**
 
 ### Errors
 
@@ -214,7 +214,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Document](../../models/components/document.md)\>**
+**Promise\<[operations.GetV1ContractorDocumentResponse](../../models/operations/getv1contractordocumentresponse.md)\>**
 
 ### Errors
 
@@ -320,7 +320,7 @@ import {
 
 ### Response
 
-**Promise\<[components.DocumentPdf](../../models/components/documentpdf.md)\>**
+**Promise\<[operations.GetV1ContractorDocumentPdfResponse](../../models/operations/getv1contractordocumentpdfresponse.md)\>**
 
 ### Errors
 
@@ -433,7 +433,7 @@ import {
 
 ### Response
 
-**Promise\<[components.DocumentSigned](../../models/components/documentsigned.md)\>**
+**Promise\<[operations.PutV1ContractorDocumentSignResponse](../../models/operations/putv1contractordocumentsignresponse.md)\>**
 
 ### Errors
 

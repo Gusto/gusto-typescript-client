@@ -21,7 +21,8 @@ export type EmployeeAddressesDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeeAddressesDeleteMutationData = void;
+export type EmployeeAddressesDeleteMutationData =
+  operations.DeleteV1HomeAddressesHomeAddressUuidResponse;
 
 /**
  * Delete an employee's home address

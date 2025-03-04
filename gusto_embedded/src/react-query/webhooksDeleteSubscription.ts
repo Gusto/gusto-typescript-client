@@ -22,7 +22,8 @@ export type WebhooksDeleteSubscriptionMutationVariables = {
   options?: RequestOptions;
 };
 
-export type WebhooksDeleteSubscriptionMutationData = void;
+export type WebhooksDeleteSubscriptionMutationData =
+  operations.DeleteV1WebhookSubscriptionUuidResponse;
 
 /**
  * Delete a webhook subscription

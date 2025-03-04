@@ -20,6 +20,21 @@ export type PutV1TaxLiabilitiesFinishRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type PutV1TaxLiabilitiesFinishResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const PutV1TaxLiabilitiesFinishRequest$inboundSchema: z.ZodType<
   PutV1TaxLiabilitiesFinishRequest,
@@ -90,5 +105,82 @@ export function putV1TaxLiabilitiesFinishRequestFromJSON(
     jsonString,
     (x) => PutV1TaxLiabilitiesFinishRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PutV1TaxLiabilitiesFinishRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1TaxLiabilitiesFinishResponse$inboundSchema: z.ZodType<
+  PutV1TaxLiabilitiesFinishResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type PutV1TaxLiabilitiesFinishResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const PutV1TaxLiabilitiesFinishResponse$outboundSchema: z.ZodType<
+  PutV1TaxLiabilitiesFinishResponse$Outbound,
+  z.ZodTypeDef,
+  PutV1TaxLiabilitiesFinishResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1TaxLiabilitiesFinishResponse$ {
+  /** @deprecated use `PutV1TaxLiabilitiesFinishResponse$inboundSchema` instead. */
+  export const inboundSchema = PutV1TaxLiabilitiesFinishResponse$inboundSchema;
+  /** @deprecated use `PutV1TaxLiabilitiesFinishResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1TaxLiabilitiesFinishResponse$outboundSchema;
+  /** @deprecated use `PutV1TaxLiabilitiesFinishResponse$Outbound` instead. */
+  export type Outbound = PutV1TaxLiabilitiesFinishResponse$Outbound;
+}
+
+export function putV1TaxLiabilitiesFinishResponseToJSON(
+  putV1TaxLiabilitiesFinishResponse: PutV1TaxLiabilitiesFinishResponse,
+): string {
+  return JSON.stringify(
+    PutV1TaxLiabilitiesFinishResponse$outboundSchema.parse(
+      putV1TaxLiabilitiesFinishResponse,
+    ),
+  );
+}
+
+export function putV1TaxLiabilitiesFinishResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PutV1TaxLiabilitiesFinishResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PutV1TaxLiabilitiesFinishResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PutV1TaxLiabilitiesFinishResponse' from JSON`,
   );
 }

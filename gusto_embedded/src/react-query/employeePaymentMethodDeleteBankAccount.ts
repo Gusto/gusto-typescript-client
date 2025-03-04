@@ -22,7 +22,8 @@ export type EmployeePaymentMethodDeleteBankAccountMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeePaymentMethodDeleteBankAccountMutationData = void;
+export type EmployeePaymentMethodDeleteBankAccountMutationData =
+  operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse;
 
 /**
  * Delete an employee bank account

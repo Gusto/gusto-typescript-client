@@ -7,7 +7,7 @@ The contractor type.
 ```typescript
 import { PutV1ContractorsContractorUuidType } from "@gusto/embedded-api/models/operations";
 
-let value: PutV1ContractorsContractorUuidType = "Individual";
+let value: PutV1ContractorsContractorUuidType = "Business";
 ```
 
 ## Values

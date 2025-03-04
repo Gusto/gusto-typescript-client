@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupUpdateStateTaxes } from "../funcs/employeeTaxSetupUpdateStateTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,9 +21,8 @@ export type EmployeeTaxSetupUpdateStateTaxesMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeeTaxSetupUpdateStateTaxesMutationData = Array<
-  components.EmployeeStateTax
->;
+export type EmployeeTaxSetupUpdateStateTaxesMutationData =
+  operations.PutV1EmployeesEmployeeIdStateTaxesResponse;
 
 /**
  * Update an employee's state taxes

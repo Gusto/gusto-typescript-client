@@ -154,7 +154,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Employee](../../models/components/employee.md)\>**
+**Promise\<[operations.PutV1HistoricalEmployeesResponse](../../models/operations/putv1historicalemployeesresponse.md)\>**
 
 ### Errors
 

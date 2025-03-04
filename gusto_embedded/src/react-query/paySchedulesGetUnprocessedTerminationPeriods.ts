@@ -26,9 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PaySchedulesGetUnprocessedTerminationPeriodsQueryData = Array<
-  components.UnprocessedTerminationPayPeriod
->;
+export type PaySchedulesGetUnprocessedTerminationPeriodsQueryData =
+  operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse;
 
 /**
  * Get termination pay periods for a company

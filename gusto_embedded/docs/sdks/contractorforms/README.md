@@ -108,7 +108,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form1099[]](../../models/.md)\>**
+**Promise\<[operations.GetV1ContractorFormsResponse](../../models/operations/getv1contractorformsresponse.md)\>**
 
 ### Errors
 
@@ -216,7 +216,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form1099](../../models/components/form1099.md)\>**
+**Promise\<[operations.GetV1ContractorFormResponse](../../models/operations/getv1contractorformresponse.md)\>**
 
 ### Errors
 
@@ -324,7 +324,7 @@ import {
 
 ### Response
 
-**Promise\<[components.FormPdf](../../models/components/formpdf.md)\>**
+**Promise\<[operations.GetV1ContractorFormPdfResponse](../../models/operations/getv1contractorformpdfresponse.md)\>**
 
 ### Errors
 
@@ -427,7 +427,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Form1099](../../models/components/form1099.md)\>**
+**Promise\<[operations.PostV1SandboxGenerate1099Response](../../models/operations/postv1sandboxgenerate1099response.md)\>**
 
 ### Errors
 

@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type GarnishmentsGetChildSupportDataQueryData =
-  components.ChildSupportData;
+  operations.GetV1GarnishmentsChildSupportResponse;
 
 /**
  * Get child support garnishment data

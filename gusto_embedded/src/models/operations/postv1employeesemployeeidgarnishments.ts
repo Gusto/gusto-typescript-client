@@ -90,6 +90,25 @@ export type PostV1EmployeesEmployeeIdGarnishmentsRequest = {
   requestBody: PostV1EmployeesEmployeeIdGarnishmentsRequestBody;
 };
 
+export type PostV1EmployeesEmployeeIdGarnishmentsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  garnishment?: components.Garnishment | undefined;
+};
+
 /** @internal */
 export const GarnishmentType$inboundSchema: z.ZodNativeEnum<
   typeof GarnishmentType
@@ -329,5 +348,97 @@ export function postV1EmployeesEmployeeIdGarnishmentsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1EmployeesEmployeeIdGarnishmentsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdGarnishmentsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    Garnishment: components.Garnishment$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Garnishment": "garnishment",
+    });
+  });
+
+/** @internal */
+export type PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Garnishment?: components.Garnishment$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema:
+  z.ZodType<
+    PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1EmployeesEmployeeIdGarnishmentsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    garnishment: components.Garnishment$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      garnishment: "Garnishment",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesEmployeeIdGarnishmentsResponse$ {
+  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound` instead. */
+  export type Outbound = PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound;
+}
+
+export function postV1EmployeesEmployeeIdGarnishmentsResponseToJSON(
+  postV1EmployeesEmployeeIdGarnishmentsResponse:
+    PostV1EmployeesEmployeeIdGarnishmentsResponse,
+): string {
+  return JSON.stringify(
+    PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema.parse(
+      postV1EmployeesEmployeeIdGarnishmentsResponse,
+    ),
+  );
+}
+
+export function postV1EmployeesEmployeeIdGarnishmentsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EmployeesEmployeeIdGarnishmentsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EmployeesEmployeeIdGarnishmentsResponse' from JSON`,
   );
 }

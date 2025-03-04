@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeesGetTimeOffActivitiesQueryData = components.TimeOffActivity;
+export type EmployeesGetTimeOffActivitiesQueryData =
+  operations.GetVersionEmployeesTimeOffActivitiesResponse;
 
 /**
  * Get employee time off activities

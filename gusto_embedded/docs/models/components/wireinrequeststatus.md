@@ -7,7 +7,7 @@ Status of the wire in
 ```typescript
 import { WireInRequestStatus } from "@gusto/embedded-api/models/components";
 
-let value: WireInRequestStatus = "awaiting_funds";
+let value: WireInRequestStatus = "approved";
 ```
 
 ## Values

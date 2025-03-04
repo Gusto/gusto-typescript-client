@@ -5,10 +5,10 @@ Unprocessable Entity
 
 ## Supported Types
 
-### `errors.UnprocessableEntityErrorObject`
+### `errors.UnprocessableEntityErrorObject1`
 
 ```typescript
-const value: errors.UnprocessableEntityErrorObject = {};
+const value: errors.UnprocessableEntityErrorObject1 = {};
 ```
 
 ### `errors.PayrollBlockersError`

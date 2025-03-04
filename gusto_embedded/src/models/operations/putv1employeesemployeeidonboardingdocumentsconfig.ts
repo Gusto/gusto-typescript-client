@@ -28,6 +28,27 @@ export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest = {
   requestBody: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody;
 };
 
+export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeOnboardingDocument?:
+    | components.EmployeeOnboardingDocument
+    | undefined;
+};
+
 /** @internal */
 export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema:
   z.ZodType<
@@ -194,5 +215,101 @@ export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestFromJSON
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Employee-Onboarding-Document": components
+      .EmployeeOnboardingDocument$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Employee-Onboarding-Document": "employeeOnboardingDocument",
+    });
+  });
+
+/** @internal */
+export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Employee-Onboarding-Document"?:
+      | components.EmployeeOnboardingDocument$Outbound
+      | undefined;
+  };
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeOnboardingDocument: components
+      .EmployeeOnboardingDocument$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeOnboardingDocument: "Employee-Onboarding-Document",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound` instead. */
+  export type Outbound =
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound;
+}
+
+export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponseToJSON(
+  putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse:
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema
+      .parse(putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse),
+  );
+}
+
+export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse' from JSON`,
   );
 }

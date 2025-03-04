@@ -20,6 +20,25 @@ export type GetV1ContractorDocumentPdfRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1ContractorDocumentPdfResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  documentPdf?: components.DocumentPdf | undefined;
+};
+
 /** @internal */
 export const GetV1ContractorDocumentPdfRequest$inboundSchema: z.ZodType<
   GetV1ContractorDocumentPdfRequest,
@@ -91,5 +110,88 @@ export function getV1ContractorDocumentPdfRequestFromJSON(
     jsonString,
     (x) => GetV1ContractorDocumentPdfRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1ContractorDocumentPdfRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1ContractorDocumentPdfResponse$inboundSchema: z.ZodType<
+  GetV1ContractorDocumentPdfResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Document-Pdf": components.DocumentPdf$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Document-Pdf": "documentPdf",
+  });
+});
+
+/** @internal */
+export type GetV1ContractorDocumentPdfResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Document-Pdf"?: components.DocumentPdf$Outbound | undefined;
+};
+
+/** @internal */
+export const GetV1ContractorDocumentPdfResponse$outboundSchema: z.ZodType<
+  GetV1ContractorDocumentPdfResponse$Outbound,
+  z.ZodTypeDef,
+  GetV1ContractorDocumentPdfResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  documentPdf: components.DocumentPdf$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    documentPdf: "Document-Pdf",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1ContractorDocumentPdfResponse$ {
+  /** @deprecated use `GetV1ContractorDocumentPdfResponse$inboundSchema` instead. */
+  export const inboundSchema = GetV1ContractorDocumentPdfResponse$inboundSchema;
+  /** @deprecated use `GetV1ContractorDocumentPdfResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1ContractorDocumentPdfResponse$outboundSchema;
+  /** @deprecated use `GetV1ContractorDocumentPdfResponse$Outbound` instead. */
+  export type Outbound = GetV1ContractorDocumentPdfResponse$Outbound;
+}
+
+export function getV1ContractorDocumentPdfResponseToJSON(
+  getV1ContractorDocumentPdfResponse: GetV1ContractorDocumentPdfResponse,
+): string {
+  return JSON.stringify(
+    GetV1ContractorDocumentPdfResponse$outboundSchema.parse(
+      getV1ContractorDocumentPdfResponse,
+    ),
+  );
+}
+
+export function getV1ContractorDocumentPdfResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1ContractorDocumentPdfResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1ContractorDocumentPdfResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1ContractorDocumentPdfResponse' from JSON`,
   );
 }

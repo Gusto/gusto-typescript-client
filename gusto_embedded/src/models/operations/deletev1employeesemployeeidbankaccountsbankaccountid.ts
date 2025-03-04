@@ -24,6 +24,21 @@ export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$inboundSchema:
   z.ZodType<
@@ -110,5 +125,92 @@ export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestFromJ
       DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema:
+  z.ZodType<
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+  };
+
+/** @internal */
+export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema:
+  z.ZodType<
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$ {
+  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema;
+  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema;
+  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound` instead. */
+  export type Outbound =
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound;
+}
+
+export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponseToJSON(
+  deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse:
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema
+      .parse(deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse),
+  );
+}
+
+export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse' from JSON`,
   );
 }

@@ -7,7 +7,7 @@ The Gusto product tier of the company (not applicable to Embedded partner manage
 ```typescript
 import { Tier } from "@gusto/embedded-api/models/components";
 
-let value: Tier = "premium";
+let value: Tier = "complete";
 ```
 
 ## Values

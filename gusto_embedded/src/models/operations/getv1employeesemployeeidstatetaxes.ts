@@ -20,6 +20,25 @@ export type GetV1EmployeesEmployeeIdStateTaxesRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1EmployeesEmployeeIdStateTaxesResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  employeeStateTaxesList?: Array<components.EmployeeStateTax> | undefined;
+};
+
 /** @internal */
 export const GetV1EmployeesEmployeeIdStateTaxesRequest$inboundSchema: z.ZodType<
   GetV1EmployeesEmployeeIdStateTaxesRequest,
@@ -100,5 +119,99 @@ export function getV1EmployeesEmployeeIdStateTaxesRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1EmployeesEmployeeIdStateTaxesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema:
+  z.ZodType<GetV1EmployeesEmployeeIdStateTaxesResponse, z.ZodTypeDef, unknown> =
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      "Employee-State-Taxes-List": z.array(
+        components.EmployeeStateTax$inboundSchema,
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "Employee-State-Taxes-List": "employeeStateTaxesList",
+      });
+    });
+
+/** @internal */
+export type GetV1EmployeesEmployeeIdStateTaxesResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Employee-State-Taxes-List"?:
+    | Array<components.EmployeeStateTax$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema:
+  z.ZodType<
+    GetV1EmployeesEmployeeIdStateTaxesResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1EmployeesEmployeeIdStateTaxesResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    employeeStateTaxesList: z.array(components.EmployeeStateTax$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      employeeStateTaxesList: "Employee-State-Taxes-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdStateTaxesResponse$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdStateTaxesResponse$Outbound` instead. */
+  export type Outbound = GetV1EmployeesEmployeeIdStateTaxesResponse$Outbound;
+}
+
+export function getV1EmployeesEmployeeIdStateTaxesResponseToJSON(
+  getV1EmployeesEmployeeIdStateTaxesResponse:
+    GetV1EmployeesEmployeeIdStateTaxesResponse,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema.parse(
+      getV1EmployeesEmployeeIdStateTaxesResponse,
+    ),
+  );
+}
+
+export function getV1EmployeesEmployeeIdStateTaxesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesEmployeeIdStateTaxesResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesEmployeeIdStateTaxesResponse' from JSON`,
   );
 }

@@ -105,7 +105,7 @@ import {
 
 ### Response
 
-**Promise\<[components.AchTransaction[]](../../models/.md)\>**
+**Promise\<[operations.GetAchTransactionsResponse](../../models/operations/getachtransactionsresponse.md)\>**
 
 ### Errors
 

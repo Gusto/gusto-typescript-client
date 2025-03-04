@@ -112,7 +112,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBankAccount](../../models/components/employeebankaccount.md)\>**
+**Promise\<[operations.PostV1EmployeesEmployeeIdBankAccountsResponse](../../models/operations/postv1employeesemployeeidbankaccountsresponse.md)\>**
 
 ### Errors
 
@@ -138,12 +138,13 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.employeePaymentMethod.deleteBankAccount({
+  const result = await gustoEmbedded.employeePaymentMethod.deleteBankAccount({
     employeeId: "<id>",
     bankAccountUuid: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -175,7 +176,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -209,7 +211,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse](../../models/operations/deletev1employeesemployeeidbankaccountsbankaccountidresponse.md)\>**
 
 ### Errors
 
@@ -318,7 +320,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBankAccount](../../models/components/employeebankaccount.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdBankAccountsResponse](../../models/operations/putv1employeesemployeeidbankaccountsresponse.md)\>**
 
 ### Errors
 
@@ -427,7 +429,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeePaymentMethod](../../models/components/employeepaymentmethod.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdPaymentMethodResponse](../../models/operations/getv1employeesemployeeidpaymentmethodresponse.md)\>**
 
 ### Errors
 
@@ -573,7 +575,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeePaymentMethod](../../models/components/employeepaymentmethod.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdPaymentMethodResponse](../../models/operations/putv1employeesemployeeidpaymentmethodresponse.md)\>**
 
 ### Errors
 

@@ -7,7 +7,7 @@ The pay schedule assignment type.
 ```typescript
 import { PayScheduleAssignmentPreviewType } from "@gusto/embedded-api/models/components";
 
-let value: PayScheduleAssignmentPreviewType = "hourly_salaried";
+let value: PayScheduleAssignmentPreviewType = "by_department";
 ```
 
 ## Values

@@ -112,7 +112,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyBenefit](../../models/components/companybenefit.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdCompanyBenefitsResponse](../../models/operations/postv1companiescompanyidcompanybenefitsresponse.md)\>**
 
 ### Errors
 
@@ -223,7 +223,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyBenefit[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdCompanyBenefitsResponse](../../models/operations/getv1companiescompanyidcompanybenefitsresponse.md)\>**
 
 ### Errors
 
@@ -333,7 +333,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyBenefitWithEmployeeBenefits](../../models/components/companybenefitwithemployeebenefits.md)\>**
+**Promise\<[operations.GetV1CompanyBenefitsCompanyBenefitIdResponse](../../models/operations/getv1companybenefitscompanybenefitidresponse.md)\>**
 
 ### Errors
 
@@ -438,7 +438,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyBenefit](../../models/components/companybenefit.md)\>**
+**Promise\<[operations.PutV1CompanyBenefitsCompanyBenefitIdResponse](../../models/operations/putv1companybenefitscompanybenefitidresponse.md)\>**
 
 ### Errors
 
@@ -466,11 +466,12 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  await gustoEmbedded.companyBenefits.delete({
+  const result = await gustoEmbedded.companyBenefits.delete({
     companyBenefitId: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -501,7 +502,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -535,7 +537,7 @@ import {
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse](../../models/operations/deletev1companybenefitscompanybenefitidresponse.md)\>**
 
 ### Errors
 
@@ -640,7 +642,7 @@ import {
 
 ### Response
 
-**Promise\<[components.SupportedBenefit[]](../../models/.md)\>**
+**Promise\<[operations.GetV1BenefitsResponse](../../models/operations/getv1benefitsresponse.md)\>**
 
 ### Errors
 
@@ -748,7 +750,7 @@ import {
 
 ### Response
 
-**Promise\<[components.SupportedBenefit](../../models/components/supportedbenefit.md)\>**
+**Promise\<[operations.GetV1BenefitsBenefitIdResponse](../../models/operations/getv1benefitsbenefitidresponse.md)\>**
 
 ### Errors
 
@@ -860,7 +862,7 @@ import {
 
 ### Response
 
-**Promise\<[components.BenefitSummary](../../models/components/benefitsummary.md)\>**
+**Promise\<[operations.GetV1BenefitsCompanyBenefitIdSummaryResponse](../../models/operations/getv1benefitscompanybenefitidsummaryresponse.md)\>**
 
 ### Errors
 
@@ -970,7 +972,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBenefit[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse](../../models/operations/getv1companybenefitscompanybenefitidemployeebenefitsresponse.md)\>**
 
 ### Errors
 
@@ -1085,7 +1087,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeBenefit[]](../../models/.md)\>**
+**Promise\<[operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse](../../models/operations/putv1companybenefitscompanybenefitidemployeebenefitsresponse.md)\>**
 
 ### Errors
 
@@ -1192,7 +1194,7 @@ import {
 
 ### Response
 
-**Promise\<[components.BenefitTypeRequirements](../../models/components/benefittyperequirements.md)\>**
+**Promise\<[operations.GetV1BenefitsBenefitsIdRequirementsResponse](../../models/operations/getv1benefitsbenefitsidrequirementsresponse.md)\>**
 
 ### Errors
 

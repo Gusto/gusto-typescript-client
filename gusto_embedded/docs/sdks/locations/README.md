@@ -116,7 +116,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Location](../../models/components/location.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdLocationsResponse](../../models/operations/postv1companiescompanyidlocationsresponse.md)\>**
 
 ### Errors
 
@@ -225,7 +225,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Location[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdLocationsResponse](../../models/operations/getv1companiescompanyidlocationsresponse.md)\>**
 
 ### Errors
 
@@ -331,7 +331,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Location](../../models/components/location.md)\>**
+**Promise\<[operations.GetV1LocationsLocationIdResponse](../../models/operations/getv1locationslocationidresponse.md)\>**
 
 ### Errors
 
@@ -446,7 +446,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Location](../../models/components/location.md)\>**
+**Promise\<[operations.PutV1LocationsLocationIdResponse](../../models/operations/putv1locationslocationidresponse.md)\>**
 
 ### Errors
 
@@ -555,7 +555,7 @@ import {
 
 ### Response
 
-**Promise\<[components.MinimumWage[]](../../models/.md)\>**
+**Promise\<[operations.GetV1LocationsLocationUuidMinimumWagesResponse](../../models/operations/getv1locationslocationuuidminimumwagesresponse.md)\>**
 
 ### Errors
 

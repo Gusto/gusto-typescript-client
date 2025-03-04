@@ -24,6 +24,25 @@ export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  paySchedule?: components.PaySchedule | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema:
   z.ZodType<
@@ -109,5 +128,97 @@ export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestFromJSON(
       GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Pay-Schedule": components.PaySchedule$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Pay-Schedule": "paySchedule",
+    });
+  });
+
+/** @internal */
+export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound =
+  {
+    ContentType: string;
+    StatusCode: number;
+    RawResponse: never;
+    "Pay-Schedule"?: components.PaySchedule$Outbound | undefined;
+  };
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    paySchedule: components.PaySchedule$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      paySchedule: "Pay-Schedule",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound` instead. */
+  export type Outbound =
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseToJSON(
+  getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse:
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema
+      .parse(getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse),
+  );
+}
+
+export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse' from JSON`,
   );
 }

@@ -7,7 +7,6 @@ import { bankAccountsCreateFromPlaidToken } from "../funcs/bankAccountsCreateFro
 import { bankAccountsGet } from "../funcs/bankAccountsGet.js";
 import { bankAccountsVerify } from "../funcs/bankAccountsVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -32,7 +31,7 @@ export class BankAccounts extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesCompanyIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyBankAccount> {
+  ): Promise<operations.PostV1CompaniesCompanyIdBankAccountsResponse> {
     return unwrapAsync(bankAccountsCreate(
       this,
       request,
@@ -51,7 +50,7 @@ export class BankAccounts extends ClientSDK {
   async get(
     request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.CompanyBankAccount>> {
+  ): Promise<operations.GetV1CompaniesCompanyIdBankAccountsResponse> {
     return unwrapAsync(bankAccountsGet(
       this,
       request,
@@ -83,7 +82,7 @@ export class BankAccounts extends ClientSDK {
   async verify(
     request: operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyBankAccount> {
+  ): Promise<operations.PutV1CompaniesCompanyIdBankAccountsVerifyResponse> {
     return unwrapAsync(bankAccountsVerify(
       this,
       request,
@@ -109,7 +108,7 @@ export class BankAccounts extends ClientSDK {
   async createFromPlaidToken(
     request: operations.PostV1PlaidProcessorTokenRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1PlaidProcessorTokenResponseBody> {
+  ): Promise<operations.PostV1PlaidProcessorTokenResponse> {
     return unwrapAsync(bankAccountsCreateFromPlaidToken(
       this,
       request,

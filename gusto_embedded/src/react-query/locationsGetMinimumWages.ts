@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type LocationsGetMinimumWagesQueryData = Array<components.MinimumWage>;
+export type LocationsGetMinimumWagesQueryData =
+  operations.GetV1LocationsLocationUuidMinimumWagesResponse;
 
 /**
  * Get minimum wages for a location

@@ -36,6 +36,25 @@ export type PostV1CompaniesCompanyIdAdminsRequest = {
   requestBody: PostV1CompaniesCompanyIdAdminsRequestBody;
 };
 
+export type PostV1CompaniesCompanyIdAdminsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  admin?: components.Admin | undefined;
+};
+
 /** @internal */
 export const PostV1CompaniesCompanyIdAdminsRequestBody$inboundSchema: z.ZodType<
   PostV1CompaniesCompanyIdAdminsRequestBody,
@@ -200,5 +219,90 @@ export function postV1CompaniesCompanyIdAdminsRequestFromJSON(
     (x) =>
       PostV1CompaniesCompanyIdAdminsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PostV1CompaniesCompanyIdAdminsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdAdminsResponse$inboundSchema: z.ZodType<
+  PostV1CompaniesCompanyIdAdminsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  Admin: components.Admin$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Admin": "admin",
+  });
+});
+
+/** @internal */
+export type PostV1CompaniesCompanyIdAdminsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  Admin?: components.Admin$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyIdAdminsResponse$outboundSchema: z.ZodType<
+  PostV1CompaniesCompanyIdAdminsResponse$Outbound,
+  z.ZodTypeDef,
+  PostV1CompaniesCompanyIdAdminsResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+  admin: components.Admin$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+    admin: "Admin",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdAdminsResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdAdminsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdAdminsResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdAdminsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdAdminsResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdAdminsResponse$Outbound` instead. */
+  export type Outbound = PostV1CompaniesCompanyIdAdminsResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdAdminsResponseToJSON(
+  postV1CompaniesCompanyIdAdminsResponse:
+    PostV1CompaniesCompanyIdAdminsResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdAdminsResponse$outboundSchema.parse(
+      postV1CompaniesCompanyIdAdminsResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyIdAdminsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1CompaniesCompanyIdAdminsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdAdminsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1CompaniesCompanyIdAdminsResponse' from JSON`,
   );
 }

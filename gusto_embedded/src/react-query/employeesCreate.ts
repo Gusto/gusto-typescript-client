@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesCreate } from "../funcs/employeesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -22,7 +21,7 @@ export type EmployeesCreateMutationVariables = {
   options?: RequestOptions;
 };
 
-export type EmployeesCreateMutationData = components.Employee;
+export type EmployeesCreateMutationData = operations.PostV1EmployeesResponse;
 
 /**
  * Create an employee

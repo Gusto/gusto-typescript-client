@@ -21,7 +21,8 @@ export type CompanyBenefitsDeleteMutationVariables = {
   options?: RequestOptions;
 };
 
-export type CompanyBenefitsDeleteMutationData = void;
+export type CompanyBenefitsDeleteMutationData =
+  operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse;
 
 /**
  * Delete a company benefit

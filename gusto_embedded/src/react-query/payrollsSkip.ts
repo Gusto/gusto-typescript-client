@@ -21,7 +21,8 @@ export type PayrollsSkipMutationVariables = {
   options?: RequestOptions;
 };
 
-export type PayrollsSkipMutationData = void;
+export type PayrollsSkipMutationData =
+  operations.PostCompaniesPayrollSkipCompanyUuidResponse;
 
 /**
  * Skip a payroll

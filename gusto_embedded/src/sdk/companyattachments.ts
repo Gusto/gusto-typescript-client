@@ -6,7 +6,6 @@ import { companyAttachmentsCreate } from "../funcs/companyAttachmentsCreate.js";
 import { companyAttachmentsGetDetails } from "../funcs/companyAttachmentsGetDetails.js";
 import { companyAttachmentsGetList } from "../funcs/companyAttachmentsGetList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +21,7 @@ export class CompanyAttachments extends ClientSDK {
   async getDetails(
     request: operations.GetV1CompaniesAttachmentRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyAttachment> {
+  ): Promise<operations.GetV1CompaniesAttachmentResponse> {
     return unwrapAsync(companyAttachmentsGetDetails(
       this,
       request,
@@ -41,7 +40,7 @@ export class CompanyAttachments extends ClientSDK {
   async getList(
     request: operations.GetV1CompaniesAttachmentsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.CompanyAttachment>> {
+  ): Promise<operations.GetV1CompaniesAttachmentsResponse> {
     return unwrapAsync(companyAttachmentsGetList(
       this,
       request,
@@ -62,7 +61,7 @@ export class CompanyAttachments extends ClientSDK {
   async create(
     request: operations.PostV1CompaniesAttachmentRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyAttachment> {
+  ): Promise<operations.PostV1CompaniesAttachmentResponse> {
     return unwrapAsync(companyAttachmentsCreate(
       this,
       request,

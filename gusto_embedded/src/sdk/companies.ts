@@ -14,7 +14,6 @@ import { companiesMigrate } from "../funcs/companiesMigrate.js";
 import { companiesRetrieveTermsOfService } from "../funcs/companiesRetrieveTermsOfService.js";
 import { companiesUpdate } from "../funcs/companiesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -40,7 +39,7 @@ export class Companies extends ClientSDK {
     security: operations.PostV1PartnerManagedCompaniesSecurity,
     request: operations.PostV1PartnerManagedCompaniesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1PartnerManagedCompaniesResponseBody> {
+  ): Promise<operations.PostV1PartnerManagedCompaniesResponse> {
     return unwrapAsync(companiesCreatePartnerManaged(
       this,
       security,
@@ -63,7 +62,7 @@ export class Companies extends ClientSDK {
   async get(
     request: operations.GetV1CompaniesRequest,
     options?: RequestOptions,
-  ): Promise<components.Company> {
+  ): Promise<operations.GetV1CompaniesResponse> {
     return unwrapAsync(companiesGet(
       this,
       request,
@@ -82,7 +81,7 @@ export class Companies extends ClientSDK {
   async update(
     request: operations.PutV1CompaniesRequest,
     options?: RequestOptions,
-  ): Promise<components.Company> {
+  ): Promise<operations.PutV1CompaniesResponse> {
     return unwrapAsync(companiesUpdate(
       this,
       request,
@@ -104,7 +103,7 @@ export class Companies extends ClientSDK {
     request: operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
     options?: RequestOptions,
   ): Promise<
-    operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
+    operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse
   > {
     return unwrapAsync(companiesMigrate(
       this,
@@ -127,7 +126,7 @@ export class Companies extends ClientSDK {
       operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
     options?: RequestOptions,
   ): Promise<
-    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody
+    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse
   > {
     return unwrapAsync(companiesAcceptTermsOfService(
       this,
@@ -149,7 +148,7 @@ export class Companies extends ClientSDK {
       operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
     options?: RequestOptions,
   ): Promise<
-    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody
+    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse
   > {
     return unwrapAsync(companiesRetrieveTermsOfService(
       this,
@@ -170,7 +169,7 @@ export class Companies extends ClientSDK {
   async createAdmin(
     request: operations.PostV1CompaniesCompanyIdAdminsRequest,
     options?: RequestOptions,
-  ): Promise<components.Admin> {
+  ): Promise<operations.PostV1CompaniesCompanyIdAdminsResponse> {
     return unwrapAsync(companiesCreateAdmin(
       this,
       request,
@@ -189,7 +188,7 @@ export class Companies extends ClientSDK {
   async listAdmins(
     request: operations.GetV1CompaniesCompanyIdAdminsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Admin>> {
+  ): Promise<operations.GetV1CompaniesCompanyIdAdminsResponse> {
     return unwrapAsync(companiesListAdmins(
       this,
       request,
@@ -209,7 +208,7 @@ export class Companies extends ClientSDK {
   async getOnboardingStatus(
     request: operations.GetV1CompanyOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyOnboardingStatus> {
+  ): Promise<operations.GetV1CompanyOnboardingStatusResponse> {
     return unwrapAsync(companiesGetOnboardingStatus(
       this,
       request,
@@ -240,7 +239,7 @@ export class Companies extends ClientSDK {
   async finishOnboarding(
     request: operations.GetV1CompanyFinishOnboardingRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyOnboardingStatus> {
+  ): Promise<operations.GetV1CompanyFinishOnboardingResponse> {
     return unwrapAsync(companiesFinishOnboarding(
       this,
       request,
@@ -259,7 +258,7 @@ export class Companies extends ClientSDK {
   async getCustomFields(
     request: operations.GetV1CompaniesCompanyIdCustomFieldsRequest,
     options?: RequestOptions,
-  ): Promise<components.CompanyCustomFieldList> {
+  ): Promise<operations.GetV1CompaniesCompanyIdCustomFieldsResponse> {
     return unwrapAsync(companiesGetCustomFields(
       this,
       request,

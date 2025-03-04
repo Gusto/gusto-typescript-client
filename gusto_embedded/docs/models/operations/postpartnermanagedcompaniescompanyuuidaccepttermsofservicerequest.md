@@ -8,8 +8,8 @@ import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest } fro
 let value: PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest = {
   companyUuid: "<id>",
   requestBody: {
-    email: "Dorcas_Denesik68@hotmail.com",
-    ipAddress: "a54b:0498:a6cd:2b2f:8c43:a7ea:ad1c:cf65",
+    email: "Anissa33@yahoo.com",
+    ipAddress: "243.240.204.161",
     externalUserId: "<id>",
   },
 };

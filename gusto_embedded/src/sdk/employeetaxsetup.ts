@@ -7,7 +7,6 @@ import { employeeTaxSetupGetStateTaxes } from "../funcs/employeeTaxSetupGetState
 import { employeeTaxSetupUpdateFederalTaxes } from "../funcs/employeeTaxSetupUpdateFederalTaxes.js";
 import { employeeTaxSetupUpdateStateTaxes } from "../funcs/employeeTaxSetupUpdateStateTaxes.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -23,7 +22,7 @@ export class EmployeeTaxSetup extends ClientSDK {
   async getFederalTaxes(
     request: operations.GetV1EmployeesEmployeeIdFederalTaxesRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeFederalTax> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdFederalTaxesResponse> {
     return unwrapAsync(employeeTaxSetupGetFederalTaxes(
       this,
       request,
@@ -42,7 +41,7 @@ export class EmployeeTaxSetup extends ClientSDK {
   async updateFederalTaxes(
     request: operations.PutV1EmployeesEmployeeIdFederalTaxesRequest,
     options?: RequestOptions,
-  ): Promise<components.EmployeeFederalTax> {
+  ): Promise<operations.PutV1EmployeesEmployeeIdFederalTaxesResponse> {
     return unwrapAsync(employeeTaxSetupUpdateFederalTaxes(
       this,
       request,
@@ -72,7 +71,7 @@ export class EmployeeTaxSetup extends ClientSDK {
   async getStateTaxes(
     request: operations.GetV1EmployeesEmployeeIdStateTaxesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmployeeStateTax>> {
+  ): Promise<operations.GetV1EmployeesEmployeeIdStateTaxesResponse> {
     return unwrapAsync(employeeTaxSetupGetStateTaxes(
       this,
       request,
@@ -93,7 +92,7 @@ export class EmployeeTaxSetup extends ClientSDK {
   async updateStateTaxes(
     request: operations.PutV1EmployeesEmployeeIdStateTaxesRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.EmployeeStateTax>> {
+  ): Promise<operations.PutV1EmployeesEmployeeIdStateTaxesResponse> {
     return unwrapAsync(employeeTaxSetupUpdateStateTaxes(
       this,
       request,

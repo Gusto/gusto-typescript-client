@@ -108,7 +108,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeFederalTax](../../models/components/employeefederaltax.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdFederalTaxesResponse](../../models/operations/getv1employeesemployeeidfederaltaxesresponse.md)\>**
 
 ### Errors
 
@@ -223,7 +223,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeFederalTax](../../models/components/employeefederaltax.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdFederalTaxesResponse](../../models/operations/putv1employeesemployeeidfederaltaxesresponse.md)\>**
 
 ### Errors
 
@@ -342,7 +342,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeStateTax[]](../../models/.md)\>**
+**Promise\<[operations.GetV1EmployeesEmployeeIdStateTaxesResponse](../../models/operations/getv1employeesemployeeidstatetaxesresponse.md)\>**
 
 ### Errors
 
@@ -537,7 +537,7 @@ import {
 
 ### Response
 
-**Promise\<[components.EmployeeStateTax[]](../../models/.md)\>**
+**Promise\<[operations.PutV1EmployeesEmployeeIdStateTaxesResponse](../../models/operations/putv1employeesemployeeidstatetaxesresponse.md)\>**
 
 ### Errors
 

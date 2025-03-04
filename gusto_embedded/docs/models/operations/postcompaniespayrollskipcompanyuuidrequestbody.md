@@ -6,7 +6,7 @@
 import { PostCompaniesPayrollSkipCompanyUuidRequestBody } from "@gusto/embedded-api/models/operations";
 
 let value: PostCompaniesPayrollSkipCompanyUuidRequestBody = {
-  payrollType: "Hired employee",
+  payrollType: "Dismissed employee",
 };
 ```
 

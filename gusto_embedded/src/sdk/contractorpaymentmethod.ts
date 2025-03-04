@@ -6,7 +6,6 @@ import { contractorPaymentMethodGet } from "../funcs/contractorPaymentMethodGet.
 import { contractorPaymentMethodGetBankAccounts } from "../funcs/contractorPaymentMethodGetBankAccounts.js";
 import { contractorPaymentMethodUpdate } from "../funcs/contractorPaymentMethodUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +21,7 @@ export class ContractorPaymentMethod extends ClientSDK {
   async getBankAccounts(
     request: operations.GetV1ContractorsContractorUuidBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.ContractorBankAccount>> {
+  ): Promise<operations.GetV1ContractorsContractorUuidBankAccountsResponse> {
     return unwrapAsync(contractorPaymentMethodGetBankAccounts(
       this,
       request,
@@ -43,7 +42,7 @@ export class ContractorPaymentMethod extends ClientSDK {
   async get(
     request: operations.GetV1ContractorsContractorUuidPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPaymentMethod> {
+  ): Promise<operations.GetV1ContractorsContractorUuidPaymentMethodResponse> {
     return unwrapAsync(contractorPaymentMethodGet(
       this,
       request,
@@ -63,7 +62,7 @@ export class ContractorPaymentMethod extends ClientSDK {
   async update(
     request: operations.PutV1ContractorsContractorIdPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<components.ContractorPaymentMethod> {
+  ): Promise<operations.PutV1ContractorsContractorIdPaymentMethodResponse> {
     return unwrapAsync(contractorPaymentMethodUpdate(
       this,
       request,

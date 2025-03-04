@@ -26,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type InvoicesGetQueryData = components.InvoiceData;
+export type InvoicesGetQueryData = operations.GetInvoicesInvoicePeriodResponse;
 
 /**
  * Retrieve invoicing data for companies

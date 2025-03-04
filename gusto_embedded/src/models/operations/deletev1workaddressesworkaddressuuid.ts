@@ -20,6 +20,21 @@ export type DeleteV1WorkAddressesWorkAddressUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1WorkAddressesWorkAddressUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1WorkAddressesWorkAddressUuidRequest$inboundSchema:
   z.ZodType<
@@ -101,5 +116,92 @@ export function deleteV1WorkAddressesWorkAddressUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'DeleteV1WorkAddressesWorkAddressUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema:
+  z.ZodType<
+    DeleteV1WorkAddressesWorkAddressUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+    });
+  });
+
+/** @internal */
+export type DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema:
+  z.ZodType<
+    DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteV1WorkAddressesWorkAddressUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1WorkAddressesWorkAddressUuidResponse$ {
+  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema;
+  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema;
+  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound` instead. */
+  export type Outbound = DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound;
+}
+
+export function deleteV1WorkAddressesWorkAddressUuidResponseToJSON(
+  deleteV1WorkAddressesWorkAddressUuidResponse:
+    DeleteV1WorkAddressesWorkAddressUuidResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema.parse(
+      deleteV1WorkAddressesWorkAddressUuidResponse,
+    ),
+  );
+}
+
+export function deleteV1WorkAddressesWorkAddressUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1WorkAddressesWorkAddressUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteV1WorkAddressesWorkAddressUuidResponse' from JSON`,
   );
 }

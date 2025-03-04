@@ -13,7 +13,7 @@
 ```typescript
 import { IdentityVerificationStatus } from "@gusto/embedded-api/models/components";
 
-let value: IdentityVerificationStatus = "Skipped";
+let value: IdentityVerificationStatus = "Fail";
 ```
 
 ## Values

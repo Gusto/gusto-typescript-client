@@ -29,6 +29,25 @@ export type GetV1CompaniesCompanyIdPayPeriodsRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetV1CompaniesCompanyIdPayPeriodsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  payPeriodList?: Array<components.PayPeriod> | undefined;
+};
+
 /** @internal */
 export const GetV1CompaniesCompanyIdPayPeriodsRequest$inboundSchema: z.ZodType<
   GetV1CompaniesCompanyIdPayPeriodsRequest,
@@ -123,5 +142,96 @@ export function getV1CompaniesCompanyIdPayPeriodsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetV1CompaniesCompanyIdPayPeriodsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema: z.ZodType<
+  GetV1CompaniesCompanyIdPayPeriodsResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+  "Pay-Period-List": z.array(components.PayPeriod$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+    "Pay-Period-List": "payPeriodList",
+  });
+});
+
+/** @internal */
+export type GetV1CompaniesCompanyIdPayPeriodsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Pay-Period-List"?: Array<components.PayPeriod$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayPeriodsResponse$outboundSchema:
+  z.ZodType<
+    GetV1CompaniesCompanyIdPayPeriodsResponse$Outbound,
+    z.ZodTypeDef,
+    GetV1CompaniesCompanyIdPayPeriodsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    payPeriodList: z.array(components.PayPeriod$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      payPeriodList: "Pay-Period-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdPayPeriodsResponse$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPayPeriodsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdPayPeriodsResponse$outboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPayPeriodsResponse$Outbound` instead. */
+  export type Outbound = GetV1CompaniesCompanyIdPayPeriodsResponse$Outbound;
+}
+
+export function getV1CompaniesCompanyIdPayPeriodsResponseToJSON(
+  getV1CompaniesCompanyIdPayPeriodsResponse:
+    GetV1CompaniesCompanyIdPayPeriodsResponse,
+): string {
+  return JSON.stringify(
+    GetV1CompaniesCompanyIdPayPeriodsResponse$outboundSchema.parse(
+      getV1CompaniesCompanyIdPayPeriodsResponse,
+    ),
+  );
+}
+
+export function getV1CompaniesCompanyIdPayPeriodsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompaniesCompanyIdPayPeriodsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompaniesCompanyIdPayPeriodsResponse' from JSON`,
   );
 }

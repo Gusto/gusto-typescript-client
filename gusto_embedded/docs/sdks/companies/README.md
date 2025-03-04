@@ -140,7 +140,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.PostV1PartnerManagedCompaniesResponseBody](../../models/operations/postv1partnermanagedcompaniesresponsebody.md)\>**
+**Promise\<[operations.PostV1PartnerManagedCompaniesResponse](../../models/operations/postv1partnermanagedcompaniesresponse.md)\>**
 
 ### Errors
 
@@ -250,7 +250,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Company](../../models/components/company.md)\>**
+**Promise\<[operations.GetV1CompaniesResponse](../../models/operations/getv1companiesresponse.md)\>**
 
 ### Errors
 
@@ -351,7 +351,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Company](../../models/components/company.md)\>**
+**Promise\<[operations.PutV1CompaniesResponse](../../models/operations/putv1companiesresponse.md)\>**
 
 ### Errors
 
@@ -459,7 +459,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody](../../models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponsebody.md)\>**
+**Promise\<[operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse](../../models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponse.md)\>**
 
 ### Errors
 
@@ -566,7 +566,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponseBody](../../models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofserviceresponsebody.md)\>**
+**Promise\<[operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse](../../models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofserviceresponse.md)\>**
 
 ### Errors
 
@@ -668,7 +668,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody](../../models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofserviceresponsebody.md)\>**
+**Promise\<[operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse](../../models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofserviceresponse.md)\>**
 
 ### Errors
 
@@ -775,7 +775,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Admin](../../models/components/admin.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyIdAdminsResponse](../../models/operations/postv1companiescompanyidadminsresponse.md)\>**
 
 ### Errors
 
@@ -882,7 +882,7 @@ import {
 
 ### Response
 
-**Promise\<[components.Admin[]](../../models/.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdAdminsResponse](../../models/operations/getv1companiescompanyidadminsresponse.md)\>**
 
 ### Errors
 
@@ -991,7 +991,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyOnboardingStatus](../../models/components/companyonboardingstatus.md)\>**
+**Promise\<[operations.GetV1CompanyOnboardingStatusResponse](../../models/operations/getv1companyonboardingstatusresponse.md)\>**
 
 ### Errors
 
@@ -1098,7 +1098,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyOnboardingStatus](../../models/components/companyonboardingstatus.md)\>**
+**Promise\<[operations.GetV1CompanyFinishOnboardingResponse](../../models/operations/getv1companyfinishonboardingresponse.md)\>**
 
 ### Errors
 
@@ -1205,7 +1205,7 @@ import {
 
 ### Response
 
-**Promise\<[components.CompanyCustomFieldList](../../models/components/companycustomfieldlist.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyIdCustomFieldsResponse](../../models/operations/getv1companiescompanyidcustomfieldsresponse.md)\>**
 
 ### Errors
 

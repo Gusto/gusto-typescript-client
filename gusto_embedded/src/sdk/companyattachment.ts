@@ -20,7 +20,7 @@ export class CompanyAttachment extends ClientSDK {
   async getDownloadUrl(
     request: operations.GetV1CompaniesAttachmentUrlRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesAttachmentUrlResponseBody> {
+  ): Promise<operations.GetV1CompaniesAttachmentUrlResponse> {
     return unwrapAsync(companyAttachmentGetDownloadUrl(
       this,
       request,

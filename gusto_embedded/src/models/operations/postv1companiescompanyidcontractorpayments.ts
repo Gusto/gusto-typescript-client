@@ -61,6 +61,25 @@ export type PostV1CompaniesCompanyIdContractorPaymentsRequest = {
   requestBody: PostV1CompaniesCompanyIdContractorPaymentsRequestBody;
 };
 
+export type PostV1CompaniesCompanyIdContractorPaymentsResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  contractorPayment?: components.ContractorPayment | undefined;
+};
+
 /** @internal */
 export const PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$inboundSchema:
   z.ZodNativeEnum<
@@ -277,5 +296,98 @@ export function postV1CompaniesCompanyIdContractorPaymentsRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'PostV1CompaniesCompanyIdContractorPaymentsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdContractorPaymentsResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Contractor-Payment": components.ContractorPayment$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Contractor-Payment": "contractorPayment",
+    });
+  });
+
+/** @internal */
+export type PostV1CompaniesCompanyIdContractorPaymentsResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Contractor-Payment"?: components.ContractorPayment$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdContractorPaymentsResponse$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdContractorPaymentsResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    contractorPayment: components.ContractorPayment$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      contractorPayment: "Contractor-Payment",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdContractorPaymentsResponse$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentsResponse$Outbound` instead. */
+  export type Outbound =
+    PostV1CompaniesCompanyIdContractorPaymentsResponse$Outbound;
+}
+
+export function postV1CompaniesCompanyIdContractorPaymentsResponseToJSON(
+  postV1CompaniesCompanyIdContractorPaymentsResponse:
+    PostV1CompaniesCompanyIdContractorPaymentsResponse,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema.parse(
+      postV1CompaniesCompanyIdContractorPaymentsResponse,
+    ),
+  );
+}
+
+export function postV1CompaniesCompanyIdContractorPaymentsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1CompaniesCompanyIdContractorPaymentsResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1CompaniesCompanyIdContractorPaymentsResponse' from JSON`,
   );
 }

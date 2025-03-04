@@ -42,7 +42,7 @@ export function employeeFormsGenerateW2(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1SandboxGenerateW2Form,
+    operations.PostV1SandboxGenerateW2Response,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -67,7 +67,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.PostV1SandboxGenerateW2Form,
+      operations.PostV1SandboxGenerateW2Response,
       | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
@@ -150,11 +150,15 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    HttpMeta: { Response: response, Request: req },
+    ContentType: response.headers.get("content-type")
+      ?? "application/octet-stream",
+    StatusCode: response.status,
+    RawResponse: response,
+    Headers: {},
   };
 
   const [result] = await M.match<
-    operations.PostV1SandboxGenerateW2Form,
+    operations.PostV1SandboxGenerateW2Response,
     | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
@@ -164,7 +168,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PostV1SandboxGenerateW2Form$inboundSchema),
+    M.json(200, operations.PostV1SandboxGenerateW2Response$inboundSchema, {
+      key: "Form",
+    }),
     M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

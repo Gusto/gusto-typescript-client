@@ -26,7 +26,8 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type TimeOffPoliciesGetAllQueryData = Array<components.TimeOffPolicy>;
+export type TimeOffPoliciesGetAllQueryData =
+  operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse;
 
 /**
  * Get all time off policies

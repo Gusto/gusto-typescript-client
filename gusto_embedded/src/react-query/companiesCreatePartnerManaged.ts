@@ -23,7 +23,7 @@ export type CompaniesCreatePartnerManagedMutationVariables = {
 };
 
 export type CompaniesCreatePartnerManagedMutationData =
-  operations.PostV1PartnerManagedCompaniesResponseBody;
+  operations.PostV1PartnerManagedCompaniesResponse;
 
 /**
  * Create a partner managed company

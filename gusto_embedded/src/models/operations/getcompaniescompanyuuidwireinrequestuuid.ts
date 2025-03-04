@@ -20,6 +20,25 @@ export type GetCompaniesCompanyUuidWireInRequestUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type GetCompaniesCompanyUuidWireInRequestUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+  /**
+   * Example response
+   */
+  wireInRequestList?: Array<components.WireInRequest> | undefined;
+};
+
 /** @internal */
 export const GetCompaniesCompanyUuidWireInRequestUuidRequest$inboundSchema:
   z.ZodType<
@@ -102,5 +121,100 @@ export function getCompaniesCompanyUuidWireInRequestUuidRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetCompaniesCompanyUuidWireInRequestUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema:
+  z.ZodType<
+    GetCompaniesCompanyUuidWireInRequestUuidResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    "Wire-In-Request-List": z.array(components.WireInRequest$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "Wire-In-Request-List": "wireInRequestList",
+    });
+  });
+
+/** @internal */
+export type GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+  "Wire-In-Request-List"?: Array<components.WireInRequest$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema:
+  z.ZodType<
+    GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound,
+    z.ZodTypeDef,
+    GetCompaniesCompanyUuidWireInRequestUuidResponse
+  > = z.object({
+    contentType: z.string(),
+    statusCode: z.number().int(),
+    rawResponse: z.instanceof(Response).transform(() => {
+      throw new Error("Response cannot be serialized");
+    }),
+    wireInRequestList: z.array(components.WireInRequest$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "ContentType",
+      statusCode: "StatusCode",
+      rawResponse: "RawResponse",
+      wireInRequestList: "Wire-In-Request-List",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCompaniesCompanyUuidWireInRequestUuidResponse$ {
+  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema;
+  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema;
+  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound` instead. */
+  export type Outbound =
+    GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound;
+}
+
+export function getCompaniesCompanyUuidWireInRequestUuidResponseToJSON(
+  getCompaniesCompanyUuidWireInRequestUuidResponse:
+    GetCompaniesCompanyUuidWireInRequestUuidResponse,
+): string {
+  return JSON.stringify(
+    GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema.parse(
+      getCompaniesCompanyUuidWireInRequestUuidResponse,
+    ),
+  );
+}
+
+export function getCompaniesCompanyUuidWireInRequestUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetCompaniesCompanyUuidWireInRequestUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetCompaniesCompanyUuidWireInRequestUuidResponse' from JSON`,
   );
 }

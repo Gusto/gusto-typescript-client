@@ -8,7 +8,7 @@ import { RFCDate } from "@gusto/embedded-api/types";
 
 let value: PostCompaniesCompanyUuidReportsRequestBody = {
   columns: [
-    "employee_phone_number",
+    "double_overtime_earnings",
   ],
   groupings: [
     "payroll",

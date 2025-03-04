@@ -24,6 +24,21 @@ export type DeleteV1WebhookSubscriptionUuidRequest = {
   xGustoAPIVersion?: components.VersionHeader | undefined;
 };
 
+export type DeleteV1WebhookSubscriptionUuidResponse = {
+  /**
+   * HTTP response content type for this operation
+   */
+  contentType: string;
+  /**
+   * HTTP response status code for this operation
+   */
+  statusCode: number;
+  /**
+   * Raw HTTP response; suitable for custom response parsing
+   */
+  rawResponse: Response;
+};
+
 /** @internal */
 export const DeleteV1WebhookSubscriptionUuidSecurity$inboundSchema: z.ZodType<
   DeleteV1WebhookSubscriptionUuidSecurity,
@@ -171,5 +186,90 @@ export function deleteV1WebhookSubscriptionUuidRequestFromJSON(
     (x) =>
       DeleteV1WebhookSubscriptionUuidRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeleteV1WebhookSubscriptionUuidRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteV1WebhookSubscriptionUuidResponse$inboundSchema: z.ZodType<
+  DeleteV1WebhookSubscriptionUuidResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ContentType: z.string(),
+  StatusCode: z.number().int(),
+  RawResponse: z.instanceof(Response),
+}).transform((v) => {
+  return remap$(v, {
+    "ContentType": "contentType",
+    "StatusCode": "statusCode",
+    "RawResponse": "rawResponse",
+  });
+});
+
+/** @internal */
+export type DeleteV1WebhookSubscriptionUuidResponse$Outbound = {
+  ContentType: string;
+  StatusCode: number;
+  RawResponse: never;
+};
+
+/** @internal */
+export const DeleteV1WebhookSubscriptionUuidResponse$outboundSchema: z.ZodType<
+  DeleteV1WebhookSubscriptionUuidResponse$Outbound,
+  z.ZodTypeDef,
+  DeleteV1WebhookSubscriptionUuidResponse
+> = z.object({
+  contentType: z.string(),
+  statusCode: z.number().int(),
+  rawResponse: z.instanceof(Response).transform(() => {
+    throw new Error("Response cannot be serialized");
+  }),
+}).transform((v) => {
+  return remap$(v, {
+    contentType: "ContentType",
+    statusCode: "StatusCode",
+    rawResponse: "RawResponse",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1WebhookSubscriptionUuidResponse$ {
+  /** @deprecated use `DeleteV1WebhookSubscriptionUuidResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1WebhookSubscriptionUuidResponse$inboundSchema;
+  /** @deprecated use `DeleteV1WebhookSubscriptionUuidResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1WebhookSubscriptionUuidResponse$outboundSchema;
+  /** @deprecated use `DeleteV1WebhookSubscriptionUuidResponse$Outbound` instead. */
+  export type Outbound = DeleteV1WebhookSubscriptionUuidResponse$Outbound;
+}
+
+export function deleteV1WebhookSubscriptionUuidResponseToJSON(
+  deleteV1WebhookSubscriptionUuidResponse:
+    DeleteV1WebhookSubscriptionUuidResponse,
+): string {
+  return JSON.stringify(
+    DeleteV1WebhookSubscriptionUuidResponse$outboundSchema.parse(
+      deleteV1WebhookSubscriptionUuidResponse,
+    ),
+  );
+}
+
+export function deleteV1WebhookSubscriptionUuidResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeleteV1WebhookSubscriptionUuidResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeleteV1WebhookSubscriptionUuidResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeleteV1WebhookSubscriptionUuidResponse' from JSON`,
   );
 }

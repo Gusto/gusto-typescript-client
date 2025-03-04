@@ -27,7 +27,7 @@ import {
 } from "./_types.js";
 
 export type CompaniesGetCustomFieldsQueryData =
-  components.CompanyCustomFieldList;
+  operations.GetV1CompaniesCompanyIdCustomFieldsResponse;
 
 /**
  * Get the custom fields of a company
