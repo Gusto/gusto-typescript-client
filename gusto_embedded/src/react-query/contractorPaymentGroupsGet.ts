@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsGet } from "../funcs/contractorPaymentGroupsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+} from "../models/operations/getv1contractorpaymentgroupscontractorpaymentgroupid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentGroupsGetQueryData =
-  operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
+  GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 
 /**
  * Fetch a contractor payment group
@@ -38,8 +41,7 @@ export type ContractorPaymentGroupsGetQueryData =
  * scope: `payrolls:read`
  */
 export function useContractorPaymentGroupsGet(
-  request:
-    operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  request: GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   options?: QueryHookOptions<ContractorPaymentGroupsGetQueryData>,
 ): UseQueryResult<ContractorPaymentGroupsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -62,8 +64,7 @@ export function useContractorPaymentGroupsGet(
  * scope: `payrolls:read`
  */
 export function useContractorPaymentGroupsGetSuspense(
-  request:
-    operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  request: GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   options?: SuspenseQueryHookOptions<ContractorPaymentGroupsGetQueryData>,
 ): UseSuspenseQueryResult<ContractorPaymentGroupsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -80,8 +81,7 @@ export function useContractorPaymentGroupsGetSuspense(
 export function prefetchContractorPaymentGroupsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  request: GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorPaymentGroupsGetQuery(
@@ -95,7 +95,7 @@ export function setContractorPaymentGroupsGetData(
   client: QueryClient,
   queryKeyBase: [
     contractorPaymentGroupUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorPaymentGroupsGetQueryData,
 ): ContractorPaymentGroupsGetQueryData | undefined {
@@ -109,7 +109,7 @@ export function invalidateContractorPaymentGroupsGet(
   queryKeyBase: TupleToPrefixes<
     [
       contractorPaymentGroupUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -137,8 +137,7 @@ export function invalidateAllContractorPaymentGroupsGet(
 
 export function buildContractorPaymentGroupsGetQuery(
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  request: GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -171,7 +170,7 @@ export function buildContractorPaymentGroupsGetQuery(
 
 export function queryKeyContractorPaymentGroupsGet(
   contractorPaymentGroupUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

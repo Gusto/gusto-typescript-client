@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  PayrollCheck,
+  PayrollCheck$inboundSchema,
+  PayrollCheck$Outbound,
+  PayrollCheck$outboundSchema,
+} from "../components/payrollcheck.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -43,7 +53,7 @@ export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksReq
     /**
      * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
      */
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
     requestBody:
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody;
   };
@@ -65,7 +75,7 @@ export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRes
     /**
      * Example response
      */
-    payrollCheck?: components.PayrollCheck | undefined;
+    payrollCheck?: PayrollCheck | undefined;
   };
 
 /** @internal */
@@ -179,9 +189,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     unknown
   > = z.object({
     payroll_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$inboundSchema
     ),
@@ -210,9 +218,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest
   > = z.object({
     payrollUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody$outboundSchema
     ),
@@ -277,7 +283,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Payroll-Check": components.PayrollCheck$inboundSchema.optional(),
+    "Payroll-Check": PayrollCheck$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -293,7 +299,7 @@ export type PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRes
     ContentType: string;
     StatusCode: number;
     RawResponse: never;
-    "Payroll-Check"?: components.PayrollCheck$Outbound | undefined;
+    "Payroll-Check"?: PayrollCheck$Outbound | undefined;
   };
 
 /** @internal */
@@ -308,7 +314,7 @@ export const PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRe
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    payrollCheck: components.PayrollCheck$outboundSchema.optional(),
+    payrollCheck: PayrollCheck$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

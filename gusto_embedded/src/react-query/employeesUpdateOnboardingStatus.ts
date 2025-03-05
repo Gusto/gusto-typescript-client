@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesUpdateOnboardingStatus } from "../funcs/employeesUpdateOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdOnboardingStatusRequest,
+  PutV1EmployeesEmployeeIdOnboardingStatusResponse,
+} from "../models/operations/putv1employeesemployeeidonboardingstatus.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeesUpdateOnboardingStatusMutationVariables = {
-  request: operations.PutV1EmployeesEmployeeIdOnboardingStatusRequest;
+  request: PutV1EmployeesEmployeeIdOnboardingStatusRequest;
   options?: RequestOptions;
 };
 
 export type EmployeesUpdateOnboardingStatusMutationData =
-  operations.PutV1EmployeesEmployeeIdOnboardingStatusResponse;
+  PutV1EmployeesEmployeeIdOnboardingStatusResponse;
 
 /**
  * Update the employee's onboarding status

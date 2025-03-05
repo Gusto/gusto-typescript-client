@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { invoicesGet } from "../funcs/invoicesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetInvoicesInvoicePeriodRequest,
+  GetInvoicesInvoicePeriodResponse,
+  GetInvoicesInvoicePeriodSecurity,
+} from "../models/operations/getinvoicesinvoiceperiod.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +30,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type InvoicesGetQueryData = operations.GetInvoicesInvoicePeriodResponse;
+export type InvoicesGetQueryData = GetInvoicesInvoicePeriodResponse;
 
 /**
  * Retrieve invoicing data for companies
@@ -41,8 +45,8 @@ export type InvoicesGetQueryData = operations.GetInvoicesInvoicePeriodResponse;
  * scope: `invoices:read`
  */
 export function useInvoicesGet(
-  security: operations.GetInvoicesInvoicePeriodSecurity,
-  request: operations.GetInvoicesInvoicePeriodRequest,
+  security: GetInvoicesInvoicePeriodSecurity,
+  request: GetInvoicesInvoicePeriodRequest,
   options?: QueryHookOptions<InvoicesGetQueryData>,
 ): UseQueryResult<InvoicesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -70,8 +74,8 @@ export function useInvoicesGet(
  * scope: `invoices:read`
  */
 export function useInvoicesGetSuspense(
-  security: operations.GetInvoicesInvoicePeriodSecurity,
-  request: operations.GetInvoicesInvoicePeriodRequest,
+  security: GetInvoicesInvoicePeriodSecurity,
+  request: GetInvoicesInvoicePeriodRequest,
   options?: SuspenseQueryHookOptions<InvoicesGetQueryData>,
 ): UseSuspenseQueryResult<InvoicesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -89,8 +93,8 @@ export function useInvoicesGetSuspense(
 export function prefetchInvoicesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  security: operations.GetInvoicesInvoicePeriodSecurity,
-  request: operations.GetInvoicesInvoicePeriodRequest,
+  security: GetInvoicesInvoicePeriodSecurity,
+  request: GetInvoicesInvoicePeriodRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildInvoicesGetQuery(
@@ -109,7 +113,7 @@ export function setInvoicesGetData(
       page?: number | undefined;
       per?: number | undefined;
       companyUuids?: string | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: InvoicesGetQueryData,
@@ -128,7 +132,7 @@ export function invalidateInvoicesGet(
         page?: number | undefined;
         per?: number | undefined;
         companyUuids?: string | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -152,8 +156,8 @@ export function invalidateAllInvoicesGet(
 
 export function buildInvoicesGetQuery(
   client$: GustoEmbeddedCore,
-  security: operations.GetInvoicesInvoicePeriodSecurity,
-  request: operations.GetInvoicesInvoicePeriodRequest,
+  security: GetInvoicesInvoicePeriodSecurity,
+  request: GetInvoicesInvoicePeriodRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -191,7 +195,7 @@ export function queryKeyInvoicesGet(
     page?: number | undefined;
     per?: number | undefined;
     companyUuids?: string | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Invoices", "get", invoicePeriod, parameters];

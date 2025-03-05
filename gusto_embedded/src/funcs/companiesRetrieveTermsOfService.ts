@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$outboundSchema,
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$inboundSchema,
+} from "../models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofservice.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,13 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function companiesRetrieveTermsOfService(
   client: GustoEmbeddedCore,
-  request:
-    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
+  request: PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,14 +66,13 @@ export function companiesRetrieveTermsOfService(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
+  request: PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
-      | errors.UnprocessableEntityErrorObject
+      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,8 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$outboundSchema
+      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -168,8 +173,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -180,11 +185,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$inboundSchema,
+      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$inboundSchema,
       { key: "object" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

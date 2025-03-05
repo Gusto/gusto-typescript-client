@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsRemovePeople } from "../funcs/departmentsRemovePeople.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutRemovePeopleFromDepartmentRequest,
+  PutRemovePeopleFromDepartmentResponse,
+} from "../models/operations/putremovepeoplefromdepartment.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type DepartmentsRemovePeopleMutationVariables = {
-  request: operations.PutRemovePeopleFromDepartmentRequest;
+  request: PutRemovePeopleFromDepartmentRequest;
   options?: RequestOptions;
 };
 
 export type DepartmentsRemovePeopleMutationData =
-  operations.PutRemovePeopleFromDepartmentResponse;
+  PutRemovePeopleFromDepartmentResponse;
 
 /**
  * Remove people from a department

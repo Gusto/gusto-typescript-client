@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  ContractorAddress,
+  ContractorAddress$inboundSchema,
+  ContractorAddress$Outbound,
+  ContractorAddress$outboundSchema,
+} from "../components/contractoraddress.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutV1ContractorsContractorUuidAddressRequestBody = {
@@ -29,7 +39,7 @@ export type PutV1ContractorsContractorUuidAddressRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1ContractorsContractorUuidAddressRequestBody;
 };
 
@@ -49,7 +59,7 @@ export type PutV1ContractorsContractorUuidAddressResponse = {
   /**
    * Example response
    */
-  contractorAddress?: components.ContractorAddress | undefined;
+  contractorAddress?: ContractorAddress | undefined;
 };
 
 /** @internal */
@@ -153,9 +163,7 @@ export const PutV1ContractorsContractorUuidAddressRequest$inboundSchema:
     unknown
   > = z.object({
     contractor_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema
     ),
@@ -182,9 +190,7 @@ export const PutV1ContractorsContractorUuidAddressRequest$outboundSchema:
     PutV1ContractorsContractorUuidAddressRequest
   > = z.object({
     contractorUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema
     ),
@@ -248,7 +254,7 @@ export const PutV1ContractorsContractorUuidAddressResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Contractor-Address": components.ContractorAddress$inboundSchema.optional(),
+    "Contractor-Address": ContractorAddress$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -263,7 +269,7 @@ export type PutV1ContractorsContractorUuidAddressResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Contractor-Address"?: components.ContractorAddress$Outbound | undefined;
+  "Contractor-Address"?: ContractorAddress$Outbound | undefined;
 };
 
 /** @internal */
@@ -278,7 +284,7 @@ export const PutV1ContractorsContractorUuidAddressResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    contractorAddress: components.ContractorAddress$outboundSchema.optional(),
+    contractorAddress: ContractorAddress$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

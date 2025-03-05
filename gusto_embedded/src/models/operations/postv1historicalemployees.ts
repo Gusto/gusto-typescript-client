@@ -6,7 +6,23 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Employee,
+  Employee$inboundSchema,
+  Employee$Outbound,
+  Employee$outboundSchema,
+} from "../components/employee.js";
+import {
+  HistoricalEmployeeBody,
+  HistoricalEmployeeBody$inboundSchema,
+  HistoricalEmployeeBody$Outbound,
+  HistoricalEmployeeBody$outboundSchema,
+} from "../components/historicalemployeebody.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV1HistoricalEmployeesRequest = {
@@ -17,11 +33,11 @@ export type PostV1HistoricalEmployeesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   /**
    * Create a historical employee.
    */
-  historicalEmployeeBody: components.HistoricalEmployeeBody;
+  historicalEmployeeBody: HistoricalEmployeeBody;
 };
 
 export type PostV1HistoricalEmployeesResponse = {
@@ -40,7 +56,7 @@ export type PostV1HistoricalEmployeesResponse = {
   /**
    * Example response
    */
-  employee?: components.Employee | undefined;
+  employee?: Employee | undefined;
 };
 
 /** @internal */
@@ -50,10 +66,8 @@ export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
-  "Historical-Employee-Body": components.HistoricalEmployeeBody$inboundSchema,
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "Historical-Employee-Body": HistoricalEmployeeBody$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -66,7 +80,7 @@ export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
 export type PostV1HistoricalEmployeesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
-  "Historical-Employee-Body": components.HistoricalEmployeeBody$Outbound;
+  "Historical-Employee-Body": HistoricalEmployeeBody$Outbound;
 };
 
 /** @internal */
@@ -76,10 +90,8 @@ export const PostV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
   PostV1HistoricalEmployeesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
-  historicalEmployeeBody: components.HistoricalEmployeeBody$outboundSchema,
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  historicalEmployeeBody: HistoricalEmployeeBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
@@ -130,7 +142,7 @@ export const PostV1HistoricalEmployeesResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Employee: components.Employee$inboundSchema.optional(),
+  Employee: Employee$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -145,7 +157,7 @@ export type PostV1HistoricalEmployeesResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Employee?: components.Employee$Outbound | undefined;
+  Employee?: Employee$Outbound | undefined;
 };
 
 /** @internal */
@@ -159,7 +171,7 @@ export const PostV1HistoricalEmployeesResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  employee: components.Employee$outboundSchema.optional(),
+  employee: Employee$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

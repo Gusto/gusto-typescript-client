@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksRequestVerificationToken } from "../funcs/webhooksRequestVerificationToken.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+  GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+} from "../models/operations/getv1webhooksubscriptionverificationtokenuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +31,7 @@ import {
 } from "./_types.js";
 
 export type WebhooksRequestVerificationTokenQueryData =
-  operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse;
+  GetV1WebhookSubscriptionVerificationTokenUuidResponse;
 
 /**
  * Request the webhook subscription verification_token
@@ -42,8 +46,8 @@ export type WebhooksRequestVerificationTokenQueryData =
  * scope: `webhook_subscriptions:read`
  */
 export function useWebhooksRequestVerificationToken(
-  security: operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+  request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
   options?: QueryHookOptions<WebhooksRequestVerificationTokenQueryData>,
 ): UseQueryResult<WebhooksRequestVerificationTokenQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -71,8 +75,8 @@ export function useWebhooksRequestVerificationToken(
  * scope: `webhook_subscriptions:read`
  */
 export function useWebhooksRequestVerificationTokenSuspense(
-  security: operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+  request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
   options?: SuspenseQueryHookOptions<WebhooksRequestVerificationTokenQueryData>,
 ): UseSuspenseQueryResult<WebhooksRequestVerificationTokenQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -90,8 +94,8 @@ export function useWebhooksRequestVerificationTokenSuspense(
 export function prefetchWebhooksRequestVerificationToken(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+  request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildWebhooksRequestVerificationTokenQuery(
@@ -106,7 +110,7 @@ export function setWebhooksRequestVerificationTokenData(
   client: QueryClient,
   queryKeyBase: [
     webhookSubscriptionUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: WebhooksRequestVerificationTokenQueryData,
 ): WebhooksRequestVerificationTokenQueryData | undefined {
@@ -123,7 +127,7 @@ export function invalidateWebhooksRequestVerificationToken(
   queryKeyBase: TupleToPrefixes<
     [
       webhookSubscriptionUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -151,8 +155,8 @@ export function invalidateAllWebhooksRequestVerificationToken(
 
 export function buildWebhooksRequestVerificationTokenQuery(
   client$: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+  request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -186,7 +190,7 @@ export function buildWebhooksRequestVerificationTokenQuery(
 
 export function queryKeyWebhooksRequestVerificationToken(
   webhookSubscriptionUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

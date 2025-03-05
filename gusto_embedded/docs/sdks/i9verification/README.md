@@ -698,7 +698,6 @@ async function run() {
     requestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
-      signedByIpAddress: "<value>",
       agree: false,
     },
   });
@@ -730,7 +729,6 @@ async function run() {
     requestBody: {
       signatureText: "<value>",
       signerTitle: "<value>",
-      signedByIpAddress: "<value>",
       agree: false,
     },
   });

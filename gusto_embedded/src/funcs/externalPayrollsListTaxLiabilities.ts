@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1TaxLiabilitiesRequest,
+  GetV1TaxLiabilitiesRequest$outboundSchema,
+  GetV1TaxLiabilitiesResponse,
+  GetV1TaxLiabilitiesResponse$inboundSchema,
+} from "../models/operations/getv1taxliabilities.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function externalPayrollsListTaxLiabilities(
   client: GustoEmbeddedCore,
-  request: operations.GetV1TaxLiabilitiesRequest,
+  request: GetV1TaxLiabilitiesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1TaxLiabilitiesResponse,
+    GetV1TaxLiabilitiesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function externalPayrollsListTaxLiabilities(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1TaxLiabilitiesRequest,
+  request: GetV1TaxLiabilitiesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1TaxLiabilitiesResponse,
+      GetV1TaxLiabilitiesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1TaxLiabilitiesRequest$outboundSchema.parse(value),
+    (value) => GetV1TaxLiabilitiesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1TaxLiabilitiesResponse,
+    GetV1TaxLiabilitiesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -168,7 +172,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1TaxLiabilitiesResponse$inboundSchema, {
+    M.json(200, GetV1TaxLiabilitiesResponse$inboundSchema, {
       key: "Tax-Liabilities-List",
     }),
     M.fail([404, "4XX"]),

@@ -6,14 +6,24 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  SupportedBenefit,
+  SupportedBenefit$inboundSchema,
+  SupportedBenefit$Outbound,
+  SupportedBenefit$outboundSchema,
+} from "../components/supportedbenefit.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1BenefitsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1BenefitsResponse = {
@@ -32,7 +42,7 @@ export type GetV1BenefitsResponse = {
   /**
    * Example response
    */
-  supportedBenefitList?: Array<components.SupportedBenefit> | undefined;
+  supportedBenefitList?: Array<SupportedBenefit> | undefined;
 };
 
 /** @internal */
@@ -41,9 +51,7 @@ export const GetV1BenefitsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "X-Gusto-API-Version": "xGustoAPIVersion",
@@ -61,9 +69,7 @@ export const GetV1BenefitsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1BenefitsRequest
 > = z.object({
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
@@ -110,8 +116,7 @@ export const GetV1BenefitsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Supported-Benefit-List": z.array(components.SupportedBenefit$inboundSchema)
-    .optional(),
+  "Supported-Benefit-List": z.array(SupportedBenefit$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -126,9 +131,7 @@ export type GetV1BenefitsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Supported-Benefit-List"?:
-    | Array<components.SupportedBenefit$Outbound>
-    | undefined;
+  "Supported-Benefit-List"?: Array<SupportedBenefit$Outbound> | undefined;
 };
 
 /** @internal */
@@ -142,8 +145,7 @@ export const GetV1BenefitsResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  supportedBenefitList: z.array(components.SupportedBenefit$outboundSchema)
-    .optional(),
+  supportedBenefitList: z.array(SupportedBenefit$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

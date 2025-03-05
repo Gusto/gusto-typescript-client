@@ -3,9 +3,9 @@
 ## Example Usage
 
 ```typescript
-import { Requirements } from "@gusto/embedded-api/models/components";
+import { Requirements } from "@gusto/embedded-api/models/components/companyonboardingstatus.js";
 
-let value: Requirements = "verify_bank_info";
+let value: Requirements = "external_payroll";
 ```
 
 ## Values

@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  FormPdf,
+  FormPdf$inboundSchema,
+  FormPdf$Outbound,
+  FormPdf$outboundSchema,
+} from "../components/formpdf.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1ContractorFormPdfRequest = {
@@ -21,7 +31,7 @@ export type GetV1ContractorFormPdfRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1ContractorFormPdfResponse = {
@@ -40,7 +50,7 @@ export type GetV1ContractorFormPdfResponse = {
   /**
    * Example response
    */
-  formPdf?: components.FormPdf | undefined;
+  formPdf?: FormPdf | undefined;
 };
 
 /** @internal */
@@ -51,9 +61,7 @@ export const GetV1ContractorFormPdfRequest$inboundSchema: z.ZodType<
 > = z.object({
   contractor_uuid: z.string(),
   form_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",
@@ -77,9 +85,7 @@ export const GetV1ContractorFormPdfRequest$outboundSchema: z.ZodType<
 > = z.object({
   contractorUuid: z.string(),
   formId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     contractorUuid: "contractor_uuid",
@@ -130,7 +136,7 @@ export const GetV1ContractorFormPdfResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Form-Pdf": components.FormPdf$inboundSchema.optional(),
+  "Form-Pdf": FormPdf$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -145,7 +151,7 @@ export type GetV1ContractorFormPdfResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Form-Pdf"?: components.FormPdf$Outbound | undefined;
+  "Form-Pdf"?: FormPdf$Outbound | undefined;
 };
 
 /** @internal */
@@ -159,7 +165,7 @@ export const GetV1ContractorFormPdfResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  formPdf: components.FormPdf$outboundSchema.optional(),
+  formPdf: FormPdf$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesGetCustomFields } from "../funcs/companiesGetCustomFields.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdCustomFieldsRequest,
+  GetV1CompaniesCompanyIdCustomFieldsResponse,
+} from "../models/operations/getv1companiescompanyidcustomfields.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type CompaniesGetCustomFieldsQueryData =
-  operations.GetV1CompaniesCompanyIdCustomFieldsResponse;
+  GetV1CompaniesCompanyIdCustomFieldsResponse;
 
 /**
  * Get the custom fields of a company
@@ -38,7 +41,7 @@ export type CompaniesGetCustomFieldsQueryData =
  * scope: `companies:read`
  */
 export function useCompaniesGetCustomFields(
-  request: operations.GetV1CompaniesCompanyIdCustomFieldsRequest,
+  request: GetV1CompaniesCompanyIdCustomFieldsRequest,
   options?: QueryHookOptions<CompaniesGetCustomFieldsQueryData>,
 ): UseQueryResult<CompaniesGetCustomFieldsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useCompaniesGetCustomFields(
  * scope: `companies:read`
  */
 export function useCompaniesGetCustomFieldsSuspense(
-  request: operations.GetV1CompaniesCompanyIdCustomFieldsRequest,
+  request: GetV1CompaniesCompanyIdCustomFieldsRequest,
   options?: SuspenseQueryHookOptions<CompaniesGetCustomFieldsQueryData>,
 ): UseSuspenseQueryResult<CompaniesGetCustomFieldsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useCompaniesGetCustomFieldsSuspense(
 export function prefetchCompaniesGetCustomFields(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdCustomFieldsRequest,
+  request: GetV1CompaniesCompanyIdCustomFieldsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompaniesGetCustomFieldsQuery(
@@ -95,7 +98,7 @@ export function setCompaniesGetCustomFieldsData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: CompaniesGetCustomFieldsQueryData,
@@ -113,7 +116,7 @@ export function invalidateCompaniesGetCustomFields(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -142,7 +145,7 @@ export function invalidateAllCompaniesGetCustomFields(
 
 export function buildCompaniesGetCustomFieldsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdCustomFieldsRequest,
+  request: GetV1CompaniesCompanyIdCustomFieldsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -179,7 +182,7 @@ export function queryKeyCompaniesGetCustomFields(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

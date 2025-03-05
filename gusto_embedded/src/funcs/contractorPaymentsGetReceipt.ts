@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest$outboundSchema,
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse$inboundSchema,
+} from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -40,12 +45,11 @@ import { Result } from "../types/fp.js";
  */
 export function contractorPaymentsGetReceipt(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
+    GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -64,13 +68,12 @@ export function contractorPaymentsGetReceipt(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
+      GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -85,8 +88,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest$outboundSchema
+      GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -171,7 +173,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
+    GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -182,8 +184,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse$inboundSchema,
+      GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse$inboundSchema,
       { key: "Contractor-Payment-Receipt" },
     ),
     M.fail([404, "4XX"]),

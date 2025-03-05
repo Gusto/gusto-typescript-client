@@ -11,17 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsCreate } from "../funcs/departmentsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostDepartmentsRequest,
+  PostDepartmentsResponse,
+} from "../models/operations/postdepartments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type DepartmentsCreateMutationVariables = {
-  request: operations.PostDepartmentsRequest;
+  request: PostDepartmentsRequest;
   options?: RequestOptions;
 };
 
-export type DepartmentsCreateMutationData = operations.PostDepartmentsResponse;
+export type DepartmentsCreateMutationData = PostDepartmentsResponse;
 
 /**
  * Create a department

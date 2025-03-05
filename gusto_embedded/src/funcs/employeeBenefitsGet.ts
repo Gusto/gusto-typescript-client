@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  GetV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema,
+  GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+  GetV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema,
+} from "../models/operations/getv1employeesemployeeidemployeebenefits.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,11 +42,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeeBenefitsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  request: GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+    GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,12 +65,12 @@ export function employeeBenefitsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  request: GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+      GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -80,8 +85,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema
-        .parse(value),
+      GetV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -170,7 +176,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+    GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -181,7 +187,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations.GetV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema,
+      GetV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema,
       { key: "Employee-Benefit-List" },
     ),
     M.fail([404, "4XX"]),

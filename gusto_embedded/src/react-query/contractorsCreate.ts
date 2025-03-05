@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsCreate } from "../funcs/contractorsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyUuidContractorsRequest,
+  PostV1CompaniesCompanyUuidContractorsResponse,
+} from "../models/operations/postv1companiescompanyuuidcontractors.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorsCreateMutationVariables = {
-  request: operations.PostV1CompaniesCompanyUuidContractorsRequest;
+  request: PostV1CompaniesCompanyUuidContractorsRequest;
   options?: RequestOptions;
 };
 
 export type ContractorsCreateMutationData =
-  operations.PostV1CompaniesCompanyUuidContractorsResponse;
+  PostV1CompaniesCompanyUuidContractorsResponse;
 
 /**
  * Create a contractor

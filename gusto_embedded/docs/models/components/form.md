@@ -5,7 +5,7 @@ Example response
 ## Example Usage
 
 ```typescript
-import { Form } from "@gusto/embedded-api/models/components";
+import { Form } from "@gusto/embedded-api/models/components/form.js";
 
 let value: Form = {
   uuid: "ea885963-a5c6-48c7-afcd-f69baf44ec39",

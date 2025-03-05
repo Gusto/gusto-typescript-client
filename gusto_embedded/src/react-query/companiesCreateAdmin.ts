@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesCreateAdmin } from "../funcs/companiesCreateAdmin.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdAdminsRequest,
+  PostV1CompaniesCompanyIdAdminsResponse,
+} from "../models/operations/postv1companiescompanyidadmins.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompaniesCreateAdminMutationVariables = {
-  request: operations.PostV1CompaniesCompanyIdAdminsRequest;
+  request: PostV1CompaniesCompanyIdAdminsRequest;
   options?: RequestOptions;
 };
 
 export type CompaniesCreateAdminMutationData =
-  operations.PostV1CompaniesCompanyIdAdminsResponse;
+  PostV1CompaniesCompanyIdAdminsResponse;
 
 /**
  * Create an admin for the company

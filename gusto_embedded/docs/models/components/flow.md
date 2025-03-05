@@ -5,7 +5,7 @@ The representation of a flow in Gusto white-label UI.
 ## Example Usage
 
 ```typescript
-import { Flow } from "@gusto/embedded-api/models/components";
+import { Flow } from "@gusto/embedded-api/models/components/flow.js";
 
 let value: Flow = {};
 ```

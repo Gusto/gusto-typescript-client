@@ -3,16 +3,16 @@
 ## Example Usage
 
 ```typescript
-import { PutV1ContractorsContractorUuidResponse } from "@gusto/embedded-api/models/operations";
+import { PutV1ContractorsContractorUuidResponse } from "@gusto/embedded-api/models/operations/putv1contractorscontractoruuid.js";
 
 let value: PutV1ContractorsContractorUuidResponse = {
   contentType: "<value>",
-  statusCode: 101,
+  statusCode: 308,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),
   contractor: {
-    uuid: "e1096ce4-679f-4b64-9f2b-ea635baedde4",
+    uuid: "1096ce46-79fb-464f-92be-a635baedde45",
     hourlyRate: "50.0",
   },
 };

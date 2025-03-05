@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Report,
+  Report$inboundSchema,
+  Report$Outbound,
+  Report$outboundSchema,
+} from "../components/report.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetReportsReportUuidRequest = {
@@ -17,7 +27,7 @@ export type GetReportsReportUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetReportsReportUuidResponse = {
@@ -36,7 +46,7 @@ export type GetReportsReportUuidResponse = {
   /**
    * Example response
    */
-  report?: components.Report | undefined;
+  report?: Report | undefined;
 };
 
 /** @internal */
@@ -46,9 +56,7 @@ export const GetReportsReportUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   report_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "report_uuid": "reportUuid",
@@ -69,9 +77,7 @@ export const GetReportsReportUuidRequest$outboundSchema: z.ZodType<
   GetReportsReportUuidRequest
 > = z.object({
   reportUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     reportUuid: "report_uuid",
@@ -121,7 +127,7 @@ export const GetReportsReportUuidResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Report: components.Report$inboundSchema.optional(),
+  Report: Report$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -136,7 +142,7 @@ export type GetReportsReportUuidResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Report?: components.Report$Outbound | undefined;
+  Report?: Report$Outbound | undefined;
 };
 
 /** @internal */
@@ -150,7 +156,7 @@ export const GetReportsReportUuidResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  report: components.Report$outboundSchema.optional(),
+  report: Report$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

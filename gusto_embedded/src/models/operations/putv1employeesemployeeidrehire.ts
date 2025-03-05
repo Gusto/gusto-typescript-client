@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Rehire,
+  Rehire$inboundSchema,
+  Rehire$Outbound,
+  Rehire$outboundSchema,
+} from "../components/rehire.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -61,7 +71,7 @@ export type PutV1EmployeesEmployeeIdRehireRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1EmployeesEmployeeIdRehireRequestBody;
 };
 
@@ -81,7 +91,7 @@ export type PutV1EmployeesEmployeeIdRehireResponse = {
   /**
    * Example response
    */
-  rehire?: components.Rehire | undefined;
+  rehire?: Rehire | undefined;
 };
 
 /** @internal */
@@ -209,9 +219,7 @@ export const PutV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PutV1EmployeesEmployeeIdRehireRequestBody$inboundSchema
   ),
@@ -237,9 +245,7 @@ export const PutV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   PutV1EmployeesEmployeeIdRehireRequest
 > = z.object({
   employeeId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() =>
     PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema
   ),
@@ -296,7 +302,7 @@ export const PutV1EmployeesEmployeeIdRehireResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Rehire: components.Rehire$inboundSchema.optional(),
+  Rehire: Rehire$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -311,7 +317,7 @@ export type PutV1EmployeesEmployeeIdRehireResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Rehire?: components.Rehire$Outbound | undefined;
+  Rehire?: Rehire$Outbound | undefined;
 };
 
 /** @internal */
@@ -325,7 +331,7 @@ export const PutV1EmployeesEmployeeIdRehireResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  rehire: components.Rehire$outboundSchema.optional(),
+  rehire: Rehire$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

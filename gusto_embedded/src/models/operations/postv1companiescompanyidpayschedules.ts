@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  PayScheduleCreateUpdate,
+  PayScheduleCreateUpdate$inboundSchema,
+  PayScheduleCreateUpdate$Outbound,
+  PayScheduleCreateUpdate$outboundSchema,
+} from "../components/payschedulecreateupdate.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -59,7 +69,7 @@ export type PostV1CompaniesCompanyIdPaySchedulesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1CompaniesCompanyIdPaySchedulesRequestBody;
 };
 
@@ -79,7 +89,7 @@ export type PostV1CompaniesCompanyIdPaySchedulesResponse = {
   /**
    * Example response
    */
-  payScheduleCreateUpdate?: components.PayScheduleCreateUpdate | undefined;
+  payScheduleCreateUpdate?: PayScheduleCreateUpdate | undefined;
 };
 
 /** @internal */
@@ -208,9 +218,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdPaySchedulesRequestBody$inboundSchema
     ),
@@ -237,9 +245,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesRequest$outboundSchema:
     PostV1CompaniesCompanyIdPaySchedulesRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdPaySchedulesRequestBody$outboundSchema
     ),
@@ -303,8 +309,8 @@ export const PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Pay-Schedule-Create-Update": components
-      .PayScheduleCreateUpdate$inboundSchema.optional(),
+    "Pay-Schedule-Create-Update": PayScheduleCreateUpdate$inboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -319,9 +325,7 @@ export type PostV1CompaniesCompanyIdPaySchedulesResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Pay-Schedule-Create-Update"?:
-    | components.PayScheduleCreateUpdate$Outbound
-    | undefined;
+  "Pay-Schedule-Create-Update"?: PayScheduleCreateUpdate$Outbound | undefined;
 };
 
 /** @internal */
@@ -336,8 +340,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    payScheduleCreateUpdate: components.PayScheduleCreateUpdate$outboundSchema
-      .optional(),
+    payScheduleCreateUpdate: PayScheduleCreateUpdate$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

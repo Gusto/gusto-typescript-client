@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  GetV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema,
+  GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
+  GetV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function federalTaxDetailsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
+    GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function federalTaxDetailsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
+      GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema
-        .parse(value),
+      GetV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
+    GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,7 +177,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema,
+      GetV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema,
       { key: "Federal-Tax-Details" },
     ),
     M.fail([404, "4XX"]),

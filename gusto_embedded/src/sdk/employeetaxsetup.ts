@@ -7,7 +7,22 @@ import { employeeTaxSetupGetStateTaxes } from "../funcs/employeeTaxSetupGetState
 import { employeeTaxSetupUpdateFederalTaxes } from "../funcs/employeeTaxSetupUpdateFederalTaxes.js";
 import { employeeTaxSetupUpdateStateTaxes } from "../funcs/employeeTaxSetupUpdateStateTaxes.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdFederalTaxesRequest,
+  GetV1EmployeesEmployeeIdFederalTaxesResponse,
+} from "../models/operations/getv1employeesemployeeidfederaltaxes.js";
+import {
+  GetV1EmployeesEmployeeIdStateTaxesRequest,
+  GetV1EmployeesEmployeeIdStateTaxesResponse,
+} from "../models/operations/getv1employeesemployeeidstatetaxes.js";
+import {
+  PutV1EmployeesEmployeeIdFederalTaxesRequest,
+  PutV1EmployeesEmployeeIdFederalTaxesResponse,
+} from "../models/operations/putv1employeesemployeeidfederaltaxes.js";
+import {
+  PutV1EmployeesEmployeeIdStateTaxesRequest,
+  PutV1EmployeesEmployeeIdStateTaxesResponse,
+} from "../models/operations/putv1employeesemployeeidstatetaxes.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeTaxSetup extends ClientSDK {
@@ -20,9 +35,9 @@ export class EmployeeTaxSetup extends ClientSDK {
    *  scope: `employee_federal_taxes:read`
    */
   async getFederalTaxes(
-    request: operations.GetV1EmployeesEmployeeIdFederalTaxesRequest,
+    request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdFederalTaxesResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdFederalTaxesResponse> {
     return unwrapAsync(employeeTaxSetupGetFederalTaxes(
       this,
       request,
@@ -39,9 +54,9 @@ export class EmployeeTaxSetup extends ClientSDK {
    * scope: `employee_federal_taxes:write`
    */
   async updateFederalTaxes(
-    request: operations.PutV1EmployeesEmployeeIdFederalTaxesRequest,
+    request: PutV1EmployeesEmployeeIdFederalTaxesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesEmployeeIdFederalTaxesResponse> {
+  ): Promise<PutV1EmployeesEmployeeIdFederalTaxesResponse> {
     return unwrapAsync(employeeTaxSetupUpdateFederalTaxes(
       this,
       request,
@@ -69,9 +84,9 @@ export class EmployeeTaxSetup extends ClientSDK {
    * scope: `employee_state_taxes:read`
    */
   async getStateTaxes(
-    request: operations.GetV1EmployeesEmployeeIdStateTaxesRequest,
+    request: GetV1EmployeesEmployeeIdStateTaxesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdStateTaxesResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdStateTaxesResponse> {
     return unwrapAsync(employeeTaxSetupGetStateTaxes(
       this,
       request,
@@ -90,9 +105,9 @@ export class EmployeeTaxSetup extends ClientSDK {
    * scope: `employee_state_taxes:write`
    */
   async updateStateTaxes(
-    request: operations.PutV1EmployeesEmployeeIdStateTaxesRequest,
+    request: PutV1EmployeesEmployeeIdStateTaxesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesEmployeeIdStateTaxesResponse> {
+  ): Promise<PutV1EmployeesEmployeeIdStateTaxesResponse> {
     return unwrapAsync(employeeTaxSetupUpdateStateTaxes(
       this,
       request,

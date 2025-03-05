@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  EmployeeOnboardingDocument,
+  EmployeeOnboardingDocument$inboundSchema,
+  EmployeeOnboardingDocument$Outbound,
+  EmployeeOnboardingDocument$outboundSchema,
+} from "../components/employeeonboardingdocument.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody = {
@@ -24,7 +34,7 @@ export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody;
 };
 
@@ -44,9 +54,7 @@ export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse = {
   /**
    * Example response
    */
-  employeeOnboardingDocument?:
-    | components.EmployeeOnboardingDocument
-    | undefined;
+  employeeOnboardingDocument?: EmployeeOnboardingDocument | undefined;
 };
 
 /** @internal */
@@ -132,9 +140,7 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSch
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema
     ),
@@ -163,9 +169,7 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSc
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outboundSchema
     ),
@@ -228,8 +232,8 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSc
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Employee-Onboarding-Document": components
-      .EmployeeOnboardingDocument$inboundSchema.optional(),
+    "Employee-Onboarding-Document": EmployeeOnboardingDocument$inboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -246,7 +250,7 @@ export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound =
     StatusCode: number;
     RawResponse: never;
     "Employee-Onboarding-Document"?:
-      | components.EmployeeOnboardingDocument$Outbound
+      | EmployeeOnboardingDocument$Outbound
       | undefined;
   };
 
@@ -262,8 +266,8 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundS
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    employeeOnboardingDocument: components
-      .EmployeeOnboardingDocument$outboundSchema.optional(),
+    employeeOnboardingDocument: EmployeeOnboardingDocument$outboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

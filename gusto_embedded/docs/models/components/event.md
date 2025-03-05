@@ -5,7 +5,7 @@ Representation of an Event
 ## Example Usage
 
 ```typescript
-import { Event } from "@gusto/embedded-api/models/components";
+import { Event } from "@gusto/embedded-api/models/components/event.js";
 
 let value: Event = {
   uuid: "209d4ec0-9935-4702-b26b-d2caef11c23e",

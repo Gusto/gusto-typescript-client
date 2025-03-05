@@ -5,9 +5,9 @@ Employee employment status to filter by
 ## Example Usage
 
 ```typescript
-import { PostCompaniesCompanyUuidReportsEmploymentStatus } from "@gusto/embedded-api/models/operations";
+import { PostCompaniesCompanyUuidReportsEmploymentStatus } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
 
-let value: PostCompaniesCompanyUuidReportsEmploymentStatus = "active_part_time";
+let value: PostCompaniesCompanyUuidReportsEmploymentStatus = "active_full_time";
 ```
 
 ## Values

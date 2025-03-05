@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { earningTypesDelete } from "../funcs/earningTypesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
+  DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+} from "../models/operations/deletev1companiescompanyidearningtypesearningtypeuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EarningTypesDeleteMutationVariables = {
-  request:
-    operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest;
+  request: DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest;
   options?: RequestOptions;
 };
 
 export type EarningTypesDeleteMutationData =
-  operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
+  DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
 
 /**
  * Deactivate an earning type

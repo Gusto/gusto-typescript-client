@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetDepartmentRequest,
+  GetDepartmentRequest$outboundSchema,
+  GetDepartmentResponse,
+  GetDepartmentResponse$inboundSchema,
+} from "../models/operations/getdepartment.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function departmentsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetDepartmentRequest,
+  request: GetDepartmentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetDepartmentResponse,
+    GetDepartmentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function departmentsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetDepartmentRequest,
+  request: GetDepartmentRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetDepartmentResponse,
+      GetDepartmentResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetDepartmentRequest$outboundSchema.parse(value),
+    (value) => GetDepartmentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -156,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetDepartmentResponse,
+    GetDepartmentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -165,9 +170,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetDepartmentResponse$inboundSchema, {
-      key: "Department",
-    }),
+    M.json(200, GetDepartmentResponse$inboundSchema, { key: "Department" }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

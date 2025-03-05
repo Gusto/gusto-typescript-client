@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: bb3ce44f85049dc2d55d18c172266e69
+  docChecksum: 0c1d511b9a14082d55cd08b360437a86
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.509.1
-  generationVersion: 2.539.1
-  releaseVersion: 0.4.0
-  configChecksum: 685efd43a662dda45d93d98441d2c177
+  speakeasyVersion: 1.510.0
+  generationVersion: 2.541.0
+  releaseVersion: 0.4.1
+  configChecksum: a8967e860128afc654bc06b2970fe36a
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -218,7 +218,6 @@ generatedFiles:
   - docs/models/components/fundingtype.md
   - docs/models/components/garnishment.md
   - docs/models/components/garnishmentchildsupport.md
-  - docs/models/components/garnishmentchildsupportinput.md
   - docs/models/components/garnishmenttype.md
   - docs/models/components/generateddocument.md
   - docs/models/components/generateddocumentstatus.md
@@ -1452,7 +1451,6 @@ generatedFiles:
   - src/funcs/wireInRequestsList.ts
   - src/funcs/wireInRequestsSubmit.ts
   - src/hooks/hooks.ts
-  - src/hooks/index.ts
   - src/hooks/types.ts
   - src/index.ts
   - src/lib/base64.ts
@@ -1547,7 +1545,6 @@ generatedFiles:
   - src/models/components/i9authorization.ts
   - src/models/components/i9authorizationdocument.ts
   - src/models/components/i9authorizationdocumentoption.ts
-  - src/models/components/index.ts
   - src/models/components/industry.ts
   - src/models/components/invoicedata.ts
   - src/models/components/job.ts
@@ -1617,7 +1614,6 @@ generatedFiles:
   - src/models/errors/apierror.ts
   - src/models/errors/deletev1companybenefitscompanybenefitid.ts
   - src/models/errors/httpclienterrors.ts
-  - src/models/errors/index.ts
   - src/models/errors/payrollblockerserror.ts
   - src/models/errors/postcompaniespayrollskipcompanyuuid.ts
   - src/models/errors/postpayrollsgrossuppayrolluuid.ts
@@ -1762,7 +1758,6 @@ generatedFiles:
   - src/models/operations/getv1workaddressesworkaddressuuid.ts
   - src/models/operations/getversionemployeestimeoffactivities.ts
   - src/models/operations/getwireinrequestswireinrequestuuid.ts
-  - src/models/operations/index.ts
   - src/models/operations/postcompaniescompanyuuidholidaypaypolicy.ts
   - src/models/operations/postcompaniescompanyuuidreports.ts
   - src/models/operations/postcompaniescompanyuuidtimeoffpolicies.ts
@@ -2155,7 +2150,6 @@ generatedFiles:
   - src/sdk/historicalemployees.ts
   - src/sdk/holidaypaypolicies.ts
   - src/sdk/i9verification.ts
-  - src/sdk/index.ts
   - src/sdk/industryselection.ts
   - src/sdk/introspection.ts
   - src/sdk/invoices.ts
@@ -2178,7 +2172,6 @@ generatedFiles:
   - src/types/constdatetime.ts
   - src/types/enums.ts
   - src/types/fp.ts
-  - src/types/index.ts
   - src/types/operations.ts
   - src/types/rfcdate.ts
   - src/types/streams.ts
@@ -7984,7 +7977,7 @@ examples:
         application/json: {"active": true, "amount": "150.00", "description": "Back taxes", "court_ordered": true, "times": null, "recurring": true, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
       responses:
         "201":
-          application/json: {"uuid": "0648730b-e81b-40fd-b400-179e824ec05f", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
+          application/json: {"uuid": "0648730b-e81b-40fd-b400-179e824ec05f", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Child-Support-Example:
       parameters:
         path:
@@ -7992,10 +7985,10 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"active": true, "amount": "40", "court_ordered": true, "garnishment_type": "child_support", "times": null, "recurring": true, "annual_maximum": null, "pay_period_maximum": "500.00", "deduct_as_percentage": true, "child_support": {"state": "FL", "payment_period": "Monthly", "case_number": "CS1234"}}
+        application/json: {"active": true, "amount": "40", "court_ordered": true, "garnishment_type": "child_support", "times": null, "recurring": true, "annual_maximum": null, "pay_period_maximum": "500.00", "deduct_as_percentage": true, "child_support": {"state": "FL", "payment_period": "Monthly", "fips_code": "12011", "case_number": "CS1234"}}
       responses:
         "201":
-          application/json: {"uuid": "427b9e5b-95d2-4cfd-b063-45dff43ac8aa", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
+          application/json: {"uuid": "427b9e5b-95d2-4cfd-b063-45dff43ac8aa", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Basic:
       parameters:
         path:
@@ -8039,7 +8032,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "c8a232aa-0b11-4b8a-b005-71e9e705d0e6", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}, {"uuid": "21e27667-18d6-4d46-812e-0aee1b9ddf12", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}]
+          application/json: [{"uuid": "c8a232aa-0b11-4b8a-b005-71e9e705d0e6", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}, {"uuid": "21e27667-18d6-4d46-812e-0aee1b9ddf12", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}]
   get-v1-garnishments-garnishment_id:
     Example:
       parameters:
@@ -8049,7 +8042,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "a1b1d4d7-9d85-4c0c-970a-7d2676a05c04", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
+          application/json: {"uuid": "a1b1d4d7-9d85-4c0c-970a-7d2676a05c04", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Child-Support-Example:
       parameters:
         path:
@@ -8058,7 +8051,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "c70f28ce-90e2-4168-b683-1abb1a5f7f21", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
+          application/json: {"uuid": "c70f28ce-90e2-4168-b683-1abb1a5f7f21", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}
   put-v1-garnishments-garnishment_id:
     Example:
       parameters:
@@ -8070,7 +8063,7 @@ examples:
         application/json: {"active": false, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false, "version": "52b7c567242cb7452e89ba2bc02cb476"}
       responses:
         "200":
-          application/json: {"uuid": "4c044b4e-cf94-4436-a3fb-eaf811f919f4", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
+          application/json: {"uuid": "4c044b4e-cf94-4436-a3fb-eaf811f919f4", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Child-Support-Example:
       parameters:
         path:
@@ -8081,7 +8074,7 @@ examples:
         application/json: {"active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false, "version": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "b05be711-9e3f-4fc9-8067-cd32e9559970", "active": true, "times": null, "recurring": false, "annual_maximum": null, "pay_period_maximum": null, "deduct_as_percentage": false}
+          application/json: {"uuid": "b05be711-9e3f-4fc9-8067-cd32e9559970", "active": true, "times": null, "recurring": false, "annual_maximum": null, "total_amount": null, "pay_period_maximum": null, "deduct_as_percentage": false}
     Basic:
       parameters:
         path:
@@ -8256,7 +8249,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"signature_text": "<value>", "signer_title": "<value>", "signed_by_ip_address": "<value>", "agree": false}
+        application/json: {"signature_text": "<value>", "signer_title": "<value>", "agree": false}
       responses:
         "200":
           application/json: {"uuid": "ab18cec1-6568-4d93-b2ad-8deafd3f650c", "version": "<value>", "authorization_status": "alien", "employer_signed": true, "employee_signed": true}

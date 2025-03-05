@@ -11,18 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { industrySelectionUpdate } from "../funcs/industrySelectionUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompanyIndustryRequest,
+  PutV1CompanyIndustryResponse,
+} from "../models/operations/putv1companyindustry.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type IndustrySelectionUpdateMutationVariables = {
-  request: operations.PutV1CompanyIndustryRequest;
+  request: PutV1CompanyIndustryRequest;
   options?: RequestOptions;
 };
 
-export type IndustrySelectionUpdateMutationData =
-  operations.PutV1CompanyIndustryResponse;
+export type IndustrySelectionUpdateMutationData = PutV1CompanyIndustryResponse;
 
 /**
  * Update a company industry selection

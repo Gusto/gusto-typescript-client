@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeFormsGenerateW2 } from "../funcs/employeeFormsGenerateW2.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1SandboxGenerateW2Request,
+  PostV1SandboxGenerateW2Response,
+} from "../models/operations/postv1sandboxgeneratew2.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeFormsGenerateW2MutationVariables = {
-  request: operations.PostV1SandboxGenerateW2Request;
+  request: PostV1SandboxGenerateW2Request;
   options?: RequestOptions;
 };
 
 export type EmployeeFormsGenerateW2MutationData =
-  operations.PostV1SandboxGenerateW2Response;
+  PostV1SandboxGenerateW2Response;
 
 /**
  * Generate a W2 form [DEMO]

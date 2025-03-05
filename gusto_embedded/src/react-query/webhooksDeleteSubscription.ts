@@ -11,19 +11,23 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksDeleteSubscription } from "../funcs/webhooksDeleteSubscription.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1WebhookSubscriptionUuidRequest,
+  DeleteV1WebhookSubscriptionUuidResponse,
+  DeleteV1WebhookSubscriptionUuidSecurity,
+} from "../models/operations/deletev1webhooksubscriptionuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type WebhooksDeleteSubscriptionMutationVariables = {
-  security: operations.DeleteV1WebhookSubscriptionUuidSecurity;
-  request: operations.DeleteV1WebhookSubscriptionUuidRequest;
+  security: DeleteV1WebhookSubscriptionUuidSecurity;
+  request: DeleteV1WebhookSubscriptionUuidRequest;
   options?: RequestOptions;
 };
 
 export type WebhooksDeleteSubscriptionMutationData =
-  operations.DeleteV1WebhookSubscriptionUuidResponse;
+  DeleteV1WebhookSubscriptionUuidResponse;
 
 /**
  * Delete a webhook subscription

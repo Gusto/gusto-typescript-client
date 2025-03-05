@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentsGet } from "../funcs/contractorPaymentsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
+  GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
+} from "../models/operations/getv1companiescompanyidcontractorpaymentcontractorpayment.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentsGetQueryData =
-  operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse;
+  GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse;
 
 /**
  * Get a single contractor payment
@@ -37,8 +40,7 @@ export type ContractorPaymentsGetQueryData =
  * scope: `payrolls:read`
  */
 export function useContractorPaymentsGet(
-  request:
-    operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
+  request: GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
   options?: QueryHookOptions<ContractorPaymentsGetQueryData>,
 ): UseQueryResult<ContractorPaymentsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -60,8 +62,7 @@ export function useContractorPaymentsGet(
  * scope: `payrolls:read`
  */
 export function useContractorPaymentsGetSuspense(
-  request:
-    operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
+  request: GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
   options?: SuspenseQueryHookOptions<ContractorPaymentsGetQueryData>,
 ): UseSuspenseQueryResult<ContractorPaymentsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,8 +79,7 @@ export function useContractorPaymentsGetSuspense(
 export function prefetchContractorPaymentsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
+  request: GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorPaymentsGetQuery(
@@ -94,7 +94,7 @@ export function setContractorPaymentsGetData(
   queryKeyBase: [
     companyId: string,
     contractorPaymentId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorPaymentsGetQueryData,
 ): ContractorPaymentsGetQueryData | undefined {
@@ -109,7 +109,7 @@ export function invalidateContractorPaymentsGet(
     [
       companyId: string,
       contractorPaymentId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -137,8 +137,7 @@ export function invalidateAllContractorPaymentsGet(
 
 export function buildContractorPaymentsGetQuery(
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
+  request: GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -173,7 +172,7 @@ export function buildContractorPaymentsGetQuery(
 export function queryKeyContractorPaymentsGet(
   companyId: string,
   contractorPaymentId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

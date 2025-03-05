@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorFormsList } from "../funcs/contractorFormsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorFormsRequest,
+  GetV1ContractorFormsResponse,
+} from "../models/operations/getv1contractorforms.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorFormsListQueryData =
-  operations.GetV1ContractorFormsResponse;
+export type ContractorFormsListQueryData = GetV1ContractorFormsResponse;
 
 /**
  * Get all contractor forms
@@ -38,7 +40,7 @@ export type ContractorFormsListQueryData =
  * scope: `contractor_forms:read`
  */
 export function useContractorFormsList(
-  request: operations.GetV1ContractorFormsRequest,
+  request: GetV1ContractorFormsRequest,
   options?: QueryHookOptions<ContractorFormsListQueryData>,
 ): UseQueryResult<ContractorFormsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useContractorFormsList(
  * scope: `contractor_forms:read`
  */
 export function useContractorFormsListSuspense(
-  request: operations.GetV1ContractorFormsRequest,
+  request: GetV1ContractorFormsRequest,
   options?: SuspenseQueryHookOptions<ContractorFormsListQueryData>,
 ): UseSuspenseQueryResult<ContractorFormsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useContractorFormsListSuspense(
 export function prefetchContractorFormsList(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormsRequest,
+  request: GetV1ContractorFormsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorFormsListQuery(
@@ -92,7 +94,7 @@ export function setContractorFormsListData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorFormsListQueryData,
 ): ContractorFormsListQueryData | undefined {
@@ -106,7 +108,7 @@ export function invalidateContractorFormsList(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +136,7 @@ export function invalidateAllContractorFormsList(
 
 export function buildContractorFormsListQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormsRequest,
+  request: GetV1ContractorFormsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +168,7 @@ export function buildContractorFormsListQuery(
 
 export function queryKeyContractorFormsList(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

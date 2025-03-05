@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+} from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ReportsGetTemplateQueryData =
-  operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
+  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
 
 /**
  * Get a report template
@@ -38,7 +41,7 @@ export type ReportsGetTemplateQueryData =
  * scope: `company_reports:write`
  */
 export function useReportsGetTemplate(
-  request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
   options?: QueryHookOptions<ReportsGetTemplateQueryData>,
 ): UseQueryResult<ReportsGetTemplateQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useReportsGetTemplate(
  * scope: `company_reports:write`
  */
 export function useReportsGetTemplateSuspense(
-  request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
   options?: SuspenseQueryHookOptions<ReportsGetTemplateQueryData>,
 ): UseSuspenseQueryResult<ReportsGetTemplateQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useReportsGetTemplateSuspense(
 export function prefetchReportsGetTemplate(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildReportsGetTemplateQuery(
@@ -93,7 +96,7 @@ export function setReportsGetTemplateData(
   queryKeyBase: [
     companyUuid: string,
     reportType: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ReportsGetTemplateQueryData,
 ): ReportsGetTemplateQueryData | undefined {
@@ -108,7 +111,7 @@ export function invalidateReportsGetTemplate(
     [
       companyUuid: string,
       reportType: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -136,7 +139,7 @@ export function invalidateAllReportsGetTemplate(
 
 export function buildReportsGetTemplateQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -171,7 +174,7 @@ export function buildReportsGetTemplateQuery(
 export function queryKeyReportsGetTemplate(
   companyUuid: string,
   reportType: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

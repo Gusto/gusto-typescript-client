@@ -5,9 +5,9 @@ The status of the company in Gusto. "Approved" companies are approved to run pay
 ## Example Usage
 
 ```typescript
-import { CompanyStatus } from "@gusto/embedded-api/models/components";
+import { CompanyStatus } from "@gusto/embedded-api/models/components/company.js";
 
-let value: CompanyStatus = "Suspended";
+let value: CompanyStatus = "Not Approved";
 ```
 
 ## Values

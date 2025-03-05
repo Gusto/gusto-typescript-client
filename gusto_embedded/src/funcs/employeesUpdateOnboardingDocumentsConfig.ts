@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSchema,
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema,
+} from "../models/operations/putv1employeesemployeeidonboardingdocumentsconfig.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeesUpdateOnboardingDocumentsConfig(
   client: GustoEmbeddedCore,
-  request: operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+  request: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function employeesUpdateOnboardingDocumentsConfig(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+  request: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSchema
+      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -162,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,8 +177,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema,
+      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema,
       { key: "Employee-Onboarding-Document" },
     ),
     M.fail([404, "4XX"]),

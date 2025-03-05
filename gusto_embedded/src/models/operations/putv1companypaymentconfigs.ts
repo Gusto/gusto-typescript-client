@@ -6,12 +6,34 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  FastPaymentLimitRequiredBody,
+  FastPaymentLimitRequiredBody$inboundSchema,
+  FastPaymentLimitRequiredBody$Outbound,
+  FastPaymentLimitRequiredBody$outboundSchema,
+} from "../components/fastpaymentlimitrequiredbody.js";
+import {
+  PaymentConfigs,
+  PaymentConfigs$inboundSchema,
+  PaymentConfigs$Outbound,
+  PaymentConfigs$outboundSchema,
+} from "../components/paymentconfigs.js";
+import {
+  PaymentSpeedRequiredBody,
+  PaymentSpeedRequiredBody$inboundSchema,
+  PaymentSpeedRequiredBody$Outbound,
+  PaymentSpeedRequiredBody$outboundSchema,
+} from "../components/paymentspeedrequiredbody.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutV1CompanyPaymentConfigsRequestBody =
-  | components.FastPaymentLimitRequiredBody
-  | components.PaymentSpeedRequiredBody;
+  | FastPaymentLimitRequiredBody
+  | PaymentSpeedRequiredBody;
 
 export type PutV1CompanyPaymentConfigsRequest = {
   /**
@@ -21,10 +43,8 @@ export type PutV1CompanyPaymentConfigsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
-  requestBody:
-    | components.FastPaymentLimitRequiredBody
-    | components.PaymentSpeedRequiredBody;
+  xGustoAPIVersion?: VersionHeader | undefined;
+  requestBody: FastPaymentLimitRequiredBody | PaymentSpeedRequiredBody;
 };
 
 export type PutV1CompanyPaymentConfigsResponse = {
@@ -43,7 +63,7 @@ export type PutV1CompanyPaymentConfigsResponse = {
   /**
    * Example response
    */
-  paymentConfigs?: components.PaymentConfigs | undefined;
+  paymentConfigs?: PaymentConfigs | undefined;
 };
 
 /** @internal */
@@ -52,14 +72,14 @@ export const PutV1CompanyPaymentConfigsRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.FastPaymentLimitRequiredBody$inboundSchema,
-  components.PaymentSpeedRequiredBody$inboundSchema,
+  FastPaymentLimitRequiredBody$inboundSchema,
+  PaymentSpeedRequiredBody$inboundSchema,
 ]);
 
 /** @internal */
 export type PutV1CompanyPaymentConfigsRequestBody$Outbound =
-  | components.FastPaymentLimitRequiredBody$Outbound
-  | components.PaymentSpeedRequiredBody$Outbound;
+  | FastPaymentLimitRequiredBody$Outbound
+  | PaymentSpeedRequiredBody$Outbound;
 
 /** @internal */
 export const PutV1CompanyPaymentConfigsRequestBody$outboundSchema: z.ZodType<
@@ -67,8 +87,8 @@ export const PutV1CompanyPaymentConfigsRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1CompanyPaymentConfigsRequestBody
 > = z.union([
-  components.FastPaymentLimitRequiredBody$outboundSchema,
-  components.PaymentSpeedRequiredBody$outboundSchema,
+  FastPaymentLimitRequiredBody$outboundSchema,
+  PaymentSpeedRequiredBody$outboundSchema,
 ]);
 
 /**
@@ -114,12 +134,10 @@ export const PutV1CompanyPaymentConfigsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.union([
-    components.FastPaymentLimitRequiredBody$inboundSchema,
-    components.PaymentSpeedRequiredBody$inboundSchema,
+    FastPaymentLimitRequiredBody$inboundSchema,
+    PaymentSpeedRequiredBody$inboundSchema,
   ]),
 }).transform((v) => {
   return remap$(v, {
@@ -134,8 +152,8 @@ export type PutV1CompanyPaymentConfigsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
   RequestBody:
-    | components.FastPaymentLimitRequiredBody$Outbound
-    | components.PaymentSpeedRequiredBody$Outbound;
+    | FastPaymentLimitRequiredBody$Outbound
+    | PaymentSpeedRequiredBody$Outbound;
 };
 
 /** @internal */
@@ -145,12 +163,10 @@ export const PutV1CompanyPaymentConfigsRequest$outboundSchema: z.ZodType<
   PutV1CompanyPaymentConfigsRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.union([
-    components.FastPaymentLimitRequiredBody$outboundSchema,
-    components.PaymentSpeedRequiredBody$outboundSchema,
+    FastPaymentLimitRequiredBody$outboundSchema,
+    PaymentSpeedRequiredBody$outboundSchema,
   ]),
 }).transform((v) => {
   return remap$(v, {
@@ -203,7 +219,7 @@ export const PutV1CompanyPaymentConfigsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Payment-Configs": components.PaymentConfigs$inboundSchema.optional(),
+  "Payment-Configs": PaymentConfigs$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -218,7 +234,7 @@ export type PutV1CompanyPaymentConfigsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Payment-Configs"?: components.PaymentConfigs$Outbound | undefined;
+  "Payment-Configs"?: PaymentConfigs$Outbound | undefined;
 };
 
 /** @internal */
@@ -232,7 +248,7 @@ export const PutV1CompanyPaymentConfigsResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  paymentConfigs: components.PaymentConfigs$outboundSchema.optional(),
+  paymentConfigs: PaymentConfigs$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Options } from "@gusto/embedded-api/models/components";
+import { Options } from "@gusto/embedded-api/models/components/employeestatetaxinputquestionformat.js";
 
 let value: Options = {
   label: "<value>",

@@ -3,17 +3,17 @@
 ## Example Usage
 
 ```typescript
-import { GetV1CompaniesCompanyUuidContractorsResponse } from "@gusto/embedded-api/models/operations";
+import { GetV1CompaniesCompanyUuidContractorsResponse } from "@gusto/embedded-api/models/operations/getv1companiescompanyuuidcontractors.js";
 
 let value: GetV1CompaniesCompanyUuidContractorsResponse = {
   contentType: "<value>",
-  statusCode: 501,
+  statusCode: 103,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),
   contractorList: [
     {
-      uuid: "c0f984e4-dfc8-4177-b365-27480ed8df1a",
+      uuid: "0f984e4d-fc81-4773-b652-7480ed8df1af",
       hourlyRate: "50.0",
     },
   ],

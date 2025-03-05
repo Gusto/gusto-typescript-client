@@ -14,7 +14,50 @@ import { companyBenefitsList } from "../funcs/companyBenefitsList.js";
 import { companyBenefitsUpdate } from "../funcs/companyBenefitsUpdate.js";
 import { companyBenefitsUpdateEmployeeBenefits } from "../funcs/companyBenefitsUpdateEmployeeBenefits.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
+  DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
+} from "../models/operations/deletev1companybenefitscompanybenefitid.js";
+import {
+  GetV1BenefitsRequest,
+  GetV1BenefitsResponse,
+} from "../models/operations/getv1benefits.js";
+import {
+  GetV1BenefitsBenefitIdRequest,
+  GetV1BenefitsBenefitIdResponse,
+} from "../models/operations/getv1benefitsbenefitid.js";
+import {
+  GetV1BenefitsBenefitsIdRequirementsRequest,
+  GetV1BenefitsBenefitsIdRequirementsResponse,
+} from "../models/operations/getv1benefitsbenefitsidrequirements.js";
+import {
+  GetV1BenefitsCompanyBenefitIdSummaryRequest,
+  GetV1BenefitsCompanyBenefitIdSummaryResponse,
+} from "../models/operations/getv1benefitscompanybenefitidsummary.js";
+import {
+  GetV1CompaniesCompanyIdCompanyBenefitsRequest,
+  GetV1CompaniesCompanyIdCompanyBenefitsResponse,
+} from "../models/operations/getv1companiescompanyidcompanybenefits.js";
+import {
+  GetV1CompanyBenefitsCompanyBenefitIdRequest,
+  GetV1CompanyBenefitsCompanyBenefitIdResponse,
+} from "../models/operations/getv1companybenefitscompanybenefitid.js";
+import {
+  GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+  GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
+} from "../models/operations/getv1companybenefitscompanybenefitidemployeebenefits.js";
+import {
+  PostV1CompaniesCompanyIdCompanyBenefitsRequest,
+  PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+} from "../models/operations/postv1companiescompanyidcompanybenefits.js";
+import {
+  PutV1CompanyBenefitsCompanyBenefitIdRequest,
+  PutV1CompanyBenefitsCompanyBenefitIdResponse,
+} from "../models/operations/putv1companybenefitscompanybenefitid.js";
+import {
+  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
+} from "../models/operations/putv1companybenefitscompanybenefitidemployeebenefits.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyBenefits extends ClientSDK {
@@ -29,9 +72,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `company_benefits:write`
    */
   async create(
-    request: operations.PostV1CompaniesCompanyIdCompanyBenefitsRequest,
+    request: PostV1CompaniesCompanyIdCompanyBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdCompanyBenefitsResponse> {
+  ): Promise<PostV1CompaniesCompanyIdCompanyBenefitsResponse> {
     return unwrapAsync(companyBenefitsCreate(
       this,
       request,
@@ -52,9 +95,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `company_benefits:read`
    */
   async list(
-    request: operations.GetV1CompaniesCompanyIdCompanyBenefitsRequest,
+    request: GetV1CompaniesCompanyIdCompanyBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdCompanyBenefitsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdCompanyBenefitsResponse> {
     return unwrapAsync(companyBenefitsList(
       this,
       request,
@@ -75,9 +118,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `company_benefits:read`
    */
   async get(
-    request: operations.GetV1CompanyBenefitsCompanyBenefitIdRequest,
+    request: GetV1CompanyBenefitsCompanyBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompanyBenefitsCompanyBenefitIdResponse> {
+  ): Promise<GetV1CompanyBenefitsCompanyBenefitIdResponse> {
     return unwrapAsync(companyBenefitsGet(
       this,
       request,
@@ -96,9 +139,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `company_benefits:write`
    */
   async update(
-    request: operations.PutV1CompanyBenefitsCompanyBenefitIdRequest,
+    request: PutV1CompanyBenefitsCompanyBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompanyBenefitsCompanyBenefitIdResponse> {
+  ): Promise<PutV1CompanyBenefitsCompanyBenefitIdResponse> {
     return unwrapAsync(companyBenefitsUpdate(
       this,
       request,
@@ -118,9 +161,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `company_benefits:write`
    */
   async delete(
-    request: operations.DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
+    request: DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse> {
+  ): Promise<DeleteV1CompanyBenefitsCompanyBenefitIdResponse> {
     return unwrapAsync(companyBenefitsDelete(
       this,
       request,
@@ -139,9 +182,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `benefits:read`
    */
   async getAll(
-    request: operations.GetV1BenefitsRequest,
+    request: GetV1BenefitsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1BenefitsResponse> {
+  ): Promise<GetV1BenefitsResponse> {
     return unwrapAsync(companyBenefitsGetAll(
       this,
       request,
@@ -160,9 +203,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `benefits:read`
    */
   async getSupported(
-    request: operations.GetV1BenefitsBenefitIdRequest,
+    request: GetV1BenefitsBenefitIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1BenefitsBenefitIdResponse> {
+  ): Promise<GetV1BenefitsBenefitIdResponse> {
     return unwrapAsync(companyBenefitsGetSupported(
       this,
       request,
@@ -181,9 +224,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `company_benefits:read`
    */
   async getSummary(
-    request: operations.GetV1BenefitsCompanyBenefitIdSummaryRequest,
+    request: GetV1BenefitsCompanyBenefitIdSummaryRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1BenefitsCompanyBenefitIdSummaryResponse> {
+  ): Promise<GetV1BenefitsCompanyBenefitIdSummaryResponse> {
     return unwrapAsync(companyBenefitsGetSummary(
       this,
       request,
@@ -204,12 +247,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `employee_benefits:read`
    */
   async getEmployeeBenefits(
-    request:
-      operations.GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+    request: GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse
-  > {
+  ): Promise<GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse> {
     return unwrapAsync(companyBenefitsGetEmployeeBenefits(
       this,
       request,
@@ -230,12 +270,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `employee_benefits:write`
    */
   async updateEmployeeBenefits(
-    request:
-      operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+    request: PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse
-  > {
+  ): Promise<PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse> {
     return unwrapAsync(companyBenefitsUpdateEmployeeBenefits(
       this,
       request,
@@ -252,9 +289,9 @@ export class CompanyBenefits extends ClientSDK {
    * scope: `benefits:read`
    */
   async getRequirements(
-    request: operations.GetV1BenefitsBenefitsIdRequirementsRequest,
+    request: GetV1BenefitsBenefitsIdRequirementsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1BenefitsBenefitsIdRequirementsResponse> {
+  ): Promise<GetV1BenefitsBenefitsIdRequirementsResponse> {
     return unwrapAsync(companyBenefitsGetRequirements(
       this,
       request,

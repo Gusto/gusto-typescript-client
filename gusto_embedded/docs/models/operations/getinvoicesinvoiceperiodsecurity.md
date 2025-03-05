@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetInvoicesInvoicePeriodSecurity } from "@gusto/embedded-api/models/operations";
+import { GetInvoicesInvoicePeriodSecurity } from "@gusto/embedded-api/models/operations/getinvoicesinvoiceperiod.js";
 
 let value: GetInvoicesInvoicePeriodSecurity = {
   systemAccessAuth: "<value>",

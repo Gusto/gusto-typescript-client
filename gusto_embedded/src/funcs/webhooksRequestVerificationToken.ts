@@ -19,7 +19,13 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema,
+  GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+  GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema,
+  GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+} from "../models/operations/getv1webhooksubscriptionverificationtokenuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,12 +43,12 @@ import { Result } from "../types/fp.js";
  */
 export function webhooksRequestVerificationToken(
   client: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+  request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -62,13 +68,13 @@ export function webhooksRequestVerificationToken(
 
 async function $do(
   client: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+  request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+      GetV1WebhookSubscriptionVerificationTokenUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -83,9 +89,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema
-        .parse(value),
+      GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -173,7 +179,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+    GetV1WebhookSubscriptionVerificationTokenUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -184,8 +190,7 @@ async function $do(
   >(
     M.nil(
       200,
-      operations
-        .GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema,
+      GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema,
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

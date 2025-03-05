@@ -8,7 +8,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
-import * as components from "../components/index.js";
+import {
+  ContractorPayment,
+  ContractorPayment$inboundSchema,
+  ContractorPayment$Outbound,
+  ContractorPayment$outboundSchema,
+} from "../components/contractorpayment.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod = {
@@ -57,7 +67,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1CompaniesCompanyIdContractorPaymentsRequestBody;
 };
 
@@ -77,7 +87,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentsResponse = {
   /**
    * Example response
    */
-  contractorPayment?: components.ContractorPayment | undefined;
+  contractorPayment?: ContractorPayment | undefined;
 };
 
 /** @internal */
@@ -213,9 +223,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentsRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentsRequestBody$inboundSchema
     ),
@@ -242,9 +250,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema:
     PostV1CompaniesCompanyIdContractorPaymentsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentsRequestBody$outboundSchema
     ),
@@ -309,7 +315,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Contractor-Payment": components.ContractorPayment$inboundSchema.optional(),
+    "Contractor-Payment": ContractorPayment$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -324,7 +330,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Contractor-Payment"?: components.ContractorPayment$Outbound | undefined;
+  "Contractor-Payment"?: ContractorPayment$Outbound | undefined;
 };
 
 /** @internal */
@@ -339,7 +345,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    contractorPayment: components.ContractorPayment$outboundSchema.optional(),
+    contractorPayment: ContractorPayment$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

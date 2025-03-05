@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupGetStateTaxes } from "../funcs/employeeTaxSetupGetStateTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdStateTaxesRequest,
+  GetV1EmployeesEmployeeIdStateTaxesResponse,
+} from "../models/operations/getv1employeesemployeeidstatetaxes.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeTaxSetupGetStateTaxesQueryData =
-  operations.GetV1EmployeesEmployeeIdStateTaxesResponse;
+  GetV1EmployeesEmployeeIdStateTaxesResponse;
 
 /**
  * Get an employee's state taxes
@@ -49,7 +52,7 @@ export type EmployeeTaxSetupGetStateTaxesQueryData =
  * scope: `employee_state_taxes:read`
  */
 export function useEmployeeTaxSetupGetStateTaxes(
-  request: operations.GetV1EmployeesEmployeeIdStateTaxesRequest,
+  request: GetV1EmployeesEmployeeIdStateTaxesRequest,
   options?: QueryHookOptions<EmployeeTaxSetupGetStateTaxesQueryData>,
 ): UseQueryResult<EmployeeTaxSetupGetStateTaxesQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -83,7 +86,7 @@ export function useEmployeeTaxSetupGetStateTaxes(
  * scope: `employee_state_taxes:read`
  */
 export function useEmployeeTaxSetupGetStateTaxesSuspense(
-  request: operations.GetV1EmployeesEmployeeIdStateTaxesRequest,
+  request: GetV1EmployeesEmployeeIdStateTaxesRequest,
   options?: SuspenseQueryHookOptions<EmployeeTaxSetupGetStateTaxesQueryData>,
 ): UseSuspenseQueryResult<EmployeeTaxSetupGetStateTaxesQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -100,7 +103,7 @@ export function useEmployeeTaxSetupGetStateTaxesSuspense(
 export function prefetchEmployeeTaxSetupGetStateTaxes(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdStateTaxesRequest,
+  request: GetV1EmployeesEmployeeIdStateTaxesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeTaxSetupGetStateTaxesQuery(
@@ -114,7 +117,7 @@ export function setEmployeeTaxSetupGetStateTaxesData(
   client: QueryClient,
   queryKeyBase: [
     employeeUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeeTaxSetupGetStateTaxesQueryData,
 ): EmployeeTaxSetupGetStateTaxesQueryData | undefined {
@@ -128,7 +131,7 @@ export function invalidateEmployeeTaxSetupGetStateTaxes(
   queryKeyBase: TupleToPrefixes<
     [
       employeeUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -156,7 +159,7 @@ export function invalidateAllEmployeeTaxSetupGetStateTaxes(
 
 export function buildEmployeeTaxSetupGetStateTaxesQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdStateTaxesRequest,
+  request: GetV1EmployeesEmployeeIdStateTaxesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -188,7 +191,7 @@ export function buildEmployeeTaxSetupGetStateTaxesQuery(
 
 export function queryKeyEmployeeTaxSetupGetStateTaxes(
   employeeUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

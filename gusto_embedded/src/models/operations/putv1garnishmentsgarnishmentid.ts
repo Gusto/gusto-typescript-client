@@ -6,7 +6,23 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Garnishment,
+  Garnishment$inboundSchema,
+  Garnishment$Outbound,
+  Garnishment$outboundSchema,
+} from "../components/garnishment.js";
+import {
+  GarnishmentChildSupport,
+  GarnishmentChildSupport$inboundSchema,
+  GarnishmentChildSupport$Outbound,
+  GarnishmentChildSupport$outboundSchema,
+} from "../components/garnishmentchildsupport.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutV1GarnishmentsGarnishmentIdRequestBody = {
@@ -53,7 +69,7 @@ export type PutV1GarnishmentsGarnishmentIdRequestBody = {
   /**
    * Additional child support order details
    */
-  childSupport?: components.GarnishmentChildSupportInput | null | undefined;
+  childSupport?: GarnishmentChildSupport | null | undefined;
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
    */
@@ -68,7 +84,7 @@ export type PutV1GarnishmentsGarnishmentIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1GarnishmentsGarnishmentIdRequestBody;
 };
 
@@ -88,7 +104,7 @@ export type PutV1GarnishmentsGarnishmentIdResponse = {
   /**
    * Example response
    */
-  garnishment?: components.Garnishment | undefined;
+  garnishment?: Garnishment | undefined;
 };
 
 /** @internal */
@@ -107,9 +123,7 @@ export const PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema: z.ZodType<
   pay_period_maximum: z.nullable(z.string()).default(null),
   deduct_as_percentage: z.boolean().default(false),
   total_amount: z.string().optional(),
-  child_support: z.nullable(
-    components.GarnishmentChildSupportInput$inboundSchema,
-  ).optional(),
+  child_support: z.nullable(GarnishmentChildSupport$inboundSchema).optional(),
   version: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -134,10 +148,7 @@ export type PutV1GarnishmentsGarnishmentIdRequestBody$Outbound = {
   pay_period_maximum: string | null;
   deduct_as_percentage: boolean;
   total_amount?: string | undefined;
-  child_support?:
-    | components.GarnishmentChildSupportInput$Outbound
-    | null
-    | undefined;
+  child_support?: GarnishmentChildSupport$Outbound | null | undefined;
   version: string;
 };
 
@@ -158,9 +169,7 @@ export const PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema:
     payPeriodMaximum: z.nullable(z.string()).default(null),
     deductAsPercentage: z.boolean().default(false),
     totalAmount: z.string().optional(),
-    childSupport: z.nullable(
-      components.GarnishmentChildSupportInput$outboundSchema,
-    ).optional(),
+    childSupport: z.nullable(GarnishmentChildSupport$outboundSchema).optional(),
     version: z.string(),
   }).transform((v) => {
     return remap$(v, {
@@ -222,9 +231,7 @@ export const PutV1GarnishmentsGarnishmentIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   garnishment_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema
   ),
@@ -250,9 +257,7 @@ export const PutV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   PutV1GarnishmentsGarnishmentIdRequest
 > = z.object({
   garnishmentId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() =>
     PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema
   ),
@@ -309,7 +314,7 @@ export const PutV1GarnishmentsGarnishmentIdResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Garnishment: components.Garnishment$inboundSchema.optional(),
+  Garnishment: Garnishment$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -324,7 +329,7 @@ export type PutV1GarnishmentsGarnishmentIdResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Garnishment?: components.Garnishment$Outbound | undefined;
+  Garnishment?: Garnishment$Outbound | undefined;
 };
 
 /** @internal */
@@ -338,7 +343,7 @@ export const PutV1GarnishmentsGarnishmentIdResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  garnishment: components.Garnishment$outboundSchema.optional(),
+  garnishment: Garnishment$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

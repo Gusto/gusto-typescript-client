@@ -6,7 +6,23 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  ContractorPaymentSummary,
+  ContractorPaymentSummary$inboundSchema,
+  ContractorPaymentSummary$Outbound,
+  ContractorPaymentSummary$outboundSchema,
+} from "../components/contractorpaymentsummary.js";
+import {
+  ContractorPaymentSummaryByDates,
+  ContractorPaymentSummaryByDates$inboundSchema,
+  ContractorPaymentSummaryByDates$Outbound,
+  ContractorPaymentSummaryByDates$outboundSchema,
+} from "../components/contractorpaymentsummarybydates.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompaniesCompanyIdContractorPaymentsRequest = {
@@ -41,15 +57,15 @@ export type GetV1CompaniesCompanyIdContractorPaymentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 /**
  * A JSON object containing contractor payments information
  */
 export type GetV1CompaniesCompanyIdContractorPaymentsResponseBody =
-  | components.ContractorPaymentSummary
-  | components.ContractorPaymentSummaryByDates;
+  | ContractorPaymentSummary
+  | ContractorPaymentSummaryByDates;
 
 export type GetV1CompaniesCompanyIdContractorPaymentsResponse = {
   /**
@@ -68,8 +84,8 @@ export type GetV1CompaniesCompanyIdContractorPaymentsResponse = {
    * A JSON object containing contractor payments information
    */
   oneOf?:
-    | components.ContractorPaymentSummary
-    | components.ContractorPaymentSummaryByDates
+    | ContractorPaymentSummary
+    | ContractorPaymentSummaryByDates
     | undefined;
 };
 
@@ -87,9 +103,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentsRequest$inboundSchema:
     group_by_date: z.boolean().optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -127,9 +141,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema:
     groupByDate: z.boolean().optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
@@ -191,14 +203,14 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponseBody$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.ContractorPaymentSummary$inboundSchema,
-    components.ContractorPaymentSummaryByDates$inboundSchema,
+    ContractorPaymentSummary$inboundSchema,
+    ContractorPaymentSummaryByDates$inboundSchema,
   ]);
 
 /** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentsResponseBody$Outbound =
-  | components.ContractorPaymentSummary$Outbound
-  | components.ContractorPaymentSummaryByDates$Outbound;
+  | ContractorPaymentSummary$Outbound
+  | ContractorPaymentSummaryByDates$Outbound;
 
 /** @internal */
 export const GetV1CompaniesCompanyIdContractorPaymentsResponseBody$outboundSchema:
@@ -207,8 +219,8 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponseBody$outboundSchem
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdContractorPaymentsResponseBody
   > = z.union([
-    components.ContractorPaymentSummary$outboundSchema,
-    components.ContractorPaymentSummaryByDates$outboundSchema,
+    ContractorPaymentSummary$outboundSchema,
+    ContractorPaymentSummaryByDates$outboundSchema,
   ]);
 
 /**
@@ -265,8 +277,8 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema:
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
     oneOf: z.union([
-      components.ContractorPaymentSummary$inboundSchema,
-      components.ContractorPaymentSummaryByDates$inboundSchema,
+      ContractorPaymentSummary$inboundSchema,
+      ContractorPaymentSummaryByDates$inboundSchema,
     ]).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -282,8 +294,8 @@ export type GetV1CompaniesCompanyIdContractorPaymentsResponse$Outbound = {
   StatusCode: number;
   RawResponse: never;
   oneOf?:
-    | components.ContractorPaymentSummary$Outbound
-    | components.ContractorPaymentSummaryByDates$Outbound
+    | ContractorPaymentSummary$Outbound
+    | ContractorPaymentSummaryByDates$Outbound
     | undefined;
 };
 
@@ -300,8 +312,8 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema:
       throw new Error("Response cannot be serialized");
     }),
     oneOf: z.union([
-      components.ContractorPaymentSummary$outboundSchema,
-      components.ContractorPaymentSummaryByDates$outboundSchema,
+      ContractorPaymentSummary$outboundSchema,
+      ContractorPaymentSummaryByDates$outboundSchema,
     ]).optional(),
   }).transform((v) => {
     return remap$(v, {

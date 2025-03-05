@@ -3,17 +3,17 @@
 ## Example Usage
 
 ```typescript
-import { PostCompaniesCompanyUuidReportsRequestBody } from "@gusto/embedded-api/models/operations";
-import { RFCDate } from "@gusto/embedded-api/types";
+import { PostCompaniesCompanyUuidReportsRequestBody } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PostCompaniesCompanyUuidReportsRequestBody = {
   columns: [
-    "double_overtime_earnings",
+    "employee_compensation_time_period",
   ],
   groupings: [
-    "payroll",
+    "work_address",
   ],
-  fileType: "json",
+  fileType: "csv",
   startDate: new RFCDate("2024-01-01"),
   endDate: new RFCDate("2024-04-01"),
   dismissedStartDate: new RFCDate("2024-01-01"),

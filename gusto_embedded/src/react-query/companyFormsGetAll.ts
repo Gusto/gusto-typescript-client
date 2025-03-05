@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyFormsGetAll } from "../funcs/companyFormsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompanyFormsRequest,
+  GetV1CompanyFormsResponse,
+} from "../models/operations/getv1companyforms.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompanyFormsGetAllQueryData = operations.GetV1CompanyFormsResponse;
+export type CompanyFormsGetAllQueryData = GetV1CompanyFormsResponse;
 
 /**
  * Get all company forms
@@ -37,7 +40,7 @@ export type CompanyFormsGetAllQueryData = operations.GetV1CompanyFormsResponse;
  * scope: `company_forms:read`
  */
 export function useCompanyFormsGetAll(
-  request: operations.GetV1CompanyFormsRequest,
+  request: GetV1CompanyFormsRequest,
   options?: QueryHookOptions<CompanyFormsGetAllQueryData>,
 ): UseQueryResult<CompanyFormsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -60,7 +63,7 @@ export function useCompanyFormsGetAll(
  * scope: `company_forms:read`
  */
 export function useCompanyFormsGetAllSuspense(
-  request: operations.GetV1CompanyFormsRequest,
+  request: GetV1CompanyFormsRequest,
   options?: SuspenseQueryHookOptions<CompanyFormsGetAllQueryData>,
 ): UseSuspenseQueryResult<CompanyFormsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +80,7 @@ export function useCompanyFormsGetAllSuspense(
 export function prefetchCompanyFormsGetAll(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormsRequest,
+  request: GetV1CompanyFormsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompanyFormsGetAllQuery(
@@ -91,7 +94,7 @@ export function setCompanyFormsGetAllData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: CompanyFormsGetAllQueryData,
 ): CompanyFormsGetAllQueryData | undefined {
@@ -105,7 +108,7 @@ export function invalidateCompanyFormsGetAll(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -133,7 +136,7 @@ export function invalidateAllCompanyFormsGetAll(
 
 export function buildCompanyFormsGetAllQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormsRequest,
+  request: GetV1CompanyFormsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -165,7 +168,7 @@ export function buildCompanyFormsGetAllQuery(
 
 export function queryKeyCompanyFormsGetAll(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

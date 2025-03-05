@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1JobsJobIdRequest,
+  DeleteV1JobsJobIdRequest$outboundSchema,
+  DeleteV1JobsJobIdResponse,
+  DeleteV1JobsJobIdResponse$inboundSchema,
+} from "../models/operations/deletev1jobsjobid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function jobsAndCompensationsDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1JobsJobIdRequest,
+  request: DeleteV1JobsJobIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1JobsJobIdResponse,
+    DeleteV1JobsJobIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function jobsAndCompensationsDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1JobsJobIdRequest,
+  request: DeleteV1JobsJobIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1JobsJobIdResponse,
+      DeleteV1JobsJobIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.DeleteV1JobsJobIdRequest$outboundSchema.parse(value),
+    (value) => DeleteV1JobsJobIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -156,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1JobsJobIdResponse,
+    DeleteV1JobsJobIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -165,7 +170,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(204, operations.DeleteV1JobsJobIdResponse$inboundSchema),
+    M.nil(204, DeleteV1JobsJobIdResponse$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

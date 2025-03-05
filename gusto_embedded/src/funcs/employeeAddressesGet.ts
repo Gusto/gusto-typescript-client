@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdHomeAddressesRequest,
+  GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema,
+  GetV1EmployeesEmployeeIdHomeAddressesResponse,
+  GetV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema,
+} from "../models/operations/getv1employeesemployeeidhomeaddresses.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeeAddressesGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
+  request: GetV1EmployeesEmployeeIdHomeAddressesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdHomeAddressesResponse,
+    GetV1EmployeesEmployeeIdHomeAddressesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function employeeAddressesGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
+  request: GetV1EmployeesEmployeeIdHomeAddressesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdHomeAddressesResponse,
+      GetV1EmployeesEmployeeIdHomeAddressesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema
-        .parse(value),
+      GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -162,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdHomeAddressesResponse,
+    GetV1EmployeesEmployeeIdHomeAddressesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,11 +175,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema,
-      { key: "Employee-Address-List" },
-    ),
+    M.json(200, GetV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema, {
+      key: "Employee-Address-List",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

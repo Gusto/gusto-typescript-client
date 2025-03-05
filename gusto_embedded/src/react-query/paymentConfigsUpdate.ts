@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paymentConfigsUpdate } from "../funcs/paymentConfigsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompanyPaymentConfigsRequest,
+  PutV1CompanyPaymentConfigsResponse,
+} from "../models/operations/putv1companypaymentconfigs.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PaymentConfigsUpdateMutationVariables = {
-  request: operations.PutV1CompanyPaymentConfigsRequest;
+  request: PutV1CompanyPaymentConfigsRequest;
   options?: RequestOptions;
 };
 
 export type PaymentConfigsUpdateMutationData =
-  operations.PutV1CompanyPaymentConfigsResponse;
+  PutV1CompanyPaymentConfigsResponse;
 
 /**
  * Update a company's payment configs

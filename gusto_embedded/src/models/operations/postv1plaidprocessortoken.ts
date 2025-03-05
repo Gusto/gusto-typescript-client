@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  CompanyBankAccount,
+  CompanyBankAccount$inboundSchema,
+  CompanyBankAccount$Outbound,
+  CompanyBankAccount$outboundSchema,
+} from "../components/companybankaccount.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -40,15 +50,14 @@ export type PostV1PlaidProcessorTokenRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1PlaidProcessorTokenRequestBody;
 };
 
 /**
  * A JSON object containing bank information
  */
-export type PostV1PlaidProcessorTokenResponseBody =
-  components.CompanyBankAccount;
+export type PostV1PlaidProcessorTokenResponseBody = CompanyBankAccount;
 
 export type PostV1PlaidProcessorTokenResponse = {
   /**
@@ -66,7 +75,7 @@ export type PostV1PlaidProcessorTokenResponse = {
   /**
    * A JSON object containing bank information
    */
-  oneOf?: components.CompanyBankAccount | undefined;
+  oneOf?: CompanyBankAccount | undefined;
 };
 
 /** @internal */
@@ -171,9 +180,7 @@ export const PostV1PlaidProcessorTokenRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() => PostV1PlaidProcessorTokenRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -194,9 +201,7 @@ export const PostV1PlaidProcessorTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1PlaidProcessorTokenRequest
 > = z.object({
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() =>
     PostV1PlaidProcessorTokenRequestBody$outboundSchema
   ),
@@ -245,18 +250,18 @@ export const PostV1PlaidProcessorTokenResponseBody$inboundSchema: z.ZodType<
   PostV1PlaidProcessorTokenResponseBody,
   z.ZodTypeDef,
   unknown
-> = components.CompanyBankAccount$inboundSchema;
+> = CompanyBankAccount$inboundSchema;
 
 /** @internal */
 export type PostV1PlaidProcessorTokenResponseBody$Outbound =
-  components.CompanyBankAccount$Outbound;
+  CompanyBankAccount$Outbound;
 
 /** @internal */
 export const PostV1PlaidProcessorTokenResponseBody$outboundSchema: z.ZodType<
   PostV1PlaidProcessorTokenResponseBody$Outbound,
   z.ZodTypeDef,
   PostV1PlaidProcessorTokenResponseBody
-> = components.CompanyBankAccount$outboundSchema;
+> = CompanyBankAccount$outboundSchema;
 
 /**
  * @internal
@@ -303,7 +308,7 @@ export const PostV1PlaidProcessorTokenResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  oneOf: components.CompanyBankAccount$inboundSchema.optional(),
+  oneOf: CompanyBankAccount$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -317,7 +322,7 @@ export type PostV1PlaidProcessorTokenResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  oneOf?: components.CompanyBankAccount$Outbound | undefined;
+  oneOf?: CompanyBankAccount$Outbound | undefined;
 };
 
 /** @internal */
@@ -331,7 +336,7 @@ export const PostV1PlaidProcessorTokenResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  oneOf: components.CompanyBankAccount$outboundSchema.optional(),
+  oneOf: CompanyBankAccount$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

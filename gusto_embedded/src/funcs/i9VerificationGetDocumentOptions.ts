@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$outboundSchema,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$inboundSchema,
+} from "../models/operations/getv1employeesemployeeidi9authorizationdocumentoptions.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,12 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function i9VerificationGetDocumentOptions(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -57,13 +61,12 @@ export function i9VerificationGetDocumentOptions(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
+      GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$outboundSchema
+      GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -164,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
+    GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -175,8 +177,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$inboundSchema,
+      GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse$inboundSchema,
       { key: "I9-Authorization-Document-Options-Object" },
     ),
     M.fail([404, "4XX"]),

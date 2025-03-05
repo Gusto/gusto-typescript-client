@@ -11,18 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { introspectionRefreshToken } from "../funcs/introspectionRefreshToken.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  RefreshAccessTokenRequest,
+  RefreshAccessTokenResponse,
+} from "../models/operations/refreshaccesstoken.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type IntrospectionRefreshTokenMutationVariables = {
-  request: operations.RefreshAccessTokenRequest;
+  request: RefreshAccessTokenRequest;
   options?: RequestOptions;
 };
 
-export type IntrospectionRefreshTokenMutationData =
-  operations.RefreshAccessTokenResponse;
+export type IntrospectionRefreshTokenMutationData = RefreshAccessTokenResponse;
 
 /**
  * Refresh access token

@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1ContractorsContractorUuidRequest,
+  DeleteV1ContractorsContractorUuidRequest$outboundSchema,
+  DeleteV1ContractorsContractorUuidResponse,
+  DeleteV1ContractorsContractorUuidResponse$inboundSchema,
+} from "../models/operations/deletev1contractorscontractoruuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function contractorsDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1ContractorsContractorUuidRequest,
+  request: DeleteV1ContractorsContractorUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1ContractorsContractorUuidResponse,
+    DeleteV1ContractorsContractorUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function contractorsDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1ContractorsContractorUuidRequest,
+  request: DeleteV1ContractorsContractorUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1ContractorsContractorUuidResponse,
+      DeleteV1ContractorsContractorUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,9 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1ContractorsContractorUuidRequest$outboundSchema.parse(
-        value,
-      ),
+      DeleteV1ContractorsContractorUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,7 +162,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1ContractorsContractorUuidResponse,
+    DeleteV1ContractorsContractorUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -168,10 +171,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      204,
-      operations.DeleteV1ContractorsContractorUuidResponse$inboundSchema,
-    ),
+    M.nil(204, DeleteV1ContractorsContractorUuidResponse$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

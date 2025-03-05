@@ -11,17 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { flowsCreate } from "../funcs/flowsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompanyFlowsRequest,
+  PostV1CompanyFlowsResponse,
+} from "../models/operations/postv1companyflows.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type FlowsCreateMutationVariables = {
-  request: operations.PostV1CompanyFlowsRequest;
+  request: PostV1CompanyFlowsRequest;
   options?: RequestOptions;
 };
 
-export type FlowsCreateMutationData = operations.PostV1CompanyFlowsResponse;
+export type FlowsCreateMutationData = PostV1CompanyFlowsResponse;
 
 /**
  * Create a flow

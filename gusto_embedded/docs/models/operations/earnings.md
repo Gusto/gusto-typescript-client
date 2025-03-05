@@ -5,7 +5,7 @@ An array of earnings for the employee. Depends on your company selections, earni
 ## Example Usage
 
 ```typescript
-import { Earnings } from "@gusto/embedded-api/models/operations";
+import { Earnings } from "@gusto/embedded-api/models/operations/putv1externalpayroll.js";
 
 let value: Earnings = {};
 ```

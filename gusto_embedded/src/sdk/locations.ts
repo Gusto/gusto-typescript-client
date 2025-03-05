@@ -8,7 +8,26 @@ import { locationsGetMinimumWages } from "../funcs/locationsGetMinimumWages.js";
 import { locationsRetrieve } from "../funcs/locationsRetrieve.js";
 import { locationsUpdate } from "../funcs/locationsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdLocationsRequest,
+  GetV1CompaniesCompanyIdLocationsResponse,
+} from "../models/operations/getv1companiescompanyidlocations.js";
+import {
+  GetV1LocationsLocationIdRequest,
+  GetV1LocationsLocationIdResponse,
+} from "../models/operations/getv1locationslocationid.js";
+import {
+  GetV1LocationsLocationUuidMinimumWagesRequest,
+  GetV1LocationsLocationUuidMinimumWagesResponse,
+} from "../models/operations/getv1locationslocationuuidminimumwages.js";
+import {
+  PostV1CompaniesCompanyIdLocationsRequest,
+  PostV1CompaniesCompanyIdLocationsResponse,
+} from "../models/operations/postv1companiescompanyidlocations.js";
+import {
+  PutV1LocationsLocationIdRequest,
+  PutV1LocationsLocationIdResponse,
+} from "../models/operations/putv1locationslocationid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Locations extends ClientSDK {
@@ -23,9 +42,9 @@ export class Locations extends ClientSDK {
    * scope: `companies:write`
    */
   async create(
-    request: operations.PostV1CompaniesCompanyIdLocationsRequest,
+    request: PostV1CompaniesCompanyIdLocationsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdLocationsResponse> {
+  ): Promise<PostV1CompaniesCompanyIdLocationsResponse> {
     return unwrapAsync(locationsCreate(
       this,
       request,
@@ -44,9 +63,9 @@ export class Locations extends ClientSDK {
    * scope: `companies:read`
    */
   async get(
-    request: operations.GetV1CompaniesCompanyIdLocationsRequest,
+    request: GetV1CompaniesCompanyIdLocationsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdLocationsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdLocationsResponse> {
     return unwrapAsync(locationsGet(
       this,
       request,
@@ -63,9 +82,9 @@ export class Locations extends ClientSDK {
    * scope: `companies:read`
    */
   async retrieve(
-    request: operations.GetV1LocationsLocationIdRequest,
+    request: GetV1LocationsLocationIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1LocationsLocationIdResponse> {
+  ): Promise<GetV1LocationsLocationIdResponse> {
     return unwrapAsync(locationsRetrieve(
       this,
       request,
@@ -82,9 +101,9 @@ export class Locations extends ClientSDK {
    * scope: `companies.write`
    */
   async update(
-    request: operations.PutV1LocationsLocationIdRequest,
+    request: PutV1LocationsLocationIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1LocationsLocationIdResponse> {
+  ): Promise<PutV1LocationsLocationIdResponse> {
     return unwrapAsync(locationsUpdate(
       this,
       request,
@@ -101,9 +120,9 @@ export class Locations extends ClientSDK {
    * scope: `companies:read`
    */
   async getMinimumWages(
-    request: operations.GetV1LocationsLocationUuidMinimumWagesRequest,
+    request: GetV1LocationsLocationUuidMinimumWagesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1LocationsLocationUuidMinimumWagesResponse> {
+  ): Promise<GetV1LocationsLocationUuidMinimumWagesResponse> {
     return unwrapAsync(locationsGetMinimumWages(
       this,
       request,

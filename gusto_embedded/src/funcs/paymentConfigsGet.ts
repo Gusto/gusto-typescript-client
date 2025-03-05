@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyPaymentConfigsRequest,
+  GetV1CompanyPaymentConfigsRequest$outboundSchema,
+  GetV1CompanyPaymentConfigsResponse,
+  GetV1CompanyPaymentConfigsResponse$inboundSchema,
+} from "../models/operations/getv1companypaymentconfigs.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function paymentConfigsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyPaymentConfigsRequest,
+  request: GetV1CompanyPaymentConfigsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompanyPaymentConfigsResponse,
+    GetV1CompanyPaymentConfigsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function paymentConfigsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyPaymentConfigsRequest,
+  request: GetV1CompanyPaymentConfigsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompanyPaymentConfigsResponse,
+      GetV1CompanyPaymentConfigsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1CompanyPaymentConfigsRequest$outboundSchema.parse(value),
+    (value) => GetV1CompanyPaymentConfigsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompanyPaymentConfigsResponse,
+    GetV1CompanyPaymentConfigsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -168,7 +172,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompanyPaymentConfigsResponse$inboundSchema, {
+    M.json(200, GetV1CompanyPaymentConfigsResponse$inboundSchema, {
       key: "Payment-Configs",
     }),
     M.fail([404, "4XX"]),

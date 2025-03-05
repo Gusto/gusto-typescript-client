@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  PayScheduleAssignment,
+  PayScheduleAssignment$inboundSchema,
+  PayScheduleAssignment$Outbound,
+  PayScheduleAssignment$outboundSchema,
+} from "../components/payscheduleassignment.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest = {
@@ -17,7 +27,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse = {
@@ -36,7 +46,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse = {
   /**
    * Example response
    */
-  payScheduleAssignment?: components.PayScheduleAssignment | undefined;
+  payScheduleAssignment?: PayScheduleAssignment | undefined;
 };
 
 /** @internal */
@@ -47,9 +57,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest$inboundSchema
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -71,9 +79,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest$outboundSchem
     GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
@@ -134,8 +140,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse$inboundSchem
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Pay-Schedule-Assignment": components.PayScheduleAssignment$inboundSchema
-      .optional(),
+    "Pay-Schedule-Assignment": PayScheduleAssignment$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -150,9 +155,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Pay-Schedule-Assignment"?:
-    | components.PayScheduleAssignment$Outbound
-    | undefined;
+  "Pay-Schedule-Assignment"?: PayScheduleAssignment$Outbound | undefined;
 };
 
 /** @internal */
@@ -167,8 +170,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse$outboundSche
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    payScheduleAssignment: components.PayScheduleAssignment$outboundSchema
-      .optional(),
+    payScheduleAssignment: PayScheduleAssignment$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

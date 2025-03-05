@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesAttachmentUrlRequest,
+  GetV1CompaniesAttachmentUrlRequest$outboundSchema,
+  GetV1CompaniesAttachmentUrlResponse,
+  GetV1CompaniesAttachmentUrlResponse$inboundSchema,
+} from "../models/operations/getv1companiesattachmenturl.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,11 +39,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyAttachmentGetDownloadUrl(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentUrlRequest,
+  request: GetV1CompaniesAttachmentUrlRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesAttachmentUrlResponse,
+    GetV1CompaniesAttachmentUrlResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -57,12 +62,12 @@ export function companyAttachmentGetDownloadUrl(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentUrlRequest,
+  request: GetV1CompaniesAttachmentUrlRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesAttachmentUrlResponse,
+      GetV1CompaniesAttachmentUrlResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1CompaniesAttachmentUrlRequest$outboundSchema.parse(value),
+    (value) => GetV1CompaniesAttachmentUrlRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -165,7 +169,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesAttachmentUrlResponse,
+    GetV1CompaniesAttachmentUrlResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -174,7 +178,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompaniesAttachmentUrlResponse$inboundSchema, {
+    M.json(200, GetV1CompaniesAttachmentUrlResponse$inboundSchema, {
       key: "object",
     }),
     M.fail([404, "4XX"]),

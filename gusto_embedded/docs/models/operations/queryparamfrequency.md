@@ -5,7 +5,7 @@ The frequency that employees on this pay schedule are paid with Gusto.
 ## Example Usage
 
 ```typescript
-import { QueryParamFrequency } from "@gusto/embedded-api/models/operations";
+import { QueryParamFrequency } from "@gusto/embedded-api/models/operations/getv1companiescompanyidpayschedulespreview.js";
 
 let value: QueryParamFrequency = "Every other week";
 ```

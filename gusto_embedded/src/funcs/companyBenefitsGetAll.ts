@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1BenefitsRequest,
+  GetV1BenefitsRequest$outboundSchema,
+  GetV1BenefitsResponse,
+  GetV1BenefitsResponse$inboundSchema,
+} from "../models/operations/getv1benefits.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyBenefitsGetAll(
   client: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsRequest,
+  request: GetV1BenefitsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1BenefitsResponse,
+    GetV1BenefitsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function companyBenefitsGetAll(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsRequest,
+  request: GetV1BenefitsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1BenefitsResponse,
+      GetV1BenefitsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -77,7 +82,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetV1BenefitsRequest$outboundSchema.parse(value),
+    (value) => GetV1BenefitsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -151,7 +156,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1BenefitsResponse,
+    GetV1BenefitsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,7 +165,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1BenefitsResponse$inboundSchema, {
+    M.json(200, GetV1BenefitsResponse$inboundSchema, {
       key: "Supported-Benefit-List",
     }),
     M.fail([404, "4XX"]),

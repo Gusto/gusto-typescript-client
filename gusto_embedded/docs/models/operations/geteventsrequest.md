@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetEventsRequest } from "@gusto/embedded-api/models/operations";
+import { GetEventsRequest } from "@gusto/embedded-api/models/operations/getevents.js";
 
 let value: GetEventsRequest = {
   sortOrder: "asc",

@@ -11,19 +11,23 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksCreateSubscription } from "../funcs/webhooksCreateSubscription.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1WebhookSubscriptionRequest,
+  PostV1WebhookSubscriptionResponse,
+  PostV1WebhookSubscriptionSecurity,
+} from "../models/operations/postv1webhooksubscription.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type WebhooksCreateSubscriptionMutationVariables = {
-  security: operations.PostV1WebhookSubscriptionSecurity;
-  request: operations.PostV1WebhookSubscriptionRequest;
+  security: PostV1WebhookSubscriptionSecurity;
+  request: PostV1WebhookSubscriptionRequest;
   options?: RequestOptions;
 };
 
 export type WebhooksCreateSubscriptionMutationData =
-  operations.PostV1WebhookSubscriptionResponse;
+  PostV1WebhookSubscriptionResponse;
 
 /**
  * Create a webhook subscription

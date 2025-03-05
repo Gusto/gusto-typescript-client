@@ -5,7 +5,7 @@ Update a location
 ## Example Usage
 
 ```typescript
-import { PutV1LocationsLocationIdRequestBody } from "@gusto/embedded-api/models/operations";
+import { PutV1LocationsLocationIdRequestBody } from "@gusto/embedded-api/models/operations/putv1locationslocationid.js";
 
 let value: PutV1LocationsLocationIdRequestBody = {
   version: "<value>",

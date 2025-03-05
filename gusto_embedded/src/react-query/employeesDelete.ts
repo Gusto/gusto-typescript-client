@@ -11,17 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesDelete } from "../funcs/employeesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeeRequest,
+  DeleteV1EmployeeResponse,
+} from "../models/operations/deletev1employee.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeesDeleteMutationVariables = {
-  request: operations.DeleteV1EmployeeRequest;
+  request: DeleteV1EmployeeRequest;
   options?: RequestOptions;
 };
 
-export type EmployeesDeleteMutationData = operations.DeleteV1EmployeeResponse;
+export type EmployeesDeleteMutationData = DeleteV1EmployeeResponse;
 
 /**
  * Delete an onboarding employee

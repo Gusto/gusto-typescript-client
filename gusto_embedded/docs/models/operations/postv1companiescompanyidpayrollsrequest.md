@@ -3,13 +3,13 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdPayrollsRequest } from "@gusto/embedded-api/models/operations";
+import { PostV1CompaniesCompanyIdPayrollsRequest } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpayrolls.js";
 
 let value: PostV1CompaniesCompanyIdPayrollsRequest = {
   companyId: "<id>",
   requestBody: {
     offCycle: false,
-    offCycleReason: "Dismissed employee",
+    offCycleReason: "Bonus",
     startDate: "<value>",
     endDate: "<value>",
   },

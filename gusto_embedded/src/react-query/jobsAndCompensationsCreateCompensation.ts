@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsCreateCompensation } from "../funcs/jobsAndCompensationsCreateCompensation.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompensationsCompensationIdRequest,
+  PostV1CompensationsCompensationIdResponse,
+} from "../models/operations/postv1compensationscompensationid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type JobsAndCompensationsCreateCompensationMutationVariables = {
-  request: operations.PostV1CompensationsCompensationIdRequest;
+  request: PostV1CompensationsCompensationIdRequest;
   options?: RequestOptions;
 };
 
 export type JobsAndCompensationsCreateCompensationMutationData =
-  operations.PostV1CompensationsCompensationIdResponse;
+  PostV1CompensationsCompensationIdResponse;
 
 /**
  * Create a compensation

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1PlaidProcessorTokenRequest } from "@gusto/embedded-api/models/operations";
+import { PostV1PlaidProcessorTokenRequest } from "@gusto/embedded-api/models/operations/postv1plaidprocessortoken.js";
 
 let value: PostV1PlaidProcessorTokenRequest = {
   requestBody: {

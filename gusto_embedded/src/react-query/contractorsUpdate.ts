@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsUpdate } from "../funcs/contractorsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1ContractorsContractorUuidRequest,
+  PutV1ContractorsContractorUuidResponse,
+} from "../models/operations/putv1contractorscontractoruuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorsUpdateMutationVariables = {
-  request: operations.PutV1ContractorsContractorUuidRequest;
+  request: PutV1ContractorsContractorUuidRequest;
   options?: RequestOptions;
 };
 
 export type ContractorsUpdateMutationData =
-  operations.PutV1ContractorsContractorUuidResponse;
+  PutV1ContractorsContractorUuidResponse;
 
 /**
  * Update a contractor

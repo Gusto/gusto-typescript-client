@@ -8,7 +8,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
-import * as components from "../components/index.js";
+import {
+  CreateReport,
+  CreateReport$inboundSchema,
+  CreateReport$Outbound,
+  CreateReport$outboundSchema,
+} from "../components/createreport.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const Columns = {
@@ -237,7 +247,7 @@ export type PostCompaniesCompanyUuidReportsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostCompaniesCompanyUuidReportsRequestBody;
 };
 
@@ -257,7 +267,7 @@ export type PostCompaniesCompanyUuidReportsResponse = {
   /**
    * Example response
    */
-  createReport?: components.CreateReport | undefined;
+  createReport?: CreateReport | undefined;
 };
 
 /** @internal */
@@ -537,9 +547,7 @@ export const PostCompaniesCompanyUuidReportsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PostCompaniesCompanyUuidReportsRequestBody$inboundSchema
   ),
@@ -565,9 +573,7 @@ export const PostCompaniesCompanyUuidReportsRequest$outboundSchema: z.ZodType<
   PostCompaniesCompanyUuidReportsRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() =>
     PostCompaniesCompanyUuidReportsRequestBody$outboundSchema
   ),
@@ -625,7 +631,7 @@ export const PostCompaniesCompanyUuidReportsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Create-Report": components.CreateReport$inboundSchema.optional(),
+  "Create-Report": CreateReport$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -640,7 +646,7 @@ export type PostCompaniesCompanyUuidReportsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Create-Report"?: components.CreateReport$Outbound | undefined;
+  "Create-Report"?: CreateReport$Outbound | undefined;
 };
 
 /** @internal */
@@ -654,7 +660,7 @@ export const PostCompaniesCompanyUuidReportsResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  createReport: components.CreateReport$outboundSchema.optional(),
+  createReport: CreateReport$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

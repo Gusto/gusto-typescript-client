@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostV1SandboxGenerateW2Request,
+  PostV1SandboxGenerateW2Request$outboundSchema,
+  PostV1SandboxGenerateW2Response,
+  PostV1SandboxGenerateW2Response$inboundSchema,
+} from "../models/operations/postv1sandboxgeneratew2.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -38,12 +46,12 @@ import { Result } from "../types/fp.js";
  */
 export function employeeFormsGenerateW2(
   client: GustoEmbeddedCore,
-  request: operations.PostV1SandboxGenerateW2Request,
+  request: PostV1SandboxGenerateW2Request,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1SandboxGenerateW2Response,
-    | errors.UnprocessableEntityErrorObject
+    PostV1SandboxGenerateW2Response,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -62,13 +70,13 @@ export function employeeFormsGenerateW2(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PostV1SandboxGenerateW2Request,
+  request: PostV1SandboxGenerateW2Request,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostV1SandboxGenerateW2Response,
-      | errors.UnprocessableEntityErrorObject
+      PostV1SandboxGenerateW2Response,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -82,8 +90,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PostV1SandboxGenerateW2Request$outboundSchema.parse(value),
+    (value) => PostV1SandboxGenerateW2Request$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -158,8 +165,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostV1SandboxGenerateW2Response,
-    | errors.UnprocessableEntityErrorObject
+    PostV1SandboxGenerateW2Response,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -168,10 +175,8 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PostV1SandboxGenerateW2Response$inboundSchema, {
-      key: "Form",
-    }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, PostV1SandboxGenerateW2Response$inboundSchema, { key: "Form" }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -5,7 +5,14 @@
 import { federalTaxDetailsGet } from "../funcs/federalTaxDetailsGet.js";
 import { federalTaxDetailsUpdate } from "../funcs/federalTaxDetailsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
+} from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
+import {
+  PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+} from "../models/operations/putv1companiescompanyidfederaltaxdetails.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class FederalTaxDetails extends ClientSDK {
@@ -18,9 +25,9 @@ export class FederalTaxDetails extends ClientSDK {
    * scope: `company_federal_taxes:read`
    */
   async get(
-    request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+    request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdFederalTaxDetailsResponse> {
     return unwrapAsync(federalTaxDetailsGet(
       this,
       request,
@@ -38,9 +45,9 @@ export class FederalTaxDetails extends ClientSDK {
    * scope: `company_federal_taxes:write`
    */
   async update(
-    request: operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
+    request: PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse> {
+  ): Promise<PutV1CompaniesCompanyIdFederalTaxDetailsResponse> {
     return unwrapAsync(federalTaxDetailsUpdate(
       this,
       request,

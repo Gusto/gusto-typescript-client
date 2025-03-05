@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationGetAuthorization } from "../funcs/i9VerificationGetAuthorization.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+  GetV1EmployeesEmployeeIdI9AuthorizationResponse,
+} from "../models/operations/getv1employeesemployeeidi9authorization.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type I9VerificationGetAuthorizationQueryData =
-  operations.GetV1EmployeesEmployeeIdI9AuthorizationResponse;
+  GetV1EmployeesEmployeeIdI9AuthorizationResponse;
 
 /**
  * Get an employee's I-9 authorization
@@ -40,7 +43,7 @@ export type I9VerificationGetAuthorizationQueryData =
  * scope: `i9_authorizations:read`
  */
 export function useI9VerificationGetAuthorization(
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
   options?: QueryHookOptions<I9VerificationGetAuthorizationQueryData>,
 ): UseQueryResult<I9VerificationGetAuthorizationQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -65,7 +68,7 @@ export function useI9VerificationGetAuthorization(
  * scope: `i9_authorizations:read`
  */
 export function useI9VerificationGetAuthorizationSuspense(
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
   options?: SuspenseQueryHookOptions<I9VerificationGetAuthorizationQueryData>,
 ): UseSuspenseQueryResult<I9VerificationGetAuthorizationQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -82,7 +85,7 @@ export function useI9VerificationGetAuthorizationSuspense(
 export function prefetchI9VerificationGetAuthorization(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildI9VerificationGetAuthorizationQuery(
@@ -96,7 +99,7 @@ export function setI9VerificationGetAuthorizationData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: I9VerificationGetAuthorizationQueryData,
 ): I9VerificationGetAuthorizationQueryData | undefined {
@@ -113,7 +116,7 @@ export function invalidateI9VerificationGetAuthorization(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -141,7 +144,7 @@ export function invalidateAllI9VerificationGetAuthorization(
 
 export function buildI9VerificationGetAuthorizationQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -173,7 +176,7 @@ export function buildI9VerificationGetAuthorizationQuery(
 
 export function queryKeyI9VerificationGetAuthorization(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

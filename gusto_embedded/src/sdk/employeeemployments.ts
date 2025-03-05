@@ -12,7 +12,42 @@ import { employeeEmploymentsGetTerminations } from "../funcs/employeeEmployments
 import { employeeEmploymentsRehire } from "../funcs/employeeEmploymentsRehire.js";
 import { employeeEmploymentsUpdateTermination } from "../funcs/employeeEmploymentsUpdateTermination.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdRehireRequest,
+  DeleteV1EmployeesEmployeeIdRehireResponse,
+} from "../models/operations/deletev1employeesemployeeidrehire.js";
+import {
+  DeleteV1EmployeesEmployeeIdTerminationsRequest,
+  DeleteV1EmployeesEmployeeIdTerminationsResponse,
+} from "../models/operations/deletev1employeesemployeeidterminations.js";
+import {
+  GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+} from "../models/operations/getv1employeesemployeeidemploymenthistory.js";
+import {
+  GetV1EmployeesEmployeeIdRehireRequest,
+  GetV1EmployeesEmployeeIdRehireResponse,
+} from "../models/operations/getv1employeesemployeeidrehire.js";
+import {
+  GetV1EmployeesEmployeeIdTerminationsRequest,
+  GetV1EmployeesEmployeeIdTerminationsResponse,
+} from "../models/operations/getv1employeesemployeeidterminations.js";
+import {
+  PostV1EmployeesEmployeeIdRehireRequest,
+  PostV1EmployeesEmployeeIdRehireResponse,
+} from "../models/operations/postv1employeesemployeeidrehire.js";
+import {
+  PostV1EmployeesEmployeeIdTerminationsRequest,
+  PostV1EmployeesEmployeeIdTerminationsResponse,
+} from "../models/operations/postv1employeesemployeeidterminations.js";
+import {
+  PutV1EmployeesEmployeeIdRehireRequest,
+  PutV1EmployeesEmployeeIdRehireResponse,
+} from "../models/operations/putv1employeesemployeeidrehire.js";
+import {
+  PutV1TerminationsEmployeeIdRequest,
+  PutV1TerminationsEmployeeIdResponse,
+} from "../models/operations/putv1terminationsemployeeid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeEmployments extends ClientSDK {
@@ -27,9 +62,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:write`
    */
   async createTermination(
-    request: operations.PostV1EmployeesEmployeeIdTerminationsRequest,
+    request: PostV1EmployeesEmployeeIdTerminationsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1EmployeesEmployeeIdTerminationsResponse> {
+  ): Promise<PostV1EmployeesEmployeeIdTerminationsResponse> {
     return unwrapAsync(employeeEmploymentsCreateTermination(
       this,
       request,
@@ -48,9 +83,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:read`
    */
   async getTerminations(
-    request: operations.GetV1EmployeesEmployeeIdTerminationsRequest,
+    request: GetV1EmployeesEmployeeIdTerminationsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdTerminationsResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdTerminationsResponse> {
     return unwrapAsync(employeeEmploymentsGetTerminations(
       this,
       request,
@@ -67,9 +102,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:write`
    */
   async deleteTermination(
-    request: operations.DeleteV1EmployeesEmployeeIdTerminationsRequest,
+    request: DeleteV1EmployeesEmployeeIdTerminationsRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1EmployeesEmployeeIdTerminationsResponse> {
+  ): Promise<DeleteV1EmployeesEmployeeIdTerminationsResponse> {
     return unwrapAsync(employeeEmploymentsDeleteTermination(
       this,
       request,
@@ -88,9 +123,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:write`
    */
   async updateTermination(
-    request: operations.PutV1TerminationsEmployeeIdRequest,
+    request: PutV1TerminationsEmployeeIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1TerminationsEmployeeIdResponse> {
+  ): Promise<PutV1TerminationsEmployeeIdResponse> {
     return unwrapAsync(employeeEmploymentsUpdateTermination(
       this,
       request,
@@ -107,9 +142,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:write`
    */
   async createRehire(
-    request: operations.PostV1EmployeesEmployeeIdRehireRequest,
+    request: PostV1EmployeesEmployeeIdRehireRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1EmployeesEmployeeIdRehireResponse> {
+  ): Promise<PostV1EmployeesEmployeeIdRehireResponse> {
     return unwrapAsync(employeeEmploymentsCreateRehire(
       this,
       request,
@@ -126,9 +161,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:write`
    */
   async rehire(
-    request: operations.PutV1EmployeesEmployeeIdRehireRequest,
+    request: PutV1EmployeesEmployeeIdRehireRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesEmployeeIdRehireResponse> {
+  ): Promise<PutV1EmployeesEmployeeIdRehireResponse> {
     return unwrapAsync(employeeEmploymentsRehire(
       this,
       request,
@@ -145,9 +180,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:read`
    */
   async getRehire(
-    request: operations.GetV1EmployeesEmployeeIdRehireRequest,
+    request: GetV1EmployeesEmployeeIdRehireRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdRehireResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdRehireResponse> {
     return unwrapAsync(employeeEmploymentsGetRehire(
       this,
       request,
@@ -164,9 +199,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:write`
    */
   async deleteRehire(
-    request: operations.DeleteV1EmployeesEmployeeIdRehireRequest,
+    request: DeleteV1EmployeesEmployeeIdRehireRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1EmployeesEmployeeIdRehireResponse> {
+  ): Promise<DeleteV1EmployeesEmployeeIdRehireResponse> {
     return unwrapAsync(employeeEmploymentsDeleteRehire(
       this,
       request,
@@ -183,9 +218,9 @@ export class EmployeeEmployments extends ClientSDK {
    * scope: `employments:read`
    */
   async getHistory(
-    request: operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+    request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdEmploymentHistoryResponse> {
     return unwrapAsync(employeeEmploymentsGetHistory(
       this,
       request,

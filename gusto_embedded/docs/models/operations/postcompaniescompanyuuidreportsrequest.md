@@ -3,14 +3,14 @@
 ## Example Usage
 
 ```typescript
-import { PostCompaniesCompanyUuidReportsRequest } from "@gusto/embedded-api/models/operations";
-import { RFCDate } from "@gusto/embedded-api/types";
+import { PostCompaniesCompanyUuidReportsRequest } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PostCompaniesCompanyUuidReportsRequest = {
   companyUuid: "<id>",
   requestBody: {
     columns: [
-      "bonus",
+      "commission",
     ],
     groupings: [
       "payroll",

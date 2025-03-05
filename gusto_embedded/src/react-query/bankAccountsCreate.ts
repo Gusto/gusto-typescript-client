@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { bankAccountsCreate } from "../funcs/bankAccountsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdBankAccountsRequest,
+  PostV1CompaniesCompanyIdBankAccountsResponse,
+} from "../models/operations/postv1companiescompanyidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type BankAccountsCreateMutationVariables = {
-  request: operations.PostV1CompaniesCompanyIdBankAccountsRequest;
+  request: PostV1CompaniesCompanyIdBankAccountsRequest;
   options?: RequestOptions;
 };
 
 export type BankAccountsCreateMutationData =
-  operations.PostV1CompaniesCompanyIdBankAccountsResponse;
+  PostV1CompaniesCompanyIdBankAccountsResponse;
 
 /**
  * Create a company bank account

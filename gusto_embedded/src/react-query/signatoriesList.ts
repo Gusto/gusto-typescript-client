@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesList } from "../funcs/signatoriesList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyUuidSignatoriesRequest,
+  GetV1CompaniesCompanyUuidSignatoriesResponse,
+} from "../models/operations/getv1companiescompanyuuidsignatories.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type SignatoriesListQueryData =
-  operations.GetV1CompaniesCompanyUuidSignatoriesResponse;
+  GetV1CompaniesCompanyUuidSignatoriesResponse;
 
 /**
  * Get all company signatories
@@ -38,7 +41,7 @@ export type SignatoriesListQueryData =
  * scope: `signatories:read`
  */
 export function useSignatoriesList(
-  request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
+  request: GetV1CompaniesCompanyUuidSignatoriesRequest,
   options?: QueryHookOptions<SignatoriesListQueryData>,
 ): UseQueryResult<SignatoriesListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useSignatoriesList(
  * scope: `signatories:read`
  */
 export function useSignatoriesListSuspense(
-  request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
+  request: GetV1CompaniesCompanyUuidSignatoriesRequest,
   options?: SuspenseQueryHookOptions<SignatoriesListQueryData>,
 ): UseSuspenseQueryResult<SignatoriesListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useSignatoriesListSuspense(
 export function prefetchSignatoriesList(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
+  request: GetV1CompaniesCompanyUuidSignatoriesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildSignatoriesListQuery(
@@ -92,7 +95,7 @@ export function setSignatoriesListData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: SignatoriesListQueryData,
 ): SignatoriesListQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateSignatoriesList(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -129,7 +132,7 @@ export function invalidateAllSignatoriesList(
 
 export function buildSignatoriesListQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
+  request: GetV1CompaniesCompanyUuidSignatoriesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -159,7 +162,7 @@ export function buildSignatoriesListQuery(
 
 export function queryKeySignatoriesList(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

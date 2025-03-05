@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGetOnboardingStatus } from "../funcs/employeesGetOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+} from "../models/operations/getv1employeesemployeeidonboardingstatus.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeesGetOnboardingStatusQueryData =
-  operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse;
+  GetV1EmployeesEmployeeIdOnboardingStatusResponse;
 
 /**
  * Get the employee's onboarding status
@@ -74,7 +77,7 @@ export type EmployeesGetOnboardingStatusQueryData =
  * | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
  */
 export function useEmployeesGetOnboardingStatus(
-  request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
   options?: QueryHookOptions<EmployeesGetOnboardingStatusQueryData>,
 ): UseQueryResult<EmployeesGetOnboardingStatusQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -133,7 +136,7 @@ export function useEmployeesGetOnboardingStatus(
  * | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
  */
 export function useEmployeesGetOnboardingStatusSuspense(
-  request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
   options?: SuspenseQueryHookOptions<EmployeesGetOnboardingStatusQueryData>,
 ): UseSuspenseQueryResult<EmployeesGetOnboardingStatusQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -150,7 +153,7 @@ export function useEmployeesGetOnboardingStatusSuspense(
 export function prefetchEmployeesGetOnboardingStatus(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeesGetOnboardingStatusQuery(
@@ -164,7 +167,7 @@ export function setEmployeesGetOnboardingStatusData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeesGetOnboardingStatusQueryData,
 ): EmployeesGetOnboardingStatusQueryData | undefined {
@@ -178,7 +181,7 @@ export function invalidateEmployeesGetOnboardingStatus(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -206,7 +209,7 @@ export function invalidateAllEmployeesGetOnboardingStatus(
 
 export function buildEmployeesGetOnboardingStatusQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -238,7 +241,7 @@ export function buildEmployeesGetOnboardingStatusQuery(
 
 export function queryKeyEmployeesGetOnboardingStatus(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

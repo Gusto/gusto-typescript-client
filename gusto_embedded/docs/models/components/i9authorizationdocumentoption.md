@@ -5,7 +5,7 @@ An employee's I-9 verification document option based on the authorization status
 ## Example Usage
 
 ```typescript
-import { I9AuthorizationDocumentOption } from "@gusto/embedded-api/models/components";
+import { I9AuthorizationDocumentOption } from "@gusto/embedded-api/models/components/i9authorizationdocumentoption.js";
 
 let value: I9AuthorizationDocumentOption = {
   section: "C",

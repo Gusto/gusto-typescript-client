@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1ContractorFormRequest,
+  GetV1ContractorFormRequest$outboundSchema,
+  GetV1ContractorFormResponse,
+  GetV1ContractorFormResponse$inboundSchema,
+} from "../models/operations/getv1contractorform.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function contractorFormsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormRequest,
+  request: GetV1ContractorFormRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1ContractorFormResponse,
+    GetV1ContractorFormResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function contractorFormsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormRequest,
+  request: GetV1ContractorFormRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1ContractorFormResponse,
+      GetV1ContractorFormResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1ContractorFormRequest$outboundSchema.parse(value),
+    (value) => GetV1ContractorFormRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -163,7 +167,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1ContractorFormResponse,
+    GetV1ContractorFormResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -172,7 +176,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1ContractorFormResponse$inboundSchema, {
+    M.json(200, GetV1ContractorFormResponse$inboundSchema, {
       key: "Form_1099",
     }),
     M.fail([404, "4XX"]),

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsGetMinimumWages } from "../funcs/locationsGetMinimumWages.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1LocationsLocationUuidMinimumWagesRequest,
+  GetV1LocationsLocationUuidMinimumWagesResponse,
+} from "../models/operations/getv1locationslocationuuidminimumwages.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type LocationsGetMinimumWagesQueryData =
-  operations.GetV1LocationsLocationUuidMinimumWagesResponse;
+  GetV1LocationsLocationUuidMinimumWagesResponse;
 
 /**
  * Get minimum wages for a location
@@ -38,7 +41,7 @@ export type LocationsGetMinimumWagesQueryData =
  * scope: `companies:read`
  */
 export function useLocationsGetMinimumWages(
-  request: operations.GetV1LocationsLocationUuidMinimumWagesRequest,
+  request: GetV1LocationsLocationUuidMinimumWagesRequest,
   options?: QueryHookOptions<LocationsGetMinimumWagesQueryData>,
 ): UseQueryResult<LocationsGetMinimumWagesQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useLocationsGetMinimumWages(
  * scope: `companies:read`
  */
 export function useLocationsGetMinimumWagesSuspense(
-  request: operations.GetV1LocationsLocationUuidMinimumWagesRequest,
+  request: GetV1LocationsLocationUuidMinimumWagesRequest,
   options?: SuspenseQueryHookOptions<LocationsGetMinimumWagesQueryData>,
 ): UseSuspenseQueryResult<LocationsGetMinimumWagesQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useLocationsGetMinimumWagesSuspense(
 export function prefetchLocationsGetMinimumWages(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationUuidMinimumWagesRequest,
+  request: GetV1LocationsLocationUuidMinimumWagesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildLocationsGetMinimumWagesQuery(
@@ -94,7 +97,7 @@ export function setLocationsGetMinimumWagesData(
     locationUuid: string,
     parameters: {
       effectiveDate?: string | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: LocationsGetMinimumWagesQueryData,
@@ -111,7 +114,7 @@ export function invalidateLocationsGetMinimumWages(
       locationUuid: string,
       parameters: {
         effectiveDate?: string | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -140,7 +143,7 @@ export function invalidateAllLocationsGetMinimumWages(
 
 export function buildLocationsGetMinimumWagesQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationUuidMinimumWagesRequest,
+  request: GetV1LocationsLocationUuidMinimumWagesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -175,7 +178,7 @@ export function queryKeyLocationsGetMinimumWages(
   locationUuid: string,
   parameters: {
     effectiveDate?: string | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

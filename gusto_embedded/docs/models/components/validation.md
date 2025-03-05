@@ -5,7 +5,7 @@
 ## Example Usage
 
 ```typescript
-import { Validation } from "@gusto/embedded-api/models/components";
+import { Validation } from "@gusto/embedded-api/models/components/taxrequirementmetadata.js";
 
 let value: Validation = {
   type: "min_max",

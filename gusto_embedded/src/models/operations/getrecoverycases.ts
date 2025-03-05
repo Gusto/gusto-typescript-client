@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  RecoveryCase,
+  RecoveryCase$inboundSchema,
+  RecoveryCase$Outbound,
+  RecoveryCase$outboundSchema,
+} from "../components/recoverycase.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetRecoveryCasesRequest = {
@@ -17,7 +27,7 @@ export type GetRecoveryCasesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetRecoveryCasesResponse = {
@@ -36,7 +46,7 @@ export type GetRecoveryCasesResponse = {
   /**
    * Example response
    */
-  recoveryCaseList?: Array<components.RecoveryCase> | undefined;
+  recoveryCaseList?: Array<RecoveryCase> | undefined;
 };
 
 /** @internal */
@@ -46,9 +56,7 @@ export const GetRecoveryCasesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -69,9 +77,7 @@ export const GetRecoveryCasesRequest$outboundSchema: z.ZodType<
   GetRecoveryCasesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
@@ -119,8 +125,7 @@ export const GetRecoveryCasesResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Recovery-Case-List": z.array(components.RecoveryCase$inboundSchema)
-    .optional(),
+  "Recovery-Case-List": z.array(RecoveryCase$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -135,7 +140,7 @@ export type GetRecoveryCasesResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Recovery-Case-List"?: Array<components.RecoveryCase$Outbound> | undefined;
+  "Recovery-Case-List"?: Array<RecoveryCase$Outbound> | undefined;
 };
 
 /** @internal */
@@ -149,7 +154,7 @@ export const GetRecoveryCasesResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  recoveryCaseList: z.array(components.RecoveryCase$outboundSchema).optional(),
+  recoveryCaseList: z.array(RecoveryCase$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

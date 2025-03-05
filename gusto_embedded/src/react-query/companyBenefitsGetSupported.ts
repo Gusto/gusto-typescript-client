@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsGetSupported } from "../funcs/companyBenefitsGetSupported.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1BenefitsBenefitIdRequest,
+  GetV1BenefitsBenefitIdResponse,
+} from "../models/operations/getv1benefitsbenefitid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type CompanyBenefitsGetSupportedQueryData =
-  operations.GetV1BenefitsBenefitIdResponse;
+  GetV1BenefitsBenefitIdResponse;
 
 /**
  * Get a supported benefit by ID
@@ -40,7 +43,7 @@ export type CompanyBenefitsGetSupportedQueryData =
  * scope: `benefits:read`
  */
 export function useCompanyBenefitsGetSupported(
-  request: operations.GetV1BenefitsBenefitIdRequest,
+  request: GetV1BenefitsBenefitIdRequest,
   options?: QueryHookOptions<CompanyBenefitsGetSupportedQueryData>,
 ): UseQueryResult<CompanyBenefitsGetSupportedQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -65,7 +68,7 @@ export function useCompanyBenefitsGetSupported(
  * scope: `benefits:read`
  */
 export function useCompanyBenefitsGetSupportedSuspense(
-  request: operations.GetV1BenefitsBenefitIdRequest,
+  request: GetV1BenefitsBenefitIdRequest,
   options?: SuspenseQueryHookOptions<CompanyBenefitsGetSupportedQueryData>,
 ): UseSuspenseQueryResult<CompanyBenefitsGetSupportedQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -82,7 +85,7 @@ export function useCompanyBenefitsGetSupportedSuspense(
 export function prefetchCompanyBenefitsGetSupported(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsBenefitIdRequest,
+  request: GetV1BenefitsBenefitIdRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompanyBenefitsGetSupportedQuery(
@@ -96,7 +99,7 @@ export function setCompanyBenefitsGetSupportedData(
   client: QueryClient,
   queryKeyBase: [
     benefitId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: CompanyBenefitsGetSupportedQueryData,
 ): CompanyBenefitsGetSupportedQueryData | undefined {
@@ -110,7 +113,7 @@ export function invalidateCompanyBenefitsGetSupported(
   queryKeyBase: TupleToPrefixes<
     [
       benefitId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -138,7 +141,7 @@ export function invalidateAllCompanyBenefitsGetSupported(
 
 export function buildCompanyBenefitsGetSupportedQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsBenefitIdRequest,
+  request: GetV1BenefitsBenefitIdRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -170,7 +173,7 @@ export function buildCompanyBenefitsGetSupportedQuery(
 
 export function queryKeyCompanyBenefitsGetSupported(
   benefitId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

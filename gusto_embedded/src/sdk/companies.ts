@@ -14,7 +14,51 @@ import { companiesMigrate } from "../funcs/companiesMigrate.js";
 import { companiesRetrieveTermsOfService } from "../funcs/companiesRetrieveTermsOfService.js";
 import { companiesUpdate } from "../funcs/companiesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesRequest,
+  GetV1CompaniesResponse,
+} from "../models/operations/getv1companies.js";
+import {
+  GetV1CompaniesCompanyIdAdminsRequest,
+  GetV1CompaniesCompanyIdAdminsResponse,
+} from "../models/operations/getv1companiescompanyidadmins.js";
+import {
+  GetV1CompaniesCompanyIdCustomFieldsRequest,
+  GetV1CompaniesCompanyIdCustomFieldsResponse,
+} from "../models/operations/getv1companiescompanyidcustomfields.js";
+import {
+  GetV1CompanyFinishOnboardingRequest,
+  GetV1CompanyFinishOnboardingResponse,
+} from "../models/operations/getv1companyfinishonboarding.js";
+import {
+  GetV1CompanyOnboardingStatusRequest,
+  GetV1CompanyOnboardingStatusResponse,
+} from "../models/operations/getv1companyonboardingstatus.js";
+import {
+  PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
+  PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
+} from "../models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofservice.js";
+import {
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
+} from "../models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofservice.js";
+import {
+  PostV1CompaniesCompanyIdAdminsRequest,
+  PostV1CompaniesCompanyIdAdminsResponse,
+} from "../models/operations/postv1companiescompanyidadmins.js";
+import {
+  PostV1PartnerManagedCompaniesRequest,
+  PostV1PartnerManagedCompaniesResponse,
+  PostV1PartnerManagedCompaniesSecurity,
+} from "../models/operations/postv1partnermanagedcompanies.js";
+import {
+  PutV1CompaniesRequest,
+  PutV1CompaniesResponse,
+} from "../models/operations/putv1companies.js";
+import {
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
+} from "../models/operations/putv1partnermanagedcompaniescompanyuuidmigrate.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Companies extends ClientSDK {
@@ -36,10 +80,10 @@ export class Companies extends ClientSDK {
    * > this endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
    */
   async createPartnerManaged(
-    security: operations.PostV1PartnerManagedCompaniesSecurity,
-    request: operations.PostV1PartnerManagedCompaniesRequest,
+    security: PostV1PartnerManagedCompaniesSecurity,
+    request: PostV1PartnerManagedCompaniesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1PartnerManagedCompaniesResponse> {
+  ): Promise<PostV1PartnerManagedCompaniesResponse> {
     return unwrapAsync(companiesCreatePartnerManaged(
       this,
       security,
@@ -60,9 +104,9 @@ export class Companies extends ClientSDK {
    * scope: `companies:read`
    */
   async get(
-    request: operations.GetV1CompaniesRequest,
+    request: GetV1CompaniesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesResponse> {
+  ): Promise<GetV1CompaniesResponse> {
     return unwrapAsync(companiesGet(
       this,
       request,
@@ -79,9 +123,9 @@ export class Companies extends ClientSDK {
    * scope: `companies:write`
    */
   async update(
-    request: operations.PutV1CompaniesRequest,
+    request: PutV1CompaniesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompaniesResponse> {
+  ): Promise<PutV1CompaniesResponse> {
     return unwrapAsync(companiesUpdate(
       this,
       request,
@@ -100,11 +144,9 @@ export class Companies extends ClientSDK {
    * scope: `partner_managed_companies:write`
    */
   async migrate(
-    request: operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
+    request: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse
-  > {
+  ): Promise<PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse> {
     return unwrapAsync(companiesMigrate(
       this,
       request,
@@ -122,11 +164,10 @@ export class Companies extends ClientSDK {
    * scope: `terms_of_services:write`
    */
   async acceptTermsOfService(
-    request:
-      operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
+    request: PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
     options?: RequestOptions,
   ): Promise<
-    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse
+    PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse
   > {
     return unwrapAsync(companiesAcceptTermsOfService(
       this,
@@ -145,10 +186,10 @@ export class Companies extends ClientSDK {
    */
   async retrieveTermsOfService(
     request:
-      operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
+      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
     options?: RequestOptions,
   ): Promise<
-    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse
+    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse
   > {
     return unwrapAsync(companiesRetrieveTermsOfService(
       this,
@@ -167,9 +208,9 @@ export class Companies extends ClientSDK {
    * scope: `company_admin:write`
    */
   async createAdmin(
-    request: operations.PostV1CompaniesCompanyIdAdminsRequest,
+    request: PostV1CompaniesCompanyIdAdminsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdAdminsResponse> {
+  ): Promise<PostV1CompaniesCompanyIdAdminsResponse> {
     return unwrapAsync(companiesCreateAdmin(
       this,
       request,
@@ -186,9 +227,9 @@ export class Companies extends ClientSDK {
    * scope: `company_admin:read`
    */
   async listAdmins(
-    request: operations.GetV1CompaniesCompanyIdAdminsRequest,
+    request: GetV1CompaniesCompanyIdAdminsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdAdminsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdAdminsResponse> {
     return unwrapAsync(companiesListAdmins(
       this,
       request,
@@ -206,9 +247,9 @@ export class Companies extends ClientSDK {
    * scope: `company_onboarding_status:read`
    */
   async getOnboardingStatus(
-    request: operations.GetV1CompanyOnboardingStatusRequest,
+    request: GetV1CompanyOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompanyOnboardingStatusResponse> {
+  ): Promise<GetV1CompanyOnboardingStatusResponse> {
     return unwrapAsync(companiesGetOnboardingStatus(
       this,
       request,
@@ -237,9 +278,9 @@ export class Companies extends ClientSDK {
    * scope: `companies:write`
    */
   async finishOnboarding(
-    request: operations.GetV1CompanyFinishOnboardingRequest,
+    request: GetV1CompanyFinishOnboardingRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompanyFinishOnboardingResponse> {
+  ): Promise<GetV1CompanyFinishOnboardingResponse> {
     return unwrapAsync(companiesFinishOnboarding(
       this,
       request,
@@ -256,9 +297,9 @@ export class Companies extends ClientSDK {
    * scope: `companies:read`
    */
   async getCustomFields(
-    request: operations.GetV1CompaniesCompanyIdCustomFieldsRequest,
+    request: GetV1CompaniesCompanyIdCustomFieldsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdCustomFieldsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdCustomFieldsResponse> {
     return unwrapAsync(companiesGetCustomFields(
       this,
       request,

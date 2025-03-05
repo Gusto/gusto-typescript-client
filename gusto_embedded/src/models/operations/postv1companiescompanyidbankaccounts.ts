@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  CompanyBankAccount,
+  CompanyBankAccount$inboundSchema,
+  CompanyBankAccount$Outbound,
+  CompanyBankAccount$outboundSchema,
+} from "../components/companybankaccount.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -45,7 +55,7 @@ export type PostV1CompaniesCompanyIdBankAccountsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1CompaniesCompanyIdBankAccountsRequestBody;
 };
 
@@ -65,7 +75,7 @@ export type PostV1CompaniesCompanyIdBankAccountsResponse = {
   /**
    * Example response
    */
-  companyBankAccount?: components.CompanyBankAccount | undefined;
+  companyBankAccount?: CompanyBankAccount | undefined;
 };
 
 /** @internal */
@@ -181,9 +191,7 @@ export const PostV1CompaniesCompanyIdBankAccountsRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdBankAccountsRequestBody$inboundSchema
     ),
@@ -210,9 +218,7 @@ export const PostV1CompaniesCompanyIdBankAccountsRequest$outboundSchema:
     PostV1CompaniesCompanyIdBankAccountsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdBankAccountsRequestBody$outboundSchema
     ),
@@ -276,8 +282,7 @@ export const PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Company-Bank-Account": components.CompanyBankAccount$inboundSchema
-      .optional(),
+    "Company-Bank-Account": CompanyBankAccount$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -292,7 +297,7 @@ export type PostV1CompaniesCompanyIdBankAccountsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Company-Bank-Account"?: components.CompanyBankAccount$Outbound | undefined;
+  "Company-Bank-Account"?: CompanyBankAccount$Outbound | undefined;
 };
 
 /** @internal */
@@ -307,7 +312,7 @@ export const PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    companyBankAccount: components.CompanyBankAccount$outboundSchema.optional(),
+    companyBankAccount: CompanyBankAccount$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

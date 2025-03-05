@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
+  GetV1ContractorPaymentsContractorPaymentUuidFundRequest$outboundSchema,
+  GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
+  GetV1ContractorPaymentsContractorPaymentUuidFundResponse$inboundSchema,
+} from "../models/operations/getv1contractorpaymentscontractorpaymentuuidfund.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -38,12 +46,12 @@ import { Result } from "../types/fp.js";
  */
 export function contractorPaymentsFund(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
-    | errors.UnprocessableEntityErrorObject
+    GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -62,13 +70,13 @@ export function contractorPaymentsFund(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
-      | errors.UnprocessableEntityErrorObject
+      GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -83,8 +91,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1ContractorPaymentsContractorPaymentUuidFundRequest$outboundSchema
+      GetV1ContractorPaymentsContractorPaymentUuidFundRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -169,8 +176,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
-    | errors.UnprocessableEntityErrorObject
+    GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -181,11 +188,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1ContractorPaymentsContractorPaymentUuidFundResponse$inboundSchema,
+      GetV1ContractorPaymentsContractorPaymentUuidFundResponse$inboundSchema,
       { key: "Contractor-Payment" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

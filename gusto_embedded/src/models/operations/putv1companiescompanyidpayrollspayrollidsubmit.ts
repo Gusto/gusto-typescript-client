@@ -6,7 +6,11 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SubmissionBlockers = {
@@ -39,7 +43,7 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody;
 };
 
@@ -211,9 +215,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$inboundSchema
   > = z.object({
     company_id: z.string(),
     payroll_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$inboundSchema
     ),
@@ -244,9 +246,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$outboundSchem
   > = z.object({
     companyId: z.string(),
     payrollId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$outboundSchema
     ),

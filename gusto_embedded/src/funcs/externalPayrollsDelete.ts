@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1ExternalPayrollRequest,
+  DeleteV1ExternalPayrollRequest$outboundSchema,
+  DeleteV1ExternalPayrollResponse,
+  DeleteV1ExternalPayrollResponse$inboundSchema,
+} from "../models/operations/deletev1externalpayroll.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function externalPayrollsDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1ExternalPayrollRequest,
+  request: DeleteV1ExternalPayrollRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1ExternalPayrollResponse,
+    DeleteV1ExternalPayrollResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function externalPayrollsDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1ExternalPayrollRequest,
+  request: DeleteV1ExternalPayrollRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1ExternalPayrollResponse,
+      DeleteV1ExternalPayrollResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.DeleteV1ExternalPayrollRequest$outboundSchema.parse(value),
+    (value) => DeleteV1ExternalPayrollRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -164,7 +168,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1ExternalPayrollResponse,
+    DeleteV1ExternalPayrollResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,7 +177,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(204, operations.DeleteV1ExternalPayrollResponse$inboundSchema),
+    M.nil(204, DeleteV1ExternalPayrollResponse$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

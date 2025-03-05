@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$outboundSchema,
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema,
+} from "../models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,13 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function contractorPaymentGroupsDelete(
   client: GustoEmbeddedCore,
-  request:
-    operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  request: DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,14 +66,13 @@ export function contractorPaymentGroupsDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  request: DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
-      | errors.UnprocessableEntityErrorObject
+      DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,8 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$outboundSchema
+      DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -168,8 +173,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -180,10 +185,9 @@ async function $do(
   >(
     M.nil(
       204,
-      operations
-        .DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema,
+      DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse$inboundSchema,
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

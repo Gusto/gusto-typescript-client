@@ -11,19 +11,22 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGeneratePrintableChecks } from "../funcs/payrollsGeneratePrintableChecks.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+} from "../models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PayrollsGeneratePrintableChecksMutationVariables = {
   request:
-    operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest;
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest;
   options?: RequestOptions;
 };
 
 export type PayrollsGeneratePrintableChecksMutationData =
-  operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse;
 
 /**
  * Generate printable payroll checks (pdf)

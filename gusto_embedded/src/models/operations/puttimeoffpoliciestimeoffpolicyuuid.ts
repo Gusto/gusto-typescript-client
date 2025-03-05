@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  TimeOffPolicy,
+  TimeOffPolicy$inboundSchema,
+  TimeOffPolicy$Outbound,
+  TimeOffPolicy$outboundSchema,
+} from "../components/timeoffpolicy.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -78,7 +88,7 @@ export type PutTimeOffPoliciesTimeOffPolicyUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   /**
    * Can update any attributes of the time off policy except policy_type, is_active, complete & employees
    */
@@ -101,7 +111,7 @@ export type PutTimeOffPoliciesTimeOffPolicyUuidResponse = {
   /**
    * OK
    */
-  timeOffPolicy?: components.TimeOffPolicy | undefined;
+  timeOffPolicy?: TimeOffPolicy | undefined;
 };
 
 /** @internal */
@@ -244,9 +254,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequest$inboundSchema:
   z.ZodType<PutTimeOffPoliciesTimeOffPolicyUuidRequest, z.ZodTypeDef, unknown> =
     z.object({
       time_off_policy_uuid: z.string(),
-      "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-        "2024-04-01",
-      ),
+      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
       RequestBody: z.lazy(() =>
         PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$inboundSchema
       ),
@@ -273,9 +281,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema:
     PutTimeOffPoliciesTimeOffPolicyUuidRequest
   > = z.object({
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$outboundSchema
     ),
@@ -339,7 +345,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Time-Off-Policy": components.TimeOffPolicy$inboundSchema.optional(),
+    "Time-Off-Policy": TimeOffPolicy$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -354,7 +360,7 @@ export type PutTimeOffPoliciesTimeOffPolicyUuidResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Time-Off-Policy"?: components.TimeOffPolicy$Outbound | undefined;
+  "Time-Off-Policy"?: TimeOffPolicy$Outbound | undefined;
 };
 
 /** @internal */
@@ -369,7 +375,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    timeOffPolicy: components.TimeOffPolicy$outboundSchema.optional(),
+    timeOffPolicy: TimeOffPolicy$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsGetHistory } from "../funcs/employeeEmploymentsGetHistory.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+} from "../models/operations/getv1employeesemployeeidemploymenthistory.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeEmploymentsGetHistoryQueryData =
-  operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse;
+  GetV1EmployeesEmployeeIdEmploymentHistoryResponse;
 
 /**
  * Get employment history for an employee
@@ -38,7 +41,7 @@ export type EmployeeEmploymentsGetHistoryQueryData =
  * scope: `employments:read`
  */
 export function useEmployeeEmploymentsGetHistory(
-  request: operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
   options?: QueryHookOptions<EmployeeEmploymentsGetHistoryQueryData>,
 ): UseQueryResult<EmployeeEmploymentsGetHistoryQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useEmployeeEmploymentsGetHistory(
  * scope: `employments:read`
  */
 export function useEmployeeEmploymentsGetHistorySuspense(
-  request: operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
   options?: SuspenseQueryHookOptions<EmployeeEmploymentsGetHistoryQueryData>,
 ): UseSuspenseQueryResult<EmployeeEmploymentsGetHistoryQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useEmployeeEmploymentsGetHistorySuspense(
 export function prefetchEmployeeEmploymentsGetHistory(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeEmploymentsGetHistoryQuery(
@@ -92,7 +95,7 @@ export function setEmployeeEmploymentsGetHistoryData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeeEmploymentsGetHistoryQueryData,
 ): EmployeeEmploymentsGetHistoryQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateEmployeeEmploymentsGetHistory(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllEmployeeEmploymentsGetHistory(
 
 export function buildEmployeeEmploymentsGetHistoryQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildEmployeeEmploymentsGetHistoryQuery(
 
 export function queryKeyEmployeeEmploymentsGetHistory(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

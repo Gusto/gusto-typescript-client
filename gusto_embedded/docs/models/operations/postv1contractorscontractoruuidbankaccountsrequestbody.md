@@ -3,13 +3,13 @@
 ## Example Usage
 
 ```typescript
-import { PostV1ContractorsContractorUuidBankAccountsRequestBody } from "@gusto/embedded-api/models/operations";
+import { PostV1ContractorsContractorUuidBankAccountsRequestBody } from "@gusto/embedded-api/models/operations/postv1contractorscontractoruuidbankaccounts.js";
 
 let value: PostV1ContractorsContractorUuidBankAccountsRequestBody = {
   name: "<value>",
   routingNumber: "<value>",
   accountNumber: "<value>",
-  accountType: "Checking",
+  accountType: "Savings",
 };
 ```
 

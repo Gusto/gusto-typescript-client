@@ -3,13 +3,13 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompensationsCompensationIdRequest } from "@gusto/embedded-api/models/operations";
+import { PostV1CompensationsCompensationIdRequest } from "@gusto/embedded-api/models/operations/postv1compensationscompensationid.js";
 
 let value: PostV1CompensationsCompensationIdRequest = {
   jobId: "<id>",
   requestBody: {
-    paymentUnit: "Week",
-    flsaStatus: "Exempt",
+    paymentUnit: "Hour",
+    flsaStatus: "Owner",
   },
 };
 ```

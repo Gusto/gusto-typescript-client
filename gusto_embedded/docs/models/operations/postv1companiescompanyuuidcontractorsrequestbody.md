@@ -5,7 +5,7 @@ Create an individual or business contractor.
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyUuidContractorsRequestBody } from "@gusto/embedded-api/models/operations";
+import { PostV1CompaniesCompanyUuidContractorsRequestBody } from "@gusto/embedded-api/models/operations/postv1companiescompanyuuidcontractors.js";
 
 let value: PostV1CompaniesCompanyUuidContractorsRequestBody = {
   wageType: "Hourly",

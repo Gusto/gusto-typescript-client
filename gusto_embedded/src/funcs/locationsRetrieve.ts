@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1LocationsLocationIdRequest,
+  GetV1LocationsLocationIdRequest$outboundSchema,
+  GetV1LocationsLocationIdResponse,
+  GetV1LocationsLocationIdResponse$inboundSchema,
+} from "../models/operations/getv1locationslocationid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function locationsRetrieve(
   client: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: GetV1LocationsLocationIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1LocationsLocationIdResponse,
+    GetV1LocationsLocationIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function locationsRetrieve(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: GetV1LocationsLocationIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1LocationsLocationIdResponse,
+      GetV1LocationsLocationIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1LocationsLocationIdRequest$outboundSchema.parse(value),
+    (value) => GetV1LocationsLocationIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -157,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1LocationsLocationIdResponse,
+    GetV1LocationsLocationIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -166,7 +170,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1LocationsLocationIdResponse$inboundSchema, {
+    M.json(200, GetV1LocationsLocationIdResponse$inboundSchema, {
       key: "Location",
     }),
     M.fail([404, "4XX"]),

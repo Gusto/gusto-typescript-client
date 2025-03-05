@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Garnishment,
+  Garnishment$inboundSchema,
+  Garnishment$Outbound,
+  Garnishment$outboundSchema,
+} from "../components/garnishment.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1GarnishmentsGarnishmentIdRequest = {
@@ -17,7 +27,7 @@ export type GetV1GarnishmentsGarnishmentIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1GarnishmentsGarnishmentIdResponse = {
@@ -36,7 +46,7 @@ export type GetV1GarnishmentsGarnishmentIdResponse = {
   /**
    * Example response
    */
-  garnishment?: components.Garnishment | undefined;
+  garnishment?: Garnishment | undefined;
 };
 
 /** @internal */
@@ -46,9 +56,7 @@ export const GetV1GarnishmentsGarnishmentIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   garnishment_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "garnishment_id": "garnishmentId",
@@ -69,9 +77,7 @@ export const GetV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   GetV1GarnishmentsGarnishmentIdRequest
 > = z.object({
   garnishmentId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     garnishmentId: "garnishment_id",
@@ -124,7 +130,7 @@ export const GetV1GarnishmentsGarnishmentIdResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Garnishment: components.Garnishment$inboundSchema.optional(),
+  Garnishment: Garnishment$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -139,7 +145,7 @@ export type GetV1GarnishmentsGarnishmentIdResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Garnishment?: components.Garnishment$Outbound | undefined;
+  Garnishment?: Garnishment$Outbound | undefined;
 };
 
 /** @internal */
@@ -153,7 +159,7 @@ export const GetV1GarnishmentsGarnishmentIdResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  garnishment: components.Garnishment$outboundSchema.optional(),
+  garnishment: Garnishment$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

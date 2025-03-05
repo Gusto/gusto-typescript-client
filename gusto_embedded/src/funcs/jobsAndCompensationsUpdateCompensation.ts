@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1CompensationsCompensationIdRequest,
+  PutV1CompensationsCompensationIdRequest$outboundSchema,
+  PutV1CompensationsCompensationIdResponse,
+  PutV1CompensationsCompensationIdResponse$inboundSchema,
+} from "../models/operations/putv1compensationscompensationid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function jobsAndCompensationsUpdateCompensation(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompensationsCompensationIdRequest,
+  request: PutV1CompensationsCompensationIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompensationsCompensationIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompensationsCompensationIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function jobsAndCompensationsUpdateCompensation(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompensationsCompensationIdRequest,
+  request: PutV1CompensationsCompensationIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompensationsCompensationIdResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1CompensationsCompensationIdResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,9 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PutV1CompensationsCompensationIdRequest$outboundSchema.parse(
-        value,
-      ),
+      PutV1CompensationsCompensationIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -163,8 +169,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompensationsCompensationIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompensationsCompensationIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,12 +179,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.PutV1CompensationsCompensationIdResponse$inboundSchema,
-      { key: "Compensation" },
-    ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, PutV1CompensationsCompensationIdResponse$inboundSchema, {
+      key: "Compensation",
+    }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

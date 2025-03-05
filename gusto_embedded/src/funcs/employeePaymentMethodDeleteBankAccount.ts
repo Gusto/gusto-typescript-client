@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboundSchema,
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema,
+} from "../models/operations/deletev1employeesemployeeidbankaccountsbankaccountid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +39,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeePaymentMethodDeleteBankAccount(
   client: GustoEmbeddedCore,
-  request:
-    operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+  request: DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +62,12 @@ export function employeePaymentMethodDeleteBankAccount(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+  request: DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+      DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,8 +82,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboundSchema
+      DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -170,7 +172,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -181,8 +183,7 @@ async function $do(
   >(
     M.nil(
       204,
-      operations
-        .DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema,
+      DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema,
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGetReceipt } from "../funcs/payrollsGetReceipt.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+  GetV1PaymentReceiptsPayrollsPayrollUuidResponse,
+} from "../models/operations/getv1paymentreceiptspayrollspayrolluuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PayrollsGetReceiptQueryData =
-  operations.GetV1PaymentReceiptsPayrollsPayrollUuidResponse;
+  GetV1PaymentReceiptsPayrollsPayrollUuidResponse;
 
 /**
  * Get a single payroll receipt
@@ -43,7 +46,7 @@ export type PayrollsGetReceiptQueryData =
  * scope: `payrolls:read`
  */
 export function usePayrollsGetReceipt(
-  request: operations.GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+  request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
   options?: QueryHookOptions<PayrollsGetReceiptQueryData>,
 ): UseQueryResult<PayrollsGetReceiptQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -71,7 +74,7 @@ export function usePayrollsGetReceipt(
  * scope: `payrolls:read`
  */
 export function usePayrollsGetReceiptSuspense(
-  request: operations.GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+  request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
   options?: SuspenseQueryHookOptions<PayrollsGetReceiptQueryData>,
 ): UseSuspenseQueryResult<PayrollsGetReceiptQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -88,7 +91,7 @@ export function usePayrollsGetReceiptSuspense(
 export function prefetchPayrollsGetReceipt(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+  request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPayrollsGetReceiptQuery(
@@ -102,7 +105,7 @@ export function setPayrollsGetReceiptData(
   client: QueryClient,
   queryKeyBase: [
     payrollUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: PayrollsGetReceiptQueryData,
 ): PayrollsGetReceiptQueryData | undefined {
@@ -116,7 +119,7 @@ export function invalidatePayrollsGetReceipt(
   queryKeyBase: TupleToPrefixes<
     [
       payrollUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -144,7 +147,7 @@ export function invalidateAllPayrollsGetReceipt(
 
 export function buildPayrollsGetReceiptQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+  request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -176,7 +179,7 @@ export function buildPayrollsGetReceiptQuery(
 
 export function queryKeyPayrollsGetReceipt(
   payrollUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

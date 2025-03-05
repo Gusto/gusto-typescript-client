@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { bankAccountsGet } from "../funcs/bankAccountsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdBankAccountsRequest,
+  GetV1CompaniesCompanyIdBankAccountsResponse,
+} from "../models/operations/getv1companiescompanyidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type BankAccountsGetQueryData =
-  operations.GetV1CompaniesCompanyIdBankAccountsResponse;
+  GetV1CompaniesCompanyIdBankAccountsResponse;
 
 /**
  * Get all company bank accounts
@@ -38,7 +41,7 @@ export type BankAccountsGetQueryData =
  * scope: `company_bank_accounts:read`
  */
 export function useBankAccountsGet(
-  request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
+  request: GetV1CompaniesCompanyIdBankAccountsRequest,
   options?: QueryHookOptions<BankAccountsGetQueryData>,
 ): UseQueryResult<BankAccountsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useBankAccountsGet(
  * scope: `company_bank_accounts:read`
  */
 export function useBankAccountsGetSuspense(
-  request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
+  request: GetV1CompaniesCompanyIdBankAccountsRequest,
   options?: SuspenseQueryHookOptions<BankAccountsGetQueryData>,
 ): UseSuspenseQueryResult<BankAccountsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useBankAccountsGetSuspense(
 export function prefetchBankAccountsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
+  request: GetV1CompaniesCompanyIdBankAccountsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildBankAccountsGetQuery(
@@ -92,7 +95,7 @@ export function setBankAccountsGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: BankAccountsGetQueryData,
 ): BankAccountsGetQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateBankAccountsGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -129,7 +132,7 @@ export function invalidateAllBankAccountsGet(
 
 export function buildBankAccountsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
+  request: GetV1CompaniesCompanyIdBankAccountsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -159,7 +162,7 @@ export function buildBankAccountsGetQuery(
 
 export function queryKeyBankAccountsGet(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "bankAccounts", "get", companyId, parameters];
 }

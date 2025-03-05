@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  I9AuthorizationDocument,
+  I9AuthorizationDocument$inboundSchema,
+  I9AuthorizationDocument$Outbound,
+  I9AuthorizationDocument$outboundSchema,
+} from "../components/i9authorizationdocument.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
@@ -17,7 +27,7 @@ export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {
@@ -36,9 +46,7 @@ export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {
   /**
    * Example response
    */
-  i9AuthorizationDocumentsObject?:
-    | Array<components.I9AuthorizationDocument>
-    | undefined;
+  i9AuthorizationDocumentsObject?: Array<I9AuthorizationDocument> | undefined;
 };
 
 /** @internal */
@@ -49,9 +57,7 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$inboundSche
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -73,9 +79,7 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$outboundSch
     GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",
@@ -135,7 +139,7 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSch
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
     "I9-Authorization-Documents-Object": z.array(
-      components.I9AuthorizationDocument$inboundSchema,
+      I9AuthorizationDocument$inboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -153,7 +157,7 @@ export type GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$Outbound =
     StatusCode: number;
     RawResponse: never;
     "I9-Authorization-Documents-Object"?:
-      | Array<components.I9AuthorizationDocument$Outbound>
+      | Array<I9AuthorizationDocument$Outbound>
       | undefined;
   };
 
@@ -170,7 +174,7 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$outboundSc
       throw new Error("Response cannot be serialized");
     }),
     i9AuthorizationDocumentsObject: z.array(
-      components.I9AuthorizationDocument$outboundSchema,
+      I9AuthorizationDocument$outboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {

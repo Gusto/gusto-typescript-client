@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PutV1HistoricalEmployeesRequest } from "@gusto/embedded-api/models/operations";
+import { PutV1HistoricalEmployeesRequest } from "@gusto/embedded-api/models/operations/putv1historicalemployees.js";
 
 let value: PutV1HistoricalEmployeesRequest = {
   companyUuid: "<id>",
@@ -12,7 +12,7 @@ let value: PutV1HistoricalEmployeesRequest = {
     version: "<value>",
     firstName: "Mose",
     lastName: "Greenfelder",
-    dateOfBirth: "1980-07-27",
+    dateOfBirth: "1980-07-28",
     ssn: "<value>",
     workAddress: {},
     homeAddress: {

@@ -3,14 +3,14 @@
 ## Example Usage
 
 ```typescript
-import { PostV1HistoricalEmployeesRequest } from "@gusto/embedded-api/models/operations";
+import { PostV1HistoricalEmployeesRequest } from "@gusto/embedded-api/models/operations/postv1historicalemployees.js";
 
 let value: PostV1HistoricalEmployeesRequest = {
   companyUuid: "<id>",
   historicalEmployeeBody: {
     firstName: "Keenan",
     lastName: "Klocko",
-    dateOfBirth: "1953-11-02",
+    dateOfBirth: "1953-11-03",
     ssn: "<value>",
     workAddress: {},
     homeAddress: {

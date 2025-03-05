@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  ContractorPayment,
+  ContractorPayment$inboundSchema,
+  ContractorPayment$Outbound,
+  ContractorPayment$outboundSchema,
+} from "../components/contractorpayment.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest = {
@@ -21,7 +31,7 @@ export type GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse =
@@ -41,7 +51,7 @@ export type GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse =
     /**
      * Example response
      */
-    contractorPayment?: components.ContractorPayment | undefined;
+    contractorPayment?: ContractorPayment | undefined;
   };
 
 /** @internal */
@@ -53,9 +63,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$in
   > = z.object({
     company_id: z.string(),
     contractor_payment_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -81,9 +89,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$ou
   > = z.object({
     companyId: z.string(),
     contractorPaymentId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
@@ -143,7 +149,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$i
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Contractor-Payment": components.ContractorPayment$inboundSchema.optional(),
+    "Contractor-Payment": ContractorPayment$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -159,7 +165,7 @@ export type GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Ou
     ContentType: string;
     StatusCode: number;
     RawResponse: never;
-    "Contractor-Payment"?: components.ContractorPayment$Outbound | undefined;
+    "Contractor-Payment"?: ContractorPayment$Outbound | undefined;
   };
 
 /** @internal */
@@ -174,7 +180,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$o
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    contractorPayment: components.ContractorPayment$outboundSchema.optional(),
+    contractorPayment: ContractorPayment$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

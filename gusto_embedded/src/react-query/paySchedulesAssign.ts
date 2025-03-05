@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesAssign } from "../funcs/paySchedulesAssign.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdPaySchedulesAssignRequest,
+  PostV1CompaniesCompanyIdPaySchedulesAssignResponse,
+} from "../models/operations/postv1companiescompanyidpayschedulesassign.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PaySchedulesAssignMutationVariables = {
-  request: operations.PostV1CompaniesCompanyIdPaySchedulesAssignRequest;
+  request: PostV1CompaniesCompanyIdPaySchedulesAssignRequest;
   options?: RequestOptions;
 };
 
 export type PaySchedulesAssignMutationData =
-  operations.PostV1CompaniesCompanyIdPaySchedulesAssignResponse;
+  PostV1CompaniesCompanyIdPaySchedulesAssignResponse;
 
 /**
  * Assign pay schedules for a company

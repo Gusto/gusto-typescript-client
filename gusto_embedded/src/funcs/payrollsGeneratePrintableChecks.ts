@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest$outboundSchema,
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema,
+} from "../models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,12 +43,12 @@ import { Result } from "../types/fp.js";
 export function payrollsGeneratePrintableChecks(
   client: GustoEmbeddedCore,
   request:
-    operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,13 +68,13 @@ export function payrollsGeneratePrintableChecks(
 async function $do(
   client: GustoEmbeddedCore,
   request:
-    operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
-      | errors.UnprocessableEntityErrorObject
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,8 +89,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest$outboundSchema
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -168,8 +175,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -180,11 +187,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema,
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse$inboundSchema,
       { key: "Payroll-Check" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

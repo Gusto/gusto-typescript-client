@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGetAssignments } from "../funcs/paySchedulesGetAssignments.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+  GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse,
+} from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PaySchedulesGetAssignmentsQueryData =
-  operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse;
+  GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse;
 
 /**
  * Get pay schedule assignments for a company
@@ -38,7 +41,7 @@ export type PaySchedulesGetAssignmentsQueryData =
  * scope: `pay_schedules:read`
  */
 export function usePaySchedulesGetAssignments(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
   options?: QueryHookOptions<PaySchedulesGetAssignmentsQueryData>,
 ): UseQueryResult<PaySchedulesGetAssignmentsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function usePaySchedulesGetAssignments(
  * scope: `pay_schedules:read`
  */
 export function usePaySchedulesGetAssignmentsSuspense(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
   options?: SuspenseQueryHookOptions<PaySchedulesGetAssignmentsQueryData>,
 ): UseSuspenseQueryResult<PaySchedulesGetAssignmentsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function usePaySchedulesGetAssignmentsSuspense(
 export function prefetchPaySchedulesGetAssignments(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPaySchedulesGetAssignmentsQuery(
@@ -92,7 +95,7 @@ export function setPaySchedulesGetAssignmentsData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: PaySchedulesGetAssignmentsQueryData,
 ): PaySchedulesGetAssignmentsQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidatePaySchedulesGetAssignments(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllPaySchedulesGetAssignments(
 
 export function buildPaySchedulesGetAssignmentsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildPaySchedulesGetAssignmentsQuery(
 
 export function queryKeyPaySchedulesGetAssignments(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

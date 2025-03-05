@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesUpdateBalance } from "../funcs/timeOffPoliciesUpdateBalance.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
+} from "../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalance.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesUpdateBalanceMutationVariables = {
-  request: operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest;
+  request: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesUpdateBalanceMutationData =
-  operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse;
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse;
 
 /**
  * Update employee time off hour balances

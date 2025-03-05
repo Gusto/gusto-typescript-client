@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationDeleteDocument } from "../funcs/i9VerificationDeleteDocument.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
+} from "../models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type I9VerificationDeleteDocumentMutationVariables = {
-  request:
-    operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest;
+  request: DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest;
   options?: RequestOptions;
 };
 
 export type I9VerificationDeleteDocumentMutationData =
-  operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse;
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse;
 
 /**
  * Delete an employee's I-9 verification document

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsCreateCustom } from "../funcs/reportsCreateCustom.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostCompaniesCompanyUuidReportsRequest,
+  PostCompaniesCompanyUuidReportsResponse,
+} from "../models/operations/postcompaniescompanyuuidreports.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ReportsCreateCustomMutationVariables = {
-  request: operations.PostCompaniesCompanyUuidReportsRequest;
+  request: PostCompaniesCompanyUuidReportsRequest;
   options?: RequestOptions;
 };
 
 export type ReportsCreateCustomMutationData =
-  operations.PostCompaniesCompanyUuidReportsResponse;
+  PostCompaniesCompanyUuidReportsResponse;
 
 /**
  * Create a custom report

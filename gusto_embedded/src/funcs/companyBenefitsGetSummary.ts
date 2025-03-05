@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1BenefitsCompanyBenefitIdSummaryRequest,
+  GetV1BenefitsCompanyBenefitIdSummaryRequest$outboundSchema,
+  GetV1BenefitsCompanyBenefitIdSummaryResponse,
+  GetV1BenefitsCompanyBenefitIdSummaryResponse$inboundSchema,
+} from "../models/operations/getv1benefitscompanybenefitidsummary.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyBenefitsGetSummary(
   client: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsCompanyBenefitIdSummaryRequest,
+  request: GetV1BenefitsCompanyBenefitIdSummaryRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1BenefitsCompanyBenefitIdSummaryResponse,
+    GetV1BenefitsCompanyBenefitIdSummaryResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function companyBenefitsGetSummary(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsCompanyBenefitIdSummaryRequest,
+  request: GetV1BenefitsCompanyBenefitIdSummaryRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1BenefitsCompanyBenefitIdSummaryResponse,
+      GetV1BenefitsCompanyBenefitIdSummaryResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1BenefitsCompanyBenefitIdSummaryRequest$outboundSchema
-        .parse(value),
+      GetV1BenefitsCompanyBenefitIdSummaryRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -170,7 +174,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1BenefitsCompanyBenefitIdSummaryResponse,
+    GetV1BenefitsCompanyBenefitIdSummaryResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -179,11 +183,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetV1BenefitsCompanyBenefitIdSummaryResponse$inboundSchema,
-      { key: "Benefit-Summary" },
-    ),
+    M.json(200, GetV1BenefitsCompanyBenefitIdSummaryResponse$inboundSchema, {
+      key: "Benefit-Summary",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
-import * as components from "../components/index.js";
+import {
+  EmployeeAddress,
+  EmployeeAddress$inboundSchema,
+  EmployeeAddress$Outbound,
+  EmployeeAddress$outboundSchema,
+} from "../components/employeeaddress.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV1EmployeesEmployeeIdHomeAddressesRequestBody = {
@@ -28,7 +38,7 @@ export type PostV1EmployeesEmployeeIdHomeAddressesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1EmployeesEmployeeIdHomeAddressesRequestBody;
 };
 
@@ -48,7 +58,7 @@ export type PostV1EmployeesEmployeeIdHomeAddressesResponse = {
   /**
    * Example response
    */
-  employeeAddress?: components.EmployeeAddress | undefined;
+  employeeAddress?: EmployeeAddress | undefined;
 };
 
 /** @internal */
@@ -160,9 +170,7 @@ export const PostV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdHomeAddressesRequestBody$inboundSchema
     ),
@@ -189,9 +197,7 @@ export const PostV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema:
     PostV1EmployeesEmployeeIdHomeAddressesRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdHomeAddressesRequestBody$outboundSchema
     ),
@@ -255,7 +261,7 @@ export const PostV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Employee-Address": components.EmployeeAddress$inboundSchema.optional(),
+    "Employee-Address": EmployeeAddress$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -270,7 +276,7 @@ export type PostV1EmployeesEmployeeIdHomeAddressesResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Employee-Address"?: components.EmployeeAddress$Outbound | undefined;
+  "Employee-Address"?: EmployeeAddress$Outbound | undefined;
 };
 
 /** @internal */
@@ -285,7 +291,7 @@ export const PostV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    employeeAddress: components.EmployeeAddress$outboundSchema.optional(),
+    employeeAddress: EmployeeAddress$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

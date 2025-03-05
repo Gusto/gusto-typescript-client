@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1BenefitsBenefitIdRequest,
+  GetV1BenefitsBenefitIdRequest$outboundSchema,
+  GetV1BenefitsBenefitIdResponse,
+  GetV1BenefitsBenefitIdResponse$inboundSchema,
+} from "../models/operations/getv1benefitsbenefitid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyBenefitsGetSupported(
   client: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsBenefitIdRequest,
+  request: GetV1BenefitsBenefitIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1BenefitsBenefitIdResponse,
+    GetV1BenefitsBenefitIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function companyBenefitsGetSupported(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsBenefitIdRequest,
+  request: GetV1BenefitsBenefitIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1BenefitsBenefitIdResponse,
+      GetV1BenefitsBenefitIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -77,8 +82,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1BenefitsBenefitIdRequest$outboundSchema.parse(value),
+    (value) => GetV1BenefitsBenefitIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1BenefitsBenefitIdResponse,
+    GetV1BenefitsBenefitIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -168,7 +172,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1BenefitsBenefitIdResponse$inboundSchema, {
+    M.json(200, GetV1BenefitsBenefitIdResponse$inboundSchema, {
       key: "Supported-Benefit",
     }),
     M.fail([404, "4XX"]),

@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { DeleteV1CompaniesCompanyIdPayrollsResponse } from "@gusto/embedded-api/models/operations";
+import { DeleteV1CompaniesCompanyIdPayrollsResponse } from "@gusto/embedded-api/models/operations/deletev1companiescompanyidpayrolls.js";
 
 let value: DeleteV1CompaniesCompanyIdPayrollsResponse = {
   contentType: "<value>",
-  statusCode: 101,
+  statusCode: 208,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsGet } from "../funcs/employeeBenefitsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+} from "../models/operations/getv1employeesemployeeidemployeebenefits.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeBenefitsGetQueryData =
-  operations.GetV1EmployeesEmployeeIdEmployeeBenefitsResponse;
+  GetV1EmployeesEmployeeIdEmployeeBenefitsResponse;
 
 /**
  * Get all benefits for an employee
@@ -42,7 +45,7 @@ export type EmployeeBenefitsGetQueryData =
  * scope: `employee_benefits:read`
  */
 export function useEmployeeBenefitsGet(
-  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  request: GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: QueryHookOptions<EmployeeBenefitsGetQueryData>,
 ): UseQueryResult<EmployeeBenefitsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -69,7 +72,7 @@ export function useEmployeeBenefitsGet(
  * scope: `employee_benefits:read`
  */
 export function useEmployeeBenefitsGetSuspense(
-  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  request: GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: SuspenseQueryHookOptions<EmployeeBenefitsGetQueryData>,
 ): UseSuspenseQueryResult<EmployeeBenefitsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -86,7 +89,7 @@ export function useEmployeeBenefitsGetSuspense(
 export function prefetchEmployeeBenefitsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  request: GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeBenefitsGetQuery(
@@ -103,7 +106,7 @@ export function setEmployeeBenefitsGetData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeeBenefitsGetQueryData,
@@ -121,7 +124,7 @@ export function invalidateEmployeeBenefitsGet(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -150,7 +153,7 @@ export function invalidateAllEmployeeBenefitsGet(
 
 export function buildEmployeeBenefitsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  request: GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -187,7 +190,7 @@ export function queryKeyEmployeeBenefitsGet(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsCreateOffCycle } from "../funcs/payrollsCreateOffCycle.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdPayrollsRequest,
+  PostV1CompaniesCompanyIdPayrollsResponse,
+} from "../models/operations/postv1companiescompanyidpayrolls.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PayrollsCreateOffCycleMutationVariables = {
-  request: operations.PostV1CompaniesCompanyIdPayrollsRequest;
+  request: PostV1CompaniesCompanyIdPayrollsRequest;
   options?: RequestOptions;
 };
 
 export type PayrollsCreateOffCycleMutationData =
-  operations.PostV1CompaniesCompanyIdPayrollsResponse;
+  PostV1CompaniesCompanyIdPayrollsResponse;
 
 /**
  * Create an off-cycle payroll

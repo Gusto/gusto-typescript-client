@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema,
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema,
+} from "../models/operations/deletev1employeebenefitsemployeebenefitid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeeBenefitsDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  request: DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function employeeBenefitsDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  request: DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+      DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema
-        .parse(value),
+      DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -161,7 +167,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+    DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -170,11 +176,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      204,
-      operations
-        .DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema,
-    ),
+    M.nil(204, DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

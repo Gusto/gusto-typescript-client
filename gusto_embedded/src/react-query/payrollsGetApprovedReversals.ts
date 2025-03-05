@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGetApprovedReversals } from "../funcs/payrollsGetApprovedReversals.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdPayrollReversalsRequest,
+  GetV1CompaniesCompanyIdPayrollReversalsResponse,
+} from "../models/operations/getv1companiescompanyidpayrollreversals.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PayrollsGetApprovedReversalsQueryData =
-  operations.GetV1CompaniesCompanyIdPayrollReversalsResponse;
+  GetV1CompaniesCompanyIdPayrollReversalsResponse;
 
 /**
  * Get approved payroll reversals
@@ -38,7 +41,7 @@ export type PayrollsGetApprovedReversalsQueryData =
  * scope: `payrolls:read`
  */
 export function usePayrollsGetApprovedReversals(
-  request: operations.GetV1CompaniesCompanyIdPayrollReversalsRequest,
+  request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
   options?: QueryHookOptions<PayrollsGetApprovedReversalsQueryData>,
 ): UseQueryResult<PayrollsGetApprovedReversalsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function usePayrollsGetApprovedReversals(
  * scope: `payrolls:read`
  */
 export function usePayrollsGetApprovedReversalsSuspense(
-  request: operations.GetV1CompaniesCompanyIdPayrollReversalsRequest,
+  request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
   options?: SuspenseQueryHookOptions<PayrollsGetApprovedReversalsQueryData>,
 ): UseSuspenseQueryResult<PayrollsGetApprovedReversalsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function usePayrollsGetApprovedReversalsSuspense(
 export function prefetchPayrollsGetApprovedReversals(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPayrollReversalsRequest,
+  request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPayrollsGetApprovedReversalsQuery(
@@ -95,7 +98,7 @@ export function setPayrollsGetApprovedReversalsData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: PayrollsGetApprovedReversalsQueryData,
@@ -113,7 +116,7 @@ export function invalidatePayrollsGetApprovedReversals(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -142,7 +145,7 @@ export function invalidateAllPayrollsGetApprovedReversals(
 
 export function buildPayrollsGetApprovedReversalsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPayrollReversalsRequest,
+  request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -179,7 +182,7 @@ export function queryKeyPayrollsGetApprovedReversals(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

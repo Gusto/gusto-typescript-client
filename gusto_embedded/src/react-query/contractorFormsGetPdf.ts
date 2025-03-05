@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorFormsGetPdf } from "../funcs/contractorFormsGetPdf.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorFormPdfRequest,
+  GetV1ContractorFormPdfResponse,
+} from "../models/operations/getv1contractorformpdf.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorFormsGetPdfQueryData =
-  operations.GetV1ContractorFormPdfResponse;
+export type ContractorFormsGetPdfQueryData = GetV1ContractorFormPdfResponse;
 
 /**
  * Get the contractor form pdf
@@ -38,7 +40,7 @@ export type ContractorFormsGetPdfQueryData =
  * scope: `contractor_forms:read`
  */
 export function useContractorFormsGetPdf(
-  request: operations.GetV1ContractorFormPdfRequest,
+  request: GetV1ContractorFormPdfRequest,
   options?: QueryHookOptions<ContractorFormsGetPdfQueryData>,
 ): UseQueryResult<ContractorFormsGetPdfQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useContractorFormsGetPdf(
  * scope: `contractor_forms:read`
  */
 export function useContractorFormsGetPdfSuspense(
-  request: operations.GetV1ContractorFormPdfRequest,
+  request: GetV1ContractorFormPdfRequest,
   options?: SuspenseQueryHookOptions<ContractorFormsGetPdfQueryData>,
 ): UseSuspenseQueryResult<ContractorFormsGetPdfQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useContractorFormsGetPdfSuspense(
 export function prefetchContractorFormsGetPdf(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormPdfRequest,
+  request: GetV1ContractorFormPdfRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorFormsGetPdfQuery(
@@ -93,7 +95,7 @@ export function setContractorFormsGetPdfData(
   queryKeyBase: [
     contractorUuid: string,
     formId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorFormsGetPdfQueryData,
 ): ContractorFormsGetPdfQueryData | undefined {
@@ -108,7 +110,7 @@ export function invalidateContractorFormsGetPdf(
     [
       contractorUuid: string,
       formId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -136,7 +138,7 @@ export function invalidateAllContractorFormsGetPdf(
 
 export function buildContractorFormsGetPdfQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormPdfRequest,
+  request: GetV1ContractorFormPdfRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -171,7 +173,7 @@ export function buildContractorFormsGetPdfQuery(
 export function queryKeyContractorFormsGetPdf(
   contractorUuid: string,
   formId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

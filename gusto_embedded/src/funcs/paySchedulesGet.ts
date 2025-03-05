@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema,
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyidpayschedulespayscheduleid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function paySchedulesGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function paySchedulesGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+      GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema
+      GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -165,7 +169,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,8 +180,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema,
+      GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema,
       { key: "Pay-Schedule" },
     ),
     M.fail([404, "4XX"]),

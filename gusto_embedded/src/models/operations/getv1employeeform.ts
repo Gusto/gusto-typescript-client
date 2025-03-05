@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Form,
+  Form$inboundSchema,
+  Form$Outbound,
+  Form$outboundSchema,
+} from "../components/form.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1EmployeeFormRequest = {
@@ -21,7 +31,7 @@ export type GetV1EmployeeFormRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeeFormResponse = {
@@ -40,7 +50,7 @@ export type GetV1EmployeeFormResponse = {
   /**
    * Example response
    */
-  form?: components.Form | undefined;
+  form?: Form | undefined;
 };
 
 /** @internal */
@@ -51,9 +61,7 @@ export const GetV1EmployeeFormRequest$inboundSchema: z.ZodType<
 > = z.object({
   employee_id: z.string(),
   form_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "employee_id": "employeeId",
@@ -77,9 +85,7 @@ export const GetV1EmployeeFormRequest$outboundSchema: z.ZodType<
 > = z.object({
   employeeId: z.string(),
   formId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     employeeId: "employee_id",
@@ -128,7 +134,7 @@ export const GetV1EmployeeFormResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Form: components.Form$inboundSchema.optional(),
+  Form: Form$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -143,7 +149,7 @@ export type GetV1EmployeeFormResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Form?: components.Form$Outbound | undefined;
+  Form?: Form$Outbound | undefined;
 };
 
 /** @internal */
@@ -157,7 +163,7 @@ export const GetV1EmployeeFormResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  form: components.Form$outboundSchema.optional(),
+  form: Form$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

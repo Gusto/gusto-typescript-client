@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Document } from "@gusto/embedded-api/models/operations";
+import { Document } from "@gusto/embedded-api/models/operations/postv1companiesattachment.js";
 
 // No examples available for this model
 ```

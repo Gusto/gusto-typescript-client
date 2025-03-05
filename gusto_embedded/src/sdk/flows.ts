@@ -4,7 +4,10 @@
 
 import { flowsCreate } from "../funcs/flowsCreate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompanyFlowsRequest,
+  PostV1CompanyFlowsResponse,
+} from "../models/operations/postv1companyflows.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Flows extends ClientSDK {
@@ -17,9 +20,9 @@ export class Flows extends ClientSDK {
    * scope: `flows:write`
    */
   async create(
-    request: operations.PostV1CompanyFlowsRequest,
+    request: PostV1CompanyFlowsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompanyFlowsResponse> {
+  ): Promise<PostV1CompanyFlowsResponse> {
     return unwrapAsync(flowsCreate(
       this,
       request,

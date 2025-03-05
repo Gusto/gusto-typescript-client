@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesMigrate } from "../funcs/companiesMigrate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
+} from "../models/operations/putv1partnermanagedcompaniescompanyuuidmigrate.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompaniesMigrateMutationVariables = {
-  request: operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest;
+  request: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest;
   options?: RequestOptions;
 };
 
 export type CompaniesMigrateMutationData =
-  operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse;
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse;
 
 /**
  * Migrate company to embedded payroll

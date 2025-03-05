@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { wireInRequestsGet } from "../funcs/wireInRequestsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetWireInRequestsWireInRequestUuidRequest,
+  GetWireInRequestsWireInRequestUuidResponse,
+} from "../models/operations/getwireinrequestswireinrequestuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type WireInRequestsGetQueryData =
-  operations.GetWireInRequestsWireInRequestUuidResponse;
+  GetWireInRequestsWireInRequestUuidResponse;
 
 /**
  * Get a single Wire In Request
@@ -38,7 +41,7 @@ export type WireInRequestsGetQueryData =
  * scope: `payrolls:read`
  */
 export function useWireInRequestsGet(
-  request: operations.GetWireInRequestsWireInRequestUuidRequest,
+  request: GetWireInRequestsWireInRequestUuidRequest,
   options?: QueryHookOptions<WireInRequestsGetQueryData>,
 ): UseQueryResult<WireInRequestsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useWireInRequestsGet(
  * scope: `payrolls:read`
  */
 export function useWireInRequestsGetSuspense(
-  request: operations.GetWireInRequestsWireInRequestUuidRequest,
+  request: GetWireInRequestsWireInRequestUuidRequest,
   options?: SuspenseQueryHookOptions<WireInRequestsGetQueryData>,
 ): UseSuspenseQueryResult<WireInRequestsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useWireInRequestsGetSuspense(
 export function prefetchWireInRequestsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetWireInRequestsWireInRequestUuidRequest,
+  request: GetWireInRequestsWireInRequestUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildWireInRequestsGetQuery(
@@ -92,7 +95,7 @@ export function setWireInRequestsGetData(
   client: QueryClient,
   queryKeyBase: [
     wireInRequestUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: WireInRequestsGetQueryData,
 ): WireInRequestsGetQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateWireInRequestsGet(
   queryKeyBase: TupleToPrefixes<
     [
       wireInRequestUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -129,7 +132,7 @@ export function invalidateAllWireInRequestsGet(
 
 export function buildWireInRequestsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetWireInRequestsWireInRequestUuidRequest,
+  request: GetWireInRequestsWireInRequestUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -161,7 +164,7 @@ export function buildWireInRequestsGetQuery(
 
 export function queryKeyWireInRequestsGet(
   wireInRequestUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

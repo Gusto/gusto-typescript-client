@@ -5,7 +5,7 @@ Some benefits require additional information to determine their limit. For examp
 ## Example Usage
 
 ```typescript
-import { LimitOption } from "@gusto/embedded-api/models/components";
+import { LimitOption } from "@gusto/embedded-api/models/components/benefittyperequirements.js";
 
 let value: LimitOption = {};
 ```

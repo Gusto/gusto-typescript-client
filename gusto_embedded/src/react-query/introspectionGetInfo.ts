@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { introspectionGetInfo } from "../funcs/introspectionGetInfo.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1TokenInfoRequest,
+  GetV1TokenInfoResponse,
+} from "../models/operations/getv1tokeninfo.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type IntrospectionGetInfoQueryData = operations.GetV1TokenInfoResponse;
+export type IntrospectionGetInfoQueryData = GetV1TokenInfoResponse;
 
 /**
  * Get info about the current access token
@@ -35,7 +38,7 @@ export type IntrospectionGetInfoQueryData = operations.GetV1TokenInfoResponse;
  * Returns scope and resource information associated with the current access token.
  */
 export function useIntrospectionGetInfo(
-  request: operations.GetV1TokenInfoRequest,
+  request: GetV1TokenInfoRequest,
   options?: QueryHookOptions<IntrospectionGetInfoQueryData>,
 ): UseQueryResult<IntrospectionGetInfoQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -56,7 +59,7 @@ export function useIntrospectionGetInfo(
  * Returns scope and resource information associated with the current access token.
  */
 export function useIntrospectionGetInfoSuspense(
-  request: operations.GetV1TokenInfoRequest,
+  request: GetV1TokenInfoRequest,
   options?: SuspenseQueryHookOptions<IntrospectionGetInfoQueryData>,
 ): UseSuspenseQueryResult<IntrospectionGetInfoQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -73,7 +76,7 @@ export function useIntrospectionGetInfoSuspense(
 export function prefetchIntrospectionGetInfo(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1TokenInfoRequest,
+  request: GetV1TokenInfoRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildIntrospectionGetInfoQuery(
@@ -85,9 +88,7 @@ export function prefetchIntrospectionGetInfo(
 
 export function setIntrospectionGetInfoData(
   client: QueryClient,
-  queryKeyBase: [
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
-  ],
+  queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
   data: IntrospectionGetInfoQueryData,
 ): IntrospectionGetInfoQueryData | undefined {
   const key = queryKeyIntrospectionGetInfo(...queryKeyBase);
@@ -98,7 +99,7 @@ export function setIntrospectionGetInfoData(
 export function invalidateIntrospectionGetInfo(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: components.VersionHeader | undefined }]
+    [parameters: { xGustoAPIVersion?: VersionHeader | undefined }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
@@ -125,7 +126,7 @@ export function invalidateAllIntrospectionGetInfo(
 
 export function buildIntrospectionGetInfoQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1TokenInfoRequest,
+  request: GetV1TokenInfoRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -156,7 +157,7 @@ export function buildIntrospectionGetInfoQuery(
 }
 
 export function queryKeyIntrospectionGetInfo(
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "Introspection", "getInfo", parameters];
 }

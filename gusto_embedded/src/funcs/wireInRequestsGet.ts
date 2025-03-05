@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetWireInRequestsWireInRequestUuidRequest,
+  GetWireInRequestsWireInRequestUuidRequest$outboundSchema,
+  GetWireInRequestsWireInRequestUuidResponse,
+  GetWireInRequestsWireInRequestUuidResponse$inboundSchema,
+} from "../models/operations/getwireinrequestswireinrequestuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function wireInRequestsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetWireInRequestsWireInRequestUuidRequest,
+  request: GetWireInRequestsWireInRequestUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetWireInRequestsWireInRequestUuidResponse,
+    GetWireInRequestsWireInRequestUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function wireInRequestsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetWireInRequestsWireInRequestUuidRequest,
+  request: GetWireInRequestsWireInRequestUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetWireInRequestsWireInRequestUuidResponse,
+      GetWireInRequestsWireInRequestUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,9 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetWireInRequestsWireInRequestUuidRequest$outboundSchema.parse(
-        value,
-      ),
+      GetWireInRequestsWireInRequestUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -162,7 +165,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetWireInRequestsWireInRequestUuidResponse,
+    GetWireInRequestsWireInRequestUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,11 +174,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetWireInRequestsWireInRequestUuidResponse$inboundSchema,
-      { key: "Wire-In-Request" },
-    ),
+    M.json(200, GetWireInRequestsWireInRequestUuidResponse$inboundSchema, {
+      key: "Wire-In-Request",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

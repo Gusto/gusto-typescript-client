@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
+  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outboundSchema,
+  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema,
+} from "../models/operations/postv1companiescompanyidpayschedulesassignmentpreview.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,13 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function paySchedulesPreviewAssignment(
   client: GustoEmbeddedCore,
-  request:
-    operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
+  request: PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,14 +66,13 @@ export function paySchedulesPreviewAssignment(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
+  request: PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
-      | errors.UnprocessableEntityErrorObject
+      PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,8 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outboundSchema
+      PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -170,8 +175,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -182,11 +187,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema,
+      PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema,
       { key: "Pay-Schedule-Assignment-Preview" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

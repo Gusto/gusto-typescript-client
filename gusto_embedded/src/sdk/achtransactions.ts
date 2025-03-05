@@ -4,7 +4,10 @@
 
 import { achTransactionsGetAll } from "../funcs/achTransactionsGetAll.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetAchTransactionsRequest,
+  GetAchTransactionsResponse,
+} from "../models/operations/getachtransactions.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class AchTransactions extends ClientSDK {
@@ -17,9 +20,9 @@ export class AchTransactions extends ClientSDK {
    * scope: `ach_transactions:read`
    */
   async getAll(
-    request: operations.GetAchTransactionsRequest,
+    request: GetAchTransactionsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAchTransactionsResponse> {
+  ): Promise<GetAchTransactionsResponse> {
     return unwrapAsync(achTransactionsGetAll(
       this,
       request,

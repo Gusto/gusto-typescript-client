@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse } from "@gusto/embedded-api/models/operations";
-import { RFCDate } from "@gusto/embedded-api/types";
+import { GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse } from "@gusto/embedded-api/models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse = {
   contentType: "<value>",
-  statusCode: 103,
+  statusCode: 402,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

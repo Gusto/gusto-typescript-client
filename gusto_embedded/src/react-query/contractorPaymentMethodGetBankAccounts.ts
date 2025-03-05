@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentMethodGetBankAccounts } from "../funcs/contractorPaymentMethodGetBankAccounts.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorsContractorUuidBankAccountsRequest,
+  GetV1ContractorsContractorUuidBankAccountsResponse,
+} from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentMethodGetBankAccountsQueryData =
-  operations.GetV1ContractorsContractorUuidBankAccountsResponse;
+  GetV1ContractorsContractorUuidBankAccountsResponse;
 
 /**
  * Get all contractor bank accounts
@@ -38,7 +41,7 @@ export type ContractorPaymentMethodGetBankAccountsQueryData =
  * scope: `contractor_payment_methods:read`
  */
 export function useContractorPaymentMethodGetBankAccounts(
-  request: operations.GetV1ContractorsContractorUuidBankAccountsRequest,
+  request: GetV1ContractorsContractorUuidBankAccountsRequest,
   options?: QueryHookOptions<ContractorPaymentMethodGetBankAccountsQueryData>,
 ): UseQueryResult<ContractorPaymentMethodGetBankAccountsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useContractorPaymentMethodGetBankAccounts(
  * scope: `contractor_payment_methods:read`
  */
 export function useContractorPaymentMethodGetBankAccountsSuspense(
-  request: operations.GetV1ContractorsContractorUuidBankAccountsRequest,
+  request: GetV1ContractorsContractorUuidBankAccountsRequest,
   options?: SuspenseQueryHookOptions<
     ContractorPaymentMethodGetBankAccountsQueryData
   >,
@@ -83,7 +86,7 @@ export function useContractorPaymentMethodGetBankAccountsSuspense(
 export function prefetchContractorPaymentMethodGetBankAccounts(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidBankAccountsRequest,
+  request: GetV1ContractorsContractorUuidBankAccountsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorPaymentMethodGetBankAccountsQuery(
@@ -97,7 +100,7 @@ export function setContractorPaymentMethodGetBankAccountsData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorPaymentMethodGetBankAccountsQueryData,
 ): ContractorPaymentMethodGetBankAccountsQueryData | undefined {
@@ -114,7 +117,7 @@ export function invalidateContractorPaymentMethodGetBankAccounts(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -146,7 +149,7 @@ export function invalidateAllContractorPaymentMethodGetBankAccounts(
 
 export function buildContractorPaymentMethodGetBankAccountsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidBankAccountsRequest,
+  request: GetV1ContractorsContractorUuidBankAccountsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -179,7 +182,7 @@ export function buildContractorPaymentMethodGetBankAccountsQuery(
 
 export function queryKeyContractorPaymentMethodGetBankAccounts(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

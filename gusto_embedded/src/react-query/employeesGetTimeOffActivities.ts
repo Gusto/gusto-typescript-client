@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGetTimeOffActivities } from "../funcs/employeesGetTimeOffActivities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetVersionEmployeesTimeOffActivitiesRequest,
+  GetVersionEmployeesTimeOffActivitiesResponse,
+} from "../models/operations/getversionemployeestimeoffactivities.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeesGetTimeOffActivitiesQueryData =
-  operations.GetVersionEmployeesTimeOffActivitiesResponse;
+  GetVersionEmployeesTimeOffActivitiesResponse;
 
 /**
  * Get employee time off activities
@@ -38,7 +41,7 @@ export type EmployeesGetTimeOffActivitiesQueryData =
  * scope: `employee_time_off_activities:read`
  */
 export function useEmployeesGetTimeOffActivities(
-  request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
+  request: GetVersionEmployeesTimeOffActivitiesRequest,
   options?: QueryHookOptions<EmployeesGetTimeOffActivitiesQueryData>,
 ): UseQueryResult<EmployeesGetTimeOffActivitiesQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useEmployeesGetTimeOffActivities(
  * scope: `employee_time_off_activities:read`
  */
 export function useEmployeesGetTimeOffActivitiesSuspense(
-  request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
+  request: GetVersionEmployeesTimeOffActivitiesRequest,
   options?: SuspenseQueryHookOptions<EmployeesGetTimeOffActivitiesQueryData>,
 ): UseSuspenseQueryResult<EmployeesGetTimeOffActivitiesQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useEmployeesGetTimeOffActivitiesSuspense(
 export function prefetchEmployeesGetTimeOffActivities(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
+  request: GetVersionEmployeesTimeOffActivitiesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeesGetTimeOffActivitiesQuery(
@@ -94,7 +97,7 @@ export function setEmployeesGetTimeOffActivitiesData(
     employeeUuid: string,
     parameters: {
       timeOffType: string;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesGetTimeOffActivitiesQueryData,
@@ -111,7 +114,7 @@ export function invalidateEmployeesGetTimeOffActivities(
       employeeUuid: string,
       parameters: {
         timeOffType: string;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -140,7 +143,7 @@ export function invalidateAllEmployeesGetTimeOffActivities(
 
 export function buildEmployeesGetTimeOffActivitiesQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
+  request: GetVersionEmployeesTimeOffActivitiesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -175,7 +178,7 @@ export function queryKeyEmployeesGetTimeOffActivities(
   employeeUuid: string,
   parameters: {
     timeOffType: string;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

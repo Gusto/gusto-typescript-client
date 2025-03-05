@@ -6,14 +6,29 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  DocumentType,
+  DocumentType$inboundSchema,
+  DocumentType$outboundSchema,
+} from "../components/documenttype.js";
+import {
+  GeneratedDocument,
+  GeneratedDocument$inboundSchema,
+  GeneratedDocument$Outbound,
+  GeneratedDocument$outboundSchema,
+} from "../components/generateddocument.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest = {
   /**
    * The type of document being generated
    */
-  documentType: components.DocumentType;
+  documentType: DocumentType;
   /**
    * The UUID of the request to generate a document. Generate document endpoints return request_uuids to be used with the GET generated document endpoint.
    */
@@ -21,7 +36,7 @@ export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
@@ -40,7 +55,7 @@ export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
   /**
    * Example response
    */
-  generatedDocument?: components.GeneratedDocument | undefined;
+  generatedDocument?: GeneratedDocument | undefined;
 };
 
 /** @internal */
@@ -50,11 +65,9 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.object({
-    document_type: components.DocumentType$inboundSchema,
+    document_type: DocumentType$inboundSchema,
     request_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "document_type": "documentType",
@@ -77,11 +90,9 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchem
     z.ZodTypeDef,
     GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest
   > = z.object({
-    documentType: components.DocumentType$outboundSchema,
+    documentType: DocumentType$outboundSchema,
     requestUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       documentType: "document_type",
@@ -143,7 +154,7 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$inboundSchem
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Generated-Document": components.GeneratedDocument$inboundSchema.optional(),
+    "Generated-Document": GeneratedDocument$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -158,7 +169,7 @@ export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Generated-Document"?: components.GeneratedDocument$Outbound | undefined;
+  "Generated-Document"?: GeneratedDocument$Outbound | undefined;
 };
 
 /** @internal */
@@ -173,7 +184,7 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$outboundSche
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    generatedDocument: components.GeneratedDocument$outboundSchema.optional(),
+    generatedDocument: GeneratedDocument$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

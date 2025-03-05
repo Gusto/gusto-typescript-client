@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetVersionEmployeesTimeOffActivitiesRequest,
+  GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema,
+  GetVersionEmployeesTimeOffActivitiesResponse,
+  GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema,
+} from "../models/operations/getversionemployeestimeoffactivities.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeesGetTimeOffActivities(
   client: GustoEmbeddedCore,
-  request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
+  request: GetVersionEmployeesTimeOffActivitiesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetVersionEmployeesTimeOffActivitiesResponse,
+    GetVersionEmployeesTimeOffActivitiesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function employeesGetTimeOffActivities(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
+  request: GetVersionEmployeesTimeOffActivitiesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetVersionEmployeesTimeOffActivitiesResponse,
+      GetVersionEmployeesTimeOffActivitiesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema
-        .parse(value),
+      GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -165,7 +169,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetVersionEmployeesTimeOffActivitiesResponse,
+    GetVersionEmployeesTimeOffActivitiesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -174,11 +178,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema,
-      { key: "Time-Off-Activity" },
-    ),
+    M.json(200, GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema, {
+      key: "Time-Off-Activity",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

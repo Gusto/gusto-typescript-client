@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Location,
+  Location$inboundSchema,
+  Location$Outbound,
+  Location$outboundSchema,
+} from "../components/location.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1LocationsLocationIdRequest = {
@@ -17,7 +27,7 @@ export type GetV1LocationsLocationIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1LocationsLocationIdResponse = {
@@ -36,7 +46,7 @@ export type GetV1LocationsLocationIdResponse = {
   /**
    * Example response
    */
-  location?: components.Location | undefined;
+  location?: Location | undefined;
 };
 
 /** @internal */
@@ -46,9 +56,7 @@ export const GetV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   location_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "location_id": "locationId",
@@ -69,9 +77,7 @@ export const GetV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
   GetV1LocationsLocationIdRequest
 > = z.object({
   locationId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     locationId: "location_id",
@@ -121,7 +127,7 @@ export const GetV1LocationsLocationIdResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Location: components.Location$inboundSchema.optional(),
+  Location: Location$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -136,7 +142,7 @@ export type GetV1LocationsLocationIdResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Location?: components.Location$Outbound | undefined;
+  Location?: Location$Outbound | undefined;
 };
 
 /** @internal */
@@ -150,7 +156,7 @@ export const GetV1LocationsLocationIdResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  location: components.Location$outboundSchema.optional(),
+  location: Location$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

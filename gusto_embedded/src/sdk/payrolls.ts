@@ -20,7 +20,74 @@ import { payrollsSkip } from "../funcs/payrollsSkip.js";
 import { payrollsSubmit } from "../funcs/payrollsSubmit.js";
 import { payrollsUpdate } from "../funcs/payrollsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyIdPayrollsRequest,
+  DeleteV1CompaniesCompanyIdPayrollsResponse,
+} from "../models/operations/deletev1companiescompanyidpayrolls.js";
+import {
+  GetV1CompaniesCompanyIdPayrollReversalsRequest,
+  GetV1CompaniesCompanyIdPayrollReversalsResponse,
+} from "../models/operations/getv1companiescompanyidpayrollreversals.js";
+import {
+  GetV1CompaniesCompanyIdPayrollsRequest,
+  GetV1CompaniesCompanyIdPayrollsResponse,
+} from "../models/operations/getv1companiescompanyidpayrolls.js";
+import {
+  GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+  GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
+} from "../models/operations/getv1companiescompanyidpayrollspayrollid.js";
+import {
+  GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+  GetV1CompaniesPayrollBlockersCompanyUuidResponse,
+} from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
+import {
+  GetV1EmployeesEmployeeUuidPayStubsRequest,
+  GetV1EmployeesEmployeeUuidPayStubsResponse,
+} from "../models/operations/getv1employeesemployeeuuidpaystubs.js";
+import {
+  GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+  GetV1PaymentReceiptsPayrollsPayrollUuidResponse,
+} from "../models/operations/getv1paymentreceiptspayrollspayrolluuid.js";
+import {
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+} from "../models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.js";
+import {
+  PostCompaniesPayrollSkipCompanyUuidRequest,
+  PostCompaniesPayrollSkipCompanyUuidResponse,
+} from "../models/operations/postcompaniespayrollskipcompanyuuid.js";
+import {
+  PostPayrollsGrossUpPayrollUuidRequest,
+  PostPayrollsGrossUpPayrollUuidResponse,
+} from "../models/operations/postpayrollsgrossuppayrolluuid.js";
+import {
+  PostV1CompaniesCompanyIdPayrollsRequest,
+  PostV1CompaniesCompanyIdPayrollsResponse,
+} from "../models/operations/postv1companiescompanyidpayrolls.js";
+import {
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse,
+} from "../models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.js";
+import {
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+} from "../models/operations/putapiv1companiescompanyidpayrollspayrollidcancel.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsRequest,
+  PutV1CompaniesCompanyIdPayrollsResponse,
+} from "../models/operations/putv1companiescompanyidpayrolls.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
+} from "../models/operations/putv1companiescompanyidpayrollspayrollidcalculate.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse,
+} from "../models/operations/putv1companiescompanyidpayrollspayrollidprepare.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse,
+} from "../models/operations/putv1companiescompanyidpayrollspayrollidsubmit.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Payrolls extends ClientSDK {
@@ -40,9 +107,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:run`
    */
   async createOffCycle(
-    request: operations.PostV1CompaniesCompanyIdPayrollsRequest,
+    request: PostV1CompaniesCompanyIdPayrollsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdPayrollsResponse> {
+  ): Promise<PostV1CompaniesCompanyIdPayrollsResponse> {
     return unwrapAsync(payrollsCreateOffCycle(
       this,
       request,
@@ -65,9 +132,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:read`
    */
   async list(
-    request: operations.GetV1CompaniesCompanyIdPayrollsRequest,
+    request: GetV1CompaniesCompanyIdPayrollsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdPayrollsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdPayrollsResponse> {
     return unwrapAsync(payrollsList(
       this,
       request,
@@ -84,9 +151,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:read`
    */
   async getApprovedReversals(
-    request: operations.GetV1CompaniesCompanyIdPayrollReversalsRequest,
+    request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdPayrollReversalsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdPayrollReversalsResponse> {
     return unwrapAsync(payrollsGetApprovedReversals(
       this,
       request,
@@ -111,9 +178,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:read`
    */
   async get(
-    request: operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+    request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> {
+  ): Promise<GetV1CompaniesCompanyIdPayrollsPayrollIdResponse> {
     return unwrapAsync(payrollsGet(
       this,
       request,
@@ -133,9 +200,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:write`
    */
   async update(
-    request: operations.PutV1CompaniesCompanyIdPayrollsRequest,
+    request: PutV1CompaniesCompanyIdPayrollsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompaniesCompanyIdPayrollsResponse> {
+  ): Promise<PutV1CompaniesCompanyIdPayrollsResponse> {
     return unwrapAsync(payrollsUpdate(
       this,
       request,
@@ -154,9 +221,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:run`
    */
   async delete(
-    request: operations.DeleteV1CompaniesCompanyIdPayrollsRequest,
+    request: DeleteV1CompaniesCompanyIdPayrollsRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1CompaniesCompanyIdPayrollsResponse> {
+  ): Promise<DeleteV1CompaniesCompanyIdPayrollsResponse> {
     return unwrapAsync(payrollsDelete(
       this,
       request,
@@ -177,11 +244,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:write`
    */
   async prepare(
-    request: operations.PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
+    request: PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse
-  > {
+  ): Promise<PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse> {
     return unwrapAsync(payrollsPrepare(
       this,
       request,
@@ -203,9 +268,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:read`
    */
   async getReceipt(
-    request: operations.GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
+    request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1PaymentReceiptsPayrollsPayrollUuidResponse> {
+  ): Promise<GetV1PaymentReceiptsPayrollsPayrollUuidResponse> {
     return unwrapAsync(payrollsGetReceipt(
       this,
       request,
@@ -224,9 +289,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:run`
    */
   async getBlockers(
-    request: operations.GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+    request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesPayrollBlockersCompanyUuidResponse> {
+  ): Promise<GetV1CompaniesPayrollBlockersCompanyUuidResponse> {
     return unwrapAsync(payrollsGetBlockers(
       this,
       request,
@@ -245,9 +310,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:run`
    */
   async skip(
-    request: operations.PostCompaniesPayrollSkipCompanyUuidRequest,
+    request: PostCompaniesPayrollSkipCompanyUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostCompaniesPayrollSkipCompanyUuidResponse> {
+  ): Promise<PostCompaniesPayrollSkipCompanyUuidResponse> {
     return unwrapAsync(payrollsSkip(
       this,
       request,
@@ -266,9 +331,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:run`
    */
   async calculateGrossUp(
-    request: operations.PostPayrollsGrossUpPayrollUuidRequest,
+    request: PostPayrollsGrossUpPayrollUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostPayrollsGrossUpPayrollUuidResponse> {
+  ): Promise<PostPayrollsGrossUpPayrollUuidResponse> {
     return unwrapAsync(payrollsCalculateGrossUp(
       this,
       request,
@@ -288,12 +353,9 @@ export class Payrolls extends ClientSDK {
    * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
    */
   async calculate(
-    request:
-      operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
+    request: PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse
-  > {
+  ): Promise<PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse> {
     return unwrapAsync(payrollsCalculate(
       this,
       request,
@@ -314,11 +376,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:run`
    */
   async submit(
-    request: operations.PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
+    request: PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse
-  > {
+  ): Promise<PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse> {
     return unwrapAsync(payrollsSubmit(
       this,
       request,
@@ -337,12 +397,9 @@ export class Payrolls extends ClientSDK {
    * scope: `payrolls:run`
    */
   async cancel(
-    request:
-      operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+    request: PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse
-  > {
+  ): Promise<PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse> {
     return unwrapAsync(payrollsCancel(
       this,
       request,
@@ -359,12 +416,9 @@ export class Payrolls extends ClientSDK {
    * scope: `pay_stubs:read`
    */
   async getPayStub(
-    request:
-      operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+    request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse
-  > {
+  ): Promise<GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse> {
     return unwrapAsync(payrollsGetPayStub(
       this,
       request,
@@ -381,9 +435,9 @@ export class Payrolls extends ClientSDK {
    * scope: `pay_stubs:read`
    */
   async getPayStubs(
-    request: operations.GetV1EmployeesEmployeeUuidPayStubsRequest,
+    request: GetV1EmployeesEmployeeUuidPayStubsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeUuidPayStubsResponse> {
+  ): Promise<GetV1EmployeesEmployeeUuidPayStubsResponse> {
     return unwrapAsync(payrollsGetPayStubs(
       this,
       request,
@@ -401,10 +455,10 @@ export class Payrolls extends ClientSDK {
    */
   async generatePrintableChecks(
     request:
-      operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
+      PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequest,
     options?: RequestOptions,
   ): Promise<
-    operations.PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse
+    PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse
   > {
     return unwrapAsync(payrollsGeneratePrintableChecks(
       this,

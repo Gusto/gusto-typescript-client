@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentMethodsCreateBankAccount } from "../funcs/contractorPaymentMethodsCreateBankAccount.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1ContractorsContractorUuidBankAccountsRequest,
+  PostV1ContractorsContractorUuidBankAccountsResponse,
+} from "../models/operations/postv1contractorscontractoruuidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorPaymentMethodsCreateBankAccountMutationVariables = {
-  request: operations.PostV1ContractorsContractorUuidBankAccountsRequest;
+  request: PostV1ContractorsContractorUuidBankAccountsRequest;
   options?: RequestOptions;
 };
 
 export type ContractorPaymentMethodsCreateBankAccountMutationData =
-  operations.PostV1ContractorsContractorUuidBankAccountsResponse;
+  PostV1ContractorsContractorUuidBankAccountsResponse;
 
 /**
  * Create a contractor bank account

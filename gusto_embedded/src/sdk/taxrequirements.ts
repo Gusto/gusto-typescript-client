@@ -6,7 +6,18 @@ import { taxRequirementsGet } from "../funcs/taxRequirementsGet.js";
 import { taxRequirementsGetAll } from "../funcs/taxRequirementsGetAll.js";
 import { taxRequirementsUpdateState } from "../funcs/taxRequirementsUpdateState.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyUuidTaxRequirementsRequest,
+  GetV1CompaniesCompanyUuidTaxRequirementsResponse,
+} from "../models/operations/getv1companiescompanyuuidtaxrequirements.js";
+import {
+  GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+} from "../models/operations/getv1companiescompanyuuidtaxrequirementsstate.js";
+import {
+  PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+} from "../models/operations/putv1companiescompanyuuidtaxrequirementsstate.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class TaxRequirements extends ClientSDK {
@@ -58,9 +69,9 @@ export class TaxRequirements extends ClientSDK {
    * scope: `company_tax_requirements:read`
    */
   async get(
-    request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+    request: GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyUuidTaxRequirementsStateResponse> {
+  ): Promise<GetV1CompaniesCompanyUuidTaxRequirementsStateResponse> {
     return unwrapAsync(taxRequirementsGet(
       this,
       request,
@@ -77,9 +88,9 @@ export class TaxRequirements extends ClientSDK {
    * scope: `company_tax_requirements:write`
    */
   async updateState(
-    request: operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+    request: PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse> {
+  ): Promise<PutV1CompaniesCompanyUuidTaxRequirementsStateResponse> {
     return unwrapAsync(taxRequirementsUpdateState(
       this,
       request,
@@ -96,9 +107,9 @@ export class TaxRequirements extends ClientSDK {
    * scope: `company_tax_requirements:read`
    */
   async getAll(
-    request: operations.GetV1CompaniesCompanyUuidTaxRequirementsRequest,
+    request: GetV1CompaniesCompanyUuidTaxRequirementsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyUuidTaxRequirementsResponse> {
+  ): Promise<GetV1CompaniesCompanyUuidTaxRequirementsResponse> {
     return unwrapAsync(taxRequirementsGetAll(
       this,
       request,

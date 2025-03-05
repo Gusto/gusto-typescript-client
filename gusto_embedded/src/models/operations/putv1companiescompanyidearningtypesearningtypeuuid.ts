@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  EarningType,
+  EarningType$inboundSchema,
+  EarningType$Outbound,
+  EarningType$outboundSchema,
+} from "../components/earningtype.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody = {
@@ -28,7 +38,7 @@ export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody;
 };
 
@@ -48,7 +58,7 @@ export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse = {
   /**
    * Example response
    */
-  earningType?: components.EarningType | undefined;
+  earningType?: EarningType | undefined;
 };
 
 /** @internal */
@@ -127,9 +137,7 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSc
   > = z.object({
     company_id: z.string(),
     earning_type_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema
     ),
@@ -161,9 +169,7 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundS
   > = z.object({
     companyId: z.string(),
     earningTypeUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outboundSchema
     ),
@@ -227,7 +233,7 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundS
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Earning-Type": components.EarningType$inboundSchema.optional(),
+    "Earning-Type": EarningType$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -243,7 +249,7 @@ export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound 
     ContentType: string;
     StatusCode: number;
     RawResponse: never;
-    "Earning-Type"?: components.EarningType$Outbound | undefined;
+    "Earning-Type"?: EarningType$Outbound | undefined;
   };
 
 /** @internal */
@@ -258,7 +264,7 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outbound
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    earningType: components.EarningType$outboundSchema.optional(),
+    earningType: EarningType$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { GetV1GarnishmentsGarnishmentIdResponse } from "@gusto/embedded-api/models/operations";
+import { GetV1GarnishmentsGarnishmentIdResponse } from "@gusto/embedded-api/models/operations/getv1garnishmentsgarnishmentid.js";
 
 let value: GetV1GarnishmentsGarnishmentIdResponse = {
   contentType: "<value>",
-  statusCode: 504,
+  statusCode: 201,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

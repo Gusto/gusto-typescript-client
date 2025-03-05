@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  TaxRequirementsState,
+  TaxRequirementsState$inboundSchema,
+  TaxRequirementsState$Outbound,
+  TaxRequirementsState$outboundSchema,
+} from "../components/taxrequirementsstate.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
@@ -25,7 +35,7 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
@@ -44,7 +54,7 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
   /**
    * OK
    */
-  taxRequirementsState?: components.TaxRequirementsState | undefined;
+  taxRequirementsState?: TaxRequirementsState | undefined;
 };
 
 /** @internal */
@@ -57,9 +67,7 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema:
     company_uuid: z.string(),
     state: z.string(),
     scheduling: z.boolean().optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -85,9 +93,7 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
     companyUuid: z.string(),
     state: z.string(),
     scheduling: z.boolean().optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
@@ -148,8 +154,7 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Tax-Requirements-State": components.TaxRequirementsState$inboundSchema
-      .optional(),
+    "Tax-Requirements-State": TaxRequirementsState$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -164,9 +169,7 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Tax-Requirements-State"?:
-    | components.TaxRequirementsState$Outbound
-    | undefined;
+  "Tax-Requirements-State"?: TaxRequirementsState$Outbound | undefined;
 };
 
 /** @internal */
@@ -181,8 +184,7 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchem
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    taxRequirementsState: components.TaxRequirementsState$outboundSchema
-      .optional(),
+    taxRequirementsState: TaxRequirementsState$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

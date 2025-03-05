@@ -6,7 +6,18 @@ import { wireInRequestsGet } from "../funcs/wireInRequestsGet.js";
 import { wireInRequestsList } from "../funcs/wireInRequestsList.js";
 import { wireInRequestsSubmit } from "../funcs/wireInRequestsSubmit.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  GetCompaniesCompanyUuidWireInRequestUuidResponse,
+} from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
+import {
+  GetWireInRequestsWireInRequestUuidRequest,
+  GetWireInRequestsWireInRequestUuidResponse,
+} from "../models/operations/getwireinrequestswireinrequestuuid.js";
+import {
+  PutWireInRequestsWireInRequestUuidRequest,
+  PutWireInRequestsWireInRequestUuidResponse,
+} from "../models/operations/putwireinrequestswireinrequestuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class WireInRequests extends ClientSDK {
@@ -19,9 +30,9 @@ export class WireInRequests extends ClientSDK {
    * scope: `payrolls:read`
    */
   async get(
-    request: operations.GetWireInRequestsWireInRequestUuidRequest,
+    request: GetWireInRequestsWireInRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWireInRequestsWireInRequestUuidResponse> {
+  ): Promise<GetWireInRequestsWireInRequestUuidResponse> {
     return unwrapAsync(wireInRequestsGet(
       this,
       request,
@@ -38,9 +49,9 @@ export class WireInRequests extends ClientSDK {
    * scope: `payrolls:run`
    */
   async submit(
-    request: operations.PutWireInRequestsWireInRequestUuidRequest,
+    request: PutWireInRequestsWireInRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutWireInRequestsWireInRequestUuidResponse> {
+  ): Promise<PutWireInRequestsWireInRequestUuidResponse> {
     return unwrapAsync(wireInRequestsSubmit(
       this,
       request,
@@ -57,9 +68,9 @@ export class WireInRequests extends ClientSDK {
    * scope: `payrolls:read`
    */
   async list(
-    request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
+    request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetCompaniesCompanyUuidWireInRequestUuidResponse> {
+  ): Promise<GetCompaniesCompanyUuidWireInRequestUuidResponse> {
     return unwrapAsync(wireInRequestsList(
       this,
       request,

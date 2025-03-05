@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationGetDocuments } from "../funcs/i9VerificationGetDocuments.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+} from "../models/operations/getv1employeesemployeeidi9authorizationdocuments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type I9VerificationGetDocumentsQueryData =
-  operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
 
 /**
  * Get an employee's I-9 verification documents
@@ -38,7 +41,7 @@ export type I9VerificationGetDocumentsQueryData =
  * scope: `i9_authorizations:read`
  */
 export function useI9VerificationGetDocuments(
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
   options?: QueryHookOptions<I9VerificationGetDocumentsQueryData>,
 ): UseQueryResult<I9VerificationGetDocumentsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useI9VerificationGetDocuments(
  * scope: `i9_authorizations:read`
  */
 export function useI9VerificationGetDocumentsSuspense(
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
   options?: SuspenseQueryHookOptions<I9VerificationGetDocumentsQueryData>,
 ): UseSuspenseQueryResult<I9VerificationGetDocumentsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useI9VerificationGetDocumentsSuspense(
 export function prefetchI9VerificationGetDocuments(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildI9VerificationGetDocumentsQuery(
@@ -92,7 +95,7 @@ export function setI9VerificationGetDocumentsData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: I9VerificationGetDocumentsQueryData,
 ): I9VerificationGetDocumentsQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateI9VerificationGetDocuments(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllI9VerificationGetDocuments(
 
 export function buildI9VerificationGetDocumentsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildI9VerificationGetDocumentsQuery(
 
 export function queryKeyI9VerificationGetDocuments(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

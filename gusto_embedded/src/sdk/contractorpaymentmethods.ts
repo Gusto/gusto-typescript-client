@@ -4,7 +4,10 @@
 
 import { contractorPaymentMethodsCreateBankAccount } from "../funcs/contractorPaymentMethodsCreateBankAccount.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1ContractorsContractorUuidBankAccountsRequest,
+  PostV1ContractorsContractorUuidBankAccountsResponse,
+} from "../models/operations/postv1contractorscontractoruuidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class ContractorPaymentMethods extends ClientSDK {
@@ -19,9 +22,9 @@ export class ContractorPaymentMethods extends ClientSDK {
    * scope: `contractor_payment_methods:write`
    */
   async createBankAccount(
-    request: operations.PostV1ContractorsContractorUuidBankAccountsRequest,
+    request: PostV1ContractorsContractorUuidBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1ContractorsContractorUuidBankAccountsResponse> {
+  ): Promise<PostV1ContractorsContractorUuidBankAccountsResponse> {
     return unwrapAsync(contractorPaymentMethodsCreateBankAccount(
       this,
       request,

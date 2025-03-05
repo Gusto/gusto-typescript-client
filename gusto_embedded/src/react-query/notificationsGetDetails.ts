@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { notificationsGetDetails } from "../funcs/notificationsGetDetails.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetNotificationsNotificationUuidRequest,
+  GetNotificationsNotificationUuidResponse,
+} from "../models/operations/getnotificationsnotificationuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type NotificationsGetDetailsQueryData =
-  operations.GetNotificationsNotificationUuidResponse;
+  GetNotificationsNotificationUuidResponse;
 
 /**
  * Get a notification's details
@@ -42,7 +45,7 @@ export type NotificationsGetDetailsQueryData =
  * scope: `notifications:read`
  */
 export function useNotificationsGetDetails(
-  request: operations.GetNotificationsNotificationUuidRequest,
+  request: GetNotificationsNotificationUuidRequest,
   options?: QueryHookOptions<NotificationsGetDetailsQueryData>,
 ): UseQueryResult<NotificationsGetDetailsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -69,7 +72,7 @@ export function useNotificationsGetDetails(
  * scope: `notifications:read`
  */
 export function useNotificationsGetDetailsSuspense(
-  request: operations.GetNotificationsNotificationUuidRequest,
+  request: GetNotificationsNotificationUuidRequest,
   options?: SuspenseQueryHookOptions<NotificationsGetDetailsQueryData>,
 ): UseSuspenseQueryResult<NotificationsGetDetailsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -86,7 +89,7 @@ export function useNotificationsGetDetailsSuspense(
 export function prefetchNotificationsGetDetails(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetNotificationsNotificationUuidRequest,
+  request: GetNotificationsNotificationUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildNotificationsGetDetailsQuery(
@@ -100,7 +103,7 @@ export function setNotificationsGetDetailsData(
   client: QueryClient,
   queryKeyBase: [
     notificationUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: NotificationsGetDetailsQueryData,
 ): NotificationsGetDetailsQueryData | undefined {
@@ -114,7 +117,7 @@ export function invalidateNotificationsGetDetails(
   queryKeyBase: TupleToPrefixes<
     [
       notificationUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -142,7 +145,7 @@ export function invalidateAllNotificationsGetDetails(
 
 export function buildNotificationsGetDetailsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetNotificationsNotificationUuidRequest,
+  request: GetNotificationsNotificationUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -174,7 +177,7 @@ export function buildNotificationsGetDetailsQuery(
 
 export function queryKeyNotificationsGetDetails(
   notificationUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

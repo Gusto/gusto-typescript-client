@@ -5,7 +5,7 @@ Update a job.
 ## Example Usage
 
 ```typescript
-import { PutV1JobsJobIdRequestBody } from "@gusto/embedded-api/models/operations";
+import { PutV1JobsJobIdRequestBody } from "@gusto/embedded-api/models/operations/putv1jobsjobid.js";
 
 let value: PutV1JobsJobIdRequestBody = {
   version: "<value>",

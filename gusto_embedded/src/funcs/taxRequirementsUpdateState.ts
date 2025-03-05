@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema,
+  PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+  PutV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema,
+} from "../models/operations/putv1companiescompanyuuidtaxrequirementsstate.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function taxRequirementsUpdateState(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  request: PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function taxRequirementsUpdateState(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  request: PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,9 +87,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
-        .parse(value),
+      PutV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -169,8 +177,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -181,10 +189,9 @@ async function $do(
   >(
     M.nil(
       200,
-      operations
-        .PutV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema,
+      PutV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema,
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

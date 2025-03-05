@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsUpdateOnboardingStatus } from "../funcs/contractorsUpdateOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1ContractorsContractorUuidOnboardingStatusRequest,
+  PutV1ContractorsContractorUuidOnboardingStatusResponse,
+} from "../models/operations/putv1contractorscontractoruuidonboardingstatus.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorsUpdateOnboardingStatusMutationVariables = {
-  request: operations.PutV1ContractorsContractorUuidOnboardingStatusRequest;
+  request: PutV1ContractorsContractorUuidOnboardingStatusRequest;
   options?: RequestOptions;
 };
 
 export type ContractorsUpdateOnboardingStatusMutationData =
-  operations.PutV1ContractorsContractorUuidOnboardingStatusResponse;
+  PutV1ContractorsContractorUuidOnboardingStatusResponse;
 
 /**
  * Change the contractor's onboarding status

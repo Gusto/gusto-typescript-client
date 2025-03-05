@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesInvite } from "../funcs/signatoriesInvite.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
+  PostV1CompaniesCompanyUuidSignatoriesInviteResponse,
+} from "../models/operations/postv1companiescompanyuuidsignatoriesinvite.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type SignatoriesInviteMutationVariables = {
-  request: operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequest;
+  request: PostV1CompaniesCompanyUuidSignatoriesInviteRequest;
   options?: RequestOptions;
 };
 
 export type SignatoriesInviteMutationData =
-  operations.PostV1CompaniesCompanyUuidSignatoriesInviteResponse;
+  PostV1CompaniesCompanyUuidSignatoriesInviteResponse;
 
 /**
  * Invite a signatory

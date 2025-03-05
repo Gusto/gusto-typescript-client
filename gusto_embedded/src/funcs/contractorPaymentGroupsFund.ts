@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$outboundSchema,
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema,
+} from "../models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfund.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -38,13 +46,12 @@ import { Result } from "../types/fp.js";
  */
 export function contractorPaymentGroupsFund(
   client: GustoEmbeddedCore,
-  request:
-    operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
+  request: PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -63,14 +70,13 @@ export function contractorPaymentGroupsFund(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
+  request: PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -85,8 +91,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$outboundSchema
+      PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -172,8 +177,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -184,11 +189,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema,
+      PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema,
       { key: "Contractor-Payment-Group" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

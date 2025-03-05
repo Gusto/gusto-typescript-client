@@ -12,7 +12,42 @@ import { timeOffPoliciesRemoveEmployees } from "../funcs/timeOffPoliciesRemoveEm
 import { timeOffPoliciesUpdate } from "../funcs/timeOffPoliciesUpdate.js";
 import { timeOffPoliciesUpdateBalance } from "../funcs/timeOffPoliciesUpdateBalance.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+} from "../models/operations/getcompaniescompanyuuidtimeoffpolicies.js";
+import {
+  GetTimeOffPoliciesTimeOffPolicyUuidRequest,
+  GetTimeOffPoliciesTimeOffPolicyUuidResponse,
+} from "../models/operations/gettimeoffpoliciestimeoffpolicyuuid.js";
+import {
+  PostCompaniesCompanyUuidTimeOffPoliciesRequest,
+  PostCompaniesCompanyUuidTimeOffPoliciesResponse,
+} from "../models/operations/postcompaniescompanyuuidtimeoffpolicies.js";
+import {
+  PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest,
+  PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+} from "../models/operations/postv1payrollspayrollidcalculateaccruingtimeoffhours.js";
+import {
+  PutTimeOffPoliciesTimeOffPolicyUuidRequest,
+  PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+} from "../models/operations/puttimeoffpoliciestimeoffpolicyuuid.js";
+import {
+  PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuiddeactivate.js";
+import {
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuidremoveemployees.js";
+import {
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest,
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse,
+} from "../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployees.js";
+import {
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
+} from "../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalance.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class TimeOffPolicies extends ClientSDK {
@@ -33,12 +68,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `payrolls:read`
    */
   async calculateAccruingTimeOffHours(
-    request:
-      operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest,
+    request: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse
-  > {
+  ): Promise<PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse> {
     return unwrapAsync(timeOffPoliciesCalculateAccruingTimeOffHours(
       this,
       request,
@@ -55,9 +87,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:read`
    */
   async get(
-    request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
+    request: GetTimeOffPoliciesTimeOffPolicyUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse> {
+  ): Promise<GetTimeOffPoliciesTimeOffPolicyUuidResponse> {
     return unwrapAsync(timeOffPoliciesGet(
       this,
       request,
@@ -74,9 +106,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:write`
    */
   async update(
-    request: operations.PutTimeOffPoliciesTimeOffPolicyUuidRequest,
+    request: PutTimeOffPoliciesTimeOffPolicyUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse> {
+  ): Promise<PutTimeOffPoliciesTimeOffPolicyUuidResponse> {
     return unwrapAsync(timeOffPoliciesUpdate(
       this,
       request,
@@ -93,9 +125,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:read`
    */
   async getAll(
-    request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+    request: GetCompaniesCompanyUuidTimeOffPoliciesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse> {
+  ): Promise<GetCompaniesCompanyUuidTimeOffPoliciesResponse> {
     return unwrapAsync(timeOffPoliciesGetAll(
       this,
       request,
@@ -112,9 +144,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:write`
    */
   async create(
-    request: operations.PostCompaniesCompanyUuidTimeOffPoliciesRequest,
+    request: PostCompaniesCompanyUuidTimeOffPoliciesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostCompaniesCompanyUuidTimeOffPoliciesResponse> {
+  ): Promise<PostCompaniesCompanyUuidTimeOffPoliciesResponse> {
     return unwrapAsync(timeOffPoliciesCreate(
       this,
       request,
@@ -131,12 +163,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:write`
    */
   async addEmployees(
-    request:
-      operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest,
+    request: PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse
-  > {
+  ): Promise<PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse> {
     return unwrapAsync(timeOffPoliciesAddEmployees(
       this,
       request,
@@ -153,12 +182,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:write`
    */
   async removeEmployees(
-    request:
-      operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
+    request: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse
-  > {
+  ): Promise<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse> {
     return unwrapAsync(timeOffPoliciesRemoveEmployees(
       this,
       request,
@@ -175,12 +201,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:write`
    */
   async updateBalance(
-    request:
-      operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
+    request: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse
-  > {
+  ): Promise<PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse> {
     return unwrapAsync(timeOffPoliciesUpdateBalance(
       this,
       request,
@@ -197,11 +220,9 @@ export class TimeOffPolicies extends ClientSDK {
    * scope: `time_off_policies:write`
    */
   async deactivate(
-    request: operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
+    request: PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse
-  > {
+  ): Promise<PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse> {
     return unwrapAsync(timeOffPoliciesDeactivate(
       this,
       request,

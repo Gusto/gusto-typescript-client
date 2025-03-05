@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsFinalizeTaxLiabilities } from "../funcs/externalPayrollsFinalizeTaxLiabilities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1TaxLiabilitiesFinishRequest,
+  PutV1TaxLiabilitiesFinishResponse,
+} from "../models/operations/putv1taxliabilitiesfinish.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ExternalPayrollsFinalizeTaxLiabilitiesMutationVariables = {
-  request: operations.PutV1TaxLiabilitiesFinishRequest;
+  request: PutV1TaxLiabilitiesFinishRequest;
   options?: RequestOptions;
 };
 
 export type ExternalPayrollsFinalizeTaxLiabilitiesMutationData =
-  operations.PutV1TaxLiabilitiesFinishResponse;
+  PutV1TaxLiabilitiesFinishResponse;
 
 /**
  * Finalize tax liabilities options and convert into processed payrolls

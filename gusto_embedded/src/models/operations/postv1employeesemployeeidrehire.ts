@@ -6,7 +6,23 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Rehire,
+  Rehire$inboundSchema,
+  Rehire$Outbound,
+  Rehire$outboundSchema,
+} from "../components/rehire.js";
+import {
+  RehireBody,
+  RehireBody$inboundSchema,
+  RehireBody$Outbound,
+  RehireBody$outboundSchema,
+} from "../components/rehirebody.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV1EmployeesEmployeeIdRehireRequest = {
@@ -17,8 +33,8 @@ export type PostV1EmployeesEmployeeIdRehireRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
-  rehireBody: components.RehireBody;
+  xGustoAPIVersion?: VersionHeader | undefined;
+  rehireBody: RehireBody;
 };
 
 export type PostV1EmployeesEmployeeIdRehireResponse = {
@@ -37,7 +53,7 @@ export type PostV1EmployeesEmployeeIdRehireResponse = {
   /**
    * Example response
    */
-  rehire?: components.Rehire | undefined;
+  rehire?: Rehire | undefined;
 };
 
 /** @internal */
@@ -47,10 +63,8 @@ export const PostV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
-  "Rehire-Body": components.RehireBody$inboundSchema,
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "Rehire-Body": RehireBody$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "employee_id": "employeeId",
@@ -63,7 +77,7 @@ export const PostV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
 export type PostV1EmployeesEmployeeIdRehireRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version": string;
-  "Rehire-Body": components.RehireBody$Outbound;
+  "Rehire-Body": RehireBody$Outbound;
 };
 
 /** @internal */
@@ -73,10 +87,8 @@ export const PostV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   PostV1EmployeesEmployeeIdRehireRequest
 > = z.object({
   employeeId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
-  rehireBody: components.RehireBody$outboundSchema,
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  rehireBody: RehireBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     employeeId: "employee_id",
@@ -131,7 +143,7 @@ export const PostV1EmployeesEmployeeIdRehireResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Rehire: components.Rehire$inboundSchema.optional(),
+  Rehire: Rehire$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -146,7 +158,7 @@ export type PostV1EmployeesEmployeeIdRehireResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Rehire?: components.Rehire$Outbound | undefined;
+  Rehire?: Rehire$Outbound | undefined;
 };
 
 /** @internal */
@@ -160,7 +172,7 @@ export const PostV1EmployeesEmployeeIdRehireResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  rehire: components.Rehire$outboundSchema.optional(),
+  rehire: Rehire$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

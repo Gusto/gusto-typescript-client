@@ -4,7 +4,10 @@
 
 import { employeePaymentMethodsGetBankAccounts } from "../funcs/employeePaymentMethodsGetBankAccounts.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdBankAccountsRequest,
+  GetV1EmployeesEmployeeIdBankAccountsResponse,
+} from "../models/operations/getv1employeesemployeeidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeePaymentMethods extends ClientSDK {
@@ -17,9 +20,9 @@ export class EmployeePaymentMethods extends ClientSDK {
    * scope: `employee_payment_methods:read`
    */
   async getBankAccounts(
-    request: operations.GetV1EmployeesEmployeeIdBankAccountsRequest,
+    request: GetV1EmployeesEmployeeIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdBankAccountsResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdBankAccountsResponse> {
     return unwrapAsync(employeePaymentMethodsGetBankAccounts(
       this,
       request,

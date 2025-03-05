@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostV1CompaniesCompanyIdCompanyBenefitsRequest,
+  PostV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema,
+  PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+  PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema,
+} from "../models/operations/postv1companiescompanyidcompanybenefits.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,12 +44,12 @@ import { Result } from "../types/fp.js";
  */
 export function companyBenefitsCreate(
   client: GustoEmbeddedCore,
-  request: operations.PostV1CompaniesCompanyIdCompanyBenefitsRequest,
+  request: PostV1CompaniesCompanyIdCompanyBenefitsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1CompaniesCompanyIdCompanyBenefitsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,13 +68,13 @@ export function companyBenefitsCreate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PostV1CompaniesCompanyIdCompanyBenefitsRequest,
+  request: PostV1CompaniesCompanyIdCompanyBenefitsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostV1CompaniesCompanyIdCompanyBenefitsResponse,
-      | errors.UnprocessableEntityErrorObject
+      PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,8 +89,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema
-        .parse(value),
+      PostV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -166,8 +175,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostV1CompaniesCompanyIdCompanyBenefitsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1CompaniesCompanyIdCompanyBenefitsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,12 +185,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      201,
-      operations.PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema,
-      { key: "Company-Benefit" },
-    ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(201, PostV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema, {
+      key: "Company-Benefit",
+    }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

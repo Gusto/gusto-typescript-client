@@ -5,7 +5,7 @@ The amount that the employee is insured for. Note: company contribution cannot b
 ## Example Usage
 
 ```typescript
-import { CoverageAmount } from "@gusto/embedded-api/models/components";
+import { CoverageAmount } from "@gusto/embedded-api/models/components/benefittyperequirements.js";
 
 let value: CoverageAmount = {};
 ```

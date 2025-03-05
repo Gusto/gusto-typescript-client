@@ -3,14 +3,14 @@
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeesEmployeeIdStateTaxesRequest } from "@gusto/embedded-api/models/operations";
+import { PutV1EmployeesEmployeeIdStateTaxesRequest } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidstatetaxes.js";
 
 let value: PutV1EmployeesEmployeeIdStateTaxesRequest = {
   employeeUuid: "<id>",
   requestBody: {
     states: [
       {
-        state: "Washington",
+        state: "Idaho",
       },
     ],
   },

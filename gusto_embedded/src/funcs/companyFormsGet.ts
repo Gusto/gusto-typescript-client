@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyFormRequest,
+  GetV1CompanyFormRequest$outboundSchema,
+  GetV1CompanyFormResponse,
+  GetV1CompanyFormResponse$inboundSchema,
+} from "../models/operations/getv1companyform.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyFormsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormRequest,
+  request: GetV1CompanyFormRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompanyFormResponse,
+    GetV1CompanyFormResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function companyFormsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormRequest,
+  request: GetV1CompanyFormRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompanyFormResponse,
+      GetV1CompanyFormResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetV1CompanyFormRequest$outboundSchema.parse(value),
+    (value) => GetV1CompanyFormRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -156,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompanyFormResponse,
+    GetV1CompanyFormResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -165,9 +170,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompanyFormResponse$inboundSchema, {
-      key: "Form",
-    }),
+    M.json(200, GetV1CompanyFormResponse$inboundSchema, { key: "Form" }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

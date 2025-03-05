@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1ContractorFormsRequest,
+  GetV1ContractorFormsRequest$outboundSchema,
+  GetV1ContractorFormsResponse,
+  GetV1ContractorFormsResponse$inboundSchema,
+} from "../models/operations/getv1contractorforms.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function contractorFormsList(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormsRequest,
+  request: GetV1ContractorFormsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1ContractorFormsResponse,
+    GetV1ContractorFormsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function contractorFormsList(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormsRequest,
+  request: GetV1ContractorFormsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1ContractorFormsResponse,
+      GetV1ContractorFormsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1ContractorFormsRequest$outboundSchema.parse(value),
+    (value) => GetV1ContractorFormsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1ContractorFormsResponse,
+    GetV1ContractorFormsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -168,7 +172,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1ContractorFormsResponse$inboundSchema, {
+    M.json(200, GetV1ContractorFormsResponse$inboundSchema, {
       key: "Form_1099s",
     }),
     M.fail([404, "4XX"]),

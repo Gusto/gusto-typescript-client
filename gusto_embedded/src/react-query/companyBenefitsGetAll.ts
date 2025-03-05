@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsGetAll } from "../funcs/companyBenefitsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1BenefitsRequest,
+  GetV1BenefitsResponse,
+} from "../models/operations/getv1benefits.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompanyBenefitsGetAllQueryData = operations.GetV1BenefitsResponse;
+export type CompanyBenefitsGetAllQueryData = GetV1BenefitsResponse;
 
 /**
  * Get all benefits supported by Gusto
@@ -39,7 +42,7 @@ export type CompanyBenefitsGetAllQueryData = operations.GetV1BenefitsResponse;
  * scope: `benefits:read`
  */
 export function useCompanyBenefitsGetAll(
-  request: operations.GetV1BenefitsRequest,
+  request: GetV1BenefitsRequest,
   options?: QueryHookOptions<CompanyBenefitsGetAllQueryData>,
 ): UseQueryResult<CompanyBenefitsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -64,7 +67,7 @@ export function useCompanyBenefitsGetAll(
  * scope: `benefits:read`
  */
 export function useCompanyBenefitsGetAllSuspense(
-  request: operations.GetV1BenefitsRequest,
+  request: GetV1BenefitsRequest,
   options?: SuspenseQueryHookOptions<CompanyBenefitsGetAllQueryData>,
 ): UseSuspenseQueryResult<CompanyBenefitsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -81,7 +84,7 @@ export function useCompanyBenefitsGetAllSuspense(
 export function prefetchCompanyBenefitsGetAll(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsRequest,
+  request: GetV1BenefitsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompanyBenefitsGetAllQuery(
@@ -93,9 +96,7 @@ export function prefetchCompanyBenefitsGetAll(
 
 export function setCompanyBenefitsGetAllData(
   client: QueryClient,
-  queryKeyBase: [
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
-  ],
+  queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
   data: CompanyBenefitsGetAllQueryData,
 ): CompanyBenefitsGetAllQueryData | undefined {
   const key = queryKeyCompanyBenefitsGetAll(...queryKeyBase);
@@ -106,7 +107,7 @@ export function setCompanyBenefitsGetAllData(
 export function invalidateCompanyBenefitsGetAll(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: components.VersionHeader | undefined }]
+    [parameters: { xGustoAPIVersion?: VersionHeader | undefined }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
@@ -133,7 +134,7 @@ export function invalidateAllCompanyBenefitsGetAll(
 
 export function buildCompanyBenefitsGetAllQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1BenefitsRequest,
+  request: GetV1BenefitsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -164,7 +165,7 @@ export function buildCompanyBenefitsGetAllQuery(
 }
 
 export function queryKeyCompanyBenefitsGetAll(
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "companyBenefits", "getAll", parameters];
 }

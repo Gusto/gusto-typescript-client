@@ -8,7 +8,26 @@ import { employeeFormsGetPdf } from "../funcs/employeeFormsGetPdf.js";
 import { employeeFormsList } from "../funcs/employeeFormsList.js";
 import { employeeFormsSign } from "../funcs/employeeFormsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeeFormRequest,
+  GetV1EmployeeFormResponse,
+} from "../models/operations/getv1employeeform.js";
+import {
+  GetV1EmployeeFormPdfRequest,
+  GetV1EmployeeFormPdfResponse,
+} from "../models/operations/getv1employeeformpdf.js";
+import {
+  GetV1EmployeeFormsRequest,
+  GetV1EmployeeFormsResponse,
+} from "../models/operations/getv1employeeforms.js";
+import {
+  PostV1SandboxGenerateW2Request,
+  PostV1SandboxGenerateW2Response,
+} from "../models/operations/postv1sandboxgeneratew2.js";
+import {
+  PutV1EmployeeFormSignRequest,
+  PutV1EmployeeFormSignResponse,
+} from "../models/operations/putv1employeeformsign.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeForms extends ClientSDK {
@@ -25,9 +44,9 @@ export class EmployeeForms extends ClientSDK {
    * scope: `employees:write`
    */
   async generateW2(
-    request: operations.PostV1SandboxGenerateW2Request,
+    request: PostV1SandboxGenerateW2Request,
     options?: RequestOptions,
-  ): Promise<operations.PostV1SandboxGenerateW2Response> {
+  ): Promise<PostV1SandboxGenerateW2Response> {
     return unwrapAsync(employeeFormsGenerateW2(
       this,
       request,
@@ -44,9 +63,9 @@ export class EmployeeForms extends ClientSDK {
    * scope: `employee_forms:read`
    */
   async list(
-    request: operations.GetV1EmployeeFormsRequest,
+    request: GetV1EmployeeFormsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeeFormsResponse> {
+  ): Promise<GetV1EmployeeFormsResponse> {
     return unwrapAsync(employeeFormsList(
       this,
       request,
@@ -63,9 +82,9 @@ export class EmployeeForms extends ClientSDK {
    * scope: `employee_forms:read`
    */
   async get(
-    request: operations.GetV1EmployeeFormRequest,
+    request: GetV1EmployeeFormRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeeFormResponse> {
+  ): Promise<GetV1EmployeeFormResponse> {
     return unwrapAsync(employeeFormsGet(
       this,
       request,
@@ -82,9 +101,9 @@ export class EmployeeForms extends ClientSDK {
    * scope: `employee_forms:read`
    */
   async getPdf(
-    request: operations.GetV1EmployeeFormPdfRequest,
+    request: GetV1EmployeeFormPdfRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeeFormPdfResponse> {
+  ): Promise<GetV1EmployeeFormPdfResponse> {
     return unwrapAsync(employeeFormsGetPdf(
       this,
       request,
@@ -104,9 +123,9 @@ export class EmployeeForms extends ClientSDK {
    * scope: `employee_forms:sign`
    */
   async sign(
-    request: operations.PutV1EmployeeFormSignRequest,
+    request: PutV1EmployeeFormSignRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeeFormSignResponse> {
+  ): Promise<PutV1EmployeeFormSignResponse> {
     return unwrapAsync(employeeFormsSign(
       this,
       request,

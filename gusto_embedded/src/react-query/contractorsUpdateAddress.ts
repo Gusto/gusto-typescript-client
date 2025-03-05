@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsUpdateAddress } from "../funcs/contractorsUpdateAddress.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1ContractorsContractorUuidAddressRequest,
+  PutV1ContractorsContractorUuidAddressResponse,
+} from "../models/operations/putv1contractorscontractoruuidaddress.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorsUpdateAddressMutationVariables = {
-  request: operations.PutV1ContractorsContractorUuidAddressRequest;
+  request: PutV1ContractorsContractorUuidAddressRequest;
   options?: RequestOptions;
 };
 
 export type ContractorsUpdateAddressMutationData =
-  operations.PutV1ContractorsContractorUuidAddressResponse;
+  PutV1ContractorsContractorUuidAddressResponse;
 
 /**
  * Update a contractor's address

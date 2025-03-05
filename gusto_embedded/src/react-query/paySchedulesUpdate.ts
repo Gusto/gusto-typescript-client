@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesUpdate } from "../funcs/paySchedulesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+} from "../models/operations/putv1companiescompanyidpayschedulespayscheduleid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PaySchedulesUpdateMutationVariables = {
-  request: operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest;
+  request: PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest;
   options?: RequestOptions;
 };
 
 export type PaySchedulesUpdateMutationData =
-  operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse;
+  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse;
 
 /**
  * Update a pay schedule

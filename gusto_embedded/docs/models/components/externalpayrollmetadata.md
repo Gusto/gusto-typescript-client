@@ -5,7 +5,7 @@ Stores metadata of the external payroll.
 ## Example Usage
 
 ```typescript
-import { ExternalPayrollMetadata } from "@gusto/embedded-api/models/components";
+import { ExternalPayrollMetadata } from "@gusto/embedded-api/models/components/externalpayroll.js";
 
 let value: ExternalPayrollMetadata = {};
 ```

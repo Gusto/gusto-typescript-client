@@ -4,7 +4,10 @@
 
 import { generatedDocumentsGet } from "../funcs/generatedDocumentsGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
+} from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class GeneratedDocuments extends ClientSDK {
@@ -17,11 +20,9 @@ export class GeneratedDocuments extends ClientSDK {
    * scope: `generated_documents:read`
    */
   async get(
-    request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+    request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse
-  > {
+  ): Promise<GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse> {
     return unwrapAsync(generatedDocumentsGet(
       this,
       request,

@@ -5,7 +5,7 @@ The representation of webhook subscription.
 ## Example Usage
 
 ```typescript
-import { WebhookSubscription } from "@gusto/embedded-api/models/components";
+import { WebhookSubscription } from "@gusto/embedded-api/models/components/webhooksubscription.js";
 
 let value: WebhookSubscription = {
   uuid: "58116467-ff2e-4182-b5b6-cbf8c5566181",

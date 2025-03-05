@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsList } from "../funcs/contractorsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyUuidContractorsRequest,
+  GetV1CompaniesCompanyUuidContractorsResponse,
+} from "../models/operations/getv1companiescompanyuuidcontractors.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorsListQueryData =
-  operations.GetV1CompaniesCompanyUuidContractorsResponse;
+  GetV1CompaniesCompanyUuidContractorsResponse;
 
 /**
  * Get contractors of a company
@@ -38,7 +41,7 @@ export type ContractorsListQueryData =
  * scope: `contractors:read`
  */
 export function useContractorsList(
-  request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+  request: GetV1CompaniesCompanyUuidContractorsRequest,
   options?: QueryHookOptions<ContractorsListQueryData>,
 ): UseQueryResult<ContractorsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useContractorsList(
  * scope: `contractors:read`
  */
 export function useContractorsListSuspense(
-  request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+  request: GetV1CompaniesCompanyUuidContractorsRequest,
   options?: SuspenseQueryHookOptions<ContractorsListQueryData>,
 ): UseSuspenseQueryResult<ContractorsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useContractorsListSuspense(
 export function prefetchContractorsList(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+  request: GetV1CompaniesCompanyUuidContractorsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorsListQuery(
@@ -96,7 +99,7 @@ export function setContractorsListData(
       page?: number | undefined;
       per?: number | undefined;
       searchTerm?: string | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: ContractorsListQueryData,
@@ -115,7 +118,7 @@ export function invalidateContractorsList(
         page?: number | undefined;
         per?: number | undefined;
         searchTerm?: string | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -139,7 +142,7 @@ export function invalidateAllContractorsList(
 
 export function buildContractorsListQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+  request: GetV1CompaniesCompanyUuidContractorsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -176,7 +179,7 @@ export function queryKeyContractorsList(
     page?: number | undefined;
     per?: number | undefined;
     searchTerm?: string | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

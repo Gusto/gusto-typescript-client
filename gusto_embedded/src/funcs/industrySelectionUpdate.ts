@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1CompanyIndustryRequest,
+  PutV1CompanyIndustryRequest$outboundSchema,
+  PutV1CompanyIndustryResponse,
+  PutV1CompanyIndustryResponse$inboundSchema,
+} from "../models/operations/putv1companyindustry.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function industrySelectionUpdate(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompanyIndustryRequest,
+  request: PutV1CompanyIndustryRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompanyIndustryResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompanyIndustryResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function industrySelectionUpdate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompanyIndustryRequest,
+  request: PutV1CompanyIndustryRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompanyIndustryResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1CompanyIndustryResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +86,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PutV1CompanyIndustryRequest$outboundSchema.parse(value),
+    (value) => PutV1CompanyIndustryRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -163,8 +170,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompanyIndustryResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompanyIndustryResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,10 +180,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(201, operations.PutV1CompanyIndustryResponse$inboundSchema, {
+    M.json(201, PutV1CompanyIndustryResponse$inboundSchema, {
       key: "Industry",
     }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

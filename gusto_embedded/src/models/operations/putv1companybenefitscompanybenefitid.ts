@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  CompanyBenefit,
+  CompanyBenefit$inboundSchema,
+  CompanyBenefit$Outbound,
+  CompanyBenefit$outboundSchema,
+} from "../components/companybenefit.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutV1CompanyBenefitsCompanyBenefitIdRequestBody = {
@@ -32,7 +42,7 @@ export type PutV1CompanyBenefitsCompanyBenefitIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1CompanyBenefitsCompanyBenefitIdRequestBody;
 };
 
@@ -52,7 +62,7 @@ export type PutV1CompanyBenefitsCompanyBenefitIdResponse = {
   /**
    * Example response
    */
-  companyBenefit?: components.CompanyBenefit | undefined;
+  companyBenefit?: CompanyBenefit | undefined;
 };
 
 /** @internal */
@@ -137,9 +147,7 @@ export const PutV1CompanyBenefitsCompanyBenefitIdRequest$inboundSchema:
     unknown
   > = z.object({
     company_benefit_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1CompanyBenefitsCompanyBenefitIdRequestBody$inboundSchema
     ),
@@ -166,9 +174,7 @@ export const PutV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
     PutV1CompanyBenefitsCompanyBenefitIdRequest
   > = z.object({
     companyBenefitId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1CompanyBenefitsCompanyBenefitIdRequestBody$outboundSchema
     ),
@@ -232,7 +238,7 @@ export const PutV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Company-Benefit": components.CompanyBenefit$inboundSchema.optional(),
+    "Company-Benefit": CompanyBenefit$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -247,7 +253,7 @@ export type PutV1CompanyBenefitsCompanyBenefitIdResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Company-Benefit"?: components.CompanyBenefit$Outbound | undefined;
+  "Company-Benefit"?: CompanyBenefit$Outbound | undefined;
 };
 
 /** @internal */
@@ -262,7 +268,7 @@ export const PutV1CompanyBenefitsCompanyBenefitIdResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    companyBenefit: components.CompanyBenefit$outboundSchema.optional(),
+    companyBenefit: CompanyBenefit$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

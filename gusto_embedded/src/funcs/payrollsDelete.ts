@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyIdPayrollsRequest,
+  DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema,
+  DeleteV1CompaniesCompanyIdPayrollsResponse,
+  DeleteV1CompaniesCompanyIdPayrollsResponse$inboundSchema,
+} from "../models/operations/deletev1companiescompanyidpayrolls.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function payrollsDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1CompaniesCompanyIdPayrollsRequest,
+  request: DeleteV1CompaniesCompanyIdPayrollsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1CompaniesCompanyIdPayrollsResponse,
+    DeleteV1CompaniesCompanyIdPayrollsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function payrollsDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1CompaniesCompanyIdPayrollsRequest,
+  request: DeleteV1CompaniesCompanyIdPayrollsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1CompaniesCompanyIdPayrollsResponse,
+      DeleteV1CompaniesCompanyIdPayrollsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,9 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema.parse(
-        value,
-      ),
+      DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -172,7 +175,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1CompaniesCompanyIdPayrollsResponse,
+    DeleteV1CompaniesCompanyIdPayrollsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -181,10 +184,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      [202, 204],
-      operations.DeleteV1CompaniesCompanyIdPayrollsResponse$inboundSchema,
-    ),
+    M.nil([202, 204], DeleteV1CompaniesCompanyIdPayrollsResponse$inboundSchema),
     M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { bankAccountsCreateFromPlaidToken } from "../funcs/bankAccountsCreateFromPlaidToken.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1PlaidProcessorTokenRequest,
+  PostV1PlaidProcessorTokenResponse,
+} from "../models/operations/postv1plaidprocessortoken.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type BankAccountsCreateFromPlaidTokenMutationVariables = {
-  request: operations.PostV1PlaidProcessorTokenRequest;
+  request: PostV1PlaidProcessorTokenRequest;
   options?: RequestOptions;
 };
 
 export type BankAccountsCreateFromPlaidTokenMutationData =
-  operations.PostV1PlaidProcessorTokenResponse;
+  PostV1PlaidProcessorTokenResponse;
 
 /**
  * Create a bank account from a plaid processor token

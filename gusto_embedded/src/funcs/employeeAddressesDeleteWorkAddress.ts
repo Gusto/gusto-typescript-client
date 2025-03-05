@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  DeleteV1WorkAddressesWorkAddressUuidRequest,
+  DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema,
+  DeleteV1WorkAddressesWorkAddressUuidResponse,
+  DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema,
+} from "../models/operations/deletev1workaddressesworkaddressuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function employeeAddressesDeleteWorkAddress(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest,
+  request: DeleteV1WorkAddressesWorkAddressUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1WorkAddressesWorkAddressUuidResponse,
-    | errors.UnprocessableEntityErrorObject
+    DeleteV1WorkAddressesWorkAddressUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function employeeAddressesDeleteWorkAddress(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest,
+  request: DeleteV1WorkAddressesWorkAddressUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1WorkAddressesWorkAddressUuidResponse,
-      | errors.UnprocessableEntityErrorObject
+      DeleteV1WorkAddressesWorkAddressUuidResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,8 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema
-        .parse(value),
+      DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -162,8 +169,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1WorkAddressesWorkAddressUuidResponse,
-    | errors.UnprocessableEntityErrorObject
+    DeleteV1WorkAddressesWorkAddressUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -172,11 +179,8 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      204,
-      operations.DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema,
-    ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.nil(204, DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

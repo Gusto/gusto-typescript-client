@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outboundSchema,
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,12 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function paySchedulesGetUnprocessedTerminationPeriods(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,13 +63,12 @@ export function paySchedulesGetUnprocessedTerminationPeriods(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+      GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -80,8 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outboundSchema
+      GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -166,7 +168,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -177,8 +179,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema,
+      GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema,
       { key: "Unprocessed-Termination-Pay-Period-List" },
     ),
     M.fail([404, "4XX"]),

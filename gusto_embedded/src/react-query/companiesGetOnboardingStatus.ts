@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesGetOnboardingStatus } from "../funcs/companiesGetOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompanyOnboardingStatusRequest,
+  GetV1CompanyOnboardingStatusResponse,
+} from "../models/operations/getv1companyonboardingstatus.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type CompaniesGetOnboardingStatusQueryData =
-  operations.GetV1CompanyOnboardingStatusResponse;
+  GetV1CompanyOnboardingStatusResponse;
 
 /**
  * Get the company's onboarding status
@@ -39,7 +42,7 @@ export type CompaniesGetOnboardingStatusQueryData =
  * scope: `company_onboarding_status:read`
  */
 export function useCompaniesGetOnboardingStatus(
-  request: operations.GetV1CompanyOnboardingStatusRequest,
+  request: GetV1CompanyOnboardingStatusRequest,
   options?: QueryHookOptions<CompaniesGetOnboardingStatusQueryData>,
 ): UseQueryResult<CompaniesGetOnboardingStatusQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -63,7 +66,7 @@ export function useCompaniesGetOnboardingStatus(
  * scope: `company_onboarding_status:read`
  */
 export function useCompaniesGetOnboardingStatusSuspense(
-  request: operations.GetV1CompanyOnboardingStatusRequest,
+  request: GetV1CompanyOnboardingStatusRequest,
   options?: SuspenseQueryHookOptions<CompaniesGetOnboardingStatusQueryData>,
 ): UseSuspenseQueryResult<CompaniesGetOnboardingStatusQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -80,7 +83,7 @@ export function useCompaniesGetOnboardingStatusSuspense(
 export function prefetchCompaniesGetOnboardingStatus(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyOnboardingStatusRequest,
+  request: GetV1CompanyOnboardingStatusRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompaniesGetOnboardingStatusQuery(
@@ -96,7 +99,7 @@ export function setCompaniesGetOnboardingStatusData(
     companyUuid: string,
     parameters: {
       additionalSteps?: string | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: CompaniesGetOnboardingStatusQueryData,
@@ -113,7 +116,7 @@ export function invalidateCompaniesGetOnboardingStatus(
       companyUuid: string,
       parameters: {
         additionalSteps?: string | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -142,7 +145,7 @@ export function invalidateAllCompaniesGetOnboardingStatus(
 
 export function buildCompaniesGetOnboardingStatusQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyOnboardingStatusRequest,
+  request: GetV1CompanyOnboardingStatusRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -177,7 +180,7 @@ export function queryKeyCompaniesGetOnboardingStatus(
   companyUuid: string,
   parameters: {
     additionalSteps?: string | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

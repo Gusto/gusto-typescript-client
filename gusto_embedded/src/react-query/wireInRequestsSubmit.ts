@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { wireInRequestsSubmit } from "../funcs/wireInRequestsSubmit.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutWireInRequestsWireInRequestUuidRequest,
+  PutWireInRequestsWireInRequestUuidResponse,
+} from "../models/operations/putwireinrequestswireinrequestuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type WireInRequestsSubmitMutationVariables = {
-  request: operations.PutWireInRequestsWireInRequestUuidRequest;
+  request: PutWireInRequestsWireInRequestUuidRequest;
   options?: RequestOptions;
 };
 
 export type WireInRequestsSubmitMutationData =
-  operations.PutWireInRequestsWireInRequestUuidResponse;
+  PutWireInRequestsWireInRequestUuidResponse;
 
 /**
  * Submit a wire in request

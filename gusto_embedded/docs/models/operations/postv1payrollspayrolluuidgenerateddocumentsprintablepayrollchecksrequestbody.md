@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody } from "@gusto/embedded-api/models/operations";
+import { PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody } from "@gusto/embedded-api/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.js";
 
 let value:
   PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksRequestBody =
     {
-      printingFormat: "top",
+      printingFormat: "bottom",
     };
 ```
 

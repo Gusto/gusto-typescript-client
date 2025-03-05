@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody$inboundSchema,
+} from "../models/errors/putv1companiescompanyidpayrollspayrollidcalculate.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSchema,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$inboundSchema,
+} from "../models/operations/putv1companiescompanyidpayrollspayrollidcalculate.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,12 +45,12 @@ import { Result } from "../types/fp.js";
  */
 export function payrollsCalculate(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
+  request: PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
-    | errors.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -61,13 +69,13 @@ export function payrollsCalculate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
+  request: PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
-      | errors.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+      PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
+      | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -82,8 +90,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSchema
+      PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -171,8 +178,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
-    | errors.PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -183,13 +190,11 @@ async function $do(
   >(
     M.nil(
       202,
-      operations
-        .PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$inboundSchema,
+      PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$inboundSchema,
     ),
     M.jsonErr(
       422,
-      errors
-        .PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody$inboundSchema,
+      PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody$inboundSchema,
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

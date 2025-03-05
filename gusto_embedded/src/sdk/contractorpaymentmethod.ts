@@ -6,7 +6,18 @@ import { contractorPaymentMethodGet } from "../funcs/contractorPaymentMethodGet.
 import { contractorPaymentMethodGetBankAccounts } from "../funcs/contractorPaymentMethodGetBankAccounts.js";
 import { contractorPaymentMethodUpdate } from "../funcs/contractorPaymentMethodUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1ContractorsContractorUuidBankAccountsRequest,
+  GetV1ContractorsContractorUuidBankAccountsResponse,
+} from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
+import {
+  GetV1ContractorsContractorUuidPaymentMethodRequest,
+  GetV1ContractorsContractorUuidPaymentMethodResponse,
+} from "../models/operations/getv1contractorscontractoruuidpaymentmethod.js";
+import {
+  PutV1ContractorsContractorIdPaymentMethodRequest,
+  PutV1ContractorsContractorIdPaymentMethodResponse,
+} from "../models/operations/putv1contractorscontractoridpaymentmethod.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class ContractorPaymentMethod extends ClientSDK {
@@ -19,9 +30,9 @@ export class ContractorPaymentMethod extends ClientSDK {
    * scope: `contractor_payment_methods:read`
    */
   async getBankAccounts(
-    request: operations.GetV1ContractorsContractorUuidBankAccountsRequest,
+    request: GetV1ContractorsContractorUuidBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorsContractorUuidBankAccountsResponse> {
+  ): Promise<GetV1ContractorsContractorUuidBankAccountsResponse> {
     return unwrapAsync(contractorPaymentMethodGetBankAccounts(
       this,
       request,
@@ -40,9 +51,9 @@ export class ContractorPaymentMethod extends ClientSDK {
    * scope: `contractor_payment_methods:read`
    */
   async get(
-    request: operations.GetV1ContractorsContractorUuidPaymentMethodRequest,
+    request: GetV1ContractorsContractorUuidPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorsContractorUuidPaymentMethodResponse> {
+  ): Promise<GetV1ContractorsContractorUuidPaymentMethodResponse> {
     return unwrapAsync(contractorPaymentMethodGet(
       this,
       request,
@@ -60,9 +71,9 @@ export class ContractorPaymentMethod extends ClientSDK {
    * scope: `contractor_payment_methods:write`
    */
   async update(
-    request: operations.PutV1ContractorsContractorIdPaymentMethodRequest,
+    request: PutV1ContractorsContractorIdPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1ContractorsContractorIdPaymentMethodResponse> {
+  ): Promise<PutV1ContractorsContractorIdPaymentMethodResponse> {
     return unwrapAsync(contractorPaymentMethodUpdate(
       this,
       request,

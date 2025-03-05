@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsCancel } from "../funcs/payrollsCancel.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+} from "../models/operations/putapiv1companiescompanyidpayrollspayrollidcancel.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PayrollsCancelMutationVariables = {
-  request: operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest;
+  request: PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest;
   options?: RequestOptions;
 };
 
 export type PayrollsCancelMutationData =
-  operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse;
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse;
 
 /**
  * Cancel a payroll

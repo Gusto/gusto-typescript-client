@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboundSchema,
+  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
+  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboundSchema,
+} from "../models/operations/putv1companybenefitscompanybenefitidemployeebenefits.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -38,13 +46,12 @@ import { Result } from "../types/fp.js";
  */
 export function companyBenefitsUpdateEmployeeBenefits(
   client: GustoEmbeddedCore,
-  request:
-    operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+  request: PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -63,14 +70,13 @@ export function companyBenefitsUpdateEmployeeBenefits(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
+  request: PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -85,8 +91,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboundSchema
+      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -172,8 +177,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -184,11 +189,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboundSchema,
+      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboundSchema,
       { key: "Employee-Benefit-List" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

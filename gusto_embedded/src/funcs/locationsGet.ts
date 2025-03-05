@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdLocationsRequest,
+  GetV1CompaniesCompanyIdLocationsRequest$outboundSchema,
+  GetV1CompaniesCompanyIdLocationsResponse,
+  GetV1CompaniesCompanyIdLocationsResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyidlocations.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function locationsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdLocationsRequest,
+  request: GetV1CompaniesCompanyIdLocationsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdLocationsResponse,
+    GetV1CompaniesCompanyIdLocationsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function locationsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdLocationsRequest,
+  request: GetV1CompaniesCompanyIdLocationsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdLocationsResponse,
+      GetV1CompaniesCompanyIdLocationsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,9 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1CompaniesCompanyIdLocationsRequest$outboundSchema.parse(
-        value,
-      ),
+      GetV1CompaniesCompanyIdLocationsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -167,7 +170,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdLocationsResponse,
+    GetV1CompaniesCompanyIdLocationsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,11 +179,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetV1CompaniesCompanyIdLocationsResponse$inboundSchema,
-      { key: "Location-List" },
-    ),
+    M.json(200, GetV1CompaniesCompanyIdLocationsResponse$inboundSchema, {
+      key: "Location-List",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
+import {
+  YtdBenefitAmountsFromDifferentCompany,
+  YtdBenefitAmountsFromDifferentCompany$inboundSchema,
+  YtdBenefitAmountsFromDifferentCompany$Outbound,
+  YtdBenefitAmountsFromDifferentCompany$outboundSchema,
+} from "../components/ytdbenefitamountsfromdifferentcompany.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
@@ -21,7 +31,7 @@ export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
@@ -41,7 +51,7 @@ export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
    * List of Ytd Benefit Amounts From Different Company List
    */
   ytdBenefitAmountsFromDifferentCompanyList?:
-    | Array<components.YtdBenefitAmountsFromDifferentCompany>
+    | Array<YtdBenefitAmountsFromDifferentCompany>
     | undefined;
 };
 
@@ -54,9 +64,7 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSche
   > = z.object({
     employee_id: z.string(),
     tax_year: z.number().int().optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -81,9 +89,7 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSch
   > = z.object({
     employeeId: z.string(),
     taxYear: z.number().int().optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",
@@ -144,7 +150,7 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSch
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
     "Ytd-Benefit-Amounts-From-Different-Company-List": z.array(
-      components.YtdBenefitAmountsFromDifferentCompany$inboundSchema,
+      YtdBenefitAmountsFromDifferentCompany$inboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -163,7 +169,7 @@ export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound =
     StatusCode: number;
     RawResponse: never;
     "Ytd-Benefit-Amounts-From-Different-Company-List"?:
-      | Array<components.YtdBenefitAmountsFromDifferentCompany$Outbound>
+      | Array<YtdBenefitAmountsFromDifferentCompany$Outbound>
       | undefined;
   };
 
@@ -180,7 +186,7 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSc
       throw new Error("Response cannot be serialized");
     }),
     ytdBenefitAmountsFromDifferentCompanyList: z.array(
-      components.YtdBenefitAmountsFromDifferentCompany$outboundSchema,
+      YtdBenefitAmountsFromDifferentCompany$outboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {

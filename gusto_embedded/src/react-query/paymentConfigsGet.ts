@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paymentConfigsGet } from "../funcs/paymentConfigsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompanyPaymentConfigsRequest,
+  GetV1CompanyPaymentConfigsResponse,
+} from "../models/operations/getv1companypaymentconfigs.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PaymentConfigsGetQueryData =
-  operations.GetV1CompanyPaymentConfigsResponse;
+export type PaymentConfigsGetQueryData = GetV1CompanyPaymentConfigsResponse;
 
 /**
  * Get a company's payment configs
@@ -38,7 +40,7 @@ export type PaymentConfigsGetQueryData =
  * scope: `company_payment_configs:read`
  */
 export function usePaymentConfigsGet(
-  request: operations.GetV1CompanyPaymentConfigsRequest,
+  request: GetV1CompanyPaymentConfigsRequest,
   options?: QueryHookOptions<PaymentConfigsGetQueryData>,
 ): UseQueryResult<PaymentConfigsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function usePaymentConfigsGet(
  * scope: `company_payment_configs:read`
  */
 export function usePaymentConfigsGetSuspense(
-  request: operations.GetV1CompanyPaymentConfigsRequest,
+  request: GetV1CompanyPaymentConfigsRequest,
   options?: SuspenseQueryHookOptions<PaymentConfigsGetQueryData>,
 ): UseSuspenseQueryResult<PaymentConfigsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function usePaymentConfigsGetSuspense(
 export function prefetchPaymentConfigsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyPaymentConfigsRequest,
+  request: GetV1CompanyPaymentConfigsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPaymentConfigsGetQuery(
@@ -92,7 +94,7 @@ export function setPaymentConfigsGetData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: PaymentConfigsGetQueryData,
 ): PaymentConfigsGetQueryData | undefined {
@@ -106,7 +108,7 @@ export function invalidatePaymentConfigsGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -129,7 +131,7 @@ export function invalidateAllPaymentConfigsGet(
 
 export function buildPaymentConfigsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyPaymentConfigsRequest,
+  request: GetV1CompanyPaymentConfigsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -161,7 +163,7 @@ export function buildPaymentConfigsGetQuery(
 
 export function queryKeyPaymentConfigsGet(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

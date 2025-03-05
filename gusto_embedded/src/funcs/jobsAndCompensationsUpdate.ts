@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1JobsJobIdRequest,
+  PutV1JobsJobIdRequest$outboundSchema,
+  PutV1JobsJobIdResponse,
+  PutV1JobsJobIdResponse$inboundSchema,
+} from "../models/operations/putv1jobsjobid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function jobsAndCompensationsUpdate(
   client: GustoEmbeddedCore,
-  request: operations.PutV1JobsJobIdRequest,
+  request: PutV1JobsJobIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1JobsJobIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1JobsJobIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function jobsAndCompensationsUpdate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1JobsJobIdRequest,
+  request: PutV1JobsJobIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1JobsJobIdResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1JobsJobIdResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +86,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.PutV1JobsJobIdRequest$outboundSchema.parse(value),
+    (value) => PutV1JobsJobIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,8 +168,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1JobsJobIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1JobsJobIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -170,10 +178,8 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PutV1JobsJobIdResponse$inboundSchema, {
-      key: "Job",
-    }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, PutV1JobsJobIdResponse$inboundSchema, { key: "Job" }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

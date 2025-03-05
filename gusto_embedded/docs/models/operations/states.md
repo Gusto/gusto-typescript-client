@@ -3,10 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { States } from "@gusto/embedded-api/models/operations";
+import { States } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidstatetaxes.js";
 
 let value: States = {
-  state: "California",
+  state: "Montana",
 };
 ```
 

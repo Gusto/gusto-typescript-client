@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGetCustomFields } from "../funcs/employeesGetCustomFields.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdCustomFieldsRequest,
+  GetV1EmployeesEmployeeIdCustomFieldsResponse,
+} from "../models/operations/getv1employeesemployeeidcustomfields.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeesGetCustomFieldsQueryData =
-  operations.GetV1EmployeesEmployeeIdCustomFieldsResponse;
+  GetV1EmployeesEmployeeIdCustomFieldsResponse;
 
 /**
  * Get an employee's custom fields
@@ -38,7 +41,7 @@ export type EmployeesGetCustomFieldsQueryData =
  * scope: `employees:read`
  */
 export function useEmployeesGetCustomFields(
-  request: operations.GetV1EmployeesEmployeeIdCustomFieldsRequest,
+  request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
   options?: QueryHookOptions<EmployeesGetCustomFieldsQueryData>,
 ): UseQueryResult<EmployeesGetCustomFieldsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useEmployeesGetCustomFields(
  * scope: `employees:read`
  */
 export function useEmployeesGetCustomFieldsSuspense(
-  request: operations.GetV1EmployeesEmployeeIdCustomFieldsRequest,
+  request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
   options?: SuspenseQueryHookOptions<EmployeesGetCustomFieldsQueryData>,
 ): UseSuspenseQueryResult<EmployeesGetCustomFieldsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useEmployeesGetCustomFieldsSuspense(
 export function prefetchEmployeesGetCustomFields(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdCustomFieldsRequest,
+  request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeesGetCustomFieldsQuery(
@@ -95,7 +98,7 @@ export function setEmployeesGetCustomFieldsData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesGetCustomFieldsQueryData,
@@ -113,7 +116,7 @@ export function invalidateEmployeesGetCustomFields(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -142,7 +145,7 @@ export function invalidateAllEmployeesGetCustomFields(
 
 export function buildEmployeesGetCustomFieldsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdCustomFieldsRequest,
+  request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -179,7 +182,7 @@ export function queryKeyEmployeesGetCustomFields(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

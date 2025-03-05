@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGetUnprocessedTerminationPeriods } from "../funcs/paySchedulesGetUnprocessedTerminationPeriods.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+} from "../models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PaySchedulesGetUnprocessedTerminationPeriodsQueryData =
-  operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse;
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse;
 
 /**
  * Get termination pay periods for a company
@@ -40,8 +43,7 @@ export type PaySchedulesGetUnprocessedTerminationPeriodsQueryData =
  * scope: `payrolls:read`
  */
 export function usePaySchedulesGetUnprocessedTerminationPeriods(
-  request:
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
   options?: QueryHookOptions<
     PaySchedulesGetUnprocessedTerminationPeriodsQueryData
   >,
@@ -71,8 +73,7 @@ export function usePaySchedulesGetUnprocessedTerminationPeriods(
  * scope: `payrolls:read`
  */
 export function usePaySchedulesGetUnprocessedTerminationPeriodsSuspense(
-  request:
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
   options?: SuspenseQueryHookOptions<
     PaySchedulesGetUnprocessedTerminationPeriodsQueryData
   >,
@@ -94,8 +95,7 @@ export function usePaySchedulesGetUnprocessedTerminationPeriodsSuspense(
 export function prefetchPaySchedulesGetUnprocessedTerminationPeriods(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPaySchedulesGetUnprocessedTerminationPeriodsQuery(
@@ -109,7 +109,7 @@ export function setPaySchedulesGetUnprocessedTerminationPeriodsData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: PaySchedulesGetUnprocessedTerminationPeriodsQueryData,
 ): PaySchedulesGetUnprocessedTerminationPeriodsQueryData | undefined {
@@ -127,7 +127,7 @@ export function invalidatePaySchedulesGetUnprocessedTerminationPeriods(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -159,8 +159,7 @@ export function invalidateAllPaySchedulesGetUnprocessedTerminationPeriods(
 
 export function buildPaySchedulesGetUnprocessedTerminationPeriodsQuery(
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -193,7 +192,7 @@ export function buildPaySchedulesGetUnprocessedTerminationPeriodsQuery(
 
 export function queryKeyPaySchedulesGetUnprocessedTerminationPeriods(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

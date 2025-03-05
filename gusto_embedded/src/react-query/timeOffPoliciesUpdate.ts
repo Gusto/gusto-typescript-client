@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesUpdate } from "../funcs/timeOffPoliciesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutTimeOffPoliciesTimeOffPolicyUuidRequest,
+  PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+} from "../models/operations/puttimeoffpoliciestimeoffpolicyuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesUpdateMutationVariables = {
-  request: operations.PutTimeOffPoliciesTimeOffPolicyUuidRequest;
+  request: PutTimeOffPoliciesTimeOffPolicyUuidRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesUpdateMutationData =
-  operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse;
+  PutTimeOffPoliciesTimeOffPolicyUuidResponse;
 
 /**
  * Update a time off policy

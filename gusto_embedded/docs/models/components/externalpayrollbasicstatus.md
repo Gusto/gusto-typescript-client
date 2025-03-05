@@ -5,7 +5,7 @@ The status of the external payroll. The status will be `unprocessed` when the ex
 ## Example Usage
 
 ```typescript
-import { ExternalPayrollBasicStatus } from "@gusto/embedded-api/models/components";
+import { ExternalPayrollBasicStatus } from "@gusto/embedded-api/models/components/externalpayrollbasic.js";
 
 let value: ExternalPayrollBasicStatus = "processed";
 ```

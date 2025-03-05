@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsDelete } from "../funcs/payrollsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyIdPayrollsRequest,
+  DeleteV1CompaniesCompanyIdPayrollsResponse,
+} from "../models/operations/deletev1companiescompanyidpayrolls.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PayrollsDeleteMutationVariables = {
-  request: operations.DeleteV1CompaniesCompanyIdPayrollsRequest;
+  request: DeleteV1CompaniesCompanyIdPayrollsRequest;
   options?: RequestOptions;
 };
 
 export type PayrollsDeleteMutationData =
-  operations.DeleteV1CompaniesCompanyIdPayrollsResponse;
+  DeleteV1CompaniesCompanyIdPayrollsResponse;
 
 /**
  * Delete a payroll

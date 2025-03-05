@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesRemoveEmployees } from "../funcs/timeOffPoliciesRemoveEmployees.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuidremoveemployees.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesRemoveEmployeesMutationVariables = {
-  request:
-    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest;
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesRemoveEmployeesMutationData =
-  operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse;
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse;
 
 /**
  * Remove employees from a time off policy

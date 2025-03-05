@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGet } from "../funcs/employeesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesRequest,
+  GetV1EmployeesResponse,
+  QueryParamInclude,
+} from "../models/operations/getv1employees.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +30,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeesGetQueryData = operations.GetV1EmployeesResponse;
+export type EmployeesGetQueryData = GetV1EmployeesResponse;
 
 /**
  * Get an employee
@@ -37,7 +41,7 @@ export type EmployeesGetQueryData = operations.GetV1EmployeesResponse;
  * scope: `employees:read`
  */
 export function useEmployeesGet(
-  request: operations.GetV1EmployeesRequest,
+  request: GetV1EmployeesRequest,
   options?: QueryHookOptions<EmployeesGetQueryData>,
 ): UseQueryResult<EmployeesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -60,7 +64,7 @@ export function useEmployeesGet(
  * scope: `employees:read`
  */
 export function useEmployeesGetSuspense(
-  request: operations.GetV1EmployeesRequest,
+  request: GetV1EmployeesRequest,
   options?: SuspenseQueryHookOptions<EmployeesGetQueryData>,
 ): UseSuspenseQueryResult<EmployeesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +81,7 @@ export function useEmployeesGetSuspense(
 export function prefetchEmployeesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesRequest,
+  request: GetV1EmployeesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeesGetQuery(
@@ -92,8 +96,8 @@ export function setEmployeesGetData(
   queryKeyBase: [
     employeeId: string,
     parameters: {
-      include?: Array<operations.QueryParamInclude> | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      include?: Array<QueryParamInclude> | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesGetQueryData,
@@ -109,8 +113,8 @@ export function invalidateEmployeesGet(
     [
       employeeId: string,
       parameters: {
-        include?: Array<operations.QueryParamInclude> | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        include?: Array<QueryParamInclude> | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -134,7 +138,7 @@ export function invalidateAllEmployeesGet(
 
 export function buildEmployeesGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesRequest,
+  request: GetV1EmployeesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,8 +170,8 @@ export function buildEmployeesGetQuery(
 export function queryKeyEmployeesGet(
   employeeId: string,
   parameters: {
-    include?: Array<operations.QueryParamInclude> | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    include?: Array<QueryParamInclude> | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Employees", "get", employeeId, parameters];

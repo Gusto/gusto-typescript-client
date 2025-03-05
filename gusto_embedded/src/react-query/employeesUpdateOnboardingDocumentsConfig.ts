@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesUpdateOnboardingDocumentsConfig } from "../funcs/employeesUpdateOnboardingDocumentsConfig.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+} from "../models/operations/putv1employeesemployeeidonboardingdocumentsconfig.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeesUpdateOnboardingDocumentsConfigMutationVariables = {
-  request: operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest;
+  request: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest;
   options?: RequestOptions;
 };
 
 export type EmployeesUpdateOnboardingDocumentsConfigMutationData =
-  operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse;
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse;
 
 /**
  * Update an employee's onboarding documents config

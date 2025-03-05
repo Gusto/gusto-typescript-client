@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { garnishmentsCreate } from "../funcs/garnishmentsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1EmployeesEmployeeIdGarnishmentsRequest,
+  PostV1EmployeesEmployeeIdGarnishmentsResponse,
+} from "../models/operations/postv1employeesemployeeidgarnishments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type GarnishmentsCreateMutationVariables = {
-  request: operations.PostV1EmployeesEmployeeIdGarnishmentsRequest;
+  request: PostV1EmployeesEmployeeIdGarnishmentsRequest;
   options?: RequestOptions;
 };
 
 export type GarnishmentsCreateMutationData =
-  operations.PostV1EmployeesEmployeeIdGarnishmentsResponse;
+  PostV1EmployeesEmployeeIdGarnishmentsResponse;
 
 /**
  * Create a garnishment

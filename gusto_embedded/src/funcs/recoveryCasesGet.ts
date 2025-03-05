@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetRecoveryCasesRequest,
+  GetRecoveryCasesRequest$outboundSchema,
+  GetRecoveryCasesResponse,
+  GetRecoveryCasesResponse$inboundSchema,
+} from "../models/operations/getrecoverycases.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function recoveryCasesGet(
   client: GustoEmbeddedCore,
-  request: operations.GetRecoveryCasesRequest,
+  request: GetRecoveryCasesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetRecoveryCasesResponse,
+    GetRecoveryCasesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function recoveryCasesGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetRecoveryCasesRequest,
+  request: GetRecoveryCasesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetRecoveryCasesResponse,
+      GetRecoveryCasesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetRecoveryCasesRequest$outboundSchema.parse(value),
+    (value) => GetRecoveryCasesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -158,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetRecoveryCasesResponse,
+    GetRecoveryCasesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -167,7 +172,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetRecoveryCasesResponse$inboundSchema, {
+    M.json(200, GetRecoveryCasesResponse$inboundSchema, {
       key: "Recovery-Case-List",
     }),
     M.fail([404, "4XX"]),

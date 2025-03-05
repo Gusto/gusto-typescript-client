@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesUpdate } from "../funcs/employeeAddressesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1HomeAddressesHomeAddressUuidRequest,
+  PutV1HomeAddressesHomeAddressUuidResponse,
+} from "../models/operations/putv1homeaddresseshomeaddressuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeAddressesUpdateMutationVariables = {
-  request: operations.PutV1HomeAddressesHomeAddressUuidRequest;
+  request: PutV1HomeAddressesHomeAddressUuidRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeAddressesUpdateMutationData =
-  operations.PutV1HomeAddressesHomeAddressUuidResponse;
+  PutV1HomeAddressesHomeAddressUuidResponse;
 
 /**
  * Update an employee's home address

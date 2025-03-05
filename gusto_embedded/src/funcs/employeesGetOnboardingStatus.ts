@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  GetV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema,
+  GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+  GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema,
+} from "../models/operations/getv1employeesemployeeidonboardingstatus.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -69,11 +74,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeesGetOnboardingStatus(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -92,12 +97,12 @@ export function employeesGetOnboardingStatus(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+      GetV1EmployeesEmployeeIdOnboardingStatusResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -112,8 +117,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema
-        .parse(value),
+      GetV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -196,7 +202,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+    GetV1EmployeesEmployeeIdOnboardingStatusResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -207,7 +213,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema,
+      GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema,
       { key: "Employee-Onboarding-Status" },
     ),
     M.fail([404, "4XX"]),

@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetTimeOffPoliciesTimeOffPolicyUuidRequest,
+  GetTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema,
+  GetTimeOffPoliciesTimeOffPolicyUuidResponse,
+  GetTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema,
+} from "../models/operations/gettimeoffpoliciestimeoffpolicyuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function timeOffPoliciesGet(
   client: GustoEmbeddedCore,
-  request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
+  request: GetTimeOffPoliciesTimeOffPolicyUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse,
+    GetTimeOffPoliciesTimeOffPolicyUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function timeOffPoliciesGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest,
+  request: GetTimeOffPoliciesTimeOffPolicyUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse,
+      GetTimeOffPoliciesTimeOffPolicyUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema
-        .parse(value),
+      GetTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -161,7 +165,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse,
+    GetTimeOffPoliciesTimeOffPolicyUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -170,11 +174,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema,
-      { key: "Time-Off-Policy" },
-    ),
+    M.json(200, GetTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema, {
+      key: "Time-Off-Policy",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -6,7 +6,18 @@ import { reportsCreateCustom } from "../funcs/reportsCreateCustom.js";
 import { reportsGet } from "../funcs/reportsGet.js";
 import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+} from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
+import {
+  GetReportsReportUuidRequest,
+  GetReportsReportUuidResponse,
+} from "../models/operations/getreportsreportuuid.js";
+import {
+  PostCompaniesCompanyUuidReportsRequest,
+  PostCompaniesCompanyUuidReportsResponse,
+} from "../models/operations/postcompaniescompanyuuidreports.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Reports extends ClientSDK {
@@ -19,9 +30,9 @@ export class Reports extends ClientSDK {
    * scope: `company_reports:write`
    */
   async createCustom(
-    request: operations.PostCompaniesCompanyUuidReportsRequest,
+    request: PostCompaniesCompanyUuidReportsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostCompaniesCompanyUuidReportsResponse> {
+  ): Promise<PostCompaniesCompanyUuidReportsResponse> {
     return unwrapAsync(reportsCreateCustom(
       this,
       request,
@@ -38,9 +49,9 @@ export class Reports extends ClientSDK {
    * scope: `company_reports:read`
    */
   async get(
-    request: operations.GetReportsReportUuidRequest,
+    request: GetReportsReportUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetReportsReportUuidResponse> {
+  ): Promise<GetReportsReportUuidResponse> {
     return unwrapAsync(reportsGet(
       this,
       request,
@@ -57,11 +68,9 @@ export class Reports extends ClientSDK {
    * scope: `company_reports:write`
    */
   async getTemplate(
-    request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+    request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse
-  > {
+  ): Promise<GetCompaniesCompanyUuidReportTemplatesReportTypeResponse> {
     return unwrapAsync(reportsGetTemplate(
       this,
       request,

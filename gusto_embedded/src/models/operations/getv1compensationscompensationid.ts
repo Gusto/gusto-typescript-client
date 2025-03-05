@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Compensation,
+  Compensation$inboundSchema,
+  Compensation$Outbound,
+  Compensation$outboundSchema,
+} from "../components/compensation.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompensationsCompensationIdRequest = {
@@ -17,7 +27,7 @@ export type GetV1CompensationsCompensationIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompensationsCompensationIdResponse = {
@@ -36,7 +46,7 @@ export type GetV1CompensationsCompensationIdResponse = {
   /**
    * Example response
    */
-  compensation?: components.Compensation | undefined;
+  compensation?: Compensation | undefined;
 };
 
 /** @internal */
@@ -46,9 +56,7 @@ export const GetV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   compensation_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "compensation_id": "compensationId",
@@ -69,9 +77,7 @@ export const GetV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<
   GetV1CompensationsCompensationIdRequest
 > = z.object({
   compensationId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     compensationId: "compensation_id",
@@ -130,7 +136,7 @@ export const GetV1CompensationsCompensationIdResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Compensation: components.Compensation$inboundSchema.optional(),
+  Compensation: Compensation$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -145,7 +151,7 @@ export type GetV1CompensationsCompensationIdResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Compensation?: components.Compensation$Outbound | undefined;
+  Compensation?: Compensation$Outbound | undefined;
 };
 
 /** @internal */
@@ -159,7 +165,7 @@ export const GetV1CompensationsCompensationIdResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  compensation: components.Compensation$outboundSchema.optional(),
+  compensation: Compensation$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

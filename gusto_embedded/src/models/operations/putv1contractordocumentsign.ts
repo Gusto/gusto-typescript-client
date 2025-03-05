@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  DocumentSigned,
+  DocumentSigned$inboundSchema,
+  DocumentSigned$Outbound,
+  DocumentSigned$outboundSchema,
+} from "../components/documentsigned.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Fields = {
@@ -30,9 +40,9 @@ export type PutV1ContractorDocumentSignRequestBody = {
    */
   agree: boolean;
   /**
-   * The IP address of the signatory who signed the form.
+   * The IP address of the signatory who signed the form. You must provide the IP address with either this parameter OR you can leave out this parameter and set the IP address in the request header using the `x-gusto-client-ip` header instead.
    */
-  signedByIpAddress: string;
+  signedByIpAddress?: string | undefined;
 };
 
 export type PutV1ContractorDocumentSignRequest = {
@@ -41,9 +51,13 @@ export type PutV1ContractorDocumentSignRequest = {
    */
   documentUuid: string;
   /**
+   * Optional header to supply the IP address. This can be used to supply the IP address for signature endpoints instead of the signed_by_ip_address parameter.
+   */
+  xGustoClientIp?: string | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1ContractorDocumentSignRequestBody;
 };
 
@@ -63,7 +77,7 @@ export type PutV1ContractorDocumentSignResponse = {
   /**
    * Example response
    */
-  documentSigned?: components.DocumentSigned | undefined;
+  documentSigned?: DocumentSigned | undefined;
 };
 
 /** @internal */
@@ -124,7 +138,7 @@ export const PutV1ContractorDocumentSignRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   fields: z.array(z.lazy(() => Fields$inboundSchema)),
   agree: z.boolean(),
-  signed_by_ip_address: z.string(),
+  signed_by_ip_address: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "signed_by_ip_address": "signedByIpAddress",
@@ -135,7 +149,7 @@ export const PutV1ContractorDocumentSignRequestBody$inboundSchema: z.ZodType<
 export type PutV1ContractorDocumentSignRequestBody$Outbound = {
   fields: Array<Fields$Outbound>;
   agree: boolean;
-  signed_by_ip_address: string;
+  signed_by_ip_address?: string | undefined;
 };
 
 /** @internal */
@@ -146,7 +160,7 @@ export const PutV1ContractorDocumentSignRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   fields: z.array(z.lazy(() => Fields$outboundSchema)),
   agree: z.boolean(),
-  signedByIpAddress: z.string(),
+  signedByIpAddress: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     signedByIpAddress: "signed_by_ip_address",
@@ -197,15 +211,15 @@ export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   document_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "x-gusto-client-ip": z.string().optional(),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
     "document_uuid": "documentUuid",
+    "x-gusto-client-ip": "xGustoClientIp",
     "X-Gusto-API-Version": "xGustoAPIVersion",
     "RequestBody": "requestBody",
   });
@@ -214,6 +228,7 @@ export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PutV1ContractorDocumentSignRequest$Outbound = {
   document_uuid: string;
+  "x-gusto-client-ip"?: string | undefined;
   "X-Gusto-API-Version": string;
   RequestBody: PutV1ContractorDocumentSignRequestBody$Outbound;
 };
@@ -225,15 +240,15 @@ export const PutV1ContractorDocumentSignRequest$outboundSchema: z.ZodType<
   PutV1ContractorDocumentSignRequest
 > = z.object({
   documentUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoClientIp: z.string().optional(),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
     documentUuid: "document_uuid",
+    xGustoClientIp: "x-gusto-client-ip",
     xGustoAPIVersion: "X-Gusto-API-Version",
     requestBody: "RequestBody",
   });
@@ -283,7 +298,7 @@ export const PutV1ContractorDocumentSignResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Document-Signed": components.DocumentSigned$inboundSchema.optional(),
+  "Document-Signed": DocumentSigned$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -298,7 +313,7 @@ export type PutV1ContractorDocumentSignResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Document-Signed"?: components.DocumentSigned$Outbound | undefined;
+  "Document-Signed"?: DocumentSigned$Outbound | undefined;
 };
 
 /** @internal */
@@ -312,7 +327,7 @@ export const PutV1ContractorDocumentSignResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  documentSigned: components.DocumentSigned$outboundSchema.optional(),
+  documentSigned: DocumentSigned$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

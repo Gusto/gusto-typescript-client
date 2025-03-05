@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyFormsRequest,
+  GetV1CompanyFormsRequest$outboundSchema,
+  GetV1CompanyFormsResponse,
+  GetV1CompanyFormsResponse$inboundSchema,
+} from "../models/operations/getv1companyforms.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyFormsGetAll(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormsRequest,
+  request: GetV1CompanyFormsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompanyFormsResponse,
+    GetV1CompanyFormsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function companyFormsGetAll(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormsRequest,
+  request: GetV1CompanyFormsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompanyFormsResponse,
+      GetV1CompanyFormsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetV1CompanyFormsRequest$outboundSchema.parse(value),
+    (value) => GetV1CompanyFormsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -156,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompanyFormsResponse,
+    GetV1CompanyFormsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -165,9 +170,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompanyFormsResponse$inboundSchema, {
-      key: "Form-List",
-    }),
+    M.json(200, GetV1CompanyFormsResponse$inboundSchema, { key: "Form-List" }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

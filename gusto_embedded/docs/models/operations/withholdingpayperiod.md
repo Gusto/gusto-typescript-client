@@ -5,9 +5,9 @@ The payment schedule tax rate the payroll is based on.
 ## Example Usage
 
 ```typescript
-import { WithholdingPayPeriod } from "@gusto/embedded-api/models/operations";
+import { WithholdingPayPeriod } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpayrolls.js";
 
-let value: WithholdingPayPeriod = "Quarterly";
+let value: WithholdingPayPeriod = "Annually";
 ```
 
 ## Values

@@ -7,7 +7,22 @@ import { earningTypesDelete } from "../funcs/earningTypesDelete.js";
 import { earningTypesList } from "../funcs/earningTypesList.js";
 import { earningTypesUpdate } from "../funcs/earningTypesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
+  DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+} from "../models/operations/deletev1companiescompanyidearningtypesearningtypeuuid.js";
+import {
+  GetV1CompaniesCompanyIdEarningTypesRequest,
+  GetV1CompaniesCompanyIdEarningTypesResponse,
+} from "../models/operations/getv1companiescompanyidearningtypes.js";
+import {
+  PostV1CompaniesCompanyIdEarningTypesRequest,
+  PostV1CompaniesCompanyIdEarningTypesResponse,
+} from "../models/operations/postv1companiescompanyidearningtypes.js";
+import {
+  PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
+  PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
+} from "../models/operations/putv1companiescompanyidearningtypesearningtypeuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class EarningTypes extends ClientSDK {
@@ -22,9 +37,9 @@ export class EarningTypes extends ClientSDK {
    * scope: `payrolls:write`
    */
   async create(
-    request: operations.PostV1CompaniesCompanyIdEarningTypesRequest,
+    request: PostV1CompaniesCompanyIdEarningTypesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdEarningTypesResponse> {
+  ): Promise<PostV1CompaniesCompanyIdEarningTypesResponse> {
     return unwrapAsync(earningTypesCreate(
       this,
       request,
@@ -47,9 +62,9 @@ export class EarningTypes extends ClientSDK {
    * scope: `payrolls:read`
    */
   async list(
-    request: operations.GetV1CompaniesCompanyIdEarningTypesRequest,
+    request: GetV1CompaniesCompanyIdEarningTypesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdEarningTypesResponse> {
+  ): Promise<GetV1CompaniesCompanyIdEarningTypesResponse> {
     return unwrapAsync(earningTypesList(
       this,
       request,
@@ -66,12 +81,9 @@ export class EarningTypes extends ClientSDK {
    * scope: `payrolls:write`
    */
   async update(
-    request:
-      operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
+    request: PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse
-  > {
+  ): Promise<PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse> {
     return unwrapAsync(earningTypesUpdate(
       this,
       request,
@@ -88,12 +100,9 @@ export class EarningTypes extends ClientSDK {
    * scope: `payrolls:write`
    */
   async delete(
-    request:
-      operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
+    request: DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse
-  > {
+  ): Promise<DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse> {
     return unwrapAsync(earningTypesDelete(
       this,
       request,

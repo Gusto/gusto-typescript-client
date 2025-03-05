@@ -7,7 +7,22 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  PayrollMinimal,
+  PayrollMinimal$inboundSchema,
+  PayrollMinimal$Outbound,
+  PayrollMinimal$outboundSchema,
+} from "../components/payrollminimal.js";
+import {
+  SortOrder,
+  SortOrder$inboundSchema,
+  SortOrder$outboundSchema,
+} from "../components/sortorder.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const ProcessingStatuses = {
@@ -60,7 +75,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
   /**
    * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
    */
-  sortOrder?: components.SortOrder | undefined;
+  sortOrder?: SortOrder | undefined;
   /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
@@ -72,7 +87,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayrollsResponse = {
@@ -91,7 +106,7 @@ export type GetV1CompaniesCompanyIdPayrollsResponse = {
   /**
    * Example response
    */
-  payrollList?: Array<components.PayrollMinimal> | undefined;
+  payrollList?: Array<PayrollMinimal> | undefined;
 };
 
 /** @internal */
@@ -171,12 +186,10 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   ).optional(),
   start_date: z.string().optional(),
   end_date: z.string().optional(),
-  sort_order: components.SortOrder$inboundSchema.optional(),
+  sort_order: SortOrder$inboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -217,12 +230,10 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   ).optional(),
   startDate: z.string().optional(),
   endDate: z.string().optional(),
-  sortOrder: components.SortOrder$outboundSchema.optional(),
+  sortOrder: SortOrder$outboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",
@@ -281,7 +292,7 @@ export const GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Payroll-List": z.array(components.PayrollMinimal$inboundSchema).optional(),
+  "Payroll-List": z.array(PayrollMinimal$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -296,7 +307,7 @@ export type GetV1CompaniesCompanyIdPayrollsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Payroll-List"?: Array<components.PayrollMinimal$Outbound> | undefined;
+  "Payroll-List"?: Array<PayrollMinimal$Outbound> | undefined;
 };
 
 /** @internal */
@@ -310,7 +321,7 @@ export const GetV1CompaniesCompanyIdPayrollsResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  payrollList: z.array(components.PayrollMinimal$outboundSchema).optional(),
+  payrollList: z.array(PayrollMinimal$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

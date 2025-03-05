@@ -53,32 +53,6 @@ export type GarnishmentChildSupport = {
   remittanceNumber?: string | null | undefined;
 };
 
-/**
- * Additional child support order details
- */
-export type GarnishmentChildSupportInput = {
-  /**
-   * The two letter state abbreviation for the state issuing the child support order. Agency data is available in the `GET /v1/garnishments/child_support` API.
-   */
-  state?: string | undefined;
-  /**
-   * How often the agency collects the withholding amount. e.g. $500 monthly -> `Monthly`.
-   */
-  paymentPeriod?: PaymentPeriod | undefined;
-  /**
-   * Child Support Enforcement Case Number associated with this child support obligation - required for most states. Agency specific requirements are available in the `GET /v1/garnishments/child_support` API.
-   */
-  caseNumber?: string | null | undefined;
-  /**
-   * Order Identifier or Order ID associated with this child support obligation - required for some states. Agency specific requirements are available in the `GET /v1/garnishments/child_support` API.
-   */
-  orderNumber?: string | null | undefined;
-  /**
-   * Child Support Enforcement Remittance ID associated with this child support obligation - required for some states. Agency specific requirements are available in the `GET /v1/garnishments/child_support` API.
-   */
-  remittanceNumber?: string | null | undefined;
-};
-
 /** @internal */
 export const PaymentPeriod$inboundSchema: z.ZodNativeEnum<
   typeof PaymentPeriod
@@ -182,87 +156,5 @@ export function garnishmentChildSupportFromJSON(
     jsonString,
     (x) => GarnishmentChildSupport$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GarnishmentChildSupport' from JSON`,
-  );
-}
-
-/** @internal */
-export const GarnishmentChildSupportInput$inboundSchema: z.ZodType<
-  GarnishmentChildSupportInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  state: z.string().optional(),
-  payment_period: PaymentPeriod$inboundSchema.optional(),
-  case_number: z.nullable(z.string()).optional(),
-  order_number: z.nullable(z.string()).optional(),
-  remittance_number: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "payment_period": "paymentPeriod",
-    "case_number": "caseNumber",
-    "order_number": "orderNumber",
-    "remittance_number": "remittanceNumber",
-  });
-});
-
-/** @internal */
-export type GarnishmentChildSupportInput$Outbound = {
-  state?: string | undefined;
-  payment_period?: string | undefined;
-  case_number?: string | null | undefined;
-  order_number?: string | null | undefined;
-  remittance_number?: string | null | undefined;
-};
-
-/** @internal */
-export const GarnishmentChildSupportInput$outboundSchema: z.ZodType<
-  GarnishmentChildSupportInput$Outbound,
-  z.ZodTypeDef,
-  GarnishmentChildSupportInput
-> = z.object({
-  state: z.string().optional(),
-  paymentPeriod: PaymentPeriod$outboundSchema.optional(),
-  caseNumber: z.nullable(z.string()).optional(),
-  orderNumber: z.nullable(z.string()).optional(),
-  remittanceNumber: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    paymentPeriod: "payment_period",
-    caseNumber: "case_number",
-    orderNumber: "order_number",
-    remittanceNumber: "remittance_number",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GarnishmentChildSupportInput$ {
-  /** @deprecated use `GarnishmentChildSupportInput$inboundSchema` instead. */
-  export const inboundSchema = GarnishmentChildSupportInput$inboundSchema;
-  /** @deprecated use `GarnishmentChildSupportInput$outboundSchema` instead. */
-  export const outboundSchema = GarnishmentChildSupportInput$outboundSchema;
-  /** @deprecated use `GarnishmentChildSupportInput$Outbound` instead. */
-  export type Outbound = GarnishmentChildSupportInput$Outbound;
-}
-
-export function garnishmentChildSupportInputToJSON(
-  garnishmentChildSupportInput: GarnishmentChildSupportInput,
-): string {
-  return JSON.stringify(
-    GarnishmentChildSupportInput$outboundSchema.parse(
-      garnishmentChildSupportInput,
-    ),
-  );
-}
-
-export function garnishmentChildSupportInputFromJSON(
-  jsonString: string,
-): SafeParseResult<GarnishmentChildSupportInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GarnishmentChildSupportInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GarnishmentChildSupportInput' from JSON`,
   );
 }

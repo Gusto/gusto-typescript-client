@@ -3,9 +3,9 @@
 ## Example Usage
 
 ```typescript
-import { PayrollTypes } from "@gusto/embedded-api/models/operations";
+import { PayrollTypes } from "@gusto/embedded-api/models/operations/getv1companiescompanyidpayrolls.js";
 
-let value: PayrollTypes = "external";
+let value: PayrollTypes = "regular";
 ```
 
 ## Values

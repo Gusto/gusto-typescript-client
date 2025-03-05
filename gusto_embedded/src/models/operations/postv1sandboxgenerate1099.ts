@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Form1099,
+  Form1099$inboundSchema,
+  Form1099$Outbound,
+  Form1099$outboundSchema,
+} from "../components/form1099.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV1SandboxGenerate1099RequestBody = {
@@ -26,7 +36,7 @@ export type PostV1SandboxGenerate1099Request = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1SandboxGenerate1099RequestBody;
 };
 
@@ -46,7 +56,7 @@ export type PostV1SandboxGenerate1099Response = {
   /**
    * OK
    */
-  form1099?: components.Form1099 | undefined;
+  form1099?: Form1099 | undefined;
 };
 
 /** @internal */
@@ -125,9 +135,7 @@ export const PostV1SandboxGenerate1099Request$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() => PostV1SandboxGenerate1099RequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -148,9 +156,7 @@ export const PostV1SandboxGenerate1099Request$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1SandboxGenerate1099Request
 > = z.object({
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() =>
     PostV1SandboxGenerate1099RequestBody$outboundSchema
   ),
@@ -203,7 +209,7 @@ export const PostV1SandboxGenerate1099Response$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Form_1099: components.Form1099$inboundSchema.optional(),
+  Form_1099: Form1099$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -218,7 +224,7 @@ export type PostV1SandboxGenerate1099Response$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Form_1099?: components.Form1099$Outbound | undefined;
+  Form_1099?: Form1099$Outbound | undefined;
 };
 
 /** @internal */
@@ -232,7 +238,7 @@ export const PostV1SandboxGenerate1099Response$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  form1099: components.Form1099$outboundSchema.optional(),
+  form1099: Form1099$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

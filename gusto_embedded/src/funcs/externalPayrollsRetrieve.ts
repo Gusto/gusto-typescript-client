@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1ExternalPayrollRequest,
+  GetV1ExternalPayrollRequest$outboundSchema,
+  GetV1ExternalPayrollResponse,
+  GetV1ExternalPayrollResponse$inboundSchema,
+} from "../models/operations/getv1externalpayroll.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function externalPayrollsRetrieve(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ExternalPayrollRequest,
+  request: GetV1ExternalPayrollRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1ExternalPayrollResponse,
+    GetV1ExternalPayrollResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function externalPayrollsRetrieve(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1ExternalPayrollRequest,
+  request: GetV1ExternalPayrollRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1ExternalPayrollResponse,
+      GetV1ExternalPayrollResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1ExternalPayrollRequest$outboundSchema.parse(value),
+    (value) => GetV1ExternalPayrollRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -164,7 +168,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1ExternalPayrollResponse,
+    GetV1ExternalPayrollResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,7 +177,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1ExternalPayrollResponse$inboundSchema, {
+    M.json(200, GetV1ExternalPayrollResponse$inboundSchema, {
       key: "External-Payroll",
     }),
     M.fail([404, "4XX"]),

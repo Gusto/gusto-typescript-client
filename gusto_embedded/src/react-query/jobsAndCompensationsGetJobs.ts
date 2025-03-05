@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsGetJobs } from "../funcs/jobsAndCompensationsGetJobs.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdJobsQueryParamInclude,
+  GetV1EmployeesEmployeeIdJobsRequest,
+  GetV1EmployeesEmployeeIdJobsResponse,
+} from "../models/operations/getv1employeesemployeeidjobs.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +31,7 @@ import {
 } from "./_types.js";
 
 export type JobsAndCompensationsGetJobsQueryData =
-  operations.GetV1EmployeesEmployeeIdJobsResponse;
+  GetV1EmployeesEmployeeIdJobsResponse;
 
 /**
  * Get jobs for an employee
@@ -38,7 +42,7 @@ export type JobsAndCompensationsGetJobsQueryData =
  * scope: `jobs:read`
  */
 export function useJobsAndCompensationsGetJobs(
-  request: operations.GetV1EmployeesEmployeeIdJobsRequest,
+  request: GetV1EmployeesEmployeeIdJobsRequest,
   options?: QueryHookOptions<JobsAndCompensationsGetJobsQueryData>,
 ): UseQueryResult<JobsAndCompensationsGetJobsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +65,7 @@ export function useJobsAndCompensationsGetJobs(
  * scope: `jobs:read`
  */
 export function useJobsAndCompensationsGetJobsSuspense(
-  request: operations.GetV1EmployeesEmployeeIdJobsRequest,
+  request: GetV1EmployeesEmployeeIdJobsRequest,
   options?: SuspenseQueryHookOptions<JobsAndCompensationsGetJobsQueryData>,
 ): UseSuspenseQueryResult<JobsAndCompensationsGetJobsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +82,7 @@ export function useJobsAndCompensationsGetJobsSuspense(
 export function prefetchJobsAndCompensationsGetJobs(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdJobsRequest,
+  request: GetV1EmployeesEmployeeIdJobsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildJobsAndCompensationsGetJobsQuery(
@@ -95,10 +99,8 @@ export function setJobsAndCompensationsGetJobsData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      include?:
-        | operations.GetV1EmployeesEmployeeIdJobsQueryParamInclude
-        | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: JobsAndCompensationsGetJobsQueryData,
@@ -116,10 +118,8 @@ export function invalidateJobsAndCompensationsGetJobs(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        include?:
-          | operations.GetV1EmployeesEmployeeIdJobsQueryParamInclude
-          | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -148,7 +148,7 @@ export function invalidateAllJobsAndCompensationsGetJobs(
 
 export function buildJobsAndCompensationsGetJobsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdJobsRequest,
+  request: GetV1EmployeesEmployeeIdJobsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -186,10 +186,8 @@ export function queryKeyJobsAndCompensationsGetJobs(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    include?:
-      | operations.GetV1EmployeesEmployeeIdJobsQueryParamInclude
-      | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { historicalEmployeesUpdate } from "../funcs/historicalEmployeesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1HistoricalEmployeesRequest,
+  PutV1HistoricalEmployeesResponse,
+} from "../models/operations/putv1historicalemployees.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type HistoricalEmployeesUpdateMutationVariables = {
-  request: operations.PutV1HistoricalEmployeesRequest;
+  request: PutV1HistoricalEmployeesRequest;
   options?: RequestOptions;
 };
 
 export type HistoricalEmployeesUpdateMutationData =
-  operations.PutV1HistoricalEmployeesResponse;
+  PutV1HistoricalEmployeesResponse;
 
 /**
  * Update a historical employee

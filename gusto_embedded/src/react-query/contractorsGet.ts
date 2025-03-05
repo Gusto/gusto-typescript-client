@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsGet } from "../funcs/contractorsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorsContractorUuidRequest,
+  GetV1ContractorsContractorUuidResponse,
+} from "../models/operations/getv1contractorscontractoruuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorsGetQueryData =
-  operations.GetV1ContractorsContractorUuidResponse;
+export type ContractorsGetQueryData = GetV1ContractorsContractorUuidResponse;
 
 /**
  * Get a contractor
@@ -38,7 +40,7 @@ export type ContractorsGetQueryData =
  * scope: `contractors:read`
  */
 export function useContractorsGet(
-  request: operations.GetV1ContractorsContractorUuidRequest,
+  request: GetV1ContractorsContractorUuidRequest,
   options?: QueryHookOptions<ContractorsGetQueryData>,
 ): UseQueryResult<ContractorsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useContractorsGet(
  * scope: `contractors:read`
  */
 export function useContractorsGetSuspense(
-  request: operations.GetV1ContractorsContractorUuidRequest,
+  request: GetV1ContractorsContractorUuidRequest,
   options?: SuspenseQueryHookOptions<ContractorsGetQueryData>,
 ): UseSuspenseQueryResult<ContractorsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useContractorsGetSuspense(
 export function prefetchContractorsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidRequest,
+  request: GetV1ContractorsContractorUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorsGetQuery(
@@ -92,7 +94,7 @@ export function setContractorsGetData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorsGetQueryData,
 ): ContractorsGetQueryData | undefined {
@@ -106,7 +108,7 @@ export function invalidateContractorsGet(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -129,7 +131,7 @@ export function invalidateAllContractorsGet(
 
 export function buildContractorsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidRequest,
+  request: GetV1ContractorsContractorUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -159,7 +161,7 @@ export function buildContractorsGetQuery(
 
 export function queryKeyContractorsGet(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

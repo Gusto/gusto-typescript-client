@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { bankAccountsVerify } from "../funcs/bankAccountsVerify.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
+  PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+} from "../models/operations/putv1companiescompanyidbankaccountsverify.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type BankAccountsVerifyMutationVariables = {
-  request: operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequest;
+  request: PutV1CompaniesCompanyIdBankAccountsVerifyRequest;
   options?: RequestOptions;
 };
 
 export type BankAccountsVerifyMutationData =
-  operations.PutV1CompaniesCompanyIdBankAccountsVerifyResponse;
+  PutV1CompaniesCompanyIdBankAccountsVerifyResponse;
 
 /**
  * Verify a company bank account

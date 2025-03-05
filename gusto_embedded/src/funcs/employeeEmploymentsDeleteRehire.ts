@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  DeleteV1EmployeesEmployeeIdRehireRequest,
+  DeleteV1EmployeesEmployeeIdRehireRequest$outboundSchema,
+  DeleteV1EmployeesEmployeeIdRehireResponse,
+  DeleteV1EmployeesEmployeeIdRehireResponse$inboundSchema,
+} from "../models/operations/deletev1employeesemployeeidrehire.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function employeeEmploymentsDeleteRehire(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1EmployeesEmployeeIdRehireRequest,
+  request: DeleteV1EmployeesEmployeeIdRehireRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1EmployeesEmployeeIdRehireResponse,
-    | errors.UnprocessableEntityErrorObject
+    DeleteV1EmployeesEmployeeIdRehireResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function employeeEmploymentsDeleteRehire(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1EmployeesEmployeeIdRehireRequest,
+  request: DeleteV1EmployeesEmployeeIdRehireRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1EmployeesEmployeeIdRehireResponse,
-      | errors.UnprocessableEntityErrorObject
+      DeleteV1EmployeesEmployeeIdRehireResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,9 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1EmployeesEmployeeIdRehireRequest$outboundSchema.parse(
-        value,
-      ),
+      DeleteV1EmployeesEmployeeIdRehireRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -162,8 +168,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1EmployeesEmployeeIdRehireResponse,
-    | errors.UnprocessableEntityErrorObject
+    DeleteV1EmployeesEmployeeIdRehireResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -172,11 +178,8 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      204,
-      operations.DeleteV1EmployeesEmployeeIdRehireResponse$inboundSchema,
-    ),
-    M.jsonErr(404, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.nil(204, DeleteV1EmployeesEmployeeIdRehireResponse$inboundSchema),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

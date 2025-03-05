@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentsDelete } from "../funcs/contractorPaymentsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
+  DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
+} from "../models/operations/deletev1companiescompanyidcontractorpaymentcontractorpayment.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorPaymentsDeleteMutationVariables = {
-  request:
-    operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest;
+  request: DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest;
   options?: RequestOptions;
 };
 
 export type ContractorPaymentsDeleteMutationData =
-  operations.DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse;
+  DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse;
 
 /**
  * Cancel a contractor payment

@@ -4,7 +4,10 @@
 
 import { companyAttachmentGetDownloadUrl } from "../funcs/companyAttachmentGetDownloadUrl.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesAttachmentUrlRequest,
+  GetV1CompaniesAttachmentUrlResponse,
+} from "../models/operations/getv1companiesattachmenturl.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyAttachment extends ClientSDK {
@@ -18,9 +21,9 @@ export class CompanyAttachment extends ClientSDK {
    * scope: `company_attachments:read`
    */
   async getDownloadUrl(
-    request: operations.GetV1CompaniesAttachmentUrlRequest,
+    request: GetV1CompaniesAttachmentUrlRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesAttachmentUrlResponse> {
+  ): Promise<GetV1CompaniesAttachmentUrlResponse> {
     return unwrapAsync(companyAttachmentGetDownloadUrl(
       this,
       request,

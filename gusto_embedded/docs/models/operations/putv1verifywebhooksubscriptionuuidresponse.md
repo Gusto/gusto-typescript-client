@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PutV1VerifyWebhookSubscriptionUuidResponse } from "@gusto/embedded-api/models/operations";
+import { PutV1VerifyWebhookSubscriptionUuidResponse } from "@gusto/embedded-api/models/operations/putv1verifywebhooksubscriptionuuid.js";
 
 let value: PutV1VerifyWebhookSubscriptionUuidResponse = {
   contentType: "<value>",
-  statusCode: 501,
+  statusCode: 103,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

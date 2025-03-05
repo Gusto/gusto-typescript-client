@@ -11,17 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsDelete } from "../funcs/departmentsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteDepartmentRequest,
+  DeleteDepartmentResponse,
+} from "../models/operations/deletedepartment.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type DepartmentsDeleteMutationVariables = {
-  request: operations.DeleteDepartmentRequest;
+  request: DeleteDepartmentRequest;
   options?: RequestOptions;
 };
 
-export type DepartmentsDeleteMutationData = operations.DeleteDepartmentResponse;
+export type DepartmentsDeleteMutationData = DeleteDepartmentResponse;
 
 /**
  * Delete a department

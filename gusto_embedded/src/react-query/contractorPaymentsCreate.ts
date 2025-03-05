@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentsCreate } from "../funcs/contractorPaymentsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdContractorPaymentsRequest,
+  PostV1CompaniesCompanyIdContractorPaymentsResponse,
+} from "../models/operations/postv1companiescompanyidcontractorpayments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorPaymentsCreateMutationVariables = {
-  request: operations.PostV1CompaniesCompanyIdContractorPaymentsRequest;
+  request: PostV1CompaniesCompanyIdContractorPaymentsRequest;
   options?: RequestOptions;
 };
 
 export type ContractorPaymentsCreateMutationData =
-  operations.PostV1CompaniesCompanyIdContractorPaymentsResponse;
+  PostV1CompaniesCompanyIdContractorPaymentsResponse;
 
 /**
  * Create a contractor payment

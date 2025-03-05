@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGetBlockers } from "../funcs/payrollsGetBlockers.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+  GetV1CompaniesPayrollBlockersCompanyUuidResponse,
+} from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PayrollsGetBlockersQueryData =
-  operations.GetV1CompaniesPayrollBlockersCompanyUuidResponse;
+  GetV1CompaniesPayrollBlockersCompanyUuidResponse;
 
 /**
  * Get all payroll blockers for a company
@@ -40,7 +43,7 @@ export type PayrollsGetBlockersQueryData =
  * scope: `payrolls:run`
  */
 export function usePayrollsGetBlockers(
-  request: operations.GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+  request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
   options?: QueryHookOptions<PayrollsGetBlockersQueryData>,
 ): UseQueryResult<PayrollsGetBlockersQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -65,7 +68,7 @@ export function usePayrollsGetBlockers(
  * scope: `payrolls:run`
  */
 export function usePayrollsGetBlockersSuspense(
-  request: operations.GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+  request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
   options?: SuspenseQueryHookOptions<PayrollsGetBlockersQueryData>,
 ): UseSuspenseQueryResult<PayrollsGetBlockersQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -82,7 +85,7 @@ export function usePayrollsGetBlockersSuspense(
 export function prefetchPayrollsGetBlockers(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+  request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPayrollsGetBlockersQuery(
@@ -96,7 +99,7 @@ export function setPayrollsGetBlockersData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: PayrollsGetBlockersQueryData,
 ): PayrollsGetBlockersQueryData | undefined {
@@ -110,7 +113,7 @@ export function invalidatePayrollsGetBlockers(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -138,7 +141,7 @@ export function invalidateAllPayrollsGetBlockers(
 
 export function buildPayrollsGetBlockersQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesPayrollBlockersCompanyUuidRequest,
+  request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -170,7 +173,7 @@ export function buildPayrollsGetBlockersQuery(
 
 export function queryKeyPayrollsGetBlockers(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

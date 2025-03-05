@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesAddEmployees } from "../funcs/timeOffPoliciesAddEmployees.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest,
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse,
+} from "../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployees.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesAddEmployeesMutationVariables = {
-  request:
-    operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest;
+  request: PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesAddEmployeesMutationData =
-  operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse;
+  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse;
 
 /**
  * Add employees to a time off policy

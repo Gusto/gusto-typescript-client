@@ -7,7 +7,7 @@ For detailed information, see the [Payroll Blockers guide](https://docs.gusto.co
 ## Example Usage
 
 ```typescript
-import { PayrollBlockersError } from "@gusto/embedded-api/models/errors";
+import { PayrollBlockersError } from "@gusto/embedded-api/models/errors/payrollblockerserror.js";
 
 // No examples available for this model
 ```
