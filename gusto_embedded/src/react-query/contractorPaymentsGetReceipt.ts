@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentsGetReceipt } from "../funcs/contractorPaymentsGetReceipt.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
+} from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentsGetReceiptQueryData =
-  operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
+  GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
 
 /**
  * Get a single contractor payment receipt
@@ -45,8 +48,7 @@ export type ContractorPaymentsGetReceiptQueryData =
  * scope: `payrolls:read`
  */
 export function useContractorPaymentsGetReceipt(
-  request:
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
   options?: QueryHookOptions<ContractorPaymentsGetReceiptQueryData>,
 ): UseQueryResult<ContractorPaymentsGetReceiptQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -76,8 +78,7 @@ export function useContractorPaymentsGetReceipt(
  * scope: `payrolls:read`
  */
 export function useContractorPaymentsGetReceiptSuspense(
-  request:
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
   options?: SuspenseQueryHookOptions<ContractorPaymentsGetReceiptQueryData>,
 ): UseSuspenseQueryResult<ContractorPaymentsGetReceiptQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -94,8 +95,7 @@ export function useContractorPaymentsGetReceiptSuspense(
 export function prefetchContractorPaymentsGetReceipt(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorPaymentsGetReceiptQuery(
@@ -109,7 +109,7 @@ export function setContractorPaymentsGetReceiptData(
   client: QueryClient,
   queryKeyBase: [
     contractorPaymentUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorPaymentsGetReceiptQueryData,
 ): ContractorPaymentsGetReceiptQueryData | undefined {
@@ -123,7 +123,7 @@ export function invalidateContractorPaymentsGetReceipt(
   queryKeyBase: TupleToPrefixes<
     [
       contractorPaymentUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -151,8 +151,7 @@ export function invalidateAllContractorPaymentsGetReceipt(
 
 export function buildContractorPaymentsGetReceiptQuery(
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
+  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -185,7 +184,7 @@ export function buildContractorPaymentsGetReceiptQuery(
 
 export function queryKeyContractorPaymentsGetReceipt(
   contractorPaymentUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

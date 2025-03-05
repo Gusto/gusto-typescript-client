@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeFormsGet } from "../funcs/employeeFormsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeeFormRequest,
+  GetV1EmployeeFormResponse,
+} from "../models/operations/getv1employeeform.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeeFormsGetQueryData = operations.GetV1EmployeeFormResponse;
+export type EmployeeFormsGetQueryData = GetV1EmployeeFormResponse;
 
 /**
  * Get an employee form
@@ -37,7 +40,7 @@ export type EmployeeFormsGetQueryData = operations.GetV1EmployeeFormResponse;
  * scope: `employee_forms:read`
  */
 export function useEmployeeFormsGet(
-  request: operations.GetV1EmployeeFormRequest,
+  request: GetV1EmployeeFormRequest,
   options?: QueryHookOptions<EmployeeFormsGetQueryData>,
 ): UseQueryResult<EmployeeFormsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -60,7 +63,7 @@ export function useEmployeeFormsGet(
  * scope: `employee_forms:read`
  */
 export function useEmployeeFormsGetSuspense(
-  request: operations.GetV1EmployeeFormRequest,
+  request: GetV1EmployeeFormRequest,
   options?: SuspenseQueryHookOptions<EmployeeFormsGetQueryData>,
 ): UseSuspenseQueryResult<EmployeeFormsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +80,7 @@ export function useEmployeeFormsGetSuspense(
 export function prefetchEmployeeFormsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeeFormRequest,
+  request: GetV1EmployeeFormRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeFormsGetQuery(
@@ -92,7 +95,7 @@ export function setEmployeeFormsGetData(
   queryKeyBase: [
     employeeId: string,
     formId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeeFormsGetQueryData,
 ): EmployeeFormsGetQueryData | undefined {
@@ -107,7 +110,7 @@ export function invalidateEmployeeFormsGet(
     [
       employeeId: string,
       formId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -130,7 +133,7 @@ export function invalidateAllEmployeeFormsGet(
 
 export function buildEmployeeFormsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeeFormRequest,
+  request: GetV1EmployeeFormRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -163,7 +166,7 @@ export function buildEmployeeFormsGetQuery(
 export function queryKeyEmployeeFormsGet(
   employeeId: string,
   formId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

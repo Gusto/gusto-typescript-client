@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  ExternalPayroll,
+  ExternalPayroll$inboundSchema,
+  ExternalPayroll$Outbound,
+  ExternalPayroll$outboundSchema,
+} from "../components/externalpayroll.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -109,7 +119,7 @@ export type PutV1ExternalPayrollRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1ExternalPayrollRequestBody;
 };
 
@@ -129,7 +139,7 @@ export type PutV1ExternalPayrollResponse = {
   /**
    * Example response
    */
-  externalPayroll?: components.ExternalPayroll | undefined;
+  externalPayroll?: ExternalPayroll | undefined;
 };
 
 /** @internal */
@@ -498,9 +508,7 @@ export const PutV1ExternalPayrollRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   external_payroll_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() => PutV1ExternalPayrollRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -527,9 +535,7 @@ export const PutV1ExternalPayrollRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   externalPayrollId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() => PutV1ExternalPayrollRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -582,7 +588,7 @@ export const PutV1ExternalPayrollResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "External-Payroll": components.ExternalPayroll$inboundSchema.optional(),
+  "External-Payroll": ExternalPayroll$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -597,7 +603,7 @@ export type PutV1ExternalPayrollResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "External-Payroll"?: components.ExternalPayroll$Outbound | undefined;
+  "External-Payroll"?: ExternalPayroll$Outbound | undefined;
 };
 
 /** @internal */
@@ -611,7 +617,7 @@ export const PutV1ExternalPayrollResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  externalPayroll: components.ExternalPayroll$outboundSchema.optional(),
+  externalPayroll: ExternalPayroll$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

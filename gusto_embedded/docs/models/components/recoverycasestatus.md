@@ -5,7 +5,7 @@ Status of the recovery case
 ## Example Usage
 
 ```typescript
-import { RecoveryCaseStatus } from "@gusto/embedded-api/models/components";
+import { RecoveryCaseStatus } from "@gusto/embedded-api/models/components/recoverycase.js";
 
 let value: RecoveryCaseStatus = "redebit_initiated";
 ```

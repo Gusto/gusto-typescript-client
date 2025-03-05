@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { wireInRequestsList } from "../funcs/wireInRequestsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  GetCompaniesCompanyUuidWireInRequestUuidResponse,
+} from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type WireInRequestsListQueryData =
-  operations.GetCompaniesCompanyUuidWireInRequestUuidResponse;
+  GetCompaniesCompanyUuidWireInRequestUuidResponse;
 
 /**
  * Get all Wire In Requests for a company
@@ -38,7 +41,7 @@ export type WireInRequestsListQueryData =
  * scope: `payrolls:read`
  */
 export function useWireInRequestsList(
-  request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
   options?: QueryHookOptions<WireInRequestsListQueryData>,
 ): UseQueryResult<WireInRequestsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useWireInRequestsList(
  * scope: `payrolls:read`
  */
 export function useWireInRequestsListSuspense(
-  request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
   options?: SuspenseQueryHookOptions<WireInRequestsListQueryData>,
 ): UseSuspenseQueryResult<WireInRequestsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useWireInRequestsListSuspense(
 export function prefetchWireInRequestsList(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildWireInRequestsListQuery(
@@ -92,7 +95,7 @@ export function setWireInRequestsListData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: WireInRequestsListQueryData,
 ): WireInRequestsListQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateWireInRequestsList(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllWireInRequestsList(
 
 export function buildWireInRequestsListQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildWireInRequestsListQuery(
 
 export function queryKeyWireInRequestsList(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

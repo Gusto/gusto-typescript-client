@@ -5,7 +5,7 @@ Ytd Benefit Amounts From Different Company
 ## Example Usage
 
 ```typescript
-import { YtdBenefitAmountsFromDifferentCompany } from "@gusto/embedded-api/models/components";
+import { YtdBenefitAmountsFromDifferentCompany } from "@gusto/embedded-api/models/components/ytdbenefitamountsfromdifferentcompany.js";
 
 let value: YtdBenefitAmountsFromDifferentCompany = {
   uuid: "95277f04-dada-4c73-bc92-cf541af2710a",

@@ -10,7 +10,34 @@ import { i9VerificationGetDocumentOptions } from "../funcs/i9VerificationGetDocu
 import { i9VerificationGetDocuments } from "../funcs/i9VerificationGetDocuments.js";
 import { i9VerificationUpdate } from "../funcs/i9VerificationUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
+} from "../models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentid.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+  GetV1EmployeesEmployeeIdI9AuthorizationResponse,
+} from "../models/operations/getv1employeesemployeeidi9authorization.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse,
+} from "../models/operations/getv1employeesemployeeidi9authorizationdocumentoptions.js";
+import {
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+} from "../models/operations/getv1employeesemployeeidi9authorizationdocuments.js";
+import {
+  PutV1EmployeesEmployeeIdI9AuthorizationRequest,
+  PutV1EmployeesEmployeeIdI9AuthorizationResponse,
+} from "../models/operations/putv1employeesemployeeidi9authorization.js";
+import {
+  PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+} from "../models/operations/putv1employeesemployeeidi9authorizationdocuments.js";
+import {
+  PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
+  PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
+} from "../models/operations/putv1employeesemployeeidi9authorizationemployersign.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class I9Verification extends ClientSDK {
@@ -25,9 +52,9 @@ export class I9Verification extends ClientSDK {
    * scope: `i9_authorizations:read`
    */
   async getAuthorization(
-    request: operations.GetV1EmployeesEmployeeIdI9AuthorizationRequest,
+    request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdI9AuthorizationResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdI9AuthorizationResponse> {
     return unwrapAsync(i9VerificationGetAuthorization(
       this,
       request,
@@ -61,9 +88,9 @@ export class I9Verification extends ClientSDK {
    * scope: `i9_authorizations:write`
    */
   async update(
-    request: operations.PutV1EmployeesEmployeeIdI9AuthorizationRequest,
+    request: PutV1EmployeesEmployeeIdI9AuthorizationRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesEmployeeIdI9AuthorizationResponse> {
+  ): Promise<PutV1EmployeesEmployeeIdI9AuthorizationResponse> {
     return unwrapAsync(i9VerificationUpdate(
       this,
       request,
@@ -80,12 +107,9 @@ export class I9Verification extends ClientSDK {
    * scope: `i9_authorizations:read`
    */
   async getDocumentOptions(
-    request:
-      operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
+    request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse
-  > {
+  ): Promise<GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse> {
     return unwrapAsync(i9VerificationGetDocumentOptions(
       this,
       request,
@@ -102,11 +126,9 @@ export class I9Verification extends ClientSDK {
    * scope: `i9_authorizations:read`
    */
   async getDocuments(
-    request: operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+    request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse
-  > {
+  ): Promise<GetV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse> {
     return unwrapAsync(i9VerificationGetDocuments(
       this,
       request,
@@ -129,11 +151,9 @@ export class I9Verification extends ClientSDK {
    * scope: `i9_authorizations:manage`
    */
   async createDocuments(
-    request: operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+    request: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse
-  > {
+  ): Promise<PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse> {
     return unwrapAsync(i9VerificationCreateDocuments(
       this,
       request,
@@ -151,10 +171,10 @@ export class I9Verification extends ClientSDK {
    */
   async deleteDocument(
     request:
-      operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
+      DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
     options?: RequestOptions,
   ): Promise<
-    operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse
+    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse
   > {
     return unwrapAsync(i9VerificationDeleteDocument(
       this,
@@ -172,12 +192,9 @@ export class I9Verification extends ClientSDK {
    * scope: `i9_authorizations:manage`
    */
   async employerSign(
-    request:
-      operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
+    request: PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse
-  > {
+  ): Promise<PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse> {
     return unwrapAsync(i9VerificationEmployerSign(
       this,
       request,

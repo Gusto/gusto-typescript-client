@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupUpdateFederalTaxes } from "../funcs/employeeTaxSetupUpdateFederalTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdFederalTaxesRequest,
+  PutV1EmployeesEmployeeIdFederalTaxesResponse,
+} from "../models/operations/putv1employeesemployeeidfederaltaxes.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeTaxSetupUpdateFederalTaxesMutationVariables = {
-  request: operations.PutV1EmployeesEmployeeIdFederalTaxesRequest;
+  request: PutV1EmployeesEmployeeIdFederalTaxesRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeTaxSetupUpdateFederalTaxesMutationData =
-  operations.PutV1EmployeesEmployeeIdFederalTaxesResponse;
+  PutV1EmployeesEmployeeIdFederalTaxesResponse;
 
 /**
  * Update an employee's federal taxes

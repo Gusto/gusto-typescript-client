@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
+  PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema,
+  PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+  PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema,
+} from "../models/operations/putv1companiescompanyidbankaccountsverify.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -47,12 +55,12 @@ import { Result } from "../types/fp.js";
  */
 export function bankAccountsVerify(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
+  request: PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -71,13 +79,13 @@ export function bankAccountsVerify(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
+  request: PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -92,8 +100,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema
-        .parse(value),
+      PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -182,8 +191,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -194,11 +203,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema,
+      PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema,
       { key: "Company-Bank-Account" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

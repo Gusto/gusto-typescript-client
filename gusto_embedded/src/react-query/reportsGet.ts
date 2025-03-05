@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsGet } from "../funcs/reportsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetReportsReportUuidRequest,
+  GetReportsReportUuidResponse,
+} from "../models/operations/getreportsreportuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ReportsGetQueryData = operations.GetReportsReportUuidResponse;
+export type ReportsGetQueryData = GetReportsReportUuidResponse;
 
 /**
  * Get a report
@@ -37,7 +40,7 @@ export type ReportsGetQueryData = operations.GetReportsReportUuidResponse;
  * scope: `company_reports:read`
  */
 export function useReportsGet(
-  request: operations.GetReportsReportUuidRequest,
+  request: GetReportsReportUuidRequest,
   options?: QueryHookOptions<ReportsGetQueryData>,
 ): UseQueryResult<ReportsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -60,7 +63,7 @@ export function useReportsGet(
  * scope: `company_reports:read`
  */
 export function useReportsGetSuspense(
-  request: operations.GetReportsReportUuidRequest,
+  request: GetReportsReportUuidRequest,
   options?: SuspenseQueryHookOptions<ReportsGetQueryData>,
 ): UseSuspenseQueryResult<ReportsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +80,7 @@ export function useReportsGetSuspense(
 export function prefetchReportsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetReportsReportUuidRequest,
+  request: GetReportsReportUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildReportsGetQuery(
@@ -91,7 +94,7 @@ export function setReportsGetData(
   client: QueryClient,
   queryKeyBase: [
     reportUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ReportsGetQueryData,
 ): ReportsGetQueryData | undefined {
@@ -105,7 +108,7 @@ export function invalidateReportsGet(
   queryKeyBase: TupleToPrefixes<
     [
       reportUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -128,7 +131,7 @@ export function invalidateAllReportsGet(
 
 export function buildReportsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetReportsReportUuidRequest,
+  request: GetReportsReportUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -158,7 +161,7 @@ export function buildReportsGetQuery(
 
 export function queryKeyReportsGet(
   reportUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "Reports", "get", reportUuid, parameters];
 }

@@ -3,13 +3,13 @@
 ## Example Usage
 
 ```typescript
-import { PutV1EmployeesEmployeeIdPaymentMethodRequest } from "@gusto/embedded-api/models/operations";
+import { PutV1EmployeesEmployeeIdPaymentMethodRequest } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidpaymentmethod.js";
 
 let value: PutV1EmployeesEmployeeIdPaymentMethodRequest = {
   employeeId: "<id>",
   requestBody: {
     version: "<value>",
-    type: "Direct Deposit",
+    type: "Check",
   },
 };
 ```

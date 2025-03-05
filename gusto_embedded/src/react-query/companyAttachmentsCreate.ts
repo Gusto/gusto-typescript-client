@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyAttachmentsCreate } from "../funcs/companyAttachmentsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesAttachmentRequest,
+  PostV1CompaniesAttachmentResponse,
+} from "../models/operations/postv1companiesattachment.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompanyAttachmentsCreateMutationVariables = {
-  request: operations.PostV1CompaniesAttachmentRequest;
+  request: PostV1CompaniesAttachmentRequest;
   options?: RequestOptions;
 };
 
 export type CompanyAttachmentsCreateMutationData =
-  operations.PostV1CompaniesAttachmentResponse;
+  PostV1CompaniesAttachmentResponse;
 
 /**
  * Create Company Attachment and Upload File

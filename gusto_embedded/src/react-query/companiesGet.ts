@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesGet } from "../funcs/companiesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesRequest,
+  GetV1CompaniesResponse,
+} from "../models/operations/getv1companies.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompaniesGetQueryData = operations.GetV1CompaniesResponse;
+export type CompaniesGetQueryData = GetV1CompaniesResponse;
 
 /**
  * Get a company
@@ -40,7 +43,7 @@ export type CompaniesGetQueryData = operations.GetV1CompaniesResponse;
  * scope: `companies:read`
  */
 export function useCompaniesGet(
-  request: operations.GetV1CompaniesRequest,
+  request: GetV1CompaniesRequest,
   options?: QueryHookOptions<CompaniesGetQueryData>,
 ): UseQueryResult<CompaniesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -66,7 +69,7 @@ export function useCompaniesGet(
  * scope: `companies:read`
  */
 export function useCompaniesGetSuspense(
-  request: operations.GetV1CompaniesRequest,
+  request: GetV1CompaniesRequest,
   options?: SuspenseQueryHookOptions<CompaniesGetQueryData>,
 ): UseSuspenseQueryResult<CompaniesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -83,7 +86,7 @@ export function useCompaniesGetSuspense(
 export function prefetchCompaniesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesRequest,
+  request: GetV1CompaniesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompaniesGetQuery(
@@ -97,7 +100,7 @@ export function setCompaniesGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: CompaniesGetQueryData,
 ): CompaniesGetQueryData | undefined {
@@ -111,7 +114,7 @@ export function invalidateCompaniesGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllCompaniesGet(
 
 export function buildCompaniesGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesRequest,
+  request: GetV1CompaniesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -164,7 +167,7 @@ export function buildCompaniesGetQuery(
 
 export function queryKeyCompaniesGet(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "Companies", "get", companyId, parameters];
 }

@@ -5,8 +5,8 @@ Example response
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentReceipt } from "@gusto/embedded-api/models/components";
-import { RFCDate } from "@gusto/embedded-api/types";
+import { ContractorPaymentReceipt } from "@gusto/embedded-api/models/components/contractorpaymentreceipt.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: ContractorPaymentReceipt = {
   debitDate: new RFCDate("2022-05-30"),

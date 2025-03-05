@@ -3,13 +3,13 @@
 ## Example Usage
 
 ```typescript
-import { PutV1WebhookSubscriptionUuidRequest } from "@gusto/embedded-api/models/operations";
+import { PutV1WebhookSubscriptionUuidRequest } from "@gusto/embedded-api/models/operations/putv1webhooksubscriptionuuid.js";
 
 let value: PutV1WebhookSubscriptionUuidRequest = {
   webhookSubscriptionUuid: "<id>",
   requestBody: {
     subscriptionTypes: [
-      "EmployeeBenefit",
+      "Form",
     ],
   },
 };

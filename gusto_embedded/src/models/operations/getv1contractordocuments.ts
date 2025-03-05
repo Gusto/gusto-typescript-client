@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Document,
+  Document$inboundSchema,
+  Document$Outbound,
+  Document$outboundSchema,
+} from "../components/document.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1ContractorDocumentsRequest = {
@@ -17,7 +27,7 @@ export type GetV1ContractorDocumentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1ContractorDocumentsResponse = {
@@ -36,7 +46,7 @@ export type GetV1ContractorDocumentsResponse = {
   /**
    * Example response
    */
-  documents?: Array<components.Document> | undefined;
+  documents?: Array<Document> | undefined;
 };
 
 /** @internal */
@@ -46,9 +56,7 @@ export const GetV1ContractorDocumentsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   contractor_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",
@@ -69,9 +77,7 @@ export const GetV1ContractorDocumentsRequest$outboundSchema: z.ZodType<
   GetV1ContractorDocumentsRequest
 > = z.object({
   contractorUuid: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     contractorUuid: "contractor_uuid",
@@ -121,7 +127,7 @@ export const GetV1ContractorDocumentsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  Documents: z.array(components.Document$inboundSchema).optional(),
+  Documents: z.array(Document$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -136,7 +142,7 @@ export type GetV1ContractorDocumentsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Documents?: Array<components.Document$Outbound> | undefined;
+  Documents?: Array<Document$Outbound> | undefined;
 };
 
 /** @internal */
@@ -150,7 +156,7 @@ export const GetV1ContractorDocumentsResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  documents: z.array(components.Document$outboundSchema).optional(),
+  documents: z.array(Document$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

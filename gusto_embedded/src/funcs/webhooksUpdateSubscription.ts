@@ -18,9 +18,18 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1WebhookSubscriptionUuidRequest,
+  PutV1WebhookSubscriptionUuidRequest$outboundSchema,
+  PutV1WebhookSubscriptionUuidResponse,
+  PutV1WebhookSubscriptionUuidResponse$inboundSchema,
+  PutV1WebhookSubscriptionUuidSecurity,
+} from "../models/operations/putv1webhooksubscriptionuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -38,13 +47,13 @@ import { Result } from "../types/fp.js";
  */
 export function webhooksUpdateSubscription(
   client: GustoEmbeddedCore,
-  security: operations.PutV1WebhookSubscriptionUuidSecurity,
-  request: operations.PutV1WebhookSubscriptionUuidRequest,
+  security: PutV1WebhookSubscriptionUuidSecurity,
+  request: PutV1WebhookSubscriptionUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1WebhookSubscriptionUuidResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1WebhookSubscriptionUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -64,14 +73,14 @@ export function webhooksUpdateSubscription(
 
 async function $do(
   client: GustoEmbeddedCore,
-  security: operations.PutV1WebhookSubscriptionUuidSecurity,
-  request: operations.PutV1WebhookSubscriptionUuidRequest,
+  security: PutV1WebhookSubscriptionUuidSecurity,
+  request: PutV1WebhookSubscriptionUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1WebhookSubscriptionUuidResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1WebhookSubscriptionUuidResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -85,10 +94,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PutV1WebhookSubscriptionUuidRequest$outboundSchema.parse(
-        value,
-      ),
+    (value) => PutV1WebhookSubscriptionUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -177,8 +183,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1WebhookSubscriptionUuidResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1WebhookSubscriptionUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -187,10 +193,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PutV1WebhookSubscriptionUuidResponse$inboundSchema, {
+    M.json(200, PutV1WebhookSubscriptionUuidResponse$inboundSchema, {
       key: "Webhook-Subscription",
     }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -19,7 +19,13 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetEventsRequest,
+  GetEventsRequest$outboundSchema,
+  GetEventsResponse,
+  GetEventsResponse$inboundSchema,
+  GetEventsSecurity,
+} from "../models/operations/getevents.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,12 +43,12 @@ import { Result } from "../types/fp.js";
  */
 export function eventsGet(
   client: GustoEmbeddedCore,
-  security: operations.GetEventsSecurity,
-  request: operations.GetEventsRequest,
+  security: GetEventsSecurity,
+  request: GetEventsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetEventsResponse,
+    GetEventsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -62,13 +68,13 @@ export function eventsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  security: operations.GetEventsSecurity,
-  request: operations.GetEventsRequest,
+  security: GetEventsSecurity,
+  request: GetEventsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetEventsResponse,
+      GetEventsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -82,7 +88,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetEventsRequest$outboundSchema.parse(value),
+    (value) => GetEventsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -169,7 +175,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetEventsResponse,
+    GetEventsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -178,9 +184,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetEventsResponse$inboundSchema, {
-      key: "Event-List",
-    }),
+    M.json(200, GetEventsResponse$inboundSchema, { key: "Event-List" }),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { achTransactionsGetAll } from "../funcs/achTransactionsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetAchTransactionsRequest,
+  GetAchTransactionsResponse,
+} from "../models/operations/getachtransactions.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type AchTransactionsGetAllQueryData =
-  operations.GetAchTransactionsResponse;
+export type AchTransactionsGetAllQueryData = GetAchTransactionsResponse;
 
 /**
  * Get all ACH transactions for a company
@@ -38,7 +40,7 @@ export type AchTransactionsGetAllQueryData =
  * scope: `ach_transactions:read`
  */
 export function useAchTransactionsGetAll(
-  request: operations.GetAchTransactionsRequest,
+  request: GetAchTransactionsRequest,
   options?: QueryHookOptions<AchTransactionsGetAllQueryData>,
 ): UseQueryResult<AchTransactionsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useAchTransactionsGetAll(
  * scope: `ach_transactions:read`
  */
 export function useAchTransactionsGetAllSuspense(
-  request: operations.GetAchTransactionsRequest,
+  request: GetAchTransactionsRequest,
   options?: SuspenseQueryHookOptions<AchTransactionsGetAllQueryData>,
 ): UseSuspenseQueryResult<AchTransactionsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useAchTransactionsGetAllSuspense(
 export function prefetchAchTransactionsGetAll(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetAchTransactionsRequest,
+  request: GetAchTransactionsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildAchTransactionsGetAllQuery(
@@ -99,7 +101,7 @@ export function setAchTransactionsGetAllData(
       paymentDirection?: string | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: AchTransactionsGetAllQueryData,
@@ -121,7 +123,7 @@ export function invalidateAchTransactionsGetAll(
         paymentDirection?: string | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -150,7 +152,7 @@ export function invalidateAllAchTransactionsGetAll(
 
 export function buildAchTransactionsGetAllQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetAchTransactionsRequest,
+  request: GetAchTransactionsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -195,7 +197,7 @@ export function queryKeyAchTransactionsGetAll(
     paymentDirection?: string | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

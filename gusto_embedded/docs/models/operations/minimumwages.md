@@ -5,7 +5,7 @@ The minimum wage record you want to apply to the compensation
 ## Example Usage
 
 ```typescript
-import { MinimumWages } from "@gusto/embedded-api/models/operations";
+import { MinimumWages } from "@gusto/embedded-api/models/operations/postv1compensationscompensationid.js";
 
 let value: MinimumWages = {};
 ```

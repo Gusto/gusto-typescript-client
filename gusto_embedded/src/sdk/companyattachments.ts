@@ -6,7 +6,18 @@ import { companyAttachmentsCreate } from "../funcs/companyAttachmentsCreate.js";
 import { companyAttachmentsGetDetails } from "../funcs/companyAttachmentsGetDetails.js";
 import { companyAttachmentsGetList } from "../funcs/companyAttachmentsGetList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesAttachmentRequest,
+  GetV1CompaniesAttachmentResponse,
+} from "../models/operations/getv1companiesattachment.js";
+import {
+  GetV1CompaniesAttachmentsRequest,
+  GetV1CompaniesAttachmentsResponse,
+} from "../models/operations/getv1companiesattachments.js";
+import {
+  PostV1CompaniesAttachmentRequest,
+  PostV1CompaniesAttachmentResponse,
+} from "../models/operations/postv1companiesattachment.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyAttachments extends ClientSDK {
@@ -19,9 +30,9 @@ export class CompanyAttachments extends ClientSDK {
    * scope: `company_attachments:read`
    */
   async getDetails(
-    request: operations.GetV1CompaniesAttachmentRequest,
+    request: GetV1CompaniesAttachmentRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesAttachmentResponse> {
+  ): Promise<GetV1CompaniesAttachmentResponse> {
     return unwrapAsync(companyAttachmentsGetDetails(
       this,
       request,
@@ -38,9 +49,9 @@ export class CompanyAttachments extends ClientSDK {
    * scope: `company_attachments:read`
    */
   async getList(
-    request: operations.GetV1CompaniesAttachmentsRequest,
+    request: GetV1CompaniesAttachmentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesAttachmentsResponse> {
+  ): Promise<GetV1CompaniesAttachmentsResponse> {
     return unwrapAsync(companyAttachmentsGetList(
       this,
       request,
@@ -59,9 +70,9 @@ export class CompanyAttachments extends ClientSDK {
    * scope: `company_attachments:write`
    */
   async create(
-    request: operations.PostV1CompaniesAttachmentRequest,
+    request: PostV1CompaniesAttachmentRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesAttachmentResponse> {
+  ): Promise<PostV1CompaniesAttachmentResponse> {
     return unwrapAsync(companyAttachmentsCreate(
       this,
       request,

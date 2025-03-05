@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyUuidContractorsRequest,
+  GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema,
+  GetV1CompaniesCompanyUuidContractorsResponse,
+  GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyuuidcontractors.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function contractorsList(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+  request: GetV1CompaniesCompanyUuidContractorsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyUuidContractorsResponse,
+    GetV1CompaniesCompanyUuidContractorsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function contractorsList(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+  request: GetV1CompaniesCompanyUuidContractorsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyUuidContractorsResponse,
+      GetV1CompaniesCompanyUuidContractorsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema
-        .parse(value),
+      GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -167,7 +171,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyUuidContractorsResponse,
+    GetV1CompaniesCompanyUuidContractorsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,11 +180,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema,
-      { key: "Contractor-List" },
-    ),
+    M.json(200, GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema, {
+      key: "Contractor-List",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

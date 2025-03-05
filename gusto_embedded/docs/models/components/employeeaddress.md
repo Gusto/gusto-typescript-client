@@ -3,8 +3,8 @@
 ## Example Usage
 
 ```typescript
-import { EmployeeAddress } from "@gusto/embedded-api/models/components";
-import { RFCDate } from "@gusto/embedded-api/types";
+import { EmployeeAddress } from "@gusto/embedded-api/models/components/employeeaddress.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: EmployeeAddress = {
   street1: "333 Kiera Stravenue",

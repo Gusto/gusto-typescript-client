@@ -7,7 +7,23 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Garnishment,
+  Garnishment$inboundSchema,
+  Garnishment$Outbound,
+  Garnishment$outboundSchema,
+} from "../components/garnishment.js";
+import {
+  GarnishmentChildSupport,
+  GarnishmentChildSupport$inboundSchema,
+  GarnishmentChildSupport$Outbound,
+  GarnishmentChildSupport$outboundSchema,
+} from "../components/garnishmentchildsupport.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -75,7 +91,7 @@ export type PostV1EmployeesEmployeeIdGarnishmentsRequestBody = {
   /**
    * Additional child support order details
    */
-  childSupport?: components.GarnishmentChildSupportInput | null | undefined;
+  childSupport?: GarnishmentChildSupport | null | undefined;
 };
 
 export type PostV1EmployeesEmployeeIdGarnishmentsRequest = {
@@ -86,7 +102,7 @@ export type PostV1EmployeesEmployeeIdGarnishmentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1EmployeesEmployeeIdGarnishmentsRequestBody;
 };
 
@@ -106,7 +122,7 @@ export type PostV1EmployeesEmployeeIdGarnishmentsResponse = {
   /**
    * Example response
    */
-  garnishment?: components.Garnishment | undefined;
+  garnishment?: Garnishment | undefined;
 };
 
 /** @internal */
@@ -148,9 +164,7 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema:
     pay_period_maximum: z.nullable(z.string()).default(null),
     deduct_as_percentage: z.boolean().default(false),
     total_amount: z.string().optional(),
-    child_support: z.nullable(
-      components.GarnishmentChildSupportInput$inboundSchema,
-    ).optional(),
+    child_support: z.nullable(GarnishmentChildSupport$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "court_ordered": "courtOrdered",
@@ -176,10 +190,7 @@ export type PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound = {
   pay_period_maximum: string | null;
   deduct_as_percentage: boolean;
   total_amount?: string | undefined;
-  child_support?:
-    | components.GarnishmentChildSupportInput$Outbound
-    | null
-    | undefined;
+  child_support?: GarnishmentChildSupport$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -200,9 +211,7 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema:
     payPeriodMaximum: z.nullable(z.string()).default(null),
     deductAsPercentage: z.boolean().default(false),
     totalAmount: z.string().optional(),
-    childSupport: z.nullable(
-      components.GarnishmentChildSupportInput$outboundSchema,
-    ).optional(),
+    childSupport: z.nullable(GarnishmentChildSupport$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       courtOrdered: "court_ordered",
@@ -266,9 +275,7 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema
     ),
@@ -295,9 +302,7 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema:
     PostV1EmployeesEmployeeIdGarnishmentsRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema
     ),
@@ -361,7 +366,7 @@ export const PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    Garnishment: components.Garnishment$inboundSchema.optional(),
+    Garnishment: Garnishment$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -376,7 +381,7 @@ export type PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  Garnishment?: components.Garnishment$Outbound | undefined;
+  Garnishment?: Garnishment$Outbound | undefined;
 };
 
 /** @internal */
@@ -391,7 +396,7 @@ export const PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    garnishment: components.Garnishment$outboundSchema.optional(),
+    garnishment: Garnishment$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

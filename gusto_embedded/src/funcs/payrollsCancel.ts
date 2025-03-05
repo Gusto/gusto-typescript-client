@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSchema,
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema,
+} from "../models/operations/putapiv1companiescompanyidpayrollspayrollidcancel.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,12 +44,12 @@ import { Result } from "../types/fp.js";
  */
 export function payrollsCancel(
   client: GustoEmbeddedCore,
-  request: operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+  request: PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,13 +68,13 @@ export function payrollsCancel(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
+  request: PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,8 +89,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSchema
+      PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -170,8 +177,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -182,11 +189,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema,
+      PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema,
       { key: "Payroll" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

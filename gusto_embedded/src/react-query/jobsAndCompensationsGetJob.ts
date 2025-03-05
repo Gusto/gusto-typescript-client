@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsGetJob } from "../funcs/jobsAndCompensationsGetJob.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1JobsJobIdQueryParamInclude,
+  GetV1JobsJobIdRequest,
+  GetV1JobsJobIdResponse,
+} from "../models/operations/getv1jobsjobid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +30,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type JobsAndCompensationsGetJobQueryData =
-  operations.GetV1JobsJobIdResponse;
+export type JobsAndCompensationsGetJobQueryData = GetV1JobsJobIdResponse;
 
 /**
  * Get a job
@@ -38,7 +41,7 @@ export type JobsAndCompensationsGetJobQueryData =
  * scope: `jobs:read`
  */
 export function useJobsAndCompensationsGetJob(
-  request: operations.GetV1JobsJobIdRequest,
+  request: GetV1JobsJobIdRequest,
   options?: QueryHookOptions<JobsAndCompensationsGetJobQueryData>,
 ): UseQueryResult<JobsAndCompensationsGetJobQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useJobsAndCompensationsGetJob(
  * scope: `jobs:read`
  */
 export function useJobsAndCompensationsGetJobSuspense(
-  request: operations.GetV1JobsJobIdRequest,
+  request: GetV1JobsJobIdRequest,
   options?: SuspenseQueryHookOptions<JobsAndCompensationsGetJobQueryData>,
 ): UseSuspenseQueryResult<JobsAndCompensationsGetJobQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useJobsAndCompensationsGetJobSuspense(
 export function prefetchJobsAndCompensationsGetJob(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1JobsJobIdRequest,
+  request: GetV1JobsJobIdRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildJobsAndCompensationsGetJobQuery(
@@ -93,8 +96,8 @@ export function setJobsAndCompensationsGetJobData(
   queryKeyBase: [
     jobId: string,
     parameters: {
-      include?: operations.GetV1JobsJobIdQueryParamInclude | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      include?: GetV1JobsJobIdQueryParamInclude | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: JobsAndCompensationsGetJobQueryData,
@@ -110,8 +113,8 @@ export function invalidateJobsAndCompensationsGetJob(
     [
       jobId: string,
       parameters: {
-        include?: operations.GetV1JobsJobIdQueryParamInclude | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        include?: GetV1JobsJobIdQueryParamInclude | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -140,7 +143,7 @@ export function invalidateAllJobsAndCompensationsGetJob(
 
 export function buildJobsAndCompensationsGetJobQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1JobsJobIdRequest,
+  request: GetV1JobsJobIdRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -174,8 +177,8 @@ export function buildJobsAndCompensationsGetJobQuery(
 export function queryKeyJobsAndCompensationsGetJob(
   jobId: string,
   parameters: {
-    include?: operations.GetV1JobsJobIdQueryParamInclude | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    include?: GetV1JobsJobIdQueryParamInclude | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

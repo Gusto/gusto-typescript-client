@@ -4,7 +4,11 @@
 
 import { invoicesGet } from "../funcs/invoicesGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetInvoicesInvoicePeriodRequest,
+  GetInvoicesInvoicePeriodResponse,
+  GetInvoicesInvoicePeriodSecurity,
+} from "../models/operations/getinvoicesinvoiceperiod.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Invoices extends ClientSDK {
@@ -21,10 +25,10 @@ export class Invoices extends ClientSDK {
    * scope: `invoices:read`
    */
   async get(
-    security: operations.GetInvoicesInvoicePeriodSecurity,
-    request: operations.GetInvoicesInvoicePeriodRequest,
+    security: GetInvoicesInvoicePeriodSecurity,
+    request: GetInvoicesInvoicePeriodRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetInvoicesInvoicePeriodResponse> {
+  ): Promise<GetInvoicesInvoicePeriodResponse> {
     return unwrapAsync(invoicesGet(
       this,
       security,

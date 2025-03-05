@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1LocationsLocationIdRequest,
+  PutV1LocationsLocationIdRequest$outboundSchema,
+  PutV1LocationsLocationIdResponse,
+  PutV1LocationsLocationIdResponse$inboundSchema,
+} from "../models/operations/putv1locationslocationid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function locationsUpdate(
   client: GustoEmbeddedCore,
-  request: operations.PutV1LocationsLocationIdRequest,
+  request: PutV1LocationsLocationIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1LocationsLocationIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1LocationsLocationIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function locationsUpdate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1LocationsLocationIdRequest,
+  request: PutV1LocationsLocationIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1LocationsLocationIdResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1LocationsLocationIdResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +86,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PutV1LocationsLocationIdRequest$outboundSchema.parse(value),
+    (value) => PutV1LocationsLocationIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -161,8 +168,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1LocationsLocationIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1LocationsLocationIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,10 +178,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PutV1LocationsLocationIdResponse$inboundSchema, {
+    M.json(200, PutV1LocationsLocationIdResponse$inboundSchema, {
       key: "Location",
     }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

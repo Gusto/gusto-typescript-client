@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { PostV1WebhookSubscriptionRequestBody } from "@gusto/embedded-api/models/operations";
+import { PostV1WebhookSubscriptionRequestBody } from "@gusto/embedded-api/models/operations/postv1webhooksubscription.js";
 
 let value: PostV1WebhookSubscriptionRequestBody = {
-  url: "https://worst-whack.org",
+  url: "https://worst-wriggler.com",
   subscriptionTypes: [
-    "Company",
+    "Signatory",
   ],
 };
 ```

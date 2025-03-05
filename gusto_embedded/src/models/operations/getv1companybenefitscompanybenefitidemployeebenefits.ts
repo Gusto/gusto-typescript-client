@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  EmployeeBenefit,
+  EmployeeBenefit$inboundSchema,
+  EmployeeBenefit$Outbound,
+  EmployeeBenefit$outboundSchema,
+} from "../components/employeebenefit.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest = {
@@ -25,7 +35,7 @@ export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse = {
@@ -44,7 +54,7 @@ export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse = {
   /**
    * Example response
    */
-  employeeBenefitList?: Array<components.EmployeeBenefit> | undefined;
+  employeeBenefitList?: Array<EmployeeBenefit> | undefined;
 };
 
 /** @internal */
@@ -57,9 +67,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$inbound
     company_benefit_id: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "company_benefit_id": "companyBenefitId",
@@ -86,9 +94,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboun
     companyBenefitId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyBenefitId: "company_benefit_id",
@@ -147,8 +153,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboun
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Employee-Benefit-List": z.array(components.EmployeeBenefit$inboundSchema)
-      .optional(),
+    "Employee-Benefit-List": z.array(EmployeeBenefit$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -164,9 +169,7 @@ export type GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$Outboun
     ContentType: string;
     StatusCode: number;
     RawResponse: never;
-    "Employee-Benefit-List"?:
-      | Array<components.EmployeeBenefit$Outbound>
-      | undefined;
+    "Employee-Benefit-List"?: Array<EmployeeBenefit$Outbound> | undefined;
   };
 
 /** @internal */
@@ -181,8 +184,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$outbou
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    employeeBenefitList: z.array(components.EmployeeBenefit$outboundSchema)
-      .optional(),
+    employeeBenefitList: z.array(EmployeeBenefit$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
+  GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema,
+  GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
+  GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyidcontractorpaymentgroups.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function contractorPaymentGroupsGetList(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
+  request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
+    GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function contractorPaymentGroupsGetList(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
+  request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
+      GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema
+      GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -169,7 +173,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
+    GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -180,8 +184,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema,
+      GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema,
       { key: "Contractor-Payment-Group-List" },
     ),
     M.fail([404, "4XX"]),

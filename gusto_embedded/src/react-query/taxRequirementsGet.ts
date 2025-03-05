@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { taxRequirementsGet } from "../funcs/taxRequirementsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+} from "../models/operations/getv1companiescompanyuuidtaxrequirementsstate.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type TaxRequirementsGetQueryData =
-  operations.GetV1CompaniesCompanyUuidTaxRequirementsStateResponse;
+  GetV1CompaniesCompanyUuidTaxRequirementsStateResponse;
 
 /**
  * Get State Tax Requirements
@@ -77,7 +80,7 @@ export type TaxRequirementsGetQueryData =
  * scope: `company_tax_requirements:read`
  */
 export function useTaxRequirementsGet(
-  request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  request: GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
   options?: QueryHookOptions<TaxRequirementsGetQueryData>,
 ): UseQueryResult<TaxRequirementsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -139,7 +142,7 @@ export function useTaxRequirementsGet(
  * scope: `company_tax_requirements:read`
  */
 export function useTaxRequirementsGetSuspense(
-  request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  request: GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
   options?: SuspenseQueryHookOptions<TaxRequirementsGetQueryData>,
 ): UseSuspenseQueryResult<TaxRequirementsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -156,7 +159,7 @@ export function useTaxRequirementsGetSuspense(
 export function prefetchTaxRequirementsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  request: GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildTaxRequirementsGetQuery(
@@ -173,7 +176,7 @@ export function setTaxRequirementsGetData(
     state: string,
     parameters: {
       scheduling?: boolean | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: TaxRequirementsGetQueryData,
@@ -191,7 +194,7 @@ export function invalidateTaxRequirementsGet(
       state: string,
       parameters: {
         scheduling?: boolean | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -220,7 +223,7 @@ export function invalidateAllTaxRequirementsGet(
 
 export function buildTaxRequirementsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  request: GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -256,7 +259,7 @@ export function queryKeyTaxRequirementsGet(
   state: string,
   parameters: {
     scheduling?: boolean | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

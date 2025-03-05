@@ -4,7 +4,10 @@
 
 import { notificationsGetDetails } from "../funcs/notificationsGetDetails.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetNotificationsNotificationUuidRequest,
+  GetNotificationsNotificationUuidResponse,
+} from "../models/operations/getnotificationsnotificationuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Notifications extends ClientSDK {
@@ -21,9 +24,9 @@ export class Notifications extends ClientSDK {
    * scope: `notifications:read`
    */
   async getDetails(
-    request: operations.GetNotificationsNotificationUuidRequest,
+    request: GetNotificationsNotificationUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetNotificationsNotificationUuidResponse> {
+  ): Promise<GetNotificationsNotificationUuidResponse> {
     return unwrapAsync(notificationsGetDetails(
       this,
       request,

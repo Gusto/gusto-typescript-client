@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { MlkDay } from "@gusto/embedded-api/models/operations";
+import { MlkDay } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidholidaypaypolicy.js";
 
 let value: MlkDay = {};
 ```

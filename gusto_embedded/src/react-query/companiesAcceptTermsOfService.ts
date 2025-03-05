@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesAcceptTermsOfService } from "../funcs/companiesAcceptTermsOfService.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
+  PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
+} from "../models/operations/postpartnermanagedcompaniescompanyuuidaccepttermsofservice.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompaniesAcceptTermsOfServiceMutationVariables = {
-  request:
-    operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest;
+  request: PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest;
   options?: RequestOptions;
 };
 
 export type CompaniesAcceptTermsOfServiceMutationData =
-  operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse;
+  PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse;
 
 /**
  * Accept terms of service for a company user

@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesDelete } from "../funcs/signatoriesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
+  DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+} from "../models/operations/deletev1companiescompanyuuidsignatoriessignatoryuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type SignatoriesDeleteMutationVariables = {
-  request:
-    operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest;
+  request: DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest;
   options?: RequestOptions;
 };
 
 export type SignatoriesDeleteMutationData =
-  operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
+  DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
 /**
  * Delete a signatory

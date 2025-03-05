@@ -7,7 +7,22 @@ import { bankAccountsCreateFromPlaidToken } from "../funcs/bankAccountsCreateFro
 import { bankAccountsGet } from "../funcs/bankAccountsGet.js";
 import { bankAccountsVerify } from "../funcs/bankAccountsVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdBankAccountsRequest,
+  GetV1CompaniesCompanyIdBankAccountsResponse,
+} from "../models/operations/getv1companiescompanyidbankaccounts.js";
+import {
+  PostV1CompaniesCompanyIdBankAccountsRequest,
+  PostV1CompaniesCompanyIdBankAccountsResponse,
+} from "../models/operations/postv1companiescompanyidbankaccounts.js";
+import {
+  PostV1PlaidProcessorTokenRequest,
+  PostV1PlaidProcessorTokenResponse,
+} from "../models/operations/postv1plaidprocessortoken.js";
+import {
+  PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
+  PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
+} from "../models/operations/putv1companiescompanyidbankaccountsverify.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class BankAccounts extends ClientSDK {
@@ -29,9 +44,9 @@ export class BankAccounts extends ClientSDK {
    * > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
    */
   async create(
-    request: operations.PostV1CompaniesCompanyIdBankAccountsRequest,
+    request: PostV1CompaniesCompanyIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdBankAccountsResponse> {
+  ): Promise<PostV1CompaniesCompanyIdBankAccountsResponse> {
     return unwrapAsync(bankAccountsCreate(
       this,
       request,
@@ -48,9 +63,9 @@ export class BankAccounts extends ClientSDK {
    * scope: `company_bank_accounts:read`
    */
   async get(
-    request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
+    request: GetV1CompaniesCompanyIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdBankAccountsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdBankAccountsResponse> {
     return unwrapAsync(bankAccountsGet(
       this,
       request,
@@ -80,9 +95,9 @@ export class BankAccounts extends ClientSDK {
    * scope: `company_bank_accounts:write`
    */
   async verify(
-    request: operations.PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
+    request: PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompaniesCompanyIdBankAccountsVerifyResponse> {
+  ): Promise<PutV1CompaniesCompanyIdBankAccountsVerifyResponse> {
     return unwrapAsync(bankAccountsVerify(
       this,
       request,
@@ -106,9 +121,9 @@ export class BankAccounts extends ClientSDK {
    * > If a default company bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
    */
   async createFromPlaidToken(
-    request: operations.PostV1PlaidProcessorTokenRequest,
+    request: PostV1PlaidProcessorTokenRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1PlaidProcessorTokenResponse> {
+  ): Promise<PostV1PlaidProcessorTokenResponse> {
     return unwrapAsync(bankAccountsCreateFromPlaidToken(
       this,
       request,

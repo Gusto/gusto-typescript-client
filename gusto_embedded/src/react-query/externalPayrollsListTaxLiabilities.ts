@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsListTaxLiabilities } from "../funcs/externalPayrollsListTaxLiabilities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1TaxLiabilitiesRequest,
+  GetV1TaxLiabilitiesResponse,
+} from "../models/operations/getv1taxliabilities.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ExternalPayrollsListTaxLiabilitiesQueryData =
-  operations.GetV1TaxLiabilitiesResponse;
+  GetV1TaxLiabilitiesResponse;
 
 /**
  * Get tax liabilities
@@ -38,7 +41,7 @@ export type ExternalPayrollsListTaxLiabilitiesQueryData =
  * scope: `external_payrolls:read`
  */
 export function useExternalPayrollsListTaxLiabilities(
-  request: operations.GetV1TaxLiabilitiesRequest,
+  request: GetV1TaxLiabilitiesRequest,
   options?: QueryHookOptions<ExternalPayrollsListTaxLiabilitiesQueryData>,
 ): UseQueryResult<ExternalPayrollsListTaxLiabilitiesQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useExternalPayrollsListTaxLiabilities(
  * scope: `external_payrolls:read`
  */
 export function useExternalPayrollsListTaxLiabilitiesSuspense(
-  request: operations.GetV1TaxLiabilitiesRequest,
+  request: GetV1TaxLiabilitiesRequest,
   options?: SuspenseQueryHookOptions<
     ExternalPayrollsListTaxLiabilitiesQueryData
   >,
@@ -80,7 +83,7 @@ export function useExternalPayrollsListTaxLiabilitiesSuspense(
 export function prefetchExternalPayrollsListTaxLiabilities(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1TaxLiabilitiesRequest,
+  request: GetV1TaxLiabilitiesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildExternalPayrollsListTaxLiabilitiesQuery(
@@ -94,7 +97,7 @@ export function setExternalPayrollsListTaxLiabilitiesData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ExternalPayrollsListTaxLiabilitiesQueryData,
 ): ExternalPayrollsListTaxLiabilitiesQueryData | undefined {
@@ -111,7 +114,7 @@ export function invalidateExternalPayrollsListTaxLiabilities(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -139,7 +142,7 @@ export function invalidateAllExternalPayrollsListTaxLiabilities(
 
 export function buildExternalPayrollsListTaxLiabilitiesQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1TaxLiabilitiesRequest,
+  request: GetV1TaxLiabilitiesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -171,7 +174,7 @@ export function buildExternalPayrollsListTaxLiabilitiesQuery(
 
 export function queryKeyExternalPayrollsListTaxLiabilities(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

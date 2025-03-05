@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutAddPeopleToDepartmentRequest,
+  PutAddPeopleToDepartmentRequest$outboundSchema,
+  PutAddPeopleToDepartmentResponse,
+  PutAddPeopleToDepartmentResponse$inboundSchema,
+} from "../models/operations/putaddpeopletodepartment.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function departmentsAddPeople(
   client: GustoEmbeddedCore,
-  request: operations.PutAddPeopleToDepartmentRequest,
+  request: PutAddPeopleToDepartmentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutAddPeopleToDepartmentResponse,
+    PutAddPeopleToDepartmentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function departmentsAddPeople(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutAddPeopleToDepartmentRequest,
+  request: PutAddPeopleToDepartmentRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutAddPeopleToDepartmentResponse,
+      PutAddPeopleToDepartmentResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PutAddPeopleToDepartmentRequest$outboundSchema.parse(value),
+    (value) => PutAddPeopleToDepartmentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -158,7 +162,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutAddPeopleToDepartmentResponse,
+    PutAddPeopleToDepartmentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -167,7 +171,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PutAddPeopleToDepartmentResponse$inboundSchema, {
+    M.json(200, PutAddPeopleToDepartmentResponse$inboundSchema, {
       key: "Department",
     }),
     M.fail([404, "4XX"]),

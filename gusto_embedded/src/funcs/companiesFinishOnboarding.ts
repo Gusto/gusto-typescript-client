@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetV1CompanyFinishOnboardingRequest,
+  GetV1CompanyFinishOnboardingRequest$outboundSchema,
+  GetV1CompanyFinishOnboardingResponse,
+  GetV1CompanyFinishOnboardingResponse$inboundSchema,
+} from "../models/operations/getv1companyfinishonboarding.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -46,12 +54,12 @@ import { Result } from "../types/fp.js";
  */
 export function companiesFinishOnboarding(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFinishOnboardingRequest,
+  request: GetV1CompanyFinishOnboardingRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompanyFinishOnboardingResponse,
-    | errors.UnprocessableEntityErrorObject
+    GetV1CompanyFinishOnboardingResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -70,13 +78,13 @@ export function companiesFinishOnboarding(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFinishOnboardingRequest,
+  request: GetV1CompanyFinishOnboardingRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompanyFinishOnboardingResponse,
-      | errors.UnprocessableEntityErrorObject
+      GetV1CompanyFinishOnboardingResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -90,10 +98,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1CompanyFinishOnboardingRequest$outboundSchema.parse(
-        value,
-      ),
+    (value) => GetV1CompanyFinishOnboardingRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -176,8 +181,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompanyFinishOnboardingResponse,
-    | errors.UnprocessableEntityErrorObject
+    GetV1CompanyFinishOnboardingResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -186,10 +191,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompanyFinishOnboardingResponse$inboundSchema, {
+    M.json(200, GetV1CompanyFinishOnboardingResponse$inboundSchema, {
       key: "Company-Onboarding-Status",
     }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

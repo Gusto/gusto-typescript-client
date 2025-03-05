@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
+import {
+  PostCompaniesPayrollSkipCompanyUuidResponseBody,
+  PostCompaniesPayrollSkipCompanyUuidResponseBody$inboundSchema,
+} from "../models/errors/postcompaniespayrollskipcompanyuuid.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostCompaniesPayrollSkipCompanyUuidRequest,
+  PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema,
+  PostCompaniesPayrollSkipCompanyUuidResponse,
+  PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema,
+} from "../models/operations/postcompaniespayrollskipcompanyuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,12 +44,12 @@ import { Result } from "../types/fp.js";
  */
 export function payrollsSkip(
   client: GustoEmbeddedCore,
-  request: operations.PostCompaniesPayrollSkipCompanyUuidRequest,
+  request: PostCompaniesPayrollSkipCompanyUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostCompaniesPayrollSkipCompanyUuidResponse,
-    | errors.PostCompaniesPayrollSkipCompanyUuidResponseBody
+    PostCompaniesPayrollSkipCompanyUuidResponse,
+    | PostCompaniesPayrollSkipCompanyUuidResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,13 +68,13 @@ export function payrollsSkip(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PostCompaniesPayrollSkipCompanyUuidRequest,
+  request: PostCompaniesPayrollSkipCompanyUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostCompaniesPayrollSkipCompanyUuidResponse,
-      | errors.PostCompaniesPayrollSkipCompanyUuidResponseBody
+      PostCompaniesPayrollSkipCompanyUuidResponse,
+      | PostCompaniesPayrollSkipCompanyUuidResponseBody
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,8 +89,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema
-        .parse(value),
+      PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -166,8 +173,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostCompaniesPayrollSkipCompanyUuidResponse,
-    | errors.PostCompaniesPayrollSkipCompanyUuidResponseBody
+    PostCompaniesPayrollSkipCompanyUuidResponse,
+    | PostCompaniesPayrollSkipCompanyUuidResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,13 +183,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      202,
-      operations.PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema,
-    ),
+    M.nil(202, PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema),
     M.jsonErr(
       422,
-      errors.PostCompaniesPayrollSkipCompanyUuidResponseBody$inboundSchema,
+      PostCompaniesPayrollSkipCompanyUuidResponseBody$inboundSchema,
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

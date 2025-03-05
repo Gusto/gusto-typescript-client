@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetReportsReportUuidRequest,
+  GetReportsReportUuidRequest$outboundSchema,
+  GetReportsReportUuidResponse,
+  GetReportsReportUuidResponse$inboundSchema,
+} from "../models/operations/getreportsreportuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function reportsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetReportsReportUuidRequest,
+  request: GetReportsReportUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetReportsReportUuidResponse,
+    GetReportsReportUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function reportsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetReportsReportUuidRequest,
+  request: GetReportsReportUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetReportsReportUuidResponse,
+      GetReportsReportUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetReportsReportUuidRequest$outboundSchema.parse(value),
+    (value) => GetReportsReportUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -157,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetReportsReportUuidResponse,
+    GetReportsReportUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -166,9 +170,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetReportsReportUuidResponse$inboundSchema, {
-      key: "Report",
-    }),
+    M.json(200, GetReportsReportUuidResponse$inboundSchema, { key: "Report" }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -5,7 +5,14 @@
 import { introspectionGetInfo } from "../funcs/introspectionGetInfo.js";
 import { introspectionRefreshToken } from "../funcs/introspectionRefreshToken.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1TokenInfoRequest,
+  GetV1TokenInfoResponse,
+} from "../models/operations/getv1tokeninfo.js";
+import {
+  RefreshAccessTokenRequest,
+  RefreshAccessTokenResponse,
+} from "../models/operations/refreshaccesstoken.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Introspection extends ClientSDK {
@@ -16,9 +23,9 @@ export class Introspection extends ClientSDK {
    * Returns scope and resource information associated with the current access token.
    */
   async getInfo(
-    request: operations.GetV1TokenInfoRequest,
+    request: GetV1TokenInfoRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1TokenInfoResponse> {
+  ): Promise<GetV1TokenInfoResponse> {
     return unwrapAsync(introspectionGetInfo(
       this,
       request,
@@ -37,9 +44,9 @@ export class Introspection extends ClientSDK {
    * The `expires_in` value is provided in seconds from when the `access_token` was generated.
    */
   async refreshToken(
-    request: operations.RefreshAccessTokenRequest,
+    request: RefreshAccessTokenRequest,
     options?: RequestOptions,
-  ): Promise<operations.RefreshAccessTokenResponse> {
+  ): Promise<RefreshAccessTokenResponse> {
     return unwrapAsync(introspectionRefreshToken(
       this,
       request,

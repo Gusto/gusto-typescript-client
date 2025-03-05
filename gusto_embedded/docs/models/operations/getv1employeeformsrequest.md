@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1EmployeeFormsRequest } from "@gusto/embedded-api/models/operations";
+import { GetV1EmployeeFormsRequest } from "@gusto/embedded-api/models/operations/getv1employeeforms.js";
 
 let value: GetV1EmployeeFormsRequest = {
   employeeId: "<id>",

@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutWireInRequestsWireInRequestUuidRequest,
+  PutWireInRequestsWireInRequestUuidRequest$outboundSchema,
+  PutWireInRequestsWireInRequestUuidResponse,
+  PutWireInRequestsWireInRequestUuidResponse$inboundSchema,
+} from "../models/operations/putwireinrequestswireinrequestuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function wireInRequestsSubmit(
   client: GustoEmbeddedCore,
-  request: operations.PutWireInRequestsWireInRequestUuidRequest,
+  request: PutWireInRequestsWireInRequestUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutWireInRequestsWireInRequestUuidResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutWireInRequestsWireInRequestUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function wireInRequestsSubmit(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutWireInRequestsWireInRequestUuidRequest,
+  request: PutWireInRequestsWireInRequestUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutWireInRequestsWireInRequestUuidResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutWireInRequestsWireInRequestUuidResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,9 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PutWireInRequestsWireInRequestUuidRequest$outboundSchema.parse(
-        value,
-      ),
+      PutWireInRequestsWireInRequestUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -166,8 +172,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutWireInRequestsWireInRequestUuidResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutWireInRequestsWireInRequestUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,12 +182,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.PutWireInRequestsWireInRequestUuidResponse$inboundSchema,
-      { key: "Wire-In-Request" },
-    ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, PutWireInRequestsWireInRequestUuidResponse$inboundSchema, {
+      key: "Wire-In-Request",
+    }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

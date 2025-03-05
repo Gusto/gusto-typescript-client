@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsDeleteCompensation } from "../funcs/jobsAndCompensationsDeleteCompensation.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompensationsCompensationIdRequest,
+  DeleteV1CompensationsCompensationIdResponse,
+} from "../models/operations/deletev1compensationscompensationid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type JobsAndCompensationsDeleteCompensationMutationVariables = {
-  request: operations.DeleteV1CompensationsCompensationIdRequest;
+  request: DeleteV1CompensationsCompensationIdRequest;
   options?: RequestOptions;
 };
 
 export type JobsAndCompensationsDeleteCompensationMutationData =
-  operations.DeleteV1CompensationsCompensationIdResponse;
+  DeleteV1CompensationsCompensationIdResponse;
 
 /**
  * Delete a compensation

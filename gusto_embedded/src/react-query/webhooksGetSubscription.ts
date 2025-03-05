@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksGetSubscription } from "../funcs/webhooksGetSubscription.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1WebhookSubscriptionUuidRequest,
+  GetV1WebhookSubscriptionUuidResponse,
+  GetV1WebhookSubscriptionUuidSecurity,
+} from "../models/operations/getv1webhooksubscriptionuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +31,7 @@ import {
 } from "./_types.js";
 
 export type WebhooksGetSubscriptionQueryData =
-  operations.GetV1WebhookSubscriptionUuidResponse;
+  GetV1WebhookSubscriptionUuidResponse;
 
 /**
  * Get a webhook subscription
@@ -42,8 +46,8 @@ export type WebhooksGetSubscriptionQueryData =
  * scope: `webhook_subscriptions:read`
  */
 export function useWebhooksGetSubscription(
-  security: operations.GetV1WebhookSubscriptionUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionUuidRequest,
+  security: GetV1WebhookSubscriptionUuidSecurity,
+  request: GetV1WebhookSubscriptionUuidRequest,
   options?: QueryHookOptions<WebhooksGetSubscriptionQueryData>,
 ): UseQueryResult<WebhooksGetSubscriptionQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -71,8 +75,8 @@ export function useWebhooksGetSubscription(
  * scope: `webhook_subscriptions:read`
  */
 export function useWebhooksGetSubscriptionSuspense(
-  security: operations.GetV1WebhookSubscriptionUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionUuidRequest,
+  security: GetV1WebhookSubscriptionUuidSecurity,
+  request: GetV1WebhookSubscriptionUuidRequest,
   options?: SuspenseQueryHookOptions<WebhooksGetSubscriptionQueryData>,
 ): UseSuspenseQueryResult<WebhooksGetSubscriptionQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -90,8 +94,8 @@ export function useWebhooksGetSubscriptionSuspense(
 export function prefetchWebhooksGetSubscription(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionUuidRequest,
+  security: GetV1WebhookSubscriptionUuidSecurity,
+  request: GetV1WebhookSubscriptionUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildWebhooksGetSubscriptionQuery(
@@ -106,7 +110,7 @@ export function setWebhooksGetSubscriptionData(
   client: QueryClient,
   queryKeyBase: [
     webhookSubscriptionUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: WebhooksGetSubscriptionQueryData,
 ): WebhooksGetSubscriptionQueryData | undefined {
@@ -120,7 +124,7 @@ export function invalidateWebhooksGetSubscription(
   queryKeyBase: TupleToPrefixes<
     [
       webhookSubscriptionUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -148,8 +152,8 @@ export function invalidateAllWebhooksGetSubscription(
 
 export function buildWebhooksGetSubscriptionQuery(
   client$: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionUuidSecurity,
-  request: operations.GetV1WebhookSubscriptionUuidRequest,
+  security: GetV1WebhookSubscriptionUuidSecurity,
+  request: GetV1WebhookSubscriptionUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -182,7 +186,7 @@ export function buildWebhooksGetSubscriptionQuery(
 
 export function queryKeyWebhooksGetSubscription(
   webhookSubscriptionUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

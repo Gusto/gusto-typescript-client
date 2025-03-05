@@ -8,7 +8,26 @@ import { garnishmentsGetChildSupportData } from "../funcs/garnishmentsGetChildSu
 import { garnishmentsList } from "../funcs/garnishmentsList.js";
 import { garnishmentsUpdate } from "../funcs/garnishmentsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  GetV1EmployeesEmployeeIdGarnishmentsResponse,
+} from "../models/operations/getv1employeesemployeeidgarnishments.js";
+import {
+  GetV1GarnishmentsChildSupportRequest,
+  GetV1GarnishmentsChildSupportResponse,
+} from "../models/operations/getv1garnishmentschildsupport.js";
+import {
+  GetV1GarnishmentsGarnishmentIdRequest,
+  GetV1GarnishmentsGarnishmentIdResponse,
+} from "../models/operations/getv1garnishmentsgarnishmentid.js";
+import {
+  PostV1EmployeesEmployeeIdGarnishmentsRequest,
+  PostV1EmployeesEmployeeIdGarnishmentsResponse,
+} from "../models/operations/postv1employeesemployeeidgarnishments.js";
+import {
+  PutV1GarnishmentsGarnishmentIdRequest,
+  PutV1GarnishmentsGarnishmentIdResponse,
+} from "../models/operations/putv1garnishmentsgarnishmentid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Garnishments extends ClientSDK {
@@ -21,9 +40,9 @@ export class Garnishments extends ClientSDK {
    * scope: `garnishments:write`
    */
   async create(
-    request: operations.PostV1EmployeesEmployeeIdGarnishmentsRequest,
+    request: PostV1EmployeesEmployeeIdGarnishmentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1EmployeesEmployeeIdGarnishmentsResponse> {
+  ): Promise<PostV1EmployeesEmployeeIdGarnishmentsResponse> {
     return unwrapAsync(garnishmentsCreate(
       this,
       request,
@@ -40,9 +59,9 @@ export class Garnishments extends ClientSDK {
    * scope: `garnishments:read`
    */
   async list(
-    request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+    request: GetV1EmployeesEmployeeIdGarnishmentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdGarnishmentsResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdGarnishmentsResponse> {
     return unwrapAsync(garnishmentsList(
       this,
       request,
@@ -59,9 +78,9 @@ export class Garnishments extends ClientSDK {
    * scope: `garnishments:read`
    */
   async get(
-    request: operations.GetV1GarnishmentsGarnishmentIdRequest,
+    request: GetV1GarnishmentsGarnishmentIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1GarnishmentsGarnishmentIdResponse> {
+  ): Promise<GetV1GarnishmentsGarnishmentIdResponse> {
     return unwrapAsync(garnishmentsGet(
       this,
       request,
@@ -78,9 +97,9 @@ export class Garnishments extends ClientSDK {
    * scope: `garnishments:write`
    */
   async update(
-    request: operations.PutV1GarnishmentsGarnishmentIdRequest,
+    request: PutV1GarnishmentsGarnishmentIdRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1GarnishmentsGarnishmentIdResponse> {
+  ): Promise<PutV1GarnishmentsGarnishmentIdResponse> {
     return unwrapAsync(garnishmentsUpdate(
       this,
       request,
@@ -97,9 +116,9 @@ export class Garnishments extends ClientSDK {
    * scope: `garnishments:read`
    */
   async getChildSupportData(
-    request: operations.GetV1GarnishmentsChildSupportRequest,
+    request: GetV1GarnishmentsChildSupportRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1GarnishmentsChildSupportResponse> {
+  ): Promise<GetV1GarnishmentsChildSupportResponse> {
     return unwrapAsync(garnishmentsGetChildSupportData(
       this,
       request,

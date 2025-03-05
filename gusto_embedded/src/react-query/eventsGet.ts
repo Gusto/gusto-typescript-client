@@ -16,8 +16,13 @@ import { GustoEmbeddedCore } from "../core.js";
 import { eventsGet } from "../funcs/eventsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { SortOrder } from "../models/components/sortorder.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetEventsRequest,
+  GetEventsResponse,
+  GetEventsSecurity,
+} from "../models/operations/getevents.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +31,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EventsGetQueryData = operations.GetEventsResponse;
+export type EventsGetQueryData = GetEventsResponse;
 
 /**
  * Get all events
@@ -41,8 +46,8 @@ export type EventsGetQueryData = operations.GetEventsResponse;
  * scope: `events:read`
  */
 export function useEventsGet(
-  security: operations.GetEventsSecurity,
-  request: operations.GetEventsRequest,
+  security: GetEventsSecurity,
+  request: GetEventsRequest,
   options?: QueryHookOptions<EventsGetQueryData>,
 ): UseQueryResult<EventsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -70,8 +75,8 @@ export function useEventsGet(
  * scope: `events:read`
  */
 export function useEventsGetSuspense(
-  security: operations.GetEventsSecurity,
-  request: operations.GetEventsRequest,
+  security: GetEventsSecurity,
+  request: GetEventsRequest,
   options?: SuspenseQueryHookOptions<EventsGetQueryData>,
 ): UseSuspenseQueryResult<EventsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -89,8 +94,8 @@ export function useEventsGetSuspense(
 export function prefetchEventsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  security: operations.GetEventsSecurity,
-  request: operations.GetEventsRequest,
+  security: GetEventsSecurity,
+  request: GetEventsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEventsGetQuery(
@@ -109,8 +114,8 @@ export function setEventsGetData(
       resourceUuid?: string | undefined;
       limit?: string | undefined;
       eventType?: string | undefined;
-      sortOrder?: components.SortOrder | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      sortOrder?: SortOrder | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EventsGetQueryData,
@@ -128,8 +133,8 @@ export function invalidateEventsGet(
       resourceUuid?: string | undefined;
       limit?: string | undefined;
       eventType?: string | undefined;
-      sortOrder?: components.SortOrder | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      sortOrder?: SortOrder | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -152,8 +157,8 @@ export function invalidateAllEventsGet(
 
 export function buildEventsGetQuery(
   client$: GustoEmbeddedCore,
-  security: operations.GetEventsSecurity,
-  request: operations.GetEventsRequest,
+  security: GetEventsSecurity,
+  request: GetEventsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -191,8 +196,8 @@ export function queryKeyEventsGet(
     resourceUuid?: string | undefined;
     limit?: string | undefined;
     eventType?: string | undefined;
-    sortOrder?: components.SortOrder | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    sortOrder?: SortOrder | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Events", "get", parameters];

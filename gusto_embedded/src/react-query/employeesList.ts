@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesList } from "../funcs/employeesList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdEmployeesRequest,
+  GetV1CompaniesCompanyIdEmployeesResponse,
+  Include,
+} from "../models/operations/getv1companiescompanyidemployees.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +30,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type EmployeesListQueryData =
-  operations.GetV1CompaniesCompanyIdEmployeesResponse;
+export type EmployeesListQueryData = GetV1CompaniesCompanyIdEmployeesResponse;
 
 /**
  * Get employees of a company
@@ -38,7 +41,7 @@ export type EmployeesListQueryData =
  * scope: `employees:read`
  */
 export function useEmployeesList(
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: GetV1CompaniesCompanyIdEmployeesRequest,
   options?: QueryHookOptions<EmployeesListQueryData>,
 ): UseQueryResult<EmployeesListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useEmployeesList(
  * scope: `employees:read`
  */
 export function useEmployeesListSuspense(
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: GetV1CompaniesCompanyIdEmployeesRequest,
   options?: SuspenseQueryHookOptions<EmployeesListQueryData>,
 ): UseSuspenseQueryResult<EmployeesListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useEmployeesListSuspense(
 export function prefetchEmployeesList(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: GetV1CompaniesCompanyIdEmployeesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeesListQuery(
@@ -94,11 +97,11 @@ export function setEmployeesListData(
     companyId: string,
     parameters: {
       terminated?: boolean | undefined;
-      include?: Array<operations.Include> | undefined;
+      include?: Array<Include> | undefined;
       page?: number | undefined;
       per?: number | undefined;
       searchTerm?: string | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesListQueryData,
@@ -115,11 +118,11 @@ export function invalidateEmployeesList(
       companyId: string,
       parameters: {
         terminated?: boolean | undefined;
-        include?: Array<operations.Include> | undefined;
+        include?: Array<Include> | undefined;
         page?: number | undefined;
         per?: number | undefined;
         searchTerm?: string | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -143,7 +146,7 @@ export function invalidateAllEmployeesList(
 
 export function buildEmployeesListQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+  request: GetV1CompaniesCompanyIdEmployeesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -180,11 +183,11 @@ export function queryKeyEmployeesList(
   companyId: string,
   parameters: {
     terminated?: boolean | undefined;
-    include?: Array<operations.Include> | undefined;
+    include?: Array<Include> | undefined;
     page?: number | undefined;
     per?: number | undefined;
     searchTerm?: string | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Employees", "list", companyId, parameters];

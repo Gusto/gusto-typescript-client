@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGetPreview } from "../funcs/paySchedulesGetPreview.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
+  GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+  QueryParamFrequency,
+} from "../models/operations/getv1companiescompanyidpayschedulespreview.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +31,7 @@ import {
 } from "./_types.js";
 
 export type PaySchedulesGetPreviewQueryData =
-  operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse;
+  GetV1CompaniesCompanyIdPaySchedulesPreviewResponse;
 
 /**
  * Preview pay schedule dates
@@ -38,7 +42,7 @@ export type PaySchedulesGetPreviewQueryData =
  * scope: `pay_schedules:write`
  */
 export function usePaySchedulesGetPreview(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
   options?: QueryHookOptions<PaySchedulesGetPreviewQueryData>,
 ): UseQueryResult<PaySchedulesGetPreviewQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +65,7 @@ export function usePaySchedulesGetPreview(
  * scope: `pay_schedules:write`
  */
 export function usePaySchedulesGetPreviewSuspense(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
   options?: SuspenseQueryHookOptions<PaySchedulesGetPreviewQueryData>,
 ): UseSuspenseQueryResult<PaySchedulesGetPreviewQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +82,7 @@ export function usePaySchedulesGetPreviewSuspense(
 export function prefetchPaySchedulesGetPreview(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPaySchedulesGetPreviewQuery(
@@ -93,12 +97,12 @@ export function setPaySchedulesGetPreviewData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      frequency: operations.QueryParamFrequency;
+      frequency: QueryParamFrequency;
       anchorPayDate: string;
       anchorEndOfPayPeriod: string;
       day1?: number | undefined;
       day2?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: PaySchedulesGetPreviewQueryData,
@@ -114,12 +118,12 @@ export function invalidatePaySchedulesGetPreview(
     [
       companyId: string,
       parameters: {
-        frequency: operations.QueryParamFrequency;
+        frequency: QueryParamFrequency;
         anchorPayDate: string;
         anchorEndOfPayPeriod: string;
         day1?: number | undefined;
         day2?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -148,7 +152,7 @@ export function invalidateAllPaySchedulesGetPreview(
 
 export function buildPaySchedulesGetPreviewQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -186,12 +190,12 @@ export function buildPaySchedulesGetPreviewQuery(
 export function queryKeyPaySchedulesGetPreview(
   companyId: string,
   parameters: {
-    frequency: operations.QueryParamFrequency;
+    frequency: QueryParamFrequency;
     anchorPayDate: string;
     anchorEndOfPayPeriod: string;
     day1?: number | undefined;
     day2?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

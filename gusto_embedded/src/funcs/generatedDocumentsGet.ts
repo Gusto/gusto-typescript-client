@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchema,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$inboundSchema,
+} from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function generatedDocumentsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
+    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function generatedDocumentsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
+      GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchema
+      GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -165,7 +169,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
+    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,8 +180,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$inboundSchema,
+      GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$inboundSchema,
       { key: "Generated-Document" },
     ),
     M.fail([404, "4XX"]),

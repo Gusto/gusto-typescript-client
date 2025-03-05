@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PutV1ContractorDocumentSignResponse } from "@gusto/embedded-api/models/operations";
+import { PutV1ContractorDocumentSignResponse } from "@gusto/embedded-api/models/operations/putv1contractordocumentsign.js";
 
 let value: PutV1ContractorDocumentSignResponse = {
   contentType: "<value>",
-  statusCode: 207,
+  statusCode: 413,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

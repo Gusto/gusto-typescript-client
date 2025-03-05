@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostV1HistoricalEmployeesRequest,
+  PostV1HistoricalEmployeesRequest$outboundSchema,
+  PostV1HistoricalEmployeesResponse,
+  PostV1HistoricalEmployeesResponse$inboundSchema,
+} from "../models/operations/postv1historicalemployees.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function employeesCreateHistorical(
   client: GustoEmbeddedCore,
-  request: operations.PostV1HistoricalEmployeesRequest,
+  request: PostV1HistoricalEmployeesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV1HistoricalEmployeesResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1HistoricalEmployeesResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function employeesCreateHistorical(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PostV1HistoricalEmployeesRequest,
+  request: PostV1HistoricalEmployeesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostV1HistoricalEmployeesResponse,
-      | errors.UnprocessableEntityErrorObject
+      PostV1HistoricalEmployeesResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +86,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PostV1HistoricalEmployeesRequest$outboundSchema.parse(value),
+    (value) => PostV1HistoricalEmployeesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -165,8 +172,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostV1HistoricalEmployeesResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostV1HistoricalEmployeesResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -175,10 +182,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(201, operations.PostV1HistoricalEmployeesResponse$inboundSchema, {
+    M.json(201, PostV1HistoricalEmployeesResponse$inboundSchema, {
       key: "Employee",
     }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -10,7 +10,34 @@ import { departmentsGetAll } from "../funcs/departmentsGetAll.js";
 import { departmentsRemovePeople } from "../funcs/departmentsRemovePeople.js";
 import { departmentsUpdate } from "../funcs/departmentsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteDepartmentRequest,
+  DeleteDepartmentResponse,
+} from "../models/operations/deletedepartment.js";
+import {
+  GetCompaniesDepartmentsRequest,
+  GetCompaniesDepartmentsResponse,
+} from "../models/operations/getcompaniesdepartments.js";
+import {
+  GetDepartmentRequest,
+  GetDepartmentResponse,
+} from "../models/operations/getdepartment.js";
+import {
+  PostDepartmentsRequest,
+  PostDepartmentsResponse,
+} from "../models/operations/postdepartments.js";
+import {
+  PutAddPeopleToDepartmentRequest,
+  PutAddPeopleToDepartmentResponse,
+} from "../models/operations/putaddpeopletodepartment.js";
+import {
+  PutDepartmentsRequest,
+  PutDepartmentsResponse,
+} from "../models/operations/putdepartments.js";
+import {
+  PutRemovePeopleFromDepartmentRequest,
+  PutRemovePeopleFromDepartmentResponse,
+} from "../models/operations/putremovepeoplefromdepartment.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Departments extends ClientSDK {
@@ -23,9 +50,9 @@ export class Departments extends ClientSDK {
    * scope: `departments:write`
    */
   async create(
-    request: operations.PostDepartmentsRequest,
+    request: PostDepartmentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostDepartmentsResponse> {
+  ): Promise<PostDepartmentsResponse> {
     return unwrapAsync(departmentsCreate(
       this,
       request,
@@ -42,9 +69,9 @@ export class Departments extends ClientSDK {
    * scope: `departments:read`
    */
   async getAll(
-    request: operations.GetCompaniesDepartmentsRequest,
+    request: GetCompaniesDepartmentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetCompaniesDepartmentsResponse> {
+  ): Promise<GetCompaniesDepartmentsResponse> {
     return unwrapAsync(departmentsGetAll(
       this,
       request,
@@ -61,9 +88,9 @@ export class Departments extends ClientSDK {
    * scope: `departments:read`
    */
   async get(
-    request: operations.GetDepartmentRequest,
+    request: GetDepartmentRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetDepartmentResponse> {
+  ): Promise<GetDepartmentResponse> {
     return unwrapAsync(departmentsGet(
       this,
       request,
@@ -80,9 +107,9 @@ export class Departments extends ClientSDK {
    * scope: `departments:write`
    */
   async update(
-    request: operations.PutDepartmentsRequest,
+    request: PutDepartmentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutDepartmentsResponse> {
+  ): Promise<PutDepartmentsResponse> {
     return unwrapAsync(departmentsUpdate(
       this,
       request,
@@ -99,9 +126,9 @@ export class Departments extends ClientSDK {
    * scope: `departments:write`
    */
   async delete(
-    request: operations.DeleteDepartmentRequest,
+    request: DeleteDepartmentRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteDepartmentResponse> {
+  ): Promise<DeleteDepartmentResponse> {
     return unwrapAsync(departmentsDelete(
       this,
       request,
@@ -118,9 +145,9 @@ export class Departments extends ClientSDK {
    * scope: `departments:write`
    */
   async addPeople(
-    request: operations.PutAddPeopleToDepartmentRequest,
+    request: PutAddPeopleToDepartmentRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutAddPeopleToDepartmentResponse> {
+  ): Promise<PutAddPeopleToDepartmentResponse> {
     return unwrapAsync(departmentsAddPeople(
       this,
       request,
@@ -137,9 +164,9 @@ export class Departments extends ClientSDK {
    * scope: `departments:write`
    */
   async removePeople(
-    request: operations.PutRemovePeopleFromDepartmentRequest,
+    request: PutRemovePeopleFromDepartmentRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutRemovePeopleFromDepartmentResponse> {
+  ): Promise<PutRemovePeopleFromDepartmentResponse> {
     return unwrapAsync(departmentsRemovePeople(
       this,
       request,

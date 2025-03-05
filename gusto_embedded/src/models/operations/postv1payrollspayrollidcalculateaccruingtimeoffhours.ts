@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  AccruingTimeOffHour,
+  AccruingTimeOffHour$inboundSchema,
+  AccruingTimeOffHour$Outbound,
+  AccruingTimeOffHour$outboundSchema,
+} from "../components/accruingtimeoffhour.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody = {
@@ -44,7 +54,7 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
 };
 
@@ -64,7 +74,7 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse = {
   /**
    * Example response
    */
-  accruingTimeOffHourObject?: Array<components.AccruingTimeOffHour> | undefined;
+  accruingTimeOffHourObject?: Array<AccruingTimeOffHour> | undefined;
 };
 
 /** @internal */
@@ -171,9 +181,7 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$inbound
   > = z.object({
     payroll_id: z.string(),
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$inboundSchema
     ),
@@ -205,9 +213,7 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$outboun
   > = z.object({
     payrollId: z.string(),
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$outboundSchema
     ),
@@ -271,9 +277,8 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboun
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Accruing-Time-Off-Hour-Object": z.array(
-      components.AccruingTimeOffHour$inboundSchema,
-    ).optional(),
+    "Accruing-Time-Off-Hour-Object": z.array(AccruingTimeOffHour$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -290,7 +295,7 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$Outboun
     StatusCode: number;
     RawResponse: never;
     "Accruing-Time-Off-Hour-Object"?:
-      | Array<components.AccruingTimeOffHour$Outbound>
+      | Array<AccruingTimeOffHour$Outbound>
       | undefined;
   };
 
@@ -306,9 +311,8 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$outbou
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    accruingTimeOffHourObject: z.array(
-      components.AccruingTimeOffHour$outboundSchema,
-    ).optional(),
+    accruingTimeOffHourObject: z.array(AccruingTimeOffHour$outboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

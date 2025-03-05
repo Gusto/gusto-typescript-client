@@ -6,7 +6,7 @@ Available options:
 ## Example Usage
 
 ```typescript
-import { GetV1EmployeesEmployeeIdJobsQueryParamInclude } from "@gusto/embedded-api/models/operations";
+import { GetV1EmployeesEmployeeIdJobsQueryParamInclude } from "@gusto/embedded-api/models/operations/getv1employeesemployeeidjobs.js";
 
 let value: GetV1EmployeesEmployeeIdJobsQueryParamInclude = "all_compensations";
 ```

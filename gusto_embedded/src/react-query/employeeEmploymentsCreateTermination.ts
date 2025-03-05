@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsCreateTermination } from "../funcs/employeeEmploymentsCreateTermination.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1EmployeesEmployeeIdTerminationsRequest,
+  PostV1EmployeesEmployeeIdTerminationsResponse,
+} from "../models/operations/postv1employeesemployeeidterminations.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeEmploymentsCreateTerminationMutationVariables = {
-  request: operations.PostV1EmployeesEmployeeIdTerminationsRequest;
+  request: PostV1EmployeesEmployeeIdTerminationsRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeEmploymentsCreateTerminationMutationData =
-  operations.PostV1EmployeesEmployeeIdTerminationsResponse;
+  PostV1EmployeesEmployeeIdTerminationsResponse;
 
 /**
  * Create an employee termination

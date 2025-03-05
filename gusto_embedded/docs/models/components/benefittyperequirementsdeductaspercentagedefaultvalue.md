@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BenefitTypeRequirementsDeductAsPercentageDefaultValue } from "@gusto/embedded-api/models/components";
+import { BenefitTypeRequirementsDeductAsPercentageDefaultValue } from "@gusto/embedded-api/models/components/benefittyperequirements.js";
 
 let value: BenefitTypeRequirementsDeductAsPercentageDefaultValue = {};
 ```

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsDeleteTermination } from "../funcs/employeeEmploymentsDeleteTermination.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdTerminationsRequest,
+  DeleteV1EmployeesEmployeeIdTerminationsResponse,
+} from "../models/operations/deletev1employeesemployeeidterminations.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeEmploymentsDeleteTerminationMutationVariables = {
-  request: operations.DeleteV1EmployeesEmployeeIdTerminationsRequest;
+  request: DeleteV1EmployeesEmployeeIdTerminationsRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeEmploymentsDeleteTerminationMutationData =
-  operations.DeleteV1EmployeesEmployeeIdTerminationsResponse;
+  DeleteV1EmployeesEmployeeIdTerminationsResponse;
 
 /**
  * Delete an employee termination

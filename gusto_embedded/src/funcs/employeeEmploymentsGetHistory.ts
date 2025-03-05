@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  GetV1EmployeesEmployeeIdEmploymentHistoryRequest$outboundSchema,
+  GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+  GetV1EmployeesEmployeeIdEmploymentHistoryResponse$inboundSchema,
+} from "../models/operations/getv1employeesemployeeidemploymenthistory.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeeEmploymentsGetHistory(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function employeeEmploymentsGetHistory(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
+  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+      GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1EmployeesEmployeeIdEmploymentHistoryRequest$outboundSchema
-        .parse(value),
+      GetV1EmployeesEmployeeIdEmploymentHistoryRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
+    GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,8 +177,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetV1EmployeesEmployeeIdEmploymentHistoryResponse$inboundSchema,
+      GetV1EmployeesEmployeeIdEmploymentHistoryResponse$inboundSchema,
       { key: "Employment-History-List" },
     ),
     M.fail([404, "4XX"]),

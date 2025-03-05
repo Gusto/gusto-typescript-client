@@ -3,16 +3,16 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyUuidContractorsResponse } from "@gusto/embedded-api/models/operations";
+import { PostV1CompaniesCompanyUuidContractorsResponse } from "@gusto/embedded-api/models/operations/postv1companiescompanyuuidcontractors.js";
 
 let value: PostV1CompaniesCompanyUuidContractorsResponse = {
   contentType: "<value>",
-  statusCode: 412,
+  statusCode: 300,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),
   contractor: {
-    uuid: "00810fd2-0f42-4b14-bfa8-6c2fd90be851",
+    uuid: "0810fd20-f42b-414f-ba86-c2fd90be851c",
     hourlyRate: "50.0",
   },
 };

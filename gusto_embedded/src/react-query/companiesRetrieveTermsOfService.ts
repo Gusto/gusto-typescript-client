@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesRetrieveTermsOfService } from "../funcs/companiesRetrieveTermsOfService.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
+} from "../models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofservice.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompaniesRetrieveTermsOfServiceMutationVariables = {
-  request:
-    operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest;
+  request: PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest;
   options?: RequestOptions;
 };
 
 export type CompaniesRetrieveTermsOfServiceMutationData =
-  operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse;
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse;
 
 /**
  * Retrieve terms of service status for a company user

@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompensationsCompensationIdRequest,
+  DeleteV1CompensationsCompensationIdRequest$outboundSchema,
+  DeleteV1CompensationsCompensationIdResponse,
+  DeleteV1CompensationsCompensationIdResponse$inboundSchema,
+} from "../models/operations/deletev1compensationscompensationid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function jobsAndCompensationsDeleteCompensation(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1CompensationsCompensationIdRequest,
+  request: DeleteV1CompensationsCompensationIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1CompensationsCompensationIdResponse,
+    DeleteV1CompensationsCompensationIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function jobsAndCompensationsDeleteCompensation(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1CompensationsCompensationIdRequest,
+  request: DeleteV1CompensationsCompensationIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1CompensationsCompensationIdResponse,
+      DeleteV1CompensationsCompensationIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1CompensationsCompensationIdRequest$outboundSchema
-        .parse(value),
+      DeleteV1CompensationsCompensationIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -158,7 +162,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1CompensationsCompensationIdResponse,
+    DeleteV1CompensationsCompensationIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -167,10 +171,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      204,
-      operations.DeleteV1CompensationsCompensationIdResponse$inboundSchema,
-    ),
+    M.nil(204, DeleteV1CompensationsCompensationIdResponse$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

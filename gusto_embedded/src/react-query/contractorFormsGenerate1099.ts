@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorFormsGenerate1099 } from "../funcs/contractorFormsGenerate1099.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1SandboxGenerate1099Request,
+  PostV1SandboxGenerate1099Response,
+} from "../models/operations/postv1sandboxgenerate1099.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorFormsGenerate1099MutationVariables = {
-  request: operations.PostV1SandboxGenerate1099Request;
+  request: PostV1SandboxGenerate1099Request;
   options?: RequestOptions;
 };
 
 export type ContractorFormsGenerate1099MutationData =
-  operations.PostV1SandboxGenerate1099Response;
+  PostV1SandboxGenerate1099Response;
 
 /**
  * Generate a 1099 form [DEMO]

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsDelete } from "../funcs/employeeBenefitsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest,
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse,
+} from "../models/operations/deletev1employeebenefitsemployeebenefitid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeBenefitsDeleteMutationVariables = {
-  request: operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest;
+  request: DeleteV1EmployeeBenefitsEmployeeBenefitIdRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeBenefitsDeleteMutationData =
-  operations.DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse;
+  DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse;
 
 /**
  * Delete an employee benefit

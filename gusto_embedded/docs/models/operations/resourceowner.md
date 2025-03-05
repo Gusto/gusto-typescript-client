@@ -5,7 +5,7 @@ Information about the token owner
 ## Example Usage
 
 ```typescript
-import { ResourceOwner } from "@gusto/embedded-api/models/operations";
+import { ResourceOwner } from "@gusto/embedded-api/models/operations/getv1tokeninfo.js";
 
 let value: ResourceOwner = {
   type: "Employee",

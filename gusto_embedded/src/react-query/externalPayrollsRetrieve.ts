@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsRetrieve } from "../funcs/externalPayrollsRetrieve.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ExternalPayrollRequest,
+  GetV1ExternalPayrollResponse,
+} from "../models/operations/getv1externalpayroll.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ExternalPayrollsRetrieveQueryData =
-  operations.GetV1ExternalPayrollResponse;
+export type ExternalPayrollsRetrieveQueryData = GetV1ExternalPayrollResponse;
 
 /**
  * Get an external payroll
@@ -38,7 +40,7 @@ export type ExternalPayrollsRetrieveQueryData =
  * scope: `external_payrolls:read`
  */
 export function useExternalPayrollsRetrieve(
-  request: operations.GetV1ExternalPayrollRequest,
+  request: GetV1ExternalPayrollRequest,
   options?: QueryHookOptions<ExternalPayrollsRetrieveQueryData>,
 ): UseQueryResult<ExternalPayrollsRetrieveQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useExternalPayrollsRetrieve(
  * scope: `external_payrolls:read`
  */
 export function useExternalPayrollsRetrieveSuspense(
-  request: operations.GetV1ExternalPayrollRequest,
+  request: GetV1ExternalPayrollRequest,
   options?: SuspenseQueryHookOptions<ExternalPayrollsRetrieveQueryData>,
 ): UseSuspenseQueryResult<ExternalPayrollsRetrieveQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useExternalPayrollsRetrieveSuspense(
 export function prefetchExternalPayrollsRetrieve(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ExternalPayrollRequest,
+  request: GetV1ExternalPayrollRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildExternalPayrollsRetrieveQuery(
@@ -93,7 +95,7 @@ export function setExternalPayrollsRetrieveData(
   queryKeyBase: [
     companyUuid: string,
     externalPayrollId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ExternalPayrollsRetrieveQueryData,
 ): ExternalPayrollsRetrieveQueryData | undefined {
@@ -108,7 +110,7 @@ export function invalidateExternalPayrollsRetrieve(
     [
       companyUuid: string,
       externalPayrollId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -136,7 +138,7 @@ export function invalidateAllExternalPayrollsRetrieve(
 
 export function buildExternalPayrollsRetrieveQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ExternalPayrollRequest,
+  request: GetV1ExternalPayrollRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -171,7 +173,7 @@ export function buildExternalPayrollsRetrieveQuery(
 export function queryKeyExternalPayrollsRetrieve(
   companyUuid: string,
   externalPayrollId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

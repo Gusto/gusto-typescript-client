@@ -11,19 +11,23 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesCreatePartnerManaged } from "../funcs/companiesCreatePartnerManaged.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1PartnerManagedCompaniesRequest,
+  PostV1PartnerManagedCompaniesResponse,
+  PostV1PartnerManagedCompaniesSecurity,
+} from "../models/operations/postv1partnermanagedcompanies.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompaniesCreatePartnerManagedMutationVariables = {
-  security: operations.PostV1PartnerManagedCompaniesSecurity;
-  request: operations.PostV1PartnerManagedCompaniesRequest;
+  security: PostV1PartnerManagedCompaniesSecurity;
+  request: PostV1PartnerManagedCompaniesRequest;
   options?: RequestOptions;
 };
 
 export type CompaniesCreatePartnerManagedMutationData =
-  operations.PostV1PartnerManagedCompaniesResponse;
+  PostV1PartnerManagedCompaniesResponse;
 
 /**
  * Create a partner managed company

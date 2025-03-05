@@ -7,7 +7,22 @@ import { contractorDocumentsGetAll } from "../funcs/contractorDocumentsGetAll.js
 import { contractorDocumentsGetPdf } from "../funcs/contractorDocumentsGetPdf.js";
 import { contractorDocumentsSign } from "../funcs/contractorDocumentsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1ContractorDocumentRequest,
+  GetV1ContractorDocumentResponse,
+} from "../models/operations/getv1contractordocument.js";
+import {
+  GetV1ContractorDocumentPdfRequest,
+  GetV1ContractorDocumentPdfResponse,
+} from "../models/operations/getv1contractordocumentpdf.js";
+import {
+  GetV1ContractorDocumentsRequest,
+  GetV1ContractorDocumentsResponse,
+} from "../models/operations/getv1contractordocuments.js";
+import {
+  PutV1ContractorDocumentSignRequest,
+  PutV1ContractorDocumentSignResponse,
+} from "../models/operations/putv1contractordocumentsign.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class ContractorDocuments extends ClientSDK {
@@ -20,9 +35,9 @@ export class ContractorDocuments extends ClientSDK {
    * scope: `contractor_documents:read`
    */
   async getAll(
-    request: operations.GetV1ContractorDocumentsRequest,
+    request: GetV1ContractorDocumentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorDocumentsResponse> {
+  ): Promise<GetV1ContractorDocumentsResponse> {
     return unwrapAsync(contractorDocumentsGetAll(
       this,
       request,
@@ -39,9 +54,9 @@ export class ContractorDocuments extends ClientSDK {
    * scope: `contractor_documents:read`
    */
   async get(
-    request: operations.GetV1ContractorDocumentRequest,
+    request: GetV1ContractorDocumentRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorDocumentResponse> {
+  ): Promise<GetV1ContractorDocumentResponse> {
     return unwrapAsync(contractorDocumentsGet(
       this,
       request,
@@ -58,9 +73,9 @@ export class ContractorDocuments extends ClientSDK {
    * scope: `contractor_documents:read`
    */
   async getPdf(
-    request: operations.GetV1ContractorDocumentPdfRequest,
+    request: GetV1ContractorDocumentPdfRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorDocumentPdfResponse> {
+  ): Promise<GetV1ContractorDocumentPdfResponse> {
     return unwrapAsync(contractorDocumentsGetPdf(
       this,
       request,
@@ -77,9 +92,9 @@ export class ContractorDocuments extends ClientSDK {
    * scope: `contractor_documents:write`
    */
   async sign(
-    request: operations.PutV1ContractorDocumentSignRequest,
+    request: PutV1ContractorDocumentSignRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1ContractorDocumentSignResponse> {
+  ): Promise<PutV1ContractorDocumentSignResponse> {
     return unwrapAsync(contractorDocumentsSign(
       this,
       request,

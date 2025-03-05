@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesUpdate } from "../funcs/signatoriesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
+  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+} from "../models/operations/putv1companiescompanyuuidsignatoriessignatoryuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type SignatoriesUpdateMutationVariables = {
-  request: operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest;
+  request: PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest;
   options?: RequestOptions;
 };
 
 export type SignatoriesUpdateMutationData =
-  operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
+  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
 /**
  * Update a signatory

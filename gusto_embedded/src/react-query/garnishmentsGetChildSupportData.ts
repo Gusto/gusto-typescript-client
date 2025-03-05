@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { garnishmentsGetChildSupportData } from "../funcs/garnishmentsGetChildSupportData.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1GarnishmentsChildSupportRequest,
+  GetV1GarnishmentsChildSupportResponse,
+} from "../models/operations/getv1garnishmentschildsupport.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type GarnishmentsGetChildSupportDataQueryData =
-  operations.GetV1GarnishmentsChildSupportResponse;
+  GetV1GarnishmentsChildSupportResponse;
 
 /**
  * Get child support garnishment data
@@ -38,7 +41,7 @@ export type GarnishmentsGetChildSupportDataQueryData =
  * scope: `garnishments:read`
  */
 export function useGarnishmentsGetChildSupportData(
-  request: operations.GetV1GarnishmentsChildSupportRequest,
+  request: GetV1GarnishmentsChildSupportRequest,
   options?: QueryHookOptions<GarnishmentsGetChildSupportDataQueryData>,
 ): UseQueryResult<GarnishmentsGetChildSupportDataQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useGarnishmentsGetChildSupportData(
  * scope: `garnishments:read`
  */
 export function useGarnishmentsGetChildSupportDataSuspense(
-  request: operations.GetV1GarnishmentsChildSupportRequest,
+  request: GetV1GarnishmentsChildSupportRequest,
   options?: SuspenseQueryHookOptions<GarnishmentsGetChildSupportDataQueryData>,
 ): UseSuspenseQueryResult<GarnishmentsGetChildSupportDataQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useGarnishmentsGetChildSupportDataSuspense(
 export function prefetchGarnishmentsGetChildSupportData(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1GarnishmentsChildSupportRequest,
+  request: GetV1GarnishmentsChildSupportRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildGarnishmentsGetChildSupportDataQuery(
@@ -90,9 +93,7 @@ export function prefetchGarnishmentsGetChildSupportData(
 
 export function setGarnishmentsGetChildSupportDataData(
   client: QueryClient,
-  queryKeyBase: [
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
-  ],
+  queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
   data: GarnishmentsGetChildSupportDataQueryData,
 ): GarnishmentsGetChildSupportDataQueryData | undefined {
   const key = queryKeyGarnishmentsGetChildSupportData(...queryKeyBase);
@@ -106,7 +107,7 @@ export function setGarnishmentsGetChildSupportDataData(
 export function invalidateGarnishmentsGetChildSupportData(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [parameters: { xGustoAPIVersion?: components.VersionHeader | undefined }]
+    [parameters: { xGustoAPIVersion?: VersionHeader | undefined }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
@@ -133,7 +134,7 @@ export function invalidateAllGarnishmentsGetChildSupportData(
 
 export function buildGarnishmentsGetChildSupportDataQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1GarnishmentsChildSupportRequest,
+  request: GetV1GarnishmentsChildSupportRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -164,7 +165,7 @@ export function buildGarnishmentsGetChildSupportDataQuery(
 }
 
 export function queryKeyGarnishmentsGetChildSupportData(
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

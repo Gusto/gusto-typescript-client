@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSchema,
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+  GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema,
+} from "../models/operations/getemployeeytdbenefitamountsfromdifferentcompany.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,11 +41,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
   client: GustoEmbeddedCore,
-  request: operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
+  request: GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +64,12 @@ export function employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
+  request: GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+      GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,8 +84,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSchema
+      GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -169,7 +173,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+    GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -180,8 +184,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema,
+      GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema,
       { key: "Ytd-Benefit-Amounts-From-Different-Company-List" },
     ),
     M.fail([404, "4XX"]),

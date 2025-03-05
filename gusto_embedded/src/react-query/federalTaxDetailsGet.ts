@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { federalTaxDetailsGet } from "../funcs/federalTaxDetailsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
+} from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type FederalTaxDetailsGetQueryData =
-  operations.GetV1CompaniesCompanyIdFederalTaxDetailsResponse;
+  GetV1CompaniesCompanyIdFederalTaxDetailsResponse;
 
 /**
  * Get Federal Tax Details
@@ -38,7 +41,7 @@ export type FederalTaxDetailsGetQueryData =
  * scope: `company_federal_taxes:read`
  */
 export function useFederalTaxDetailsGet(
-  request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
   options?: QueryHookOptions<FederalTaxDetailsGetQueryData>,
 ): UseQueryResult<FederalTaxDetailsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useFederalTaxDetailsGet(
  * scope: `company_federal_taxes:read`
  */
 export function useFederalTaxDetailsGetSuspense(
-  request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
   options?: SuspenseQueryHookOptions<FederalTaxDetailsGetQueryData>,
 ): UseSuspenseQueryResult<FederalTaxDetailsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useFederalTaxDetailsGetSuspense(
 export function prefetchFederalTaxDetailsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildFederalTaxDetailsGetQuery(
@@ -92,7 +95,7 @@ export function setFederalTaxDetailsGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: FederalTaxDetailsGetQueryData,
 ): FederalTaxDetailsGetQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateFederalTaxDetailsGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllFederalTaxDetailsGet(
 
 export function buildFederalTaxDetailsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildFederalTaxDetailsGetQuery(
 
 export function queryKeyFederalTaxDetailsGet(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

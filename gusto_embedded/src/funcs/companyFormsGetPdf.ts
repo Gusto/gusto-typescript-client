@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyFormPdfRequest,
+  GetV1CompanyFormPdfRequest$outboundSchema,
+  GetV1CompanyFormPdfResponse,
+  GetV1CompanyFormPdfResponse$inboundSchema,
+} from "../models/operations/getv1companyformpdf.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyFormsGetPdf(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormPdfRequest,
+  request: GetV1CompanyFormPdfRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompanyFormPdfResponse,
+    GetV1CompanyFormPdfResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function companyFormsGetPdf(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormPdfRequest,
+  request: GetV1CompanyFormPdfRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompanyFormPdfResponse,
+      GetV1CompanyFormPdfResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1CompanyFormPdfRequest$outboundSchema.parse(value),
+    (value) => GetV1CompanyFormPdfRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -157,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompanyFormPdfResponse,
+    GetV1CompanyFormPdfResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -166,9 +170,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompanyFormPdfResponse$inboundSchema, {
-      key: "Form-Pdf",
-    }),
+    M.json(200, GetV1CompanyFormPdfResponse$inboundSchema, { key: "Form-Pdf" }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

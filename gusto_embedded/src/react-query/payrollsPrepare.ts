@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsPrepare } from "../funcs/payrollsPrepare.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
+  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse,
+} from "../models/operations/putv1companiescompanyidpayrollspayrollidprepare.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PayrollsPrepareMutationVariables = {
-  request: operations.PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest;
+  request: PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest;
   options?: RequestOptions;
 };
 
 export type PayrollsPrepareMutationData =
-  operations.PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse;
+  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse;
 
 /**
  * Prepare a payroll for update

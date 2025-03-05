@@ -8,7 +8,26 @@ import { employeePaymentMethodGet } from "../funcs/employeePaymentMethodGet.js";
 import { employeePaymentMethodUpdate } from "../funcs/employeePaymentMethodUpdate.js";
 import { employeePaymentMethodUpdateBankAccount } from "../funcs/employeePaymentMethodUpdateBankAccount.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+} from "../models/operations/deletev1employeesemployeeidbankaccountsbankaccountid.js";
+import {
+  GetV1EmployeesEmployeeIdPaymentMethodRequest,
+  GetV1EmployeesEmployeeIdPaymentMethodResponse,
+} from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
+import {
+  PostV1EmployeesEmployeeIdBankAccountsRequest,
+  PostV1EmployeesEmployeeIdBankAccountsResponse,
+} from "../models/operations/postv1employeesemployeeidbankaccounts.js";
+import {
+  PutV1EmployeesEmployeeIdBankAccountsRequest,
+  PutV1EmployeesEmployeeIdBankAccountsResponse,
+} from "../models/operations/putv1employeesemployeeidbankaccounts.js";
+import {
+  PutV1EmployeesEmployeeIdPaymentMethodRequest,
+  PutV1EmployeesEmployeeIdPaymentMethodResponse,
+} from "../models/operations/putv1employeesemployeeidpaymentmethod.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeePaymentMethod extends ClientSDK {
@@ -23,9 +42,9 @@ export class EmployeePaymentMethod extends ClientSDK {
    * scope: `employee_payment_methods:write`
    */
   async create(
-    request: operations.PostV1EmployeesEmployeeIdBankAccountsRequest,
+    request: PostV1EmployeesEmployeeIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1EmployeesEmployeeIdBankAccountsResponse> {
+  ): Promise<PostV1EmployeesEmployeeIdBankAccountsResponse> {
     return unwrapAsync(employeePaymentMethodCreate(
       this,
       request,
@@ -43,12 +62,9 @@ export class EmployeePaymentMethod extends ClientSDK {
    * scope: `employee_payment_methods:write`
    */
   async deleteBankAccount(
-    request:
-      operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+    request: DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse
-  > {
+  ): Promise<DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse> {
     return unwrapAsync(employeePaymentMethodDeleteBankAccount(
       this,
       request,
@@ -65,9 +81,9 @@ export class EmployeePaymentMethod extends ClientSDK {
    * scope: `employee_payment_methods:write`
    */
   async updateBankAccount(
-    request: operations.PutV1EmployeesEmployeeIdBankAccountsRequest,
+    request: PutV1EmployeesEmployeeIdBankAccountsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesEmployeeIdBankAccountsResponse> {
+  ): Promise<PutV1EmployeesEmployeeIdBankAccountsResponse> {
     return unwrapAsync(employeePaymentMethodUpdateBankAccount(
       this,
       request,
@@ -86,9 +102,9 @@ export class EmployeePaymentMethod extends ClientSDK {
    * scope: `employee_payment_methods:read`
    */
   async get(
-    request: operations.GetV1EmployeesEmployeeIdPaymentMethodRequest,
+    request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdPaymentMethodResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdPaymentMethodResponse> {
     return unwrapAsync(employeePaymentMethodGet(
       this,
       request,
@@ -106,9 +122,9 @@ export class EmployeePaymentMethod extends ClientSDK {
    * scope: `employee_payment_methods:write`
    */
   async update(
-    request: operations.PutV1EmployeesEmployeeIdPaymentMethodRequest,
+    request: PutV1EmployeesEmployeeIdPaymentMethodRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesEmployeeIdPaymentMethodResponse> {
+  ): Promise<PutV1EmployeesEmployeeIdPaymentMethodResponse> {
     return unwrapAsync(employeePaymentMethodUpdate(
       this,
       request,

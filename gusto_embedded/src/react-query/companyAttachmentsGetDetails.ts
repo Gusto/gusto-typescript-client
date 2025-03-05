@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyAttachmentsGetDetails } from "../funcs/companyAttachmentsGetDetails.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesAttachmentRequest,
+  GetV1CompaniesAttachmentResponse,
+} from "../models/operations/getv1companiesattachment.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type CompanyAttachmentsGetDetailsQueryData =
-  operations.GetV1CompaniesAttachmentResponse;
+  GetV1CompaniesAttachmentResponse;
 
 /**
  * Get Company Attachment Details
@@ -38,7 +41,7 @@ export type CompanyAttachmentsGetDetailsQueryData =
  * scope: `company_attachments:read`
  */
 export function useCompanyAttachmentsGetDetails(
-  request: operations.GetV1CompaniesAttachmentRequest,
+  request: GetV1CompaniesAttachmentRequest,
   options?: QueryHookOptions<CompanyAttachmentsGetDetailsQueryData>,
 ): UseQueryResult<CompanyAttachmentsGetDetailsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useCompanyAttachmentsGetDetails(
  * scope: `company_attachments:read`
  */
 export function useCompanyAttachmentsGetDetailsSuspense(
-  request: operations.GetV1CompaniesAttachmentRequest,
+  request: GetV1CompaniesAttachmentRequest,
   options?: SuspenseQueryHookOptions<CompanyAttachmentsGetDetailsQueryData>,
 ): UseSuspenseQueryResult<CompanyAttachmentsGetDetailsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useCompanyAttachmentsGetDetailsSuspense(
 export function prefetchCompanyAttachmentsGetDetails(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentRequest,
+  request: GetV1CompaniesAttachmentRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompanyAttachmentsGetDetailsQuery(
@@ -93,7 +96,7 @@ export function setCompanyAttachmentsGetDetailsData(
   queryKeyBase: [
     companyId: string,
     companyAttachmentUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: CompanyAttachmentsGetDetailsQueryData,
 ): CompanyAttachmentsGetDetailsQueryData | undefined {
@@ -108,7 +111,7 @@ export function invalidateCompanyAttachmentsGetDetails(
     [
       companyId: string,
       companyAttachmentUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -136,7 +139,7 @@ export function invalidateAllCompanyAttachmentsGetDetails(
 
 export function buildCompanyAttachmentsGetDetailsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentRequest,
+  request: GetV1CompaniesAttachmentRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -171,7 +174,7 @@ export function buildCompanyAttachmentsGetDetailsQuery(
 export function queryKeyCompanyAttachmentsGetDetails(
   companyId: string,
   companyAttachmentUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

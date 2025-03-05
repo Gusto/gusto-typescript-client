@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  EmployeeOnboardingStatus,
+  EmployeeOnboardingStatus$inboundSchema,
+  EmployeeOnboardingStatus$Outbound,
+  EmployeeOnboardingStatus$outboundSchema,
+} from "../components/employeeonboardingstatus.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1EmployeesEmployeeIdOnboardingStatusRequest = {
@@ -17,7 +27,7 @@ export type GetV1EmployeesEmployeeIdOnboardingStatusRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdOnboardingStatusResponse = {
@@ -36,7 +46,7 @@ export type GetV1EmployeesEmployeeIdOnboardingStatusResponse = {
   /**
    * Example response.
    */
-  employeeOnboardingStatus?: components.EmployeeOnboardingStatus | undefined;
+  employeeOnboardingStatus?: EmployeeOnboardingStatus | undefined;
 };
 
 /** @internal */
@@ -47,9 +57,7 @@ export const GetV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -71,9 +79,7 @@ export const GetV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema:
     GetV1EmployeesEmployeeIdOnboardingStatusRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",
@@ -134,8 +140,8 @@ export const GetV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Employee-Onboarding-Status": components
-      .EmployeeOnboardingStatus$inboundSchema.optional(),
+    "Employee-Onboarding-Status": EmployeeOnboardingStatus$inboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -150,9 +156,7 @@ export type GetV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Employee-Onboarding-Status"?:
-    | components.EmployeeOnboardingStatus$Outbound
-    | undefined;
+  "Employee-Onboarding-Status"?: EmployeeOnboardingStatus$Outbound | undefined;
 };
 
 /** @internal */
@@ -167,7 +171,7 @@ export const GetV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    employeeOnboardingStatus: components.EmployeeOnboardingStatus$outboundSchema
+    employeeOnboardingStatus: EmployeeOnboardingStatus$outboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {

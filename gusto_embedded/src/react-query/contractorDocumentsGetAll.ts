@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorDocumentsGetAll } from "../funcs/contractorDocumentsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorDocumentsRequest,
+  GetV1ContractorDocumentsResponse,
+} from "../models/operations/getv1contractordocuments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorDocumentsGetAllQueryData =
-  operations.GetV1ContractorDocumentsResponse;
+  GetV1ContractorDocumentsResponse;
 
 /**
  * Get all contractor documents
@@ -38,7 +41,7 @@ export type ContractorDocumentsGetAllQueryData =
  * scope: `contractor_documents:read`
  */
 export function useContractorDocumentsGetAll(
-  request: operations.GetV1ContractorDocumentsRequest,
+  request: GetV1ContractorDocumentsRequest,
   options?: QueryHookOptions<ContractorDocumentsGetAllQueryData>,
 ): UseQueryResult<ContractorDocumentsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useContractorDocumentsGetAll(
  * scope: `contractor_documents:read`
  */
 export function useContractorDocumentsGetAllSuspense(
-  request: operations.GetV1ContractorDocumentsRequest,
+  request: GetV1ContractorDocumentsRequest,
   options?: SuspenseQueryHookOptions<ContractorDocumentsGetAllQueryData>,
 ): UseSuspenseQueryResult<ContractorDocumentsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useContractorDocumentsGetAllSuspense(
 export function prefetchContractorDocumentsGetAll(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorDocumentsRequest,
+  request: GetV1ContractorDocumentsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorDocumentsGetAllQuery(
@@ -92,7 +95,7 @@ export function setContractorDocumentsGetAllData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorDocumentsGetAllQueryData,
 ): ContractorDocumentsGetAllQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateContractorDocumentsGetAll(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllContractorDocumentsGetAll(
 
 export function buildContractorDocumentsGetAllQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorDocumentsRequest,
+  request: GetV1ContractorDocumentsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildContractorDocumentsGetAllQuery(
 
 export function queryKeyContractorDocumentsGetAll(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

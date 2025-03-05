@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { garnishmentsList } from "../funcs/garnishmentsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  GetV1EmployeesEmployeeIdGarnishmentsResponse,
+} from "../models/operations/getv1employeesemployeeidgarnishments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type GarnishmentsListQueryData =
-  operations.GetV1EmployeesEmployeeIdGarnishmentsResponse;
+  GetV1EmployeesEmployeeIdGarnishmentsResponse;
 
 /**
  * Get garnishments for an employee
@@ -38,7 +41,7 @@ export type GarnishmentsListQueryData =
  * scope: `garnishments:read`
  */
 export function useGarnishmentsList(
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: GetV1EmployeesEmployeeIdGarnishmentsRequest,
   options?: QueryHookOptions<GarnishmentsListQueryData>,
 ): UseQueryResult<GarnishmentsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useGarnishmentsList(
  * scope: `garnishments:read`
  */
 export function useGarnishmentsListSuspense(
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: GetV1EmployeesEmployeeIdGarnishmentsRequest,
   options?: SuspenseQueryHookOptions<GarnishmentsListQueryData>,
 ): UseSuspenseQueryResult<GarnishmentsListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useGarnishmentsListSuspense(
 export function prefetchGarnishmentsList(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: GetV1EmployeesEmployeeIdGarnishmentsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildGarnishmentsListQuery(
@@ -95,7 +98,7 @@ export function setGarnishmentsListData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: GarnishmentsListQueryData,
@@ -113,7 +116,7 @@ export function invalidateGarnishmentsList(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -137,7 +140,7 @@ export function invalidateAllGarnishmentsList(
 
 export function buildGarnishmentsListQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: GetV1EmployeesEmployeeIdGarnishmentsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -174,7 +177,7 @@ export function queryKeyGarnishmentsList(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

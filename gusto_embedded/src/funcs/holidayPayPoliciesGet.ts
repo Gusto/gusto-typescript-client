@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema,
+  GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+  GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
+} from "../models/operations/getcompaniescompanyuuidholidaypaypolicy.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function holidayPayPoliciesGet(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+    GetCompaniesCompanyUuidHolidayPayPolicyResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function holidayPayPoliciesGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+      GetCompaniesCompanyUuidHolidayPayPolicyResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema
-        .parse(value),
+      GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+    GetCompaniesCompanyUuidHolidayPayPolicyResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -169,11 +175,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
-      { key: "Holiday-Pay-Policy" },
-    ),
+    M.json(200, GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema, {
+      key: "Holiday-Pay-Policy",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

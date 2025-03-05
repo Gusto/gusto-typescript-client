@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$outboundSchema,
+  PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+  PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema,
+} from "../models/operations/putv1employeesemployeeidi9authorizationdocuments.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -40,12 +48,12 @@ import { Result } from "../types/fp.js";
  */
 export function i9VerificationCreateDocuments(
   client: GustoEmbeddedCore,
-  request: operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  request: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -64,13 +72,13 @@ export function i9VerificationCreateDocuments(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
+  request: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -85,8 +93,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$outboundSchema
+      PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -171,8 +178,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -183,11 +190,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema,
+      PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse$inboundSchema,
       { key: "I9-Authorization-Documents-Object" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

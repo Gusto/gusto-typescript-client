@@ -7,7 +7,22 @@ import { contractorFormsGet } from "../funcs/contractorFormsGet.js";
 import { contractorFormsGetPdf } from "../funcs/contractorFormsGetPdf.js";
 import { contractorFormsList } from "../funcs/contractorFormsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1ContractorFormRequest,
+  GetV1ContractorFormResponse,
+} from "../models/operations/getv1contractorform.js";
+import {
+  GetV1ContractorFormPdfRequest,
+  GetV1ContractorFormPdfResponse,
+} from "../models/operations/getv1contractorformpdf.js";
+import {
+  GetV1ContractorFormsRequest,
+  GetV1ContractorFormsResponse,
+} from "../models/operations/getv1contractorforms.js";
+import {
+  PostV1SandboxGenerate1099Request,
+  PostV1SandboxGenerate1099Response,
+} from "../models/operations/postv1sandboxgenerate1099.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class ContractorForms extends ClientSDK {
@@ -20,9 +35,9 @@ export class ContractorForms extends ClientSDK {
    * scope: `contractor_forms:read`
    */
   async list(
-    request: operations.GetV1ContractorFormsRequest,
+    request: GetV1ContractorFormsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorFormsResponse> {
+  ): Promise<GetV1ContractorFormsResponse> {
     return unwrapAsync(contractorFormsList(
       this,
       request,
@@ -39,9 +54,9 @@ export class ContractorForms extends ClientSDK {
    * scope: `contractor_forms:read`
    */
   async get(
-    request: operations.GetV1ContractorFormRequest,
+    request: GetV1ContractorFormRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorFormResponse> {
+  ): Promise<GetV1ContractorFormResponse> {
     return unwrapAsync(contractorFormsGet(
       this,
       request,
@@ -58,9 +73,9 @@ export class ContractorForms extends ClientSDK {
    * scope: `contractor_forms:read`
    */
   async getPdf(
-    request: operations.GetV1ContractorFormPdfRequest,
+    request: GetV1ContractorFormPdfRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorFormPdfResponse> {
+  ): Promise<GetV1ContractorFormPdfResponse> {
     return unwrapAsync(contractorFormsGetPdf(
       this,
       request,
@@ -81,9 +96,9 @@ export class ContractorForms extends ClientSDK {
    * scope: `contractors:write`
    */
   async generate1099(
-    request: operations.PostV1SandboxGenerate1099Request,
+    request: PostV1SandboxGenerate1099Request,
     options?: RequestOptions,
-  ): Promise<operations.PostV1SandboxGenerate1099Response> {
+  ): Promise<PostV1SandboxGenerate1099Response> {
     return unwrapAsync(contractorFormsGenerate1099(
       this,
       request,

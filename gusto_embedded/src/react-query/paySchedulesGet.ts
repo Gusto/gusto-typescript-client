@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGet } from "../funcs/paySchedulesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+} from "../models/operations/getv1companiescompanyidpayschedulespayscheduleid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PaySchedulesGetQueryData =
-  operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse;
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse;
 
 /**
  * Get a pay schedule
@@ -38,7 +41,7 @@ export type PaySchedulesGetQueryData =
  * scope: `pay_schedules:read`
  */
 export function usePaySchedulesGet(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
   options?: QueryHookOptions<PaySchedulesGetQueryData>,
 ): UseQueryResult<PaySchedulesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function usePaySchedulesGet(
  * scope: `pay_schedules:read`
  */
 export function usePaySchedulesGetSuspense(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
   options?: SuspenseQueryHookOptions<PaySchedulesGetQueryData>,
 ): UseSuspenseQueryResult<PaySchedulesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function usePaySchedulesGetSuspense(
 export function prefetchPaySchedulesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPaySchedulesGetQuery(
@@ -93,7 +96,7 @@ export function setPaySchedulesGetData(
   queryKeyBase: [
     companyId: string,
     payScheduleId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: PaySchedulesGetQueryData,
 ): PaySchedulesGetQueryData | undefined {
@@ -108,7 +111,7 @@ export function invalidatePaySchedulesGet(
     [
       companyId: string,
       payScheduleId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -131,7 +134,7 @@ export function invalidateAllPaySchedulesGet(
 
 export function buildPaySchedulesGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -164,7 +167,7 @@ export function buildPaySchedulesGetQuery(
 export function queryKeyPaySchedulesGet(
   companyId: string,
   payScheduleId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

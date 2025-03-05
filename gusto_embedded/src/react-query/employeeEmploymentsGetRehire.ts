@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsGetRehire } from "../funcs/employeeEmploymentsGetRehire.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdRehireRequest,
+  GetV1EmployeesEmployeeIdRehireResponse,
+} from "../models/operations/getv1employeesemployeeidrehire.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeEmploymentsGetRehireQueryData =
-  operations.GetV1EmployeesEmployeeIdRehireResponse;
+  GetV1EmployeesEmployeeIdRehireResponse;
 
 /**
  * Get an employee rehire
@@ -38,7 +41,7 @@ export type EmployeeEmploymentsGetRehireQueryData =
  * scope: `employments:read`
  */
 export function useEmployeeEmploymentsGetRehire(
-  request: operations.GetV1EmployeesEmployeeIdRehireRequest,
+  request: GetV1EmployeesEmployeeIdRehireRequest,
   options?: QueryHookOptions<EmployeeEmploymentsGetRehireQueryData>,
 ): UseQueryResult<EmployeeEmploymentsGetRehireQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useEmployeeEmploymentsGetRehire(
  * scope: `employments:read`
  */
 export function useEmployeeEmploymentsGetRehireSuspense(
-  request: operations.GetV1EmployeesEmployeeIdRehireRequest,
+  request: GetV1EmployeesEmployeeIdRehireRequest,
   options?: SuspenseQueryHookOptions<EmployeeEmploymentsGetRehireQueryData>,
 ): UseSuspenseQueryResult<EmployeeEmploymentsGetRehireQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useEmployeeEmploymentsGetRehireSuspense(
 export function prefetchEmployeeEmploymentsGetRehire(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdRehireRequest,
+  request: GetV1EmployeesEmployeeIdRehireRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeEmploymentsGetRehireQuery(
@@ -92,7 +95,7 @@ export function setEmployeeEmploymentsGetRehireData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeeEmploymentsGetRehireQueryData,
 ): EmployeeEmploymentsGetRehireQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateEmployeeEmploymentsGetRehire(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllEmployeeEmploymentsGetRehire(
 
 export function buildEmployeeEmploymentsGetRehireQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdRehireRequest,
+  request: GetV1EmployeesEmployeeIdRehireRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildEmployeeEmploymentsGetRehireQuery(
 
 export function queryKeyEmployeeEmploymentsGetRehire(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

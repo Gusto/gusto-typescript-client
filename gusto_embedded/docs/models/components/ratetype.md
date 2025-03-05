@@ -8,7 +8,7 @@
 ## Example Usage
 
 ```typescript
-import { RateType } from "@gusto/embedded-api/models/components";
+import { RateType } from "@gusto/embedded-api/models/components/taxrequirementmetadata.js";
 
 let value: RateType = "currency_per_hour";
 ```

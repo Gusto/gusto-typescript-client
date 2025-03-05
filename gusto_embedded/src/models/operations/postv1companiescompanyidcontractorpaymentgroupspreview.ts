@@ -8,7 +8,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
-import * as components from "../components/index.js";
+import {
+  ContractorPaymentGroup,
+  ContractorPaymentGroup$inboundSchema,
+  ContractorPaymentGroup$Outbound,
+  ContractorPaymentGroup$outboundSchema,
+} from "../components/contractorpaymentgroup.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
@@ -72,7 +82,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody:
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody;
 };
@@ -93,7 +103,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse = {
   /**
    * Full contractor payment group object with null uuid
    */
-  contractorPaymentGroup?: components.ContractorPaymentGroup | undefined;
+  contractorPaymentGroup?: ContractorPaymentGroup | undefined;
 };
 
 /** @internal */
@@ -325,9 +335,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest$inbou
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$inboundSchema
     ),
@@ -356,9 +364,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest$outbo
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$outboundSchema
     ),
@@ -421,8 +427,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$inbo
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Contractor-Payment-Group": components.ContractorPaymentGroup$inboundSchema
-      .optional(),
+    "Contractor-Payment-Group": ContractorPaymentGroup$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -438,9 +443,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$Outbo
     ContentType: string;
     StatusCode: number;
     RawResponse: never;
-    "Contractor-Payment-Group"?:
-      | components.ContractorPaymentGroup$Outbound
-      | undefined;
+    "Contractor-Payment-Group"?: ContractorPaymentGroup$Outbound | undefined;
   };
 
 /** @internal */
@@ -455,8 +458,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$outb
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    contractorPaymentGroup: components.ContractorPaymentGroup$outboundSchema
-      .optional(),
+    contractorPaymentGroup: ContractorPaymentGroup$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

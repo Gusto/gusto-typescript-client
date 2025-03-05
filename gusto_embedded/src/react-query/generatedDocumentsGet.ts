@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { generatedDocumentsGet } from "../funcs/generatedDocumentsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { DocumentType } from "../models/components/documenttype.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
+} from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +31,7 @@ import {
 } from "./_types.js";
 
 export type GeneratedDocumentsGetQueryData =
-  operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse;
+  GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse;
 
 /**
  * Get a generated document
@@ -38,7 +42,7 @@ export type GeneratedDocumentsGetQueryData =
  * scope: `generated_documents:read`
  */
 export function useGeneratedDocumentsGet(
-  request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
   options?: QueryHookOptions<GeneratedDocumentsGetQueryData>,
 ): UseQueryResult<GeneratedDocumentsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +65,7 @@ export function useGeneratedDocumentsGet(
  * scope: `generated_documents:read`
  */
 export function useGeneratedDocumentsGetSuspense(
-  request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
   options?: SuspenseQueryHookOptions<GeneratedDocumentsGetQueryData>,
 ): UseSuspenseQueryResult<GeneratedDocumentsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +82,7 @@ export function useGeneratedDocumentsGetSuspense(
 export function prefetchGeneratedDocumentsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildGeneratedDocumentsGetQuery(
@@ -91,9 +95,9 @@ export function prefetchGeneratedDocumentsGet(
 export function setGeneratedDocumentsGetData(
   client: QueryClient,
   queryKeyBase: [
-    documentType: components.DocumentType,
+    documentType: DocumentType,
     requestUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: GeneratedDocumentsGetQueryData,
 ): GeneratedDocumentsGetQueryData | undefined {
@@ -106,9 +110,9 @@ export function invalidateGeneratedDocumentsGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
-      documentType: components.DocumentType,
+      documentType: DocumentType,
       requestUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -136,7 +140,7 @@ export function invalidateAllGeneratedDocumentsGet(
 
 export function buildGeneratedDocumentsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
+  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -169,9 +173,9 @@ export function buildGeneratedDocumentsGetQuery(
 }
 
 export function queryKeyGeneratedDocumentsGet(
-  documentType: components.DocumentType,
+  documentType: DocumentType,
   requestUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

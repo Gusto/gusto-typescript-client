@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
+import {
+  PostPayrollsGrossUpPayrollUuidResponseBody,
+  PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema,
+} from "../models/errors/postpayrollsgrossuppayrolluuid.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostPayrollsGrossUpPayrollUuidRequest,
+  PostPayrollsGrossUpPayrollUuidRequest$outboundSchema,
+  PostPayrollsGrossUpPayrollUuidResponse,
+  PostPayrollsGrossUpPayrollUuidResponse$inboundSchema,
+} from "../models/operations/postpayrollsgrossuppayrolluuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,12 +44,12 @@ import { Result } from "../types/fp.js";
  */
 export function payrollsCalculateGrossUp(
   client: GustoEmbeddedCore,
-  request: operations.PostPayrollsGrossUpPayrollUuidRequest,
+  request: PostPayrollsGrossUpPayrollUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostPayrollsGrossUpPayrollUuidResponse,
-    | errors.PostPayrollsGrossUpPayrollUuidResponseBody
+    PostPayrollsGrossUpPayrollUuidResponse,
+    | PostPayrollsGrossUpPayrollUuidResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,13 +68,13 @@ export function payrollsCalculateGrossUp(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PostPayrollsGrossUpPayrollUuidRequest,
+  request: PostPayrollsGrossUpPayrollUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostPayrollsGrossUpPayrollUuidResponse,
-      | errors.PostPayrollsGrossUpPayrollUuidResponseBody
+      PostPayrollsGrossUpPayrollUuidResponse,
+      | PostPayrollsGrossUpPayrollUuidResponseBody
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -81,9 +89,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostPayrollsGrossUpPayrollUuidRequest$outboundSchema.parse(
-        value,
-      ),
+      PostPayrollsGrossUpPayrollUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -165,8 +171,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostPayrollsGrossUpPayrollUuidResponse,
-    | errors.PostPayrollsGrossUpPayrollUuidResponseBody
+    PostPayrollsGrossUpPayrollUuidResponse,
+    | PostPayrollsGrossUpPayrollUuidResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -175,15 +181,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.PostPayrollsGrossUpPayrollUuidResponse$inboundSchema,
-      { key: "Gross-Up-Pay" },
-    ),
-    M.jsonErr(
-      422,
-      errors.PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema,
-    ),
+    M.json(200, PostPayrollsGrossUpPayrollUuidResponse$inboundSchema, {
+      key: "Gross-Up-Pay",
+    }),
+    M.jsonErr(422, PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

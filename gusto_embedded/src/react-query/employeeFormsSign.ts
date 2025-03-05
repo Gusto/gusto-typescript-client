@@ -11,18 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeFormsSign } from "../funcs/employeeFormsSign.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeeFormSignRequest,
+  PutV1EmployeeFormSignResponse,
+} from "../models/operations/putv1employeeformsign.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeFormsSignMutationVariables = {
-  request: operations.PutV1EmployeeFormSignRequest;
+  request: PutV1EmployeeFormSignRequest;
   options?: RequestOptions;
 };
 
-export type EmployeeFormsSignMutationData =
-  operations.PutV1EmployeeFormSignResponse;
+export type EmployeeFormsSignMutationData = PutV1EmployeeFormSignResponse;
 
 /**
  * Sign an employee form

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsRetrieve } from "../funcs/locationsRetrieve.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1LocationsLocationIdRequest,
+  GetV1LocationsLocationIdResponse,
+} from "../models/operations/getv1locationslocationid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type LocationsRetrieveQueryData =
-  operations.GetV1LocationsLocationIdResponse;
+export type LocationsRetrieveQueryData = GetV1LocationsLocationIdResponse;
 
 /**
  * Get a location
@@ -38,7 +40,7 @@ export type LocationsRetrieveQueryData =
  * scope: `companies:read`
  */
 export function useLocationsRetrieve(
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: GetV1LocationsLocationIdRequest,
   options?: QueryHookOptions<LocationsRetrieveQueryData>,
 ): UseQueryResult<LocationsRetrieveQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useLocationsRetrieve(
  * scope: `companies:read`
  */
 export function useLocationsRetrieveSuspense(
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: GetV1LocationsLocationIdRequest,
   options?: SuspenseQueryHookOptions<LocationsRetrieveQueryData>,
 ): UseSuspenseQueryResult<LocationsRetrieveQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useLocationsRetrieveSuspense(
 export function prefetchLocationsRetrieve(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: GetV1LocationsLocationIdRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildLocationsRetrieveQuery(
@@ -92,7 +94,7 @@ export function setLocationsRetrieveData(
   client: QueryClient,
   queryKeyBase: [
     locationId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: LocationsRetrieveQueryData,
 ): LocationsRetrieveQueryData | undefined {
@@ -106,7 +108,7 @@ export function invalidateLocationsRetrieve(
   queryKeyBase: TupleToPrefixes<
     [
       locationId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -129,7 +131,7 @@ export function invalidateAllLocationsRetrieve(
 
 export function buildLocationsRetrieveQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1LocationsLocationIdRequest,
+  request: GetV1LocationsLocationIdRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -161,7 +163,7 @@ export function buildLocationsRetrieveQuery(
 
 export function queryKeyLocationsRetrieve(
   locationId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

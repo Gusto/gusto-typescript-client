@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodUpdate } from "../funcs/employeePaymentMethodUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdPaymentMethodRequest,
+  PutV1EmployeesEmployeeIdPaymentMethodResponse,
+} from "../models/operations/putv1employeesemployeeidpaymentmethod.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeePaymentMethodUpdateMutationVariables = {
-  request: operations.PutV1EmployeesEmployeeIdPaymentMethodRequest;
+  request: PutV1EmployeesEmployeeIdPaymentMethodRequest;
   options?: RequestOptions;
 };
 
 export type EmployeePaymentMethodUpdateMutationData =
-  operations.PutV1EmployeesEmployeeIdPaymentMethodResponse;
+  PutV1EmployeesEmployeeIdPaymentMethodResponse;
 
 /**
  * Update an employee's payment method

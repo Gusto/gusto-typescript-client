@@ -4,7 +4,10 @@
 
 import { historicalEmployeesUpdate } from "../funcs/historicalEmployeesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1HistoricalEmployeesRequest,
+  PutV1HistoricalEmployeesResponse,
+} from "../models/operations/putv1historicalemployees.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class HistoricalEmployees extends ClientSDK {
@@ -17,9 +20,9 @@ export class HistoricalEmployees extends ClientSDK {
    * scope: `employees:manage`
    */
   async update(
-    request: operations.PutV1HistoricalEmployeesRequest,
+    request: PutV1HistoricalEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1HistoricalEmployeesResponse> {
+  ): Promise<PutV1HistoricalEmployeesResponse> {
     return unwrapAsync(historicalEmployeesUpdate(
       this,
       request,

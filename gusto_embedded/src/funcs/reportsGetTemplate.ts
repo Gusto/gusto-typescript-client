@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSchema,
+  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema,
+} from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function reportsGetTemplate(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function reportsGetTemplate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
+  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+      GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSchema
+      GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -165,7 +169,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
+    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,8 +180,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema,
+      GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema,
       { key: "Report-Template" },
     ),
     M.fail([404, "4XX"]),

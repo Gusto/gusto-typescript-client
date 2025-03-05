@@ -12,15 +12,23 @@ import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
+  DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody,
+  DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema,
+} from "../models/errors/deletev1companybenefitscompanybenefitid.js";
+import {
   ConnectionError,
   InvalidRequestError,
   RequestAbortedError,
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
+  DeleteV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema,
+  DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
+  DeleteV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema,
+} from "../models/operations/deletev1companybenefitscompanybenefitid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,12 +45,12 @@ import { Result } from "../types/fp.js";
  */
 export function companyBenefitsDelete(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
+  request: DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-    | errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+    DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
+    | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -61,13 +69,13 @@ export function companyBenefitsDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
+  request: DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-      | errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+      DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
+      | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -82,8 +90,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.DeleteV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema
-        .parse(value),
+      DeleteV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -167,8 +176,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-    | errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+    DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
+    | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -177,13 +186,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(
-      204,
-      operations.DeleteV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema,
-    ),
+    M.nil(204, DeleteV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema),
     M.jsonErr(
       422,
-      errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema,
+      DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema,
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

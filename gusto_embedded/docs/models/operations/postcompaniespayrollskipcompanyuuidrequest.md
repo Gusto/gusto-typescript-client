@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { PostCompaniesPayrollSkipCompanyUuidRequest } from "@gusto/embedded-api/models/operations";
+import { PostCompaniesPayrollSkipCompanyUuidRequest } from "@gusto/embedded-api/models/operations/postcompaniespayrollskipcompanyuuid.js";
 
 let value: PostCompaniesPayrollSkipCompanyUuidRequest = {
   companyUuid: "<id>",
   requestBody: {
-    payrollType: "Transition from old pay schedule",
+    payrollType: "Hired employee",
   },
 };
 ```

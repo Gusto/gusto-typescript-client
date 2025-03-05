@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsCreate } from "../funcs/employeeBenefitsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1EmployeesEmployeeIdEmployeeBenefitsRequest,
+  PostV1EmployeesEmployeeIdEmployeeBenefitsResponse,
+} from "../models/operations/postv1employeesemployeeidemployeebenefits.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeBenefitsCreateMutationVariables = {
-  request: operations.PostV1EmployeesEmployeeIdEmployeeBenefitsRequest;
+  request: PostV1EmployeesEmployeeIdEmployeeBenefitsRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeBenefitsCreateMutationData =
-  operations.PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
+  PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
 
 /**
  * Create an employee benefit

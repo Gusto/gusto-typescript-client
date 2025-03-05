@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsGetAll } from "../funcs/departmentsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetCompaniesDepartmentsRequest,
+  GetCompaniesDepartmentsResponse,
+} from "../models/operations/getcompaniesdepartments.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type DepartmentsGetAllQueryData =
-  operations.GetCompaniesDepartmentsResponse;
+export type DepartmentsGetAllQueryData = GetCompaniesDepartmentsResponse;
 
 /**
  * Get all departments of a company
@@ -38,7 +40,7 @@ export type DepartmentsGetAllQueryData =
  * scope: `departments:read`
  */
 export function useDepartmentsGetAll(
-  request: operations.GetCompaniesDepartmentsRequest,
+  request: GetCompaniesDepartmentsRequest,
   options?: QueryHookOptions<DepartmentsGetAllQueryData>,
 ): UseQueryResult<DepartmentsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useDepartmentsGetAll(
  * scope: `departments:read`
  */
 export function useDepartmentsGetAllSuspense(
-  request: operations.GetCompaniesDepartmentsRequest,
+  request: GetCompaniesDepartmentsRequest,
   options?: SuspenseQueryHookOptions<DepartmentsGetAllQueryData>,
 ): UseSuspenseQueryResult<DepartmentsGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useDepartmentsGetAllSuspense(
 export function prefetchDepartmentsGetAll(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesDepartmentsRequest,
+  request: GetCompaniesDepartmentsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildDepartmentsGetAllQuery(
@@ -92,7 +94,7 @@ export function setDepartmentsGetAllData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: DepartmentsGetAllQueryData,
 ): DepartmentsGetAllQueryData | undefined {
@@ -106,7 +108,7 @@ export function invalidateDepartmentsGetAll(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -129,7 +131,7 @@ export function invalidateAllDepartmentsGetAll(
 
 export function buildDepartmentsGetAllQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetCompaniesDepartmentsRequest,
+  request: GetCompaniesDepartmentsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -161,7 +163,7 @@ export function buildDepartmentsGetAllQuery(
 
 export function queryKeyDepartmentsGetAll(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

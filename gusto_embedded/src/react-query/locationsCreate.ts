@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsCreate } from "../funcs/locationsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdLocationsRequest,
+  PostV1CompaniesCompanyIdLocationsResponse,
+} from "../models/operations/postv1companiescompanyidlocations.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type LocationsCreateMutationVariables = {
-  request: operations.PostV1CompaniesCompanyIdLocationsRequest;
+  request: PostV1CompaniesCompanyIdLocationsRequest;
   options?: RequestOptions;
 };
 
 export type LocationsCreateMutationData =
-  operations.PostV1CompaniesCompanyIdLocationsResponse;
+  PostV1CompaniesCompanyIdLocationsResponse;
 
 /**
  * Create a company location

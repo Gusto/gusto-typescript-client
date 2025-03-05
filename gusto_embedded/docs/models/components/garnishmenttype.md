@@ -5,7 +5,7 @@ The specific type of garnishment for court ordered garnishments.
 ## Example Usage
 
 ```typescript
-import { GarnishmentType } from "@gusto/embedded-api/models/components";
+import { GarnishmentType } from "@gusto/embedded-api/models/components/garnishment.js";
 
 let value: GarnishmentType = "state_tax_lien";
 ```

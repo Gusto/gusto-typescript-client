@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { federalTaxDetailsUpdate } from "../funcs/federalTaxDetailsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
+  PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
+} from "../models/operations/putv1companiescompanyidfederaltaxdetails.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type FederalTaxDetailsUpdateMutationVariables = {
-  request: operations.PutV1CompaniesCompanyIdFederalTaxDetailsRequest;
+  request: PutV1CompaniesCompanyIdFederalTaxDetailsRequest;
   options?: RequestOptions;
 };
 
 export type FederalTaxDetailsUpdateMutationData =
-  operations.PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
+  PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 
 /**
  * Update Federal Tax Details

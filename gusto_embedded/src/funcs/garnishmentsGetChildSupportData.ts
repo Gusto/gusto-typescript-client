@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1GarnishmentsChildSupportRequest,
+  GetV1GarnishmentsChildSupportRequest$outboundSchema,
+  GetV1GarnishmentsChildSupportResponse,
+  GetV1GarnishmentsChildSupportResponse$inboundSchema,
+} from "../models/operations/getv1garnishmentschildsupport.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function garnishmentsGetChildSupportData(
   client: GustoEmbeddedCore,
-  request: operations.GetV1GarnishmentsChildSupportRequest,
+  request: GetV1GarnishmentsChildSupportRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1GarnishmentsChildSupportResponse,
+    GetV1GarnishmentsChildSupportResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function garnishmentsGetChildSupportData(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1GarnishmentsChildSupportRequest,
+  request: GetV1GarnishmentsChildSupportRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1GarnishmentsChildSupportResponse,
+      GetV1GarnishmentsChildSupportResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,10 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1GarnishmentsChildSupportRequest$outboundSchema.parse(
-        value,
-      ),
+    (value) => GetV1GarnishmentsChildSupportRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -152,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1GarnishmentsChildSupportResponse,
+    GetV1GarnishmentsChildSupportResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -161,11 +163,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetV1GarnishmentsChildSupportResponse$inboundSchema,
-      { key: "Child-Support-Data" },
-    ),
+    M.json(200, GetV1GarnishmentsChildSupportResponse$inboundSchema, {
+      key: "Child-Support-Data",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

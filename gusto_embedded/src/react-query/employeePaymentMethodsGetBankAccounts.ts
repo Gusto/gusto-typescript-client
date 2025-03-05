@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodsGetBankAccounts } from "../funcs/employeePaymentMethodsGetBankAccounts.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdBankAccountsRequest,
+  GetV1EmployeesEmployeeIdBankAccountsResponse,
+} from "../models/operations/getv1employeesemployeeidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeePaymentMethodsGetBankAccountsQueryData =
-  operations.GetV1EmployeesEmployeeIdBankAccountsResponse;
+  GetV1EmployeesEmployeeIdBankAccountsResponse;
 
 /**
  * Get all employee bank accounts
@@ -38,7 +41,7 @@ export type EmployeePaymentMethodsGetBankAccountsQueryData =
  * scope: `employee_payment_methods:read`
  */
 export function useEmployeePaymentMethodsGetBankAccounts(
-  request: operations.GetV1EmployeesEmployeeIdBankAccountsRequest,
+  request: GetV1EmployeesEmployeeIdBankAccountsRequest,
   options?: QueryHookOptions<EmployeePaymentMethodsGetBankAccountsQueryData>,
 ): UseQueryResult<EmployeePaymentMethodsGetBankAccountsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useEmployeePaymentMethodsGetBankAccounts(
  * scope: `employee_payment_methods:read`
  */
 export function useEmployeePaymentMethodsGetBankAccountsSuspense(
-  request: operations.GetV1EmployeesEmployeeIdBankAccountsRequest,
+  request: GetV1EmployeesEmployeeIdBankAccountsRequest,
   options?: SuspenseQueryHookOptions<
     EmployeePaymentMethodsGetBankAccountsQueryData
   >,
@@ -83,7 +86,7 @@ export function useEmployeePaymentMethodsGetBankAccountsSuspense(
 export function prefetchEmployeePaymentMethodsGetBankAccounts(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdBankAccountsRequest,
+  request: GetV1EmployeesEmployeeIdBankAccountsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeePaymentMethodsGetBankAccountsQuery(
@@ -100,7 +103,7 @@ export function setEmployeePaymentMethodsGetBankAccountsData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeePaymentMethodsGetBankAccountsQueryData,
@@ -121,7 +124,7 @@ export function invalidateEmployeePaymentMethodsGetBankAccounts(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -154,7 +157,7 @@ export function invalidateAllEmployeePaymentMethodsGetBankAccounts(
 
 export function buildEmployeePaymentMethodsGetBankAccountsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdBankAccountsRequest,
+  request: GetV1EmployeesEmployeeIdBankAccountsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -194,7 +197,7 @@ export function queryKeyEmployeePaymentMethodsGetBankAccounts(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

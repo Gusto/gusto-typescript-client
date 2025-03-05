@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsFund } from "../funcs/contractorPaymentGroupsFund.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+} from "../models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfund.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorPaymentGroupsFundMutationVariables = {
-  request:
-    operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest;
+  request: PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest;
   options?: RequestOptions;
 };
 
 export type ContractorPaymentGroupsFundMutationData =
-  operations.PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse;
+  PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse;
 
 /**
  * Fund a contractor payment group [DEMO]

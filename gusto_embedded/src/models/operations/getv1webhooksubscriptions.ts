@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
+import {
+  WebhookSubscription,
+  WebhookSubscription$inboundSchema,
+  WebhookSubscription$Outbound,
+  WebhookSubscription$outboundSchema,
+} from "../components/webhooksubscription.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1WebhookSubscriptionsSecurity = {
@@ -17,7 +27,7 @@ export type GetV1WebhookSubscriptionsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1WebhookSubscriptionsResponse = {
@@ -36,7 +46,7 @@ export type GetV1WebhookSubscriptionsResponse = {
   /**
    * Example response
    */
-  webhookSubscriptionsList?: Array<components.WebhookSubscription> | undefined;
+  webhookSubscriptionsList?: Array<WebhookSubscription> | undefined;
 };
 
 /** @internal */
@@ -110,9 +120,7 @@ export const GetV1WebhookSubscriptionsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "X-Gusto-API-Version": "xGustoAPIVersion",
@@ -130,9 +138,7 @@ export const GetV1WebhookSubscriptionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1WebhookSubscriptionsRequest
 > = z.object({
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
@@ -181,9 +187,8 @@ export const GetV1WebhookSubscriptionsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Webhook-Subscriptions-List": z.array(
-    components.WebhookSubscription$inboundSchema,
-  ).optional(),
+  "Webhook-Subscriptions-List": z.array(WebhookSubscription$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -199,7 +204,7 @@ export type GetV1WebhookSubscriptionsResponse$Outbound = {
   StatusCode: number;
   RawResponse: never;
   "Webhook-Subscriptions-List"?:
-    | Array<components.WebhookSubscription$Outbound>
+    | Array<WebhookSubscription$Outbound>
     | undefined;
 };
 
@@ -214,9 +219,8 @@ export const GetV1WebhookSubscriptionsResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  webhookSubscriptionsList: z.array(
-    components.WebhookSubscription$outboundSchema,
-  ).optional(),
+  webhookSubscriptionsList: z.array(WebhookSubscription$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

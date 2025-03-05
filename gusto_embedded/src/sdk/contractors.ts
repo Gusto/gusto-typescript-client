@@ -12,7 +12,42 @@ import { contractorsUpdate } from "../funcs/contractorsUpdate.js";
 import { contractorsUpdateAddress } from "../funcs/contractorsUpdateAddress.js";
 import { contractorsUpdateOnboardingStatus } from "../funcs/contractorsUpdateOnboardingStatus.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1ContractorsContractorUuidRequest,
+  DeleteV1ContractorsContractorUuidResponse,
+} from "../models/operations/deletev1contractorscontractoruuid.js";
+import {
+  GetV1CompaniesCompanyUuidContractorsRequest,
+  GetV1CompaniesCompanyUuidContractorsResponse,
+} from "../models/operations/getv1companiescompanyuuidcontractors.js";
+import {
+  GetV1ContractorsContractorUuidRequest,
+  GetV1ContractorsContractorUuidResponse,
+} from "../models/operations/getv1contractorscontractoruuid.js";
+import {
+  GetV1ContractorsContractorUuidAddressRequest,
+  GetV1ContractorsContractorUuidAddressResponse,
+} from "../models/operations/getv1contractorscontractoruuidaddress.js";
+import {
+  GetV1ContractorsContractorUuidOnboardingStatusRequest,
+  GetV1ContractorsContractorUuidOnboardingStatusResponse,
+} from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
+import {
+  PostV1CompaniesCompanyUuidContractorsRequest,
+  PostV1CompaniesCompanyUuidContractorsResponse,
+} from "../models/operations/postv1companiescompanyuuidcontractors.js";
+import {
+  PutV1ContractorsContractorUuidRequest,
+  PutV1ContractorsContractorUuidResponse,
+} from "../models/operations/putv1contractorscontractoruuid.js";
+import {
+  PutV1ContractorsContractorUuidAddressRequest,
+  PutV1ContractorsContractorUuidAddressResponse,
+} from "../models/operations/putv1contractorscontractoruuidaddress.js";
+import {
+  PutV1ContractorsContractorUuidOnboardingStatusRequest,
+  PutV1ContractorsContractorUuidOnboardingStatusResponse,
+} from "../models/operations/putv1contractorscontractoruuidonboardingstatus.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Contractors extends ClientSDK {
@@ -25,9 +60,9 @@ export class Contractors extends ClientSDK {
    * scope: `contractors:manage`
    */
   async create(
-    request: operations.PostV1CompaniesCompanyUuidContractorsRequest,
+    request: PostV1CompaniesCompanyUuidContractorsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyUuidContractorsResponse> {
+  ): Promise<PostV1CompaniesCompanyUuidContractorsResponse> {
     return unwrapAsync(contractorsCreate(
       this,
       request,
@@ -44,9 +79,9 @@ export class Contractors extends ClientSDK {
    * scope: `contractors:read`
    */
   async list(
-    request: operations.GetV1CompaniesCompanyUuidContractorsRequest,
+    request: GetV1CompaniesCompanyUuidContractorsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyUuidContractorsResponse> {
+  ): Promise<GetV1CompaniesCompanyUuidContractorsResponse> {
     return unwrapAsync(contractorsList(
       this,
       request,
@@ -63,9 +98,9 @@ export class Contractors extends ClientSDK {
    * scope: `contractors:read`
    */
   async get(
-    request: operations.GetV1ContractorsContractorUuidRequest,
+    request: GetV1ContractorsContractorUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorsContractorUuidResponse> {
+  ): Promise<GetV1ContractorsContractorUuidResponse> {
     return unwrapAsync(contractorsGet(
       this,
       request,
@@ -86,9 +121,9 @@ export class Contractors extends ClientSDK {
    * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual
    */
   async update(
-    request: operations.PutV1ContractorsContractorUuidRequest,
+    request: PutV1ContractorsContractorUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1ContractorsContractorUuidResponse> {
+  ): Promise<PutV1ContractorsContractorUuidResponse> {
     return unwrapAsync(contractorsUpdate(
       this,
       request,
@@ -105,9 +140,9 @@ export class Contractors extends ClientSDK {
    * scope: `contractors:manage`
    */
   async delete(
-    request: operations.DeleteV1ContractorsContractorUuidRequest,
+    request: DeleteV1ContractorsContractorUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1ContractorsContractorUuidResponse> {
+  ): Promise<DeleteV1ContractorsContractorUuidResponse> {
     return unwrapAsync(contractorsDelete(
       this,
       request,
@@ -155,11 +190,9 @@ export class Contractors extends ClientSDK {
    * | `file_new_hire_report` | Contractor new hire report is generated. |
    */
   async getOnboardingStatus(
-    request: operations.GetV1ContractorsContractorUuidOnboardingStatusRequest,
+    request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1ContractorsContractorUuidOnboardingStatusResponse
-  > {
+  ): Promise<GetV1ContractorsContractorUuidOnboardingStatusResponse> {
     return unwrapAsync(contractorsGetOnboardingStatus(
       this,
       request,
@@ -186,11 +219,9 @@ export class Contractors extends ClientSDK {
    * | Finish a contractor's onboarding | `admin_onboarding_review` or `self_onboarding_review` | `onboarding_completed` |
    */
   async updateOnboardingStatus(
-    request: operations.PutV1ContractorsContractorUuidOnboardingStatusRequest,
+    request: PutV1ContractorsContractorUuidOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1ContractorsContractorUuidOnboardingStatusResponse
-  > {
+  ): Promise<PutV1ContractorsContractorUuidOnboardingStatusResponse> {
     return unwrapAsync(contractorsUpdateOnboardingStatus(
       this,
       request,
@@ -207,9 +238,9 @@ export class Contractors extends ClientSDK {
    * scope: `contractors:read`
    */
   async getAddress(
-    request: operations.GetV1ContractorsContractorUuidAddressRequest,
+    request: GetV1ContractorsContractorUuidAddressRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1ContractorsContractorUuidAddressResponse> {
+  ): Promise<GetV1ContractorsContractorUuidAddressResponse> {
     return unwrapAsync(contractorsGetAddress(
       this,
       request,
@@ -226,9 +257,9 @@ export class Contractors extends ClientSDK {
    * scope: `contractors:write`
    */
   async updateAddress(
-    request: operations.PutV1ContractorsContractorUuidAddressRequest,
+    request: PutV1ContractorsContractorUuidAddressRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1ContractorsContractorUuidAddressResponse> {
+  ): Promise<PutV1ContractorsContractorUuidAddressResponse> {
     return unwrapAsync(contractorsUpdateAddress(
       this,
       request,

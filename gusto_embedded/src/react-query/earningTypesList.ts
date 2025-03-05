@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { earningTypesList } from "../funcs/earningTypesList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdEarningTypesRequest,
+  GetV1CompaniesCompanyIdEarningTypesResponse,
+} from "../models/operations/getv1companiescompanyidearningtypes.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EarningTypesListQueryData =
-  operations.GetV1CompaniesCompanyIdEarningTypesResponse;
+  GetV1CompaniesCompanyIdEarningTypesResponse;
 
 /**
  * Get all earning types for a company
@@ -44,7 +47,7 @@ export type EarningTypesListQueryData =
  * scope: `payrolls:read`
  */
 export function useEarningTypesList(
-  request: operations.GetV1CompaniesCompanyIdEarningTypesRequest,
+  request: GetV1CompaniesCompanyIdEarningTypesRequest,
   options?: QueryHookOptions<EarningTypesListQueryData>,
 ): UseQueryResult<EarningTypesListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -73,7 +76,7 @@ export function useEarningTypesList(
  * scope: `payrolls:read`
  */
 export function useEarningTypesListSuspense(
-  request: operations.GetV1CompaniesCompanyIdEarningTypesRequest,
+  request: GetV1CompaniesCompanyIdEarningTypesRequest,
   options?: SuspenseQueryHookOptions<EarningTypesListQueryData>,
 ): UseSuspenseQueryResult<EarningTypesListQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -90,7 +93,7 @@ export function useEarningTypesListSuspense(
 export function prefetchEarningTypesList(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdEarningTypesRequest,
+  request: GetV1CompaniesCompanyIdEarningTypesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEarningTypesListQuery(
@@ -104,7 +107,7 @@ export function setEarningTypesListData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EarningTypesListQueryData,
 ): EarningTypesListQueryData | undefined {
@@ -118,7 +121,7 @@ export function invalidateEarningTypesList(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -141,7 +144,7 @@ export function invalidateAllEarningTypesList(
 
 export function buildEarningTypesListQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdEarningTypesRequest,
+  request: GetV1CompaniesCompanyIdEarningTypesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -173,7 +176,7 @@ export function buildEarningTypesListQuery(
 
 export function queryKeyEarningTypesList(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "earningTypes", "list", companyId, parameters];
 }

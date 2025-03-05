@@ -4,7 +4,11 @@
 
 import { eventsGet } from "../funcs/eventsGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetEventsRequest,
+  GetEventsResponse,
+  GetEventsSecurity,
+} from "../models/operations/getevents.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Events extends ClientSDK {
@@ -21,10 +25,10 @@ export class Events extends ClientSDK {
    * scope: `events:read`
    */
   async get(
-    security: operations.GetEventsSecurity,
-    request: operations.GetEventsRequest,
+    security: GetEventsSecurity,
+    request: GetEventsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetEventsResponse> {
+  ): Promise<GetEventsResponse> {
     return unwrapAsync(eventsGet(
       this,
       security,

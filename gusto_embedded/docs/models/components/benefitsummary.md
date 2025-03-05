@@ -5,7 +5,7 @@ Benefit summary response
 ## Example Usage
 
 ```typescript
-import { BenefitSummary } from "@gusto/embedded-api/models/components";
+import { BenefitSummary } from "@gusto/embedded-api/models/components/benefitsummary.js";
 
 let value: BenefitSummary = {};
 ```

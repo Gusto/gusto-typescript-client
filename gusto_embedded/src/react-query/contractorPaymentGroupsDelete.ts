@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsDelete } from "../funcs/contractorPaymentGroupsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
+} from "../models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorPaymentGroupsDeleteMutationVariables = {
-  request:
-    operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest;
+  request: DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest;
   options?: RequestOptions;
 };
 
 export type ContractorPaymentGroupsDeleteMutationData =
-  operations.DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
+  DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 
 /**
  * Cancel a contractor payment group

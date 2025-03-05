@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsGetTerminations } from "../funcs/employeeEmploymentsGetTerminations.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdTerminationsRequest,
+  GetV1EmployeesEmployeeIdTerminationsResponse,
+} from "../models/operations/getv1employeesemployeeidterminations.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeEmploymentsGetTerminationsQueryData =
-  operations.GetV1EmployeesEmployeeIdTerminationsResponse;
+  GetV1EmployeesEmployeeIdTerminationsResponse;
 
 /**
  * Get terminations for an employee
@@ -40,7 +43,7 @@ export type EmployeeEmploymentsGetTerminationsQueryData =
  * scope: `employments:read`
  */
 export function useEmployeeEmploymentsGetTerminations(
-  request: operations.GetV1EmployeesEmployeeIdTerminationsRequest,
+  request: GetV1EmployeesEmployeeIdTerminationsRequest,
   options?: QueryHookOptions<EmployeeEmploymentsGetTerminationsQueryData>,
 ): UseQueryResult<EmployeeEmploymentsGetTerminationsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -65,7 +68,7 @@ export function useEmployeeEmploymentsGetTerminations(
  * scope: `employments:read`
  */
 export function useEmployeeEmploymentsGetTerminationsSuspense(
-  request: operations.GetV1EmployeesEmployeeIdTerminationsRequest,
+  request: GetV1EmployeesEmployeeIdTerminationsRequest,
   options?: SuspenseQueryHookOptions<
     EmployeeEmploymentsGetTerminationsQueryData
   >,
@@ -84,7 +87,7 @@ export function useEmployeeEmploymentsGetTerminationsSuspense(
 export function prefetchEmployeeEmploymentsGetTerminations(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdTerminationsRequest,
+  request: GetV1EmployeesEmployeeIdTerminationsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeEmploymentsGetTerminationsQuery(
@@ -98,7 +101,7 @@ export function setEmployeeEmploymentsGetTerminationsData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeeEmploymentsGetTerminationsQueryData,
 ): EmployeeEmploymentsGetTerminationsQueryData | undefined {
@@ -115,7 +118,7 @@ export function invalidateEmployeeEmploymentsGetTerminations(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -143,7 +146,7 @@ export function invalidateAllEmployeeEmploymentsGetTerminations(
 
 export function buildEmployeeEmploymentsGetTerminationsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdTerminationsRequest,
+  request: GetV1EmployeesEmployeeIdTerminationsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -175,7 +178,7 @@ export function buildEmployeeEmploymentsGetTerminationsQuery(
 
 export function queryKeyEmployeeEmploymentsGetTerminations(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

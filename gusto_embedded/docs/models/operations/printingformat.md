@@ -5,7 +5,7 @@ The type of check stock being printed. Check the "Types of check stock" section 
 ## Example Usage
 
 ```typescript
-import { PrintingFormat } from "@gusto/embedded-api/models/operations";
+import { PrintingFormat } from "@gusto/embedded-api/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.js";
 
 let value: PrintingFormat = "top";
 ```

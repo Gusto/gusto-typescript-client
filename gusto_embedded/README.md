@@ -82,6 +82,10 @@ yarn add @tanstack/react-query react react-dom
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
 ```
+
+> [!NOTE]
+> This package is published as an ES Module (ESM) only. For applications using
+> CommonJS, use `await import("@gusto/embedded-api")` to import and use this package.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -1240,10 +1244,8 @@ If the method throws an error and it is not captured by the known errors, it wil
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
-import {
-  SDKValidationError,
-  UnprocessableEntityErrorObject,
-} from "@gusto/embedded-api/models/errors";
+import { SDKValidationError } from "@gusto/embedded-api/models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "@gusto/embedded-api/models/errors/unprocessableentityerrorobject.js";
 
 const gustoEmbedded = new GustoEmbedded();
 

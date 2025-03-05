@@ -3,7 +3,12 @@
  */
 
 import * as z from "zod";
-import * as components from "../components/index.js";
+import {
+  EntityErrorObject,
+  EntityErrorObject$inboundSchema,
+  EntityErrorObject$Outbound,
+  EntityErrorObject$outboundSchema,
+} from "../components/entityerrorobject.js";
 
 /**
  * Unprocessable Entity
@@ -13,7 +18,7 @@ import * as components from "../components/index.js";
  * This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
 export type UnprocessableEntityErrorObjectData = {
-  errors?: Array<components.EntityErrorObject> | undefined;
+  errors?: Array<EntityErrorObject> | undefined;
 };
 
 /**
@@ -24,7 +29,7 @@ export type UnprocessableEntityErrorObjectData = {
  * This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
 export class UnprocessableEntityErrorObject extends Error {
-  errors?: Array<components.EntityErrorObject> | undefined;
+  errors?: Array<EntityErrorObject> | undefined;
 
   /** The original data that was passed to this error instance. */
   data$: UnprocessableEntityErrorObjectData;
@@ -48,7 +53,7 @@ export const UnprocessableEntityErrorObject$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errors: z.array(components.EntityErrorObject$inboundSchema).optional(),
+  errors: z.array(EntityErrorObject$inboundSchema).optional(),
 })
   .transform((v) => {
     return new UnprocessableEntityErrorObject(v);
@@ -56,7 +61,7 @@ export const UnprocessableEntityErrorObject$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UnprocessableEntityErrorObject$Outbound = {
-  errors?: Array<components.EntityErrorObject$Outbound> | undefined;
+  errors?: Array<EntityErrorObject$Outbound> | undefined;
 };
 
 /** @internal */
@@ -67,7 +72,7 @@ export const UnprocessableEntityErrorObject$outboundSchema: z.ZodType<
 > = z.instanceof(UnprocessableEntityErrorObject)
   .transform(v => v.data$)
   .pipe(z.object({
-    errors: z.array(components.EntityErrorObject$outboundSchema).optional(),
+    errors: z.array(EntityErrorObject$outboundSchema).optional(),
   }));
 
 /**

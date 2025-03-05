@@ -11,18 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { recoveryCasesRedebit } from "../funcs/recoveryCasesRedebit.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  RedebitRecoveryCaseRequest,
+  RedebitRecoveryCaseResponse,
+} from "../models/operations/redebitrecoverycase.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type RecoveryCasesRedebitMutationVariables = {
-  request: operations.RedebitRecoveryCaseRequest;
+  request: RedebitRecoveryCaseRequest;
   options?: RequestOptions;
 };
 
-export type RecoveryCasesRedebitMutationData =
-  operations.RedebitRecoveryCaseResponse;
+export type RecoveryCasesRedebitMutationData = RedebitRecoveryCaseResponse;
 
 /**
  * Initiate a redebit for a recovery case

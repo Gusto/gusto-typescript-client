@@ -5,7 +5,7 @@ The representation of an unprocessed termination pay period.
 ## Example Usage
 
 ```typescript
-import { AccruingTimeOffHour } from "@gusto/embedded-api/models/components";
+import { AccruingTimeOffHour } from "@gusto/embedded-api/models/components/accruingtimeoffhour.js";
 
 let value: AccruingTimeOffHour = {};
 ```

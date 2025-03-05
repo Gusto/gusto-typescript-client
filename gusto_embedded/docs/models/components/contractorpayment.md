@@ -5,7 +5,7 @@ The representation of a single contractor payment.
 ## Example Usage
 
 ```typescript
-import { ContractorPayment } from "@gusto/embedded-api/models/components";
+import { ContractorPayment } from "@gusto/embedded-api/models/components/contractorpayment.js";
 
 let value: ContractorPayment = {
   uuid: "4b0bd764-02fd-44f5-b42e-f5b51681d739",

@@ -13,7 +13,46 @@ import { employeeAddressesRetrieveWorkAddress } from "../funcs/employeeAddresses
 import { employeeAddressesUpdate } from "../funcs/employeeAddressesUpdate.js";
 import { employeeAddressesUpdateWorkAddress } from "../funcs/employeeAddressesUpdateWorkAddress.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1HomeAddressesHomeAddressUuidRequest,
+  DeleteV1HomeAddressesHomeAddressUuidResponse,
+} from "../models/operations/deletev1homeaddresseshomeaddressuuid.js";
+import {
+  DeleteV1WorkAddressesWorkAddressUuidRequest,
+  DeleteV1WorkAddressesWorkAddressUuidResponse,
+} from "../models/operations/deletev1workaddressesworkaddressuuid.js";
+import {
+  GetV1EmployeesEmployeeIdHomeAddressesRequest,
+  GetV1EmployeesEmployeeIdHomeAddressesResponse,
+} from "../models/operations/getv1employeesemployeeidhomeaddresses.js";
+import {
+  GetV1EmployeesEmployeeIdWorkAddressesRequest,
+  GetV1EmployeesEmployeeIdWorkAddressesResponse,
+} from "../models/operations/getv1employeesemployeeidworkaddresses.js";
+import {
+  GetV1HomeAddressesHomeAddressUuidRequest,
+  GetV1HomeAddressesHomeAddressUuidResponse,
+} from "../models/operations/getv1homeaddresseshomeaddressuuid.js";
+import {
+  GetV1WorkAddressesWorkAddressUuidRequest,
+  GetV1WorkAddressesWorkAddressUuidResponse,
+} from "../models/operations/getv1workaddressesworkaddressuuid.js";
+import {
+  PostV1EmployeesEmployeeIdHomeAddressesRequest,
+  PostV1EmployeesEmployeeIdHomeAddressesResponse,
+} from "../models/operations/postv1employeesemployeeidhomeaddresses.js";
+import {
+  PostV1EmployeesEmployeeIdWorkAddressesRequest,
+  PostV1EmployeesEmployeeIdWorkAddressesResponse,
+} from "../models/operations/postv1employeesemployeeidworkaddresses.js";
+import {
+  PutV1HomeAddressesHomeAddressUuidRequest,
+  PutV1HomeAddressesHomeAddressUuidResponse,
+} from "../models/operations/putv1homeaddresseshomeaddressuuid.js";
+import {
+  PutV1WorkAddressesWorkAddressUuidRequest,
+  PutV1WorkAddressesWorkAddressUuidResponse,
+} from "../models/operations/putv1workaddressesworkaddressuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class EmployeeAddresses extends ClientSDK {
@@ -28,9 +67,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:read`
    */
   async get(
-    request: operations.GetV1EmployeesEmployeeIdHomeAddressesRequest,
+    request: GetV1EmployeesEmployeeIdHomeAddressesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdHomeAddressesResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdHomeAddressesResponse> {
     return unwrapAsync(employeeAddressesGet(
       this,
       request,
@@ -49,9 +88,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:write`
    */
   async create(
-    request: operations.PostV1EmployeesEmployeeIdHomeAddressesRequest,
+    request: PostV1EmployeesEmployeeIdHomeAddressesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1EmployeesEmployeeIdHomeAddressesResponse> {
+  ): Promise<PostV1EmployeesEmployeeIdHomeAddressesResponse> {
     return unwrapAsync(employeeAddressesCreate(
       this,
       request,
@@ -70,9 +109,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:read`
    */
   async retrieveHomeAddress(
-    request: operations.GetV1HomeAddressesHomeAddressUuidRequest,
+    request: GetV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1HomeAddressesHomeAddressUuidResponse> {
+  ): Promise<GetV1HomeAddressesHomeAddressUuidResponse> {
     return unwrapAsync(employeeAddressesRetrieveHomeAddress(
       this,
       request,
@@ -91,9 +130,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:write`
    */
   async update(
-    request: operations.PutV1HomeAddressesHomeAddressUuidRequest,
+    request: PutV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1HomeAddressesHomeAddressUuidResponse> {
+  ): Promise<PutV1HomeAddressesHomeAddressUuidResponse> {
     return unwrapAsync(employeeAddressesUpdate(
       this,
       request,
@@ -110,9 +149,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:write`
    */
   async delete(
-    request: operations.DeleteV1HomeAddressesHomeAddressUuidRequest,
+    request: DeleteV1HomeAddressesHomeAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1HomeAddressesHomeAddressUuidResponse> {
+  ): Promise<DeleteV1HomeAddressesHomeAddressUuidResponse> {
     return unwrapAsync(employeeAddressesDelete(
       this,
       request,
@@ -130,9 +169,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:read`
    */
   async getWorkAddresses(
-    request: operations.GetV1EmployeesEmployeeIdWorkAddressesRequest,
+    request: GetV1EmployeesEmployeeIdWorkAddressesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdWorkAddressesResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdWorkAddressesResponse> {
     return unwrapAsync(employeeAddressesGetWorkAddresses(
       this,
       request,
@@ -149,9 +188,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:manage`
    */
   async createWorkAddress(
-    request: operations.PostV1EmployeesEmployeeIdWorkAddressesRequest,
+    request: PostV1EmployeesEmployeeIdWorkAddressesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1EmployeesEmployeeIdWorkAddressesResponse> {
+  ): Promise<PostV1EmployeesEmployeeIdWorkAddressesResponse> {
     return unwrapAsync(employeeAddressesCreateWorkAddress(
       this,
       request,
@@ -168,9 +207,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:read`
    */
   async retrieveWorkAddress(
-    request: operations.GetV1WorkAddressesWorkAddressUuidRequest,
+    request: GetV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1WorkAddressesWorkAddressUuidResponse> {
+  ): Promise<GetV1WorkAddressesWorkAddressUuidResponse> {
     return unwrapAsync(employeeAddressesRetrieveWorkAddress(
       this,
       request,
@@ -187,9 +226,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:manage`
    */
   async updateWorkAddress(
-    request: operations.PutV1WorkAddressesWorkAddressUuidRequest,
+    request: PutV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1WorkAddressesWorkAddressUuidResponse> {
+  ): Promise<PutV1WorkAddressesWorkAddressUuidResponse> {
     return unwrapAsync(employeeAddressesUpdateWorkAddress(
       this,
       request,
@@ -206,9 +245,9 @@ export class EmployeeAddresses extends ClientSDK {
    * scope: `employees:manage`
    */
   async deleteWorkAddress(
-    request: operations.DeleteV1WorkAddressesWorkAddressUuidRequest,
+    request: DeleteV1WorkAddressesWorkAddressUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1WorkAddressesWorkAddressUuidResponse> {
+  ): Promise<DeleteV1WorkAddressesWorkAddressUuidResponse> {
     return unwrapAsync(employeeAddressesDeleteWorkAddress(
       this,
       request,

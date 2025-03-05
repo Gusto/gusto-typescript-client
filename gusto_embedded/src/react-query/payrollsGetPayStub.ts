@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGetPayStub } from "../funcs/payrollsGetPayStub.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+} from "../models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PayrollsGetPayStubQueryData =
-  operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse;
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse;
 
 /**
  * Get an employee pay stub (pdf)
@@ -38,8 +41,7 @@ export type PayrollsGetPayStubQueryData =
  * scope: `pay_stubs:read`
  */
 export function usePayrollsGetPayStub(
-  request:
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
   options?: QueryHookOptions<PayrollsGetPayStubQueryData>,
 ): UseQueryResult<PayrollsGetPayStubQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -62,8 +64,7 @@ export function usePayrollsGetPayStub(
  * scope: `pay_stubs:read`
  */
 export function usePayrollsGetPayStubSuspense(
-  request:
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
   options?: SuspenseQueryHookOptions<PayrollsGetPayStubQueryData>,
 ): UseSuspenseQueryResult<PayrollsGetPayStubQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -80,8 +81,7 @@ export function usePayrollsGetPayStubSuspense(
 export function prefetchPayrollsGetPayStub(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPayrollsGetPayStubQuery(
@@ -96,7 +96,7 @@ export function setPayrollsGetPayStubData(
   queryKeyBase: [
     payrollId: string,
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: PayrollsGetPayStubQueryData,
 ): PayrollsGetPayStubQueryData | undefined {
@@ -111,7 +111,7 @@ export function invalidatePayrollsGetPayStub(
     [
       payrollId: string,
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -139,8 +139,7 @@ export function invalidateAllPayrollsGetPayStub(
 
 export function buildPayrollsGetPayStubQuery(
   client$: GustoEmbeddedCore,
-  request:
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -175,7 +174,7 @@ export function buildPayrollsGetPayStubQuery(
 export function queryKeyPayrollsGetPayStub(
   payrollId: string,
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

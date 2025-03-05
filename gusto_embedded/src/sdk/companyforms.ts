@@ -7,7 +7,22 @@ import { companyFormsGetAll } from "../funcs/companyFormsGetAll.js";
 import { companyFormsGetPdf } from "../funcs/companyFormsGetPdf.js";
 import { companyFormsSign } from "../funcs/companyFormsSign.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyFormRequest,
+  GetV1CompanyFormResponse,
+} from "../models/operations/getv1companyform.js";
+import {
+  GetV1CompanyFormPdfRequest,
+  GetV1CompanyFormPdfResponse,
+} from "../models/operations/getv1companyformpdf.js";
+import {
+  GetV1CompanyFormsRequest,
+  GetV1CompanyFormsResponse,
+} from "../models/operations/getv1companyforms.js";
+import {
+  PutV1CompanyFormSignRequest,
+  PutV1CompanyFormSignResponse,
+} from "../models/operations/putv1companyformsign.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class CompanyForms extends ClientSDK {
@@ -20,9 +35,9 @@ export class CompanyForms extends ClientSDK {
    * scope: `company_forms:read`
    */
   async getAll(
-    request: operations.GetV1CompanyFormsRequest,
+    request: GetV1CompanyFormsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompanyFormsResponse> {
+  ): Promise<GetV1CompanyFormsResponse> {
     return unwrapAsync(companyFormsGetAll(
       this,
       request,
@@ -39,9 +54,9 @@ export class CompanyForms extends ClientSDK {
    * scope: `company_forms:read`
    */
   async get(
-    request: operations.GetV1CompanyFormRequest,
+    request: GetV1CompanyFormRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompanyFormResponse> {
+  ): Promise<GetV1CompanyFormResponse> {
     return unwrapAsync(companyFormsGet(
       this,
       request,
@@ -58,9 +73,9 @@ export class CompanyForms extends ClientSDK {
    * scope: `company_forms:read`
    */
   async getPdf(
-    request: operations.GetV1CompanyFormPdfRequest,
+    request: GetV1CompanyFormPdfRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompanyFormPdfResponse> {
+  ): Promise<GetV1CompanyFormPdfResponse> {
     return unwrapAsync(companyFormsGetPdf(
       this,
       request,
@@ -77,9 +92,9 @@ export class CompanyForms extends ClientSDK {
    * scope: `company_forms:sign`
    */
   async sign(
-    request: operations.PutV1CompanyFormSignRequest,
+    request: PutV1CompanyFormSignRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompanyFormSignResponse> {
+  ): Promise<PutV1CompanyFormSignResponse> {
     return unwrapAsync(companyFormsSign(
       this,
       request,

@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1TerminationsEmployeeIdRequest,
+  PutV1TerminationsEmployeeIdRequest$outboundSchema,
+  PutV1TerminationsEmployeeIdResponse,
+  PutV1TerminationsEmployeeIdResponse$inboundSchema,
+} from "../models/operations/putv1terminationsemployeeid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,12 +44,12 @@ import { Result } from "../types/fp.js";
  */
 export function employeeEmploymentsUpdateTermination(
   client: GustoEmbeddedCore,
-  request: operations.PutV1TerminationsEmployeeIdRequest,
+  request: PutV1TerminationsEmployeeIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1TerminationsEmployeeIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1TerminationsEmployeeIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,13 +68,13 @@ export function employeeEmploymentsUpdateTermination(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1TerminationsEmployeeIdRequest,
+  request: PutV1TerminationsEmployeeIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1TerminationsEmployeeIdResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1TerminationsEmployeeIdResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -80,8 +88,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PutV1TerminationsEmployeeIdRequest$outboundSchema.parse(value),
+    (value) => PutV1TerminationsEmployeeIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -163,8 +170,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1TerminationsEmployeeIdResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1TerminationsEmployeeIdResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,10 +180,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PutV1TerminationsEmployeeIdResponse$inboundSchema, {
+    M.json(200, PutV1TerminationsEmployeeIdResponse$inboundSchema, {
       key: "Termination",
     }),
-    M.jsonErr([404, 422], errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -5,7 +5,7 @@ The status of the credit blocker
 ## Example Usage
 
 ```typescript
-import { PayrollCreditBlockersTypeStatus } from "@gusto/embedded-api/models/components";
+import { PayrollCreditBlockersTypeStatus } from "@gusto/embedded-api/models/components/payrollcreditblockerstype.js";
 
 let value: PayrollCreditBlockersTypeStatus = "unresolved";
 ```

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsDeleteRehire } from "../funcs/employeeEmploymentsDeleteRehire.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdRehireRequest,
+  DeleteV1EmployeesEmployeeIdRehireResponse,
+} from "../models/operations/deletev1employeesemployeeidrehire.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeEmploymentsDeleteRehireMutationVariables = {
-  request: operations.DeleteV1EmployeesEmployeeIdRehireRequest;
+  request: DeleteV1EmployeesEmployeeIdRehireRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeEmploymentsDeleteRehireMutationData =
-  operations.DeleteV1EmployeesEmployeeIdRehireResponse;
+  DeleteV1EmployeesEmployeeIdRehireResponse;
 
 /**
  * Delete an employee rehire

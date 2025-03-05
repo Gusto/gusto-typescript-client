@@ -11,17 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesUpdate } from "../funcs/companiesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesRequest,
+  PutV1CompaniesResponse,
+} from "../models/operations/putv1companies.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompaniesUpdateMutationVariables = {
-  request: operations.PutV1CompaniesRequest;
+  request: PutV1CompaniesRequest;
   options?: RequestOptions;
 };
 
-export type CompaniesUpdateMutationData = operations.PutV1CompaniesResponse;
+export type CompaniesUpdateMutationData = PutV1CompaniesResponse;
 
 /**
  * Update a company

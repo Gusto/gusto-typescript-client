@@ -5,7 +5,7 @@ The contractor’s home address.
 ## Example Usage
 
 ```typescript
-import { Address } from "@gusto/embedded-api/models/components";
+import { Address } from "@gusto/embedded-api/models/components/contractor.js";
 
 let value: Address = {};
 ```

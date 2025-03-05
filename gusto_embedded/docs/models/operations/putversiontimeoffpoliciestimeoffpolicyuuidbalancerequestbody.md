@@ -5,7 +5,7 @@ A list of employee objects containing the employee uuid and time off hours balan
 ## Example Usage
 
 ```typescript
-import { PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody } from "@gusto/embedded-api/models/operations";
+import { PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody } from "@gusto/embedded-api/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalance.js";
 
 let value: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody = {};
 ```

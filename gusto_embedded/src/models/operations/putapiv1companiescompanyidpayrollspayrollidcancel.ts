@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  Payroll,
+  Payroll$inboundSchema,
+  Payroll$Outbound,
+  Payroll$outboundSchema,
+} from "../components/payroll.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest = {
@@ -21,7 +31,7 @@ export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse = {
@@ -40,7 +50,7 @@ export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse = {
   /**
    * Example response
    */
-  payroll?: components.Payroll | undefined;
+  payroll?: Payroll | undefined;
 };
 
 /** @internal */
@@ -52,9 +62,7 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$inboundSch
   > = z.object({
     company_id: z.string(),
     payroll_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -80,9 +88,7 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSc
   > = z.object({
     companyId: z.string(),
     payrollId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
@@ -142,7 +148,7 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSc
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    Payroll: components.Payroll$inboundSchema.optional(),
+    Payroll: Payroll$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -158,7 +164,7 @@ export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound =
     ContentType: string;
     StatusCode: number;
     RawResponse: never;
-    Payroll?: components.Payroll$Outbound | undefined;
+    Payroll?: Payroll$Outbound | undefined;
   };
 
 /** @internal */
@@ -173,7 +179,7 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundS
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    payroll: components.Payroll$outboundSchema.optional(),
+    payroll: Payroll$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

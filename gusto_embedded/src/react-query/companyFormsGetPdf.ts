@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyFormsGetPdf } from "../funcs/companyFormsGetPdf.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompanyFormPdfRequest,
+  GetV1CompanyFormPdfResponse,
+} from "../models/operations/getv1companyformpdf.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompanyFormsGetPdfQueryData =
-  operations.GetV1CompanyFormPdfResponse;
+export type CompanyFormsGetPdfQueryData = GetV1CompanyFormPdfResponse;
 
 /**
  * Get a company form pdf
@@ -38,7 +40,7 @@ export type CompanyFormsGetPdfQueryData =
  * scope: `company_forms:read`
  */
 export function useCompanyFormsGetPdf(
-  request: operations.GetV1CompanyFormPdfRequest,
+  request: GetV1CompanyFormPdfRequest,
   options?: QueryHookOptions<CompanyFormsGetPdfQueryData>,
 ): UseQueryResult<CompanyFormsGetPdfQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useCompanyFormsGetPdf(
  * scope: `company_forms:read`
  */
 export function useCompanyFormsGetPdfSuspense(
-  request: operations.GetV1CompanyFormPdfRequest,
+  request: GetV1CompanyFormPdfRequest,
   options?: SuspenseQueryHookOptions<CompanyFormsGetPdfQueryData>,
 ): UseSuspenseQueryResult<CompanyFormsGetPdfQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useCompanyFormsGetPdfSuspense(
 export function prefetchCompanyFormsGetPdf(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormPdfRequest,
+  request: GetV1CompanyFormPdfRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompanyFormsGetPdfQuery(
@@ -92,7 +94,7 @@ export function setCompanyFormsGetPdfData(
   client: QueryClient,
   queryKeyBase: [
     formId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: CompanyFormsGetPdfQueryData,
 ): CompanyFormsGetPdfQueryData | undefined {
@@ -106,7 +108,7 @@ export function invalidateCompanyFormsGetPdf(
   queryKeyBase: TupleToPrefixes<
     [
       formId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +136,7 @@ export function invalidateAllCompanyFormsGetPdf(
 
 export function buildCompanyFormsGetPdfQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyFormPdfRequest,
+  request: GetV1CompanyFormPdfRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +168,7 @@ export function buildCompanyFormsGetPdfQuery(
 
 export function queryKeyCompanyFormsGetPdf(
   formId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "companyForms", "getPdf", formId, parameters];
 }

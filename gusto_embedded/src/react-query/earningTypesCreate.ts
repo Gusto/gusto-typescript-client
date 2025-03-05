@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { earningTypesCreate } from "../funcs/earningTypesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdEarningTypesRequest,
+  PostV1CompaniesCompanyIdEarningTypesResponse,
+} from "../models/operations/postv1companiescompanyidearningtypes.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EarningTypesCreateMutationVariables = {
-  request: operations.PostV1CompaniesCompanyIdEarningTypesRequest;
+  request: PostV1CompaniesCompanyIdEarningTypesRequest;
   options?: RequestOptions;
 };
 
 export type EarningTypesCreateMutationData =
-  operations.PostV1CompaniesCompanyIdEarningTypesResponse;
+  PostV1CompaniesCompanyIdEarningTypesResponse;
 
 /**
  * Create a custom earning type

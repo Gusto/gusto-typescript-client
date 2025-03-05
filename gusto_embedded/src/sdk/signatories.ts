@@ -8,7 +8,26 @@ import { signatoriesInvite } from "../funcs/signatoriesInvite.js";
 import { signatoriesList } from "../funcs/signatoriesList.js";
 import { signatoriesUpdate } from "../funcs/signatoriesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
+  DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+} from "../models/operations/deletev1companiescompanyuuidsignatoriessignatoryuuid.js";
+import {
+  GetV1CompaniesCompanyUuidSignatoriesRequest,
+  GetV1CompaniesCompanyUuidSignatoriesResponse,
+} from "../models/operations/getv1companiescompanyuuidsignatories.js";
+import {
+  PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
+  PostV1CompaniesCompanyUuidSignatoriesInviteResponse,
+} from "../models/operations/postv1companiescompanyuuidsignatoriesinvite.js";
+import {
+  PostV1CompanySignatoriesRequest,
+  PostV1CompanySignatoriesResponse,
+} from "../models/operations/postv1companysignatories.js";
+import {
+  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
+  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+} from "../models/operations/putv1companiescompanyuuidsignatoriessignatoryuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Signatories extends ClientSDK {
@@ -23,9 +42,9 @@ export class Signatories extends ClientSDK {
    * scope: `signatories:manage`
    */
   async create(
-    request: operations.PostV1CompanySignatoriesRequest,
+    request: PostV1CompanySignatoriesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompanySignatoriesResponse> {
+  ): Promise<PostV1CompanySignatoriesResponse> {
     return unwrapAsync(signatoriesCreate(
       this,
       request,
@@ -42,9 +61,9 @@ export class Signatories extends ClientSDK {
    * scope: `signatories:read`
    */
   async list(
-    request: operations.GetV1CompaniesCompanyUuidSignatoriesRequest,
+    request: GetV1CompaniesCompanyUuidSignatoriesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyUuidSignatoriesResponse> {
+  ): Promise<GetV1CompaniesCompanyUuidSignatoriesResponse> {
     return unwrapAsync(signatoriesList(
       this,
       request,
@@ -59,9 +78,9 @@ export class Signatories extends ClientSDK {
    * Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
    */
   async invite(
-    request: operations.PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
+    request: PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyUuidSignatoriesInviteResponse> {
+  ): Promise<PostV1CompaniesCompanyUuidSignatoriesInviteResponse> {
     return unwrapAsync(signatoriesInvite(
       this,
       request,
@@ -78,12 +97,9 @@ export class Signatories extends ClientSDK {
    * scope: `signatories:write`
    */
   async update(
-    request:
-      operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
+    request: PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse
-  > {
+  ): Promise<PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> {
     return unwrapAsync(signatoriesUpdate(
       this,
       request,
@@ -100,12 +116,9 @@ export class Signatories extends ClientSDK {
    * scope: `signatories:manage`
    */
   async delete(
-    request:
-      operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
+    request: DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse
-  > {
+  ): Promise<DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse> {
     return unwrapAsync(signatoriesDelete(
       this,
       request,

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesGetAll } from "../funcs/paySchedulesGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesRequest,
+  GetV1CompaniesCompanyIdPaySchedulesResponse,
+} from "../models/operations/getv1companiescompanyidpayschedules.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type PaySchedulesGetAllQueryData =
-  operations.GetV1CompaniesCompanyIdPaySchedulesResponse;
+  GetV1CompaniesCompanyIdPaySchedulesResponse;
 
 /**
  * Get the pay schedules for a company
@@ -38,7 +41,7 @@ export type PaySchedulesGetAllQueryData =
  * scope: `pay_schedules:read`
  */
 export function usePaySchedulesGetAll(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesRequest,
   options?: QueryHookOptions<PaySchedulesGetAllQueryData>,
 ): UseQueryResult<PaySchedulesGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function usePaySchedulesGetAll(
  * scope: `pay_schedules:read`
  */
 export function usePaySchedulesGetAllSuspense(
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesRequest,
   options?: SuspenseQueryHookOptions<PaySchedulesGetAllQueryData>,
 ): UseSuspenseQueryResult<PaySchedulesGetAllQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function usePaySchedulesGetAllSuspense(
 export function prefetchPaySchedulesGetAll(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPaySchedulesGetAllQuery(
@@ -95,7 +98,7 @@ export function setPaySchedulesGetAllData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: PaySchedulesGetAllQueryData,
@@ -113,7 +116,7 @@ export function invalidatePaySchedulesGetAll(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -142,7 +145,7 @@ export function invalidateAllPaySchedulesGetAll(
 
 export function buildPaySchedulesGetAllQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
+  request: GetV1CompaniesCompanyIdPaySchedulesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -179,7 +182,7 @@ export function queryKeyPaySchedulesGetAll(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

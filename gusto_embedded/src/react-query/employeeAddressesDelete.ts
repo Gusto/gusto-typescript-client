@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesDelete } from "../funcs/employeeAddressesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1HomeAddressesHomeAddressUuidRequest,
+  DeleteV1HomeAddressesHomeAddressUuidResponse,
+} from "../models/operations/deletev1homeaddresseshomeaddressuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeAddressesDeleteMutationVariables = {
-  request: operations.DeleteV1HomeAddressesHomeAddressUuidRequest;
+  request: DeleteV1HomeAddressesHomeAddressUuidRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeAddressesDeleteMutationData =
-  operations.DeleteV1HomeAddressesHomeAddressUuidResponse;
+  DeleteV1HomeAddressesHomeAddressUuidResponse;
 
 /**
  * Delete an employee's home address

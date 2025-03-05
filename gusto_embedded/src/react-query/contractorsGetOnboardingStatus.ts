@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsGetOnboardingStatus } from "../funcs/contractorsGetOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorsContractorUuidOnboardingStatusRequest,
+  GetV1ContractorsContractorUuidOnboardingStatusResponse,
+} from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorsGetOnboardingStatusQueryData =
-  operations.GetV1ContractorsContractorUuidOnboardingStatusResponse;
+  GetV1ContractorsContractorUuidOnboardingStatusResponse;
 
 /**
  * Get the contractor's onboarding status
@@ -69,7 +72,7 @@ export type ContractorsGetOnboardingStatusQueryData =
  * | `file_new_hire_report` | Contractor new hire report is generated. |
  */
 export function useContractorsGetOnboardingStatus(
-  request: operations.GetV1ContractorsContractorUuidOnboardingStatusRequest,
+  request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
   options?: QueryHookOptions<ContractorsGetOnboardingStatusQueryData>,
 ): UseQueryResult<ContractorsGetOnboardingStatusQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -123,7 +126,7 @@ export function useContractorsGetOnboardingStatus(
  * | `file_new_hire_report` | Contractor new hire report is generated. |
  */
 export function useContractorsGetOnboardingStatusSuspense(
-  request: operations.GetV1ContractorsContractorUuidOnboardingStatusRequest,
+  request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
   options?: SuspenseQueryHookOptions<ContractorsGetOnboardingStatusQueryData>,
 ): UseSuspenseQueryResult<ContractorsGetOnboardingStatusQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -140,7 +143,7 @@ export function useContractorsGetOnboardingStatusSuspense(
 export function prefetchContractorsGetOnboardingStatus(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidOnboardingStatusRequest,
+  request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorsGetOnboardingStatusQuery(
@@ -154,7 +157,7 @@ export function setContractorsGetOnboardingStatusData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorsGetOnboardingStatusQueryData,
 ): ContractorsGetOnboardingStatusQueryData | undefined {
@@ -171,7 +174,7 @@ export function invalidateContractorsGetOnboardingStatus(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -199,7 +202,7 @@ export function invalidateAllContractorsGetOnboardingStatus(
 
 export function buildContractorsGetOnboardingStatusQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidOnboardingStatusRequest,
+  request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -231,7 +234,7 @@ export function buildContractorsGetOnboardingStatusQuery(
 
 export function queryKeyContractorsGetOnboardingStatus(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

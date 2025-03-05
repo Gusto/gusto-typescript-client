@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdStateTaxesRequest,
+  PutV1EmployeesEmployeeIdStateTaxesRequest$outboundSchema,
+  PutV1EmployeesEmployeeIdStateTaxesResponse,
+  PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema,
+} from "../models/operations/putv1employeesemployeeidstatetaxes.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function employeeTaxSetupUpdateStateTaxes(
   client: GustoEmbeddedCore,
-  request: operations.PutV1EmployeesEmployeeIdStateTaxesRequest,
+  request: PutV1EmployeesEmployeeIdStateTaxesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1EmployeesEmployeeIdStateTaxesResponse,
+    PutV1EmployeesEmployeeIdStateTaxesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function employeeTaxSetupUpdateStateTaxes(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1EmployeesEmployeeIdStateTaxesRequest,
+  request: PutV1EmployeesEmployeeIdStateTaxesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1EmployeesEmployeeIdStateTaxesResponse,
+      PutV1EmployeesEmployeeIdStateTaxesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,9 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PutV1EmployeesEmployeeIdStateTaxesRequest$outboundSchema.parse(
-        value,
-      ),
+      PutV1EmployeesEmployeeIdStateTaxesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -164,7 +167,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1EmployeesEmployeeIdStateTaxesResponse,
+    PutV1EmployeesEmployeeIdStateTaxesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,11 +176,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema,
-      { key: "Employee-State-Taxes-List" },
-    ),
+    M.json(200, PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema, {
+      key: "Employee-State-Taxes-List",
+    }),
     M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

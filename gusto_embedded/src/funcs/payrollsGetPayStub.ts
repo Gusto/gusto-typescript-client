@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$outboundSchema,
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema,
+} from "../models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,12 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function payrollsGetPayStub(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -57,13 +61,12 @@ export function payrollsGetPayStub(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
+  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+      GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$outboundSchema
+      GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -168,7 +170,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
+    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -179,8 +181,7 @@ async function $do(
   >(
     M.nil(
       200,
-      operations
-        .GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema,
+      GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema,
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

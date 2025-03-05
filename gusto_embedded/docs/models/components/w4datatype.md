@@ -5,7 +5,7 @@ The version of w4 form.
 ## Example Usage
 
 ```typescript
-import { W4DataType } from "@gusto/embedded-api/models/components";
+import { W4DataType } from "@gusto/embedded-api/models/components/employeefederaltax.js";
 
 let value: W4DataType = "rev_2020_w4";
 ```

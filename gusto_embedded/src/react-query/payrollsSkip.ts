@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsSkip } from "../funcs/payrollsSkip.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostCompaniesPayrollSkipCompanyUuidRequest,
+  PostCompaniesPayrollSkipCompanyUuidResponse,
+} from "../models/operations/postcompaniespayrollskipcompanyuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type PayrollsSkipMutationVariables = {
-  request: operations.PostCompaniesPayrollSkipCompanyUuidRequest;
+  request: PostCompaniesPayrollSkipCompanyUuidRequest;
   options?: RequestOptions;
 };
 
 export type PayrollsSkipMutationData =
-  operations.PostCompaniesPayrollSkipCompanyUuidResponse;
+  PostCompaniesPayrollSkipCompanyUuidResponse;
 
 /**
  * Skip a payroll

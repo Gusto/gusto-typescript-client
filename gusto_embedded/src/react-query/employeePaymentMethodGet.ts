@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodGet } from "../funcs/employeePaymentMethodGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1EmployeesEmployeeIdPaymentMethodRequest,
+  GetV1EmployeesEmployeeIdPaymentMethodResponse,
+} from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeePaymentMethodGetQueryData =
-  operations.GetV1EmployeesEmployeeIdPaymentMethodResponse;
+  GetV1EmployeesEmployeeIdPaymentMethodResponse;
 
 /**
  * Get an employee's payment method
@@ -40,7 +43,7 @@ export type EmployeePaymentMethodGetQueryData =
  * scope: `employee_payment_methods:read`
  */
 export function useEmployeePaymentMethodGet(
-  request: operations.GetV1EmployeesEmployeeIdPaymentMethodRequest,
+  request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
   options?: QueryHookOptions<EmployeePaymentMethodGetQueryData>,
 ): UseQueryResult<EmployeePaymentMethodGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -65,7 +68,7 @@ export function useEmployeePaymentMethodGet(
  * scope: `employee_payment_methods:read`
  */
 export function useEmployeePaymentMethodGetSuspense(
-  request: operations.GetV1EmployeesEmployeeIdPaymentMethodRequest,
+  request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
   options?: SuspenseQueryHookOptions<EmployeePaymentMethodGetQueryData>,
 ): UseSuspenseQueryResult<EmployeePaymentMethodGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -82,7 +85,7 @@ export function useEmployeePaymentMethodGetSuspense(
 export function prefetchEmployeePaymentMethodGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdPaymentMethodRequest,
+  request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeePaymentMethodGetQuery(
@@ -96,7 +99,7 @@ export function setEmployeePaymentMethodGetData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeePaymentMethodGetQueryData,
 ): EmployeePaymentMethodGetQueryData | undefined {
@@ -110,7 +113,7 @@ export function invalidateEmployeePaymentMethodGet(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -138,7 +141,7 @@ export function invalidateAllEmployeePaymentMethodGet(
 
 export function buildEmployeePaymentMethodGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdPaymentMethodRequest,
+  request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -170,7 +173,7 @@ export function buildEmployeePaymentMethodGetQuery(
 
 export function queryKeyEmployeePaymentMethodGet(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

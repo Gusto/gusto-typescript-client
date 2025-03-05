@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorFormsGet } from "../funcs/contractorFormsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorFormRequest,
+  GetV1ContractorFormResponse,
+} from "../models/operations/getv1contractorform.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type ContractorFormsGetQueryData =
-  operations.GetV1ContractorFormResponse;
+export type ContractorFormsGetQueryData = GetV1ContractorFormResponse;
 
 /**
  * Get a contractor form
@@ -38,7 +40,7 @@ export type ContractorFormsGetQueryData =
  * scope: `contractor_forms:read`
  */
 export function useContractorFormsGet(
-  request: operations.GetV1ContractorFormRequest,
+  request: GetV1ContractorFormRequest,
   options?: QueryHookOptions<ContractorFormsGetQueryData>,
 ): UseQueryResult<ContractorFormsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useContractorFormsGet(
  * scope: `contractor_forms:read`
  */
 export function useContractorFormsGetSuspense(
-  request: operations.GetV1ContractorFormRequest,
+  request: GetV1ContractorFormRequest,
   options?: SuspenseQueryHookOptions<ContractorFormsGetQueryData>,
 ): UseSuspenseQueryResult<ContractorFormsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useContractorFormsGetSuspense(
 export function prefetchContractorFormsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormRequest,
+  request: GetV1ContractorFormRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorFormsGetQuery(
@@ -93,7 +95,7 @@ export function setContractorFormsGetData(
   queryKeyBase: [
     contractorUuid: string,
     formId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorFormsGetQueryData,
 ): ContractorFormsGetQueryData | undefined {
@@ -108,7 +110,7 @@ export function invalidateContractorFormsGet(
     [
       contractorUuid: string,
       formId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -136,7 +138,7 @@ export function invalidateAllContractorFormsGet(
 
 export function buildContractorFormsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorFormRequest,
+  request: GetV1ContractorFormRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -171,7 +173,7 @@ export function buildContractorFormsGetQuery(
 export function queryKeyContractorFormsGet(
   contractorUuid: string,
   formId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

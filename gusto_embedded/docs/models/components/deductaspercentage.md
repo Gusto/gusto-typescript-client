@@ -5,7 +5,7 @@ Whether the employee deduction amount should be treated as a percentage to be de
 ## Example Usage
 
 ```typescript
-import { DeductAsPercentage } from "@gusto/embedded-api/models/components";
+import { DeductAsPercentage } from "@gusto/embedded-api/models/components/benefittyperequirements.js";
 
 let value: DeductAsPercentage = {};
 ```

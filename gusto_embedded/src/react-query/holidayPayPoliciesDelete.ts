@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { holidayPayPoliciesDelete } from "../funcs/holidayPayPoliciesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
+  DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
+} from "../models/operations/deletecompaniescompanyuuidholidaypaypolicy.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type HolidayPayPoliciesDeleteMutationVariables = {
-  request: operations.DeleteCompaniesCompanyUuidHolidayPayPolicyRequest;
+  request: DeleteCompaniesCompanyUuidHolidayPayPolicyRequest;
   options?: RequestOptions;
 };
 
 export type HolidayPayPoliciesDeleteMutationData =
-  operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse;
+  DeleteCompaniesCompanyUuidHolidayPayPolicyResponse;
 
 /**
  * Delete a company's holiday pay policy

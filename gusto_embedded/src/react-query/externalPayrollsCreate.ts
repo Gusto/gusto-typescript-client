@@ -11,18 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsCreate } from "../funcs/externalPayrollsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1ExternalPayrollRequest,
+  PostV1ExternalPayrollResponse,
+} from "../models/operations/postv1externalpayroll.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ExternalPayrollsCreateMutationVariables = {
-  request: operations.PostV1ExternalPayrollRequest;
+  request: PostV1ExternalPayrollRequest;
   options?: RequestOptions;
 };
 
-export type ExternalPayrollsCreateMutationData =
-  operations.PostV1ExternalPayrollResponse;
+export type ExternalPayrollsCreateMutationData = PostV1ExternalPayrollResponse;
 
 /**
  * Create a new external payroll for a company

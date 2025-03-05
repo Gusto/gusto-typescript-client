@@ -5,7 +5,7 @@ The representation of a pay schedule assignment preview.
 ## Example Usage
 
 ```typescript
-import { PayScheduleAssignmentPreview } from "@gusto/embedded-api/models/components";
+import { PayScheduleAssignmentPreview } from "@gusto/embedded-api/models/components/payscheduleassignmentpreview.js";
 
 let value: PayScheduleAssignmentPreview = {};
 ```

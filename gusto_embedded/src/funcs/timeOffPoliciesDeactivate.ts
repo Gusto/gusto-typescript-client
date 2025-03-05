@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSchema,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$inboundSchema,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuiddeactivate.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function timeOffPoliciesDeactivate(
   client: GustoEmbeddedCore,
-  request: operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function timeOffPoliciesDeactivate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,8 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSchema
+      PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -165,8 +172,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -177,11 +184,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$inboundSchema,
+      PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$inboundSchema,
       { key: "Time-Off-Policy" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

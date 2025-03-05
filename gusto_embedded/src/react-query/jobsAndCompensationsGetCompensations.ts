@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsGetCompensations } from "../funcs/jobsAndCompensationsGetCompensations.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1JobsJobIdCompensationsQueryParamInclude,
+  GetV1JobsJobIdCompensationsRequest,
+  GetV1JobsJobIdCompensationsResponse,
+} from "../models/operations/getv1jobsjobidcompensations.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +31,7 @@ import {
 } from "./_types.js";
 
 export type JobsAndCompensationsGetCompensationsQueryData =
-  operations.GetV1JobsJobIdCompensationsResponse;
+  GetV1JobsJobIdCompensationsResponse;
 
 /**
  * Get compensations for a job
@@ -42,7 +46,7 @@ export type JobsAndCompensationsGetCompensationsQueryData =
  * scope: `jobs:read`
  */
 export function useJobsAndCompensationsGetCompensations(
-  request: operations.GetV1JobsJobIdCompensationsRequest,
+  request: GetV1JobsJobIdCompensationsRequest,
   options?: QueryHookOptions<JobsAndCompensationsGetCompensationsQueryData>,
 ): UseQueryResult<JobsAndCompensationsGetCompensationsQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -69,7 +73,7 @@ export function useJobsAndCompensationsGetCompensations(
  * scope: `jobs:read`
  */
 export function useJobsAndCompensationsGetCompensationsSuspense(
-  request: operations.GetV1JobsJobIdCompensationsRequest,
+  request: GetV1JobsJobIdCompensationsRequest,
   options?: SuspenseQueryHookOptions<
     JobsAndCompensationsGetCompensationsQueryData
   >,
@@ -91,7 +95,7 @@ export function useJobsAndCompensationsGetCompensationsSuspense(
 export function prefetchJobsAndCompensationsGetCompensations(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1JobsJobIdCompensationsRequest,
+  request: GetV1JobsJobIdCompensationsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildJobsAndCompensationsGetCompensationsQuery(
@@ -108,10 +112,8 @@ export function setJobsAndCompensationsGetCompensationsData(
     parameters: {
       page?: number | undefined;
       per?: number | undefined;
-      include?:
-        | operations.GetV1JobsJobIdCompensationsQueryParamInclude
-        | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      include?: GetV1JobsJobIdCompensationsQueryParamInclude | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: JobsAndCompensationsGetCompensationsQueryData,
@@ -132,10 +134,8 @@ export function invalidateJobsAndCompensationsGetCompensations(
       parameters: {
         page?: number | undefined;
         per?: number | undefined;
-        include?:
-          | operations.GetV1JobsJobIdCompensationsQueryParamInclude
-          | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        include?: GetV1JobsJobIdCompensationsQueryParamInclude | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -168,7 +168,7 @@ export function invalidateAllJobsAndCompensationsGetCompensations(
 
 export function buildJobsAndCompensationsGetCompensationsQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1JobsJobIdCompensationsRequest,
+  request: GetV1JobsJobIdCompensationsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -206,10 +206,8 @@ export function queryKeyJobsAndCompensationsGetCompensations(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
-    include?:
-      | operations.GetV1JobsJobIdCompensationsQueryParamInclude
-      | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    include?: GetV1JobsJobIdCompensationsQueryParamInclude | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
+import {
+  WireInRequest,
+  WireInRequest$inboundSchema,
+  WireInRequest$Outbound,
+  WireInRequest$outboundSchema,
+} from "../components/wireinrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PutWireInRequestsWireInRequestUuidRequestBody = {
@@ -36,7 +46,7 @@ export type PutWireInRequestsWireInRequestUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutWireInRequestsWireInRequestUuidRequestBody;
 };
 
@@ -56,7 +66,7 @@ export type PutWireInRequestsWireInRequestUuidResponse = {
   /**
    * Example response
    */
-  wireInRequest?: components.WireInRequest | undefined;
+  wireInRequest?: WireInRequest | undefined;
 };
 
 /** @internal */
@@ -156,9 +166,7 @@ export const PutWireInRequestsWireInRequestUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   wire_in_request_uuid: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema
   ),
@@ -185,9 +193,7 @@ export const PutWireInRequestsWireInRequestUuidRequest$outboundSchema:
     PutWireInRequestsWireInRequestUuidRequest
   > = z.object({
     wireInRequestUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutWireInRequestsWireInRequestUuidRequestBody$outboundSchema
     ),
@@ -248,7 +254,7 @@ export const PutWireInRequestsWireInRequestUuidResponse$inboundSchema:
       ContentType: z.string(),
       StatusCode: z.number().int(),
       RawResponse: z.instanceof(Response),
-      "Wire-In-Request": components.WireInRequest$inboundSchema.optional(),
+      "Wire-In-Request": WireInRequest$inboundSchema.optional(),
     }).transform((v) => {
       return remap$(v, {
         "ContentType": "contentType",
@@ -263,7 +269,7 @@ export type PutWireInRequestsWireInRequestUuidResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Wire-In-Request"?: components.WireInRequest$Outbound | undefined;
+  "Wire-In-Request"?: WireInRequest$Outbound | undefined;
 };
 
 /** @internal */
@@ -278,7 +284,7 @@ export const PutWireInRequestsWireInRequestUuidResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    wireInRequest: components.WireInRequest$outboundSchema.optional(),
+    wireInRequest: WireInRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

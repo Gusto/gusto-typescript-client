@@ -5,7 +5,14 @@
 import { paymentConfigsGet } from "../funcs/paymentConfigsGet.js";
 import { paymentConfigsUpdate } from "../funcs/paymentConfigsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyPaymentConfigsRequest,
+  GetV1CompanyPaymentConfigsResponse,
+} from "../models/operations/getv1companypaymentconfigs.js";
+import {
+  PutV1CompanyPaymentConfigsRequest,
+  PutV1CompanyPaymentConfigsResponse,
+} from "../models/operations/putv1companypaymentconfigs.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class PaymentConfigs extends ClientSDK {
@@ -18,9 +25,9 @@ export class PaymentConfigs extends ClientSDK {
    * scope: `company_payment_configs:read`
    */
   async get(
-    request: operations.GetV1CompanyPaymentConfigsRequest,
+    request: GetV1CompanyPaymentConfigsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompanyPaymentConfigsResponse> {
+  ): Promise<GetV1CompanyPaymentConfigsResponse> {
     return unwrapAsync(paymentConfigsGet(
       this,
       request,
@@ -37,9 +44,9 @@ export class PaymentConfigs extends ClientSDK {
    * scope: `company_payment_configs:write`
    */
   async update(
-    request: operations.PutV1CompanyPaymentConfigsRequest,
+    request: PutV1CompanyPaymentConfigsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1CompanyPaymentConfigsResponse> {
+  ): Promise<PutV1CompanyPaymentConfigsResponse> {
     return unwrapAsync(paymentConfigsUpdate(
       this,
       request,

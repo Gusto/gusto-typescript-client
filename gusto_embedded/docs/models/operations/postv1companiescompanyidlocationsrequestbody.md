@@ -5,7 +5,7 @@ Create a company location.
 ## Example Usage
 
 ```typescript
-import { PostV1CompaniesCompanyIdLocationsRequestBody } from "@gusto/embedded-api/models/operations";
+import { PostV1CompaniesCompanyIdLocationsRequestBody } from "@gusto/embedded-api/models/operations/postv1companiescompanyidlocations.js";
 
 let value: PostV1CompaniesCompanyIdLocationsRequestBody = {
   phoneNumber: "482.696.8976 x994",

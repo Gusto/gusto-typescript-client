@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyOnboardingStatusRequest,
+  GetV1CompanyOnboardingStatusRequest$outboundSchema,
+  GetV1CompanyOnboardingStatusResponse,
+  GetV1CompanyOnboardingStatusResponse$inboundSchema,
+} from "../models/operations/getv1companyonboardingstatus.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,11 +39,11 @@ import { Result } from "../types/fp.js";
  */
 export function companiesGetOnboardingStatus(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyOnboardingStatusRequest,
+  request: GetV1CompanyOnboardingStatusRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompanyOnboardingStatusResponse,
+    GetV1CompanyOnboardingStatusResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -57,12 +62,12 @@ export function companiesGetOnboardingStatus(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompanyOnboardingStatusRequest,
+  request: GetV1CompanyOnboardingStatusRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompanyOnboardingStatusResponse,
+      GetV1CompanyOnboardingStatusResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,10 +81,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1CompanyOnboardingStatusRequest$outboundSchema.parse(
-        value,
-      ),
+    (value) => GetV1CompanyOnboardingStatusRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -167,7 +169,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompanyOnboardingStatusResponse,
+    GetV1CompanyOnboardingStatusResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,7 +178,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompanyOnboardingStatusResponse$inboundSchema, {
+    M.json(200, GetV1CompanyOnboardingStatusResponse$inboundSchema, {
       key: "Company-Onboarding-Status",
     }),
     M.fail([404, "4XX"]),

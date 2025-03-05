@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1CompaniesCompanyIdPayrollsRequest,
+  PutV1CompaniesCompanyIdPayrollsRequest$outboundSchema,
+  PutV1CompaniesCompanyIdPayrollsResponse,
+  PutV1CompaniesCompanyIdPayrollsResponse$inboundSchema,
+} from "../models/operations/putv1companiescompanyidpayrolls.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,12 +45,12 @@ import { Result } from "../types/fp.js";
  */
 export function payrollsUpdate(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyIdPayrollsRequest,
+  request: PutV1CompaniesCompanyIdPayrollsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompaniesCompanyIdPayrollsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompaniesCompanyIdPayrollsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -61,13 +69,13 @@ export function payrollsUpdate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompaniesCompanyIdPayrollsRequest,
+  request: PutV1CompaniesCompanyIdPayrollsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompaniesCompanyIdPayrollsResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1CompaniesCompanyIdPayrollsResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -82,9 +90,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PutV1CompaniesCompanyIdPayrollsRequest$outboundSchema.parse(
-        value,
-      ),
+      PutV1CompaniesCompanyIdPayrollsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -172,8 +178,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompaniesCompanyIdPayrollsResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompaniesCompanyIdPayrollsResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -182,12 +188,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.PutV1CompaniesCompanyIdPayrollsResponse$inboundSchema,
-      { key: "Payroll-Prepared" },
-    ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, PutV1CompaniesCompanyIdPayrollsResponse$inboundSchema, {
+      key: "Payroll-Prepared",
+    }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -3,11 +3,11 @@
 ## Example Usage
 
 ```typescript
-import { PostV1SandboxGenerateW2Response } from "@gusto/embedded-api/models/operations";
+import { PostV1SandboxGenerateW2Response } from "@gusto/embedded-api/models/operations/postv1sandboxgeneratew2.js";
 
 let value: PostV1SandboxGenerateW2Response = {
   contentType: "<value>",
-  statusCode: 200,
+  statusCode: 103,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

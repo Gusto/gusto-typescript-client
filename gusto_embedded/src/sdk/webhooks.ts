@@ -10,7 +10,41 @@ import { webhooksRequestVerificationToken } from "../funcs/webhooksRequestVerifi
 import { webhooksUpdateSubscription } from "../funcs/webhooksUpdateSubscription.js";
 import { webhooksVerify } from "../funcs/webhooksVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1WebhookSubscriptionUuidRequest,
+  DeleteV1WebhookSubscriptionUuidResponse,
+  DeleteV1WebhookSubscriptionUuidSecurity,
+} from "../models/operations/deletev1webhooksubscriptionuuid.js";
+import {
+  GetV1WebhookSubscriptionsRequest,
+  GetV1WebhookSubscriptionsResponse,
+  GetV1WebhookSubscriptionsSecurity,
+} from "../models/operations/getv1webhooksubscriptions.js";
+import {
+  GetV1WebhookSubscriptionUuidRequest,
+  GetV1WebhookSubscriptionUuidResponse,
+  GetV1WebhookSubscriptionUuidSecurity,
+} from "../models/operations/getv1webhooksubscriptionuuid.js";
+import {
+  GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+  GetV1WebhookSubscriptionVerificationTokenUuidResponse,
+  GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+} from "../models/operations/getv1webhooksubscriptionverificationtokenuuid.js";
+import {
+  PostV1WebhookSubscriptionRequest,
+  PostV1WebhookSubscriptionResponse,
+  PostV1WebhookSubscriptionSecurity,
+} from "../models/operations/postv1webhooksubscription.js";
+import {
+  PutV1VerifyWebhookSubscriptionUuidRequest,
+  PutV1VerifyWebhookSubscriptionUuidResponse,
+  PutV1VerifyWebhookSubscriptionUuidSecurity,
+} from "../models/operations/putv1verifywebhooksubscriptionuuid.js";
+import {
+  PutV1WebhookSubscriptionUuidRequest,
+  PutV1WebhookSubscriptionUuidResponse,
+  PutV1WebhookSubscriptionUuidSecurity,
+} from "../models/operations/putv1webhooksubscriptionuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Webhooks extends ClientSDK {
@@ -27,10 +61,10 @@ export class Webhooks extends ClientSDK {
    * scope: `webhook_subscriptions:write`
    */
   async createSubscription(
-    security: operations.PostV1WebhookSubscriptionSecurity,
-    request: operations.PostV1WebhookSubscriptionRequest,
+    security: PostV1WebhookSubscriptionSecurity,
+    request: PostV1WebhookSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1WebhookSubscriptionResponse> {
+  ): Promise<PostV1WebhookSubscriptionResponse> {
     return unwrapAsync(webhooksCreateSubscription(
       this,
       security,
@@ -52,10 +86,10 @@ export class Webhooks extends ClientSDK {
    * scope: `webhook_subscriptions:read`
    */
   async listSubscriptions(
-    security: operations.GetV1WebhookSubscriptionsSecurity,
-    request: operations.GetV1WebhookSubscriptionsRequest,
+    security: GetV1WebhookSubscriptionsSecurity,
+    request: GetV1WebhookSubscriptionsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1WebhookSubscriptionsResponse> {
+  ): Promise<GetV1WebhookSubscriptionsResponse> {
     return unwrapAsync(webhooksListSubscriptions(
       this,
       security,
@@ -77,10 +111,10 @@ export class Webhooks extends ClientSDK {
    * scope: `webhook_subscriptions:write`
    */
   async updateSubscription(
-    security: operations.PutV1WebhookSubscriptionUuidSecurity,
-    request: operations.PutV1WebhookSubscriptionUuidRequest,
+    security: PutV1WebhookSubscriptionUuidSecurity,
+    request: PutV1WebhookSubscriptionUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1WebhookSubscriptionUuidResponse> {
+  ): Promise<PutV1WebhookSubscriptionUuidResponse> {
     return unwrapAsync(webhooksUpdateSubscription(
       this,
       security,
@@ -102,10 +136,10 @@ export class Webhooks extends ClientSDK {
    * scope: `webhook_subscriptions:read`
    */
   async getSubscription(
-    security: operations.GetV1WebhookSubscriptionUuidSecurity,
-    request: operations.GetV1WebhookSubscriptionUuidRequest,
+    security: GetV1WebhookSubscriptionUuidSecurity,
+    request: GetV1WebhookSubscriptionUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1WebhookSubscriptionUuidResponse> {
+  ): Promise<GetV1WebhookSubscriptionUuidResponse> {
     return unwrapAsync(webhooksGetSubscription(
       this,
       security,
@@ -127,10 +161,10 @@ export class Webhooks extends ClientSDK {
    * scope: `webhook_subscriptions:write`
    */
   async deleteSubscription(
-    security: operations.DeleteV1WebhookSubscriptionUuidSecurity,
-    request: operations.DeleteV1WebhookSubscriptionUuidRequest,
+    security: DeleteV1WebhookSubscriptionUuidSecurity,
+    request: DeleteV1WebhookSubscriptionUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1WebhookSubscriptionUuidResponse> {
+  ): Promise<DeleteV1WebhookSubscriptionUuidResponse> {
     return unwrapAsync(webhooksDeleteSubscription(
       this,
       security,
@@ -154,10 +188,10 @@ export class Webhooks extends ClientSDK {
    * scope: `webhook_subscriptions:write`
    */
   async verify(
-    security: operations.PutV1VerifyWebhookSubscriptionUuidSecurity,
-    request: operations.PutV1VerifyWebhookSubscriptionUuidRequest,
+    security: PutV1VerifyWebhookSubscriptionUuidSecurity,
+    request: PutV1VerifyWebhookSubscriptionUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1VerifyWebhookSubscriptionUuidResponse> {
+  ): Promise<PutV1VerifyWebhookSubscriptionUuidResponse> {
     return unwrapAsync(webhooksVerify(
       this,
       security,
@@ -179,10 +213,10 @@ export class Webhooks extends ClientSDK {
    * scope: `webhook_subscriptions:read`
    */
   async requestVerificationToken(
-    security: operations.GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-    request: operations.GetV1WebhookSubscriptionVerificationTokenUuidRequest,
+    security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
+    request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse> {
+  ): Promise<GetV1WebhookSubscriptionVerificationTokenUuidResponse> {
     return unwrapAsync(webhooksRequestVerificationToken(
       this,
       security,

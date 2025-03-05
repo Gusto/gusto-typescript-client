@@ -5,7 +5,7 @@ The employee's employment status. Supplying an invalid option will set the emplo
 ## Example Usage
 
 ```typescript
-import { EmploymentHistoryListEmploymentStatus } from "@gusto/embedded-api/models/components";
+import { EmploymentHistoryListEmploymentStatus } from "@gusto/embedded-api/models/components/employmenthistorylist.js";
 
 let value: EmploymentHistoryListEmploymentStatus = "variable";
 ```

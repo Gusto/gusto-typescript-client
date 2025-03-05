@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema,
+  GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+  GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema,
+} from "../models/operations/getcompaniescompanyuuidtimeoffpolicies.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function timeOffPoliciesGetAll(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: GetCompaniesCompanyUuidTimeOffPoliciesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function timeOffPoliciesGetAll(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: GetCompaniesCompanyUuidTimeOffPoliciesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+      GetCompaniesCompanyUuidTimeOffPoliciesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema
-        .parse(value),
+      GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,7 +164,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+    GetCompaniesCompanyUuidTimeOffPoliciesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -169,11 +173,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema,
-      { key: "Time-Off-Policy-List" },
-    ),
+    M.json(200, GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema, {
+      key: "Time-Off-Policy-List",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

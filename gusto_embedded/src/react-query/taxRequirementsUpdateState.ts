@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { taxRequirementsUpdateState } from "../funcs/taxRequirementsUpdateState.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
+  PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
+} from "../models/operations/putv1companiescompanyuuidtaxrequirementsstate.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TaxRequirementsUpdateStateMutationVariables = {
-  request: operations.PutV1CompaniesCompanyUuidTaxRequirementsStateRequest;
+  request: PutV1CompaniesCompanyUuidTaxRequirementsStateRequest;
   options?: RequestOptions;
 };
 
 export type TaxRequirementsUpdateStateMutationData =
-  operations.PutV1CompaniesCompanyUuidTaxRequirementsStateResponse;
+  PutV1CompaniesCompanyUuidTaxRequirementsStateResponse;
 
 /**
  * Update State Tax Requirements

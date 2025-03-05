@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema,
+  GetCompaniesCompanyUuidWireInRequestUuidResponse,
+  GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema,
+} from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function wireInRequestsList(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetCompaniesCompanyUuidWireInRequestUuidResponse,
+    GetCompaniesCompanyUuidWireInRequestUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function wireInRequestsList(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetCompaniesCompanyUuidWireInRequestUuidRequest,
+  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetCompaniesCompanyUuidWireInRequestUuidResponse,
+      GetCompaniesCompanyUuidWireInRequestUuidResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema
-        .parse(value),
+      GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetCompaniesCompanyUuidWireInRequestUuidResponse,
+    GetCompaniesCompanyUuidWireInRequestUuidResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,7 +177,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations.GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema,
+      GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema,
       { key: "Wire-In-Request-List" },
     ),
     M.fail("4XX"),

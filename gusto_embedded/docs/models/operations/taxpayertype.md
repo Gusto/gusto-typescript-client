@@ -5,7 +5,7 @@ What type of tax entity the company is
 ## Example Usage
 
 ```typescript
-import { TaxPayerType } from "@gusto/embedded-api/models/operations";
+import { TaxPayerType } from "@gusto/embedded-api/models/operations/putv1companiescompanyidfederaltaxdetails.js";
 
 let value: TaxPayerType = "C-Corporation";
 ```

@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdJobsRequest,
+  GetV1EmployeesEmployeeIdJobsRequest$outboundSchema,
+  GetV1EmployeesEmployeeIdJobsResponse,
+  GetV1EmployeesEmployeeIdJobsResponse$inboundSchema,
+} from "../models/operations/getv1employeesemployeeidjobs.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function jobsAndCompensationsGetJobs(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdJobsRequest,
+  request: GetV1EmployeesEmployeeIdJobsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdJobsResponse,
+    GetV1EmployeesEmployeeIdJobsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function jobsAndCompensationsGetJobs(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdJobsRequest,
+  request: GetV1EmployeesEmployeeIdJobsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdJobsResponse,
+      GetV1EmployeesEmployeeIdJobsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,10 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1EmployeesEmployeeIdJobsRequest$outboundSchema.parse(
-        value,
-      ),
+    (value) => GetV1EmployeesEmployeeIdJobsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -166,7 +168,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdJobsResponse,
+    GetV1EmployeesEmployeeIdJobsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -175,7 +177,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1EmployeesEmployeeIdJobsResponse$inboundSchema, {
+    M.json(200, GetV1EmployeesEmployeeIdJobsResponse$inboundSchema, {
       key: "Job-List",
     }),
     M.fail([404, "4XX"]),

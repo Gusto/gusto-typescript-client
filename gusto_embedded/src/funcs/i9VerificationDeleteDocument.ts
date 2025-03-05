@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$outboundSchema,
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$inboundSchema,
+} from "../models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,12 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function i9VerificationDeleteDocument(
   client: GustoEmbeddedCore,
-  request:
-    operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
+  request: DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
+    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -57,13 +61,12 @@ export function i9VerificationDeleteDocument(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request:
-    operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
+  request: DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
+      DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations
-        .DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$outboundSchema
+      DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -168,7 +170,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
+    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -179,8 +181,7 @@ async function $do(
   >(
     M.nil(
       204,
-      operations
-        .DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$inboundSchema,
+      DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$inboundSchema,
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

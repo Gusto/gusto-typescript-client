@@ -5,12 +5,12 @@ Requires a policy name, a policy_type, and an accrual_method
 ## Example Usage
 
 ```typescript
-import { PostCompaniesCompanyUuidTimeOffPoliciesRequestBody } from "@gusto/embedded-api/models/operations";
+import { PostCompaniesCompanyUuidTimeOffPoliciesRequestBody } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidtimeoffpolicies.js";
 
 let value: PostCompaniesCompanyUuidTimeOffPoliciesRequestBody = {
   name: "<value>",
   policyType: "<value>",
-  accrualMethod: "per_calendar_year",
+  accrualMethod: "per_hour_worked",
 };
 ```
 

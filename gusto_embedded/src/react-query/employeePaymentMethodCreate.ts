@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodCreate } from "../funcs/employeePaymentMethodCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1EmployeesEmployeeIdBankAccountsRequest,
+  PostV1EmployeesEmployeeIdBankAccountsResponse,
+} from "../models/operations/postv1employeesemployeeidbankaccounts.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeePaymentMethodCreateMutationVariables = {
-  request: operations.PostV1EmployeesEmployeeIdBankAccountsRequest;
+  request: PostV1EmployeesEmployeeIdBankAccountsRequest;
   options?: RequestOptions;
 };
 
 export type EmployeePaymentMethodCreateMutationData =
-  operations.PostV1EmployeesEmployeeIdBankAccountsResponse;
+  PostV1EmployeesEmployeeIdBankAccountsResponse;
 
 /**
  * Create an employee bank account

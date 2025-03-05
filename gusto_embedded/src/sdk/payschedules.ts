@@ -13,7 +13,46 @@ import { paySchedulesGetUnprocessedTerminationPeriods } from "../funcs/paySchedu
 import { paySchedulesPreviewAssignment } from "../funcs/paySchedulesPreviewAssignment.js";
 import { paySchedulesUpdate } from "../funcs/paySchedulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdPayPeriodsRequest,
+  GetV1CompaniesCompanyIdPayPeriodsResponse,
+} from "../models/operations/getv1companiescompanyidpayperiods.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesRequest,
+  GetV1CompaniesCompanyIdPaySchedulesResponse,
+} from "../models/operations/getv1companiescompanyidpayschedules.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+  GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse,
+} from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+} from "../models/operations/getv1companiescompanyidpayschedulespayscheduleid.js";
+import {
+  GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
+  GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+} from "../models/operations/getv1companiescompanyidpayschedulespreview.js";
+import {
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
+} from "../models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
+import {
+  PostV1CompaniesCompanyIdPaySchedulesRequest,
+  PostV1CompaniesCompanyIdPaySchedulesResponse,
+} from "../models/operations/postv1companiescompanyidpayschedules.js";
+import {
+  PostV1CompaniesCompanyIdPaySchedulesAssignRequest,
+  PostV1CompaniesCompanyIdPaySchedulesAssignResponse,
+} from "../models/operations/postv1companiescompanyidpayschedulesassign.js";
+import {
+  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
+  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
+} from "../models/operations/postv1companiescompanyidpayschedulesassignmentpreview.js";
+import {
+  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
+} from "../models/operations/putv1companiescompanyidpayschedulespayscheduleid.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class PaySchedules extends ClientSDK {
@@ -30,9 +69,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:write`
    */
   async create(
-    request: operations.PostV1CompaniesCompanyIdPaySchedulesRequest,
+    request: PostV1CompaniesCompanyIdPaySchedulesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdPaySchedulesResponse> {
+  ): Promise<PostV1CompaniesCompanyIdPaySchedulesResponse> {
     return unwrapAsync(paySchedulesCreate(
       this,
       request,
@@ -49,9 +88,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:read`
    */
   async getAll(
-    request: operations.GetV1CompaniesCompanyIdPaySchedulesRequest,
+    request: GetV1CompaniesCompanyIdPaySchedulesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdPaySchedulesResponse> {
+  ): Promise<GetV1CompaniesCompanyIdPaySchedulesResponse> {
     return unwrapAsync(paySchedulesGetAll(
       this,
       request,
@@ -68,9 +107,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:write`
    */
   async getPreview(
-    request: operations.GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
+    request: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdPaySchedulesPreviewResponse> {
+  ): Promise<GetV1CompaniesCompanyIdPaySchedulesPreviewResponse> {
     return unwrapAsync(paySchedulesGetPreview(
       this,
       request,
@@ -87,11 +126,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:read`
    */
   async get(
-    request: operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+    request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse
-  > {
+  ): Promise<GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> {
     return unwrapAsync(paySchedulesGet(
       this,
       request,
@@ -108,11 +145,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:write`
    */
   async update(
-    request: operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
+    request: PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse
-  > {
+  ): Promise<PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse> {
     return unwrapAsync(paySchedulesUpdate(
       this,
       request,
@@ -133,9 +168,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `payrolls:read`
    */
   async getPayPeriods(
-    request: operations.GetV1CompaniesCompanyIdPayPeriodsRequest,
+    request: GetV1CompaniesCompanyIdPayPeriodsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdPayPeriodsResponse> {
+  ): Promise<GetV1CompaniesCompanyIdPayPeriodsResponse> {
     return unwrapAsync(paySchedulesGetPayPeriods(
       this,
       request,
@@ -154,12 +189,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `payrolls:read`
    */
   async getUnprocessedTerminationPeriods(
-    request:
-      operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
+    request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse
-  > {
+  ): Promise<GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse> {
     return unwrapAsync(paySchedulesGetUnprocessedTerminationPeriods(
       this,
       request,
@@ -176,11 +208,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:read`
    */
   async getAssignments(
-    request: operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
+    request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse
-  > {
+  ): Promise<GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse> {
     return unwrapAsync(paySchedulesGetAssignments(
       this,
       request,
@@ -197,12 +227,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:write`
    */
   async previewAssignment(
-    request:
-      operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
+    request: PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse
-  > {
+  ): Promise<PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse> {
     return unwrapAsync(paySchedulesPreviewAssignment(
       this,
       request,
@@ -220,9 +247,9 @@ export class PaySchedules extends ClientSDK {
    * scope: `pay_schedules:write`
    */
   async assign(
-    request: operations.PostV1CompaniesCompanyIdPaySchedulesAssignRequest,
+    request: PostV1CompaniesCompanyIdPaySchedulesAssignRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1CompaniesCompanyIdPaySchedulesAssignResponse> {
+  ): Promise<PostV1CompaniesCompanyIdPaySchedulesAssignResponse> {
     return unwrapAsync(paySchedulesAssign(
       this,
       request,

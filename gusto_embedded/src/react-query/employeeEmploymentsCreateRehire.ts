@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsCreateRehire } from "../funcs/employeeEmploymentsCreateRehire.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1EmployeesEmployeeIdRehireRequest,
+  PostV1EmployeesEmployeeIdRehireResponse,
+} from "../models/operations/postv1employeesemployeeidrehire.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeEmploymentsCreateRehireMutationVariables = {
-  request: operations.PostV1EmployeesEmployeeIdRehireRequest;
+  request: PostV1EmployeesEmployeeIdRehireRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeEmploymentsCreateRehireMutationData =
-  operations.PostV1EmployeesEmployeeIdRehireResponse;
+  PostV1EmployeesEmployeeIdRehireResponse;
 
 /**
  * Create an employee rehire

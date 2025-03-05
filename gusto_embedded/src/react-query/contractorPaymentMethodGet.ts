@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentMethodGet } from "../funcs/contractorPaymentMethodGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorsContractorUuidPaymentMethodRequest,
+  GetV1ContractorsContractorUuidPaymentMethodResponse,
+} from "../models/operations/getv1contractorscontractoruuidpaymentmethod.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorPaymentMethodGetQueryData =
-  operations.GetV1ContractorsContractorUuidPaymentMethodResponse;
+  GetV1ContractorsContractorUuidPaymentMethodResponse;
 
 /**
  * Get a contractor's payment method
@@ -40,7 +43,7 @@ export type ContractorPaymentMethodGetQueryData =
  * scope: `contractor_payment_methods:read`
  */
 export function useContractorPaymentMethodGet(
-  request: operations.GetV1ContractorsContractorUuidPaymentMethodRequest,
+  request: GetV1ContractorsContractorUuidPaymentMethodRequest,
   options?: QueryHookOptions<ContractorPaymentMethodGetQueryData>,
 ): UseQueryResult<ContractorPaymentMethodGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -65,7 +68,7 @@ export function useContractorPaymentMethodGet(
  * scope: `contractor_payment_methods:read`
  */
 export function useContractorPaymentMethodGetSuspense(
-  request: operations.GetV1ContractorsContractorUuidPaymentMethodRequest,
+  request: GetV1ContractorsContractorUuidPaymentMethodRequest,
   options?: SuspenseQueryHookOptions<ContractorPaymentMethodGetQueryData>,
 ): UseSuspenseQueryResult<ContractorPaymentMethodGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -82,7 +85,7 @@ export function useContractorPaymentMethodGetSuspense(
 export function prefetchContractorPaymentMethodGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidPaymentMethodRequest,
+  request: GetV1ContractorsContractorUuidPaymentMethodRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorPaymentMethodGetQuery(
@@ -96,7 +99,7 @@ export function setContractorPaymentMethodGetData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorPaymentMethodGetQueryData,
 ): ContractorPaymentMethodGetQueryData | undefined {
@@ -110,7 +113,7 @@ export function invalidateContractorPaymentMethodGet(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -138,7 +141,7 @@ export function invalidateAllContractorPaymentMethodGet(
 
 export function buildContractorPaymentMethodGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidPaymentMethodRequest,
+  request: GetV1ContractorsContractorUuidPaymentMethodRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -170,7 +173,7 @@ export function buildContractorPaymentMethodGetQuery(
 
 export function queryKeyContractorPaymentMethodGet(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyAttachmentGetDownloadUrl } from "../funcs/companyAttachmentGetDownloadUrl.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesAttachmentUrlRequest,
+  GetV1CompaniesAttachmentUrlResponse,
+} from "../models/operations/getv1companiesattachmenturl.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type CompanyAttachmentGetDownloadUrlQueryData =
-  operations.GetV1CompaniesAttachmentUrlResponse;
+  GetV1CompaniesAttachmentUrlResponse;
 
 /**
  * Get a temporary url to download the Company Attachment file
@@ -39,7 +42,7 @@ export type CompanyAttachmentGetDownloadUrlQueryData =
  * scope: `company_attachments:read`
  */
 export function useCompanyAttachmentGetDownloadUrl(
-  request: operations.GetV1CompaniesAttachmentUrlRequest,
+  request: GetV1CompaniesAttachmentUrlRequest,
   options?: QueryHookOptions<CompanyAttachmentGetDownloadUrlQueryData>,
 ): UseQueryResult<CompanyAttachmentGetDownloadUrlQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -63,7 +66,7 @@ export function useCompanyAttachmentGetDownloadUrl(
  * scope: `company_attachments:read`
  */
 export function useCompanyAttachmentGetDownloadUrlSuspense(
-  request: operations.GetV1CompaniesAttachmentUrlRequest,
+  request: GetV1CompaniesAttachmentUrlRequest,
   options?: SuspenseQueryHookOptions<CompanyAttachmentGetDownloadUrlQueryData>,
 ): UseSuspenseQueryResult<CompanyAttachmentGetDownloadUrlQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -80,7 +83,7 @@ export function useCompanyAttachmentGetDownloadUrlSuspense(
 export function prefetchCompanyAttachmentGetDownloadUrl(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentUrlRequest,
+  request: GetV1CompaniesAttachmentUrlRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildCompanyAttachmentGetDownloadUrlQuery(
@@ -95,7 +98,7 @@ export function setCompanyAttachmentGetDownloadUrlData(
   queryKeyBase: [
     companyId: string,
     companyAttachmentUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: CompanyAttachmentGetDownloadUrlQueryData,
 ): CompanyAttachmentGetDownloadUrlQueryData | undefined {
@@ -113,7 +116,7 @@ export function invalidateCompanyAttachmentGetDownloadUrl(
     [
       companyId: string,
       companyAttachmentUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -141,7 +144,7 @@ export function invalidateAllCompanyAttachmentGetDownloadUrl(
 
 export function buildCompanyAttachmentGetDownloadUrlQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentUrlRequest,
+  request: GetV1CompaniesAttachmentUrlRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -176,7 +179,7 @@ export function buildCompanyAttachmentGetDownloadUrlQuery(
 export function queryKeyCompanyAttachmentGetDownloadUrl(
   companyId: string,
   companyAttachmentUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

@@ -7,7 +7,7 @@ The form used by the company for federal tax filing. One of:
 ## Example Usage
 
 ```typescript
-import { FilingForm } from "@gusto/embedded-api/models/operations";
+import { FilingForm } from "@gusto/embedded-api/models/operations/putv1companiescompanyidfederaltaxdetails.js";
 
 let value: FilingForm = "944";
 ```

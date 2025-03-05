@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesFinishOnboarding } from "../funcs/companiesFinishOnboarding.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompanyFinishOnboardingRequest,
+  GetV1CompanyFinishOnboardingResponse,
+} from "../models/operations/getv1companyfinishonboarding.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type CompaniesFinishOnboardingMutationVariables = {
-  request: operations.GetV1CompanyFinishOnboardingRequest;
+  request: GetV1CompanyFinishOnboardingRequest;
   options?: RequestOptions;
 };
 
 export type CompaniesFinishOnboardingMutationData =
-  operations.GetV1CompanyFinishOnboardingResponse;
+  GetV1CompanyFinishOnboardingResponse;
 
 /**
  * Finish company onboarding

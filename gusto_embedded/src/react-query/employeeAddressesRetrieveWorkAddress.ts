@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesRetrieveWorkAddress } from "../funcs/employeeAddressesRetrieveWorkAddress.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1WorkAddressesWorkAddressUuidRequest,
+  GetV1WorkAddressesWorkAddressUuidResponse,
+} from "../models/operations/getv1workaddressesworkaddressuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type EmployeeAddressesRetrieveWorkAddressQueryData =
-  operations.GetV1WorkAddressesWorkAddressUuidResponse;
+  GetV1WorkAddressesWorkAddressUuidResponse;
 
 /**
  * Get an employee work address
@@ -38,7 +41,7 @@ export type EmployeeAddressesRetrieveWorkAddressQueryData =
  * scope: `employees:read`
  */
 export function useEmployeeAddressesRetrieveWorkAddress(
-  request: operations.GetV1WorkAddressesWorkAddressUuidRequest,
+  request: GetV1WorkAddressesWorkAddressUuidRequest,
   options?: QueryHookOptions<EmployeeAddressesRetrieveWorkAddressQueryData>,
 ): UseQueryResult<EmployeeAddressesRetrieveWorkAddressQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useEmployeeAddressesRetrieveWorkAddress(
  * scope: `employees:read`
  */
 export function useEmployeeAddressesRetrieveWorkAddressSuspense(
-  request: operations.GetV1WorkAddressesWorkAddressUuidRequest,
+  request: GetV1WorkAddressesWorkAddressUuidRequest,
   options?: SuspenseQueryHookOptions<
     EmployeeAddressesRetrieveWorkAddressQueryData
   >,
@@ -83,7 +86,7 @@ export function useEmployeeAddressesRetrieveWorkAddressSuspense(
 export function prefetchEmployeeAddressesRetrieveWorkAddress(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1WorkAddressesWorkAddressUuidRequest,
+  request: GetV1WorkAddressesWorkAddressUuidRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildEmployeeAddressesRetrieveWorkAddressQuery(
@@ -97,7 +100,7 @@ export function setEmployeeAddressesRetrieveWorkAddressData(
   client: QueryClient,
   queryKeyBase: [
     workAddressUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: EmployeeAddressesRetrieveWorkAddressQueryData,
 ): EmployeeAddressesRetrieveWorkAddressQueryData | undefined {
@@ -114,7 +117,7 @@ export function invalidateEmployeeAddressesRetrieveWorkAddress(
   queryKeyBase: TupleToPrefixes<
     [
       workAddressUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -146,7 +149,7 @@ export function invalidateAllEmployeeAddressesRetrieveWorkAddress(
 
 export function buildEmployeeAddressesRetrieveWorkAddressQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1WorkAddressesWorkAddressUuidRequest,
+  request: GetV1WorkAddressesWorkAddressUuidRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -179,7 +182,7 @@ export function buildEmployeeAddressesRetrieveWorkAddressQuery(
 
 export function queryKeyEmployeeAddressesRetrieveWorkAddress(
   workAddressUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

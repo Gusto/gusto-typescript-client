@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  CompanyAttachment,
+  CompanyAttachment$inboundSchema,
+  CompanyAttachment$Outbound,
+  CompanyAttachment$outboundSchema,
+} from "../components/companyattachment.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompaniesAttachmentsRequest = {
@@ -17,7 +27,7 @@ export type GetV1CompaniesAttachmentsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesAttachmentsResponse = {
@@ -36,7 +46,7 @@ export type GetV1CompaniesAttachmentsResponse = {
   /**
    * Example response
    */
-  companyAttachmentList?: Array<components.CompanyAttachment> | undefined;
+  companyAttachmentList?: Array<CompanyAttachment> | undefined;
 };
 
 /** @internal */
@@ -46,9 +56,7 @@ export const GetV1CompaniesAttachmentsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_id: z.string(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -69,9 +77,7 @@ export const GetV1CompaniesAttachmentsRequest$outboundSchema: z.ZodType<
   GetV1CompaniesAttachmentsRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",
@@ -121,7 +127,7 @@ export const GetV1CompaniesAttachmentsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Company-Attachment-List": z.array(components.CompanyAttachment$inboundSchema)
+  "Company-Attachment-List": z.array(CompanyAttachment$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -137,9 +143,7 @@ export type GetV1CompaniesAttachmentsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Company-Attachment-List"?:
-    | Array<components.CompanyAttachment$Outbound>
-    | undefined;
+  "Company-Attachment-List"?: Array<CompanyAttachment$Outbound> | undefined;
 };
 
 /** @internal */
@@ -153,8 +157,7 @@ export const GetV1CompaniesAttachmentsResponse$outboundSchema: z.ZodType<
   rawResponse: z.instanceof(Response).transform(() => {
     throw new Error("Response cannot be serialized");
   }),
-  companyAttachmentList: z.array(components.CompanyAttachment$outboundSchema)
-    .optional(),
+  companyAttachmentList: z.array(CompanyAttachment$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "ContentType",

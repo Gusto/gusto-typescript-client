@@ -5,9 +5,9 @@ The pay schedule assignment type.
 ## Example Usage
 
 ```typescript
-import { PayScheduleType } from "@gusto/embedded-api/models/components";
+import { PayScheduleType } from "@gusto/embedded-api/models/components/company.js";
 
-let value: PayScheduleType = "hourly_salaried";
+let value: PayScheduleType = "by_department";
 ```
 
 ## Values

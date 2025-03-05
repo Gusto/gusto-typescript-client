@@ -16,8 +16,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGet } from "../funcs/payrollsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude,
+  GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+  GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
+} from "../models/operations/getv1companiescompanyidpayrollspayrollid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +31,7 @@ import {
 } from "./_types.js";
 
 export type PayrollsGetQueryData =
-  operations.GetV1CompaniesCompanyIdPayrollsPayrollIdResponse;
+  GetV1CompaniesCompanyIdPayrollsPayrollIdResponse;
 
 /**
  * Get a single payroll
@@ -46,7 +50,7 @@ export type PayrollsGetQueryData =
  * scope: `payrolls:read`
  */
 export function usePayrollsGet(
-  request: operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+  request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
   options?: QueryHookOptions<PayrollsGetQueryData>,
 ): UseQueryResult<PayrollsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +81,7 @@ export function usePayrollsGet(
  * scope: `payrolls:read`
  */
 export function usePayrollsGetSuspense(
-  request: operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+  request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
   options?: SuspenseQueryHookOptions<PayrollsGetQueryData>,
 ): UseSuspenseQueryResult<PayrollsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -94,7 +98,7 @@ export function usePayrollsGetSuspense(
 export function prefetchPayrollsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+  request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildPayrollsGetQuery(
@@ -111,11 +115,9 @@ export function setPayrollsGetData(
     payrollId: string,
     parameters: {
       include?:
-        | Array<
-          operations.GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude
-        >
+        | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
         | undefined;
-      xGustoAPIVersion?: components.VersionHeader | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: PayrollsGetQueryData,
@@ -133,11 +135,9 @@ export function invalidatePayrollsGet(
       payrollId: string,
       parameters: {
         include?:
-          | Array<
-            operations.GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude
-          >
+          | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
           | undefined;
-        xGustoAPIVersion?: components.VersionHeader | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -161,7 +161,7 @@ export function invalidateAllPayrollsGet(
 
 export function buildPayrollsGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
+  request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -195,11 +195,9 @@ export function queryKeyPayrollsGet(
   payrollId: string,
   parameters: {
     include?:
-      | Array<
-        operations.GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude
-      >
+      | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
       | undefined;
-    xGustoAPIVersion?: components.VersionHeader | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

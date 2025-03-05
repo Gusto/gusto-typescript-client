@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  RefreshAccessTokenRequest,
+  RefreshAccessTokenRequest$outboundSchema,
+  RefreshAccessTokenResponse,
+  RefreshAccessTokenResponse$inboundSchema,
+} from "../models/operations/refreshaccesstoken.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -35,11 +40,11 @@ import { Result } from "../types/fp.js";
  */
 export function introspectionRefreshToken(
   client: GustoEmbeddedCore,
-  request: operations.RefreshAccessTokenRequest,
+  request: RefreshAccessTokenRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RefreshAccessTokenResponse,
+    RefreshAccessTokenResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,12 +63,12 @@ export function introspectionRefreshToken(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.RefreshAccessTokenRequest,
+  request: RefreshAccessTokenRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.RefreshAccessTokenResponse,
+      RefreshAccessTokenResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -77,7 +82,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.RefreshAccessTokenRequest$outboundSchema.parse(value),
+    (value) => RefreshAccessTokenRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -152,7 +157,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.RefreshAccessTokenResponse,
+    RefreshAccessTokenResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -161,7 +166,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.RefreshAccessTokenResponse$inboundSchema, {
+    M.json(200, RefreshAccessTokenResponse$inboundSchema, {
       key: "Authentication",
     }),
     M.fail("4XX"),

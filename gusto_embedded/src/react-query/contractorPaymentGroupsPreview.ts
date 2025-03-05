@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsPreview } from "../funcs/contractorPaymentGroupsPreview.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest,
+  PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse,
+} from "../models/operations/postv1companiescompanyidcontractorpaymentgroupspreview.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ContractorPaymentGroupsPreviewMutationVariables = {
-  request:
-    operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest;
+  request: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest;
   options?: RequestOptions;
 };
 
 export type ContractorPaymentGroupsPreviewMutationData =
-  operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse;
+  PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse;
 
 /**
  * Preview a contractor payment group

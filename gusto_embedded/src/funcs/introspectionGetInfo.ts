@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1TokenInfoRequest,
+  GetV1TokenInfoRequest$outboundSchema,
+  GetV1TokenInfoResponse,
+  GetV1TokenInfoResponse$inboundSchema,
+} from "../models/operations/getv1tokeninfo.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -31,11 +36,11 @@ import { Result } from "../types/fp.js";
  */
 export function introspectionGetInfo(
   client: GustoEmbeddedCore,
-  request: operations.GetV1TokenInfoRequest,
+  request: GetV1TokenInfoRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1TokenInfoResponse,
+    GetV1TokenInfoResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -54,12 +59,12 @@ export function introspectionGetInfo(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1TokenInfoRequest,
+  request: GetV1TokenInfoRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1TokenInfoResponse,
+      GetV1TokenInfoResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -73,7 +78,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetV1TokenInfoRequest$outboundSchema.parse(value),
+    (value) => GetV1TokenInfoRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -147,7 +152,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1TokenInfoResponse,
+    GetV1TokenInfoResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -156,9 +161,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1TokenInfoResponse$inboundSchema, {
-      key: "object",
-    }),
+    M.json(200, GetV1TokenInfoResponse$inboundSchema, { key: "object" }),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

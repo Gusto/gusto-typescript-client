@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1ContractorsContractorUuidAddressRequest,
+  PutV1ContractorsContractorUuidAddressRequest$outboundSchema,
+  PutV1ContractorsContractorUuidAddressResponse,
+  PutV1ContractorsContractorUuidAddressResponse$inboundSchema,
+} from "../models/operations/putv1contractorscontractoruuidaddress.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function contractorsUpdateAddress(
   client: GustoEmbeddedCore,
-  request: operations.PutV1ContractorsContractorUuidAddressRequest,
+  request: PutV1ContractorsContractorUuidAddressRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1ContractorsContractorUuidAddressResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1ContractorsContractorUuidAddressResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function contractorsUpdateAddress(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1ContractorsContractorUuidAddressRequest,
+  request: PutV1ContractorsContractorUuidAddressRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1ContractorsContractorUuidAddressResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1ContractorsContractorUuidAddressResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,8 +87,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PutV1ContractorsContractorUuidAddressRequest$outboundSchema
-        .parse(value),
+      PutV1ContractorsContractorUuidAddressRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -164,8 +171,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1ContractorsContractorUuidAddressResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1ContractorsContractorUuidAddressResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -174,12 +181,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.PutV1ContractorsContractorUuidAddressResponse$inboundSchema,
-      { key: "Contractor-Address" },
-    ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, PutV1ContractorsContractorUuidAddressResponse$inboundSchema, {
+      key: "Contractor-Address",
+    }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

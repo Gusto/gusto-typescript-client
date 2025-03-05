@@ -14,7 +14,50 @@ import { employeesUpdate } from "../funcs/employeesUpdate.js";
 import { employeesUpdateOnboardingDocumentsConfig } from "../funcs/employeesUpdateOnboardingDocumentsConfig.js";
 import { employeesUpdateOnboardingStatus } from "../funcs/employeesUpdateOnboardingStatus.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeeRequest,
+  DeleteV1EmployeeResponse,
+} from "../models/operations/deletev1employee.js";
+import {
+  GetV1CompaniesCompanyIdEmployeesRequest,
+  GetV1CompaniesCompanyIdEmployeesResponse,
+} from "../models/operations/getv1companiescompanyidemployees.js";
+import {
+  GetV1EmployeesRequest,
+  GetV1EmployeesResponse,
+} from "../models/operations/getv1employees.js";
+import {
+  GetV1EmployeesEmployeeIdCustomFieldsRequest,
+  GetV1EmployeesEmployeeIdCustomFieldsResponse,
+} from "../models/operations/getv1employeesemployeeidcustomfields.js";
+import {
+  GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+  GetV1EmployeesEmployeeIdOnboardingStatusResponse,
+} from "../models/operations/getv1employeesemployeeidonboardingstatus.js";
+import {
+  GetVersionEmployeesTimeOffActivitiesRequest,
+  GetVersionEmployeesTimeOffActivitiesResponse,
+} from "../models/operations/getversionemployeestimeoffactivities.js";
+import {
+  PostV1EmployeesRequest,
+  PostV1EmployeesResponse,
+} from "../models/operations/postv1employees.js";
+import {
+  PostV1HistoricalEmployeesRequest,
+  PostV1HistoricalEmployeesResponse,
+} from "../models/operations/postv1historicalemployees.js";
+import {
+  PutV1EmployeesRequest,
+  PutV1EmployeesResponse,
+} from "../models/operations/putv1employees.js";
+import {
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+} from "../models/operations/putv1employeesemployeeidonboardingdocumentsconfig.js";
+import {
+  PutV1EmployeesEmployeeIdOnboardingStatusRequest,
+  PutV1EmployeesEmployeeIdOnboardingStatusResponse,
+} from "../models/operations/putv1employeesemployeeidonboardingstatus.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Employees extends ClientSDK {
@@ -27,9 +70,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:manage`
    */
   async create(
-    request: operations.PostV1EmployeesRequest,
+    request: PostV1EmployeesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1EmployeesResponse> {
+  ): Promise<PostV1EmployeesResponse> {
     return unwrapAsync(employeesCreate(
       this,
       request,
@@ -46,9 +89,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:read`
    */
   async list(
-    request: operations.GetV1CompaniesCompanyIdEmployeesRequest,
+    request: GetV1CompaniesCompanyIdEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1CompaniesCompanyIdEmployeesResponse> {
+  ): Promise<GetV1CompaniesCompanyIdEmployeesResponse> {
     return unwrapAsync(employeesList(
       this,
       request,
@@ -65,9 +108,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:manage`
    */
   async createHistorical(
-    request: operations.PostV1HistoricalEmployeesRequest,
+    request: PostV1HistoricalEmployeesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostV1HistoricalEmployeesResponse> {
+  ): Promise<PostV1HistoricalEmployeesResponse> {
     return unwrapAsync(employeesCreateHistorical(
       this,
       request,
@@ -84,9 +127,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:read`
    */
   async get(
-    request: operations.GetV1EmployeesRequest,
+    request: GetV1EmployeesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesResponse> {
+  ): Promise<GetV1EmployeesResponse> {
     return unwrapAsync(employeesGet(
       this,
       request,
@@ -103,9 +146,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:write`
    */
   async update(
-    request: operations.PutV1EmployeesRequest,
+    request: PutV1EmployeesRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesResponse> {
+  ): Promise<PutV1EmployeesResponse> {
     return unwrapAsync(employeesUpdate(
       this,
       request,
@@ -124,9 +167,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:manage`
    */
   async delete(
-    request: operations.DeleteV1EmployeeRequest,
+    request: DeleteV1EmployeeRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteV1EmployeeResponse> {
+  ): Promise<DeleteV1EmployeeResponse> {
     return unwrapAsync(employeesDelete(
       this,
       request,
@@ -143,9 +186,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:read`
    */
   async getCustomFields(
-    request: operations.GetV1EmployeesEmployeeIdCustomFieldsRequest,
+    request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdCustomFieldsResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdCustomFieldsResponse> {
     return unwrapAsync(employeesGetCustomFields(
       this,
       request,
@@ -162,12 +205,9 @@ export class Employees extends ClientSDK {
    * scope: `employees:manage`
    */
   async updateOnboardingDocumentsConfig(
-    request:
-      operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
+    request: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse
-  > {
+  ): Promise<PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse> {
     return unwrapAsync(employeesUpdateOnboardingDocumentsConfig(
       this,
       request,
@@ -220,9 +260,9 @@ export class Employees extends ClientSDK {
    * | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
    */
   async getOnboardingStatus(
-    request: operations.GetV1EmployeesEmployeeIdOnboardingStatusRequest,
+    request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV1EmployeesEmployeeIdOnboardingStatusResponse> {
+  ): Promise<GetV1EmployeesEmployeeIdOnboardingStatusResponse> {
     return unwrapAsync(employeesGetOnboardingStatus(
       this,
       request,
@@ -248,9 +288,9 @@ export class Employees extends ClientSDK {
    * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
    */
   async updateOnboardingStatus(
-    request: operations.PutV1EmployeesEmployeeIdOnboardingStatusRequest,
+    request: PutV1EmployeesEmployeeIdOnboardingStatusRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutV1EmployeesEmployeeIdOnboardingStatusResponse> {
+  ): Promise<PutV1EmployeesEmployeeIdOnboardingStatusResponse> {
     return unwrapAsync(employeesUpdateOnboardingStatus(
       this,
       request,
@@ -267,9 +307,9 @@ export class Employees extends ClientSDK {
    * scope: `employee_time_off_activities:read`
    */
   async getTimeOffActivities(
-    request: operations.GetVersionEmployeesTimeOffActivitiesRequest,
+    request: GetVersionEmployeesTimeOffActivitiesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetVersionEmployeesTimeOffActivitiesResponse> {
+  ): Promise<GetVersionEmployeesTimeOffActivitiesResponse> {
     return unwrapAsync(employeesGetTimeOffActivities(
       this,
       request,

@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { holidayPayPoliciesAddEmployees } from "../funcs/holidayPayPoliciesAddEmployees.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutCompaniesCompanyUuidHolidayPayPolicyAddRequest,
+  PutCompaniesCompanyUuidHolidayPayPolicyAddResponse,
+} from "../models/operations/putcompaniescompanyuuidholidaypaypolicyadd.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type HolidayPayPoliciesAddEmployeesMutationVariables = {
-  request: operations.PutCompaniesCompanyUuidHolidayPayPolicyAddRequest;
+  request: PutCompaniesCompanyUuidHolidayPayPolicyAddRequest;
   options?: RequestOptions;
 };
 
 export type HolidayPayPoliciesAddEmployeesMutationData =
-  operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse;
+  PutCompaniesCompanyUuidHolidayPayPolicyAddResponse;
 
 /**
  * Add employees to a company's holiday pay policy

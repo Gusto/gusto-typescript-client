@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationEmployerSign } from "../funcs/i9VerificationEmployerSign.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
+  PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
+} from "../models/operations/putv1employeesemployeeidi9authorizationemployersign.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type I9VerificationEmployerSignMutationVariables = {
-  request:
-    operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest;
+  request: PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest;
   options?: RequestOptions;
 };
 
 export type I9VerificationEmployerSignMutationData =
-  operations.PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse;
+  PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse;
 
 /**
  * Employer sign an employee's Form I-9

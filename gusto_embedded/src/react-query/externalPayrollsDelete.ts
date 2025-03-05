@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsDelete } from "../funcs/externalPayrollsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1ExternalPayrollRequest,
+  DeleteV1ExternalPayrollResponse,
+} from "../models/operations/deletev1externalpayroll.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type ExternalPayrollsDeleteMutationVariables = {
-  request: operations.DeleteV1ExternalPayrollRequest;
+  request: DeleteV1ExternalPayrollRequest;
   options?: RequestOptions;
 };
 
 export type ExternalPayrollsDeleteMutationData =
-  operations.DeleteV1ExternalPayrollResponse;
+  DeleteV1ExternalPayrollResponse;
 
 /**
  * Delete an external payroll

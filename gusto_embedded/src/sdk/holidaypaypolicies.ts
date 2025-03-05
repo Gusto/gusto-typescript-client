@@ -9,7 +9,30 @@ import { holidayPayPoliciesGet } from "../funcs/holidayPayPoliciesGet.js";
 import { holidayPayPoliciesRemoveEmployees } from "../funcs/holidayPayPoliciesRemoveEmployees.js";
 import { holidayPayPoliciesUpdate } from "../funcs/holidayPayPoliciesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
+  DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
+} from "../models/operations/deletecompaniescompanyuuidholidaypaypolicy.js";
+import {
+  GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+} from "../models/operations/getcompaniescompanyuuidholidaypaypolicy.js";
+import {
+  PostCompaniesCompanyUuidHolidayPayPolicyRequest,
+  PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+} from "../models/operations/postcompaniescompanyuuidholidaypaypolicy.js";
+import {
+  PutCompaniesCompanyUuidHolidayPayPolicyRequest,
+  PutCompaniesCompanyUuidHolidayPayPolicyResponse,
+} from "../models/operations/putcompaniescompanyuuidholidaypaypolicy.js";
+import {
+  PutCompaniesCompanyUuidHolidayPayPolicyAddRequest,
+  PutCompaniesCompanyUuidHolidayPayPolicyAddResponse,
+} from "../models/operations/putcompaniescompanyuuidholidaypaypolicyadd.js";
+import {
+  PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
+  PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+} from "../models/operations/putcompaniescompanyuuidholidaypaypolicyremove.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class HolidayPayPolicies extends ClientSDK {
@@ -22,9 +45,9 @@ export class HolidayPayPolicies extends ClientSDK {
    * scope: `holiday_pay_policies:read`
    */
   async get(
-    request: operations.GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+    request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse> {
+  ): Promise<GetCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesGet(
       this,
       request,
@@ -41,9 +64,9 @@ export class HolidayPayPolicies extends ClientSDK {
    * scope: `holiday_pay_policies:write`
    */
   async create(
-    request: operations.PostCompaniesCompanyUuidHolidayPayPolicyRequest,
+    request: PostCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse> {
+  ): Promise<PostCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesCreate(
       this,
       request,
@@ -60,9 +83,9 @@ export class HolidayPayPolicies extends ClientSDK {
    * scope: `holiday_pay_policies:write`
    */
   async update(
-    request: operations.PutCompaniesCompanyUuidHolidayPayPolicyRequest,
+    request: PutCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutCompaniesCompanyUuidHolidayPayPolicyResponse> {
+  ): Promise<PutCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesUpdate(
       this,
       request,
@@ -79,9 +102,9 @@ export class HolidayPayPolicies extends ClientSDK {
    * scope: `holiday_pay_policies:write`
    */
   async delete(
-    request: operations.DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
+    request: DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse> {
+  ): Promise<DeleteCompaniesCompanyUuidHolidayPayPolicyResponse> {
     return unwrapAsync(holidayPayPoliciesDelete(
       this,
       request,
@@ -98,9 +121,9 @@ export class HolidayPayPolicies extends ClientSDK {
    * scope: `holiday_pay_policies:write`
    */
   async addEmployees(
-    request: operations.PutCompaniesCompanyUuidHolidayPayPolicyAddRequest,
+    request: PutCompaniesCompanyUuidHolidayPayPolicyAddRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse> {
+  ): Promise<PutCompaniesCompanyUuidHolidayPayPolicyAddResponse> {
     return unwrapAsync(holidayPayPoliciesAddEmployees(
       this,
       request,
@@ -117,9 +140,9 @@ export class HolidayPayPolicies extends ClientSDK {
    * scope: `holiday_pay_policies:write`
    */
   async removeEmployees(
-    request: operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
+    request: PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
     options?: RequestOptions,
-  ): Promise<operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse> {
+  ): Promise<PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse> {
     return unwrapAsync(holidayPayPoliciesRemoveEmployees(
       this,
       request,

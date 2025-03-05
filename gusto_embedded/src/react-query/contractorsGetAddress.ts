@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsGetAddress } from "../funcs/contractorsGetAddress.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1ContractorsContractorUuidAddressRequest,
+  GetV1ContractorsContractorUuidAddressResponse,
+} from "../models/operations/getv1contractorscontractoruuidaddress.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -27,7 +30,7 @@ import {
 } from "./_types.js";
 
 export type ContractorsGetAddressQueryData =
-  operations.GetV1ContractorsContractorUuidAddressResponse;
+  GetV1ContractorsContractorUuidAddressResponse;
 
 /**
  * Get a contractor address
@@ -38,7 +41,7 @@ export type ContractorsGetAddressQueryData =
  * scope: `contractors:read`
  */
 export function useContractorsGetAddress(
-  request: operations.GetV1ContractorsContractorUuidAddressRequest,
+  request: GetV1ContractorsContractorUuidAddressRequest,
   options?: QueryHookOptions<ContractorsGetAddressQueryData>,
 ): UseQueryResult<ContractorsGetAddressQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +64,7 @@ export function useContractorsGetAddress(
  * scope: `contractors:read`
  */
 export function useContractorsGetAddressSuspense(
-  request: operations.GetV1ContractorsContractorUuidAddressRequest,
+  request: GetV1ContractorsContractorUuidAddressRequest,
   options?: SuspenseQueryHookOptions<ContractorsGetAddressQueryData>,
 ): UseSuspenseQueryResult<ContractorsGetAddressQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +81,7 @@ export function useContractorsGetAddressSuspense(
 export function prefetchContractorsGetAddress(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidAddressRequest,
+  request: GetV1ContractorsContractorUuidAddressRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildContractorsGetAddressQuery(
@@ -92,7 +95,7 @@ export function setContractorsGetAddressData(
   client: QueryClient,
   queryKeyBase: [
     contractorUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: ContractorsGetAddressQueryData,
 ): ContractorsGetAddressQueryData | undefined {
@@ -106,7 +109,7 @@ export function invalidateContractorsGetAddress(
   queryKeyBase: TupleToPrefixes<
     [
       contractorUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +137,7 @@ export function invalidateAllContractorsGetAddress(
 
 export function buildContractorsGetAddressQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1ContractorsContractorUuidAddressRequest,
+  request: GetV1ContractorsContractorUuidAddressRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +169,7 @@ export function buildContractorsGetAddressQuery(
 
 export function queryKeyContractorsGetAddress(
   contractorUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

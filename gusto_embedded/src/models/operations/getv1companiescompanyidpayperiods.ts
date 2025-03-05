@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  PayPeriod,
+  PayPeriod$inboundSchema,
+  PayPeriod$Outbound,
+  PayPeriod$outboundSchema,
+} from "../components/payperiod.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1CompaniesCompanyIdPayPeriodsRequest = {
@@ -26,7 +36,7 @@ export type GetV1CompaniesCompanyIdPayPeriodsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayPeriodsResponse = {
@@ -45,7 +55,7 @@ export type GetV1CompaniesCompanyIdPayPeriodsResponse = {
   /**
    * Example response
    */
-  payPeriodList?: Array<components.PayPeriod> | undefined;
+  payPeriodList?: Array<PayPeriod> | undefined;
 };
 
 /** @internal */
@@ -58,9 +68,7 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$inboundSchema: z.ZodType<
   start_date: z.string().optional(),
   end_date: z.string().optional(),
   payroll_types: z.string().optional(),
-  "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-    "2024-04-01",
-  ),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -90,9 +98,7 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$outboundSchema: z.ZodType<
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   payrollTypes: z.string().optional(),
-  xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-    "2024-04-01",
-  ),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",
@@ -154,7 +160,7 @@ export const GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  "Pay-Period-List": z.array(components.PayPeriod$inboundSchema).optional(),
+  "Pay-Period-List": z.array(PayPeriod$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
@@ -169,7 +175,7 @@ export type GetV1CompaniesCompanyIdPayPeriodsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Pay-Period-List"?: Array<components.PayPeriod$Outbound> | undefined;
+  "Pay-Period-List"?: Array<PayPeriod$Outbound> | undefined;
 };
 
 /** @internal */
@@ -184,7 +190,7 @@ export const GetV1CompaniesCompanyIdPayPeriodsResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    payPeriodList: z.array(components.PayPeriod$outboundSchema).optional(),
+    payPeriodList: z.array(PayPeriod$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

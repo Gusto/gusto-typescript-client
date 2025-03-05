@@ -3,12 +3,12 @@
 ## Example Usage
 
 ```typescript
-import { PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest } from "@gusto/embedded-api/models/operations";
+import { PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest } from "@gusto/embedded-api/models/operations/postemployeeytdbenefitamountsfromdifferentcompany.js";
 
 let value: PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
   employeeId: "<id>",
   postEmployeeYtdBenefitAmountsFromDifferentCompany: {
-    taxYear: 9790.11,
+    taxYear: 8988.26,
   },
 };
 ```

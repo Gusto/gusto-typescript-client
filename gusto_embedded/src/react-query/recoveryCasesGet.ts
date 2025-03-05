@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { recoveryCasesGet } from "../funcs/recoveryCasesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetRecoveryCasesRequest,
+  GetRecoveryCasesResponse,
+} from "../models/operations/getrecoverycases.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type RecoveryCasesGetQueryData = operations.GetRecoveryCasesResponse;
+export type RecoveryCasesGetQueryData = GetRecoveryCasesResponse;
 
 /**
  * Get all recovery cases for a company
@@ -37,7 +40,7 @@ export type RecoveryCasesGetQueryData = operations.GetRecoveryCasesResponse;
  * scope: `recovery_cases:read`
  */
 export function useRecoveryCasesGet(
-  request: operations.GetRecoveryCasesRequest,
+  request: GetRecoveryCasesRequest,
   options?: QueryHookOptions<RecoveryCasesGetQueryData>,
 ): UseQueryResult<RecoveryCasesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -60,7 +63,7 @@ export function useRecoveryCasesGet(
  * scope: `recovery_cases:read`
  */
 export function useRecoveryCasesGetSuspense(
-  request: operations.GetRecoveryCasesRequest,
+  request: GetRecoveryCasesRequest,
   options?: SuspenseQueryHookOptions<RecoveryCasesGetQueryData>,
 ): UseSuspenseQueryResult<RecoveryCasesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -77,7 +80,7 @@ export function useRecoveryCasesGetSuspense(
 export function prefetchRecoveryCasesGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetRecoveryCasesRequest,
+  request: GetRecoveryCasesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildRecoveryCasesGetQuery(
@@ -91,7 +94,7 @@ export function setRecoveryCasesGetData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: RecoveryCasesGetQueryData,
 ): RecoveryCasesGetQueryData | undefined {
@@ -105,7 +108,7 @@ export function invalidateRecoveryCasesGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -128,7 +131,7 @@ export function invalidateAllRecoveryCasesGet(
 
 export function buildRecoveryCasesGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetRecoveryCasesRequest,
+  request: GetRecoveryCasesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -160,7 +163,7 @@ export function buildRecoveryCasesGetQuery(
 
 export function queryKeyRecoveryCasesGet(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  GetV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema,
+  GetV1EmployeesEmployeeIdGarnishmentsResponse,
+  GetV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema,
+} from "../models/operations/getv1employeesemployeeidgarnishments.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function garnishmentsList(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: GetV1EmployeesEmployeeIdGarnishmentsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1EmployeesEmployeeIdGarnishmentsResponse,
+    GetV1EmployeesEmployeeIdGarnishmentsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function garnishmentsList(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1EmployeesEmployeeIdGarnishmentsRequest,
+  request: GetV1EmployeesEmployeeIdGarnishmentsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1EmployeesEmployeeIdGarnishmentsResponse,
+      GetV1EmployeesEmployeeIdGarnishmentsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema
-        .parse(value),
+      GetV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -166,7 +170,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1EmployeesEmployeeIdGarnishmentsResponse,
+    GetV1EmployeesEmployeeIdGarnishmentsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -175,11 +179,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema,
-      { key: "Garnishment-List" },
-    ),
+    M.json(200, GetV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema, {
+      key: "Garnishment-List",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

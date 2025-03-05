@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PutV1CompanyFormSignRequest,
+  PutV1CompanyFormSignRequest$outboundSchema,
+  PutV1CompanyFormSignResponse,
+  PutV1CompanyFormSignResponse$inboundSchema,
+} from "../models/operations/putv1companyformsign.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function companyFormsSign(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompanyFormSignRequest,
+  request: PutV1CompanyFormSignRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1CompanyFormSignResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompanyFormSignResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function companyFormsSign(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1CompanyFormSignRequest,
+  request: PutV1CompanyFormSignRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1CompanyFormSignResponse,
-      | errors.UnprocessableEntityErrorObject
+      PutV1CompanyFormSignResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +86,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PutV1CompanyFormSignRequest$outboundSchema.parse(value),
+    (value) => PutV1CompanyFormSignRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -103,6 +110,11 @@ async function $do(
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
+      { explode: false, charEncoding: "none" },
+    ),
+    "x-gusto-client-ip": encodeSimple(
+      "x-gusto-client-ip",
+      payload["x-gusto-client-ip"],
       { explode: false, charEncoding: "none" },
     ),
   }));
@@ -161,8 +173,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1CompanyFormSignResponse,
-    | errors.UnprocessableEntityErrorObject
+    PutV1CompanyFormSignResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,10 +183,8 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PutV1CompanyFormSignResponse$inboundSchema, {
-      key: "Form",
-    }),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, PutV1CompanyFormSignResponse$inboundSchema, { key: "Form" }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

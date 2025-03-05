@@ -11,18 +11,20 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesCreate } from "../funcs/signatoriesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1CompanySignatoriesRequest,
+  PostV1CompanySignatoriesResponse,
+} from "../models/operations/postv1companysignatories.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type SignatoriesCreateMutationVariables = {
-  request: operations.PostV1CompanySignatoriesRequest;
+  request: PostV1CompanySignatoriesRequest;
   options?: RequestOptions;
 };
 
-export type SignatoriesCreateMutationData =
-  operations.PostV1CompanySignatoriesResponse;
+export type SignatoriesCreateMutationData = PostV1CompanySignatoriesResponse;
 
 /**
  * Create a signatory

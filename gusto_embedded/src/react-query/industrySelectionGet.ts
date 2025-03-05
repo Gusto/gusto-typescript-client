@@ -16,8 +16,11 @@ import { GustoEmbeddedCore } from "../core.js";
 import { industrySelectionGet } from "../funcs/industrySelectionGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
-import * as operations from "../models/operations/index.js";
+import { VersionHeader } from "../models/components/versionheader.js";
+import {
+  GetV1CompanyIndustryRequest,
+  GetV1CompanyIndustryResponse,
+} from "../models/operations/getv1companyindustry.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -26,8 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type IndustrySelectionGetQueryData =
-  operations.GetV1CompanyIndustryResponse;
+export type IndustrySelectionGetQueryData = GetV1CompanyIndustryResponse;
 
 /**
  * Get a company industry selection
@@ -38,7 +40,7 @@ export type IndustrySelectionGetQueryData =
  * scope: `companies:read`
  */
 export function useIndustrySelectionGet(
-  request: operations.GetV1CompanyIndustryRequest,
+  request: GetV1CompanyIndustryRequest,
   options?: QueryHookOptions<IndustrySelectionGetQueryData>,
 ): UseQueryResult<IndustrySelectionGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -61,7 +63,7 @@ export function useIndustrySelectionGet(
  * scope: `companies:read`
  */
 export function useIndustrySelectionGetSuspense(
-  request: operations.GetV1CompanyIndustryRequest,
+  request: GetV1CompanyIndustryRequest,
   options?: SuspenseQueryHookOptions<IndustrySelectionGetQueryData>,
 ): UseSuspenseQueryResult<IndustrySelectionGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,7 +80,7 @@ export function useIndustrySelectionGetSuspense(
 export function prefetchIndustrySelectionGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyIndustryRequest,
+  request: GetV1CompanyIndustryRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildIndustrySelectionGetQuery(
@@ -92,7 +94,7 @@ export function setIndustrySelectionGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
   data: IndustrySelectionGetQueryData,
 ): IndustrySelectionGetQueryData | undefined {
@@ -106,7 +108,7 @@ export function invalidateIndustrySelectionGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -134,7 +136,7 @@ export function invalidateAllIndustrySelectionGet(
 
 export function buildIndustrySelectionGetQuery(
   client$: GustoEmbeddedCore,
-  request: operations.GetV1CompanyIndustryRequest,
+  request: GetV1CompanyIndustryRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -166,7 +168,7 @@ export function buildIndustrySelectionGetQuery(
 
 export function queryKeyIndustrySelectionGet(
   companyId: string,
-  parameters: { xGustoAPIVersion?: components.VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

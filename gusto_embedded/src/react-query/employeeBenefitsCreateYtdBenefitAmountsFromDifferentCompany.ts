@@ -11,20 +11,22 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany } from "../funcs/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
+  PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
+} from "../models/operations/postemployeeytdbenefitamountsfromdifferentcompany.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMutationVariables =
   {
-    request:
-      operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest;
+    request: PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest;
     options?: RequestOptions;
   };
 
 export type EmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMutationData =
-  operations.PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
+  PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
 
 /**
  * Create year-to-date benefit amounts from a different company

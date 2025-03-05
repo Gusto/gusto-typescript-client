@@ -11,18 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupUpdateStateTaxes } from "../funcs/employeeTaxSetupUpdateStateTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1EmployeesEmployeeIdStateTaxesRequest,
+  PutV1EmployeesEmployeeIdStateTaxesResponse,
+} from "../models/operations/putv1employeesemployeeidstatetaxes.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeeTaxSetupUpdateStateTaxesMutationVariables = {
-  request: operations.PutV1EmployeesEmployeeIdStateTaxesRequest;
+  request: PutV1EmployeesEmployeeIdStateTaxesRequest;
   options?: RequestOptions;
 };
 
 export type EmployeeTaxSetupUpdateStateTaxesMutationData =
-  operations.PutV1EmployeesEmployeeIdStateTaxesResponse;
+  PutV1EmployeesEmployeeIdStateTaxesResponse;
 
 /**
  * Update an employee's state taxes

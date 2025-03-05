@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesCompanyIdBankAccountsRequest,
+  GetV1CompaniesCompanyIdBankAccountsRequest$outboundSchema,
+  GetV1CompaniesCompanyIdBankAccountsResponse,
+  GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyidbankaccounts.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function bankAccountsGet(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
+  request: GetV1CompaniesCompanyIdBankAccountsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesCompanyIdBankAccountsResponse,
+    GetV1CompaniesCompanyIdBankAccountsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function bankAccountsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesCompanyIdBankAccountsRequest,
+  request: GetV1CompaniesCompanyIdBankAccountsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesCompanyIdBankAccountsResponse,
+      GetV1CompaniesCompanyIdBankAccountsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -76,8 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV1CompaniesCompanyIdBankAccountsRequest$outboundSchema
-        .parse(value),
+      GetV1CompaniesCompanyIdBankAccountsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,7 +164,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesCompanyIdBankAccountsResponse,
+    GetV1CompaniesCompanyIdBankAccountsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -169,11 +173,9 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      200,
-      operations.GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema,
-      { key: "Company-Bank-Account-List" },
-    ),
+    M.json(200, GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema, {
+      key: "Company-Bank-Account-List",
+    }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

@@ -18,9 +18,17 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostCompaniesCompanyUuidHolidayPayPolicyRequest,
+  PostCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema,
+  PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+  PostCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
+} from "../models/operations/postcompaniescompanyuuidholidaypaypolicy.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -34,12 +42,12 @@ import { Result } from "../types/fp.js";
  */
 export function holidayPayPoliciesCreate(
   client: GustoEmbeddedCore,
-  request: operations.PostCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: PostCompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,13 +66,13 @@ export function holidayPayPoliciesCreate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PostCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: PostCompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse,
-      | errors.UnprocessableEntityErrorObject
+      PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -79,8 +87,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema
-        .parse(value),
+      PostCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -164,8 +173,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse,
-    | errors.UnprocessableEntityErrorObject
+    PostCompaniesCompanyUuidHolidayPayPolicyResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,10 +185,10 @@ async function $do(
   >(
     M.json(
       200,
-      operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
+      PostCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
       { key: "Holiday-Pay-Policy" },
     ),
-    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });

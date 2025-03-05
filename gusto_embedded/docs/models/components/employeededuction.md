@@ -5,7 +5,7 @@ The amount to be deducted, per pay period, from the employee's pay.
 ## Example Usage
 
 ```typescript
-import { EmployeeDeduction } from "@gusto/embedded-api/models/components";
+import { EmployeeDeduction } from "@gusto/embedded-api/models/components/benefittyperequirements.js";
 
 let value: EmployeeDeduction = {};
 ```

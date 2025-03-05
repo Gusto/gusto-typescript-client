@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1CompaniesAttachmentRequest,
+  GetV1CompaniesAttachmentRequest$outboundSchema,
+  GetV1CompaniesAttachmentResponse,
+  GetV1CompaniesAttachmentResponse$inboundSchema,
+} from "../models/operations/getv1companiesattachment.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function companyAttachmentsGetDetails(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentRequest,
+  request: GetV1CompaniesAttachmentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1CompaniesAttachmentResponse,
+    GetV1CompaniesAttachmentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function companyAttachmentsGetDetails(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.GetV1CompaniesAttachmentRequest,
+  request: GetV1CompaniesAttachmentRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1CompaniesAttachmentResponse,
+      GetV1CompaniesAttachmentResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1CompaniesAttachmentRequest$outboundSchema.parse(value),
+    (value) => GetV1CompaniesAttachmentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -164,7 +168,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1CompaniesAttachmentResponse,
+    GetV1CompaniesAttachmentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,7 +177,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1CompaniesAttachmentResponse$inboundSchema, {
+    M.json(200, GetV1CompaniesAttachmentResponse$inboundSchema, {
       key: "Company-Attachment",
     }),
     M.fail([404, "4XX"]),

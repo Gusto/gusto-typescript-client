@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodDeleteBankAccount } from "../funcs/employeePaymentMethodDeleteBankAccount.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
+} from "../models/operations/deletev1employeesemployeeidbankaccountsbankaccountid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type EmployeePaymentMethodDeleteBankAccountMutationVariables = {
-  request:
-    operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest;
+  request: DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest;
   options?: RequestOptions;
 };
 
 export type EmployeePaymentMethodDeleteBankAccountMutationData =
-  operations.DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse;
+  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse;
 
 /**
  * Delete an employee bank account

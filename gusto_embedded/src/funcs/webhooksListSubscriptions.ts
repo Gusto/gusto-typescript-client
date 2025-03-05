@@ -19,7 +19,13 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  GetV1WebhookSubscriptionsRequest,
+  GetV1WebhookSubscriptionsRequest$outboundSchema,
+  GetV1WebhookSubscriptionsResponse,
+  GetV1WebhookSubscriptionsResponse$inboundSchema,
+  GetV1WebhookSubscriptionsSecurity,
+} from "../models/operations/getv1webhooksubscriptions.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,12 +43,12 @@ import { Result } from "../types/fp.js";
  */
 export function webhooksListSubscriptions(
   client: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionsSecurity,
-  request: operations.GetV1WebhookSubscriptionsRequest,
+  security: GetV1WebhookSubscriptionsSecurity,
+  request: GetV1WebhookSubscriptionsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV1WebhookSubscriptionsResponse,
+    GetV1WebhookSubscriptionsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -62,13 +68,13 @@ export function webhooksListSubscriptions(
 
 async function $do(
   client: GustoEmbeddedCore,
-  security: operations.GetV1WebhookSubscriptionsSecurity,
-  request: operations.GetV1WebhookSubscriptionsRequest,
+  security: GetV1WebhookSubscriptionsSecurity,
+  request: GetV1WebhookSubscriptionsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV1WebhookSubscriptionsResponse,
+      GetV1WebhookSubscriptionsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -82,8 +88,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV1WebhookSubscriptionsRequest$outboundSchema.parse(value),
+    (value) => GetV1WebhookSubscriptionsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -161,7 +166,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV1WebhookSubscriptionsResponse,
+    GetV1WebhookSubscriptionsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -170,7 +175,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetV1WebhookSubscriptionsResponse$inboundSchema, {
+    M.json(200, GetV1WebhookSubscriptionsResponse$inboundSchema, {
       key: "Webhook-Subscriptions-List",
     }),
     M.fail([404, "4XX"]),

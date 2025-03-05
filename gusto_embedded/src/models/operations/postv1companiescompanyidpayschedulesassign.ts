@@ -6,7 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  PayScheduleAssignmentBody,
+  PayScheduleAssignmentBody$inboundSchema,
+  PayScheduleAssignmentBody$Outbound,
+  PayScheduleAssignmentBody$outboundSchema,
+} from "../components/payscheduleassignmentbody.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV1CompaniesCompanyIdPaySchedulesAssignRequest = {
@@ -17,8 +27,8 @@ export type PostV1CompaniesCompanyIdPaySchedulesAssignRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
-  payScheduleAssignmentBody: components.PayScheduleAssignmentBody;
+  xGustoAPIVersion?: VersionHeader | undefined;
+  payScheduleAssignmentBody: PayScheduleAssignmentBody;
 };
 
 export type PostV1CompaniesCompanyIdPaySchedulesAssignResponse = {
@@ -44,11 +54,8 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
-    "Pay-Schedule-Assignment-Body":
-      components.PayScheduleAssignmentBody$inboundSchema,
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "Pay-Schedule-Assignment-Body": PayScheduleAssignmentBody$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -61,7 +68,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignRequest$inboundSchema:
 export type PostV1CompaniesCompanyIdPaySchedulesAssignRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
-  "Pay-Schedule-Assignment-Body": components.PayScheduleAssignmentBody$Outbound;
+  "Pay-Schedule-Assignment-Body": PayScheduleAssignmentBody$Outbound;
 };
 
 /** @internal */
@@ -72,11 +79,8 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignRequest$outboundSchema:
     PostV1CompaniesCompanyIdPaySchedulesAssignRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
-    payScheduleAssignmentBody:
-      components.PayScheduleAssignmentBody$outboundSchema,
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    payScheduleAssignmentBody: PayScheduleAssignmentBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

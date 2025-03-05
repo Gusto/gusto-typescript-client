@@ -19,7 +19,12 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PutV1HistoricalEmployeesRequest,
+  PutV1HistoricalEmployeesRequest$outboundSchema,
+  PutV1HistoricalEmployeesResponse,
+  PutV1HistoricalEmployeesResponse$inboundSchema,
+} from "../models/operations/putv1historicalemployees.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -33,11 +38,11 @@ import { Result } from "../types/fp.js";
  */
 export function historicalEmployeesUpdate(
   client: GustoEmbeddedCore,
-  request: operations.PutV1HistoricalEmployeesRequest,
+  request: PutV1HistoricalEmployeesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutV1HistoricalEmployeesResponse,
+    PutV1HistoricalEmployeesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -56,12 +61,12 @@ export function historicalEmployeesUpdate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: operations.PutV1HistoricalEmployeesRequest,
+  request: PutV1HistoricalEmployeesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutV1HistoricalEmployeesResponse,
+      PutV1HistoricalEmployeesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -75,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PutV1HistoricalEmployeesRequest$outboundSchema.parse(value),
+    (value) => PutV1HistoricalEmployeesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -165,7 +169,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutV1HistoricalEmployeesResponse,
+    PutV1HistoricalEmployeesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -174,7 +178,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.PutV1HistoricalEmployeesResponse$inboundSchema, {
+    M.json(200, PutV1HistoricalEmployeesResponse$inboundSchema, {
       key: "Employee",
     }),
     M.fail([404, "4XX"]),

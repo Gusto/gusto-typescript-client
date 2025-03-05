@@ -5,9 +5,9 @@ The tax payer type of the company.
 ## Example Usage
 
 ```typescript
-import { EntityType } from "@gusto/embedded-api/models/components";
+import { EntityType } from "@gusto/embedded-api/models/components/company.js";
 
-let value: EntityType = "Sole proprietor";
+let value: EntityType = "Co-ownership";
 ```
 
 ## Values

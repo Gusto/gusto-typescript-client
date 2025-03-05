@@ -5,7 +5,7 @@ The representation of an employee benefit.
 ## Example Usage
 
 ```typescript
-import { EmployeeBenefit } from "@gusto/embedded-api/models/components";
+import { EmployeeBenefit } from "@gusto/embedded-api/models/components/employeebenefit.js";
 
 let value: EmployeeBenefit = {
   uuid: "9b75e506-caf1-4e57-a613-b020d92cfee0",

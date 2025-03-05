@@ -7,7 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
+import {
+  ContractorBankAccount,
+  ContractorBankAccount$inboundSchema,
+  ContractorBankAccount$Outbound,
+  ContractorBankAccount$outboundSchema,
+} from "../components/contractorbankaccount.js";
+import {
+  VersionHeader,
+  VersionHeader$inboundSchema,
+  VersionHeader$outboundSchema,
+} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const PostV1ContractorsContractorUuidBankAccountsAccountType = {
@@ -33,7 +43,7 @@ export type PostV1ContractorsContractorUuidBankAccountsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: components.VersionHeader | undefined;
+  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1ContractorsContractorUuidBankAccountsRequestBody;
 };
 
@@ -53,7 +63,7 @@ export type PostV1ContractorsContractorUuidBankAccountsResponse = {
   /**
    * Example response
    */
-  contractorBankAccount?: components.ContractorBankAccount | undefined;
+  contractorBankAccount?: ContractorBankAccount | undefined;
 };
 
 /** @internal */
@@ -179,9 +189,7 @@ export const PostV1ContractorsContractorUuidBankAccountsRequest$inboundSchema:
     unknown
   > = z.object({
     contractor_uuid: z.string(),
-    "X-Gusto-API-Version": components.VersionHeader$inboundSchema.default(
-      "2024-04-01",
-    ),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1ContractorsContractorUuidBankAccountsRequestBody$inboundSchema
     ),
@@ -208,9 +216,7 @@ export const PostV1ContractorsContractorUuidBankAccountsRequest$outboundSchema:
     PostV1ContractorsContractorUuidBankAccountsRequest
   > = z.object({
     contractorUuid: z.string(),
-    xGustoAPIVersion: components.VersionHeader$outboundSchema.default(
-      "2024-04-01",
-    ),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1ContractorsContractorUuidBankAccountsRequestBody$outboundSchema
     ),
@@ -275,8 +281,7 @@ export const PostV1ContractorsContractorUuidBankAccountsResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Contractor-Bank-Account": components.ContractorBankAccount$inboundSchema
-      .optional(),
+    "Contractor-Bank-Account": ContractorBankAccount$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
@@ -291,9 +296,7 @@ export type PostV1ContractorsContractorUuidBankAccountsResponse$Outbound = {
   ContentType: string;
   StatusCode: number;
   RawResponse: never;
-  "Contractor-Bank-Account"?:
-    | components.ContractorBankAccount$Outbound
-    | undefined;
+  "Contractor-Bank-Account"?: ContractorBankAccount$Outbound | undefined;
 };
 
 /** @internal */
@@ -308,8 +311,7 @@ export const PostV1ContractorsContractorUuidBankAccountsResponse$outboundSchema:
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    contractorBankAccount: components.ContractorBankAccount$outboundSchema
-      .optional(),
+    contractorBankAccount: ContractorBankAccount$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       contentType: "ContentType",

@@ -11,19 +11,21 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesCalculateAccruingTimeOffHours } from "../funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../models/operations/index.js";
+import {
+  PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest,
+  PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+} from "../models/operations/postv1payrollspayrollidcalculateaccruingtimeoffhours.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationVariables = {
-  request:
-    operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest;
+  request: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationData =
-  operations.PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse;
+  PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse;
 
 /**
  * Calculate accruing time off hours
