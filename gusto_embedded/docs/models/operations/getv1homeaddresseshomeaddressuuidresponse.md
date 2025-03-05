@@ -8,7 +8,7 @@ import { RFCDate } from "@gusto/embedded-api/types";
 
 let value: GetV1HomeAddressesHomeAddressUuidResponse = {
   contentType: "<value>",
-  statusCode: 103,
+  statusCode: 505,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

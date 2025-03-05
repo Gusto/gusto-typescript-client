@@ -7,7 +7,7 @@ import { DeleteV1ContractorsContractorUuidResponse } from "@gusto/embedded-api/m
 
 let value: DeleteV1ContractorsContractorUuidResponse = {
   contentType: "<value>",
-  statusCode: 205,
+  statusCode: 306,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

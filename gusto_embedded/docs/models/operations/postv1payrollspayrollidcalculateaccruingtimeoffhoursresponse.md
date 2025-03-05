@@ -7,7 +7,7 @@ import { PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse } from "@g
 
 let value: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse = {
   contentType: "<value>",
-  statusCode: 208,
+  statusCode: 506,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

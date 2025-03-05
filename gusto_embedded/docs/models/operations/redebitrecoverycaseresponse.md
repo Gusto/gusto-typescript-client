@@ -7,7 +7,7 @@ import { RedebitRecoveryCaseResponse } from "@gusto/embedded-api/models/operatio
 
 let value: RedebitRecoveryCaseResponse = {
   contentType: "<value>",
-  statusCode: 304,
+  statusCode: 307,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse } from "
 
 let value: PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse = {
   contentType: "<value>",
-  statusCode: 503,
+  statusCode: 207,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

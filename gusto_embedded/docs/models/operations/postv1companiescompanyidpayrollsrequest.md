@@ -9,7 +9,7 @@ let value: PostV1CompaniesCompanyIdPayrollsRequest = {
   companyId: "<id>",
   requestBody: {
     offCycle: false,
-    offCycleReason: "Dismissed employee",
+    offCycleReason: "Bonus",
     startDate: "<value>",
     endDate: "<value>",
   },

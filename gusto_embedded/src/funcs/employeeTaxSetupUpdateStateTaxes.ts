@@ -18,6 +18,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -40,6 +41,7 @@ export function employeeTaxSetupUpdateStateTaxes(
 ): APIPromise<
   Result<
     operations.PutV1EmployeesEmployeeIdStateTaxesResponse,
+    | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -64,6 +66,7 @@ async function $do(
   [
     Result<
       operations.PutV1EmployeesEmployeeIdStateTaxesResponse,
+      | errors.UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -165,6 +168,7 @@ async function $do(
 
   const [result] = await M.match<
     operations.PutV1EmployeesEmployeeIdStateTaxesResponse,
+    | errors.UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -178,7 +182,8 @@ async function $do(
       operations.PutV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema,
       { key: "Employee-State-Taxes-List" },
     ),
-    M.fail([404, 422, "4XX"]),
+    M.jsonErr(422, errors.UnprocessableEntityErrorObject$inboundSchema),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

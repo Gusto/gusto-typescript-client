@@ -7,7 +7,7 @@ import { DeleteV1CompensationsCompensationIdResponse } from "@gusto/embedded-api
 
 let value: DeleteV1CompensationsCompensationIdResponse = {
   contentType: "<value>",
-  statusCode: 426,
+  statusCode: 505,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

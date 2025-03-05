@@ -7,7 +7,7 @@ import { PutV1ContractorDocumentSignResponse } from "@gusto/embedded-api/models/
 
 let value: PutV1ContractorDocumentSignResponse = {
   contentType: "<value>",
-  statusCode: 207,
+  statusCode: 413,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

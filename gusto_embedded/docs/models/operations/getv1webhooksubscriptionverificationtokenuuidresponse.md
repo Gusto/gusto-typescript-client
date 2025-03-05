@@ -7,7 +7,7 @@ import { GetV1WebhookSubscriptionVerificationTokenUuidResponse } from "@gusto/em
 
 let value: GetV1WebhookSubscriptionVerificationTokenUuidResponse = {
   contentType: "<value>",
-  statusCode: 506,
+  statusCode: 305,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

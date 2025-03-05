@@ -7,7 +7,7 @@ import { PutV1CompaniesCompanyIdPayrollsResponse } from "@gusto/embedded-api/mod
 
 let value: PutV1CompaniesCompanyIdPayrollsResponse = {
   contentType: "<value>",
-  statusCode: 401,
+  statusCode: 100,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

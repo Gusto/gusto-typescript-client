@@ -7,7 +7,7 @@ import { PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse } from "@gusto
 
 let value: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse = {
   contentType: "<value>",
-  statusCode: 507,
+  statusCode: 412,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

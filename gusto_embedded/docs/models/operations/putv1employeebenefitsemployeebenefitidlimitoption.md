@@ -12,7 +12,7 @@ their limit.
 ```typescript
 import { PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption } from "@gusto/embedded-api/models/operations";
 
-let value: PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption = "Family";
+let value: PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption = "Individual";
 ```
 
 ## Values

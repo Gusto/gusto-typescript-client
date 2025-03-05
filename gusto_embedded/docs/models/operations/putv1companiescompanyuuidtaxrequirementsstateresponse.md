@@ -7,7 +7,7 @@ import { PutV1CompaniesCompanyUuidTaxRequirementsStateResponse } from "@gusto/em
 
 let value: PutV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
   contentType: "<value>",
-  statusCode: 100,
+  statusCode: 101,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

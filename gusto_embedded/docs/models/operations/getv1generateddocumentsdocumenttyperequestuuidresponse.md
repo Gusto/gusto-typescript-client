@@ -7,7 +7,7 @@ import { GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse } from "@gusto/e
 
 let value: GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
   contentType: "<value>",
-  statusCode: 301,
+  statusCode: 206,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

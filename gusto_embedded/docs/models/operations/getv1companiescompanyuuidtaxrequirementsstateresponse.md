@@ -7,7 +7,7 @@ import { GetV1CompaniesCompanyUuidTaxRequirementsStateResponse } from "@gusto/em
 
 let value: GetV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
   contentType: "<value>",
-  statusCode: 500,
+  statusCode: 100,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

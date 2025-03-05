@@ -7,7 +7,7 @@ import { GetV1CompaniesCompanyIdPayrollsPayrollIdResponse } from "@gusto/embedde
 
 let value: GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
   contentType: "<value>",
-  statusCode: 508,
+  statusCode: 451,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

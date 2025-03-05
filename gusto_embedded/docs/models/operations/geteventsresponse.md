@@ -7,7 +7,7 @@ import { GetEventsResponse } from "@gusto/embedded-api/models/operations";
 
 let value: GetEventsResponse = {
   contentType: "<value>",
-  statusCode: 425,
+  statusCode: 502,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

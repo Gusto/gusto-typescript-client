@@ -77,6 +77,10 @@ export type Garnishment = {
    */
   annualMaximum?: string | null | undefined;
   /**
+   * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
+   */
+  totalAmount?: string | null | undefined;
+  /**
    * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
    */
   payPeriodMaximum?: string | null | undefined;
@@ -131,6 +135,7 @@ export const Garnishment$inboundSchema: z.ZodType<
   times: z.nullable(z.number().int()).default(null),
   recurring: z.boolean().default(false),
   annual_maximum: z.nullable(z.string()).default(null),
+  total_amount: z.nullable(z.string()).default(null),
   pay_period_maximum: z.nullable(z.string()).default(null),
   deduct_as_percentage: z.boolean().default(false),
   garnishment_type: z.nullable(GarnishmentType$inboundSchema).optional(),
@@ -140,6 +145,7 @@ export const Garnishment$inboundSchema: z.ZodType<
     "employee_uuid": "employeeUuid",
     "court_ordered": "courtOrdered",
     "annual_maximum": "annualMaximum",
+    "total_amount": "totalAmount",
     "pay_period_maximum": "payPeriodMaximum",
     "deduct_as_percentage": "deductAsPercentage",
     "garnishment_type": "garnishmentType",
@@ -159,6 +165,7 @@ export type Garnishment$Outbound = {
   times: number | null;
   recurring: boolean;
   annual_maximum: string | null;
+  total_amount: string | null;
   pay_period_maximum: string | null;
   deduct_as_percentage: boolean;
   garnishment_type?: string | null | undefined;
@@ -181,6 +188,7 @@ export const Garnishment$outboundSchema: z.ZodType<
   times: z.nullable(z.number().int()).default(null),
   recurring: z.boolean().default(false),
   annualMaximum: z.nullable(z.string()).default(null),
+  totalAmount: z.nullable(z.string()).default(null),
   payPeriodMaximum: z.nullable(z.string()).default(null),
   deductAsPercentage: z.boolean().default(false),
   garnishmentType: z.nullable(GarnishmentType$outboundSchema).optional(),
@@ -190,6 +198,7 @@ export const Garnishment$outboundSchema: z.ZodType<
     employeeUuid: "employee_uuid",
     courtOrdered: "court_ordered",
     annualMaximum: "annual_maximum",
+    totalAmount: "total_amount",
     payPeriodMaximum: "pay_period_maximum",
     deductAsPercentage: "deduct_as_percentage",
     garnishmentType: "garnishment_type",

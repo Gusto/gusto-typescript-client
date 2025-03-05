@@ -7,7 +7,7 @@ import { GetV1ContractorDocumentsResponse } from "@gusto/embedded-api/models/ope
 
 let value: GetV1ContractorDocumentsResponse = {
   contentType: "<value>",
-  statusCode: 301,
+  statusCode: 101,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

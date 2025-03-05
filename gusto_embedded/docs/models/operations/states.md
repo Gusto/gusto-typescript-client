@@ -6,7 +6,7 @@
 import { States } from "@gusto/embedded-api/models/operations";
 
 let value: States = {
-  state: "California",
+  state: "Montana",
 };
 ```
 

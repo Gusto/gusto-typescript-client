@@ -7,7 +7,7 @@ import { PostCompaniesCompanyUuidHolidayPayPolicyResponse } from "@gusto/embedde
 
 let value: PostCompaniesCompanyUuidHolidayPayPolicyResponse = {
   contentType: "<value>",
-  statusCode: 507,
+  statusCode: 426,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

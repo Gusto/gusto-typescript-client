@@ -7,7 +7,7 @@ import { GetV1CompaniesCompanyIdCompanyBenefitsResponse } from "@gusto/embedded-
 
 let value: GetV1CompaniesCompanyIdCompanyBenefitsResponse = {
   contentType: "<value>",
-  statusCode: 208,
+  statusCode: 506,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

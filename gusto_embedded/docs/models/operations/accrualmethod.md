@@ -7,7 +7,7 @@ Accrual method of the time off policy
 ```typescript
 import { AccrualMethod } from "@gusto/embedded-api/models/operations";
 
-let value: AccrualMethod = "unlimited";
+let value: AccrualMethod = "per_calendar_year";
 ```
 
 ## Values

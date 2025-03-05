@@ -7,7 +7,7 @@ import { PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse } from "@g
 
 let value: PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse = {
   contentType: "<value>",
-  statusCode: 401,
+  statusCode: 102,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { PutV1EmployeesEmployeeIdStateTaxesResponse } from "@gusto/embedded-api/
 
 let value: PutV1EmployeesEmployeeIdStateTaxesResponse = {
   contentType: "<value>",
-  statusCode: 206,
+  statusCode: 417,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse } from "@
 
 let value: DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse = {
   contentType: "<value>",
-  statusCode: 502,
+  statusCode: 203,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

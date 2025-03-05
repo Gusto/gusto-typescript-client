@@ -7,7 +7,7 @@ import { GetV1EmployeeFormResponse } from "@gusto/embedded-api/models/operations
 
 let value: GetV1EmployeeFormResponse = {
   contentType: "<value>",
-  statusCode: 103,
+  statusCode: 501,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

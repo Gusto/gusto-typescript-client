@@ -7,7 +7,7 @@ import { PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse } from "@gusto/em
 
 let value: PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse = {
   contentType: "<value>",
-  statusCode: 204,
+  statusCode: 305,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

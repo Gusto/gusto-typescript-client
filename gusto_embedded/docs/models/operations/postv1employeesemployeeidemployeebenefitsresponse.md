@@ -7,7 +7,7 @@ import { PostV1EmployeesEmployeeIdEmployeeBenefitsResponse } from "@gusto/embedd
 
 let value: PostV1EmployeesEmployeeIdEmployeeBenefitsResponse = {
   contentType: "<value>",
-  statusCode: 204,
+  statusCode: 305,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

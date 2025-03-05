@@ -7,7 +7,7 @@ import { GetRecoveryCasesResponse } from "@gusto/embedded-api/models/operations"
 
 let value: GetRecoveryCasesResponse = {
   contentType: "<value>",
-  statusCode: 101,
+  statusCode: 304,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

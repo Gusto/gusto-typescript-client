@@ -7,7 +7,7 @@ import { PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse } from "@g
 
 let value: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse = {
   contentType: "<value>",
-  statusCode: 421,
+  statusCode: 416,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -11,7 +11,7 @@ let value: PostV1EmployeesEmployeeIdBankAccountsRequest = {
     name: "<value>",
     routingNumber: "<value>",
     accountNumber: "<value>",
-    accountType: "Checking",
+    accountType: "Savings",
   },
 };
 ```

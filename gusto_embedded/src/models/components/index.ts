@@ -82,6 +82,8 @@ export * from "./industry.js";
 export * from "./invoicedata.js";
 export * from "./job.js";
 export * from "./location.js";
+export * from "./metadatawithmultipleentities.js";
+export * from "./metadatawithoneentity.js";
 export * from "./minimumwage.js";
 export * from "./notification.js";
 export * from "./offcyclereasontype.js";

@@ -7,7 +7,7 @@ import { DeleteV1WebhookSubscriptionUuidResponse } from "@gusto/embedded-api/mod
 
 let value: DeleteV1WebhookSubscriptionUuidResponse = {
   contentType: "<value>",
-  statusCode: 201,
+  statusCode: 103,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

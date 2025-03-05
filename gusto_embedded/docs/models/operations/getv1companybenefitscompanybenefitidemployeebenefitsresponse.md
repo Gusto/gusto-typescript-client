@@ -7,7 +7,7 @@ import { GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse } from "@g
 
 let value: GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse = {
   contentType: "<value>",
-  statusCode: 507,
+  statusCode: 421,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

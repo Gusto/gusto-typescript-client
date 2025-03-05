@@ -7,7 +7,7 @@ import { GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse } from "
 
 let value: GetV1EmployeesEmployeeIdI9AuthorizationDocumentOptionsResponse = {
   contentType: "<value>",
-  statusCode: 102,
+  statusCode: 403,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

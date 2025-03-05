@@ -5,7 +5,7 @@
 ```typescript
 import { PayrollTypes } from "@gusto/embedded-api/models/operations";
 
-let value: PayrollTypes = "external";
+let value: PayrollTypes = "regular";
 ```
 
 ## Values

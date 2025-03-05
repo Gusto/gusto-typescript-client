@@ -8,7 +8,7 @@ see [Bank account endpoint](./post-v1-contractors-contractor_uuid-bank_accounts)
 ```typescript
 import { PutV1ContractorsContractorIdPaymentMethodType } from "@gusto/embedded-api/models/operations";
 
-let value: PutV1ContractorsContractorIdPaymentMethodType = "Direct Deposit";
+let value: PutV1ContractorsContractorIdPaymentMethodType = "Check";
 ```
 
 ## Values

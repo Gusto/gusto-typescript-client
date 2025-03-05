@@ -7,12 +7,12 @@ import { GetV1ContractorsContractorUuidResponse } from "@gusto/embedded-api/mode
 
 let value: GetV1ContractorsContractorUuidResponse = {
   contentType: "<value>",
-  statusCode: 506,
+  statusCode: 403,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),
   contractor: {
-    uuid: "2903f5a4-fb5c-4163-8a16-485b0a34cf5d",
+    uuid: "903f5a4f-b5c1-463a-a164-85b0a34cf5d1",
     hourlyRate: "50.0",
   },
 };

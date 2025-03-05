@@ -7,7 +7,7 @@ import { GetV1ContractorPaymentsContractorPaymentUuidFundResponse } from "@gusto
 
 let value: GetV1ContractorPaymentsContractorPaymentUuidFundResponse = {
   contentType: "<value>",
-  statusCode: 102,
+  statusCode: 301,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse } from "
 
 let value: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse = {
   contentType: "<value>",
-  statusCode: 511,
+  statusCode: 506,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

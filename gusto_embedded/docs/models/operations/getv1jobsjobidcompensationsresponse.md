@@ -7,7 +7,7 @@ import { GetV1JobsJobIdCompensationsResponse } from "@gusto/embedded-api/models/
 
 let value: GetV1JobsJobIdCompensationsResponse = {
   contentType: "<value>",
-  statusCode: 511,
+  statusCode: 507,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

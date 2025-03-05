@@ -7,7 +7,7 @@ import { GetV1ContractorFormResponse } from "@gusto/embedded-api/models/operatio
 
 let value: GetV1ContractorFormResponse = {
   contentType: "<value>",
-  statusCode: 504,
+  statusCode: 207,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

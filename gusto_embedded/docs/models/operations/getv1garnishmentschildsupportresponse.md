@@ -7,7 +7,7 @@ import { GetV1GarnishmentsChildSupportResponse } from "@gusto/embedded-api/model
 
 let value: GetV1GarnishmentsChildSupportResponse = {
   contentType: "<value>",
-  statusCode: 413,
+  statusCode: 306,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { PutV1CompanyBenefitsCompanyBenefitIdResponse } from "@gusto/embedded-ap
 
 let value: PutV1CompanyBenefitsCompanyBenefitIdResponse = {
   contentType: "<value>",
-  statusCode: 508,
+  statusCode: 511,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

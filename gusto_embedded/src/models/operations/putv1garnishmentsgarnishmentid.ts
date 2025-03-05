@@ -53,7 +53,7 @@ export type PutV1GarnishmentsGarnishmentIdRequestBody = {
   /**
    * Additional child support order details
    */
-  childSupport?: components.GarnishmentChildSupportInput | null | undefined;
+  childSupport?: components.GarnishmentChildSupport | null | undefined;
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
    */
@@ -107,9 +107,8 @@ export const PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema: z.ZodType<
   pay_period_maximum: z.nullable(z.string()).default(null),
   deduct_as_percentage: z.boolean().default(false),
   total_amount: z.string().optional(),
-  child_support: z.nullable(
-    components.GarnishmentChildSupportInput$inboundSchema,
-  ).optional(),
+  child_support: z.nullable(components.GarnishmentChildSupport$inboundSchema)
+    .optional(),
   version: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -135,7 +134,7 @@ export type PutV1GarnishmentsGarnishmentIdRequestBody$Outbound = {
   deduct_as_percentage: boolean;
   total_amount?: string | undefined;
   child_support?:
-    | components.GarnishmentChildSupportInput$Outbound
+    | components.GarnishmentChildSupport$Outbound
     | null
     | undefined;
   version: string;
@@ -158,9 +157,8 @@ export const PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema:
     payPeriodMaximum: z.nullable(z.string()).default(null),
     deductAsPercentage: z.boolean().default(false),
     totalAmount: z.string().optional(),
-    childSupport: z.nullable(
-      components.GarnishmentChildSupportInput$outboundSchema,
-    ).optional(),
+    childSupport: z.nullable(components.GarnishmentChildSupport$outboundSchema)
+      .optional(),
     version: z.string(),
   }).transform((v) => {
     return remap$(v, {

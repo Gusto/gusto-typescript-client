@@ -7,45 +7,36 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  MetadataWithMultipleEntities,
+  MetadataWithMultipleEntities$inboundSchema,
+  MetadataWithMultipleEntities$Outbound,
+  MetadataWithMultipleEntities$outboundSchema,
+} from "./metadatawithmultipleentities.js";
+import {
+  MetadataWithOneEntity,
+  MetadataWithOneEntity$inboundSchema,
+  MetadataWithOneEntity$Outbound,
+  MetadataWithOneEntity$outboundSchema,
+} from "./metadatawithoneentity.js";
 
 /**
  * Contains relevant data to identify the resource in question when applicable. For example, to identify an entity `entity_type` and `entity_uuid` will be provided.
  */
-export type Metadata = {};
+export type Metadata = MetadataWithMultipleEntities | MetadataWithOneEntity;
 
 /**
- * Contains relevant data to identify the resource in question when applicable. For example, to identify an entity `entity_type` and `entity_uuid` will be provided.
+ * Will only exist if category is `nested_errors`. It is possible to have multiple levels of nested errors.
  */
-export type EntityErrorObjectMetadata = {};
-
-export type Errors = {
-  /**
-   * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
-   */
-  errorKey?: string | undefined;
-  /**
-   * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
-   */
-  category?: string | undefined;
-  /**
-   * Provides details about the error - generally this message can be surfaced to an end user.
-   */
-  message?: string | undefined;
-  /**
-   * Contains relevant data to identify the resource in question when applicable. For example, to identify an entity `entity_type` and `entity_uuid` will be provided.
-   */
-  metadata?: EntityErrorObjectMetadata | undefined;
-};
-
 export type EntityErrorObject = {
   /**
    * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
    */
-  errorKey?: string | undefined;
+  errorKey: string;
   /**
    * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration. If category is `nested_errors`, the object will contain a nested `errors` property with entity errors.
    */
-  category?: string | undefined;
+  category: string;
   /**
    * Provides details about the error - generally this message can be surfaced to an end user.
    */
@@ -53,11 +44,8 @@ export type EntityErrorObject = {
   /**
    * Contains relevant data to identify the resource in question when applicable. For example, to identify an entity `entity_type` and `entity_uuid` will be provided.
    */
-  metadata?: Metadata | undefined;
-  /**
-   * Will only exist if category is `nested_errors`. It is possible to have multiple levels of nested errors.
-   */
-  errors?: Array<Errors> | undefined;
+  metadata?: MetadataWithMultipleEntities | MetadataWithOneEntity | undefined;
+  errors?: Array<EntityErrorObject> | undefined;
 };
 
 /** @internal */
@@ -65,17 +53,25 @@ export const Metadata$inboundSchema: z.ZodType<
   Metadata,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.union([
+  MetadataWithMultipleEntities$inboundSchema,
+  MetadataWithOneEntity$inboundSchema,
+]);
 
 /** @internal */
-export type Metadata$Outbound = {};
+export type Metadata$Outbound =
+  | MetadataWithMultipleEntities$Outbound
+  | MetadataWithOneEntity$Outbound;
 
 /** @internal */
 export const Metadata$outboundSchema: z.ZodType<
   Metadata$Outbound,
   z.ZodTypeDef,
   Metadata
-> = z.object({});
+> = z.union([
+  MetadataWithMultipleEntities$outboundSchema,
+  MetadataWithOneEntity$outboundSchema,
+]);
 
 /**
  * @internal
@@ -105,128 +101,19 @@ export function metadataFromJSON(
 }
 
 /** @internal */
-export const EntityErrorObjectMetadata$inboundSchema: z.ZodType<
-  EntityErrorObjectMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-/** @internal */
-export type EntityErrorObjectMetadata$Outbound = {};
-
-/** @internal */
-export const EntityErrorObjectMetadata$outboundSchema: z.ZodType<
-  EntityErrorObjectMetadata$Outbound,
-  z.ZodTypeDef,
-  EntityErrorObjectMetadata
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntityErrorObjectMetadata$ {
-  /** @deprecated use `EntityErrorObjectMetadata$inboundSchema` instead. */
-  export const inboundSchema = EntityErrorObjectMetadata$inboundSchema;
-  /** @deprecated use `EntityErrorObjectMetadata$outboundSchema` instead. */
-  export const outboundSchema = EntityErrorObjectMetadata$outboundSchema;
-  /** @deprecated use `EntityErrorObjectMetadata$Outbound` instead. */
-  export type Outbound = EntityErrorObjectMetadata$Outbound;
-}
-
-export function entityErrorObjectMetadataToJSON(
-  entityErrorObjectMetadata: EntityErrorObjectMetadata,
-): string {
-  return JSON.stringify(
-    EntityErrorObjectMetadata$outboundSchema.parse(entityErrorObjectMetadata),
-  );
-}
-
-export function entityErrorObjectMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<EntityErrorObjectMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EntityErrorObjectMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EntityErrorObjectMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
-  .object({
-    error_key: z.string().optional(),
-    category: z.string().optional(),
-    message: z.string().optional(),
-    metadata: z.lazy(() => EntityErrorObjectMetadata$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "error_key": "errorKey",
-    });
-  });
-
-/** @internal */
-export type Errors$Outbound = {
-  error_key?: string | undefined;
-  category?: string | undefined;
-  message?: string | undefined;
-  metadata?: EntityErrorObjectMetadata$Outbound | undefined;
-};
-
-/** @internal */
-export const Errors$outboundSchema: z.ZodType<
-  Errors$Outbound,
-  z.ZodTypeDef,
-  Errors
-> = z.object({
-  errorKey: z.string().optional(),
-  category: z.string().optional(),
-  message: z.string().optional(),
-  metadata: z.lazy(() => EntityErrorObjectMetadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    errorKey: "error_key",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Errors$ {
-  /** @deprecated use `Errors$inboundSchema` instead. */
-  export const inboundSchema = Errors$inboundSchema;
-  /** @deprecated use `Errors$outboundSchema` instead. */
-  export const outboundSchema = Errors$outboundSchema;
-  /** @deprecated use `Errors$Outbound` instead. */
-  export type Outbound = Errors$Outbound;
-}
-
-export function errorsToJSON(errors: Errors): string {
-  return JSON.stringify(Errors$outboundSchema.parse(errors));
-}
-
-export function errorsFromJSON(
-  jsonString: string,
-): SafeParseResult<Errors, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Errors' from JSON`,
-  );
-}
-
-/** @internal */
 export const EntityErrorObject$inboundSchema: z.ZodType<
   EntityErrorObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error_key: z.string().optional(),
-  category: z.string().optional(),
+  error_key: z.string(),
+  category: z.string(),
   message: z.string().optional(),
-  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
-  errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
+  metadata: z.union([
+    MetadataWithMultipleEntities$inboundSchema,
+    MetadataWithOneEntity$inboundSchema,
+  ]).optional(),
+  errors: z.array(z.lazy(() => EntityErrorObject$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "error_key": "errorKey",
@@ -235,11 +122,14 @@ export const EntityErrorObject$inboundSchema: z.ZodType<
 
 /** @internal */
 export type EntityErrorObject$Outbound = {
-  error_key?: string | undefined;
-  category?: string | undefined;
+  error_key: string;
+  category: string;
   message?: string | undefined;
-  metadata?: Metadata$Outbound | undefined;
-  errors?: Array<Errors$Outbound> | undefined;
+  metadata?:
+    | MetadataWithMultipleEntities$Outbound
+    | MetadataWithOneEntity$Outbound
+    | undefined;
+  errors?: Array<EntityErrorObject$Outbound> | undefined;
 };
 
 /** @internal */
@@ -248,11 +138,14 @@ export const EntityErrorObject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EntityErrorObject
 > = z.object({
-  errorKey: z.string().optional(),
-  category: z.string().optional(),
+  errorKey: z.string(),
+  category: z.string(),
   message: z.string().optional(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
-  errors: z.array(z.lazy(() => Errors$outboundSchema)).optional(),
+  metadata: z.union([
+    MetadataWithMultipleEntities$outboundSchema,
+    MetadataWithOneEntity$outboundSchema,
+  ]).optional(),
+  errors: z.array(z.lazy(() => EntityErrorObject$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     errorKey: "error_key",

@@ -8,7 +8,7 @@ The representation of an address in Gusto.
 import { Location } from "@gusto/embedded-api/models/components";
 
 let value: Location = {
-  uuid: "9fd52cbf-d817-4584-8dd5-96e2bf23bc79",
+  uuid: "fd52cbfd-8175-484d-9d59-6e2bf23bc793",
 };
 ```
 

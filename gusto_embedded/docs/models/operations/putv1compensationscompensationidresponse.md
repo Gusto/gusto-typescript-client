@@ -7,7 +7,7 @@ import { PutV1CompensationsCompensationIdResponse } from "@gusto/embedded-api/mo
 
 let value: PutV1CompensationsCompensationIdResponse = {
   contentType: "<value>",
-  statusCode: 101,
+  statusCode: 305,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

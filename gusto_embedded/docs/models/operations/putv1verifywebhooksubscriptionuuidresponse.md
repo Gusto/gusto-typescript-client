@@ -7,7 +7,7 @@ import { PutV1VerifyWebhookSubscriptionUuidResponse } from "@gusto/embedded-api/
 
 let value: PutV1VerifyWebhookSubscriptionUuidResponse = {
   contentType: "<value>",
-  statusCode: 501,
+  statusCode: 103,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

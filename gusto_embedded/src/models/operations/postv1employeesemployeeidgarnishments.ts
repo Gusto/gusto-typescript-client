@@ -75,7 +75,7 @@ export type PostV1EmployeesEmployeeIdGarnishmentsRequestBody = {
   /**
    * Additional child support order details
    */
-  childSupport?: components.GarnishmentChildSupportInput | null | undefined;
+  childSupport?: components.GarnishmentChildSupport | null | undefined;
 };
 
 export type PostV1EmployeesEmployeeIdGarnishmentsRequest = {
@@ -148,9 +148,8 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema:
     pay_period_maximum: z.nullable(z.string()).default(null),
     deduct_as_percentage: z.boolean().default(false),
     total_amount: z.string().optional(),
-    child_support: z.nullable(
-      components.GarnishmentChildSupportInput$inboundSchema,
-    ).optional(),
+    child_support: z.nullable(components.GarnishmentChildSupport$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "court_ordered": "courtOrdered",
@@ -177,7 +176,7 @@ export type PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound = {
   deduct_as_percentage: boolean;
   total_amount?: string | undefined;
   child_support?:
-    | components.GarnishmentChildSupportInput$Outbound
+    | components.GarnishmentChildSupport$Outbound
     | null
     | undefined;
 };
@@ -200,9 +199,8 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema:
     payPeriodMaximum: z.nullable(z.string()).default(null),
     deductAsPercentage: z.boolean().default(false),
     totalAmount: z.string().optional(),
-    childSupport: z.nullable(
-      components.GarnishmentChildSupportInput$outboundSchema,
-    ).optional(),
+    childSupport: z.nullable(components.GarnishmentChildSupport$outboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       courtOrdered: "court_ordered",

@@ -8,7 +8,7 @@ Accrual method of the time off policy
 import { PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod } from "@gusto/embedded-api/models/operations";
 
 let value: PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod =
-  "per_hour_paid";
+  "per_calendar_year";
 ```
 
 ## Values

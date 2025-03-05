@@ -7,7 +7,7 @@ import { GetWireInRequestsWireInRequestUuidResponse } from "@gusto/embedded-api/
 
 let value: GetWireInRequestsWireInRequestUuidResponse = {
   contentType: "<value>",
-  statusCode: 402,
+  statusCode: 103,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

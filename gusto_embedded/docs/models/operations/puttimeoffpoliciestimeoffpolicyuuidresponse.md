@@ -7,7 +7,7 @@ import { PutTimeOffPoliciesTimeOffPolicyUuidResponse } from "@gusto/embedded-api
 
 let value: PutTimeOffPoliciesTimeOffPolicyUuidResponse = {
   contentType: "<value>",
-  statusCode: 207,
+  statusCode: 421,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

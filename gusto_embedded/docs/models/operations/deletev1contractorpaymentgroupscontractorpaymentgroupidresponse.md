@@ -7,7 +7,7 @@ import { DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse } from 
 
 let value: DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse = {
   contentType: "<value>",
-  statusCode: 510,
+  statusCode: 508,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { GetV1CompanyFormPdfResponse } from "@gusto/embedded-api/models/operatio
 
 let value: GetV1CompanyFormPdfResponse = {
   contentType: "<value>",
-  statusCode: 501,
+  statusCode: 100,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse } from "@gusto
 
 let value: GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
   contentType: "<value>",
-  statusCode: 507,
+  statusCode: 451,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

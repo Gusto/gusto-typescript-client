@@ -7,7 +7,7 @@ import { PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse } from "@gusto/
 
 let value: PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse = {
   contentType: "<value>",
-  statusCode: 510,
+  statusCode: 511,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

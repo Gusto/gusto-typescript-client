@@ -7,7 +7,7 @@ import { GetV1ContractorFormPdfResponse } from "@gusto/embedded-api/models/opera
 
 let value: GetV1ContractorFormPdfResponse = {
   contentType: "<value>",
-  statusCode: 416,
+  statusCode: 303,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { GetV1GarnishmentsGarnishmentIdResponse } from "@gusto/embedded-api/mode
 
 let value: GetV1GarnishmentsGarnishmentIdResponse = {
   contentType: "<value>",
-  statusCode: 504,
+  statusCode: 201,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

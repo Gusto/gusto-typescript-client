@@ -7,7 +7,7 @@ import { PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse } from "@gusto/
 
 let value: PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse = {
   contentType: "<value>",
-  statusCode: 500,
+  statusCode: 100,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

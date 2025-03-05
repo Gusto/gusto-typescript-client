@@ -7,7 +7,7 @@ import { GetV1ContractorsContractorUuidAddressResponse } from "@gusto/embedded-a
 
 let value: GetV1ContractorsContractorUuidAddressResponse = {
   contentType: "<value>",
-  statusCode: 226,
+  statusCode: 510,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

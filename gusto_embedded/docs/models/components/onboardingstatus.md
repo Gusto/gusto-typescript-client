@@ -7,7 +7,7 @@ The current onboarding status of the employee
 ```typescript
 import { OnboardingStatus } from "@gusto/embedded-api/models/components";
 
-let value: OnboardingStatus = "onboarding_completed";
+let value: OnboardingStatus = "self_onboarding_awaiting_admin_review";
 ```
 
 ## Values

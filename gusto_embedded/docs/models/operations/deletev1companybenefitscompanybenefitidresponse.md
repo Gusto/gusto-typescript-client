@@ -7,7 +7,7 @@ import { DeleteV1CompanyBenefitsCompanyBenefitIdResponse } from "@gusto/embedded
 
 let value: DeleteV1CompanyBenefitsCompanyBenefitIdResponse = {
   contentType: "<value>",
-  statusCode: 510,
+  statusCode: 504,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

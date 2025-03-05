@@ -7,7 +7,7 @@ import { PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse } from "@gust
 
 let value: PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse = {
   contentType: "<value>",
-  statusCode: 306,
+  statusCode: 431,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { DeleteV1HomeAddressesHomeAddressUuidResponse } from "@gusto/embedded-ap
 
 let value: DeleteV1HomeAddressesHomeAddressUuidResponse = {
   contentType: "<value>",
-  statusCode: 203,
+  statusCode: 205,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

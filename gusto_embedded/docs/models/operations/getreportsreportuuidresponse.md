@@ -7,7 +7,7 @@ import { GetReportsReportUuidResponse } from "@gusto/embedded-api/models/operati
 
 let value: GetReportsReportUuidResponse = {
   contentType: "<value>",
-  statusCode: 207,
+  statusCode: 451,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

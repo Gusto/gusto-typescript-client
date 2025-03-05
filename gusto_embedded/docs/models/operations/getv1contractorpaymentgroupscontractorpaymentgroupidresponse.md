@@ -7,7 +7,7 @@ import { GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse } from "@g
 
 let value: GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse = {
   contentType: "<value>",
-  statusCode: 417,
+  statusCode: 451,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

@@ -7,7 +7,7 @@ import { GetV1WebhookSubscriptionUuidResponse } from "@gusto/embedded-api/models
 
 let value: GetV1WebhookSubscriptionUuidResponse = {
   contentType: "<value>",
-  statusCode: 100,
+  statusCode: 101,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

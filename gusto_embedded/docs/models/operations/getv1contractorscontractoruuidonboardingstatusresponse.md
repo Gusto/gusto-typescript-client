@@ -7,7 +7,7 @@ import { GetV1ContractorsContractorUuidOnboardingStatusResponse } from "@gusto/e
 
 let value: GetV1ContractorsContractorUuidOnboardingStatusResponse = {
   contentType: "<value>",
-  statusCode: 408,
+  statusCode: 200,
   rawResponse: new Response("{\"message\": \"hello world\"}", {
     headers: { "Content-Type": "application/json" },
   }),

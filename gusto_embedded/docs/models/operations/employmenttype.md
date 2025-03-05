@@ -7,7 +7,7 @@ Employee employment type to filter by
 ```typescript
 import { EmploymentType } from "@gusto/embedded-api/models/operations";
 
-let value: EmploymentType = "exempt";
+let value: EmploymentType = "salaried_nonexempt";
 ```
 
 ## Values
