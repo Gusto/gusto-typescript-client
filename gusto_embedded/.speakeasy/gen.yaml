@@ -46,9 +46,9 @@ typescript:
   jsonpath: legacy
   maxMethodParams: 0
   methodArguments: require-security-and-request
-  moduleFormat: commonjs
+  moduleFormat: esm
   outputModelSuffix: output
   packageName: '@gusto/embedded-api'
   responseFormat: envelope
   templateVersion: v2
-  useIndexModules: true
+  useIndexModules: false
