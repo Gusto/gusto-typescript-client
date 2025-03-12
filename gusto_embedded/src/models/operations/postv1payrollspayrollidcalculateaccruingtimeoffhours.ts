@@ -7,11 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
-  AccruingTimeOffHour,
-  AccruingTimeOffHour$inboundSchema,
-  AccruingTimeOffHour$Outbound,
-  AccruingTimeOffHour$outboundSchema,
-} from "../components/accruingtimeoffhour.js";
+  AccruingTimeOffHourObject,
+  AccruingTimeOffHourObject$inboundSchema,
+  AccruingTimeOffHourObject$Outbound,
+  AccruingTimeOffHourObject$outboundSchema,
+} from "../components/accruingtimeoffhourobject.js";
 import {
   VersionHeader,
   VersionHeader$inboundSchema,
@@ -74,7 +74,7 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse = {
   /**
    * Example response
    */
-  accruingTimeOffHourObject?: Array<AccruingTimeOffHour> | undefined;
+  accruingTimeOffHourObject?: AccruingTimeOffHourObject | undefined;
 };
 
 /** @internal */
@@ -277,7 +277,7 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboun
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    "Accruing-Time-Off-Hour-Object": z.array(AccruingTimeOffHour$inboundSchema)
+    "Accruing-Time-Off-Hour-Object": AccruingTimeOffHourObject$inboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -295,7 +295,7 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$Outboun
     StatusCode: number;
     RawResponse: never;
     "Accruing-Time-Off-Hour-Object"?:
-      | Array<AccruingTimeOffHour$Outbound>
+      | AccruingTimeOffHourObject$Outbound
       | undefined;
   };
 
@@ -311,7 +311,7 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$outbou
     rawResponse: z.instanceof(Response).transform(() => {
       throw new Error("Response cannot be serialized");
     }),
-    accruingTimeOffHourObject: z.array(AccruingTimeOffHour$outboundSchema)
+    accruingTimeOffHourObject: AccruingTimeOffHourObject$outboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {
