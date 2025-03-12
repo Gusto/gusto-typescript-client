@@ -2,10 +2,9 @@
 
 import * as z from "zod";
 import { stringToBase64 } from "../lib/base64.js";
-import { env } from "../lib/env.js";
 import { HTTPClient } from "../lib/http.js";
 import { parse } from "../lib/schemas.js";
-import * as components from "../models/components/index.js";
+import { PostV1PartnerManagedCompaniesSecurity$outboundSchema } from "../models/operations/postv1partnermanagedcompanies.js";
 import {
   AfterErrorContext,
   AfterErrorHook,
@@ -167,17 +166,16 @@ export class ClientCredentialsHook
     }
     const out = parse(
       security,
-      (val) => z.lazy(() => components.Security$outboundSchema).parse(val),
+      (val) =>
+        z
+          .lazy(() => PostV1PartnerManagedCompaniesSecurity$outboundSchema)
+          .parse(val),
       "unexpected security type"
     );
 
     return {
-      clientID:
-        out?.SystemAccessAuth?.clientId ?? env().GUSTOEMBEDDED_CLIENT_ID ?? "",
-      clientSecret:
-        out?.SystemAccessAuth?.clientSecret ??
-        env().GUSTOEMBEDDED_CLIENT_SECRET ??
-        "",
+      clientID: out.clientId ?? "",
+      clientSecret: out.clientSecret ?? "",
     };
   }
 
