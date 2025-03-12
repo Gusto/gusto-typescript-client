@@ -9,9 +9,9 @@ import { ClosedEnum } from "../../types/enums.js";
  * Gusto Embedded supports three payment speeds (1-day, 2-day, and 4-day). For next-day payments, funds are deposited in your team's bank account by the end of the next business day. Most people will see the funds arrive the next afternoon, but payments may arrive as late as the end of the business day.
  */
 export const PaymentSpeedParam = {
-  OneDay: "1-day",
-  TwoDay: "2-day",
-  FourDay: "4-day",
+  OneMinusDay: "1-day",
+  TwoMinusDay: "2-day",
+  FourMinusDay: "4-day",
 } as const;
 /**
  * Gusto Embedded supports three payment speeds (1-day, 2-day, and 4-day). For next-day payments, funds are deposited in your team's bank account by the end of the next business day. Most people will see the funds arrive the next afternoon, but payments may arrive as late as the end of the business day.
