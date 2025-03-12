@@ -10,8 +10,17 @@ sources:
             - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
               authHeader: Authorization
               authSecret: $openapi_doc_auth_token
+            - location: gusto_embedded/.speakeasy/speakeasy-modifications-overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+    GustoEmbedded-local:
+        inputs:
+            - location: ../Gusto-Partner-API/generated/embedded/api.v2024-04-01.embedded.yaml
+        overlays:
+            - location: ../Gusto-Partner-API/.speakeasy/speakeasy-modifications-overlay.yaml
+            - location: gusto_embedded/.speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-local
 targets:
     gusto-embedded:
         target: typescript
