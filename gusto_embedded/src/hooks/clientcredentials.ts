@@ -75,8 +75,6 @@ export class ClientCredentialsHook
     response: Response | null,
     error: unknown
   ): Promise<{ response: Response | null; error: unknown }> {
-    // TODO I wonder if this only works if we don't define a 401 error on each
-    // request
     if (error) {
       return { response, error };
     }
