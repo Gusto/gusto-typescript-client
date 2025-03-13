@@ -13,6 +13,12 @@ import {
   CompanyAttachment$outboundSchema,
 } from "../components/companyattachment.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -31,18 +37,7 @@ export type GetV1CompaniesAttachmentsRequest = {
 };
 
 export type GetV1CompaniesAttachmentsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -124,25 +119,19 @@ export const GetV1CompaniesAttachmentsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   "Company-Attachment-List": z.array(CompanyAttachment$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Company-Attachment-List": "companyAttachmentList",
   });
 });
 
 /** @internal */
 export type GetV1CompaniesAttachmentsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Company-Attachment-List"?: Array<CompanyAttachment$Outbound> | undefined;
 };
 
@@ -152,17 +141,11 @@ export const GetV1CompaniesAttachmentsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompaniesAttachmentsResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   companyAttachmentList: z.array(CompanyAttachment$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     companyAttachmentList: "Company-Attachment-List",
   });
 });

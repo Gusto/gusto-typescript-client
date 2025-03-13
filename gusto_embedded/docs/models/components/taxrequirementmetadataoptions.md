@@ -7,7 +7,7 @@ import { TaxRequirementMetadataOptions } from "@gusto/embedded-api/models/compon
 
 let value: TaxRequirementMetadataOptions = {
   label: "<value>",
-  value: false,
+  value: "<value>",
 };
 ```
 

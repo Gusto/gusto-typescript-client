@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   PayScheduleCreateUpdate,
   PayScheduleCreateUpdate$inboundSchema,
   PayScheduleCreateUpdate$Outbound,
@@ -74,18 +80,7 @@ export type PostV1CompaniesCompanyIdPaySchedulesRequest = {
 };
 
 export type PostV1CompaniesCompanyIdPaySchedulesResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -306,25 +301,19 @@ export const PostV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Pay-Schedule-Create-Update": PayScheduleCreateUpdate$inboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Pay-Schedule-Create-Update": "payScheduleCreateUpdate",
     });
   });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPaySchedulesResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Pay-Schedule-Create-Update"?: PayScheduleCreateUpdate$Outbound | undefined;
 };
 
@@ -335,17 +324,11 @@ export const PostV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdPaySchedulesResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     payScheduleCreateUpdate: PayScheduleCreateUpdate$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       payScheduleCreateUpdate: "Pay-Schedule-Create-Update",
     });
   });

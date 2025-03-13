@@ -13,6 +13,12 @@ import {
   EmployeeBenefit$outboundSchema,
 } from "../components/employeebenefit.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -31,18 +37,7 @@ export type GetV1EmployeeBenefitsEmployeeBenefitIdRequest = {
 };
 
 export type GetV1EmployeeBenefitsEmployeeBenefitIdResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -136,24 +131,18 @@ export const GetV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Employee-Benefit": EmployeeBenefit$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Employee-Benefit": "employeeBenefit",
     });
   });
 
 /** @internal */
 export type GetV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Employee-Benefit"?: EmployeeBenefit$Outbound | undefined;
 };
 
@@ -164,17 +153,11 @@ export const GetV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeeBenefitsEmployeeBenefitIdResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     employeeBenefit: EmployeeBenefit$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       employeeBenefit: "Employee-Benefit",
     });
   });

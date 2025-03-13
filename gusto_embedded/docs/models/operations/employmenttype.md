@@ -7,7 +7,7 @@ Employee employment type to filter by
 ```typescript
 import { EmploymentType } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
 
-let value: EmploymentType = "salaried_nonexempt";
+let value: EmploymentType = "commission_only_exempt";
 ```
 
 ## Values

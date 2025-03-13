@@ -3,10 +3,10 @@ id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
   docChecksum: faf71a2fd549ee108515b43e930d0e1c
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.517.0
-  generationVersion: 2.548.1
-  releaseVersion: 0.5.1
-  configChecksum: 3f6b88cc6fded3c9d24bbce7dbc10803
+  speakeasyVersion: 1.517.3
+  generationVersion: 2.548.6
+  releaseVersion: 0.5.2
+  configChecksum: 6bc5d774ad51224e239b3058022d8ac6
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -231,6 +231,7 @@ generatedFiles:
   - docs/models/components/homeaddress.md
   - docs/models/components/hourly.md
   - docs/models/components/hourlycompensations.md
+  - docs/models/components/httpmetadata.md
   - docs/models/components/i9authorization.md
   - docs/models/components/i9authorizationdocument.md
   - docs/models/components/i9authorizationdocumentoption.md
@@ -1545,6 +1546,7 @@ generatedFiles:
   - src/models/components/grossuppay.ts
   - src/models/components/historicalemployeebody.ts
   - src/models/components/holidaypaypolicy.ts
+  - src/models/components/httpmetadata.ts
   - src/models/components/i9authorization.ts
   - src/models/components/i9authorizationdocument.ts
   - src/models/components/i9authorizationdocumentoption.ts
@@ -6522,7 +6524,7 @@ examples:
         application/json: {"payroll_type": "Regular", "start_date": "2023-05-26T00:00:00Z", "end_date": "2023-06-25T00:00:00Z", "pay_schedule_uuid": "85100524-4b42-4d2d-bd62-9d864f9aea64"}
       responses:
         "422":
-          application/json: {}
+          application/json: {"": {}}
   post-payrolls-gross-up-payroll_uuid:
     Example:
       parameters:
@@ -6534,7 +6536,7 @@ examples:
         application/json: {"employee_uuid": "be48c41e-142d-4116-9430-5aba2313fac7", "net_pay": "1000.00"}
       responses:
         "422":
-          application/json: {}
+          application/json: {"": {}}
         "200": {}
   put-v1-companies-company_id-payrolls-payroll_id-calculate:
     Example:
@@ -6546,7 +6548,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "422":
-          application/json: {}
+          application/json: {"": {}}
   put-v1-companies-company_id-payrolls-payroll_id-submit:
     Example:
       parameters:
@@ -6559,7 +6561,7 @@ examples:
         application/json: {}
       responses:
         "422":
-          application/json: {}
+          application/json: {"": {}}
   put-api-v1-companies-company_id-payrolls-payroll_id-cancel:
     Unprocessed:
       parameters:
@@ -7702,7 +7704,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "422":
-          application/json: {"errors": {"base": [{"type": "error type", "message": "This is an error message", "full_message": "This is a more descriptive error message"}]}}
+          application/json: {"errors": {"base": [{"type": "error type", "message": "This is an error message", "full_message": "This is a more descriptive error message"}]}, "": {}}
   get-v1-benefits:
     Supported Benefits:
       parameters:

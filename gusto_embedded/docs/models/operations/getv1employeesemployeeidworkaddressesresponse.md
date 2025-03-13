@@ -6,11 +6,12 @@
 import { GetV1EmployeesEmployeeIdWorkAddressesResponse } from "@gusto/embedded-api/models/operations/getv1employeesemployeeidworkaddresses.js";
 
 let value: GetV1EmployeesEmployeeIdWorkAddressesResponse = {
-  contentType: "<value>",
-  statusCode: 508,
-  rawResponse: new Response("{\"message\": \"hello world\"}", {
-    headers: { "Content-Type": "application/json" },
-  }),
+  httpMeta: {
+    response: new Response("{\"message\": \"hello world\"}", {
+      headers: { "Content-Type": "application/json" },
+    }),
+    request: new Request("https://example.com"),
+  },
   employeeWorkAddressList: [
     {
       uuid: "34925ef7-6234-440d-83b8-788a24d0d69a",
@@ -33,7 +34,5 @@ let value: GetV1EmployeesEmployeeIdWorkAddressesResponse = {
 
 | Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `contentType`                                                                      | *string*                                                                           | :heavy_check_mark:                                                                 | HTTP response content type for this operation                                      |
-| `statusCode`                                                                       | *number*                                                                           | :heavy_check_mark:                                                                 | HTTP response status code for this operation                                       |
-| `rawResponse`                                                                      | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)              | :heavy_check_mark:                                                                 | Raw HTTP response; suitable for custom response parsing                            |
+| `httpMeta`                                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md)                 | :heavy_check_mark:                                                                 | N/A                                                                                |
 | `employeeWorkAddressList`                                                          | [components.EmployeeWorkAddress](../../models/components/employeeworkaddress.md)[] | :heavy_minus_sign:                                                                 | List of employee work addresses                                                    |

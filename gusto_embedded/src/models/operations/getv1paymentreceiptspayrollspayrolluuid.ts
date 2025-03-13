@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   PayrollReceipt,
   PayrollReceipt$inboundSchema,
   PayrollReceipt$Outbound,
@@ -31,18 +37,7 @@ export type GetV1PaymentReceiptsPayrollsPayrollUuidRequest = {
 };
 
 export type GetV1PaymentReceiptsPayrollsPayrollUuidResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -137,24 +132,18 @@ export const GetV1PaymentReceiptsPayrollsPayrollUuidResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Payroll-Receipt": PayrollReceipt$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Payroll-Receipt": "payrollReceipt",
     });
   });
 
 /** @internal */
 export type GetV1PaymentReceiptsPayrollsPayrollUuidResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Payroll-Receipt"?: PayrollReceipt$Outbound | undefined;
 };
 
@@ -165,17 +154,11 @@ export const GetV1PaymentReceiptsPayrollsPayrollUuidResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1PaymentReceiptsPayrollsPayrollUuidResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     payrollReceipt: PayrollReceipt$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       payrollReceipt: "Payroll-Receipt",
     });
   });

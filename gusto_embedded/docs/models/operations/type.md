@@ -7,7 +7,7 @@ The payment method type. If type is Check, then split_by and splits do not need 
 ```typescript
 import { Type } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidpaymentmethod.js";
 
-let value: Type = "Direct Deposit";
+let value: Type = "Check";
 ```
 
 ## Values

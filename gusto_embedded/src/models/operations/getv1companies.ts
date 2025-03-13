@@ -13,6 +13,12 @@ import {
   Company$outboundSchema,
 } from "../components/company.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -31,18 +37,7 @@ export type GetV1CompaniesRequest = {
 };
 
 export type GetV1CompaniesResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -122,24 +117,18 @@ export const GetV1CompaniesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   Company: Company$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Company": "company",
   });
 });
 
 /** @internal */
 export type GetV1CompaniesResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   Company?: Company$Outbound | undefined;
 };
 
@@ -149,17 +138,11 @@ export const GetV1CompaniesResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1CompaniesResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   company: Company$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     company: "Company",
   });
 });

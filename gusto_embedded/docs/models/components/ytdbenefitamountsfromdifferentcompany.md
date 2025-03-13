@@ -8,8 +8,8 @@ Ytd Benefit Amounts From Different Company
 import { YtdBenefitAmountsFromDifferentCompany } from "@gusto/embedded-api/models/components/ytdbenefitamountsfromdifferentcompany.js";
 
 let value: YtdBenefitAmountsFromDifferentCompany = {
-  uuid: "95277f04-dada-4c73-bc92-cf541af2710a",
-  benefitType: 337570,
+  uuid: "4cba3df8-a844-453e-bd75-f38039a9dfc7",
+  benefitType: 120387,
   ytdEmployeeDeductionAmount: "<value>",
   ytdCompanyContributionAmount: "<value>",
 };

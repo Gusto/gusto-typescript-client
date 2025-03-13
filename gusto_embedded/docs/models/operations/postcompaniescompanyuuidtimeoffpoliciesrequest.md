@@ -10,7 +10,7 @@ let value: PostCompaniesCompanyUuidTimeOffPoliciesRequest = {
   requestBody: {
     name: "<value>",
     policyType: "<value>",
-    accrualMethod: "per_hour_worked",
+    accrualMethod: "per_hour_paid_no_overtime",
   },
 };
 ```

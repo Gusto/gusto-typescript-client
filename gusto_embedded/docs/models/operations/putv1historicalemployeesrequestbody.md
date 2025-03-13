@@ -9,16 +9,16 @@ import { PutV1HistoricalEmployeesRequestBody } from "@gusto/embedded-api/models/
 
 let value: PutV1HistoricalEmployeesRequestBody = {
   version: "<value>",
-  firstName: "Vincenza",
-  lastName: "Gerhold",
-  dateOfBirth: "1999-03-24",
+  firstName: "Lauryn",
+  lastName: "Wolf",
+  dateOfBirth: "2002-12-13",
   ssn: "<value>",
   workAddress: {},
   homeAddress: {
     street1: "<value>",
-    city: "Stantonberg",
-    state: "Nebraska",
-    zip: "34439",
+    city: "East Demarco",
+    state: "Missouri",
+    zip: "64387",
   },
   termination: {},
   job: {},

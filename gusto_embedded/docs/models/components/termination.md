@@ -8,7 +8,7 @@ The representation of a termination in Gusto.
 import { Termination } from "@gusto/embedded-api/models/components/termination.js";
 
 let value: Termination = {
-  uuid: "6e65fa51-cbe3-41b3-b25d-807a893d8bf6",
+  uuid: "c46ed930-6add-4035-b3cc-8f2e12b196be",
 };
 ```
 

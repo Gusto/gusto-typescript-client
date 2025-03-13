@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   TaxLiabilitiesSelections,
   TaxLiabilitiesSelections$inboundSchema,
   TaxLiabilitiesSelections$Outbound,
@@ -51,18 +57,7 @@ export type PutV1TaxLiabilitiesRequest = {
 };
 
 export type PutV1TaxLiabilitiesResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -285,26 +280,20 @@ export const PutV1TaxLiabilitiesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   "Tax-Liabilities-List": z.array(
     z.array(TaxLiabilitiesSelections$inboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Tax-Liabilities-List": "taxLiabilitiesList",
   });
 });
 
 /** @internal */
 export type PutV1TaxLiabilitiesResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Tax-Liabilities-List"?:
     | Array<Array<TaxLiabilitiesSelections$Outbound>>
     | undefined;
@@ -316,18 +305,12 @@ export const PutV1TaxLiabilitiesResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1TaxLiabilitiesResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   taxLiabilitiesList: z.array(z.array(TaxLiabilitiesSelections$outboundSchema))
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     taxLiabilitiesList: "Tax-Liabilities-List",
   });
 });

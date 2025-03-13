@@ -6,6 +6,12 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
 export type Metadata = {
@@ -40,10 +46,7 @@ export type Errors = {
  */
 export type PayrollBlockersErrorData = {
   errors?: Array<Errors> | undefined;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse?: Response | undefined;
+  httpMeta: HTTPMetadata;
 };
 
 /**
@@ -55,10 +58,7 @@ export type PayrollBlockersErrorData = {
  */
 export class PayrollBlockersError extends Error {
   errors?: Array<Errors> | undefined;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse?: Response | undefined;
+  httpMeta: HTTPMetadata;
 
   /** The original data that was passed to this error instance. */
   data$: PayrollBlockersErrorData;
@@ -71,7 +71,7 @@ export class PayrollBlockersError extends Error {
     this.data$ = err;
 
     if (err.errors != null) this.errors = err.errors;
-    if (err.rawResponse != null) this.rawResponse = err.rawResponse;
+    this.httpMeta = err.httpMeta;
 
     this.name = "PayrollBlockersError";
   }
@@ -198,11 +198,11 @@ export const PayrollBlockersError$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
-  RawResponse: z.instanceof(Response).optional(),
+  HttpMeta: HTTPMetadata$inboundSchema,
 })
   .transform((v) => {
     const remapped = remap$(v, {
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
     });
 
     return new PayrollBlockersError(remapped);
@@ -211,7 +211,7 @@ export const PayrollBlockersError$inboundSchema: z.ZodType<
 /** @internal */
 export type PayrollBlockersError$Outbound = {
   errors?: Array<Errors$Outbound> | undefined;
-  RawResponse?: never | undefined;
+  HttpMeta: HTTPMetadata$Outbound;
 };
 
 /** @internal */
@@ -224,12 +224,10 @@ export const PayrollBlockersError$outboundSchema: z.ZodType<
   .pipe(
     z.object({
       errors: z.array(z.lazy(() => Errors$outboundSchema)).optional(),
-      rawResponse: z.instanceof(Response).transform(() => {
-        throw new Error("Response cannot be serialized");
-      }).optional(),
+      httpMeta: HTTPMetadata$outboundSchema,
     }).transform((v) => {
       return remap$(v, {
-        rawResponse: "RawResponse",
+        httpMeta: "HttpMeta",
       });
     }),
   );

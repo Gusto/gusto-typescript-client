@@ -14,6 +14,12 @@ import {
   Contractor$outboundSchema,
 } from "../components/contractor.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -162,18 +168,7 @@ export type PutV1ContractorsContractorUuidRequest = {
 };
 
 export type PutV1ContractorsContractorUuidResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -454,24 +449,18 @@ export const PutV1ContractorsContractorUuidResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   Contractor: Contractor$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Contractor": "contractor",
   });
 });
 
 /** @internal */
 export type PutV1ContractorsContractorUuidResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   Contractor?: Contractor$Outbound | undefined;
 };
 
@@ -481,17 +470,11 @@ export const PutV1ContractorsContractorUuidResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1ContractorsContractorUuidResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   contractor: Contractor$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     contractor: "Contractor",
   });
 });

@@ -8,9 +8,9 @@ Information for the user who will be the primary payroll administrator for the n
 import { User } from "@gusto/embedded-api/models/operations/postv1partnermanagedcompanies.js";
 
 let value: User = {
-  firstName: "Hildegard",
-  lastName: "Gusikowski",
-  email: "Landen43@yahoo.com",
+  firstName: "Elisha",
+  lastName: "Greenfelder",
+  email: "Hildegard_Gusikowski@yahoo.com",
 };
 ```
 

@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   UnprocessedTerminationPayPeriod,
   UnprocessedTerminationPayPeriod$inboundSchema,
   UnprocessedTerminationPayPeriod$Outbound,
@@ -31,18 +37,7 @@ export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest = {
 };
 
 export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -138,17 +133,13 @@ export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inb
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Unprocessed-Termination-Pay-Period-List": z.array(
       UnprocessedTerminationPayPeriod$inboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Unprocessed-Termination-Pay-Period-List":
         "unprocessedTerminationPayPeriodList",
     });
@@ -157,9 +148,7 @@ export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inb
 /** @internal */
 export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound =
   {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
+    HttpMeta: HTTPMetadata$Outbound;
     "Unprocessed-Termination-Pay-Period-List"?:
       | Array<UnprocessedTerminationPayPeriod$Outbound>
       | undefined;
@@ -172,19 +161,13 @@ export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$out
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     unprocessedTerminationPayPeriodList: z.array(
       UnprocessedTerminationPayPeriod$outboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       unprocessedTerminationPayPeriodList:
         "Unprocessed-Termination-Pay-Period-List",
     });

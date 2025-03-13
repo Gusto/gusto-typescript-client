@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   MinimumWage,
   MinimumWage$inboundSchema,
   MinimumWage$Outbound,
@@ -32,18 +38,7 @@ export type GetV1LocationsLocationUuidMinimumWagesRequest = {
 };
 
 export type GetV1LocationsLocationUuidMinimumWagesResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -142,24 +137,18 @@ export const GetV1LocationsLocationUuidMinimumWagesResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Minimum-Wage-List": z.array(MinimumWage$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Minimum-Wage-List": "minimumWageList",
     });
   });
 
 /** @internal */
 export type GetV1LocationsLocationUuidMinimumWagesResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Minimum-Wage-List"?: Array<MinimumWage$Outbound> | undefined;
 };
 
@@ -170,17 +159,11 @@ export const GetV1LocationsLocationUuidMinimumWagesResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1LocationsLocationUuidMinimumWagesResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     minimumWageList: z.array(MinimumWage$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       minimumWageList: "Minimum-Wage-List",
     });
   });

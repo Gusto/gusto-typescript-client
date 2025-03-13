@@ -5,7 +5,7 @@
 ```typescript
 import { PutV1EmployeesEmployeeIdBankAccountsAccountType } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidbankaccounts.js";
 
-let value: PutV1EmployeesEmployeeIdBankAccountsAccountType = "Checking";
+let value: PutV1EmployeesEmployeeIdBankAccountsAccountType = "Savings";
 ```
 
 ## Values

@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -35,18 +41,7 @@ export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
 };
 
 export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * List of Ytd Benefit Amounts From Different Company List
    */
@@ -146,17 +141,13 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSch
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Ytd-Benefit-Amounts-From-Different-Company-List": z.array(
       YtdBenefitAmountsFromDifferentCompany$inboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Ytd-Benefit-Amounts-From-Different-Company-List":
         "ytdBenefitAmountsFromDifferentCompanyList",
     });
@@ -165,9 +156,7 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSch
 /** @internal */
 export type GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound =
   {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
+    HttpMeta: HTTPMetadata$Outbound;
     "Ytd-Benefit-Amounts-From-Different-Company-List"?:
       | Array<YtdBenefitAmountsFromDifferentCompany$Outbound>
       | undefined;
@@ -180,19 +169,13 @@ export const GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSc
     z.ZodTypeDef,
     GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     ytdBenefitAmountsFromDifferentCompanyList: z.array(
       YtdBenefitAmountsFromDifferentCompany$outboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       ytdBenefitAmountsFromDifferentCompanyList:
         "Ytd-Benefit-Amounts-From-Different-Company-List",
     });

@@ -13,6 +13,12 @@ import {
   Department$outboundSchema,
 } from "../components/department.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -40,18 +46,7 @@ export type PutDepartmentsRequest = {
 };
 
 export type PutDepartmentsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Department Object Example
    */
@@ -193,24 +188,18 @@ export const PutDepartmentsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   Department: Department$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Department": "department",
   });
 });
 
 /** @internal */
 export type PutDepartmentsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   Department?: Department$Outbound | undefined;
 };
 
@@ -220,17 +209,11 @@ export const PutDepartmentsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutDepartmentsResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   department: Department$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     department: "Department",
   });
 });

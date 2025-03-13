@@ -6,14 +6,15 @@
 import { GetV1CompaniesCompanyUuidContractorsResponse } from "@gusto/embedded-api/models/operations/getv1companiescompanyuuidcontractors.js";
 
 let value: GetV1CompaniesCompanyUuidContractorsResponse = {
-  contentType: "<value>",
-  statusCode: 103,
-  rawResponse: new Response("{\"message\": \"hello world\"}", {
-    headers: { "Content-Type": "application/json" },
-  }),
+  httpMeta: {
+    response: new Response("{\"message\": \"hello world\"}", {
+      headers: { "Content-Type": "application/json" },
+    }),
+    request: new Request("https://example.com"),
+  },
   contractorList: [
     {
-      uuid: "0f984e4d-fc81-4773-b652-7480ed8df1af",
+      uuid: "1d955c5a-87e8-4db0-ac3e-0517d425d231",
       hourlyRate: "50.0",
     },
   ],
@@ -22,9 +23,7 @@ let value: GetV1CompaniesCompanyUuidContractorsResponse = {
 
 ## Fields
 
-| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `contentType`                                                         | *string*                                                              | :heavy_check_mark:                                                    | HTTP response content type for this operation                         |
-| `statusCode`                                                          | *number*                                                              | :heavy_check_mark:                                                    | HTTP response status code for this operation                          |
-| `rawResponse`                                                         | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) | :heavy_check_mark:                                                    | Raw HTTP response; suitable for custom response parsing               |
-| `contractorList`                                                      | [components.Contractor](../../models/components/contractor.md)[]      | :heavy_minus_sign:                                                    | Example response                                                      |
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |
+| `contractorList`                                                   | [components.Contractor](../../models/components/contractor.md)[]   | :heavy_minus_sign:                                                 | Example response                                                   |

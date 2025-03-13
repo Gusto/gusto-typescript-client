@@ -8,11 +8,11 @@ import { PostV1CompaniesCompanyIdLocationsRequest } from "@gusto/embedded-api/mo
 let value: PostV1CompaniesCompanyIdLocationsRequest = {
   companyId: "<id>",
   requestBody: {
-    phoneNumber: "542-633-5739 x802",
+    phoneNumber: "237.767.2368 x520",
     street1: "<value>",
-    city: "Bellabury",
-    state: "Pennsylvania",
-    zip: "67236-8520",
+    city: "Adamsbury",
+    state: "Nebraska",
+    zip: "04036-2215",
   },
 };
 ```

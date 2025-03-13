@@ -13,6 +13,12 @@ import {
   EmployeeAddress$outboundSchema,
 } from "../components/employeeaddress.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -31,18 +37,7 @@ export type GetV1HomeAddressesHomeAddressUuidRequest = {
 };
 
 export type GetV1HomeAddressesHomeAddressUuidResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -133,24 +128,18 @@ export const GetV1HomeAddressesHomeAddressUuidResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   "Employee-Address": EmployeeAddress$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Employee-Address": "employeeAddress",
   });
 });
 
 /** @internal */
 export type GetV1HomeAddressesHomeAddressUuidResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Employee-Address"?: EmployeeAddress$Outbound | undefined;
 };
 
@@ -161,17 +150,11 @@ export const GetV1HomeAddressesHomeAddressUuidResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1HomeAddressesHomeAddressUuidResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     employeeAddress: EmployeeAddress$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       employeeAddress: "Employee-Address",
     });
   });

@@ -7,7 +7,7 @@ the type of target entity applicable to the flow. This field is optional for com
 ```typescript
 import { EntityType } from "@gusto/embedded-api/models/operations/postv1companyflows.js";
 
-let value: EntityType = "Employee";
+let value: EntityType = "Company";
 ```
 
 ## Values

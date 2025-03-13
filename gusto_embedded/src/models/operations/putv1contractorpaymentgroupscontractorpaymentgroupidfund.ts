@@ -13,6 +13,12 @@ import {
   ContractorPaymentGroup$outboundSchema,
 } from "../components/contractorpaymentgroup.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -31,18 +37,7 @@ export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest = {
 };
 
 export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Full contractor payment group object
    */
@@ -136,15 +131,11 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$in
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Contractor-Payment-Group": ContractorPaymentGroup$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Contractor-Payment-Group": "contractorPaymentGroup",
     });
   });
@@ -152,9 +143,7 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$in
 /** @internal */
 export type PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$Outbound =
   {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
+    HttpMeta: HTTPMetadata$Outbound;
     "Contractor-Payment-Group"?: ContractorPaymentGroup$Outbound | undefined;
   };
 
@@ -165,17 +154,11 @@ export const PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$ou
     z.ZodTypeDef,
     PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     contractorPaymentGroup: ContractorPaymentGroup$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       contractorPaymentGroup: "Contractor-Payment-Group",
     });
   });

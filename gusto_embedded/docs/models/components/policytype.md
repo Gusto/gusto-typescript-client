@@ -7,7 +7,7 @@ Type of the time off policy
 ```typescript
 import { PolicyType } from "@gusto/embedded-api/models/components/timeoffpolicy.js";
 
-let value: PolicyType = "sick";
+let value: PolicyType = "vacation";
 ```
 
 ## Values

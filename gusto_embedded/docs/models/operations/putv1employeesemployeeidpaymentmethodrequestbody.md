@@ -7,7 +7,7 @@ import { PutV1EmployeesEmployeeIdPaymentMethodRequestBody } from "@gusto/embedde
 
 let value: PutV1EmployeesEmployeeIdPaymentMethodRequestBody = {
   version: "<value>",
-  type: "Direct Deposit",
+  type: "Check",
 };
 ```
 

@@ -14,6 +14,12 @@ import {
   Compensation$outboundSchema,
 } from "../components/compensation.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -66,18 +72,7 @@ export type GetV1JobsJobIdCompensationsRequest = {
 };
 
 export type GetV1JobsJobIdCompensationsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -195,24 +190,18 @@ export const GetV1JobsJobIdCompensationsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   "Compensation-List": z.array(Compensation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Compensation-List": "compensationList",
   });
 });
 
 /** @internal */
 export type GetV1JobsJobIdCompensationsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Compensation-List"?: Array<Compensation$Outbound> | undefined;
 };
 
@@ -222,17 +211,11 @@ export const GetV1JobsJobIdCompensationsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1JobsJobIdCompensationsResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   compensationList: z.array(Compensation$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     compensationList: "Compensation-List",
   });
 });

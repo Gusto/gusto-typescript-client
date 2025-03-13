@@ -6,15 +6,16 @@
 import { PutV1EmployeesResponse } from "@gusto/embedded-api/models/operations/putv1employees.js";
 
 let value: PutV1EmployeesResponse = {
-  contentType: "<value>",
-  statusCode: 208,
-  rawResponse: new Response("{\"message\": \"hello world\"}", {
-    headers: { "Content-Type": "application/json" },
-  }),
+  httpMeta: {
+    response: new Response("{\"message\": \"hello world\"}", {
+      headers: { "Content-Type": "application/json" },
+    }),
+    request: new Request("https://example.com"),
+  },
   employee: {
-    uuid: "bf5ec594-d132-46b8-9706-13e3dc291bac",
-    firstName: "Taya",
-    lastName: "Greenholt",
+    uuid: "1ebf848e-84e5-4035-9d77-5eff6fca332e",
+    firstName: "Jace",
+    lastName: "Satterfield",
     eligiblePaidTimeOff: [
       {
         accrualUnit: "Hour",
@@ -28,9 +29,7 @@ let value: PutV1EmployeesResponse = {
 
 ## Fields
 
-| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `contentType`                                                         | *string*                                                              | :heavy_check_mark:                                                    | HTTP response content type for this operation                         |
-| `statusCode`                                                          | *number*                                                              | :heavy_check_mark:                                                    | HTTP response status code for this operation                          |
-| `rawResponse`                                                         | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) | :heavy_check_mark:                                                    | Raw HTTP response; suitable for custom response parsing               |
-| `employee`                                                            | [components.Employee](../../models/components/employee.md)            | :heavy_minus_sign:                                                    | Example response                                                      |
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |
+| `employee`                                                         | [components.Employee](../../models/components/employee.md)         | :heavy_minus_sign:                                                 | Example response                                                   |

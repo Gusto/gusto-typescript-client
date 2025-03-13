@@ -7,8 +7,8 @@ import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody }
 
 let value:
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody = {
-    email: "Katrine.Willms24@gmail.com",
-    ipAddress: "237.171.200.72",
+    email: "Eugenia_Feeney-Wiegand@hotmail.com",
+    ipAddress: "6cd0:73fa:ae83:c4b4:2cff:db71:8521:f0a3",
     externalUserId: "<id>",
   };
 ```

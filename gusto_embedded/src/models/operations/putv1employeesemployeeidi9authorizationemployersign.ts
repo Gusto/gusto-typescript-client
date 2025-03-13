@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   I9Authorization,
   I9Authorization$inboundSchema,
   I9Authorization$Outbound,
@@ -63,18 +69,7 @@ export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest = {
 };
 
 export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -281,15 +276,11 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$inbound
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "I9-Authorization": I9Authorization$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "I9-Authorization": "i9Authorization",
     });
   });
@@ -297,9 +288,7 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$inbound
 /** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$Outbound =
   {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
+    HttpMeta: HTTPMetadata$Outbound;
     "I9-Authorization"?: I9Authorization$Outbound | undefined;
   };
 
@@ -310,17 +299,11 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$outboun
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     i9Authorization: I9Authorization$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       i9Authorization: "I9-Authorization",
     });
   });

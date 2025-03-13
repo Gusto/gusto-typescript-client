@@ -13,6 +13,12 @@ import {
   HolidayPayPolicy$outboundSchema,
 } from "../components/holidaypaypolicy.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -49,18 +55,7 @@ export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest = {
 };
 
 export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Holiday Pay Policy Object Example
    */
@@ -312,24 +307,18 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Holiday-Pay-Policy": HolidayPayPolicy$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Holiday-Pay-Policy": "holidayPayPolicy",
     });
   });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Holiday-Pay-Policy"?: HolidayPayPolicy$Outbound | undefined;
 };
 
@@ -340,17 +329,11 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchem
     z.ZodTypeDef,
     PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     holidayPayPolicy: HolidayPayPolicy$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       holidayPayPolicy: "Holiday-Pay-Policy",
     });
   });

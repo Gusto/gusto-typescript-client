@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   PayrollPrepared,
   PayrollPrepared$inboundSchema,
   PayrollPrepared$Outbound,
@@ -107,18 +113,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequest = {
 };
 
 export type PostV1CompaniesCompanyIdPayrollsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * An off-cycle payroll
    */
@@ -380,24 +375,18 @@ export const PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   "Payroll-Prepared": PayrollPrepared$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Payroll-Prepared": "payrollPrepared",
   });
 });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPayrollsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Payroll-Prepared"?: PayrollPrepared$Outbound | undefined;
 };
 
@@ -407,17 +396,11 @@ export const PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompaniesCompanyIdPayrollsResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   payrollPrepared: PayrollPrepared$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     payrollPrepared: "Payroll-Prepared",
   });
 });

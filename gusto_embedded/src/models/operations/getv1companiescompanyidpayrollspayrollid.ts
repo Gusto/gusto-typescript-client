@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   Payroll,
   Payroll$inboundSchema,
   Payroll$Outbound,
@@ -51,18 +57,7 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
 };
 
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -194,24 +189,18 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     Payroll: Payroll$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Payroll": "payroll",
     });
   });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   Payroll?: Payroll$Outbound | undefined;
 };
 
@@ -222,17 +211,11 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdPayrollsPayrollIdResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     payroll: Payroll$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       payroll: "Payroll",
     });
   });

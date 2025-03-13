@@ -13,6 +13,12 @@ import {
   ExternalPayrollTaxSuggestions$outboundSchema,
 } from "../components/externalpayrolltaxsuggestions.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -35,18 +41,7 @@ export type GetV1ExternalPayrollCalculateTaxesRequest = {
 };
 
 export type GetV1ExternalPayrollCalculateTaxesResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -143,17 +138,13 @@ export function getV1ExternalPayrollCalculateTaxesRequestFromJSON(
 export const GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema:
   z.ZodType<GetV1ExternalPayrollCalculateTaxesResponse, z.ZodTypeDef, unknown> =
     z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
+      HttpMeta: HTTPMetadata$inboundSchema,
       "External-Payroll-Tax-Suggestions-List": z.array(
         ExternalPayrollTaxSuggestions$inboundSchema,
       ).optional(),
     }).transform((v) => {
       return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
+        "HttpMeta": "httpMeta",
         "External-Payroll-Tax-Suggestions-List":
           "externalPayrollTaxSuggestionsList",
       });
@@ -161,9 +152,7 @@ export const GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema:
 
 /** @internal */
 export type GetV1ExternalPayrollCalculateTaxesResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "External-Payroll-Tax-Suggestions-List"?:
     | Array<ExternalPayrollTaxSuggestions$Outbound>
     | undefined;
@@ -176,19 +165,13 @@ export const GetV1ExternalPayrollCalculateTaxesResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1ExternalPayrollCalculateTaxesResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     externalPayrollTaxSuggestionsList: z.array(
       ExternalPayrollTaxSuggestions$outboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       externalPayrollTaxSuggestionsList:
         "External-Payroll-Tax-Suggestions-List",
     });

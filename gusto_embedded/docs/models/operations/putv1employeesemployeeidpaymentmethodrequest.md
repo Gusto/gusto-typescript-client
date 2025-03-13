@@ -9,7 +9,7 @@ let value: PutV1EmployeesEmployeeIdPaymentMethodRequest = {
   employeeId: "<id>",
   requestBody: {
     version: "<value>",
-    type: "Check",
+    type: "Direct Deposit",
   },
 };
 ```
