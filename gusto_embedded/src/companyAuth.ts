@@ -49,41 +49,63 @@ export function withTokenRefresh(
       return session.token;
     }
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "content-type": "application/x-www-form-urlencoded",
-          // Include the SDK's user agent in the request so requests can be
-          // tracked using observability infrastructure.
-          "user-agent": SDK_METADATA.userAgent,
-        },
-        body: new URLSearchParams({
-          client_id: clientId,
-          client_secret: clientSecret,
-          grant_type: "refresh_token",
-          refresh_token: refreshToken,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Unexpected status code: " + response.status);
-      }
-
-      const json = await response.json();
-      const data = tokenResponseSchema.parse(json);
-
-      await tokenStore.set({
-        token: data.access_token,
-        expires: Date.now() + data.expires_in * 1000 - tolerance,
-        refreshToken: data.refresh_token,
-      });
-
-      return data.access_token;
-    } catch (error) {
-      throw new Error("Failed to obtain OAuth token: " + error);
-    }
+    return await refreshAndSaveAuthToken(
+      url,
+      {
+        clientId,
+        clientSecret,
+        refreshToken: session?.refreshToken ?? refreshToken,
+      },
+      tokenStore
+    );
   };
+}
+
+export async function refreshAndSaveAuthToken(
+  authUrl: string,
+  refreshCredentials: {
+    clientId: string;
+    clientSecret: string;
+    refreshToken: string;
+  },
+  tokenStore: TokenStore
+): Promise<string> {
+  const { clientId, clientSecret, refreshToken } = refreshCredentials;
+
+  try {
+    const response = await fetch(authUrl, {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        // Include the SDK's user agent in the request so requests can be
+        // tracked using observability infrastructure.
+        "user-agent": SDK_METADATA.userAgent,
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Unexpected status code: " + response.status);
+    }
+
+    const json = await response.json();
+    const data = tokenResponseSchema.parse(json);
+
+    await tokenStore.set({
+      token: data.access_token,
+      expires: Date.now() + data.expires_in * 1000 - tolerance,
+      refreshToken: data.refresh_token,
+    });
+
+    return data.access_token;
+  } catch (error) {
+    throw new Error("Failed to obtain OAuth token: " + error);
+  }
 }
 
 /**

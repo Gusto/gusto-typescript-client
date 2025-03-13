@@ -97,10 +97,37 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ## SDK Example Usage
 
 ### Example
+Automatic token refresh using a persistent data store.
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { CompanyAuthenticatedClient } = "@gusto/embedded-api/CompanyAuthenticatedClient";
+
+class PersistentTokenStore implements TokenStore {
+  constructor() {}
+
+  async get() {
+    const { token, expires, refreshToken } = retrieveToken();
+
+    return {
+      token,
+      expires,
+      refreshToken,
+    };
+  }
+
+  async set({
+    token,
+    expires,
+    refreshToken,
+  }: {
+    token: string;
+    expires: number;
+    refreshToken: string;
+  }) {
+    saveToken(token, refreshToken, expires);
+  }
+}
 
 const client = new GustoEmbedded();
 const clientId = process.env["GUSTOEMBEDDED_CLIENT_ID"]
@@ -132,6 +159,8 @@ async function run() {
 
   const { accessToken, refreshToken, companyUuid, expiresIn } = response.object;
 
+  const tokenStore = PersistentTokenStore();
+
   const companyAuthClient = CompanyAuthenticatedClient({
     clientId,
     clientSecret,
@@ -140,6 +169,7 @@ async function run() {
     expiresIn,
     options: {
       server: "demo",
+      tokenStore,
     },
   });
 

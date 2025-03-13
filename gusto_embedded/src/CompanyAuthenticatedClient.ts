@@ -1,5 +1,11 @@
-import { TokenRefreshOptions, withTokenRefresh } from "./companyAuth.js";
-import { GustoEmbeddedCore } from "./core.js";
+import { HTTPClient } from "./lib/http.js";
+import {
+  InMemoryTokenStore,
+  refreshAndSaveAuthToken,
+  TokenRefreshOptions,
+  withTokenRefresh,
+} from "./companyAuth.js";
+import { GustoEmbedded } from "./sdk/sdk.js";
 import { SDKOptions, ServerDemo, ServerList } from "./lib/config.js";
 
 type ClientArguments = {
@@ -20,9 +26,25 @@ export function CompanyAuthenticatedClient({
   options,
 }: ClientArguments) {
   const authUrl = constructAuthUrl(options);
+  const tokenStore = new InMemoryTokenStore();
 
-  return new GustoEmbeddedCore({
+  const httpClientWithTokenRefresh = new HTTPClient();
+
+  httpClientWithTokenRefresh.addHook("response", async (res) => {
+    if (res.status === 401) {
+      console.log("Unauthorized, attempting to refresh token");
+
+      await refreshAndSaveAuthToken(
+        authUrl,
+        { clientId, clientSecret, refreshToken },
+        tokenStore
+      );
+    }
+  });
+
+  return new GustoEmbedded({
     ...options,
+    httpClient: httpClientWithTokenRefresh,
     companyAccessAuth: withTokenRefresh(
       clientId,
       clientSecret,
@@ -30,6 +52,7 @@ export function CompanyAuthenticatedClient({
       refreshToken,
       expiresIn,
       {
+        tokenStore,
         ...options,
         url: authUrl,
       }
