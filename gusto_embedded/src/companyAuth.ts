@@ -15,25 +15,31 @@ const tokenResponseSchema = z.object({
 // and slow or unreliable networks.
 const tolerance = 5 * 60 * 1000;
 
+export type TokenRefreshOptions = { tokenStore?: TokenStore; url?: string };
+
 /**
  * A callback function that can be used to obtain an OAuth access token for use
  * with SDKs that require OAuth security. A new token is requested from the
  * OAuth provider when the current token has expired.
  */
 export function withTokenRefresh(
-  clientID: string,
+  clientId: string,
   clientSecret: string,
   accessToken: string,
   refreshToken: string,
-  options: { tokenStore?: TokenStore; url?: string } = {}
+  expiresIn: number,
+  options: TokenRefreshOptions = {}
 ) {
   const {
     tokenStore = new InMemoryTokenStore(),
-    // Replace this with your default OAuth provider's access token endpoint.
     url = "https://api.gusto-demo.com/oauth/token",
   } = options;
 
-  tokenStore.set({ token: accessToken, refreshToken, expires: 10 });
+  tokenStore.set({
+    token: accessToken,
+    refreshToken,
+    expires: Date.now() + expiresIn * 1000 - tolerance,
+  });
 
   return async (): Promise<string> => {
     const session = await tokenStore.get();
@@ -53,7 +59,7 @@ export function withTokenRefresh(
           "user-agent": SDK_METADATA.userAgent,
         },
         body: new URLSearchParams({
-          client_id: clientID,
+          client_id: clientId,
           client_secret: clientSecret,
           grant_type: "refresh_token",
           refresh_token: refreshToken,
