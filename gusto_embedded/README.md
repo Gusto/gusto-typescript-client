@@ -94,29 +94,62 @@ yarn add @tanstack/react-query react react-dom
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
-<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
 ### Example
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { CompanyAuthenticatedClient } = "@gusto/embedded-api/CompanyAuthenticatedClient";
 
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
+const client = new GustoEmbedded();
+const clientId = process.env["GUSTOEMBEDDED_CLIENT_ID"]
+const clientSecret = process.env["GUSTOEMBEDDED_CLIENT_SECRET"];
 
 async function run() {
-  const result = await gustoEmbedded.introspection.getInfo({});
+  const response = await client.companies.createPartnerManaged(
+    {
+      clientId,
+      clientSecret,
+    },
+    {
+      requestBody: {
+        user: {
+          firstName: "Frank",
+          lastName: "Ocean",
+          email: "frank@example.com",
+          phone: "2345558899",
+        },
+        company: {
+          name: "Frank's Ocean, LLC",
+          tradeName: "Frank’s Ocean",
+          ein: "123456789",
+          contractorOnly: false,
+        },
+      },
+    }
+  );
 
-  // Handle the result
-  console.log(result);
+  const { accessToken, refreshToken, companyUuid, expiresIn } = response.object;
+
+  const companyAuthClient = CompanyAuthenticatedClient({
+    clientId,
+    clientSecret,
+    accessToken,
+    refreshToken,
+    expiresIn,
+    options: {
+      server: "demo",
+    },
+  });
+
+  await companyAuthClient.companies.get({ companyId: companyUuid });
 }
 
 run();
 
 ```
-<!-- End SDK Example Usage [usage] -->
+<!-- No SDK Example Usage [usage] -->
 
 <!-- Start Authentication [security] -->
 ## Authentication
@@ -158,7 +191,8 @@ const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
   const result = await gustoEmbedded.companies.createPartnerManaged({
-    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+    clientId: process.env["GUSTOEMBEDDED_CLIENT_ID"] ?? "",
+    clientSecret: process.env["GUSTOEMBEDDED_CLIENT_SECRET"] ?? "",
   }, {
     requestBody: {
       user: {
@@ -1262,7 +1296,8 @@ async function run() {
   let result;
   try {
     result = await gustoEmbedded.companies.createPartnerManaged({
-      systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+      clientId: process.env["GUSTOEMBEDDED_CLIENT_ID"] ?? "",
+      clientSecret: process.env["GUSTOEMBEDDED_CLIENT_SECRET"] ?? "",
     }, {
       requestBody: {
         user: {
@@ -1458,7 +1493,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=gusto-embedded&utm_campaign=typescript)
