@@ -164,6 +164,12 @@ export class ClientCredentialsHook
     if (typeof source === "function") {
       security = await source();
     }
+
+    // The client was passed a raw access token, no need to fetch one.
+    if (typeof security === "string") {
+      return null;
+    }
+
     const out = parse(
       security,
       (val) =>
