@@ -48,7 +48,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: esm
   outputModelSuffix: output
-  packageName: '@gusto/embedded-api'
-  responseFormat: envelope
+  packageName: "@gusto/embedded-api"
+  responseFormat: envelope-http
   templateVersion: v2
   useIndexModules: false
