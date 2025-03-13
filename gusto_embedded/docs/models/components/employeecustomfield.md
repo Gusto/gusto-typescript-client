@@ -11,7 +11,7 @@ let value: EmployeeCustomField = {
   id: "<id>",
   companyCustomFieldId: "<id>",
   name: "<value>",
-  type: "currency",
+  type: "text",
   value: "<value>",
 };
 ```

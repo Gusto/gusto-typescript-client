@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   ReportTemplate,
   ReportTemplate$inboundSchema,
   ReportTemplate$Outbound,
@@ -35,18 +41,7 @@ export type GetCompaniesCompanyUuidReportTemplatesReportTypeRequest = {
 };
 
 export type GetCompaniesCompanyUuidReportTemplatesReportTypeResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -144,15 +139,11 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSch
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Report-Template": ReportTemplate$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Report-Template": "reportTemplate",
     });
   });
@@ -160,9 +151,7 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSch
 /** @internal */
 export type GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound =
   {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
+    HttpMeta: HTTPMetadata$Outbound;
     "Report-Template"?: ReportTemplate$Outbound | undefined;
   };
 
@@ -173,17 +162,11 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSc
     z.ZodTypeDef,
     GetCompaniesCompanyUuidReportTemplatesReportTypeResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     reportTemplate: ReportTemplate$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       reportTemplate: "Report-Template",
     });
   });

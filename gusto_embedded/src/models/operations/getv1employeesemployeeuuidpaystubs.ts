@@ -13,6 +13,12 @@ import {
   EmployeePayStub$outboundSchema,
 } from "../components/employeepaystub.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -31,18 +37,7 @@ export type GetV1EmployeesEmployeeUuidPayStubsRequest = {
 };
 
 export type GetV1EmployeesEmployeeUuidPayStubsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -132,25 +127,19 @@ export function getV1EmployeesEmployeeUuidPayStubsRequestFromJSON(
 export const GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema:
   z.ZodType<GetV1EmployeesEmployeeUuidPayStubsResponse, z.ZodTypeDef, unknown> =
     z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
+      HttpMeta: HTTPMetadata$inboundSchema,
       "Employee-Pay-Stubs-List": z.array(EmployeePayStub$inboundSchema)
         .optional(),
     }).transform((v) => {
       return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
+        "HttpMeta": "httpMeta",
         "Employee-Pay-Stubs-List": "employeePayStubsList",
       });
     });
 
 /** @internal */
 export type GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Employee-Pay-Stubs-List"?: Array<EmployeePayStub$Outbound> | undefined;
 };
 
@@ -161,17 +150,11 @@ export const GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeUuidPayStubsResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     employeePayStubsList: z.array(EmployeePayStub$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       employeePayStubsList: "Employee-Pay-Stubs-List",
     });
   });

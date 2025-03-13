@@ -6,11 +6,12 @@
 import { GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse } from "@gusto/embedded-api/models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
 
 let value: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {
-  contentType: "<value>",
-  statusCode: 425,
-  rawResponse: new Response("{\"message\": \"hello world\"}", {
-    headers: { "Content-Type": "application/json" },
-  }),
+  httpMeta: {
+    response: new Response("{\"message\": \"hello world\"}", {
+      headers: { "Content-Type": "application/json" },
+    }),
+    request: new Request("https://example.com"),
+  },
 };
 ```
 
@@ -18,7 +19,5 @@ let value: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {
 
 | Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `contentType`                                                                                              | *string*                                                                                                   | :heavy_check_mark:                                                                                         | HTTP response content type for this operation                                                              |
-| `statusCode`                                                                                               | *number*                                                                                                   | :heavy_check_mark:                                                                                         | HTTP response status code for this operation                                                               |
-| `rawResponse`                                                                                              | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)                                      | :heavy_check_mark:                                                                                         | Raw HTTP response; suitable for custom response parsing                                                    |
+| `httpMeta`                                                                                                 | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                         | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
 | `unprocessedTerminationPayPeriodList`                                                                      | [components.UnprocessedTerminationPayPeriod](../../models/components/unprocessedterminationpayperiod.md)[] | :heavy_minus_sign:                                                                                         | Example response                                                                                           |

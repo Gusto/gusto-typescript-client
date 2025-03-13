@@ -13,6 +13,12 @@ import {
   ChildSupportData$outboundSchema,
 } from "../components/childsupportdata.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -27,18 +33,7 @@ export type GetV1GarnishmentsChildSupportRequest = {
 };
 
 export type GetV1GarnishmentsChildSupportResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -118,24 +113,18 @@ export const GetV1GarnishmentsChildSupportResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   "Child-Support-Data": ChildSupportData$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Child-Support-Data": "childSupportData",
   });
 });
 
 /** @internal */
 export type GetV1GarnishmentsChildSupportResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Child-Support-Data"?: ChildSupportData$Outbound | undefined;
 };
 
@@ -145,17 +134,11 @@ export const GetV1GarnishmentsChildSupportResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1GarnishmentsChildSupportResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   childSupportData: ChildSupportData$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     childSupportData: "Child-Support-Data",
   });
 });

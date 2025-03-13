@@ -19,6 +19,12 @@ import {
   ContractorPaymentSummaryByDates$outboundSchema,
 } from "../components/contractorpaymentsummarybydates.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -68,18 +74,7 @@ export type GetV1CompaniesCompanyIdContractorPaymentsResponseBody =
   | ContractorPaymentSummaryByDates;
 
 export type GetV1CompaniesCompanyIdContractorPaymentsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * A JSON object containing contractor payments information
    */
@@ -273,26 +268,20 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     oneOf: z.union([
       ContractorPaymentSummary$inboundSchema,
       ContractorPaymentSummaryByDates$inboundSchema,
     ]).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
     });
   });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   oneOf?:
     | ContractorPaymentSummary$Outbound
     | ContractorPaymentSummaryByDates$Outbound
@@ -306,20 +295,14 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdContractorPaymentsResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     oneOf: z.union([
       ContractorPaymentSummary$outboundSchema,
       ContractorPaymentSummaryByDates$outboundSchema,
     ]).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
     });
   });
 

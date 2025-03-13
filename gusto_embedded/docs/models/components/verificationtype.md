@@ -10,7 +10,7 @@ The verification type of the bank account.
 ```typescript
 import { VerificationType } from "@gusto/embedded-api/models/components/companybankaccount.js";
 
-let value: VerificationType = "plaid_external";
+let value: VerificationType = "plaid";
 ```
 
 ## Values

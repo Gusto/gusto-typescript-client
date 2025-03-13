@@ -7,6 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   I9Authorization,
   I9Authorization$inboundSchema,
   I9Authorization$Outbound,
@@ -31,18 +37,7 @@ export type GetV1EmployeesEmployeeIdI9AuthorizationRequest = {
 };
 
 export type GetV1EmployeesEmployeeIdI9AuthorizationResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -137,24 +132,18 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "I9-Authorization": I9Authorization$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "I9-Authorization": "i9Authorization",
     });
   });
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "I9-Authorization"?: I9Authorization$Outbound | undefined;
 };
 
@@ -165,17 +154,11 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdI9AuthorizationResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     i9Authorization: I9Authorization$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       i9Authorization: "I9-Authorization",
     });
   });

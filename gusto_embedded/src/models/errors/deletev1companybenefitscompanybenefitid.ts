@@ -6,6 +6,12 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
 export type Base = {
@@ -23,10 +29,7 @@ export type DeleteV1CompanyBenefitsCompanyBenefitIdErrors = {
  */
 export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData = {
   errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors | undefined;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse?: Response | undefined;
+  httpMeta: HTTPMetadata;
 };
 
 /**
@@ -34,10 +37,7 @@ export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData = {
  */
 export class DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody extends Error {
   errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors | undefined;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse?: Response | undefined;
+  httpMeta: HTTPMetadata;
 
   /** The original data that was passed to this error instance. */
   data$: DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData;
@@ -50,7 +50,7 @@ export class DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody extends Error {
     this.data$ = err;
 
     if (err.errors != null) this.errors = err.errors;
-    if (err.rawResponse != null) this.rawResponse = err.rawResponse;
+    this.httpMeta = err.httpMeta;
 
     this.name = "DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody";
   }
@@ -191,11 +191,11 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema:
     errors: z.lazy(() =>
       DeleteV1CompanyBenefitsCompanyBenefitIdErrors$inboundSchema
     ).optional(),
-    RawResponse: z.instanceof(Response).optional(),
+    HttpMeta: HTTPMetadata$inboundSchema,
   })
     .transform((v) => {
       const remapped = remap$(v, {
-        "RawResponse": "rawResponse",
+        "HttpMeta": "httpMeta",
       });
 
       return new DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody(remapped);
@@ -204,7 +204,7 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema:
 /** @internal */
 export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$Outbound = {
   errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors$Outbound | undefined;
-  RawResponse?: never | undefined;
+  HttpMeta: HTTPMetadata$Outbound;
 };
 
 /** @internal */
@@ -220,12 +220,10 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$outboundSchema:
         errors: z.lazy(() =>
           DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema
         ).optional(),
-        rawResponse: z.instanceof(Response).transform(() => {
-          throw new Error("Response cannot be serialized");
-        }).optional(),
+        httpMeta: HTTPMetadata$outboundSchema,
       }).transform((v) => {
         return remap$(v, {
-          rawResponse: "RawResponse",
+          httpMeta: "HttpMeta",
         });
       }),
     );

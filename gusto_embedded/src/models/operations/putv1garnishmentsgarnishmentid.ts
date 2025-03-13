@@ -19,6 +19,12 @@ import {
   GarnishmentChildSupport$outboundSchema,
 } from "../components/garnishmentchildsupport.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -89,18 +95,7 @@ export type PutV1GarnishmentsGarnishmentIdRequest = {
 };
 
 export type PutV1GarnishmentsGarnishmentIdResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -311,24 +306,18 @@ export const PutV1GarnishmentsGarnishmentIdResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
+  HttpMeta: HTTPMetadata$inboundSchema,
   Garnishment: Garnishment$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
+    "HttpMeta": "httpMeta",
     "Garnishment": "garnishment",
   });
 });
 
 /** @internal */
 export type PutV1GarnishmentsGarnishmentIdResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   Garnishment?: Garnishment$Outbound | undefined;
 };
 
@@ -338,17 +327,11 @@ export const PutV1GarnishmentsGarnishmentIdResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1GarnishmentsGarnishmentIdResponse
 > = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
+  httpMeta: HTTPMetadata$outboundSchema,
   garnishment: Garnishment$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
+    httpMeta: "HttpMeta",
     garnishment: "Garnishment",
   });
 });

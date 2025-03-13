@@ -10,6 +10,12 @@ import {
   EntityErrorObject$Outbound,
   EntityErrorObject$outboundSchema,
 } from "../components/entityerrorobject.js";
+import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
 
 /**
  * Unprocessable Entity
@@ -20,10 +26,7 @@ import {
  */
 export type UnprocessableEntityErrorObject1Data = {
   errors?: Array<EntityErrorObject> | undefined;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse?: Response | undefined;
+  httpMeta: HTTPMetadata;
 };
 
 /**
@@ -35,10 +38,7 @@ export type UnprocessableEntityErrorObject1Data = {
  */
 export class UnprocessableEntityErrorObject1 extends Error {
   errors?: Array<EntityErrorObject> | undefined;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse?: Response | undefined;
+  httpMeta: HTTPMetadata;
 
   /** The original data that was passed to this error instance. */
   data$: UnprocessableEntityErrorObject1Data;
@@ -51,7 +51,7 @@ export class UnprocessableEntityErrorObject1 extends Error {
     this.data$ = err;
 
     if (err.errors != null) this.errors = err.errors;
-    if (err.rawResponse != null) this.rawResponse = err.rawResponse;
+    this.httpMeta = err.httpMeta;
 
     this.name = "UnprocessableEntityErrorObject1";
   }
@@ -64,11 +64,11 @@ export const UnprocessableEntityErrorObject1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   errors: z.array(EntityErrorObject$inboundSchema).optional(),
-  RawResponse: z.instanceof(Response).optional(),
+  HttpMeta: HTTPMetadata$inboundSchema,
 })
   .transform((v) => {
     const remapped = remap$(v, {
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
     });
 
     return new UnprocessableEntityErrorObject1(remapped);
@@ -77,7 +77,7 @@ export const UnprocessableEntityErrorObject1$inboundSchema: z.ZodType<
 /** @internal */
 export type UnprocessableEntityErrorObject1$Outbound = {
   errors?: Array<EntityErrorObject$Outbound> | undefined;
-  RawResponse?: never | undefined;
+  HttpMeta: HTTPMetadata$Outbound;
 };
 
 /** @internal */
@@ -90,12 +90,10 @@ export const UnprocessableEntityErrorObject1$outboundSchema: z.ZodType<
   .pipe(
     z.object({
       errors: z.array(EntityErrorObject$outboundSchema).optional(),
-      rawResponse: z.instanceof(Response).transform(() => {
-        throw new Error("Response cannot be serialized");
-      }).optional(),
+      httpMeta: HTTPMetadata$outboundSchema,
     }).transform((v) => {
       return remap$(v, {
-        rawResponse: "RawResponse",
+        httpMeta: "HttpMeta",
       });
     }),
   );

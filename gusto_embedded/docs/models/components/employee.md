@@ -8,9 +8,9 @@ The representation of an employee in Gusto.
 import { Employee } from "@gusto/embedded-api/models/components/employee.js";
 
 let value: Employee = {
-  uuid: "04b81669-ad76-42cb-a68a-20597bd72d9b",
-  firstName: "Vivianne",
-  lastName: "Purdy",
+  uuid: "ff3a1ada-6669-4ee0-8213-58abefadc4e0",
+  firstName: "Dorian",
+  lastName: "Nienow",
   eligiblePaidTimeOff: [
     {
       accrualUnit: "Hour",

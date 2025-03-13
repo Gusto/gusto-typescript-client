@@ -8,7 +8,7 @@ The representation of an admin user in Gusto.
 import { Admin } from "@gusto/embedded-api/models/components/admin.js";
 
 let value: Admin = {
-  uuid: "8f2e12b1-96be-4cd0-b486-34f450d234e3",
+  uuid: "61142f2c-998f-45c8-96f9-16cbe4c79ffd",
 };
 ```
 

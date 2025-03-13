@@ -13,6 +13,12 @@ import {
   EmployeeCustomField$outboundSchema,
 } from "../components/employeecustomfield.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -46,18 +52,7 @@ export type GetV1EmployeesEmployeeIdCustomFieldsResponseBody = {
 };
 
 export type GetV1EmployeesEmployeeIdCustomFieldsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * OK
    */
@@ -233,25 +228,19 @@ export const GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     object: z.lazy(() =>
       GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
     });
   });
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   object?:
     | GetV1EmployeesEmployeeIdCustomFieldsResponseBody$Outbound
     | undefined;
@@ -264,19 +253,13 @@ export const GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdCustomFieldsResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     object: z.lazy(() =>
       GetV1EmployeesEmployeeIdCustomFieldsResponseBody$outboundSchema
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
     });
   });
 

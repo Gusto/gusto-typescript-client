@@ -7,7 +7,7 @@ The off-cycle reason. Only included for off-cycle payrolls.
 ```typescript
 import { OffCycleReasonType } from "@gusto/embedded-api/models/components/offcyclereasontype.js";
 
-let value: OffCycleReasonType = "Reversal";
+let value: OffCycleReasonType = "Wage correction";
 ```
 
 ## Values

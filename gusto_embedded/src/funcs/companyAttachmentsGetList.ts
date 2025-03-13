@@ -153,11 +153,7 @@ async function $do(
   const response = doResult.value;
 
   const responseFields = {
-    ContentType: response.headers.get("content-type")
-      ?? "application/octet-stream",
-    StatusCode: response.status,
-    RawResponse: response,
-    Headers: {},
+    HttpMeta: { Response: response, Request: req },
   };
 
   const [result] = await M.match<
@@ -175,7 +171,7 @@ async function $do(
     }),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

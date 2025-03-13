@@ -8,7 +8,7 @@ Example response
 import { FormPdf } from "@gusto/embedded-api/models/components/formpdf.js";
 
 let value: FormPdf = {
-  uuid: "ed79bd0c-7ac8-4261-8bfc-69484b4fa10f",
+  uuid: "af991f8c-0644-4c97-90ff-308fe945e723",
 };
 ```
 

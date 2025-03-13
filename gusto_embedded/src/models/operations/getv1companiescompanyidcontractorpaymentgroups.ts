@@ -13,6 +13,12 @@ import {
   ContractorPaymentGroupMinimal$outboundSchema,
 } from "../components/contractorpaymentgroupminimal.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -47,18 +53,7 @@ export type GetV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
 };
 
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * List of Contractor Payment Groups
    */
@@ -169,26 +164,20 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchem
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Contractor-Payment-Group-List": z.array(
       ContractorPaymentGroupMinimal$inboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Contractor-Payment-Group-List": "contractorPaymentGroupList",
     });
   });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Contractor-Payment-Group-List"?:
     | Array<ContractorPaymentGroupMinimal$Outbound>
     | undefined;
@@ -201,19 +190,13 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$outboundSche
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdContractorPaymentGroupsResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     contractorPaymentGroupList: z.array(
       ContractorPaymentGroupMinimal$outboundSchema,
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       contractorPaymentGroupList: "Contractor-Payment-Group-List",
     });
   });

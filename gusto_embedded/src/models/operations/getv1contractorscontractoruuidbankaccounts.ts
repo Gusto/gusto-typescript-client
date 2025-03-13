@@ -13,6 +13,12 @@ import {
   ContractorBankAccount$outboundSchema,
 } from "../components/contractorbankaccount.js";
 import {
+  HTTPMetadata,
+  HTTPMetadata$inboundSchema,
+  HTTPMetadata$Outbound,
+  HTTPMetadata$outboundSchema,
+} from "../components/httpmetadata.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -31,18 +37,7 @@ export type GetV1ContractorsContractorUuidBankAccountsRequest = {
 };
 
 export type GetV1ContractorsContractorUuidBankAccountsResponse = {
-  /**
-   * HTTP response content type for this operation
-   */
-  contentType: string;
-  /**
-   * HTTP response status code for this operation
-   */
-  statusCode: number;
-  /**
-   * Raw HTTP response; suitable for custom response parsing
-   */
-  rawResponse: Response;
+  httpMeta: HTTPMetadata;
   /**
    * Example response
    */
@@ -137,25 +132,19 @@ export const GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
+    HttpMeta: HTTPMetadata$inboundSchema,
     "Contractor-Bank-Account-List": z.array(ContractorBankAccount$inboundSchema)
       .optional(),
   }).transform((v) => {
     return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
+      "HttpMeta": "httpMeta",
       "Contractor-Bank-Account-List": "contractorBankAccountList",
     });
   });
 
 /** @internal */
 export type GetV1ContractorsContractorUuidBankAccountsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
+  HttpMeta: HTTPMetadata$Outbound;
   "Contractor-Bank-Account-List"?:
     | Array<ContractorBankAccount$Outbound>
     | undefined;
@@ -168,18 +157,12 @@ export const GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema:
     z.ZodTypeDef,
     GetV1ContractorsContractorUuidBankAccountsResponse
   > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
+    httpMeta: HTTPMetadata$outboundSchema,
     contractorBankAccountList: z.array(ContractorBankAccount$outboundSchema)
       .optional(),
   }).transform((v) => {
     return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
+      httpMeta: "HttpMeta",
       contractorBankAccountList: "Contractor-Bank-Account-List",
     });
   });
