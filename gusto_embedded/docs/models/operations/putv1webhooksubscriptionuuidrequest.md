@@ -9,7 +9,7 @@ let value: PutV1WebhookSubscriptionUuidRequest = {
   webhookSubscriptionUuid: "<id>",
   requestBody: {
     subscriptionTypes: [
-      "Payroll",
+      "Signatory",
     ],
   },
 };

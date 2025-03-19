@@ -8,7 +8,7 @@ Garnishments, or employee deductions, are fixed amounts or percentages deducted 
 import { Garnishment } from "@gusto/embedded-api/models/components/garnishment.js";
 
 let value: Garnishment = {
-  uuid: "f3cd8796-866b-412d-8c46-ed9306add035",
+  uuid: "12b196be-cd04-4863-84f4-50d234e3cce1",
 };
 ```
 

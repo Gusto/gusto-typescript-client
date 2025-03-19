@@ -8,7 +8,7 @@ The representation of an employee's onboarding status.
 import { EmployeeOnboardingStatus } from "@gusto/embedded-api/models/components/employeeonboardingstatus.js";
 
 let value: EmployeeOnboardingStatus = {
-  uuid: "9ffd9709-fd52-4cbf-bd81-7584dd596e2b",
+  uuid: "e269f2e1-7735-47df-b8d9-53680293d511",
 };
 ```
 

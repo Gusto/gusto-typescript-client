@@ -5,7 +5,7 @@
 ```typescript
 import { Groupings } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
 
-let value: Groupings = "employee";
+let value: Groupings = "work_address_state";
 ```
 
 ## Values

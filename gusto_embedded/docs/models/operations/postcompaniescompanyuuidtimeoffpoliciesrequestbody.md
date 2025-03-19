@@ -10,7 +10,7 @@ import { PostCompaniesCompanyUuidTimeOffPoliciesRequestBody } from "@gusto/embed
 let value: PostCompaniesCompanyUuidTimeOffPoliciesRequestBody = {
   name: "<value>",
   policyType: "<value>",
-  accrualMethod: "unlimited",
+  accrualMethod: "per_hour_worked",
 };
 ```
 

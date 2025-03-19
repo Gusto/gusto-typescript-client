@@ -7,7 +7,7 @@ import { EmployeeStateTaxQuestion } from "@gusto/embedded-api/models/components/
 
 let value: EmployeeStateTaxQuestion = {
   label: "<value>",
-  description: "decongestant clonk scaly wherever pointless",
+  description: "um mid bloom redound grounded about mature minority",
   key: "<key>",
   inputQuestionFormat: {
     type: "<value>",

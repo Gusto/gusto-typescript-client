@@ -7,9 +7,9 @@ import { HistoricalEmployeeBodyHomeAddress } from "@gusto/embedded-api/models/co
 
 let value: HistoricalEmployeeBodyHomeAddress = {
   street1: "<value>",
-  city: "Gleasonbury",
-  state: "Hawaii",
-  zip: "18608-6975",
+  city: "East Otto",
+  state: "Pennsylvania",
+  zip: "85143-5388",
 };
 ```
 

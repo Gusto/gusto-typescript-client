@@ -12,7 +12,7 @@ The type of document an employee holds, based on their authorization status.
 ```typescript
 import { DocumentType } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidi9authorization.js";
 
-let value: DocumentType = "foreign_passport";
+let value: DocumentType = "uscis_alien_registration_number";
 ```
 
 ## Values

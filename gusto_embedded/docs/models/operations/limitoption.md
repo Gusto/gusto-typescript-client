@@ -12,7 +12,7 @@ their limit.
 ```typescript
 import { LimitOption } from "@gusto/embedded-api/models/operations/postv1employeesemployeeidemployeebenefits.js";
 
-let value: LimitOption = "Individual";
+let value: LimitOption = "Married and Filing Separately";
 ```
 
 ## Values

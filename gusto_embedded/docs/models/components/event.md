@@ -8,7 +8,7 @@ Representation of an Event
 import { Event } from "@gusto/embedded-api/models/components/event.js";
 
 let value: Event = {
-  uuid: "bfc69484-b4fa-410f-a353-ea885963a5c6",
+  uuid: "5e5a82ad-1cbd-414b-b0bd-76402fd4f542",
 };
 ```
 

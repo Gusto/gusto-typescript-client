@@ -7,7 +7,7 @@ Current status of the Generated Document
 ```typescript
 import { GeneratedDocumentStatus } from "@gusto/embedded-api/models/components/generateddocument.js";
 
-let value: GeneratedDocumentStatus = "failed";
+let value: GeneratedDocumentStatus = "succeeded";
 ```
 
 ## Values
