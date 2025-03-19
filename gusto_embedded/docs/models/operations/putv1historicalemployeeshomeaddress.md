@@ -7,9 +7,9 @@ import { PutV1HistoricalEmployeesHomeAddress } from "@gusto/embedded-api/models/
 
 let value: PutV1HistoricalEmployeesHomeAddress = {
   street1: "<value>",
-  city: "Carmel",
-  state: "Michigan",
-  zip: "81130-4152",
+  city: "Aliyahfurt",
+  state: "Massachusetts",
+  zip: "87938",
 };
 ```
 

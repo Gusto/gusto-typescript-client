@@ -8,8 +8,8 @@ Create an employee.
 import { PostV1EmployeesRequestBody } from "@gusto/embedded-api/models/operations/postv1employees.js";
 
 let value: PostV1EmployeesRequestBody = {
-  firstName: "Andy",
-  lastName: "Upton",
+  firstName: "Ed",
+  lastName: "Larkin",
 };
 ```
 

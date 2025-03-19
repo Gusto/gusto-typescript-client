@@ -8,11 +8,11 @@ Create a company location.
 import { PostV1CompaniesCompanyIdLocationsRequestBody } from "@gusto/embedded-api/models/operations/postv1companiescompanyidlocations.js";
 
 let value: PostV1CompaniesCompanyIdLocationsRequestBody = {
-  phoneNumber: "1-638-952-5845",
+  phoneNumber: "839-802-4137 x6672",
   street1: "<value>",
-  city: "South Greyson",
-  state: "Illinois",
-  zip: "33573-9802",
+  city: "Lake Shane",
+  state: "Nevada",
+  zip: "07035",
 };
 ```
 

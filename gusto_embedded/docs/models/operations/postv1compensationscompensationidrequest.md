@@ -9,7 +9,7 @@ let value: PostV1CompensationsCompensationIdRequest = {
   jobId: "<id>",
   requestBody: {
     paymentUnit: "Month",
-    flsaStatus: "Nonexempt",
+    flsaStatus: "Commission Only Nonexempt",
   },
 };
 ```

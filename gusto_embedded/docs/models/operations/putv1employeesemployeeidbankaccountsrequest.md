@@ -12,7 +12,7 @@ let value: PutV1EmployeesEmployeeIdBankAccountsRequest = {
     name: "<value>",
     routingNumber: "<value>",
     accountNumber: "<value>",
-    accountType: "Checking",
+    accountType: "Savings",
   },
 };
 ```

@@ -8,7 +8,7 @@ import { PutV1CompanyPaymentConfigsRequest } from "@gusto/embedded-api/models/op
 let value: PutV1CompanyPaymentConfigsRequest = {
   companyUuid: "<id>",
   requestBody: {
-    paymentSpeed: "2-day",
+    fastPaymentLimit: "<value>",
   },
 };
 ```

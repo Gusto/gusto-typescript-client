@@ -8,7 +8,7 @@ The representation of a company in Gusto.
 import { Company } from "@gusto/embedded-api/models/components/company.js";
 
 let value: Company = {
-  uuid: "8d1c0dc0-a822-4c9f-aff1-f37c39211506",
+  uuid: "e4568a40-64fe-4da5-b8d1-c0dc0a822c9f",
   compensations: {
     hourly: [
       {

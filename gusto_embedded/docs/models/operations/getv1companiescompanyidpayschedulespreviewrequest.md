@@ -7,7 +7,7 @@ import { GetV1CompaniesCompanyIdPaySchedulesPreviewRequest } from "@gusto/embedd
 
 let value: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest = {
   companyId: "<id>",
-  frequency: "Every week",
+  frequency: "Twice per month",
   anchorPayDate: "2020-05-15",
   anchorEndOfPayPeriod: "2020-05-08",
 };

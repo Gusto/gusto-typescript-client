@@ -8,7 +8,7 @@ import { PutV1EmployeesEmployeeIdStateTaxesRequestBody } from "@gusto/embedded-a
 let value: PutV1EmployeesEmployeeIdStateTaxesRequestBody = {
   states: [
     {
-      state: "Washington",
+      state: "Oregon",
     },
   ],
 };

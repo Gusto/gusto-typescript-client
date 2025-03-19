@@ -8,7 +8,7 @@ The temporary url to download a Company Attachment File
 import { GetV1CompaniesAttachmentUrlResponseBody } from "@gusto/embedded-api/models/operations/getv1companiesattachmenturl.js";
 
 let value: GetV1CompaniesAttachmentUrlResponseBody = {
-  url: "https://beneficial-hippodrome.biz/",
+  url: "https://hard-to-find-adviser.biz/",
 };
 ```
 

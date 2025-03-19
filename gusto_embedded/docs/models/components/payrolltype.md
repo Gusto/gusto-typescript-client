@@ -7,7 +7,7 @@ Whether it is regular pay period or transition pay period.
 ```typescript
 import { PayrollType } from "@gusto/embedded-api/models/components/payperiod.js";
 
-let value: PayrollType = "transition";
+let value: PayrollType = "regular";
 ```
 
 ## Values

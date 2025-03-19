@@ -13,7 +13,7 @@ let value: PostV1CompaniesCompanyUuidContractorsResponse = {
     request: new Request("https://example.com"),
   },
   contractor: {
-    uuid: "9cc5cb2d-7779-497d-ba66-c530ee1521e0",
+    uuid: "30ee1521-e0f1-4d95-95c5-a87e8db0c3e0",
     hourlyRate: "50.0",
   },
 };

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: faf71a2fd549ee108515b43e930d0e1c
+  docChecksum: 937393749e06083076de283cdc9d570c
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.517.3
-  generationVersion: 2.548.6
-  releaseVersion: 0.5.2
-  configChecksum: 6bc5d774ad51224e239b3058022d8ac6
+  speakeasyVersion: 1.520.1
+  generationVersion: 2.556.1
+  releaseVersion: 0.5.3
+  configChecksum: a1b404e58df459e353eb24c21c321fce
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -99,6 +99,7 @@ generatedFiles:
   - docs/models/components/companyonboardingstatus.md
   - docs/models/components/companypaidtimeoff.md
   - docs/models/components/companystatus.md
+  - docs/models/components/companysuspension.md
   - docs/models/components/compensation.md
   - docs/models/components/compensations.md
   - docs/models/components/contractor.md
@@ -307,7 +308,6 @@ generatedFiles:
   - docs/models/components/payrolltotalstype.md
   - docs/models/components/payrolltype.md
   - docs/models/components/payrollwithholdingpayperiodtype.md
-  - docs/models/components/payschedule.md
   - docs/models/components/payscheduleassignment.md
   - docs/models/components/payscheduleassignmentbody.md
   - docs/models/components/payscheduleassignmentbodytype.md
@@ -321,6 +321,8 @@ generatedFiles:
   - docs/models/components/payschedulecreateupdate.md
   - docs/models/components/payschedulefrequency.md
   - docs/models/components/payschedulefrequencycreateupdate.md
+  - docs/models/components/payschedulelist.md
+  - docs/models/components/payscheduleobject.md
   - docs/models/components/payscheduletype.md
   - docs/models/components/plaidstatus.md
   - docs/models/components/policytype.md
@@ -331,6 +333,7 @@ generatedFiles:
   - docs/models/components/primarysignatory.md
   - docs/models/components/ratetype.md
   - docs/models/components/recipienttype.md
+  - docs/models/components/reconciletaxmethod.md
   - docs/models/components/recoverycase.md
   - docs/models/components/recoverycasestatus.md
   - docs/models/components/rehire.md
@@ -352,6 +355,7 @@ generatedFiles:
   - docs/models/components/supportedbenefit.md
   - docs/models/components/taxes.md
   - docs/models/components/taxliabilitiesselections.md
+  - docs/models/components/taxrefunds.md
   - docs/models/components/taxrequirement.md
   - docs/models/components/taxrequirementmetadata.md
   - docs/models/components/taxrequirementmetadataoptions.md
@@ -486,6 +490,8 @@ generatedFiles:
   - docs/models/operations/getcompaniescompanyuuidholidaypaypolicyresponse.md
   - docs/models/operations/getcompaniescompanyuuidreporttemplatesreporttyperequest.md
   - docs/models/operations/getcompaniescompanyuuidreporttemplatesreporttyperesponse.md
+  - docs/models/operations/getcompaniescompanyuuidsuspensionsrequest.md
+  - docs/models/operations/getcompaniescompanyuuidsuspensionsresponse.md
   - docs/models/operations/getcompaniescompanyuuidtimeoffpoliciesrequest.md
   - docs/models/operations/getcompaniescompanyuuidtimeoffpoliciesresponse.md
   - docs/models/operations/getcompaniescompanyuuidwireinrequestuuidrequest.md
@@ -734,6 +740,7 @@ generatedFiles:
   - docs/models/operations/job.md
   - docs/models/operations/juneteenth.md
   - docs/models/operations/laborday.md
+  - docs/models/operations/leavingfor.md
   - docs/models/operations/liabilityselections.md
   - docs/models/operations/limitoption.md
   - docs/models/operations/memorialday.md
@@ -758,6 +765,9 @@ generatedFiles:
   - docs/models/operations/postcompaniescompanyuuidreportsrequest.md
   - docs/models/operations/postcompaniescompanyuuidreportsrequestbody.md
   - docs/models/operations/postcompaniescompanyuuidreportsresponse.md
+  - docs/models/operations/postcompaniescompanyuuidsuspensionsrequest.md
+  - docs/models/operations/postcompaniescompanyuuidsuspensionsrequestbody.md
+  - docs/models/operations/postcompaniescompanyuuidsuspensionsresponse.md
   - docs/models/operations/postcompaniescompanyuuidtimeoffpoliciesaccrualmethod.md
   - docs/models/operations/postcompaniescompanyuuidtimeoffpoliciesrequest.md
   - docs/models/operations/postcompaniescompanyuuidtimeoffpoliciesrequestbody.md
@@ -1124,6 +1134,8 @@ generatedFiles:
   - docs/models/operations/queryparamfrequency.md
   - docs/models/operations/queryparaminclude.md
   - docs/models/operations/questions.md
+  - docs/models/operations/reason.md
+  - docs/models/operations/reconciletaxmethod.md
   - docs/models/operations/redebitrecoverycaserequest.md
   - docs/models/operations/redebitrecoverycaseresponse.md
   - docs/models/operations/refreshaccesstokenrequest.md
@@ -1217,10 +1229,12 @@ generatedFiles:
   - src/funcs/companiesCreatePartnerManaged.ts
   - src/funcs/companiesFinishOnboarding.ts
   - src/funcs/companiesGet.ts
+  - src/funcs/companiesGetCompaniesCompanyUuidSuspensions.ts
   - src/funcs/companiesGetCustomFields.ts
   - src/funcs/companiesGetOnboardingStatus.ts
   - src/funcs/companiesListAdmins.ts
   - src/funcs/companiesMigrate.ts
+  - src/funcs/companiesPostCompaniesCompanyUuidSuspensions.ts
   - src/funcs/companiesRetrieveTermsOfService.ts
   - src/funcs/companiesUpdate.ts
   - src/funcs/companyAttachmentGetDownloadUrl.ts
@@ -1489,6 +1503,7 @@ generatedFiles:
   - src/models/components/companycustomfield.ts
   - src/models/components/companycustomfieldlist.ts
   - src/models/components/companyonboardingstatus.ts
+  - src/models/components/companysuspension.ts
   - src/models/components/compensation.ts
   - src/models/components/contractor.ts
   - src/models/components/contractoraddress.ts
@@ -1583,7 +1598,6 @@ generatedFiles:
   - src/models/components/payrollsubmissionblockerstype.ts
   - src/models/components/payrolltotalstype.ts
   - src/models/components/payrollwithholdingpayperiodtype.ts
-  - src/models/components/payschedule.ts
   - src/models/components/payscheduleassignment.ts
   - src/models/components/payscheduleassignmentbody.ts
   - src/models/components/payscheduleassignmentdepartment.ts
@@ -1595,6 +1609,8 @@ generatedFiles:
   - src/models/components/payschedulecreateupdate.ts
   - src/models/components/payschedulefrequency.ts
   - src/models/components/payschedulefrequencycreateupdate.ts
+  - src/models/components/payschedulelist.ts
+  - src/models/components/payscheduleobject.ts
   - src/models/components/postemployeeytdbenefitamountsfromdifferentcompany.ts
   - src/models/components/recoverycase.ts
   - src/models/components/rehire.ts
@@ -1653,6 +1669,7 @@ generatedFiles:
   - src/models/operations/getachtransactions.ts
   - src/models/operations/getcompaniescompanyuuidholidaypaypolicy.ts
   - src/models/operations/getcompaniescompanyuuidreporttemplatesreporttype.ts
+  - src/models/operations/getcompaniescompanyuuidsuspensions.ts
   - src/models/operations/getcompaniescompanyuuidtimeoffpolicies.ts
   - src/models/operations/getcompaniescompanyuuidwireinrequestuuid.ts
   - src/models/operations/getcompaniesdepartments.ts
@@ -1767,6 +1784,7 @@ generatedFiles:
   - src/models/operations/getwireinrequestswireinrequestuuid.ts
   - src/models/operations/postcompaniescompanyuuidholidaypaypolicy.ts
   - src/models/operations/postcompaniescompanyuuidreports.ts
+  - src/models/operations/postcompaniescompanyuuidsuspensions.ts
   - src/models/operations/postcompaniescompanyuuidtimeoffpolicies.ts
   - src/models/operations/postcompaniespayrollskipcompanyuuid.ts
   - src/models/operations/postdepartments.ts
@@ -1887,10 +1905,12 @@ generatedFiles:
   - src/react-query/companiesCreatePartnerManaged.ts
   - src/react-query/companiesFinishOnboarding.ts
   - src/react-query/companiesGet.ts
+  - src/react-query/companiesGetCompaniesCompanyUuidSuspensions.ts
   - src/react-query/companiesGetCustomFields.ts
   - src/react-query/companiesGetOnboardingStatus.ts
   - src/react-query/companiesListAdmins.ts
   - src/react-query/companiesMigrate.ts
+  - src/react-query/companiesPostCompaniesCompanyUuidSuspensions.ts
   - src/react-query/companiesRetrieveTermsOfService.ts
   - src/react-query/companiesUpdate.ts
   - src/react-query/companyAttachmentGetDownloadUrl.ts
@@ -3582,7 +3602,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "2097fe08-407a-46d7-b35c-a32402a2355e", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "Engineering department pay schedule", "auto_pilot": false, "active": true}, {"uuid": "8fc9f556-74fa-4271-97f6-4bfbfc5a5352", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Sales", "custom_name": "Sales department monthly schedule", "auto_pilot": false, "active": false}, {"uuid": "0e07d35a-af11-4123-bfcb-4dd5f2f12ee1", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Staff", "custom_name": "Staff department pay schedule", "auto_pilot": true, "active": false}]
+          application/json: [{"uuid": "2097fe08-407a-46d7-b35c-a32402a2355e", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "Engineering department pay schedule", "auto_pilot": false, "active": true, "version": "68934a3e9455fa72420237eb05902327"}, {"uuid": "8fc9f556-74fa-4271-97f6-4bfbfc5a5352", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Sales", "custom_name": "Sales department monthly schedule", "auto_pilot": false, "active": false, "version": "68934a3e9455fa72420237eb05902320"}, {"uuid": "0e07d35a-af11-4123-bfcb-4dd5f2f12ee1", "frequency": "Monthly", "anchor_pay_date": "2020-05-31", "day_1": 31, "day_2": null, "name": "Staff", "custom_name": "Staff department pay schedule", "auto_pilot": true, "active": false, "version": "68934a3e9455fa72420237eb05902323"}]
   get-v1-companies-company_id-pay_schedules-preview:
     Example:
       parameters:
@@ -3607,7 +3627,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "f2a69c38-e2f9-4e31-b5c5-4754fc60a052", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "A new monthly pay schedule", "auto_pilot": false, "active": true}
+          application/json: {"uuid": "f2a69c38-e2f9-4e31-b5c5-4754fc60a052", "frequency": "Twice per month", "anchor_pay_date": "2020-05-15", "anchor_end_of_pay_period": "2020-05-08", "day_1": 15, "day_2": 31, "name": "Engineering", "custom_name": "A new monthly pay schedule", "auto_pilot": false, "active": true, "version": "68934a3e9455fa72420237eb05902327"}
   put-v1-companies-company_id-pay_schedules-pay_schedule_id:
     Example:
       parameters:
@@ -8783,5 +8803,65 @@ examples:
       responses:
         "200":
           application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d3", "benefit_type": 1, "ytd_employee_deduction_amount": "5000.00", "ytd_company_contribution_amount": "2500.00"}, {"uuid": "1bfdb946-b2be-4909-ac46-9e7f73872d0a", "benefit_type": 5, "ytd_employee_deduction_amount": "2132.00", "ytd_company_contribution_amount": "3345.00"}]
+  get-companies-company_uuid-suspensions:
+    speakeasy-default-get-companies-company-uuid-suspensions:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{}]
+  post-companies-company_uuid-suspensions:
+    Leaving to join another payroll provider:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": true, "file_yearly_forms": true, "reconcile_tax_method": "pay_taxes", "reason": "switching_provider", "leaving_for": "other"}
+    Company is shutting down:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": true, "file_yearly_forms": true, "reconcile_tax_method": "pay_taxes", "reason": "shutting_down"}
+    Basic:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": true, "file_yearly_forms": true, "reconcile_tax_method": "pay_taxes", "reason": "acquired"}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
+    Resource:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": false, "file_yearly_forms": false, "reconcile_tax_method": "refund_taxes", "reason": "shutting_down"}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
+    Nested:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": false, "file_yearly_forms": false, "reconcile_tax_method": "refund_taxes", "reason": "no_more_employees"}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}}]}
 examplesVersion: 1.0.0
 generatedTests: {}

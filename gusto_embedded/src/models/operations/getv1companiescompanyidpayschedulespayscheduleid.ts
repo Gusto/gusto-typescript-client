@@ -13,11 +13,11 @@ import {
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PaySchedule,
-  PaySchedule$inboundSchema,
-  PaySchedule$Outbound,
-  PaySchedule$outboundSchema,
-} from "../components/payschedule.js";
+  PayScheduleObject,
+  PayScheduleObject$inboundSchema,
+  PayScheduleObject$Outbound,
+  PayScheduleObject$outboundSchema,
+} from "../components/payscheduleobject.js";
 import {
   VersionHeader,
   VersionHeader$inboundSchema,
@@ -45,7 +45,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse = {
   /**
    * Example response
    */
-  paySchedule?: PaySchedule | undefined;
+  payScheduleObject?: PayScheduleObject | undefined;
 };
 
 /** @internal */
@@ -140,11 +140,11 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSch
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule": PaySchedule$inboundSchema.optional(),
+    "Pay-Schedule-Object": PayScheduleObject$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Pay-Schedule": "paySchedule",
+      "Pay-Schedule-Object": "payScheduleObject",
     });
   });
 
@@ -152,7 +152,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSch
 export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound =
   {
     HttpMeta: HTTPMetadata$Outbound;
-    "Pay-Schedule"?: PaySchedule$Outbound | undefined;
+    "Pay-Schedule-Object"?: PayScheduleObject$Outbound | undefined;
   };
 
 /** @internal */
@@ -163,11 +163,11 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSc
     GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    paySchedule: PaySchedule$outboundSchema.optional(),
+    payScheduleObject: PayScheduleObject$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
-      paySchedule: "Pay-Schedule",
+      payScheduleObject: "Pay-Schedule-Object",
     });
   });
 

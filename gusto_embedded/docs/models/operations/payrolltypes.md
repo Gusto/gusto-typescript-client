@@ -5,7 +5,7 @@
 ```typescript
 import { PayrollTypes } from "@gusto/embedded-api/models/operations/getv1companiescompanyidpayrolls.js";
 
-let value: PayrollTypes = "off_cycle";
+let value: PayrollTypes = "external";
 ```
 
 ## Values

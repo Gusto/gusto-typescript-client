@@ -9,7 +9,7 @@ let value: PutV1EmployeesEmployeeIdBankAccountsRequestBody = {
   name: "<value>",
   routingNumber: "<value>",
   accountNumber: "<value>",
-  accountType: "Checking",
+  accountType: "Savings",
 };
 ```
 

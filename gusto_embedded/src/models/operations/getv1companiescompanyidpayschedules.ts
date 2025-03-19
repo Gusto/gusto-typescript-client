@@ -13,11 +13,11 @@ import {
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PaySchedule,
-  PaySchedule$inboundSchema,
-  PaySchedule$Outbound,
-  PaySchedule$outboundSchema,
-} from "../components/payschedule.js";
+  PayScheduleList,
+  PayScheduleList$inboundSchema,
+  PayScheduleList$Outbound,
+  PayScheduleList$outboundSchema,
+} from "../components/payschedulelist.js";
 import {
   VersionHeader,
   VersionHeader$inboundSchema,
@@ -49,7 +49,7 @@ export type GetV1CompaniesCompanyIdPaySchedulesResponse = {
   /**
    * Example response
    */
-  payScheduleList?: Array<PaySchedule> | undefined;
+  payScheduleList?: Array<PayScheduleList> | undefined;
 };
 
 /** @internal */
@@ -143,7 +143,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Pay-Schedule-List": z.array(PaySchedule$inboundSchema).optional(),
+    "Pay-Schedule-List": z.array(PayScheduleList$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
@@ -154,7 +154,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesResponse$inboundSchema:
 /** @internal */
 export type GetV1CompaniesCompanyIdPaySchedulesResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Pay-Schedule-List"?: Array<PaySchedule$Outbound> | undefined;
+  "Pay-Schedule-List"?: Array<PayScheduleList$Outbound> | undefined;
 };
 
 /** @internal */
@@ -165,7 +165,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesResponse$outboundSchema:
     GetV1CompaniesCompanyIdPaySchedulesResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    payScheduleList: z.array(PaySchedule$outboundSchema).optional(),
+    payScheduleList: z.array(PayScheduleList$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",

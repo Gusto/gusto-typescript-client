@@ -9,7 +9,7 @@ import { PayrollMinimal } from "@gusto/embedded-api/models/components/payrollmin
 
 let value: PayrollMinimal = {
   processed: false,
-  uuid: "77de7ac8-4a9e-40e8-b05b-7f65d8aca619",
+  uuid: "ea1045cf-6afb-4a15-9e3d-b588b82c6f44",
   payrollUuid: "<id>",
   companyUuid: "<id>",
 };

@@ -14,7 +14,7 @@ let value: GetV1CompaniesCompanyUuidContractorsResponse = {
   },
   contractorList: [
     {
-      uuid: "1d955c5a-87e8-4db0-ac3e-0517d425d231",
+      uuid: "17d425d2-31b6-44b5-9bd3-f242578de391",
       hourlyRate: "50.0",
     },
   ],

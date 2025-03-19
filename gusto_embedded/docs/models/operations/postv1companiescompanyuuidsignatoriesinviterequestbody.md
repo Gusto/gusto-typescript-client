@@ -6,7 +6,7 @@
 import { PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody } from "@gusto/embedded-api/models/operations/postv1companiescompanyuuidsignatoriesinvite.js";
 
 let value: PostV1CompaniesCompanyUuidSignatoriesInviteRequestBody = {
-  email: "David86@hotmail.com",
+  email: "Sonia_Lockman-Goodwin@yahoo.com",
 };
 ```
 

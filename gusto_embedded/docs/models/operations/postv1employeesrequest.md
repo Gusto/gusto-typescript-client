@@ -8,8 +8,8 @@ import { PostV1EmployeesRequest } from "@gusto/embedded-api/models/operations/po
 let value: PostV1EmployeesRequest = {
   companyId: "<id>",
   requestBody: {
-    firstName: "Nadia",
-    lastName: "Pacocha",
+    firstName: "Fredy",
+    lastName: "Hauck",
   },
 };
 ```
