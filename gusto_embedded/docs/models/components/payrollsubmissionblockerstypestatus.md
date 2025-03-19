@@ -7,7 +7,7 @@ The status of the submission blocker.
 ```typescript
 import { PayrollSubmissionBlockersTypeStatus } from "@gusto/embedded-api/models/components/payrollsubmissionblockerstype.js";
 
-let value: PayrollSubmissionBlockersTypeStatus = "resolved";
+let value: PayrollSubmissionBlockersTypeStatus = "unresolved";
 ```
 
 ## Values

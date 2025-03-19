@@ -1,9 +1,5 @@
 # Value
 
-For the `amount` and `percentage` contribution types, the value of the corresponding amount or percentage.
-
-For the `tiered` contribution type, an array of tiers.
-
 
 ## Supported Types
 
@@ -13,11 +9,15 @@ For the `tiered` contribution type, an array of tiers.
 const value: string = "<value>";
 ```
 
-### `operations.Two[]`
+### `number`
 
 ```typescript
-const value: operations.Two[] = [
-  {},
-];
+const value: number = 7317.44;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = false;
 ```
 

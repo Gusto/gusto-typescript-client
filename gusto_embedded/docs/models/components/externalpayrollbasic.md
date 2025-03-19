@@ -8,7 +8,7 @@ The representation of an external payroll with minimal information.
 import { ExternalPayrollBasic } from "@gusto/embedded-api/models/components/externalpayrollbasic.js";
 
 let value: ExternalPayrollBasic = {
-  uuid: "af8c556a-5ef0-4310-b37d-37eac8f90369",
+  uuid: "e8bce286-e1fe-417b-bbec-47b2374d95dc",
 };
 ```
 

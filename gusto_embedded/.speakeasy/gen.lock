@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 937393749e06083076de283cdc9d570c
+  docChecksum: d59f4dd77e3f051008140d0e55a9afdc
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.520.1
-  generationVersion: 2.556.1
-  releaseVersion: 0.5.3
-  configChecksum: a1b404e58df459e353eb24c21c321fce
+  speakeasyVersion: 1.521.0
+  generationVersion: 2.558.2
+  releaseVersion: 0.5.4
+  configChecksum: 9891b18a7b42a3cc996e558e86bfea84
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -860,6 +860,7 @@ generatedFiles:
   - docs/models/operations/postv1employeesemployeeidemployeebenefitsrequestbody.md
   - docs/models/operations/postv1employeesemployeeidemployeebenefitsresponse.md
   - docs/models/operations/postv1employeesemployeeidemployeebenefitstype.md
+  - docs/models/operations/postv1employeesemployeeidemployeebenefitsvalue.md
   - docs/models/operations/postv1employeesemployeeidgarnishmentsrequest.md
   - docs/models/operations/postv1employeesemployeeidgarnishmentsrequestbody.md
   - docs/models/operations/postv1employeesemployeeidgarnishmentsresponse.md
@@ -4911,7 +4912,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"states": [{"state": "CA", "questions": [{"key": "filing_status", "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "withholding_allowance", "answers": [{"value": "2", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "additional_withholding", "answers": [{"value": "25.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "file_new_hire_report", "answers": [{"value": "true", "valid_from": "2010-01-01", "valid_up_to": null}]}]}]}
+        application/json: {"states": [{"state": "CA", "questions": [{"key": "filing_status", "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "withholding_allowance", "answers": [{"value": 2, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "additional_withholding", "answers": [{"value": "25.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"key": "file_new_hire_report", "answers": [{"value": true, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]}
       responses:
         "200":
           application/json: [{"employee_uuid": "<id>", "state": "Ohio", "questions": [{"label": "<value>", "description": "which difficult really", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}]}]}, {"employee_uuid": "<id>", "state": "Alabama", "questions": []}, {"employee_uuid": "<id>", "state": "Tennessee", "questions": [{"label": "<value>", "description": "notwithstanding yippee now cinch against however unearth outside stiff", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}, {}]}, {"label": "<value>", "description": "incidentally shadowy cleverly", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}, {}]}, {"label": "<value>", "description": "off frizz yowza huzzah whose", "key": "<key>", "input_question_format": {"type": "<value>"}, "answers": [{}, {}]}]}]

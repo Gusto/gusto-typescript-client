@@ -7,7 +7,7 @@ Payroll type
 ```typescript
 import { PayrollType } from "@gusto/embedded-api/models/operations/postcompaniespayrollskipcompanyuuid.js";
 
-let value: PayrollType = "Transition from old pay schedule";
+let value: PayrollType = "Hired employee";
 ```
 
 ## Values

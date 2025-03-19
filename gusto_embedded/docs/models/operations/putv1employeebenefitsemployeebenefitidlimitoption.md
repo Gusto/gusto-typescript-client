@@ -13,7 +13,7 @@ their limit.
 import { PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption } from "@gusto/embedded-api/models/operations/putv1employeebenefitsemployeebenefitid.js";
 
 let value: PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption =
-  "Joint Filing or Single";
+  "Married and Filing Separately";
 ```
 
 ## Values

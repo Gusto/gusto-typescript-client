@@ -13,7 +13,7 @@ let value: PutV1ContractorsContractorUuidResponse = {
     request: new Request("https://example.com"),
   },
   contractor: {
-    uuid: "f3a907b0-e803-4f91-8470-6739c39afcd7",
+    uuid: "a907b0e8-03f9-4147-8067-39c39afcd72f",
     hourlyRate: "50.0",
   },
 };

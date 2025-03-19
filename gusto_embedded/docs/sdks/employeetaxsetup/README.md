@@ -389,7 +389,7 @@ async function run() {
               key: "withholding_allowance",
               answers: [
                 {
-                  value: "2",
+                  value: 2,
                   validFrom: "2010-01-01",
                   validUpTo: null,
                 },
@@ -409,7 +409,7 @@ async function run() {
               key: "file_new_hire_report",
               answers: [
                 {
-                  value: "true",
+                  value: true,
                   validFrom: "2010-01-01",
                   validUpTo: null,
                 },
@@ -464,7 +464,7 @@ async function run() {
               key: "withholding_allowance",
               answers: [
                 {
-                  value: "2",
+                  value: 2,
                   validFrom: "2010-01-01",
                   validUpTo: null,
                 },
@@ -484,7 +484,7 @@ async function run() {
               key: "file_new_hire_report",
               answers: [
                 {
-                  value: "true",
+                  value: true,
                   validFrom: "2010-01-01",
                   validUpTo: null,
                 },

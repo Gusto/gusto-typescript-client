@@ -25,8 +25,10 @@ import {
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type Value = string | number | boolean;
+
 export type Answers = {
-  value: string;
+  value: string | number | boolean | null;
   validFrom: string;
   validUpTo?: any | null | undefined;
 };
@@ -66,9 +68,50 @@ export type PutV1EmployeesEmployeeIdStateTaxesResponse = {
 };
 
 /** @internal */
+export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
+  .union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type Value$Outbound = string | number | boolean;
+
+/** @internal */
+export const Value$outboundSchema: z.ZodType<
+  Value$Outbound,
+  z.ZodTypeDef,
+  Value
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Value$ {
+  /** @deprecated use `Value$inboundSchema` instead. */
+  export const inboundSchema = Value$inboundSchema;
+  /** @deprecated use `Value$outboundSchema` instead. */
+  export const outboundSchema = Value$outboundSchema;
+  /** @deprecated use `Value$Outbound` instead. */
+  export type Outbound = Value$Outbound;
+}
+
+export function valueToJSON(value: Value): string {
+  return JSON.stringify(Value$outboundSchema.parse(value));
+}
+
+export function valueFromJSON(
+  jsonString: string,
+): SafeParseResult<Value, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Value$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Value' from JSON`,
+  );
+}
+
+/** @internal */
 export const Answers$inboundSchema: z.ZodType<Answers, z.ZodTypeDef, unknown> =
   z.object({
-    value: z.string(),
+    value: z.nullable(z.union([z.string(), z.number(), z.boolean()])),
     valid_from: z.string(),
     valid_up_to: z.nullable(z.any()).optional(),
   }).transform((v) => {
@@ -80,7 +123,7 @@ export const Answers$inboundSchema: z.ZodType<Answers, z.ZodTypeDef, unknown> =
 
 /** @internal */
 export type Answers$Outbound = {
-  value: string;
+  value: string | number | boolean | null;
   valid_from: string;
   valid_up_to?: any | null | undefined;
 };
@@ -91,7 +134,7 @@ export const Answers$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Answers
 > = z.object({
-  value: z.string(),
+  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])),
   validFrom: z.string(),
   validUpTo: z.nullable(z.any()).optional(),
 }).transform((v) => {

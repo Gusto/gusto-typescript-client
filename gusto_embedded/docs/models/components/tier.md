@@ -7,7 +7,7 @@ The Gusto product tier of the company (not applicable to Embedded partner manage
 ```typescript
 import { Tier } from "@gusto/embedded-api/models/components/company.js";
 
-let value: Tier = "concierge";
+let value: Tier = "basic";
 ```
 
 ## Values
