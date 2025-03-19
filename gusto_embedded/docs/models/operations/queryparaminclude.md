@@ -5,7 +5,7 @@
 ```typescript
 import { QueryParamInclude } from "@gusto/embedded-api/models/operations/getv1employees.js";
 
-let value: QueryParamInclude = "all_compensations";
+let value: QueryParamInclude = "custom_fields";
 ```
 
 ## Values

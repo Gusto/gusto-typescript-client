@@ -8,7 +8,7 @@ import { PostV1CompaniesCompanyIdPaySchedulesRequest } from "@gusto/embedded-api
 let value: PostV1CompaniesCompanyIdPaySchedulesRequest = {
   companyId: "<id>",
   requestBody: {
-    frequency: "Twice per month",
+    frequency: "Every week",
     anchorPayDate: "2020-05-15",
     anchorEndOfPayPeriod: "2020-05-08",
   },

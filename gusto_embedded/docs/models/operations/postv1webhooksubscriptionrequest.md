@@ -7,9 +7,9 @@ import { PostV1WebhookSubscriptionRequest } from "@gusto/embedded-api/models/ope
 
 let value: PostV1WebhookSubscriptionRequest = {
   requestBody: {
-    url: "https://political-paintwork.org/",
+    url: "https://giving-orchid.net/",
     subscriptionTypes: [
-      "Notification",
+      "BankAccount",
     ],
   },
 };

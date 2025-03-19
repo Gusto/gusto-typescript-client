@@ -7,7 +7,7 @@ Status of the recovery case
 ```typescript
 import { RecoveryCaseStatus } from "@gusto/embedded-api/models/components/recoverycase.js";
 
-let value: RecoveryCaseStatus = "open";
+let value: RecoveryCaseStatus = "recovered";
 ```
 
 ## Values

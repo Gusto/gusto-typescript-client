@@ -6,8 +6,8 @@
 import { PostV1CompensationsCompensationIdRequestBody } from "@gusto/embedded-api/models/operations/postv1compensationscompensationid.js";
 
 let value: PostV1CompensationsCompensationIdRequestBody = {
-  paymentUnit: "Week",
-  flsaStatus: "Salaried Nonexempt",
+  paymentUnit: "Month",
+  flsaStatus: "Owner",
 };
 ```
 

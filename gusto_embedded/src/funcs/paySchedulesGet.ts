@@ -177,7 +177,7 @@ async function $do(
     M.json(
       200,
       GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema,
-      { key: "Pay-Schedule" },
+      { key: "Pay-Schedule-Object" },
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

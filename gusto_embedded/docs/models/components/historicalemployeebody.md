@@ -6,16 +6,16 @@
 import { HistoricalEmployeeBody } from "@gusto/embedded-api/models/components/historicalemployeebody.js";
 
 let value: HistoricalEmployeeBody = {
-  firstName: "Oleta",
-  lastName: "Wuckert",
-  dateOfBirth: "1948-10-10",
+  firstName: "Rod",
+  lastName: "Lockman",
+  dateOfBirth: "1962-09-17",
   ssn: "<value>",
   workAddress: {},
   homeAddress: {
     street1: "<value>",
-    city: "Gleasonbury",
-    state: "Hawaii",
-    zip: "18608-6975",
+    city: "Danville",
+    state: "Alabama",
+    zip: "50587",
   },
   termination: {},
   job: {},

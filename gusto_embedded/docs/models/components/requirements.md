@@ -5,7 +5,7 @@
 ```typescript
 import { Requirements } from "@gusto/embedded-api/models/components/companyonboardingstatus.js";
 
-let value: Requirements = "payroll_schedule";
+let value: Requirements = "state_setup";
 ```
 
 ## Values

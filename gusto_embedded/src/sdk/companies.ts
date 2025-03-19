@@ -7,13 +7,19 @@ import { companiesCreateAdmin } from "../funcs/companiesCreateAdmin.js";
 import { companiesCreatePartnerManaged } from "../funcs/companiesCreatePartnerManaged.js";
 import { companiesFinishOnboarding } from "../funcs/companiesFinishOnboarding.js";
 import { companiesGet } from "../funcs/companiesGet.js";
+import { companiesGetCompaniesCompanyUuidSuspensions } from "../funcs/companiesGetCompaniesCompanyUuidSuspensions.js";
 import { companiesGetCustomFields } from "../funcs/companiesGetCustomFields.js";
 import { companiesGetOnboardingStatus } from "../funcs/companiesGetOnboardingStatus.js";
 import { companiesListAdmins } from "../funcs/companiesListAdmins.js";
 import { companiesMigrate } from "../funcs/companiesMigrate.js";
+import { companiesPostCompaniesCompanyUuidSuspensions } from "../funcs/companiesPostCompaniesCompanyUuidSuspensions.js";
 import { companiesRetrieveTermsOfService } from "../funcs/companiesRetrieveTermsOfService.js";
 import { companiesUpdate } from "../funcs/companiesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import {
+  GetCompaniesCompanyUuidSuspensionsRequest,
+  GetCompaniesCompanyUuidSuspensionsResponse,
+} from "../models/operations/getcompaniescompanyuuidsuspensions.js";
 import {
   GetV1CompaniesRequest,
   GetV1CompaniesResponse,
@@ -34,6 +40,10 @@ import {
   GetV1CompanyOnboardingStatusRequest,
   GetV1CompanyOnboardingStatusResponse,
 } from "../models/operations/getv1companyonboardingstatus.js";
+import {
+  PostCompaniesCompanyUuidSuspensionsRequest,
+  PostCompaniesCompanyUuidSuspensionsResponse,
+} from "../models/operations/postcompaniescompanyuuidsuspensions.js";
 import {
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
@@ -301,6 +311,48 @@ export class Companies extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyIdCustomFieldsResponse> {
     return unwrapAsync(companiesGetCustomFields(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get suspensions for this company
+   *
+   * @remarks
+   * Get existing suspension records for this company. A company may have multiple suspension records if they have suspended their Gusto account more than once.
+   *
+   * > 📘 To check if company is already suspended
+   * >
+   * > To determine if a company is _currently_ suspended, use the `is_suspended` and `company_status` fields in the [Get a company](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies) endpoint.
+   *
+   * scope: `company_suspensions:read`
+   */
+  async getCompaniesCompanyUuidSuspensions(
+    request: GetCompaniesCompanyUuidSuspensionsRequest,
+    options?: RequestOptions,
+  ): Promise<GetCompaniesCompanyUuidSuspensionsResponse> {
+    return unwrapAsync(companiesGetCompaniesCompanyUuidSuspensions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Suspend a company's account
+   *
+   * @remarks
+   * Use this endpoint to suspend a company. After suspension, company will no longer be able to run payroll but will retain access to their information, such as retrieving employee info or retrieving past payrolls.
+   *
+   * scope: `company_suspensions:write`
+   */
+  async postCompaniesCompanyUuidSuspensions(
+    request: PostCompaniesCompanyUuidSuspensionsRequest,
+    options?: RequestOptions,
+  ): Promise<PostCompaniesCompanyUuidSuspensionsResponse> {
+    return unwrapAsync(companiesPostCompaniesCompanyUuidSuspensions(
       this,
       request,
       options,

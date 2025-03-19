@@ -16,7 +16,7 @@ import {
 /**
  * The representation of a pay schedule.
  */
-export type PaySchedule = {
+export type PayScheduleList = {
   /**
    * The unique identifier of the pay schedule in Gusto.
    */
@@ -57,11 +57,15 @@ export type PaySchedule = {
    * Whether this pay schedule is associated with any employees. A pay schedule is inactive when it's unassigned.
    */
   active?: boolean | undefined;
+  /**
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   */
+  version: string;
 };
 
 /** @internal */
-export const PaySchedule$inboundSchema: z.ZodType<
-  PaySchedule,
+export const PayScheduleList$inboundSchema: z.ZodType<
+  PayScheduleList,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -75,6 +79,7 @@ export const PaySchedule$inboundSchema: z.ZodType<
   custom_name: z.string().optional(),
   auto_pilot: z.boolean().optional(),
   active: z.boolean().optional(),
+  version: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "anchor_pay_date": "anchorPayDate",
@@ -87,7 +92,7 @@ export const PaySchedule$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type PaySchedule$Outbound = {
+export type PayScheduleList$Outbound = {
   uuid: string;
   frequency?: string | undefined;
   anchor_pay_date?: string | undefined;
@@ -98,13 +103,14 @@ export type PaySchedule$Outbound = {
   custom_name?: string | undefined;
   auto_pilot?: boolean | undefined;
   active?: boolean | undefined;
+  version: string;
 };
 
 /** @internal */
-export const PaySchedule$outboundSchema: z.ZodType<
-  PaySchedule$Outbound,
+export const PayScheduleList$outboundSchema: z.ZodType<
+  PayScheduleList$Outbound,
   z.ZodTypeDef,
-  PaySchedule
+  PayScheduleList
 > = z.object({
   uuid: z.string(),
   frequency: PayScheduleFrequency$outboundSchema.optional(),
@@ -116,6 +122,7 @@ export const PaySchedule$outboundSchema: z.ZodType<
   customName: z.string().optional(),
   autoPilot: z.boolean().optional(),
   active: z.boolean().optional(),
+  version: z.string(),
 }).transform((v) => {
   return remap$(v, {
     anchorPayDate: "anchor_pay_date",
@@ -131,25 +138,27 @@ export const PaySchedule$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PaySchedule$ {
-  /** @deprecated use `PaySchedule$inboundSchema` instead. */
-  export const inboundSchema = PaySchedule$inboundSchema;
-  /** @deprecated use `PaySchedule$outboundSchema` instead. */
-  export const outboundSchema = PaySchedule$outboundSchema;
-  /** @deprecated use `PaySchedule$Outbound` instead. */
-  export type Outbound = PaySchedule$Outbound;
+export namespace PayScheduleList$ {
+  /** @deprecated use `PayScheduleList$inboundSchema` instead. */
+  export const inboundSchema = PayScheduleList$inboundSchema;
+  /** @deprecated use `PayScheduleList$outboundSchema` instead. */
+  export const outboundSchema = PayScheduleList$outboundSchema;
+  /** @deprecated use `PayScheduleList$Outbound` instead. */
+  export type Outbound = PayScheduleList$Outbound;
 }
 
-export function payScheduleToJSON(paySchedule: PaySchedule): string {
-  return JSON.stringify(PaySchedule$outboundSchema.parse(paySchedule));
+export function payScheduleListToJSON(
+  payScheduleList: PayScheduleList,
+): string {
+  return JSON.stringify(PayScheduleList$outboundSchema.parse(payScheduleList));
 }
 
-export function payScheduleFromJSON(
+export function payScheduleListFromJSON(
   jsonString: string,
-): SafeParseResult<PaySchedule, SDKValidationError> {
+): SafeParseResult<PayScheduleList, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PaySchedule$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PaySchedule' from JSON`,
+    (x) => PayScheduleList$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayScheduleList' from JSON`,
   );
 }

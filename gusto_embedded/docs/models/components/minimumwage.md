@@ -9,10 +9,10 @@ import { MinimumWage } from "@gusto/embedded-api/models/components/minimumwage.j
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: MinimumWage = {
-  uuid: "ec5537fe-10e8-43aa-a140-323a012544cf",
+  uuid: "88a51528-5ff9-49fe-9c55-37fe10e83aa1",
   wage: "<value>",
   wageType: "<value>",
-  effectiveDate: new RFCDate("2025-10-31"),
+  effectiveDate: new RFCDate("2023-03-07"),
   authority: "<value>",
 };
 ```

@@ -7,7 +7,7 @@ import { PostV1CompaniesCompanyIdPayrollsRequestBody } from "@gusto/embedded-api
 
 let value: PostV1CompaniesCompanyIdPayrollsRequestBody = {
   offCycle: false,
-  offCycleReason: "Correction",
+  offCycleReason: "Transition from old pay schedule",
   startDate: "<value>",
   endDate: "<value>",
 };

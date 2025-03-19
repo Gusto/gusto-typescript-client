@@ -6,8 +6,8 @@
 import { PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody } from "@gusto/embedded-api/models/operations/putv1companiescompanyidbankaccountsverify.js";
 
 let value: PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody = {
-  deposit1: 6719.57,
-  deposit2: 9488.61,
+  deposit1: 6232.95,
+  deposit2: 8869.61,
 };
 ```
 

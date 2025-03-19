@@ -8,7 +8,7 @@ An employee's I-9 verification document
 import { I9AuthorizationDocument } from "@gusto/embedded-api/models/components/i9authorizationdocument.js";
 
 let value: I9AuthorizationDocument = {
-  uuid: "d717d709-fd9e-4d79-abd0-c7ac8261bfc6",
+  uuid: "ff2e1825-b6cb-4f8c-a556-6181e0742cb2",
   documentType: "<value>",
   documentTitle: "<value>",
   issuingAuthority: "<value>",

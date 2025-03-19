@@ -8,7 +8,7 @@ OK
 import { PostV1SandboxGenerateW2Form } from "@gusto/embedded-api/models/operations/postv1sandboxgeneratew2.js";
 
 let value: PostV1SandboxGenerateW2Form = {
-  uuid: "f271ffb5-4428-425a-ab06-ad7f4074d34c",
+  uuid: "7f4074d3-4cb8-4b60-a081-0fd20f42b14f",
 };
 ```
 

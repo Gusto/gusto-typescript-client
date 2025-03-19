@@ -8,7 +8,7 @@ The representation of a single contractor payment.
 import { ContractorPayment } from "@gusto/embedded-api/models/components/contractorpayment.js";
 
 let value: ContractorPayment = {
-  uuid: "fb8c1713-256f-447c-8dc4-7236b8ed099f",
+  uuid: "12a9de24-6013-474e-95ef-734c4679f354",
 };
 ```
 
