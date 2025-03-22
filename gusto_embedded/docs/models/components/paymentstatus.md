@@ -7,7 +7,7 @@ The status of the ACH transaction
 ```typescript
 import { PaymentStatus } from "@gusto/embedded-api/models/components/achtransaction.js";
 
-let value: PaymentStatus = "failed";
+let value: PaymentStatus = "submitted";
 ```
 
 ## Values

@@ -8,7 +8,7 @@ Representation of a notification
 import { Notification } from "@gusto/embedded-api/models/components/notification.js";
 
 let value: Notification = {
-  uuid: "4176e211-e729-4839-8538-43e24643c518",
+  uuid: "f72a998f-2123-4993-b777-c7c28d2792c1",
 };
 ```
 

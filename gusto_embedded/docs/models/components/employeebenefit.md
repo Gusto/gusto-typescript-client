@@ -8,7 +8,7 @@ The representation of an employee benefit.
 import { EmployeeBenefit } from "@gusto/embedded-api/models/components/employeebenefit.js";
 
 let value: EmployeeBenefit = {
-  uuid: "1a82f59e-81d5-4fed-95cf-870bd3581164",
+  uuid: "fc7d1a82-f59e-481d-85fe-d5cf870bd358",
 };
 ```
 

@@ -8,7 +8,7 @@ import { PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest } from "@gusto
 let value: PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
   employeeId: "<id>",
   postEmployeeYtdBenefitAmountsFromDifferentCompany: {
-    taxYear: 6271.61,
+    taxYear: 9926.67,
   },
 };
 ```

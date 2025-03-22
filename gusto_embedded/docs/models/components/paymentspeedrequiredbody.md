@@ -6,7 +6,7 @@
 import { PaymentSpeedRequiredBody } from "@gusto/embedded-api/models/components/paymentspeedrequiredbody.js";
 
 let value: PaymentSpeedRequiredBody = {
-  paymentSpeed: "2-day",
+  paymentSpeed: "4-day",
 };
 ```
 

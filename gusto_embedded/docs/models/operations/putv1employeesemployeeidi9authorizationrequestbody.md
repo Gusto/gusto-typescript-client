@@ -6,7 +6,7 @@
 import { PutV1EmployeesEmployeeIdI9AuthorizationRequestBody } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidi9authorization.js";
 
 let value: PutV1EmployeesEmployeeIdI9AuthorizationRequestBody = {
-  authorizationStatus: "alien",
+  authorizationStatus: "noncitizen",
 };
 ```
 

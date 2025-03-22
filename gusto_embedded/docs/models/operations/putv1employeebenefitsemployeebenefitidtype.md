@@ -13,7 +13,7 @@ The company contribution scheme.
 ```typescript
 import { PutV1EmployeeBenefitsEmployeeBenefitIdType } from "@gusto/embedded-api/models/operations/putv1employeebenefitsemployeebenefitid.js";
 
-let value: PutV1EmployeeBenefitsEmployeeBenefitIdType = "tiered";
+let value: PutV1EmployeeBenefitsEmployeeBenefitIdType = "percentage";
 ```
 
 ## Values
