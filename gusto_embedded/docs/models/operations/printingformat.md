@@ -7,7 +7,7 @@ The type of check stock being printed. Check the "Types of check stock" section 
 ```typescript
 import { PrintingFormat } from "@gusto/embedded-api/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.js";
 
-let value: PrintingFormat = "bottom";
+let value: PrintingFormat = "top";
 ```
 
 ## Values

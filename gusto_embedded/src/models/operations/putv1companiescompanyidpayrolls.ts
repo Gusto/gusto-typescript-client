@@ -122,8 +122,41 @@ export type EmployeeCompensations = {
   paidTimeOff?: Array<PaidTimeOff> | undefined;
 };
 
+/**
+ * The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
+ */
+export const PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod = {
+  EveryWeek: "Every week",
+  EveryOtherWeek: "Every other week",
+  TwicePerMonth: "Twice per month",
+  Monthly: "Monthly",
+  Quarterly: "Quarterly",
+  Semiannually: "Semiannually",
+  Annually: "Annually",
+} as const;
+/**
+ * The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
+ */
+export type PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod = ClosedEnum<
+  typeof PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod
+>;
+
 export type PutV1CompaniesCompanyIdPayrollsRequestBody = {
   employeeCompensations: Array<EmployeeCompensations>;
+  /**
+   * The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
+   */
+  withholdingPayPeriod?:
+    | PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod
+    | undefined;
+  /**
+   * Block regular deductions and contributions for this payroll. Only relevant for off-cycle payrolls.
+   */
+  skipRegularDeductions?: boolean | undefined;
+  /**
+   * Enable taxes to be withheld at the IRS's required rate of 22% for federal income taxes. State income taxes will be taxed at the state's supplemental tax rate. Otherwise, we'll sum the entirety of the employee's wages and withhold taxes on the entire amount at the rate for regular wages. Only relevant for off-cycle payrolls.
+   */
+  fixedWithholdingRate?: boolean | undefined;
 };
 
 export type PutV1CompaniesCompanyIdPayrollsRequest = {
@@ -472,21 +505,55 @@ export function employeeCompensationsFromJSON(
 }
 
 /** @internal */
+export const PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema:
+  z.ZodNativeEnum<typeof PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod> =
+    z.nativeEnum(PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod);
+
+/** @internal */
+export const PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod> =
+    PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$ {
+  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema;
+}
+
+/** @internal */
 export const PutV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema:
   z.ZodType<PutV1CompaniesCompanyIdPayrollsRequestBody, z.ZodTypeDef, unknown> =
     z.object({
       employee_compensations: z.array(
         z.lazy(() => EmployeeCompensations$inboundSchema),
       ),
+      withholding_pay_period:
+        PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema
+          .optional(),
+      skip_regular_deductions: z.boolean().optional(),
+      fixed_withholding_rate: z.boolean().optional(),
     }).transform((v) => {
       return remap$(v, {
         "employee_compensations": "employeeCompensations",
+        "withholding_pay_period": "withholdingPayPeriod",
+        "skip_regular_deductions": "skipRegularDeductions",
+        "fixed_withholding_rate": "fixedWithholdingRate",
       });
     });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsRequestBody$Outbound = {
   employee_compensations: Array<EmployeeCompensations$Outbound>;
+  withholding_pay_period?: string | undefined;
+  skip_regular_deductions?: boolean | undefined;
+  fixed_withholding_rate?: boolean | undefined;
 };
 
 /** @internal */
@@ -499,9 +566,17 @@ export const PutV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
     employeeCompensations: z.array(
       z.lazy(() => EmployeeCompensations$outboundSchema),
     ),
+    withholdingPayPeriod:
+      PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema
+        .optional(),
+    skipRegularDeductions: z.boolean().optional(),
+    fixedWithholdingRate: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       employeeCompensations: "employee_compensations",
+      withholdingPayPeriod: "withholding_pay_period",
+      skipRegularDeductions: "skip_regular_deductions",
+      fixedWithholdingRate: "fixed_withholding_rate",
     });
   });
 

@@ -8,10 +8,10 @@ import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PostCompaniesCompanyUuidReportsRequestBody = {
   columns: [
-    "employer_social_security_tax",
+    "employee_compensation",
   ],
   groupings: [
-    "payroll",
+    "employee",
   ],
   fileType: "csv",
   startDate: new RFCDate("2024-01-01"),

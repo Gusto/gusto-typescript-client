@@ -8,7 +8,7 @@ Example response
 import { ContractorBankAccount } from "@gusto/embedded-api/models/components/contractorbankaccount.js";
 
 let value: ContractorBankAccount = {
-  uuid: "f09b4fde-094d-4a81-a8af-9ffa87e011c5",
+  uuid: "a185f09b-4fde-4094-8da8-18af9ffa87e0",
 };
 ```
 

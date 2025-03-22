@@ -8,7 +8,7 @@ The representation of webhook subscription.
 import { WebhookSubscription } from "@gusto/embedded-api/models/components/webhooksubscription.js";
 
 let value: WebhookSubscription = {
-  uuid: "f991f8c0-644c-4970-8ff3-08fe945e7234",
+  uuid: "968af991-f8c0-4644-9c97-0ff308fe945e",
 };
 ```
 
