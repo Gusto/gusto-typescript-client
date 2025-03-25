@@ -28,7 +28,7 @@ export function CompanyAuthenticatedClient({
   const authUrl = constructAuthUrl(options);
   const tokenStore = new InMemoryTokenStore();
 
-  const httpClientWithTokenRefresh = new HTTPClient();
+  const httpClientWithTokenRefresh = options.httpClient ?? new HTTPClient();
 
   httpClientWithTokenRefresh.addHook("response", async (res) => {
     if (res.status === 401) {
