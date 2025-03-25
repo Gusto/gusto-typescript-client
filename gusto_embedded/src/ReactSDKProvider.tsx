@@ -12,7 +12,7 @@ export function ReactSDKProvider({
   children,
 }: {
   url: string;
-  headers?: Record<string, string | number>;
+  headers?: Headers;
   children: React.ReactNode;
 }) {
   const httpClientWithHeaders = new HTTPClient({
