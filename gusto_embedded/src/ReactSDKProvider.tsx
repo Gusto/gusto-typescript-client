@@ -17,16 +17,14 @@ export function ReactSDKProvider({
 }) {
   const httpClientWithHeaders = new HTTPClient({
     fetcher: async (request) => {
-      if (request instanceof Request) {
-        const requestWithHeaders = {
-          ...request,
-          headers: {
-            ...request.headers,
-            ...headers,
-          },
-        };
-        return fetch(requestWithHeaders);
+      if (request instanceof Request && headers) {
+        headers.forEach((headerValue, headerName) => {
+          if (headerValue) {
+            request.headers.set(headerName, headerValue);
+          }
+        });
       }
+
       return fetch(request);
     },
   });
