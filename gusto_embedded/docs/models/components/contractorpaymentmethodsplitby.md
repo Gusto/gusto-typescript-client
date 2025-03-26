@@ -7,7 +7,7 @@ Describes how the payment will be split. If split_by is Percentage, then the spl
 ```typescript
 import { ContractorPaymentMethodSplitBy } from "@gusto/embedded-api/models/components/contractorpaymentmethod.js";
 
-let value: ContractorPaymentMethodSplitBy = "Amount";
+let value: ContractorPaymentMethodSplitBy = "Percentage";
 ```
 
 ## Values

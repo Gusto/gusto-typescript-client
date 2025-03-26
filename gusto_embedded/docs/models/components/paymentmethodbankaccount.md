@@ -8,7 +8,7 @@ Representation of a bank account item
 import { PaymentMethodBankAccount } from "@gusto/embedded-api/models/components/paymentmethodbankaccount.js";
 
 let value: PaymentMethodBankAccount = {
-  uuid: "b3fa4c1f-0e4c-404b-8816-69ad762cb68a",
+  uuid: "6916b3fa-4c1f-40e4-ac04-b81669ad762c",
 };
 ```
 

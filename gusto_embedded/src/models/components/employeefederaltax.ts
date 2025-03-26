@@ -39,7 +39,7 @@ export type EmployeeFederalTax = {
    * - Exempt from withholding
    * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
    */
-  filingStatus: string;
+  filingStatus: string | null;
   /**
    * An employee can request an additional amount to be withheld from each paycheck.
    */
@@ -104,7 +104,7 @@ export const EmployeeFederalTax$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   version: z.string(),
-  filing_status: z.string(),
+  filing_status: z.nullable(z.string()),
   extra_withholding: z.nullable(z.string()),
   two_jobs: z.nullable(z.boolean()),
   dependents_amount: z.nullable(z.string()),
@@ -129,7 +129,7 @@ export const EmployeeFederalTax$inboundSchema: z.ZodType<
 /** @internal */
 export type EmployeeFederalTax$Outbound = {
   version: string;
-  filing_status: string;
+  filing_status: string | null;
   extra_withholding: string | null;
   two_jobs: boolean | null;
   dependents_amount: string | null;
@@ -147,7 +147,7 @@ export const EmployeeFederalTax$outboundSchema: z.ZodType<
   EmployeeFederalTax
 > = z.object({
   version: z.string(),
-  filingStatus: z.string(),
+  filingStatus: z.nullable(z.string()),
   extraWithholding: z.nullable(z.string()),
   twoJobs: z.nullable(z.boolean()),
   dependentsAmount: z.nullable(z.string()),

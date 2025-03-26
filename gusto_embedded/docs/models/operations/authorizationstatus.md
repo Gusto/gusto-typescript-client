@@ -13,7 +13,7 @@ The employee's authorization status
 ```typescript
 import { AuthorizationStatus } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidi9authorization.js";
 
-let value: AuthorizationStatus = "citizen";
+let value: AuthorizationStatus = "alien";
 ```
 
 ## Values

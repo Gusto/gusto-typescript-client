@@ -7,7 +7,7 @@ The category of the company attachment
 ```typescript
 import { Category } from "@gusto/embedded-api/models/components/companyattachment.js";
 
-let value: Category = "compliance";
+let value: Category = "other";
 ```
 
 ## Values

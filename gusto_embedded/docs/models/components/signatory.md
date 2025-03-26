@@ -8,7 +8,7 @@ The representation of a company's signatory
 import { Signatory } from "@gusto/embedded-api/models/components/signatory.js";
 
 let value: Signatory = {
-  uuid: "bbc488bf-4ca9-4cf0-92c1-834b0d788a51",
+  uuid: "4ca9cf02-c183-44b0-bd78-8a515285ff99",
 };
 ```
 

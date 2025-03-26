@@ -7,7 +7,7 @@ The string identifier for each onboarding step
 ```typescript
 import { Id } from "@gusto/embedded-api/models/components/companyonboardingstatus.js";
 
-let value: Id = "add_bank_info";
+let value: Id = "external_payroll";
 ```
 
 ## Values

@@ -5,7 +5,7 @@
 ```typescript
 import { Columns } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
 
-let value: Columns = "regular_hours";
+let value: Columns = "work_address_street";
 ```
 
 ## Values

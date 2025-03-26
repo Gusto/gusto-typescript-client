@@ -7,7 +7,7 @@ Status of the recovery case
 ```typescript
 import { RecoveryCaseStatus } from "@gusto/embedded-api/models/components/recoverycase.js";
 
-let value: RecoveryCaseStatus = "lost";
+let value: RecoveryCaseStatus = "redebit_initiated";
 ```
 
 ## Values

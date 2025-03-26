@@ -15,7 +15,7 @@ let value: EmployeeFederalTax = {
   dependentsAmount: "<value>",
   otherIncome: "<value>",
   deductions: "<value>",
-  w4DataType: "rev_2020_w4",
+  w4DataType: "pre_2020_w4",
 };
 ```
 

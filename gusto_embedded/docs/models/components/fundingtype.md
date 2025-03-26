@@ -7,7 +7,7 @@ Company's default funding type
 ```typescript
 import { FundingType } from "@gusto/embedded-api/models/components/company.js";
 
-let value: FundingType = "brex";
+let value: FundingType = "reverse_wire";
 ```
 
 ## Values

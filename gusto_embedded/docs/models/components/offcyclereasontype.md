@@ -7,7 +7,7 @@ The off-cycle reason. Only included for off-cycle payrolls.
 ```typescript
 import { OffCycleReasonType } from "@gusto/embedded-api/models/components/offcyclereasontype.js";
 
-let value: OffCycleReasonType = "Dismissed employee";
+let value: OffCycleReasonType = "Transition from old pay schedule";
 ```
 
 ## Values
