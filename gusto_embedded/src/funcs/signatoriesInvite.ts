@@ -178,7 +178,7 @@ async function $do(
     | ConnectionError
   >(
     M.json(
-      201,
+      200,
       PostV1CompaniesCompanyUuidSignatoriesInviteResponse$inboundSchema,
       { key: "Signatory" },
     ),

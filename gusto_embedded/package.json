@@ -1,6 +1,6 @@
 {
   "name": "@gusto/embedded-api",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "author": "Speakeasy",
   "type": "module",
   "main": "./esm/index.js",

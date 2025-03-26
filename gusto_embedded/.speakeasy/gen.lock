@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 85047f82d4022f91538c1827b830f0b1
+  docChecksum: daf9c178abf39865e8f9a043cbe12dd4
   docVersion: "2024-04-01"
   speakeasyVersion: 1.523.2
   generationVersion: 2.560.1
-  releaseVersion: 0.5.5
-  configChecksum: 0ef4910f3343204da0a3500188984b90
+  releaseVersion: 0.5.6
+  configChecksum: 239c4dee373a3435320fc8dd2651e571
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -2865,6 +2865,8 @@ examples:
         application/json: {"email": "Maureen_Wyman@yahoo.com"}
       responses:
         "201":
+          application/json: {"uuid": "f8c653dc-0094-41fb-8670-45d6399afade", "first_name": "Bob", "last_name": "Johnson", "title": "Owner", "phone": "4239879876", "email": "olin.okuneva@denesik.us", "birthday": "2002-10-31", "is_admin": false, "has_ssn": true, "version": "49ea586f528411f5cfadfd54452b2423", "identity_verification_status": "Skipped", "home_address": {"street_1": "524 Roob Divide", "street_2": "Suite 565", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA"}}
+        "200":
           application/json: {"uuid": "f8c653dc-0094-41fb-8670-45d6399afade", "first_name": "Bob", "last_name": "Johnson", "title": "Owner", "phone": "4239879876", "email": "olin.okuneva@denesik.us", "birthday": "2002-10-31", "is_admin": false, "has_ssn": true, "version": "49ea586f528411f5cfadfd54452b2423", "identity_verification_status": "Skipped", "home_address": {"street_1": "524 Roob Divide", "street_2": "Suite 565", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA"}}
     Basic:
       parameters:
