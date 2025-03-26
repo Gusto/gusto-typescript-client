@@ -7,7 +7,7 @@ Payment method to filter by
 ```typescript
 import { PostCompaniesCompanyUuidReportsPaymentMethod } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
 
-let value: PostCompaniesCompanyUuidReportsPaymentMethod = "direct_deposit";
+let value: PostCompaniesCompanyUuidReportsPaymentMethod = "check";
 ```
 
 ## Values

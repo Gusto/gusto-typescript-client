@@ -7,7 +7,7 @@ Input type for the custom field.
 ```typescript
 import { CustomFieldType } from "@gusto/embedded-api/models/components/customfieldtype.js";
 
-let value: CustomFieldType = "text";
+let value: CustomFieldType = "number";
 ```
 
 ## Values

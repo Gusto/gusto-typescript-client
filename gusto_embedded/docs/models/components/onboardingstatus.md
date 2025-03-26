@@ -7,7 +7,7 @@ The current onboarding status of the employee
 ```typescript
 import { OnboardingStatus } from "@gusto/embedded-api/models/components/employee.js";
 
-let value: OnboardingStatus = "self_onboarding_invited_overdue";
+let value: OnboardingStatus = "self_onboarding_invited_started";
 ```
 
 ## Values

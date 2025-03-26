@@ -10,10 +10,10 @@ let value: PostCompaniesCompanyUuidReportsRequest = {
   companyUuid: "<id>",
   requestBody: {
     columns: [
-      "employee_taxes",
+      "employee_additional_taxes",
     ],
     groupings: [
-      "payroll",
+      "employee",
     ],
     fileType: "csv",
     startDate: new RFCDate("2024-01-01"),

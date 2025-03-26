@@ -8,9 +8,9 @@ An employee's I-9 authorization
 import { I9Authorization } from "@gusto/embedded-api/models/components/i9authorization.js";
 
 let value: I9Authorization = {
-  uuid: "d87fc85d-717d-4709-8fd9-ed79bd0c7ac8",
+  uuid: "c1abd87f-c85d-4717-9d70-9fd9ed79bd0c",
   version: "<value>",
-  authorizationStatus: "noncitizen",
+  authorizationStatus: "permanent_resident",
   employerSigned: false,
   employeeSigned: false,
 };

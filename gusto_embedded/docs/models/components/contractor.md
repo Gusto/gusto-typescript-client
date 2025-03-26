@@ -8,7 +8,7 @@ The representation of a contractor (individual or business) in Gusto.
 import { Contractor } from "@gusto/embedded-api/models/components/contractor.js";
 
 let value: Contractor = {
-  uuid: "50232c8a-d35b-4606-9e65-fa51cbe31b32",
+  uuid: "abf65023-2c8a-4d35-8b60-6e65fa51cbe3",
   hourlyRate: "50.0",
 };
 ```

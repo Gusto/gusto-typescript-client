@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: d59f4dd77e3f051008140d0e55a9afdc
+  docChecksum: 85047f82d4022f91538c1827b830f0b1
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.521.0
-  generationVersion: 2.558.2
-  releaseVersion: 0.5.4
-  configChecksum: 9891b18a7b42a3cc996e558e86bfea84
+  speakeasyVersion: 1.523.2
+  generationVersion: 2.560.1
+  releaseVersion: 0.5.5
+  configChecksum: 0ef4910f3343204da0a3500188984b90
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -32,7 +32,7 @@ features:
     methodSecurity: 2.82.6
     nameOverrides: 2.81.2
     nullables: 0.1.1
-    reactQueryHooks: 0.2.2
+    reactQueryHooks: 0.2.3
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
@@ -973,6 +973,7 @@ generatedFiles:
   - docs/models/operations/putv1companiescompanyidpayrollsrequest.md
   - docs/models/operations/putv1companiescompanyidpayrollsrequestbody.md
   - docs/models/operations/putv1companiescompanyidpayrollsresponse.md
+  - docs/models/operations/putv1companiescompanyidpayrollswithholdingpayperiod.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidfrequency.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidrequest.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidrequestbody.md
