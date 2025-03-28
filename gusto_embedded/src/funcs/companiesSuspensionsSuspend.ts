@@ -40,7 +40,7 @@ import { Result } from "../types/fp.js";
  *
  * scope: `company_suspensions:write`
  */
-export function companiesPostCompaniesCompanyUuidSuspensions(
+export function companiesSuspensionsSuspend(
   client: GustoEmbeddedCore,
   request: PostCompaniesCompanyUuidSuspensionsRequest,
   options?: RequestOptions,

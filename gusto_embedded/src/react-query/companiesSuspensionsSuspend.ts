@@ -8,7 +8,7 @@ import {
   UseMutationResult,
 } from "@tanstack/react-query";
 import { GustoEmbeddedCore } from "../core.js";
-import { companiesPostCompaniesCompanyUuidSuspensions } from "../funcs/companiesPostCompaniesCompanyUuidSuspensions.js";
+import { companiesSuspensionsSuspend } from "../funcs/companiesSuspensionsSuspend.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
@@ -19,12 +19,12 @@ import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
-export type CompaniesPostCompaniesCompanyUuidSuspensionsMutationVariables = {
+export type CompaniesSuspensionsSuspendMutationVariables = {
   request: PostCompaniesCompanyUuidSuspensionsRequest;
   options?: RequestOptions;
 };
 
-export type CompaniesPostCompaniesCompanyUuidSuspensionsMutationData =
+export type CompaniesSuspensionsSuspendMutationData =
   PostCompaniesCompanyUuidSuspensionsResponse;
 
 /**
@@ -35,52 +35,43 @@ export type CompaniesPostCompaniesCompanyUuidSuspensionsMutationData =
  *
  * scope: `company_suspensions:write`
  */
-export function useCompaniesPostCompaniesCompanyUuidSuspensionsMutation(
+export function useCompaniesSuspensionsSuspendMutation(
   options?: MutationHookOptions<
-    CompaniesPostCompaniesCompanyUuidSuspensionsMutationData,
+    CompaniesSuspensionsSuspendMutationData,
     Error,
-    CompaniesPostCompaniesCompanyUuidSuspensionsMutationVariables
+    CompaniesSuspensionsSuspendMutationVariables
   >,
 ): UseMutationResult<
-  CompaniesPostCompaniesCompanyUuidSuspensionsMutationData,
+  CompaniesSuspensionsSuspendMutationData,
   Error,
-  CompaniesPostCompaniesCompanyUuidSuspensionsMutationVariables
+  CompaniesSuspensionsSuspendMutationVariables
 > {
   const client = useGustoEmbeddedContext();
   return useMutation({
-    ...buildCompaniesPostCompaniesCompanyUuidSuspensionsMutation(
-      client,
-      options,
-    ),
+    ...buildCompaniesSuspensionsSuspendMutation(client, options),
     ...options,
   });
 }
 
-export function mutationKeyCompaniesPostCompaniesCompanyUuidSuspensions(): MutationKey {
-  return [
-    "@gusto/embedded-api",
-    "Companies",
-    "postCompaniesCompanyUuidSuspensions",
-  ];
+export function mutationKeyCompaniesSuspensionsSuspend(): MutationKey {
+  return ["@gusto/embedded-api", "suspensions", "suspend"];
 }
 
-export function buildCompaniesPostCompaniesCompanyUuidSuspensionsMutation(
+export function buildCompaniesSuspensionsSuspendMutation(
   client$: GustoEmbeddedCore,
   hookOptions?: RequestOptions,
 ): {
   mutationKey: MutationKey;
   mutationFn: (
-    variables: CompaniesPostCompaniesCompanyUuidSuspensionsMutationVariables,
-  ) => Promise<CompaniesPostCompaniesCompanyUuidSuspensionsMutationData>;
+    variables: CompaniesSuspensionsSuspendMutationVariables,
+  ) => Promise<CompaniesSuspensionsSuspendMutationData>;
 } {
   return {
-    mutationKey: mutationKeyCompaniesPostCompaniesCompanyUuidSuspensions(),
-    mutationFn: function companiesPostCompaniesCompanyUuidSuspensionsMutationFn(
-      {
-        request,
-        options,
-      },
-    ): Promise<CompaniesPostCompaniesCompanyUuidSuspensionsMutationData> {
+    mutationKey: mutationKeyCompaniesSuspensionsSuspend(),
+    mutationFn: function companiesSuspensionsSuspendMutationFn({
+      request,
+      options,
+    }): Promise<CompaniesSuspensionsSuspendMutationData> {
       const mergedOptions = {
         ...hookOptions,
         ...options,
@@ -93,7 +84,7 @@ export function buildCompaniesPostCompaniesCompanyUuidSuspensionsMutation(
           ),
         },
       };
-      return unwrapAsync(companiesPostCompaniesCompanyUuidSuspensions(
+      return unwrapAsync(companiesSuspensionsSuspend(
         client$,
         request,
         mergedOptions,

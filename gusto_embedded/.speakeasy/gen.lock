@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: daf9c178abf39865e8f9a043cbe12dd4
+  docChecksum: 040871ecd05195c4f0c000645be00a17
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.523.2
-  generationVersion: 2.560.1
-  releaseVersion: 0.5.6
-  configChecksum: 239c4dee373a3435320fc8dd2651e571
+  speakeasyVersion: 1.525.2
+  generationVersion: 2.562.3
+  releaseVersion: 0.5.7
+  configChecksum: eb9a288a5e984d5e6bed2236f9b00fea
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -1212,6 +1212,7 @@ generatedFiles:
   - docs/sdks/recoverycases/README.md
   - docs/sdks/reports/README.md
   - docs/sdks/signatories/README.md
+  - docs/sdks/suspensions/README.md
   - docs/sdks/taxrequirements/README.md
   - docs/sdks/timeoffpolicies/README.md
   - docs/sdks/webhooks/README.md
@@ -1231,13 +1232,13 @@ generatedFiles:
   - src/funcs/companiesCreatePartnerManaged.ts
   - src/funcs/companiesFinishOnboarding.ts
   - src/funcs/companiesGet.ts
-  - src/funcs/companiesGetCompaniesCompanyUuidSuspensions.ts
   - src/funcs/companiesGetCustomFields.ts
   - src/funcs/companiesGetOnboardingStatus.ts
   - src/funcs/companiesListAdmins.ts
   - src/funcs/companiesMigrate.ts
-  - src/funcs/companiesPostCompaniesCompanyUuidSuspensions.ts
   - src/funcs/companiesRetrieveTermsOfService.ts
+  - src/funcs/companiesSuspensionsGet.ts
+  - src/funcs/companiesSuspensionsSuspend.ts
   - src/funcs/companiesUpdate.ts
   - src/funcs/companyAttachmentGetDownloadUrl.ts
   - src/funcs/companyAttachmentsCreate.ts
@@ -1907,13 +1908,13 @@ generatedFiles:
   - src/react-query/companiesCreatePartnerManaged.ts
   - src/react-query/companiesFinishOnboarding.ts
   - src/react-query/companiesGet.ts
-  - src/react-query/companiesGetCompaniesCompanyUuidSuspensions.ts
   - src/react-query/companiesGetCustomFields.ts
   - src/react-query/companiesGetOnboardingStatus.ts
   - src/react-query/companiesListAdmins.ts
   - src/react-query/companiesMigrate.ts
-  - src/react-query/companiesPostCompaniesCompanyUuidSuspensions.ts
   - src/react-query/companiesRetrieveTermsOfService.ts
+  - src/react-query/companiesSuspensionsGet.ts
+  - src/react-query/companiesSuspensionsSuspend.ts
   - src/react-query/companiesUpdate.ts
   - src/react-query/companyAttachmentGetDownloadUrl.ts
   - src/react-query/companyAttachmentsCreate.ts
@@ -2192,6 +2193,7 @@ generatedFiles:
   - src/sdk/reports.ts
   - src/sdk/sdk.ts
   - src/sdk/signatories.ts
+  - src/sdk/suspensions.ts
   - src/sdk/taxrequirements.ts
   - src/sdk/timeoffpolicies.ts
   - src/sdk/webhooks.ts
