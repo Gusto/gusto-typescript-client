@@ -40,7 +40,7 @@ import { Result } from "../types/fp.js";
  *
  * scope: `company_suspensions:read`
  */
-export function companiesGetCompaniesCompanyUuidSuspensions(
+export function companiesSuspensionsGet(
   client: GustoEmbeddedCore,
   request: GetCompaniesCompanyUuidSuspensionsRequest,
   options?: RequestOptions,

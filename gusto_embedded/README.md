@@ -215,8 +215,11 @@ run();
 * [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
-* [getCompaniesCompanyUuidSuspensions](docs/sdks/companies/README.md#getcompaniescompanyuuidsuspensions) - Get suspensions for this company
-* [postCompaniesCompanyUuidSuspensions](docs/sdks/companies/README.md#postcompaniescompanyuuidsuspensions) - Suspend a company's account
+
+#### [companies.suspensions](docs/sdks/suspensions/README.md)
+
+* [get](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
+* [suspend](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
 
 ### [companyAttachment](docs/sdks/companyattachment/README.md)
 
@@ -615,13 +618,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companiesCreatePartnerManaged`](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 - [`companiesFinishOnboarding`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 - [`companiesGet`](docs/sdks/companies/README.md#get) - Get a company
-- [`companiesGetCompaniesCompanyUuidSuspensions`](docs/sdks/companies/README.md#getcompaniescompanyuuidsuspensions) - Get suspensions for this company
 - [`companiesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 - [`companiesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
 - [`companiesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`companiesMigrate`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
-- [`companiesPostCompaniesCompanyUuidSuspensions`](docs/sdks/companies/README.md#postcompaniescompanyuuidsuspensions) - Suspend a company's account
 - [`companiesRetrieveTermsOfService`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
+- [`companiesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
+- [`companiesSuspensionsSuspend`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
 - [`companiesUpdate`](docs/sdks/companies/README.md#update) - Update a company
 - [`companyAttachmentGetDownloadUrl`](docs/sdks/companyattachment/README.md#getdownloadurl) - Get a temporary url to download the Company Attachment file
 - [`companyAttachmentsCreate`](docs/sdks/companyattachments/README.md#create) - Create Company Attachment and Upload File
@@ -889,13 +892,13 @@ To learn about this feature and how to get started, check
 - [`useCompaniesCreatePartnerManagedMutation`](docs/sdks/companies/README.md#createpartnermanaged) - Create a partner managed company
 - [`useCompaniesFinishOnboardingMutation`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 - [`useCompaniesGet`](docs/sdks/companies/README.md#get) - Get a company
-- [`useCompaniesGetCompaniesCompanyUuidSuspensions`](docs/sdks/companies/README.md#getcompaniescompanyuuidsuspensions) - Get suspensions for this company
 - [`useCompaniesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 - [`useCompaniesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
 - [`useCompaniesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
-- [`useCompaniesPostCompaniesCompanyUuidSuspensionsMutation`](docs/sdks/companies/README.md#postcompaniescompanyuuidsuspensions) - Suspend a company's account
 - [`useCompaniesRetrieveTermsOfServiceMutation`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
+- [`useCompaniesSuspensionsGet`](docs/sdks/suspensions/README.md#get) - Get suspensions for this company
+- [`useCompaniesSuspensionsSuspendMutation`](docs/sdks/suspensions/README.md#suspend) - Suspend a company's account
 - [`useCompaniesUpdateMutation`](docs/sdks/companies/README.md#update) - Update a company
 - [`useCompanyAttachmentGetDownloadUrl`](docs/sdks/companyattachment/README.md#getdownloadurl) - Get a temporary url to download the Company Attachment file
 - [`useCompanyAttachmentsCreateMutation`](docs/sdks/companyattachments/README.md#create) - Create Company Attachment and Upload File

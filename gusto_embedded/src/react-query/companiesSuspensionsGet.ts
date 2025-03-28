@@ -13,7 +13,7 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { GustoEmbeddedCore } from "../core.js";
-import { companiesGetCompaniesCompanyUuidSuspensions } from "../funcs/companiesGetCompaniesCompanyUuidSuspensions.js";
+import { companiesSuspensionsGet } from "../funcs/companiesSuspensionsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
@@ -29,7 +29,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CompaniesGetCompaniesCompanyUuidSuspensionsQueryData =
+export type CompaniesSuspensionsGetQueryData =
   GetCompaniesCompanyUuidSuspensionsResponse;
 
 /**
@@ -44,15 +44,13 @@ export type CompaniesGetCompaniesCompanyUuidSuspensionsQueryData =
  *
  * scope: `company_suspensions:read`
  */
-export function useCompaniesGetCompaniesCompanyUuidSuspensions(
+export function useCompaniesSuspensionsGet(
   request: GetCompaniesCompanyUuidSuspensionsRequest,
-  options?: QueryHookOptions<
-    CompaniesGetCompaniesCompanyUuidSuspensionsQueryData
-  >,
-): UseQueryResult<CompaniesGetCompaniesCompanyUuidSuspensionsQueryData, Error> {
+  options?: QueryHookOptions<CompaniesSuspensionsGetQueryData>,
+): UseQueryResult<CompaniesSuspensionsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
   return useQuery({
-    ...buildCompaniesGetCompaniesCompanyUuidSuspensionsQuery(
+    ...buildCompaniesSuspensionsGetQuery(
       client,
       request,
       options,
@@ -73,18 +71,13 @@ export function useCompaniesGetCompaniesCompanyUuidSuspensions(
  *
  * scope: `company_suspensions:read`
  */
-export function useCompaniesGetCompaniesCompanyUuidSuspensionsSuspense(
+export function useCompaniesSuspensionsGetSuspense(
   request: GetCompaniesCompanyUuidSuspensionsRequest,
-  options?: SuspenseQueryHookOptions<
-    CompaniesGetCompaniesCompanyUuidSuspensionsQueryData
-  >,
-): UseSuspenseQueryResult<
-  CompaniesGetCompaniesCompanyUuidSuspensionsQueryData,
-  Error
-> {
+  options?: SuspenseQueryHookOptions<CompaniesSuspensionsGetQueryData>,
+): UseSuspenseQueryResult<CompaniesSuspensionsGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
-    ...buildCompaniesGetCompaniesCompanyUuidSuspensionsQuery(
+    ...buildCompaniesSuspensionsGetQuery(
       client,
       request,
       options,
@@ -93,37 +86,33 @@ export function useCompaniesGetCompaniesCompanyUuidSuspensionsSuspense(
   });
 }
 
-export function prefetchCompaniesGetCompaniesCompanyUuidSuspensions(
+export function prefetchCompaniesSuspensionsGet(
   queryClient: QueryClient,
   client$: GustoEmbeddedCore,
   request: GetCompaniesCompanyUuidSuspensionsRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
-    ...buildCompaniesGetCompaniesCompanyUuidSuspensionsQuery(
+    ...buildCompaniesSuspensionsGetQuery(
       client$,
       request,
     ),
   });
 }
 
-export function setCompaniesGetCompaniesCompanyUuidSuspensionsData(
+export function setCompaniesSuspensionsGetData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
     parameters: { xGustoAPIVersion?: VersionHeader | undefined },
   ],
-  data: CompaniesGetCompaniesCompanyUuidSuspensionsQueryData,
-): CompaniesGetCompaniesCompanyUuidSuspensionsQueryData | undefined {
-  const key = queryKeyCompaniesGetCompaniesCompanyUuidSuspensions(
-    ...queryKeyBase,
-  );
+  data: CompaniesSuspensionsGetQueryData,
+): CompaniesSuspensionsGetQueryData | undefined {
+  const key = queryKeyCompaniesSuspensionsGet(...queryKeyBase);
 
-  return client.setQueryData<
-    CompaniesGetCompaniesCompanyUuidSuspensionsQueryData
-  >(key, data);
+  return client.setQueryData<CompaniesSuspensionsGetQueryData>(key, data);
 }
 
-export function invalidateCompaniesGetCompaniesCompanyUuidSuspensions(
+export function invalidateCompaniesSuspensionsGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [
@@ -135,30 +124,21 @@ export function invalidateCompaniesGetCompaniesCompanyUuidSuspensions(
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: [
-      "@gusto/embedded-api",
-      "Companies",
-      "getCompaniesCompanyUuidSuspensions",
-      ...queryKeyBase,
-    ],
+    queryKey: ["@gusto/embedded-api", "suspensions", "get", ...queryKeyBase],
   });
 }
 
-export function invalidateAllCompaniesGetCompaniesCompanyUuidSuspensions(
+export function invalidateAllCompaniesSuspensionsGet(
   client: QueryClient,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
   return client.invalidateQueries({
     ...filters,
-    queryKey: [
-      "@gusto/embedded-api",
-      "Companies",
-      "getCompaniesCompanyUuidSuspensions",
-    ],
+    queryKey: ["@gusto/embedded-api", "suspensions", "get"],
   });
 }
 
-export function buildCompaniesGetCompaniesCompanyUuidSuspensionsQuery(
+export function buildCompaniesSuspensionsGetQuery(
   client$: GustoEmbeddedCore,
   request: GetCompaniesCompanyUuidSuspensionsRequest,
   options?: RequestOptions,
@@ -166,23 +146,22 @@ export function buildCompaniesGetCompaniesCompanyUuidSuspensionsQuery(
   queryKey: QueryKey;
   queryFn: (
     context: QueryFunctionContext,
-  ) => Promise<CompaniesGetCompaniesCompanyUuidSuspensionsQueryData>;
+  ) => Promise<CompaniesSuspensionsGetQueryData>;
 } {
   return {
-    queryKey: queryKeyCompaniesGetCompaniesCompanyUuidSuspensions(
-      request.companyUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function companiesGetCompaniesCompanyUuidSuspensionsQueryFn(
+    queryKey: queryKeyCompaniesSuspensionsGet(request.companyUuid, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
+    }),
+    queryFn: async function companiesSuspensionsGetQueryFn(
       ctx,
-    ): Promise<CompaniesGetCompaniesCompanyUuidSuspensionsQueryData> {
+    ): Promise<CompaniesSuspensionsGetQueryData> {
       const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
       const mergedOptions = {
         ...options,
         fetchOptions: { ...options?.fetchOptions, signal: sig },
       };
 
-      return unwrapAsync(companiesGetCompaniesCompanyUuidSuspensions(
+      return unwrapAsync(companiesSuspensionsGet(
         client$,
         request,
         mergedOptions,
@@ -191,15 +170,9 @@ export function buildCompaniesGetCompaniesCompanyUuidSuspensionsQuery(
   };
 }
 
-export function queryKeyCompaniesGetCompaniesCompanyUuidSuspensions(
+export function queryKeyCompaniesSuspensionsGet(
   companyUuid: string,
   parameters: { xGustoAPIVersion?: VersionHeader | undefined },
 ): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Companies",
-    "getCompaniesCompanyUuidSuspensions",
-    companyUuid,
-    parameters,
-  ];
+  return ["@gusto/embedded-api", "suspensions", "get", companyUuid, parameters];
 }
