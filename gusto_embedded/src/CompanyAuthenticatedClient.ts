@@ -14,7 +14,7 @@ type ClientArguments = {
   accessToken: string;
   refreshToken: string;
   expiresIn: number;
-  options: TokenRefreshOptions & SDKOptions;
+  options?: TokenRefreshOptions & SDKOptions;
 };
 
 export function CompanyAuthenticatedClient({
@@ -23,7 +23,7 @@ export function CompanyAuthenticatedClient({
   accessToken,
   refreshToken,
   expiresIn,
-  options,
+  options = {},
 }: ClientArguments) {
   const authUrl = constructAuthUrl(options);
   const tokenStore = new InMemoryTokenStore();
@@ -63,7 +63,7 @@ export function CompanyAuthenticatedClient({
 function constructAuthUrl(
   options: TokenRefreshOptions & Pick<SDKOptions, "server" | "serverURL">
 ) {
-  const { server, serverURL, url } = options;
+  const { server, serverURL } = options;
 
   if (server) {
     const baseUrl = ServerList[server] || "";
@@ -72,10 +72,6 @@ function constructAuthUrl(
 
   if (serverURL) {
     return `${serverURL}/oauth/token`;
-  }
-
-  if (url) {
-    return url;
   }
 
   return `${ServerList[ServerDemo]}/oauth/token`;

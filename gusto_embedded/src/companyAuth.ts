@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { SDK_METADATA } from "./lib/config.js";
+import { ServerDemo, ServerList } from "./lib/config.js";
 
 // TypeScript SDKs use Zod for runtime data validation. We can use Zod
 // to describe the shape of the response from the OAuth token endpoint. If the
@@ -32,7 +33,7 @@ export function withTokenRefresh(
 ) {
   const {
     tokenStore = new InMemoryTokenStore(),
-    url = "https://api.gusto-demo.com/oauth/token",
+    url = ServerList[ServerDemo],
   } = options;
 
   tokenStore.set({
