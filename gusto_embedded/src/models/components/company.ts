@@ -166,7 +166,7 @@ export type PrimarySignatory = {
   /**
    * The company's primary signatory's middle initial.
    */
-  middleInitial?: string | undefined;
+  middleInitial?: string | null | undefined;
   /**
    * The company's primary signatory's last name.
    */
@@ -689,7 +689,7 @@ export const PrimarySignatory$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string().optional(),
   first_name: z.string().optional(),
-  middle_initial: z.string().optional(),
+  middle_initial: z.nullable(z.string()).optional(),
   last_name: z.string().optional(),
   phone: z.string().optional(),
   email: z.string().optional(),
@@ -707,7 +707,7 @@ export const PrimarySignatory$inboundSchema: z.ZodType<
 export type PrimarySignatory$Outbound = {
   uuid?: string | undefined;
   first_name?: string | undefined;
-  middle_initial?: string | undefined;
+  middle_initial?: string | null | undefined;
   last_name?: string | undefined;
   phone?: string | undefined;
   email?: string | undefined;
@@ -722,7 +722,7 @@ export const PrimarySignatory$outboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string().optional(),
   firstName: z.string().optional(),
-  middleInitial: z.string().optional(),
+  middleInitial: z.nullable(z.string()).optional(),
   lastName: z.string().optional(),
   phone: z.string().optional(),
   email: z.string().optional(),
