@@ -8,7 +8,11 @@ Contains relevant data to identify the resource in question when applicable. For
 ### `components.MetadataWithMultipleEntities`
 
 ```typescript
-const value: components.MetadataWithMultipleEntities = {};
+const value: components.MetadataWithMultipleEntities = {
+  entities: [
+    {},
+  ],
+};
 ```
 
 ### `components.MetadataWithOneEntity`

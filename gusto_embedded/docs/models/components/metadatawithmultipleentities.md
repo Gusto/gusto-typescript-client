@@ -7,11 +7,15 @@ multiple entities
 ```typescript
 import { MetadataWithMultipleEntities } from "@gusto/embedded-api/models/components/metadatawithmultipleentities.js";
 
-let value: MetadataWithMultipleEntities = {};
+let value: MetadataWithMultipleEntities = {
+  entities: [
+    {},
+  ],
+};
 ```
 
 ## Fields
 
 | Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `entities`                                                                             | [components.MetadataWithOneEntity](../../models/components/metadatawithoneentity.md)[] | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `entities`                                                                             | [components.MetadataWithOneEntity](../../models/components/metadatawithoneentity.md)[] | :heavy_check_mark:                                                                     | N/A                                                                                    |
