@@ -23,10 +23,10 @@ export type MetadataWithOneEntity = {
    * Unique identifier for the entity.
    */
   entityUuid?: string | undefined;
-  validFrom?: string | undefined;
-  validUpTo?: string | undefined;
-  key?: string | undefined;
-  state?: string | undefined;
+  validFrom?: string | null | undefined;
+  validUpTo?: string | null | undefined;
+  key?: string | null | undefined;
+  state?: string | null | undefined;
   additionalProperties?: { [k: string]: any };
 };
 
@@ -39,10 +39,10 @@ export const MetadataWithOneEntity$inboundSchema: z.ZodType<
   z.object({
     entity_type: z.string().optional(),
     entity_uuid: z.string().optional(),
-    valid_from: z.string().optional(),
-    valid_up_to: z.string().optional(),
-    key: z.string().optional(),
-    state: z.string().optional(),
+    valid_from: z.nullable(z.string()).optional(),
+    valid_up_to: z.nullable(z.string()).optional(),
+    key: z.nullable(z.string()).optional(),
+    state: z.nullable(z.string()).optional(),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -59,10 +59,10 @@ export const MetadataWithOneEntity$inboundSchema: z.ZodType<
 export type MetadataWithOneEntity$Outbound = {
   entity_type?: string | undefined;
   entity_uuid?: string | undefined;
-  valid_from?: string | undefined;
-  valid_up_to?: string | undefined;
-  key?: string | undefined;
-  state?: string | undefined;
+  valid_from?: string | null | undefined;
+  valid_up_to?: string | null | undefined;
+  key?: string | null | undefined;
+  state?: string | null | undefined;
   [additionalProperties: string]: unknown;
 };
 
@@ -74,10 +74,10 @@ export const MetadataWithOneEntity$outboundSchema: z.ZodType<
 > = z.object({
   entityType: z.string().optional(),
   entityUuid: z.string().optional(),
-  validFrom: z.string().optional(),
-  validUpTo: z.string().optional(),
-  key: z.string().optional(),
-  state: z.string().optional(),
+  validFrom: z.nullable(z.string()).optional(),
+  validUpTo: z.nullable(z.string()).optional(),
+  key: z.nullable(z.string()).optional(),
+  state: z.nullable(z.string()).optional(),
   additionalProperties: z.record(z.any()),
 }).transform((v) => {
   return {

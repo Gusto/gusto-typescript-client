@@ -17,7 +17,7 @@ import {
  * multiple entities
  */
 export type MetadataWithMultipleEntities = {
-  entities?: Array<MetadataWithOneEntity> | undefined;
+  entities: Array<MetadataWithOneEntity>;
 };
 
 /** @internal */
@@ -26,12 +26,12 @@ export const MetadataWithMultipleEntities$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  entities: z.array(MetadataWithOneEntity$inboundSchema).optional(),
+  entities: z.array(MetadataWithOneEntity$inboundSchema),
 });
 
 /** @internal */
 export type MetadataWithMultipleEntities$Outbound = {
-  entities?: Array<MetadataWithOneEntity$Outbound> | undefined;
+  entities: Array<MetadataWithOneEntity$Outbound>;
 };
 
 /** @internal */
@@ -40,7 +40,7 @@ export const MetadataWithMultipleEntities$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MetadataWithMultipleEntities
 > = z.object({
-  entities: z.array(MetadataWithOneEntity$outboundSchema).optional(),
+  entities: z.array(MetadataWithOneEntity$outboundSchema),
 });
 
 /**
