@@ -2,23 +2,36 @@ speakeasyVersion: 1.525.2
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:6a7950ff2c31a4c64212393827ae14f689c434262b0ff5c3d37f415a0f4a187d
+        sourceRevisionDigest: sha256:757faeace32fceefa1c486515cbd4b902e787957af0937115410b9aac266a229
         sourceBlobDigest: sha256:8cb7d7d6ab90af686f6647092eb52e63c492963d61184dc935d869b487d23dcc
         tags:
             - latest
-            - speakeasy-sdk-regen-1743811995
+            - "2024-04-01"
+    GustoEmbedded-local:
+        sourceNamespace: gusto-embedded-local
+        sourceRevisionDigest: sha256:b958fa00e1426745ebc9ea4a137dc9d6c00c1ac1570b802ca2c5af0f379e5984
+        sourceBlobDigest: sha256:8cb7d7d6ab90af686f6647092eb52e63c492963d61184dc935d869b487d23dcc
+        tags:
+            - latest
             - "2024-04-01"
 targets:
     gusto-embedded:
         source: GustoEmbedded-OAS
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:6a7950ff2c31a4c64212393827ae14f689c434262b0ff5c3d37f415a0f4a187d
+        sourceRevisionDigest: sha256:757faeace32fceefa1c486515cbd4b902e787957af0937115410b9aac266a229
         sourceBlobDigest: sha256:8cb7d7d6ab90af686f6647092eb52e63c492963d61184dc935d869b487d23dcc
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:6b563cfa3d09c0d4fd998e1d840c38c1a7d72c698b1da91de4c91f2ac3271fa0
+        codeSamplesRevisionDigest: sha256:8851e282b68f2a49b714fc9549827b4ba33ce67f9620982f8f5b2d555264731d
+    local:
+        source: GustoEmbedded-local
+        sourceNamespace: gusto-embedded-local
+        sourceRevisionDigest: sha256:b958fa00e1426745ebc9ea4a137dc9d6c00c1ac1570b802ca2c5af0f379e5984
+        sourceBlobDigest: sha256:8cb7d7d6ab90af686f6647092eb52e63c492963d61184dc935d869b487d23dcc
+        codeSamplesNamespace: gusto-embedded-local-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:a8064440aaaf20c639763494f8ce59b5869847d0940b86b2cce7045abce3476d
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: latest
+    speakeasyVersion: 1.525.2
     sources:
         GustoEmbedded-OAS:
             inputs:
@@ -31,6 +44,13 @@ workflow:
                   authSecret: $openapi_doc_auth_token
             registry:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
+        GustoEmbedded-local:
+            inputs:
+                - location: ../Gusto-Partner-API/generated/embedded/api.v2024-04-01.embedded.yaml
+            overlays:
+                - location: ../Gusto-Partner-API/.speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-local
     targets:
         gusto-embedded:
             target: typescript
@@ -44,3 +64,13 @@ workflow:
                     location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
                 labelOverride:
                     fixedValue: Typescript (SDK)
+        local:
+            target: typescript
+            source: GustoEmbedded-local
+            output: ./gusto_embedded
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-local-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false
