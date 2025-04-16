@@ -56,6 +56,10 @@ export type Notification = {
    */
   actionable?: boolean | undefined;
   /**
+   * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
+   */
+  canBlockPayroll?: boolean | undefined;
+  /**
    * Timestamp of when the notification was published.
    */
   publishedAt?: string | undefined;
@@ -154,12 +158,14 @@ export const Notification$inboundSchema: z.ZodType<
   message: z.string().optional(),
   category: z.string().optional(),
   actionable: z.boolean().optional(),
+  can_block_payroll: z.boolean().optional(),
   published_at: z.string().optional(),
   due_at: z.string().optional(),
   resources: z.array(z.lazy(() => Resources$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
+    "can_block_payroll": "canBlockPayroll",
     "published_at": "publishedAt",
     "due_at": "dueAt",
   });
@@ -173,6 +179,7 @@ export type Notification$Outbound = {
   message?: string | undefined;
   category?: string | undefined;
   actionable?: boolean | undefined;
+  can_block_payroll?: boolean | undefined;
   published_at?: string | undefined;
   due_at?: string | undefined;
   resources?: Array<Resources$Outbound> | undefined;
@@ -190,12 +197,14 @@ export const Notification$outboundSchema: z.ZodType<
   message: z.string().optional(),
   category: z.string().optional(),
   actionable: z.boolean().optional(),
+  canBlockPayroll: z.boolean().optional(),
   publishedAt: z.string().optional(),
   dueAt: z.string().optional(),
   resources: z.array(z.lazy(() => Resources$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
+    canBlockPayroll: "can_block_payroll",
     publishedAt: "published_at",
     dueAt: "due_at",
   });
