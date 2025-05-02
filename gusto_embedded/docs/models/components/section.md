@@ -7,7 +7,7 @@ The document option's section in the list of acceptable documents on the Form I-
 ```typescript
 import { Section } from "@gusto/embedded-api/models/components/i9authorizationdocumentoption.js";
 
-let value: Section = "B";
+let value: Section = "C";
 ```
 
 ## Values

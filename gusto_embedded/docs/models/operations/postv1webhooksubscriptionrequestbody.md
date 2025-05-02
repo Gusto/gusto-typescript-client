@@ -6,9 +6,9 @@
 import { PostV1WebhookSubscriptionRequestBody } from "@gusto/embedded-api/models/operations/postv1webhooksubscription.js";
 
 let value: PostV1WebhookSubscriptionRequestBody = {
-  url: "https://colossal-lifestyle.com/",
+  url: "https://expert-bin.biz/",
   subscriptionTypes: [
-    "ContractorPayment",
+    "Company",
   ],
 };
 ```

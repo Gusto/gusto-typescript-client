@@ -6,7 +6,7 @@
 import { States } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidstatetaxes.js";
 
 let value: States = {
-  state: "Iowa",
+  state: "Utah",
 };
 ```
 

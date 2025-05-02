@@ -9,8 +9,8 @@ let value: PutV1CompaniesCompanyIdBankAccountsVerifyRequest = {
   bankAccountUuid: "<id>",
   companyId: "<id>",
   requestBody: {
-    deposit1: 6188.26,
-    deposit2: 1334.61,
+    deposit1: 6176.75,
+    deposit2: 1725.74,
   },
 };
 ```

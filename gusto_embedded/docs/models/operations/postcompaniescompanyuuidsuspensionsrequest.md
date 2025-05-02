@@ -10,8 +10,8 @@ let value: PostCompaniesCompanyUuidSuspensionsRequest = {
   requestBody: {
     fileQuarterlyForms: false,
     fileYearlyForms: false,
-    reconcileTaxMethod: "refund_taxes",
-    reason: "switching_provider",
+    reconcileTaxMethod: "pay_taxes",
+    reason: "no_more_employees",
   },
 };
 ```

@@ -15,7 +15,7 @@ const value: components.FastPaymentLimitRequiredBody = {
 
 ```typescript
 const value: components.PaymentSpeedRequiredBody = {
-  paymentSpeed: "2-day",
+  paymentSpeed: "4-day",
 };
 ```
 

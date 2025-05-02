@@ -5,8 +5,24 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+ */
+export const CompanyBenefitWithEmployeeBenefitsSource = {
+  Internal: "internal",
+  External: "external",
+  Partnered: "partnered",
+} as const;
+/**
+ * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+ */
+export type CompanyBenefitWithEmployeeBenefitsSource = ClosedEnum<
+  typeof CompanyBenefitWithEmployeeBenefitsSource
+>;
 
 /**
  * A single tier of a tiered matching scheme.
@@ -134,6 +150,14 @@ export type CompanyBenefitWithEmployeeBenefits = {
    */
   description?: string | undefined;
   /**
+   * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+   */
+  source?: CompanyBenefitWithEmployeeBenefitsSource | undefined;
+  /**
+   * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+   */
+  partnerName?: string | null | undefined;
+  /**
    * Whether this company benefit can be deleted. Deletable will be set to true if the benefit has not been used in payroll, has no employee benefits associated, and the benefit is not owned by Gusto or a Partner
    */
   deletable?: boolean | undefined;
@@ -151,6 +175,29 @@ export type CompanyBenefitWithEmployeeBenefits = {
   responsibleForEmployeeW2?: boolean | undefined;
   employeeBenefits?: Array<EmployeeBenefits> | undefined;
 };
+
+/** @internal */
+export const CompanyBenefitWithEmployeeBenefitsSource$inboundSchema:
+  z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsSource> = z
+    .nativeEnum(CompanyBenefitWithEmployeeBenefitsSource);
+
+/** @internal */
+export const CompanyBenefitWithEmployeeBenefitsSource$outboundSchema:
+  z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsSource> =
+    CompanyBenefitWithEmployeeBenefitsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CompanyBenefitWithEmployeeBenefitsSource$ {
+  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsSource$inboundSchema` instead. */
+  export const inboundSchema =
+    CompanyBenefitWithEmployeeBenefitsSource$inboundSchema;
+  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsSource$outboundSchema` instead. */
+  export const outboundSchema =
+    CompanyBenefitWithEmployeeBenefitsSource$outboundSchema;
+}
 
 /** @internal */
 export const CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema:
@@ -560,6 +607,8 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
   benefit_type: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
+  source: CompanyBenefitWithEmployeeBenefitsSource$inboundSchema.optional(),
+  partner_name: z.nullable(z.string()).optional(),
   deletable: z.boolean().optional(),
   supports_percentage_amounts: z.boolean().optional(),
   responsible_for_employer_taxes: z.boolean().optional(),
@@ -570,6 +619,7 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
   return remap$(v, {
     "company_uuid": "companyUuid",
     "benefit_type": "benefitType",
+    "partner_name": "partnerName",
     "supports_percentage_amounts": "supportsPercentageAmounts",
     "responsible_for_employer_taxes": "responsibleForEmployerTaxes",
     "responsible_for_employee_w2": "responsibleForEmployeeW2",
@@ -585,6 +635,8 @@ export type CompanyBenefitWithEmployeeBenefits$Outbound = {
   benefit_type?: number | undefined;
   active: boolean;
   description?: string | undefined;
+  source?: string | undefined;
+  partner_name?: string | null | undefined;
   deletable?: boolean | undefined;
   supports_percentage_amounts?: boolean | undefined;
   responsible_for_employer_taxes?: boolean | undefined;
@@ -604,6 +656,8 @@ export const CompanyBenefitWithEmployeeBenefits$outboundSchema: z.ZodType<
   benefitType: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
+  source: CompanyBenefitWithEmployeeBenefitsSource$outboundSchema.optional(),
+  partnerName: z.nullable(z.string()).optional(),
   deletable: z.boolean().optional(),
   supportsPercentageAmounts: z.boolean().optional(),
   responsibleForEmployerTaxes: z.boolean().optional(),
@@ -614,6 +668,7 @@ export const CompanyBenefitWithEmployeeBenefits$outboundSchema: z.ZodType<
   return remap$(v, {
     companyUuid: "company_uuid",
     benefitType: "benefit_type",
+    partnerName: "partner_name",
     supportsPercentageAmounts: "supports_percentage_amounts",
     responsibleForEmployerTaxes: "responsible_for_employer_taxes",
     responsibleForEmployeeW2: "responsible_for_employee_w2",

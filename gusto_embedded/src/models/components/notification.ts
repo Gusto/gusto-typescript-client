@@ -5,8 +5,22 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+ */
+export const NotificationStatus = {
+  Open: "open",
+  Resolved: "resolved",
+  Expired: "expired",
+} as const;
+/**
+ * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+ */
+export type NotificationStatus = ClosedEnum<typeof NotificationStatus>;
 
 export type Resources = {
   /**
@@ -48,6 +62,10 @@ export type Notification = {
    */
   message?: string | undefined;
   /**
+   * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
+   */
+  status?: NotificationStatus | undefined;
+  /**
    * The notification's category.
    */
   category?: string | undefined;
@@ -72,6 +90,27 @@ export type Notification = {
    */
   resources?: Array<Resources> | undefined;
 };
+
+/** @internal */
+export const NotificationStatus$inboundSchema: z.ZodNativeEnum<
+  typeof NotificationStatus
+> = z.nativeEnum(NotificationStatus);
+
+/** @internal */
+export const NotificationStatus$outboundSchema: z.ZodNativeEnum<
+  typeof NotificationStatus
+> = NotificationStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace NotificationStatus$ {
+  /** @deprecated use `NotificationStatus$inboundSchema` instead. */
+  export const inboundSchema = NotificationStatus$inboundSchema;
+  /** @deprecated use `NotificationStatus$outboundSchema` instead. */
+  export const outboundSchema = NotificationStatus$outboundSchema;
+}
 
 /** @internal */
 export const Resources$inboundSchema: z.ZodType<
@@ -156,6 +195,7 @@ export const Notification$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   title: z.string().optional(),
   message: z.string().optional(),
+  status: NotificationStatus$inboundSchema.optional(),
   category: z.string().optional(),
   actionable: z.boolean().optional(),
   can_block_payroll: z.boolean().optional(),
@@ -177,6 +217,7 @@ export type Notification$Outbound = {
   company_uuid?: string | undefined;
   title?: string | undefined;
   message?: string | undefined;
+  status?: string | undefined;
   category?: string | undefined;
   actionable?: boolean | undefined;
   can_block_payroll?: boolean | undefined;
@@ -195,6 +236,7 @@ export const Notification$outboundSchema: z.ZodType<
   companyUuid: z.string().optional(),
   title: z.string().optional(),
   message: z.string().optional(),
+  status: NotificationStatus$outboundSchema.optional(),
   category: z.string().optional(),
   actionable: z.boolean().optional(),
   canBlockPayroll: z.boolean().optional(),

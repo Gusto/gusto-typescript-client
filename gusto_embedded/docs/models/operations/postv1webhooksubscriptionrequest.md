@@ -7,9 +7,9 @@ import { PostV1WebhookSubscriptionRequest } from "@gusto/embedded-api/models/ope
 
 let value: PostV1WebhookSubscriptionRequest = {
   requestBody: {
-    url: "https://shabby-airmail.info",
+    url: "https://tight-allocation.name/",
     subscriptionTypes: [
-      "Form",
+      "Location",
     ],
   },
 };

@@ -30,12 +30,12 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       columns: [
-        "employee_compensation_time_period",
-        "employee_social_security_tax",
-        "bank_account_account_number",
+        "total_employer_benefit_contributions",
+        "employee_medicare_additional_tax",
       ],
       groupings: [
         "work_address_state",
+        "work_address",
       ],
       fileType: "csv",
       startDate: new RFCDate("2024-01-01"),
@@ -72,12 +72,12 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       columns: [
-        "employee_compensation_time_period",
-        "employee_social_security_tax",
-        "bank_account_account_number",
+        "total_employer_benefit_contributions",
+        "employee_medicare_additional_tax",
       ],
       groupings: [
         "work_address_state",
+        "work_address",
       ],
       fileType: "csv",
       startDate: new RFCDate("2024-01-01"),

@@ -13,7 +13,7 @@ let value: GetV1ContractorsContractorUuidResponse = {
     request: new Request("https://example.com"),
   },
   contractor: {
-    uuid: "7b1eb2f8-f384-449e-acb8-e7dd3c0538b1",
+    uuid: "28ecf641-8703-49e6-955c-231c4c413ca9",
     hourlyRate: "50.0",
   },
 };

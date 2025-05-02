@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -18,16 +19,19 @@ import {
   Location$Outbound,
   Location$outboundSchema,
 } from "../components/location.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Update a location
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
+export const HeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type HeaderXGustoAPIVersion = ClosedEnum<typeof HeaderXGustoAPIVersion>;
+
 export type PutV1LocationsLocationIdRequestBody = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
@@ -52,26 +56,44 @@ export type PutV1LocationsLocationIdRequestBody = {
 
 export type PutV1LocationsLocationIdRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
+  /**
    * The UUID of the location
    */
   locationId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  /**
-   * Update a location
-   */
   requestBody: PutV1LocationsLocationIdRequestBody;
 };
 
 export type PutV1LocationsLocationIdResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   location?: Location | undefined;
 };
+
+/** @internal */
+export const HeaderXGustoAPIVersion$inboundSchema: z.ZodNativeEnum<
+  typeof HeaderXGustoAPIVersion
+> = z.nativeEnum(HeaderXGustoAPIVersion);
+
+/** @internal */
+export const HeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
+  typeof HeaderXGustoAPIVersion
+> = HeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace HeaderXGustoAPIVersion$ {
+  /** @deprecated use `HeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema = HeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `HeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema = HeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PutV1LocationsLocationIdRequestBody$inboundSchema: z.ZodType<
@@ -181,21 +203,23 @@ export const PutV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version": HeaderXGustoAPIVersion$inboundSchema.default(
+    "2024-04-01",
+  ),
   location_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    "location_id": "locationId",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "location_id": "locationId",
     "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type PutV1LocationsLocationIdRequest$Outbound = {
-  location_id: string;
   "X-Gusto-API-Version": string;
+  location_id: string;
   RequestBody: PutV1LocationsLocationIdRequestBody$Outbound;
 };
 
@@ -205,13 +229,13 @@ export const PutV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1LocationsLocationIdRequest
 > = z.object({
+  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2024-04-01"),
   locationId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    locationId: "location_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    locationId: "location_id",
     requestBody: "RequestBody",
   });
 });

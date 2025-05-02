@@ -7,7 +7,7 @@ import { PutV1ContractorsContractorIdPaymentMethodRequestBody } from "@gusto/emb
 
 let value: PutV1ContractorsContractorIdPaymentMethodRequestBody = {
   version: "<value>",
-  type: "Check",
+  type: "Direct Deposit",
 };
 ```
 

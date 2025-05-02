@@ -1,7 +1,5 @@
 # PutV1LocationsLocationIdRequestBody
 
-Update a location
-
 ## Example Usage
 
 ```typescript

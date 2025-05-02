@@ -14,9 +14,9 @@ let value: GetV1CompaniesCompanyIdEmployeesResponse = {
   },
   employeeList: [
     {
-      uuid: "ad17932d-0717-4f6d-a146-6a5ba6691dab",
-      firstName: "Bernie",
-      lastName: "Jakubowski",
+      uuid: "6cb68c04-1b94-4d92-844c-aea162aa3227",
+      firstName: "Evert",
+      lastName: "White",
       eligiblePaidTimeOff: [
         {
           accrualUnit: "Hour",

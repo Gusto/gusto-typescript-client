@@ -8,8 +8,8 @@ Information about the token owner
 import { ResourceOwner } from "@gusto/embedded-api/models/operations/getv1tokeninfo.js";
 
 let value: ResourceOwner = {
-  type: "Employee",
-  uuid: "90999fa5-6b0a-4a32-8559-7f132a47321a",
+  type: "Contractor",
+  uuid: "d85b8106-da6c-417e-9335-206fa381b655",
 };
 ```
 

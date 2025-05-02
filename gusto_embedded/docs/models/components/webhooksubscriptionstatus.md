@@ -7,7 +7,7 @@ The status of the webhook subscription.
 ```typescript
 import { WebhookSubscriptionStatus } from "@gusto/embedded-api/models/components/webhooksubscription.js";
 
-let value: WebhookSubscriptionStatus = "verified";
+let value: WebhookSubscriptionStatus = "unreachable";
 ```
 
 ## Values

@@ -13,9 +13,9 @@ let value: PostV1HistoricalEmployeesResponse = {
     request: new Request("https://example.com"),
   },
   employee: {
-    uuid: "5308d531-1314-411d-b28c-723685cce0e6",
-    firstName: "Maryse",
-    lastName: "Rowe-Hickle",
+    uuid: "799b633b-1c6b-46fa-85d7-282824f52cd4",
+    firstName: "Antonio",
+    lastName: "Welch",
     eligiblePaidTimeOff: [
       {
         accrualUnit: "Hour",

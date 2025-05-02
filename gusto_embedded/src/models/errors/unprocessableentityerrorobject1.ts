@@ -25,7 +25,7 @@ import {
  * This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
 export type UnprocessableEntityErrorObject1Data = {
-  errors?: Array<EntityErrorObject> | undefined;
+  errors: Array<EntityErrorObject>;
   httpMeta: HTTPMetadata;
 };
 
@@ -37,7 +37,7 @@ export type UnprocessableEntityErrorObject1Data = {
  * This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
 export class UnprocessableEntityErrorObject1 extends Error {
-  errors?: Array<EntityErrorObject> | undefined;
+  errors: Array<EntityErrorObject>;
   httpMeta: HTTPMetadata;
 
   /** The original data that was passed to this error instance. */
@@ -50,7 +50,7 @@ export class UnprocessableEntityErrorObject1 extends Error {
     super(message);
     this.data$ = err;
 
-    if (err.errors != null) this.errors = err.errors;
+    this.errors = err.errors;
     this.httpMeta = err.httpMeta;
 
     this.name = "UnprocessableEntityErrorObject1";
@@ -63,7 +63,7 @@ export const UnprocessableEntityErrorObject1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errors: z.array(EntityErrorObject$inboundSchema).optional(),
+  errors: z.array(EntityErrorObject$inboundSchema),
   HttpMeta: HTTPMetadata$inboundSchema,
 })
   .transform((v) => {
@@ -76,7 +76,7 @@ export const UnprocessableEntityErrorObject1$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UnprocessableEntityErrorObject1$Outbound = {
-  errors?: Array<EntityErrorObject$Outbound> | undefined;
+  errors: Array<EntityErrorObject$Outbound>;
   HttpMeta: HTTPMetadata$Outbound;
 };
 
@@ -89,7 +89,7 @@ export const UnprocessableEntityErrorObject1$outboundSchema: z.ZodType<
   .transform(v => v.data$)
   .pipe(
     z.object({
-      errors: z.array(EntityErrorObject$outboundSchema).optional(),
+      errors: z.array(EntityErrorObject$outboundSchema),
       httpMeta: HTTPMetadata$outboundSchema,
     }).transform((v) => {
       return remap$(v, {

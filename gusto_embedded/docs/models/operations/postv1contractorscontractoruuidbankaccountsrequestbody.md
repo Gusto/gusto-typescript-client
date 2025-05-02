@@ -9,7 +9,7 @@ let value: PostV1ContractorsContractorUuidBankAccountsRequestBody = {
   name: "<value>",
   routingNumber: "<value>",
   accountNumber: "<value>",
-  accountType: "Checking",
+  accountType: "Savings",
 };
 ```
 

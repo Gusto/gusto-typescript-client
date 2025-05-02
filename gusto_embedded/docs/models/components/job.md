@@ -8,7 +8,7 @@ The representation of a job in Gusto.
 import { Job } from "@gusto/embedded-api/models/components/job.js";
 
 let value: Job = {
-  uuid: "fbd97987-c226-451d-bc8f-1c453c2da0ca",
+  uuid: "53a43d25-8a99-4abd-974b-dd35d9ef88d7",
 };
 ```
 

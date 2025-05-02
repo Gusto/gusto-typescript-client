@@ -353,7 +353,6 @@ async function run() {
         {},
       ],
       agree: true,
-      signedByIpAddress: "<value>",
     },
   });
 
@@ -388,7 +387,6 @@ async function run() {
         {},
       ],
       agree: true,
-      signedByIpAddress: "<value>",
     },
   });
 

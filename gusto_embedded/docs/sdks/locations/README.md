@@ -239,6 +239,7 @@ Get a location.
 
 scope: `companies:read`
 
+
 ### Example Usage
 
 ```typescript
@@ -335,15 +336,17 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## update
 
 Update a location.
 
 scope: `companies.write`
+
 
 ### Example Usage
 
@@ -358,14 +361,13 @@ async function run() {
   const result = await gustoEmbedded.locations.update({
     locationId: "<id>",
     requestBody: {
-      version: "1928d0c378e519e9c03fb959bc959a6b",
+      version: "52d5265dbe000f69a8e95e8a7b1300b6",
       phoneNumber: "8009360383",
-      street1: "425 2nd Street",
-      street2: "Suite 602",
+      street1: "300 3rd Street",
+      street2: "Apartment 318",
       city: "San Francisco",
-      state: "CA",
       zip: "94107",
-      country: "USA",
+      filingAddress: true,
     },
   });
 
@@ -394,14 +396,13 @@ async function run() {
   const res = await locationsUpdate(gustoEmbedded, {
     locationId: "<id>",
     requestBody: {
-      version: "1928d0c378e519e9c03fb959bc959a6b",
+      version: "52d5265dbe000f69a8e95e8a7b1300b6",
       phoneNumber: "8009360383",
-      street1: "425 2nd Street",
-      street2: "Suite 602",
+      street1: "300 3rd Street",
+      street2: "Apartment 318",
       city: "San Francisco",
-      state: "CA",
       zip: "94107",
-      country: "USA",
+      filingAddress: true,
     },
   });
 
@@ -452,7 +453,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 409, 422                         | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getMinimumWages
@@ -460,6 +461,7 @@ import {
 Get minimum wages for a location
 
 scope: `companies:read`
+
 
 ### Example Usage
 
@@ -559,6 +561,7 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

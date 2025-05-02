@@ -47,6 +47,7 @@ export const Columns = {
   EmployeeCompensation: "employee_compensation",
   EmployeeDeductions: "employee_deductions",
   EmployeeDepartment: "employee_department",
+  EmployeeDonations: "employee_donations",
   EmployeeEmail: "employee_email",
   EmployeeFederalIncomeTax: "employee_federal_income_tax",
   EmployeeFirstName: "employee_first_name",

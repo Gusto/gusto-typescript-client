@@ -5,7 +5,7 @@
 ```typescript
 import { SubscriptionTypes } from "@gusto/embedded-api/models/operations/postv1webhooksubscription.js";
 
-let value: SubscriptionTypes = "Contractor";
+let value: SubscriptionTypes = "CompanyBenefit";
 ```
 
 ## Values

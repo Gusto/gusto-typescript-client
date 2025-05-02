@@ -245,8 +245,8 @@ async function run() {
   const result = await gustoEmbedded.companyAttachments.create({
     companyId: "<id>",
     requestBody: {
-      category: "gep_notice",
       document: await openAsBlob("example.file"),
+      category: "gep_notice",
     },
   });
 
@@ -276,8 +276,8 @@ async function run() {
   const res = await companyAttachmentsCreate(gustoEmbedded, {
     companyId: "<id>",
     requestBody: {
-      category: "gep_notice",
       document: await openAsBlob("example.file"),
+      category: "gep_notice",
     },
   });
 

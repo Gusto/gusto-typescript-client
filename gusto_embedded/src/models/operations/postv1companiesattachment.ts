@@ -49,13 +49,13 @@ export type Category = ClosedEnum<typeof Category>;
  */
 export type PostV1CompaniesAttachmentRequestBody = {
   /**
-   * The category of a company attachment.
-   */
-  category: Category;
-  /**
    * The binary payload of the file to be uploaded.
    */
   document: Document | Blob;
+  /**
+   * The category of a company attachment.
+   */
+  category: Category;
 };
 
 export type PostV1CompaniesAttachmentRequest = {
@@ -166,14 +166,14 @@ export const PostV1CompaniesAttachmentRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  category: Category$inboundSchema,
   document: z.lazy(() => Document$inboundSchema),
+  category: Category$inboundSchema,
 });
 
 /** @internal */
 export type PostV1CompaniesAttachmentRequestBody$Outbound = {
-  category: string;
   document: Document$Outbound | Blob;
+  category: string;
 };
 
 /** @internal */
@@ -182,8 +182,8 @@ export const PostV1CompaniesAttachmentRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompaniesAttachmentRequestBody
 > = z.object({
-  category: Category$outboundSchema,
   document: z.lazy(() => Document$outboundSchema).or(blobLikeSchema),
+  category: Category$outboundSchema,
 });
 
 /**

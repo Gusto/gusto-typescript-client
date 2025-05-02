@@ -7,7 +7,7 @@ The name of the paid time off type.
 ```typescript
 import { Name } from "@gusto/embedded-api/models/components/paidtimeoff.js";
 
-let value: Name = "Vacation Hours";
+let value: Name = "Sick Hours";
 ```
 
 ## Values

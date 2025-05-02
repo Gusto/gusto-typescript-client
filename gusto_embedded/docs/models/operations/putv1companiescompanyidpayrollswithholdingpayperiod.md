@@ -7,8 +7,7 @@ The payment schedule tax rate the payroll is based on. Only relevant for off-cyc
 ```typescript
 import { PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod } from "@gusto/embedded-api/models/operations/putv1companiescompanyidpayrolls.js";
 
-let value: PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod =
-  "Twice per month";
+let value: PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod = "Monthly";
 ```
 
 ## Values

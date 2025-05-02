@@ -9,9 +9,9 @@ import { HomeAddress } from "@gusto/embedded-api/models/operations/postv1company
 
 let value: HomeAddress = {
   street1: "<value>",
-  city: "Fort Santinoport",
-  state: "Kentucky",
-  zip: "60040",
+  city: "East Annabellstead",
+  state: "Virginia",
+  zip: "24647-4102",
 };
 ```
 

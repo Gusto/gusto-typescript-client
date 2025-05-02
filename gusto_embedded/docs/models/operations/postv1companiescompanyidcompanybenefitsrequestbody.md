@@ -6,7 +6,8 @@
 import { PostV1CompaniesCompanyIdCompanyBenefitsRequestBody } from "@gusto/embedded-api/models/operations/postv1companiescompanyidcompanybenefits.js";
 
 let value: PostV1CompaniesCompanyIdCompanyBenefitsRequestBody = {
-  description: "carpool yuck mmm canter bah before yuck",
+  description:
+    "bouncy worthwhile a jealously excepting majestically uselessly except",
 };
 ```
 

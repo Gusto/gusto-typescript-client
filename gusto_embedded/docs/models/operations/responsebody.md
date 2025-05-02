@@ -6,7 +6,7 @@
 import { ResponseBody } from "@gusto/embedded-api/models/operations/getv1companiescompanyuuidtaxrequirements.js";
 
 let value: ResponseBody = {
-  state: "Georgia",
+  state: "Tennessee",
   setupComplete: false,
 };
 ```

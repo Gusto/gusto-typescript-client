@@ -9,7 +9,7 @@ A JSON object containing bank information
 
 ```typescript
 const value: components.CompanyBankAccount = {
-  uuid: "fd8e8edf-e026-4f42-ae7e-2a71b3000ebe",
+  uuid: "49eeb856-7e39-4c68-b685-77cbaf326faa",
 };
 ```
 
