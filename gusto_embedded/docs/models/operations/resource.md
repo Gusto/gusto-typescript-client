@@ -9,7 +9,7 @@ import { Resource } from "@gusto/embedded-api/models/operations/getv1tokeninfo.j
 
 let value: Resource = {
   type: "<value>",
-  uuid: "8b986a7e-f6c8-49e1-910d-cdfc7c1a2f86",
+  uuid: "bb4906c9-ddac-4512-97bf-d9db56c3ec92",
 };
 ```
 

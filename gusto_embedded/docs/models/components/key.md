@@ -7,7 +7,7 @@ A required attribute when creating a garnishment for this state agency. The curr
 ```typescript
 import { Key } from "@gusto/embedded-api/models/components/childsupportdata.js";
 
-let value: Key = "case_number";
+let value: Key = "remittance_number";
 ```
 
 ## Values

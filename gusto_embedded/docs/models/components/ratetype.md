@@ -10,7 +10,7 @@
 ```typescript
 import { RateType } from "@gusto/embedded-api/models/components/taxrequirementmetadata.js";
 
-let value: RateType = "percent";
+let value: RateType = "currency_per_hour";
 ```
 
 ## Values

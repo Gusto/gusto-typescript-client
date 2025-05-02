@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -18,32 +19,71 @@ import {
   MinimumWage$Outbound,
   MinimumWage$outboundSchema,
 } from "../components/minimumwage.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
+  >;
 
 export type GetV1LocationsLocationUuidMinimumWagesRequest = {
   /**
    * The UUID of the location
    */
   locationUuid: string;
-  effectiveDate?: string | undefined;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
+    | undefined;
+  effectiveDate?: string | undefined;
 };
 
 export type GetV1LocationsLocationUuidMinimumWagesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   minimumWageList?: Array<MinimumWage> | undefined;
 };
+
+/** @internal */
+export const GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
+  > =
+    GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1LocationsLocationUuidMinimumWagesRequest$inboundSchema:
@@ -53,21 +93,23 @@ export const GetV1LocationsLocationUuidMinimumWagesRequest$inboundSchema:
     unknown
   > = z.object({
     location_uuid: z.string(),
+    "X-Gusto-API-Version":
+      GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
     effective_date: z.string().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "location_uuid": "locationUuid",
-      "effective_date": "effectiveDate",
       "X-Gusto-API-Version": "xGustoAPIVersion",
+      "effective_date": "effectiveDate",
     });
   });
 
 /** @internal */
 export type GetV1LocationsLocationUuidMinimumWagesRequest$Outbound = {
   location_uuid: string;
-  effective_date?: string | undefined;
   "X-Gusto-API-Version": string;
+  effective_date?: string | undefined;
 };
 
 /** @internal */
@@ -78,13 +120,15 @@ export const GetV1LocationsLocationUuidMinimumWagesRequest$outboundSchema:
     GetV1LocationsLocationUuidMinimumWagesRequest
   > = z.object({
     locationUuid: z.string(),
+    xGustoAPIVersion:
+      GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     effectiveDate: z.string().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       locationUuid: "location_uuid",
-      effectiveDate: "effective_date",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      effectiveDate: "effective_date",
     });
   });
 

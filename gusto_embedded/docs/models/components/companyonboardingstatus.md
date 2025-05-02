@@ -8,7 +8,7 @@ The representation of a company's onboarding status
 import { CompanyOnboardingStatus } from "@gusto/embedded-api/models/components/companyonboardingstatus.js";
 
 let value: CompanyOnboardingStatus = {
-  uuid: "d46caf91-ecb0-462d-9bef-cf9005ddf10e",
+  uuid: "83e7e39c-7232-4978-aeae-30938756a40c",
 };
 ```
 

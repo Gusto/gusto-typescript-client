@@ -147,6 +147,10 @@ export type PayrollMinimal = {
    * Only included for processed payrolls
    */
   creditBlockers?: Array<PayrollCreditBlockersType> | undefined;
+  /**
+   * Array of reversal payroll UUIDs, if applicable.
+   */
+  reversalPayrollUuids?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -184,6 +188,7 @@ export const PayrollMinimal$inboundSchema: z.ZodType<
   submission_blockers: z.array(PayrollSubmissionBlockersType$inboundSchema)
     .optional(),
   credit_blockers: z.array(PayrollCreditBlockersType$inboundSchema).optional(),
+  reversal_payroll_uuids: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_deadline": "payrollDeadline",
@@ -205,6 +210,7 @@ export const PayrollMinimal$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "submission_blockers": "submissionBlockers",
     "credit_blockers": "creditBlockers",
+    "reversal_payroll_uuids": "reversalPayrollUuids",
   });
 });
 
@@ -235,6 +241,7 @@ export type PayrollMinimal$Outbound = {
     | Array<PayrollSubmissionBlockersType$Outbound>
     | undefined;
   credit_blockers?: Array<PayrollCreditBlockersType$Outbound> | undefined;
+  reversal_payroll_uuids?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -268,6 +275,7 @@ export const PayrollMinimal$outboundSchema: z.ZodType<
   submissionBlockers: z.array(PayrollSubmissionBlockersType$outboundSchema)
     .optional(),
   creditBlockers: z.array(PayrollCreditBlockersType$outboundSchema).optional(),
+  reversalPayrollUuids: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     payrollDeadline: "payroll_deadline",
@@ -289,6 +297,7 @@ export const PayrollMinimal$outboundSchema: z.ZodType<
     createdAt: "created_at",
     submissionBlockers: "submission_blockers",
     creditBlockers: "credit_blockers",
+    reversalPayrollUuids: "reversal_payroll_uuids",
   });
 });
 

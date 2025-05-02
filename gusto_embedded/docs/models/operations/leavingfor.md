@@ -7,7 +7,7 @@ Which competitor the company is joining instead. Required if `reason` is `'switc
 ```typescript
 import { LeavingFor } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidsuspensions.js";
 
-let value: LeavingFor = "adp_total_source";
+let value: LeavingFor = "rippling";
 ```
 
 ## Values

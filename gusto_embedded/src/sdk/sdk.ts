@@ -37,6 +37,7 @@ import { HistoricalEmployees } from "./historicalemployees.js";
 import { HolidayPayPolicies } from "./holidaypaypolicies.js";
 import { I9Verification } from "./i9verification.js";
 import { IndustrySelection } from "./industryselection.js";
+import { InformationRequests } from "./informationrequests.js";
 import { Introspection } from "./introspection.js";
 import { Invoices } from "./invoices.js";
 import { JobsAndCompensations } from "./jobsandcompensations.js";
@@ -300,6 +301,13 @@ export class GustoEmbedded extends ClientSDK {
   private _events?: Events;
   get events(): Events {
     return (this._events ??= new Events(this._options));
+  }
+
+  private _informationRequests?: InformationRequests;
+  get informationRequests(): InformationRequests {
+    return (this._informationRequests ??= new InformationRequests(
+      this._options,
+    ));
   }
 
   private _recoveryCases?: RecoveryCases;

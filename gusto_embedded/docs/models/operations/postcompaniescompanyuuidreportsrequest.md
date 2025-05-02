@@ -10,12 +10,12 @@ let value: PostCompaniesCompanyUuidReportsRequest = {
   companyUuid: "<id>",
   requestBody: {
     columns: [
-      "employee_additional_taxes",
+      "employee_last_name",
     ],
     groupings: [
-      "employee",
+      "payroll",
     ],
-    fileType: "csv",
+    fileType: "json",
     startDate: new RFCDate("2024-01-01"),
     endDate: new RFCDate("2024-04-01"),
     dismissedStartDate: new RFCDate("2024-01-01"),

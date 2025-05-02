@@ -8,7 +8,7 @@ import { PutV1EmployeesEmployeeIdI9AuthorizationRequest } from "@gusto/embedded-
 let value: PutV1EmployeesEmployeeIdI9AuthorizationRequest = {
   employeeId: "<id>",
   requestBody: {
-    authorizationStatus: "alien",
+    authorizationStatus: "permanent_resident",
   },
 };
 ```

@@ -8,7 +8,7 @@ import { PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest } from "@g
 let value: PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest = {
   companyId: "<id>",
   payScheduleAssignmentBody: {
-    type: "by_employee",
+    type: "by_department",
   },
 };
 ```

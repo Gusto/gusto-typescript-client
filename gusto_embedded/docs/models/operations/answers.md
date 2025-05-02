@@ -6,7 +6,7 @@
 import { Answers } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidstatetaxes.js";
 
 let value: Answers = {
-  value: false,
+  value: 9989.31,
   validFrom: "<value>",
 };
 ```

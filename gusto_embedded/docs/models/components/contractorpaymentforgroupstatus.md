@@ -7,7 +7,7 @@ The status of the contractor payment.  Will transition to `Funded` during paymen
 ```typescript
 import { ContractorPaymentForGroupStatus } from "@gusto/embedded-api/models/components/contractorpaymentforgroup.js";
 
-let value: ContractorPaymentForGroupStatus = "Unfunded";
+let value: ContractorPaymentForGroupStatus = "Funded";
 ```
 
 ## Values

@@ -9,7 +9,7 @@ let value: PutV1ContractorsContractorIdPaymentMethodRequest = {
   contractorUuid: "<id>",
   requestBody: {
     version: "<value>",
-    type: "Direct Deposit",
+    type: "Check",
   },
 };
 ```

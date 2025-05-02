@@ -13,7 +13,7 @@ let value: PutV1CompaniesResponse = {
     request: new Request("https://example.com"),
   },
   company: {
-    uuid: "b4632fb7-3406-44b6-a201-a78ef3a40c56",
+    uuid: "64630c7b-de6e-4735-b4a3-1e7c024a7d41",
     compensations: {
       hourly: [
         {

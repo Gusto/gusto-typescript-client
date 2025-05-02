@@ -46,7 +46,7 @@ export type TaxRequirement = {
   /**
    * A more detailed customer facing description of the requirement
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The "answer"
    */
@@ -164,7 +164,7 @@ export const TaxRequirement$inboundSchema: z.ZodType<
   key: z.string().optional(),
   applicable_if: z.array(z.lazy(() => ApplicableIf$inboundSchema)).optional(),
   label: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
   metadata: TaxRequirementMetadata$inboundSchema.optional(),
 }).transform((v) => {
@@ -178,7 +178,7 @@ export type TaxRequirement$Outbound = {
   key?: string | undefined;
   applicable_if?: Array<ApplicableIf$Outbound> | undefined;
   label?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   value?: string | null | undefined;
   metadata?: TaxRequirementMetadata$Outbound | undefined;
 };
@@ -192,7 +192,7 @@ export const TaxRequirement$outboundSchema: z.ZodType<
   key: z.string().optional(),
   applicableIf: z.array(z.lazy(() => ApplicableIf$outboundSchema)).optional(),
   label: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
   metadata: TaxRequirementMetadata$outboundSchema.optional(),
 }).transform((v) => {

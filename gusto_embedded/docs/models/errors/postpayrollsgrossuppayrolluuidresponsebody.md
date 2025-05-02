@@ -9,6 +9,12 @@ Unprocessable Entity
 
 ```typescript
 const value: errors.UnprocessableEntityErrorObject1 = {
+  errors: [
+    {
+      errorKey: "<value>",
+      category: "<value>",
+    },
+  ],
   httpMeta: {
     response: new Response("{\"message\": \"hello world\"}", {
       headers: { "Content-Type": "application/json" },

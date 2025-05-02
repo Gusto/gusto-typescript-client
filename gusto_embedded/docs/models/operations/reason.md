@@ -11,7 +11,7 @@ Explanation for why the company is suspending their account.
 ```typescript
 import { Reason } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidsuspensions.js";
 
-let value: Reason = "shutting_down";
+let value: Reason = "changing_ein_or_entity_type";
 ```
 
 ## Values

@@ -7,7 +7,7 @@ One of the "onboarding_status" enum values.
 ```typescript
 import { ContractorOnboardingStatus1 } from "@gusto/embedded-api/models/components/contractor.js";
 
-let value: ContractorOnboardingStatus1 = "self_onboarding_invited";
+let value: ContractorOnboardingStatus1 = "self_onboarding_not_invited";
 ```
 
 ## Values

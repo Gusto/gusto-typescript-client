@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsGetMinimumWages } from "../funcs/locationsGetMinimumWages.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion,
   GetV1LocationsLocationUuidMinimumWagesRequest,
   GetV1LocationsLocationUuidMinimumWagesResponse,
 } from "../models/operations/getv1locationslocationuuidminimumwages.js";
@@ -96,8 +96,10 @@ export function setLocationsGetMinimumWagesData(
   queryKeyBase: [
     locationUuid: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
+        | undefined;
       effectiveDate?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: LocationsGetMinimumWagesQueryData,
@@ -113,8 +115,10 @@ export function invalidateLocationsGetMinimumWages(
     [
       locationUuid: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
+          | undefined;
         effectiveDate?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -153,8 +157,8 @@ export function buildLocationsGetMinimumWagesQuery(
 } {
   return {
     queryKey: queryKeyLocationsGetMinimumWages(request.locationUuid, {
-      effectiveDate: request.effectiveDate,
       xGustoAPIVersion: request.xGustoAPIVersion,
+      effectiveDate: request.effectiveDate,
     }),
     queryFn: async function locationsGetMinimumWagesQueryFn(
       ctx,
@@ -177,8 +181,10 @@ export function buildLocationsGetMinimumWagesQuery(
 export function queryKeyLocationsGetMinimumWages(
   locationUuid: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
+      | undefined;
     effectiveDate?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

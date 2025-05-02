@@ -7,7 +7,7 @@ The direction of the payment
 ```typescript
 import { PaymentDirection } from "@gusto/embedded-api/models/components/achtransaction.js";
 
-let value: PaymentDirection = "credit";
+let value: PaymentDirection = "debit";
 ```
 
 ## Values

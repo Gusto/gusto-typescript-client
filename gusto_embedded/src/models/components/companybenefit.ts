@@ -5,8 +5,22 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+ */
+export const Source = {
+  Internal: "internal",
+  External: "external",
+  Partnered: "partnered",
+} as const;
+/**
+ * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+ */
+export type Source = ClosedEnum<typeof Source>;
 
 /**
  * The representation of a company benefit.
@@ -41,6 +55,14 @@ export type CompanyBenefit = {
    */
   description?: string | undefined;
   /**
+   * The source of the company benefit. This can be "internal", "external", or "partnered". Company benefits created via the API default to "external". Certain partners can create company benefits with a source of "partnered".
+   */
+  source?: Source | undefined;
+  /**
+   * The partner name of the partner that created the company benefit. For example, "XYZ Corp".
+   */
+  partnerName?: string | null | undefined;
+  /**
    * Whether this company benefit can be deleted. Deletable will be set to true if the benefit has not been used in payroll, has no employee benefits associated, and the benefit is not owned by Gusto or a Partner
    */
   deletable?: boolean | undefined;
@@ -59,6 +81,25 @@ export type CompanyBenefit = {
 };
 
 /** @internal */
+export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
+  .nativeEnum(Source);
+
+/** @internal */
+export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
+  Source$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Source$ {
+  /** @deprecated use `Source$inboundSchema` instead. */
+  export const inboundSchema = Source$inboundSchema;
+  /** @deprecated use `Source$outboundSchema` instead. */
+  export const outboundSchema = Source$outboundSchema;
+}
+
+/** @internal */
 export const CompanyBenefit$inboundSchema: z.ZodType<
   CompanyBenefit,
   z.ZodTypeDef,
@@ -71,6 +112,8 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
   benefit_type: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
+  source: Source$inboundSchema.optional(),
+  partner_name: z.nullable(z.string()).optional(),
   deletable: z.boolean().optional(),
   supports_percentage_amounts: z.boolean().optional(),
   responsible_for_employer_taxes: z.boolean().optional(),
@@ -80,6 +123,7 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
     "enrollment_count": "enrollmentCount",
     "company_uuid": "companyUuid",
     "benefit_type": "benefitType",
+    "partner_name": "partnerName",
     "supports_percentage_amounts": "supportsPercentageAmounts",
     "responsible_for_employer_taxes": "responsibleForEmployerTaxes",
     "responsible_for_employee_w2": "responsibleForEmployeeW2",
@@ -95,6 +139,8 @@ export type CompanyBenefit$Outbound = {
   benefit_type?: number | undefined;
   active: boolean;
   description?: string | undefined;
+  source?: string | undefined;
+  partner_name?: string | null | undefined;
   deletable?: boolean | undefined;
   supports_percentage_amounts?: boolean | undefined;
   responsible_for_employer_taxes?: boolean | undefined;
@@ -114,6 +160,8 @@ export const CompanyBenefit$outboundSchema: z.ZodType<
   benefitType: z.number().int().optional(),
   active: z.boolean().default(true),
   description: z.string().optional(),
+  source: Source$outboundSchema.optional(),
+  partnerName: z.nullable(z.string()).optional(),
   deletable: z.boolean().optional(),
   supportsPercentageAmounts: z.boolean().optional(),
   responsibleForEmployerTaxes: z.boolean().optional(),
@@ -123,6 +171,7 @@ export const CompanyBenefit$outboundSchema: z.ZodType<
     enrollmentCount: "enrollment_count",
     companyUuid: "company_uuid",
     benefitType: "benefit_type",
+    partnerName: "partner_name",
     supportsPercentageAmounts: "supports_percentage_amounts",
     responsibleForEmployerTaxes: "responsible_for_employer_taxes",
     responsibleForEmployeeW2: "responsible_for_employee_w2",

@@ -256,7 +256,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.paySchedules.getPreview({
     companyId: "<id>",
-    frequency: "Monthly",
+    frequency: "Every other week",
     anchorPayDate: "2020-05-15",
     anchorEndOfPayPeriod: "2020-05-08",
   });
@@ -285,7 +285,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await paySchedulesGetPreview(gustoEmbedded, {
     companyId: "<id>",
-    frequency: "Monthly",
+    frequency: "Every other week",
     anchorPayDate: "2020-05-15",
     anchorEndOfPayPeriod: "2020-05-08",
   });

@@ -13,7 +13,7 @@ let value: GetV1CompaniesResponse = {
     request: new Request("https://example.com"),
   },
   company: {
-    uuid: "961b7bdf-d05b-4280-a30c-35eb02993e98",
+    uuid: "88e5a54a-293c-41ca-8b40-c75abce54978",
     compensations: {
       hourly: [
         {

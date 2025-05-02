@@ -67,7 +67,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.taxRequirements.get({
     companyUuid: "<id>",
-    state: "New Mexico",
+    state: "Oklahoma",
   });
 
   // Handle the result
@@ -94,7 +94,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await taxRequirementsGet(gustoEmbedded, {
     companyUuid: "<id>",
-    state: "New Mexico",
+    state: "Oklahoma",
   });
 
   if (!res.ok) {
@@ -175,7 +175,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.taxRequirements.updateState({
     companyUuid: "<id>",
-    state: "New Jersey",
+    state: "Massachusetts",
     requestBody: {
       requirementSets: [
         {
@@ -243,7 +243,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await taxRequirementsUpdateState(gustoEmbedded, {
     companyUuid: "<id>",
-    state: "New Jersey",
+    state: "Massachusetts",
     requestBody: {
       requirementSets: [
         {
