@@ -17,7 +17,7 @@ import {
 /**
  * The required value of the requirement identified by `key`
  */
-export type TaxRequirementValue = boolean | string | number;
+export type TaxRequirementApplicableIfValue = boolean | string | number;
 
 export type ApplicableIf = {
   /**
@@ -29,6 +29,11 @@ export type ApplicableIf = {
    */
   value?: boolean | string | number | null | undefined;
 };
+
+/**
+ * The "answer"
+ */
+export type TaxRequirementValue = string | boolean;
 
 export type TaxRequirement = {
   /**
@@ -50,55 +55,60 @@ export type TaxRequirement = {
   /**
    * The "answer"
    */
-  value?: string | null | undefined;
+  value?: string | boolean | null | undefined;
   metadata?: TaxRequirementMetadata | undefined;
 };
 
 /** @internal */
-export const TaxRequirementValue$inboundSchema: z.ZodType<
-  TaxRequirementValue,
+export const TaxRequirementApplicableIfValue$inboundSchema: z.ZodType<
+  TaxRequirementApplicableIfValue,
   z.ZodTypeDef,
   unknown
 > = z.union([z.boolean(), z.string(), z.number()]);
 
 /** @internal */
-export type TaxRequirementValue$Outbound = boolean | string | number;
+export type TaxRequirementApplicableIfValue$Outbound =
+  | boolean
+  | string
+  | number;
 
 /** @internal */
-export const TaxRequirementValue$outboundSchema: z.ZodType<
-  TaxRequirementValue$Outbound,
+export const TaxRequirementApplicableIfValue$outboundSchema: z.ZodType<
+  TaxRequirementApplicableIfValue$Outbound,
   z.ZodTypeDef,
-  TaxRequirementValue
+  TaxRequirementApplicableIfValue
 > = z.union([z.boolean(), z.string(), z.number()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TaxRequirementValue$ {
-  /** @deprecated use `TaxRequirementValue$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementValue$inboundSchema;
-  /** @deprecated use `TaxRequirementValue$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementValue$outboundSchema;
-  /** @deprecated use `TaxRequirementValue$Outbound` instead. */
-  export type Outbound = TaxRequirementValue$Outbound;
+export namespace TaxRequirementApplicableIfValue$ {
+  /** @deprecated use `TaxRequirementApplicableIfValue$inboundSchema` instead. */
+  export const inboundSchema = TaxRequirementApplicableIfValue$inboundSchema;
+  /** @deprecated use `TaxRequirementApplicableIfValue$outboundSchema` instead. */
+  export const outboundSchema = TaxRequirementApplicableIfValue$outboundSchema;
+  /** @deprecated use `TaxRequirementApplicableIfValue$Outbound` instead. */
+  export type Outbound = TaxRequirementApplicableIfValue$Outbound;
 }
 
-export function taxRequirementValueToJSON(
-  taxRequirementValue: TaxRequirementValue,
+export function taxRequirementApplicableIfValueToJSON(
+  taxRequirementApplicableIfValue: TaxRequirementApplicableIfValue,
 ): string {
   return JSON.stringify(
-    TaxRequirementValue$outboundSchema.parse(taxRequirementValue),
+    TaxRequirementApplicableIfValue$outboundSchema.parse(
+      taxRequirementApplicableIfValue,
+    ),
   );
 }
 
-export function taxRequirementValueFromJSON(
+export function taxRequirementApplicableIfValueFromJSON(
   jsonString: string,
-): SafeParseResult<TaxRequirementValue, SDKValidationError> {
+): SafeParseResult<TaxRequirementApplicableIfValue, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TaxRequirementValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaxRequirementValue' from JSON`,
+    (x) => TaxRequirementApplicableIfValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TaxRequirementApplicableIfValue' from JSON`,
   );
 }
 
@@ -156,6 +166,54 @@ export function applicableIfFromJSON(
 }
 
 /** @internal */
+export const TaxRequirementValue$inboundSchema: z.ZodType<
+  TaxRequirementValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.boolean()]);
+
+/** @internal */
+export type TaxRequirementValue$Outbound = string | boolean;
+
+/** @internal */
+export const TaxRequirementValue$outboundSchema: z.ZodType<
+  TaxRequirementValue$Outbound,
+  z.ZodTypeDef,
+  TaxRequirementValue
+> = z.union([z.string(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TaxRequirementValue$ {
+  /** @deprecated use `TaxRequirementValue$inboundSchema` instead. */
+  export const inboundSchema = TaxRequirementValue$inboundSchema;
+  /** @deprecated use `TaxRequirementValue$outboundSchema` instead. */
+  export const outboundSchema = TaxRequirementValue$outboundSchema;
+  /** @deprecated use `TaxRequirementValue$Outbound` instead. */
+  export type Outbound = TaxRequirementValue$Outbound;
+}
+
+export function taxRequirementValueToJSON(
+  taxRequirementValue: TaxRequirementValue,
+): string {
+  return JSON.stringify(
+    TaxRequirementValue$outboundSchema.parse(taxRequirementValue),
+  );
+}
+
+export function taxRequirementValueFromJSON(
+  jsonString: string,
+): SafeParseResult<TaxRequirementValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TaxRequirementValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TaxRequirementValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const TaxRequirement$inboundSchema: z.ZodType<
   TaxRequirement,
   z.ZodTypeDef,
@@ -165,7 +223,7 @@ export const TaxRequirement$inboundSchema: z.ZodType<
   applicable_if: z.array(z.lazy(() => ApplicableIf$inboundSchema)).optional(),
   label: z.string().optional(),
   description: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  value: z.nullable(z.union([z.string(), z.boolean()])).optional(),
   metadata: TaxRequirementMetadata$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -179,7 +237,7 @@ export type TaxRequirement$Outbound = {
   applicable_if?: Array<ApplicableIf$Outbound> | undefined;
   label?: string | undefined;
   description?: string | null | undefined;
-  value?: string | null | undefined;
+  value?: string | boolean | null | undefined;
   metadata?: TaxRequirementMetadata$Outbound | undefined;
 };
 
@@ -193,7 +251,7 @@ export const TaxRequirement$outboundSchema: z.ZodType<
   applicableIf: z.array(z.lazy(() => ApplicableIf$outboundSchema)).optional(),
   label: z.string().optional(),
   description: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  value: z.nullable(z.union([z.string(), z.boolean()])).optional(),
   metadata: TaxRequirementMetadata$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
