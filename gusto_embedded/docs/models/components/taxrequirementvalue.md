@@ -1,15 +1,9 @@
 # TaxRequirementValue
 
-The required value of the requirement identified by `key`
+The "answer"
 
 
 ## Supported Types
-
-### `boolean`
-
-```typescript
-const value: boolean = false;
-```
 
 ### `string`
 
@@ -17,9 +11,9 @@ const value: boolean = false;
 const value: string = "<value>";
 ```
 
-### `number`
+### `boolean`
 
 ```typescript
-const value: number = 1284.03;
+const value: boolean = false;
 ```
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 01fddff1edbed7541b37a7331a2c0282
+  docChecksum: e23c4b83f9a63e6f4f34d00f5347d535
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.542.0
-  generationVersion: 2.596.2
-  releaseVersion: 0.5.12
-  configChecksum: 6a28cf3e49206a536a62e24a73d7c0f1
+  speakeasyVersion: 1.543.1
+  generationVersion: 2.598.21
+  releaseVersion: 0.5.13
+  configChecksum: d5de0142db05171dd669f5ab112e835b
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -363,6 +363,7 @@ generatedFiles:
   - docs/models/components/taxliabilitiesselections.md
   - docs/models/components/taxrefunds.md
   - docs/models/components/taxrequirement.md
+  - docs/models/components/taxrequirementapplicableifvalue.md
   - docs/models/components/taxrequirementmetadata.md
   - docs/models/components/taxrequirementmetadataoptions.md
   - docs/models/components/taxrequirementmetadatatype.md
@@ -2608,6 +2609,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     Company is shutting down:
       parameters:
         path:
@@ -2619,6 +2621,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     Basic:
       parameters:
         path:
@@ -5144,6 +5147,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     example-2:
       parameters:
         path:
@@ -5155,6 +5159,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     example-3:
       parameters:
         path:
@@ -5166,6 +5171,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     Example:
       parameters:
         path:
@@ -5989,6 +5995,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     example-3:
       parameters:
         path:
@@ -6000,6 +6007,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     Example:
       parameters:
         path:
@@ -6669,6 +6677,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [], "": {}}
+        "200": {}
   put-v1-companies-company_id-payrolls-payroll_id-calculate:
     Example:
       parameters:
@@ -6908,7 +6917,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 579805, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 857478, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
     Hourly Vacation Policy:
       parameters:
         path:
@@ -7000,7 +7009,7 @@ examples:
         application/json: {"name": "<value>", "policy_type": "<value>", "accrual_method": "unlimited"}
       responses:
         "201":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 198175, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Unlimited Vacation Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 486589, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "is_active": true, "employees": []}
     Hourly Vacation Policy:
       parameters:
         path:
@@ -8872,6 +8881,7 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+        "200": {}
     example:
       parameters:
         path:
