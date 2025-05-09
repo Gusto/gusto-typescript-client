@@ -25,7 +25,7 @@ jobs:
       mode: pr
       set_version: ${{ github.event.inputs.set_version }}
       target: gusto-embedded
-      runs-on: '{"group": "gusto-ubuntu-default"}'
+      runs-on: "{\"group\": \"gusto-ubuntu-default\"}"
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       npm_token: ${{ secrets.NPM_TOKEN }}
