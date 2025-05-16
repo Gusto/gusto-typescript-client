@@ -49,7 +49,7 @@ export type Job = {
   /**
    * The payment unit of the current compensation for the job.
    */
-  paymentUnit?: string | undefined;
+  paymentUnit?: string | null | undefined;
   /**
    * The UUID of the current compensation of the job.
    */
@@ -79,7 +79,7 @@ export const Job$inboundSchema: z.ZodType<Job, z.ZodTypeDef, unknown> = z
     title: z.nullable(z.string()).default(null),
     primary: z.boolean().optional(),
     rate: z.string().optional(),
-    payment_unit: z.string().optional(),
+    payment_unit: z.nullable(z.string()).optional(),
     current_compensation_uuid: z.string().optional(),
     two_percent_shareholder: z.boolean().optional(),
     state_wc_covered: z.nullable(z.boolean()).optional(),
@@ -106,7 +106,7 @@ export type Job$Outbound = {
   title: string | null;
   primary?: boolean | undefined;
   rate?: string | undefined;
-  payment_unit?: string | undefined;
+  payment_unit?: string | null | undefined;
   current_compensation_uuid?: string | undefined;
   two_percent_shareholder?: boolean | undefined;
   state_wc_covered?: boolean | null | undefined;
@@ -124,7 +124,7 @@ export const Job$outboundSchema: z.ZodType<Job$Outbound, z.ZodTypeDef, Job> = z
     title: z.nullable(z.string()).default(null),
     primary: z.boolean().optional(),
     rate: z.string().optional(),
-    paymentUnit: z.string().optional(),
+    paymentUnit: z.nullable(z.string()).optional(),
     currentCompensationUuid: z.string().optional(),
     twoPercentShareholder: z.boolean().optional(),
     stateWcCovered: z.nullable(z.boolean()).optional(),

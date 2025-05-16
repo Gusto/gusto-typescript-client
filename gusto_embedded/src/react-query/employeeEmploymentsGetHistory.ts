@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsGetHistory } from "../funcs/employeeEmploymentsGetHistory.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
   GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
 } from "../models/operations/getv1employeesemployeeidemploymenthistory.js";
@@ -95,7 +95,11 @@ export function setEmployeeEmploymentsGetHistoryData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeeEmploymentsGetHistoryQueryData,
 ): EmployeeEmploymentsGetHistoryQueryData | undefined {
@@ -109,7 +113,11 @@ export function invalidateEmployeeEmploymentsGetHistory(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -169,7 +177,11 @@ export function buildEmployeeEmploymentsGetHistoryQuery(
 
 export function queryKeyEmployeeEmploymentsGetHistory(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

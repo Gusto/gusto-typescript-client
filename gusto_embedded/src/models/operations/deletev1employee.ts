@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -12,22 +13,30 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const DeleteV1EmployeeHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteV1EmployeeHeaderXGustoAPIVersion = ClosedEnum<
+  typeof DeleteV1EmployeeHeaderXGustoAPIVersion
+>;
+
 export type DeleteV1EmployeeRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: DeleteV1EmployeeHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type DeleteV1EmployeeResponse = {
@@ -35,24 +44,49 @@ export type DeleteV1EmployeeResponse = {
 };
 
 /** @internal */
+export const DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<typeof DeleteV1EmployeeHeaderXGustoAPIVersion> = z.nativeEnum(
+    DeleteV1EmployeeHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof DeleteV1EmployeeHeaderXGustoAPIVersion> =
+    DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1EmployeeHeaderXGustoAPIVersion$ {
+  /** @deprecated use `DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema;
+}
+
+/** @internal */
 export const DeleteV1EmployeeRequest$inboundSchema: z.ZodType<
   DeleteV1EmployeeRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version": DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema
+    .default("2024-04-01"),
   employee_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
-    "employee_id": "employeeId",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "employee_id": "employeeId",
   });
 });
 
 /** @internal */
 export type DeleteV1EmployeeRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
 };
 
 /** @internal */
@@ -61,12 +95,13 @@ export const DeleteV1EmployeeRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteV1EmployeeRequest
 > = z.object({
+  xGustoAPIVersion: DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema
+    .default("2024-04-01"),
   employeeId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
-    employeeId: "employee_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    employeeId: "employee_id",
   });
 });
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: e23c4b83f9a63e6f4f34d00f5347d535
+  docChecksum: da16c67f87fb516ea3beed4d31a8b3d8
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.543.1
-  generationVersion: 2.598.21
-  releaseVersion: 0.5.13
-  configChecksum: d5de0142db05171dd669f5ab112e835b
+  speakeasyVersion: 1.545.0
+  generationVersion: 2.599.0
+  releaseVersion: 0.5.14
+  configChecksum: e1a900a668d6d22f9560fd6a6e317a67
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -26,7 +26,7 @@ features:
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.82.5
     groups: 2.81.2
     inputOutputModels: 2.82.0
     methodSecurity: 2.82.6
@@ -182,7 +182,7 @@ generatedFiles:
   - docs/models/components/employeeonboardingstatusonboardingstep.md
   - docs/models/components/employeepaymentmethod.md
   - docs/models/components/employeepaymentmethodtype.md
-  - docs/models/components/employeepaystub.md
+  - docs/models/components/employeepaystubslist.md
   - docs/models/components/employees.md
   - docs/models/components/employeestatetax.md
   - docs/models/components/employeestatetaxanswer.md
@@ -451,6 +451,7 @@ generatedFiles:
   - docs/models/operations/deletev1contractorscontractoruuidresponse.md
   - docs/models/operations/deletev1employeebenefitsemployeebenefitidrequest.md
   - docs/models/operations/deletev1employeebenefitsemployeebenefitidresponse.md
+  - docs/models/operations/deletev1employeeheaderxgustoapiversion.md
   - docs/models/operations/deletev1employeerequest.md
   - docs/models/operations/deletev1employeeresponse.md
   - docs/models/operations/deletev1employeesemployeeidbankaccountsbankaccountidrequest.md
@@ -557,6 +558,7 @@ generatedFiles:
   - docs/models/operations/getv1companiescompanyidcustomfieldsresponse.md
   - docs/models/operations/getv1companiescompanyidearningtypesrequest.md
   - docs/models/operations/getv1companiescompanyidearningtypesresponse.md
+  - docs/models/operations/getv1companiescompanyidemployeesheaderxgustoapiversion.md
   - docs/models/operations/getv1companiescompanyidemployeesrequest.md
   - docs/models/operations/getv1companiescompanyidemployeesresponse.md
   - docs/models/operations/getv1companiescompanyidfederaltaxdetailsrequest.md
@@ -661,6 +663,7 @@ generatedFiles:
   - docs/models/operations/getv1employeesemployeeidcustomfieldsresponsebody.md
   - docs/models/operations/getv1employeesemployeeidemployeebenefitsrequest.md
   - docs/models/operations/getv1employeesemployeeidemployeebenefitsresponse.md
+  - docs/models/operations/getv1employeesemployeeidemploymenthistoryheaderxgustoapiversion.md
   - docs/models/operations/getv1employeesemployeeidemploymenthistoryrequest.md
   - docs/models/operations/getv1employeesemployeeidemploymenthistoryresponse.md
   - docs/models/operations/getv1employeesemployeeidfederaltaxesrequest.md
@@ -678,6 +681,7 @@ generatedFiles:
   - docs/models/operations/getv1employeesemployeeidjobsqueryparaminclude.md
   - docs/models/operations/getv1employeesemployeeidjobsrequest.md
   - docs/models/operations/getv1employeesemployeeidjobsresponse.md
+  - docs/models/operations/getv1employeesemployeeidonboardingstatusheaderxgustoapiversion.md
   - docs/models/operations/getv1employeesemployeeidonboardingstatusrequest.md
   - docs/models/operations/getv1employeesemployeeidonboardingstatusresponse.md
   - docs/models/operations/getv1employeesemployeeidpaymentmethodrequest.md
@@ -690,8 +694,10 @@ generatedFiles:
   - docs/models/operations/getv1employeesemployeeidterminationsresponse.md
   - docs/models/operations/getv1employeesemployeeidworkaddressesrequest.md
   - docs/models/operations/getv1employeesemployeeidworkaddressesresponse.md
+  - docs/models/operations/getv1employeesemployeeuuidpaystubsheaderxgustoapiversion.md
   - docs/models/operations/getv1employeesemployeeuuidpaystubsrequest.md
   - docs/models/operations/getv1employeesemployeeuuidpaystubsresponse.md
+  - docs/models/operations/getv1employeesheaderxgustoapiversion.md
   - docs/models/operations/getv1employeesrequest.md
   - docs/models/operations/getv1employeesresponse.md
   - docs/models/operations/getv1externalpayrollcalculatetaxesrequest.md
@@ -719,6 +725,7 @@ generatedFiles:
   - docs/models/operations/getv1locationslocationuuidminimumwagesresponse.md
   - docs/models/operations/getv1paymentreceiptspayrollspayrolluuidrequest.md
   - docs/models/operations/getv1paymentreceiptspayrollspayrolluuidresponse.md
+  - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubheaderxgustoapiversion.md
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubrequest.md
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubresponse.md
   - docs/models/operations/getv1taxliabilitiesrequest.md
@@ -886,6 +893,7 @@ generatedFiles:
   - docs/models/operations/postv1employeesemployeeidworkaddressesrequest.md
   - docs/models/operations/postv1employeesemployeeidworkaddressesrequestbody.md
   - docs/models/operations/postv1employeesemployeeidworkaddressesresponse.md
+  - docs/models/operations/postv1employeesheaderxgustoapiversion.md
   - docs/models/operations/postv1employeesrequest.md
   - docs/models/operations/postv1employeesrequestbody.md
   - docs/models/operations/postv1employeesresponse.md
@@ -1031,6 +1039,7 @@ generatedFiles:
   - docs/models/operations/putv1contractorscontractoruuidaddressrequest.md
   - docs/models/operations/putv1contractorscontractoruuidaddressrequestbody.md
   - docs/models/operations/putv1contractorscontractoruuidaddressresponse.md
+  - docs/models/operations/putv1contractorscontractoruuidonboardingstatusonboardingstatus.md
   - docs/models/operations/putv1contractorscontractoruuidonboardingstatusrequest.md
   - docs/models/operations/putv1contractorscontractoruuidonboardingstatusrequestbody.md
   - docs/models/operations/putv1contractorscontractoruuidonboardingstatusresponse.md
@@ -1069,6 +1078,7 @@ generatedFiles:
   - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequest.md
   - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigrequestbody.md
   - docs/models/operations/putv1employeesemployeeidonboardingdocumentsconfigresponse.md
+  - docs/models/operations/putv1employeesemployeeidonboardingstatusheaderxgustoapiversion.md
   - docs/models/operations/putv1employeesemployeeidonboardingstatusrequest.md
   - docs/models/operations/putv1employeesemployeeidonboardingstatusrequestbody.md
   - docs/models/operations/putv1employeesemployeeidonboardingstatusresponse.md
@@ -1553,7 +1563,7 @@ generatedFiles:
   - src/models/components/employeeonboardingdocument.ts
   - src/models/components/employeeonboardingstatus.ts
   - src/models/components/employeepaymentmethod.ts
-  - src/models/components/employeepaystub.ts
+  - src/models/components/employeepaystubslist.ts
   - src/models/components/employeestatetax.ts
   - src/models/components/employeestatetaxanswer.ts
   - src/models/components/employeestatetaxinputquestionformat.ts
@@ -3150,7 +3160,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "92a4bb87-8731-4cbc-a8b5-ff15e71e5c6d", "version": "d058d4dabda76568bc8b5c571bd4397e", "company_uuid": "1fcd2fd8-9ce7-40dc-92c2-a9278e957047", "phone_number": "8094206653", "street_1": "84802 Darrel Crossing", "street_2": "Suite 187", "city": "Kenna", "state": "WV", "zip": "25248", "country": "USA", "active": true, "mailing_address": true, "filing_address": false, "created_at": "2025-04-28T13:03:41.000-07:00", "updated_at": "2025-04-28T13:03:41.000-07:00"}
+          application/json: {"uuid": "bd6fc55c-1263-4432-aef0-d667b9e0aef7", "version": "2a98f99d7e8e3ede9b04a6494b7f3fcf", "company_uuid": "393b7c66-66a1-4967-ab19-32eca5db9edd", "phone_number": "7425583363", "street_1": "3079 Hackett Landing", "street_2": "Suite 671", "city": "Belmont", "state": "IN", "zip": "47448", "country": "USA", "active": true, "mailing_address": true, "filing_address": false, "created_at": "2025-05-15T08:01:01.000-07:00", "updated_at": "2025-05-15T08:01:01.000-07:00"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-locations-location_id:
@@ -3161,7 +3171,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "52d5265dbe000f69a8e95e8a7b1300b6", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
+        application/json: {"version": "aa2c4db94c2e968aa0cf51f346007c5f", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
       responses:
         "200":
           application/json: {"uuid": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "country": "USA"}
@@ -3177,7 +3187,7 @@ examples:
         application/json: {"version": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "976e2a84-939e-43a0-8299-e9b151587469", "version": "b32d692e5323b53a927628d6417a8f7e", "company_uuid": "65832238-d188-459e-bbcb-8f3225acacfb", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "state": "SC", "zip": "94107", "country": "USA", "active": true, "mailing_address": true, "filing_address": true, "created_at": "2025-04-28T13:03:43.000-07:00", "updated_at": "2025-04-28T13:03:44.000-07:00"}
+          application/json: {"uuid": "a8b2221c-c063-4417-8c72-9b8e535ff7c4", "version": "65aacee259b7169fe6287ddda9fa7d22", "company_uuid": "7692323a-d689-436c-b9f3-df05d4f16f0f", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "state": "MN", "zip": "94107", "country": "USA", "active": true, "mailing_address": true, "filing_address": true, "created_at": "2025-05-15T08:01:03.000-07:00", "updated_at": "2025-05-15T08:01:03.000-07:00"}
         "404":
           application/json: {"errors": [{"error_key": "state", "category": "invalid_attribute_value", "message": "State is in the wrong format"}]}
   get-v1-locations-location_uuid-minimum_wages:
@@ -3204,7 +3214,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "32cdd7db-7315-4225-a53a-d6a17e710802", "wage": "15.0", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "003eeb45-eaec-41cf-8544-07f9d2186494", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "0b851548-b7c3-4616-ad66-908f30bbcb2e", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "State", "notes": "large companies"}, {"uuid": "9b362d44-6b56-49d2-9b5c-f499eec1486f", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "Federal", "notes": "large companies"}]
+          application/json: [{"uuid": "f236d80d-52d2-495e-8538-884162a383f4", "wage": "15.0", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "0f86fd12-a2fd-45b4-b3ab-fb8400b383b2", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "648c12be-857b-4c4e-9667-4e4480ddf794", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "State", "notes": "large companies"}, {"uuid": "9eb81bb8-2a5f-4cba-ab74-da2e2cd35a5f", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "Federal", "notes": "large companies"}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-companies-company_id-bank-accounts:
@@ -3953,6 +3963,30 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}}]}
+    request_example_1:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"first_name": "Karl", "last_name": "The Fog"}
+      responses:
+        "201":
+          application/json: {"uuid": "7a621cf0-21cd-49cf-8540-3315211a509a", "first_name": "Adrienne", "last_name": "Barrows", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+    test_example:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "201":
+          application/json: {"uuid": "83f84a60-a44c-49dc-8b61-db364d7cfbf4", "first_name": "Karl", "middle_initial": null, "last_name": "The Fog", "email": null, "company_uuid": "085cb0bf-c271-4f33-9d25-4b7ed5534358", "manager_uuid": null, "version": "5211ee9bb08e51634431a18eff0afc64", "department": null, "terminated": false, "two_percent_shareholder": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": null, "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null, "current_employment_status": null}
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-v1-companies-company_id-employees:
     Example:
       parameters:
@@ -3964,6 +3998,18 @@ examples:
       responses:
         "200":
           application/json: [{"uuid": "9779767c-6044-48e0-bf68-aeb370b9a2e7", "first_name": "Nicole", "middle_initial": "M", "last_name": "Boehm", "email": "kory7757869450111548@barton-hermiston.io", "company_uuid": "c44d66dc-c41b-4a60-9e25-5e93ff8583f2", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "414dedaca594b77135e0b8d2f398516d", "department": "Stage Hand", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "9d5e3ce5-ea8f-4885-90e5-7ebbed03f7c5", "i9_document": true}, "jobs": [{"uuid": "5d5e3ce5-ea8f-4885-90e5-7ebaed03f7c5", "version": "91179081a7309c9fbd31bb3cf7b9893e", "employee_uuid": "a987bce1-6d06-43f8-9978-9db886f479fb", "hire_date": "2020-01-20", "title": "Client Support Manager", "primary": true, "rate": "22.00", "payment_unit": "Hour", "current_compensation_uuid": "798a962f-0fcf-491e-9b71-cfa6a1db114f", "compensations": [{"uuid": "94f17a77-cfe5-436a-af94-422bbf8248ff", "version": "233f0096a8015e62d9795fadf1fd300d", "job_uuid": "64711ac0-83ff-4aaf-bec1-db72f5a44e56", "rate": "22.00", "payment_unit": "Hour", "flsa_status": "Nonexempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "9940d205-9904-4e55-9fec-652628e84af7", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "71.0", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "8b312f0e-30e7-4810-9c06-1177a6484f2d", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "34.0", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "date_of_birth": "1996-05-08", "has_ssn": true, "ssn": "", "phone": "1234567890", "preferred_first_name": "Vanessa", "payment_method": "Check", "work_email": "vanessa.boehm@example.com"}, {"uuid": "d7cb289a-af62-4120-9cd5-acda324b5c04", "first_name": "Maci", "middle_initial": "M", "last_name": "Cassin", "email": "claud_reinger7757869450111549@gutkowski.net", "company_uuid": "4522d043-5731-406d-a129-de1808042a32", "manager_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "version": "e867459e1360fa71e78b88142923d341", "department": "Band", "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": "1d5e3ce5-ea8f-4885-90e5-7ebbed03f7c5", "i9_document": true}, "jobs": [{"uuid": "62a00cf7-342b-465e-a151-ecd295152be0", "version": "d0e719137f89ca3dd334dd4cc248ffbb", "employee_uuid": "5e53e257-c8d6-45aa-aa8a-ec99283a3acd", "hire_date": "2020-01-20", "title": "Account Director", "primary": true, "rate": "78000.00", "payment_unit": "Year", "current_compensation_uuid": "93e5da92-173b-4faa-a0bd-d1a8dee68be0", "compensations": [{"uuid": "1bad5177-c4ed-432e-ab43-66055d40c3a5", "version": "994b75511d1debac5d7e2ddeae13679f", "job_uuid": "1214875b-f43d-4267-bf2f-a6d2c298ff3d", "rate": "78000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2021-01-20", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [{"name": "Sick Hours", "policy_name": "Sick Policy", "policy_uuid": "8b312f0e-30e7-4810-9c06-1177a6484f2d", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_method": "per_hour_worked", "accrual_period": "Year", "accrual_balance": "74.0", "maximum_accrual_balance": "240.0", "paid_at_termination": false}, {"name": "Vacation Hours", "policy_name": "Vacation Policy", "policy_uuid": "0d4c755e-50ac-4c54-b46e-81bdfa03da5b", "accrual_unit": "Hour", "accrual_rate": "208.0", "accrual_period": "Year", "accrual_balance": "16.0", "maximum_accrual_balance": "240.0", "paid_at_termination": true}], "terminations": [], "garnishments": [], "custom_fields": [{"id": "ee515986-f3ca-49da-b576-2691b95262f9", "company_custom_field_id": "ea7e5d57-6abb-47d7-b654-347c142886c0", "name": "employee_level", "type": "text", "description": "Employee Level", "value": "2", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "299650e4-e970-4acf-9bf0-6f05585d20ba", "name": "t-shirt size", "type": "text", "description": "What is your t-shirt size?", "value": "md", "selection_options": null}, {"id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59", "company_custom_field_id": "024ec137-6c92-43a3-b061-14a9720531d6", "name": "favorite fruit", "type": "radio", "description": "Which is your favorite fruit?", "value": "apple", "selection_options": ["apple", "banana", "orange"]}], "date_of_birth": "1995-09-21", "has_ssn": true, "ssn": "", "phone": "1234567890", "preferred_first_name": "Denis", "payment_method": "Check", "work_email": "denis.cassin@example.com"}]
+    test_example:
+      parameters:
+        path:
+          company_id: "<id>"
+        query: {}
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"uuid": "d6d55ac1-802f-403a-bb0a-0543bb5670c3", "first_name": "Boaty", "middle_initial": null, "last_name": "Jenkins", "email": "freda_gaylord@nikolausgottlieb.com", "company_uuid": "278819f0-5bb9-4af8-8981-5ef539471969", "manager_uuid": null, "version": "b252e3ee842587da40dd4c9206dcb650", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "6e481688-c92b-41ab-ba11-90cd77060846", "version": "7b3c1d34eedab81d57ee2dfe89cec6e1", "employee_uuid": "d6d55ac1-802f-403a-bb0a-0543bb5670c3", "hire_date": "2024-05-15", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "a26f36aa-8255-499e-aabd-7404c40db3c2", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "a26f36aa-8255-499e-aabd-7404c40db3c2", "version": "1c5b6d134862dee3598c87e6c6300f51", "job_uuid": "6e481688-c92b-41ab-ba11-90cd77060846", "employee_uuid": "d6d55ac1-802f-403a-bb0a-0543bb5670c3", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-05-15", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-05-15", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "work_email": null, "current_employment_status": "full_time"}, {"uuid": "40bb57f6-3a64-4ab9-9338-1d1a711db7ed", "first_name": "Cathrine", "middle_initial": null, "last_name": "Jacobson", "email": "hai@morissette.ca", "company_uuid": "278819f0-5bb9-4af8-8981-5ef539471969", "manager_uuid": null, "version": "838143794e09a50eab0207f2e7238520", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "db9cd327-96e0-4b53-a94d-1546378c647e", "version": "7b3c1d34eedab81d57ee2dfe89cec6e1", "employee_uuid": "40bb57f6-3a64-4ab9-9338-1d1a711db7ed", "hire_date": "2024-05-15", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "8b7dd287-46f1-4bdf-b245-ec4a8ceaef34", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "8b7dd287-46f1-4bdf-b245-ec4a8ceaef34", "version": "1c5b6d134862dee3598c87e6c6300f51", "job_uuid": "db9cd327-96e0-4b53-a94d-1546378c647e", "employee_uuid": "40bb57f6-3a64-4ab9-9338-1d1a711db7ed", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-05-15", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-05-15", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "work_email": null, "current_employment_status": "full_time"}]
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-historical_employees:
     Example:
       parameters:
@@ -4043,6 +4089,16 @@ examples:
       responses:
         "200":
           application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31T00:00:00Z", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null}
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        query: {}
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {"uuid": "ac151743-4bea-41a3-ac1e-1707d6dcf9b0", "first_name": "Bertram", "middle_initial": null, "last_name": "Fritsch", "email": "talia@stehr.com", "company_uuid": "2f224f94-521b-4ab0-959a-192bb0c00c4d", "version": "56251d892c85d34d80c85b931760161b", "department": "Trivia 1", "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "f2c956af-bc5f-4348-b4aa-7d3ecc2db71b", "employee_uuid": "ac151743-4bea-41a3-ac1e-1707d6dcf9b0", "hire_date": "2024-05-15", "title": "Engineer", "primary": true, "two_percent_shareholder": false}], "date_of_birth": "2005-05-15", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check"}
   put-v1-employees:
     Example:
       parameters:
@@ -4112,6 +4168,30 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}}]}
+    request_example_1:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"version": "f0c06d303aab1fd909b40d4a1ad409ac", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233"}
+      responses:
+        "200":
+          application/json: {"uuid": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "first_name": "Merlin", "last_name": "Harber", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}, {"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"version": "<value>"}
+      responses:
+        "200":
+          application/json: {"uuid": "ce755bcc-c8d7-4dcc-aa1a-365fd9cb18c5", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "company_uuid": "3753e3e8-d20b-4a9e-b83e-4a06f2976666", "version": "4eff5441d8f8ecc08f53a88ded36f13e", "department": null, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "ad02c425-fa91-436b-b55a-9bd653306dd2", "employee_uuid": "ce755bcc-c8d7-4dcc-aa1a-365fd9cb18c5", "hire_date": "2024-05-15", "title": "", "primary": true, "two_percent_shareholder": false}], "date_of_birth": "1991-01-31", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check"}
+        "404":
+          application/json: {"errors": [{"error_key": "base", "category": "invalid_resource_version", "message": "You are attempting to update a resource using an out-of-date version."}]}
   delete-v1-employee:
     Basic:
       parameters:
@@ -4140,6 +4220,12 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}}]}
+    speakeasy-default-delete-v1-employee:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
   get-v1-employees-employee_id-custom_fields:
     Example:
       parameters:
@@ -4173,6 +4259,15 @@ examples:
       responses:
         "200":
           application/json: {"uuid": "c44d66dc-c41b-4a60-9e25-5e93ff8583f2", "onboarding_status": "admin_onboarding_incomplete", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": false, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": false, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": false, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": false, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": false, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": false, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}]}
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {"uuid": "fc886793-beb9-464b-aecb-0f0bfbaab009", "onboarding_status": "onboarding_completed", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": true, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": true, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": true, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": true, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": true, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
   put-v1-employees-employee_id-onboarding_status:
     Example:
       parameters:
@@ -4218,6 +4313,32 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}}]}
+    request_example_1:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"onboarding_status": "admin_onboarding_incomplete"}
+      responses:
+        "200":
+          application/json: {"uuid": "75e8eff6-5962-4484-81aa-a27f8239a25f"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"onboarding_status": "admin_onboarding_incomplete"}
+      responses:
+        "200":
+          application/json: {"uuid": "6b811a65-1944-45e6-99ce-b5c245cecd17", "onboarding_status": "admin_onboarding_incomplete", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": false, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": false, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": false, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": false, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": false, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-version-employees-time_off_activities:
     example:
       parameters:
@@ -4646,6 +4767,17 @@ examples:
       responses:
         "200":
           application/json: [{"hire_date": "2023-05-30", "termination_date": "<value>", "file_new_hire_report": true, "two_percent_shareholder": false, "employment_status": "seasonal"}, {"hire_date": "2021-02-02", "termination_date": "2023-03-01", "file_new_hire_report": false, "two_percent_shareholder": false, "employment_status": "full_time"}]
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"hire_date": "2015-05-15", "termination_date": "2025-04-15", "file_new_hire_report": false, "two_percent_shareholder": false, "employment_status": "full_time"}]
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-v1-employees-employee_id-home_addresses:
     Example:
       parameters:
@@ -6771,6 +6903,17 @@ examples:
       responses:
         "200":
           application/json: [{"uuid": "d2cec746-caee-464a-bcaf-00d93f7049c9", "check_date": "2023-11-24T00:00:00Z", "gross_pay": "880", "net_pay": "541.02", "payroll_uuid": "a039cafb-745e-4af4-bf1e-935a86fc18e0", "check_amount": "500.2"}]
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: []
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks:
     Example:
       parameters:
@@ -8762,7 +8905,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "7b1d0df1-6403-4a06-8768-c1dd7d24d27a", "company_uuid": "88f7cca1-dcad-4d20-84db-7fb80303d69f", "title": "Action required: Additional information needed to process payroll", "message": "If we do not receive this information as soon as possible, your payroll may not be processed on time.", "category": "information_request", "actionable": true, "can_block_payroll": true, "published_at": "2022-01-01T00:00:00.000Z", "due_at": "2022-02-01T00:00:00.000Z", "resources": [{"entity_type": "Employee", "entity_uuid": "21b6f9ce-0ac4-4745-8d8a-127f8c0f00f2"}]}
+          application/json: {"uuid": "7b1d0df1-6403-4a06-8768-c1dd7d24d27a", "company_uuid": "88f7cca1-dcad-4d20-84db-7fb80303d69f", "title": "Action required: Additional information needed to process payroll", "message": "If we do not receive this information as soon as possible, your payroll may not be processed on time.", "category": "information_request", "actionable": true, "can_block_payroll": true, "published_at": "2022-01-01T00:00:00.000Z", "due_at": "2022-02-01T00:00:00.000Z", "template_variables": {"blocked_task": "Payroll"}, "resources": [{"entity_type": "Employee", "entity_uuid": "21b6f9ce-0ac4-4745-8d8a-127f8c0f00f2"}]}
     Basic:
       parameters:
         path:

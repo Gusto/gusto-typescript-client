@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesList } from "../funcs/employeesList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdEmployeesRequest,
   GetV1CompaniesCompanyIdEmployeesResponse,
   Include,
@@ -96,12 +96,14 @@ export function setEmployeesListData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      terminated?: boolean | undefined;
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
+        | undefined;
+      searchTerm?: string | undefined;
       include?: Array<Include> | undefined;
+      terminated?: boolean | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      searchTerm?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesListQueryData,
@@ -117,12 +119,14 @@ export function invalidateEmployeesList(
     [
       companyId: string,
       parameters: {
-        terminated?: boolean | undefined;
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
+          | undefined;
+        searchTerm?: string | undefined;
         include?: Array<Include> | undefined;
+        terminated?: boolean | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        searchTerm?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -154,12 +158,12 @@ export function buildEmployeesListQuery(
 } {
   return {
     queryKey: queryKeyEmployeesList(request.companyId, {
-      terminated: request.terminated,
+      xGustoAPIVersion: request.xGustoAPIVersion,
+      searchTerm: request.searchTerm,
       include: request.include,
+      terminated: request.terminated,
       page: request.page,
       per: request.per,
-      searchTerm: request.searchTerm,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function employeesListQueryFn(
       ctx,
@@ -182,12 +186,14 @@ export function buildEmployeesListQuery(
 export function queryKeyEmployeesList(
   companyId: string,
   parameters: {
-    terminated?: boolean | undefined;
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
+      | undefined;
+    searchTerm?: string | undefined;
     include?: Array<Include> | undefined;
+    terminated?: boolean | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    searchTerm?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Employees", "list", companyId, parameters];

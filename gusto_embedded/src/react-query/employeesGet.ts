@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGet } from "../funcs/employeesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesHeaderXGustoAPIVersion,
   GetV1EmployeesRequest,
   GetV1EmployeesResponse,
   QueryParamInclude,
@@ -96,8 +96,8 @@ export function setEmployeesGetData(
   queryKeyBase: [
     employeeId: string,
     parameters: {
+      xGustoAPIVersion?: GetV1EmployeesHeaderXGustoAPIVersion | undefined;
       include?: Array<QueryParamInclude> | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: EmployeesGetQueryData,
@@ -113,8 +113,8 @@ export function invalidateEmployeesGet(
     [
       employeeId: string,
       parameters: {
+        xGustoAPIVersion?: GetV1EmployeesHeaderXGustoAPIVersion | undefined;
         include?: Array<QueryParamInclude> | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -146,8 +146,8 @@ export function buildEmployeesGetQuery(
 } {
   return {
     queryKey: queryKeyEmployeesGet(request.employeeId, {
-      include: request.include,
       xGustoAPIVersion: request.xGustoAPIVersion,
+      include: request.include,
     }),
     queryFn: async function employeesGetQueryFn(
       ctx,
@@ -170,8 +170,8 @@ export function buildEmployeesGetQuery(
 export function queryKeyEmployeesGet(
   employeeId: string,
   parameters: {
+    xGustoAPIVersion?: GetV1EmployeesHeaderXGustoAPIVersion | undefined;
     include?: Array<QueryParamInclude> | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Employees", "get", employeeId, parameters];

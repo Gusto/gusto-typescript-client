@@ -146,7 +146,7 @@ export type Employee = {
   /**
    * The current onboarding status of the employee
    */
-  onboardingStatus?: OnboardingStatus | undefined;
+  onboardingStatus?: OnboardingStatus | null | undefined;
   /**
    * Configuration for an employee onboarding documents during onboarding
    */
@@ -330,7 +330,7 @@ export const Employee$inboundSchema: z.ZodType<
   terminated: z.boolean().optional(),
   two_percent_shareholder: z.nullable(z.boolean()).optional(),
   onboarded: z.boolean().optional(),
-  onboarding_status: OnboardingStatus$inboundSchema.optional(),
+  onboarding_status: z.nullable(OnboardingStatus$inboundSchema).optional(),
   onboarding_documents_config: z.lazy(() =>
     OnboardingDocumentsConfig$inboundSchema
   ).optional(),
@@ -383,7 +383,7 @@ export type Employee$Outbound = {
   terminated?: boolean | undefined;
   two_percent_shareholder?: boolean | null | undefined;
   onboarded?: boolean | undefined;
-  onboarding_status?: string | undefined;
+  onboarding_status?: string | null | undefined;
   onboarding_documents_config?: OnboardingDocumentsConfig$Outbound | undefined;
   jobs?: Array<Job$Outbound> | undefined;
   eligible_paid_time_off?: Array<PaidTimeOff$Outbound> | undefined;
@@ -418,7 +418,7 @@ export const Employee$outboundSchema: z.ZodType<
   terminated: z.boolean().optional(),
   twoPercentShareholder: z.nullable(z.boolean()).optional(),
   onboarded: z.boolean().optional(),
-  onboardingStatus: OnboardingStatus$outboundSchema.optional(),
+  onboardingStatus: z.nullable(OnboardingStatus$outboundSchema).optional(),
   onboardingDocumentsConfig: z.lazy(() =>
     OnboardingDocumentsConfig$outboundSchema
   ).optional(),

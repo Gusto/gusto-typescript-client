@@ -30,9 +30,9 @@ export type EmployeesCreateMutationData = PostV1EmployeesResponse;
  * Create an employee
  *
  * @remarks
- * Create an employee.
+ *         Create an employee.
  *
- * scope: `employees:manage`
+ *         scope: `employees:manage`
  */
 export function useEmployeesCreateMutation(
   options?: MutationHookOptions<

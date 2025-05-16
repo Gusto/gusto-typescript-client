@@ -1539,6 +1539,7 @@ Get an employee's pay stub for the specified payroll. By default, an application
 
 scope: `pay_stubs:read`
 
+
 ### Example Usage
 
 ```typescript
@@ -1647,6 +1648,7 @@ Get an employee's pay stubs
 
 scope: `pay_stubs:read`
 
+
 ### Example Usage
 
 ```typescript
@@ -1743,9 +1745,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## generatePrintableChecks
 

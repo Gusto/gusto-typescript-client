@@ -29,19 +29,24 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The updated onboarding status for the contractor
  */
-export const OnboardingStatus = {
+export const PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus = {
   OnboardingCompleted: "onboarding_completed",
 } as const;
 /**
  * The updated onboarding status for the contractor
  */
-export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
+export type PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus =
+  ClosedEnum<
+    typeof PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus
+  >;
 
 export type PutV1ContractorsContractorUuidOnboardingStatusRequestBody = {
   /**
    * The updated onboarding status for the contractor
    */
-  onboardingStatus?: OnboardingStatus | undefined;
+  onboardingStatus?:
+    | PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus
+    | undefined;
 };
 
 export type PutV1ContractorsContractorUuidOnboardingStatusRequest = {
@@ -65,24 +70,31 @@ export type PutV1ContractorsContractorUuidOnboardingStatusResponse = {
 };
 
 /** @internal */
-export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = z.nativeEnum(OnboardingStatus);
+export const PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus
+  > = z.nativeEnum(
+    PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus,
+  );
 
 /** @internal */
-export const OnboardingStatus$outboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = OnboardingStatus$inboundSchema;
+export const PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus
+  > =
+    PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace OnboardingStatus$ {
-  /** @deprecated use `OnboardingStatus$inboundSchema` instead. */
-  export const inboundSchema = OnboardingStatus$inboundSchema;
-  /** @deprecated use `OnboardingStatus$outboundSchema` instead. */
-  export const outboundSchema = OnboardingStatus$outboundSchema;
+export namespace PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$ {
+  /** @deprecated use `PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$inboundSchema;
+  /** @deprecated use `PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$outboundSchema;
 }
 
 /** @internal */
@@ -92,9 +104,9 @@ export const PutV1ContractorsContractorUuidOnboardingStatusRequestBody$inboundSc
     z.ZodTypeDef,
     unknown
   > = z.object({
-    onboarding_status: OnboardingStatus$inboundSchema.default(
-      "onboarding_completed",
-    ),
+    onboarding_status:
+      PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$inboundSchema
+        .default("onboarding_completed"),
   }).transform((v) => {
     return remap$(v, {
       "onboarding_status": "onboardingStatus",
@@ -114,9 +126,9 @@ export const PutV1ContractorsContractorUuidOnboardingStatusRequestBody$outboundS
     z.ZodTypeDef,
     PutV1ContractorsContractorUuidOnboardingStatusRequestBody
   > = z.object({
-    onboardingStatus: OnboardingStatus$outboundSchema.default(
-      "onboarding_completed",
-    ),
+    onboardingStatus:
+      PutV1ContractorsContractorUuidOnboardingStatusOnboardingStatus$outboundSchema
+        .default("onboarding_completed"),
   }).transform((v) => {
     return remap$(v, {
       onboardingStatus: "onboarding_status",

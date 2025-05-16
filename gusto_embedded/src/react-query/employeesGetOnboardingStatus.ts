@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesGetOnboardingStatus } from "../funcs/employeesGetOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdOnboardingStatusRequest,
   GetV1EmployeesEmployeeIdOnboardingStatusResponse,
 } from "../models/operations/getv1employeesemployeeidonboardingstatus.js";
@@ -167,7 +167,11 @@ export function setEmployeesGetOnboardingStatusData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeesGetOnboardingStatusQueryData,
 ): EmployeesGetOnboardingStatusQueryData | undefined {
@@ -181,7 +185,11 @@ export function invalidateEmployeesGetOnboardingStatus(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -241,7 +249,11 @@ export function buildEmployeesGetOnboardingStatusQuery(
 
 export function queryKeyEmployeesGetOnboardingStatus(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

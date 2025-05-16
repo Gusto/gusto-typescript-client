@@ -36,18 +36,18 @@ import { Result } from "../types/fp.js";
  * Update the employee's onboarding status
  *
  * @remarks
- * scope: `employees:manage`
+ *         scope: `employees:manage`
  *
- * Updates an employee's onboarding status.
- * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+ *         Updates an employee's onboarding status.
+ *         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
  *
- * | Action | current onboarding_status | new onboarding_status |
- * |:------------------|:------------:|----------:|
- * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
- * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
- * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
- * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
- * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+ *         | Action | current onboarding_status | new onboarding_status |
+ *         |:------------------|:------------:|----------:|
+ *         | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+ *         | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+ *         | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+ *         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+ *         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
  */
 export function employeesUpdateOnboardingStatus(
   client: GustoEmbeddedCore,
@@ -193,8 +193,8 @@ async function $do(
       PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema,
       { key: "Employee-Onboarding-Status" },
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

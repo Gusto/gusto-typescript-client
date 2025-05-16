@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGetPayStub } from "../funcs/payrollsGetPayStub.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion,
   GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
   GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
 } from "../models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.js";
@@ -96,7 +96,11 @@ export function setPayrollsGetPayStubData(
   queryKeyBase: [
     payrollId: string,
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: PayrollsGetPayStubQueryData,
 ): PayrollsGetPayStubQueryData | undefined {
@@ -111,7 +115,11 @@ export function invalidatePayrollsGetPayStub(
     [
       payrollId: string,
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -174,7 +182,11 @@ export function buildPayrollsGetPayStubQuery(
 export function queryKeyPayrollsGetPayStub(
   payrollId: string,
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

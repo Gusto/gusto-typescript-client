@@ -1,14 +1,14 @@
-# EmployeePayStub
+# EmployeePayStubsList
 
 The representation of an employee pay stub information.
 
 ## Example Usage
 
 ```typescript
-import { EmployeePayStub } from "@gusto/embedded-api/models/components/employeepaystub.js";
+import { EmployeePayStubsList } from "@gusto/embedded-api/models/components/employeepaystubslist.js";
 
-let value: EmployeePayStub = {
-  uuid: "142c0a25-d45f-423b-b3f9-bf70b08a250f",
+let value: EmployeePayStubsList = {
+  uuid: "25fc4170-1319-4aeb-b537-b75bbccd2a76",
 };
 ```
 

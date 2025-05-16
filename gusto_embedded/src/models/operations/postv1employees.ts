@@ -5,7 +5,9 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   Employee,
   Employee$inboundSchema,
@@ -18,27 +20,32 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Create an employee.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
+export const PostV1EmployeesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1EmployeesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1EmployeesHeaderXGustoAPIVersion
+>;
+
 export type PostV1EmployeesRequestBody = {
   firstName: string;
   middleInitial?: string | undefined;
   lastName: string;
-  preferredFirstName?: string | undefined;
-  dateOfBirth?: string | undefined;
   /**
    * The employee's personal email address.
    */
   email?: string | undefined;
+  dateOfBirth?: RFCDate | undefined;
   ssn?: string | undefined;
+  preferredFirstName?: string | undefined;
   /**
    * If true, employee is expected to self-onboard. If false, payroll admin is expected to enter in the employee's onboarding information
    */
@@ -47,26 +54,47 @@ export type PostV1EmployeesRequestBody = {
 
 export type PostV1EmployeesRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?: PostV1EmployeesHeaderXGustoAPIVersion | undefined;
   /**
-   * Create an employee.
+   * Company ID
    */
-  requestBody: PostV1EmployeesRequestBody;
+  companyId: string;
+  requestBody?: PostV1EmployeesRequestBody | undefined;
 };
 
 export type PostV1EmployeesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   employee?: Employee | undefined;
 };
+
+/** @internal */
+export const PostV1EmployeesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<typeof PostV1EmployeesHeaderXGustoAPIVersion> = z.nativeEnum(
+    PostV1EmployeesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const PostV1EmployeesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1EmployeesHeaderXGustoAPIVersion> =
+    PostV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostV1EmployeesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostV1EmployeesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PostV1EmployeesRequestBody$inboundSchema: z.ZodType<
@@ -77,18 +105,18 @@ export const PostV1EmployeesRequestBody$inboundSchema: z.ZodType<
   first_name: z.string(),
   middle_initial: z.string().optional(),
   last_name: z.string(),
-  preferred_first_name: z.string().optional(),
-  date_of_birth: z.string().optional(),
   email: z.string().optional(),
+  date_of_birth: z.string().transform(v => new RFCDate(v)).optional(),
   ssn: z.string().optional(),
+  preferred_first_name: z.string().optional(),
   self_onboarding: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
     "middle_initial": "middleInitial",
     "last_name": "lastName",
-    "preferred_first_name": "preferredFirstName",
     "date_of_birth": "dateOfBirth",
+    "preferred_first_name": "preferredFirstName",
     "self_onboarding": "selfOnboarding",
   });
 });
@@ -98,10 +126,10 @@ export type PostV1EmployeesRequestBody$Outbound = {
   first_name: string;
   middle_initial?: string | undefined;
   last_name: string;
-  preferred_first_name?: string | undefined;
-  date_of_birth?: string | undefined;
   email?: string | undefined;
+  date_of_birth?: string | undefined;
   ssn?: string | undefined;
+  preferred_first_name?: string | undefined;
   self_onboarding?: boolean | undefined;
 };
 
@@ -114,18 +142,18 @@ export const PostV1EmployeesRequestBody$outboundSchema: z.ZodType<
   firstName: z.string(),
   middleInitial: z.string().optional(),
   lastName: z.string(),
-  preferredFirstName: z.string().optional(),
-  dateOfBirth: z.string().optional(),
   email: z.string().optional(),
+  dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   ssn: z.string().optional(),
+  preferredFirstName: z.string().optional(),
   selfOnboarding: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
     middleInitial: "middle_initial",
     lastName: "last_name",
-    preferredFirstName: "preferred_first_name",
     dateOfBirth: "date_of_birth",
+    preferredFirstName: "preferred_first_name",
     selfOnboarding: "self_onboarding",
   });
 });
@@ -167,22 +195,24 @@ export const PostV1EmployeesRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version": PostV1EmployeesHeaderXGustoAPIVersion$inboundSchema
+    .default("2024-04-01"),
   company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
-  RequestBody: z.lazy(() => PostV1EmployeesRequestBody$inboundSchema),
+  RequestBody: z.lazy(() => PostV1EmployeesRequestBody$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
-    "company_id": "companyId",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "company_id": "companyId",
     "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type PostV1EmployeesRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1EmployeesRequestBody$Outbound;
+  company_id: string;
+  RequestBody?: PostV1EmployeesRequestBody$Outbound | undefined;
 };
 
 /** @internal */
@@ -191,13 +221,15 @@ export const PostV1EmployeesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1EmployeesRequest
 > = z.object({
+  xGustoAPIVersion: PostV1EmployeesHeaderXGustoAPIVersion$outboundSchema
+    .default("2024-04-01"),
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
-  requestBody: z.lazy(() => PostV1EmployeesRequestBody$outboundSchema),
+  requestBody: z.lazy(() => PostV1EmployeesRequestBody$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyId: "company_id",
     requestBody: "RequestBody",
   });
 });

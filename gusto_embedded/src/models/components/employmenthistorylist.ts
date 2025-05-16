@@ -17,8 +17,7 @@ export const EmploymentHistoryListEmploymentStatus = {
   FullTime: "full_time",
   PartTimeEligible: "part_time_eligible",
   Variable: "variable",
-  Seasonal: "seasonal",
-  NotSet: "not_set",
+  SeasonalNotSet: "seasonal - not_set",
 } as const;
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
@@ -28,7 +27,7 @@ export type EmploymentHistoryListEmploymentStatus = ClosedEnum<
 >;
 
 /**
- * Example response
+ * The representation of an employee's individual employements.
  */
 export type EmploymentHistoryList = {
   /**

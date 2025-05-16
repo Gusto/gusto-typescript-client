@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeOnboardingStatus,
@@ -18,39 +19,112 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
+  >;
+
+/**
+ * Onboarding status value
+ */
+export const OnboardingStatus = {
+  SelfOnboardingInvited: "self_onboarding_invited",
+  AdminOnboardingIncomplete: "admin_onboarding_incomplete",
+  OnboardingCompleted: "onboarding_completed",
+} as const;
+/**
+ * Onboarding status value
+ */
+export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
 
 export type PutV1EmployeesEmployeeIdOnboardingStatusRequestBody = {
   /**
-   * The updated onboarding status for the employee
+   * Onboarding status value
    */
-  onboardingStatus: string;
+  onboardingStatus: OnboardingStatus;
 };
 
 export type PutV1EmployeesEmployeeIdOnboardingStatusRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1EmployeesEmployeeIdOnboardingStatusRequestBody;
 };
 
 export type PutV1EmployeesEmployeeIdOnboardingStatusResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response.
+   * successful
    */
   employeeOnboardingStatus?: EmployeeOnboardingStatus | undefined;
 };
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
+  > =
+    PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema;
+}
+
+/** @internal */
+export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
+  typeof OnboardingStatus
+> = z.nativeEnum(OnboardingStatus);
+
+/** @internal */
+export const OnboardingStatus$outboundSchema: z.ZodNativeEnum<
+  typeof OnboardingStatus
+> = OnboardingStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OnboardingStatus$ {
+  /** @deprecated use `OnboardingStatus$inboundSchema` instead. */
+  export const inboundSchema = OnboardingStatus$inboundSchema;
+  /** @deprecated use `OnboardingStatus$outboundSchema` instead. */
+  export const outboundSchema = OnboardingStatus$outboundSchema;
+}
 
 /** @internal */
 export const PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema:
@@ -59,7 +133,7 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    onboarding_status: z.string(),
+    onboarding_status: OnboardingStatus$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "onboarding_status": "onboardingStatus",
@@ -78,7 +152,7 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$outboundSchema:
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdOnboardingStatusRequestBody
   > = z.object({
-    onboardingStatus: z.string(),
+    onboardingStatus: OnboardingStatus$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       onboardingStatus: "onboarding_status",
@@ -135,23 +209,25 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    "X-Gusto-API-Version":
+      PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "employee_id": "employeeId",
       "X-Gusto-API-Version": "xGustoAPIVersion",
+      "employee_id": "employeeId",
       "RequestBody": "requestBody",
     });
   });
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdOnboardingStatusRequest$Outbound = {
-  employee_id: string;
   "X-Gusto-API-Version": string;
+  employee_id: string;
   RequestBody: PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$Outbound;
 };
 
@@ -162,15 +238,17 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema:
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdOnboardingStatusRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeId: "employee_id",
       requestBody: "RequestBody",
     });
   });

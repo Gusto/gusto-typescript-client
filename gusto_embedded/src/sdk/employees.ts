@@ -62,25 +62,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Employees extends ClientSDK {
   /**
-   * Create an employee
-   *
-   * @remarks
-   * Create an employee.
-   *
-   * scope: `employees:manage`
-   */
-  async create(
-    request: PostV1EmployeesRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1EmployeesResponse> {
-    return unwrapAsync(employeesCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get employees of a company
    *
    * @remarks
@@ -93,6 +74,25 @@ export class Employees extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyIdEmployeesResponse> {
     return unwrapAsync(employeesList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create an employee
+   *
+   * @remarks
+   *         Create an employee.
+   *
+   *         scope: `employees:manage`
+   */
+  async create(
+    request: PostV1EmployeesRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1EmployeesResponse> {
+    return unwrapAsync(employeesCreate(
       this,
       request,
       options,
@@ -138,7 +138,7 @@ export class Employees extends ClientSDK {
   }
 
   /**
-   * Update an employee
+   * Update an employee.
    *
    * @remarks
    * Update an employee.
@@ -274,18 +274,18 @@ export class Employees extends ClientSDK {
    * Update the employee's onboarding status
    *
    * @remarks
-   * scope: `employees:manage`
+   *         scope: `employees:manage`
    *
-   * Updates an employee's onboarding status.
-   * Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+   *         Updates an employee's onboarding status.
+   *         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
    *
-   * | Action | current onboarding_status | new onboarding_status |
-   * |:------------------|:------------:|----------:|
-   * | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
-   * | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
-   * | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
-   * | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
-   * | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+   *         | Action | current onboarding_status | new onboarding_status |
+   *         |:------------------|:------------:|----------:|
+   *         | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+   *         | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+   *         | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+   *         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+   *         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
    */
   async updateOnboardingStatus(
     request: PutV1EmployeesEmployeeIdOnboardingStatusRequest,

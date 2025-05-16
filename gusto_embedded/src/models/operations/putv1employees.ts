@@ -18,31 +18,20 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Update an employee.
- */
 export type PutV1EmployeesRequestBody = {
   /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
   version: string;
   firstName?: string | undefined;
-  middleInitial?: string | undefined;
+  middleInitial?: string | null | undefined;
   lastName?: string | undefined;
-  preferredFirstName?: string | undefined;
-  dateOfBirth?: string | undefined;
-  /**
-   * The employee's personal email address.
-   */
   email?: string | undefined;
+  dateOfBirth?: string | undefined;
   ssn?: string | undefined;
+  preferredFirstName?: string | null | undefined;
   /**
    * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
    */
@@ -50,24 +39,18 @@ export type PutV1EmployeesRequestBody = {
 };
 
 export type PutV1EmployeesRequest = {
+  xGustoAPIVersion?: string | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  /**
-   * Update an employee.
-   */
   requestBody: PutV1EmployeesRequestBody;
 };
 
 export type PutV1EmployeesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   employee?: Employee | undefined;
 };
@@ -80,20 +63,20 @@ export const PutV1EmployeesRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   version: z.string(),
   first_name: z.string().optional(),
-  middle_initial: z.string().optional(),
+  middle_initial: z.nullable(z.string()).optional(),
   last_name: z.string().optional(),
-  preferred_first_name: z.string().optional(),
-  date_of_birth: z.string().optional(),
   email: z.string().optional(),
+  date_of_birth: z.string().optional(),
   ssn: z.string().optional(),
+  preferred_first_name: z.nullable(z.string()).optional(),
   two_percent_shareholder: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
     "middle_initial": "middleInitial",
     "last_name": "lastName",
-    "preferred_first_name": "preferredFirstName",
     "date_of_birth": "dateOfBirth",
+    "preferred_first_name": "preferredFirstName",
     "two_percent_shareholder": "twoPercentShareholder",
   });
 });
@@ -102,12 +85,12 @@ export const PutV1EmployeesRequestBody$inboundSchema: z.ZodType<
 export type PutV1EmployeesRequestBody$Outbound = {
   version: string;
   first_name?: string | undefined;
-  middle_initial?: string | undefined;
+  middle_initial?: string | null | undefined;
   last_name?: string | undefined;
-  preferred_first_name?: string | undefined;
-  date_of_birth?: string | undefined;
   email?: string | undefined;
+  date_of_birth?: string | undefined;
   ssn?: string | undefined;
+  preferred_first_name?: string | null | undefined;
   two_percent_shareholder?: boolean | undefined;
 };
 
@@ -119,20 +102,20 @@ export const PutV1EmployeesRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   version: z.string(),
   firstName: z.string().optional(),
-  middleInitial: z.string().optional(),
+  middleInitial: z.nullable(z.string()).optional(),
   lastName: z.string().optional(),
-  preferredFirstName: z.string().optional(),
-  dateOfBirth: z.string().optional(),
   email: z.string().optional(),
+  dateOfBirth: z.string().optional(),
   ssn: z.string().optional(),
+  preferredFirstName: z.nullable(z.string()).optional(),
   twoPercentShareholder: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
     middleInitial: "middle_initial",
     lastName: "last_name",
-    preferredFirstName: "preferred_first_name",
     dateOfBirth: "date_of_birth",
+    preferredFirstName: "preferred_first_name",
     twoPercentShareholder: "two_percent_shareholder",
   });
 });
@@ -174,21 +157,21 @@ export const PutV1EmployeesRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version": z.string().optional(),
   employee_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() => PutV1EmployeesRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    "employee_id": "employeeId",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "employee_id": "employeeId",
     "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type PutV1EmployeesRequest$Outbound = {
+  "X-Gusto-API-Version"?: string | undefined;
   employee_id: string;
-  "X-Gusto-API-Version": string;
   RequestBody: PutV1EmployeesRequestBody$Outbound;
 };
 
@@ -198,13 +181,13 @@ export const PutV1EmployeesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1EmployeesRequest
 > = z.object({
+  xGustoAPIVersion: z.string().optional(),
   employeeId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() => PutV1EmployeesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    employeeId: "employee_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    employeeId: "employee_id",
     requestBody: "RequestBody",
   });
 });
