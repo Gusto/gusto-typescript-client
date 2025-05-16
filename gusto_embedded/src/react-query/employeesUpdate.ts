@@ -27,7 +27,7 @@ export type EmployeesUpdateMutationVariables = {
 export type EmployeesUpdateMutationData = PutV1EmployeesResponse;
 
 /**
- * Update an employee
+ * Update an employee.
  *
  * @remarks
  * Update an employee.

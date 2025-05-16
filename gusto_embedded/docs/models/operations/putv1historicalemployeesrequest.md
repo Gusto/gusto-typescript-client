@@ -12,7 +12,7 @@ let value: PutV1HistoricalEmployeesRequest = {
     version: "<value>",
     firstName: "Mellie",
     lastName: "Stroman-Bergstrom",
-    dateOfBirth: "1987-07-07",
+    dateOfBirth: "1987-07-14",
     ssn: "<value>",
     workAddress: {},
     homeAddress: {

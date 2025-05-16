@@ -13,5 +13,5 @@ let value: EmploymentHistoryListEmploymentStatus = "full_time";
 ## Values
 
 ```typescript
-"part_time" | "full_time" | "part_time_eligible" | "variable" | "seasonal" | "not_set"
+"part_time" | "full_time" | "part_time_eligible" | "variable" | "seasonal - not_set"
 ```

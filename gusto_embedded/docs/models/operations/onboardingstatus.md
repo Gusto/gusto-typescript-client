@@ -1,17 +1,17 @@
 # OnboardingStatus
 
-The updated onboarding status for the contractor
+Onboarding status value
 
 ## Example Usage
 
 ```typescript
-import { OnboardingStatus } from "@gusto/embedded-api/models/operations/putv1contractorscontractoruuidonboardingstatus.js";
+import { OnboardingStatus } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidonboardingstatus.js";
 
-let value: OnboardingStatus = "onboarding_completed";
+let value: OnboardingStatus = "self_onboarding_invited";
 ```
 
 ## Values
 
 ```typescript
-"onboarding_completed"
+"self_onboarding_invited" | "admin_onboarding_incomplete" | "onboarding_completed"
 ```

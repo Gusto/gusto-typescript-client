@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The representation of an employee pay stub information.
  */
-export type EmployeePayStub = {
+export type EmployeePayStubsList = {
   /**
    * The UUID of the employee pay stub.
    */
@@ -39,8 +39,8 @@ export type EmployeePayStub = {
 };
 
 /** @internal */
-export const EmployeePayStub$inboundSchema: z.ZodType<
-  EmployeePayStub,
+export const EmployeePayStubsList$inboundSchema: z.ZodType<
+  EmployeePayStubsList,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -61,7 +61,7 @@ export const EmployeePayStub$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type EmployeePayStub$Outbound = {
+export type EmployeePayStubsList$Outbound = {
   uuid: string;
   check_date?: string | undefined;
   gross_pay?: string | undefined;
@@ -71,10 +71,10 @@ export type EmployeePayStub$Outbound = {
 };
 
 /** @internal */
-export const EmployeePayStub$outboundSchema: z.ZodType<
-  EmployeePayStub$Outbound,
+export const EmployeePayStubsList$outboundSchema: z.ZodType<
+  EmployeePayStubsList$Outbound,
   z.ZodTypeDef,
-  EmployeePayStub
+  EmployeePayStubsList
 > = z.object({
   uuid: z.string(),
   checkDate: z.string().optional(),
@@ -96,27 +96,29 @@ export const EmployeePayStub$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace EmployeePayStub$ {
-  /** @deprecated use `EmployeePayStub$inboundSchema` instead. */
-  export const inboundSchema = EmployeePayStub$inboundSchema;
-  /** @deprecated use `EmployeePayStub$outboundSchema` instead. */
-  export const outboundSchema = EmployeePayStub$outboundSchema;
-  /** @deprecated use `EmployeePayStub$Outbound` instead. */
-  export type Outbound = EmployeePayStub$Outbound;
+export namespace EmployeePayStubsList$ {
+  /** @deprecated use `EmployeePayStubsList$inboundSchema` instead. */
+  export const inboundSchema = EmployeePayStubsList$inboundSchema;
+  /** @deprecated use `EmployeePayStubsList$outboundSchema` instead. */
+  export const outboundSchema = EmployeePayStubsList$outboundSchema;
+  /** @deprecated use `EmployeePayStubsList$Outbound` instead. */
+  export type Outbound = EmployeePayStubsList$Outbound;
 }
 
-export function employeePayStubToJSON(
-  employeePayStub: EmployeePayStub,
+export function employeePayStubsListToJSON(
+  employeePayStubsList: EmployeePayStubsList,
 ): string {
-  return JSON.stringify(EmployeePayStub$outboundSchema.parse(employeePayStub));
+  return JSON.stringify(
+    EmployeePayStubsList$outboundSchema.parse(employeePayStubsList),
+  );
 }
 
-export function employeePayStubFromJSON(
+export function employeePayStubsListFromJSON(
   jsonString: string,
-): SafeParseResult<EmployeePayStub, SDKValidationError> {
+): SafeParseResult<EmployeePayStubsList, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => EmployeePayStub$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeePayStub' from JSON`,
+    (x) => EmployeePayStubsList$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeePayStubsList' from JSON`,
   );
 }

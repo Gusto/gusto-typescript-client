@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [create](#create) - Create an employee
 * [list](#list) - Get employees of a company
+* [create](#create) - Create an employee
 * [createHistorical](#createhistorical) - Create a historical employee
 * [get](#get) - Get an employee
-* [update](#update) - Update an employee
+* [update](#update) - Update an employee.
 * [delete](#delete) - Delete an onboarding employee
 * [getCustomFields](#getcustomfields) - Get an employee's custom fields
 * [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
@@ -17,125 +17,12 @@
 * [updateOnboardingStatus](#updateonboardingstatus) - Update the employee's onboarding status
 * [getTimeOffActivities](#gettimeoffactivities) - Get employee time off activities
 
-## create
-
-Create an employee.
-
-scope: `employees:manage`
-
-### Example Usage
-
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.employees.create({
-    companyId: "<id>",
-    requestBody: {
-      firstName: "Soren",
-      middleInitial: "A",
-      lastName: "Kierkegaard",
-      preferredFirstName: "Angel",
-      dateOfBirth: "1995-05-05",
-      email: "knight0faith@example.com",
-      ssn: "123456294",
-    },
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { employeesCreate } from "@gusto/embedded-api/funcs/employeesCreate.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await employeesCreate(gustoEmbedded, {
-    companyId: "<id>",
-    requestBody: {
-      firstName: "Soren",
-      middleInitial: "A",
-      lastName: "Kierkegaard",
-      preferredFirstName: "Angel",
-      dateOfBirth: "1995-05-05",
-      email: "knight0faith@example.com",
-      ssn: "123456294",
-    },
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Mutation hook for triggering the API call.
-  useEmployeesCreateMutation
-} from "@gusto/embedded-api/react-query/employeesCreate.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostV1EmployeesRequest](../../models/operations/postv1employeesrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.PostV1EmployeesResponse](../../models/operations/postv1employeesresponse.md)\>**
-
-### Errors
-
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
-
 ## list
 
 Get all of the employees, onboarding, active and terminated, for a given company.
 
 scope: `employees:read`
+
 
 ### Example Usage
 
@@ -233,9 +120,115 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## create
+
+        Create an employee.
+
+        scope: `employees:manage`
+
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.create({
+    companyId: "<id>",
+    requestBody: {
+      firstName: "Karl",
+      lastName: "The Fog",
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesCreate } from "@gusto/embedded-api/funcs/employeesCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesCreate(gustoEmbedded, {
+    companyId: "<id>",
+    requestBody: {
+      firstName: "Karl",
+      lastName: "The Fog",
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesCreateMutation
+} from "@gusto/embedded-api/react-query/employeesCreate.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostV1EmployeesRequest](../../models/operations/postv1employeesrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostV1EmployeesResponse](../../models/operations/postv1employeesresponse.md)\>**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## createHistorical
 
@@ -504,6 +497,7 @@ Update an employee.
 
 scope: `employees:write`
 
+
 ### Example Usage
 
 ```typescript
@@ -515,17 +509,16 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.employees.update({
+    xGustoAPIVersion: "2024-04-01",
     employeeId: "<id>",
     requestBody: {
-      version: "db0edd04aaac4506f7edab03ac855d56",
-      firstName: "Soren",
-      middleInitial: "A",
-      lastName: "Kierkegaard",
-      preferredFirstName: "Angel",
-      dateOfBirth: "1995-05-05",
-      email: "knight0faith@example.com",
-      ssn: "123456294",
-      twoPercentShareholder: false,
+      version: "f0c06d303aab1fd909b40d4a1ad409ac",
+      firstName: "Weezy",
+      middleInitial: "F",
+      lastName: "Baby",
+      email: "tunechi@cashmoneyrecords.com",
+      dateOfBirth: "1991-01-31",
+      ssn: "824920233",
     },
   });
 
@@ -552,17 +545,16 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await employeesUpdate(gustoEmbedded, {
+    xGustoAPIVersion: "2024-04-01",
     employeeId: "<id>",
     requestBody: {
-      version: "db0edd04aaac4506f7edab03ac855d56",
-      firstName: "Soren",
-      middleInitial: "A",
-      lastName: "Kierkegaard",
-      preferredFirstName: "Angel",
-      dateOfBirth: "1995-05-05",
-      email: "knight0faith@example.com",
-      ssn: "123456294",
-      twoPercentShareholder: false,
+      version: "f0c06d303aab1fd909b40d4a1ad409ac",
+      firstName: "Weezy",
+      middleInitial: "F",
+      lastName: "Baby",
+      email: "tunechi@cashmoneyrecords.com",
+      dateOfBirth: "1991-01-31",
+      ssn: "824920233",
     },
   });
 
@@ -613,7 +605,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 409, 422                         | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## delete
@@ -623,6 +615,7 @@ an onboarded employee is not allowed and will return a 422 response. Please chec
 if you need to terminate an onboarded employee.
 
 scope: `employees:manage`
+
 
 ### Example Usage
 
@@ -709,10 +702,9 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## getCustomFields
 
@@ -963,6 +955,7 @@ scope: `employees:read`
 | `file_new_hire_report` | File a new hire report for this employee. |
 | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
 
+
 ### Example Usage
 
 ```typescript
@@ -1065,18 +1058,19 @@ import {
 
 ## updateOnboardingStatus
 
-scope: `employees:manage`
+        scope: `employees:manage`
 
-Updates an employee's onboarding status.
-Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
+        Updates an employee's onboarding status.
+        Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
 
-| Action | current onboarding_status | new onboarding_status |
-|:------------------|:------------:|----------:|
-| Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
-| Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
-| Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
-| Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
-| Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+        | Action | current onboarding_status | new onboarding_status |
+        |:------------------|:------------:|----------:|
+        | Mark an employee as self-onboarding | `admin_onboarding_incomplete` | `self_onboarding_pending_invite` |
+        | Invite an employee to self-onboard | `admin_onboarding_incomplete` or `self_onboarding_pending_invite` | `self_onboarding_invited` |
+        | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
+        | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
+        | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+
 
 ### Example Usage
 
@@ -1091,7 +1085,7 @@ async function run() {
   const result = await gustoEmbedded.employees.updateOnboardingStatus({
     employeeId: "<id>",
     requestBody: {
-      onboardingStatus: "<value>",
+      onboardingStatus: "admin_onboarding_incomplete",
     },
   });
 
@@ -1120,7 +1114,7 @@ async function run() {
   const res = await employeesUpdateOnboardingStatus(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      onboardingStatus: "<value>",
+      onboardingStatus: "admin_onboarding_incomplete",
     },
   });
 
@@ -1171,7 +1165,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getTimeOffActivities

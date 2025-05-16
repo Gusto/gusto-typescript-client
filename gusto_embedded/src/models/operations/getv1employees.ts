@@ -19,20 +19,33 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1EmployeesHeaderXGustoAPIVersion
+>;
+
 export const QueryParamInclude = {
-  AllCompensations: "all_compensations",
   CustomFields: "custom_fields",
+  AllCompensations: "all_compensations",
+  CompanyName: "company_name",
 } as const;
 export type QueryParamInclude = ClosedEnum<typeof QueryParamInclude>;
 
 export type GetV1EmployeesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetV1EmployeesHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the employee
    */
@@ -45,19 +58,39 @@ export type GetV1EmployeesRequest = {
    * - custom_fields: Include employees' custom fields
    */
   include?: Array<QueryParamInclude> | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   employee?: Employee | undefined;
 };
+
+/** @internal */
+export const GetV1EmployeesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<typeof GetV1EmployeesHeaderXGustoAPIVersion> = z.nativeEnum(
+    GetV1EmployeesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const GetV1EmployeesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1EmployeesHeaderXGustoAPIVersion> =
+    GetV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1EmployeesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1EmployeesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const QueryParamInclude$inboundSchema: z.ZodNativeEnum<
@@ -86,21 +119,22 @@ export const GetV1EmployeesRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version": GetV1EmployeesHeaderXGustoAPIVersion$inboundSchema
+    .default("2024-04-01"),
   employee_id: z.string(),
   include: z.array(QueryParamInclude$inboundSchema).optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
-    "employee_id": "employeeId",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "employee_id": "employeeId",
   });
 });
 
 /** @internal */
 export type GetV1EmployeesRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   employee_id: string;
   include?: Array<string> | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -109,13 +143,15 @@ export const GetV1EmployeesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1EmployeesRequest
 > = z.object({
+  xGustoAPIVersion: GetV1EmployeesHeaderXGustoAPIVersion$outboundSchema.default(
+    "2024-04-01",
+  ),
   employeeId: z.string(),
   include: z.array(QueryParamInclude$outboundSchema).optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
-    employeeId: "employee_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    employeeId: "employee_id",
   });
 });
 

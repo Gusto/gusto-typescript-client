@@ -86,6 +86,10 @@ export type Notification = {
    */
   dueAt?: string | undefined;
   /**
+   * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
+   */
+  templateVariables?: { [k: string]: string } | undefined;
+  /**
    * An array of entities relevant to the notification
    */
   resources?: Array<Resources> | undefined;
@@ -201,6 +205,7 @@ export const Notification$inboundSchema: z.ZodType<
   can_block_payroll: z.boolean().optional(),
   published_at: z.string().optional(),
   due_at: z.string().optional(),
+  template_variables: z.record(z.string()).optional(),
   resources: z.array(z.lazy(() => Resources$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -208,6 +213,7 @@ export const Notification$inboundSchema: z.ZodType<
     "can_block_payroll": "canBlockPayroll",
     "published_at": "publishedAt",
     "due_at": "dueAt",
+    "template_variables": "templateVariables",
   });
 });
 
@@ -223,6 +229,7 @@ export type Notification$Outbound = {
   can_block_payroll?: boolean | undefined;
   published_at?: string | undefined;
   due_at?: string | undefined;
+  template_variables?: { [k: string]: string } | undefined;
   resources?: Array<Resources$Outbound> | undefined;
 };
 
@@ -242,6 +249,7 @@ export const Notification$outboundSchema: z.ZodType<
   canBlockPayroll: z.boolean().optional(),
   publishedAt: z.string().optional(),
   dueAt: z.string().optional(),
+  templateVariables: z.record(z.string()).optional(),
   resources: z.array(z.lazy(() => Resources$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -249,6 +257,7 @@ export const Notification$outboundSchema: z.ZodType<
     canBlockPayroll: "can_block_payroll",
     publishedAt: "published_at",
     dueAt: "due_at",
+    templateVariables: "template_variables",
   });
 });
 

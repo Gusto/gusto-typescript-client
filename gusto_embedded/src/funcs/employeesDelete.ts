@@ -20,10 +20,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
-import {
   DeleteV1EmployeeRequest,
   DeleteV1EmployeeRequest$outboundSchema,
   DeleteV1EmployeeResponse,
@@ -49,7 +45,6 @@ export function employeesDelete(
 ): APIPromise<
   Result<
     DeleteV1EmployeeResponse,
-    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -74,7 +69,6 @@ async function $do(
   [
     Result<
       DeleteV1EmployeeResponse,
-      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -107,7 +101,7 @@ async function $do(
   const path = pathToFunc("/v1/employees/{employee_id}")(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "application/json",
+    Accept: "*/*",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -166,7 +160,6 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1EmployeeResponse,
-    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,8 +169,7 @@ async function $do(
     | ConnectionError
   >(
     M.nil(204, DeleteV1EmployeeResponse$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

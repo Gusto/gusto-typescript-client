@@ -380,11 +380,11 @@ run();
 
 ### [employees](docs/sdks/employees/README.md)
 
-* [create](docs/sdks/employees/README.md#create) - Create an employee
 * [list](docs/sdks/employees/README.md#list) - Get employees of a company
+* [create](docs/sdks/employees/README.md#create) - Create an employee
 * [createHistorical](docs/sdks/employees/README.md#createhistorical) - Create a historical employee
 * [get](docs/sdks/employees/README.md#get) - Get an employee
-* [update](docs/sdks/employees/README.md#update) - Update an employee
+* [update](docs/sdks/employees/README.md#update) - Update an employee.
 * [delete](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
 * [getCustomFields](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
 * [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
@@ -738,7 +738,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeesGetOnboardingStatus`](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
 - [`employeesGetTimeOffActivities`](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
 - [`employeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
-- [`employeesUpdate`](docs/sdks/employees/README.md#update) - Update an employee
+- [`employeesUpdate`](docs/sdks/employees/README.md#update) - Update an employee.
 - [`employeesUpdateOnboardingDocumentsConfig`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
 - [`employeesUpdateOnboardingStatus`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 - [`employeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
@@ -1013,7 +1013,7 @@ To learn about this feature and how to get started, check
 - [`useEmployeesGetOnboardingStatus`](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
 - [`useEmployeesGetTimeOffActivities`](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
 - [`useEmployeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
-- [`useEmployeesUpdateMutation`](docs/sdks/employees/README.md#update) - Update an employee
+- [`useEmployeesUpdateMutation`](docs/sdks/employees/README.md#update) - Update an employee.
 - [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
 - [`useEmployeesUpdateOnboardingStatusMutation`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 - [`useEmployeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
