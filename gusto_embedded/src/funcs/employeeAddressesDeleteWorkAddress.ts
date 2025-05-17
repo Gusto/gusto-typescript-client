@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
  * Delete an employee's work address
  *
  * @remarks
- * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+ * Used for deleting an employee's work address. Cannot delete the employee's active work address.
  *
  * scope: `employees:manage`
  */
@@ -176,8 +176,8 @@ async function $do(
     | ConnectionError
   >(
     M.nil(204, DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

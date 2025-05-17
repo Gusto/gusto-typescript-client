@@ -30,14 +30,14 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       columns: [
-        "total_employer_benefit_contributions",
-        "employee_medicare_additional_tax",
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
       ],
       groupings: [
         "work_address_state",
-        "work_address",
       ],
-      fileType: "csv",
+      fileType: "json",
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),
@@ -72,14 +72,14 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       columns: [
-        "total_employer_benefit_contributions",
-        "employee_medicare_additional_tax",
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
       ],
       groupings: [
         "work_address_state",
-        "work_address",
       ],
-      fileType: "csv",
+      fileType: "json",
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),

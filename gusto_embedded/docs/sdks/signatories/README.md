@@ -33,17 +33,17 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       ssn: "<value>",
-      firstName: "Jed",
-      lastName: "Johnson",
-      email: "Annie.Wiegand16@gmail.com",
+      firstName: "Ed",
+      lastName: "Reichert",
+      email: "Shanny62@hotmail.com",
       title: "<value>",
-      phone: "857-932-0220 x31016",
+      phone: "1-346-396-8392 x69356",
       birthday: "<value>",
       homeAddress: {
         street1: "<value>",
-        city: "North Lilly",
-        state: "North Carolina",
-        zip: "05065",
+        city: "East Clydefield",
+        state: "Kentucky",
+        zip: "13719-5134",
       },
     },
   });
@@ -74,17 +74,17 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       ssn: "<value>",
-      firstName: "Jed",
-      lastName: "Johnson",
-      email: "Annie.Wiegand16@gmail.com",
+      firstName: "Ed",
+      lastName: "Reichert",
+      email: "Shanny62@hotmail.com",
       title: "<value>",
-      phone: "857-932-0220 x31016",
+      phone: "1-346-396-8392 x69356",
       birthday: "<value>",
       homeAddress: {
         street1: "<value>",
-        city: "North Lilly",
-        state: "North Carolina",
-        zip: "05065",
+        city: "East Clydefield",
+        state: "Kentucky",
+        zip: "13719-5134",
       },
     },
   });
@@ -262,7 +262,7 @@ async function run() {
   const result = await gustoEmbedded.signatories.invite({
     companyUuid: "<id>",
     requestBody: {
-      email: "Maureen_Wyman@yahoo.com",
+      email: "Kamron.Nikolaus@yahoo.com",
     },
   });
 
@@ -291,7 +291,7 @@ async function run() {
   const res = await signatoriesInvite(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
-      email: "Maureen_Wyman@yahoo.com",
+      email: "Kamron.Nikolaus@yahoo.com",
     },
   });
 

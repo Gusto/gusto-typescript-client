@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import {
@@ -19,23 +20,30 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>;
+
 export type PutV1WorkAddressesWorkAddressUuidRequestBody = {
+  /**
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   */
+  version: string;
   /**
    * Reference to a company location
    */
   locationUuid?: string | undefined;
   effectiveDate?: RFCDate | undefined;
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
-   */
-  version: string;
 };
 
 export type PutV1WorkAddressesWorkAddressUuidRequest = {
@@ -46,17 +54,44 @@ export type PutV1WorkAddressesWorkAddressUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
+    | undefined;
   requestBody: PutV1WorkAddressesWorkAddressUuidRequestBody;
 };
 
 export type PutV1WorkAddressesWorkAddressUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   employeeWorkAddress?: EmployeeWorkAddress | undefined;
 };
+
+/** @internal */
+export const PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
+
+/** @internal */
+export const PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
+  > = PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema:
@@ -65,9 +100,9 @@ export const PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    version: z.string(),
     location_uuid: z.string().optional(),
     effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-    version: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "location_uuid": "locationUuid",
@@ -77,9 +112,9 @@ export const PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema:
 
 /** @internal */
 export type PutV1WorkAddressesWorkAddressUuidRequestBody$Outbound = {
+  version: string;
   location_uuid?: string | undefined;
   effective_date?: string | undefined;
-  version: string;
 };
 
 /** @internal */
@@ -89,10 +124,10 @@ export const PutV1WorkAddressesWorkAddressUuidRequestBody$outboundSchema:
     z.ZodTypeDef,
     PutV1WorkAddressesWorkAddressUuidRequestBody
   > = z.object({
+    version: z.string(),
     locationUuid: z.string().optional(),
     effectiveDate: z.instanceof(RFCDate).transform(v => v.toString())
       .optional(),
-    version: z.string(),
   }).transform((v) => {
     return remap$(v, {
       locationUuid: "location_uuid",
@@ -149,7 +184,9 @@ export const PutV1WorkAddressesWorkAddressUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   work_address_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version":
+    PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema
+      .default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema
   ),
@@ -175,7 +212,9 @@ export const PutV1WorkAddressesWorkAddressUuidRequest$outboundSchema: z.ZodType<
   PutV1WorkAddressesWorkAddressUuidRequest
 > = z.object({
   workAddressUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion:
+    PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema
+      .default("2024-04-01"),
   requestBody: z.lazy(() =>
     PutV1WorkAddressesWorkAddressUuidRequestBody$outboundSchema
   ),
