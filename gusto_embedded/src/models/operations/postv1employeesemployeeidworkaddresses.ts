@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import {
@@ -19,12 +20,21 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+  >;
 
 export type PostV1EmployeesEmployeeIdWorkAddressesRequestBody = {
   /**
@@ -45,17 +55,47 @@ export type PostV1EmployeesEmployeeIdWorkAddressesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+    | undefined;
   requestBody: PostV1EmployeesEmployeeIdWorkAddressesRequestBody;
 };
 
 export type PostV1EmployeesEmployeeIdWorkAddressesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * created
    */
   employeeWorkAddress?: EmployeeWorkAddress | undefined;
 };
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+  > =
+    PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema:
@@ -147,7 +187,9 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version":
+      PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema
     ),
@@ -174,7 +216,9 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema:
     PostV1EmployeesEmployeeIdWorkAddressesRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdWorkAddressesRequestBody$outboundSchema
     ),

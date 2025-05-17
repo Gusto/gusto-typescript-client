@@ -568,10 +568,11 @@ import {
 
 ## getWorkAddresses
 
-Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
-signifying if it is the currently active work address.
+Returns a list of an employee's work addresses. Each address includes its effective
+date and a boolean signifying if it is the currently active work address.
 
 scope: `employees:read`
+
 
 ### Example Usage
 
@@ -669,15 +670,17 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## createWorkAddress
 
 The work address of an employee describes when an employee began working at an associated company location.
 
 scope: `employees:manage`
+
 
 ### Example Usage
 
@@ -693,8 +696,8 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.createWorkAddress({
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new RFCDate("2023-05-15"),
+      locationUuid: "f3ce2f31-cba6-4f18-b66b-291de5d52ca2",
+      effectiveDate: new RFCDate("2020-01-31"),
     },
   });
 
@@ -724,8 +727,8 @@ async function run() {
   const res = await employeeAddressesCreateWorkAddress(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new RFCDate("2023-05-15"),
+      locationUuid: "f3ce2f31-cba6-4f18-b66b-291de5d52ca2",
+      effectiveDate: new RFCDate("2020-01-31"),
     },
   });
 
@@ -776,7 +779,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## retrieveWorkAddress
@@ -784,6 +787,7 @@ import {
 The work address of an employee is used for payroll tax purposes.
 
 scope: `employees:read`
+
 
 ### Example Usage
 
@@ -881,9 +885,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## updateWorkAddress
 
@@ -891,11 +896,11 @@ The work address of an employee is used for payroll tax purposes.
 
 scope: `employees:manage`
 
+
 ### Example Usage
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -905,9 +910,8 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.updateWorkAddress({
     workAddressUuid: "<id>",
     requestBody: {
-      locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new RFCDate("2023-05-15"),
-      version: "e6db1baa29d3df1eb307ff6a12c778da",
+      version: "cd2e396aff8925367ff773e771e40488",
+      locationUuid: "333eb008-db81-4003-9e91-1ad257226518",
     },
   });
 
@@ -925,7 +929,6 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeeAddressesUpdateWorkAddress } from "@gusto/embedded-api/funcs/employeeAddressesUpdateWorkAddress.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -937,9 +940,8 @@ async function run() {
   const res = await employeeAddressesUpdateWorkAddress(gustoEmbedded, {
     workAddressUuid: "<id>",
     requestBody: {
-      locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-      effectiveDate: new RFCDate("2023-05-15"),
-      version: "e6db1baa29d3df1eb307ff6a12c778da",
+      version: "cd2e396aff8925367ff773e771e40488",
+      locationUuid: "333eb008-db81-4003-9e91-1ad257226518",
     },
   });
 
@@ -990,14 +992,15 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## deleteWorkAddress
 
-Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+Used for deleting an employee's work address. Cannot delete the employee's active work address.
 
 scope: `employees:manage`
+
 
 ### Example Usage
 
@@ -1086,5 +1089,5 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

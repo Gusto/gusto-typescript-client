@@ -38,7 +38,7 @@ async function run() {
   const result = await gustoEmbedded.companyBenefits.create({
     companyId: "<id>",
     requestBody: {
-      description: "yuck vice between gee ugh ha",
+      description: "hm pfft surge beyond",
     },
   });
 
@@ -67,7 +67,7 @@ async function run() {
   const res = await companyBenefitsCreate(gustoEmbedded, {
     companyId: "<id>",
     requestBody: {
-      description: "yuck vice between gee ugh ha",
+      description: "hm pfft surge beyond",
     },
   });
 

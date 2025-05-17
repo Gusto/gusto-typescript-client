@@ -163,8 +163,8 @@ export class EmployeeAddresses extends ClientSDK {
    * Get an employee's work addresses
    *
    * @remarks
-   * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
-   * signifying if it is the currently active work address.
+   * Returns a list of an employee's work addresses. Each address includes its effective
+   * date and a boolean signifying if it is the currently active work address.
    *
    * scope: `employees:read`
    */
@@ -240,7 +240,7 @@ export class EmployeeAddresses extends ClientSDK {
    * Delete an employee's work address
    *
    * @remarks
-   * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+   * Used for deleting an employee's work address. Cannot delete the employee's active work address.
    *
    * scope: `employees:manage`
    */
