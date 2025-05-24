@@ -74,8 +74,12 @@ export type EmployeeFederalTax = {
   federalWithholdingAllowance?: number | undefined;
   /**
    * *does not apply to rev_2020_w4 form*
+   *
+   * @remarks
+   *
+   * An additional withholding dollar amount
    */
-  additionalWithholding?: boolean | undefined;
+  additionalWithholding?: string | undefined;
 };
 
 /** @internal */
@@ -112,7 +116,7 @@ export const EmployeeFederalTax$inboundSchema: z.ZodType<
   deductions: z.nullable(z.string()),
   w4_data_type: W4DataType$inboundSchema,
   federal_withholding_allowance: z.number().optional(),
-  additional_withholding: z.boolean().optional(),
+  additional_withholding: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filing_status": "filingStatus",
@@ -137,7 +141,7 @@ export type EmployeeFederalTax$Outbound = {
   deductions: string | null;
   w4_data_type: string;
   federal_withholding_allowance?: number | undefined;
-  additional_withholding?: boolean | undefined;
+  additional_withholding?: string | undefined;
 };
 
 /** @internal */
@@ -155,7 +159,7 @@ export const EmployeeFederalTax$outboundSchema: z.ZodType<
   deductions: z.nullable(z.string()),
   w4DataType: W4DataType$outboundSchema,
   federalWithholdingAllowance: z.number().optional(),
-  additionalWithholding: z.boolean().optional(),
+  additionalWithholding: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filingStatus: "filing_status",

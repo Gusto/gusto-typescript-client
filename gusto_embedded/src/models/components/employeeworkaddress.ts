@@ -8,9 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * List of employee work addresses
- */
 export type EmployeeWorkAddress = {
   /**
    * The unique identifier of this work address.

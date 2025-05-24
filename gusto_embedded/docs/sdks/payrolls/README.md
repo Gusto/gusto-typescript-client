@@ -49,8 +49,8 @@ async function run() {
   const result = await gustoEmbedded.payrolls.createOffCycle({
     companyId: "<id>",
     requestBody: {
-      offCycle: true,
-      offCycleReason: "Dismissed employee",
+      offCycle: false,
+      offCycleReason: "Correction",
       startDate: "<value>",
       endDate: "<value>",
     },
@@ -81,8 +81,8 @@ async function run() {
   const res = await payrollsCreateOffCycle(gustoEmbedded, {
     companyId: "<id>",
     requestBody: {
-      offCycle: true,
-      offCycleReason: "Dismissed employee",
+      offCycle: false,
+      offCycleReason: "Correction",
       startDate: "<value>",
       endDate: "<value>",
     },
@@ -1769,7 +1769,7 @@ async function run() {
   const result = await gustoEmbedded.payrolls.generatePrintableChecks({
     payrollUuid: "<id>",
     requestBody: {
-      printingFormat: "bottom",
+      printingFormat: "top",
     },
   });
 
@@ -1798,7 +1798,7 @@ async function run() {
   const res = await payrollsGeneratePrintableChecks(gustoEmbedded, {
     payrollUuid: "<id>",
     requestBody: {
-      printingFormat: "bottom",
+      printingFormat: "top",
     },
   });
 
