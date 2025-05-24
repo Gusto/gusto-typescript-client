@@ -35,10 +35,6 @@ export type Location = {
   zip?: string | undefined;
   country?: string | undefined;
   /**
-   * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-   */
-  active?: boolean | undefined;
-  /**
    * Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
    */
   mailingAddress?: boolean | undefined;
@@ -54,6 +50,14 @@ export type Location = {
    * Datetime for when location is updated
    */
   updatedAt?: string | undefined;
+  /**
+   * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+   */
+  active?: boolean | undefined;
+  /**
+   * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+   */
+  inactive?: boolean | undefined;
 };
 
 /** @internal */
@@ -72,11 +76,12 @@ export const Location$inboundSchema: z.ZodType<
   state: z.string().optional(),
   zip: z.string().optional(),
   country: z.string().default("USA"),
-  active: z.boolean().optional(),
   mailing_address: z.boolean().optional(),
   filing_address: z.boolean().optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
+  active: z.boolean().optional(),
+  inactive: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -102,11 +107,12 @@ export type Location$Outbound = {
   state?: string | undefined;
   zip?: string | undefined;
   country: string;
-  active?: boolean | undefined;
   mailing_address?: boolean | undefined;
   filing_address?: boolean | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
+  active?: boolean | undefined;
+  inactive?: boolean | undefined;
 };
 
 /** @internal */
@@ -125,11 +131,12 @@ export const Location$outboundSchema: z.ZodType<
   state: z.string().optional(),
   zip: z.string().optional(),
   country: z.string().default("USA"),
-  active: z.boolean().optional(),
   mailingAddress: z.boolean().optional(),
   filingAddress: z.boolean().optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+  active: z.boolean().optional(),
+  inactive: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

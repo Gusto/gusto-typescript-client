@@ -549,7 +549,8 @@ run();
 ### [reports](docs/sdks/reports/README.md)
 
 * [createCustom](docs/sdks/reports/README.md#createcustom) - Create a custom report
-* [get](docs/sdks/reports/README.md#get) - Get a report
+* [postPayrollsPayrollUuidReportsGeneralLedger](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+* [getReportsRequestUuid](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 * [getTemplate](docs/sdks/reports/README.md#gettemplate) - Get a report template
 
 ### [signatories](docs/sdks/signatories/README.md)
@@ -832,8 +833,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`recoveryCasesGet`](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
 - [`recoveryCasesRedebit`](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
 - [`reportsCreateCustom`](docs/sdks/reports/README.md#createcustom) - Create a custom report
-- [`reportsGet`](docs/sdks/reports/README.md#get) - Get a report
+- [`reportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`reportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
+- [`reportsPostPayrollsPayrollUuidReportsGeneralLedger`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
 - [`signatoriesCreate`](docs/sdks/signatories/README.md#create) - Create a signatory
 - [`signatoriesDelete`](docs/sdks/signatories/README.md#delete) - Delete a signatory
 - [`signatoriesInvite`](docs/sdks/signatories/README.md#invite) - Invite a signatory
@@ -1107,8 +1109,9 @@ To learn about this feature and how to get started, check
 - [`useRecoveryCasesGet`](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
 - [`useRecoveryCasesRedebitMutation`](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
 - [`useReportsCreateCustomMutation`](docs/sdks/reports/README.md#createcustom) - Create a custom report
-- [`useReportsGet`](docs/sdks/reports/README.md#get) - Get a report
+- [`useReportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`useReportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
+- [`useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
 - [`useSignatoriesCreateMutation`](docs/sdks/signatories/README.md#create) - Create a signatory
 - [`useSignatoriesDeleteMutation`](docs/sdks/signatories/README.md#delete) - Delete a signatory
 - [`useSignatoriesInviteMutation`](docs/sdks/signatories/README.md#invite) - Invite a signatory

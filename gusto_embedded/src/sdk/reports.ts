@@ -3,21 +3,26 @@
  */
 
 import { reportsCreateCustom } from "../funcs/reportsCreateCustom.js";
-import { reportsGet } from "../funcs/reportsGet.js";
+import { reportsGetReportsRequestUuid } from "../funcs/reportsGetReportsRequestUuid.js";
 import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
+import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "../funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
   GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
   GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
 } from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
 import {
-  GetReportsReportUuidRequest,
-  GetReportsReportUuidResponse,
-} from "../models/operations/getreportsreportuuid.js";
+  GetReportsRequestUuidRequest,
+  GetReportsRequestUuidResponse,
+} from "../models/operations/getreportsrequestuuid.js";
 import {
   PostCompaniesCompanyUuidReportsRequest,
   PostCompaniesCompanyUuidReportsResponse,
 } from "../models/operations/postcompaniescompanyuuidreports.js";
+import {
+  PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
+  PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
+} from "../models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Reports extends ClientSDK {
@@ -25,7 +30,7 @@ export class Reports extends ClientSDK {
    * Create a custom report
    *
    * @remarks
-   * Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+   * Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
    *
    * scope: `company_reports:write`
    */
@@ -41,6 +46,27 @@ export class Reports extends ClientSDK {
   }
 
   /**
+   * Create a general ledger report
+   *
+   * @remarks
+   * Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
+   *
+   * Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+   *
+   * scope: `company_reports:write`
+   */
+  async postPayrollsPayrollUuidReportsGeneralLedger(
+    request: PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
+    options?: RequestOptions,
+  ): Promise<PostPayrollsPayrollUuidReportsGeneralLedgerResponse> {
+    return unwrapAsync(reportsPostPayrollsPayrollUuidReportsGeneralLedger(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get a report
    *
    * @remarks
@@ -48,11 +74,11 @@ export class Reports extends ClientSDK {
    *
    * scope: `company_reports:read`
    */
-  async get(
-    request: GetReportsReportUuidRequest,
+  async getReportsRequestUuid(
+    request: GetReportsRequestUuidRequest,
     options?: RequestOptions,
-  ): Promise<GetReportsReportUuidResponse> {
-    return unwrapAsync(reportsGet(
+  ): Promise<GetReportsRequestUuidResponse> {
+    return unwrapAsync(reportsGetReportsRequestUuid(
       this,
       request,
       options,

@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesGetWorkAddresses } from "../funcs/employeeAddressesGetWorkAddresses.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdWorkAddressesRequest,
   GetV1EmployeesEmployeeIdWorkAddressesResponse,
 } from "../models/operations/getv1employeesemployeeidworkaddresses.js";
@@ -36,8 +36,8 @@ export type EmployeeAddressesGetWorkAddressesQueryData =
  * Get an employee's work addresses
  *
  * @remarks
- * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
- * signifying if it is the currently active work address.
+ * Returns a list of an employee's work addresses. Each address includes its effective
+ * date and a boolean signifying if it is the currently active work address.
  *
  * scope: `employees:read`
  */
@@ -60,8 +60,8 @@ export function useEmployeeAddressesGetWorkAddresses(
  * Get an employee's work addresses
  *
  * @remarks
- * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
- * signifying if it is the currently active work address.
+ * Returns a list of an employee's work addresses. Each address includes its effective
+ * date and a boolean signifying if it is the currently active work address.
  *
  * scope: `employees:read`
  */
@@ -99,7 +99,11 @@ export function setEmployeeAddressesGetWorkAddressesData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeeAddressesGetWorkAddressesQueryData,
 ): EmployeeAddressesGetWorkAddressesQueryData | undefined {
@@ -116,7 +120,11 @@ export function invalidateEmployeeAddressesGetWorkAddresses(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -176,7 +184,11 @@ export function buildEmployeeAddressesGetWorkAddressesQuery(
 
 export function queryKeyEmployeeAddressesGetWorkAddresses(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",
