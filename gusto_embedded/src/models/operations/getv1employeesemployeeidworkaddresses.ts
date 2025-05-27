@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeWorkAddress,
@@ -18,12 +19,21 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+  >;
 
 export type GetV1EmployeesEmployeeIdWorkAddressesRequest = {
   /**
@@ -33,7 +43,9 @@ export type GetV1EmployeesEmployeeIdWorkAddressesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdWorkAddressesResponse = {
@@ -41,8 +53,33 @@ export type GetV1EmployeesEmployeeIdWorkAddressesResponse = {
   /**
    * List of employee work addresses
    */
-  employeeWorkAddressList?: Array<EmployeeWorkAddress> | undefined;
+  employeeWorkAddressesList?: Array<EmployeeWorkAddress> | undefined;
 };
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
+  > = GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema:
@@ -52,7 +89,9 @@ export const GetV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version":
+      GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -74,7 +113,9 @@ export const GetV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema:
     GetV1EmployeesEmployeeIdWorkAddressesRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",
@@ -132,19 +173,19 @@ export const GetV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Employee-Work-Address-List": z.array(EmployeeWorkAddress$inboundSchema)
+    "Employee-Work-Addresses-List": z.array(EmployeeWorkAddress$inboundSchema)
       .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Employee-Work-Address-List": "employeeWorkAddressList",
+      "Employee-Work-Addresses-List": "employeeWorkAddressesList",
     });
   });
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdWorkAddressesResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Work-Address-List"?:
+  "Employee-Work-Addresses-List"?:
     | Array<EmployeeWorkAddress$Outbound>
     | undefined;
 };
@@ -157,12 +198,12 @@ export const GetV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema:
     GetV1EmployeesEmployeeIdWorkAddressesResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    employeeWorkAddressList: z.array(EmployeeWorkAddress$outboundSchema)
+    employeeWorkAddressesList: z.array(EmployeeWorkAddress$outboundSchema)
       .optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
-      employeeWorkAddressList: "Employee-Work-Address-List",
+      employeeWorkAddressesList: "Employee-Work-Addresses-List",
     });
   });
 

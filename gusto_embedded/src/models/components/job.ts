@@ -13,6 +13,12 @@ import {
   Compensation$Outbound,
   Compensation$outboundSchema,
 } from "./compensation.js";
+import {
+  Location,
+  Location$inboundSchema,
+  Location$Outbound,
+  Location$outboundSchema,
+} from "./location.js";
 
 /**
  * The representation of a job in Gusto.
@@ -67,6 +73,14 @@ export type Job = {
    */
   stateWcClassCode?: string | null | undefined;
   compensations?: Array<Compensation> | undefined;
+  /**
+   * The uuid of the employee's work location.
+   */
+  locationUuid?: string | undefined;
+  /**
+   * The representation of an address in Gusto.
+   */
+  location?: Location | undefined;
 };
 
 /** @internal */
@@ -85,6 +99,8 @@ export const Job$inboundSchema: z.ZodType<Job, z.ZodTypeDef, unknown> = z
     state_wc_covered: z.nullable(z.boolean()).optional(),
     state_wc_class_code: z.nullable(z.string()).optional(),
     compensations: z.array(Compensation$inboundSchema).optional(),
+    location_uuid: z.string().optional(),
+    location: Location$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "employee_uuid": "employeeUuid",
@@ -94,6 +110,7 @@ export const Job$inboundSchema: z.ZodType<Job, z.ZodTypeDef, unknown> = z
       "two_percent_shareholder": "twoPercentShareholder",
       "state_wc_covered": "stateWcCovered",
       "state_wc_class_code": "stateWcClassCode",
+      "location_uuid": "locationUuid",
     });
   });
 
@@ -112,6 +129,8 @@ export type Job$Outbound = {
   state_wc_covered?: boolean | null | undefined;
   state_wc_class_code?: string | null | undefined;
   compensations?: Array<Compensation$Outbound> | undefined;
+  location_uuid?: string | undefined;
+  location?: Location$Outbound | undefined;
 };
 
 /** @internal */
@@ -130,6 +149,8 @@ export const Job$outboundSchema: z.ZodType<Job$Outbound, z.ZodTypeDef, Job> = z
     stateWcCovered: z.nullable(z.boolean()).optional(),
     stateWcClassCode: z.nullable(z.string()).optional(),
     compensations: z.array(Compensation$outboundSchema).optional(),
+    locationUuid: z.string().optional(),
+    location: Location$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       employeeUuid: "employee_uuid",
@@ -139,6 +160,7 @@ export const Job$outboundSchema: z.ZodType<Job$Outbound, z.ZodTypeDef, Job> = z
       twoPercentShareholder: "two_percent_shareholder",
       stateWcCovered: "state_wc_covered",
       stateWcClassCode: "state_wc_class_code",
+      locationUuid: "location_uuid",
     });
   });
 

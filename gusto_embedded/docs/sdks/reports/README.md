@@ -6,12 +6,13 @@
 ### Available Operations
 
 * [createCustom](#createcustom) - Create a custom report
-* [get](#get) - Get a report
+* [postPayrollsPayrollUuidReportsGeneralLedger](#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+* [getReportsRequestUuid](#getreportsrequestuuid) - Get a report
 * [getTemplate](#gettemplate) - Get a report template
 
 ## createCustom
 
-Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
 
 scope: `company_reports:write`
 
@@ -30,14 +31,14 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       columns: [
-        "total_employer_benefit_contributions",
-        "employee_medicare_additional_tax",
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
       ],
       groupings: [
         "work_address_state",
-        "work_address",
       ],
-      fileType: "csv",
+      fileType: "json",
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),
@@ -72,14 +73,14 @@ async function run() {
     companyUuid: "<id>",
     requestBody: {
       columns: [
-        "total_employer_benefit_contributions",
-        "employee_medicare_additional_tax",
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
       ],
       groupings: [
         "work_address_state",
-        "work_address",
       ],
-      fileType: "csv",
+      fileType: "json",
       startDate: new RFCDate("2024-01-01"),
       endDate: new RFCDate("2024-04-01"),
       dismissedStartDate: new RFCDate("2024-01-01"),
@@ -137,11 +138,13 @@ import {
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## get
+## postPayrollsPayrollUuidReportsGeneralLedger
 
-Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
 
-scope: `company_reports:read`
+Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+
+scope: `company_reports:write`
 
 ### Example Usage
 
@@ -153,8 +156,11 @@ const gustoEmbedded = new GustoEmbedded({
 });
 
 async function run() {
-  const result = await gustoEmbedded.reports.get({
-    reportUuid: "<id>",
+  const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
   });
 
   // Handle the result
@@ -170,7 +176,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { reportsGet } from "@gusto/embedded-api/funcs/reportsGet.js";
+import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "@gusto/embedded-api/funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -179,8 +185,107 @@ const gustoEmbedded = new GustoEmbeddedCore({
 });
 
 async function run() {
-  const res = await reportsGet(gustoEmbedded, {
-    reportUuid: "<id>",
+  const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation
+} from "@gusto/embedded-api/react-query/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostPayrollsPayrollUuidReportsGeneralLedgerRequest](../../models/operations/postpayrollspayrolluuidreportsgeneralledgerrequest.md)                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostPayrollsPayrollUuidReportsGeneralLedgerResponse](../../models/operations/postpayrollspayrolluuidreportsgeneralledgerresponse.md)\>**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## getReportsRequestUuid
+
+Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+
+scope: `company_reports:read`
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.reports.getReportsRequestUuid({
+    requestUuid: "<id>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsGetReportsRequestUuid } from "@gusto/embedded-api/funcs/reportsGetReportsRequestUuid.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await reportsGetReportsRequestUuid(gustoEmbedded, {
+    requestUuid: "<id>",
   });
 
   if (!res.ok) {
@@ -209,33 +314,33 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useReportsGet,
-  useReportsGetSuspense,
+  useReportsGetReportsRequestUuid,
+  useReportsGetReportsRequestUuidSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchReportsGet,
+  prefetchReportsGetReportsRequestUuid,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateReportsGet,
-  invalidateAllReportsGet,
-} from "@gusto/embedded-api/react-query/reportsGet.js";
+  invalidateReportsGetReportsRequestUuid,
+  invalidateAllReportsGetReportsRequestUuid,
+} from "@gusto/embedded-api/react-query/reportsGetReportsRequestUuid.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetReportsReportUuidRequest](../../models/operations/getreportsreportuuidrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetReportsRequestUuidRequest](../../models/operations/getreportsrequestuuidrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetReportsReportUuidResponse](../../models/operations/getreportsreportuuidresponse.md)\>**
+**Promise\<[operations.GetReportsRequestUuidResponse](../../models/operations/getreportsrequestuuidresponse.md)\>**
 
 ### Errors
 

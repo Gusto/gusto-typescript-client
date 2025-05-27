@@ -1,11 +1,11 @@
-# GetReportsReportUuidResponse
+# GetReportsRequestUuidResponse
 
 ## Example Usage
 
 ```typescript
-import { GetReportsReportUuidResponse } from "@gusto/embedded-api/models/operations/getreportsreportuuid.js";
+import { GetReportsRequestUuidResponse } from "@gusto/embedded-api/models/operations/getreportsrequestuuid.js";
 
-let value: GetReportsReportUuidResponse = {
+let value: GetReportsRequestUuidResponse = {
   httpMeta: {
     response: new Response("{\"message\": \"hello world\"}", {
       headers: { "Content-Type": "application/json" },

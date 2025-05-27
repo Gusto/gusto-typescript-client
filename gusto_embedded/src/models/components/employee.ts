@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmployeeCustomField,
@@ -14,6 +15,11 @@ import {
   EmployeeCustomField$Outbound,
   EmployeeCustomField$outboundSchema,
 } from "./employeecustomfield.js";
+import {
+  FlsaStatusType,
+  FlsaStatusType$inboundSchema,
+  FlsaStatusType$outboundSchema,
+} from "./flsastatustype.js";
 import {
   Garnishment,
   Garnishment$inboundSchema,
@@ -182,6 +188,26 @@ export type Employee = {
    * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
    */
   currentEmploymentStatus?: CurrentEmploymentStatus | null | undefined;
+  historical?: boolean | undefined;
+  /**
+   * The short format code of the employee
+   */
+  employeeCode?: string | undefined;
+  /**
+   * The UUID of the department the employee is under
+   */
+  departmentUuid?: string | null | undefined;
+  title?: string | undefined;
+  /**
+   * The date when the employee was hired to the company
+   */
+  hiredAt?: RFCDate | undefined;
+  hiddenSsn?: string | undefined;
+  /**
+   * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+   */
+  flsaStatus?: FlsaStatusType | undefined;
+  applicableTaxIds?: Array<number> | undefined;
 };
 
 /** @internal */
@@ -348,6 +374,14 @@ export const Employee$inboundSchema: z.ZodType<
   work_email: z.nullable(z.string()).optional(),
   current_employment_status: z.nullable(CurrentEmploymentStatus$inboundSchema)
     .optional(),
+  historical: z.boolean().optional(),
+  employee_code: z.string().optional(),
+  department_uuid: z.nullable(z.string()).optional(),
+  title: z.string().optional(),
+  hired_at: z.string().transform(v => new RFCDate(v)).optional(),
+  hidden_ssn: z.string().optional(),
+  flsa_status: FlsaStatusType$inboundSchema.optional(),
+  applicable_tax_ids: z.array(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
@@ -366,6 +400,12 @@ export const Employee$inboundSchema: z.ZodType<
     "payment_method": "paymentMethod",
     "work_email": "workEmail",
     "current_employment_status": "currentEmploymentStatus",
+    "employee_code": "employeeCode",
+    "department_uuid": "departmentUuid",
+    "hired_at": "hiredAt",
+    "hidden_ssn": "hiddenSsn",
+    "flsa_status": "flsaStatus",
+    "applicable_tax_ids": "applicableTaxIds",
   });
 });
 
@@ -398,6 +438,14 @@ export type Employee$Outbound = {
   payment_method: string;
   work_email?: string | null | undefined;
   current_employment_status?: string | null | undefined;
+  historical?: boolean | undefined;
+  employee_code?: string | undefined;
+  department_uuid?: string | null | undefined;
+  title?: string | undefined;
+  hired_at?: string | undefined;
+  hidden_ssn?: string | undefined;
+  flsa_status?: string | undefined;
+  applicable_tax_ids?: Array<number> | undefined;
 };
 
 /** @internal */
@@ -436,6 +484,14 @@ export const Employee$outboundSchema: z.ZodType<
   workEmail: z.nullable(z.string()).optional(),
   currentEmploymentStatus: z.nullable(CurrentEmploymentStatus$outboundSchema)
     .optional(),
+  historical: z.boolean().optional(),
+  employeeCode: z.string().optional(),
+  departmentUuid: z.nullable(z.string()).optional(),
+  title: z.string().optional(),
+  hiredAt: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  hiddenSsn: z.string().optional(),
+  flsaStatus: FlsaStatusType$outboundSchema.optional(),
+  applicableTaxIds: z.array(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
@@ -454,6 +510,12 @@ export const Employee$outboundSchema: z.ZodType<
     paymentMethod: "payment_method",
     workEmail: "work_email",
     currentEmploymentStatus: "current_employment_status",
+    employeeCode: "employee_code",
+    departmentUuid: "department_uuid",
+    hiredAt: "hired_at",
+    hiddenSsn: "hidden_ssn",
+    flsaStatus: "flsa_status",
+    applicableTaxIds: "applicable_tax_ids",
   });
 });
 

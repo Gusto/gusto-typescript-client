@@ -16,7 +16,6 @@ export const WireInRequestStatus = {
   AwaitingFunds: "awaiting_funds",
   PendingReview: "pending_review",
   Approved: "approved",
-  Rfi: "rfi",
   Canceled: "canceled",
 } as const;
 /**
@@ -25,15 +24,15 @@ export const WireInRequestStatus = {
 export type WireInRequestStatus = ClosedEnum<typeof WireInRequestStatus>;
 
 /**
- * Unique identifier of the payment
+ * Type of payment for the wire in
  */
-export const PaymentUuid = {
+export const PaymentType = {
   Payroll: "payroll",
 } as const;
 /**
- * Unique identifier of the payment
+ * Type of payment for the wire in
  */
-export type PaymentUuid = ClosedEnum<typeof PaymentUuid>;
+export type PaymentType = ClosedEnum<typeof PaymentType>;
 
 /**
  * Representation of a wire in request
@@ -90,11 +89,11 @@ export type WireInRequest = {
   /**
    * Type of payment for the wire in
    */
-  paymentType?: string | undefined;
+  paymentType?: PaymentType | undefined;
   /**
    * Unique identifier of the payment
    */
-  paymentUuid?: PaymentUuid | undefined;
+  paymentUuid?: string | undefined;
   /**
    * Amount sent through wire in
    */
@@ -131,22 +130,22 @@ export namespace WireInRequestStatus$ {
 }
 
 /** @internal */
-export const PaymentUuid$inboundSchema: z.ZodNativeEnum<typeof PaymentUuid> = z
-  .nativeEnum(PaymentUuid);
+export const PaymentType$inboundSchema: z.ZodNativeEnum<typeof PaymentType> = z
+  .nativeEnum(PaymentType);
 
 /** @internal */
-export const PaymentUuid$outboundSchema: z.ZodNativeEnum<typeof PaymentUuid> =
-  PaymentUuid$inboundSchema;
+export const PaymentType$outboundSchema: z.ZodNativeEnum<typeof PaymentType> =
+  PaymentType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PaymentUuid$ {
-  /** @deprecated use `PaymentUuid$inboundSchema` instead. */
-  export const inboundSchema = PaymentUuid$inboundSchema;
-  /** @deprecated use `PaymentUuid$outboundSchema` instead. */
-  export const outboundSchema = PaymentUuid$outboundSchema;
+export namespace PaymentType$ {
+  /** @deprecated use `PaymentType$inboundSchema` instead. */
+  export const inboundSchema = PaymentType$inboundSchema;
+  /** @deprecated use `PaymentType$outboundSchema` instead. */
+  export const outboundSchema = PaymentType$outboundSchema;
 }
 
 /** @internal */
@@ -167,8 +166,8 @@ export const WireInRequest$inboundSchema: z.ZodType<
   bank_name: z.string().optional(),
   date_sent: z.string().optional(),
   unique_tracking_code: z.string().optional(),
-  payment_type: z.string().optional(),
-  payment_uuid: PaymentUuid$inboundSchema.optional(),
+  payment_type: PaymentType$inboundSchema.optional(),
+  payment_uuid: z.string().optional(),
   amount_sent: z.string().optional(),
   requested_amount: z.string().optional(),
   wire_in_deadline: z.string().optional(),
@@ -231,8 +230,8 @@ export const WireInRequest$outboundSchema: z.ZodType<
   bankName: z.string().optional(),
   dateSent: z.string().optional(),
   uniqueTrackingCode: z.string().optional(),
-  paymentType: z.string().optional(),
-  paymentUuid: PaymentUuid$outboundSchema.optional(),
+  paymentType: PaymentType$outboundSchema.optional(),
+  paymentUuid: z.string().optional(),
   amountSent: z.string().optional(),
   requestedAmount: z.string().optional(),
   wireInDeadline: z.string().optional(),
