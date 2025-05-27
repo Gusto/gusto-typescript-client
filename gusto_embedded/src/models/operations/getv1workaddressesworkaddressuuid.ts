@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeWorkAddress,
@@ -18,12 +19,19 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion>;
 
 export type GetV1WorkAddressesWorkAddressUuidRequest = {
   /**
@@ -33,16 +41,43 @@ export type GetV1WorkAddressesWorkAddressUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1WorkAddressesWorkAddressUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   employeeWorkAddress?: EmployeeWorkAddress | undefined;
 };
+
+/** @internal */
+export const GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
+  > = GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1WorkAddressesWorkAddressUuidRequest$inboundSchema: z.ZodType<
@@ -51,7 +86,9 @@ export const GetV1WorkAddressesWorkAddressUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   work_address_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version":
+    GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema
+      .default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "work_address_uuid": "workAddressUuid",
@@ -72,7 +109,9 @@ export const GetV1WorkAddressesWorkAddressUuidRequest$outboundSchema: z.ZodType<
   GetV1WorkAddressesWorkAddressUuidRequest
 > = z.object({
   workAddressUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion:
+    GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema
+      .default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     workAddressUuid: "work_address_uuid",

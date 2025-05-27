@@ -20,6 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetV1EmployeesEmployeeIdWorkAddressesRequest,
   GetV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema,
   GetV1EmployeesEmployeeIdWorkAddressesResponse,
@@ -32,8 +36,8 @@ import { Result } from "../types/fp.js";
  * Get an employee's work addresses
  *
  * @remarks
- * Returns a list of an employee's work addresses. Each address includes its effective date and a boolean
- * signifying if it is the currently active work address.
+ * Returns a list of an employee's work addresses. Each address includes its effective
+ * date and a boolean signifying if it is the currently active work address.
  *
  * scope: `employees:read`
  */
@@ -44,6 +48,7 @@ export function employeeAddressesGetWorkAddresses(
 ): APIPromise<
   Result<
     GetV1EmployeesEmployeeIdWorkAddressesResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -68,6 +73,7 @@ async function $do(
   [
     Result<
       GetV1EmployeesEmployeeIdWorkAddressesResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -162,6 +168,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1EmployeesEmployeeIdWorkAddressesResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -171,9 +178,10 @@ async function $do(
     | ConnectionError
   >(
     M.json(200, GetV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema, {
-      key: "Employee-Work-Address-List",
+      key: "Employee-Work-Addresses-List",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

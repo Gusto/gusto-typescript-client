@@ -3,7 +3,7 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,29 +20,36 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetReportsReportUuidRequest,
-  GetReportsReportUuidRequest$outboundSchema,
-  GetReportsReportUuidResponse,
-  GetReportsReportUuidResponse$inboundSchema,
-} from "../models/operations/getreportsreportuuid.js";
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
+  PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema,
+  PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
+  PostPayrollsPayrollUuidReportsGeneralLedgerResponse$inboundSchema,
+} from "../models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get a report
+ * Create a general ledger report
  *
  * @remarks
- * Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+ * Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
  *
- * scope: `company_reports:read`
+ * Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+ *
+ * scope: `company_reports:write`
  */
-export function reportsGet(
+export function reportsPostPayrollsPayrollUuidReportsGeneralLedger(
   client: GustoEmbeddedCore,
-  request: GetReportsReportUuidRequest,
+  request: PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetReportsReportUuidResponse,
+    PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -61,12 +68,13 @@ export function reportsGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: GetReportsReportUuidRequest,
+  request: PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetReportsReportUuidResponse,
+      PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -80,25 +88,31 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => GetReportsReportUuidRequest$outboundSchema.parse(value),
+    (value) =>
+      PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
-    report_uuid: encodeSimple("report_uuid", payload.report_uuid, {
+    payroll_uuid: encodeSimple("payroll_uuid", payload.payroll_uuid, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v1/reports/{report_uuid}")(pathParams);
+  const path = pathToFunc("/v1/payrolls/{payroll_uuid}/reports/general_ledger")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
@@ -115,7 +129,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-reports-report_uuid",
+    operationID: "post-payrolls-payroll_uuid-reports-general_ledger",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -129,7 +143,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -143,7 +157,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -157,7 +171,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    GetReportsReportUuidResponse,
+    PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -166,7 +181,12 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetReportsReportUuidResponse$inboundSchema, { key: "Report" }),
+    M.json(
+      200,
+      PostPayrollsPayrollUuidReportsGeneralLedgerResponse$inboundSchema,
+      { key: "General-Ledger-Report" },
+    ),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

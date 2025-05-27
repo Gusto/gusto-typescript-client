@@ -21,7 +21,7 @@ export type CompanyAddress = {
   /**
    * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
    */
-  active?: boolean | undefined;
+  inactive?: boolean | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const CompanyAddress$inboundSchema: z.ZodType<
   state: z.string().optional(),
   zip: z.string().optional(),
   country: z.string().default("USA"),
-  active: z.boolean().optional(),
+  inactive: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "street_1": "street1",
@@ -52,7 +52,7 @@ export type CompanyAddress$Outbound = {
   state?: string | undefined;
   zip?: string | undefined;
   country: string;
-  active?: boolean | undefined;
+  inactive?: boolean | undefined;
 };
 
 /** @internal */
@@ -67,7 +67,7 @@ export const CompanyAddress$outboundSchema: z.ZodType<
   state: z.string().optional(),
   zip: z.string().optional(),
   country: z.string().default("USA"),
-  active: z.boolean().optional(),
+  inactive: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     street1: "street_1",

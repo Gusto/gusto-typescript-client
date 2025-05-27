@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
  * Create a custom report
  *
  * @remarks
- * Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the report GET endpoint. This URL is valid for 10 minutes.
+ * Create a custom report for a company. This endpoint initiates creating a custom report with custom columns, groupings, and filters. The `request_uuid` in the response can then be used to poll for the status and report URL upon completion using the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid). This URL is valid for 10 minutes.
  *
  * scope: `company_reports:write`
  */

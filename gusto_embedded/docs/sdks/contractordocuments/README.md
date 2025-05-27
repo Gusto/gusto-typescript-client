@@ -347,12 +347,8 @@ async function run() {
   const result = await gustoEmbedded.contractorDocuments.sign({
     documentUuid: "<id>",
     requestBody: {
-      fields: [
-        {},
-        {},
-        {},
-      ],
-      agree: true,
+      fields: [],
+      agree: false,
     },
   });
 
@@ -381,12 +377,8 @@ async function run() {
   const res = await contractorDocumentsSign(gustoEmbedded, {
     documentUuid: "<id>",
     requestBody: {
-      fields: [
-        {},
-        {},
-        {},
-      ],
-      agree: true,
+      fields: [],
+      agree: false,
     },
   });
 

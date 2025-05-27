@@ -381,8 +381,8 @@ async function run() {
   const result = await gustoEmbedded.companies.migrate({
     companyUuid: "<id>",
     requestBody: {
-      email: "Benjamin_Kihn44@yahoo.com",
-      ipAddress: "198.52.136.51",
+      email: "Janice18@gmail.com",
+      ipAddress: "75.249.55.210",
       externalUserId: "<id>",
     },
   });
@@ -412,8 +412,8 @@ async function run() {
   const res = await companiesMigrate(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
-      email: "Benjamin_Kihn44@yahoo.com",
-      ipAddress: "198.52.136.51",
+      email: "Janice18@gmail.com",
+      ipAddress: "75.249.55.210",
       externalUserId: "<id>",
     },
   });

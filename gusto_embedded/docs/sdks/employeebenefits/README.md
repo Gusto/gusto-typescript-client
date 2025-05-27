@@ -670,7 +670,7 @@ async function run() {
   const result = await gustoEmbedded.employeeBenefits.createYtdBenefitAmountsFromDifferentCompany({
     employeeId: "<id>",
     postEmployeeYtdBenefitAmountsFromDifferentCompany: {
-      taxYear: 5621.31,
+      taxYear: 1828.56,
     },
   });
 
@@ -699,7 +699,7 @@ async function run() {
   const res = await employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(gustoEmbedded, {
     employeeId: "<id>",
     postEmployeeYtdBenefitAmountsFromDifferentCompany: {
-      taxYear: 5621.31,
+      taxYear: 1828.56,
     },
   });
 

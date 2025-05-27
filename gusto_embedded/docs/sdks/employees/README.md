@@ -509,10 +509,9 @@ const gustoEmbedded = new GustoEmbedded({
 
 async function run() {
   const result = await gustoEmbedded.employees.update({
-    xGustoAPIVersion: "2024-04-01",
     employeeId: "<id>",
     requestBody: {
-      version: "f0c06d303aab1fd909b40d4a1ad409ac",
+      version: "9294130ed6ff0c1735ef7b4148c1f320",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",
@@ -545,10 +544,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await employeesUpdate(gustoEmbedded, {
-    xGustoAPIVersion: "2024-04-01",
     employeeId: "<id>",
     requestBody: {
-      version: "f0c06d303aab1fd909b40d4a1ad409ac",
+      version: "9294130ed6ff0c1735ef7b4148c1f320",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",

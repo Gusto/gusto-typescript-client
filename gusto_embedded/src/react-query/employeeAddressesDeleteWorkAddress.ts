@@ -31,7 +31,7 @@ export type EmployeeAddressesDeleteWorkAddressMutationData =
  * Delete an employee's work address
  *
  * @remarks
- * Used for deleting an employee's work address.  Cannot delete the employee's active work address.
+ * Used for deleting an employee's work address. Cannot delete the employee's active work address.
  *
  * scope: `employees:manage`
  */

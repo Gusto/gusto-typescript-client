@@ -13,5 +13,5 @@ let value: WireInRequestStatus = "awaiting_funds";
 ## Values
 
 ```typescript
-"awaiting_funds" | "pending_review" | "approved" | "rfi" | "canceled"
+"awaiting_funds" | "pending_review" | "approved" | "canceled"
 ```

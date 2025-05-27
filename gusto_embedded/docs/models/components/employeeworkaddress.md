@@ -1,24 +1,13 @@
 # EmployeeWorkAddress
 
-List of employee work addresses
-
 ## Example Usage
 
 ```typescript
 import { EmployeeWorkAddress } from "@gusto/embedded-api/models/components/employeeworkaddress.js";
 
 let value: EmployeeWorkAddress = {
-  uuid: "34925ef7-6234-440d-83b8-788a24d0d69a",
-  effectiveDate: "2023-05-15",
-  active: true,
-  locationUuid: "aba6d0fd-7294-4997-b1a4-bc9268c45932",
-  employeeUuid: "2363b9c0-6625-4425-9261-47627fd68783",
-  version: "6a22da647ed391f184a212e6e83a541d",
-  street1: "977 Marks Viaduct",
-  street2: null,
-  city: "Pink Hill",
-  state: "NC",
-  zip: "28572",
+  uuid: "525628b9-2230-48bd-ad21-8b36643a5303",
+  version: "<value>",
 };
 ```
 
