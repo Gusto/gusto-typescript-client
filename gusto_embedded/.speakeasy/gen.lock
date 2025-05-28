@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 7eac40dba18b3c0535b527dad6f3db70
+  docChecksum: 4dff47b2b19f454b3437db562f874a2e
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.551.0
+  speakeasyVersion: 1.552.0
   generationVersion: 2.610.0
-  releaseVersion: 0.5.15
-  configChecksum: c7dcf64519a8be64f36ba36034e942df
+  releaseVersion: 0.5.16
+  configChecksum: 106b73c1961cdaedfdfd8fd546ce6157
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -467,6 +467,7 @@ generatedFiles:
   - docs/models/operations/deletev1employeesemployeeidterminationsresponse.md
   - docs/models/operations/deletev1externalpayrollrequest.md
   - docs/models/operations/deletev1externalpayrollresponse.md
+  - docs/models/operations/deletev1homeaddresseshomeaddressuuidheaderxgustoapiversion.md
   - docs/models/operations/deletev1homeaddresseshomeaddressuuidrequest.md
   - docs/models/operations/deletev1homeaddresseshomeaddressuuidresponse.md
   - docs/models/operations/deletev1jobsjobidrequest.md
@@ -674,6 +675,7 @@ generatedFiles:
   - docs/models/operations/getv1employeesemployeeidfederaltaxesresponse.md
   - docs/models/operations/getv1employeesemployeeidgarnishmentsrequest.md
   - docs/models/operations/getv1employeesemployeeidgarnishmentsresponse.md
+  - docs/models/operations/getv1employeesemployeeidhomeaddressesheaderxgustoapiversion.md
   - docs/models/operations/getv1employeesemployeeidhomeaddressesrequest.md
   - docs/models/operations/getv1employeesemployeeidhomeaddressesresponse.md
   - docs/models/operations/getv1employeesemployeeidi9authorizationdocumentoptionsrequest.md
@@ -715,6 +717,7 @@ generatedFiles:
   - docs/models/operations/getv1garnishmentsgarnishmentidresponse.md
   - docs/models/operations/getv1generateddocumentsdocumenttyperequestuuidrequest.md
   - docs/models/operations/getv1generateddocumentsdocumenttyperequestuuidresponse.md
+  - docs/models/operations/getv1homeaddresseshomeaddressuuidheaderxgustoapiversion.md
   - docs/models/operations/getv1homeaddresseshomeaddressuuidrequest.md
   - docs/models/operations/getv1homeaddresseshomeaddressuuidresponse.md
   - docs/models/operations/getv1jobsjobidcompensationsqueryparaminclude.md
@@ -891,6 +894,7 @@ generatedFiles:
   - docs/models/operations/postv1employeesemployeeidgarnishmentsrequest.md
   - docs/models/operations/postv1employeesemployeeidgarnishmentsrequestbody.md
   - docs/models/operations/postv1employeesemployeeidgarnishmentsresponse.md
+  - docs/models/operations/postv1employeesemployeeidhomeaddressesheaderxgustoapiversion.md
   - docs/models/operations/postv1employeesemployeeidhomeaddressesrequest.md
   - docs/models/operations/postv1employeesemployeeidhomeaddressesrequestbody.md
   - docs/models/operations/postv1employeesemployeeidhomeaddressesresponse.md
@@ -1114,6 +1118,7 @@ generatedFiles:
   - docs/models/operations/putv1historicalemployeesrequest.md
   - docs/models/operations/putv1historicalemployeesrequestbody.md
   - docs/models/operations/putv1historicalemployeesresponse.md
+  - docs/models/operations/putv1homeaddresseshomeaddressuuidheaderxgustoapiversion.md
   - docs/models/operations/putv1homeaddresseshomeaddressuuidrequest.md
   - docs/models/operations/putv1homeaddresseshomeaddressuuidrequestbody.md
   - docs/models/operations/putv1homeaddresseshomeaddressuuidresponse.md
@@ -3170,7 +3175,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "d79baec2-1bfd-41ad-bd7f-fefc9f4cdb29", "version": "ddcd087920c1f969e25153a9e3fe9d13", "company_uuid": "a0f11a60-0ec0-4f1b-9694-8c6fa7ffedce", "phone_number": "4721978147", "street_1": "58092 Mosciski Spring", "street_2": "Suite 680", "city": "Archie", "state": "LA", "zip": "71343", "country": "USA", "mailing_address": true, "filing_address": false, "created_at": "2025-05-16T09:41:49.000-07:00", "updated_at": "2025-05-16T09:41:49.000-07:00", "active": true}
+          application/json: {"uuid": "c979ab0c-3664-464f-bd52-bdbb37d35d92", "version": "c706c1ed27a84346ab92bd7bebd2e1f4", "company_uuid": "fbd42c3b-38bf-4b6f-982a-c6a107d770fb", "phone_number": "3243915644", "street_1": "64556 Thompson Springs", "street_2": "Suite 956", "city": "Denver", "state": "CO", "zip": "80024", "country": "USA", "mailing_address": true, "filing_address": false, "created_at": "2025-05-26T15:08:27.000-07:00", "updated_at": "2025-05-26T15:08:27.000-07:00", "active": true}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-locations-location_id:
@@ -3181,7 +3186,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "14302448d61342a1a25072fcb59df0b3", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
+        application/json: {"version": "756aee0bdbf26def096673bb7f9a7b97", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
       responses:
         "200":
           application/json: {"uuid": "ced517c9-1c22-4468-88f7-bea752987d03", "country": "USA"}
@@ -3197,7 +3202,7 @@ examples:
         application/json: {"version": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "6982ef7e-a318-4a40-b0b6-1d95c52c8263", "version": "226dc9377faecceeb3ec7f6cef066f40", "company_uuid": "07c1ab76-8e02-40a9-9cec-cfe3b8b20b6b", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "state": "MD", "zip": "94107", "country": "USA", "mailing_address": true, "filing_address": true, "created_at": "2025-05-16T09:41:51.000-07:00", "updated_at": "2025-05-16T09:41:51.000-07:00", "active": true}
+          application/json: {"uuid": "71739fbf-670e-4040-b6e8-8ee36fc4f89a", "version": "41ebe90f35f0a25ef35538289afbbd2e", "company_uuid": "cc588d80-a878-4970-b454-bdde1fea01ec", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "state": "VT", "zip": "94107", "country": "USA", "mailing_address": true, "filing_address": true, "created_at": "2025-05-26T15:08:30.000-07:00", "updated_at": "2025-05-26T15:08:31.000-07:00", "active": true}
         "404":
           application/json: {"errors": [{"error_key": "state", "category": "invalid_attribute_value", "message": "State is in the wrong format"}]}
   get-v1-locations-location_uuid-minimum_wages:
@@ -3224,7 +3229,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "ae7ee6b1-1c17-4d4f-a9c5-c5d588d8882d", "wage": "15.0", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "4f9e53f1-89ba-43e1-a5af-d5ada47c814f", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "4633fce7-f1df-4938-bd67-642ee10174c7", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "State", "notes": "large companies"}, {"uuid": "4db78a28-1561-4fe7-8daf-627abd7e437d", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "Federal", "notes": "large companies"}]
+          application/json: [{"uuid": "dcb964c8-052b-4a0c-b77a-6060987c4f2c", "wage": "15.0", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "24d67955-70b6-4865-8486-cc295fcba448", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "295cf6dd-9297-49c5-a14c-628210f66cfa", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "State", "notes": "large companies"}, {"uuid": "31f9216b-14e9-4d80-a375-9631a1100b00", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "Federal", "notes": "large companies"}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-companies-company_id-bank-accounts:
@@ -3912,7 +3917,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "de2e7947-7ecc-44a5-bec0-1a5510c59c6e", "first_name": "Boaty", "middle_initial": null, "last_name": "Stracke", "email": "kenisha_kozey@marks.info", "company_uuid": "0bf81e9e-d92b-49f2-ac0a-2c4a5b870a58", "manager_uuid": null, "version": "88eee0db8ad79bda9eb546418ca98e90", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "b5bee54d-2fe8-4552-bb99-fd1584e39622", "version": "e9e474cc8e549f1799c0a88fe1e08948", "employee_uuid": "de2e7947-7ecc-44a5-bec0-1a5510c59c6e", "hire_date": "2024-05-16", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "5bf6f514-cb90-4a18-a9ab-a2175d97eea5", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "5bf6f514-cb90-4a18-a9ab-a2175d97eea5", "version": "901df6d3e289216ac2e9aac8ea8f0973", "job_uuid": "b5bee54d-2fe8-4552-bb99-fd1584e39622", "employee_uuid": "de2e7947-7ecc-44a5-bec0-1a5510c59c6e", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-05-16", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-05-16", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "work_email": null, "current_employment_status": "full_time", "historical": false, "employee_code": "76ee96", "department_uuid": null}, {"uuid": "33b06016-1ed9-4c64-8fc4-5863e1a8c18f", "first_name": "Kari", "middle_initial": null, "last_name": "Ward", "email": "thelma_rath@schuster.co.uk", "company_uuid": "0bf81e9e-d92b-49f2-ac0a-2c4a5b870a58", "manager_uuid": null, "version": "62a52bbf56d4619ac2f45755bb832e5d", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "5465f758-21aa-4748-8c39-437d21a02295", "version": "e9e474cc8e549f1799c0a88fe1e08948", "employee_uuid": "33b06016-1ed9-4c64-8fc4-5863e1a8c18f", "hire_date": "2024-05-16", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "e1f91158-9f89-4824-8103-9303faa2316e", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "e1f91158-9f89-4824-8103-9303faa2316e", "version": "901df6d3e289216ac2e9aac8ea8f0973", "job_uuid": "5465f758-21aa-4748-8c39-437d21a02295", "employee_uuid": "33b06016-1ed9-4c64-8fc4-5863e1a8c18f", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-05-16", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-05-16", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "work_email": null, "current_employment_status": "full_time", "historical": false, "employee_code": "19f85c", "department_uuid": null}]
+          application/json: [{"uuid": "fffef268-ac17-4957-ba45-151a5b94ff6c", "first_name": "Boaty", "middle_initial": null, "last_name": "Fadel", "email": "roni.osinski@ernser.info", "company_uuid": "0d1f3486-8084-4792-aada-2a24b3849227", "manager_uuid": null, "version": "2fcf3c1cb920262a7f1aae5152ece734", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "81e381a8-92f4-4c26-a581-a146dca48f3b", "version": "1229f1ec34fceee62b41e96848d516a8", "employee_uuid": "fffef268-ac17-4957-ba45-151a5b94ff6c", "hire_date": "2024-05-26", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "a7d89a5a-35a2-4122-ba41-d05766d1fc88", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "a7d89a5a-35a2-4122-ba41-d05766d1fc88", "version": "926b8f058ad4106d6ef95989a146f92e", "job_uuid": "81e381a8-92f4-4c26-a581-a146dca48f3b", "employee_uuid": "fffef268-ac17-4957-ba45-151a5b94ff6c", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-05-26", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-05-26", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "work_email": null, "current_employment_status": "full_time", "historical": false, "employee_code": "d389ff", "department_uuid": null}, {"uuid": "4820e71e-c504-4041-8b41-191899c96751", "first_name": "Ulrike", "middle_initial": null, "last_name": "Hansen", "email": "annmarie_oga@aufderhar.com", "company_uuid": "0d1f3486-8084-4792-aada-2a24b3849227", "manager_uuid": null, "version": "c326c63691a709e384175b04cfa28aa4", "department": null, "terminated": false, "two_percent_shareholder": false, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "c7ef80b7-f547-4ae6-8d33-4faff24e9430", "version": "1229f1ec34fceee62b41e96848d516a8", "employee_uuid": "4820e71e-c504-4041-8b41-191899c96751", "hire_date": "2024-05-26", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "e493e465-e1c5-4bef-8e69-3bad20e6ebc5", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "e493e465-e1c5-4bef-8e69-3bad20e6ebc5", "version": "926b8f058ad4106d6ef95989a146f92e", "job_uuid": "c7ef80b7-f547-4ae6-8d33-4faff24e9430", "employee_uuid": "4820e71e-c504-4041-8b41-191899c96751", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-05-26", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-05-26", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "work_email": null, "current_employment_status": "full_time", "historical": false, "employee_code": "3f9cc0", "department_uuid": null}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-employees:
@@ -3937,7 +3942,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "201":
-          application/json: {"uuid": "461ec6e0-9e5b-4582-a13f-5498479bdc0f", "first_name": "Karl", "middle_initial": null, "last_name": "The Fog", "email": null, "company_uuid": "1b5bc024-aac4-4bcc-8aa7-36a935750c32", "manager_uuid": null, "version": "5211ee9bb08e51634431a18eff0afc64", "department": null, "terminated": false, "two_percent_shareholder": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": null, "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null, "current_employment_status": null, "historical": false, "employee_code": "b93a2f", "department_uuid": null}
+          application/json: {"uuid": "90ee8908-4f38-4a09-9657-de7bc36314c6", "first_name": "Karl", "middle_initial": null, "last_name": "The Fog", "email": null, "company_uuid": "5fef604c-3b7e-44b9-a116-2a3572176dad", "manager_uuid": null, "version": "5211ee9bb08e51634431a18eff0afc64", "department": null, "terminated": false, "two_percent_shareholder": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": null, "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "work_email": null, "current_employment_status": null, "historical": false, "employee_code": "60100000", "department_uuid": null}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-historical_employees:
@@ -4007,14 +4012,14 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "d59f0776-107e-4c43-a148-564a14c8cdbf", "first_name": "Kurtis", "middle_initial": null, "last_name": "McKenzie", "email": "jonie@oconner.com", "company_uuid": "cc82c11f-d4ba-4f55-aace-2fb7b1fefa1f", "version": "2929199b9321e6eb9e84c673667971bd", "department": "Renaissance 1", "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "ea980264-f301-4ac2-bbed-169be7b96457", "employee_uuid": "d59f0776-107e-4c43-a148-564a14c8cdbf", "hire_date": "2024-05-16", "title": "Engineer", "primary": true, "two_percent_shareholder": false, "location_uuid": "3ee20a56-8931-47f4-94c7-e637dda8cf74", "location": {"uuid": "3ee20a56-8931-47f4-94c7-e637dda8cf74", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "2005-05-16", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "ca217a", "department_uuid": "a52c025f-acb3-43ac-b342-31cfdcac636f", "title": "Engineer", "hired_at": "2024-05-16", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
+          application/json: {"uuid": "12ed8290-72d5-4602-811c-2b5d8155c365", "first_name": "Garnet", "middle_initial": null, "last_name": "Flatley", "email": "hilda_gutmann@jakubowski.com", "company_uuid": "33c44cd8-f730-493d-a072-7d283306694f", "version": "fa86fadae65de9d5eb244d0b2d94f645", "department": "Civil War 1", "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "4fbe4e5a-f9f4-4aa2-ac91-4f3be6555a22", "employee_uuid": "12ed8290-72d5-4602-811c-2b5d8155c365", "hire_date": "2024-05-26", "title": "Engineer", "primary": true, "two_percent_shareholder": false, "location_uuid": "87214194-bf78-425c-bfa3-f3d5b01c3a8c", "location": {"uuid": "87214194-bf78-425c-bfa3-f3d5b01c3a8c", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "2005-05-26", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "f3ef5c", "department_uuid": "389b09b2-30b9-43b0-8e95-b32fc8b50cb3", "title": "Engineer", "hired_at": "2024-05-26", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
   put-v1-employees:
     request_example_1:
       parameters:
         path:
           employee_id: "<id>"
       requestBody:
-        application/json: {"version": "9294130ed6ff0c1735ef7b4148c1f320", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233"}
+        application/json: {"version": "6da9085f86ecc01e0000a5655c2dfdba", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233"}
       responses:
         "200":
           application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
@@ -4028,7 +4033,7 @@ examples:
         application/json: {"version": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "5612ac40-0609-4138-a77a-d320a8bdb619", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "company_uuid": "7ef5be90-60c9-4a3c-817c-2d96bbf2dc42", "version": "4eff5441d8f8ecc08f53a88ded36f13e", "department": null, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "62a9d759-aba8-4107-b170-f29ecf10a9b5", "employee_uuid": "5612ac40-0609-4138-a77a-d320a8bdb619", "hire_date": "2024-05-16", "title": "", "primary": true, "two_percent_shareholder": false, "location_uuid": "368609b9-cab0-440c-ae3d-690b3d7fbaba", "location": {"uuid": "368609b9-cab0-440c-ae3d-690b3d7fbaba", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "1991-01-31", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "f62dc1", "department_uuid": null, "title": "", "hired_at": "2024-05-16", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
+          application/json: {"uuid": "9423c23d-19f9-455f-976d-5cb4c1f9e2a0", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "company_uuid": "a5dfb9ef-07cf-4923-9c4e-3b5e9cee33be", "version": "4eff5441d8f8ecc08f53a88ded36f13e", "department": null, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "ed0d6c9e-bf34-4a5d-8937-1632c17b88af", "employee_uuid": "9423c23d-19f9-455f-976d-5cb4c1f9e2a0", "hire_date": "2024-05-26", "title": "", "primary": true, "two_percent_shareholder": false, "location_uuid": "e7a5683e-2858-4160-b61a-1d9a1c68b2dd", "location": {"uuid": "e7a5683e-2858-4160-b61a-1d9a1c68b2dd", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "1991-01-31", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "d3738d", "department_uuid": null, "title": "", "hired_at": "2024-05-26", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
         "404":
           application/json: {"errors": [{"error_key": "base", "category": "invalid_resource_version", "message": "You are attempting to update a resource using an out-of-date version."}]}
   delete-v1-employee:
@@ -4069,7 +4074,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "a2675884-9d15-447e-95db-394db473512d", "onboarding_status": "onboarding_completed", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": true, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": true, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": true, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": true, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": true, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
+          application/json: {"uuid": "7dc59103-8e04-43c3-ae3e-9a279b0c381a", "onboarding_status": "onboarding_completed", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": true, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": true, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": true, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": true, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": true, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
   put-v1-employees-employee_id-onboarding_status:
     request_example_1:
       parameters:
@@ -4094,7 +4099,7 @@ examples:
         application/json: {"onboarding_status": "self_onboarding_invited"}
       responses:
         "200":
-          application/json: {"uuid": "ea6f3457-7eb4-4a11-beea-2e6b67808f96", "onboarding_status": "admin_onboarding_incomplete", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": false, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": false, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": false, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": false, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": false, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
+          application/json: {"uuid": "f494f6c5-c791-4dce-9bab-773a2434a253", "onboarding_status": "admin_onboarding_incomplete", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": false, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": false, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": false, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": false, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": false, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-version-employees-time_off_activities:
@@ -4527,7 +4532,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"hire_date": "2015-05-16", "termination_date": "2025-04-16", "file_new_hire_report": false, "two_percent_shareholder": false, "employment_status": "full_time"}]
+          application/json: [{"hire_date": "2015-05-26", "termination_date": "2025-04-26", "file_new_hire_report": false, "two_percent_shareholder": false, "employment_status": "full_time"}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-v1-employees-employee_id-home_addresses:
@@ -4540,6 +4545,17 @@ examples:
       responses:
         "200":
           application/json: [{"street_1": "644 Fay Vista", "street_2": "Suite 842", "city": "Richmond", "state": "VA", "zip": "23218", "country": "USA", "active": false, "uuid": "56260b3d-c375-415c-b77a-75d99f717193", "employee_uuid": "7087a288-8349-4632-b92e-bc94fb79f29e", "effective_date": "2021-01-01", "courtesy_withholding": true}, {"street_1": "100 5th Ave", "street_2": "Suite 555", "city": "New York", "state": "NY", "zip": "10001", "country": "USA", "active": true, "uuid": "d9f74049-8769-4fba-8e0f-eceef2da4e6b", "employee_uuid": "7087a288-8349-4632-b92e-bc94fb79f29e", "effective_date": "2022-03-03", "courtesy_withholding": true}]
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"uuid": "405b7c6f-a874-427c-84dc-a7beaf8a5908", "employee_uuid": "ca060f65-d41c-484b-92af-25af650ccf3f", "effective_date": "2024-05-26", "courtesy_withholding": false, "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": false, "version": "1c4450baec9dfa3838d4f75710785ed1"}, {"uuid": "df3cffc0-eb5e-4a0d-847b-b6c8d62f1cea", "employee_uuid": "ca060f65-d41c-484b-92af-25af650ccf3f", "effective_date": "2025-05-12", "courtesy_withholding": false, "street_1": "3624 Victoria Ln", "street_2": "", "city": "Cincinnati", "state": "OH", "zip": "45208", "country": "USA", "active": true, "version": "02ad1b65e7d2f030c99559b5bf94edd3"}, {"uuid": "8fd72d8e-d634-497e-b731-8b4814a31bea", "employee_uuid": "ca060f65-d41c-484b-92af-25af650ccf3f", "effective_date": "2025-06-26", "courtesy_withholding": false, "street_1": "Main st.", "street_2": "", "city": "New York", "state": "NY", "zip": "10011", "country": "USA", "active": false, "version": "d87cc64e22340337fe0ce108ca4b3eac"}]
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-employees-employee_id-home_addresses:
     Example:
       parameters:
@@ -4585,6 +4601,32 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    request_example_1:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"street_1": "500 3rd Street", "city": "San Francisco", "state": "CA", "zip": "94107"}
+      responses:
+        "201":
+          application/json: {"uuid": "b552472e-2d5c-4e19-bf31-49aeeb888b6e", "country": "USA", "version": "<value>"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+    test_example:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"street_1": "300 3rd Street", "city": "San Francisco", "state": "CA", "zip": "94107", "effective_date": "2022-01-31"}
+      responses:
+        "201":
+          application/json: {"uuid": "38c40128-5fa5-42dc-b871-05eacdcf6712", "employee_uuid": "16360798-66b0-4dd6-bdf2-9688e4e3980c", "effective_date": "2025-03-26", "courtesy_withholding": false, "street_1": "500 3rd Street", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "version": "80dbf9c4c6d5d8f7d4c282e336856b87"}
+        "404":
+          application/json: {"errors": [{"error_key": "street_1", "category": "invalid_attribute_value", "message": "Must include a street address"}]}
   get-v1-home_addresses-home_address_uuid:
     Example:
       parameters:
@@ -4595,6 +4637,17 @@ examples:
       responses:
         "200":
           application/json: {"street_1": "644 Fay Vista", "street_2": "Suite 842", "city": "Richmond", "state": "VA", "zip": "23218", "country": "USA", "active": false, "uuid": "56260b3d-c375-415c-b77a-75d99f717193", "effective_date": "2021-01-01", "courtesy_withholding": true}
+    test_example:
+      parameters:
+        path:
+          home_address_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {"uuid": "33fb0dfd-0003-430c-970e-b70ff9047bc0", "employee_uuid": "c77cc8aa-2817-488a-a1fb-e6331f832d85", "effective_date": "1970-01-01", "courtesy_withholding": false, "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "version": "6c3c23e4cc840bd3f1416f72b5380eff"}
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-home_addresses-home_address_uuid:
     Example:
       parameters:
@@ -4640,6 +4693,32 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    request_example_1:
+      parameters:
+        path:
+          home_address_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"version": "6c3c23e4cc840bd3f1416f72b5380eff", "street_1": "600 4th Street", "city": "Miami", "state": "FL", "zip": "33173"}
+      responses:
+        "200":
+          application/json: {"uuid": "d9fd058f-e693-4c4a-905f-3b5654a55589", "country": "USA", "version": "<value>"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
+    test_example:
+      parameters:
+        path:
+          home_address_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"version": "<value>"}
+      responses:
+        "200":
+          application/json: {"uuid": "c40ad97d-7012-4f7c-ab8a-f14a344004a6", "employee_uuid": "552147a4-4070-4d73-9b2f-e02edd663a64", "effective_date": "1970-01-01", "courtesy_withholding": false, "street_1": "600 4th Street", "street_2": "", "city": "Miami", "state": "FL", "zip": "33173", "country": "USA", "active": true, "version": "92676c3c5a3c0f26911388a55633b31a"}
+        "404":
+          application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   delete-v1-home_addresses-home_address_uuid:
     Basic:
       parameters:
@@ -4668,6 +4747,12 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-delete-v1-home-addresses-home-address-uuid:
+      parameters:
+        path:
+          home_address_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
   get-v1-employees-employee_id-work_addresses:
     test_example:
       parameters:
@@ -4677,7 +4762,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "de083b69-1265-49d1-9148-0e45ad81584a", "effective_date": "2021-01-01", "active": false, "location_uuid": "ee498dcd-ad3f-421a-acaf-fccfba7a54b7", "employee_uuid": "db9bdb62-7a02-4dbf-9599-c68375f46117", "version": "2bf1afa0988905127810578fa8f7096f", "street_1": "91678 Farrell Meadow", "street_2": "Apt. 835", "city": "Phoenix", "state": "AZ", "zip": "85016", "country": "USA"}, {"uuid": "855b87c6-b049-4334-be6e-a5e8d53016fb", "effective_date": "2022-01-01", "active": false, "location_uuid": "69c0fcad-9d5a-4f21-ac59-d3a06c1566ed", "employee_uuid": "db9bdb62-7a02-4dbf-9599-c68375f46117", "version": "e4450ac4a8b4f362f315edc55c9ea784", "street_1": "800 Adolfo Gardens", "street_2": "Suite 419", "city": "Bremen", "state": "AL", "zip": "35033", "country": "USA"}, {"uuid": "ff95bce2-11e6-47a7-9635-fa0e3a768b31", "effective_date": "2023-01-01", "active": true, "location_uuid": "6294b652-92ca-474f-9e3e-7961205f728c", "employee_uuid": "db9bdb62-7a02-4dbf-9599-c68375f46117", "version": "dbb907f6fca92b01c14f3b367d4f0b25", "street_1": "2216 Icie Villages", "street_2": "Apt. 798", "city": "Big Delta", "state": "AK", "zip": "99737", "country": "USA"}]
+          application/json: [{"uuid": "2d29abd9-875c-4703-aaa4-c1d963d8dc57", "effective_date": "2021-01-01", "active": false, "location_uuid": "8aecc99c-fed1-48c0-a345-64ed6935377a", "employee_uuid": "800387a7-171b-4e0d-add2-61b0b1e11a03", "version": "3ad8599cd498f29e2515cedbd6c0bff5", "street_1": "91678 Farrell Meadow", "street_2": "Apt. 835", "city": "Phoenix", "state": "AZ", "zip": "85016", "country": "USA"}, {"uuid": "d1e003ec-2615-4432-adb2-16efeb5c1567", "effective_date": "2022-01-01", "active": false, "location_uuid": "a9e975f9-82d6-49a9-a053-3893f9a5f549", "employee_uuid": "800387a7-171b-4e0d-add2-61b0b1e11a03", "version": "7e781fe24aa40c64e6d9902260695501", "street_1": "800 Adolfo Gardens", "street_2": "Suite 419", "city": "Bremen", "state": "AL", "zip": "35033", "country": "USA"}, {"uuid": "aeb37390-194c-47c2-aa03-61dda3086b07", "effective_date": "2023-01-01", "active": true, "location_uuid": "e3cd52ca-15fe-4f26-bf56-67f338640cec", "employee_uuid": "800387a7-171b-4e0d-add2-61b0b1e11a03", "version": "5c3f417bdbe5940d0a99def2689ac2b4", "street_1": "2216 Icie Villages", "street_2": "Apt. 798", "city": "Big Delta", "state": "AK", "zip": "99737", "country": "USA"}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-employees-employee_id-work_addresses:
@@ -4688,7 +4773,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"location_uuid": "f3ce2f31-cba6-4f18-b66b-291de5d52ca2", "effective_date": "2020-01-31"}
+        application/json: {"location_uuid": "4484345c-ddb7-4d68-ae92-f3e8b931cb63", "effective_date": "2020-01-31"}
       responses:
         "201":
           application/json: {"uuid": "e02ec014-1e6b-41a8-ba57-7e102baa2d06", "version": "<value>", "country": "USA"}
@@ -4704,7 +4789,7 @@ examples:
         application/json: {"location_uuid": "6a119be7-b4b0-4e27-aaa0-89d5f2524635", "effective_date": "2023-05-15"}
       responses:
         "201":
-          application/json: {"uuid": "ec995b22-ef41-47eb-b601-fa7ec7b60a62", "effective_date": "2020-01-31", "active": true, "location_uuid": "f3ce2f31-cba6-4f18-b66b-291de5d52ca2", "employee_uuid": "ebdaa937-3574-472d-b383-a5c3c977496e", "version": "5a5318a71ec6f40cffa014e3ff504b8b", "street_1": "977 Marks Viaduct", "street_2": "Apt. 958", "city": "Pink Hill", "state": "NC", "zip": "28572", "country": "USA"}
+          application/json: {"uuid": "2398e86b-9ff8-4294-b370-ba650c7af041", "effective_date": "2020-01-31", "active": true, "location_uuid": "4484345c-ddb7-4d68-ae92-f3e8b931cb63", "employee_uuid": "acd127f2-c985-43ac-94f3-e439f6192a2e", "version": "a38dd0afeb9ce4e976078cba5e692e02", "street_1": "977 Marks Viaduct", "street_2": "Apt. 958", "city": "Pink Hill", "state": "NC", "zip": "28572", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-v1-work_addresses-work_address_uuid:
@@ -4716,7 +4801,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "a0de01ec-a4ce-46bc-8f4a-56b04d885c87", "effective_date": "2023-01-01", "active": true, "location_uuid": "e08560ad-bfbd-4d07-b6e9-43867e7adffa", "employee_uuid": "b5d23454-3e50-4902-8c3f-90c7a07dfb26", "version": "774485f09e6e1d6021426262af246fa1", "street_1": "229 Virgil Mission", "street_2": "Apt. 360", "city": "Yatesville", "state": "GA", "zip": "31097", "country": "USA"}
+          application/json: {"uuid": "20b9d424-2b79-4026-997c-cf078c510a5c", "effective_date": "2023-01-01", "active": true, "location_uuid": "3359710d-4dfc-4e6a-8353-5b329351c80b", "employee_uuid": "3dac86a4-e126-4a78-9a92-3a0416b3c102", "version": "95c6e324b64b0bbc49945332f8ee65aa", "street_1": "229 Virgil Mission", "street_2": "Apt. 360", "city": "Yatesville", "state": "GA", "zip": "31097", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-work_addresses-work_address_uuid:
@@ -4727,7 +4812,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "cd2e396aff8925367ff773e771e40488", "location_uuid": "333eb008-db81-4003-9e91-1ad257226518"}
+        application/json: {"version": "078763b58cf7cd508790581843078419", "location_uuid": "b02a39f8-086b-44e3-babf-35cf7f2ea173"}
       responses:
         "200":
           application/json: {"uuid": "27c58f85-7f90-4597-bc74-193b0a8d024d", "version": "<value>", "country": "USA"}
@@ -4743,7 +4828,7 @@ examples:
         application/json: {"version": "<value>", "location_uuid": "6a119be7-b4b0-4e27-aaa0-89d5f2524635", "effective_date": "2023-05-15"}
       responses:
         "200":
-          application/json: {"uuid": "7e40de75-4345-41dc-a187-d8960e853298", "effective_date": "2022-01-01", "active": false, "location_uuid": "333eb008-db81-4003-9e91-1ad257226518", "employee_uuid": "020cb03f-2301-40f5-9d21-bf4a9ca21dd7", "version": "68f2fd4efda1e5ef8072071e49af35e7", "street_1": "5467 Ward Radial", "street_2": "Suite 251", "city": "Holualoa", "state": "HI", "zip": "96725", "country": "USA"}
+          application/json: {"uuid": "4b34572b-cc66-4ba1-ae89-82f8d187ebf0", "effective_date": "2022-01-01", "active": false, "location_uuid": "b02a39f8-086b-44e3-babf-35cf7f2ea173", "employee_uuid": "b8c70b1b-2fe3-4a34-8357-aabf146cfa31", "version": "518a97e30441eea5008c2e9e5725c4a1", "street_1": "5467 Ward Radial", "street_2": "Suite 251", "city": "Holualoa", "state": "HI", "zip": "96725", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   delete-v1-work_addresses-work_address_uuid:

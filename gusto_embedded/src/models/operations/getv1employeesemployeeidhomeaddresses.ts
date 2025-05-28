@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeAddress,
@@ -18,12 +19,21 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+  >;
 
 export type GetV1EmployeesEmployeeIdHomeAddressesRequest = {
   /**
@@ -33,16 +43,43 @@ export type GetV1EmployeesEmployeeIdHomeAddressesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdHomeAddressesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * List of employee addresses
+   * successful
    */
   employeeAddressList?: Array<EmployeeAddress> | undefined;
 };
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+  > = GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema:
@@ -52,7 +89,9 @@ export const GetV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version":
+      GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -74,7 +113,9 @@ export const GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema:
     GetV1EmployeesEmployeeIdHomeAddressesRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

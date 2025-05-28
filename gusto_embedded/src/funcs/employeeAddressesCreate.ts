@@ -182,8 +182,8 @@ async function $do(
     M.json(201, PostV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema, {
       key: "Employee-Address",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -20,6 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetV1HomeAddressesHomeAddressUuidRequest,
   GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema,
   GetV1HomeAddressesHomeAddressUuidResponse,
@@ -45,6 +49,7 @@ export function employeeAddressesRetrieveHomeAddress(
 ): APIPromise<
   Result<
     GetV1HomeAddressesHomeAddressUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       GetV1HomeAddressesHomeAddressUuidResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -162,6 +168,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1HomeAddressesHomeAddressUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,7 +180,8 @@ async function $do(
     M.json(200, GetV1HomeAddressesHomeAddressUuidResponse$inboundSchema, {
       key: "Employee-Address",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

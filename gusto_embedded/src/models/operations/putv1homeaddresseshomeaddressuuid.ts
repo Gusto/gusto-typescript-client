@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import {
@@ -19,16 +20,23 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>;
 
 export type PutV1HomeAddressesHomeAddressUuidRequestBody = {
   /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
   version: string;
   street1?: string | undefined;
@@ -36,29 +44,55 @@ export type PutV1HomeAddressesHomeAddressUuidRequestBody = {
   city?: string | undefined;
   state?: string | undefined;
   zip?: string | undefined;
-  effectiveDate?: RFCDate | undefined;
-  courtesyWithholding?: boolean | undefined;
+  effectiveDate?: RFCDate | null | undefined;
 };
 
 export type PutV1HomeAddressesHomeAddressUuidRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the home address
    */
   homeAddressUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PutV1HomeAddressesHomeAddressUuidRequestBody;
 };
 
 export type PutV1HomeAddressesHomeAddressUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   employeeAddress?: EmployeeAddress | undefined;
 };
+
+/** @internal */
+export const PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
+
+/** @internal */
+export const PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+  > = PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema:
@@ -73,14 +107,13 @@ export const PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema:
     city: z.string().optional(),
     state: z.string().optional(),
     zip: z.string().optional(),
-    effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-    courtesy_withholding: z.boolean().optional(),
+    effective_date: z.nullable(z.string().transform(v => new RFCDate(v)))
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "street_1": "street1",
       "street_2": "street2",
       "effective_date": "effectiveDate",
-      "courtesy_withholding": "courtesyWithholding",
     });
   });
 
@@ -92,8 +125,7 @@ export type PutV1HomeAddressesHomeAddressUuidRequestBody$Outbound = {
   city?: string | undefined;
   state?: string | undefined;
   zip?: string | undefined;
-  effective_date?: string | undefined;
-  courtesy_withholding?: boolean | undefined;
+  effective_date?: string | null | undefined;
 };
 
 /** @internal */
@@ -109,15 +141,14 @@ export const PutV1HomeAddressesHomeAddressUuidRequestBody$outboundSchema:
     city: z.string().optional(),
     state: z.string().optional(),
     zip: z.string().optional(),
-    effectiveDate: z.instanceof(RFCDate).transform(v => v.toString())
-      .optional(),
-    courtesyWithholding: z.boolean().optional(),
+    effectiveDate: z.nullable(
+      z.instanceof(RFCDate).transform(v => v.toString()),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       street1: "street_1",
       street2: "street_2",
       effectiveDate: "effective_date",
-      courtesyWithholding: "courtesy_withholding",
     });
   });
 
@@ -169,23 +200,25 @@ export const PutV1HomeAddressesHomeAddressUuidRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version":
+    PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema
+      .default("2024-04-01"),
   home_address_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
-    "home_address_uuid": "homeAddressUuid",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "home_address_uuid": "homeAddressUuid",
     "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type PutV1HomeAddressesHomeAddressUuidRequest$Outbound = {
-  home_address_uuid: string;
   "X-Gusto-API-Version": string;
+  home_address_uuid: string;
   RequestBody: PutV1HomeAddressesHomeAddressUuidRequestBody$Outbound;
 };
 
@@ -195,15 +228,17 @@ export const PutV1HomeAddressesHomeAddressUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1HomeAddressesHomeAddressUuidRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema
+      .default("2024-04-01"),
   homeAddressUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   requestBody: z.lazy(() =>
     PutV1HomeAddressesHomeAddressUuidRequestBody$outboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
-    homeAddressUuid: "home_address_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    homeAddressUuid: "home_address_uuid",
     requestBody: "RequestBody",
   });
 });

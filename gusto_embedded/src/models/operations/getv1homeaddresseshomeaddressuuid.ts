@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeAddress,
@@ -18,12 +19,19 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>;
 
 export type GetV1HomeAddressesHomeAddressUuidRequest = {
   /**
@@ -33,16 +41,43 @@ export type GetV1HomeAddressesHomeAddressUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1HomeAddressesHomeAddressUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   employeeAddress?: EmployeeAddress | undefined;
 };
+
+/** @internal */
+export const GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+  > = GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1HomeAddressesHomeAddressUuidRequest$inboundSchema: z.ZodType<
@@ -51,7 +86,9 @@ export const GetV1HomeAddressesHomeAddressUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   home_address_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version":
+    GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema
+      .default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     "home_address_uuid": "homeAddressUuid",
@@ -72,7 +109,9 @@ export const GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema: z.ZodType<
   GetV1HomeAddressesHomeAddressUuidRequest
 > = z.object({
   homeAddressUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion:
+    GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema
+      .default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
     homeAddressUuid: "home_address_uuid",
