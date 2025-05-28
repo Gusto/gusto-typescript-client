@@ -11,23 +11,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EmployeeAddress = {
   /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version?: string | undefined;
-  street1?: string | undefined;
-  street2?: string | null | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country?: string | undefined;
-  /**
-   * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
-   */
-  active?: boolean | undefined;
-  /**
    * The UUID of the employee address
    */
-  uuid?: string | undefined;
+  uuid: string;
   /**
    * The UUID of the employee
    */
@@ -40,6 +26,20 @@ export type EmployeeAddress = {
    * Determines if home taxes should be withheld and paid for employee.
    */
   courtesyWithholding?: boolean | undefined;
+  street1?: string | undefined;
+  street2?: string | null | undefined;
+  city?: string | undefined;
+  state?: string | undefined;
+  zip?: string | undefined;
+  country?: string | undefined;
+  /**
+   * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
+   */
+  active?: boolean | undefined;
+  /**
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   */
+  version: string;
 };
 
 /** @internal */
@@ -48,7 +48,10 @@ export const EmployeeAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
+  uuid: z.string(),
+  employee_uuid: z.string().optional(),
+  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
+  courtesy_withholding: z.boolean().optional(),
   street_1: z.string().optional(),
   street_2: z.nullable(z.string()).optional(),
   city: z.string().optional(),
@@ -56,23 +59,23 @@ export const EmployeeAddress$inboundSchema: z.ZodType<
   zip: z.string().optional(),
   country: z.string().default("USA"),
   active: z.boolean().optional(),
-  uuid: z.string().optional(),
-  employee_uuid: z.string().optional(),
-  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-  courtesy_withholding: z.boolean().optional(),
+  version: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    "street_1": "street1",
-    "street_2": "street2",
     "employee_uuid": "employeeUuid",
     "effective_date": "effectiveDate",
     "courtesy_withholding": "courtesyWithholding",
+    "street_1": "street1",
+    "street_2": "street2",
   });
 });
 
 /** @internal */
 export type EmployeeAddress$Outbound = {
-  version?: string | undefined;
+  uuid: string;
+  employee_uuid?: string | undefined;
+  effective_date?: string | undefined;
+  courtesy_withholding?: boolean | undefined;
   street_1?: string | undefined;
   street_2?: string | null | undefined;
   city?: string | undefined;
@@ -80,10 +83,7 @@ export type EmployeeAddress$Outbound = {
   zip?: string | undefined;
   country: string;
   active?: boolean | undefined;
-  uuid?: string | undefined;
-  employee_uuid?: string | undefined;
-  effective_date?: string | undefined;
-  courtesy_withholding?: boolean | undefined;
+  version: string;
 };
 
 /** @internal */
@@ -92,7 +92,10 @@ export const EmployeeAddress$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmployeeAddress
 > = z.object({
-  version: z.string().optional(),
+  uuid: z.string(),
+  employeeUuid: z.string().optional(),
+  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  courtesyWithholding: z.boolean().optional(),
   street1: z.string().optional(),
   street2: z.nullable(z.string()).optional(),
   city: z.string().optional(),
@@ -100,17 +103,14 @@ export const EmployeeAddress$outboundSchema: z.ZodType<
   zip: z.string().optional(),
   country: z.string().default("USA"),
   active: z.boolean().optional(),
-  uuid: z.string().optional(),
-  employeeUuid: z.string().optional(),
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  courtesyWithholding: z.boolean().optional(),
+  version: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
     employeeUuid: "employee_uuid",
     effectiveDate: "effective_date",
     courtesyWithholding: "courtesy_withholding",
+    street1: "street_1",
+    street2: "street_2",
   });
 });
 

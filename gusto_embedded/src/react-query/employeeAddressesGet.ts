@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesGet } from "../funcs/employeeAddressesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdHomeAddressesRequest,
   GetV1EmployeesEmployeeIdHomeAddressesResponse,
 } from "../models/operations/getv1employeesemployeeidhomeaddresses.js";
@@ -99,7 +99,11 @@ export function setEmployeeAddressesGetData(
   client: QueryClient,
   queryKeyBase: [
     employeeId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeeAddressesGetQueryData,
 ): EmployeeAddressesGetQueryData | undefined {
@@ -113,7 +117,11 @@ export function invalidateEmployeeAddressesGet(
   queryKeyBase: TupleToPrefixes<
     [
       employeeId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -173,7 +181,11 @@ export function buildEmployeeAddressesGetQuery(
 
 export function queryKeyEmployeeAddressesGet(
   employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",
