@@ -14,7 +14,7 @@ permissions:
   workflow_dispatch: {}
 jobs:
   publish:
-    uses: Gusto/sdk-generation-action/.github/workflows/workflow-executor.yaml@main
+    uses: Gusto/sdk-generation-action/.github/workflows/sdk-publish.yaml@main
     with:
       target: gusto-embedded
       runs-on: "{\"group\": \"gusto-ubuntu-default\"}"
@@ -22,4 +22,3 @@ jobs:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       npm_token: ${{ secrets.NPM_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-      openapi_doc_auth_token: ${{ secrets.OPENAPI_DOC_AUTH_TOKEN }}
