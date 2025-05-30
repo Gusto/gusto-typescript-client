@@ -361,7 +361,7 @@ async function run() {
   const result = await gustoEmbedded.locations.update({
     locationId: "<id>",
     requestBody: {
-      version: "14302448d61342a1a25072fcb59df0b3",
+      version: "756aee0bdbf26def096673bb7f9a7b97",
       phoneNumber: "8009360383",
       street1: "300 3rd Street",
       street2: "Apartment 318",
@@ -396,7 +396,7 @@ async function run() {
   const res = await locationsUpdate(gustoEmbedded, {
     locationId: "<id>",
     requestBody: {
-      version: "14302448d61342a1a25072fcb59df0b3",
+      version: "756aee0bdbf26def096673bb7f9a7b97",
       phoneNumber: "8009360383",
       street1: "300 3rd Street",
       street2: "Apartment 318",

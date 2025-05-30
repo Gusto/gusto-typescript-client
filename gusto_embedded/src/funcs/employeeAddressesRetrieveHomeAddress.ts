@@ -20,6 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetV1HomeAddressesHomeAddressUuidRequest,
   GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema,
   GetV1HomeAddressesHomeAddressUuidResponse,
@@ -45,6 +49,7 @@ export function employeeAddressesRetrieveHomeAddress(
 ): APIPromise<
   Result<
     GetV1HomeAddressesHomeAddressUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       GetV1HomeAddressesHomeAddressUuidResponse,
+      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -118,6 +124,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "get-v1-home_addresses-home_address_uuid",
     oAuth2Scopes: [],
@@ -138,6 +145,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -162,6 +170,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1HomeAddressesHomeAddressUuidResponse,
+    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -173,7 +182,8 @@ async function $do(
     M.json(200, GetV1HomeAddressesHomeAddressUuidResponse$inboundSchema, {
       key: "Employee-Address",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

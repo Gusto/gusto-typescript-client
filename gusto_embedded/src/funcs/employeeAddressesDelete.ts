@@ -20,10 +20,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
-import {
   DeleteV1HomeAddressesHomeAddressUuidRequest,
   DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema,
   DeleteV1HomeAddressesHomeAddressUuidResponse,
@@ -36,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Delete an employee's home address
  *
  * @remarks
- * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+ * Used for deleting an employee's home address. Cannot delete the employee's active home address.
  *
  * scope: `employees:write`
  */
@@ -47,7 +43,6 @@ export function employeeAddressesDelete(
 ): APIPromise<
   Result<
     DeleteV1HomeAddressesHomeAddressUuidResponse,
-    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -72,7 +67,6 @@ async function $do(
   [
     Result<
       DeleteV1HomeAddressesHomeAddressUuidResponse,
-      | UnprocessableEntityErrorObject
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -107,7 +101,7 @@ async function $do(
   const path = pathToFunc("/v1/home_addresses/{home_address_uuid}")(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "application/json",
+    Accept: "*/*",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -122,6 +116,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "delete-v1-home_addresses-home_address_uuid",
     oAuth2Scopes: [],
@@ -142,6 +137,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -166,7 +162,6 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1HomeAddressesHomeAddressUuidResponse,
-    | UnprocessableEntityErrorObject
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -176,8 +171,7 @@ async function $do(
     | ConnectionError
   >(
     M.nil(204, DeleteV1HomeAddressesHomeAddressUuidResponse$inboundSchema),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -25,6 +25,13 @@ import {
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody = {
+  /**
+   * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
+   */
+  employeeUuids?: Array<string> | undefined;
+};
+
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
   /**
    * The UUID of the company
@@ -38,6 +45,9 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: VersionHeader | undefined;
+  requestBody?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody
+    | undefined;
 };
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse = {
@@ -49,6 +59,81 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse = {
 };
 
 /** @internal */
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    employee_uuids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "employee_uuids": "employeeUuids",
+    });
+  });
+
+/** @internal */
+export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound =
+  {
+    employee_uuids?: Array<string> | undefined;
+  };
+
+/** @internal */
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema:
+  z.ZodType<
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound,
+    z.ZodTypeDef,
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody
+  > = z.object({
+    employeeUuids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      employeeUuids: "employee_uuids",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$ {
+  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound` instead. */
+  export type Outbound =
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound;
+}
+
+export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBodyToJSON(
+  putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody:
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody,
+): string {
+  return JSON.stringify(
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema
+      .parse(putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody),
+  );
+}
+
+export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody' from JSON`,
+  );
+}
+
+/** @internal */
 export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchema:
   z.ZodType<
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
@@ -58,11 +143,15 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchem
     company_id: z.string(),
     payroll_id: z.string(),
     "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    RequestBody: z.lazy(() =>
+      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
       "payroll_id": "payrollId",
       "X-Gusto-API-Version": "xGustoAPIVersion",
+      "RequestBody": "requestBody",
     });
   });
 
@@ -71,6 +160,9 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$Outbound = {
   company_id: string;
   payroll_id: string;
   "X-Gusto-API-Version": string;
+  RequestBody?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -83,11 +175,15 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
     companyId: z.string(),
     payrollId: z.string(),
     xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    requestBody: z.lazy(() =>
+      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
       payrollId: "payroll_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      requestBody: "RequestBody",
     });
   });
 

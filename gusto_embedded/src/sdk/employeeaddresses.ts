@@ -144,7 +144,7 @@ export class EmployeeAddresses extends ClientSDK {
    * Delete an employee's home address
    *
    * @remarks
-   * Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+   * Used for deleting an employee's home address. Cannot delete the employee's active home address.
    *
    * scope: `employees:write`
    */

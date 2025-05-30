@@ -13,12 +13,12 @@ export type ContractorAddress = {
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
   version?: string | undefined;
-  street1?: string | undefined;
+  street1?: string | null | undefined;
   street2?: string | null | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country?: string | undefined;
+  city?: string | null | undefined;
+  state?: string | null | undefined;
+  zip?: string | null | undefined;
+  country?: string | null | undefined;
   /**
    * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
    */
@@ -36,12 +36,12 @@ export const ContractorAddress$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   version: z.string().optional(),
-  street_1: z.string().optional(),
+  street_1: z.nullable(z.string()).optional(),
   street_2: z.nullable(z.string()).optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().default("USA"),
+  city: z.nullable(z.string()).optional(),
+  state: z.nullable(z.string()).optional(),
+  zip: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string().default("USA")),
   active: z.boolean().optional(),
   contractor_uuid: z.string().optional(),
 }).transform((v) => {
@@ -55,12 +55,12 @@ export const ContractorAddress$inboundSchema: z.ZodType<
 /** @internal */
 export type ContractorAddress$Outbound = {
   version?: string | undefined;
-  street_1?: string | undefined;
+  street_1?: string | null | undefined;
   street_2?: string | null | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country: string;
+  city?: string | null | undefined;
+  state?: string | null | undefined;
+  zip?: string | null | undefined;
+  country: string | null;
   active?: boolean | undefined;
   contractor_uuid?: string | undefined;
 };
@@ -72,12 +72,12 @@ export const ContractorAddress$outboundSchema: z.ZodType<
   ContractorAddress
 > = z.object({
   version: z.string().optional(),
-  street1: z.string().optional(),
+  street1: z.nullable(z.string()).optional(),
   street2: z.nullable(z.string()).optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().default("USA"),
+  city: z.nullable(z.string()).optional(),
+  state: z.nullable(z.string()).optional(),
+  zip: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string().default("USA")),
   active: z.boolean().optional(),
   contractorUuid: z.string().optional(),
 }).transform((v) => {
