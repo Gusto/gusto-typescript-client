@@ -125,6 +125,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "post-partner-managed-companies-company_uuid-retrieve_terms_of_service",
@@ -146,6 +147,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {

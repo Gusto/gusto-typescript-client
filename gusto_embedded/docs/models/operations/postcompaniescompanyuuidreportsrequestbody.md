@@ -13,7 +13,7 @@ let value: PostCompaniesCompanyUuidReportsRequestBody = {
   groupings: [
     "employee",
   ],
-  fileType: "json",
+  fileType: "pdf",
   startDate: new RFCDate("2024-01-01"),
   endDate: new RFCDate("2024-04-01"),
   dismissedStartDate: new RFCDate("2024-01-01"),

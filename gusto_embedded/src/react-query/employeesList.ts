@@ -100,6 +100,7 @@ export function setEmployeesListData(
         | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
         | undefined;
       searchTerm?: string | undefined;
+      uuids?: Array<string> | undefined;
       include?: Array<Include> | undefined;
       terminated?: boolean | undefined;
       page?: number | undefined;
@@ -123,6 +124,7 @@ export function invalidateEmployeesList(
           | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
           | undefined;
         searchTerm?: string | undefined;
+        uuids?: Array<string> | undefined;
         include?: Array<Include> | undefined;
         terminated?: boolean | undefined;
         page?: number | undefined;
@@ -160,6 +162,7 @@ export function buildEmployeesListQuery(
     queryKey: queryKeyEmployeesList(request.companyId, {
       xGustoAPIVersion: request.xGustoAPIVersion,
       searchTerm: request.searchTerm,
+      uuids: request.uuids,
       include: request.include,
       terminated: request.terminated,
       page: request.page,
@@ -190,6 +193,7 @@ export function queryKeyEmployeesList(
       | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
       | undefined;
     searchTerm?: string | undefined;
+    uuids?: Array<string> | undefined;
     include?: Array<Include> | undefined;
     terminated?: boolean | undefined;
     page?: number | undefined;

@@ -24,6 +24,7 @@ Supports home address effective dating and courtesy withholding.
 
 scope: `employees:read`
 
+
 ### Example Usage
 
 ```typescript
@@ -120,9 +121,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## create
 
@@ -132,11 +134,11 @@ Supports home address effective dating and courtesy withholding.
 
 scope: `employees:write`
 
+
 ### Example Usage
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -146,13 +148,10 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.create({
     employeeId: "<id>",
     requestBody: {
-      street1: "300 3rd Street",
-      street2: null,
+      street1: "500 3rd Street",
       city: "San Francisco",
       state: "CA",
       zip: "94107",
-      effectiveDate: new RFCDate("2021-01-01"),
-      courtesyWithholding: true,
     },
   });
 
@@ -170,7 +169,6 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeeAddressesCreate } from "@gusto/embedded-api/funcs/employeeAddressesCreate.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -182,13 +180,10 @@ async function run() {
   const res = await employeeAddressesCreate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      street1: "300 3rd Street",
-      street2: null,
+      street1: "500 3rd Street",
       city: "San Francisco",
       state: "CA",
       zip: "94107",
-      effectiveDate: new RFCDate("2021-01-01"),
-      courtesyWithholding: true,
     },
   });
 
@@ -239,7 +234,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## retrieveHomeAddress
@@ -249,6 +244,7 @@ The home address of an employee is used to determine certain tax information abo
 Supports home address effective dating and courtesy withholding.
 
 scope: `employees:read`
+
 
 ### Example Usage
 
@@ -346,9 +342,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## update
 
@@ -358,11 +355,11 @@ Supports home address effective dating and courtesy withholding.
 
 scope: `employees:write`
 
+
 ### Example Usage
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -372,14 +369,11 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.update({
     homeAddressUuid: "<id>",
     requestBody: {
-      version: "fe75bd065ff48b91c35fe8ff842f986c",
-      street1: "300 3rd Street",
-      street2: null,
-      city: "San Francisco",
-      state: "CA",
-      zip: "94107",
-      effectiveDate: new RFCDate("2021-01-01"),
-      courtesyWithholding: true,
+      version: "6c3c23e4cc840bd3f1416f72b5380eff",
+      street1: "600 4th Street",
+      city: "Miami",
+      state: "FL",
+      zip: "33173",
     },
   });
 
@@ -397,7 +391,6 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeeAddressesUpdate } from "@gusto/embedded-api/funcs/employeeAddressesUpdate.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -409,14 +402,11 @@ async function run() {
   const res = await employeeAddressesUpdate(gustoEmbedded, {
     homeAddressUuid: "<id>",
     requestBody: {
-      version: "fe75bd065ff48b91c35fe8ff842f986c",
-      street1: "300 3rd Street",
-      street2: null,
-      city: "San Francisco",
-      state: "CA",
-      zip: "94107",
-      effectiveDate: new RFCDate("2021-01-01"),
-      courtesyWithholding: true,
+      version: "6c3c23e4cc840bd3f1416f72b5380eff",
+      street1: "600 4th Street",
+      city: "Miami",
+      state: "FL",
+      zip: "33173",
     },
   });
 
@@ -467,14 +457,15 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## delete
 
-Used for deleting an employee's home address.  Cannot delete the employee's active home address.
+Used for deleting an employee's home address. Cannot delete the employee's active home address.
 
 scope: `employees:write`
+
 
 ### Example Usage
 
@@ -561,10 +552,9 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## getWorkAddresses
 
@@ -696,7 +686,7 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.createWorkAddress({
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "f3ce2f31-cba6-4f18-b66b-291de5d52ca2",
+      locationUuid: "4484345c-ddb7-4d68-ae92-f3e8b931cb63",
       effectiveDate: new RFCDate("2020-01-31"),
     },
   });
@@ -727,7 +717,7 @@ async function run() {
   const res = await employeeAddressesCreateWorkAddress(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "f3ce2f31-cba6-4f18-b66b-291de5d52ca2",
+      locationUuid: "4484345c-ddb7-4d68-ae92-f3e8b931cb63",
       effectiveDate: new RFCDate("2020-01-31"),
     },
   });
@@ -910,8 +900,8 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.updateWorkAddress({
     workAddressUuid: "<id>",
     requestBody: {
-      version: "cd2e396aff8925367ff773e771e40488",
-      locationUuid: "333eb008-db81-4003-9e91-1ad257226518",
+      version: "078763b58cf7cd508790581843078419",
+      locationUuid: "b02a39f8-086b-44e3-babf-35cf7f2ea173",
     },
   });
 
@@ -940,8 +930,8 @@ async function run() {
   const res = await employeeAddressesUpdateWorkAddress(gustoEmbedded, {
     workAddressUuid: "<id>",
     requestBody: {
-      version: "cd2e396aff8925367ff773e771e40488",
-      locationUuid: "333eb008-db81-4003-9e91-1ad257226518",
+      version: "078763b58cf7cd508790581843078419",
+      locationUuid: "b02a39f8-086b-44e3-babf-35cf7f2ea173",
     },
   });
 

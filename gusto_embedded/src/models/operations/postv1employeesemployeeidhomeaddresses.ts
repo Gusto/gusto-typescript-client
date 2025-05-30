@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import {
@@ -19,12 +20,21 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+  >;
 
 export type PostV1EmployeesEmployeeIdHomeAddressesRequestBody = {
   street1?: string | undefined;
@@ -32,7 +42,7 @@ export type PostV1EmployeesEmployeeIdHomeAddressesRequestBody = {
   city?: string | undefined;
   state?: string | undefined;
   zip?: string | undefined;
-  effectiveDate?: RFCDate | undefined;
+  effectiveDate?: RFCDate | null | undefined;
   courtesyWithholding?: boolean | undefined;
 };
 
@@ -44,17 +54,47 @@ export type PostV1EmployeesEmployeeIdHomeAddressesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+    | undefined;
   requestBody: PostV1EmployeesEmployeeIdHomeAddressesRequestBody;
 };
 
 export type PostV1EmployeesEmployeeIdHomeAddressesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * created
    */
   employeeAddress?: EmployeeAddress | undefined;
 };
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
+  > =
+    PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PostV1EmployeesEmployeeIdHomeAddressesRequestBody$inboundSchema:
@@ -68,7 +108,8 @@ export const PostV1EmployeesEmployeeIdHomeAddressesRequestBody$inboundSchema:
     city: z.string().optional(),
     state: z.string().optional(),
     zip: z.string().optional(),
-    effective_date: z.string().transform(v => new RFCDate(v)).optional(),
+    effective_date: z.nullable(z.string().transform(v => new RFCDate(v)))
+      .optional(),
     courtesy_withholding: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -86,7 +127,7 @@ export type PostV1EmployeesEmployeeIdHomeAddressesRequestBody$Outbound = {
   city?: string | undefined;
   state?: string | undefined;
   zip?: string | undefined;
-  effective_date?: string | undefined;
+  effective_date?: string | null | undefined;
   courtesy_withholding?: boolean | undefined;
 };
 
@@ -102,8 +143,9 @@ export const PostV1EmployeesEmployeeIdHomeAddressesRequestBody$outboundSchema:
     city: z.string().optional(),
     state: z.string().optional(),
     zip: z.string().optional(),
-    effectiveDate: z.instanceof(RFCDate).transform(v => v.toString())
-      .optional(),
+    effectiveDate: z.nullable(
+      z.instanceof(RFCDate).transform(v => v.toString()),
+    ).optional(),
     courtesyWithholding: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -165,7 +207,9 @@ export const PostV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version":
+      PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdHomeAddressesRequestBody$inboundSchema
     ),
@@ -192,7 +236,9 @@ export const PostV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema:
     PostV1EmployeesEmployeeIdHomeAddressesRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      PostV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdHomeAddressesRequestBody$outboundSchema
     ),

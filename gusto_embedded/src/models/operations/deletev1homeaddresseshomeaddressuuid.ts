@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -12,27 +13,61 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion =
+  ClosedEnum<typeof DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion>;
+
 export type DeleteV1HomeAddressesHomeAddressUuidRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the home address
    */
   homeAddressUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type DeleteV1HomeAddressesHomeAddressUuidResponse = {
   httpMeta: HTTPMetadata;
 };
+
+/** @internal */
+export const DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
+
+/** @internal */
+export const DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
+  > = DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$ {
+  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema:
@@ -41,19 +76,21 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    "X-Gusto-API-Version":
+      DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
     home_address_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
-      "home_address_uuid": "homeAddressUuid",
       "X-Gusto-API-Version": "xGustoAPIVersion",
+      "home_address_uuid": "homeAddressUuid",
     });
   });
 
 /** @internal */
 export type DeleteV1HomeAddressesHomeAddressUuidRequest$Outbound = {
-  home_address_uuid: string;
   "X-Gusto-API-Version": string;
+  home_address_uuid: string;
 };
 
 /** @internal */
@@ -63,12 +100,14 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema:
     z.ZodTypeDef,
     DeleteV1HomeAddressesHomeAddressUuidRequest
   > = z.object({
+    xGustoAPIVersion:
+      DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     homeAddressUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
-      homeAddressUuid: "home_address_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      homeAddressUuid: "home_address_uuid",
     });
   });
 

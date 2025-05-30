@@ -127,6 +127,7 @@ export type Groupings = ClosedEnum<typeof Groupings>;
 export const FileType = {
   Csv: "csv",
   Json: "json",
+  Pdf: "pdf",
 } as const;
 /**
  * The type of file to generate
