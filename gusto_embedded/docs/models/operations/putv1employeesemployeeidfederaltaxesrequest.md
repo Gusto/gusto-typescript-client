@@ -7,9 +7,6 @@ import { PutV1EmployeesEmployeeIdFederalTaxesRequest } from "@gusto/embedded-api
 
 let value: PutV1EmployeesEmployeeIdFederalTaxesRequest = {
   employeeUuid: "<id>",
-  requestBody: {
-    version: "<value>",
-  },
 };
 ```
 

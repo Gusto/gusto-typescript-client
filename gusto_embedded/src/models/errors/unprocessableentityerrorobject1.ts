@@ -16,6 +16,7 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
+import { GustoEmbeddedError } from "./gustoembeddederror.js";
 
 /**
  * Unprocessable Entity
@@ -36,22 +37,22 @@ export type UnprocessableEntityErrorObject1Data = {
  *
  * This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
-export class UnprocessableEntityErrorObject1 extends Error {
+export class UnprocessableEntityErrorObject1 extends GustoEmbeddedError {
   errors: Array<EntityErrorObject>;
-  httpMeta: HTTPMetadata;
 
   /** The original data that was passed to this error instance. */
   data$: UnprocessableEntityErrorObject1Data;
 
-  constructor(err: UnprocessableEntityErrorObject1Data) {
+  constructor(
+    err: UnprocessableEntityErrorObject1Data,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
-
     this.errors = err.errors;
-    this.httpMeta = err.httpMeta;
 
     this.name = "UnprocessableEntityErrorObject1";
   }
@@ -65,13 +66,20 @@ export const UnprocessableEntityErrorObject1$inboundSchema: z.ZodType<
 > = z.object({
   errors: z.array(EntityErrorObject$inboundSchema),
   HttpMeta: HTTPMetadata$inboundSchema,
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
     const remapped = remap$(v, {
       "HttpMeta": "httpMeta",
     });
 
-    return new UnprocessableEntityErrorObject1(remapped);
+    return new UnprocessableEntityErrorObject1(remapped, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

@@ -38,6 +38,8 @@ export const QueryParamInclude = {
   CustomFields: "custom_fields",
   AllCompensations: "all_compensations",
   CompanyName: "company_name",
+  CurrentHomeAddress: "current_home_address",
+  AllHomeAddresses: "all_home_addresses",
 } as const;
 export type QueryParamInclude = ClosedEnum<typeof QueryParamInclude>;
 

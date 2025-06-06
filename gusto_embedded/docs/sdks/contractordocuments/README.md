@@ -30,7 +30,6 @@ async function run() {
     contractorUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ async function run() {
   const res = await contractorDocumentsGetAll(gustoEmbedded, {
     contractorUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorDocumentsGetAll failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -136,7 +132,6 @@ async function run() {
     documentUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -161,15 +156,12 @@ async function run() {
   const res = await contractorDocumentsGet(gustoEmbedded, {
     documentUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorDocumentsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -242,7 +234,6 @@ async function run() {
     documentUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -267,15 +258,12 @@ async function run() {
   const res = await contractorDocumentsGetPdf(gustoEmbedded, {
     documentUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorDocumentsGetPdf failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -352,7 +340,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -381,15 +368,12 @@ async function run() {
       agree: false,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorDocumentsSign failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

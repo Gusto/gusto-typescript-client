@@ -39,7 +39,6 @@ async function run() {
     contractorPaymentUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -64,15 +63,12 @@ async function run() {
   const res = await contractorPaymentsGetReceipt(gustoEmbedded, {
     contractorPaymentUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsGetReceipt failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -149,7 +145,6 @@ async function run() {
     contractorPaymentUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -174,15 +169,12 @@ async function run() {
   const res = await contractorPaymentsFund(gustoEmbedded, {
     contractorPaymentUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsFund failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -254,7 +246,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -288,15 +279,12 @@ async function run() {
       reimbursement: 20,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -361,7 +349,6 @@ async function run() {
     endDate: "2020-12-31",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -388,15 +375,12 @@ async function run() {
     startDate: "2020-01-01",
     endDate: "2020-12-31",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -469,7 +453,6 @@ async function run() {
     contractorPaymentId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -495,15 +478,12 @@ async function run() {
     companyId: "<id>",
     contractorPaymentId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -577,7 +557,6 @@ async function run() {
     contractorPaymentId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -603,15 +582,12 @@ async function run() {
     companyId: "<id>",
     contractorPaymentId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

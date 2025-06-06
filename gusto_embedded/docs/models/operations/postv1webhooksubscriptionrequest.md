@@ -5,14 +5,7 @@
 ```typescript
 import { PostV1WebhookSubscriptionRequest } from "@gusto/embedded-api/models/operations/postv1webhooksubscription.js";
 
-let value: PostV1WebhookSubscriptionRequest = {
-  requestBody: {
-    url: "https://tight-allocation.name/",
-    subscriptionTypes: [
-      "Location",
-    ],
-  },
-};
+let value: PostV1WebhookSubscriptionRequest = {};
 ```
 
 ## Fields

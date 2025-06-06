@@ -5,14 +5,7 @@
 ```typescript
 import { PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse } from "@gusto/embedded-api/models/operations/putcompaniescompanyuuidholidaypaypolicyremove.js";
 
-let value: PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse = {};
 ```
 
 ## Fields

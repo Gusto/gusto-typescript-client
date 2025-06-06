@@ -33,6 +33,7 @@ export type EmployeeStateTaxQuestion = {
    * A unique identifier of the question (for the given state) - used for updating the answer.
    */
   key: string;
+  isQuestionForAdminOnly: boolean;
   inputQuestionFormat: EmployeeStateTaxInputQuestionFormat;
   answers: Array<EmployeeStateTaxAnswer>;
 };
@@ -46,10 +47,12 @@ export const EmployeeStateTaxQuestion$inboundSchema: z.ZodType<
   label: z.string(),
   description: z.string(),
   key: z.string(),
+  is_question_for_admin_only: z.boolean(),
   input_question_format: EmployeeStateTaxInputQuestionFormat$inboundSchema,
   answers: z.array(EmployeeStateTaxAnswer$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    "is_question_for_admin_only": "isQuestionForAdminOnly",
     "input_question_format": "inputQuestionFormat",
   });
 });
@@ -59,6 +62,7 @@ export type EmployeeStateTaxQuestion$Outbound = {
   label: string;
   description: string;
   key: string;
+  is_question_for_admin_only: boolean;
   input_question_format: EmployeeStateTaxInputQuestionFormat$Outbound;
   answers: Array<EmployeeStateTaxAnswer$Outbound>;
 };
@@ -72,10 +76,12 @@ export const EmployeeStateTaxQuestion$outboundSchema: z.ZodType<
   label: z.string(),
   description: z.string(),
   key: z.string(),
+  isQuestionForAdminOnly: z.boolean(),
   inputQuestionFormat: EmployeeStateTaxInputQuestionFormat$outboundSchema,
   answers: z.array(EmployeeStateTaxAnswer$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    isQuestionForAdminOnly: "is_question_for_admin_only",
     inputQuestionFormat: "input_question_format",
   });
 });

@@ -7,9 +7,6 @@ import { PutV1LocationsLocationIdRequest } from "@gusto/embedded-api/models/oper
 
 let value: PutV1LocationsLocationIdRequest = {
   locationId: "<id>",
-  requestBody: {
-    version: "<value>",
-  },
 };
 ```
 

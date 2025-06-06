@@ -5,14 +5,7 @@
 ```typescript
 import { PostCompaniesPayrollSkipCompanyUuidResponse } from "@gusto/embedded-api/models/operations/postcompaniespayrollskipcompanyuuid.js";
 
-let value: PostCompaniesPayrollSkipCompanyUuidResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PostCompaniesPayrollSkipCompanyUuidResponse = {};
 ```
 
 ## Fields

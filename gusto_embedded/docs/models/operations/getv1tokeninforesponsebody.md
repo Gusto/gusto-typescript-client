@@ -11,11 +11,11 @@ let value: GetV1TokenInfoResponseBody = {
   scope: "<value>",
   resource: {
     type: "<value>",
-    uuid: "be2908c1-f60f-4d58-955d-79b312adf6c1",
+    uuid: "e2908c1f-60fd-4585-95d7-9b312adf6c16",
   },
   resourceOwner: {
     type: "CompanyAdmin",
-    uuid: "3094f0f1-69e6-4400-b835-8bc109cf2774",
+    uuid: "94f0f169-e640-4083-a58b-c109cf2774d9",
   },
 };
 ```

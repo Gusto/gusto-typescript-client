@@ -5,14 +5,7 @@
 ```typescript
 import { GetV1BenefitsBenefitsIdRequirementsResponse } from "@gusto/embedded-api/models/operations/getv1benefitsbenefitsidrequirements.js";
 
-let value: GetV1BenefitsBenefitsIdRequirementsResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetV1BenefitsBenefitsIdRequirementsResponse = {};
 ```
 
 ## Fields

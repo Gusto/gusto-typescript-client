@@ -84,9 +84,7 @@ export type Two = {
  *
  * For the `tiered` contribution type, an array of tiers.
  */
-export type PostV1EmployeesEmployeeIdEmployeeBenefitsValue =
-  | string
-  | Array<Two>;
+export type Value = string | Array<Two>;
 
 /**
  * An object representing the company contribution type and value.
@@ -325,66 +323,43 @@ export function twoFromJSON(
 }
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdEmployeeBenefitsValue$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([z.string(), z.array(z.lazy(() => Two$inboundSchema))]);
+export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
+  .union([z.string(), z.array(z.lazy(() => Two$inboundSchema))]);
 
 /** @internal */
-export type PostV1EmployeesEmployeeIdEmployeeBenefitsValue$Outbound =
-  | string
-  | Array<Two$Outbound>;
+export type Value$Outbound = string | Array<Two$Outbound>;
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdEmployeeBenefitsValue$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue
-  > = z.union([z.string(), z.array(z.lazy(() => Two$outboundSchema))]);
+export const Value$outboundSchema: z.ZodType<
+  Value$Outbound,
+  z.ZodTypeDef,
+  Value
+> = z.union([z.string(), z.array(z.lazy(() => Two$outboundSchema))]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PostV1EmployeesEmployeeIdEmployeeBenefitsValue$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsValue$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsValue$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsValue$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue$Outbound;
+export namespace Value$ {
+  /** @deprecated use `Value$inboundSchema` instead. */
+  export const inboundSchema = Value$inboundSchema;
+  /** @deprecated use `Value$outboundSchema` instead. */
+  export const outboundSchema = Value$outboundSchema;
+  /** @deprecated use `Value$Outbound` instead. */
+  export type Outbound = Value$Outbound;
 }
 
-export function postV1EmployeesEmployeeIdEmployeeBenefitsValueToJSON(
-  postV1EmployeesEmployeeIdEmployeeBenefitsValue:
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdEmployeeBenefitsValue$outboundSchema.parse(
-      postV1EmployeesEmployeeIdEmployeeBenefitsValue,
-    ),
-  );
+export function valueToJSON(value: Value): string {
+  return JSON.stringify(Value$outboundSchema.parse(value));
 }
 
-export function postV1EmployeesEmployeeIdEmployeeBenefitsValueFromJSON(
+export function valueFromJSON(
   jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdEmployeeBenefitsValue,
-  SDKValidationError
-> {
+): SafeParseResult<Value, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdEmployeeBenefitsValue$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdEmployeeBenefitsValue' from JSON`,
+    (x) => Value$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Value' from JSON`,
   );
 }
 

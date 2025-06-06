@@ -42,7 +42,7 @@ export type Resources = {
 };
 
 /**
- * Representation of a notification
+ * Example response
  */
 export type Notification = {
   /**
@@ -52,39 +52,39 @@ export type Notification = {
   /**
    * Unique identifier of the company to which the notification belongs.
    */
-  companyUuid?: string | undefined;
+  companyUuid: string;
   /**
    * The title of the notification. This highlights the actionable component of the notification.
    */
-  title?: string | undefined;
+  title: string;
   /**
    * The message of the notification. This provides additional context for the user and recommends a specific action to resolve the notification.
    */
-  message?: string | undefined;
+  message: string;
   /**
    * Represents the notification's status as managed by our system. It is updated based on observable system events and internal business logic, and does not reflect resolution steps taken outside our system. This field is read-only and cannot be modified via the API.
    */
-  status?: NotificationStatus | undefined;
+  status: NotificationStatus;
   /**
    * The notification's category.
    */
-  category?: string | undefined;
+  category: string;
   /**
    * Indicates whether a notification requires action or not. If false, the notification provides critical information only.
    */
-  actionable?: boolean | undefined;
+  actionable: boolean;
   /**
    * Indicates whether a notification may block ability to run payroll. If true, we suggest that these notifications are prioritized to your end users.
    */
-  canBlockPayroll?: boolean | undefined;
+  canBlockPayroll: boolean;
   /**
    * Timestamp of when the notification was published.
    */
-  publishedAt?: string | undefined;
+  publishedAt: string;
   /**
    * Timestamp of when the notification is due. If the notification has no due date, this field will be null.
    */
-  dueAt?: string | undefined;
+  dueAt: string | null;
   /**
    * An object containing template variables used to render the notification. The structure of this object depends on the notification category. Each category defines a fixed set of variable names (keys), which are always present. The values of these variables can vary depending on the specific notification instance.
    */
@@ -92,7 +92,7 @@ export type Notification = {
   /**
    * An array of entities relevant to the notification
    */
-  resources?: Array<Resources> | undefined;
+  resources: Array<Resources>;
 };
 
 /** @internal */
@@ -196,17 +196,17 @@ export const Notification$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   uuid: z.string(),
-  company_uuid: z.string().optional(),
-  title: z.string().optional(),
-  message: z.string().optional(),
-  status: NotificationStatus$inboundSchema.optional(),
-  category: z.string().optional(),
-  actionable: z.boolean().optional(),
-  can_block_payroll: z.boolean().optional(),
-  published_at: z.string().optional(),
-  due_at: z.string().optional(),
+  company_uuid: z.string(),
+  title: z.string(),
+  message: z.string(),
+  status: NotificationStatus$inboundSchema,
+  category: z.string(),
+  actionable: z.boolean(),
+  can_block_payroll: z.boolean(),
+  published_at: z.string(),
+  due_at: z.nullable(z.string()),
   template_variables: z.record(z.string()).optional(),
-  resources: z.array(z.lazy(() => Resources$inboundSchema)).optional(),
+  resources: z.array(z.lazy(() => Resources$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -220,17 +220,17 @@ export const Notification$inboundSchema: z.ZodType<
 /** @internal */
 export type Notification$Outbound = {
   uuid: string;
-  company_uuid?: string | undefined;
-  title?: string | undefined;
-  message?: string | undefined;
-  status?: string | undefined;
-  category?: string | undefined;
-  actionable?: boolean | undefined;
-  can_block_payroll?: boolean | undefined;
-  published_at?: string | undefined;
-  due_at?: string | undefined;
+  company_uuid: string;
+  title: string;
+  message: string;
+  status: string;
+  category: string;
+  actionable: boolean;
+  can_block_payroll: boolean;
+  published_at: string;
+  due_at: string | null;
   template_variables?: { [k: string]: string } | undefined;
-  resources?: Array<Resources$Outbound> | undefined;
+  resources: Array<Resources$Outbound>;
 };
 
 /** @internal */
@@ -240,17 +240,17 @@ export const Notification$outboundSchema: z.ZodType<
   Notification
 > = z.object({
   uuid: z.string(),
-  companyUuid: z.string().optional(),
-  title: z.string().optional(),
-  message: z.string().optional(),
-  status: NotificationStatus$outboundSchema.optional(),
-  category: z.string().optional(),
-  actionable: z.boolean().optional(),
-  canBlockPayroll: z.boolean().optional(),
-  publishedAt: z.string().optional(),
-  dueAt: z.string().optional(),
+  companyUuid: z.string(),
+  title: z.string(),
+  message: z.string(),
+  status: NotificationStatus$outboundSchema,
+  category: z.string(),
+  actionable: z.boolean(),
+  canBlockPayroll: z.boolean(),
+  publishedAt: z.string(),
+  dueAt: z.nullable(z.string()),
   templateVariables: z.record(z.string()).optional(),
-  resources: z.array(z.lazy(() => Resources$outboundSchema)).optional(),
+  resources: z.array(z.lazy(() => Resources$outboundSchema)),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

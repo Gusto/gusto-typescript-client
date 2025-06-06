@@ -7,9 +7,6 @@ import { PostV1EmployeesEmployeeIdEmployeeBenefitsRequest } from "@gusto/embedde
 
 let value: PostV1EmployeesEmployeeIdEmployeeBenefitsRequest = {
   employeeId: "<id>",
-  requestBody: {
-    companyBenefitUuid: "<id>",
-  },
 };
 ```
 

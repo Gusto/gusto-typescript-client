@@ -45,6 +45,7 @@ export type PutV1HomeAddressesHomeAddressUuidRequestBody = {
   state?: string | undefined;
   zip?: string | undefined;
   effectiveDate?: RFCDate | null | undefined;
+  courtesyWithholding?: boolean | undefined;
 };
 
 export type PutV1HomeAddressesHomeAddressUuidRequest = {
@@ -109,11 +110,13 @@ export const PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema:
     zip: z.string().optional(),
     effective_date: z.nullable(z.string().transform(v => new RFCDate(v)))
       .optional(),
+    courtesy_withholding: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "street_1": "street1",
       "street_2": "street2",
       "effective_date": "effectiveDate",
+      "courtesy_withholding": "courtesyWithholding",
     });
   });
 
@@ -126,6 +129,7 @@ export type PutV1HomeAddressesHomeAddressUuidRequestBody$Outbound = {
   state?: string | undefined;
   zip?: string | undefined;
   effective_date?: string | null | undefined;
+  courtesy_withholding?: boolean | undefined;
 };
 
 /** @internal */
@@ -144,11 +148,13 @@ export const PutV1HomeAddressesHomeAddressUuidRequestBody$outboundSchema:
     effectiveDate: z.nullable(
       z.instanceof(RFCDate).transform(v => v.toString()),
     ).optional(),
+    courtesyWithholding: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       street1: "street_1",
       street2: "street_2",
       effectiveDate: "effective_date",
+      courtesyWithholding: "courtesy_withholding",
     });
   });
 

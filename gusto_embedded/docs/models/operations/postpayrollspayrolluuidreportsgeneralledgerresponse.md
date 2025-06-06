@@ -5,14 +5,7 @@
 ```typescript
 import { PostPayrollsPayrollUuidReportsGeneralLedgerResponse } from "@gusto/embedded-api/models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
 
-let value: PostPayrollsPayrollUuidReportsGeneralLedgerResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PostPayrollsPayrollUuidReportsGeneralLedgerResponse = {};
 ```
 
 ## Fields

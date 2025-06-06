@@ -5,14 +5,7 @@
 ```typescript
 import { GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse } from "@gusto/embedded-api/models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 
-let value: GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {};
 ```
 
 ## Fields

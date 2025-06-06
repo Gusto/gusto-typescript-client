@@ -9,6 +9,7 @@ import {
   EntityErrorObject$Outbound,
   EntityErrorObject$outboundSchema,
 } from "../components/entityerrorobject.js";
+import { GustoEmbeddedError } from "./gustoembeddederror.js";
 
 /**
  * Unprocessable Entity
@@ -28,19 +29,21 @@ export type UnprocessableEntityErrorObjectData = {
  *
  * This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
  */
-export class UnprocessableEntityErrorObject extends Error {
+export class UnprocessableEntityErrorObject extends GustoEmbeddedError {
   errors: Array<EntityErrorObject>;
 
   /** The original data that was passed to this error instance. */
   data$: UnprocessableEntityErrorObjectData;
 
-  constructor(err: UnprocessableEntityErrorObjectData) {
+  constructor(
+    err: UnprocessableEntityErrorObjectData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
-
     this.errors = err.errors;
 
     this.name = "UnprocessableEntityErrorObject";
@@ -54,9 +57,16 @@ export const UnprocessableEntityErrorObject$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   errors: z.array(EntityErrorObject$inboundSchema),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new UnprocessableEntityErrorObject(v);
+    return new UnprocessableEntityErrorObject(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

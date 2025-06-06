@@ -7,7 +7,7 @@ import { PostV1EmployeesEmployeeIdGarnishmentsRequestBody } from "@gusto/embedde
 
 let value: PostV1EmployeesEmployeeIdGarnishmentsRequestBody = {
   amount: "<value>",
-  courtOrdered: false,
+  courtOrdered: true,
 };
 ```
 

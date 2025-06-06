@@ -5,14 +5,7 @@
 ```typescript
 import { GetCompaniesDepartmentsResponse } from "@gusto/embedded-api/models/operations/getcompaniesdepartments.js";
 
-let value: GetCompaniesDepartmentsResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetCompaniesDepartmentsResponse = {};
 ```
 
 ## Fields

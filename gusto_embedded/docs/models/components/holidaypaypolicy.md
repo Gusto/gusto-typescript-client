@@ -10,9 +10,7 @@ import { HolidayPayPolicy } from "@gusto/embedded-api/models/components/holidayp
 let value: HolidayPayPolicy = {
   version: "<value>",
   companyUuid: "<id>",
-  federalHolidays: [
-    {},
-  ],
+  federalHolidays: [],
   employees: [
     {},
   ],

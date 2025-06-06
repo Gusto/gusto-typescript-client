@@ -7,9 +7,6 @@ import { PostV1CompaniesCompanyIdEarningTypesRequest } from "@gusto/embedded-api
 
 let value: PostV1CompaniesCompanyIdEarningTypesRequest = {
   companyId: "<id>",
-  requestBody: {
-    name: "<value>",
-  },
 };
 ```
 

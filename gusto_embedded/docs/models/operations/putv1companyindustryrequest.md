@@ -7,9 +7,6 @@ import { PutV1CompanyIndustryRequest } from "@gusto/embedded-api/models/operatio
 
 let value: PutV1CompanyIndustryRequest = {
   companyId: "<id>",
-  requestBody: {
-    naicsCode: "<value>",
-  },
 };
 ```
 

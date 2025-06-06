@@ -5,14 +5,7 @@
 ```typescript
 import { PutV1LocationsLocationIdResponse } from "@gusto/embedded-api/models/operations/putv1locationslocationid.js";
 
-let value: PutV1LocationsLocationIdResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PutV1LocationsLocationIdResponse = {};
 ```
 
 ## Fields

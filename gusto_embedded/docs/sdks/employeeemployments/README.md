@@ -41,7 +41,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -70,15 +69,12 @@ async function run() {
       runTerminationPayroll: true,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsCreateTermination failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -143,7 +139,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -168,15 +163,12 @@ async function run() {
   const res = await employeeEmploymentsGetTerminations(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsGetTerminations failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -249,7 +241,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -274,15 +265,12 @@ async function run() {
   const res = await employeeEmploymentsDeleteTermination(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsDeleteTermination failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -352,7 +340,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -382,15 +369,12 @@ async function run() {
       runTerminationPayroll: true,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsUpdateTermination failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -458,7 +442,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -488,15 +471,12 @@ async function run() {
       workLocationUuid: "b6ae9d93-d4b8-4119-8c96-dba595dd8c30",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsCreateRehire failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -565,7 +545,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -596,15 +575,12 @@ async function run() {
       workLocationUuid: "b6ae9d93-d4b8-4119-8c96-dba595dd8c30",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsRehire failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -667,7 +643,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -692,15 +667,12 @@ async function run() {
   const res = await employeeEmploymentsGetRehire(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsGetRehire failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -774,7 +746,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -799,15 +770,12 @@ async function run() {
   const res = await employeeEmploymentsDeleteRehire(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsDeleteRehire failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -871,7 +839,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -896,15 +863,12 @@ async function run() {
   const res = await employeeEmploymentsGetHistory(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeEmploymentsGetHistory failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

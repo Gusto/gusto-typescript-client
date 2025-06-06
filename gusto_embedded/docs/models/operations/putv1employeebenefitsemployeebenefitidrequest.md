@@ -7,9 +7,6 @@ import { PutV1EmployeeBenefitsEmployeeBenefitIdRequest } from "@gusto/embedded-a
 
 let value: PutV1EmployeeBenefitsEmployeeBenefitIdRequest = {
   employeeBenefitId: "<id>",
-  requestBody: {
-    version: "<value>",
-  },
 };
 ```
 

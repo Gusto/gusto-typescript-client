@@ -7,9 +7,6 @@ import { PostV1EmployeesEmployeeIdTerminationsRequest } from "@gusto/embedded-ap
 
 let value: PostV1EmployeesEmployeeIdTerminationsRequest = {
   employeeId: "<id>",
-  requestBody: {
-    effectiveDate: "<value>",
-  },
 };
 ```
 

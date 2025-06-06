@@ -7,8 +7,8 @@ import { PostCompaniesCompanyUuidSuspensionsRequestBody } from "@gusto/embedded-
 
 let value: PostCompaniesCompanyUuidSuspensionsRequestBody = {
   fileQuarterlyForms: false,
-  fileYearlyForms: false,
-  reconcileTaxMethod: "refund_taxes",
+  fileYearlyForms: true,
+  reconcileTaxMethod: "pay_taxes",
   reason: "shutting_down",
 };
 ```

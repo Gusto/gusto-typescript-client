@@ -14,6 +14,7 @@
 * [updateOnboardingStatus](#updateonboardingstatus) - Change the contractor's onboarding status
 * [getAddress](#getaddress) - Get a contractor address
 * [updateAddress](#updateaddress) - Update a contractor's address
+* [getV1CompaniesCompanyIdContractorsPaymentDetails](#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 
 ## create
 
@@ -36,6 +37,7 @@ async function run() {
     requestBody: {
       wageType: "Fixed",
       startDate: "2020-04-01",
+      selfOnboarding: true,
       email: "johnson@johnson.com",
       firstName: "Johnson",
       lastName: "Johnson",
@@ -43,7 +45,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -70,21 +71,19 @@ async function run() {
     requestBody: {
       wageType: "Fixed",
       startDate: "2020-04-01",
+      selfOnboarding: true,
       email: "johnson@johnson.com",
       firstName: "Johnson",
       lastName: "Johnson",
       workState: "CA",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -147,7 +146,6 @@ async function run() {
     companyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -172,15 +170,12 @@ async function run() {
   const res = await contractorsList(gustoEmbedded, {
     companyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -253,7 +248,6 @@ async function run() {
     contractorUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -278,15 +272,12 @@ async function run() {
   const res = await contractorsGet(gustoEmbedded, {
     contractorUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -373,7 +364,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -408,15 +398,12 @@ async function run() {
       isActive: true,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -479,7 +466,6 @@ async function run() {
     contractorUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -504,15 +490,12 @@ async function run() {
   const res = await contractorsDelete(gustoEmbedded, {
     contractorUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -605,7 +588,6 @@ async function run() {
     contractorUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -630,15 +612,12 @@ async function run() {
   const res = await contractorsGetOnboardingStatus(gustoEmbedded, {
     contractorUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsGetOnboardingStatus failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -722,7 +701,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -748,15 +726,12 @@ async function run() {
     contractorUuid: "<id>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsUpdateOnboardingStatus failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -819,7 +794,6 @@ async function run() {
     contractorUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -844,15 +818,12 @@ async function run() {
   const res = await contractorsGetAddress(gustoEmbedded, {
     contractorUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsGetAddress failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -933,7 +904,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -966,15 +936,12 @@ async function run() {
       zip: "94107",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsUpdateAddress failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1015,4 +982,132 @@ import {
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## getV1CompaniesCompanyIdContractorsPaymentDetails
+
+Get payment details for contractors in a company. This endpoint returns a list of all contractors 
+associated with the specified company, including their payment methods and bank account details 
+if they are paid via direct deposit.
+
+For contractors paid by direct deposit, the response includes their bank account information 
+with sensitive data masked for security. The payment details also include information about 
+how their payments are split if they have multiple bank accounts configured.
+
+For contractors paid by check, only the basic payment method information is returned.
+
+### Response Details
+- For direct deposit contractors:
+  - Bank account details (masked)
+  - Payment splits configuration
+  - Routing numbers
+  - Account types
+- For check payments:
+  - Basic payment method designation
+
+### Common Use Cases
+- Fetching contractor payment information for payroll processing
+- Verifying contractor payment methods
+- Reviewing payment split configurations
+
+`encrypted_account_number` is available only with the additional scope `contractor_payment_methods:read:account_numbers`.
+
+scope: `contractor_payment_methods:read`
+
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractors.getV1CompaniesCompanyIdContractorsPaymentDetails({
+    companyId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails } from "@gusto/embedded-api/funcs/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(gustoEmbedded, {
+    companyId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+  useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+  invalidateAllContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+} from "@gusto/embedded-api/react-query/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest](../../models/operations/getv1companiescompanyidcontractorspaymentdetailsrequest.md)                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse](../../models/operations/getv1companiescompanyidcontractorspaymentdetailsresponse.md)\>**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

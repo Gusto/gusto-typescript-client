@@ -5,14 +5,7 @@
 ```typescript
 import { GetCompaniesCompanyUuidReportTemplatesReportTypeResponse } from "@gusto/embedded-api/models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
 
-let value: GetCompaniesCompanyUuidReportTemplatesReportTypeResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetCompaniesCompanyUuidReportTemplatesReportTypeResponse = {};
 ```
 
 ## Fields

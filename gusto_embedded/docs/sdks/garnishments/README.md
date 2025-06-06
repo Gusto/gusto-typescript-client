@@ -33,10 +33,10 @@ async function run() {
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
+      recurring: true,
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -64,17 +64,15 @@ async function run() {
       amount: "150.00",
       description: "Back taxes",
       courtOrdered: true,
+      recurring: true,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("garnishmentsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -137,7 +135,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -162,15 +159,12 @@ async function run() {
   const res = await garnishmentsList(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("garnishmentsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -243,7 +237,6 @@ async function run() {
     garnishmentId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -268,15 +261,12 @@ async function run() {
   const res = await garnishmentsGet(gustoEmbedded, {
     garnishmentId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("garnishmentsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -348,11 +338,11 @@ async function run() {
   const result = await gustoEmbedded.garnishments.update({
     garnishmentId: "<id>",
     requestBody: {
+      active: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -377,18 +367,16 @@ async function run() {
   const res = await garnishmentsUpdate(gustoEmbedded, {
     garnishmentId: "<id>",
     requestBody: {
+      active: false,
       version: "52b7c567242cb7452e89ba2bc02cb476",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("garnishmentsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -449,7 +437,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.garnishments.getChildSupportData({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -472,15 +459,12 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await garnishmentsGetChildSupportData(gustoEmbedded, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("garnishmentsGetChildSupportData failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

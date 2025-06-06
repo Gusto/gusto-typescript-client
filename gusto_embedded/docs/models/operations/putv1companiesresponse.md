@@ -5,35 +5,7 @@
 ```typescript
 import { PutV1CompaniesResponse } from "@gusto/embedded-api/models/operations/putv1companies.js";
 
-let value: PutV1CompaniesResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-  company: {
-    uuid: "64630c7b-de6e-4735-b4a3-1e7c024a7d41",
-    compensations: {
-      hourly: [
-        {
-          name: "Overtime",
-          multiple: 1.5,
-        },
-      ],
-      fixed: [
-        {
-          name: "Bonus",
-        },
-      ],
-      paidTimeOff: [
-        {
-          name: "Vacation Hours",
-        },
-      ],
-    },
-  },
-};
+let value: PutV1CompaniesResponse = {};
 ```
 
 ## Fields

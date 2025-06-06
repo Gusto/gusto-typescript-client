@@ -5,14 +5,7 @@
 ```typescript
 import { GetV1CompaniesAttachmentUrlResponse } from "@gusto/embedded-api/models/operations/getv1companiesattachmenturl.js";
 
-let value: GetV1CompaniesAttachmentUrlResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetV1CompaniesAttachmentUrlResponse = {};
 ```
 
 ## Fields

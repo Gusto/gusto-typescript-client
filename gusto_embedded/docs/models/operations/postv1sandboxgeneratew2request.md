@@ -5,11 +5,7 @@
 ```typescript
 import { PostV1SandboxGenerateW2Request } from "@gusto/embedded-api/models/operations/postv1sandboxgeneratew2.js";
 
-let value: PostV1SandboxGenerateW2Request = {
-  requestBody: {
-    employeeId: "<id>",
-  },
-};
+let value: PostV1SandboxGenerateW2Request = {};
 ```
 
 ## Fields

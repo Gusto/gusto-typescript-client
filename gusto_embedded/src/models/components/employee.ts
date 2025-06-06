@@ -146,6 +146,10 @@ export type Employee = {
    */
   twoPercentShareholder?: boolean | null | undefined;
   /**
+   * The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+   */
+  workEmail?: string | null | undefined;
+  /**
    * Whether the employee has completed onboarding.
    */
   onboarded?: boolean | undefined;
@@ -180,10 +184,6 @@ export type Employee = {
    * The employee's payment method
    */
   paymentMethod?: PaymentMethod | undefined;
-  /**
-   * The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-   */
-  workEmail?: string | null | undefined;
   /**
    * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
    */
@@ -355,6 +355,7 @@ export const Employee$inboundSchema: z.ZodType<
   department: z.nullable(z.string()).optional(),
   terminated: z.boolean().optional(),
   two_percent_shareholder: z.nullable(z.boolean()).optional(),
+  work_email: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
   onboarding_status: z.nullable(OnboardingStatus$inboundSchema).optional(),
   onboarding_documents_config: z.lazy(() =>
@@ -371,7 +372,6 @@ export const Employee$inboundSchema: z.ZodType<
   phone: z.nullable(z.string()).optional(),
   preferred_first_name: z.nullable(z.string()).optional(),
   payment_method: PaymentMethod$inboundSchema.default("Check"),
-  work_email: z.nullable(z.string()).optional(),
   current_employment_status: z.nullable(CurrentEmploymentStatus$inboundSchema)
     .optional(),
   historical: z.boolean().optional(),
@@ -390,6 +390,7 @@ export const Employee$inboundSchema: z.ZodType<
     "company_uuid": "companyUuid",
     "manager_uuid": "managerUuid",
     "two_percent_shareholder": "twoPercentShareholder",
+    "work_email": "workEmail",
     "onboarding_status": "onboardingStatus",
     "onboarding_documents_config": "onboardingDocumentsConfig",
     "eligible_paid_time_off": "eligiblePaidTimeOff",
@@ -398,7 +399,6 @@ export const Employee$inboundSchema: z.ZodType<
     "has_ssn": "hasSsn",
     "preferred_first_name": "preferredFirstName",
     "payment_method": "paymentMethod",
-    "work_email": "workEmail",
     "current_employment_status": "currentEmploymentStatus",
     "employee_code": "employeeCode",
     "department_uuid": "departmentUuid",
@@ -422,6 +422,7 @@ export type Employee$Outbound = {
   department?: string | null | undefined;
   terminated?: boolean | undefined;
   two_percent_shareholder?: boolean | null | undefined;
+  work_email?: string | null | undefined;
   onboarded?: boolean | undefined;
   onboarding_status?: string | null | undefined;
   onboarding_documents_config?: OnboardingDocumentsConfig$Outbound | undefined;
@@ -436,7 +437,6 @@ export type Employee$Outbound = {
   phone?: string | null | undefined;
   preferred_first_name?: string | null | undefined;
   payment_method: string;
-  work_email?: string | null | undefined;
   current_employment_status?: string | null | undefined;
   historical?: boolean | undefined;
   employee_code?: string | undefined;
@@ -465,6 +465,7 @@ export const Employee$outboundSchema: z.ZodType<
   department: z.nullable(z.string()).optional(),
   terminated: z.boolean().optional(),
   twoPercentShareholder: z.nullable(z.boolean()).optional(),
+  workEmail: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
   onboardingStatus: z.nullable(OnboardingStatus$outboundSchema).optional(),
   onboardingDocumentsConfig: z.lazy(() =>
@@ -481,7 +482,6 @@ export const Employee$outboundSchema: z.ZodType<
   phone: z.nullable(z.string()).optional(),
   preferredFirstName: z.nullable(z.string()).optional(),
   paymentMethod: PaymentMethod$outboundSchema.default("Check"),
-  workEmail: z.nullable(z.string()).optional(),
   currentEmploymentStatus: z.nullable(CurrentEmploymentStatus$outboundSchema)
     .optional(),
   historical: z.boolean().optional(),
@@ -500,6 +500,7 @@ export const Employee$outboundSchema: z.ZodType<
     companyUuid: "company_uuid",
     managerUuid: "manager_uuid",
     twoPercentShareholder: "two_percent_shareholder",
+    workEmail: "work_email",
     onboardingStatus: "onboarding_status",
     onboardingDocumentsConfig: "onboarding_documents_config",
     eligiblePaidTimeOff: "eligible_paid_time_off",
@@ -508,7 +509,6 @@ export const Employee$outboundSchema: z.ZodType<
     hasSsn: "has_ssn",
     preferredFirstName: "preferred_first_name",
     paymentMethod: "payment_method",
-    workEmail: "work_email",
     currentEmploymentStatus: "current_employment_status",
     employeeCode: "employee_code",
     departmentUuid: "department_uuid",

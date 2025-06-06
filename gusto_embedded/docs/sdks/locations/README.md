@@ -41,7 +41,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -74,15 +73,12 @@ async function run() {
       zip: "94107",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -147,7 +143,6 @@ async function run() {
     companyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -172,15 +167,12 @@ async function run() {
   const res = await locationsGet(gustoEmbedded, {
     companyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -254,7 +246,6 @@ async function run() {
     locationId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -279,15 +270,12 @@ async function run() {
   const res = await locationsRetrieve(gustoEmbedded, {
     locationId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -361,7 +349,7 @@ async function run() {
   const result = await gustoEmbedded.locations.update({
     locationId: "<id>",
     requestBody: {
-      version: "756aee0bdbf26def096673bb7f9a7b97",
+      version: "eb70c1e88e7cecdf03896d7ade66d57f",
       phoneNumber: "8009360383",
       street1: "300 3rd Street",
       street2: "Apartment 318",
@@ -371,7 +359,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -396,7 +383,7 @@ async function run() {
   const res = await locationsUpdate(gustoEmbedded, {
     locationId: "<id>",
     requestBody: {
-      version: "756aee0bdbf26def096673bb7f9a7b97",
+      version: "eb70c1e88e7cecdf03896d7ade66d57f",
       phoneNumber: "8009360383",
       street1: "300 3rd Street",
       street2: "Apartment 318",
@@ -405,15 +392,12 @@ async function run() {
       filingAddress: true,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -478,7 +462,6 @@ async function run() {
     effectiveDate: "2020-01-31",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -504,15 +487,12 @@ async function run() {
     locationUuid: "<id>",
     effectiveDate: "2020-01-31",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsGetMinimumWages failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

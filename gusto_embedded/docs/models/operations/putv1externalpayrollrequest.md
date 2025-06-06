@@ -8,7 +8,6 @@ import { PutV1ExternalPayrollRequest } from "@gusto/embedded-api/models/operatio
 let value: PutV1ExternalPayrollRequest = {
   companyUuid: "<id>",
   externalPayrollId: "<id>",
-  requestBody: {},
 };
 ```
 

@@ -7,12 +7,6 @@ import { PostCompaniesCompanyUuidSuspensionsRequest } from "@gusto/embedded-api/
 
 let value: PostCompaniesCompanyUuidSuspensionsRequest = {
   companyUuid: "<id>",
-  requestBody: {
-    fileQuarterlyForms: false,
-    fileYearlyForms: false,
-    reconcileTaxMethod: "pay_taxes",
-    reason: "no_more_employees",
-  },
 };
 ```
 

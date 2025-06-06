@@ -9,9 +9,7 @@ Contains relevant data to identify the resource in question when applicable. For
 
 ```typescript
 const value: components.MetadataWithMultipleEntities = {
-  entities: [
-    {},
-  ],
+  entities: [],
 };
 ```
 

@@ -7,12 +7,6 @@ import { PostV1ContractorsContractorUuidBankAccountsRequest } from "@gusto/embed
 
 let value: PostV1ContractorsContractorUuidBankAccountsRequest = {
   contractorUuid: "<id>",
-  requestBody: {
-    name: "<value>",
-    routingNumber: "<value>",
-    accountNumber: "<value>",
-    accountType: "Checking",
-  },
 };
 ```
 

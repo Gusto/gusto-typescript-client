@@ -5,14 +5,7 @@
 ```typescript
 import { PostV1SandboxGenerateW2Response } from "@gusto/embedded-api/models/operations/postv1sandboxgeneratew2.js";
 
-let value: PostV1SandboxGenerateW2Response = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PostV1SandboxGenerateW2Response = {};
 ```
 
 ## Fields

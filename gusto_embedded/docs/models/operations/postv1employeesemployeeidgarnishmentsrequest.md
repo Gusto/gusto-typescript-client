@@ -7,10 +7,6 @@ import { PostV1EmployeesEmployeeIdGarnishmentsRequest } from "@gusto/embedded-ap
 
 let value: PostV1EmployeesEmployeeIdGarnishmentsRequest = {
   employeeId: "<id>",
-  requestBody: {
-    amount: "<value>",
-    courtOrdered: false,
-  },
 };
 ```
 

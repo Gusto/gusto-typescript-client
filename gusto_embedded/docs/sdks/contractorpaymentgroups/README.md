@@ -45,7 +45,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -83,15 +82,12 @@ async function run() {
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -156,7 +152,6 @@ async function run() {
     endDate: "2020-12-31",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -183,15 +178,12 @@ async function run() {
     startDate: "2020-01-01",
     endDate: "2020-12-31",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsGetList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -277,7 +269,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -315,15 +306,12 @@ async function run() {
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsPreview failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -386,7 +374,6 @@ async function run() {
     contractorPaymentGroupUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -411,15 +398,12 @@ async function run() {
   const res = await contractorPaymentGroupsGet(gustoEmbedded, {
     contractorPaymentGroupUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -492,7 +476,6 @@ async function run() {
     contractorPaymentGroupUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -517,15 +500,12 @@ async function run() {
   const res = await contractorPaymentGroupsDelete(gustoEmbedded, {
     contractorPaymentGroupUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -592,7 +572,6 @@ async function run() {
     contractorPaymentGroupUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -617,15 +596,12 @@ async function run() {
   const res = await contractorPaymentGroupsFund(gustoEmbedded, {
     contractorPaymentGroupUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsFund failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

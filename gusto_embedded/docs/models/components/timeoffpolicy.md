@@ -13,10 +13,8 @@ let value: TimeOffPolicy = {
   name: "<value>",
   policyType: "vacation",
   accrualMethod: "<value>",
-  isActive: false,
-  employees: [
-    {},
-  ],
+  isActive: true,
+  employees: [],
 };
 ```
 

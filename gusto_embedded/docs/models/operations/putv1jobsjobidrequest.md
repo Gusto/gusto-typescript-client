@@ -7,9 +7,6 @@ import { PutV1JobsJobIdRequest } from "@gusto/embedded-api/models/operations/put
 
 let value: PutV1JobsJobIdRequest = {
   jobId: "<id>",
-  requestBody: {
-    version: "<value>",
-  },
 };
 ```
 

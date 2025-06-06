@@ -7,6 +7,7 @@
 
 * [list](#list) - Get employees of a company
 * [create](#create) - Create an employee
+* [getV1CompaniesCompanyIdEmployeesPaymentDetails](#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 * [createHistorical](#createhistorical) - Create a historical employee
 * [get](#get) - Get an employee
 * [update](#update) - Update an employee.
@@ -38,7 +39,6 @@ async function run() {
     companyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -63,15 +63,12 @@ async function run() {
   const res = await employeesList(gustoEmbedded, {
     companyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -150,7 +147,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -179,15 +175,12 @@ async function run() {
       lastName: "The Fog",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -229,6 +222,115 @@ import {
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## getV1CompaniesCompanyIdEmployeesPaymentDetails
+
+Fetches payment details for employees in a given company. Results are paginated.
+
+Use the `employee_uuid` query parameter to filter for a single employee.
+Use the `payroll_uuid` query parameter to filter for employees on a specific payroll.
+Providing both `employee_uuid` and `payroll_uuid` will result in a 400 error.
+An empty array is returned if the company has no employees or if no employees match the filter criteria.
+
+The `encrypted_account_number` in the `splits` array is only visible if the `employee_payment_methods:read:account_number` scope is present.
+
+Base scope: `employee_payment_methods:read`
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.getV1CompaniesCompanyIdEmployeesPaymentDetails({
+    companyId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails } from "@gusto/embedded-api/funcs/employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(gustoEmbedded, {
+    companyId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+  useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+  invalidateAllEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+} from "@gusto/embedded-api/react-query/employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest](../../models/operations/getv1companiescompanyidemployeespaymentdetailsrequest.md)                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse](../../models/operations/getv1companiescompanyidemployeespaymentdetailsresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## createHistorical
 
@@ -279,7 +381,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -333,15 +434,12 @@ async function run() {
       },
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreateHistorical failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -405,7 +503,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -430,15 +527,12 @@ async function run() {
   const res = await employeesGet(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -511,17 +605,17 @@ async function run() {
   const result = await gustoEmbedded.employees.update({
     employeeId: "<id>",
     requestBody: {
-      version: "6da9085f86ecc01e0000a5655c2dfdba",
+      version: "d178f5457405cc28eb5ddd73c36b1380",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",
       email: "tunechi@cashmoneyrecords.com",
       dateOfBirth: "1991-01-31",
       ssn: "824920233",
+      workEmail: "new.partner.work@example.com",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -546,24 +640,22 @@ async function run() {
   const res = await employeesUpdate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      version: "6da9085f86ecc01e0000a5655c2dfdba",
+      version: "d178f5457405cc28eb5ddd73c36b1380",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",
       email: "tunechi@cashmoneyrecords.com",
       dateOfBirth: "1991-01-31",
       ssn: "824920233",
+      workEmail: "new.partner.work@example.com",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -629,7 +721,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -654,15 +745,12 @@ async function run() {
   const res = await employeesDelete(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -724,7 +812,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -749,15 +836,12 @@ async function run() {
   const res = await employeesGetCustomFields(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesGetCustomFields failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -833,7 +917,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -861,15 +944,12 @@ async function run() {
       i9Document: true,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesUpdateOnboardingDocumentsConfig failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -968,7 +1048,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -993,15 +1072,12 @@ async function run() {
   const res = await employeesGetOnboardingStatus(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesGetOnboardingStatus failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1087,7 +1163,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1115,15 +1190,12 @@ async function run() {
       onboardingStatus: "admin_onboarding_incomplete",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesUpdateOnboardingStatus failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1187,7 +1259,6 @@ async function run() {
     timeOffType: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1213,15 +1284,12 @@ async function run() {
     employeeUuid: "<id>",
     timeOffType: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesGetTimeOffActivities failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

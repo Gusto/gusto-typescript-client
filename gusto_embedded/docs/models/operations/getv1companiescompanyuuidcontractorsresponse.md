@@ -5,20 +5,7 @@
 ```typescript
 import { GetV1CompaniesCompanyUuidContractorsResponse } from "@gusto/embedded-api/models/operations/getv1companiescompanyuuidcontractors.js";
 
-let value: GetV1CompaniesCompanyUuidContractorsResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-  contractorList: [
-    {
-      uuid: "26e24de7-99e1-47ae-b37a-29028967d493",
-      hourlyRate: "50.0",
-    },
-  ],
-};
+let value: GetV1CompaniesCompanyUuidContractorsResponse = {};
 ```
 
 ## Fields
