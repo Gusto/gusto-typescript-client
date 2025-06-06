@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupGetStateTaxes } from "../funcs/employeeTaxSetupGetStateTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdStateTaxesRequest,
   GetV1EmployeesEmployeeIdStateTaxesResponse,
 } from "../models/operations/getv1employeesemployeeidstatetaxes.js";
@@ -117,7 +117,11 @@ export function setEmployeeTaxSetupGetStateTaxesData(
   client: QueryClient,
   queryKeyBase: [
     employeeUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: EmployeeTaxSetupGetStateTaxesQueryData,
 ): EmployeeTaxSetupGetStateTaxesQueryData | undefined {
@@ -131,7 +135,11 @@ export function invalidateEmployeeTaxSetupGetStateTaxes(
   queryKeyBase: TupleToPrefixes<
     [
       employeeUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -191,7 +199,11 @@ export function buildEmployeeTaxSetupGetStateTaxesQuery(
 
 export function queryKeyEmployeeTaxSetupGetStateTaxes(
   employeeUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

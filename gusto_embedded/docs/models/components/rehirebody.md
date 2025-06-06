@@ -7,7 +7,7 @@ import { RehireBody } from "@gusto/embedded-api/models/components/rehirebody.js"
 
 let value: RehireBody = {
   effectiveDate: "<value>",
-  fileNewHireReport: false,
+  fileNewHireReport: true,
   workLocationUuid: "<id>",
 };
 ```

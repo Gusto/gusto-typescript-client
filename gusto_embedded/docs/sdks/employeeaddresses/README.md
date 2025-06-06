@@ -39,7 +39,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -64,15 +63,12 @@ async function run() {
   const res = await employeeAddressesGet(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -155,7 +151,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -186,15 +181,12 @@ async function run() {
       zip: "94107",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -260,7 +252,6 @@ async function run() {
     homeAddressUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -285,15 +276,12 @@ async function run() {
   const res = await employeeAddressesRetrieveHomeAddress(gustoEmbedded, {
     homeAddressUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesRetrieveHomeAddress failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -374,10 +362,10 @@ async function run() {
       city: "Miami",
       state: "FL",
       zip: "33173",
+      courtesyWithholding: false,
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -407,17 +395,15 @@ async function run() {
       city: "Miami",
       state: "FL",
       zip: "33173",
+      courtesyWithholding: false,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -481,7 +467,6 @@ async function run() {
     homeAddressUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -506,15 +491,12 @@ async function run() {
   const res = await employeeAddressesDelete(gustoEmbedded, {
     homeAddressUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -578,7 +560,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -603,15 +584,12 @@ async function run() {
   const res = await employeeAddressesGetWorkAddresses(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesGetWorkAddresses failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -686,12 +664,11 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.createWorkAddress({
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "4484345c-ddb7-4d68-ae92-f3e8b931cb63",
+      locationUuid: "998541df-291a-4822-b5eb-3059428e3367",
       effectiveDate: new RFCDate("2020-01-31"),
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -717,19 +694,16 @@ async function run() {
   const res = await employeeAddressesCreateWorkAddress(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "4484345c-ddb7-4d68-ae92-f3e8b931cb63",
+      locationUuid: "998541df-291a-4822-b5eb-3059428e3367",
       effectiveDate: new RFCDate("2020-01-31"),
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesCreateWorkAddress failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -793,7 +767,6 @@ async function run() {
     workAddressUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -818,15 +791,12 @@ async function run() {
   const res = await employeeAddressesRetrieveWorkAddress(gustoEmbedded, {
     workAddressUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesRetrieveWorkAddress failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -900,12 +870,11 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.updateWorkAddress({
     workAddressUuid: "<id>",
     requestBody: {
-      version: "078763b58cf7cd508790581843078419",
-      locationUuid: "b02a39f8-086b-44e3-babf-35cf7f2ea173",
+      version: "7e936a21d01b50b908a502b30d6c5323",
+      locationUuid: "223c260f-aeb8-49c3-b1f0-7d7027487f8f",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -930,19 +899,16 @@ async function run() {
   const res = await employeeAddressesUpdateWorkAddress(gustoEmbedded, {
     workAddressUuid: "<id>",
     requestBody: {
-      version: "078763b58cf7cd508790581843078419",
-      locationUuid: "b02a39f8-086b-44e3-babf-35cf7f2ea173",
+      version: "7e936a21d01b50b908a502b30d6c5323",
+      locationUuid: "223c260f-aeb8-49c3-b1f0-7d7027487f8f",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesUpdateWorkAddress failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1006,7 +972,6 @@ async function run() {
     workAddressUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1031,15 +996,12 @@ async function run() {
   const res = await employeeAddressesDeleteWorkAddress(gustoEmbedded, {
     workAddressUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeAddressesDeleteWorkAddress failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

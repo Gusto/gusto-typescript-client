@@ -5,14 +5,7 @@
 ```typescript
 import { PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse } from "@gusto/embedded-api/models/operations/putv1partnermanagedcompaniescompanyuuidmigrate.js";
 
-let value: PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse = {};
 ```
 
 ## Fields

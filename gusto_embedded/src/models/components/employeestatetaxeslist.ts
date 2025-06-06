@@ -14,34 +14,31 @@ import {
   EmployeeStateTaxQuestion$outboundSchema,
 } from "./employeestatetaxquestion.js";
 
-/**
- * Example response
- */
-export type EmployeeStateTax = {
+export type EmployeeStateTaxesList = {
   /**
    * The employee's uuid
    */
-  employeeUuid: string;
+  employeeUuid?: string | undefined;
   /**
    * Two letter US state abbreviation
    */
-  state: string;
+  state?: string | undefined;
   fileNewHireReport?: boolean | null | undefined;
   isWorkState?: boolean | undefined;
-  questions: Array<EmployeeStateTaxQuestion>;
+  questions?: Array<EmployeeStateTaxQuestion> | undefined;
 };
 
 /** @internal */
-export const EmployeeStateTax$inboundSchema: z.ZodType<
-  EmployeeStateTax,
+export const EmployeeStateTaxesList$inboundSchema: z.ZodType<
+  EmployeeStateTaxesList,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  employee_uuid: z.string(),
-  state: z.string(),
+  employee_uuid: z.string().optional(),
+  state: z.string().optional(),
   file_new_hire_report: z.nullable(z.boolean()).optional(),
   is_work_state: z.boolean().optional(),
-  questions: z.array(EmployeeStateTaxQuestion$inboundSchema),
+  questions: z.array(EmployeeStateTaxQuestion$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -51,25 +48,25 @@ export const EmployeeStateTax$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type EmployeeStateTax$Outbound = {
-  employee_uuid: string;
-  state: string;
+export type EmployeeStateTaxesList$Outbound = {
+  employee_uuid?: string | undefined;
+  state?: string | undefined;
   file_new_hire_report?: boolean | null | undefined;
   is_work_state?: boolean | undefined;
-  questions: Array<EmployeeStateTaxQuestion$Outbound>;
+  questions?: Array<EmployeeStateTaxQuestion$Outbound> | undefined;
 };
 
 /** @internal */
-export const EmployeeStateTax$outboundSchema: z.ZodType<
-  EmployeeStateTax$Outbound,
+export const EmployeeStateTaxesList$outboundSchema: z.ZodType<
+  EmployeeStateTaxesList$Outbound,
   z.ZodTypeDef,
-  EmployeeStateTax
+  EmployeeStateTaxesList
 > = z.object({
-  employeeUuid: z.string(),
-  state: z.string(),
+  employeeUuid: z.string().optional(),
+  state: z.string().optional(),
   fileNewHireReport: z.nullable(z.boolean()).optional(),
   isWorkState: z.boolean().optional(),
-  questions: z.array(EmployeeStateTaxQuestion$outboundSchema),
+  questions: z.array(EmployeeStateTaxQuestion$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",
@@ -82,29 +79,29 @@ export const EmployeeStateTax$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace EmployeeStateTax$ {
-  /** @deprecated use `EmployeeStateTax$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTax$inboundSchema;
-  /** @deprecated use `EmployeeStateTax$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTax$outboundSchema;
-  /** @deprecated use `EmployeeStateTax$Outbound` instead. */
-  export type Outbound = EmployeeStateTax$Outbound;
+export namespace EmployeeStateTaxesList$ {
+  /** @deprecated use `EmployeeStateTaxesList$inboundSchema` instead. */
+  export const inboundSchema = EmployeeStateTaxesList$inboundSchema;
+  /** @deprecated use `EmployeeStateTaxesList$outboundSchema` instead. */
+  export const outboundSchema = EmployeeStateTaxesList$outboundSchema;
+  /** @deprecated use `EmployeeStateTaxesList$Outbound` instead. */
+  export type Outbound = EmployeeStateTaxesList$Outbound;
 }
 
-export function employeeStateTaxToJSON(
-  employeeStateTax: EmployeeStateTax,
+export function employeeStateTaxesListToJSON(
+  employeeStateTaxesList: EmployeeStateTaxesList,
 ): string {
   return JSON.stringify(
-    EmployeeStateTax$outboundSchema.parse(employeeStateTax),
+    EmployeeStateTaxesList$outboundSchema.parse(employeeStateTaxesList),
   );
 }
 
-export function employeeStateTaxFromJSON(
+export function employeeStateTaxesListFromJSON(
   jsonString: string,
-): SafeParseResult<EmployeeStateTax, SDKValidationError> {
+): SafeParseResult<EmployeeStateTaxesList, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => EmployeeStateTax$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeStateTax' from JSON`,
+    (x) => EmployeeStateTaxesList$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeeStateTaxesList' from JSON`,
   );
 }

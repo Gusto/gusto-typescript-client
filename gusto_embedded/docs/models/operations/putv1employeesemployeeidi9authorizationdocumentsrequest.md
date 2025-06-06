@@ -7,15 +7,6 @@ import { PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest } from "@gusto/
 
 let value: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
   employeeId: "<id>",
-  requestBody: {
-    documents: [
-      {
-        documentType: "<value>",
-        documentTitle: "<value>",
-        issuingAuthority: "<value>",
-      },
-    ],
-  },
 };
 ```
 

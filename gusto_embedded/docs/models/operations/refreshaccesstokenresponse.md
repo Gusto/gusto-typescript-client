@@ -5,14 +5,7 @@
 ```typescript
 import { RefreshAccessTokenResponse } from "@gusto/embedded-api/models/operations/refreshaccesstoken.js";
 
-let value: RefreshAccessTokenResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: RefreshAccessTokenResponse = {};
 ```
 
 ## Fields

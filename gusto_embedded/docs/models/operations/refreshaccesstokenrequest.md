@@ -5,14 +5,7 @@
 ```typescript
 import { RefreshAccessTokenRequest } from "@gusto/embedded-api/models/operations/refreshaccesstoken.js";
 
-let value: RefreshAccessTokenRequest = {
-  requestBody: {
-    clientId: "<id>",
-    clientSecret: "<value>",
-    refreshToken: "<value>",
-    grantType: "<value>",
-  },
-};
+let value: RefreshAccessTokenRequest = {};
 ```
 
 ## Fields

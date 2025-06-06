@@ -7,7 +7,6 @@ import { PutRemovePeopleFromDepartmentRequest } from "@gusto/embedded-api/models
 
 let value: PutRemovePeopleFromDepartmentRequest = {
   departmentUuid: "<id>",
-  requestBody: {},
 };
 ```
 

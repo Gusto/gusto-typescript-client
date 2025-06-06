@@ -4,22 +4,9 @@
 
 ```typescript
 import { PostV1CompaniesCompanyIdContractorPaymentGroupsRequest } from "@gusto/embedded-api/models/operations/postv1companiescompanyidcontractorpaymentgroups.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PostV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
   companyId: "<id>",
-  requestBody: {
-    checkDate: new RFCDate("2020-01-01"),
-    creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
-    contractorPayments: [
-      {
-        wage: 5000,
-        hours: 40,
-        bonus: 500,
-        reimbursement: 20,
-      },
-    ],
-  },
 };
 ```
 

@@ -5,14 +5,7 @@
 ```typescript
 import { PostV1SandboxGenerate1099Response } from "@gusto/embedded-api/models/operations/postv1sandboxgenerate1099.js";
 
-let value: PostV1SandboxGenerate1099Response = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PostV1SandboxGenerate1099Response = {};
 ```
 
 ## Fields

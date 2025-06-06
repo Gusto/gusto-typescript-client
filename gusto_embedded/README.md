@@ -109,7 +109,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.introspection.getInfo({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -140,7 +139,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.introspection.getInfo({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -176,7 +174,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -305,6 +302,7 @@ run();
 * [updateOnboardingStatus](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
 * [getAddress](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 * [updateAddress](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
+* [getV1CompaniesCompanyIdContractorsPaymentDetails](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 
 ### [departments](docs/sdks/departments/README.md)
 
@@ -382,6 +380,7 @@ run();
 
 * [list](docs/sdks/employees/README.md#list) - Get employees of a company
 * [create](docs/sdks/employees/README.md#create) - Create an employee
+* [getV1CompaniesCompanyIdEmployeesPaymentDetails](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 * [createHistorical](docs/sdks/employees/README.md#createhistorical) - Create a historical employee
 * [get](docs/sdks/employees/README.md#get) - Get an employee
 * [update](docs/sdks/employees/README.md#update) - Update an employee.
@@ -502,6 +501,7 @@ run();
 ### [notifications](docs/sdks/notifications/README.md)
 
 * [getDetails](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
+* [getCompanyNotifications](docs/sdks/notifications/README.md#getcompanynotifications) - Get notifications for company
 
 ### [paymentConfigs](docs/sdks/paymentconfigs/README.md)
 
@@ -679,6 +679,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contractorsGet`](docs/sdks/contractors/README.md#get) - Get a contractor
 - [`contractorsGetAddress`](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 - [`contractorsGetOnboardingStatus`](docs/sdks/contractors/README.md#getonboardingstatus) - Get the contractor's onboarding status
+- [`contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails`](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 - [`contractorsList`](docs/sdks/contractors/README.md#list) - Get contractors of a company
 - [`contractorsUpdate`](docs/sdks/contractors/README.md#update) - Update a contractor
 - [`contractorsUpdateAddress`](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
@@ -738,6 +739,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeesGetCustomFields`](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
 - [`employeesGetOnboardingStatus`](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
 - [`employeesGetTimeOffActivities`](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
+- [`employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails`](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 - [`employeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
 - [`employeesUpdate`](docs/sdks/employees/README.md#update) - Update an employee.
 - [`employeesUpdateOnboardingDocumentsConfig`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
@@ -800,6 +802,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`locationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`locationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`locationsUpdate`](docs/sdks/locations/README.md#update) - Update a location
+- [`notificationsGetCompanyNotifications`](docs/sdks/notifications/README.md#getcompanynotifications) - Get notifications for company
 - [`notificationsGetDetails`](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
 - [`paymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`paymentConfigsUpdate`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
@@ -955,6 +958,7 @@ To learn about this feature and how to get started, check
 - [`useContractorsGet`](docs/sdks/contractors/README.md#get) - Get a contractor
 - [`useContractorsGetAddress`](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
 - [`useContractorsGetOnboardingStatus`](docs/sdks/contractors/README.md#getonboardingstatus) - Get the contractor's onboarding status
+- [`useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails`](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 - [`useContractorsList`](docs/sdks/contractors/README.md#list) - Get contractors of a company
 - [`useContractorsUpdateAddressMutation`](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
 - [`useContractorsUpdateMutation`](docs/sdks/contractors/README.md#update) - Update a contractor
@@ -1014,6 +1018,7 @@ To learn about this feature and how to get started, check
 - [`useEmployeesGetCustomFields`](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
 - [`useEmployeesGetOnboardingStatus`](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
 - [`useEmployeesGetTimeOffActivities`](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
+- [`useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails`](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 - [`useEmployeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
 - [`useEmployeesUpdateMutation`](docs/sdks/employees/README.md#update) - Update an employee.
 - [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
@@ -1076,6 +1081,7 @@ To learn about this feature and how to get started, check
 - [`useLocationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`useLocationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`useLocationsUpdateMutation`](docs/sdks/locations/README.md#update) - Update a location
+- [`useNotificationsGetCompanyNotifications`](docs/sdks/notifications/README.md#getcompanynotifications) - Get notifications for company
 - [`useNotificationsGetDetails`](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
 - [`usePaymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`usePaymentConfigsUpdateMutation`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
@@ -1174,7 +1180,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1210,7 +1215,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1239,7 +1243,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.introspection.getInfo({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1251,26 +1254,26 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `createPartnerManaged` method may throw the following errors:
+[`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Error Type                            | Status Code | Content Type     |
-| ------------------------------------- | ----------- | ---------------- |
-| errors.UnprocessableEntityErrorObject | 422         | application/json |
-| errors.APIError                       | 4XX, 5XX    | \*/\*            |
+| Property                  | Type       | Description                                                                             |
+| ------------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `error.message`           | `string`   | Error message                                                                           |
+| `error.httpMeta.response` | `Response` | HTTP response. Access to headers and more.                                              |
+| `error.httpMeta.request`  | `Request`  | HTTP request. Access to headers and more.                                               |
+| `error.data$`             |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
-If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
-
+### Example
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
-import { SDKValidationError } from "@gusto/embedded-api/models/errors/sdkvalidationerror.js";
+import { GustoEmbeddedError } from "@gusto/embedded-api/models/errors/gustoembeddederror.js.js";
 import { UnprocessableEntityErrorObject } from "@gusto/embedded-api/models/errors/unprocessableentityerrorobject.js";
 
 const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  let result;
   try {
-    result = await gustoEmbedded.companies.createPartnerManaged({
+    const result = await gustoEmbedded.companies.createPartnerManaged({
       systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
     }, {
       requestBody: {
@@ -1289,26 +1292,18 @@ async function run() {
       },
     });
 
-    // Handle the result
     console.log(result);
-  } catch (err) {
-    switch (true) {
-      // The server response does not match the expected SDK schema
-      case (err instanceof SDKValidationError): {
-        // Pretty-print will provide a human-readable multi-line error message
-        console.error(err.pretty());
-        // Raw value may also be inspected
-        console.error(err.rawValue);
-        return;
-      }
-      case (err instanceof UnprocessableEntityErrorObject): {
-        // Handle err.data$: UnprocessableEntityErrorObjectData
-        console.error(err);
-        return;
-      }
-      default: {
-        // Other errors such as network errors, see HTTPClientErrors for more details
-        throw err;
+  } catch (error) {
+    // The base class for HTTP error responses
+    if (error instanceof GustoEmbeddedError) {
+      console.log(error.message);
+      console.log(error.httpMeta.response.status);
+      console.log(error.httpMeta.response.headers);
+      console.log(error.httpMeta.request);
+
+      // Depending on the method different errors may be thrown
+      if (error instanceof UnprocessableEntityErrorObject) {
+        console.log(error.data$.errors); // EntityErrorObject[]
       }
     }
   }
@@ -1318,17 +1313,32 @@ run();
 
 ```
 
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted multi-line string since validation errors can list many issues and the plain error string may be difficult read when debugging.
+### Error Classes
+**Primary error:**
+* [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
 
-In some rare cases, the SDK can fail to get a response from the server or even make the request due to unexpected circumstances such as network conditions. These types of errors are captured in the `models/errors/httpclienterrors.ts` module:
+<details><summary>Less common errors (10)</summary>
 
-| HTTP Client Error                                    | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- |
-| RequestAbortedError                                  | HTTP request was aborted by the client               |
-| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
-| ConnectionError                                      | HTTP client was unable to make a request to a server |
-| InvalidRequestError                                  | Any input used to create a request is invalid        |
-| UnexpectedClientError                                | Unrecognised or unexpected error                     |
+<br />
+
+**Network errors:**
+* [`ConnectionError`](./src/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
+* [`RequestTimeoutError`](./src/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
+* [`RequestAbortedError`](./src/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
+* [`InvalidRequestError`](./src/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
+* [`UnexpectedClientError`](./src/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
+
+
+**Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
+* [`UnprocessableEntityErrorObject`](docs/models/errors/unprocessableentityerrorobject.md): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 125 of 253 methods.*
+* [`UnprocessableEntityErrorObject1`](docs/models/errors/unprocessableentityerrorobject1.md): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 253 methods.*
+* [`PayrollBlockersError`](docs/models/errors/payrollblockerserror.md): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 253 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](docs/models/errors/deletev1companybenefitscompanybenefitidresponsebody.md): Unprocessable Entity. Status code `422`. Applicable to 1 of 253 methods.*
+* [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+
+</details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -1356,7 +1366,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.introspection.getInfo({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1378,7 +1387,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.introspection.getInfo({});
 
-  // Handle the result
   console.log(result);
 }
 

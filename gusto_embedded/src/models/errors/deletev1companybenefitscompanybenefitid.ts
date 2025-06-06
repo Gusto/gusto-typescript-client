@@ -12,6 +12,7 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
+import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
 export type Base = {
@@ -35,22 +36,24 @@ export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData = {
 /**
  * Unprocessable Entity
  */
-export class DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody extends Error {
+export class DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+  extends GustoEmbeddedError
+{
   errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors | undefined;
-  httpMeta: HTTPMetadata;
 
   /** The original data that was passed to this error instance. */
   data$: DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData;
 
-  constructor(err: DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData) {
+  constructor(
+    err: DeleteV1CompanyBenefitsCompanyBenefitIdResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
-
     if (err.errors != null) this.errors = err.errors;
-    this.httpMeta = err.httpMeta;
 
     this.name = "DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody";
   }
@@ -192,13 +195,20 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema:
       DeleteV1CompanyBenefitsCompanyBenefitIdErrors$inboundSchema
     ).optional(),
     HttpMeta: HTTPMetadata$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
   })
     .transform((v) => {
       const remapped = remap$(v, {
         "HttpMeta": "httpMeta",
       });
 
-      return new DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody(remapped);
+      return new DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody(remapped, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
     });
 
 /** @internal */

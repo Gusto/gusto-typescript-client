@@ -5,11 +5,7 @@
 ```typescript
 import { PostV1SandboxGenerate1099Request } from "@gusto/embedded-api/models/operations/postv1sandboxgenerate1099.js";
 
-let value: PostV1SandboxGenerate1099Request = {
-  requestBody: {
-    contractorId: "<id>",
-  },
-};
+let value: PostV1SandboxGenerate1099Request = {};
 ```
 
 ## Fields

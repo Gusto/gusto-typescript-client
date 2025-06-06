@@ -9,6 +9,7 @@ import { employeesGet } from "../funcs/employeesGet.js";
 import { employeesGetCustomFields } from "../funcs/employeesGetCustomFields.js";
 import { employeesGetOnboardingStatus } from "../funcs/employeesGetOnboardingStatus.js";
 import { employeesGetTimeOffActivities } from "../funcs/employeesGetTimeOffActivities.js";
+import { employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails } from "../funcs/employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails.js";
 import { employeesList } from "../funcs/employeesList.js";
 import { employeesUpdate } from "../funcs/employeesUpdate.js";
 import { employeesUpdateOnboardingDocumentsConfig } from "../funcs/employeesUpdateOnboardingDocumentsConfig.js";
@@ -22,6 +23,10 @@ import {
   GetV1CompaniesCompanyIdEmployeesRequest,
   GetV1CompaniesCompanyIdEmployeesResponse,
 } from "../models/operations/getv1companiescompanyidemployees.js";
+import {
+  GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
+  GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse,
+} from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
 import {
   GetV1EmployeesRequest,
   GetV1EmployeesResponse,
@@ -93,6 +98,32 @@ export class Employees extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostV1EmployeesResponse> {
     return unwrapAsync(employeesCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get employee payment details for a company
+   *
+   * @remarks
+   * Fetches payment details for employees in a given company. Results are paginated.
+   *
+   * Use the `employee_uuid` query parameter to filter for a single employee.
+   * Use the `payroll_uuid` query parameter to filter for employees on a specific payroll.
+   * Providing both `employee_uuid` and `payroll_uuid` will result in a 400 error.
+   * An empty array is returned if the company has no employees or if no employees match the filter criteria.
+   *
+   * The `encrypted_account_number` in the `splits` array is only visible if the `employee_payment_methods:read:account_number` scope is present.
+   *
+   * Base scope: `employee_payment_methods:read`
+   */
+  async getV1CompaniesCompanyIdEmployeesPaymentDetails(
+    request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse> {
+    return unwrapAsync(employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
       this,
       request,
       options,

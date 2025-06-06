@@ -5,44 +5,79 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
-  EmployeeStateTax,
-  EmployeeStateTax$inboundSchema,
-  EmployeeStateTax$Outbound,
-  EmployeeStateTax$outboundSchema,
-} from "../components/employeestatetax.js";
+  EmployeeStateTaxesList,
+  EmployeeStateTaxesList$inboundSchema,
+  EmployeeStateTaxesList$Outbound,
+  EmployeeStateTaxesList$outboundSchema,
+} from "../components/employeestatetaxeslist.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call.
+ */
+export const GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call.
+ */
+export type GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion>;
+
 export type GetV1EmployeesEmployeeIdStateTaxesRequest = {
+  /**
+   * Determines the date-based API version associated with your API call.
+   */
+  xGustoAPIVersion?:
+    | GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1EmployeesEmployeeIdStateTaxesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
-  employeeStateTaxesList?: Array<EmployeeStateTax> | undefined;
+  employeeStateTaxesList?: Array<EmployeeStateTaxesList> | undefined;
 };
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion
+  > = GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1EmployeesEmployeeIdStateTaxesRequest$inboundSchema: z.ZodType<
@@ -50,19 +85,21 @@ export const GetV1EmployeesEmployeeIdStateTaxesRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version":
+    GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$inboundSchema
+      .default("2024-04-01"),
   employee_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
-    "employee_uuid": "employeeUuid",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "employee_uuid": "employeeUuid",
   });
 });
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdStateTaxesRequest$Outbound = {
-  employee_uuid: string;
   "X-Gusto-API-Version": string;
+  employee_uuid: string;
 };
 
 /** @internal */
@@ -72,12 +109,14 @@ export const GetV1EmployeesEmployeeIdStateTaxesRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1EmployeesEmployeeIdStateTaxesRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     employeeUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
-      employeeUuid: "employee_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      employeeUuid: "employee_uuid",
     });
   });
 
@@ -128,7 +167,7 @@ export const GetV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema:
   z.ZodType<GetV1EmployeesEmployeeIdStateTaxesResponse, z.ZodTypeDef, unknown> =
     z.object({
       HttpMeta: HTTPMetadata$inboundSchema,
-      "Employee-State-Taxes-List": z.array(EmployeeStateTax$inboundSchema)
+      "Employee-State-Taxes-List": z.array(EmployeeStateTaxesList$inboundSchema)
         .optional(),
     }).transform((v) => {
       return remap$(v, {
@@ -140,7 +179,9 @@ export const GetV1EmployeesEmployeeIdStateTaxesResponse$inboundSchema:
 /** @internal */
 export type GetV1EmployeesEmployeeIdStateTaxesResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Employee-State-Taxes-List"?: Array<EmployeeStateTax$Outbound> | undefined;
+  "Employee-State-Taxes-List"?:
+    | Array<EmployeeStateTaxesList$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -151,7 +192,8 @@ export const GetV1EmployeesEmployeeIdStateTaxesResponse$outboundSchema:
     GetV1EmployeesEmployeeIdStateTaxesResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    employeeStateTaxesList: z.array(EmployeeStateTax$outboundSchema).optional(),
+    employeeStateTaxesList: z.array(EmployeeStateTaxesList$outboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",

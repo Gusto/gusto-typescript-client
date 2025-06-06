@@ -40,7 +40,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -69,15 +68,12 @@ async function run() {
       hireDate: "2020-12-21",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsCreateJob failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -140,7 +136,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -165,15 +160,12 @@ async function run() {
   const res = await jobsAndCompensationsGetJobs(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsGetJobs failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -246,7 +238,6 @@ async function run() {
     jobId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -271,15 +262,12 @@ async function run() {
   const res = await jobsAndCompensationsGetJob(gustoEmbedded, {
     jobId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsGetJob failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -357,7 +345,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -387,15 +374,12 @@ async function run() {
       hireDate: "2020-12-21",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -458,7 +442,6 @@ async function run() {
     jobId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -483,15 +466,12 @@ async function run() {
   const res = await jobsAndCompensationsDelete(gustoEmbedded, {
     jobId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -557,7 +537,6 @@ async function run() {
     jobId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -582,15 +561,12 @@ async function run() {
   const res = await jobsAndCompensationsGetCompensations(gustoEmbedded, {
     jobId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsGetCompensations failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -668,7 +644,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -698,15 +673,12 @@ async function run() {
       flsaStatus: "Exempt",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsCreateCompensation failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -770,7 +742,6 @@ async function run() {
     compensationId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -795,15 +766,12 @@ async function run() {
   const res = await jobsAndCompensationsGetCompensation(gustoEmbedded, {
     compensationId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsGetCompensation failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -882,7 +850,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -913,15 +880,12 @@ async function run() {
       flsaStatus: "Exempt",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsUpdateCompensation failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -985,7 +949,6 @@ async function run() {
     compensationId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1010,15 +973,12 @@ async function run() {
   const res = await jobsAndCompensationsDeleteCompensation(gustoEmbedded, {
     compensationId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("jobsAndCompensationsDeleteCompensation failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

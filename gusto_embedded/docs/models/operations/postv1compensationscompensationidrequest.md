@@ -7,10 +7,6 @@ import { PostV1CompensationsCompensationIdRequest } from "@gusto/embedded-api/mo
 
 let value: PostV1CompensationsCompensationIdRequest = {
   jobId: "<id>",
-  requestBody: {
-    paymentUnit: "Week",
-    flsaStatus: "Commission Only Exempt",
-  },
 };
 ```
 

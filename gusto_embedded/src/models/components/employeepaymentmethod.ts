@@ -16,30 +16,32 @@ import {
 } from "./paymentmethodbankaccount.js";
 
 /**
- * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+ * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
  */
 export const EmployeePaymentMethodType = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
 /**
- * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+ * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
  */
 export type EmployeePaymentMethodType = ClosedEnum<
   typeof EmployeePaymentMethodType
 >;
 
 /**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the split amounts must add up to exactly 100. If `split_by` is Amount, then the last split `amount` must be `null` to capture the remainder.
  */
-export const SplitBy = {
+export const EmployeePaymentMethodSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
 /**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the split amounts must add up to exactly 100. If `split_by` is Amount, then the last split `amount` must be `null` to capture the remainder.
  */
-export type SplitBy = ClosedEnum<typeof SplitBy>;
+export type EmployeePaymentMethodSplitBy = ClosedEnum<
+  typeof EmployeePaymentMethodSplitBy
+>;
 
 /**
  * Example response
@@ -50,13 +52,13 @@ export type EmployeePaymentMethod = {
    */
   version?: string | undefined;
   /**
-   * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+   * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
    */
   type?: EmployeePaymentMethodType | undefined;
   /**
-   * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+   * Describes how the payment will be split. If `split_by` is Percentage, then the split amounts must add up to exactly 100. If `split_by` is Amount, then the last split `amount` must be `null` to capture the remainder.
    */
-  splitBy?: SplitBy | null | undefined;
+  splitBy?: EmployeePaymentMethodSplitBy | null | undefined;
   splits?: Array<PaymentMethodBankAccount> | null | undefined;
 };
 
@@ -82,22 +84,24 @@ export namespace EmployeePaymentMethodType$ {
 }
 
 /** @internal */
-export const SplitBy$inboundSchema: z.ZodNativeEnum<typeof SplitBy> = z
-  .nativeEnum(SplitBy);
+export const EmployeePaymentMethodSplitBy$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeePaymentMethodSplitBy
+> = z.nativeEnum(EmployeePaymentMethodSplitBy);
 
 /** @internal */
-export const SplitBy$outboundSchema: z.ZodNativeEnum<typeof SplitBy> =
-  SplitBy$inboundSchema;
+export const EmployeePaymentMethodSplitBy$outboundSchema: z.ZodNativeEnum<
+  typeof EmployeePaymentMethodSplitBy
+> = EmployeePaymentMethodSplitBy$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SplitBy$ {
-  /** @deprecated use `SplitBy$inboundSchema` instead. */
-  export const inboundSchema = SplitBy$inboundSchema;
-  /** @deprecated use `SplitBy$outboundSchema` instead. */
-  export const outboundSchema = SplitBy$outboundSchema;
+export namespace EmployeePaymentMethodSplitBy$ {
+  /** @deprecated use `EmployeePaymentMethodSplitBy$inboundSchema` instead. */
+  export const inboundSchema = EmployeePaymentMethodSplitBy$inboundSchema;
+  /** @deprecated use `EmployeePaymentMethodSplitBy$outboundSchema` instead. */
+  export const outboundSchema = EmployeePaymentMethodSplitBy$outboundSchema;
 }
 
 /** @internal */
@@ -108,7 +112,7 @@ export const EmployeePaymentMethod$inboundSchema: z.ZodType<
 > = z.object({
   version: z.string().optional(),
   type: EmployeePaymentMethodType$inboundSchema.optional(),
-  split_by: z.nullable(SplitBy$inboundSchema).optional(),
+  split_by: z.nullable(EmployeePaymentMethodSplitBy$inboundSchema).optional(),
   splits: z.nullable(z.array(PaymentMethodBankAccount$inboundSchema))
     .optional(),
 }).transform((v) => {
@@ -133,7 +137,7 @@ export const EmployeePaymentMethod$outboundSchema: z.ZodType<
 > = z.object({
   version: z.string().optional(),
   type: EmployeePaymentMethodType$outboundSchema.optional(),
-  splitBy: z.nullable(SplitBy$outboundSchema).optional(),
+  splitBy: z.nullable(EmployeePaymentMethodSplitBy$outboundSchema).optional(),
   splits: z.nullable(z.array(PaymentMethodBankAccount$outboundSchema))
     .optional(),
 }).transform((v) => {

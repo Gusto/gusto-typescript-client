@@ -5,14 +5,7 @@
 ```typescript
 import { GetV1EmployeesEmployeeIdPaymentMethodResponse } from "@gusto/embedded-api/models/operations/getv1employeesemployeeidpaymentmethod.js";
 
-let value: GetV1EmployeesEmployeeIdPaymentMethodResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetV1EmployeesEmployeeIdPaymentMethodResponse = {};
 ```
 
 ## Fields

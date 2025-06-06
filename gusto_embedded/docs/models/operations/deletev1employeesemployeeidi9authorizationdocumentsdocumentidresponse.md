@@ -6,14 +6,7 @@
 import { DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse } from "@gusto/embedded-api/models/operations/deletev1employeesemployeeidi9authorizationdocumentsdocumentid.js";
 
 let value:
-  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse = {
-    httpMeta: {
-      response: new Response("{\"message\": \"hello world\"}", {
-        headers: { "Content-Type": "application/json" },
-      }),
-      request: new Request("https://example.com"),
-    },
-  };
+  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse = {};
 ```
 
 ## Fields

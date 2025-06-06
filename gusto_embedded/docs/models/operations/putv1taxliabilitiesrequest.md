@@ -7,7 +7,6 @@ import { PutV1TaxLiabilitiesRequest } from "@gusto/embedded-api/models/operation
 
 let value: PutV1TaxLiabilitiesRequest = {
   companyUuid: "<id>",
-  requestBody: {},
 };
 ```
 

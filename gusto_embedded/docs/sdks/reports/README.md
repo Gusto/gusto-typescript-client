@@ -46,7 +46,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -87,15 +86,12 @@ async function run() {
       dismissedEndDate: new RFCDate("2024-04-01"),
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsCreateCustom failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -163,7 +159,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -191,15 +186,12 @@ async function run() {
       aggregation: "default",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsPostPayrollsPayrollUuidReportsGeneralLedger failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -262,7 +254,6 @@ async function run() {
     requestUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -287,15 +278,12 @@ async function run() {
   const res = await reportsGetReportsRequestUuid(gustoEmbedded, {
     requestUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsGetReportsRequestUuid failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -369,7 +357,6 @@ async function run() {
     reportType: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -395,15 +382,12 @@ async function run() {
     companyUuid: "<id>",
     reportType: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsGetTemplate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

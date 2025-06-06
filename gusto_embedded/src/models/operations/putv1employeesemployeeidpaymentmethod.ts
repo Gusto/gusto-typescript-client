@@ -27,30 +27,34 @@ import {
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+ * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
  */
-export const Type = {
+export const PutV1EmployeesEmployeeIdPaymentMethodType = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
 /**
- * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+ * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
  */
-export type Type = ClosedEnum<typeof Type>;
+export type PutV1EmployeesEmployeeIdPaymentMethodType = ClosedEnum<
+  typeof PutV1EmployeesEmployeeIdPaymentMethodType
+>;
 
 /**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last `split` amount must be `null` to capture the remainder.
  */
-export const SplitBy = {
+export const PutV1EmployeesEmployeeIdPaymentMethodSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
 /**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last `split` amount must be `null` to capture the remainder.
  */
-export type SplitBy = ClosedEnum<typeof SplitBy>;
+export type PutV1EmployeesEmployeeIdPaymentMethodSplitBy = ClosedEnum<
+  typeof PutV1EmployeesEmployeeIdPaymentMethodSplitBy
+>;
 
-export type Splits = {
+export type PutV1EmployeesEmployeeIdPaymentMethodSplits = {
   /**
    * The bank account ID
    *
@@ -77,14 +81,14 @@ export type PutV1EmployeesEmployeeIdPaymentMethodRequestBody = {
    */
   version: string;
   /**
-   * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
+   * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
    */
-  type: Type;
+  type: PutV1EmployeesEmployeeIdPaymentMethodType;
   /**
-   * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+   * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last `split` amount must be `null` to capture the remainder.
    */
-  splitBy?: SplitBy | undefined;
-  splits?: Array<Splits> | undefined;
+  splitBy?: PutV1EmployeesEmployeeIdPaymentMethodSplitBy | undefined;
+  splits?: Array<PutV1EmployeesEmployeeIdPaymentMethodSplits> | undefined;
 };
 
 export type PutV1EmployeesEmployeeIdPaymentMethodRequest = {
@@ -108,47 +112,58 @@ export type PutV1EmployeesEmployeeIdPaymentMethodResponse = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const PutV1EmployeesEmployeeIdPaymentMethodType$inboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesEmployeeIdPaymentMethodType> = z
+    .nativeEnum(PutV1EmployeesEmployeeIdPaymentMethodType);
 
 /** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
+export const PutV1EmployeesEmployeeIdPaymentMethodType$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesEmployeeIdPaymentMethodType> =
+    PutV1EmployeesEmployeeIdPaymentMethodType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Type$ {
-  /** @deprecated use `Type$inboundSchema` instead. */
-  export const inboundSchema = Type$inboundSchema;
-  /** @deprecated use `Type$outboundSchema` instead. */
-  export const outboundSchema = Type$outboundSchema;
+export namespace PutV1EmployeesEmployeeIdPaymentMethodType$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdPaymentMethodType$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdPaymentMethodType$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdPaymentMethodType$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdPaymentMethodType$outboundSchema;
 }
 
 /** @internal */
-export const SplitBy$inboundSchema: z.ZodNativeEnum<typeof SplitBy> = z
-  .nativeEnum(SplitBy);
+export const PutV1EmployeesEmployeeIdPaymentMethodSplitBy$inboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesEmployeeIdPaymentMethodSplitBy> = z
+    .nativeEnum(PutV1EmployeesEmployeeIdPaymentMethodSplitBy);
 
 /** @internal */
-export const SplitBy$outboundSchema: z.ZodNativeEnum<typeof SplitBy> =
-  SplitBy$inboundSchema;
+export const PutV1EmployeesEmployeeIdPaymentMethodSplitBy$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesEmployeeIdPaymentMethodSplitBy> =
+    PutV1EmployeesEmployeeIdPaymentMethodSplitBy$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SplitBy$ {
-  /** @deprecated use `SplitBy$inboundSchema` instead. */
-  export const inboundSchema = SplitBy$inboundSchema;
-  /** @deprecated use `SplitBy$outboundSchema` instead. */
-  export const outboundSchema = SplitBy$outboundSchema;
+export namespace PutV1EmployeesEmployeeIdPaymentMethodSplitBy$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdPaymentMethodSplitBy$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdPaymentMethodSplitBy$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdPaymentMethodSplitBy$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdPaymentMethodSplitBy$outboundSchema;
 }
 
 /** @internal */
-export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
-  .object({
+export const PutV1EmployeesEmployeeIdPaymentMethodSplits$inboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdPaymentMethodSplits,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
     uuid: z.string().optional(),
     name: z.string().optional(),
     priority: z.number().int().optional(),
@@ -160,7 +175,7 @@ export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
   });
 
 /** @internal */
-export type Splits$Outbound = {
+export type PutV1EmployeesEmployeeIdPaymentMethodSplits$Outbound = {
   uuid?: string | undefined;
   name?: string | undefined;
   priority?: number | undefined;
@@ -168,45 +183,61 @@ export type Splits$Outbound = {
 };
 
 /** @internal */
-export const Splits$outboundSchema: z.ZodType<
-  Splits$Outbound,
-  z.ZodTypeDef,
-  Splits
-> = z.object({
-  uuid: z.string().optional(),
-  name: z.string().optional(),
-  priority: z.number().int().optional(),
-  splitAmount: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    splitAmount: "split_amount",
+export const PutV1EmployeesEmployeeIdPaymentMethodSplits$outboundSchema:
+  z.ZodType<
+    PutV1EmployeesEmployeeIdPaymentMethodSplits$Outbound,
+    z.ZodTypeDef,
+    PutV1EmployeesEmployeeIdPaymentMethodSplits
+  > = z.object({
+    uuid: z.string().optional(),
+    name: z.string().optional(),
+    priority: z.number().int().optional(),
+    splitAmount: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      splitAmount: "split_amount",
+    });
   });
-});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Splits$ {
-  /** @deprecated use `Splits$inboundSchema` instead. */
-  export const inboundSchema = Splits$inboundSchema;
-  /** @deprecated use `Splits$outboundSchema` instead. */
-  export const outboundSchema = Splits$outboundSchema;
-  /** @deprecated use `Splits$Outbound` instead. */
-  export type Outbound = Splits$Outbound;
+export namespace PutV1EmployeesEmployeeIdPaymentMethodSplits$ {
+  /** @deprecated use `PutV1EmployeesEmployeeIdPaymentMethodSplits$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesEmployeeIdPaymentMethodSplits$inboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdPaymentMethodSplits$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesEmployeeIdPaymentMethodSplits$outboundSchema;
+  /** @deprecated use `PutV1EmployeesEmployeeIdPaymentMethodSplits$Outbound` instead. */
+  export type Outbound = PutV1EmployeesEmployeeIdPaymentMethodSplits$Outbound;
 }
 
-export function splitsToJSON(splits: Splits): string {
-  return JSON.stringify(Splits$outboundSchema.parse(splits));
+export function putV1EmployeesEmployeeIdPaymentMethodSplitsToJSON(
+  putV1EmployeesEmployeeIdPaymentMethodSplits:
+    PutV1EmployeesEmployeeIdPaymentMethodSplits,
+): string {
+  return JSON.stringify(
+    PutV1EmployeesEmployeeIdPaymentMethodSplits$outboundSchema.parse(
+      putV1EmployeesEmployeeIdPaymentMethodSplits,
+    ),
+  );
 }
 
-export function splitsFromJSON(
+export function putV1EmployeesEmployeeIdPaymentMethodSplitsFromJSON(
   jsonString: string,
-): SafeParseResult<Splits, SDKValidationError> {
+): SafeParseResult<
+  PutV1EmployeesEmployeeIdPaymentMethodSplits,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => Splits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Splits' from JSON`,
+    (x) =>
+      PutV1EmployeesEmployeeIdPaymentMethodSplits$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PutV1EmployeesEmployeeIdPaymentMethodSplits' from JSON`,
   );
 }
 
@@ -218,9 +249,12 @@ export const PutV1EmployeesEmployeeIdPaymentMethodRequestBody$inboundSchema:
     unknown
   > = z.object({
     version: z.string(),
-    type: Type$inboundSchema,
-    split_by: SplitBy$inboundSchema.optional(),
-    splits: z.array(z.lazy(() => Splits$inboundSchema)).optional(),
+    type: PutV1EmployeesEmployeeIdPaymentMethodType$inboundSchema,
+    split_by: PutV1EmployeesEmployeeIdPaymentMethodSplitBy$inboundSchema
+      .optional(),
+    splits: z.array(
+      z.lazy(() => PutV1EmployeesEmployeeIdPaymentMethodSplits$inboundSchema),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "split_by": "splitBy",
@@ -232,7 +266,9 @@ export type PutV1EmployeesEmployeeIdPaymentMethodRequestBody$Outbound = {
   version: string;
   type: string;
   split_by?: string | undefined;
-  splits?: Array<Splits$Outbound> | undefined;
+  splits?:
+    | Array<PutV1EmployeesEmployeeIdPaymentMethodSplits$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -243,9 +279,12 @@ export const PutV1EmployeesEmployeeIdPaymentMethodRequestBody$outboundSchema:
     PutV1EmployeesEmployeeIdPaymentMethodRequestBody
   > = z.object({
     version: z.string(),
-    type: Type$outboundSchema,
-    splitBy: SplitBy$outboundSchema.optional(),
-    splits: z.array(z.lazy(() => Splits$outboundSchema)).optional(),
+    type: PutV1EmployeesEmployeeIdPaymentMethodType$outboundSchema,
+    splitBy: PutV1EmployeesEmployeeIdPaymentMethodSplitBy$outboundSchema
+      .optional(),
+    splits: z.array(
+      z.lazy(() => PutV1EmployeesEmployeeIdPaymentMethodSplits$outboundSchema),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       splitBy: "split_by",

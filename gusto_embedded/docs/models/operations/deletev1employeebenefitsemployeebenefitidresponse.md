@@ -5,14 +5,7 @@
 ```typescript
 import { DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse } from "@gusto/embedded-api/models/operations/deletev1employeebenefitsemployeebenefitid.js";
 
-let value: DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: DeleteV1EmployeeBenefitsEmployeeBenefitIdResponse = {};
 ```
 
 ## Fields

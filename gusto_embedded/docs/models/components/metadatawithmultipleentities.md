@@ -8,9 +8,7 @@ multiple entities
 import { MetadataWithMultipleEntities } from "@gusto/embedded-api/models/components/metadatawithmultipleentities.js";
 
 let value: MetadataWithMultipleEntities = {
-  entities: [
-    {},
-  ],
+  entities: [],
 };
 ```
 

@@ -12,7 +12,7 @@ let value: I9Authorization = {
   version: "<value>",
   authorizationStatus: "citizen",
   employerSigned: false,
-  employeeSigned: false,
+  employeeSigned: true,
 };
 ```
 

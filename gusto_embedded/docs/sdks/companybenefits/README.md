@@ -42,7 +42,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -70,15 +69,12 @@ async function run() {
       description: "hm pfft surge beyond",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -145,7 +141,6 @@ async function run() {
     companyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -170,15 +165,12 @@ async function run() {
   const res = await companyBenefitsList(gustoEmbedded, {
     companyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -255,7 +247,6 @@ async function run() {
     companyBenefitId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -280,15 +271,12 @@ async function run() {
   const res = await companyBenefitsGet(gustoEmbedded, {
     companyBenefitId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -367,7 +355,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -396,15 +383,12 @@ async function run() {
       active: false,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -470,7 +454,6 @@ async function run() {
     companyBenefitId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -495,15 +478,12 @@ async function run() {
   const res = await companyBenefitsDelete(gustoEmbedded, {
     companyBenefitId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -566,7 +546,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.companyBenefits.getAll({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -589,15 +568,12 @@ const gustoEmbedded = new GustoEmbeddedCore({
 
 async function run() {
   const res = await companyBenefitsGetAll(gustoEmbedded, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsGetAll failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -672,7 +648,6 @@ async function run() {
     benefitId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -697,15 +672,12 @@ async function run() {
   const res = await companyBenefitsGetSupported(gustoEmbedded, {
     benefitId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsGetSupported failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -782,7 +754,6 @@ async function run() {
     endDate: "2022-12-31",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -809,15 +780,12 @@ async function run() {
     startDate: "2022-01-01",
     endDate: "2022-12-31",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsGetSummary failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -894,7 +862,6 @@ async function run() {
     companyBenefitId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -919,15 +886,12 @@ async function run() {
   const res = await companyBenefitsGetEmployeeBenefits(gustoEmbedded, {
     companyBenefitId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsGetEmployeeBenefits failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1006,13 +970,13 @@ async function run() {
       employeeBenefits: [
         {
           version: "09j3d29jqdpj92109j9j2d90dq",
+          employeeDeduction: "250.00",
           employeeUuid: "8f9f3f68-8fd3-499d-ade7-4a052e56494e",
         },
       ],
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1040,20 +1004,18 @@ async function run() {
       employeeBenefits: [
         {
           version: "09j3d29jqdpj92109j9j2d90dq",
+          employeeDeduction: "250.00",
           employeeUuid: "8f9f3f68-8fd3-499d-ade7-4a052e56494e",
         },
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdateEmployeeBenefits failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1116,7 +1078,6 @@ async function run() {
     benefitId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1141,15 +1102,12 @@ async function run() {
   const res = await companyBenefitsGetRequirements(gustoEmbedded, {
     benefitId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsGetRequirements failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

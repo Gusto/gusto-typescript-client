@@ -30,7 +30,6 @@ async function run() {
     contractorUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ async function run() {
   const res = await contractorFormsList(gustoEmbedded, {
     contractorUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorFormsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -137,7 +133,6 @@ async function run() {
     formId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -163,15 +158,12 @@ async function run() {
     contractorUuid: "<id>",
     formId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorFormsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -245,7 +237,6 @@ async function run() {
     formId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -271,15 +262,12 @@ async function run() {
     contractorUuid: "<id>",
     formId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorFormsGetPdf failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -358,7 +346,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -385,15 +372,12 @@ async function run() {
       contractorId: "<id>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorFormsGenerate1099 failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

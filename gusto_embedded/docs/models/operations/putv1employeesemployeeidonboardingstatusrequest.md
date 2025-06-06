@@ -7,9 +7,6 @@ import { PutV1EmployeesEmployeeIdOnboardingStatusRequest } from "@gusto/embedded
 
 let value: PutV1EmployeesEmployeeIdOnboardingStatusRequest = {
   employeeId: "<id>",
-  requestBody: {
-    onboardingStatus: "self_onboarding_invited",
-  },
 };
 ```
 

@@ -8,10 +8,6 @@ import { PutV1EmployeeFormSignRequest } from "@gusto/embedded-api/models/operati
 let value: PutV1EmployeeFormSignRequest = {
   employeeId: "<id>",
   formId: "<id>",
-  requestBody: {
-    signatureText: "<value>",
-    agree: false,
-  },
 };
 ```
 

@@ -8,9 +8,7 @@ Example response
 import { AccruingTimeOffHourObject } from "@gusto/embedded-api/models/components/accruingtimeoffhourobject.js";
 
 let value: AccruingTimeOffHourObject = {
-  hoursEarned: [
-    {},
-  ],
+  hoursEarned: [],
 };
 ```
 

@@ -7,7 +7,6 @@ import { PostV1CompaniesCompanyIdBankAccountsRequest } from "@gusto/embedded-api
 
 let value: PostV1CompaniesCompanyIdBankAccountsRequest = {
   companyId: "<id>",
-  requestBody: {},
 };
 ```
 

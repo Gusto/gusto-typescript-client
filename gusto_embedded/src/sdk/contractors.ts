@@ -7,6 +7,7 @@ import { contractorsDelete } from "../funcs/contractorsDelete.js";
 import { contractorsGet } from "../funcs/contractorsGet.js";
 import { contractorsGetAddress } from "../funcs/contractorsGetAddress.js";
 import { contractorsGetOnboardingStatus } from "../funcs/contractorsGetOnboardingStatus.js";
+import { contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails } from "../funcs/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
 import { contractorsList } from "../funcs/contractorsList.js";
 import { contractorsUpdate } from "../funcs/contractorsUpdate.js";
 import { contractorsUpdateAddress } from "../funcs/contractorsUpdateAddress.js";
@@ -16,6 +17,10 @@ import {
   DeleteV1ContractorsContractorUuidRequest,
   DeleteV1ContractorsContractorUuidResponse,
 } from "../models/operations/deletev1contractorscontractoruuid.js";
+import {
+  GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
+  GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse,
+} from "../models/operations/getv1companiescompanyidcontractorspaymentdetails.js";
 import {
   GetV1CompaniesCompanyUuidContractorsRequest,
   GetV1CompaniesCompanyUuidContractorsResponse,
@@ -265,5 +270,50 @@ export class Contractors extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * List contractor payment details
+   *
+   * @remarks
+   * Get payment details for contractors in a company. This endpoint returns a list of all contractors
+   * associated with the specified company, including their payment methods and bank account details
+   * if they are paid via direct deposit.
+   *
+   * For contractors paid by direct deposit, the response includes their bank account information
+   * with sensitive data masked for security. The payment details also include information about
+   * how their payments are split if they have multiple bank accounts configured.
+   *
+   * For contractors paid by check, only the basic payment method information is returned.
+   *
+   * ### Response Details
+   * - For direct deposit contractors:
+   *   - Bank account details (masked)
+   *   - Payment splits configuration
+   *   - Routing numbers
+   *   - Account types
+   * - For check payments:
+   *   - Basic payment method designation
+   *
+   * ### Common Use Cases
+   * - Fetching contractor payment information for payroll processing
+   * - Verifying contractor payment methods
+   * - Reviewing payment split configurations
+   *
+   * `encrypted_account_number` is available only with the additional scope `contractor_payment_methods:read:account_numbers`.
+   *
+   * scope: `contractor_payment_methods:read`
+   */
+  async getV1CompaniesCompanyIdContractorsPaymentDetails(
+    request: GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse> {
+    return unwrapAsync(
+      contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

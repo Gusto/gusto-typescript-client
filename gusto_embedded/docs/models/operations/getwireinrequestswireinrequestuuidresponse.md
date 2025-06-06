@@ -5,14 +5,7 @@
 ```typescript
 import { GetWireInRequestsWireInRequestUuidResponse } from "@gusto/embedded-api/models/operations/getwireinrequestswireinrequestuuid.js";
 
-let value: GetWireInRequestsWireInRequestUuidResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetWireInRequestsWireInRequestUuidResponse = {};
 ```
 
 ## Fields

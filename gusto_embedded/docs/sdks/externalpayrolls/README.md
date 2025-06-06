@@ -40,7 +40,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -70,15 +69,12 @@ async function run() {
       paymentPeriodEndDate: "2022-05-30",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -141,7 +137,6 @@ async function run() {
     companyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -166,15 +161,12 @@ async function run() {
   const res = await externalPayrollsGet(gustoEmbedded, {
     companyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -248,7 +240,6 @@ async function run() {
     externalPayrollId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -274,15 +265,12 @@ async function run() {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -356,7 +344,6 @@ async function run() {
     externalPayrollId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -382,15 +369,12 @@ async function run() {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -497,7 +481,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -567,15 +550,12 @@ async function run() {
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -641,7 +621,6 @@ async function run() {
     externalPayrollId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -667,15 +646,12 @@ async function run() {
     companyUuid: "<id>",
     externalPayrollId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsCalculateTaxes failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -748,7 +724,6 @@ async function run() {
     companyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -773,15 +748,12 @@ async function run() {
   const res = await externalPayrollsListTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsListTaxLiabilities failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -873,7 +845,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -917,15 +888,12 @@ async function run() {
       ],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsUpdateTaxLiabilities failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -988,7 +956,6 @@ async function run() {
     companyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1013,15 +980,12 @@ async function run() {
   const res = await externalPayrollsFinalizeTaxLiabilities(gustoEmbedded, {
     companyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("externalPayrollsFinalizeTaxLiabilities failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

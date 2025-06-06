@@ -5,14 +5,7 @@
 ```typescript
 import { PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse } from "@gusto/embedded-api/models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployees.js";
 
-let value: PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse = {};
 ```
 
 ## Fields

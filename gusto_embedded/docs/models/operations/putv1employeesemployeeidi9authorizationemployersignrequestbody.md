@@ -8,7 +8,7 @@ import { PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody } from "
 let value: PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody = {
   signatureText: "<value>",
   signerTitle: "<value>",
-  agree: false,
+  agree: true,
 };
 ```
 

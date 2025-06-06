@@ -8,11 +8,6 @@ import { PutV1CompaniesCompanyIdPayrollsRequest } from "@gusto/embedded-api/mode
 let value: PutV1CompaniesCompanyIdPayrollsRequest = {
   companyId: "<id>",
   payrollId: "<id>",
-  requestBody: {
-    employeeCompensations: [
-      {},
-    ],
-  },
 };
 ```
 

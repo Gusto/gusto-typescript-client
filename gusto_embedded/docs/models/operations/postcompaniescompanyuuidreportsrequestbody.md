@@ -7,12 +7,8 @@ import { PostCompaniesCompanyUuidReportsRequestBody } from "@gusto/embedded-api/
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PostCompaniesCompanyUuidReportsRequestBody = {
-  columns: [
-    "employee_email",
-  ],
-  groupings: [
-    "employee",
-  ],
+  columns: [],
+  groupings: [],
   fileType: "pdf",
   startDate: new RFCDate("2024-01-01"),
   endDate: new RFCDate("2024-04-01"),

@@ -6,14 +6,7 @@
 import { PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse } from "@gusto/embedded-api/models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofservice.js";
 
 let value:
-  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse = {
-    httpMeta: {
-      response: new Response("{\"message\": \"hello world\"}", {
-        headers: { "Content-Type": "application/json" },
-      }),
-      request: new Request("https://example.com"),
-    },
-  };
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse = {};
 ```
 
 ## Fields

@@ -12,9 +12,9 @@ let value: I9AuthorizationDocumentOption = {
   description: "midst um orange yippee energetically whether thunderbolt",
   documentType: "<value>",
   documentTitle: [
-    "<value>",
+    "<value 1>",
   ],
-  commonChoice: false,
+  commonChoice: true,
 };
 ```
 

@@ -8,7 +8,6 @@ import { PutV1CompaniesCompanyUuidTaxRequirementsStateRequest } from "@gusto/emb
 let value: PutV1CompaniesCompanyUuidTaxRequirementsStateRequest = {
   companyUuid: "<id>",
   state: "Connecticut",
-  requestBody: {},
 };
 ```
 

@@ -10,7 +10,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -22,6 +22,7 @@ import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody,
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody$inboundSchema,
 } from "../models/errors/putv1companiescompanyidpayrollspayrollidcalculate.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
@@ -51,13 +52,14 @@ export function payrollsCalculate(
   Result<
     PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
     | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | GustoEmbeddedError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -76,13 +78,14 @@ async function $do(
     Result<
       PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
       | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | GustoEmbeddedError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -178,13 +181,14 @@ async function $do(
   const [result] = await M.match<
     PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
     | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | GustoEmbeddedError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.nil(
       202,

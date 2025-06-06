@@ -9,7 +9,7 @@ let value: PutV1ContractorDocumentSignRequestBody = {
   fields: [
     {},
   ],
-  agree: false,
+  agree: true,
 };
 ```
 

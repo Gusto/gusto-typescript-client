@@ -7,9 +7,6 @@ import { PostV1CompanyFlowsRequest } from "@gusto/embedded-api/models/operations
 
 let value: PostV1CompanyFlowsRequest = {
   companyUuid: "<id>",
-  requestBody: {
-    flowType: "<value>",
-  },
 };
 ```
 

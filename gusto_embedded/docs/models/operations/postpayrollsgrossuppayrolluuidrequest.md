@@ -7,10 +7,6 @@ import { PostPayrollsGrossUpPayrollUuidRequest } from "@gusto/embedded-api/model
 
 let value: PostPayrollsGrossUpPayrollUuidRequest = {
   payrollUuid: "<id>",
-  requestBody: {
-    employeeUuid: "<id>",
-    netPay: "<value>",
-  },
 };
 ```
 

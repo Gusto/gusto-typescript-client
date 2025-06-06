@@ -7,9 +7,6 @@ import { PostV1CompaniesCompanyIdPaySchedulesAssignRequest } from "@gusto/embedd
 
 let value: PostV1CompaniesCompanyIdPaySchedulesAssignRequest = {
   companyId: "<id>",
-  payScheduleAssignmentBody: {
-    type: "hourly_salaried",
-  },
 };
 ```
 

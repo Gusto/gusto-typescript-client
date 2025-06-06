@@ -33,6 +33,7 @@ async function run() {
     employeeId: "<id>",
     requestBody: {
       companyBenefitUuid: "f68abb42-431e-4392-bc3f-2795627e00f3",
+      employeeDeduction: "100.00",
       contribution: {
         type: "amount",
         value: "100.00",
@@ -40,7 +41,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -66,21 +66,19 @@ async function run() {
     employeeId: "<id>",
     requestBody: {
       companyBenefitUuid: "f68abb42-431e-4392-bc3f-2795627e00f3",
+      employeeDeduction: "100.00",
       contribution: {
         type: "amount",
         value: "100.00",
       },
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeBenefitsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -147,7 +145,6 @@ async function run() {
     employeeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -172,15 +169,12 @@ async function run() {
   const res = await employeeBenefitsGet(gustoEmbedded, {
     employeeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeBenefitsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -255,7 +249,6 @@ async function run() {
     employeeBenefitId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -280,15 +273,12 @@ async function run() {
   const res = await employeeBenefitsRetrieve(gustoEmbedded, {
     employeeBenefitId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeBenefitsRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -361,10 +351,10 @@ async function run() {
     employeeBenefitId: "<id>",
     requestBody: {
       version: "09j3d29jqdpj92109j9j2d90dq",
+      employeeDeduction: "250.00",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -390,17 +380,15 @@ async function run() {
     employeeBenefitId: "<id>",
     requestBody: {
       version: "09j3d29jqdpj92109j9j2d90dq",
+      employeeDeduction: "250.00",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeBenefitsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -463,7 +451,6 @@ async function run() {
     employeeBenefitId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -488,15 +475,12 @@ async function run() {
   const res = await employeeBenefitsDelete(gustoEmbedded, {
     employeeBenefitId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeBenefitsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -562,7 +546,6 @@ async function run() {
     taxYear: 2024,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -588,15 +571,12 @@ async function run() {
     employeeId: "<id>",
     taxYear: 2024,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -674,7 +654,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -702,15 +681,12 @@ async function run() {
       taxYear: 1828.56,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -7,7 +7,7 @@ import { ResponseBody } from "@gusto/embedded-api/models/operations/getv1compani
 
 let value: ResponseBody = {
   state: "Tennessee",
-  setupComplete: false,
+  setupComplete: true,
 };
 ```
 

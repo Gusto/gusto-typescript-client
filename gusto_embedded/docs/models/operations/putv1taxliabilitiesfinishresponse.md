@@ -5,14 +5,7 @@
 ```typescript
 import { PutV1TaxLiabilitiesFinishResponse } from "@gusto/embedded-api/models/operations/putv1taxliabilitiesfinish.js";
 
-let value: PutV1TaxLiabilitiesFinishResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PutV1TaxLiabilitiesFinishResponse = {};
 ```
 
 ## Fields

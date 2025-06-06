@@ -13,9 +13,9 @@ let value: HistoricalEmployeeBody = {
   workAddress: {},
   homeAddress: {
     street1: "<value>",
-    city: "Rancho Santa Margarita",
-    state: "Michigan",
-    zip: "06434",
+    city: "West Heatherville",
+    state: "North Dakota",
+    zip: "12580",
   },
   termination: {},
   job: {},

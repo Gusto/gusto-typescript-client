@@ -5,14 +5,7 @@
 ```typescript
 import { PutRemovePeopleFromDepartmentResponse } from "@gusto/embedded-api/models/operations/putremovepeoplefromdepartment.js";
 
-let value: PutRemovePeopleFromDepartmentResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PutRemovePeopleFromDepartmentResponse = {};
 ```
 
 ## Fields

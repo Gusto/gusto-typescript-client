@@ -59,7 +59,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -97,15 +96,12 @@ async function run() {
       },
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesCreatePartnerManaged failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -172,7 +168,6 @@ async function run() {
     companyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -197,15 +192,12 @@ async function run() {
   const res = await companiesGet(gustoEmbedded, {
     companyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -281,7 +273,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -309,15 +300,12 @@ async function run() {
       contractorOnly: false,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -387,7 +375,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -417,15 +404,12 @@ async function run() {
       externalUserId: "<id>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesMigrate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -494,7 +478,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -524,15 +507,12 @@ async function run() {
       externalUserId: "2005648946132",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesAcceptTermsOfService failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -598,7 +578,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -626,15 +605,12 @@ async function run() {
       email: "jsmith99@gmail.com",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesRetrieveTermsOfService failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -703,7 +679,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -733,15 +708,12 @@ async function run() {
       email: "jsmith99@gmail.com",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesCreateAdmin failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -804,7 +776,6 @@ async function run() {
     companyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -829,15 +800,12 @@ async function run() {
   const res = await companiesListAdmins(gustoEmbedded, {
     companyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesListAdmins failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -912,7 +880,6 @@ async function run() {
     additionalSteps: "external_payroll",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -938,15 +905,12 @@ async function run() {
     companyUuid: "<id>",
     additionalSteps: "external_payroll",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesGetOnboardingStatus failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1031,7 +995,6 @@ async function run() {
     companyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1056,15 +1019,12 @@ async function run() {
   const res = await companiesFinishOnboarding(gustoEmbedded, {
     companyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesFinishOnboarding failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1127,7 +1087,6 @@ async function run() {
     companyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1152,15 +1111,12 @@ async function run() {
   const res = await companiesGetCustomFields(gustoEmbedded, {
     companyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesGetCustomFields failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

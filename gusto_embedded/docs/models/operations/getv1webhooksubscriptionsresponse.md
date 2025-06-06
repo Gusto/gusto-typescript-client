@@ -5,14 +5,7 @@
 ```typescript
 import { GetV1WebhookSubscriptionsResponse } from "@gusto/embedded-api/models/operations/getv1webhooksubscriptions.js";
 
-let value: GetV1WebhookSubscriptionsResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetV1WebhookSubscriptionsResponse = {};
 ```
 
 ## Fields

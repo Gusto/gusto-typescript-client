@@ -30,7 +30,6 @@ async function run() {
     employeeUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ async function run() {
   const res = await employeeTaxSetupGetFederalTaxes(gustoEmbedded, {
     employeeUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupGetFederalTaxes failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -146,7 +142,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -181,15 +176,12 @@ async function run() {
       w4DataType: "rev_2020_w4",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateFederalTaxes failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -264,7 +256,6 @@ async function run() {
     employeeUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -289,15 +280,12 @@ async function run() {
   const res = await employeeTaxSetupGetStateTaxes(gustoEmbedded, {
     employeeUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupGetStateTaxes failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -346,9 +334,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## updateStateTaxes
 
@@ -357,6 +346,7 @@ Update attributes relevant for an employee's state taxes.
 As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
 
 scope: `employee_state_taxes:write`
+
 
 ### Example Usage
 
@@ -371,57 +361,11 @@ async function run() {
   const result = await gustoEmbedded.employeeTaxSetup.updateStateTaxes({
     employeeUuid: "<id>",
     requestBody: {
-      states: [
-        {
-          state: "CA",
-          questions: [
-            {
-              key: "filing_status",
-              answers: [
-                {
-                  value: "M",
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-            {
-              key: "withholding_allowance",
-              answers: [
-                {
-                  value: 2,
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-            {
-              key: "additional_withholding",
-              answers: [
-                {
-                  value: "25.0",
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-            {
-              key: "file_new_hire_report",
-              answers: [
-                {
-                  value: true,
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      version: "<value>",
+      type: "Direct Deposit",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -446,64 +390,16 @@ async function run() {
   const res = await employeeTaxSetupUpdateStateTaxes(gustoEmbedded, {
     employeeUuid: "<id>",
     requestBody: {
-      states: [
-        {
-          state: "CA",
-          questions: [
-            {
-              key: "filing_status",
-              answers: [
-                {
-                  value: "M",
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-            {
-              key: "withholding_allowance",
-              answers: [
-                {
-                  value: 2,
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-            {
-              key: "additional_withholding",
-              answers: [
-                {
-                  value: "25.0",
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-            {
-              key: "file_new_hire_report",
-              answers: [
-                {
-                  value: true,
-                  validFrom: "2010-01-01",
-                  validUpTo: null,
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      version: "<value>",
+      type: "Direct Deposit",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateStateTaxes failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -543,5 +439,5 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

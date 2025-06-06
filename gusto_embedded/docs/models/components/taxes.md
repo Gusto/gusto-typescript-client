@@ -8,7 +8,7 @@ import { Taxes } from "@gusto/embedded-api/models/components/payrollemployeecomp
 let value: Taxes = {
   name: "<value>",
   employer: false,
-  amount: 7326.43,
+  amount: 4387.49,
 };
 ```
 

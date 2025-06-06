@@ -38,6 +38,8 @@ export const Include = {
   CustomFields: "custom_fields",
   AllCompensations: "all_compensations",
   CompanyName: "company_name",
+  CurrentHomeAddress: "current_home_address",
+  AllHomeAddresses: "all_home_addresses",
 } as const;
 export type Include = ClosedEnum<typeof Include>;
 
@@ -49,14 +51,13 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
     | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
     | undefined;
   /**
-   * A string to search for in the object's names
-   */
-  searchTerm?: string | undefined;
-  /**
    * The UUID of the company
    */
   companyId: string;
-  uuids?: Array<string> | undefined;
+  /**
+   * A string to search for in the object's names
+   */
+  searchTerm?: string | undefined;
   /**
    * Include the requested attribute(s) in each employee response, multiple options are comma separated. Available options:
    *
@@ -140,9 +141,8 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
   "X-Gusto-API-Version":
     GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion$inboundSchema
       .default("2024-04-01"),
-  search_term: z.string().optional(),
   company_id: z.string(),
-  uuids: z.array(z.string()).optional(),
+  search_term: z.string().optional(),
   include: z.array(Include$inboundSchema).optional(),
   terminated: z.boolean().optional(),
   page: z.number().int().optional(),
@@ -150,17 +150,16 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "X-Gusto-API-Version": "xGustoAPIVersion",
-    "search_term": "searchTerm",
     "company_id": "companyId",
+    "search_term": "searchTerm",
   });
 });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdEmployeesRequest$Outbound = {
   "X-Gusto-API-Version": string;
-  search_term?: string | undefined;
   company_id: string;
-  uuids?: Array<string> | undefined;
+  search_term?: string | undefined;
   include?: Array<string> | undefined;
   terminated?: boolean | undefined;
   page?: number | undefined;
@@ -176,9 +175,8 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
   xGustoAPIVersion:
     GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion$outboundSchema
       .default("2024-04-01"),
-  searchTerm: z.string().optional(),
   companyId: z.string(),
-  uuids: z.array(z.string()).optional(),
+  searchTerm: z.string().optional(),
   include: z.array(Include$outboundSchema).optional(),
   terminated: z.boolean().optional(),
   page: z.number().int().optional(),
@@ -186,8 +184,8 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
-    searchTerm: "search_term",
     companyId: "company_id",
+    searchTerm: "search_term",
   });
 });
 

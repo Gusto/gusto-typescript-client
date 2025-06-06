@@ -36,6 +36,7 @@ export type PutV1EmployeesRequestBody = {
    * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
    */
   twoPercentShareholder?: boolean | undefined;
+  workEmail?: string | undefined;
 };
 
 export type PutV1EmployeesRequest = {
@@ -70,6 +71,7 @@ export const PutV1EmployeesRequestBody$inboundSchema: z.ZodType<
   ssn: z.string().optional(),
   preferred_first_name: z.nullable(z.string()).optional(),
   two_percent_shareholder: z.boolean().optional(),
+  work_email: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
@@ -78,6 +80,7 @@ export const PutV1EmployeesRequestBody$inboundSchema: z.ZodType<
     "date_of_birth": "dateOfBirth",
     "preferred_first_name": "preferredFirstName",
     "two_percent_shareholder": "twoPercentShareholder",
+    "work_email": "workEmail",
   });
 });
 
@@ -92,6 +95,7 @@ export type PutV1EmployeesRequestBody$Outbound = {
   ssn?: string | undefined;
   preferred_first_name?: string | null | undefined;
   two_percent_shareholder?: boolean | undefined;
+  work_email?: string | undefined;
 };
 
 /** @internal */
@@ -109,6 +113,7 @@ export const PutV1EmployeesRequestBody$outboundSchema: z.ZodType<
   ssn: z.string().optional(),
   preferredFirstName: z.nullable(z.string()).optional(),
   twoPercentShareholder: z.boolean().optional(),
+  workEmail: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
@@ -117,6 +122,7 @@ export const PutV1EmployeesRequestBody$outboundSchema: z.ZodType<
     dateOfBirth: "date_of_birth",
     preferredFirstName: "preferred_first_name",
     twoPercentShareholder: "two_percent_shareholder",
+    workEmail: "work_email",
   });
 });
 

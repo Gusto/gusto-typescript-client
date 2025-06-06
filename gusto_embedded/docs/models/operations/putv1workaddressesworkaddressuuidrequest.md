@@ -4,15 +4,9 @@
 
 ```typescript
 import { PutV1WorkAddressesWorkAddressUuidRequest } from "@gusto/embedded-api/models/operations/putv1workaddressesworkaddressuuid.js";
-import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PutV1WorkAddressesWorkAddressUuidRequest = {
   workAddressUuid: "<id>",
-  requestBody: {
-    version: "<value>",
-    locationUuid: "6a119be7-b4b0-4e27-aaa0-89d5f2524635",
-    effectiveDate: new RFCDate("2023-05-15"),
-  },
 };
 ```
 

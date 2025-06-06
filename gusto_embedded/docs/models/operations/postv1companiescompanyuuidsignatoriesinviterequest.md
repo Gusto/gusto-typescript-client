@@ -7,9 +7,6 @@ import { PostV1CompaniesCompanyUuidSignatoriesInviteRequest } from "@gusto/embed
 
 let value: PostV1CompaniesCompanyUuidSignatoriesInviteRequest = {
   companyUuid: "<id>",
-  requestBody: {
-    email: "Kiara_Fritsch31@hotmail.com",
-  },
 };
 ```
 

@@ -31,7 +31,6 @@ async function run() {
     invoicePeriod: "2020-01",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,15 +55,12 @@ async function run() {
   }, {
     invoicePeriod: "2020-01",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

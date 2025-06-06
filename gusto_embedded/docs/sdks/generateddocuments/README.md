@@ -28,7 +28,6 @@ async function run() {
     requestUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -54,15 +53,12 @@ async function run() {
     documentType: "printable_payroll_checks",
     requestUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("generatedDocumentsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

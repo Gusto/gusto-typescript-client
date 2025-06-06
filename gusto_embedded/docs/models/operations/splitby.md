@@ -5,7 +5,7 @@ Describes how the payment will be split. If split_by is Percentage, then the spl
 ## Example Usage
 
 ```typescript
-import { SplitBy } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidpaymentmethod.js";
+import { SplitBy } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidstatetaxes.js";
 
 let value: SplitBy = "Amount";
 ```

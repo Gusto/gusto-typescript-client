@@ -7,9 +7,6 @@ import { PutV1CompensationsCompensationIdRequest } from "@gusto/embedded-api/mod
 
 let value: PutV1CompensationsCompensationIdRequest = {
   compensationId: "<id>",
-  requestBody: {
-    version: "<value>",
-  },
 };
 ```
 

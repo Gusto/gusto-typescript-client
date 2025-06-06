@@ -7,7 +7,6 @@ import { PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest } from "@
 
 let value: PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest = {
   timeOffPolicyUuid: "<id>",
-  requestBody: {},
 };
 ```
 

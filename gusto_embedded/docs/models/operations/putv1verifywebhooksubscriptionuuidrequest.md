@@ -7,9 +7,6 @@ import { PutV1VerifyWebhookSubscriptionUuidRequest } from "@gusto/embedded-api/m
 
 let value: PutV1VerifyWebhookSubscriptionUuidRequest = {
   webhookSubscriptionUuid: "<id>",
-  requestBody: {
-    verificationToken: "<value>",
-  },
 };
 ```
 

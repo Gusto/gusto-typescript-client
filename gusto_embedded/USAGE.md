@@ -9,7 +9,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.introspection.getInfo({});
 
-  // Handle the result
   console.log(result);
 }
 

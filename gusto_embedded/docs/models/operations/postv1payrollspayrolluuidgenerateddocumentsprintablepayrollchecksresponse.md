@@ -6,14 +6,8 @@
 import { PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse } from "@gusto/embedded-api/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.js";
 
 let value:
-  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse = {
-    httpMeta: {
-      response: new Response("{\"message\": \"hello world\"}", {
-        headers: { "Content-Type": "application/json" },
-      }),
-      request: new Request("https://example.com"),
-    },
-  };
+  PostV1PayrollsPayrollUuidGeneratedDocumentsPrintablePayrollChecksResponse =
+    {};
 ```
 
 ## Fields

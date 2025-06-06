@@ -12,6 +12,7 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
+import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 
 export type Metadata = {
@@ -56,22 +57,22 @@ export type PayrollBlockersErrorData = {
  *
  * For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers)
  */
-export class PayrollBlockersError extends Error {
+export class PayrollBlockersError extends GustoEmbeddedError {
   errors?: Array<Errors> | undefined;
-  httpMeta: HTTPMetadata;
 
   /** The original data that was passed to this error instance. */
   data$: PayrollBlockersErrorData;
 
-  constructor(err: PayrollBlockersErrorData) {
+  constructor(
+    err: PayrollBlockersErrorData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
-
     if (err.errors != null) this.errors = err.errors;
-    this.httpMeta = err.httpMeta;
 
     this.name = "PayrollBlockersError";
   }
@@ -199,13 +200,20 @@ export const PayrollBlockersError$inboundSchema: z.ZodType<
 > = z.object({
   errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
   HttpMeta: HTTPMetadata$inboundSchema,
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
     const remapped = remap$(v, {
       "HttpMeta": "httpMeta",
     });
 
-    return new PayrollBlockersError(remapped);
+    return new PayrollBlockersError(remapped, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

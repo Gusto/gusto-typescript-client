@@ -5,14 +5,7 @@
 ```typescript
 import { GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse } from "@gusto/embedded-api/models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
 
-let value: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {};
 ```
 
 ## Fields

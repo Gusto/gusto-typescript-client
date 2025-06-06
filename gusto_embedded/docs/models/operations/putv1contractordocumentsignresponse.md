@@ -5,14 +5,7 @@
 ```typescript
 import { PutV1ContractorDocumentSignResponse } from "@gusto/embedded-api/models/operations/putv1contractordocumentsign.js";
 
-let value: PutV1ContractorDocumentSignResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: PutV1ContractorDocumentSignResponse = {};
 ```
 
 ## Fields

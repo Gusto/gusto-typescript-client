@@ -8,7 +8,7 @@ The required value of the requirement identified by `key`
 ### `boolean`
 
 ```typescript
-const value: boolean = false;
+const value: boolean = true;
 ```
 
 ### `string`

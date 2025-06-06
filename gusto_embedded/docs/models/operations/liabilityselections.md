@@ -8,7 +8,7 @@ import { LiabilitySelections } from "@gusto/embedded-api/models/operations/putv1
 let value: LiabilitySelections = {
   taxId: 807174,
   lastUnpaidExternalPayrollUuid: "<id>",
-  unpaidLiabilityAmount: 8835.05,
+  unpaidLiabilityAmount: 4956.42,
 };
 ```
 

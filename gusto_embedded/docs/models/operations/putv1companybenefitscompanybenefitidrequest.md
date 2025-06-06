@@ -7,9 +7,6 @@ import { PutV1CompanyBenefitsCompanyBenefitIdRequest } from "@gusto/embedded-api
 
 let value: PutV1CompanyBenefitsCompanyBenefitIdRequest = {
   companyBenefitId: "<id>",
-  requestBody: {
-    version: "<value>",
-  },
 };
 ```
 

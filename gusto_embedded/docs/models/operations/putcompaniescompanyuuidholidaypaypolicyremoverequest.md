@@ -7,9 +7,6 @@ import { PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest } from "@gusto/emb
 
 let value: PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest = {
   companyUuid: "<id>",
-  requestBody: {
-    version: "<value>",
-  },
 };
 ```
 

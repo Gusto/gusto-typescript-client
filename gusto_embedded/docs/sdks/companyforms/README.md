@@ -30,7 +30,6 @@ async function run() {
     companyId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ async function run() {
   const res = await companyFormsGetAll(gustoEmbedded, {
     companyId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyFormsGetAll failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -136,7 +132,6 @@ async function run() {
     formId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -161,15 +156,12 @@ async function run() {
   const res = await companyFormsGet(gustoEmbedded, {
     formId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyFormsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -242,7 +234,6 @@ async function run() {
     formId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -267,15 +258,12 @@ async function run() {
   const res = await companyFormsGetPdf(gustoEmbedded, {
     formId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyFormsGetPdf failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -353,7 +341,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -383,15 +370,12 @@ async function run() {
       signedByIpAddress: "192.168.0.1",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyFormsSign failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -51,7 +51,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -84,15 +83,12 @@ async function run() {
       sickHoursUsed: 0,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesCalculateAccruingTimeOffHours failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -155,7 +151,6 @@ async function run() {
     timeOffPolicyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -180,15 +175,12 @@ async function run() {
   const res = await timeOffPoliciesGet(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -272,7 +264,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -308,15 +299,12 @@ async function run() {
       maxHours: "240.0",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -379,7 +367,6 @@ async function run() {
     companyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -404,15 +391,12 @@ async function run() {
   const res = await timeOffPoliciesGetAll(gustoEmbedded, {
     companyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesGetAll failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -490,7 +474,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -520,15 +503,12 @@ async function run() {
       accrualMethod: "unlimited",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -592,7 +572,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -618,15 +597,12 @@ async function run() {
     timeOffPolicyUuid: "<id>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesAddEmployees failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -690,7 +666,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -716,15 +691,12 @@ async function run() {
     timeOffPolicyUuid: "<id>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesRemoveEmployees failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -788,7 +760,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -814,15 +785,12 @@ async function run() {
     timeOffPolicyUuid: "<id>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesUpdateBalance failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -885,7 +853,6 @@ async function run() {
     timeOffPolicyUuid: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -910,15 +877,12 @@ async function run() {
   const res = await timeOffPoliciesDeactivate(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesDeactivate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

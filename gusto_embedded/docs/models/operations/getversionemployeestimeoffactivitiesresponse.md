@@ -5,14 +5,7 @@
 ```typescript
 import { GetVersionEmployeesTimeOffActivitiesResponse } from "@gusto/embedded-api/models/operations/getversionemployeestimeoffactivities.js";
 
-let value: GetVersionEmployeesTimeOffActivitiesResponse = {
-  httpMeta: {
-    response: new Response("{\"message\": \"hello world\"}", {
-      headers: { "Content-Type": "application/json" },
-    }),
-    request: new Request("https://example.com"),
-  },
-};
+let value: GetVersionEmployeesTimeOffActivitiesResponse = {};
 ```
 
 ## Fields

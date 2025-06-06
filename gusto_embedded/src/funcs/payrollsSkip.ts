@@ -10,7 +10,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -22,6 +22,7 @@ import {
   PostCompaniesPayrollSkipCompanyUuidResponseBody,
   PostCompaniesPayrollSkipCompanyUuidResponseBody$inboundSchema,
 } from "../models/errors/postcompaniespayrollskipcompanyuuid.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PostCompaniesPayrollSkipCompanyUuidRequest,
@@ -50,13 +51,14 @@ export function payrollsSkip(
   Result<
     PostCompaniesPayrollSkipCompanyUuidResponse,
     | PostCompaniesPayrollSkipCompanyUuidResponseBody
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | GustoEmbeddedError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -75,13 +77,14 @@ async function $do(
     Result<
       PostCompaniesPayrollSkipCompanyUuidResponse,
       | PostCompaniesPayrollSkipCompanyUuidResponseBody
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | GustoEmbeddedError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -173,13 +176,14 @@ async function $do(
   const [result] = await M.match<
     PostCompaniesPayrollSkipCompanyUuidResponse,
     | PostCompaniesPayrollSkipCompanyUuidResponseBody
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | GustoEmbeddedError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.nil(202, PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema),
     M.jsonErr(

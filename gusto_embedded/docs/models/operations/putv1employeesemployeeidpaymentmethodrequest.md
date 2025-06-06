@@ -7,10 +7,6 @@ import { PutV1EmployeesEmployeeIdPaymentMethodRequest } from "@gusto/embedded-ap
 
 let value: PutV1EmployeesEmployeeIdPaymentMethodRequest = {
   employeeId: "<id>",
-  requestBody: {
-    version: "<value>",
-    type: "Check",
-  },
 };
 ```
 
