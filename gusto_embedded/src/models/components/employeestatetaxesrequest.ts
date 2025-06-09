@@ -5,147 +5,114 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
- */
-export const EmployeeStateTaxesRequestType = {
-  DirectDeposit: "Direct Deposit",
-  Check: "Check",
-} as const;
-/**
- * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
- */
-export type EmployeeStateTaxesRequestType = ClosedEnum<
-  typeof EmployeeStateTaxesRequestType
->;
+export type EmployeeStateTaxesRequestValue = string | number | boolean;
 
-/**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
- */
-export const EmployeeStateTaxesRequestSplitBy = {
-  Amount: "Amount",
-  Percentage: "Percentage",
-} as const;
-/**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
- */
-export type EmployeeStateTaxesRequestSplitBy = ClosedEnum<
-  typeof EmployeeStateTaxesRequestSplitBy
->;
+export type Answers = {
+  value: string | number | boolean | null;
+  validFrom: string;
+  validUpTo?: any | null | undefined;
+};
 
-export type Splits = {
-  /**
-   * The bank account ID
-   *
-   * @remarks
-   */
-  uuid?: string | undefined;
-  /**
-   * The bank account name
-   */
-  name?: string | undefined;
-  /**
-   * The order of priority for each payment split, with priority 1 being the first bank account paid. Priority must be unique and sequential.
-   */
-  priority?: number | undefined;
-  /**
-   * The cents amount allocated for each payment split
-   */
-  splitAmount?: number | null | undefined;
+export type Questions = {
+  key: string;
+  answers?: Array<Answers> | undefined;
+};
+
+export type States = {
+  state: string;
+  questions?: Array<Questions> | undefined;
 };
 
 export type EmployeeStateTaxesRequest = {
-  /**
-   * The payment method type. If type is Check, then split_by and splits do not need to be populated. If type is Direct Deposit, split_by and splits are required.
-   */
-  type: EmployeeStateTaxesRequestType;
-  /**
-   * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
-   */
-  splitBy?: EmployeeStateTaxesRequestSplitBy | undefined;
-  splits?: Array<Splits> | undefined;
+  states: Array<States>;
 };
 
 /** @internal */
-export const EmployeeStateTaxesRequestType$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeeStateTaxesRequestType
-> = z.nativeEnum(EmployeeStateTaxesRequestType);
+export const EmployeeStateTaxesRequestValue$inboundSchema: z.ZodType<
+  EmployeeStateTaxesRequestValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export const EmployeeStateTaxesRequestType$outboundSchema: z.ZodNativeEnum<
-  typeof EmployeeStateTaxesRequestType
-> = EmployeeStateTaxesRequestType$inboundSchema;
+export type EmployeeStateTaxesRequestValue$Outbound = string | number | boolean;
+
+/** @internal */
+export const EmployeeStateTaxesRequestValue$outboundSchema: z.ZodType<
+  EmployeeStateTaxesRequestValue$Outbound,
+  z.ZodTypeDef,
+  EmployeeStateTaxesRequestValue
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace EmployeeStateTaxesRequestType$ {
-  /** @deprecated use `EmployeeStateTaxesRequestType$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxesRequestType$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxesRequestType$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxesRequestType$outboundSchema;
+export namespace EmployeeStateTaxesRequestValue$ {
+  /** @deprecated use `EmployeeStateTaxesRequestValue$inboundSchema` instead. */
+  export const inboundSchema = EmployeeStateTaxesRequestValue$inboundSchema;
+  /** @deprecated use `EmployeeStateTaxesRequestValue$outboundSchema` instead. */
+  export const outboundSchema = EmployeeStateTaxesRequestValue$outboundSchema;
+  /** @deprecated use `EmployeeStateTaxesRequestValue$Outbound` instead. */
+  export type Outbound = EmployeeStateTaxesRequestValue$Outbound;
+}
+
+export function employeeStateTaxesRequestValueToJSON(
+  employeeStateTaxesRequestValue: EmployeeStateTaxesRequestValue,
+): string {
+  return JSON.stringify(
+    EmployeeStateTaxesRequestValue$outboundSchema.parse(
+      employeeStateTaxesRequestValue,
+    ),
+  );
+}
+
+export function employeeStateTaxesRequestValueFromJSON(
+  jsonString: string,
+): SafeParseResult<EmployeeStateTaxesRequestValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EmployeeStateTaxesRequestValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeeStateTaxesRequestValue' from JSON`,
+  );
 }
 
 /** @internal */
-export const EmployeeStateTaxesRequestSplitBy$inboundSchema: z.ZodNativeEnum<
-  typeof EmployeeStateTaxesRequestSplitBy
-> = z.nativeEnum(EmployeeStateTaxesRequestSplitBy);
-
-/** @internal */
-export const EmployeeStateTaxesRequestSplitBy$outboundSchema: z.ZodNativeEnum<
-  typeof EmployeeStateTaxesRequestSplitBy
-> = EmployeeStateTaxesRequestSplitBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeStateTaxesRequestSplitBy$ {
-  /** @deprecated use `EmployeeStateTaxesRequestSplitBy$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxesRequestSplitBy$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxesRequestSplitBy$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxesRequestSplitBy$outboundSchema;
-}
-
-/** @internal */
-export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
-  .object({
-    uuid: z.string().optional(),
-    name: z.string().optional(),
-    priority: z.number().int().optional(),
-    split_amount: z.nullable(z.number().int()).optional(),
+export const Answers$inboundSchema: z.ZodType<Answers, z.ZodTypeDef, unknown> =
+  z.object({
+    value: z.nullable(z.union([z.string(), z.number(), z.boolean()])),
+    valid_from: z.string(),
+    valid_up_to: z.nullable(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "split_amount": "splitAmount",
+      "valid_from": "validFrom",
+      "valid_up_to": "validUpTo",
     });
   });
 
 /** @internal */
-export type Splits$Outbound = {
-  uuid?: string | undefined;
-  name?: string | undefined;
-  priority?: number | undefined;
-  split_amount?: number | null | undefined;
+export type Answers$Outbound = {
+  value: string | number | boolean | null;
+  valid_from: string;
+  valid_up_to?: any | null | undefined;
 };
 
 /** @internal */
-export const Splits$outboundSchema: z.ZodType<
-  Splits$Outbound,
+export const Answers$outboundSchema: z.ZodType<
+  Answers$Outbound,
   z.ZodTypeDef,
-  Splits
+  Answers
 > = z.object({
-  uuid: z.string().optional(),
-  name: z.string().optional(),
-  priority: z.number().int().optional(),
-  splitAmount: z.nullable(z.number().int()).optional(),
+  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])),
+  validFrom: z.string(),
+  validUpTo: z.nullable(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    splitAmount: "split_amount",
+    validFrom: "valid_from",
+    validUpTo: "valid_up_to",
   });
 });
 
@@ -153,26 +120,129 @@ export const Splits$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Splits$ {
-  /** @deprecated use `Splits$inboundSchema` instead. */
-  export const inboundSchema = Splits$inboundSchema;
-  /** @deprecated use `Splits$outboundSchema` instead. */
-  export const outboundSchema = Splits$outboundSchema;
-  /** @deprecated use `Splits$Outbound` instead. */
-  export type Outbound = Splits$Outbound;
+export namespace Answers$ {
+  /** @deprecated use `Answers$inboundSchema` instead. */
+  export const inboundSchema = Answers$inboundSchema;
+  /** @deprecated use `Answers$outboundSchema` instead. */
+  export const outboundSchema = Answers$outboundSchema;
+  /** @deprecated use `Answers$Outbound` instead. */
+  export type Outbound = Answers$Outbound;
 }
 
-export function splitsToJSON(splits: Splits): string {
-  return JSON.stringify(Splits$outboundSchema.parse(splits));
+export function answersToJSON(answers: Answers): string {
+  return JSON.stringify(Answers$outboundSchema.parse(answers));
 }
 
-export function splitsFromJSON(
+export function answersFromJSON(
   jsonString: string,
-): SafeParseResult<Splits, SDKValidationError> {
+): SafeParseResult<Answers, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Splits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Splits' from JSON`,
+    (x) => Answers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Answers' from JSON`,
+  );
+}
+
+/** @internal */
+export const Questions$inboundSchema: z.ZodType<
+  Questions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  answers: z.array(z.lazy(() => Answers$inboundSchema)).optional(),
+});
+
+/** @internal */
+export type Questions$Outbound = {
+  key: string;
+  answers?: Array<Answers$Outbound> | undefined;
+};
+
+/** @internal */
+export const Questions$outboundSchema: z.ZodType<
+  Questions$Outbound,
+  z.ZodTypeDef,
+  Questions
+> = z.object({
+  key: z.string(),
+  answers: z.array(z.lazy(() => Answers$outboundSchema)).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Questions$ {
+  /** @deprecated use `Questions$inboundSchema` instead. */
+  export const inboundSchema = Questions$inboundSchema;
+  /** @deprecated use `Questions$outboundSchema` instead. */
+  export const outboundSchema = Questions$outboundSchema;
+  /** @deprecated use `Questions$Outbound` instead. */
+  export type Outbound = Questions$Outbound;
+}
+
+export function questionsToJSON(questions: Questions): string {
+  return JSON.stringify(Questions$outboundSchema.parse(questions));
+}
+
+export function questionsFromJSON(
+  jsonString: string,
+): SafeParseResult<Questions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Questions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Questions' from JSON`,
+  );
+}
+
+/** @internal */
+export const States$inboundSchema: z.ZodType<States, z.ZodTypeDef, unknown> = z
+  .object({
+    state: z.string(),
+    questions: z.array(z.lazy(() => Questions$inboundSchema)).optional(),
+  });
+
+/** @internal */
+export type States$Outbound = {
+  state: string;
+  questions?: Array<Questions$Outbound> | undefined;
+};
+
+/** @internal */
+export const States$outboundSchema: z.ZodType<
+  States$Outbound,
+  z.ZodTypeDef,
+  States
+> = z.object({
+  state: z.string(),
+  questions: z.array(z.lazy(() => Questions$outboundSchema)).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace States$ {
+  /** @deprecated use `States$inboundSchema` instead. */
+  export const inboundSchema = States$inboundSchema;
+  /** @deprecated use `States$outboundSchema` instead. */
+  export const outboundSchema = States$outboundSchema;
+  /** @deprecated use `States$Outbound` instead. */
+  export type Outbound = States$Outbound;
+}
+
+export function statesToJSON(states: States): string {
+  return JSON.stringify(States$outboundSchema.parse(states));
+}
+
+export function statesFromJSON(
+  jsonString: string,
+): SafeParseResult<States, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => States$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'States' from JSON`,
   );
 }
 
@@ -182,20 +252,12 @@ export const EmployeeStateTaxesRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: EmployeeStateTaxesRequestType$inboundSchema,
-  split_by: EmployeeStateTaxesRequestSplitBy$inboundSchema.optional(),
-  splits: z.array(z.lazy(() => Splits$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "split_by": "splitBy",
-  });
+  states: z.array(z.lazy(() => States$inboundSchema)),
 });
 
 /** @internal */
 export type EmployeeStateTaxesRequest$Outbound = {
-  type: string;
-  split_by?: string | undefined;
-  splits?: Array<Splits$Outbound> | undefined;
+  states: Array<States$Outbound>;
 };
 
 /** @internal */
@@ -204,13 +266,7 @@ export const EmployeeStateTaxesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmployeeStateTaxesRequest
 > = z.object({
-  type: EmployeeStateTaxesRequestType$outboundSchema,
-  splitBy: EmployeeStateTaxesRequestSplitBy$outboundSchema.optional(),
-  splits: z.array(z.lazy(() => Splits$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    splitBy: "split_by",
-  });
+  states: z.array(z.lazy(() => States$outboundSchema)),
 });
 
 /**

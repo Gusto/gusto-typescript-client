@@ -361,7 +361,23 @@ async function run() {
   const result = await gustoEmbedded.employeeTaxSetup.updateStateTaxes({
     employeeUuid: "<id>",
     employeeStateTaxesRequest: {
-      type: "Direct Deposit",
+      states: [
+        {
+          state: "CA",
+          questions: [
+            {
+              key: "filing_status",
+              answers: [
+                {
+                  value: "M",
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
   });
 
@@ -389,7 +405,23 @@ async function run() {
   const res = await employeeTaxSetupUpdateStateTaxes(gustoEmbedded, {
     employeeUuid: "<id>",
     employeeStateTaxesRequest: {
-      type: "Direct Deposit",
+      states: [
+        {
+          state: "CA",
+          questions: [
+            {
+              key: "filing_status",
+              answers: [
+                {
+                  value: "M",
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
   });
   if (res.ok) {

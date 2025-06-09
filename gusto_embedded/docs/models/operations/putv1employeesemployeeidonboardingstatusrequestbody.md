@@ -6,7 +6,7 @@
 import { PutV1EmployeesEmployeeIdOnboardingStatusRequestBody } from "@gusto/embedded-api/models/operations/putv1employeesemployeeidonboardingstatus.js";
 
 let value: PutV1EmployeesEmployeeIdOnboardingStatusRequestBody = {
-  onboardingStatus: "admin_onboarding_incomplete",
+  onboardingStatus: "self_onboarding_invited_started",
 };
 ```
 
