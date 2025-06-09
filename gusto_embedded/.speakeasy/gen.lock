@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: bbc33914c9d5be2015be9661b44f90d8
+  docChecksum: 38b865aaa0918a1e76b8dd90b0a49111
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.557.1
-  generationVersion: 2.623.2
-  releaseVersion: 0.6.2
-  configChecksum: c4f47ba103943396e0d396b870abba22
+  speakeasyVersion: 1.558.1
+  generationVersion: 2.623.4
+  releaseVersion: 0.6.3
+  configChecksum: c4fd52a2de02e8cf83697ceddf9eae72
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -37,7 +37,7 @@ features:
     retries: 2.83.0
     sdkHooks: 0.3.0
     serverIDs: 2.81.2
-    unions: 2.85.8
+    unions: 2.85.9
     uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
@@ -60,6 +60,7 @@ generatedFiles:
   - docs/models/components/admin.md
   - docs/models/components/agencies.md
   - docs/models/components/aggregation.md
+  - docs/models/components/answers.md
   - docs/models/components/applicablebenefits.md
   - docs/models/components/applicableearnings.md
   - docs/models/components/applicableif.md
@@ -114,7 +115,6 @@ generatedFiles:
   - docs/models/components/contractoronboardingstatusonboardingstep.md
   - docs/models/components/contractorpayment.md
   - docs/models/components/contractorpaymentdetailslist.md
-  - docs/models/components/contractorpaymentdetailslistsplits.md
   - docs/models/components/contractorpaymentforgroup.md
   - docs/models/components/contractorpaymentforgrouppaymentmethod.md
   - docs/models/components/contractorpaymentforgroupstatus.md
@@ -195,8 +195,7 @@ generatedFiles:
   - docs/models/components/employeestatetaxes.md
   - docs/models/components/employeestatetaxeslist.md
   - docs/models/components/employeestatetaxesrequest.md
-  - docs/models/components/employeestatetaxesrequestsplitby.md
-  - docs/models/components/employeestatetaxesrequesttype.md
+  - docs/models/components/employeestatetaxesrequestvalue.md
   - docs/models/components/employeestatetaxinputquestionformat.md
   - docs/models/components/employeestatetaxinputquestionformatvalue.md
   - docs/models/components/employeestatetaxquestion.md
@@ -274,6 +273,7 @@ generatedFiles:
   - docs/models/components/name.md
   - docs/models/components/newyearsday.md
   - docs/models/components/notification.md
+  - docs/models/components/notificationentitytype.md
   - docs/models/components/notificationstatus.md
   - docs/models/components/offcyclereasontype.md
   - docs/models/components/onboardingdocumentsconfig.md
@@ -347,6 +347,7 @@ generatedFiles:
   - docs/models/components/presidentsday.md
   - docs/models/components/primarypayrolladmin.md
   - docs/models/components/primarysignatory.md
+  - docs/models/components/questions.md
   - docs/models/components/ratetype.md
   - docs/models/components/recipienttype.md
   - docs/models/components/reconciletaxmethod.md
@@ -368,6 +369,7 @@ generatedFiles:
   - docs/models/components/source.md
   - docs/models/components/splitby.md
   - docs/models/components/splits.md
+  - docs/models/components/states.md
   - docs/models/components/status.md
   - docs/models/components/subscriptiontypes.md
   - docs/models/components/supportedbenefit.md
@@ -3207,7 +3209,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "a3d7ce9f-3e9c-4388-9ba1-c6910cd4e24b", "version": "c2e2cdbe27a66a902c942084791d6bd8", "company_uuid": "5dabce7d-c434-4437-a900-7b479f0c6b09", "phone_number": "3350458937", "street_1": "756 Weldon Rest", "street_2": "Suite 248", "city": "Brooklyn", "state": "NY", "zip": "11249", "country": "USA", "mailing_address": true, "filing_address": false, "created_at": "2025-06-09T08:53:04.000-07:00", "updated_at": "2025-06-09T08:53:04.000-07:00", "active": true}
+          application/json: {"uuid": "314caa70-d638-4057-b5f1-06d7afc72ea0", "version": "ad2338cfd3a4c963e3769dbed0705c3a", "company_uuid": "0fb009ea-d104-4206-bf76-ab57a516b7c8", "phone_number": "6199914194", "street_1": "276 Wyman Terrace", "street_2": "Apt. 382", "city": "Grenola", "state": "KS", "zip": "67346", "country": "USA", "mailing_address": true, "filing_address": false, "created_at": "2025-06-09T13:43:47.000-07:00", "updated_at": "2025-06-09T13:43:47.000-07:00", "active": true}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-locations-location_id:
@@ -3218,7 +3220,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "a580c1423802f3080d66cc28b18a4d72", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
+        application/json: {"version": "e846a905b4b31e324793261d4c5f5038", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
       responses:
         "200":
           application/json: {"uuid": "ced517c9-1c22-4468-88f7-bea752987d03", "country": "USA"}
@@ -3234,7 +3236,7 @@ examples:
         application/json: {"version": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "e8077a45-22b1-4585-b89e-de20e4858b3e", "version": "6ff3b7182d80471e8873e94ca45aed22", "company_uuid": "76fc5095-1c3d-4ff2-a301-35253bbf7a4d", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "state": "ND", "zip": "94107", "country": "USA", "mailing_address": true, "filing_address": true, "created_at": "2025-06-09T08:53:06.000-07:00", "updated_at": "2025-06-09T08:53:06.000-07:00", "active": true}
+          application/json: {"uuid": "6b1351a2-de35-4499-b948-43abab274634", "version": "e1bdd845a493c74908f8e15d6114169b", "company_uuid": "10593a6a-505b-4aa6-bf31-15dcdceedbe3", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "state": "CO", "zip": "94107", "country": "USA", "mailing_address": true, "filing_address": true, "created_at": "2025-06-09T13:43:49.000-07:00", "updated_at": "2025-06-09T13:43:50.000-07:00", "active": true}
         "404":
           application/json: {"errors": [{"error_key": "state", "category": "invalid_attribute_value", "message": "State is in the wrong format"}]}
   get-v1-locations-location_uuid-minimum_wages:
@@ -3261,7 +3263,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "cab1c894-3a0d-437e-b44e-a9ca041b854c", "wage": "15.0", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "fe8aa16d-2599-4047-a94c-63cb52693360", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "09694f7f-22ad-4907-9d80-ea534f4b582b", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "State", "notes": "large companies"}, {"uuid": "1b8d62d6-6eee-4658-b36b-f738273d106c", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "Federal", "notes": "large companies"}]
+          application/json: [{"uuid": "1b71bb5b-4811-46e9-8a8a-cf5521cbeda6", "wage": "15.0", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "87434623-b57d-4630-8da5-9dde599c7840", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "City", "notes": "large companies"}, {"uuid": "fa055c11-bfe4-4ac3-84dd-8502cf046b20", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "State", "notes": "large companies"}, {"uuid": "cdd9dfc2-6465-4693-ae60-0eecff35038c", "wage": "10.5", "wage_type": "Regular", "effective_date": "2017-01-01", "authority": "Federal", "notes": "large companies"}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-companies-company_id-bank-accounts:
@@ -3949,7 +3951,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "6ba3bd2f-d785-4624-a996-875b501d0bd1", "first_name": "Boaty", "middle_initial": null, "last_name": "Howell", "email": "janina@bahringerhand.biz", "company_uuid": "4054a1f0-bd26-4220-a848-eae8e9ab5c1d", "manager_uuid": null, "version": "55f0202fb1794917f445ea933a415dbe", "department": null, "terminated": false, "two_percent_shareholder": false, "work_email": null, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "9bab8773-22ca-4973-98fd-70d12bbc233b", "version": "863bcd01c51fcfa2468d604cffec7413", "employee_uuid": "6ba3bd2f-d785-4624-a996-875b501d0bd1", "hire_date": "2024-06-09", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "8984a5f4-dd2e-4904-b3d8-bc8aee26247e", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "8984a5f4-dd2e-4904-b3d8-bc8aee26247e", "version": "db7bfb49a4f0893432cb562311bfcad9", "job_uuid": "9bab8773-22ca-4973-98fd-70d12bbc233b", "employee_uuid": "6ba3bd2f-d785-4624-a996-875b501d0bd1", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-06-09", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-06-09", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "current_employment_status": "full_time", "historical": false, "employee_code": "480fa0", "department_uuid": null}, {"uuid": "a0766d4c-e2da-4212-8588-8de414692ec3", "first_name": "Torri", "middle_initial": null, "last_name": "Von", "email": "idalia@hartmannhoeger.us", "company_uuid": "4054a1f0-bd26-4220-a848-eae8e9ab5c1d", "manager_uuid": null, "version": "a1f5974cbf0ecbe3f59b29dae90e43c0", "department": null, "terminated": false, "two_percent_shareholder": false, "work_email": null, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "c3244ec9-8ac3-4a34-bed8-b164018e5c7e", "version": "863bcd01c51fcfa2468d604cffec7413", "employee_uuid": "a0766d4c-e2da-4212-8588-8de414692ec3", "hire_date": "2024-06-09", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "3203dd91-ead1-4267-b129-2ebc8cb57130", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "3203dd91-ead1-4267-b129-2ebc8cb57130", "version": "db7bfb49a4f0893432cb562311bfcad9", "job_uuid": "c3244ec9-8ac3-4a34-bed8-b164018e5c7e", "employee_uuid": "a0766d4c-e2da-4212-8588-8de414692ec3", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-06-09", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-06-09", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "current_employment_status": "full_time", "historical": false, "employee_code": "1d49c0", "department_uuid": null}]
+          application/json: [{"uuid": "d7282d99-ab6b-42f5-ba45-f4a670e886a8", "first_name": "Boaty", "middle_initial": null, "last_name": "Koss", "email": "keena.feest@kiehn.co.uk", "company_uuid": "e904cc79-818a-4da8-9d37-0be0a86fdda8", "manager_uuid": null, "version": "a5cec1f1c0135feb3e76ca6ea3c46176", "department": null, "terminated": false, "two_percent_shareholder": false, "work_email": null, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "bc875f9d-adc5-40f6-99db-ed8470bda25f", "version": "863bcd01c51fcfa2468d604cffec7413", "employee_uuid": "d7282d99-ab6b-42f5-ba45-f4a670e886a8", "hire_date": "2024-06-09", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "2ec164d0-808b-446c-8120-8cfb500945d0", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "2ec164d0-808b-446c-8120-8cfb500945d0", "version": "db7bfb49a4f0893432cb562311bfcad9", "job_uuid": "bc875f9d-adc5-40f6-99db-ed8470bda25f", "employee_uuid": "d7282d99-ab6b-42f5-ba45-f4a670e886a8", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-06-09", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-06-09", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "current_employment_status": "full_time", "historical": false, "employee_code": "46f036", "department_uuid": null}, {"uuid": "d3506820-66b2-4bb0-a4d6-a8f986e4fca3", "first_name": "Stephenie", "middle_initial": null, "last_name": "Cartwright", "email": "mary@schoen.biz", "company_uuid": "e904cc79-818a-4da8-9d37-0be0a86fdda8", "manager_uuid": null, "version": "9c06a75307da4c5e39baf22beee81dee", "department": null, "terminated": false, "two_percent_shareholder": false, "work_email": null, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "d6f59234-77b1-4d0f-b0a3-ee1e6aee05ab", "version": "863bcd01c51fcfa2468d604cffec7413", "employee_uuid": "d3506820-66b2-4bb0-a4d6-a8f986e4fca3", "hire_date": "2024-06-09", "title": "", "primary": true, "rate": "80000.00", "payment_unit": "Year", "current_compensation_uuid": "3de0057c-80fc-4015-9b7d-28b9eebfc68d", "two_percent_shareholder": false, "state_wc_covered": null, "state_wc_class_code": null, "compensations": [{"uuid": "3de0057c-80fc-4015-9b7d-28b9eebfc68d", "version": "db7bfb49a4f0893432cb562311bfcad9", "job_uuid": "d6f59234-77b1-4d0f-b0a3-ee1e6aee05ab", "employee_uuid": "d3506820-66b2-4bb0-a4d6-a8f986e4fca3", "rate": "80000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2025-06-09", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": "2005-06-09", "has_ssn": true, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Direct Deposit", "current_employment_status": "full_time", "historical": false, "employee_code": "789029", "department_uuid": null}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-employees:
@@ -3974,7 +3976,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "201":
-          application/json: {"uuid": "061f8f35-3484-4dd4-8f61-9ecc6329e6be", "first_name": "Karl", "middle_initial": null, "last_name": "The Fog", "email": null, "company_uuid": "c7764a5b-d90c-473a-9c2d-83bba31c8f05", "manager_uuid": null, "version": "5211ee9bb08e51634431a18eff0afc64", "department": null, "terminated": false, "two_percent_shareholder": null, "work_email": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": null, "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "current_employment_status": null, "historical": false, "employee_code": "152d01", "department_uuid": null}
+          application/json: {"uuid": "1c4fba51-b867-49a7-9d75-54572badcc7e", "first_name": "Karl", "middle_initial": null, "last_name": "The Fog", "email": null, "company_uuid": "81191cf6-8bd3-4dad-836a-5e7cfdad5182", "manager_uuid": null, "version": "5211ee9bb08e51634431a18eff0afc64", "department": null, "terminated": false, "two_percent_shareholder": null, "work_email": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": null, "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "current_employment_status": null, "historical": false, "employee_code": "b9f87c", "department_uuid": null}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-historical_employees:
@@ -4044,14 +4046,14 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "839193b5-31aa-4471-842a-ca17bad14dde", "first_name": "Viki", "middle_initial": null, "last_name": "Franecki", "email": "reggie_abernathy@upton.biz", "company_uuid": "f87f87fd-ef43-42d5-8bef-8c0c62621626", "version": "fffd65aa1a869e880383552fd3ef32c0", "department": "City Building 1", "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "5c81ed4d-ec9e-473d-a65a-7e410830b9e5", "employee_uuid": "839193b5-31aa-4471-842a-ca17bad14dde", "hire_date": "2024-06-09", "title": "Engineer", "primary": true, "two_percent_shareholder": false, "location_uuid": "48fca61b-b867-42cb-8353-0d4dcf3b65a3", "location": {"uuid": "48fca61b-b867-42cb-8353-0d4dcf3b65a3", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "2005-06-09", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "1662bb", "department_uuid": "c92c2135-53e7-47d4-b67b-8bc98224c54a", "title": "Engineer", "hired_at": "2024-06-09", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
+          application/json: {"uuid": "15a82f0b-9aff-4d75-9747-44ddaaea0713", "first_name": "Tosha", "middle_initial": null, "last_name": "Nolan", "email": "malisa@nitzsche.biz", "company_uuid": "05016e59-179d-491d-b596-0e686a4e64d9", "version": "d8fe17ffef0bd950f0bb49d494ef7da5", "department": "Animals 1", "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "891d392c-734e-4194-9edf-1679e0289286", "employee_uuid": "15a82f0b-9aff-4d75-9747-44ddaaea0713", "hire_date": "2024-06-09", "title": "Engineer", "primary": true, "two_percent_shareholder": false, "location_uuid": "8454e1ee-b3df-4769-bb66-5c32e2c98061", "location": {"uuid": "8454e1ee-b3df-4769-bb66-5c32e2c98061", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "2005-06-09", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "b4b6b5", "department_uuid": "bf2188de-fef4-401e-9951-d30e7b1cdb71", "title": "Engineer", "hired_at": "2024-06-09", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
   put-v1-employees:
     request_example_1:
       parameters:
         path:
           employee_id: "<id>"
       requestBody:
-        application/json: {"version": "2d1d4e96ac947dfe3d286fb061e3bf54", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
+        application/json: {"version": "4ecb673b6db2f90a23c19c8e9cb4274e", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
       responses:
         "200":
           application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
@@ -4065,7 +4067,7 @@ examples:
         application/json: {"version": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "0747fbd8-1e04-4a33-97b4-2d6ff173a665", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "company_uuid": "192e9c64-bf9e-4062-9a99-55c92c7c5d38", "version": "4eff5441d8f8ecc08f53a88ded36f13e", "department": null, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "7bb2e32a-f314-45d1-a575-eba7026b2f4a", "employee_uuid": "0747fbd8-1e04-4a33-97b4-2d6ff173a665", "hire_date": "2024-06-09", "title": "", "primary": true, "two_percent_shareholder": false, "location_uuid": "62655141-aaa9-4af9-943f-81463475e04b", "location": {"uuid": "62655141-aaa9-4af9-943f-81463475e04b", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "1991-01-31", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "f94ecb", "department_uuid": null, "title": "", "hired_at": "2024-06-09", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
+          application/json: {"uuid": "1abe1569-9d13-4046-be56-5873f95bba18", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "company_uuid": "84e0b59a-b28c-4247-a64b-c690352374e1", "version": "4eff5441d8f8ecc08f53a88ded36f13e", "department": null, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "b642ef6b-5f2c-4972-a7b1-e492f16e66d8", "employee_uuid": "1abe1569-9d13-4046-be56-5873f95bba18", "hire_date": "2024-06-09", "title": "", "primary": true, "two_percent_shareholder": false, "location_uuid": "6f844e75-de46-420d-9680-b670022f21ce", "location": {"uuid": "6f844e75-de46-420d-9680-b670022f21ce", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "1991-01-31", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "20961c", "department_uuid": null, "title": "", "hired_at": "2024-06-09", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
         "404":
           application/json: {"errors": [{"error_key": "base", "category": "invalid_resource_version", "message": "You are attempting to update a resource using an out-of-date version."}]}
   delete-v1-employee:
@@ -4106,7 +4108,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "9e997676-d440-461a-8fdf-6101ca5b4719", "onboarding_status": "onboarding_completed", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": true, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": true, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": true, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": true, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": true, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
+          application/json: {"uuid": "1c132139-951b-4d28-9325-7fad24ebcec9", "onboarding_status": "onboarding_completed", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": true, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": true, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": true, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": true, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": true, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
   put-v1-employees-employee_id-onboarding_status:
     request_example_1:
       parameters:
@@ -4131,7 +4133,7 @@ examples:
         application/json: {"onboarding_status": "self_onboarding_invited"}
       responses:
         "200":
-          application/json: {"uuid": "01c29c30-0a80-4f63-80f5-f25b63741185", "onboarding_status": "admin_onboarding_incomplete", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": false, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": false, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": false, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": false, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": false, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
+          application/json: {"uuid": "049dbf20-0e2a-4232-854b-ac888cef3f0c", "onboarding_status": "admin_onboarding_incomplete", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": false, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": false, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": false, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": false, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": false, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-version-employees-time_off_activities:
@@ -4585,7 +4587,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "9de4b09d-f521-4182-93ff-290bde7f1ad5", "employee_uuid": "55691341-b666-40c5-8c8f-1c7cc2c12165", "effective_date": "2024-06-09", "courtesy_withholding": false, "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": false, "version": "7eee445be93fc50fd3cbb55b8d943fb3"}, {"uuid": "56645b5b-a49f-458b-8756-c0369c7c8d93", "employee_uuid": "55691341-b666-40c5-8c8f-1c7cc2c12165", "effective_date": "2025-05-26", "courtesy_withholding": false, "street_1": "3624 Victoria Ln", "street_2": "", "city": "Cincinnati", "state": "OH", "zip": "45208", "country": "USA", "active": true, "version": "5147ad755821c4ba3dbc3afa1055ff4d"}, {"uuid": "e3dcbe15-ca89-4e29-8bd7-b79275f9a751", "employee_uuid": "55691341-b666-40c5-8c8f-1c7cc2c12165", "effective_date": "2025-07-09", "courtesy_withholding": false, "street_1": "Main st.", "street_2": "", "city": "New York", "state": "NY", "zip": "10011", "country": "USA", "active": false, "version": "f0765fa5a85f62723320763494a481a6"}]
+          application/json: [{"uuid": "d6b7472f-bb55-41ca-a55c-9adbd3c64e09", "employee_uuid": "d1a166b4-79b4-413f-b067-27534ec59ecd", "effective_date": "2024-06-09", "courtesy_withholding": false, "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": false, "version": "7eee445be93fc50fd3cbb55b8d943fb3"}, {"uuid": "1b59a593-d324-4d97-9296-99ecc95f81d1", "employee_uuid": "d1a166b4-79b4-413f-b067-27534ec59ecd", "effective_date": "2025-05-26", "courtesy_withholding": false, "street_1": "3624 Victoria Ln", "street_2": "", "city": "Cincinnati", "state": "OH", "zip": "45208", "country": "USA", "active": true, "version": "5147ad755821c4ba3dbc3afa1055ff4d"}, {"uuid": "69489b54-976d-4027-8b51-702e5c8c62d3", "employee_uuid": "d1a166b4-79b4-413f-b067-27534ec59ecd", "effective_date": "2025-07-09", "courtesy_withholding": false, "street_1": "Main st.", "street_2": "", "city": "New York", "state": "NY", "zip": "10011", "country": "USA", "active": false, "version": "f0765fa5a85f62723320763494a481a6"}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-employees-employee_id-home_addresses:
@@ -4656,7 +4658,7 @@ examples:
         application/json: {"street_1": "300 3rd Street", "city": "San Francisco", "state": "CA", "zip": "94107", "effective_date": "2022-01-31"}
       responses:
         "201":
-          application/json: {"uuid": "8ee12f16-1b74-423a-b344-bd714c8b2641", "employee_uuid": "cf4b3dbd-63cb-4a54-a039-e396a1484d1c", "effective_date": "2025-04-09", "courtesy_withholding": false, "street_1": "500 3rd Street", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "version": "e4a88d91321dad0d3918c4efaeb433a2"}
+          application/json: {"uuid": "4fb52ba1-c50a-413c-a4cd-1166044fee89", "employee_uuid": "c5d6fa56-3aa4-4d0c-9315-14b197cf7401", "effective_date": "2025-04-09", "courtesy_withholding": false, "street_1": "500 3rd Street", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "version": "e4a88d91321dad0d3918c4efaeb433a2"}
         "404":
           application/json: {"errors": [{"error_key": "street_1", "category": "invalid_attribute_value", "message": "Must include a street address"}]}
   get-v1-home_addresses-home_address_uuid:
@@ -4677,7 +4679,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "f64deaad-eb94-4289-ad85-062527055741", "employee_uuid": "74b793d6-f3ce-4084-b8a7-4a8ba56d6c9a", "effective_date": "1970-01-01", "courtesy_withholding": false, "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "version": "6c3c23e4cc840bd3f1416f72b5380eff"}
+          application/json: {"uuid": "700af712-62ba-4dff-824f-97a3c6fda416", "employee_uuid": "78d20691-f1b4-4f74-bc4c-1d4db0099b00", "effective_date": "1970-01-01", "courtesy_withholding": false, "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "version": "6c3c23e4cc840bd3f1416f72b5380eff"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-home_addresses-home_address_uuid:
@@ -4748,7 +4750,7 @@ examples:
         application/json: {"version": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "279a0716-68ea-4b1b-9679-71618efb1b59", "employee_uuid": "0f76644c-bd70-465a-ac99-8630cf1c2984", "effective_date": "1970-01-01", "courtesy_withholding": false, "street_1": "600 4th Street", "street_2": "", "city": "Miami", "state": "FL", "zip": "33173", "country": "USA", "active": true, "version": "92676c3c5a3c0f26911388a55633b31a"}
+          application/json: {"uuid": "fb763fae-9dae-4307-9070-282b75ba4028", "employee_uuid": "549bfb85-03c7-4eb0-9d18-3bb85d9d3aae", "effective_date": "1970-01-01", "courtesy_withholding": false, "street_1": "600 4th Street", "street_2": "", "city": "Miami", "state": "FL", "zip": "33173", "country": "USA", "active": true, "version": "92676c3c5a3c0f26911388a55633b31a"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   delete-v1-home_addresses-home_address_uuid:
@@ -4794,7 +4796,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "2b94f90e-3e47-4eb9-afb2-ccd23e61bf8c", "effective_date": "2021-01-01", "active": false, "location_uuid": "ce267eaf-f848-4a3d-bff2-59f1cbecba31", "employee_uuid": "1ac4a26d-c387-42f7-bedf-8de92a3fd7e9", "version": "10d9f6fd3d8a56ef74f60ca02b56b648", "street_1": "91678 Farrell Meadow", "street_2": "Apt. 835", "city": "Phoenix", "state": "AZ", "zip": "85016", "country": "USA"}, {"uuid": "85c7c3c0-fb55-4898-b5d2-5015469b4f67", "effective_date": "2022-01-01", "active": false, "location_uuid": "20f0f331-37cf-4fc2-8a75-845148c11cef", "employee_uuid": "1ac4a26d-c387-42f7-bedf-8de92a3fd7e9", "version": "4eb3aa3184d8f09785a20eb778a64e42", "street_1": "800 Adolfo Gardens", "street_2": "Suite 419", "city": "Bremen", "state": "AL", "zip": "35033", "country": "USA"}, {"uuid": "ef87b156-5554-45e3-ba6a-0cb8e6677565", "effective_date": "2023-01-01", "active": true, "location_uuid": "d4bff9e6-c1a2-4d0b-ad70-4e5102c06583", "employee_uuid": "1ac4a26d-c387-42f7-bedf-8de92a3fd7e9", "version": "b2d8988a7c387c34ea3891bb9a0c5450", "street_1": "2216 Icie Villages", "street_2": "Apt. 798", "city": "Big Delta", "state": "AK", "zip": "99737", "country": "USA"}]
+          application/json: [{"uuid": "080b6254-ce7c-411f-9f7d-5a3ce3c51154", "effective_date": "2021-01-01", "active": false, "location_uuid": "9ccfade8-82ee-490c-8711-5c0787bccde8", "employee_uuid": "6747692e-d2c8-4472-9c5e-183c65404fbf", "version": "3097e9d0efb09ba2e00a8988a93b3091", "street_1": "91678 Farrell Meadow", "street_2": "Apt. 835", "city": "Phoenix", "state": "AZ", "zip": "85016", "country": "USA"}, {"uuid": "35d62f15-75da-45aa-9c97-adc57342b925", "effective_date": "2022-01-01", "active": false, "location_uuid": "10330fe8-36ef-4713-aa59-9f8a432abd13", "employee_uuid": "6747692e-d2c8-4472-9c5e-183c65404fbf", "version": "5f48ce54afed81bb11dd89461bd0e214", "street_1": "800 Adolfo Gardens", "street_2": "Suite 419", "city": "Bremen", "state": "AL", "zip": "35033", "country": "USA"}, {"uuid": "3f3ceaba-6b57-4039-a31a-0004bef83c6f", "effective_date": "2023-01-01", "active": true, "location_uuid": "98383e91-c67d-4b69-a617-5a57f91da48c", "employee_uuid": "6747692e-d2c8-4472-9c5e-183c65404fbf", "version": "a8a78c851337676137e22caf56ffe5b5", "street_1": "2216 Icie Villages", "street_2": "Apt. 798", "city": "Big Delta", "state": "AK", "zip": "99737", "country": "USA"}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-employees-employee_id-work_addresses:
@@ -4805,7 +4807,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"location_uuid": "8ed67ef6-60e3-4e4f-bbad-065578738eaf", "effective_date": "2020-01-31"}
+        application/json: {"location_uuid": "733ab2af-9510-408f-8d20-09196967174f", "effective_date": "2020-01-31"}
       responses:
         "201":
           application/json: {"uuid": "e02ec014-1e6b-41a8-ba57-7e102baa2d06", "version": "<value>", "country": "USA"}
@@ -4821,7 +4823,7 @@ examples:
         application/json: {"location_uuid": "6a119be7-b4b0-4e27-aaa0-89d5f2524635", "effective_date": "2023-05-15"}
       responses:
         "201":
-          application/json: {"uuid": "c1320a8c-b36e-47f2-a697-bc2a04e10e11", "effective_date": "2020-01-31", "active": true, "location_uuid": "8ed67ef6-60e3-4e4f-bbad-065578738eaf", "employee_uuid": "56f631c2-7f41-48bb-bebc-12186dc3031b", "version": "c4c43610156fda8f8fb51c37466377ad", "street_1": "977 Marks Viaduct", "street_2": "Apt. 958", "city": "Pink Hill", "state": "NC", "zip": "28572", "country": "USA"}
+          application/json: {"uuid": "64ee5fd7-3eb2-4083-883c-95e93e181cc8", "effective_date": "2020-01-31", "active": true, "location_uuid": "733ab2af-9510-408f-8d20-09196967174f", "employee_uuid": "d773461f-848a-40a1-8f09-b2ee4249d5c7", "version": "3879823d440f3a3215d129ac73c58966", "street_1": "977 Marks Viaduct", "street_2": "Apt. 958", "city": "Pink Hill", "state": "NC", "zip": "28572", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-v1-work_addresses-work_address_uuid:
@@ -4833,7 +4835,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "d5e0236c-cf92-41ec-a103-90530dd630bb", "effective_date": "2023-01-01", "active": true, "location_uuid": "5e012e84-1bec-4720-a5df-17fd1c2df1c5", "employee_uuid": "beeb6f2b-3745-45b0-947b-c609bb54421c", "version": "3c2df9ca31b09736335ab4e09f4e3214", "street_1": "229 Virgil Mission", "street_2": "Apt. 360", "city": "Yatesville", "state": "GA", "zip": "31097", "country": "USA"}
+          application/json: {"uuid": "a4d83116-274c-4b62-87ad-5de9d7fda013", "effective_date": "2023-01-01", "active": true, "location_uuid": "d08b2987-85c8-4f23-b55d-08c44e2a5c96", "employee_uuid": "42dd429e-5382-42d4-9e4e-1cc671c99333", "version": "ab2ffded1a7eeb11c79a401d9df38a4b", "street_1": "229 Virgil Mission", "street_2": "Apt. 360", "city": "Yatesville", "state": "GA", "zip": "31097", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-work_addresses-work_address_uuid:
@@ -4844,7 +4846,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "a212a688a13fd293283167658f79a1dd", "location_uuid": "6fcbb922-30a3-4ba7-8e96-216e71ca5912"}
+        application/json: {"version": "998232de70f02c56deb697b2ea52d427", "location_uuid": "24446253-8c6b-421d-a291-6667343e0f27"}
       responses:
         "200":
           application/json: {"uuid": "27c58f85-7f90-4597-bc74-193b0a8d024d", "version": "<value>", "country": "USA"}
@@ -4860,7 +4862,7 @@ examples:
         application/json: {"version": "<value>", "location_uuid": "6a119be7-b4b0-4e27-aaa0-89d5f2524635", "effective_date": "2023-05-15"}
       responses:
         "200":
-          application/json: {"uuid": "1bda3af3-9860-4dd3-ac5a-4aba1da5e030", "effective_date": "2022-01-01", "active": false, "location_uuid": "6fcbb922-30a3-4ba7-8e96-216e71ca5912", "employee_uuid": "f13ae161-0b7e-4c1c-b331-91c5213089fc", "version": "1295e588ab3c3b683bb1cf4a8866fa30", "street_1": "5467 Ward Radial", "street_2": "Suite 251", "city": "Holualoa", "state": "HI", "zip": "96725", "country": "USA"}
+          application/json: {"uuid": "11b87d8e-c2dc-44f6-abc0-ccc58cd3ea5b", "effective_date": "2022-01-01", "active": false, "location_uuid": "24446253-8c6b-421d-a291-6667343e0f27", "employee_uuid": "eec0c9db-693e-419e-a928-d88b8010206f", "version": "e671435712a401b4b3fa7cfc1e240678", "street_1": "5467 Ward Radial", "street_2": "Suite 251", "city": "Holualoa", "state": "HI", "zip": "96725", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   delete-v1-work_addresses-work_address_uuid:
@@ -4946,7 +4948,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"employee_uuid": "614917eb-795d-43f6-ae5c-3d11815b8e90", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "is_question_for_admin_only": false, "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of Household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "S", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "is_question_for_admin_only": false, "input_question_format": {"type": "Number"}, "answers": [{"value": 1, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "is_question_for_admin_only": false, "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "is_question_for_admin_only": true, "input_question_format": {"type": "Select", "options": [{"value": true, "label": "Yes, file the state new hire report for me."}, {"value": false, "label": "No, I have already filed."}]}, "answers": [{"value": false, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
+          application/json: [{"employee_uuid": "2b2d0cee-cbde-4539-ace5-2475a629846d", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "is_question_for_admin_only": false, "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of Household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "S", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "is_question_for_admin_only": false, "input_question_format": {"type": "Number"}, "answers": [{"value": 1, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "is_question_for_admin_only": false, "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "is_question_for_admin_only": true, "input_question_format": {"type": "Select", "options": [{"value": true, "label": "Yes, file the state new hire report for me."}, {"value": false, "label": "No, I have already filed."}]}, "answers": [{"value": false, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   put-v1-employees-employee_id-state_taxes:
@@ -4992,7 +4994,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"type": "Direct Deposit"}
+        application/json: {"states": [{"state": "CA", "questions": [{"key": "filing_status", "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}]}]}
       responses:
         "200":
           application/json: [{}]
@@ -5005,10 +5007,10 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"type": "Direct Deposit"}
+        application/json: {"states": []}
       responses:
         "200":
-          application/json: [{"employee_uuid": "c6403474-5238-4573-a468-bac44bbe9f1c", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "is_question_for_admin_only": false, "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of Household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "is_question_for_admin_only": false, "input_question_format": {"type": "Number"}, "answers": [{"value": 1, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "is_question_for_admin_only": false, "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "is_question_for_admin_only": true, "input_question_format": {"type": "Select", "options": [{"value": true, "label": "Yes, file the state new hire report for me."}, {"value": false, "label": "No, I have already filed."}]}, "answers": [{"value": false, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
+          application/json: [{"employee_uuid": "c963cb99-fe1c-4aa8-9d48-1ad211ad396f", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "is_question_for_admin_only": false, "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of Household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "is_question_for_admin_only": false, "input_question_format": {"type": "Number"}, "answers": [{"value": 1, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "is_question_for_admin_only": false, "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "is_question_for_admin_only": true, "input_question_format": {"type": "Select", "options": [{"value": true, "label": "Yes, file the state new hire report for me."}, {"value": false, "label": "No, I have already filed."}]}, "answers": [{"value": false, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   post-v1-employees-employee_id-bank_accounts:
@@ -8981,7 +8983,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"contractor_uuid": "f8c88292-09da-47b7-aa74-d40cdf911f69", "payment_method": "Check", "first_name": "Jenni", "last_name": "Kihn", "split_by": null, "splits": null}, {"contractor_uuid": "ada9c72d-302e-4f35-be14-8bb019658cd2", "payment_method": "Direct Deposit", "first_name": "Suzann", "last_name": "Bergnaum", "split_by": "Percentage", "splits": [{"bank_account_uuid": "36e10434-7b91-4384-9ad6-3a6a3289b9ad", "name": "Cayman Island Checking", "hidden_account_number": "XXXX6345", "encrypted_account_number": null, "routing_number": "055003201", "priority": 1, "split_amount": 100, "account_type": "Checking"}]}]
+          application/json: [{"contractor_uuid": "e3d9487a-4ecb-49a3-b6ff-cf03ba7278b6", "payment_method": "Check", "first_name": "Yael", "last_name": "Kuvalis", "split_by": null, "splits": null}, {"contractor_uuid": "577b6307-66e9-4926-a769-91f5c8b578aa", "payment_method": "Direct Deposit", "first_name": "Autumn", "last_name": "Connelly", "split_by": "Percentage", "splits": [{"bank_account_uuid": "0aca4500-8ba4-48fc-adce-677fe7926b7b", "name": "Cayman Island Checking", "hidden_account_number": "XXXX1545", "encrypted_account_number": null, "routing_number": "055003201", "priority": 1, "split_amount": 100, "account_type": "Checking"}]}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
   get-company-notifications:
@@ -8993,6 +8995,6 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "ab78400c-f244-41fe-9ab2-65ba67454698", "company_uuid": "f9b086c5-ff2e-42c7-bdc4-400e3fc10ed6", "title": "Set up a sick time off policy", "message": "At least one company work location requires businesses to provide a sick time off policy.", "status": "open", "category": "company_setup.missing_mandatory_sick_time_policy", "actionable": true, "can_block_payroll": false, "published_at": "2025-06-09T08:52:23.000-07:00", "due_at": null, "template_variables": {}, "resources": []}, {"uuid": "296b5a0f-686c-4d94-97ff-9d42f5eb38a1", "company_uuid": "f9b086c5-ff2e-42c7-bdc4-400e3fc10ed6", "title": "Unable to deposit funds to Jacque Dickinson", "message": "We were unable to deposit a recent paycheck to Jacque’s bank account, so these funds of $100.00 will be returned to Gorczany, Pacocha and Lynch’s bank account. Once the funds are received, the payment should be made directly to Jacque.", "status": "open", "category": "bank_error.compensation_credit_failure", "actionable": true, "can_block_payroll": false, "published_at": "2025-06-09T08:52:23.000-07:00", "due_at": null, "template_variables": {"beneficiary_name": "Jacque Dickinson", "amount": "$100.00", "company_name": "Gorczany, Pacocha and Lynch"}, "resources": [{"entity_type": "Employee", "entity_uuid": "324c43a6-ad6e-4737-82e1-71e6b76b8e5e"}]}]
+          application/json: [{"uuid": "d053ee2a-a80f-4a61-8bf8-6122c1f954dd", "company_uuid": "46c8329d-ebd1-49ba-878c-810b481a34c9", "title": "Set up a sick time off policy", "message": "At least one company work location requires businesses to provide a sick time off policy.", "status": "open", "category": "company_setup.missing_mandatory_sick_time_policy", "actionable": true, "can_block_payroll": false, "published_at": "2025-06-09T13:42:59.000-07:00", "due_at": null, "template_variables": {}, "resources": []}, {"uuid": "2edd148b-c4c3-4cda-b3e1-72b87399e6c8", "company_uuid": "46c8329d-ebd1-49ba-878c-810b481a34c9", "title": "Unable to deposit funds to Donn Cormier", "message": "We were unable to deposit a recent paycheck to Donn’s bank account, so these funds of $100.00 will be returned to Luettgen-Gusikowski’s bank account. Once the funds are received, the payment should be made directly to Donn.", "status": "open", "category": "bank_error.compensation_credit_failure", "actionable": true, "can_block_payroll": false, "published_at": "2025-06-09T13:43:00.000-07:00", "due_at": null, "template_variables": {"beneficiary_name": "Donn Cormier", "amount": "$100.00", "company_name": "Luettgen-Gusikowski"}, "resources": [{"entity_type": "Employee", "entity_uuid": "66a27bb8-be5b-42e5-82b8-b2d0044a7f9e"}]}]
 examplesVersion: 1.0.2
 generatedTests: {}

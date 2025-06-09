@@ -22,11 +22,30 @@ export const NotificationStatus = {
  */
 export type NotificationStatus = ClosedEnum<typeof NotificationStatus>;
 
+/**
+ * The type of entity being described.
+ */
+export const NotificationEntityType = {
+  BankAccount: "BankAccount",
+  Contractor: "Contractor",
+  ContractorPayment: "ContractorPayment",
+  Employee: "Employee",
+  Payroll: "Payroll",
+  PaySchedule: "PaySchedule",
+  RecoveryCase: "RecoveryCase",
+  Signatory: "Signatory",
+  WireInRequest: "Wire In Request",
+} as const;
+/**
+ * The type of entity being described.
+ */
+export type NotificationEntityType = ClosedEnum<typeof NotificationEntityType>;
+
 export type Resources = {
   /**
-   * The type of entity being described, could be “Contractor”, “Employee”, “BankAccount”, “Payroll”, “ContractorPayment”, “RecoveryCase”, or “Signatory”
+   * The type of entity being described.
    */
-  entityType: string;
+  entityType: NotificationEntityType;
   /**
    * Unique identifier of the entity
    */
@@ -117,12 +136,33 @@ export namespace NotificationStatus$ {
 }
 
 /** @internal */
+export const NotificationEntityType$inboundSchema: z.ZodNativeEnum<
+  typeof NotificationEntityType
+> = z.nativeEnum(NotificationEntityType);
+
+/** @internal */
+export const NotificationEntityType$outboundSchema: z.ZodNativeEnum<
+  typeof NotificationEntityType
+> = NotificationEntityType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace NotificationEntityType$ {
+  /** @deprecated use `NotificationEntityType$inboundSchema` instead. */
+  export const inboundSchema = NotificationEntityType$inboundSchema;
+  /** @deprecated use `NotificationEntityType$outboundSchema` instead. */
+  export const outboundSchema = NotificationEntityType$outboundSchema;
+}
+
+/** @internal */
 export const Resources$inboundSchema: z.ZodType<
   Resources,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  entity_type: z.string(),
+  entity_type: NotificationEntityType$inboundSchema,
   entity_uuid: z.string(),
   reference_type: z.string().optional(),
   reference_uuid: z.string().optional(),
@@ -149,7 +189,7 @@ export const Resources$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Resources
 > = z.object({
-  entityType: z.string(),
+  entityType: NotificationEntityType$outboundSchema,
   entityUuid: z.string(),
   referenceType: z.string().optional(),
   referenceUuid: z.string().optional(),
