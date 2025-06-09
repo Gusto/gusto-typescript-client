@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Splits = {
+export type ContractorPaymentDetailsListSplits = {
   bankAccountUuid: string;
   name: string;
   hiddenAccountNumber: string;
@@ -25,33 +25,36 @@ export type ContractorPaymentDetailsList = {
   firstName?: string | undefined;
   lastName?: string | undefined;
   splitBy?: string | null | undefined;
-  splits?: Array<Splits> | null | undefined;
+  splits?: Array<ContractorPaymentDetailsListSplits> | null | undefined;
 };
 
 /** @internal */
-export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
-  .object({
-    bank_account_uuid: z.string(),
-    name: z.string(),
-    hidden_account_number: z.string(),
-    encrypted_account_number: z.nullable(z.string()).optional(),
-    routing_number: z.string(),
-    priority: z.number().int(),
-    split_amount: z.number(),
-    account_type: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "bank_account_uuid": "bankAccountUuid",
-      "hidden_account_number": "hiddenAccountNumber",
-      "encrypted_account_number": "encryptedAccountNumber",
-      "routing_number": "routingNumber",
-      "split_amount": "splitAmount",
-      "account_type": "accountType",
-    });
+export const ContractorPaymentDetailsListSplits$inboundSchema: z.ZodType<
+  ContractorPaymentDetailsListSplits,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bank_account_uuid: z.string(),
+  name: z.string(),
+  hidden_account_number: z.string(),
+  encrypted_account_number: z.nullable(z.string()).optional(),
+  routing_number: z.string(),
+  priority: z.number().int(),
+  split_amount: z.number(),
+  account_type: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "bank_account_uuid": "bankAccountUuid",
+    "hidden_account_number": "hiddenAccountNumber",
+    "encrypted_account_number": "encryptedAccountNumber",
+    "routing_number": "routingNumber",
+    "split_amount": "splitAmount",
+    "account_type": "accountType",
   });
+});
 
 /** @internal */
-export type Splits$Outbound = {
+export type ContractorPaymentDetailsListSplits$Outbound = {
   bank_account_uuid: string;
   name: string;
   hidden_account_number: string;
@@ -63,10 +66,10 @@ export type Splits$Outbound = {
 };
 
 /** @internal */
-export const Splits$outboundSchema: z.ZodType<
-  Splits$Outbound,
+export const ContractorPaymentDetailsListSplits$outboundSchema: z.ZodType<
+  ContractorPaymentDetailsListSplits$Outbound,
   z.ZodTypeDef,
-  Splits
+  ContractorPaymentDetailsListSplits
 > = z.object({
   bankAccountUuid: z.string(),
   name: z.string(),
@@ -91,26 +94,34 @@ export const Splits$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Splits$ {
-  /** @deprecated use `Splits$inboundSchema` instead. */
-  export const inboundSchema = Splits$inboundSchema;
-  /** @deprecated use `Splits$outboundSchema` instead. */
-  export const outboundSchema = Splits$outboundSchema;
-  /** @deprecated use `Splits$Outbound` instead. */
-  export type Outbound = Splits$Outbound;
+export namespace ContractorPaymentDetailsListSplits$ {
+  /** @deprecated use `ContractorPaymentDetailsListSplits$inboundSchema` instead. */
+  export const inboundSchema = ContractorPaymentDetailsListSplits$inboundSchema;
+  /** @deprecated use `ContractorPaymentDetailsListSplits$outboundSchema` instead. */
+  export const outboundSchema =
+    ContractorPaymentDetailsListSplits$outboundSchema;
+  /** @deprecated use `ContractorPaymentDetailsListSplits$Outbound` instead. */
+  export type Outbound = ContractorPaymentDetailsListSplits$Outbound;
 }
 
-export function splitsToJSON(splits: Splits): string {
-  return JSON.stringify(Splits$outboundSchema.parse(splits));
+export function contractorPaymentDetailsListSplitsToJSON(
+  contractorPaymentDetailsListSplits: ContractorPaymentDetailsListSplits,
+): string {
+  return JSON.stringify(
+    ContractorPaymentDetailsListSplits$outboundSchema.parse(
+      contractorPaymentDetailsListSplits,
+    ),
+  );
 }
 
-export function splitsFromJSON(
+export function contractorPaymentDetailsListSplitsFromJSON(
   jsonString: string,
-): SafeParseResult<Splits, SDKValidationError> {
+): SafeParseResult<ContractorPaymentDetailsListSplits, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Splits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Splits' from JSON`,
+    (x) =>
+      ContractorPaymentDetailsListSplits$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContractorPaymentDetailsListSplits' from JSON`,
   );
 }
 
@@ -125,7 +136,9 @@ export const ContractorPaymentDetailsList$inboundSchema: z.ZodType<
   first_name: z.string().optional(),
   last_name: z.string().optional(),
   split_by: z.nullable(z.string()).optional(),
-  splits: z.nullable(z.array(z.lazy(() => Splits$inboundSchema))).optional(),
+  splits: z.nullable(
+    z.array(z.lazy(() => ContractorPaymentDetailsListSplits$inboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",
@@ -143,7 +156,10 @@ export type ContractorPaymentDetailsList$Outbound = {
   first_name?: string | undefined;
   last_name?: string | undefined;
   split_by?: string | null | undefined;
-  splits?: Array<Splits$Outbound> | null | undefined;
+  splits?:
+    | Array<ContractorPaymentDetailsListSplits$Outbound>
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -157,7 +173,9 @@ export const ContractorPaymentDetailsList$outboundSchema: z.ZodType<
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   splitBy: z.nullable(z.string()).optional(),
-  splits: z.nullable(z.array(z.lazy(() => Splits$outboundSchema))).optional(),
+  splits: z.nullable(
+    z.array(z.lazy(() => ContractorPaymentDetailsListSplits$outboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     contractorUuid: "contractor_uuid",

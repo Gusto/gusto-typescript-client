@@ -360,8 +360,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employeeTaxSetup.updateStateTaxes({
     employeeUuid: "<id>",
-    requestBody: {
-      version: "<value>",
+    employeeStateTaxesRequest: {
       type: "Direct Deposit",
     },
   });
@@ -389,8 +388,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeeTaxSetupUpdateStateTaxes(gustoEmbedded, {
     employeeUuid: "<id>",
-    requestBody: {
-      version: "<value>",
+    employeeStateTaxesRequest: {
       type: "Direct Deposit",
     },
   });
