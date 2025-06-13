@@ -605,7 +605,7 @@ async function run() {
   const result = await gustoEmbedded.employees.update({
     employeeId: "<id>",
     requestBody: {
-      version: "4ecb673b6db2f90a23c19c8e9cb4274e",
+      version: "fff04e2c03f829ba1c44ea3f6ef6a48e",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",
@@ -640,7 +640,7 @@ async function run() {
   const res = await employeesUpdate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      version: "4ecb673b6db2f90a23c19c8e9cb4274e",
+      version: "fff04e2c03f829ba1c44ea3f6ef6a48e",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",

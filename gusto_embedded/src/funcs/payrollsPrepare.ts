@@ -188,7 +188,7 @@ async function $do(
     M.json(
       200,
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$inboundSchema,
-      { key: "Payroll-Prepared" },
+      { key: "Off-Cycle-Payroll-Object" },
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),

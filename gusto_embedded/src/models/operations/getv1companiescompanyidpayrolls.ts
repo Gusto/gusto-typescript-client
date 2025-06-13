@@ -14,26 +14,29 @@ import {
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PayrollMinimal,
-  PayrollMinimal$inboundSchema,
-  PayrollMinimal$Outbound,
-  PayrollMinimal$outboundSchema,
-} from "../components/payrollminimal.js";
-import {
-  SortOrder,
-  SortOrder$inboundSchema,
-  SortOrder$outboundSchema,
-} from "../components/sortorder.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  Payroll,
+  Payroll$inboundSchema,
+  Payroll$Outbound,
+  Payroll$outboundSchema,
+} from "../components/payroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+>;
+
 export const ProcessingStatuses = {
-  Unprocessed: "unprocessed",
   Processed: "processed",
+  Unprocessed: "unprocessed",
 } as const;
 export type ProcessingStatuses = ClosedEnum<typeof ProcessingStatuses>;
 
@@ -45,8 +48,11 @@ export const PayrollTypes = {
 export type PayrollTypes = ClosedEnum<typeof PayrollTypes>;
 
 export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude = {
-  Totals: "totals",
+  Benefits: "benefits",
+  Deductions: "deductions",
+  Taxes: "taxes",
   PayrollStatusMeta: "payroll_status_meta",
+  Totals: "totals",
   RiskBlockers: "risk_blockers",
   Reversals: "reversals",
 } as const;
@@ -54,11 +60,29 @@ export type GetV1CompaniesCompanyIdPayrollsQueryParamInclude = ClosedEnum<
   typeof GetV1CompaniesCompanyIdPayrollsQueryParamInclude
 >;
 
+/**
+ * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
+ */
+export const SortOrder = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
+ */
+export type SortOrder = ClosedEnum<typeof SortOrder>;
+
 export type GetV1CompaniesCompanyIdPayrollsRequest = {
   /**
    * The UUID of the company
    */
   companyId: string;
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * Whether to include processed and/or unprocessed payrolls in the response, defaults to processed, for multiple attributes comma separate the values, i.e. `?processing_statuses=processed,unprocessed`
    */
@@ -68,7 +92,15 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    */
   payrollTypes?: Array<PayrollTypes> | undefined;
   /**
-   * Include the requested attribute in the response. The risk_blockers option will include submission_blockers and credit_blockers if applicable. The reversals option will include reversal payroll UUIDs if applicable. In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the values, i.e. `?include=totals,payroll_status_meta`
+   * Whether to return processed or unprocessed payrolls
+   */
+  processed?: boolean | undefined;
+  /**
+   * Whether to include off cycle payrolls in the response
+   */
+  includeOffCycle?: boolean | undefined;
+  /**
+   * Include the requested attribute in the response, for multiple attributes comma separate the values, i.e. `?include=benefits,deductions,taxes`
    */
   include?: Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude> | undefined;
   /**
@@ -80,10 +112,6 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    */
   endDate?: string | undefined;
   /**
-   * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
-   */
-  sortOrder?: SortOrder | undefined;
-  /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
   page?: number | undefined;
@@ -92,18 +120,43 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    */
   per?: number | undefined;
   /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  sortOrder?: SortOrder | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayrollsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
-  payrollList?: Array<PayrollMinimal> | undefined;
+  payrollList?: Array<Payroll> | undefined;
 };
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+  > = GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const ProcessingStatuses$inboundSchema: z.ZodNativeEnum<
@@ -169,47 +222,74 @@ export namespace GetV1CompaniesCompanyIdPayrollsQueryParamInclude$ {
 }
 
 /** @internal */
+export const SortOrder$inboundSchema: z.ZodNativeEnum<typeof SortOrder> = z
+  .nativeEnum(SortOrder);
+
+/** @internal */
+export const SortOrder$outboundSchema: z.ZodNativeEnum<typeof SortOrder> =
+  SortOrder$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SortOrder$ {
+  /** @deprecated use `SortOrder$inboundSchema` instead. */
+  export const inboundSchema = SortOrder$inboundSchema;
+  /** @deprecated use `SortOrder$outboundSchema` instead. */
+  export const outboundSchema = SortOrder$outboundSchema;
+}
+
+/** @internal */
 export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   GetV1CompaniesCompanyIdPayrollsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
   company_id: z.string(),
+  "X-Gusto-API-Version":
+    GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema.default(
+      "2024-04-01",
+    ),
   processing_statuses: z.array(ProcessingStatuses$inboundSchema).optional(),
   payroll_types: z.array(PayrollTypes$inboundSchema).optional(),
+  processed: z.boolean().optional(),
+  include_off_cycle: z.boolean().optional(),
   include: z.array(
     GetV1CompaniesCompanyIdPayrollsQueryParamInclude$inboundSchema,
   ).optional(),
   start_date: z.string().optional(),
   end_date: z.string().optional(),
-  sort_order: SortOrder$inboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  sort_order: SortOrder$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
+    "X-Gusto-API-Version": "xGustoAPIVersion",
     "processing_statuses": "processingStatuses",
     "payroll_types": "payrollTypes",
+    "include_off_cycle": "includeOffCycle",
     "start_date": "startDate",
     "end_date": "endDate",
     "sort_order": "sortOrder",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
   });
 });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsRequest$Outbound = {
   company_id: string;
+  "X-Gusto-API-Version": string;
   processing_statuses?: Array<string> | undefined;
   payroll_types?: Array<string> | undefined;
+  processed?: boolean | undefined;
+  include_off_cycle?: boolean | undefined;
   include?: Array<string> | undefined;
   start_date?: string | undefined;
   end_date?: string | undefined;
-  sort_order?: string | undefined;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
+  sort_order?: string | undefined;
 };
 
 /** @internal */
@@ -219,26 +299,31 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   GetV1CompaniesCompanyIdPayrollsRequest
 > = z.object({
   companyId: z.string(),
+  xGustoAPIVersion:
+    GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
+      .default("2024-04-01"),
   processingStatuses: z.array(ProcessingStatuses$outboundSchema).optional(),
   payrollTypes: z.array(PayrollTypes$outboundSchema).optional(),
+  processed: z.boolean().optional(),
+  includeOffCycle: z.boolean().optional(),
   include: z.array(
     GetV1CompaniesCompanyIdPayrollsQueryParamInclude$outboundSchema,
   ).optional(),
   startDate: z.string().optional(),
   endDate: z.string().optional(),
-  sortOrder: SortOrder$outboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  sortOrder: SortOrder$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",
+    xGustoAPIVersion: "X-Gusto-API-Version",
     processingStatuses: "processing_statuses",
     payrollTypes: "payroll_types",
+    includeOffCycle: "include_off_cycle",
     startDate: "start_date",
     endDate: "end_date",
     sortOrder: "sort_order",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 
@@ -286,7 +371,7 @@ export const GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Payroll-List": z.array(PayrollMinimal$inboundSchema).optional(),
+  "Payroll-List": z.array(Payroll$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
@@ -297,7 +382,7 @@ export const GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Payroll-List"?: Array<PayrollMinimal$Outbound> | undefined;
+  "Payroll-List"?: Array<Payroll$Outbound> | undefined;
 };
 
 /** @internal */
@@ -307,7 +392,7 @@ export const GetV1CompaniesCompanyIdPayrollsResponse$outboundSchema: z.ZodType<
   GetV1CompaniesCompanyIdPayrollsResponse
 > = z.object({
   httpMeta: HTTPMetadata$outboundSchema,
-  payrollList: z.array(PayrollMinimal$outboundSchema).optional(),
+  payrollList: z.array(Payroll$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     httpMeta: "HttpMeta",

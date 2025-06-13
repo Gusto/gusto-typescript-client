@@ -14,11 +14,11 @@ import {
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  PayrollPrepared,
-  PayrollPrepared$inboundSchema,
-  PayrollPrepared$Outbound,
-  PayrollPrepared$outboundSchema,
-} from "../components/payrollprepared.js";
+  OffCyclePayrollObject,
+  OffCyclePayrollObject$inboundSchema,
+  OffCyclePayrollObject$Outbound,
+  OffCyclePayrollObject$outboundSchema,
+} from "../components/offcyclepayrollobject.js";
 import {
   VersionHeader,
   VersionHeader$inboundSchema,
@@ -180,7 +180,7 @@ export type PutV1CompaniesCompanyIdPayrollsResponse = {
   /**
    * A prepared payroll
    */
-  payrollPrepared?: PayrollPrepared | undefined;
+  offCyclePayrollObject?: OffCyclePayrollObject | undefined;
 };
 
 /** @internal */
@@ -716,18 +716,18 @@ export const PutV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Payroll-Prepared": PayrollPrepared$inboundSchema.optional(),
+  "Off-Cycle-Payroll-Object": OffCyclePayrollObject$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Payroll-Prepared": "payrollPrepared",
+    "Off-Cycle-Payroll-Object": "offCyclePayrollObject",
   });
 });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Payroll-Prepared"?: PayrollPrepared$Outbound | undefined;
+  "Off-Cycle-Payroll-Object"?: OffCyclePayrollObject$Outbound | undefined;
 };
 
 /** @internal */
@@ -737,11 +737,11 @@ export const PutV1CompaniesCompanyIdPayrollsResponse$outboundSchema: z.ZodType<
   PutV1CompaniesCompanyIdPayrollsResponse
 > = z.object({
   httpMeta: HTTPMetadata$outboundSchema,
-  payrollPrepared: PayrollPrepared$outboundSchema.optional(),
+  offCyclePayrollObject: OffCyclePayrollObject$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     httpMeta: "HttpMeta",
-    payrollPrepared: "Payroll-Prepared",
+    offCyclePayrollObject: "Off-Cycle-Payroll-Object",
   });
 });
 

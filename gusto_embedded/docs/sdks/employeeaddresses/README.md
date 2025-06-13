@@ -664,7 +664,7 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.createWorkAddress({
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "733ab2af-9510-408f-8d20-09196967174f",
+      locationUuid: "626bcbbd-b7d0-44a2-8484-1190b8aa8165",
       effectiveDate: new RFCDate("2020-01-31"),
     },
   });
@@ -694,7 +694,7 @@ async function run() {
   const res = await employeeAddressesCreateWorkAddress(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      locationUuid: "733ab2af-9510-408f-8d20-09196967174f",
+      locationUuid: "626bcbbd-b7d0-44a2-8484-1190b8aa8165",
       effectiveDate: new RFCDate("2020-01-31"),
     },
   });
@@ -870,8 +870,8 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.updateWorkAddress({
     workAddressUuid: "<id>",
     requestBody: {
-      version: "998232de70f02c56deb697b2ea52d427",
-      locationUuid: "24446253-8c6b-421d-a291-6667343e0f27",
+      version: "75b55ea0399f7169b2afbff3291db309",
+      locationUuid: "0627b6a6-1a75-43b6-9582-4455711e5ef1",
     },
   });
 
@@ -899,8 +899,8 @@ async function run() {
   const res = await employeeAddressesUpdateWorkAddress(gustoEmbedded, {
     workAddressUuid: "<id>",
     requestBody: {
-      version: "998232de70f02c56deb697b2ea52d427",
-      locationUuid: "24446253-8c6b-421d-a291-6667343e0f27",
+      version: "75b55ea0399f7169b2afbff3291db309",
+      locationUuid: "0627b6a6-1a75-43b6-9582-4455711e5ef1",
     },
   });
   if (res.ok) {

@@ -114,9 +114,6 @@ export type Licensee = {
   phoneNumber?: string | undefined;
 };
 
-/**
- * Example response
- */
 export type PayrollReceipt = {
   /**
    * A unique identifier of the payroll receipt.

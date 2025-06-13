@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OffCycleReasonType,
@@ -54,14 +55,11 @@ import {
   PayrollWithholdingPayPeriodType$outboundSchema,
 } from "./payrollwithholdingpayperiodtype.js";
 
-/**
- * An off-cycle payroll
- */
-export type PayrollPrepared = {
+export type OffCyclePayrollObject = {
   /**
    * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on time.  If payroll has not been run by the deadline, a prepare request will update both the check date and deadline to reflect the soonest employees can be paid and the deadline by which the payroll must be run in order for said check date to be met.
    */
-  payrollDeadline?: Date | undefined;
+  payrollDeadline?: RFCDate | undefined;
   /**
    * The date on which employees will be paid for the payroll.
    */
@@ -73,11 +71,11 @@ export type PayrollPrepared = {
   /**
    * The date at which the payroll was processed. Null if the payroll isn't processed yet.
    */
-  processedDate?: string | undefined;
+  processedDate?: string | null | undefined;
   /**
    * A timestamp of the last valid payroll calculation. Null if there isn't a valid calculation.
    */
-  calculatedAt?: string | undefined;
+  calculatedAt?: string | null | undefined;
   /**
    * The UUID of the payroll.
    */
@@ -141,18 +139,16 @@ export type PayrollPrepared = {
 };
 
 /** @internal */
-export const PayrollPrepared$inboundSchema: z.ZodType<
-  PayrollPrepared,
+export const OffCyclePayrollObject$inboundSchema: z.ZodType<
+  OffCyclePayrollObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
+  payroll_deadline: z.string().transform(v => new RFCDate(v)).optional(),
   check_date: z.string().optional(),
   processed: z.boolean().optional(),
-  processed_date: z.string().optional(),
-  calculated_at: z.string().optional(),
+  processed_date: z.nullable(z.string()).optional(),
+  calculated_at: z.nullable(z.string()).optional(),
   uuid: z.string().optional(),
   payroll_uuid: z.string().optional(),
   company_uuid: z.string().optional(),
@@ -205,12 +201,12 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type PayrollPrepared$Outbound = {
+export type OffCyclePayrollObject$Outbound = {
   payroll_deadline?: string | undefined;
   check_date?: string | undefined;
   processed?: boolean | undefined;
-  processed_date?: string | undefined;
-  calculated_at?: string | undefined;
+  processed_date?: string | null | undefined;
+  calculated_at?: string | null | undefined;
   uuid?: string | undefined;
   payroll_uuid?: string | undefined;
   company_uuid?: string | undefined;
@@ -236,16 +232,17 @@ export type PayrollPrepared$Outbound = {
 };
 
 /** @internal */
-export const PayrollPrepared$outboundSchema: z.ZodType<
-  PayrollPrepared$Outbound,
+export const OffCyclePayrollObject$outboundSchema: z.ZodType<
+  OffCyclePayrollObject$Outbound,
   z.ZodTypeDef,
-  PayrollPrepared
+  OffCyclePayrollObject
 > = z.object({
-  payrollDeadline: z.date().transform(v => v.toISOString()).optional(),
+  payrollDeadline: z.instanceof(RFCDate).transform(v => v.toString())
+    .optional(),
   checkDate: z.string().optional(),
   processed: z.boolean().optional(),
-  processedDate: z.string().optional(),
-  calculatedAt: z.string().optional(),
+  processedDate: z.nullable(z.string()).optional(),
+  calculatedAt: z.nullable(z.string()).optional(),
   uuid: z.string().optional(),
   payrollUuid: z.string().optional(),
   companyUuid: z.string().optional(),
@@ -299,27 +296,29 @@ export const PayrollPrepared$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PayrollPrepared$ {
-  /** @deprecated use `PayrollPrepared$inboundSchema` instead. */
-  export const inboundSchema = PayrollPrepared$inboundSchema;
-  /** @deprecated use `PayrollPrepared$outboundSchema` instead. */
-  export const outboundSchema = PayrollPrepared$outboundSchema;
-  /** @deprecated use `PayrollPrepared$Outbound` instead. */
-  export type Outbound = PayrollPrepared$Outbound;
+export namespace OffCyclePayrollObject$ {
+  /** @deprecated use `OffCyclePayrollObject$inboundSchema` instead. */
+  export const inboundSchema = OffCyclePayrollObject$inboundSchema;
+  /** @deprecated use `OffCyclePayrollObject$outboundSchema` instead. */
+  export const outboundSchema = OffCyclePayrollObject$outboundSchema;
+  /** @deprecated use `OffCyclePayrollObject$Outbound` instead. */
+  export type Outbound = OffCyclePayrollObject$Outbound;
 }
 
-export function payrollPreparedToJSON(
-  payrollPrepared: PayrollPrepared,
+export function offCyclePayrollObjectToJSON(
+  offCyclePayrollObject: OffCyclePayrollObject,
 ): string {
-  return JSON.stringify(PayrollPrepared$outboundSchema.parse(payrollPrepared));
+  return JSON.stringify(
+    OffCyclePayrollObject$outboundSchema.parse(offCyclePayrollObject),
+  );
 }
 
-export function payrollPreparedFromJSON(
+export function offCyclePayrollObjectFromJSON(
   jsonString: string,
-): SafeParseResult<PayrollPrepared, SDKValidationError> {
+): SafeParseResult<OffCyclePayrollObject, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PayrollPrepared$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollPrepared' from JSON`,
+    (x) => OffCyclePayrollObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OffCyclePayrollObject' from JSON`,
   );
 }

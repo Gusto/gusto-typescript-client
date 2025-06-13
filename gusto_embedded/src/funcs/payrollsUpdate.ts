@@ -191,7 +191,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, PutV1CompaniesCompanyIdPayrollsResponse$inboundSchema, {
-      key: "Payroll-Prepared",
+      key: "Off-Cycle-Payroll-Object",
     }),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
