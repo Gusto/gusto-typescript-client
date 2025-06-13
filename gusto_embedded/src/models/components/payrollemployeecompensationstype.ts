@@ -13,8 +13,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The employee's compensation payment method.
  */
 export const PayrollEmployeeCompensationsTypePaymentMethod = {
-  Check: "Check",
   DirectDeposit: "Direct Deposit",
+  Check: "Check",
 } as const;
 /**
  * The employee's compensation payment method.

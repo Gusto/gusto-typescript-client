@@ -510,8 +510,8 @@ run();
 
 ### [payrolls](docs/sdks/payrolls/README.md)
 
-* [createOffCycle](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
 * [list](docs/sdks/payrolls/README.md#list) - Get all payrolls for a company
+* [createOffCycle](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
 * [getApprovedReversals](docs/sdks/payrolls/README.md#getapprovedreversals) - Get approved payroll reversals
 * [get](docs/sdks/payrolls/README.md#get) - Get a single payroll
 * [update](docs/sdks/payrolls/README.md#update) - Update a payroll by ID
@@ -1330,7 +1330,7 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](docs/models/errors/unprocessableentityerrorobject.md): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 125 of 253 methods.*
+* [`UnprocessableEntityErrorObject`](docs/models/errors/unprocessableentityerrorobject.md): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 129 of 253 methods.*
 * [`UnprocessableEntityErrorObject1`](docs/models/errors/unprocessableentityerrorobject1.md): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 253 methods.*
 * [`PayrollBlockersError`](docs/models/errors/payrollblockerserror.md): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 253 methods.*
 * [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](docs/models/errors/deletev1companybenefitscompanybenefitidresponsebody.md): Unprocessable Entity. Status code `422`. Applicable to 1 of 253 methods.*

@@ -7,11 +7,11 @@ The employee's compensation payment method.
 ```typescript
 import { PayrollEmployeeCompensationsTypePaymentMethod } from "@gusto/embedded-api/models/components/payrollemployeecompensationstype.js";
 
-let value: PayrollEmployeeCompensationsTypePaymentMethod = "Check";
+let value: PayrollEmployeeCompensationsTypePaymentMethod = "Direct Deposit";
 ```
 
 ## Values
 
 ```typescript
-"Check" | "Direct Deposit"
+"Direct Deposit" | "Check"
 ```

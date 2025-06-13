@@ -4,7 +4,10 @@
 
 import { GustoEmbeddedCore } from "../core.js";
 import { appendForm, encodeSimple } from "../lib/encodings.js";
-import { readableStreamToArrayBuffer } from "../lib/files.js";
+import {
+  getContentTypeFromFileName,
+  readableStreamToArrayBuffer,
+} from "../lib/files.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -110,15 +113,19 @@ async function $do(
     const buffer = await readableStreamToArrayBuffer(
       payload.RequestBody.document.content,
     );
-    const blob = new Blob([buffer], { type: "application/octet-stream" });
-    appendForm(body, "document", blob);
+    const contentType =
+      getContentTypeFromFileName(payload.RequestBody.document.fileName)
+      || "application/octet-stream";
+    const blob = new Blob([buffer], { type: contentType });
+    appendForm(body, "document", blob, payload.RequestBody.document.fileName);
   } else {
+    const contentType =
+      getContentTypeFromFileName(payload.RequestBody.document.fileName)
+      || "application/octet-stream";
     appendForm(
       body,
       "document",
-      new Blob([payload.RequestBody.document.content], {
-        type: "application/octet-stream",
-      }),
+      new Blob([payload.RequestBody.document.content], { type: contentType }),
       payload.RequestBody.document.fileName,
     );
   }

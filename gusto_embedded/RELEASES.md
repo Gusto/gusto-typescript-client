@@ -279,3 +279,13 @@ Based on:
 - [typescript v0.6.3] gusto_embedded
 ### Releases
 - [NPM v0.6.3] https://www.npmjs.com/package/@gusto/embedded-api/v/0.6.3 - gusto_embedded
+
+## 2025-06-13 16:46:11
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.563.0 (2.629.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v0.6.4] gusto_embedded
+### Releases
+- [NPM v0.6.4] https://www.npmjs.com/package/@gusto/embedded-api/v/0.6.4 - gusto_embedded

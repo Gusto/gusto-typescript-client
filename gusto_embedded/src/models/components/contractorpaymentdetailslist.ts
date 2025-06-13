@@ -5,40 +5,121 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const ContractorPaymentDetailsListPaymentMethod = {
+  DirectDeposit: "Direct Deposit",
+  Check: "Check",
+} as const;
+export type ContractorPaymentDetailsListPaymentMethod = ClosedEnum<
+  typeof ContractorPaymentDetailsListPaymentMethod
+>;
+
+/**
+ * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ */
+export const ContractorPaymentDetailsListSplitBy = {
+  Amount: "Amount",
+  Percentage: "Percentage",
+} as const;
+/**
+ * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ */
+export type ContractorPaymentDetailsListSplitBy = ClosedEnum<
+  typeof ContractorPaymentDetailsListSplitBy
+>;
+
 export type Splits = {
-  bankAccountUuid: string;
-  name: string;
-  hiddenAccountNumber: string;
+  bankAccountUuid?: string | undefined;
+  name?: string | undefined;
+  /**
+   * An obfuscated version of the account number which can be used for display purposes.
+   */
+  hiddenAccountNumber?: string | undefined;
+  /**
+   * Ciphertext containing the full bank account number, which must be decrypted using a key provided by Gusto. Only visible with the `contractor_payment_methods:read:account_number` scope.
+   */
   encryptedAccountNumber?: string | null | undefined;
-  routingNumber: string;
-  priority: number;
-  splitAmount: number;
-  accountType: string;
+  routingNumber?: string | undefined;
+  /**
+   * The order of priority for each payment split, with priority 1 being the first bank account paid. Priority must be unique and sequential.
+   */
+  priority?: number | undefined;
+  splitAmount?: number | undefined;
+  accountType?: string | undefined;
 };
 
 export type ContractorPaymentDetailsList = {
-  contractorUuid: string;
-  paymentMethod: string;
+  contractorUuid?: string | undefined;
+  paymentMethod?: ContractorPaymentDetailsListPaymentMethod | undefined;
   firstName?: string | undefined;
   lastName?: string | undefined;
-  splitBy?: string | null | undefined;
+  /**
+   * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+   */
+  splitBy?: ContractorPaymentDetailsListSplitBy | null | undefined;
   splits?: Array<Splits> | null | undefined;
 };
 
 /** @internal */
+export const ContractorPaymentDetailsListPaymentMethod$inboundSchema:
+  z.ZodNativeEnum<typeof ContractorPaymentDetailsListPaymentMethod> = z
+    .nativeEnum(ContractorPaymentDetailsListPaymentMethod);
+
+/** @internal */
+export const ContractorPaymentDetailsListPaymentMethod$outboundSchema:
+  z.ZodNativeEnum<typeof ContractorPaymentDetailsListPaymentMethod> =
+    ContractorPaymentDetailsListPaymentMethod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ContractorPaymentDetailsListPaymentMethod$ {
+  /** @deprecated use `ContractorPaymentDetailsListPaymentMethod$inboundSchema` instead. */
+  export const inboundSchema =
+    ContractorPaymentDetailsListPaymentMethod$inboundSchema;
+  /** @deprecated use `ContractorPaymentDetailsListPaymentMethod$outboundSchema` instead. */
+  export const outboundSchema =
+    ContractorPaymentDetailsListPaymentMethod$outboundSchema;
+}
+
+/** @internal */
+export const ContractorPaymentDetailsListSplitBy$inboundSchema: z.ZodNativeEnum<
+  typeof ContractorPaymentDetailsListSplitBy
+> = z.nativeEnum(ContractorPaymentDetailsListSplitBy);
+
+/** @internal */
+export const ContractorPaymentDetailsListSplitBy$outboundSchema:
+  z.ZodNativeEnum<typeof ContractorPaymentDetailsListSplitBy> =
+    ContractorPaymentDetailsListSplitBy$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ContractorPaymentDetailsListSplitBy$ {
+  /** @deprecated use `ContractorPaymentDetailsListSplitBy$inboundSchema` instead. */
+  export const inboundSchema =
+    ContractorPaymentDetailsListSplitBy$inboundSchema;
+  /** @deprecated use `ContractorPaymentDetailsListSplitBy$outboundSchema` instead. */
+  export const outboundSchema =
+    ContractorPaymentDetailsListSplitBy$outboundSchema;
+}
+
+/** @internal */
 export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
   .object({
-    bank_account_uuid: z.string(),
-    name: z.string(),
-    hidden_account_number: z.string(),
+    bank_account_uuid: z.string().optional(),
+    name: z.string().optional(),
+    hidden_account_number: z.string().optional(),
     encrypted_account_number: z.nullable(z.string()).optional(),
-    routing_number: z.string(),
-    priority: z.number().int(),
-    split_amount: z.number(),
-    account_type: z.string(),
+    routing_number: z.string().optional(),
+    priority: z.number().int().optional(),
+    split_amount: z.number().optional(),
+    account_type: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "bank_account_uuid": "bankAccountUuid",
@@ -52,14 +133,14 @@ export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
 
 /** @internal */
 export type Splits$Outbound = {
-  bank_account_uuid: string;
-  name: string;
-  hidden_account_number: string;
+  bank_account_uuid?: string | undefined;
+  name?: string | undefined;
+  hidden_account_number?: string | undefined;
   encrypted_account_number?: string | null | undefined;
-  routing_number: string;
-  priority: number;
-  split_amount: number;
-  account_type: string;
+  routing_number?: string | undefined;
+  priority?: number | undefined;
+  split_amount?: number | undefined;
+  account_type?: string | undefined;
 };
 
 /** @internal */
@@ -68,14 +149,14 @@ export const Splits$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Splits
 > = z.object({
-  bankAccountUuid: z.string(),
-  name: z.string(),
-  hiddenAccountNumber: z.string(),
+  bankAccountUuid: z.string().optional(),
+  name: z.string().optional(),
+  hiddenAccountNumber: z.string().optional(),
   encryptedAccountNumber: z.nullable(z.string()).optional(),
-  routingNumber: z.string(),
-  priority: z.number().int(),
-  splitAmount: z.number(),
-  accountType: z.string(),
+  routingNumber: z.string().optional(),
+  priority: z.number().int().optional(),
+  splitAmount: z.number().optional(),
+  accountType: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     bankAccountUuid: "bank_account_uuid",
@@ -120,11 +201,13 @@ export const ContractorPaymentDetailsList$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contractor_uuid: z.string(),
-  payment_method: z.string(),
+  contractor_uuid: z.string().optional(),
+  payment_method: ContractorPaymentDetailsListPaymentMethod$inboundSchema
+    .optional(),
   first_name: z.string().optional(),
   last_name: z.string().optional(),
-  split_by: z.nullable(z.string()).optional(),
+  split_by: z.nullable(ContractorPaymentDetailsListSplitBy$inboundSchema)
+    .optional(),
   splits: z.nullable(z.array(z.lazy(() => Splits$inboundSchema))).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -138,8 +221,8 @@ export const ContractorPaymentDetailsList$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ContractorPaymentDetailsList$Outbound = {
-  contractor_uuid: string;
-  payment_method: string;
+  contractor_uuid?: string | undefined;
+  payment_method?: string | undefined;
   first_name?: string | undefined;
   last_name?: string | undefined;
   split_by?: string | null | undefined;
@@ -152,11 +235,13 @@ export const ContractorPaymentDetailsList$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ContractorPaymentDetailsList
 > = z.object({
-  contractorUuid: z.string(),
-  paymentMethod: z.string(),
+  contractorUuid: z.string().optional(),
+  paymentMethod: ContractorPaymentDetailsListPaymentMethod$outboundSchema
+    .optional(),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  splitBy: z.nullable(z.string()).optional(),
+  splitBy: z.nullable(ContractorPaymentDetailsListSplitBy$outboundSchema)
+    .optional(),
   splits: z.nullable(z.array(z.lazy(() => Splits$outboundSchema))).optional(),
 }).transform((v) => {
   return remap$(v, {

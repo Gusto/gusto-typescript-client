@@ -16,14 +16,14 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsList } from "../funcs/payrollsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { SortOrder } from "../models/components/sortorder.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsRequest,
   GetV1CompaniesCompanyIdPayrollsResponse,
   PayrollTypes,
   ProcessingStatuses,
+  SortOrder,
 } from "../models/operations/getv1companiescompanyidpayrolls.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -111,17 +111,21 @@ export function setPayrollsListData(
   queryKeyBase: [
     companyId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+        | undefined;
       processingStatuses?: Array<ProcessingStatuses> | undefined;
       payrollTypes?: Array<PayrollTypes> | undefined;
+      processed?: boolean | undefined;
+      includeOffCycle?: boolean | undefined;
       include?:
         | Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>
         | undefined;
       startDate?: string | undefined;
       endDate?: string | undefined;
-      sortOrder?: SortOrder | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      sortOrder?: SortOrder | undefined;
     },
   ],
   data: PayrollsListQueryData,
@@ -137,17 +141,21 @@ export function invalidatePayrollsList(
     [
       companyId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+          | undefined;
         processingStatuses?: Array<ProcessingStatuses> | undefined;
         payrollTypes?: Array<PayrollTypes> | undefined;
+        processed?: boolean | undefined;
+        includeOffCycle?: boolean | undefined;
         include?:
           | Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>
           | undefined;
         startDate?: string | undefined;
         endDate?: string | undefined;
-        sortOrder?: SortOrder | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        sortOrder?: SortOrder | undefined;
       },
     ]
   >,
@@ -179,15 +187,17 @@ export function buildPayrollsListQuery(
 } {
   return {
     queryKey: queryKeyPayrollsList(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       processingStatuses: request.processingStatuses,
       payrollTypes: request.payrollTypes,
+      processed: request.processed,
+      includeOffCycle: request.includeOffCycle,
       include: request.include,
       startDate: request.startDate,
       endDate: request.endDate,
-      sortOrder: request.sortOrder,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
+      sortOrder: request.sortOrder,
     }),
     queryFn: async function payrollsListQueryFn(
       ctx,
@@ -210,17 +220,21 @@ export function buildPayrollsListQuery(
 export function queryKeyPayrollsList(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+      | undefined;
     processingStatuses?: Array<ProcessingStatuses> | undefined;
     payrollTypes?: Array<PayrollTypes> | undefined;
+    processed?: boolean | undefined;
+    includeOffCycle?: boolean | undefined;
     include?:
       | Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>
       | undefined;
     startDate?: string | undefined;
     endDate?: string | undefined;
-    sortOrder?: SortOrder | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    sortOrder?: SortOrder | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Payrolls", "list", companyId, parameters];
