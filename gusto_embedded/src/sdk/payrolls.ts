@@ -92,6 +92,31 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Payrolls extends ClientSDK {
   /**
+   * Get all payrolls for a company
+   *
+   * @remarks
+   * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
+   *
+   * By default, will return processed, regular payrolls for the past 6 months.
+   *
+   * Notes:
+   * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
+   * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
+   *
+   * scope: `payrolls:read`
+   */
+  async list(
+    request: GetV1CompaniesCompanyIdPayrollsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPayrollsResponse> {
+    return unwrapAsync(payrollsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create an off-cycle payroll
    *
    * @remarks
@@ -111,31 +136,6 @@ export class Payrolls extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PostV1CompaniesCompanyIdPayrollsResponse> {
     return unwrapAsync(payrollsCreateOffCycle(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get all payrolls for a company
-   *
-   * @remarks
-   * Returns a list of payrolls for a company. You can change the payrolls returned by updating the processing_status, payroll_types, start_date, & end_date params.
-   *
-   * By default, will return processed, regular payrolls for the past 6 months.
-   *
-   * Notes:
-   * * Dollar amounts are returned as string representations of numeric decimals, are represented to the cent.
-   * * end_date can be at most 3 months in the future and start_date and end_date can't be more than 1 year apart.
-   *
-   * scope: `payrolls:read`
-   */
-  async list(
-    request: GetV1CompaniesCompanyIdPayrollsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdPayrollsResponse> {
-    return unwrapAsync(payrollsList(
       this,
       request,
       options,

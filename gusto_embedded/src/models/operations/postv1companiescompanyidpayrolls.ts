@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -19,12 +20,20 @@ import {
   PayrollPrepared$Outbound,
   PayrollPrepared$outboundSchema,
 } from "../components/payrollprepared.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+>;
 
 /**
  * An off cycle payroll reason. Select one from the following list.
@@ -32,6 +41,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export const OffCycleReason = {
   Bonus: "Bonus",
   Correction: "Correction",
+  Adhoc: "Adhoc",
   DismissedEmployee: "Dismissed employee",
   TransitionFromOldPaySchedule: "Transition from old pay schedule",
 } as const;
@@ -69,11 +79,11 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
   /**
    * Pay period start date.
    */
-  startDate: string;
+  startDate: RFCDate;
   /**
    * Pay period end date.
    */
-  endDate: string;
+  endDate: RFCDate;
   /**
    * A pay schedule is required for transition from old pay schedule payroll to identify the matching transition pay period.
    */
@@ -85,7 +95,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
   /**
    * Payment date.
    */
-  checkDate?: string | undefined;
+  checkDate?: RFCDate | undefined;
   /**
    * The payment schedule tax rate the payroll is based on.
    */
@@ -108,17 +118,44 @@ export type PostV1CompaniesCompanyIdPayrollsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesCompanyIdPayrollsRequestBody;
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+    | undefined;
+  requestBody?: PostV1CompaniesCompanyIdPayrollsRequestBody | undefined;
 };
 
 export type PostV1CompaniesCompanyIdPayrollsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * An off-cycle payroll
+   * successful
    */
   payrollPrepared?: PayrollPrepared | undefined;
 };
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+  > = PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const OffCycleReason$inboundSchema: z.ZodNativeEnum<
@@ -171,11 +208,11 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema:
   > = z.object({
     off_cycle: z.boolean(),
     off_cycle_reason: OffCycleReason$inboundSchema,
-    start_date: z.string(),
-    end_date: z.string(),
+    start_date: z.string().transform(v => new RFCDate(v)),
+    end_date: z.string().transform(v => new RFCDate(v)),
     pay_schedule_uuid: z.string().optional(),
     employee_uuids: z.array(z.string()).optional(),
-    check_date: z.string().optional(),
+    check_date: z.string().transform(v => new RFCDate(v)).optional(),
     withholding_pay_period: WithholdingPayPeriod$inboundSchema.optional(),
     skip_regular_deductions: z.boolean().optional(),
     fixed_withholding_rate: z.boolean().optional(),
@@ -217,11 +254,11 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
   > = z.object({
     offCycle: z.boolean(),
     offCycleReason: OffCycleReason$outboundSchema,
-    startDate: z.string(),
-    endDate: z.string(),
+    startDate: z.instanceof(RFCDate).transform(v => v.toString()),
+    endDate: z.instanceof(RFCDate).transform(v => v.toString()),
     payScheduleUuid: z.string().optional(),
     employeeUuids: z.array(z.string()).optional(),
-    checkDate: z.string().optional(),
+    checkDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
     withholdingPayPeriod: WithholdingPayPeriod$outboundSchema.optional(),
     skipRegularDeductions: z.boolean().optional(),
     fixedWithholdingRate: z.boolean().optional(),
@@ -289,10 +326,12 @@ export const PostV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version":
+    PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema
+      .default("2024-04-01"),
   RequestBody: z.lazy(() =>
     PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema
-  ),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -305,7 +344,9 @@ export const PostV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
 export type PostV1CompaniesCompanyIdPayrollsRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound;
+  RequestBody?:
+    | PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -315,10 +356,12 @@ export const PostV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   PostV1CompaniesCompanyIdPayrollsRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion:
+    PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
+      .default("2024-04-01"),
   requestBody: z.lazy(() =>
     PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema
-  ),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",

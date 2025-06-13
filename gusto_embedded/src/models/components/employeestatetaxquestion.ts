@@ -28,7 +28,7 @@ export type EmployeeStateTaxQuestion = {
   /**
    * An explaination of the question - this may contain inline html formatted links.
    */
-  description: string;
+  description: string | null;
   /**
    * A unique identifier of the question (for the given state) - used for updating the answer.
    */
@@ -45,7 +45,7 @@ export const EmployeeStateTaxQuestion$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   label: z.string(),
-  description: z.string(),
+  description: z.nullable(z.string()),
   key: z.string(),
   is_question_for_admin_only: z.boolean(),
   input_question_format: EmployeeStateTaxInputQuestionFormat$inboundSchema,
@@ -60,7 +60,7 @@ export const EmployeeStateTaxQuestion$inboundSchema: z.ZodType<
 /** @internal */
 export type EmployeeStateTaxQuestion$Outbound = {
   label: string;
-  description: string;
+  description: string | null;
   key: string;
   is_question_for_admin_only: boolean;
   input_question_format: EmployeeStateTaxInputQuestionFormat$Outbound;
@@ -74,7 +74,7 @@ export const EmployeeStateTaxQuestion$outboundSchema: z.ZodType<
   EmployeeStateTaxQuestion
 > = z.object({
   label: z.string(),
-  description: z.string(),
+  description: z.nullable(z.string()),
   key: z.string(),
   isQuestionForAdminOnly: z.boolean(),
   inputQuestionFormat: EmployeeStateTaxInputQuestionFormat$outboundSchema,

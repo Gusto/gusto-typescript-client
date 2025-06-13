@@ -13,5 +13,5 @@ let value: OffCycleReason = "Correction";
 ## Values
 
 ```typescript
-"Bonus" | "Correction" | "Dismissed employee" | "Transition from old pay schedule"
+"Bonus" | "Correction" | "Adhoc" | "Dismissed employee" | "Transition from old pay schedule"
 ```

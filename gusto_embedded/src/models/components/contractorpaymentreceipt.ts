@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,6 +19,22 @@ export type ContractorPaymentReceiptTotals = {
    */
   companyDebit?: string | undefined;
 };
+
+/**
+ * The payment method.
+ */
+export const ContractorPaymentReceiptPaymentMethod = {
+  DirectDeposit: "Direct Deposit",
+  Check: "Check",
+  HistoricalPayment: "Historical Payment",
+  CorrectionPayment: "Correction Payment",
+} as const;
+/**
+ * The payment method.
+ */
+export type ContractorPaymentReceiptPaymentMethod = ClosedEnum<
+  typeof ContractorPaymentReceiptPaymentMethod
+>;
 
 export type ContractorPayments = {
   /**
@@ -46,12 +63,8 @@ export type ContractorPayments = {
   contractorType?: string | undefined;
   /**
    * The payment method.
-   *
-   * @remarks
-   *
-   * `Direct Deposit` `Check` `Historical Payment` `Correction Payment`
    */
-  paymentMethod?: string | undefined;
+  paymentMethod?: ContractorPaymentReceiptPaymentMethod | undefined;
   /**
    * The fixed wage of the payment, regardless of hours worked.
    */
@@ -215,6 +228,30 @@ export function contractorPaymentReceiptTotalsFromJSON(
 }
 
 /** @internal */
+export const ContractorPaymentReceiptPaymentMethod$inboundSchema:
+  z.ZodNativeEnum<typeof ContractorPaymentReceiptPaymentMethod> = z.nativeEnum(
+    ContractorPaymentReceiptPaymentMethod,
+  );
+
+/** @internal */
+export const ContractorPaymentReceiptPaymentMethod$outboundSchema:
+  z.ZodNativeEnum<typeof ContractorPaymentReceiptPaymentMethod> =
+    ContractorPaymentReceiptPaymentMethod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ContractorPaymentReceiptPaymentMethod$ {
+  /** @deprecated use `ContractorPaymentReceiptPaymentMethod$inboundSchema` instead. */
+  export const inboundSchema =
+    ContractorPaymentReceiptPaymentMethod$inboundSchema;
+  /** @deprecated use `ContractorPaymentReceiptPaymentMethod$outboundSchema` instead. */
+  export const outboundSchema =
+    ContractorPaymentReceiptPaymentMethod$outboundSchema;
+}
+
+/** @internal */
 export const ContractorPayments$inboundSchema: z.ZodType<
   ContractorPayments,
   z.ZodTypeDef,
@@ -225,7 +262,8 @@ export const ContractorPayments$inboundSchema: z.ZodType<
   contractor_last_name: z.string().optional(),
   contractor_business_name: z.string().optional(),
   contractor_type: z.string().optional(),
-  payment_method: z.string().optional(),
+  payment_method: ContractorPaymentReceiptPaymentMethod$inboundSchema
+    .optional(),
   wage: z.string().optional(),
   bonus: z.string().optional(),
   reimbursement: z.string().optional(),
@@ -264,7 +302,8 @@ export const ContractorPayments$outboundSchema: z.ZodType<
   contractorLastName: z.string().optional(),
   contractorBusinessName: z.string().optional(),
   contractorType: z.string().optional(),
-  paymentMethod: z.string().optional(),
+  paymentMethod: ContractorPaymentReceiptPaymentMethod$outboundSchema
+    .optional(),
   wage: z.string().optional(),
   bonus: z.string().optional(),
   reimbursement: z.string().optional(),

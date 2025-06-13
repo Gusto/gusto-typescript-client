@@ -581,9 +581,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## update
 
@@ -605,7 +606,7 @@ async function run() {
   const result = await gustoEmbedded.employees.update({
     employeeId: "<id>",
     requestBody: {
-      version: "4ecb673b6db2f90a23c19c8e9cb4274e",
+      version: "16db4494c093c78f703aac608c7b8ea2",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",
@@ -640,7 +641,7 @@ async function run() {
   const res = await employeesUpdate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      version: "4ecb673b6db2f90a23c19c8e9cb4274e",
+      version: "16db4494c093c78f703aac608c7b8ea2",
       firstName: "Weezy",
       middleInitial: "F",
       lastName: "Baby",
@@ -1126,9 +1127,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## updateOnboardingStatus
 

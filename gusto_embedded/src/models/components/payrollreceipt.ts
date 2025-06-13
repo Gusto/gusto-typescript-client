@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,6 +46,20 @@ export type PayrollReceiptTaxes = {
   amount?: string | undefined;
 };
 
+/**
+ * The employee's compensation payment method.
+ */
+export const PayrollReceiptPaymentMethod = {
+  DirectDeposit: "Direct Deposit",
+  Check: "Check",
+} as const;
+/**
+ * The employee's compensation payment method.
+ */
+export type PayrollReceiptPaymentMethod = ClosedEnum<
+  typeof PayrollReceiptPaymentMethod
+>;
+
 export type EmployeeCompensations = {
   /**
    * The UUID of the employee.
@@ -59,9 +74,9 @@ export type EmployeeCompensations = {
    */
   employeeLastName?: string | undefined;
   /**
-   * The employee's compensation payment method.\n\n`Check` `Direct Deposit`
+   * The employee's compensation payment method.
    */
-  paymentMethod?: string | undefined;
+  paymentMethod?: PayrollReceiptPaymentMethod | undefined;
   /**
    * The employee's net pay. Net pay paid by check is available for reference but is not included in the `["totals"]["net_pay_debit"]` amount.
    */
@@ -114,9 +129,6 @@ export type Licensee = {
   phoneNumber?: string | undefined;
 };
 
-/**
- * Example response
- */
 export type PayrollReceipt = {
   /**
    * A unique identifier of the payroll receipt.
@@ -303,6 +315,27 @@ export function payrollReceiptTaxesFromJSON(
 }
 
 /** @internal */
+export const PayrollReceiptPaymentMethod$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollReceiptPaymentMethod
+> = z.nativeEnum(PayrollReceiptPaymentMethod);
+
+/** @internal */
+export const PayrollReceiptPaymentMethod$outboundSchema: z.ZodNativeEnum<
+  typeof PayrollReceiptPaymentMethod
+> = PayrollReceiptPaymentMethod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PayrollReceiptPaymentMethod$ {
+  /** @deprecated use `PayrollReceiptPaymentMethod$inboundSchema` instead. */
+  export const inboundSchema = PayrollReceiptPaymentMethod$inboundSchema;
+  /** @deprecated use `PayrollReceiptPaymentMethod$outboundSchema` instead. */
+  export const outboundSchema = PayrollReceiptPaymentMethod$outboundSchema;
+}
+
+/** @internal */
 export const EmployeeCompensations$inboundSchema: z.ZodType<
   EmployeeCompensations,
   z.ZodTypeDef,
@@ -311,7 +344,7 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
   employee_uuid: z.string().optional(),
   employee_first_name: z.string().optional(),
   employee_last_name: z.string().optional(),
-  payment_method: z.string().optional(),
+  payment_method: PayrollReceiptPaymentMethod$inboundSchema.optional(),
   net_pay: z.string().optional(),
   total_tax: z.string().optional(),
   total_garnishments: z.string().optional(),
@@ -353,7 +386,7 @@ export const EmployeeCompensations$outboundSchema: z.ZodType<
   employeeUuid: z.string().optional(),
   employeeFirstName: z.string().optional(),
   employeeLastName: z.string().optional(),
-  paymentMethod: z.string().optional(),
+  paymentMethod: PayrollReceiptPaymentMethod$outboundSchema.optional(),
   netPay: z.string().optional(),
   totalTax: z.string().optional(),
   totalGarnishments: z.string().optional(),

@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -18,12 +19,21 @@ import {
   PayrollReceipt$Outbound,
   PayrollReceipt$outboundSchema,
 } from "../components/payrollreceipt.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
+  >;
 
 export type GetV1PaymentReceiptsPayrollsPayrollUuidRequest = {
   /**
@@ -33,16 +43,46 @@ export type GetV1PaymentReceiptsPayrollsPayrollUuidRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1PaymentReceiptsPayrollsPayrollUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   payrollReceipt?: PayrollReceipt | undefined;
 };
+
+/** @internal */
+export const GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
+  > =
+    GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1PaymentReceiptsPayrollsPayrollUuidRequest$inboundSchema:
@@ -52,7 +92,9 @@ export const GetV1PaymentReceiptsPayrollsPayrollUuidRequest$inboundSchema:
     unknown
   > = z.object({
     payroll_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version":
+      GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "payroll_uuid": "payrollUuid",
@@ -74,7 +116,9 @@ export const GetV1PaymentReceiptsPayrollsPayrollUuidRequest$outboundSchema:
     GetV1PaymentReceiptsPayrollsPayrollUuidRequest
   > = z.object({
     payrollUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       payrollUuid: "payroll_uuid",

@@ -21,6 +21,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetV1CompaniesCompanyIdPayrollsRequest,
   GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema,
   GetV1CompaniesCompanyIdPayrollsResponse,
@@ -50,6 +54,7 @@ export function payrollsList(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdPayrollsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -75,6 +80,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdPayrollsResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -116,8 +122,10 @@ async function $do(
     }, { explode: false }),
     encodeFormQuery({
       "end_date": payload.end_date,
+      "include_off_cycle": payload.include_off_cycle,
       "page": payload.page,
       "per": payload.per,
+      "processed": payload.processed,
       "sort_order": payload.sort_order,
       "start_date": payload.start_date,
     }),
@@ -186,6 +194,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdPayrollsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -198,7 +207,8 @@ async function $do(
     M.json(200, GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema, {
       key: "Payroll-List",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OffCycleReasonType,
@@ -72,14 +73,11 @@ import {
   PayrollWithholdingPayPeriodType$outboundSchema,
 } from "./payrollwithholdingpayperiodtype.js";
 
-/**
- * Example response
- */
 export type Payroll = {
   /**
    * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on time.  If payroll has not been run by the deadline, a prepare request will update both the check date and deadline to reflect the soonest employees can be paid and the deadline by which the payroll must be run in order for said check date to be met.
    */
-  payrollDeadline?: Date | undefined;
+  payrollDeadline?: RFCDate | undefined;
   /**
    * The date on which employees will be paid for the payroll.
    */
@@ -91,11 +89,11 @@ export type Payroll = {
   /**
    * The date at which the payroll was processed. Null if the payroll isn't processed yet.
    */
-  processedDate?: string | undefined;
+  processedDate?: string | null | undefined;
   /**
    * A timestamp of the last valid payroll calculation. Null if there isn't a valid calculation.
    */
-  calculatedAt?: string | undefined;
+  calculatedAt?: string | null | undefined;
   /**
    * The UUID of the payroll.
    */
@@ -176,13 +174,11 @@ export type Payroll = {
 /** @internal */
 export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
   z.object({
-    payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
+    payroll_deadline: z.string().transform(v => new RFCDate(v)).optional(),
     check_date: z.string().optional(),
     processed: z.boolean().optional(),
-    processed_date: z.string().optional(),
-    calculated_at: z.string().optional(),
+    processed_date: z.nullable(z.string()).optional(),
+    calculated_at: z.nullable(z.string()).optional(),
     uuid: z.string().optional(),
     payroll_uuid: z.string().optional(),
     company_uuid: z.string().optional(),
@@ -245,8 +241,8 @@ export type Payroll$Outbound = {
   payroll_deadline?: string | undefined;
   check_date?: string | undefined;
   processed?: boolean | undefined;
-  processed_date?: string | undefined;
-  calculated_at?: string | undefined;
+  processed_date?: string | null | undefined;
+  calculated_at?: string | null | undefined;
   uuid?: string | undefined;
   payroll_uuid?: string | undefined;
   company_uuid?: string | undefined;
@@ -280,11 +276,12 @@ export const Payroll$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Payroll
 > = z.object({
-  payrollDeadline: z.date().transform(v => v.toISOString()).optional(),
+  payrollDeadline: z.instanceof(RFCDate).transform(v => v.toString())
+    .optional(),
   checkDate: z.string().optional(),
   processed: z.boolean().optional(),
-  processedDate: z.string().optional(),
-  calculatedAt: z.string().optional(),
+  processedDate: z.nullable(z.string()).optional(),
+  calculatedAt: z.nullable(z.string()).optional(),
   uuid: z.string().optional(),
   payrollUuid: z.string().optional(),
   companyUuid: z.string().optional(),
