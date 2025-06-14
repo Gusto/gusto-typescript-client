@@ -102,6 +102,7 @@ export function setEmployeesListData(
       searchTerm?: string | undefined;
       include?: Array<Include> | undefined;
       terminated?: boolean | undefined;
+      uuids?: Array<string> | undefined;
       page?: number | undefined;
       per?: number | undefined;
     },
@@ -125,6 +126,7 @@ export function invalidateEmployeesList(
         searchTerm?: string | undefined;
         include?: Array<Include> | undefined;
         terminated?: boolean | undefined;
+        uuids?: Array<string> | undefined;
         page?: number | undefined;
         per?: number | undefined;
       },
@@ -162,6 +164,7 @@ export function buildEmployeesListQuery(
       searchTerm: request.searchTerm,
       include: request.include,
       terminated: request.terminated,
+      uuids: request.uuids,
       page: request.page,
       per: request.per,
     }),
@@ -192,6 +195,7 @@ export function queryKeyEmployeesList(
     searchTerm?: string | undefined;
     include?: Array<Include> | undefined;
     terminated?: boolean | undefined;
+    uuids?: Array<string> | undefined;
     page?: number | undefined;
     per?: number | undefined;
   },
