@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 3f7e9e9f0e0d4044b9c4bd0dfb3fe67f
+  docChecksum: 787b0c4561afdb8ccee7523b08096075
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.563.0
+  speakeasyVersion: 1.563.1
   generationVersion: 2.629.1
-  releaseVersion: 0.6.4
-  configChecksum: 28d56ca03d52d52794e3985f3941e5f1
+  releaseVersion: 0.6.5
+  configChecksum: a65ccaac7a9f4c6114ae718d1227d37c
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -3260,7 +3260,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "1869dc97bf5b9b037bee857179eba518", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
+        application/json: {"version": "1d046be3e142f6b66f7dff1414de3739", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107", "filing_address": true}
       responses:
         "200":
           application/json: {"uuid": "ced517c9-1c22-4468-88f7-bea752987d03", "country": "USA"}
@@ -4141,7 +4141,7 @@ examples:
         path:
           employee_id: "<id>"
       requestBody:
-        application/json: {"version": "16db4494c093c78f703aac608c7b8ea2", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
+        application/json: {"version": "42d3d762169564940b188e441232d30a", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
       responses:
         "200":
           application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
@@ -4277,7 +4277,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "first_name": "Leanna", "last_name": "Swaniawski", "date_of_birth": "1977-07-17", "ssn": "<value>", "work_address": {}, "home_address": {"street_1": "<value>", "city": "Port Mitchell", "state": "Kentucky", "zip": "85765"}, "termination": {}, "job": {}}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "first_name": "Leanna", "last_name": "Swaniawski", "date_of_birth": "1977-07-17", "ssn": "<value>", "work_address": {}, "home_address": {"street_1": "<value>", "city": "Port Mitchell", "state": "Kentucky", "zip": "85765"}, "termination": {}, "job": {}}
       responses:
         "200":
           application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "work_email": null, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "historical": true, "employee_code": "eh3st1", "department_uuid": null}
@@ -4527,7 +4527,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -4538,7 +4538,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -4549,7 +4549,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -4617,7 +4617,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -4628,7 +4628,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -4639,7 +4639,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -4959,7 +4959,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"location_uuid": "32e5888d-2089-45e6-8c03-fa47051f315e", "effective_date": "2020-01-31"}
+        application/json: {"location_uuid": "3f3e5275-3cd1-49fd-a0a5-596d8deb3b2f", "effective_date": "2020-01-31"}
       responses:
         "201":
           application/json: {"uuid": "e02ec014-1e6b-41a8-ba57-7e102baa2d06", "version": "<value>", "country": "USA"}
@@ -5009,7 +5009,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "2aef89e13855c4c6241bbc35c708c42c", "location_uuid": "d04d7b13-bc6f-4dd1-b28f-8f2de53fc87d"}
+        application/json: {"version": "7bf283f9baff9522805f3461108ebde0", "location_uuid": "1be2b490-8472-44e6-8c5b-7decf0750cdb"}
       responses:
         "200":
           application/json: {"uuid": "27c58f85-7f90-4597-bc74-193b0a8d024d", "version": "<value>", "country": "USA"}
@@ -5924,7 +5924,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "200":
           application/json: {"uuid": "c9fc1ad3-c107-4e7b-aa21-2dd4b00a7a07", "company_uuid": "b7457fec-3b76-43bb-9c6e-69cca4688942", "wage_type": "Hourly", "is_active": false, "version": "63859768485e218ccf8a449bb60f14ed", "type": "Individual", "first_name": "Kory", "last_name": "Gottlieb", "middle_initial": "P", "business_name": null, "ein": null, "has_ein": false, "email": "keira.west@mckenzie.org", "start_date": "2022-01-01", "address": {"street_1": "621 Jast Row", "street_2": "Apt. 281", "city": "Coral Springs", "state": "FL", "zip": "33065", "country": "USA"}, "hourly_rate": "60.00", "file_new_hire_report": true, "work_state": "FL", "onboarded": true, "onboarding_status": "onboarding_completed", "payment_method": "Direct Deposit", "has_ssn": true, "department_uuid": "56260b3d-c375-415c-b77a-75d99f717193"}
@@ -5935,7 +5935,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "200":
           application/json: {"uuid": "c7c0659c-21a6-4b4e-b74c-9252576fc68c", "company_uuid": "0ec4ae6e-e436-460d-b63c-94a14503d16f", "wage_type": "Fixed", "is_active": true, "version": "8aab307f1e8ed788697f8986346af559", "type": "Business", "first_name": null, "last_name": null, "middle_initial": null, "business_name": "Labadie-Stroman", "ein": "XX-XXX0001", "has_ein": true, "email": "jonatan@kerluke.info", "start_date": "2022-01-01", "address": null, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "payment_method": "Direct Deposit", "has_ssn": false}
@@ -5946,7 +5946,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -5957,7 +5957,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -5968,7 +5968,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -6063,7 +6063,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -6074,7 +6074,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -6085,7 +6085,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -6188,7 +6188,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "200":
           application/json: {"version": "63859768485e218ccf8a449bb60f14ed", "type": "Direct Deposit", "split_by": "Percentage", "splits": [{"uuid": "e88f9436-b74e-49a8-87e9-777b9bfe715e", "name": "BoA Checking Account", "hidden_account_number": "XXXX0992", "priority": 1, "split_amount": 100}]}
@@ -6199,7 +6199,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -6210,7 +6210,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -6221,7 +6221,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
