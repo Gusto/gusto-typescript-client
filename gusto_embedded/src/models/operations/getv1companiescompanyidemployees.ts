@@ -71,6 +71,10 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
    */
   terminated?: boolean | undefined;
   /**
+   * Optional subset of employees to fetch.
+   */
+  uuids?: Array<string> | undefined;
+  /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
   page?: number | undefined;
@@ -145,6 +149,7 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
   search_term: z.string().optional(),
   include: z.array(Include$inboundSchema).optional(),
   terminated: z.boolean().optional(),
+  uuids: z.array(z.string()).optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
 }).transform((v) => {
@@ -162,6 +167,7 @@ export type GetV1CompaniesCompanyIdEmployeesRequest$Outbound = {
   search_term?: string | undefined;
   include?: Array<string> | undefined;
   terminated?: boolean | undefined;
+  uuids?: Array<string> | undefined;
   page?: number | undefined;
   per?: number | undefined;
 };
@@ -179,6 +185,7 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
   searchTerm: z.string().optional(),
   include: z.array(Include$outboundSchema).optional(),
   terminated: z.boolean().optional(),
+  uuids: z.array(z.string()).optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
 }).transform((v) => {
