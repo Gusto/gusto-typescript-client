@@ -167,10 +167,10 @@ async function run() {
   const result = await gustoEmbedded.payrolls.createOffCycle({
     companyId: "<id>",
     requestBody: {
-      offCycle: true,
-      offCycleReason: "Bonus",
-      startDate: new RFCDate("2025-06-12"),
-      endDate: new RFCDate("2025-06-18"),
+      offCycle: false,
+      offCycleReason: "Correction",
+      startDate: new RFCDate("<value>"),
+      endDate: new RFCDate("<value>"),
     },
   });
 
@@ -199,10 +199,10 @@ async function run() {
   const res = await payrollsCreateOffCycle(gustoEmbedded, {
     companyId: "<id>",
     requestBody: {
-      offCycle: true,
-      offCycleReason: "Bonus",
-      startDate: new RFCDate("2025-06-12"),
-      endDate: new RFCDate("2025-06-18"),
+      offCycle: false,
+      offCycleReason: "Correction",
+      startDate: new RFCDate("<value>"),
+      endDate: new RFCDate("<value>"),
     },
   });
   if (res.ok) {
