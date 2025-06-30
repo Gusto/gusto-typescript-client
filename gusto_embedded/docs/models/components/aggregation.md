@@ -7,11 +7,11 @@ The breakdown level used for the report
 ```typescript
 import { Aggregation } from "@gusto/embedded-api/models/components/generalledgerreport.js";
 
-let value: Aggregation = "job";
+let value: Aggregation = "department";
 ```
 
 ## Values
 
 ```typescript
-"default" | "job" | "department"
+"default" | "job" | "department" | "integration"
 ```

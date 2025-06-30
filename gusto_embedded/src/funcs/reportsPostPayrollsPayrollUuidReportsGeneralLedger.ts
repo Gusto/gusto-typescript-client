@@ -41,7 +41,7 @@ import { Result } from "../types/fp.js";
  *
  * Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
  *
- * scope: `company_reports:write`
+ * scope: `company_reports:write` OR `company_reports:write:general_ledger`
  */
 export function reportsPostPayrollsPayrollUuidReportsGeneralLedger(
   client: GustoEmbeddedCore,

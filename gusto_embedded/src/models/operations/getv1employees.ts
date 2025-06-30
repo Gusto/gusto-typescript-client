@@ -7,18 +7,54 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
-  Employee,
-  Employee$inboundSchema,
-  Employee$Outbound,
-  Employee$outboundSchema,
-} from "../components/employee.js";
+  EmployeeCustomField,
+  EmployeeCustomField$inboundSchema,
+  EmployeeCustomField$Outbound,
+  EmployeeCustomField$outboundSchema,
+} from "../components/employeecustomfield.js";
+import {
+  EmployeeHomeAddress,
+  EmployeeHomeAddress$inboundSchema,
+  EmployeeHomeAddress$Outbound,
+  EmployeeHomeAddress$outboundSchema,
+} from "../components/employeehomeaddress.js";
+import {
+  FlsaStatusType,
+  FlsaStatusType$inboundSchema,
+  FlsaStatusType$outboundSchema,
+} from "../components/flsastatustype.js";
+import {
+  Garnishment,
+  Garnishment$inboundSchema,
+  Garnishment$Outbound,
+  Garnishment$outboundSchema,
+} from "../components/garnishment.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
+import {
+  Job,
+  Job$inboundSchema,
+  Job$Outbound,
+  Job$outboundSchema,
+} from "../components/job.js";
+import {
+  PaidTimeOff,
+  PaidTimeOff$inboundSchema,
+  PaidTimeOff$Outbound,
+  PaidTimeOff$outboundSchema,
+} from "../components/paidtimeoff.js";
+import {
+  Termination,
+  Termination$inboundSchema,
+  Termination$Outbound,
+  Termination$outboundSchema,
+} from "../components/termination.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -62,12 +98,188 @@ export type GetV1EmployeesRequest = {
   include?: Array<QueryParamInclude> | undefined;
 };
 
+/**
+ * The current onboarding status of the employee
+ */
+export const GetV1EmployeesOnboardingStatus = {
+  OnboardingCompleted: "onboarding_completed",
+  AdminOnboardingIncomplete: "admin_onboarding_incomplete",
+  SelfOnboardingPendingInvite: "self_onboarding_pending_invite",
+  SelfOnboardingInvited: "self_onboarding_invited",
+  SelfOnboardingInvitedStarted: "self_onboarding_invited_started",
+  SelfOnboardingInvitedOverdue: "self_onboarding_invited_overdue",
+  SelfOnboardingCompletedByEmployee: "self_onboarding_completed_by_employee",
+  SelfOnboardingAwaitingAdminReview: "self_onboarding_awaiting_admin_review",
+} as const;
+/**
+ * The current onboarding status of the employee
+ */
+export type GetV1EmployeesOnboardingStatus = ClosedEnum<
+  typeof GetV1EmployeesOnboardingStatus
+>;
+
+/**
+ * Configuration for an employee onboarding documents during onboarding
+ */
+export type GetV1EmployeesOnboardingDocumentsConfig = {
+  /**
+   * The UUID of the onboarding documents config
+   */
+  uuid?: string | null | undefined;
+  /**
+   * Whether to include Form I-9 for an employee during onboarding
+   */
+  i9Document?: boolean | undefined;
+};
+
+/**
+ * The employee's payment method
+ */
+export const GetV1EmployeesPaymentMethod = {
+  DirectDeposit: "Direct Deposit",
+  Check: "Check",
+} as const;
+/**
+ * The employee's payment method
+ */
+export type GetV1EmployeesPaymentMethod = ClosedEnum<
+  typeof GetV1EmployeesPaymentMethod
+>;
+
+/**
+ * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
+ */
+export const GetV1EmployeesCurrentEmploymentStatus = {
+  FullTime: "full_time",
+  PartTimeUnderTwentyHours: "part_time_under_twenty_hours",
+  PartTimeTwentyPlusHours: "part_time_twenty_plus_hours",
+  Variable: "variable",
+  Seasonal: "seasonal",
+} as const;
+/**
+ * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
+ */
+export type GetV1EmployeesCurrentEmploymentStatus = ClosedEnum<
+  typeof GetV1EmployeesCurrentEmploymentStatus
+>;
+
+/**
+ * The representation of an employee in Gusto.
+ */
+export type GetV1EmployeesEmployee = {
+  /**
+   * The UUID of the employee in Gusto.
+   */
+  uuid: string;
+  firstName: string;
+  middleInitial?: string | null | undefined;
+  lastName: string;
+  /**
+   * The personal email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+   */
+  email?: string | null | undefined;
+  /**
+   * The UUID of the company the employee is employed by.
+   */
+  companyUuid?: string | undefined;
+  /**
+   * The UUID of the employee's manager.
+   */
+  managerUuid?: string | null | undefined;
+  /**
+   * The current version of the employee. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   */
+  version?: string | undefined;
+  /**
+   * The employee's department in the company.
+   */
+  department?: string | null | undefined;
+  /**
+   * Whether the employee is terminated.
+   */
+  terminated?: boolean | undefined;
+  /**
+   * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
+   */
+  twoPercentShareholder?: boolean | null | undefined;
+  /**
+   * The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+   */
+  workEmail?: string | null | undefined;
+  /**
+   * Whether the employee has completed onboarding.
+   */
+  onboarded?: boolean | undefined;
+  /**
+   * The current onboarding status of the employee
+   */
+  onboardingStatus?: GetV1EmployeesOnboardingStatus | null | undefined;
+  /**
+   * Configuration for an employee onboarding documents during onboarding
+   */
+  onboardingDocumentsConfig?:
+    | GetV1EmployeesOnboardingDocumentsConfig
+    | undefined;
+  jobs?: Array<Job> | undefined;
+  eligiblePaidTimeOff?: Array<PaidTimeOff> | undefined;
+  terminations?: Array<Termination> | undefined;
+  garnishments?: Array<Garnishment> | undefined;
+  /**
+   * Custom fields are only included for the employee if the include param has the custom_fields value set
+   */
+  customFields?: Array<EmployeeCustomField> | undefined;
+  dateOfBirth?: string | null | undefined;
+  /**
+   * Indicates whether the employee has an SSN in Gusto.
+   */
+  hasSsn?: boolean | undefined;
+  /**
+   * Deprecated. This field always returns an empty string.
+   */
+  ssn?: string | undefined;
+  phone?: string | null | undefined;
+  preferredFirstName?: string | null | undefined;
+  /**
+   * The employee's payment method
+   */
+  paymentMethod?: GetV1EmployeesPaymentMethod | undefined;
+  /**
+   * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
+   */
+  currentEmploymentStatus?:
+    | GetV1EmployeesCurrentEmploymentStatus
+    | null
+    | undefined;
+  historical?: boolean | undefined;
+  /**
+   * The short format code of the employee
+   */
+  employeeCode?: string | undefined;
+  /**
+   * The UUID of the department the employee is under
+   */
+  departmentUuid?: string | null | undefined;
+  title?: string | undefined;
+  /**
+   * The date when the employee was hired to the company
+   */
+  hiredAt?: RFCDate | undefined;
+  hiddenSsn?: string | undefined;
+  /**
+   * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Commissioned employees ('Commission Only Exempt') earn wages based only on commission. Commissioned with overtime ('Commission Only Nonexempt') earn wages based on commission, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
+   */
+  flsaStatus?: FlsaStatusType | undefined;
+  applicableTaxIds?: Array<number> | undefined;
+  currentHomeAddress?: EmployeeHomeAddress | undefined;
+  allHomeAddresses?: Array<EmployeeHomeAddress> | undefined;
+};
+
 export type GetV1EmployeesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * successful
+   * Example response
    */
-  employee?: Employee | undefined;
+  employee?: GetV1EmployeesEmployee | undefined;
 };
 
 /** @internal */
@@ -189,13 +401,383 @@ export function getV1EmployeesRequestFromJSON(
 }
 
 /** @internal */
+export const GetV1EmployeesOnboardingStatus$inboundSchema: z.ZodNativeEnum<
+  typeof GetV1EmployeesOnboardingStatus
+> = z.nativeEnum(GetV1EmployeesOnboardingStatus);
+
+/** @internal */
+export const GetV1EmployeesOnboardingStatus$outboundSchema: z.ZodNativeEnum<
+  typeof GetV1EmployeesOnboardingStatus
+> = GetV1EmployeesOnboardingStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesOnboardingStatus$ {
+  /** @deprecated use `GetV1EmployeesOnboardingStatus$inboundSchema` instead. */
+  export const inboundSchema = GetV1EmployeesOnboardingStatus$inboundSchema;
+  /** @deprecated use `GetV1EmployeesOnboardingStatus$outboundSchema` instead. */
+  export const outboundSchema = GetV1EmployeesOnboardingStatus$outboundSchema;
+}
+
+/** @internal */
+export const GetV1EmployeesOnboardingDocumentsConfig$inboundSchema: z.ZodType<
+  GetV1EmployeesOnboardingDocumentsConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  uuid: z.nullable(z.string()).optional(),
+  i9_document: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "i9_document": "i9Document",
+  });
+});
+
+/** @internal */
+export type GetV1EmployeesOnboardingDocumentsConfig$Outbound = {
+  uuid?: string | null | undefined;
+  i9_document?: boolean | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesOnboardingDocumentsConfig$outboundSchema: z.ZodType<
+  GetV1EmployeesOnboardingDocumentsConfig$Outbound,
+  z.ZodTypeDef,
+  GetV1EmployeesOnboardingDocumentsConfig
+> = z.object({
+  uuid: z.nullable(z.string()).optional(),
+  i9Document: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    i9Document: "i9_document",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesOnboardingDocumentsConfig$ {
+  /** @deprecated use `GetV1EmployeesOnboardingDocumentsConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesOnboardingDocumentsConfig$inboundSchema;
+  /** @deprecated use `GetV1EmployeesOnboardingDocumentsConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesOnboardingDocumentsConfig$outboundSchema;
+  /** @deprecated use `GetV1EmployeesOnboardingDocumentsConfig$Outbound` instead. */
+  export type Outbound = GetV1EmployeesOnboardingDocumentsConfig$Outbound;
+}
+
+export function getV1EmployeesOnboardingDocumentsConfigToJSON(
+  getV1EmployeesOnboardingDocumentsConfig:
+    GetV1EmployeesOnboardingDocumentsConfig,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesOnboardingDocumentsConfig$outboundSchema.parse(
+      getV1EmployeesOnboardingDocumentsConfig,
+    ),
+  );
+}
+
+export function getV1EmployeesOnboardingDocumentsConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1EmployeesOnboardingDocumentsConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1EmployeesOnboardingDocumentsConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1EmployeesOnboardingDocumentsConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1EmployeesPaymentMethod$inboundSchema: z.ZodNativeEnum<
+  typeof GetV1EmployeesPaymentMethod
+> = z.nativeEnum(GetV1EmployeesPaymentMethod);
+
+/** @internal */
+export const GetV1EmployeesPaymentMethod$outboundSchema: z.ZodNativeEnum<
+  typeof GetV1EmployeesPaymentMethod
+> = GetV1EmployeesPaymentMethod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesPaymentMethod$ {
+  /** @deprecated use `GetV1EmployeesPaymentMethod$inboundSchema` instead. */
+  export const inboundSchema = GetV1EmployeesPaymentMethod$inboundSchema;
+  /** @deprecated use `GetV1EmployeesPaymentMethod$outboundSchema` instead. */
+  export const outboundSchema = GetV1EmployeesPaymentMethod$outboundSchema;
+}
+
+/** @internal */
+export const GetV1EmployeesCurrentEmploymentStatus$inboundSchema:
+  z.ZodNativeEnum<typeof GetV1EmployeesCurrentEmploymentStatus> = z.nativeEnum(
+    GetV1EmployeesCurrentEmploymentStatus,
+  );
+
+/** @internal */
+export const GetV1EmployeesCurrentEmploymentStatus$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1EmployeesCurrentEmploymentStatus> =
+    GetV1EmployeesCurrentEmploymentStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesCurrentEmploymentStatus$ {
+  /** @deprecated use `GetV1EmployeesCurrentEmploymentStatus$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1EmployeesCurrentEmploymentStatus$inboundSchema;
+  /** @deprecated use `GetV1EmployeesCurrentEmploymentStatus$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1EmployeesCurrentEmploymentStatus$outboundSchema;
+}
+
+/** @internal */
+export const GetV1EmployeesEmployee$inboundSchema: z.ZodType<
+  GetV1EmployeesEmployee,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  uuid: z.string(),
+  first_name: z.string(),
+  middle_initial: z.nullable(z.string()).optional(),
+  last_name: z.string(),
+  email: z.nullable(z.string()).optional(),
+  company_uuid: z.string().optional(),
+  manager_uuid: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+  department: z.nullable(z.string()).optional(),
+  terminated: z.boolean().optional(),
+  two_percent_shareholder: z.nullable(z.boolean()).optional(),
+  work_email: z.nullable(z.string()).optional(),
+  onboarded: z.boolean().optional(),
+  onboarding_status: z.nullable(GetV1EmployeesOnboardingStatus$inboundSchema)
+    .optional(),
+  onboarding_documents_config: z.lazy(() =>
+    GetV1EmployeesOnboardingDocumentsConfig$inboundSchema
+  ).optional(),
+  jobs: z.array(Job$inboundSchema).optional(),
+  eligible_paid_time_off: z.array(PaidTimeOff$inboundSchema).optional(),
+  terminations: z.array(Termination$inboundSchema).optional(),
+  garnishments: z.array(Garnishment$inboundSchema).optional(),
+  custom_fields: z.array(EmployeeCustomField$inboundSchema).optional(),
+  date_of_birth: z.nullable(z.string()).optional(),
+  has_ssn: z.boolean().optional(),
+  ssn: z.string().optional(),
+  phone: z.nullable(z.string()).optional(),
+  preferred_first_name: z.nullable(z.string()).optional(),
+  payment_method: GetV1EmployeesPaymentMethod$inboundSchema.default("Check"),
+  current_employment_status: z.nullable(
+    GetV1EmployeesCurrentEmploymentStatus$inboundSchema,
+  ).optional(),
+  historical: z.boolean().optional(),
+  employee_code: z.string().optional(),
+  department_uuid: z.nullable(z.string()).optional(),
+  title: z.string().optional(),
+  hired_at: z.string().transform(v => new RFCDate(v)).optional(),
+  hidden_ssn: z.string().optional(),
+  flsa_status: FlsaStatusType$inboundSchema.optional(),
+  applicable_tax_ids: z.array(z.number()).optional(),
+  current_home_address: EmployeeHomeAddress$inboundSchema.optional(),
+  all_home_addresses: z.array(EmployeeHomeAddress$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "first_name": "firstName",
+    "middle_initial": "middleInitial",
+    "last_name": "lastName",
+    "company_uuid": "companyUuid",
+    "manager_uuid": "managerUuid",
+    "two_percent_shareholder": "twoPercentShareholder",
+    "work_email": "workEmail",
+    "onboarding_status": "onboardingStatus",
+    "onboarding_documents_config": "onboardingDocumentsConfig",
+    "eligible_paid_time_off": "eligiblePaidTimeOff",
+    "custom_fields": "customFields",
+    "date_of_birth": "dateOfBirth",
+    "has_ssn": "hasSsn",
+    "preferred_first_name": "preferredFirstName",
+    "payment_method": "paymentMethod",
+    "current_employment_status": "currentEmploymentStatus",
+    "employee_code": "employeeCode",
+    "department_uuid": "departmentUuid",
+    "hired_at": "hiredAt",
+    "hidden_ssn": "hiddenSsn",
+    "flsa_status": "flsaStatus",
+    "applicable_tax_ids": "applicableTaxIds",
+    "current_home_address": "currentHomeAddress",
+    "all_home_addresses": "allHomeAddresses",
+  });
+});
+
+/** @internal */
+export type GetV1EmployeesEmployee$Outbound = {
+  uuid: string;
+  first_name: string;
+  middle_initial?: string | null | undefined;
+  last_name: string;
+  email?: string | null | undefined;
+  company_uuid?: string | undefined;
+  manager_uuid?: string | null | undefined;
+  version?: string | undefined;
+  department?: string | null | undefined;
+  terminated?: boolean | undefined;
+  two_percent_shareholder?: boolean | null | undefined;
+  work_email?: string | null | undefined;
+  onboarded?: boolean | undefined;
+  onboarding_status?: string | null | undefined;
+  onboarding_documents_config?:
+    | GetV1EmployeesOnboardingDocumentsConfig$Outbound
+    | undefined;
+  jobs?: Array<Job$Outbound> | undefined;
+  eligible_paid_time_off?: Array<PaidTimeOff$Outbound> | undefined;
+  terminations?: Array<Termination$Outbound> | undefined;
+  garnishments?: Array<Garnishment$Outbound> | undefined;
+  custom_fields?: Array<EmployeeCustomField$Outbound> | undefined;
+  date_of_birth?: string | null | undefined;
+  has_ssn?: boolean | undefined;
+  ssn?: string | undefined;
+  phone?: string | null | undefined;
+  preferred_first_name?: string | null | undefined;
+  payment_method: string;
+  current_employment_status?: string | null | undefined;
+  historical?: boolean | undefined;
+  employee_code?: string | undefined;
+  department_uuid?: string | null | undefined;
+  title?: string | undefined;
+  hired_at?: string | undefined;
+  hidden_ssn?: string | undefined;
+  flsa_status?: string | undefined;
+  applicable_tax_ids?: Array<number> | undefined;
+  current_home_address?: EmployeeHomeAddress$Outbound | undefined;
+  all_home_addresses?: Array<EmployeeHomeAddress$Outbound> | undefined;
+};
+
+/** @internal */
+export const GetV1EmployeesEmployee$outboundSchema: z.ZodType<
+  GetV1EmployeesEmployee$Outbound,
+  z.ZodTypeDef,
+  GetV1EmployeesEmployee
+> = z.object({
+  uuid: z.string(),
+  firstName: z.string(),
+  middleInitial: z.nullable(z.string()).optional(),
+  lastName: z.string(),
+  email: z.nullable(z.string()).optional(),
+  companyUuid: z.string().optional(),
+  managerUuid: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+  department: z.nullable(z.string()).optional(),
+  terminated: z.boolean().optional(),
+  twoPercentShareholder: z.nullable(z.boolean()).optional(),
+  workEmail: z.nullable(z.string()).optional(),
+  onboarded: z.boolean().optional(),
+  onboardingStatus: z.nullable(GetV1EmployeesOnboardingStatus$outboundSchema)
+    .optional(),
+  onboardingDocumentsConfig: z.lazy(() =>
+    GetV1EmployeesOnboardingDocumentsConfig$outboundSchema
+  ).optional(),
+  jobs: z.array(Job$outboundSchema).optional(),
+  eligiblePaidTimeOff: z.array(PaidTimeOff$outboundSchema).optional(),
+  terminations: z.array(Termination$outboundSchema).optional(),
+  garnishments: z.array(Garnishment$outboundSchema).optional(),
+  customFields: z.array(EmployeeCustomField$outboundSchema).optional(),
+  dateOfBirth: z.nullable(z.string()).optional(),
+  hasSsn: z.boolean().optional(),
+  ssn: z.string().optional(),
+  phone: z.nullable(z.string()).optional(),
+  preferredFirstName: z.nullable(z.string()).optional(),
+  paymentMethod: GetV1EmployeesPaymentMethod$outboundSchema.default("Check"),
+  currentEmploymentStatus: z.nullable(
+    GetV1EmployeesCurrentEmploymentStatus$outboundSchema,
+  ).optional(),
+  historical: z.boolean().optional(),
+  employeeCode: z.string().optional(),
+  departmentUuid: z.nullable(z.string()).optional(),
+  title: z.string().optional(),
+  hiredAt: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  hiddenSsn: z.string().optional(),
+  flsaStatus: FlsaStatusType$outboundSchema.optional(),
+  applicableTaxIds: z.array(z.number()).optional(),
+  currentHomeAddress: EmployeeHomeAddress$outboundSchema.optional(),
+  allHomeAddresses: z.array(EmployeeHomeAddress$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    firstName: "first_name",
+    middleInitial: "middle_initial",
+    lastName: "last_name",
+    companyUuid: "company_uuid",
+    managerUuid: "manager_uuid",
+    twoPercentShareholder: "two_percent_shareholder",
+    workEmail: "work_email",
+    onboardingStatus: "onboarding_status",
+    onboardingDocumentsConfig: "onboarding_documents_config",
+    eligiblePaidTimeOff: "eligible_paid_time_off",
+    customFields: "custom_fields",
+    dateOfBirth: "date_of_birth",
+    hasSsn: "has_ssn",
+    preferredFirstName: "preferred_first_name",
+    paymentMethod: "payment_method",
+    currentEmploymentStatus: "current_employment_status",
+    employeeCode: "employee_code",
+    departmentUuid: "department_uuid",
+    hiredAt: "hired_at",
+    hiddenSsn: "hidden_ssn",
+    flsaStatus: "flsa_status",
+    applicableTaxIds: "applicable_tax_ids",
+    currentHomeAddress: "current_home_address",
+    allHomeAddresses: "all_home_addresses",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1EmployeesEmployee$ {
+  /** @deprecated use `GetV1EmployeesEmployee$inboundSchema` instead. */
+  export const inboundSchema = GetV1EmployeesEmployee$inboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployee$outboundSchema` instead. */
+  export const outboundSchema = GetV1EmployeesEmployee$outboundSchema;
+  /** @deprecated use `GetV1EmployeesEmployee$Outbound` instead. */
+  export type Outbound = GetV1EmployeesEmployee$Outbound;
+}
+
+export function getV1EmployeesEmployeeToJSON(
+  getV1EmployeesEmployee: GetV1EmployeesEmployee,
+): string {
+  return JSON.stringify(
+    GetV1EmployeesEmployee$outboundSchema.parse(getV1EmployeesEmployee),
+  );
+}
+
+export function getV1EmployeesEmployeeFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1EmployeesEmployee, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1EmployeesEmployee$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1EmployeesEmployee' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetV1EmployeesResponse$inboundSchema: z.ZodType<
   GetV1EmployeesResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  Employee: Employee$inboundSchema.optional(),
+  Employee: z.lazy(() => GetV1EmployeesEmployee$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
@@ -206,7 +788,7 @@ export const GetV1EmployeesResponse$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1EmployeesResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  Employee?: Employee$Outbound | undefined;
+  Employee?: GetV1EmployeesEmployee$Outbound | undefined;
 };
 
 /** @internal */
@@ -216,7 +798,7 @@ export const GetV1EmployeesResponse$outboundSchema: z.ZodType<
   GetV1EmployeesResponse
 > = z.object({
   httpMeta: HTTPMetadata$outboundSchema,
-  employee: Employee$outboundSchema.optional(),
+  employee: z.lazy(() => GetV1EmployeesEmployee$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     httpMeta: "HttpMeta",
