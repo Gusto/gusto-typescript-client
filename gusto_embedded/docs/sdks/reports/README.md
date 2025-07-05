@@ -138,9 +138,9 @@ import {
 
 Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
 
-Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+Use the `request_uuid` in the response with the [report GET endpoint](../reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
 
-scope: `company_reports:write`
+scope: `company_reports:write` OR `company_reports:write:general_ledger`
 
 ### Example Usage
 
@@ -237,6 +237,8 @@ import {
 ## getReportsRequestUuid
 
 Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
+
+Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope
 
 scope: `company_reports:read`
 
