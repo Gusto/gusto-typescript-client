@@ -117,6 +117,7 @@ async function $do(
       "per": payload.per,
       "search_term": payload.search_term,
       "terminated": payload.terminated,
+      "uuids": payload.uuids,
     }),
   );
 

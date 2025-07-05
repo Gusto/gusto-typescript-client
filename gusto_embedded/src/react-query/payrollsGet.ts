@@ -112,6 +112,8 @@ export function setPayrollsGetData(
     companyId: string,
     payrollId: string,
     parameters: {
+      page?: number | undefined;
+      per?: number | undefined;
       include?:
         | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
         | undefined;
@@ -132,6 +134,8 @@ export function invalidatePayrollsGet(
       companyId: string,
       payrollId: string,
       parameters: {
+        page?: number | undefined;
+        per?: number | undefined;
         include?:
           | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
           | undefined;
@@ -167,6 +171,8 @@ export function buildPayrollsGetQuery(
 } {
   return {
     queryKey: queryKeyPayrollsGet(request.companyId, request.payrollId, {
+      page: request.page,
+      per: request.per,
       include: request.include,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
@@ -192,6 +198,8 @@ export function queryKeyPayrollsGet(
   companyId: string,
   payrollId: string,
   parameters: {
+    page?: number | undefined;
+    per?: number | undefined;
     include?:
       | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
       | undefined;

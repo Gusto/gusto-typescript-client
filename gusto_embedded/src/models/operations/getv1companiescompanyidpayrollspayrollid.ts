@@ -45,6 +45,14 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
    */
   payrollId: string;
   /**
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+   */
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
+  /**
    * Include the requested attribute in the response, for multiple attributes comma separate the values, i.e. `?include=benefits,deductions,taxes`
    */
   include?:
@@ -98,6 +106,8 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$inboundSchema:
   > = z.object({
     company_id: z.string(),
     payroll_id: z.string(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$inboundSchema,
     ).optional(),
@@ -114,6 +124,8 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$inboundSchema:
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$Outbound = {
   company_id: string;
   payroll_id: string;
+  page?: number | undefined;
+  per?: number | undefined;
   include?: Array<string> | undefined;
   "X-Gusto-API-Version": string;
 };
@@ -127,6 +139,8 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$outboundSchema:
   > = z.object({
     companyId: z.string(),
     payrollId: z.string(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$outboundSchema,
     ).optional(),

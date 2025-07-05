@@ -35,6 +35,8 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Get a company's report given the `request_uuid`. The response will include the report request's status and, if complete, the report URL.
  *
+ * Reports containing PHI are inaccessible with `company_reports:read:tier_2_only` data scope
+ *
  * scope: `company_reports:read`
  */
 export function reportsGetReportsRequestUuid(
