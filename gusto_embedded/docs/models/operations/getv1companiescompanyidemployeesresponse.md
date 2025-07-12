@@ -10,7 +10,7 @@ let value: GetV1CompaniesCompanyIdEmployeesResponse = {};
 
 ## Fields
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |
-| `employees`                                                        | [components.Employee](../../models/components/employee.md)[]       | :heavy_minus_sign:                                                 | successful                                                         |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `httpMeta`                                                             | [components.HTTPMetadata](../../models/components/httpmetadata.md)     | :heavy_check_mark:                                                     | N/A                                                                    |
+| `showEmployees`                                                        | [components.ShowEmployees](../../models/components/showemployees.md)[] | :heavy_minus_sign:                                                     | successful                                                             |

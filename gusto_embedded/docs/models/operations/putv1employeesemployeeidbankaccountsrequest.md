@@ -8,6 +8,12 @@ import { PutV1EmployeesEmployeeIdBankAccountsRequest } from "@gusto/embedded-api
 let value: PutV1EmployeesEmployeeIdBankAccountsRequest = {
   employeeId: "<id>",
   bankAccountUuid: "<id>",
+  requestBody: {
+    name: "<value>",
+    routingNumber: "<value>",
+    accountNumber: "<value>",
+    accountType: "Checking",
+  },
 };
 ```
 

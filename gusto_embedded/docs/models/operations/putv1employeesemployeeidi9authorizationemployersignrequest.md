@@ -7,6 +7,11 @@ import { PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest } from "@gus
 
 let value: PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest = {
   employeeId: "<id>",
+  requestBody: {
+    signatureText: "<value>",
+    signerTitle: "<value>",
+    agree: false,
+  },
 };
 ```
 

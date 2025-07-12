@@ -5,8 +5,32 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The type of blocker
+ */
+export const BlockerType = {
+  MinimumDays: "minimum_days",
+  MinimumFundedPayments: "minimum_funded_payments",
+} as const;
+/**
+ * The type of blocker
+ */
+export type BlockerType = ClosedEnum<typeof BlockerType>;
+
+export type EarnedFastAchBlockers = {
+  /**
+   * The type of blocker
+   */
+  blockerType?: BlockerType | undefined;
+  /**
+   * The threshold needed to unblock
+   */
+  threshold?: number | undefined;
+};
 
 /**
  * Example response
@@ -28,7 +52,95 @@ export type PaymentConfigs = {
    * Payment speed for 1-day, 2-day, 4-day
    */
   paymentSpeed?: string | undefined;
+  /**
+   * Blockers preventing the company from earning fast ACH payments
+   */
+  earnedFastAchBlockers?: Array<EarnedFastAchBlockers> | undefined;
 };
+
+/** @internal */
+export const BlockerType$inboundSchema: z.ZodNativeEnum<typeof BlockerType> = z
+  .nativeEnum(BlockerType);
+
+/** @internal */
+export const BlockerType$outboundSchema: z.ZodNativeEnum<typeof BlockerType> =
+  BlockerType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BlockerType$ {
+  /** @deprecated use `BlockerType$inboundSchema` instead. */
+  export const inboundSchema = BlockerType$inboundSchema;
+  /** @deprecated use `BlockerType$outboundSchema` instead. */
+  export const outboundSchema = BlockerType$outboundSchema;
+}
+
+/** @internal */
+export const EarnedFastAchBlockers$inboundSchema: z.ZodType<
+  EarnedFastAchBlockers,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  blocker_type: BlockerType$inboundSchema.optional(),
+  threshold: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "blocker_type": "blockerType",
+  });
+});
+
+/** @internal */
+export type EarnedFastAchBlockers$Outbound = {
+  blocker_type?: string | undefined;
+  threshold?: number | undefined;
+};
+
+/** @internal */
+export const EarnedFastAchBlockers$outboundSchema: z.ZodType<
+  EarnedFastAchBlockers$Outbound,
+  z.ZodTypeDef,
+  EarnedFastAchBlockers
+> = z.object({
+  blockerType: BlockerType$outboundSchema.optional(),
+  threshold: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    blockerType: "blocker_type",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EarnedFastAchBlockers$ {
+  /** @deprecated use `EarnedFastAchBlockers$inboundSchema` instead. */
+  export const inboundSchema = EarnedFastAchBlockers$inboundSchema;
+  /** @deprecated use `EarnedFastAchBlockers$outboundSchema` instead. */
+  export const outboundSchema = EarnedFastAchBlockers$outboundSchema;
+  /** @deprecated use `EarnedFastAchBlockers$Outbound` instead. */
+  export type Outbound = EarnedFastAchBlockers$Outbound;
+}
+
+export function earnedFastAchBlockersToJSON(
+  earnedFastAchBlockers: EarnedFastAchBlockers,
+): string {
+  return JSON.stringify(
+    EarnedFastAchBlockers$outboundSchema.parse(earnedFastAchBlockers),
+  );
+}
+
+export function earnedFastAchBlockersFromJSON(
+  jsonString: string,
+): SafeParseResult<EarnedFastAchBlockers, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EarnedFastAchBlockers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EarnedFastAchBlockers' from JSON`,
+  );
+}
 
 /** @internal */
 export const PaymentConfigs$inboundSchema: z.ZodType<
@@ -40,12 +152,16 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
   partner_uuid: z.string().optional(),
   fast_payment_limit: z.string().optional(),
   payment_speed: z.string().optional(),
+  earned_fast_ach_blockers: z.array(
+    z.lazy(() => EarnedFastAchBlockers$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
     "partner_uuid": "partnerUuid",
     "fast_payment_limit": "fastPaymentLimit",
     "payment_speed": "paymentSpeed",
+    "earned_fast_ach_blockers": "earnedFastAchBlockers",
   });
 });
 
@@ -55,6 +171,7 @@ export type PaymentConfigs$Outbound = {
   partner_uuid?: string | undefined;
   fast_payment_limit?: string | undefined;
   payment_speed?: string | undefined;
+  earned_fast_ach_blockers?: Array<EarnedFastAchBlockers$Outbound> | undefined;
 };
 
 /** @internal */
@@ -67,12 +184,16 @@ export const PaymentConfigs$outboundSchema: z.ZodType<
   partnerUuid: z.string().optional(),
   fastPaymentLimit: z.string().optional(),
   paymentSpeed: z.string().optional(),
+  earnedFastAchBlockers: z.array(
+    z.lazy(() => EarnedFastAchBlockers$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
     partnerUuid: "partner_uuid",
     fastPaymentLimit: "fast_payment_limit",
     paymentSpeed: "payment_speed",
+    earnedFastAchBlockers: "earned_fast_ach_blockers",
   });
 });
 

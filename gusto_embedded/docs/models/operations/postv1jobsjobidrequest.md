@@ -7,6 +7,10 @@ import { PostV1JobsJobIdRequest } from "@gusto/embedded-api/models/operations/po
 
 let value: PostV1JobsJobIdRequest = {
   employeeId: "<id>",
+  requestBody: {
+    title: "<value>",
+    hireDate: "<value>",
+  },
 };
 ```
 

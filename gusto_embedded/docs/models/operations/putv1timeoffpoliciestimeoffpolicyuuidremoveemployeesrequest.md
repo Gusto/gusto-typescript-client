@@ -7,6 +7,7 @@ import { PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest } from "@gu
 
 let value: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest = {
   timeOffPolicyUuid: "<id>",
+  requestBody: {},
 };
 ```
 

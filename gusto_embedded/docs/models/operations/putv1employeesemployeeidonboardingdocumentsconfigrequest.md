@@ -7,6 +7,7 @@ import { PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest } from "@gusto
 
 let value: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest = {
   employeeId: "<id>",
+  requestBody: {},
 };
 ```
 

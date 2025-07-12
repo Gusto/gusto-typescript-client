@@ -7,6 +7,7 @@ import { PutV1ContractorsContractorUuidOnboardingStatusRequest } from "@gusto/em
 
 let value: PutV1ContractorsContractorUuidOnboardingStatusRequest = {
   contractorUuid: "<id>",
+  requestBody: {},
 };
 ```
 

@@ -7,6 +7,14 @@ import { PutV1LocationsLocationIdRequest } from "@gusto/embedded-api/models/oper
 
 let value: PutV1LocationsLocationIdRequest = {
   locationId: "<id>",
+  requestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    phoneNumber: "8009360383",
+    street1: "300 3rd Street",
+    street2: "Apartment 318",
+    city: "San Francisco",
+    zip: "94107",
+  },
 };
 ```
 

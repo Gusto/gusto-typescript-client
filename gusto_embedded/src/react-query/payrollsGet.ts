@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsGet } from "../funcs/payrollsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
   GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
@@ -112,10 +112,12 @@ export function setPayrollsGetData(
     companyId: string,
     payrollId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion
+        | undefined;
       include?:
         | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
         | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: PayrollsGetQueryData,
@@ -132,10 +134,12 @@ export function invalidatePayrollsGet(
       companyId: string,
       payrollId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion
+          | undefined;
         include?:
           | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
           | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,
@@ -167,8 +171,8 @@ export function buildPayrollsGetQuery(
 } {
   return {
     queryKey: queryKeyPayrollsGet(request.companyId, request.payrollId, {
-      include: request.include,
       xGustoAPIVersion: request.xGustoAPIVersion,
+      include: request.include,
     }),
     queryFn: async function payrollsGetQueryFn(
       ctx,
@@ -192,10 +196,12 @@ export function queryKeyPayrollsGet(
   companyId: string,
   payrollId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion
+      | undefined;
     include?:
       | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
       | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [
