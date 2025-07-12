@@ -8,6 +8,7 @@ import { PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest } from "@gu
 let value: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest = {
   payrollId: "<id>",
   employeeId: "<id>",
+  requestBody: {},
 };
 ```
 

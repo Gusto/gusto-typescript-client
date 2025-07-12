@@ -12,5 +12,5 @@ let value: GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude =
 ## Values
 
 ```typescript
-"benefits" | "deductions" | "taxes" | "payroll_status_meta"
+"benefits" | "deductions" | "taxes" | "payroll_status_meta" | "totals" | "risk_blockers" | "reversals"
 ```

@@ -5,7 +5,18 @@
 ```typescript
 import { PostV1PartnerManagedCompaniesRequest } from "@gusto/embedded-api/models/operations/postv1partnermanagedcompanies.js";
 
-let value: PostV1PartnerManagedCompaniesRequest = {};
+let value: PostV1PartnerManagedCompaniesRequest = {
+  requestBody: {
+    user: {
+      firstName: "Zakary",
+      lastName: "Block",
+      email: "Jaylen96@yahoo.com",
+    },
+    company: {
+      name: "<value>",
+    },
+  },
+};
 ```
 
 ## Fields

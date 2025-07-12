@@ -4,9 +4,19 @@
 
 ```typescript
 import { PostCompaniesCompanyUuidReportsRequest } from "@gusto/embedded-api/models/operations/postcompaniescompanyuuidreports.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 let value: PostCompaniesCompanyUuidReportsRequest = {
   companyUuid: "<id>",
+  requestBody: {
+    columns: [],
+    groupings: [],
+    fileType: "pdf",
+    startDate: new RFCDate("2024-01-01"),
+    endDate: new RFCDate("2024-04-01"),
+    dismissedStartDate: new RFCDate("2024-01-01"),
+    dismissedEndDate: new RFCDate("2024-04-01"),
+  },
 };
 ```
 

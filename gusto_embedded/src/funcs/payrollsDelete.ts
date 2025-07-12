@@ -21,6 +21,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   DeleteV1CompaniesCompanyIdPayrollsRequest,
   DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema,
   DeleteV1CompaniesCompanyIdPayrollsResponse,
@@ -46,6 +50,7 @@ export function payrollsDelete(
 ): APIPromise<
   Result<
     DeleteV1CompaniesCompanyIdPayrollsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -71,6 +76,7 @@ async function $do(
   [
     Result<
       DeleteV1CompaniesCompanyIdPayrollsResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -115,7 +121,7 @@ async function $do(
   });
 
   const headers = new Headers(compactMap({
-    Accept: "*/*",
+    Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -162,7 +168,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -177,6 +183,7 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1CompaniesCompanyIdPayrollsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -187,7 +194,8 @@ async function $do(
     | SDKValidationError
   >(
     M.nil([202, 204], DeleteV1CompaniesCompanyIdPayrollsResponse$inboundSchema),
-    M.fail([404, 422, "4XX"]),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

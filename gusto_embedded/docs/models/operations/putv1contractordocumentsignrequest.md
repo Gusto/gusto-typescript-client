@@ -7,6 +7,12 @@ import { PutV1ContractorDocumentSignRequest } from "@gusto/embedded-api/models/o
 
 let value: PutV1ContractorDocumentSignRequest = {
   documentUuid: "<id>",
+  requestBody: {
+    fields: [
+      {},
+    ],
+    agree: true,
+  },
 };
 ```
 

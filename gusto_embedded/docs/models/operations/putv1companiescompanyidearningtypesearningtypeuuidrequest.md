@@ -8,6 +8,7 @@ import { PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest } from "@gust
 let value: PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest = {
   companyId: "<id>",
   earningTypeUuid: "<id>",
+  requestBody: {},
 };
 ```
 

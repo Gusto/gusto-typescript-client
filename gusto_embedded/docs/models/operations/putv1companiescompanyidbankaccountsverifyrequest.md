@@ -8,6 +8,10 @@ import { PutV1CompaniesCompanyIdBankAccountsVerifyRequest } from "@gusto/embedde
 let value: PutV1CompaniesCompanyIdBankAccountsVerifyRequest = {
   bankAccountUuid: "<id>",
   companyId: "<id>",
+  requestBody: {
+    deposit1: 6176.75,
+    deposit2: 1725.74,
+  },
 };
 ```
 

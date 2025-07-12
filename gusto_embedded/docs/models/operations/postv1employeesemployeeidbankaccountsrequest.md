@@ -7,6 +7,12 @@ import { PostV1EmployeesEmployeeIdBankAccountsRequest } from "@gusto/embedded-ap
 
 let value: PostV1EmployeesEmployeeIdBankAccountsRequest = {
   employeeId: "<id>",
+  requestBody: {
+    name: "<value>",
+    routingNumber: "<value>",
+    accountNumber: "<value>",
+    accountType: "Savings",
+  },
 };
 ```
 

@@ -33,17 +33,34 @@ export const Aggregation = {
   Default: "default",
   Job: "job",
   Department: "department",
+  Integration: "integration",
 } as const;
 /**
  * The breakdown of the report. Use 'default' for no split.
  */
 export type Aggregation = ClosedEnum<typeof Aggregation>;
 
+/**
+ * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
+ */
+export const IntegrationType = {
+  Xero: "xero",
+  Qbo: "qbo",
+} as const;
+/**
+ * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
+ */
+export type IntegrationType = ClosedEnum<typeof IntegrationType>;
+
 export type PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody = {
   /**
    * The breakdown of the report. Use 'default' for no split.
    */
   aggregation: Aggregation;
+  /**
+   * The kind of integration set up for the company. Required when `aggregation` is 'integration'. Must be null if `aggregation` is not 'integration'.
+   */
+  integrationType?: IntegrationType | null | undefined;
 };
 
 export type PostPayrollsPayrollUuidReportsGeneralLedgerRequest = {
@@ -86,6 +103,27 @@ export namespace Aggregation$ {
 }
 
 /** @internal */
+export const IntegrationType$inboundSchema: z.ZodNativeEnum<
+  typeof IntegrationType
+> = z.nativeEnum(IntegrationType);
+
+/** @internal */
+export const IntegrationType$outboundSchema: z.ZodNativeEnum<
+  typeof IntegrationType
+> = IntegrationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace IntegrationType$ {
+  /** @deprecated use `IntegrationType$inboundSchema` instead. */
+  export const inboundSchema = IntegrationType$inboundSchema;
+  /** @deprecated use `IntegrationType$outboundSchema` instead. */
+  export const outboundSchema = IntegrationType$outboundSchema;
+}
+
+/** @internal */
 export const PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchema:
   z.ZodType<
     PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody,
@@ -93,11 +131,17 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchem
     unknown
   > = z.object({
     aggregation: Aggregation$inboundSchema,
+    integration_type: z.nullable(IntegrationType$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_type": "integrationType",
+    });
   });
 
 /** @internal */
 export type PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$Outbound = {
   aggregation: string;
+  integration_type?: string | null | undefined;
 };
 
 /** @internal */
@@ -108,6 +152,11 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSche
     PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody
   > = z.object({
     aggregation: Aggregation$outboundSchema,
+    integrationType: z.nullable(IntegrationType$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      integrationType: "integration_type",
+    });
   });
 
 /**

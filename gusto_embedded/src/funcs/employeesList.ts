@@ -117,6 +117,7 @@ async function $do(
       "per": payload.per,
       "search_term": payload.search_term,
       "terminated": payload.terminated,
+      "uuids": payload.uuids,
     }),
   );
 
@@ -194,7 +195,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1CompaniesCompanyIdEmployeesResponse$inboundSchema, {
-      key: "Employees",
+      key: "Show-Employees",
     }),
     M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),

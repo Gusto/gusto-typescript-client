@@ -7,6 +7,11 @@ import { PutV1ContractorsContractorUuidRequest } from "@gusto/embedded-api/model
 
 let value: PutV1ContractorsContractorUuidRequest = {
   contractorUuid: "<id>",
+  requestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    startDate: "2020-01-11",
+    hourlyRate: "40.0",
+  },
 };
 ```
 

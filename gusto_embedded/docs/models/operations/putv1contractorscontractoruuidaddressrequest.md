@@ -7,6 +7,9 @@ import { PutV1ContractorsContractorUuidAddressRequest } from "@gusto/embedded-ap
 
 let value: PutV1ContractorsContractorUuidAddressRequest = {
   contractorUuid: "<id>",
+  requestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+  },
 };
 ```
 

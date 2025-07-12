@@ -7,6 +7,7 @@ import { PostDepartmentsRequest } from "@gusto/embedded-api/models/operations/po
 
 let value: PostDepartmentsRequest = {
   companyUuid: "<id>",
+  requestBody: {},
 };
 ```
 

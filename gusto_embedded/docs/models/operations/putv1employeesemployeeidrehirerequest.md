@@ -7,6 +7,12 @@ import { PutV1EmployeesEmployeeIdRehireRequest } from "@gusto/embedded-api/model
 
 let value: PutV1EmployeesEmployeeIdRehireRequest = {
   employeeId: "<id>",
+  requestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    effectiveDate: "<value>",
+    fileNewHireReport: true,
+    workLocationUuid: "<id>",
+  },
 };
 ```
 

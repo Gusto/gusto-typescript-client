@@ -1,11 +1,11 @@
-# PaidTimeOff
+# PayrollUpdatePaidTimeOff
 
 ## Example Usage
 
 ```typescript
-import { PaidTimeOff } from "@gusto/embedded-api/models/operations/putv1companiescompanyidpayrolls.js";
+import { PayrollUpdatePaidTimeOff } from "@gusto/embedded-api/models/components/payrollupdate.js";
 
-let value: PaidTimeOff = {};
+let value: PayrollUpdatePaidTimeOff = {};
 ```
 
 ## Fields

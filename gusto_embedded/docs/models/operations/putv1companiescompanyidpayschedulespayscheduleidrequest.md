@@ -8,6 +8,11 @@ import { PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest } from "@gusto/
 let value: PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest = {
   companyId: "<id>",
   payScheduleId: "<id>",
+  requestBody: {
+    version: "<value>",
+    anchorPayDate: "2020-05-15",
+    anchorEndOfPayPeriod: "2020-05-08",
+  },
 };
 ```
 

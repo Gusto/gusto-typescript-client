@@ -7,6 +7,9 @@ import { PutCompaniesCompanyUuidHolidayPayPolicyAddRequest } from "@gusto/embedd
 
 let value: PutCompaniesCompanyUuidHolidayPayPolicyAddRequest = {
   companyUuid: "<id>",
+  requestBody: {
+    version: "<value>",
+  },
 };
 ```
 
