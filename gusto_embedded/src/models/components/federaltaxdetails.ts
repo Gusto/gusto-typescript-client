@@ -5,8 +5,49 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The status of EIN verification:
+ *
+ * @remarks
+ * - `pending`: The EIN verification process has not completed (or the company does not yet have an EIN).
+ * - `verified`: The EIN has been successfully verified as a valid EIN with the IRS.
+ * - `failed`: The company's EIN did not pass verification. Common issues are being entered incorrectly or not matching the company's legal name.
+ */
+export const FederalTaxDetailsStatus = {
+  Pending: "pending",
+  Verified: "verified",
+  Failed: "failed",
+} as const;
+/**
+ * The status of EIN verification:
+ *
+ * @remarks
+ * - `pending`: The EIN verification process has not completed (or the company does not yet have an EIN).
+ * - `verified`: The EIN has been successfully verified as a valid EIN with the IRS.
+ * - `failed`: The company's EIN did not pass verification. Common issues are being entered incorrectly or not matching the company's legal name.
+ */
+export type FederalTaxDetailsStatus = ClosedEnum<
+  typeof FederalTaxDetailsStatus
+>;
+
+/**
+ * Information about the status of verifying the company's Employer Identification Number (EIN)
+ */
+export type EinVerification = {
+  /**
+   * The status of EIN verification:
+   *
+   * @remarks
+   * - `pending`: The EIN verification process has not completed (or the company does not yet have an EIN).
+   * - `verified`: The EIN has been successfully verified as a valid EIN with the IRS.
+   * - `failed`: The company's EIN did not pass verification. Common issues are being entered incorrectly or not matching the company's legal name.
+   */
+  status?: FederalTaxDetailsStatus | undefined;
+};
 
 /**
  * Example response
@@ -56,9 +97,13 @@ export type FederalTaxDetails = {
    */
   hasEin?: boolean | undefined;
   /**
-   * Whether the EIN was able to be verified as a valid EIN with the IRS.
+   * Whether the EIN has been successfully verified as a valid EIN with the IRS.
    */
   einVerified?: boolean | undefined;
+  /**
+   * Information about the status of verifying the company's Employer Identification Number (EIN)
+   */
+  einVerification?: EinVerification | undefined;
   /**
    * The legal name of the company
    */
@@ -78,6 +123,79 @@ export type FederalTaxDetails = {
 };
 
 /** @internal */
+export const FederalTaxDetailsStatus$inboundSchema: z.ZodNativeEnum<
+  typeof FederalTaxDetailsStatus
+> = z.nativeEnum(FederalTaxDetailsStatus);
+
+/** @internal */
+export const FederalTaxDetailsStatus$outboundSchema: z.ZodNativeEnum<
+  typeof FederalTaxDetailsStatus
+> = FederalTaxDetailsStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FederalTaxDetailsStatus$ {
+  /** @deprecated use `FederalTaxDetailsStatus$inboundSchema` instead. */
+  export const inboundSchema = FederalTaxDetailsStatus$inboundSchema;
+  /** @deprecated use `FederalTaxDetailsStatus$outboundSchema` instead. */
+  export const outboundSchema = FederalTaxDetailsStatus$outboundSchema;
+}
+
+/** @internal */
+export const EinVerification$inboundSchema: z.ZodType<
+  EinVerification,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  status: FederalTaxDetailsStatus$inboundSchema.optional(),
+});
+
+/** @internal */
+export type EinVerification$Outbound = {
+  status?: string | undefined;
+};
+
+/** @internal */
+export const EinVerification$outboundSchema: z.ZodType<
+  EinVerification$Outbound,
+  z.ZodTypeDef,
+  EinVerification
+> = z.object({
+  status: FederalTaxDetailsStatus$outboundSchema.optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EinVerification$ {
+  /** @deprecated use `EinVerification$inboundSchema` instead. */
+  export const inboundSchema = EinVerification$inboundSchema;
+  /** @deprecated use `EinVerification$outboundSchema` instead. */
+  export const outboundSchema = EinVerification$outboundSchema;
+  /** @deprecated use `EinVerification$Outbound` instead. */
+  export type Outbound = EinVerification$Outbound;
+}
+
+export function einVerificationToJSON(
+  einVerification: EinVerification,
+): string {
+  return JSON.stringify(EinVerification$outboundSchema.parse(einVerification));
+}
+
+export function einVerificationFromJSON(
+  jsonString: string,
+): SafeParseResult<EinVerification, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EinVerification$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EinVerification' from JSON`,
+  );
+}
+
+/** @internal */
 export const FederalTaxDetails$inboundSchema: z.ZodType<
   FederalTaxDetails,
   z.ZodTypeDef,
@@ -89,6 +207,7 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
   filing_form: z.string().optional(),
   has_ein: z.boolean().optional(),
   ein_verified: z.boolean().optional(),
+  ein_verification: z.lazy(() => EinVerification$inboundSchema).optional(),
   legal_name: z.string().optional(),
   effective_date: z.string().optional(),
   deposit_schedule: z.string().optional(),
@@ -99,6 +218,7 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
     "filing_form": "filingForm",
     "has_ein": "hasEin",
     "ein_verified": "einVerified",
+    "ein_verification": "einVerification",
     "legal_name": "legalName",
     "effective_date": "effectiveDate",
     "deposit_schedule": "depositSchedule",
@@ -113,6 +233,7 @@ export type FederalTaxDetails$Outbound = {
   filing_form?: string | undefined;
   has_ein?: boolean | undefined;
   ein_verified?: boolean | undefined;
+  ein_verification?: EinVerification$Outbound | undefined;
   legal_name?: string | undefined;
   effective_date?: string | undefined;
   deposit_schedule?: string | undefined;
@@ -130,6 +251,7 @@ export const FederalTaxDetails$outboundSchema: z.ZodType<
   filingForm: z.string().optional(),
   hasEin: z.boolean().optional(),
   einVerified: z.boolean().optional(),
+  einVerification: z.lazy(() => EinVerification$outboundSchema).optional(),
   legalName: z.string().optional(),
   effectiveDate: z.string().optional(),
   depositSchedule: z.string().optional(),
@@ -140,6 +262,7 @@ export const FederalTaxDetails$outboundSchema: z.ZodType<
     filingForm: "filing_form",
     hasEin: "has_ein",
     einVerified: "ein_verified",
+    einVerification: "ein_verification",
     legalName: "legal_name",
     effectiveDate: "effective_date",
     depositSchedule: "deposit_schedule",

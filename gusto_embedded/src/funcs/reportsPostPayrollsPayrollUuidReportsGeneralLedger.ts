@@ -39,9 +39,9 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Create a general ledger report for a payroll. The report can be aggregated by different dimensions such as job or department.
  *
- * Use the `request_uuid` in the response with the [report GET endpoint](https://docs.gusto.com/embedded-payroll/reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
+ * Use the `request_uuid` in the response with the [report GET endpoint](../reference/get-reports-request_uuid) to poll for the status and report URL upon completion. The retrieved report will be generated in a JSON format.
  *
- * scope: `company_reports:write`
+ * scope: `company_reports:write` OR `company_reports:write:general_ledger`
  */
 export function reportsPostPayrollsPayrollUuidReportsGeneralLedger(
   client: GustoEmbeddedCore,

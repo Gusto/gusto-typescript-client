@@ -14,7 +14,9 @@ import { payrollsGetBlockers } from "../funcs/payrollsGetBlockers.js";
 import { payrollsGetPayStub } from "../funcs/payrollsGetPayStub.js";
 import { payrollsGetPayStubs } from "../funcs/payrollsGetPayStubs.js";
 import { payrollsGetReceipt } from "../funcs/payrollsGetReceipt.js";
+import { payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements } from "../funcs/payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.js";
 import { payrollsList } from "../funcs/payrollsList.js";
+import { payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements } from "../funcs/payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.js";
 import { payrollsPrepare } from "../funcs/payrollsPrepare.js";
 import { payrollsSkip } from "../funcs/payrollsSkip.js";
 import { payrollsSubmit } from "../funcs/payrollsSubmit.js";
@@ -32,6 +34,10 @@ import {
   GetV1CompaniesCompanyIdPayrollsRequest,
   GetV1CompaniesCompanyIdPayrollsResponse,
 } from "../models/operations/getv1companiescompanyidpayrolls.js";
+import {
+  GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
+  GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse,
+} from "../models/operations/getv1companiescompanyidpayrollsidpartnerdisbursements.js";
 import {
   GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
   GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
@@ -52,6 +58,10 @@ import {
   GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
   GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
 } from "../models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.js";
+import {
+  PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
+  PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse,
+} from "../models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursements.js";
 import {
   PostCompaniesPayrollSkipCompanyUuidRequest,
   PostCompaniesPayrollSkipCompanyUuidResponse,
@@ -464,5 +474,47 @@ export class Payrolls extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Get partner disbursements for a payroll
+   *
+   * @remarks
+   * Get partner disbursements for a specific payroll.
+   *
+   * scope: `partner_disbursements:read`
+   */
+  async getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+    request: GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
+    return unwrapAsync(
+      payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Update partner disbursements for a payroll
+   *
+   * @remarks
+   * Update partner disbursements for a specific payroll.
+   *
+   * scope: `partner_disbursements:write`
+   */
+  async patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+    request: PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
+    options?: RequestOptions,
+  ): Promise<PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse> {
+    return unwrapAsync(
+      payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

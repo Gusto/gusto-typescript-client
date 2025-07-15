@@ -7,6 +7,9 @@ import { PostPayrollsPayrollUuidReportsGeneralLedgerRequest } from "@gusto/embed
 
 let value: PostPayrollsPayrollUuidReportsGeneralLedgerRequest = {
   payrollUuid: "<id>",
+  requestBody: {
+    aggregation: "default",
+  },
 };
 ```
 

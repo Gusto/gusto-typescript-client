@@ -271,6 +271,8 @@ run();
 * [get](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
 * [delete](docs/sdks/contractorpaymentgroups/README.md#delete) - Cancel a contractor payment group
 * [fund](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
+* [getV1ContractorPaymentGroupsIdPartnerDisbursements](docs/sdks/contractorpaymentgroups/README.md#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
+* [patchV1ContractorPaymentGroupsIdPartnerDisbursements](docs/sdks/contractorpaymentgroups/README.md#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
 
 ### [contractorPaymentMethod](docs/sdks/contractorpaymentmethod/README.md)
 
@@ -527,6 +529,8 @@ run();
 * [getPayStub](docs/sdks/payrolls/README.md#getpaystub) - Get an employee pay stub (pdf)
 * [getPayStubs](docs/sdks/payrolls/README.md#getpaystubs) - Get an employee's pay stubs
 * [generatePrintableChecks](docs/sdks/payrolls/README.md#generateprintablechecks) - Generate printable payroll checks (pdf)
+* [getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](docs/sdks/payrolls/README.md#getv1companiescompanyidpayrollsidpartnerdisbursements) - Get partner disbursements for a payroll
+* [patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements](docs/sdks/payrolls/README.md#patchv1companiescompanyidpayrollsidpartnerdisbursements) - Update partner disbursements for a payroll
 
 ### [paySchedules](docs/sdks/payschedules/README.md)
 
@@ -663,6 +667,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contractorPaymentGroupsFund`](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
 - [`contractorPaymentGroupsGet`](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
 - [`contractorPaymentGroupsGetList`](docs/sdks/contractorpaymentgroups/README.md#getlist) - Get contractor payment groups for a company
+- [`contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements`](docs/sdks/contractorpaymentgroups/README.md#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
+- [`contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements`](docs/sdks/contractorpaymentgroups/README.md#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
 - [`contractorPaymentGroupsPreview`](docs/sdks/contractorpaymentgroups/README.md#preview) - Preview a contractor payment group
 - [`contractorPaymentMethodGet`](docs/sdks/contractorpaymentmethod/README.md#get) - Get a contractor's payment method
 - [`contractorPaymentMethodGetBankAccounts`](docs/sdks/contractorpaymentmethod/README.md#getbankaccounts) - Get all contractor bank accounts
@@ -818,7 +824,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`payrollsGetPayStub`](docs/sdks/payrolls/README.md#getpaystub) - Get an employee pay stub (pdf)
 - [`payrollsGetPayStubs`](docs/sdks/payrolls/README.md#getpaystubs) - Get an employee's pay stubs
 - [`payrollsGetReceipt`](docs/sdks/payrolls/README.md#getreceipt) - Get a single payroll receipt
+- [`payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements`](docs/sdks/payrolls/README.md#getv1companiescompanyidpayrollsidpartnerdisbursements) - Get partner disbursements for a payroll
 - [`payrollsList`](docs/sdks/payrolls/README.md#list) - Get all payrolls for a company
+- [`payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements`](docs/sdks/payrolls/README.md#patchv1companiescompanyidpayrollsidpartnerdisbursements) - Update partner disbursements for a payroll
 - [`payrollsPrepare`](docs/sdks/payrolls/README.md#prepare) - Prepare a payroll for update
 - [`payrollsSkip`](docs/sdks/payrolls/README.md#skip) - Skip a payroll
 - [`payrollsSubmit`](docs/sdks/payrolls/README.md#submit) - Submit payroll
@@ -942,6 +950,8 @@ To learn about this feature and how to get started, check
 - [`useContractorPaymentGroupsFundMutation`](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
 - [`useContractorPaymentGroupsGet`](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
 - [`useContractorPaymentGroupsGetList`](docs/sdks/contractorpaymentgroups/README.md#getlist) - Get contractor payment groups for a company
+- [`useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements`](docs/sdks/contractorpaymentgroups/README.md#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
+- [`useContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutation`](docs/sdks/contractorpaymentgroups/README.md#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
 - [`useContractorPaymentGroupsPreviewMutation`](docs/sdks/contractorpaymentgroups/README.md#preview) - Preview a contractor payment group
 - [`useContractorPaymentMethodGet`](docs/sdks/contractorpaymentmethod/README.md#get) - Get a contractor's payment method
 - [`useContractorPaymentMethodGetBankAccounts`](docs/sdks/contractorpaymentmethod/README.md#getbankaccounts) - Get all contractor bank accounts
@@ -1097,7 +1107,9 @@ To learn about this feature and how to get started, check
 - [`usePayrollsGetPayStub`](docs/sdks/payrolls/README.md#getpaystub) - Get an employee pay stub (pdf)
 - [`usePayrollsGetPayStubs`](docs/sdks/payrolls/README.md#getpaystubs) - Get an employee's pay stubs
 - [`usePayrollsGetReceipt`](docs/sdks/payrolls/README.md#getreceipt) - Get a single payroll receipt
+- [`usePayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements`](docs/sdks/payrolls/README.md#getv1companiescompanyidpayrollsidpartnerdisbursements) - Get partner disbursements for a payroll
 - [`usePayrollsList`](docs/sdks/payrolls/README.md#list) - Get all payrolls for a company
+- [`usePayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutation`](docs/sdks/payrolls/README.md#patchv1companiescompanyidpayrollsidpartnerdisbursements) - Update partner disbursements for a payroll
 - [`usePayrollsPrepareMutation`](docs/sdks/payrolls/README.md#prepare) - Prepare a payroll for update
 - [`usePayrollsSkipMutation`](docs/sdks/payrolls/README.md#skip) - Skip a payroll
 - [`usePayrollsSubmitMutation`](docs/sdks/payrolls/README.md#submit) - Submit payroll
@@ -1330,10 +1342,10 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](docs/models/errors/unprocessableentityerrorobject.md): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 129 of 253 methods.*
-* [`UnprocessableEntityErrorObject1`](docs/models/errors/unprocessableentityerrorobject1.md): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 253 methods.*
-* [`PayrollBlockersError`](docs/models/errors/payrollblockerserror.md): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 253 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](docs/models/errors/deletev1companybenefitscompanybenefitidresponsebody.md): Unprocessable Entity. Status code `422`. Applicable to 1 of 253 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 135 of 257 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 257 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 257 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 257 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

@@ -7,6 +7,11 @@ import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest } fro
 
 let value: PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest = {
   companyUuid: "<id>",
+  requestBody: {
+    email: "Selena76@hotmail.com",
+    ipAddress: "11.124.154.127",
+    externalUserId: "<id>",
+  },
 };
 ```
 

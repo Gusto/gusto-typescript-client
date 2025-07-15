@@ -169,6 +169,10 @@ export type Payroll = {
    */
   creditBlockers?: Array<PayrollCreditBlockersType> | undefined;
   processingRequest?: PayrollProcessingRequest | null | undefined;
+  /**
+   * Will money movement for the payroll be performed by the partner rather than by Gusto?
+   */
+  partnerOwnedDisbursement?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -209,6 +213,7 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
       .optional(),
     processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
       .optional(),
+    partner_owned_disbursement: z.nullable(z.boolean()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "payroll_deadline": "payrollDeadline",
@@ -233,6 +238,7 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
       "submission_blockers": "submissionBlockers",
       "credit_blockers": "creditBlockers",
       "processing_request": "processingRequest",
+      "partner_owned_disbursement": "partnerOwnedDisbursement",
     });
   });
 
@@ -268,6 +274,7 @@ export type Payroll$Outbound = {
     | undefined;
   credit_blockers?: Array<PayrollCreditBlockersType$Outbound> | undefined;
   processing_request?: PayrollProcessingRequest$Outbound | null | undefined;
+  partner_owned_disbursement?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -308,6 +315,7 @@ export const Payroll$outboundSchema: z.ZodType<
   creditBlockers: z.array(PayrollCreditBlockersType$outboundSchema).optional(),
   processingRequest: z.nullable(PayrollProcessingRequest$outboundSchema)
     .optional(),
+  partnerOwnedDisbursement: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     payrollDeadline: "payroll_deadline",
@@ -332,6 +340,7 @@ export const Payroll$outboundSchema: z.ZodType<
     submissionBlockers: "submission_blockers",
     creditBlockers: "credit_blockers",
     processingRequest: "processing_request",
+    partnerOwnedDisbursement: "partner_owned_disbursement",
   });
 });
 

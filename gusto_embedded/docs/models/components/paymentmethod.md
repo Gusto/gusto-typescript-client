@@ -5,7 +5,7 @@ The employee's payment method
 ## Example Usage
 
 ```typescript
-import { PaymentMethod } from "@gusto/embedded-api/models/components/employee.js";
+import { PaymentMethod } from "@gusto/embedded-api/models/components/showemployees.js";
 
 let value: PaymentMethod = "Check";
 ```

@@ -375,6 +375,36 @@ async function run() {
                 },
               ],
             },
+            {
+              key: "withholding_allowance",
+              answers: [
+                {
+                  value: 2,
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+            {
+              key: "additional_withholding",
+              answers: [
+                {
+                  value: "25.0",
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+            {
+              key: "file_new_hire_report",
+              answers: [
+                {
+                  value: true,
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -414,6 +444,36 @@ async function run() {
               answers: [
                 {
                   value: "M",
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+            {
+              key: "withholding_allowance",
+              answers: [
+                {
+                  value: 2,
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+            {
+              key: "additional_withholding",
+              answers: [
+                {
+                  value: "25.0",
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+            {
+              key: "file_new_hire_report",
+              answers: [
+                {
+                  value: true,
                   validFrom: "2010-01-01",
                   validUpTo: null,
                 },

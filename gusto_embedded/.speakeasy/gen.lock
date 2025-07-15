@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 3f7e9e9f0e0d4044b9c4bd0dfb3fe67f
+  docChecksum: 9897439106079b55448df7137b324ff8
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.563.0
-  generationVersion: 2.629.1
-  releaseVersion: 0.6.4
-  configChecksum: 28d56ca03d52d52794e3985f3941e5f1
+  speakeasyVersion: 1.582.0
+  generationVersion: 2.657.1
+  releaseVersion: 0.6.5
+  configChecksum: 57c4a5de50d4bc0327415bcc9d41585b
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -15,8 +15,8 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
-    constsAndDefaults: 0.1.11
-    core: 3.21.11
+    constsAndDefaults: 0.1.12
+    core: 3.21.14
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.0
@@ -37,7 +37,7 @@ features:
     retries: 2.83.0
     sdkHooks: 0.3.0
     serverIDs: 2.81.2
-    unions: 2.85.9
+    unions: 2.85.11
     uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
@@ -80,6 +80,7 @@ generatedFiles:
   - docs/models/components/benefittyperequirementsdeductaspercentagedefaultvalue.md
   - docs/models/components/benefittyperequirementsdefaultvalue.md
   - docs/models/components/benefittyperequirementslimitoptiondefaultvalue.md
+  - docs/models/components/blockertype.md
   - docs/models/components/catchup.md
   - docs/models/components/category.md
   - docs/models/components/childsupportdata.md
@@ -125,6 +126,9 @@ generatedFiles:
   - docs/models/components/contractorpaymentgroupminimal.md
   - docs/models/components/contractorpaymentgroupminimalstatus.md
   - docs/models/components/contractorpaymentgroupminimaltotals.md
+  - docs/models/components/contractorpaymentgrouppartnerdisbursements.md
+  - docs/models/components/contractorpaymentgrouppartnerdisbursementspaymentmethod.md
+  - docs/models/components/contractorpaymentgrouppartnerdisbursementspaymentstatus.md
   - docs/models/components/contractorpaymentgroupstatus.md
   - docs/models/components/contractorpaymentgrouptotals.md
   - docs/models/components/contractorpaymentmethod.md
@@ -160,14 +164,17 @@ generatedFiles:
   - docs/models/components/departmentemployees.md
   - docs/models/components/departments.md
   - docs/models/components/detailedpaymentaccountsplit.md
+  - docs/models/components/disbursements.md
   - docs/models/components/document.md
   - docs/models/components/documentpdf.md
   - docs/models/components/documentsigned.md
   - docs/models/components/documentsignedrecipienttype.md
   - docs/models/components/documenttype.md
+  - docs/models/components/earnedfastachblockers.md
   - docs/models/components/earnings.md
   - docs/models/components/earningtype.md
   - docs/models/components/earningtypelist.md
+  - docs/models/components/einverification.md
   - docs/models/components/employee.md
   - docs/models/components/employeeaddress.md
   - docs/models/components/employeebankaccount.md
@@ -181,15 +188,20 @@ generatedFiles:
   - docs/models/components/employeebenefitvalue.md
   - docs/models/components/employeechecknumbermapping.md
   - docs/models/components/employeecompensations.md
+  - docs/models/components/employeecurrentemploymentstatus.md
   - docs/models/components/employeecustomfield.md
   - docs/models/components/employeededuction.md
   - docs/models/components/employeefederaltax.md
+  - docs/models/components/employeehomeaddress.md
   - docs/models/components/employeeonboardingdocument.md
+  - docs/models/components/employeeonboardingdocumentsconfig.md
   - docs/models/components/employeeonboardingstatus.md
+  - docs/models/components/employeeonboardingstatus1.md
   - docs/models/components/employeeonboardingstatusonboardingstep.md
   - docs/models/components/employeepaymentdetail.md
   - docs/models/components/employeepaymentdetailpaymentmethod.md
   - docs/models/components/employeepaymentmethod.md
+  - docs/models/components/employeepaymentmethod1.md
   - docs/models/components/employeepaymentmethodsplitby.md
   - docs/models/components/employeepaymentmethodtype.md
   - docs/models/components/employeepaystubslist.md
@@ -220,6 +232,7 @@ generatedFiles:
   - docs/models/components/fastpaymentlimitrequiredbody.md
   - docs/models/components/federalholidays.md
   - docs/models/components/federaltaxdetails.md
+  - docs/models/components/federaltaxdetailsstatus.md
   - docs/models/components/fields.md
   - docs/models/components/fipscodes.md
   - docs/models/components/fixed.md
@@ -258,6 +271,7 @@ generatedFiles:
   - docs/models/components/informationrequest.md
   - docs/models/components/informationrequeststatus.md
   - docs/models/components/informationrequesttype.md
+  - docs/models/components/integrationtype.md
   - docs/models/components/invoicedata.md
   - docs/models/components/job.md
   - docs/models/components/juneteenth.md
@@ -311,6 +325,10 @@ generatedFiles:
   - docs/models/components/payrollemployeecompensationstypepaidtimeoff.md
   - docs/models/components/payrollemployeecompensationstypepaymentmethod.md
   - docs/models/components/payrollfixedcompensationtypestype.md
+  - docs/models/components/payrollpartnerdisbursements.md
+  - docs/models/components/payrollpartnerdisbursementsdisbursements.md
+  - docs/models/components/payrollpartnerdisbursementspaymentmethod.md
+  - docs/models/components/payrollpartnerdisbursementspaymentstatus.md
   - docs/models/components/payrollpaymentspeedchangedtype.md
   - docs/models/components/payrollpayperiodtype.md
   - docs/models/components/payrollpayrollstatusmetatype.md
@@ -318,6 +336,7 @@ generatedFiles:
   - docs/models/components/payrollprocessingrequest.md
   - docs/models/components/payrollprocessingrequeststatus.md
   - docs/models/components/payrollreceipt.md
+  - docs/models/components/payrollreceiptemployeecompensations.md
   - docs/models/components/payrollreceiptpaymentmethod.md
   - docs/models/components/payrollreceipttaxes.md
   - docs/models/components/payrollreversal.md
@@ -326,6 +345,11 @@ generatedFiles:
   - docs/models/components/payrollsubmissionblockerstypestatus.md
   - docs/models/components/payrolltotalstype.md
   - docs/models/components/payrolltype.md
+  - docs/models/components/payrollupdate.md
+  - docs/models/components/payrollupdatefixedcompensations.md
+  - docs/models/components/payrollupdatehourlycompensations.md
+  - docs/models/components/payrollupdatepaidtimeoff.md
+  - docs/models/components/payrollupdatepaymentmethod.md
   - docs/models/components/payrollwithholdingpayperiodtype.md
   - docs/models/components/payscheduleassignment.md
   - docs/models/components/payscheduleassignmentbody.md
@@ -367,6 +391,7 @@ generatedFiles:
   - docs/models/components/resourcetype.md
   - docs/models/components/section.md
   - docs/models/components/security.md
+  - docs/models/components/showemployees.md
   - docs/models/components/signatory.md
   - docs/models/components/sortorder.md
   - docs/models/components/source.md
@@ -418,6 +443,7 @@ generatedFiles:
   - docs/models/components/webhooksubscriptionstatus.md
   - docs/models/components/wireinrequest.md
   - docs/models/components/wireinrequeststatus.md
+  - docs/models/components/withholdingpayperiod.md
   - docs/models/components/workaddress.md
   - docs/models/components/ytdbenefitamountsfromdifferentcompany.md
   - docs/models/errors/base.md
@@ -454,6 +480,7 @@ generatedFiles:
   - docs/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpaymentresponse.md
   - docs/models/operations/deletev1companiescompanyidearningtypesearningtypeuuidrequest.md
   - docs/models/operations/deletev1companiescompanyidearningtypesearningtypeuuidresponse.md
+  - docs/models/operations/deletev1companiescompanyidpayrollsheaderxgustoapiversion.md
   - docs/models/operations/deletev1companiescompanyidpayrollsrequest.md
   - docs/models/operations/deletev1companiescompanyidpayrollsresponse.md
   - docs/models/operations/deletev1companiescompanyuuidsignatoriessignatoryuuidrequest.md
@@ -492,12 +519,12 @@ generatedFiles:
   - docs/models/operations/deletev1workaddressesworkaddressuuidheaderxgustoapiversion.md
   - docs/models/operations/deletev1workaddressesworkaddressuuidrequest.md
   - docs/models/operations/deletev1workaddressesworkaddressuuidresponse.md
+  - docs/models/operations/disbursements.md
   - docs/models/operations/document.md
   - docs/models/operations/documents.md
   - docs/models/operations/documenttype.md
   - docs/models/operations/earnings.md
   - docs/models/operations/earningtype.md
-  - docs/models/operations/employeecompensations.md
   - docs/models/operations/employees.md
   - docs/models/operations/employeestatetaxes.md
   - docs/models/operations/employmentstatus.md
@@ -508,7 +535,6 @@ generatedFiles:
   - docs/models/operations/fields.md
   - docs/models/operations/filetype.md
   - docs/models/operations/filingform.md
-  - docs/models/operations/fixedcompensations.md
   - docs/models/operations/frequency.md
   - docs/models/operations/garnishmenttype.md
   - docs/models/operations/getachtransactionsrequest.md
@@ -597,6 +623,10 @@ generatedFiles:
   - docs/models/operations/getv1companiescompanyidpayrollreversalsrequest.md
   - docs/models/operations/getv1companiescompanyidpayrollreversalsresponse.md
   - docs/models/operations/getv1companiescompanyidpayrollsheaderxgustoapiversion.md
+  - docs/models/operations/getv1companiescompanyidpayrollsidpartnerdisbursementsheaderxgustoapiversion.md
+  - docs/models/operations/getv1companiescompanyidpayrollsidpartnerdisbursementsrequest.md
+  - docs/models/operations/getv1companiescompanyidpayrollsidpartnerdisbursementsresponse.md
+  - docs/models/operations/getv1companiescompanyidpayrollspayrollidheaderxgustoapiversion.md
   - docs/models/operations/getv1companiescompanyidpayrollspayrollidqueryparaminclude.md
   - docs/models/operations/getv1companiescompanyidpayrollspayrollidrequest.md
   - docs/models/operations/getv1companiescompanyidpayrollspayrollidresponse.md
@@ -662,6 +692,9 @@ generatedFiles:
   - docs/models/operations/getv1contractorformsresponse.md
   - docs/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidrequest.md
   - docs/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidresponse.md
+  - docs/models/operations/getv1contractorpaymentgroupsidpartnerdisbursementsheaderxgustoapiversion.md
+  - docs/models/operations/getv1contractorpaymentgroupsidpartnerdisbursementsrequest.md
+  - docs/models/operations/getv1contractorpaymentgroupsidpartnerdisbursementsresponse.md
   - docs/models/operations/getv1contractorpaymentscontractorpaymentuuidfundrequest.md
   - docs/models/operations/getv1contractorpaymentscontractorpaymentuuidfundresponse.md
   - docs/models/operations/getv1contractorpaymentscontractorpaymentuuidreceiptrequest.md
@@ -786,9 +819,9 @@ generatedFiles:
   - docs/models/operations/groupings.md
   - docs/models/operations/headerxgustoapiversion.md
   - docs/models/operations/homeaddress.md
-  - docs/models/operations/hourlycompensations.md
   - docs/models/operations/include.md
   - docs/models/operations/independenceday.md
+  - docs/models/operations/integrationtype.md
   - docs/models/operations/job.md
   - docs/models/operations/juneteenth.md
   - docs/models/operations/laborday.md
@@ -803,8 +836,20 @@ generatedFiles:
   - docs/models/operations/offcyclereason.md
   - docs/models/operations/onboardingstatus.md
   - docs/models/operations/ownertype.md
-  - docs/models/operations/paidtimeoff.md
+  - docs/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursementsdisbursements.md
+  - docs/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursementsheaderxgustoapiversion.md
+  - docs/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursementspaymentmethod.md
+  - docs/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursementspaymentstatus.md
+  - docs/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursementsrequest.md
+  - docs/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursementsrequestbody.md
+  - docs/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursementsresponse.md
+  - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsheaderxgustoapiversion.md
+  - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementspaymentmethod.md
+  - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsrequest.md
+  - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsrequestbody.md
+  - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsresponse.md
   - docs/models/operations/paymentmethod.md
+  - docs/models/operations/paymentstatus.md
   - docs/models/operations/paymentunit.md
   - docs/models/operations/payperiods.md
   - docs/models/operations/payrolltype.md
@@ -867,7 +912,6 @@ generatedFiles:
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupsrequest.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupsrequestbody.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupsresponse.md
-  - docs/models/operations/postv1companiescompanyidcontractorpaymentspaymentmethod.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentsrequest.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentsrequestbody.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentsresponse.md
@@ -1021,6 +1065,7 @@ generatedFiles:
   - docs/models/operations/putv1companiescompanyidfederaltaxdetailsrequest.md
   - docs/models/operations/putv1companiescompanyidfederaltaxdetailsrequestbody.md
   - docs/models/operations/putv1companiescompanyidfederaltaxdetailsresponse.md
+  - docs/models/operations/putv1companiescompanyidpayrollsheaderxgustoapiversion.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidcalculaterequest.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidcalculateresponse.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidpreparerequest.md
@@ -1030,9 +1075,7 @@ generatedFiles:
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidsubmitrequestbody.md
   - docs/models/operations/putv1companiescompanyidpayrollspayrollidsubmitresponse.md
   - docs/models/operations/putv1companiescompanyidpayrollsrequest.md
-  - docs/models/operations/putv1companiescompanyidpayrollsrequestbody.md
   - docs/models/operations/putv1companiescompanyidpayrollsresponse.md
-  - docs/models/operations/putv1companiescompanyidpayrollswithholdingpayperiod.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidfrequency.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidrequest.md
   - docs/models/operations/putv1companiescompanyidpayschedulespayscheduleidrequestbody.md
@@ -1131,6 +1174,7 @@ generatedFiles:
   - docs/models/operations/putv1employeesemployeeidstatetaxesheaderxgustoapiversion.md
   - docs/models/operations/putv1employeesemployeeidstatetaxesrequest.md
   - docs/models/operations/putv1employeesemployeeidstatetaxesresponse.md
+  - docs/models/operations/putv1employeesheaderxgustoapiversion.md
   - docs/models/operations/putv1employeesrequest.md
   - docs/models/operations/putv1employeesrequestbody.md
   - docs/models/operations/putv1employeesresponse.md
@@ -1284,6 +1328,10 @@ generatedFiles:
   - docs/sdks/wireinrequests/README.md
   - docs/types/rfcdate.md
   - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/introspectionGetInfo.example.ts
+  - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
@@ -1337,6 +1385,8 @@ generatedFiles:
   - src/funcs/contractorPaymentGroupsFund.ts
   - src/funcs/contractorPaymentGroupsGet.ts
   - src/funcs/contractorPaymentGroupsGetList.ts
+  - src/funcs/contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements.ts
+  - src/funcs/contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements.ts
   - src/funcs/contractorPaymentGroupsPreview.ts
   - src/funcs/contractorPaymentMethodGet.ts
   - src/funcs/contractorPaymentMethodGetBankAccounts.ts
@@ -1502,7 +1552,9 @@ generatedFiles:
   - src/funcs/payrollsGetPayStub.ts
   - src/funcs/payrollsGetPayStubs.ts
   - src/funcs/payrollsGetReceipt.ts
+  - src/funcs/payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.ts
   - src/funcs/payrollsList.ts
+  - src/funcs/payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.ts
   - src/funcs/payrollsPrepare.ts
   - src/funcs/payrollsSkip.ts
   - src/funcs/payrollsSubmit.ts
@@ -1587,6 +1639,7 @@ generatedFiles:
   - src/models/components/contractorpaymentforgroup.ts
   - src/models/components/contractorpaymentgroup.ts
   - src/models/components/contractorpaymentgroupminimal.ts
+  - src/models/components/contractorpaymentgrouppartnerdisbursements.ts
   - src/models/components/contractorpaymentmethod.ts
   - src/models/components/contractorpaymentreceipt.ts
   - src/models/components/contractorpaymentsummary.ts
@@ -1608,6 +1661,7 @@ generatedFiles:
   - src/models/components/employeebenefitforcompanybenefit.ts
   - src/models/components/employeecustomfield.ts
   - src/models/components/employeefederaltax.ts
+  - src/models/components/employeehomeaddress.ts
   - src/models/components/employeeonboardingdocument.ts
   - src/models/components/employeeonboardingstatus.ts
   - src/models/components/employeepaymentdetail.ts
@@ -1666,6 +1720,7 @@ generatedFiles:
   - src/models/components/payrollcreditblockerstype.ts
   - src/models/components/payrollemployeecompensationstype.ts
   - src/models/components/payrollfixedcompensationtypestype.ts
+  - src/models/components/payrollpartnerdisbursements.ts
   - src/models/components/payrollpaymentspeedchangedtype.ts
   - src/models/components/payrollpayperiodtype.ts
   - src/models/components/payrollpayrollstatusmetatype.ts
@@ -1675,6 +1730,7 @@ generatedFiles:
   - src/models/components/payrollreversal.ts
   - src/models/components/payrollsubmissionblockerstype.ts
   - src/models/components/payrolltotalstype.ts
+  - src/models/components/payrollupdate.ts
   - src/models/components/payrollwithholdingpayperiodtype.ts
   - src/models/components/payscheduleassignment.ts
   - src/models/components/payscheduleassignmentbody.ts
@@ -1696,6 +1752,7 @@ generatedFiles:
   - src/models/components/report.ts
   - src/models/components/reporttemplate.ts
   - src/models/components/security.ts
+  - src/models/components/showemployees.ts
   - src/models/components/signatory.ts
   - src/models/components/sortorder.ts
   - src/models/components/supportedbenefit.ts
@@ -1787,6 +1844,7 @@ generatedFiles:
   - src/models/operations/getv1companiescompanyidpayperiods.ts
   - src/models/operations/getv1companiescompanyidpayrollreversals.ts
   - src/models/operations/getv1companiescompanyidpayrolls.ts
+  - src/models/operations/getv1companiescompanyidpayrollsidpartnerdisbursements.ts
   - src/models/operations/getv1companiescompanyidpayrollspayrollid.ts
   - src/models/operations/getv1companiescompanyidpayschedules.ts
   - src/models/operations/getv1companiescompanyidpayschedulesassignments.ts
@@ -1816,6 +1874,7 @@ generatedFiles:
   - src/models/operations/getv1contractorformpdf.ts
   - src/models/operations/getv1contractorforms.ts
   - src/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupid.ts
+  - src/models/operations/getv1contractorpaymentgroupsidpartnerdisbursements.ts
   - src/models/operations/getv1contractorpaymentscontractorpaymentuuidfund.ts
   - src/models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.ts
   - src/models/operations/getv1contractorscontractoruuid.ts
@@ -1866,6 +1925,8 @@ generatedFiles:
   - src/models/operations/getv1workaddressesworkaddressuuid.ts
   - src/models/operations/getversionemployeestimeoffactivities.ts
   - src/models/operations/getwireinrequestswireinrequestuuid.ts
+  - src/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursements.ts
+  - src/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.ts
   - src/models/operations/postcompaniescompanyuuidholidaypaypolicy.ts
   - src/models/operations/postcompaniescompanyuuidreports.ts
   - src/models/operations/postcompaniescompanyuuidsuspensions.ts
@@ -2030,6 +2091,8 @@ generatedFiles:
   - src/react-query/contractorPaymentGroupsFund.ts
   - src/react-query/contractorPaymentGroupsGet.ts
   - src/react-query/contractorPaymentGroupsGetList.ts
+  - src/react-query/contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements.ts
+  - src/react-query/contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements.ts
   - src/react-query/contractorPaymentGroupsPreview.ts
   - src/react-query/contractorPaymentMethodGet.ts
   - src/react-query/contractorPaymentMethodGetBankAccounts.ts
@@ -2196,7 +2259,9 @@ generatedFiles:
   - src/react-query/payrollsGetPayStub.ts
   - src/react-query/payrollsGetPayStubs.ts
   - src/react-query/payrollsGetReceipt.ts
+  - src/react-query/payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.ts
   - src/react-query/payrollsList.ts
+  - src/react-query/payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.ts
   - src/react-query/payrollsPrepare.ts
   - src/react-query/payrollsSkip.ts
   - src/react-query/payrollsSubmit.ts
@@ -2871,7 +2936,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"version": "5521489cc7c93732300805dcf87a5fd3", "tax_payer_type": "S-Corporation", "taxable_as_scorp": true, "filing_form": "941", "has_ein": true, "ein_verified": true, "legal_name": "Company Name LLC", "effective_date": "2024-01-01", "deposit_schedule": "Semiweekly"}
+          application/json: {"version": "5521489cc7c93732300805dcf87a5fd3", "tax_payer_type": "S-Corporation", "taxable_as_scorp": true, "filing_form": "941", "has_ein": true, "ein_verified": true, "ein_verification": {"status": "verified"}, "legal_name": "Company Name LLC", "effective_date": "2024-01-01", "deposit_schedule": "Semiweekly"}
   put-v1-companies-company_id-federal_tax_details:
     Example:
       parameters:
@@ -2883,7 +2948,7 @@ examples:
         application/json: {"legal_name": "Acme Corp.", "tax_payer_type": "LLP", "filing_form": "944", "taxable_as_scorp": false, "version": "6cb95e00540706ca48d4577b3c839fbe"}
       responses:
         "200":
-          application/json: {"version": "5521489cc7c93732300805dcf87a5fd3", "tax_payer_type": "S-Corporation", "taxable_as_scorp": true, "filing_form": "941", "has_ein": true, "ein_verified": true, "legal_name": "Company Name LLC", "effective_date": "2024-01-01", "deposit_schedule": "Semiweekly"}
+          application/json: {"version": "5521489cc7c93732300805dcf87a5fd3", "tax_payer_type": "S-Corporation", "taxable_as_scorp": true, "filing_form": "941", "has_ein": true, "ein_verified": true, "ein_verification": {"status": "verified"}, "legal_name": "Company Name LLC", "effective_date": "2024-01-01", "deposit_schedule": "Semiweekly"}
     Basic:
       parameters:
         path:
@@ -3279,6 +3344,19 @@ examples:
           application/json: {"uuid": "6b1351a2-de35-4499-b948-43abab274634", "version": "e1bdd845a493c74908f8e15d6114169b", "company_uuid": "10593a6a-505b-4aa6-bf31-15dcdceedbe3", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "state": "CO", "zip": "94107", "country": "USA", "mailing_address": true, "filing_address": true, "created_at": "2025-06-09T13:43:49.000-07:00", "updated_at": "2025-06-09T13:43:50.000-07:00", "active": true}
         "404":
           application/json: {"errors": [{"error_key": "state", "category": "invalid_attribute_value", "message": "State is in the wrong format"}]}
+    speakeasy-default-put-v1-locations-location-id:
+      parameters:
+        path:
+          location_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "phone_number": "8009360383", "street_1": "300 3rd Street", "street_2": "Apartment 318", "city": "San Francisco", "zip": "94107"}
+      responses:
+        "200":
+          application/json: {"uuid": "ced517c9-1c22-4468-88f7-bea752987d03", "country": "USA"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-locations-location_uuid-minimum_wages:
     "":
       parameters:
@@ -3697,7 +3775,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"company_uuid": "423dd616-6dbc-4724-938a-403f6217a933", "partner_uuid": "556f05d0-48e0-4c47-bce5-db9aea923043", "fast_payment_limit": "5000", "payment_speed": "2-day"}
+          application/json: {"company_uuid": "423dd616-6dbc-4724-938a-403f6217a933", "partner_uuid": "556f05d0-48e0-4c47-bce5-db9aea923043", "fast_payment_limit": "5000", "payment_speed": "2-day", "earned_fast_ach_blockers": [{"blocker_type": "minimum_days", "threshold": 15}, {"blocker_type": "minimum_funded_payments", "threshold": 1}]}
   put-v1-company-payment-configs:
     Example:
       parameters:
@@ -3709,7 +3787,7 @@ examples:
         application/json: {"fast_payment_limit": "5000", "payment_speed": "2-day"}
       responses:
         "200":
-          application/json: {"company_uuid": "423dd616-6dbc-4724-938a-403f6217a933", "partner_uuid": "556f05d0-48e0-4c47-bce5-db9aea923043", "fast_payment_limit": "5000", "payment_speed": "2-day"}
+          application/json: {"company_uuid": "423dd616-6dbc-4724-938a-403f6217a933", "partner_uuid": "556f05d0-48e0-4c47-bce5-db9aea923043", "fast_payment_limit": "5000", "payment_speed": "2-day", "earned_fast_ach_blockers": [{"blocker_type": "minimum_days", "threshold": 15}, {"blocker_type": "minimum_funded_payments", "threshold": 1}]}
     Basic:
       parameters:
         path:
@@ -4056,6 +4134,17 @@ examples:
           application/json: {"uuid": "1c4fba51-b867-49a7-9d75-54572badcc7e", "first_name": "Karl", "middle_initial": null, "last_name": "The Fog", "email": null, "company_uuid": "81191cf6-8bd3-4dad-836a-5e7cfdad5182", "manager_uuid": null, "version": "5211ee9bb08e51634431a18eff0afc64", "department": null, "terminated": false, "two_percent_shareholder": null, "work_email": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [], "eligible_paid_time_off": [], "terminations": [], "garnishments": [], "date_of_birth": null, "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "current_employment_status": null, "historical": false, "employee_code": "b9f87c", "department_uuid": null}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
+    speakeasy-default-post-v1-employees:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "201":
+          application/json: {"uuid": "9f634ba6-53c8-4290-8751-3ec38c369860", "first_name": "Lela", "last_name": "Graham", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-v1-historical_employees:
     Example:
       parameters:
@@ -4158,6 +4247,19 @@ examples:
           application/json: {"uuid": "1abe1569-9d13-4046-be56-5873f95bba18", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "company_uuid": "84e0b59a-b28c-4247-a64b-c690352374e1", "version": "4eff5441d8f8ecc08f53a88ded36f13e", "department": null, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "b642ef6b-5f2c-4972-a7b1-e492f16e66d8", "employee_uuid": "1abe1569-9d13-4046-be56-5873f95bba18", "hire_date": "2024-06-09", "title": "", "primary": true, "two_percent_shareholder": false, "location_uuid": "6f844e75-de46-420d-9680-b670022f21ce", "location": {"uuid": "6f844e75-de46-420d-9680-b670022f21ce", "street_1": "3121 Milky Way", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "inactive": false}}], "date_of_birth": "1991-01-31", "has_ssn": true, "preferred_first_name": null, "payment_method": "Check", "employee_code": "20961c", "department_uuid": null, "title": "", "hired_at": "2024-06-09", "hidden_ssn": "", "flsa_status": "Exempt", "applicable_tax_ids": [3, 7, 6, 2, 1, 4, 5, 109, 107, 108, 106]}
         "404":
           application/json: {"errors": [{"error_key": "base", "category": "invalid_resource_version", "message": "You are attempting to update a resource using an out-of-date version."}]}
+    speakeasy-default-put-v1-employees:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
+      responses:
+        "200":
+          application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+        "404":
+          application/json: {"errors": []}
   delete-v1-employee:
     speakeasy-default-delete-v1-employee:
       parameters:
@@ -4244,6 +4346,19 @@ examples:
           application/json: {"uuid": "049dbf20-0e2a-4232-854b-ac888cef3f0c", "onboarding_status": "admin_onboarding_incomplete", "onboarding_steps": [{"title": "Personal details", "id": "personal_details", "required": true, "completed": false, "requirements": []}, {"title": "Enter compensation details", "id": "compensation_details", "required": true, "completed": true, "requirements": []}, {"title": "Add work address", "id": "add_work_address", "required": true, "completed": false, "requirements": []}, {"title": "Add home address", "id": "add_home_address", "required": true, "completed": false, "requirements": []}, {"title": "Enter federal tax withholdings", "id": "federal_tax_setup", "required": true, "completed": false, "requirements": []}, {"title": "Enter state tax information", "id": "state_tax_setup", "required": true, "completed": false, "requirements": ["add_work_address", "add_home_address"]}, {"title": "Direct deposit setup", "id": "direct_deposit_setup", "required": false, "completed": false, "requirements": []}, {"title": "Employee form signing", "id": "employee_form_signing", "required": true, "completed": false, "requirements": ["federal_tax_setup", "state_tax_setup"]}, {"title": "File new hire report", "id": "file_new_hire_report", "required": true, "completed": false, "requirements": ["add_work_address"]}]}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
+    speakeasy-default-put-v1-employees-employee-id-onboarding-status:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"onboarding_status": "admin_onboarding_incomplete"}
+      responses:
+        "200":
+          application/json: {"uuid": "66aca799-a6b4-44d8-9d21-a3c9f6ca4c66"}
+        "404":
+          application/json: {"errors": []}
   get-version-employees-time_off_activities:
     example:
       parameters:
@@ -4277,7 +4392,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "first_name": "Leanna", "last_name": "Swaniawski", "date_of_birth": "1977-07-17", "ssn": "<value>", "work_address": {}, "home_address": {"street_1": "<value>", "city": "Port Mitchell", "state": "Kentucky", "zip": "85765"}, "termination": {}, "job": {}}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "first_name": "Leanna", "last_name": "Swaniawski", "date_of_birth": "1977-07-17", "ssn": "<value>", "work_address": {}, "home_address": {"street_1": "<value>", "city": "Port Mitchell", "state": "Kentucky", "zip": "85765"}, "termination": {}, "job": {}}
       responses:
         "200":
           application/json: {"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "first_name": "Karl", "middle_initial": null, "last_name": "Jaskolski", "email": null, "company_uuid": "3c69d228-a250-49b4-9946-24e4e4294da4", "manager_uuid": null, "version": "dedac972dd28945fcd6cd941723cc71a", "department": null, "terminated": true, "two_percent_shareholder": false, "work_email": null, "onboarded": true, "onboarding_status": "onboarding_completed", "onboarding_documents_config": {"uuid": null, "i9_document": false}, "jobs": [{"uuid": "f0be5480-7a15-4583-b0d0-789c02a1afe4", "version": "1c0722f3e090713b6a0db7c39904693e", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "hire_date": "2023-11-01", "title": "Client Support Director", "primary": true, "rate": "70000.00", "payment_unit": "Year", "current_compensation_uuid": "1a1faa42-274b-4440-b200-a5d81df14af2", "compensations": [{"uuid": "145660ed-6fcc-4211-8915-18e2786290a2", "version": "2cd4b18662395eb53bcf80d5b5447f36", "job_uuid": "857feae3-414e-445d-b28b-2eb3ef50155e", "rate": "70000.00", "payment_unit": "Year", "flsa_status": "Exempt", "effective_date": "2023-11-01", "adjust_for_minimum_wage": false, "minimum_wages": []}]}], "eligible_paid_time_off": [], "terminations": [{"uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "version": "e6c865df784842196d411c1466b01686", "employee_uuid": "ad85459f-8bf5-4a8f-9079-3b3fa790799e", "active": false, "cancelable": true, "effective_date": "2023-12-31", "run_termination_payroll": false}], "garnishments": [], "date_of_birth": "1986-06-25", "has_ssn": false, "ssn": "", "phone": null, "preferred_first_name": null, "payment_method": "Check", "historical": true, "employee_code": "eh3st1", "department_uuid": null}
@@ -4527,7 +4642,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -4538,7 +4653,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -4549,7 +4664,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -4617,7 +4732,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -4628,7 +4743,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -4639,7 +4754,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "effective_date": "<value>", "file_new_hire_report": true, "work_location_uuid": "<id>"}
       responses:
         "404":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -4791,6 +4906,19 @@ examples:
           application/json: {"uuid": "4fb52ba1-c50a-413c-a4cd-1166044fee89", "employee_uuid": "c5d6fa56-3aa4-4d0c-9315-14b197cf7401", "effective_date": "2025-04-09", "courtesy_withholding": false, "street_1": "500 3rd Street", "street_2": "", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "version": "e4a88d91321dad0d3918c4efaeb433a2"}
         "404":
           application/json: {"errors": [{"error_key": "street_1", "category": "invalid_attribute_value", "message": "Must include a street address"}]}
+    speakeasy-default-post-v1-employees-employee-id-home-addresses:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"street_1": "300 3rd Street", "city": "San Francisco", "state": "CA", "zip": "94107", "effective_date": "2022-01-31"}
+      responses:
+        "201":
+          application/json: {"uuid": "b552472e-2d5c-4e19-bf31-49aeeb888b6e", "country": "USA", "version": "<value>"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-home_addresses-home_address_uuid:
     Example:
       parameters:
@@ -4894,6 +5022,19 @@ examples:
           application/json: {"uuid": "fb763fae-9dae-4307-9070-282b75ba4028", "employee_uuid": "549bfb85-03c7-4eb0-9d18-3bb85d9d3aae", "effective_date": "1970-01-01", "courtesy_withholding": false, "street_1": "600 4th Street", "street_2": "", "city": "Miami", "state": "FL", "zip": "33173", "country": "USA", "active": true, "version": "92676c3c5a3c0f26911388a55633b31a"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
+    speakeasy-default-put-v1-home-addresses-home-address-uuid:
+      parameters:
+        path:
+          home_address_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
+      responses:
+        "200":
+          application/json: {"uuid": "d9fd058f-e693-4c4a-905f-3b5654a55589", "country": "USA", "version": "<value>"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   delete-v1-home_addresses-home_address_uuid:
     Basic:
       parameters:
@@ -4978,6 +5119,19 @@ examples:
           application/json: {"uuid": "64ee5fd7-3eb2-4083-883c-95e93e181cc8", "effective_date": "2020-01-31", "active": true, "location_uuid": "733ab2af-9510-408f-8d20-09196967174f", "employee_uuid": "d773461f-848a-40a1-8f09-b2ee4249d5c7", "version": "3879823d440f3a3215d129ac73c58966", "street_1": "977 Marks Viaduct", "street_2": "Apt. 958", "city": "Pink Hill", "state": "NC", "zip": "28572", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
+    speakeasy-default-post-v1-employees-employee-id-work-addresses:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"location_uuid": "6a119be7-b4b0-4e27-aaa0-89d5f2524635", "effective_date": "2023-05-15"}
+      responses:
+        "201":
+          application/json: {"uuid": "e02ec014-1e6b-41a8-ba57-7e102baa2d06", "version": "<value>", "country": "USA"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-work_addresses-work_address_uuid:
     test_example:
       parameters:
@@ -5028,6 +5182,19 @@ examples:
           application/json: {"uuid": "11b87d8e-c2dc-44f6-abc0-ccc58cd3ea5b", "effective_date": "2022-01-01", "active": false, "location_uuid": "24446253-8c6b-421d-a291-6667343e0f27", "employee_uuid": "eec0c9db-693e-419e-a928-d88b8010206f", "version": "e671435712a401b4b3fa7cfc1e240678", "street_1": "5467 Ward Radial", "street_2": "Suite 251", "city": "Holualoa", "state": "HI", "zip": "96725", "country": "USA"}
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
+    speakeasy-default-put-v1-work-addresses-work-address-uuid:
+      parameters:
+        path:
+          work_address_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "location_uuid": "6a119be7-b4b0-4e27-aaa0-89d5f2524635", "effective_date": "2023-05-15"}
+      responses:
+        "200":
+          application/json: {"uuid": "27c58f85-7f90-4597-bc74-193b0a8d024d", "version": "<value>", "country": "USA"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   delete-v1-work_addresses-work_address_uuid:
     test_example:
       parameters:
@@ -5196,6 +5363,19 @@ examples:
           application/json: [{"employee_uuid": "c963cb99-fe1c-4aa8-9d48-1ad211ad396f", "state": "CA", "file_new_hire_report": false, "is_work_state": true, "questions": [{"label": "Filing Status", "description": "The Head of Household status applies to unmarried individuals who have a relative living with them in their home. If unsure, read the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.ftb.ca.gov/file/personal/filing-status/index.html'>CA Filing Status explanation</a>.\n", "key": "filing_status", "is_question_for_admin_only": false, "input_question_format": {"type": "Select", "options": [{"value": "S", "label": "Single"}, {"value": "M", "label": "Married one income"}, {"value": "MD", "label": "Married dual income"}, {"value": "H", "label": "Head of Household"}, {"value": "E", "label": "Do Not Withhold"}]}, "answers": [{"value": "M", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Withholding Allowance", "description": "This value is needed to calculate the employee's CA income tax withholding. If unsure, use the <a target='_blank' data-bypass rel='noopener noreferrer' tabindex='0' href='https://www.edd.ca.gov/pdf_pub_ctr/de4.pdf'>CA DE-4 form</a> to calculate the value manually.\n", "key": "withholding_allowance", "is_question_for_admin_only": false, "input_question_format": {"type": "Number"}, "answers": [{"value": 1, "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "Additional Withholding", "description": "You can withhold an additional amount of California income taxes here.", "key": "additional_withholding", "is_question_for_admin_only": false, "input_question_format": {"type": "Currency"}, "answers": [{"value": "0.0", "valid_from": "2010-01-01", "valid_up_to": null}]}, {"label": "File a New Hire Report?", "description": "State law requires you to file a new hire report within 20 days of hiring or re-hiring an employee.", "key": "file_new_hire_report", "is_question_for_admin_only": true, "input_question_format": {"type": "Select", "options": [{"value": true, "label": "Yes, file the state new hire report for me."}, {"value": false, "label": "No, I have already filed."}]}, "answers": [{"value": false, "valid_from": "2010-01-01", "valid_up_to": null}]}]}]
         "404":
           application/json: {"errors": [{"error_key": "request", "category": "not_found", "message": "The requested resource was not found."}]}
+    speakeasy-default-put-v1-employees-employee-id-state-taxes:
+      parameters:
+        path:
+          employee_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"states": []}
+      responses:
+        "200":
+          application/json: [{}]
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-v1-employees-employee_id-bank_accounts:
     Example:
       parameters:
@@ -5924,7 +6104,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "200":
           application/json: {"uuid": "c9fc1ad3-c107-4e7b-aa21-2dd4b00a7a07", "company_uuid": "b7457fec-3b76-43bb-9c6e-69cca4688942", "wage_type": "Hourly", "is_active": false, "version": "63859768485e218ccf8a449bb60f14ed", "type": "Individual", "first_name": "Kory", "last_name": "Gottlieb", "middle_initial": "P", "business_name": null, "ein": null, "has_ein": false, "email": "keira.west@mckenzie.org", "start_date": "2022-01-01", "address": {"street_1": "621 Jast Row", "street_2": "Apt. 281", "city": "Coral Springs", "state": "FL", "zip": "33065", "country": "USA"}, "hourly_rate": "60.00", "file_new_hire_report": true, "work_state": "FL", "onboarded": true, "onboarding_status": "onboarding_completed", "payment_method": "Direct Deposit", "has_ssn": true, "department_uuid": "56260b3d-c375-415c-b77a-75d99f717193"}
@@ -5935,7 +6115,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "200":
           application/json: {"uuid": "c7c0659c-21a6-4b4e-b74c-9252576fc68c", "company_uuid": "0ec4ae6e-e436-460d-b63c-94a14503d16f", "wage_type": "Fixed", "is_active": true, "version": "8aab307f1e8ed788697f8986346af559", "type": "Business", "first_name": null, "last_name": null, "middle_initial": null, "business_name": "Labadie-Stroman", "ein": "XX-XXX0001", "has_ein": true, "email": "jonatan@kerluke.info", "start_date": "2022-01-01", "address": null, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": false, "onboarding_status": "admin_onboarding_incomplete", "payment_method": "Direct Deposit", "has_ssn": false}
@@ -5946,7 +6126,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -5957,7 +6137,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -5968,7 +6148,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Individual", "start_date": "2020-01-11", "hourly_rate": "40.0", "self_onboarding": false, "file_new_hire_report": false}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -6063,7 +6243,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -6074,7 +6254,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -6085,7 +6265,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -6188,7 +6368,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "200":
           application/json: {"version": "63859768485e218ccf8a449bb60f14ed", "type": "Direct Deposit", "split_by": "Percentage", "splits": [{"uuid": "e88f9436-b74e-49a8-87e9-777b9bfe715e", "name": "BoA Checking Account", "hidden_account_number": "XXXX0992", "priority": 1, "split_amount": 100}]}
@@ -6199,7 +6379,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -6210,7 +6390,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -6221,7 +6401,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "<value>", "type": "Direct Deposit"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "type": "Direct Deposit"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -6750,6 +6930,17 @@ examples:
           application/json: {}
         "404":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+    speakeasy-default-post-v1-companies-company-id-payrolls:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-companies-company_id-payrolls:
     Example:
       parameters:
@@ -6808,6 +6999,18 @@ examples:
       responses:
         "200":
           application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "gross_pay": 2791.25, "net_pay": 1953.31, "check_amount": 1953.31, "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": 100, "company_contribution": 50, "imputed": true}, {"name": "401K", "employee_deduction": 100, "company_contribution": 50, "imputed": false}], "deductions": [{"name": "Child Support", "amount": 80}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 646.69}, {"name": "Social Security", "employer": true, "amount": 191.25}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "gross_pay": 2791.25, "net_pay": 1953.31, "check_amount": 1953.31, "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": 100, "company_contribution": 50, "imputed": true}, {"name": "401K", "employee_deduction": 100, "company_contribution": 50, "imputed": false}], "deductions": [{"name": "Child Support", "amount": 80}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 646.69}, {"name": "Social Security", "employer": true, "amount": 191.25}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "gross_pay": 2791.25, "net_pay": 1953.31, "check_amount": 1953.31, "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": 100, "company_contribution": 50, "imputed": true}, {"name": "401K", "employee_deduction": 100, "company_contribution": 50, "imputed": false}], "deductions": [{"name": "Child Support", "amount": 80}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 646.69}, {"name": "Social Security", "employer": true, "amount": 191.25}]}], "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10", "metadata": {}}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
+    speakeasy-default-get-v1-companies-company-id-payrolls-payroll-id:
+      parameters:
+        path:
+          company_id: "<id>"
+          payroll_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   put-v1-companies-company_id-payrolls:
     Example:
       parameters:
@@ -6857,6 +7060,20 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-put-v1-companies-company-id-payrolls:
+      parameters:
+        path:
+          company_id: "<id>"
+          payroll_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"employee_compensations": [{}]}
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": []}
   delete-v1-companies-company_id-payrolls:
     speakeasy-default-delete-v1-companies-company-id-payrolls:
       parameters:
@@ -6865,6 +7082,9 @@ examples:
           payroll_id: "<id>"
         header:
           X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "404":
+          application/json: {"errors": []}
   put-v1-companies-company_id-payrolls-payroll_id-prepare:
     Example:
       parameters:
@@ -8025,7 +8245,7 @@ examples:
         application/json: {"aggregation": "default"}
       responses:
         "200":
-          application/json: {"payroll_uuid": "a83d0bd8-7d20-43b9-834c-6d514ef6cb20", "aggregation": "default", "request_uuid": "p83d0ca8-7d41-42a9-834y-7d218ef6cb20"}
+          application/json: {"payroll_uuid": "a83d0bd8-7d20-43b9-834c-6d514ef6cb20", "aggregation": "integration", "integration_type": "xero", "request_uuid": "p83d0ca8-7d41-42a9-834y-7d218ef6cb20"}
     Basic:
       parameters:
         path:
@@ -9372,5 +9592,59 @@ examples:
       responses:
         "200":
           application/json: [{"uuid": "8ad92898-591b-4d89-a22e-81f1cfdbf03e", "company_uuid": "<id>", "title": "<value>", "message": "<value>", "status": "resolved", "category": "<value>", "actionable": false, "can_block_payroll": false, "published_at": "<value>", "due_at": null, "resources": []}]
+  get-v1-companies-company_id-payrolls-id-partner_disbursements:
+    speakeasy-default-get-v1-companies-company-id-payrolls-id-partner-disbursements:
+      parameters:
+        path:
+          company_id: "<id>"
+          id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  patch-v1-companies-company_id-payrolls-id-partner_disbursements:
+    speakeasy-default-patch-v1-companies-company-id-payrolls-id-partner-disbursements:
+      parameters:
+        path:
+          company_id: "<id>"
+          id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"disbursements": [{"employee_uuid": "1a2b3c4d-5e6f-7890-abcd-ef1234567890"}]}
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": []}
+  get-v1-contractor_payment_groups-id-partner_disbursements:
+    speakeasy-default-get-v1-contractor-payment-groups-id-partner-disbursements:
+      parameters:
+        path:
+          id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": []}
+  patch-v1-contractor_payment_groups-id-partner_disbursements:
+    speakeasy-default-patch-v1-contractor-payment-groups-id-partner-disbursements:
+      parameters:
+        path:
+          id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"disbursements": [{"contractor_payment_uuid": "9f8e7d6c-5b4a-3928-1c2d-3e4f5a6b7c8d"}]}
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
 examplesVersion: 1.0.2
 generatedTests: {}

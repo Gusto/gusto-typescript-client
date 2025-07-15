@@ -1,13 +1,13 @@
-# HourlyCompensations
+# PayrollUpdateHourlyCompensations
 
 An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
 
 ## Example Usage
 
 ```typescript
-import { HourlyCompensations } from "@gusto/embedded-api/models/operations/putv1companiescompanyidpayrolls.js";
+import { PayrollUpdateHourlyCompensations } from "@gusto/embedded-api/models/components/payrollupdate.js";
 
-let value: HourlyCompensations = {};
+let value: PayrollUpdateHourlyCompensations = {};
 ```
 
 ## Fields

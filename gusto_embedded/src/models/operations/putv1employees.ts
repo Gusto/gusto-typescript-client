@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Employee,
@@ -19,6 +20,19 @@ import {
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1EmployeesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1EmployeesHeaderXGustoAPIVersion
+>;
 
 export type PutV1EmployeesRequestBody = {
   /**
@@ -40,7 +54,10 @@ export type PutV1EmployeesRequestBody = {
 };
 
 export type PutV1EmployeesRequest = {
-  xGustoAPIVersion?: string | undefined;
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PutV1EmployeesHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the employee
    */
@@ -55,6 +72,30 @@ export type PutV1EmployeesResponse = {
    */
   employee?: Employee | undefined;
 };
+
+/** @internal */
+export const PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesHeaderXGustoAPIVersion> = z.nativeEnum(
+    PutV1EmployeesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1EmployeesHeaderXGustoAPIVersion> =
+    PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PutV1EmployeesHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PutV1EmployeesRequestBody$inboundSchema: z.ZodType<
@@ -163,7 +204,8 @@ export const PutV1EmployeesRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": z.string().optional(),
+  "X-Gusto-API-Version": PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema
+    .default("2024-04-01"),
   employee_id: z.string(),
   RequestBody: z.lazy(() => PutV1EmployeesRequestBody$inboundSchema),
 }).transform((v) => {
@@ -176,7 +218,7 @@ export const PutV1EmployeesRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type PutV1EmployeesRequest$Outbound = {
-  "X-Gusto-API-Version"?: string | undefined;
+  "X-Gusto-API-Version": string;
   employee_id: string;
   RequestBody: PutV1EmployeesRequestBody$Outbound;
 };
@@ -187,7 +229,9 @@ export const PutV1EmployeesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1EmployeesRequest
 > = z.object({
-  xGustoAPIVersion: z.string().optional(),
+  xGustoAPIVersion: PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema.default(
+    "2024-04-01",
+  ),
   employeeId: z.string(),
   requestBody: z.lazy(() => PutV1EmployeesRequestBody$outboundSchema),
 }).transform((v) => {

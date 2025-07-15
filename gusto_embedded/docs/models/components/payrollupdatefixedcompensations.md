@@ -1,13 +1,13 @@
-# FixedCompensations
+# PayrollUpdateFixedCompensations
 
 An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
 
 ## Example Usage
 
 ```typescript
-import { FixedCompensations } from "@gusto/embedded-api/models/operations/putv1companiescompanyidpayrolls.js";
+import { PayrollUpdateFixedCompensations } from "@gusto/embedded-api/models/components/payrollupdate.js";
 
-let value: FixedCompensations = {};
+let value: PayrollUpdateFixedCompensations = {};
 ```
 
 ## Fields

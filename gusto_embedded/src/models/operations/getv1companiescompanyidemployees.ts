@@ -8,17 +8,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
-  Employee,
-  Employee$inboundSchema,
-  Employee$Outbound,
-  Employee$outboundSchema,
-} from "../components/employee.js";
-import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
+import {
+  ShowEmployees,
+  ShowEmployees$inboundSchema,
+  ShowEmployees$Outbound,
+  ShowEmployees$outboundSchema,
+} from "../components/showemployees.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -71,6 +71,10 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
    */
   terminated?: boolean | undefined;
   /**
+   * Optional subset of employees to fetch.
+   */
+  uuids?: Array<string> | undefined;
+  /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
   page?: number | undefined;
@@ -85,7 +89,7 @@ export type GetV1CompaniesCompanyIdEmployeesResponse = {
   /**
    * successful
    */
-  employees?: Array<Employee> | undefined;
+  showEmployees?: Array<ShowEmployees> | undefined;
 };
 
 /** @internal */
@@ -145,6 +149,7 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
   search_term: z.string().optional(),
   include: z.array(Include$inboundSchema).optional(),
   terminated: z.boolean().optional(),
+  uuids: z.array(z.string()).optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
 }).transform((v) => {
@@ -162,6 +167,7 @@ export type GetV1CompaniesCompanyIdEmployeesRequest$Outbound = {
   search_term?: string | undefined;
   include?: Array<string> | undefined;
   terminated?: boolean | undefined;
+  uuids?: Array<string> | undefined;
   page?: number | undefined;
   per?: number | undefined;
 };
@@ -179,6 +185,7 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
   searchTerm: z.string().optional(),
   include: z.array(Include$outboundSchema).optional(),
   terminated: z.boolean().optional(),
+  uuids: z.array(z.string()).optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
 }).transform((v) => {
@@ -238,18 +245,18 @@ export const GetV1CompaniesCompanyIdEmployeesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  Employees: z.array(Employee$inboundSchema).optional(),
+  "Show-Employees": z.array(ShowEmployees$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Employees": "employees",
+    "Show-Employees": "showEmployees",
   });
 });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdEmployeesResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  Employees?: Array<Employee$Outbound> | undefined;
+  "Show-Employees"?: Array<ShowEmployees$Outbound> | undefined;
 };
 
 /** @internal */
@@ -259,11 +266,11 @@ export const GetV1CompaniesCompanyIdEmployeesResponse$outboundSchema: z.ZodType<
   GetV1CompaniesCompanyIdEmployeesResponse
 > = z.object({
   httpMeta: HTTPMetadata$outboundSchema,
-  employees: z.array(Employee$outboundSchema).optional(),
+  showEmployees: z.array(ShowEmployees$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     httpMeta: "HttpMeta",
-    employees: "Employees",
+    showEmployees: "Show-Employees",
   });
 });
 

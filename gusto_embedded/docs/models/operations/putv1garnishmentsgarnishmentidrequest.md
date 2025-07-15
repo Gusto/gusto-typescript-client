@@ -7,6 +7,9 @@ import { PutV1GarnishmentsGarnishmentIdRequest } from "@gusto/embedded-api/model
 
 let value: PutV1GarnishmentsGarnishmentIdRequest = {
   garnishmentId: "<id>",
+  requestBody: {
+    version: "<value>",
+  },
 };
 ```
 

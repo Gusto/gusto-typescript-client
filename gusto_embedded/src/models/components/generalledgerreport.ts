@@ -16,11 +16,24 @@ export const Aggregation = {
   Default: "default",
   Job: "job",
   Department: "department",
+  Integration: "integration",
 } as const;
 /**
  * The breakdown level used for the report
  */
 export type Aggregation = ClosedEnum<typeof Aggregation>;
+
+/**
+ * The `integration_type` used for the report, if `aggregation` was 'integration.' Otherwise, this will be null.
+ */
+export const IntegrationType = {
+  Xero: "xero",
+  Qbo: "qbo",
+} as const;
+/**
+ * The `integration_type` used for the report, if `aggregation` was 'integration.' Otherwise, this will be null.
+ */
+export type IntegrationType = ClosedEnum<typeof IntegrationType>;
 
 /**
  * Successful response for general ledger report generation
@@ -34,6 +47,10 @@ export type GeneralLedgerReport = {
    * The breakdown level used for the report
    */
   aggregation?: Aggregation | undefined;
+  /**
+   * The `integration_type` used for the report, if `aggregation` was 'integration.' Otherwise, this will be null.
+   */
+  integrationType?: IntegrationType | null | undefined;
   /**
    * UUID to use for polling the report status
    */
@@ -60,6 +77,27 @@ export namespace Aggregation$ {
 }
 
 /** @internal */
+export const IntegrationType$inboundSchema: z.ZodNativeEnum<
+  typeof IntegrationType
+> = z.nativeEnum(IntegrationType);
+
+/** @internal */
+export const IntegrationType$outboundSchema: z.ZodNativeEnum<
+  typeof IntegrationType
+> = IntegrationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace IntegrationType$ {
+  /** @deprecated use `IntegrationType$inboundSchema` instead. */
+  export const inboundSchema = IntegrationType$inboundSchema;
+  /** @deprecated use `IntegrationType$outboundSchema` instead. */
+  export const outboundSchema = IntegrationType$outboundSchema;
+}
+
+/** @internal */
 export const GeneralLedgerReport$inboundSchema: z.ZodType<
   GeneralLedgerReport,
   z.ZodTypeDef,
@@ -67,10 +105,12 @@ export const GeneralLedgerReport$inboundSchema: z.ZodType<
 > = z.object({
   payroll_uuid: z.string().optional(),
   aggregation: Aggregation$inboundSchema.optional(),
+  integration_type: z.nullable(IntegrationType$inboundSchema).optional(),
   request_uuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_uuid": "payrollUuid",
+    "integration_type": "integrationType",
     "request_uuid": "requestUuid",
   });
 });
@@ -79,6 +119,7 @@ export const GeneralLedgerReport$inboundSchema: z.ZodType<
 export type GeneralLedgerReport$Outbound = {
   payroll_uuid?: string | undefined;
   aggregation?: string | undefined;
+  integration_type?: string | null | undefined;
   request_uuid?: string | undefined;
 };
 
@@ -90,10 +131,12 @@ export const GeneralLedgerReport$outboundSchema: z.ZodType<
 > = z.object({
   payrollUuid: z.string().optional(),
   aggregation: Aggregation$outboundSchema.optional(),
+  integrationType: z.nullable(IntegrationType$outboundSchema).optional(),
   requestUuid: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     payrollUuid: "payroll_uuid",
+    integrationType: "integration_type",
     requestUuid: "request_uuid",
   });
 });

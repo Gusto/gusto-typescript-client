@@ -7,6 +7,11 @@ import { PostV1ExternalPayrollRequest } from "@gusto/embedded-api/models/operati
 
 let value: PostV1ExternalPayrollRequest = {
   companyUuid: "<id>",
+  requestBody: {
+    checkDate: "<value>",
+    paymentPeriodStartDate: "<value>",
+    paymentPeriodEndDate: "<value>",
+  },
 };
 ```
 

@@ -7,6 +7,9 @@ import { PutV1WebhookSubscriptionUuidRequest } from "@gusto/embedded-api/models/
 
 let value: PutV1WebhookSubscriptionUuidRequest = {
   webhookSubscriptionUuid: "<id>",
+  requestBody: {
+    subscriptionTypes: [],
+  },
 };
 ```
 

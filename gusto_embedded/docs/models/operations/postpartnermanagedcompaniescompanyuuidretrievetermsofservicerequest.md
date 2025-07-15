@@ -8,6 +8,9 @@ import { PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest } f
 let value: PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest =
   {
     companyUuid: "<id>",
+    requestBody: {
+      email: "Michael.Wilderman19@gmail.com",
+    },
   };
 ```
 
