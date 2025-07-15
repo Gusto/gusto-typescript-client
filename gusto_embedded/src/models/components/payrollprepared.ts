@@ -136,6 +136,10 @@ export type PayrollPrepared = {
   createdAt?: Date | undefined;
   fixedCompensationTypes?: Array<PayrollFixedCompensationTypesType> | undefined;
   processingRequest?: PayrollProcessingRequest | null | undefined;
+  /**
+   * Will money movement for the payroll be performed by the partner rather than by Gusto?
+   */
+  partnerOwnedDisbursement?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -175,6 +179,7 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   ).optional(),
   processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
     .optional(),
+  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "payroll_deadline": "payrollDeadline",
@@ -197,6 +202,7 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "fixed_compensation_types": "fixedCompensationTypes",
     "processing_request": "processingRequest",
+    "partner_owned_disbursement": "partnerOwnedDisbursement",
   });
 });
 
@@ -229,6 +235,7 @@ export type PayrollPrepared$Outbound = {
     | Array<PayrollFixedCompensationTypesType$Outbound>
     | undefined;
   processing_request?: PayrollProcessingRequest$Outbound | null | undefined;
+  partner_owned_disbursement?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -267,6 +274,7 @@ export const PayrollPrepared$outboundSchema: z.ZodType<
   ).optional(),
   processingRequest: z.nullable(PayrollProcessingRequest$outboundSchema)
     .optional(),
+  partnerOwnedDisbursement: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     payrollDeadline: "payroll_deadline",
@@ -289,6 +297,7 @@ export const PayrollPrepared$outboundSchema: z.ZodType<
     createdAt: "created_at",
     fixedCompensationTypes: "fixed_compensation_types",
     processingRequest: "processing_request",
+    partnerOwnedDisbursement: "partner_owned_disbursement",
   });
 });
 

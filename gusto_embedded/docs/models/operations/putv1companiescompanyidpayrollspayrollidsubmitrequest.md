@@ -8,6 +8,7 @@ import { PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest } from "@gusto/em
 let value: PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest = {
   companyId: "<id>",
   payrollId: "<id>",
+  requestBody: {},
 };
 ```
 

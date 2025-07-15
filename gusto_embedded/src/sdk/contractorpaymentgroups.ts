@@ -7,6 +7,8 @@ import { contractorPaymentGroupsDelete } from "../funcs/contractorPaymentGroupsD
 import { contractorPaymentGroupsFund } from "../funcs/contractorPaymentGroupsFund.js";
 import { contractorPaymentGroupsGet } from "../funcs/contractorPaymentGroupsGet.js";
 import { contractorPaymentGroupsGetList } from "../funcs/contractorPaymentGroupsGetList.js";
+import { contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements } from "../funcs/contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements.js";
+import { contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements } from "../funcs/contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements.js";
 import { contractorPaymentGroupsPreview } from "../funcs/contractorPaymentGroupsPreview.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
@@ -21,6 +23,14 @@ import {
   GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
 } from "../models/operations/getv1contractorpaymentgroupscontractorpaymentgroupid.js";
+import {
+  GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
+  GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse,
+} from "../models/operations/getv1contractorpaymentgroupsidpartnerdisbursements.js";
+import {
+  PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
+  PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse,
+} from "../models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.js";
 import {
   PostV1CompaniesCompanyIdContractorPaymentGroupsRequest,
   PostV1CompaniesCompanyIdContractorPaymentGroupsResponse,
@@ -152,5 +162,47 @@ export class ContractorPaymentGroups extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Get partner disbursements for a contractor payment group
+   *
+   * @remarks
+   * Get partner disbursements for a specific contractor payment group.
+   *
+   * scope: `partner_disbursements:read`
+   */
+  async getV1ContractorPaymentGroupsIdPartnerDisbursements(
+    request: GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> {
+    return unwrapAsync(
+      contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Update partner disbursements for a contractor payment group
+   *
+   * @remarks
+   * Update partner disbursements for a specific contractor payment group.
+   *
+   * scope: `partner_disbursements:write`
+   */
+  async patchV1ContractorPaymentGroupsIdPartnerDisbursements(
+    request: PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
+    options?: RequestOptions,
+  ): Promise<PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse> {
+    return unwrapAsync(
+      contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

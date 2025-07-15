@@ -8,6 +8,7 @@ import { PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest } from "@gusto
 let value: PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
   companyUuid: "<id>",
   signatoryUuid: "<id>",
+  requestBody: {},
 };
 ```
 

@@ -27,13 +27,12 @@ import {
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod = {
+export const PaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
   HistoricalPayment: "Historical Payment",
 } as const;
-export type PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod =
-  ClosedEnum<typeof PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod>;
+export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
 
 export type PostV1CompaniesCompanyIdContractorPaymentsRequestBody = {
   /**
@@ -44,9 +43,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentsRequestBody = {
    * Date of contractor payment
    */
   date: RFCDate;
-  paymentMethod?:
-    | PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod
-    | undefined;
+  paymentMethod?: PaymentMethod | undefined;
   /**
    * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
    */
@@ -86,28 +83,24 @@ export type PostV1CompaniesCompanyIdContractorPaymentsResponse = {
 };
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod
-  > = z.nativeEnum(PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod);
+export const PaymentMethod$inboundSchema: z.ZodNativeEnum<
+  typeof PaymentMethod
+> = z.nativeEnum(PaymentMethod);
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod
-  > = PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$inboundSchema;
+export const PaymentMethod$outboundSchema: z.ZodNativeEnum<
+  typeof PaymentMethod
+> = PaymentMethod$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$outboundSchema;
+export namespace PaymentMethod$ {
+  /** @deprecated use `PaymentMethod$inboundSchema` instead. */
+  export const inboundSchema = PaymentMethod$inboundSchema;
+  /** @deprecated use `PaymentMethod$outboundSchema` instead. */
+  export const outboundSchema = PaymentMethod$outboundSchema;
 }
 
 /** @internal */
@@ -119,9 +112,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentsRequestBody$inboundSchema
   > = z.object({
     contractor_uuid: z.string(),
     date: z.string().transform(v => new RFCDate(v)),
-    payment_method:
-      PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$inboundSchema
-        .default("Direct Deposit"),
+    payment_method: PaymentMethod$inboundSchema.default("Direct Deposit"),
     wage: z.number().optional(),
     hours: z.number().optional(),
     bonus: z.number().optional(),
@@ -153,9 +144,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentsRequestBody$outboundSchem
   > = z.object({
     contractorUuid: z.string(),
     date: z.instanceof(RFCDate).transform(v => v.toString()),
-    paymentMethod:
-      PostV1CompaniesCompanyIdContractorPaymentsPaymentMethod$outboundSchema
-        .default("Direct Deposit"),
+    paymentMethod: PaymentMethod$outboundSchema.default("Direct Deposit"),
     wage: z.number().optional(),
     hours: z.number().optional(),
     bonus: z.number().optional(),

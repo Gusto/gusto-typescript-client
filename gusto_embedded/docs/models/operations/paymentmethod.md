@@ -1,17 +1,15 @@
 # PaymentMethod
 
-The employee's compensation payment method. Invalid values will be ignored.
-
 ## Example Usage
 
 ```typescript
-import { PaymentMethod } from "@gusto/embedded-api/models/operations/putv1companiescompanyidpayrolls.js";
+import { PaymentMethod } from "@gusto/embedded-api/models/operations/postv1companiescompanyidcontractorpayments.js";
 
-let value: PaymentMethod = "Check";
+let value: PaymentMethod = "Historical Payment";
 ```
 
 ## Values
 
 ```typescript
-"Direct Deposit" | "Check"
+"Direct Deposit" | "Check" | "Historical Payment"
 ```

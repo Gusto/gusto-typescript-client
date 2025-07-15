@@ -28,20 +28,20 @@ import {
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Determines the date-based API version associated with your API call.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion = {
   TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
 } as const;
 /**
- * Determines the date-based API version associated with your API call.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export type PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion =
   ClosedEnum<typeof PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion>;
 
 export type PutV1EmployeesEmployeeIdStateTaxesRequest = {
   /**
-   * Determines the date-based API version associated with your API call.
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PutV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion

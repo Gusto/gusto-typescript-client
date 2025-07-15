@@ -20,146 +20,33 @@ import {
   PayrollPrepared$outboundSchema,
 } from "../components/payrollprepared.js";
 import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PayrollUpdate,
+  PayrollUpdate$inboundSchema,
+  PayrollUpdate$Outbound,
+  PayrollUpdate$outboundSchema,
+} from "../components/payrollupdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The employee's compensation payment method. Invalid values will be ignored.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const PaymentMethod = {
-  DirectDeposit: "Direct Deposit",
-  Check: "Check",
+export const PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
 } as const;
 /**
- * The employee's compensation payment method. Invalid values will be ignored.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
-
-/**
- * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
- */
-export type FixedCompensations = {
-  /**
-   * The name of the compensation. This also serves as the unique, immutable identifier for this compensation.
-   */
-  name?: string | undefined;
-  /**
-   * The amount of the compensation for the pay period.
-   */
-  amount?: string | undefined;
-  /**
-   * The UUID of the job for the compensation.
-   */
-  jobUuid?: string | undefined;
-};
-
-/**
- * An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
- */
-export type HourlyCompensations = {
-  /**
-   * The name of the compensation. This also serves as the unique, immutable identifier for this compensation.
-   */
-  name?: string | undefined;
-  /**
-   * The number of hours to be compensated for this pay period.
-   */
-  hours?: string | undefined;
-  /**
-   * The UUIDs of the job for the compensation.
-   */
-  jobUuid?: string | undefined;
-};
-
-export type PaidTimeOff = {
-  /**
-   * The name of the PTO. This also serves as the unique, immutable identifier for the PTO. Must pass in name or policy_uuid but not both.
-   */
-  name?: string | undefined;
-  /**
-   * The hours of this PTO taken during the pay period.
-   */
-  hours?: string | undefined;
-  /**
-   * The uuid of the PTO policy. Must pass in name or policy_uuid but not both.
-   */
-  policyUuid?: string | undefined;
-  /**
-   * The outstanding hours paid upon termination. This field is only applicable for termination payrolls.
-   */
-  finalPayoutUnusedHoursInput?: string | undefined;
-};
-
-export type EmployeeCompensations = {
-  /**
-   * The UUID of the employee.
-   */
-  employeeUuid?: string | undefined;
-  /**
-   * The current version of this employee compensation from the prepared payroll. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version?: string | undefined;
-  /**
-   * This employee will be excluded from payroll calculation and will not be paid for the payroll.
-   */
-  excluded?: boolean | undefined;
-  /**
-   * The employee's compensation payment method. Invalid values will be ignored.
-   */
-  paymentMethod?: PaymentMethod | undefined;
-  /**
-   * Custom text that will be printed as a personal note to the employee on a paystub.
-   */
-  memo?: string | undefined;
-  fixedCompensations?: Array<FixedCompensations> | undefined;
-  hourlyCompensations?: Array<HourlyCompensations> | undefined;
-  /**
-   * An array of all paid time off the employee is eligible for this pay period. Each paid time off object can be the name or the specific policy_uuid.
-   */
-  paidTimeOff?: Array<PaidTimeOff> | undefined;
-};
-
-/**
- * The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
- */
-export const PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod = {
-  EveryWeek: "Every week",
-  EveryOtherWeek: "Every other week",
-  TwicePerMonth: "Twice per month",
-  Monthly: "Monthly",
-  Quarterly: "Quarterly",
-  Semiannually: "Semiannually",
-  Annually: "Annually",
-} as const;
-/**
- * The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
- */
-export type PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod = ClosedEnum<
-  typeof PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod
+export type PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
 >;
 
-export type PutV1CompaniesCompanyIdPayrollsRequestBody = {
-  employeeCompensations: Array<EmployeeCompensations>;
-  /**
-   * The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
-   */
-  withholdingPayPeriod?:
-    | PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod
-    | undefined;
-  /**
-   * Block regular deductions and contributions for this payroll. Only relevant for off-cycle payrolls.
-   */
-  skipRegularDeductions?: boolean | undefined;
-  /**
-   * Enable taxes to be withheld at the IRS's required rate of 22% for federal income taxes. State income taxes will be taxed at the state's supplemental tax rate. Otherwise, we'll sum the entirety of the employee's wages and withhold taxes on the entire amount at the rate for regular wages. Only relevant for off-cycle payrolls.
-   */
-  fixedWithholdingRate?: boolean | undefined;
-};
-
 export type PutV1CompaniesCompanyIdPayrollsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -168,458 +55,40 @@ export type PutV1CompaniesCompanyIdPayrollsRequest = {
    * The UUID of the payroll
    */
   payrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1CompaniesCompanyIdPayrollsRequestBody;
+  payrollUpdate: PayrollUpdate;
 };
 
 export type PutV1CompaniesCompanyIdPayrollsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * A prepared payroll
+   * successful
    */
   payrollPrepared?: PayrollPrepared | undefined;
 };
 
 /** @internal */
-export const PaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentMethod
-> = z.nativeEnum(PaymentMethod);
+export const PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion);
 
 /** @internal */
-export const PaymentMethod$outboundSchema: z.ZodNativeEnum<
-  typeof PaymentMethod
-> = PaymentMethod$inboundSchema;
+export const PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
+  > = PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PaymentMethod$ {
-  /** @deprecated use `PaymentMethod$inboundSchema` instead. */
-  export const inboundSchema = PaymentMethod$inboundSchema;
-  /** @deprecated use `PaymentMethod$outboundSchema` instead. */
-  export const outboundSchema = PaymentMethod$outboundSchema;
-}
-
-/** @internal */
-export const FixedCompensations$inboundSchema: z.ZodType<
-  FixedCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-  job_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_uuid": "jobUuid",
-  });
-});
-
-/** @internal */
-export type FixedCompensations$Outbound = {
-  name?: string | undefined;
-  amount?: string | undefined;
-  job_uuid?: string | undefined;
-};
-
-/** @internal */
-export const FixedCompensations$outboundSchema: z.ZodType<
-  FixedCompensations$Outbound,
-  z.ZodTypeDef,
-  FixedCompensations
-> = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-  jobUuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    jobUuid: "job_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FixedCompensations$ {
-  /** @deprecated use `FixedCompensations$inboundSchema` instead. */
-  export const inboundSchema = FixedCompensations$inboundSchema;
-  /** @deprecated use `FixedCompensations$outboundSchema` instead. */
-  export const outboundSchema = FixedCompensations$outboundSchema;
-  /** @deprecated use `FixedCompensations$Outbound` instead. */
-  export type Outbound = FixedCompensations$Outbound;
-}
-
-export function fixedCompensationsToJSON(
-  fixedCompensations: FixedCompensations,
-): string {
-  return JSON.stringify(
-    FixedCompensations$outboundSchema.parse(fixedCompensations),
-  );
-}
-
-export function fixedCompensationsFromJSON(
-  jsonString: string,
-): SafeParseResult<FixedCompensations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FixedCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FixedCompensations' from JSON`,
-  );
-}
-
-/** @internal */
-export const HourlyCompensations$inboundSchema: z.ZodType<
-  HourlyCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  job_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_uuid": "jobUuid",
-  });
-});
-
-/** @internal */
-export type HourlyCompensations$Outbound = {
-  name?: string | undefined;
-  hours?: string | undefined;
-  job_uuid?: string | undefined;
-};
-
-/** @internal */
-export const HourlyCompensations$outboundSchema: z.ZodType<
-  HourlyCompensations$Outbound,
-  z.ZodTypeDef,
-  HourlyCompensations
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  jobUuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    jobUuid: "job_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HourlyCompensations$ {
-  /** @deprecated use `HourlyCompensations$inboundSchema` instead. */
-  export const inboundSchema = HourlyCompensations$inboundSchema;
-  /** @deprecated use `HourlyCompensations$outboundSchema` instead. */
-  export const outboundSchema = HourlyCompensations$outboundSchema;
-  /** @deprecated use `HourlyCompensations$Outbound` instead. */
-  export type Outbound = HourlyCompensations$Outbound;
-}
-
-export function hourlyCompensationsToJSON(
-  hourlyCompensations: HourlyCompensations,
-): string {
-  return JSON.stringify(
-    HourlyCompensations$outboundSchema.parse(hourlyCompensations),
-  );
-}
-
-export function hourlyCompensationsFromJSON(
-  jsonString: string,
-): SafeParseResult<HourlyCompensations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => HourlyCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HourlyCompensations' from JSON`,
-  );
-}
-
-/** @internal */
-export const PaidTimeOff$inboundSchema: z.ZodType<
-  PaidTimeOff,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  policy_uuid: z.string().optional(),
-  final_payout_unused_hours_input: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "policy_uuid": "policyUuid",
-    "final_payout_unused_hours_input": "finalPayoutUnusedHoursInput",
-  });
-});
-
-/** @internal */
-export type PaidTimeOff$Outbound = {
-  name?: string | undefined;
-  hours?: string | undefined;
-  policy_uuid?: string | undefined;
-  final_payout_unused_hours_input?: string | undefined;
-};
-
-/** @internal */
-export const PaidTimeOff$outboundSchema: z.ZodType<
-  PaidTimeOff$Outbound,
-  z.ZodTypeDef,
-  PaidTimeOff
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  policyUuid: z.string().optional(),
-  finalPayoutUnusedHoursInput: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    policyUuid: "policy_uuid",
-    finalPayoutUnusedHoursInput: "final_payout_unused_hours_input",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaidTimeOff$ {
-  /** @deprecated use `PaidTimeOff$inboundSchema` instead. */
-  export const inboundSchema = PaidTimeOff$inboundSchema;
-  /** @deprecated use `PaidTimeOff$outboundSchema` instead. */
-  export const outboundSchema = PaidTimeOff$outboundSchema;
-  /** @deprecated use `PaidTimeOff$Outbound` instead. */
-  export type Outbound = PaidTimeOff$Outbound;
-}
-
-export function paidTimeOffToJSON(paidTimeOff: PaidTimeOff): string {
-  return JSON.stringify(PaidTimeOff$outboundSchema.parse(paidTimeOff));
-}
-
-export function paidTimeOffFromJSON(
-  jsonString: string,
-): SafeParseResult<PaidTimeOff, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PaidTimeOff$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PaidTimeOff' from JSON`,
-  );
-}
-
-/** @internal */
-export const EmployeeCompensations$inboundSchema: z.ZodType<
-  EmployeeCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_uuid: z.string().optional(),
-  version: z.string().optional(),
-  excluded: z.boolean().optional(),
-  payment_method: PaymentMethod$inboundSchema.optional(),
-  memo: z.string().optional(),
-  fixed_compensations: z.array(z.lazy(() => FixedCompensations$inboundSchema))
-    .optional(),
-  hourly_compensations: z.array(z.lazy(() => HourlyCompensations$inboundSchema))
-    .optional(),
-  paid_time_off: z.array(z.lazy(() => PaidTimeOff$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_uuid": "employeeUuid",
-    "payment_method": "paymentMethod",
-    "fixed_compensations": "fixedCompensations",
-    "hourly_compensations": "hourlyCompensations",
-    "paid_time_off": "paidTimeOff",
-  });
-});
-
-/** @internal */
-export type EmployeeCompensations$Outbound = {
-  employee_uuid?: string | undefined;
-  version?: string | undefined;
-  excluded?: boolean | undefined;
-  payment_method?: string | undefined;
-  memo?: string | undefined;
-  fixed_compensations?: Array<FixedCompensations$Outbound> | undefined;
-  hourly_compensations?: Array<HourlyCompensations$Outbound> | undefined;
-  paid_time_off?: Array<PaidTimeOff$Outbound> | undefined;
-};
-
-/** @internal */
-export const EmployeeCompensations$outboundSchema: z.ZodType<
-  EmployeeCompensations$Outbound,
-  z.ZodTypeDef,
-  EmployeeCompensations
-> = z.object({
-  employeeUuid: z.string().optional(),
-  version: z.string().optional(),
-  excluded: z.boolean().optional(),
-  paymentMethod: PaymentMethod$outboundSchema.optional(),
-  memo: z.string().optional(),
-  fixedCompensations: z.array(z.lazy(() => FixedCompensations$outboundSchema))
-    .optional(),
-  hourlyCompensations: z.array(z.lazy(() => HourlyCompensations$outboundSchema))
-    .optional(),
-  paidTimeOff: z.array(z.lazy(() => PaidTimeOff$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    paymentMethod: "payment_method",
-    fixedCompensations: "fixed_compensations",
-    hourlyCompensations: "hourly_compensations",
-    paidTimeOff: "paid_time_off",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeCompensations$ {
-  /** @deprecated use `EmployeeCompensations$inboundSchema` instead. */
-  export const inboundSchema = EmployeeCompensations$inboundSchema;
-  /** @deprecated use `EmployeeCompensations$outboundSchema` instead. */
-  export const outboundSchema = EmployeeCompensations$outboundSchema;
-  /** @deprecated use `EmployeeCompensations$Outbound` instead. */
-  export type Outbound = EmployeeCompensations$Outbound;
-}
-
-export function employeeCompensationsToJSON(
-  employeeCompensations: EmployeeCompensations,
-): string {
-  return JSON.stringify(
-    EmployeeCompensations$outboundSchema.parse(employeeCompensations),
-  );
-}
-
-export function employeeCompensationsFromJSON(
-  jsonString: string,
-): SafeParseResult<EmployeeCompensations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeCompensations' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema:
-  z.ZodNativeEnum<typeof PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod> =
-    z.nativeEnum(PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod);
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod> =
-    PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema` instead. */
+export namespace PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema` instead. */
   export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema` instead. */
+    PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema` instead. */
   export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema;
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema:
-  z.ZodType<PutV1CompaniesCompanyIdPayrollsRequestBody, z.ZodTypeDef, unknown> =
-    z.object({
-      employee_compensations: z.array(
-        z.lazy(() => EmployeeCompensations$inboundSchema),
-      ),
-      withholding_pay_period:
-        PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$inboundSchema
-          .optional(),
-      skip_regular_deductions: z.boolean().optional(),
-      fixed_withholding_rate: z.boolean().optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "employee_compensations": "employeeCompensations",
-        "withholding_pay_period": "withholdingPayPeriod",
-        "skip_regular_deductions": "skipRegularDeductions",
-        "fixed_withholding_rate": "fixedWithholdingRate",
-      });
-    });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdPayrollsRequestBody$Outbound = {
-  employee_compensations: Array<EmployeeCompensations$Outbound>;
-  withholding_pay_period?: string | undefined;
-  skip_regular_deductions?: boolean | undefined;
-  fixed_withholding_rate?: boolean | undefined;
-};
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdPayrollsRequestBody
-  > = z.object({
-    employeeCompensations: z.array(
-      z.lazy(() => EmployeeCompensations$outboundSchema),
-    ),
-    withholdingPayPeriod:
-      PutV1CompaniesCompanyIdPayrollsWithholdingPayPeriod$outboundSchema
-        .optional(),
-    skipRegularDeductions: z.boolean().optional(),
-    fixedWithholdingRate: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      employeeCompensations: "employee_compensations",
-      withholdingPayPeriod: "withholding_pay_period",
-      skipRegularDeductions: "skip_regular_deductions",
-      fixedWithholdingRate: "fixed_withholding_rate",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsRequestBody$Outbound` instead. */
-  export type Outbound = PutV1CompaniesCompanyIdPayrollsRequestBody$Outbound;
-}
-
-export function putV1CompaniesCompanyIdPayrollsRequestBodyToJSON(
-  putV1CompaniesCompanyIdPayrollsRequestBody:
-    PutV1CompaniesCompanyIdPayrollsRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema.parse(
-      putV1CompaniesCompanyIdPayrollsRequestBody,
-    ),
-  );
-}
-
-export function putV1CompaniesCompanyIdPayrollsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPayrollsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1CompaniesCompanyIdPayrollsRequestBody' from JSON`,
-  );
+    PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema;
 }
 
 /** @internal */
@@ -628,27 +97,28 @@ export const PutV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version":
+    PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema.default(
+      "2024-04-01",
+    ),
   company_id: z.string(),
   payroll_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
-  RequestBody: z.lazy(() =>
-    PutV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema
-  ),
+  "Payroll-Update": PayrollUpdate$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    "X-Gusto-API-Version": "xGustoAPIVersion",
     "company_id": "companyId",
     "payroll_id": "payrollId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
+    "Payroll-Update": "payrollUpdate",
   });
 });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   payroll_id: string;
-  "X-Gusto-API-Version": string;
-  RequestBody: PutV1CompaniesCompanyIdPayrollsRequestBody$Outbound;
+  "Payroll-Update": PayrollUpdate$Outbound;
 };
 
 /** @internal */
@@ -657,18 +127,18 @@ export const PutV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1CompaniesCompanyIdPayrollsRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
+      .default("2024-04-01"),
   companyId: z.string(),
   payrollId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
-  requestBody: z.lazy(() =>
-    PutV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema
-  ),
+  payrollUpdate: PayrollUpdate$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     companyId: "company_id",
     payrollId: "payroll_id",
-    xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    payrollUpdate: "Payroll-Update",
   });
 });
 

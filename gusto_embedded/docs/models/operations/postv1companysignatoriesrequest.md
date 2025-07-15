@@ -7,6 +7,21 @@ import { PostV1CompanySignatoriesRequest } from "@gusto/embedded-api/models/oper
 
 let value: PostV1CompanySignatoriesRequest = {
   companyUuid: "<id>",
+  requestBody: {
+    ssn: "<value>",
+    firstName: "Bridget",
+    lastName: "Parker",
+    email: "Flavio.Rippin42@yahoo.com",
+    title: "<value>",
+    phone: "534.780.0624 x537",
+    birthday: "<value>",
+    homeAddress: {
+      street1: "<value>",
+      city: "Haleyport",
+      state: "Idaho",
+      zip: "25196",
+    },
+  },
 };
 ```
 

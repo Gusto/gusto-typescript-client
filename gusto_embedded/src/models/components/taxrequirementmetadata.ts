@@ -68,7 +68,7 @@ export type TaxRequirementMetadataOptions = {
   /**
    * A less verbose label that may sometimes be available
    */
-  shortLabel?: string | undefined;
+  shortLabel?: string | null | undefined;
 };
 
 /**
@@ -272,7 +272,7 @@ export const TaxRequirementMetadataOptions$inboundSchema: z.ZodType<
 > = z.object({
   label: z.string(),
   value: z.union([z.string(), z.boolean()]),
-  short_label: z.string().optional(),
+  short_label: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "short_label": "shortLabel",
@@ -283,7 +283,7 @@ export const TaxRequirementMetadataOptions$inboundSchema: z.ZodType<
 export type TaxRequirementMetadataOptions$Outbound = {
   label: string;
   value: string | boolean;
-  short_label?: string | undefined;
+  short_label?: string | null | undefined;
 };
 
 /** @internal */
@@ -294,7 +294,7 @@ export const TaxRequirementMetadataOptions$outboundSchema: z.ZodType<
 > = z.object({
   label: z.string(),
   value: z.union([z.string(), z.boolean()]),
-  shortLabel: z.string().optional(),
+  shortLabel: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     shortLabel: "short_label",

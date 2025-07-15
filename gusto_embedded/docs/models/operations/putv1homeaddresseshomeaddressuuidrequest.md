@@ -7,6 +7,9 @@ import { PutV1HomeAddressesHomeAddressUuidRequest } from "@gusto/embedded-api/mo
 
 let value: PutV1HomeAddressesHomeAddressUuidRequest = {
   homeAddressUuid: "<id>",
+  requestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+  },
 };
 ```
 

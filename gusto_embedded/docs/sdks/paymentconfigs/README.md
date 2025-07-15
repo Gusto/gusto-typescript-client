@@ -10,7 +10,7 @@
 
 ## get
 
-Get payment speed for the company and fast payment limit (1-day is only applicable to partners that opt in).
+Get payment speed configurations for the company and fast payment limit (1-day is only applicable to partners that opt in).
 
 scope: `company_payment_configs:read`
 

@@ -48,7 +48,7 @@ import {
 /**
  * The current onboarding status of the employee
  */
-export const OnboardingStatus = {
+export const EmployeeOnboardingStatus1 = {
   OnboardingCompleted: "onboarding_completed",
   AdminOnboardingIncomplete: "admin_onboarding_incomplete",
   SelfOnboardingPendingInvite: "self_onboarding_pending_invite",
@@ -61,12 +61,14 @@ export const OnboardingStatus = {
 /**
  * The current onboarding status of the employee
  */
-export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
+export type EmployeeOnboardingStatus1 = ClosedEnum<
+  typeof EmployeeOnboardingStatus1
+>;
 
 /**
  * Configuration for an employee onboarding documents during onboarding
  */
-export type OnboardingDocumentsConfig = {
+export type EmployeeOnboardingDocumentsConfig = {
   /**
    * The UUID of the onboarding documents config
    */
@@ -80,19 +82,19 @@ export type OnboardingDocumentsConfig = {
 /**
  * The employee's payment method
  */
-export const PaymentMethod = {
+export const EmployeePaymentMethod1 = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
 /**
  * The employee's payment method
  */
-export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
+export type EmployeePaymentMethod1 = ClosedEnum<typeof EmployeePaymentMethod1>;
 
 /**
  * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
  */
-export const CurrentEmploymentStatus = {
+export const EmployeeCurrentEmploymentStatus = {
   FullTime: "full_time",
   PartTimeUnderTwentyHours: "part_time_under_twenty_hours",
   PartTimeTwentyPlusHours: "part_time_twenty_plus_hours",
@@ -102,8 +104,8 @@ export const CurrentEmploymentStatus = {
 /**
  * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
  */
-export type CurrentEmploymentStatus = ClosedEnum<
-  typeof CurrentEmploymentStatus
+export type EmployeeCurrentEmploymentStatus = ClosedEnum<
+  typeof EmployeeCurrentEmploymentStatus
 >;
 
 /**
@@ -156,11 +158,11 @@ export type Employee = {
   /**
    * The current onboarding status of the employee
    */
-  onboardingStatus?: OnboardingStatus | null | undefined;
+  onboardingStatus?: EmployeeOnboardingStatus1 | null | undefined;
   /**
    * Configuration for an employee onboarding documents during onboarding
    */
-  onboardingDocumentsConfig?: OnboardingDocumentsConfig | undefined;
+  onboardingDocumentsConfig?: EmployeeOnboardingDocumentsConfig | undefined;
   jobs?: Array<Job> | undefined;
   eligiblePaidTimeOff?: Array<PaidTimeOff> | undefined;
   terminations?: Array<Termination> | undefined;
@@ -183,11 +185,11 @@ export type Employee = {
   /**
    * The employee's payment method
    */
-  paymentMethod?: PaymentMethod | undefined;
+  paymentMethod?: EmployeePaymentMethod1 | undefined;
   /**
    * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
    */
-  currentEmploymentStatus?: CurrentEmploymentStatus | null | undefined;
+  currentEmploymentStatus?: EmployeeCurrentEmploymentStatus | null | undefined;
   historical?: boolean | undefined;
   /**
    * The short format code of the employee
@@ -211,29 +213,29 @@ export type Employee = {
 };
 
 /** @internal */
-export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = z.nativeEnum(OnboardingStatus);
+export const EmployeeOnboardingStatus1$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeeOnboardingStatus1
+> = z.nativeEnum(EmployeeOnboardingStatus1);
 
 /** @internal */
-export const OnboardingStatus$outboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = OnboardingStatus$inboundSchema;
+export const EmployeeOnboardingStatus1$outboundSchema: z.ZodNativeEnum<
+  typeof EmployeeOnboardingStatus1
+> = EmployeeOnboardingStatus1$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace OnboardingStatus$ {
-  /** @deprecated use `OnboardingStatus$inboundSchema` instead. */
-  export const inboundSchema = OnboardingStatus$inboundSchema;
-  /** @deprecated use `OnboardingStatus$outboundSchema` instead. */
-  export const outboundSchema = OnboardingStatus$outboundSchema;
+export namespace EmployeeOnboardingStatus1$ {
+  /** @deprecated use `EmployeeOnboardingStatus1$inboundSchema` instead. */
+  export const inboundSchema = EmployeeOnboardingStatus1$inboundSchema;
+  /** @deprecated use `EmployeeOnboardingStatus1$outboundSchema` instead. */
+  export const outboundSchema = EmployeeOnboardingStatus1$outboundSchema;
 }
 
 /** @internal */
-export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
-  OnboardingDocumentsConfig,
+export const EmployeeOnboardingDocumentsConfig$inboundSchema: z.ZodType<
+  EmployeeOnboardingDocumentsConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -246,16 +248,16 @@ export const OnboardingDocumentsConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type OnboardingDocumentsConfig$Outbound = {
+export type EmployeeOnboardingDocumentsConfig$Outbound = {
   uuid?: string | null | undefined;
   i9_document?: boolean | undefined;
 };
 
 /** @internal */
-export const OnboardingDocumentsConfig$outboundSchema: z.ZodType<
-  OnboardingDocumentsConfig$Outbound,
+export const EmployeeOnboardingDocumentsConfig$outboundSchema: z.ZodType<
+  EmployeeOnboardingDocumentsConfig$Outbound,
   z.ZodTypeDef,
-  OnboardingDocumentsConfig
+  EmployeeOnboardingDocumentsConfig
 > = z.object({
   uuid: z.nullable(z.string()).optional(),
   i9Document: z.boolean().optional(),
@@ -269,73 +271,76 @@ export const OnboardingDocumentsConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace OnboardingDocumentsConfig$ {
-  /** @deprecated use `OnboardingDocumentsConfig$inboundSchema` instead. */
-  export const inboundSchema = OnboardingDocumentsConfig$inboundSchema;
-  /** @deprecated use `OnboardingDocumentsConfig$outboundSchema` instead. */
-  export const outboundSchema = OnboardingDocumentsConfig$outboundSchema;
-  /** @deprecated use `OnboardingDocumentsConfig$Outbound` instead. */
-  export type Outbound = OnboardingDocumentsConfig$Outbound;
+export namespace EmployeeOnboardingDocumentsConfig$ {
+  /** @deprecated use `EmployeeOnboardingDocumentsConfig$inboundSchema` instead. */
+  export const inboundSchema = EmployeeOnboardingDocumentsConfig$inboundSchema;
+  /** @deprecated use `EmployeeOnboardingDocumentsConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    EmployeeOnboardingDocumentsConfig$outboundSchema;
+  /** @deprecated use `EmployeeOnboardingDocumentsConfig$Outbound` instead. */
+  export type Outbound = EmployeeOnboardingDocumentsConfig$Outbound;
 }
 
-export function onboardingDocumentsConfigToJSON(
-  onboardingDocumentsConfig: OnboardingDocumentsConfig,
+export function employeeOnboardingDocumentsConfigToJSON(
+  employeeOnboardingDocumentsConfig: EmployeeOnboardingDocumentsConfig,
 ): string {
   return JSON.stringify(
-    OnboardingDocumentsConfig$outboundSchema.parse(onboardingDocumentsConfig),
+    EmployeeOnboardingDocumentsConfig$outboundSchema.parse(
+      employeeOnboardingDocumentsConfig,
+    ),
   );
 }
 
-export function onboardingDocumentsConfigFromJSON(
+export function employeeOnboardingDocumentsConfigFromJSON(
   jsonString: string,
-): SafeParseResult<OnboardingDocumentsConfig, SDKValidationError> {
+): SafeParseResult<EmployeeOnboardingDocumentsConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => OnboardingDocumentsConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OnboardingDocumentsConfig' from JSON`,
+    (x) => EmployeeOnboardingDocumentsConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeeOnboardingDocumentsConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const PaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentMethod
-> = z.nativeEnum(PaymentMethod);
+export const EmployeePaymentMethod1$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeePaymentMethod1
+> = z.nativeEnum(EmployeePaymentMethod1);
 
 /** @internal */
-export const PaymentMethod$outboundSchema: z.ZodNativeEnum<
-  typeof PaymentMethod
-> = PaymentMethod$inboundSchema;
+export const EmployeePaymentMethod1$outboundSchema: z.ZodNativeEnum<
+  typeof EmployeePaymentMethod1
+> = EmployeePaymentMethod1$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PaymentMethod$ {
-  /** @deprecated use `PaymentMethod$inboundSchema` instead. */
-  export const inboundSchema = PaymentMethod$inboundSchema;
-  /** @deprecated use `PaymentMethod$outboundSchema` instead. */
-  export const outboundSchema = PaymentMethod$outboundSchema;
+export namespace EmployeePaymentMethod1$ {
+  /** @deprecated use `EmployeePaymentMethod1$inboundSchema` instead. */
+  export const inboundSchema = EmployeePaymentMethod1$inboundSchema;
+  /** @deprecated use `EmployeePaymentMethod1$outboundSchema` instead. */
+  export const outboundSchema = EmployeePaymentMethod1$outboundSchema;
 }
 
 /** @internal */
-export const CurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CurrentEmploymentStatus
-> = z.nativeEnum(CurrentEmploymentStatus);
+export const EmployeeCurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeeCurrentEmploymentStatus
+> = z.nativeEnum(EmployeeCurrentEmploymentStatus);
 
 /** @internal */
-export const CurrentEmploymentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof CurrentEmploymentStatus
-> = CurrentEmploymentStatus$inboundSchema;
+export const EmployeeCurrentEmploymentStatus$outboundSchema: z.ZodNativeEnum<
+  typeof EmployeeCurrentEmploymentStatus
+> = EmployeeCurrentEmploymentStatus$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CurrentEmploymentStatus$ {
-  /** @deprecated use `CurrentEmploymentStatus$inboundSchema` instead. */
-  export const inboundSchema = CurrentEmploymentStatus$inboundSchema;
-  /** @deprecated use `CurrentEmploymentStatus$outboundSchema` instead. */
-  export const outboundSchema = CurrentEmploymentStatus$outboundSchema;
+export namespace EmployeeCurrentEmploymentStatus$ {
+  /** @deprecated use `EmployeeCurrentEmploymentStatus$inboundSchema` instead. */
+  export const inboundSchema = EmployeeCurrentEmploymentStatus$inboundSchema;
+  /** @deprecated use `EmployeeCurrentEmploymentStatus$outboundSchema` instead. */
+  export const outboundSchema = EmployeeCurrentEmploymentStatus$outboundSchema;
 }
 
 /** @internal */
@@ -357,9 +362,10 @@ export const Employee$inboundSchema: z.ZodType<
   two_percent_shareholder: z.nullable(z.boolean()).optional(),
   work_email: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
-  onboarding_status: z.nullable(OnboardingStatus$inboundSchema).optional(),
+  onboarding_status: z.nullable(EmployeeOnboardingStatus1$inboundSchema)
+    .optional(),
   onboarding_documents_config: z.lazy(() =>
-    OnboardingDocumentsConfig$inboundSchema
+    EmployeeOnboardingDocumentsConfig$inboundSchema
   ).optional(),
   jobs: z.array(Job$inboundSchema).optional(),
   eligible_paid_time_off: z.array(PaidTimeOff$inboundSchema).optional(),
@@ -371,9 +377,10 @@ export const Employee$inboundSchema: z.ZodType<
   ssn: z.string().optional(),
   phone: z.nullable(z.string()).optional(),
   preferred_first_name: z.nullable(z.string()).optional(),
-  payment_method: PaymentMethod$inboundSchema.default("Check"),
-  current_employment_status: z.nullable(CurrentEmploymentStatus$inboundSchema)
-    .optional(),
+  payment_method: EmployeePaymentMethod1$inboundSchema.default("Check"),
+  current_employment_status: z.nullable(
+    EmployeeCurrentEmploymentStatus$inboundSchema,
+  ).optional(),
   historical: z.boolean().optional(),
   employee_code: z.string().optional(),
   department_uuid: z.nullable(z.string()).optional(),
@@ -425,7 +432,9 @@ export type Employee$Outbound = {
   work_email?: string | null | undefined;
   onboarded?: boolean | undefined;
   onboarding_status?: string | null | undefined;
-  onboarding_documents_config?: OnboardingDocumentsConfig$Outbound | undefined;
+  onboarding_documents_config?:
+    | EmployeeOnboardingDocumentsConfig$Outbound
+    | undefined;
   jobs?: Array<Job$Outbound> | undefined;
   eligible_paid_time_off?: Array<PaidTimeOff$Outbound> | undefined;
   terminations?: Array<Termination$Outbound> | undefined;
@@ -467,9 +476,10 @@ export const Employee$outboundSchema: z.ZodType<
   twoPercentShareholder: z.nullable(z.boolean()).optional(),
   workEmail: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
-  onboardingStatus: z.nullable(OnboardingStatus$outboundSchema).optional(),
+  onboardingStatus: z.nullable(EmployeeOnboardingStatus1$outboundSchema)
+    .optional(),
   onboardingDocumentsConfig: z.lazy(() =>
-    OnboardingDocumentsConfig$outboundSchema
+    EmployeeOnboardingDocumentsConfig$outboundSchema
   ).optional(),
   jobs: z.array(Job$outboundSchema).optional(),
   eligiblePaidTimeOff: z.array(PaidTimeOff$outboundSchema).optional(),
@@ -481,9 +491,10 @@ export const Employee$outboundSchema: z.ZodType<
   ssn: z.string().optional(),
   phone: z.nullable(z.string()).optional(),
   preferredFirstName: z.nullable(z.string()).optional(),
-  paymentMethod: PaymentMethod$outboundSchema.default("Check"),
-  currentEmploymentStatus: z.nullable(CurrentEmploymentStatus$outboundSchema)
-    .optional(),
+  paymentMethod: EmployeePaymentMethod1$outboundSchema.default("Check"),
+  currentEmploymentStatus: z.nullable(
+    EmployeeCurrentEmploymentStatus$outboundSchema,
+  ).optional(),
   historical: z.boolean().optional(),
   employeeCode: z.string().optional(),
   departmentUuid: z.nullable(z.string()).optional(),

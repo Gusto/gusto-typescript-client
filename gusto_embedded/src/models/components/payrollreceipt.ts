@@ -60,7 +60,7 @@ export type PayrollReceiptPaymentMethod = ClosedEnum<
   typeof PayrollReceiptPaymentMethod
 >;
 
-export type EmployeeCompensations = {
+export type PayrollReceiptEmployeeCompensations = {
   /**
    * The UUID of the employee.
    */
@@ -175,7 +175,9 @@ export type PayrollReceipt = {
   /**
    * An array of employee compensations and withholdings for this payroll
    */
-  employeeCompensations?: Array<EmployeeCompensations> | undefined;
+  employeeCompensations?:
+    | Array<PayrollReceiptEmployeeCompensations>
+    | undefined;
   /**
    * The licensed payroll processor
    */
@@ -336,8 +338,8 @@ export namespace PayrollReceiptPaymentMethod$ {
 }
 
 /** @internal */
-export const EmployeeCompensations$inboundSchema: z.ZodType<
-  EmployeeCompensations,
+export const PayrollReceiptEmployeeCompensations$inboundSchema: z.ZodType<
+  PayrollReceiptEmployeeCompensations,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -365,7 +367,7 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type EmployeeCompensations$Outbound = {
+export type PayrollReceiptEmployeeCompensations$Outbound = {
   employee_uuid?: string | undefined;
   employee_first_name?: string | undefined;
   employee_last_name?: string | undefined;
@@ -378,10 +380,10 @@ export type EmployeeCompensations$Outbound = {
 };
 
 /** @internal */
-export const EmployeeCompensations$outboundSchema: z.ZodType<
-  EmployeeCompensations$Outbound,
+export const PayrollReceiptEmployeeCompensations$outboundSchema: z.ZodType<
+  PayrollReceiptEmployeeCompensations$Outbound,
   z.ZodTypeDef,
-  EmployeeCompensations
+  PayrollReceiptEmployeeCompensations
 > = z.object({
   employeeUuid: z.string().optional(),
   employeeFirstName: z.string().optional(),
@@ -410,30 +412,35 @@ export const EmployeeCompensations$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace EmployeeCompensations$ {
-  /** @deprecated use `EmployeeCompensations$inboundSchema` instead. */
-  export const inboundSchema = EmployeeCompensations$inboundSchema;
-  /** @deprecated use `EmployeeCompensations$outboundSchema` instead. */
-  export const outboundSchema = EmployeeCompensations$outboundSchema;
-  /** @deprecated use `EmployeeCompensations$Outbound` instead. */
-  export type Outbound = EmployeeCompensations$Outbound;
+export namespace PayrollReceiptEmployeeCompensations$ {
+  /** @deprecated use `PayrollReceiptEmployeeCompensations$inboundSchema` instead. */
+  export const inboundSchema =
+    PayrollReceiptEmployeeCompensations$inboundSchema;
+  /** @deprecated use `PayrollReceiptEmployeeCompensations$outboundSchema` instead. */
+  export const outboundSchema =
+    PayrollReceiptEmployeeCompensations$outboundSchema;
+  /** @deprecated use `PayrollReceiptEmployeeCompensations$Outbound` instead. */
+  export type Outbound = PayrollReceiptEmployeeCompensations$Outbound;
 }
 
-export function employeeCompensationsToJSON(
-  employeeCompensations: EmployeeCompensations,
+export function payrollReceiptEmployeeCompensationsToJSON(
+  payrollReceiptEmployeeCompensations: PayrollReceiptEmployeeCompensations,
 ): string {
   return JSON.stringify(
-    EmployeeCompensations$outboundSchema.parse(employeeCompensations),
+    PayrollReceiptEmployeeCompensations$outboundSchema.parse(
+      payrollReceiptEmployeeCompensations,
+    ),
   );
 }
 
-export function employeeCompensationsFromJSON(
+export function payrollReceiptEmployeeCompensationsFromJSON(
   jsonString: string,
-): SafeParseResult<EmployeeCompensations, SDKValidationError> {
+): SafeParseResult<PayrollReceiptEmployeeCompensations, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => EmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeCompensations' from JSON`,
+    (x) =>
+      PayrollReceiptEmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollReceiptEmployeeCompensations' from JSON`,
   );
 }
 
@@ -531,7 +538,7 @@ export const PayrollReceipt$inboundSchema: z.ZodType<
   totals: z.lazy(() => Totals$inboundSchema).optional(),
   taxes: z.array(z.lazy(() => PayrollReceiptTaxes$inboundSchema)).optional(),
   employee_compensations: z.array(
-    z.lazy(() => EmployeeCompensations$inboundSchema),
+    z.lazy(() => PayrollReceiptEmployeeCompensations$inboundSchema),
   ).optional(),
   licensee: z.lazy(() => Licensee$inboundSchema).optional(),
 }).transform((v) => {
@@ -563,7 +570,9 @@ export type PayrollReceipt$Outbound = {
   liability_of_licensee?: string | undefined;
   totals?: Totals$Outbound | undefined;
   taxes?: Array<PayrollReceiptTaxes$Outbound> | undefined;
-  employee_compensations?: Array<EmployeeCompensations$Outbound> | undefined;
+  employee_compensations?:
+    | Array<PayrollReceiptEmployeeCompensations$Outbound>
+    | undefined;
   licensee?: Licensee$Outbound | undefined;
 };
 
@@ -586,7 +595,7 @@ export const PayrollReceipt$outboundSchema: z.ZodType<
   totals: z.lazy(() => Totals$outboundSchema).optional(),
   taxes: z.array(z.lazy(() => PayrollReceiptTaxes$outboundSchema)).optional(),
   employeeCompensations: z.array(
-    z.lazy(() => EmployeeCompensations$outboundSchema),
+    z.lazy(() => PayrollReceiptEmployeeCompensations$outboundSchema),
   ).optional(),
   licensee: z.lazy(() => Licensee$outboundSchema).optional(),
 }).transform((v) => {

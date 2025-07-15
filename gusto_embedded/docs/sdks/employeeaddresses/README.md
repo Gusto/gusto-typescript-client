@@ -135,6 +135,7 @@ scope: `employees:write`
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -144,10 +145,13 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.create({
     employeeId: "<id>",
     requestBody: {
-      street1: "500 3rd Street",
+      street1: "300 3rd Street",
+      street2: null,
       city: "San Francisco",
       state: "CA",
       zip: "94107",
+      effectiveDate: new RFCDate("2021-01-01"),
+      courtesyWithholding: true,
     },
   });
 
@@ -164,6 +168,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeeAddressesCreate } from "@gusto/embedded-api/funcs/employeeAddressesCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -175,10 +180,13 @@ async function run() {
   const res = await employeeAddressesCreate(gustoEmbedded, {
     employeeId: "<id>",
     requestBody: {
-      street1: "500 3rd Street",
+      street1: "300 3rd Street",
+      street2: null,
       city: "San Francisco",
       state: "CA",
       zip: "94107",
+      effectiveDate: new RFCDate("2021-01-01"),
+      courtesyWithholding: true,
     },
   });
   if (res.ok) {
@@ -348,6 +356,7 @@ scope: `employees:write`
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -357,12 +366,14 @@ async function run() {
   const result = await gustoEmbedded.employeeAddresses.update({
     homeAddressUuid: "<id>",
     requestBody: {
-      version: "6c3c23e4cc840bd3f1416f72b5380eff",
-      street1: "600 4th Street",
-      city: "Miami",
-      state: "FL",
-      zip: "33173",
-      courtesyWithholding: false,
+      version: "fe75bd065ff48b91c35fe8ff842f986c",
+      street1: "300 3rd Street",
+      street2: null,
+      city: "San Francisco",
+      state: "CA",
+      zip: "94107",
+      effectiveDate: new RFCDate("2021-01-01"),
+      courtesyWithholding: true,
     },
   });
 
@@ -379,6 +390,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { employeeAddressesUpdate } from "@gusto/embedded-api/funcs/employeeAddressesUpdate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -390,12 +402,14 @@ async function run() {
   const res = await employeeAddressesUpdate(gustoEmbedded, {
     homeAddressUuid: "<id>",
     requestBody: {
-      version: "6c3c23e4cc840bd3f1416f72b5380eff",
-      street1: "600 4th Street",
-      city: "Miami",
-      state: "FL",
-      zip: "33173",
-      courtesyWithholding: false,
+      version: "fe75bd065ff48b91c35fe8ff842f986c",
+      street1: "300 3rd Street",
+      street2: null,
+      city: "San Francisco",
+      state: "CA",
+      zip: "94107",
+      effectiveDate: new RFCDate("2021-01-01"),
+      courtesyWithholding: true,
     },
   });
   if (res.ok) {

@@ -112,15 +112,15 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
 
 export type PostV1CompaniesCompanyIdPayrollsRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
   requestBody?: PostV1CompaniesCompanyIdPayrollsRequestBody | undefined;
 };
 
@@ -325,25 +325,25 @@ export const PostV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  company_id: z.string(),
   "X-Gusto-API-Version":
     PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema
       .default("2024-04-01"),
+  company_id: z.string(),
   RequestBody: z.lazy(() =>
     PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "company_id": "companyId",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "company_id": "companyId",
     "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPayrollsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   RequestBody?:
     | PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound
     | undefined;
@@ -355,17 +355,17 @@ export const PostV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompaniesCompanyIdPayrollsRequest
 > = z.object({
-  companyId: z.string(),
   xGustoAPIVersion:
     PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
       .default("2024-04-01"),
+  companyId: z.string(),
   requestBody: z.lazy(() =>
     PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
+    companyId: "company_id",
     requestBody: "RequestBody",
   });
 });

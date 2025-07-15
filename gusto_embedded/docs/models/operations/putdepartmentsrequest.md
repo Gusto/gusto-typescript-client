@@ -7,6 +7,9 @@ import { PutDepartmentsRequest } from "@gusto/embedded-api/models/operations/put
 
 let value: PutDepartmentsRequest = {
   departmentUuid: "<id>",
+  requestBody: {
+    version: "<value>",
+  },
 };
 ```
 

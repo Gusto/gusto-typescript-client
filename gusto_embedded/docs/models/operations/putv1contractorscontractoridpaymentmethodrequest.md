@@ -7,6 +7,10 @@ import { PutV1ContractorsContractorIdPaymentMethodRequest } from "@gusto/embedde
 
 let value: PutV1ContractorsContractorIdPaymentMethodRequest = {
   contractorUuid: "<id>",
+  requestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    type: "Check",
+  },
 };
 ```
 

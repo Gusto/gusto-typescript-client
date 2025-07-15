@@ -7,6 +7,11 @@ import { PostCompaniesCompanyUuidTimeOffPoliciesRequest } from "@gusto/embedded-
 
 let value: PostCompaniesCompanyUuidTimeOffPoliciesRequest = {
   companyUuid: "<id>",
+  requestBody: {
+    name: "<value>",
+    policyType: "<value>",
+    accrualMethod: "per_calendar_year",
+  },
 };
 ```
 

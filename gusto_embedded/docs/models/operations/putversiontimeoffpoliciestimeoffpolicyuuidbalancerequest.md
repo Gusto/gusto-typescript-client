@@ -7,6 +7,7 @@ import { PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest } from "@gusto
 
 let value: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest = {
   timeOffPolicyUuid: "<id>",
+  requestBody: {},
 };
 ```
 

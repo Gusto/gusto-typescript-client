@@ -11,6 +11,8 @@
 * [get](#get) - Fetch a contractor payment group
 * [delete](#delete) - Cancel a contractor payment group
 * [fund](#fund) - Fund a contractor payment group [DEMO]
+* [getV1ContractorPaymentGroupsIdPartnerDisbursements](#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
+* [patchV1ContractorPaymentGroupsIdPartnerDisbursements](#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
 
 ## create
 
@@ -642,4 +644,215 @@ import {
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## getV1ContractorPaymentGroupsIdPartnerDisbursements
+
+Get partner disbursements for a specific contractor payment group.
+
+scope: `partner_disbursements:read`
+
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPaymentGroups.getV1ContractorPaymentGroupsIdPartnerDisbursements({
+    id: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements } from "@gusto/embedded-api/funcs/contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(gustoEmbedded, {
+    id: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+  useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+  invalidateAllContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+} from "@gusto/embedded-api/react-query/contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest](../../models/operations/getv1contractorpaymentgroupsidpartnerdisbursementsrequest.md)                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse](../../models/operations/getv1contractorpaymentgroupsidpartnerdisbursementsresponse.md)\>**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+
+## patchV1ContractorPaymentGroupsIdPartnerDisbursements
+
+Update partner disbursements for a specific contractor payment group.
+
+scope: `partner_disbursements:write`
+
+
+### Example Usage
+
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPaymentGroups.patchV1ContractorPaymentGroupsIdPartnerDisbursements({
+    id: "<id>",
+    requestBody: {
+      disbursements: [
+        {
+          contractorPaymentUuid: "9f8e7d6c-5b4a-3928-1c2d-3e4f5a6b7c8d",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements } from "@gusto/embedded-api/funcs/contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements(gustoEmbedded, {
+    id: "<id>",
+    requestBody: {
+      disbursements: [
+        {
+          contractorPaymentUuid: "9f8e7d6c-5b4a-3928-1c2d-3e4f5a6b7c8d",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutation
+} from "@gusto/embedded-api/react-query/contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest](../../models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsrequest.md)               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse](../../models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsresponse.md)\>**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

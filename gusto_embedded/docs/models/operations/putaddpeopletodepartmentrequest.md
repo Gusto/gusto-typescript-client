@@ -7,6 +7,7 @@ import { PutAddPeopleToDepartmentRequest } from "@gusto/embedded-api/models/oper
 
 let value: PutAddPeopleToDepartmentRequest = {
   departmentUuid: "<id>",
+  requestBody: {},
 };
 ```
 

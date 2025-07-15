@@ -7,11 +7,11 @@ The breakdown of the report. Use 'default' for no split.
 ```typescript
 import { Aggregation } from "@gusto/embedded-api/models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
 
-let value: Aggregation = "job";
+let value: Aggregation = "department";
 ```
 
 ## Values
 
 ```typescript
-"default" | "job" | "department"
+"default" | "job" | "department" | "integration"
 ```

@@ -7,6 +7,11 @@ import { PutWireInRequestsWireInRequestUuidRequest } from "@gusto/embedded-api/m
 
 let value: PutWireInRequestsWireInRequestUuidRequest = {
   wireInRequestUuid: "<id>",
+  requestBody: {
+    dateSent: "<value>",
+    bankName: "<value>",
+    amountSent: "<value>",
+  },
 };
 ```
 

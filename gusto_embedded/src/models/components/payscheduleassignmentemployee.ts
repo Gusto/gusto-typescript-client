@@ -16,7 +16,7 @@ export type PayScheduleAssignmentEmployee = {
   /**
    * The employee's pay schedule UUID.
    */
-  payScheduleUuid?: string | undefined;
+  payScheduleUuid?: string | null | undefined;
 };
 
 /** @internal */
@@ -26,7 +26,7 @@ export const PayScheduleAssignmentEmployee$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_uuid: z.string().optional(),
-  pay_schedule_uuid: z.string().optional(),
+  pay_schedule_uuid: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -37,7 +37,7 @@ export const PayScheduleAssignmentEmployee$inboundSchema: z.ZodType<
 /** @internal */
 export type PayScheduleAssignmentEmployee$Outbound = {
   employee_uuid?: string | undefined;
-  pay_schedule_uuid?: string | undefined;
+  pay_schedule_uuid?: string | null | undefined;
 };
 
 /** @internal */
@@ -47,7 +47,7 @@ export const PayScheduleAssignmentEmployee$outboundSchema: z.ZodType<
   PayScheduleAssignmentEmployee
 > = z.object({
   employeeUuid: z.string().optional(),
-  payScheduleUuid: z.string().optional(),
+  payScheduleUuid: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",

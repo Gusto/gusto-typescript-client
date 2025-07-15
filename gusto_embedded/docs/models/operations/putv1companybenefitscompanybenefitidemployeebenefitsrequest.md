@@ -7,6 +7,13 @@ import { PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest } from "@gu
 
 let value: PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest = {
   companyBenefitId: "<id>",
+  requestBody: {
+    employeeBenefits: [
+      {
+        employeeUuid: "<id>",
+      },
+    ],
+  },
 };
 ```
 
