@@ -5,15 +5,21 @@ The "answer"
 
 ## Supported Types
 
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+
 ### `string`
 
 ```typescript
 const value: string = "<value>";
 ```
 
-### `boolean`
+### `number`
 
 ```typescript
-const value: boolean = true;
+const value: number = 1284.03;
 ```
 

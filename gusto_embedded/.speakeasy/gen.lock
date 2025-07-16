@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 9897439106079b55448df7137b324ff8
+  docChecksum: 3cd0c2220953704f5f13982f80fc83d6
   docVersion: "2024-04-01"
   speakeasyVersion: 1.582.0
   generationVersion: 2.657.1
-  releaseVersion: 0.6.5
-  configChecksum: 57c4a5de50d4bc0327415bcc9d41585b
+  releaseVersion: 0.6.6
+  configChecksum: 0306c134f6231d987a53f4c2fab9e9a0
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
