@@ -21,12 +21,6 @@ export const ReconcileTaxMethod = {
  */
 export type ReconcileTaxMethod = ClosedEnum<typeof ReconcileTaxMethod>;
 
-/**
- * Describes the taxes which are refundable to the company for this suspension. These may be refunded, or paid
- *
- * @remarks
- * by Gusto, depending on the value in `reconcile_tax_method`.
- */
 export type TaxRefunds = {
   /**
    * Dollar amount.
@@ -57,7 +51,7 @@ export type CompanySuspension = {
   /**
    * Which competitor the company is joining instead. Only required if `reason` is `'switching_provider'`.
    */
-  leavingFor?: string | undefined;
+  leavingFor?: string | null | undefined;
   /**
    * Explanation for why the company's account was suspended.
    */
@@ -67,30 +61,27 @@ export type CompanySuspension = {
    */
   reconcileTaxMethod?: ReconcileTaxMethod | undefined;
   /**
-   * Should Gusto file quarterly tax forms on behalf of the company? The correct answer can depend on why the company
+   * Should Gusto file quarterly tax forms on behalf of the company? The correct answer can depend on why the company is suspending their account, and how taxes are being reconciled.
    *
    * @remarks
-   * is suspending their account, and how taxes are being reconciled.
    */
   fileQuarterlyForms?: boolean | undefined;
   /**
-   * Should Gusto file yearly tax forms on behalf of the company? The correct answer can depend on why the company
+   * Should Gusto file yearly tax forms on behalf of the company? The correct answer can depend on why the company is suspending their account, and how taxes are being reconciled.
    *
    * @remarks
-   * is suspending their account, and how taxes are being reconciled.
    */
   fileYearlyForms?: boolean | undefined;
   /**
-   * User-supplied comments describing why then are suspending their account.
+   * User-supplied comments describing why they are suspending their account.
    */
-  comments?: string | undefined;
+  comments?: string | null | undefined;
   /**
-   * Describes the taxes which are refundable to the company for this suspension. These may be refunded, or paid
+   * Describes the taxes which are refundable to the company for this suspension. These may be refunded or paid by Gusto depending on the value in `reconcile_tax_method`.
    *
    * @remarks
-   * by Gusto, depending on the value in `reconcile_tax_method`.
    */
-  taxRefunds?: TaxRefunds | undefined;
+  taxRefunds?: Array<TaxRefunds> | undefined;
 };
 
 /** @internal */
@@ -176,13 +167,13 @@ export const CompanySuspension$inboundSchema: z.ZodType<
   uuid: z.string().optional(),
   company_uuid: z.string().optional(),
   effective_date: z.string().optional(),
-  leaving_for: z.string().optional(),
+  leaving_for: z.nullable(z.string()).optional(),
   reason: z.string().optional(),
   reconcile_tax_method: ReconcileTaxMethod$inboundSchema.optional(),
   file_quarterly_forms: z.boolean().optional(),
   file_yearly_forms: z.boolean().optional(),
-  comments: z.string().optional(),
-  tax_refunds: z.lazy(() => TaxRefunds$inboundSchema).optional(),
+  comments: z.nullable(z.string()).optional(),
+  tax_refunds: z.array(z.lazy(() => TaxRefunds$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -200,13 +191,13 @@ export type CompanySuspension$Outbound = {
   uuid?: string | undefined;
   company_uuid?: string | undefined;
   effective_date?: string | undefined;
-  leaving_for?: string | undefined;
+  leaving_for?: string | null | undefined;
   reason?: string | undefined;
   reconcile_tax_method?: string | undefined;
   file_quarterly_forms?: boolean | undefined;
   file_yearly_forms?: boolean | undefined;
-  comments?: string | undefined;
-  tax_refunds?: TaxRefunds$Outbound | undefined;
+  comments?: string | null | undefined;
+  tax_refunds?: Array<TaxRefunds$Outbound> | undefined;
 };
 
 /** @internal */
@@ -218,13 +209,13 @@ export const CompanySuspension$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
   companyUuid: z.string().optional(),
   effectiveDate: z.string().optional(),
-  leavingFor: z.string().optional(),
+  leavingFor: z.nullable(z.string()).optional(),
   reason: z.string().optional(),
   reconcileTaxMethod: ReconcileTaxMethod$outboundSchema.optional(),
   fileQuarterlyForms: z.boolean().optional(),
   fileYearlyForms: z.boolean().optional(),
-  comments: z.string().optional(),
-  taxRefunds: z.lazy(() => TaxRefunds$outboundSchema).optional(),
+  comments: z.nullable(z.string()).optional(),
+  taxRefunds: z.array(z.lazy(() => TaxRefunds$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

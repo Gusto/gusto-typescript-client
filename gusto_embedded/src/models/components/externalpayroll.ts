@@ -28,7 +28,7 @@ export type Earnings = {
   earningId?: number | undefined;
 };
 
-export type ExternalPayrollBenefits = {
+export type Benefits = {
   benefitId?: number | undefined;
   companyContributionAmount?: string | undefined;
   employeeDeductionAmount?: string | undefined;
@@ -42,7 +42,7 @@ export type ExternalPayrollTaxes = {
 export type ExternalPayrollItems = {
   employeeUuid?: string | undefined;
   earnings?: Array<Earnings> | undefined;
-  benefits?: Array<ExternalPayrollBenefits> | undefined;
+  benefits?: Array<Benefits> | undefined;
   taxes?: Array<ExternalPayrollTaxes> | undefined;
 };
 
@@ -222,8 +222,8 @@ export function earningsFromJSON(
 }
 
 /** @internal */
-export const ExternalPayrollBenefits$inboundSchema: z.ZodType<
-  ExternalPayrollBenefits,
+export const Benefits$inboundSchema: z.ZodType<
+  Benefits,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -239,17 +239,17 @@ export const ExternalPayrollBenefits$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ExternalPayrollBenefits$Outbound = {
+export type Benefits$Outbound = {
   benefit_id?: number | undefined;
   company_contribution_amount?: string | undefined;
   employee_deduction_amount?: string | undefined;
 };
 
 /** @internal */
-export const ExternalPayrollBenefits$outboundSchema: z.ZodType<
-  ExternalPayrollBenefits$Outbound,
+export const Benefits$outboundSchema: z.ZodType<
+  Benefits$Outbound,
   z.ZodTypeDef,
-  ExternalPayrollBenefits
+  Benefits
 > = z.object({
   benefitId: z.number().int().optional(),
   companyContributionAmount: z.string().optional(),
@@ -266,30 +266,26 @@ export const ExternalPayrollBenefits$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ExternalPayrollBenefits$ {
-  /** @deprecated use `ExternalPayrollBenefits$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollBenefits$inboundSchema;
-  /** @deprecated use `ExternalPayrollBenefits$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollBenefits$outboundSchema;
-  /** @deprecated use `ExternalPayrollBenefits$Outbound` instead. */
-  export type Outbound = ExternalPayrollBenefits$Outbound;
+export namespace Benefits$ {
+  /** @deprecated use `Benefits$inboundSchema` instead. */
+  export const inboundSchema = Benefits$inboundSchema;
+  /** @deprecated use `Benefits$outboundSchema` instead. */
+  export const outboundSchema = Benefits$outboundSchema;
+  /** @deprecated use `Benefits$Outbound` instead. */
+  export type Outbound = Benefits$Outbound;
 }
 
-export function externalPayrollBenefitsToJSON(
-  externalPayrollBenefits: ExternalPayrollBenefits,
-): string {
-  return JSON.stringify(
-    ExternalPayrollBenefits$outboundSchema.parse(externalPayrollBenefits),
-  );
+export function benefitsToJSON(benefits: Benefits): string {
+  return JSON.stringify(Benefits$outboundSchema.parse(benefits));
 }
 
-export function externalPayrollBenefitsFromJSON(
+export function benefitsFromJSON(
   jsonString: string,
-): SafeParseResult<ExternalPayrollBenefits, SDKValidationError> {
+): SafeParseResult<Benefits, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ExternalPayrollBenefits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExternalPayrollBenefits' from JSON`,
+    (x) => Benefits$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Benefits' from JSON`,
   );
 }
 
@@ -366,8 +362,7 @@ export const ExternalPayrollItems$inboundSchema: z.ZodType<
 > = z.object({
   employee_uuid: z.string().optional(),
   earnings: z.array(z.lazy(() => Earnings$inboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => ExternalPayrollBenefits$inboundSchema))
-    .optional(),
+  benefits: z.array(z.lazy(() => Benefits$inboundSchema)).optional(),
   taxes: z.array(z.lazy(() => ExternalPayrollTaxes$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -379,7 +374,7 @@ export const ExternalPayrollItems$inboundSchema: z.ZodType<
 export type ExternalPayrollItems$Outbound = {
   employee_uuid?: string | undefined;
   earnings?: Array<Earnings$Outbound> | undefined;
-  benefits?: Array<ExternalPayrollBenefits$Outbound> | undefined;
+  benefits?: Array<Benefits$Outbound> | undefined;
   taxes?: Array<ExternalPayrollTaxes$Outbound> | undefined;
 };
 
@@ -391,8 +386,7 @@ export const ExternalPayrollItems$outboundSchema: z.ZodType<
 > = z.object({
   employeeUuid: z.string().optional(),
   earnings: z.array(z.lazy(() => Earnings$outboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => ExternalPayrollBenefits$outboundSchema))
-    .optional(),
+  benefits: z.array(z.lazy(() => Benefits$outboundSchema)).optional(),
   taxes: z.array(z.lazy(() => ExternalPayrollTaxes$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {

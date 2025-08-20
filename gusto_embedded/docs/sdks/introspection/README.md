@@ -14,6 +14,7 @@ Returns scope and resource information associated with the current access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-token-info" method="get" path="/v1/token_info" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -114,6 +115,7 @@ The `expires_in` value is provided in seconds from when the `access_token` was g
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="refresh-access-token" method="post" path="/oauth/token" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

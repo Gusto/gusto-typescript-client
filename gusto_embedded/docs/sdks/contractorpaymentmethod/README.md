@@ -17,6 +17,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid-bank_accounts" method="get" path="/v1/contractors/{contractor_uuid}/bank_accounts" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -121,6 +122,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid-payment_method" method="get" path="/v1/contractors/{contractor_uuid}/payment_method" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -224,6 +226,7 @@ scope: `contractor_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_id-payment_method" method="put" path="/v1/contractors/{contractor_uuid}/payment_method" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

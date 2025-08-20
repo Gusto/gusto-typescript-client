@@ -21,6 +21,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -119,6 +120,7 @@ scope: `departments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-companies-departments" method="get" path="/v1/companies/{company_uuid}/departments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -222,6 +224,7 @@ scope: `departments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-department" method="get" path="/v1/departments/{department_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -324,6 +327,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -425,6 +429,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-department" method="delete" path="/v1/departments/{department_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -518,6 +523,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-add-people-to-department" method="put" path="/v1/departments/{department_uuid}/add" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -612,6 +618,7 @@ scope: `departments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-remove-people-from-department" method="put" path="/v1/departments/{department_uuid}/remove" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

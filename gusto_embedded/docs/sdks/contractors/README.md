@@ -24,6 +24,7 @@ scope: `contractors:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-contractors" method="post" path="/v1/companies/{company_uuid}/contractors" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -134,6 +135,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-contractors" method="get" path="/v1/companies/{company_uuid}/contractors" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -236,6 +238,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid" method="get" path="/v1/contractors/{contractor_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -342,6 +345,7 @@ scope: `contractors:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid" method="put" path="/v1/contractors/{contractor_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -454,6 +458,7 @@ scope: `contractors:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-contractors-contractor_uuid" method="delete" path="/v1/contractors/{contractor_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -576,6 +581,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid-onboarding_status" method="get" path="/v1/contractors/{contractor_uuid}/onboarding_status" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -688,6 +694,7 @@ Below is a list of valid onboarding status changes depending on the intended act
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-onboarding_status" method="put" path="/v1/contractors/{contractor_uuid}/onboarding_status" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -782,6 +789,7 @@ scope: `contractors:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractors-contractor_uuid-address" method="get" path="/v1/contractors/{contractor_uuid}/address" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -884,6 +892,7 @@ scope: `contractors:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractors-contractor_uuid-address" method="put" path="/v1/contractors/{contractor_uuid}/address" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -999,6 +1008,7 @@ scope: `contractor_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractors-payment_details" method="get" path="/v1/companies/{company_id}/contractors/payment_details" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -57,6 +57,7 @@ scope: `company_tax_requirements:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements-state" method="get" path="/v1/companies/{company_uuid}/tax_requirements/{state}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -161,6 +162,7 @@ scope: `company_tax_requirements:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -337,6 +339,7 @@ scope: `company_tax_requirements:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements" method="get" path="/v1/companies/{company_uuid}/tax_requirements" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

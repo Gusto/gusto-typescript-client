@@ -22,7 +22,7 @@ export class Suspensions extends ClientSDK {
    * @remarks
    * Get existing suspension records for this company. A company may have multiple suspension records if they have suspended their Gusto account more than once.
    *
-   * > 📘 To check if company is already suspended
+   * >📘 To check if company is already suspended
    * >
    * > To determine if a company is _currently_ suspended, use the `is_suspended` and `company_status` fields in the [Get a company](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies) endpoint.
    *

@@ -21,6 +21,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -126,6 +127,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-employees-employee_id-bank_accounts-bank_account_id" method="delete" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -219,6 +221,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -327,6 +330,7 @@ scope: `employee_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-payment_method" method="get" path="/v1/employees/{employee_id}/payment_method" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -430,6 +434,7 @@ scope: `employee_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -14,11 +14,11 @@ import {
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  Payroll,
-  Payroll$inboundSchema,
-  Payroll$Outbound,
-  Payroll$outboundSchema,
-} from "../components/payroll.js";
+  PayrollShow,
+  PayrollShow$inboundSchema,
+  PayrollShow$Outbound,
+  PayrollShow$outboundSchema,
+} from "../components/payrollshow.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -43,6 +43,7 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude = {
   Totals: "totals",
   RiskBlockers: "risk_blockers",
   Reversals: "reversals",
+  PayrollTaxes: "payroll_taxes",
 } as const;
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude =
   ClosedEnum<typeof GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>;
@@ -75,7 +76,7 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
   /**
    * successful
    */
-  payroll?: Payroll | undefined;
+  payrollShow?: PayrollShow | undefined;
 };
 
 /** @internal */
@@ -236,18 +237,18 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    Payroll: Payroll$inboundSchema.optional(),
+    "Payroll-Show": PayrollShow$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Payroll": "payroll",
+      "Payroll-Show": "payrollShow",
     });
   });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  Payroll?: Payroll$Outbound | undefined;
+  "Payroll-Show"?: PayrollShow$Outbound | undefined;
 };
 
 /** @internal */
@@ -258,11 +259,11 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$outboundSchema:
     GetV1CompaniesCompanyIdPayrollsPayrollIdResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    payroll: Payroll$outboundSchema.optional(),
+    payrollShow: PayrollShow$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
-      payroll: "Payroll",
+      payrollShow: "Payroll-Show",
     });
   });
 

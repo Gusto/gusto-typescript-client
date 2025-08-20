@@ -1,6 +1,10 @@
 # LeavingFor
 
-Which competitor the company is joining instead. Required if `reason` is `'switching_provider'`.
+The competitor the company is switching to. Required if `reason` is `'switching_provider'`.
+
+> 🚧 Switching to Gusto requires Customer Support
+> If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
+
 
 ## Example Usage
 
@@ -13,5 +17,5 @@ let value: LeavingFor = "rippling";
 ## Values
 
 ```typescript
-"apd" | "adp_total_source" | "accountant" | "bamboo_hr" | "bank_or_financial_institution" | "check" | "insperity" | "intuit_or_quickbooks" | "justworks" | "manual" | "namely" | "onpay" | "other" | "patriot" | "paycom" | "paylocity" | "rippling" | "square" | "surepayroll" | "trinet" | "zenefits"
+"accountant" | "adp" | "adp_total_source" | "bamboo_hr" | "bank_or_financial_institution" | "check" | "gusto_com" | "homebase" | "insperity" | "intuit_or_quickbooks" | "justworks" | "manual" | "namely" | "onpay" | "other" | "patriot" | "paychex" | "paycom" | "paylocity" | "rippling" | "square" | "surepayroll" | "trinet" | "zenefits"
 ```

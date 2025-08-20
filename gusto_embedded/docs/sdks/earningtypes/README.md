@@ -20,6 +20,7 @@ scope: `payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-earning_types" method="post" path="/v1/companies/{company_id}/earning_types" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -124,6 +125,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-earning_types" method="get" path="/v1/companies/{company_id}/earning_types" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -226,6 +228,7 @@ scope: `payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-earning_types-earning_type_uuid" method="put" path="/v1/companies/{company_id}/earning_types/{earning_type_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -326,6 +329,7 @@ scope: `payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_id-earning_types-earning_type_uuid" method="delete" path="/v1/companies/{company_id}/earning_types/{earning_type_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

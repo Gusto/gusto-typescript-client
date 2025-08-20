@@ -203,7 +203,7 @@ async function $do(
     M.json(
       200,
       GetV1CompaniesCompanyIdPayrollsPayrollIdResponse$inboundSchema,
-      { key: "Payroll" },
+      { key: "Payroll-Show" },
     ),
     M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),

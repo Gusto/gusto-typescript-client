@@ -16,6 +16,7 @@ scope: `recovery_cases:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-recovery-cases" method="get" path="/v1/companies/{company_uuid}/recovery_cases" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -122,6 +123,7 @@ scope: `recovery_cases:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="redebit-recovery-case" method="put" path="/v1/recovery_cases/{recovery_case_uuid}/redebit" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

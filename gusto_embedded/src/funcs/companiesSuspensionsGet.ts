@@ -21,6 +21,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetCompaniesCompanyUuidSuspensionsRequest,
   GetCompaniesCompanyUuidSuspensionsRequest$outboundSchema,
   GetCompaniesCompanyUuidSuspensionsResponse,
@@ -35,7 +39,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Get existing suspension records for this company. A company may have multiple suspension records if they have suspended their Gusto account more than once.
  *
- * > 📘 To check if company is already suspended
+ * >📘 To check if company is already suspended
  * >
  * > To determine if a company is _currently_ suspended, use the `is_suspended` and `company_status` fields in the [Get a company](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies) endpoint.
  *
@@ -48,6 +52,7 @@ export function companiesSuspensionsGet(
 ): APIPromise<
   Result<
     GetCompaniesCompanyUuidSuspensionsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -73,6 +78,7 @@ async function $do(
   [
     Result<
       GetCompaniesCompanyUuidSuspensionsResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -170,6 +176,7 @@ async function $do(
 
   const [result] = await M.match<
     GetCompaniesCompanyUuidSuspensionsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -182,7 +189,8 @@ async function $do(
     M.json(200, GetCompaniesCompanyUuidSuspensionsResponse$inboundSchema, {
       key: "Company-Suspension-List",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

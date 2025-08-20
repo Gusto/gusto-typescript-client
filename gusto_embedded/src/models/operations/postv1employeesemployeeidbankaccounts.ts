@@ -26,19 +26,17 @@ import {
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const PostV1EmployeesEmployeeIdBankAccountsAccountType = {
+export const AccountType = {
   Checking: "Checking",
   Savings: "Savings",
 } as const;
-export type PostV1EmployeesEmployeeIdBankAccountsAccountType = ClosedEnum<
-  typeof PostV1EmployeesEmployeeIdBankAccountsAccountType
->;
+export type AccountType = ClosedEnum<typeof AccountType>;
 
 export type PostV1EmployeesEmployeeIdBankAccountsRequestBody = {
   name: string;
   routingNumber: string;
   accountNumber: string;
-  accountType: PostV1EmployeesEmployeeIdBankAccountsAccountType;
+  accountType: AccountType;
 };
 
 export type PostV1EmployeesEmployeeIdBankAccountsRequest = {
@@ -62,26 +60,22 @@ export type PostV1EmployeesEmployeeIdBankAccountsResponse = {
 };
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdBankAccountsAccountType$inboundSchema:
-  z.ZodNativeEnum<typeof PostV1EmployeesEmployeeIdBankAccountsAccountType> = z
-    .nativeEnum(PostV1EmployeesEmployeeIdBankAccountsAccountType);
+export const AccountType$inboundSchema: z.ZodNativeEnum<typeof AccountType> = z
+  .nativeEnum(AccountType);
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdBankAccountsAccountType$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1EmployeesEmployeeIdBankAccountsAccountType> =
-    PostV1EmployeesEmployeeIdBankAccountsAccountType$inboundSchema;
+export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> =
+  AccountType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PostV1EmployeesEmployeeIdBankAccountsAccountType$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdBankAccountsAccountType$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdBankAccountsAccountType$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdBankAccountsAccountType$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdBankAccountsAccountType$outboundSchema;
+export namespace AccountType$ {
+  /** @deprecated use `AccountType$inboundSchema` instead. */
+  export const inboundSchema = AccountType$inboundSchema;
+  /** @deprecated use `AccountType$outboundSchema` instead. */
+  export const outboundSchema = AccountType$outboundSchema;
 }
 
 /** @internal */
@@ -94,8 +88,7 @@ export const PostV1EmployeesEmployeeIdBankAccountsRequestBody$inboundSchema:
     name: z.string(),
     routing_number: z.string(),
     account_number: z.string(),
-    account_type:
-      PostV1EmployeesEmployeeIdBankAccountsAccountType$inboundSchema,
+    account_type: AccountType$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "routing_number": "routingNumber",
@@ -122,8 +115,7 @@ export const PostV1EmployeesEmployeeIdBankAccountsRequestBody$outboundSchema:
     name: z.string(),
     routingNumber: z.string(),
     accountNumber: z.string(),
-    accountType:
-      PostV1EmployeesEmployeeIdBankAccountsAccountType$outboundSchema,
+    accountType: AccountType$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       routingNumber: "routing_number",

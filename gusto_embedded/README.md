@@ -194,10 +194,11 @@ run();
 
 ### [bankAccounts](docs/sdks/bankaccounts/README.md)
 
-* [create](docs/sdks/bankaccounts/README.md#create) - Create a company bank account
 * [get](docs/sdks/bankaccounts/README.md#get) - Get all company bank accounts
+* [create](docs/sdks/bankaccounts/README.md#create) - Create a company bank account
 * [verify](docs/sdks/bankaccounts/README.md#verify) - Verify a company bank account
 * [createFromPlaidToken](docs/sdks/bankaccounts/README.md#createfromplaidtoken) - Create a bank account from a plaid processor token
+* [deleteV1CompaniesCompanyIdBankAccountsBankAccountId](docs/sdks/bankaccounts/README.md#deletev1companiescompanyidbankaccountsbankaccountid) - Delete a company bank account
 
 ### [companies](docs/sdks/companies/README.md)
 
@@ -241,6 +242,8 @@ run();
 * [getEmployeeBenefits](docs/sdks/companybenefits/README.md#getemployeebenefits) - Get all employee benefits for a company benefit
 * [updateEmployeeBenefits](docs/sdks/companybenefits/README.md#updateemployeebenefits) - Bulk update employee benefits for a company benefit
 * [getRequirements](docs/sdks/companybenefits/README.md#getrequirements) - Get benefit fields requirements by ID
+* [getV1CompanyBenefitsCompanyBenefitIdContributionExclusions](docs/sdks/companybenefits/README.md#getv1companybenefitscompanybenefitidcontributionexclusions) - Get contribution exclusions for a company benefit
+* [putV1CompanyBenefitsCompanyBenefitIdContributionExclusions](docs/sdks/companybenefits/README.md#putv1companybenefitscompanybenefitidcontributionexclusions) - Update contribution exclusions for a company benefit
 
 ### [companyForms](docs/sdks/companyforms/README.md)
 
@@ -620,6 +623,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`achTransactionsGetAll`](docs/sdks/achtransactions/README.md#getall) - Get all ACH transactions for a company
 - [`bankAccountsCreate`](docs/sdks/bankaccounts/README.md#create) - Create a company bank account
 - [`bankAccountsCreateFromPlaidToken`](docs/sdks/bankaccounts/README.md#createfromplaidtoken) - Create a bank account from a plaid processor token
+- [`bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId`](docs/sdks/bankaccounts/README.md#deletev1companiescompanyidbankaccountsbankaccountid) - Delete a company bank account
 - [`bankAccountsGet`](docs/sdks/bankaccounts/README.md#get) - Get all company bank accounts
 - [`bankAccountsVerify`](docs/sdks/bankaccounts/README.md#verify) - Verify a company bank account
 - [`companiesAcceptTermsOfService`](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
@@ -647,7 +651,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companyBenefitsGetRequirements`](docs/sdks/companybenefits/README.md#getrequirements) - Get benefit fields requirements by ID
 - [`companyBenefitsGetSummary`](docs/sdks/companybenefits/README.md#getsummary) - Get company benefit summary by company benefit id.
 - [`companyBenefitsGetSupported`](docs/sdks/companybenefits/README.md#getsupported) - Get a supported benefit by ID
+- [`companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions`](docs/sdks/companybenefits/README.md#getv1companybenefitscompanybenefitidcontributionexclusions) - Get contribution exclusions for a company benefit
 - [`companyBenefitsList`](docs/sdks/companybenefits/README.md#list) - Get benefits for a company
+- [`companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions`](docs/sdks/companybenefits/README.md#putv1companybenefitscompanybenefitidcontributionexclusions) - Update contribution exclusions for a company benefit
 - [`companyBenefitsUpdate`](docs/sdks/companybenefits/README.md#update) - Update a company benefit
 - [`companyBenefitsUpdateEmployeeBenefits`](docs/sdks/companybenefits/README.md#updateemployeebenefits) - Bulk update employee benefits for a company benefit
 - [`companyFormsGet`](docs/sdks/companyforms/README.md#get) - Get a company form
@@ -903,6 +909,7 @@ To learn about this feature and how to get started, check
 - [`useAchTransactionsGetAll`](docs/sdks/achtransactions/README.md#getall) - Get all ACH transactions for a company
 - [`useBankAccountsCreateFromPlaidTokenMutation`](docs/sdks/bankaccounts/README.md#createfromplaidtoken) - Create a bank account from a plaid processor token
 - [`useBankAccountsCreateMutation`](docs/sdks/bankaccounts/README.md#create) - Create a company bank account
+- [`useBankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutation`](docs/sdks/bankaccounts/README.md#deletev1companiescompanyidbankaccountsbankaccountid) - Delete a company bank account
 - [`useBankAccountsGet`](docs/sdks/bankaccounts/README.md#get) - Get all company bank accounts
 - [`useBankAccountsVerifyMutation`](docs/sdks/bankaccounts/README.md#verify) - Verify a company bank account
 - [`useCompaniesAcceptTermsOfServiceMutation`](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
@@ -930,7 +937,9 @@ To learn about this feature and how to get started, check
 - [`useCompanyBenefitsGetRequirements`](docs/sdks/companybenefits/README.md#getrequirements) - Get benefit fields requirements by ID
 - [`useCompanyBenefitsGetSummary`](docs/sdks/companybenefits/README.md#getsummary) - Get company benefit summary by company benefit id.
 - [`useCompanyBenefitsGetSupported`](docs/sdks/companybenefits/README.md#getsupported) - Get a supported benefit by ID
+- [`useCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions`](docs/sdks/companybenefits/README.md#getv1companybenefitscompanybenefitidcontributionexclusions) - Get contribution exclusions for a company benefit
 - [`useCompanyBenefitsList`](docs/sdks/companybenefits/README.md#list) - Get benefits for a company
+- [`useCompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutation`](docs/sdks/companybenefits/README.md#putv1companybenefitscompanybenefitidcontributionexclusions) - Update contribution exclusions for a company benefit
 - [`useCompanyBenefitsUpdateEmployeeBenefitsMutation`](docs/sdks/companybenefits/README.md#updateemployeebenefits) - Bulk update employee benefits for a company benefit
 - [`useCompanyBenefitsUpdateMutation`](docs/sdks/companybenefits/README.md#update) - Update a company benefit
 - [`useCompanyFormsGet`](docs/sdks/companyforms/README.md#get) - Get a company form
@@ -1329,7 +1338,7 @@ run();
 **Primary error:**
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (10)</summary>
+<details><summary>Less common errors (11)</summary>
 
 <br />
 
@@ -1342,10 +1351,11 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 135 of 257 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 257 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 257 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 257 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 138 of 260 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 260 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 260 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 260 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 260 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

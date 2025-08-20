@@ -28,6 +28,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-pay_schedules" method="post" path="/v1/companies/{company_id}/pay_schedules" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -136,6 +137,7 @@ scope: `pay_schedules:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-pay_schedules" method="get" path="/v1/companies/{company_id}/pay_schedules" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -238,6 +240,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-pay_schedules-preview" method="get" path="/v1/companies/{company_id}/pay_schedules/preview" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -346,6 +349,7 @@ scope: `pay_schedules:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-pay_schedules-pay_schedule_id" method="get" path="/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -450,6 +454,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-pay_schedules-pay_schedule_id" method="put" path="/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -568,6 +573,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-pay_periods" method="get" path="/v1/companies/{company_id}/pay_periods" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -676,6 +682,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-unprocessed_termination_pay_periods" method="get" path="/v1/companies/{company_id}/pay_periods/unprocessed_termination_pay_periods" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -778,6 +785,7 @@ scope: `pay_schedules:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-pay_schedules-assignments" method="get" path="/v1/companies/{company_id}/pay_schedules/assignments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -880,6 +888,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-pay_schedules-assignment_preview" method="post" path="/v1/companies/{company_id}/pay_schedules/assignment_preview" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -991,6 +1000,7 @@ scope: `pay_schedules:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-pay_schedules-assign" method="post" path="/v1/companies/{company_id}/pay_schedules/assign" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

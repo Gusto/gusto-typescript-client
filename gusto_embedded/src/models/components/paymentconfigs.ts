@@ -53,6 +53,10 @@ export type PaymentConfigs = {
    */
   paymentSpeed?: string | undefined;
   /**
+   * Whether the company is configured to use the partner-owned disbursement payment rail
+   */
+  partnerOwnedDisbursement?: boolean | undefined;
+  /**
    * Blockers preventing the company from earning fast ACH payments
    */
   earnedFastAchBlockers?: Array<EarnedFastAchBlockers> | undefined;
@@ -152,6 +156,7 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
   partner_uuid: z.string().optional(),
   fast_payment_limit: z.string().optional(),
   payment_speed: z.string().optional(),
+  partner_owned_disbursement: z.boolean().optional(),
   earned_fast_ach_blockers: z.array(
     z.lazy(() => EarnedFastAchBlockers$inboundSchema),
   ).optional(),
@@ -161,6 +166,7 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
     "partner_uuid": "partnerUuid",
     "fast_payment_limit": "fastPaymentLimit",
     "payment_speed": "paymentSpeed",
+    "partner_owned_disbursement": "partnerOwnedDisbursement",
     "earned_fast_ach_blockers": "earnedFastAchBlockers",
   });
 });
@@ -171,6 +177,7 @@ export type PaymentConfigs$Outbound = {
   partner_uuid?: string | undefined;
   fast_payment_limit?: string | undefined;
   payment_speed?: string | undefined;
+  partner_owned_disbursement?: boolean | undefined;
   earned_fast_ach_blockers?: Array<EarnedFastAchBlockers$Outbound> | undefined;
 };
 
@@ -184,6 +191,7 @@ export const PaymentConfigs$outboundSchema: z.ZodType<
   partnerUuid: z.string().optional(),
   fastPaymentLimit: z.string().optional(),
   paymentSpeed: z.string().optional(),
+  partnerOwnedDisbursement: z.boolean().optional(),
   earnedFastAchBlockers: z.array(
     z.lazy(() => EarnedFastAchBlockers$outboundSchema),
   ).optional(),
@@ -193,6 +201,7 @@ export const PaymentConfigs$outboundSchema: z.ZodType<
     partnerUuid: "partner_uuid",
     fastPaymentLimit: "fast_payment_limit",
     paymentSpeed: "payment_speed",
+    partnerOwnedDisbursement: "partner_owned_disbursement",
     earnedFastAchBlockers: "earned_fast_ach_blockers",
   });
 });

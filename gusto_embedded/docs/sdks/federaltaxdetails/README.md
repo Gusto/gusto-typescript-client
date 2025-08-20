@@ -16,6 +16,7 @@ scope: `company_federal_taxes:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-federal_tax_details" method="get" path="/v1/companies/{company_id}/federal_tax_details" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -119,6 +120,7 @@ scope: `company_federal_taxes:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-federal_tax_details" method="put" path="/v1/companies/{company_id}/federal_tax_details" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

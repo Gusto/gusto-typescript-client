@@ -46,7 +46,7 @@ import { Result } from "../types/fp.js";
  *
  * scope: `company_bank_accounts:write`
  *
- * > 🚧 Warning
+ * >🚧 Warning
  * >
  * > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
  */
@@ -106,7 +106,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Company-Bank-Account-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -195,8 +197,8 @@ async function $do(
     M.json(201, PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema, {
       key: "Company-Bank-Account",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

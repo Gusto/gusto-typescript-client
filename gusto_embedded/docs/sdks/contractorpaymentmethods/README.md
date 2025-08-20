@@ -17,6 +17,7 @@ scope: `contractor_payment_methods:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-contractors-contractor_uuid-bank_accounts" method="post" path="/v1/contractors/{contractor_uuid}/bank_accounts" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

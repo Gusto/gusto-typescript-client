@@ -22,6 +22,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payment_groups" method="post" path="/v1/companies/{company_id}/contractor_payment_groups" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -140,6 +141,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractor_payment_groups" method="get" path="/v1/companies/{company_id}/contractor_payment_groups" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -246,6 +248,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payment_groups-preview" method="post" path="/v1/companies/{company_id}/contractor_payment_groups/preview" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -364,6 +367,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payment_groups-contractor_payment_group_id" method="get" path="/v1/contractor_payment_groups/{contractor_payment_group_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -466,6 +470,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-contractor_payment_groups-contractor_payment_group_id" method="delete" path="/v1/contractor_payment_groups/{contractor_payment_group_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -562,6 +567,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractor_payment_groups-contractor_payment_group_id-fund" method="put" path="/v1/contractor_payment_groups/{contractor_payment_group_uuid}/fund" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -655,6 +661,7 @@ scope: `partner_disbursements:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payment_groups-id-partner_disbursements" method="get" path="/v1/contractor_payment_groups/{id}/partner_disbursements" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -759,6 +766,7 @@ scope: `partner_disbursements:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="patch-v1-contractor_payment_groups-id-partner_disbursements" method="patch" path="/v1/contractor_payment_groups/{id}/partner_disbursements" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

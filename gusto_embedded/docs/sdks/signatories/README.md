@@ -21,6 +21,7 @@ scope: `signatories:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-company-signatories" method="post" path="/v1/companies/{company_uuid}/signatories" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -143,6 +144,7 @@ scope: `signatories:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-signatories" method="get" path="/v1/companies/{company_uuid}/signatories" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -243,6 +245,7 @@ Create a signatory with minimal information. This signatory can be invited to pr
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-signatories-invite" method="post" path="/v1/companies/{company_uuid}/signatories/invite" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -341,6 +344,7 @@ scope: `signatories:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-signatories-signatory_uuid" method="put" path="/v1/companies/{company_uuid}/signatories/{signatory_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -437,6 +441,7 @@ scope: `signatories:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_uuid-signatories-signatory_uuid" method="delete" path="/v1/companies/{company_uuid}/signatories/{signatory_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -15,6 +15,7 @@ scope: `information_requests:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-information-requests" method="get" path="/v1/companies/{company_uuid}/information_requests" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -48,8 +48,6 @@ export const PayrollTypes = {
 export type PayrollTypes = ClosedEnum<typeof PayrollTypes>;
 
 export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude = {
-  Benefits: "benefits",
-  Deductions: "deductions",
   Taxes: "taxes",
   PayrollStatusMeta: "payroll_status_meta",
   Totals: "totals",

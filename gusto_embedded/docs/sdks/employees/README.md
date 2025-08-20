@@ -27,6 +27,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees" method="get" path="/v1/companies/{company_id}/employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -131,6 +132,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees" method="post" path="/v1/companies/{company_id}/employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -238,6 +240,7 @@ Base scope: `employee_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees-payment_details" method="get" path="/v1/companies/{company_id}/employees/payment_details" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -340,6 +343,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -491,6 +495,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees" method="get" path="/v1/employees/{employee_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -595,6 +600,7 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees" method="put" path="/v1/employees/{employee_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -710,6 +716,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-employee" method="delete" path="/v1/employees/{employee_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -801,6 +808,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-custom_fields" method="get" path="/v1/employees/{employee_id}/custom_fields" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -903,6 +911,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_documents_config" method="put" path="/v1/employees/{employee_id}/onboarding_documents_config" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1037,6 +1046,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-onboarding_status" method="get" path="/v1/employees/{employee_id}/onboarding_status" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1150,6 +1160,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_status" method="put" path="/v1/employees/{employee_id}/onboarding_status" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1248,6 +1259,7 @@ scope: `employee_time_off_activities:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-version-employees-time_off_activities" method="get" path="/v1/employees/{employee_uuid}/time_off_activities" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

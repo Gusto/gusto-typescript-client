@@ -16,6 +16,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-industry" method="get" path="/v1/companies/{company_id}/industry_selection" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -118,6 +119,7 @@ scope: `companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-company-industry" method="put" path="/v1/companies/{company_id}/industry_selection" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

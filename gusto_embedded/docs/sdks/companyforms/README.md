@@ -18,6 +18,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-forms" method="get" path="/v1/companies/{company_id}/forms" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -120,6 +121,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-form" method="get" path="/v1/forms/{form_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -222,6 +224,7 @@ scope: `company_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-form-pdf" method="get" path="/v1/forms/{form_id}/pdf" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -324,6 +327,7 @@ scope: `company_forms:sign`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-company-form-sign" method="put" path="/v1/forms/{form_id}/sign" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

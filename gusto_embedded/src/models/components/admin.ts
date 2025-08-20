@@ -17,7 +17,7 @@ export type Admin = {
    */
   uuid: string;
   /**
-   * The email of the admin for Gusto's system. If the email matches an existing user, this will create an admin account for them.
+   * The email of the admin for Gusto's system.
    */
   email?: string | undefined;
   /**

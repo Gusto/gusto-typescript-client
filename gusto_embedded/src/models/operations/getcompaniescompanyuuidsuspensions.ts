@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanySuspension,
@@ -18,31 +19,65 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion>;
+
 export type GetCompaniesCompanyUuidSuspensionsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetCompaniesCompanyUuidSuspensionsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful response
    */
   companySuspensionList?: Array<CompanySuspension> | undefined;
 };
+
+/** @internal */
+export const GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+  > = GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetCompaniesCompanyUuidSuspensionsRequest$inboundSchema: z.ZodType<
@@ -50,19 +85,21 @@ export const GetCompaniesCompanyUuidSuspensionsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "X-Gusto-API-Version":
+    GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema
+      .default("2024-04-01"),
   company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
 }).transform((v) => {
   return remap$(v, {
-    "company_uuid": "companyUuid",
     "X-Gusto-API-Version": "xGustoAPIVersion",
+    "company_uuid": "companyUuid",
   });
 });
 
 /** @internal */
 export type GetCompaniesCompanyUuidSuspensionsRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
 };
 
 /** @internal */
@@ -72,12 +109,14 @@ export const GetCompaniesCompanyUuidSuspensionsRequest$outboundSchema:
     z.ZodTypeDef,
     GetCompaniesCompanyUuidSuspensionsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
     });
   });
 

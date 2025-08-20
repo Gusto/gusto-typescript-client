@@ -67,9 +67,17 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
    */
   include?: Array<Include> | undefined;
   /**
-   * Filters employees by the provided boolean
+   * Filters employees by those who have completed onboarding
+   */
+  onboarded?: boolean | undefined;
+  /**
+   * Filters employees by those who have been or are scheduled to be terminated
    */
   terminated?: boolean | undefined;
+  /**
+   * Filters employees by those who have been terminated and whose termination is in effect today (excludes active and scheduled to be terminated)
+   */
+  terminatedToday?: boolean | undefined;
   /**
    * Optional subset of employees to fetch.
    */
@@ -148,7 +156,9 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
   company_id: z.string(),
   search_term: z.string().optional(),
   include: z.array(Include$inboundSchema).optional(),
+  onboarded: z.boolean().optional(),
   terminated: z.boolean().optional(),
+  terminated_today: z.boolean().optional(),
   uuids: z.array(z.string()).optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
@@ -157,6 +167,7 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
     "X-Gusto-API-Version": "xGustoAPIVersion",
     "company_id": "companyId",
     "search_term": "searchTerm",
+    "terminated_today": "terminatedToday",
   });
 });
 
@@ -166,7 +177,9 @@ export type GetV1CompaniesCompanyIdEmployeesRequest$Outbound = {
   company_id: string;
   search_term?: string | undefined;
   include?: Array<string> | undefined;
+  onboarded?: boolean | undefined;
   terminated?: boolean | undefined;
+  terminated_today?: boolean | undefined;
   uuids?: Array<string> | undefined;
   page?: number | undefined;
   per?: number | undefined;
@@ -184,7 +197,9 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
   companyId: z.string(),
   searchTerm: z.string().optional(),
   include: z.array(Include$outboundSchema).optional(),
+  onboarded: z.boolean().optional(),
   terminated: z.boolean().optional(),
+  terminatedToday: z.boolean().optional(),
   uuids: z.array(z.string()).optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
@@ -193,6 +208,7 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
     xGustoAPIVersion: "X-Gusto-API-Version",
     companyId: "company_id",
     searchTerm: "search_term",
+    terminatedToday: "terminated_today",
   });
 });
 

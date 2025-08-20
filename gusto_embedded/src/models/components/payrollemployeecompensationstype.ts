@@ -81,24 +81,6 @@ export type PayrollEmployeeCompensationsTypePaidTimeOff = {
   finalPayoutUnusedHoursInput?: string | undefined;
 };
 
-export type Benefits = {
-  name?: string | undefined;
-  employeeDeduction?: number | undefined;
-  companyContribution?: number | undefined;
-  imputed?: boolean | undefined;
-};
-
-export type Deductions = {
-  name?: string | undefined;
-  amount?: number | undefined;
-};
-
-export type Taxes = {
-  name: string;
-  employer: boolean;
-  amount: number;
-};
-
 export type PayrollEmployeeCompensationsType = {
   /**
    * The UUID of the employee.
@@ -147,18 +129,6 @@ export type PayrollEmployeeCompensationsType = {
    * An array of all paid time off the employee is eligible for this pay period.
    */
   paidTimeOff?: Array<PayrollEmployeeCompensationsTypePaidTimeOff> | undefined;
-  /**
-   * An array of employee benefits for the pay period. Benefits are only included for processed payroll when the include parameter is present.
-   */
-  benefits?: Array<Benefits> | undefined;
-  /**
-   * An array of employee deductions for the pay period. Deductions are only included for processed payroll when the include parameter is present.
-   */
-  deductions?: Array<Deductions> | undefined;
-  /**
-   * An array of employer and employee taxes for the pay period. Only included for processed or calculated payrolls when `taxes` is present in the `include` parameter.
-   */
-  taxes?: Array<Taxes> | undefined;
 };
 
 /** @internal */
@@ -415,181 +385,6 @@ export function payrollEmployeeCompensationsTypePaidTimeOffFromJSON(
 }
 
 /** @internal */
-export const Benefits$inboundSchema: z.ZodType<
-  Benefits,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  employee_deduction: z.number().optional(),
-  company_contribution: z.number().optional(),
-  imputed: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_deduction": "employeeDeduction",
-    "company_contribution": "companyContribution",
-  });
-});
-
-/** @internal */
-export type Benefits$Outbound = {
-  name?: string | undefined;
-  employee_deduction?: number | undefined;
-  company_contribution?: number | undefined;
-  imputed?: boolean | undefined;
-};
-
-/** @internal */
-export const Benefits$outboundSchema: z.ZodType<
-  Benefits$Outbound,
-  z.ZodTypeDef,
-  Benefits
-> = z.object({
-  name: z.string().optional(),
-  employeeDeduction: z.number().optional(),
-  companyContribution: z.number().optional(),
-  imputed: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeDeduction: "employee_deduction",
-    companyContribution: "company_contribution",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Benefits$ {
-  /** @deprecated use `Benefits$inboundSchema` instead. */
-  export const inboundSchema = Benefits$inboundSchema;
-  /** @deprecated use `Benefits$outboundSchema` instead. */
-  export const outboundSchema = Benefits$outboundSchema;
-  /** @deprecated use `Benefits$Outbound` instead. */
-  export type Outbound = Benefits$Outbound;
-}
-
-export function benefitsToJSON(benefits: Benefits): string {
-  return JSON.stringify(Benefits$outboundSchema.parse(benefits));
-}
-
-export function benefitsFromJSON(
-  jsonString: string,
-): SafeParseResult<Benefits, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Benefits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Benefits' from JSON`,
-  );
-}
-
-/** @internal */
-export const Deductions$inboundSchema: z.ZodType<
-  Deductions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  amount: z.number().optional(),
-});
-
-/** @internal */
-export type Deductions$Outbound = {
-  name?: string | undefined;
-  amount?: number | undefined;
-};
-
-/** @internal */
-export const Deductions$outboundSchema: z.ZodType<
-  Deductions$Outbound,
-  z.ZodTypeDef,
-  Deductions
-> = z.object({
-  name: z.string().optional(),
-  amount: z.number().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deductions$ {
-  /** @deprecated use `Deductions$inboundSchema` instead. */
-  export const inboundSchema = Deductions$inboundSchema;
-  /** @deprecated use `Deductions$outboundSchema` instead. */
-  export const outboundSchema = Deductions$outboundSchema;
-  /** @deprecated use `Deductions$Outbound` instead. */
-  export type Outbound = Deductions$Outbound;
-}
-
-export function deductionsToJSON(deductions: Deductions): string {
-  return JSON.stringify(Deductions$outboundSchema.parse(deductions));
-}
-
-export function deductionsFromJSON(
-  jsonString: string,
-): SafeParseResult<Deductions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Deductions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Deductions' from JSON`,
-  );
-}
-
-/** @internal */
-export const Taxes$inboundSchema: z.ZodType<Taxes, z.ZodTypeDef, unknown> = z
-  .object({
-    name: z.string(),
-    employer: z.boolean(),
-    amount: z.number(),
-  });
-
-/** @internal */
-export type Taxes$Outbound = {
-  name: string;
-  employer: boolean;
-  amount: number;
-};
-
-/** @internal */
-export const Taxes$outboundSchema: z.ZodType<
-  Taxes$Outbound,
-  z.ZodTypeDef,
-  Taxes
-> = z.object({
-  name: z.string(),
-  employer: z.boolean(),
-  amount: z.number(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Taxes$ {
-  /** @deprecated use `Taxes$inboundSchema` instead. */
-  export const inboundSchema = Taxes$inboundSchema;
-  /** @deprecated use `Taxes$outboundSchema` instead. */
-  export const outboundSchema = Taxes$outboundSchema;
-  /** @deprecated use `Taxes$Outbound` instead. */
-  export type Outbound = Taxes$Outbound;
-}
-
-export function taxesToJSON(taxes: Taxes): string {
-  return JSON.stringify(Taxes$outboundSchema.parse(taxes));
-}
-
-export function taxesFromJSON(
-  jsonString: string,
-): SafeParseResult<Taxes, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Taxes$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Taxes' from JSON`,
-  );
-}
-
-/** @internal */
 export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   PayrollEmployeeCompensationsType,
   z.ZodTypeDef,
@@ -612,9 +407,6 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   paid_time_off: z.array(
     z.lazy(() => PayrollEmployeeCompensationsTypePaidTimeOff$inboundSchema),
   ).optional(),
-  benefits: z.array(z.lazy(() => Benefits$inboundSchema)).optional(),
-  deductions: z.array(z.lazy(() => Deductions$inboundSchema)).optional(),
-  taxes: z.array(z.lazy(() => Taxes$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -643,9 +435,6 @@ export type PayrollEmployeeCompensationsType$Outbound = {
   paid_time_off?:
     | Array<PayrollEmployeeCompensationsTypePaidTimeOff$Outbound>
     | undefined;
-  benefits?: Array<Benefits$Outbound> | undefined;
-  deductions?: Array<Deductions$Outbound> | undefined;
-  taxes?: Array<Taxes$Outbound> | undefined;
 };
 
 /** @internal */
@@ -671,9 +460,6 @@ export const PayrollEmployeeCompensationsType$outboundSchema: z.ZodType<
   paidTimeOff: z.array(
     z.lazy(() => PayrollEmployeeCompensationsTypePaidTimeOff$outboundSchema),
   ).optional(),
-  benefits: z.array(z.lazy(() => Benefits$outboundSchema)).optional(),
-  deductions: z.array(z.lazy(() => Deductions$outboundSchema)).optional(),
-  taxes: z.array(z.lazy(() => Taxes$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",

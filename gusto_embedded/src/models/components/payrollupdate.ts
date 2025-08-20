@@ -78,7 +78,7 @@ export type PayrollUpdatePaidTimeOff = {
   finalPayoutUnusedHoursInput?: string | undefined;
 };
 
-export type EmployeeCompensations = {
+export type PayrollUpdateEmployeeCompensations = {
   /**
    * The UUID of the employee.
    */
@@ -125,7 +125,7 @@ export const WithholdingPayPeriod = {
 export type WithholdingPayPeriod = ClosedEnum<typeof WithholdingPayPeriod>;
 
 export type PayrollUpdate = {
-  employeeCompensations: Array<EmployeeCompensations>;
+  employeeCompensations: Array<PayrollUpdateEmployeeCompensations>;
   /**
    * The payment schedule tax rate the payroll is based on. Only relevant for off-cycle payrolls.
    */
@@ -375,8 +375,8 @@ export function payrollUpdatePaidTimeOffFromJSON(
 }
 
 /** @internal */
-export const EmployeeCompensations$inboundSchema: z.ZodType<
-  EmployeeCompensations,
+export const PayrollUpdateEmployeeCompensations$inboundSchema: z.ZodType<
+  PayrollUpdateEmployeeCompensations,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -404,7 +404,7 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type EmployeeCompensations$Outbound = {
+export type PayrollUpdateEmployeeCompensations$Outbound = {
   employee_uuid?: string | undefined;
   version?: string | undefined;
   excluded?: boolean | undefined;
@@ -420,10 +420,10 @@ export type EmployeeCompensations$Outbound = {
 };
 
 /** @internal */
-export const EmployeeCompensations$outboundSchema: z.ZodType<
-  EmployeeCompensations$Outbound,
+export const PayrollUpdateEmployeeCompensations$outboundSchema: z.ZodType<
+  PayrollUpdateEmployeeCompensations$Outbound,
   z.ZodTypeDef,
-  EmployeeCompensations
+  PayrollUpdateEmployeeCompensations
 > = z.object({
   employeeUuid: z.string().optional(),
   version: z.string().optional(),
@@ -452,30 +452,34 @@ export const EmployeeCompensations$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace EmployeeCompensations$ {
-  /** @deprecated use `EmployeeCompensations$inboundSchema` instead. */
-  export const inboundSchema = EmployeeCompensations$inboundSchema;
-  /** @deprecated use `EmployeeCompensations$outboundSchema` instead. */
-  export const outboundSchema = EmployeeCompensations$outboundSchema;
-  /** @deprecated use `EmployeeCompensations$Outbound` instead. */
-  export type Outbound = EmployeeCompensations$Outbound;
+export namespace PayrollUpdateEmployeeCompensations$ {
+  /** @deprecated use `PayrollUpdateEmployeeCompensations$inboundSchema` instead. */
+  export const inboundSchema = PayrollUpdateEmployeeCompensations$inboundSchema;
+  /** @deprecated use `PayrollUpdateEmployeeCompensations$outboundSchema` instead. */
+  export const outboundSchema =
+    PayrollUpdateEmployeeCompensations$outboundSchema;
+  /** @deprecated use `PayrollUpdateEmployeeCompensations$Outbound` instead. */
+  export type Outbound = PayrollUpdateEmployeeCompensations$Outbound;
 }
 
-export function employeeCompensationsToJSON(
-  employeeCompensations: EmployeeCompensations,
+export function payrollUpdateEmployeeCompensationsToJSON(
+  payrollUpdateEmployeeCompensations: PayrollUpdateEmployeeCompensations,
 ): string {
   return JSON.stringify(
-    EmployeeCompensations$outboundSchema.parse(employeeCompensations),
+    PayrollUpdateEmployeeCompensations$outboundSchema.parse(
+      payrollUpdateEmployeeCompensations,
+    ),
   );
 }
 
-export function employeeCompensationsFromJSON(
+export function payrollUpdateEmployeeCompensationsFromJSON(
   jsonString: string,
-): SafeParseResult<EmployeeCompensations, SDKValidationError> {
+): SafeParseResult<PayrollUpdateEmployeeCompensations, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => EmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeCompensations' from JSON`,
+    (x) =>
+      PayrollUpdateEmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollUpdateEmployeeCompensations' from JSON`,
   );
 }
 
@@ -507,7 +511,7 @@ export const PayrollUpdate$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   employee_compensations: z.array(
-    z.lazy(() => EmployeeCompensations$inboundSchema),
+    z.lazy(() => PayrollUpdateEmployeeCompensations$inboundSchema),
   ),
   withholding_pay_period: WithholdingPayPeriod$inboundSchema.optional(),
   skip_regular_deductions: z.boolean().optional(),
@@ -523,7 +527,7 @@ export const PayrollUpdate$inboundSchema: z.ZodType<
 
 /** @internal */
 export type PayrollUpdate$Outbound = {
-  employee_compensations: Array<EmployeeCompensations$Outbound>;
+  employee_compensations: Array<PayrollUpdateEmployeeCompensations$Outbound>;
   withholding_pay_period?: string | undefined;
   skip_regular_deductions?: boolean | undefined;
   fixed_withholding_rate?: boolean | undefined;
@@ -536,7 +540,7 @@ export const PayrollUpdate$outboundSchema: z.ZodType<
   PayrollUpdate
 > = z.object({
   employeeCompensations: z.array(
-    z.lazy(() => EmployeeCompensations$outboundSchema),
+    z.lazy(() => PayrollUpdateEmployeeCompensations$outboundSchema),
   ),
   withholdingPayPeriod: WithholdingPayPeriod$outboundSchema.optional(),
   skipRegularDeductions: z.boolean().optional(),

@@ -20,6 +20,7 @@ scope: `holiday_pay_policies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-holiday_pay_policy" method="get" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -122,6 +123,7 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-holiday_pay_policy" method="post" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -258,6 +260,7 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-companies-company_uuid-holiday_pay_policy" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -396,6 +399,7 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-companies-company_uuid-holiday_pay_policy" method="delete" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -488,6 +492,7 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-companies-company_uuid-holiday_pay_policy-add" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/add" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -602,6 +607,7 @@ scope: `holiday_pay_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-companies-company_uuid-holiday_pay_policy-remove" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/remove" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

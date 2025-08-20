@@ -40,7 +40,7 @@ export type BankAccountsCreateMutationData =
  *
  * scope: `company_bank_accounts:write`
  *
- * > 🚧 Warning
+ * >🚧 Warning
  * >
  * > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
  */

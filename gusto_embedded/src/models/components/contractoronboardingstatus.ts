@@ -16,6 +16,10 @@ export const ContractorOnboardingStatusOnboardingStatus = {
   OnboardingCompleted: "onboarding_completed",
   AdminOnboardingReview: "admin_onboarding_review",
   AdminOnboardingIncomplete: "admin_onboarding_incomplete",
+  SelfOnboardingNotInvited: "self_onboarding_not_invited",
+  SelfOnboardingInvited: "self_onboarding_invited",
+  SelfOnboardingStarted: "self_onboarding_started",
+  SelfOnboardingReview: "self_onboarding_review",
 } as const;
 /**
  * One of the "onboarding_status" enum values.

@@ -25,6 +25,7 @@ scope: `employments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-terminations" method="post" path="/v1/employees/{employee_id}/terminations" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -127,6 +128,7 @@ scope: `employments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-terminations" method="get" path="/v1/employees/{employee_id}/terminations" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -229,6 +231,7 @@ scope: `employments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-employees-employee_id-terminations" method="delete" path="/v1/employees/{employee_id}/terminations" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -323,6 +326,7 @@ scope: `employments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-terminations-employee_id" method="put" path="/v1/terminations/{employee_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -425,6 +429,7 @@ scope: `employments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-rehire" method="post" path="/v1/employees/{employee_id}/rehire" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -527,6 +532,7 @@ scope: `employments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-rehire" method="put" path="/v1/employees/{employee_id}/rehire" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -631,6 +637,7 @@ scope: `employments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-rehire" method="get" path="/v1/employees/{employee_id}/rehire" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -734,6 +741,7 @@ scope: `employments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-employees-employee_id-rehire" method="delete" path="/v1/employees/{employee_id}/rehire" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -827,6 +835,7 @@ scope: `employments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-employment_history" method="get" path="/v1/employees/{employee_id}/employment_history" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

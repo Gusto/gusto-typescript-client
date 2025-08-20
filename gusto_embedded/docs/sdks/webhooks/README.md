@@ -25,6 +25,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-webhook-subscription" method="post" path="/v1/webhook_subscriptions" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -134,6 +135,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-webhook-subscriptions" method="get" path="/v1/webhook_subscriptions" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -238,6 +240,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -348,6 +351,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-webhook-subscription-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -456,6 +460,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-webhook-subscription-uuid" method="delete" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -555,6 +560,7 @@ scope: `webhook_subscriptions:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-verify-webhook-subscription-uuid" method="put" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/verify" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -659,6 +665,7 @@ scope: `webhook_subscriptions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-webhook-subscription-verification-token-uuid" method="get" path="/v1/webhook_subscriptions/{webhook_subscription_uuid}/request_verification_token" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

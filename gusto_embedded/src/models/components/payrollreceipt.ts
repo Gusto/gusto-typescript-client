@@ -35,7 +35,7 @@ export type Totals = {
   taxDebit?: string | undefined;
 };
 
-export type PayrollReceiptTaxes = {
+export type Taxes = {
   /**
    * The amount paid for this tax.
    */
@@ -171,7 +171,7 @@ export type PayrollReceipt = {
   /**
    * An array of totaled employer and employee taxes for the pay period.
    */
-  taxes?: Array<PayrollReceiptTaxes> | undefined;
+  taxes?: Array<Taxes> | undefined;
   /**
    * An array of employee compensations and withholdings for this payroll
    */
@@ -260,26 +260,23 @@ export function totalsFromJSON(
 }
 
 /** @internal */
-export const PayrollReceiptTaxes$inboundSchema: z.ZodType<
-  PayrollReceiptTaxes,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-});
+export const Taxes$inboundSchema: z.ZodType<Taxes, z.ZodTypeDef, unknown> = z
+  .object({
+    name: z.string().optional(),
+    amount: z.string().optional(),
+  });
 
 /** @internal */
-export type PayrollReceiptTaxes$Outbound = {
+export type Taxes$Outbound = {
   name?: string | undefined;
   amount?: string | undefined;
 };
 
 /** @internal */
-export const PayrollReceiptTaxes$outboundSchema: z.ZodType<
-  PayrollReceiptTaxes$Outbound,
+export const Taxes$outboundSchema: z.ZodType<
+  Taxes$Outbound,
   z.ZodTypeDef,
-  PayrollReceiptTaxes
+  Taxes
 > = z.object({
   name: z.string().optional(),
   amount: z.string().optional(),
@@ -289,30 +286,26 @@ export const PayrollReceiptTaxes$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PayrollReceiptTaxes$ {
-  /** @deprecated use `PayrollReceiptTaxes$inboundSchema` instead. */
-  export const inboundSchema = PayrollReceiptTaxes$inboundSchema;
-  /** @deprecated use `PayrollReceiptTaxes$outboundSchema` instead. */
-  export const outboundSchema = PayrollReceiptTaxes$outboundSchema;
-  /** @deprecated use `PayrollReceiptTaxes$Outbound` instead. */
-  export type Outbound = PayrollReceiptTaxes$Outbound;
+export namespace Taxes$ {
+  /** @deprecated use `Taxes$inboundSchema` instead. */
+  export const inboundSchema = Taxes$inboundSchema;
+  /** @deprecated use `Taxes$outboundSchema` instead. */
+  export const outboundSchema = Taxes$outboundSchema;
+  /** @deprecated use `Taxes$Outbound` instead. */
+  export type Outbound = Taxes$Outbound;
 }
 
-export function payrollReceiptTaxesToJSON(
-  payrollReceiptTaxes: PayrollReceiptTaxes,
-): string {
-  return JSON.stringify(
-    PayrollReceiptTaxes$outboundSchema.parse(payrollReceiptTaxes),
-  );
+export function taxesToJSON(taxes: Taxes): string {
+  return JSON.stringify(Taxes$outboundSchema.parse(taxes));
 }
 
-export function payrollReceiptTaxesFromJSON(
+export function taxesFromJSON(
   jsonString: string,
-): SafeParseResult<PayrollReceiptTaxes, SDKValidationError> {
+): SafeParseResult<Taxes, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PayrollReceiptTaxes$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollReceiptTaxes' from JSON`,
+    (x) => Taxes$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Taxes' from JSON`,
   );
 }
 
@@ -536,7 +529,7 @@ export const PayrollReceipt$inboundSchema: z.ZodType<
   right_to_refund: z.string().optional(),
   liability_of_licensee: z.string().optional(),
   totals: z.lazy(() => Totals$inboundSchema).optional(),
-  taxes: z.array(z.lazy(() => PayrollReceiptTaxes$inboundSchema)).optional(),
+  taxes: z.array(z.lazy(() => Taxes$inboundSchema)).optional(),
   employee_compensations: z.array(
     z.lazy(() => PayrollReceiptEmployeeCompensations$inboundSchema),
   ).optional(),
@@ -569,7 +562,7 @@ export type PayrollReceipt$Outbound = {
   right_to_refund?: string | undefined;
   liability_of_licensee?: string | undefined;
   totals?: Totals$Outbound | undefined;
-  taxes?: Array<PayrollReceiptTaxes$Outbound> | undefined;
+  taxes?: Array<Taxes$Outbound> | undefined;
   employee_compensations?:
     | Array<PayrollReceiptEmployeeCompensations$Outbound>
     | undefined;
@@ -593,7 +586,7 @@ export const PayrollReceipt$outboundSchema: z.ZodType<
   rightToRefund: z.string().optional(),
   liabilityOfLicensee: z.string().optional(),
   totals: z.lazy(() => Totals$outboundSchema).optional(),
-  taxes: z.array(z.lazy(() => PayrollReceiptTaxes$outboundSchema)).optional(),
+  taxes: z.array(z.lazy(() => Taxes$outboundSchema)).optional(),
   employeeCompensations: z.array(
     z.lazy(() => PayrollReceiptEmployeeCompensations$outboundSchema),
   ).optional(),

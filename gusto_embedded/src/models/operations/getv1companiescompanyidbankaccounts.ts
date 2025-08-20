@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBankAccount,
@@ -18,12 +19,19 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion>;
 
 export type GetV1CompaniesCompanyIdBankAccountsRequest = {
   /**
@@ -33,23 +41,52 @@ export type GetV1CompaniesCompanyIdBankAccountsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1CompaniesCompanyIdBankAccountsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
-  companyBankAccountList?: Array<CompanyBankAccount> | undefined;
+  companyBankAccounts?: Array<CompanyBankAccount> | undefined;
 };
+
+/** @internal */
+export const GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
+  > = GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1CompaniesCompanyIdBankAccountsRequest$inboundSchema:
   z.ZodType<GetV1CompaniesCompanyIdBankAccountsRequest, z.ZodTypeDef, unknown> =
     z.object({
       company_id: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+      "X-Gusto-API-Version":
+        GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema
+          .default("2024-04-01"),
     }).transform((v) => {
       return remap$(v, {
         "company_id": "companyId",
@@ -71,7 +108,9 @@ export const GetV1CompaniesCompanyIdBankAccountsRequest$outboundSchema:
     GetV1CompaniesCompanyIdBankAccountsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
@@ -129,19 +168,19 @@ export const GetV1CompaniesCompanyIdBankAccountsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Company-Bank-Account-List": z.array(CompanyBankAccount$inboundSchema)
+    "Company-Bank-Accounts": z.array(CompanyBankAccount$inboundSchema)
       .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Company-Bank-Account-List": "companyBankAccountList",
+      "Company-Bank-Accounts": "companyBankAccounts",
     });
   });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdBankAccountsResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Company-Bank-Account-List"?: Array<CompanyBankAccount$Outbound> | undefined;
+  "Company-Bank-Accounts"?: Array<CompanyBankAccount$Outbound> | undefined;
 };
 
 /** @internal */
@@ -152,12 +191,11 @@ export const GetV1CompaniesCompanyIdBankAccountsResponse$outboundSchema:
     GetV1CompaniesCompanyIdBankAccountsResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    companyBankAccountList: z.array(CompanyBankAccount$outboundSchema)
-      .optional(),
+    companyBankAccounts: z.array(CompanyBankAccount$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
-      companyBankAccountList: "Company-Bank-Account-List",
+      companyBankAccounts: "Company-Bank-Accounts",
     });
   });
 

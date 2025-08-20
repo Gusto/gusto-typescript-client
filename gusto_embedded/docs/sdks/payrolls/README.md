@@ -40,6 +40,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls" method="get" path="/v1/companies/{company_id}/payrolls" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -157,6 +158,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-payrolls" method="post" path="/v1/companies/{company_id}/payrolls" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -263,6 +265,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payroll_reversals" method="get" path="/v1/companies/{company_id}/payroll_reversals" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -373,6 +376,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls-payroll_id" method="get" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -482,6 +486,7 @@ scope: `payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-payrolls" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -593,6 +598,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_id-payrolls" method="delete" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -691,6 +697,7 @@ scope: `payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-payrolls-payroll_id-prepare" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}/prepare" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -790,6 +797,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-payment-receipts-payrolls-payroll_uuid" method="get" path="/v1/payrolls/{payroll_uuid}/receipt" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -895,6 +903,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-payroll-blockers-company_uuid" method="get" path="/v1/companies/{company_uuid}/payrolls/blockers" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -999,6 +1008,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-companies-payroll-skip-company_uuid" method="post" path="/v1/companies/{company_uuid}/payrolls/skip" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1106,6 +1116,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-payrolls-gross-up-payroll_uuid" method="post" path="/v1/payrolls/{payroll_uuid}/gross_up" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1210,6 +1221,7 @@ If the company is blocked from running payroll due to issues like incomplete set
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-payrolls-payroll_id-calculate" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}/calculate" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1309,6 +1321,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_id-payrolls-payroll_id-submit" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}/submit" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1409,6 +1422,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-api-v1-companies-company_id-payrolls-payroll_id-cancel" method="put" path="/v1/companies/{company_id}/payrolls/{payroll_id}/cancel" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1504,6 +1518,7 @@ scope: `pay_stubs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub" method="get" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/pay_stub" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1609,6 +1624,7 @@ scope: `pay_stubs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_uuid-pay_stubs" method="get" path="/v1/employees/{employee_id}/pay_stubs" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1712,6 +1728,7 @@ scope: `generated_documents:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks" method="post" path="/v1/payrolls/{payroll_uuid}/generated_documents/printable_payroll_checks" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1811,6 +1828,7 @@ scope: `partner_disbursements:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls-id-partner_disbursements" method="get" path="/v1/companies/{company_id}/payrolls/{id}/partner_disbursements" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1917,6 +1935,7 @@ scope: `partner_disbursements:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="patch-v1-companies-company_id-payrolls-id-partner_disbursements" method="patch" path="/v1/companies/{company_id}/payrolls/{id}/partner_disbursements" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
