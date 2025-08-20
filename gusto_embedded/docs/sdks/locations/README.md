@@ -21,6 +21,7 @@ scope: `companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-locations" method="post" path="/v1/companies/{company_id}/locations" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -131,6 +132,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-locations" method="get" path="/v1/companies/{company_id}/locations" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -234,6 +236,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-locations-location_id" method="get" path="/v1/locations/{location_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -338,6 +341,7 @@ scope: `companies.write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-locations-location_id" method="put" path="/v1/locations/{location_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -449,6 +453,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-locations-location_uuid-minimum_wages" method="get" path="/v1/locations/{location_uuid}/minimum_wages" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

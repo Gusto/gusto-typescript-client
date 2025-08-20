@@ -10,6 +10,10 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import {
+  CompanySuspensionCreationErrors,
+  CompanySuspensionCreationErrors$inboundSchema,
+} from "../models/errors/companysuspensioncreationerrors.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -20,10 +24,6 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostCompaniesCompanyUuidSuspensionsRequest,
   PostCompaniesCompanyUuidSuspensionsRequest$outboundSchema,
@@ -48,7 +48,7 @@ export function companiesSuspensionsSuspend(
 ): APIPromise<
   Result<
     PostCompaniesCompanyUuidSuspensionsResponse,
-    | UnprocessableEntityErrorObject
+    | CompanySuspensionCreationErrors
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -74,7 +74,7 @@ async function $do(
   [
     Result<
       PostCompaniesCompanyUuidSuspensionsResponse,
-      | UnprocessableEntityErrorObject
+      | CompanySuspensionCreationErrors
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -173,7 +173,7 @@ async function $do(
 
   const [result] = await M.match<
     PostCompaniesCompanyUuidSuspensionsResponse,
-    | UnprocessableEntityErrorObject
+    | CompanySuspensionCreationErrors
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -186,7 +186,7 @@ async function $do(
     M.json(200, PostCompaniesCompanyUuidSuspensionsResponse$inboundSchema, {
       key: "Company-Suspension",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, CompanySuspensionCreationErrors$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

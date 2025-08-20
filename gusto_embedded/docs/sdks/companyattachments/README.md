@@ -17,6 +17,7 @@ scope: `company_attachments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-attachment" method="get" path="/v1/companies/{company_id}/attachments/{company_attachment_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -121,6 +122,7 @@ scope: `company_attachments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-attachments" method="get" path="/v1/companies/{company_id}/attachments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -225,6 +227,7 @@ scope: `company_attachments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-attachment" method="post" path="/v1/companies/{company_id}/attachments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { openAsBlob } from "node:fs";

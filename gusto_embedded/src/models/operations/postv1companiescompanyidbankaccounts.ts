@@ -14,44 +14,30 @@ import {
   CompanyBankAccount$outboundSchema,
 } from "../components/companybankaccount.js";
 import {
+  CompanyBankAccountRequest,
+  CompanyBankAccountRequest$inboundSchema,
+  CompanyBankAccountRequest$Outbound,
+  CompanyBankAccountRequest$outboundSchema,
+} from "../components/companybankaccountrequest.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The bank account type
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const AccountType = {
-  Checking: "Checking",
-  Savings: "Savings",
+export const PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
 } as const;
 /**
- * The bank account type
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type AccountType = ClosedEnum<typeof AccountType>;
-
-export type PostV1CompaniesCompanyIdBankAccountsRequestBody = {
-  /**
-   * The bank routing number
-   */
-  routingNumber?: string | undefined;
-  /**
-   * The bank account number
-   */
-  accountNumber?: string | undefined;
-  /**
-   * The bank account type
-   */
-  accountType?: AccountType | undefined;
-};
+export type PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion>;
 
 export type PostV1CompaniesCompanyIdBankAccountsRequest = {
   /**
@@ -61,121 +47,43 @@ export type PostV1CompaniesCompanyIdBankAccountsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesCompanyIdBankAccountsRequestBody;
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
+    | undefined;
+  companyBankAccountRequest: CompanyBankAccountRequest;
 };
 
 export type PostV1CompaniesCompanyIdBankAccountsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * created
    */
   companyBankAccount?: CompanyBankAccount | undefined;
 };
 
 /** @internal */
-export const AccountType$inboundSchema: z.ZodNativeEnum<typeof AccountType> = z
-  .nativeEnum(AccountType);
+export const PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion);
 
 /** @internal */
-export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> =
-  AccountType$inboundSchema;
+export const PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
+  > = PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace AccountType$ {
-  /** @deprecated use `AccountType$inboundSchema` instead. */
-  export const inboundSchema = AccountType$inboundSchema;
-  /** @deprecated use `AccountType$outboundSchema` instead. */
-  export const outboundSchema = AccountType$outboundSchema;
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdBankAccountsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdBankAccountsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    routing_number: z.string().optional(),
-    account_number: z.string().optional(),
-    account_type: AccountType$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "routing_number": "routingNumber",
-      "account_number": "accountNumber",
-      "account_type": "accountType",
-    });
-  });
-
-/** @internal */
-export type PostV1CompaniesCompanyIdBankAccountsRequestBody$Outbound = {
-  routing_number?: string | undefined;
-  account_number?: string | undefined;
-  account_type?: string | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdBankAccountsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdBankAccountsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdBankAccountsRequestBody
-  > = z.object({
-    routingNumber: z.string().optional(),
-    accountNumber: z.string().optional(),
-    accountType: AccountType$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      routingNumber: "routing_number",
-      accountNumber: "account_number",
-      accountType: "account_type",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdBankAccountsRequestBody$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsRequestBody$inboundSchema` instead. */
+export namespace PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema` instead. */
   export const inboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsRequestBody$outboundSchema` instead. */
+    PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema` instead. */
   export const outboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1CompaniesCompanyIdBankAccountsRequestBody$Outbound;
-}
-
-export function postV1CompaniesCompanyIdBankAccountsRequestBodyToJSON(
-  postV1CompaniesCompanyIdBankAccountsRequestBody:
-    PostV1CompaniesCompanyIdBankAccountsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdBankAccountsRequestBody$outboundSchema.parse(
-      postV1CompaniesCompanyIdBankAccountsRequestBody,
-    ),
-  );
-}
-
-export function postV1CompaniesCompanyIdBankAccountsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdBankAccountsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdBankAccountsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyIdBankAccountsRequestBody' from JSON`,
-  );
+    PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema;
 }
 
 /** @internal */
@@ -186,15 +94,15 @@ export const PostV1CompaniesCompanyIdBankAccountsRequest$inboundSchema:
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
-    RequestBody: z.lazy(() =>
-      PostV1CompaniesCompanyIdBankAccountsRequestBody$inboundSchema
-    ),
+    "X-Gusto-API-Version":
+      PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
+    "Company-Bank-Account-Request": CompanyBankAccountRequest$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
       "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
+      "Company-Bank-Account-Request": "companyBankAccountRequest",
     });
   });
 
@@ -202,7 +110,7 @@ export const PostV1CompaniesCompanyIdBankAccountsRequest$inboundSchema:
 export type PostV1CompaniesCompanyIdBankAccountsRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyIdBankAccountsRequestBody$Outbound;
+  "Company-Bank-Account-Request": CompanyBankAccountRequest$Outbound;
 };
 
 /** @internal */
@@ -213,15 +121,15 @@ export const PostV1CompaniesCompanyIdBankAccountsRequest$outboundSchema:
     PostV1CompaniesCompanyIdBankAccountsRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
-    requestBody: z.lazy(() =>
-      PostV1CompaniesCompanyIdBankAccountsRequestBody$outboundSchema
-    ),
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
+    companyBankAccountRequest: CompanyBankAccountRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      companyBankAccountRequest: "Company-Bank-Account-Request",
     });
   });
 

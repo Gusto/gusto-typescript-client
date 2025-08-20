@@ -10,16 +10,18 @@
 
 ## get
 
-Get existing suspension records for this company. A company may have multiple suspension records if they have suspended their Gusto account more than once. 
+Get existing suspension records for this company. A company may have multiple suspension records if they have suspended their Gusto account more than once.
 
-> 📘 To check if company is already suspended
+>📘 To check if company is already suspended
 >
 > To determine if a company is _currently_ suspended, use the `is_suspended` and `company_status` fields in the [Get a company](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies) endpoint.
 
 scope: `company_suspensions:read`
 
+
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-suspensions" method="get" path="/v1/companies/{company_uuid}/suspensions" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -110,9 +112,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## suspend
 
@@ -120,8 +123,10 @@ Use this endpoint to suspend a company. After suspension, company will no longer
 
 scope: `company_suspensions:write`
 
+
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-suspensions" method="post" path="/v1/companies/{company_uuid}/suspensions" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -215,7 +220,7 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.CompanySuspensionCreationErrors | 422                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |

@@ -18,6 +18,7 @@ Get attributes relevant for an employee's federal taxes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-federal_taxes" method="get" path="/v1/employees/{employee_uuid}/federal_taxes" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -120,6 +121,7 @@ scope: `employee_federal_taxes:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -244,6 +246,7 @@ scope: `employee_state_taxes:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -350,6 +353,7 @@ scope: `employee_state_taxes:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

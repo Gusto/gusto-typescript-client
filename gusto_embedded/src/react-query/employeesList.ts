@@ -101,7 +101,9 @@ export function setEmployeesListData(
         | undefined;
       searchTerm?: string | undefined;
       include?: Array<Include> | undefined;
+      onboarded?: boolean | undefined;
       terminated?: boolean | undefined;
+      terminatedToday?: boolean | undefined;
       uuids?: Array<string> | undefined;
       page?: number | undefined;
       per?: number | undefined;
@@ -125,7 +127,9 @@ export function invalidateEmployeesList(
           | undefined;
         searchTerm?: string | undefined;
         include?: Array<Include> | undefined;
+        onboarded?: boolean | undefined;
         terminated?: boolean | undefined;
+        terminatedToday?: boolean | undefined;
         uuids?: Array<string> | undefined;
         page?: number | undefined;
         per?: number | undefined;
@@ -163,7 +167,9 @@ export function buildEmployeesListQuery(
       xGustoAPIVersion: request.xGustoAPIVersion,
       searchTerm: request.searchTerm,
       include: request.include,
+      onboarded: request.onboarded,
       terminated: request.terminated,
+      terminatedToday: request.terminatedToday,
       uuids: request.uuids,
       page: request.page,
       per: request.per,
@@ -194,7 +200,9 @@ export function queryKeyEmployeesList(
       | undefined;
     searchTerm?: string | undefined;
     include?: Array<Include> | undefined;
+    onboarded?: boolean | undefined;
     terminated?: boolean | undefined;
+    terminatedToday?: boolean | undefined;
     uuids?: Array<string> | undefined;
     page?: number | undefined;
     per?: number | undefined;

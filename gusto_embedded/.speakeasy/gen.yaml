@@ -24,7 +24,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.6.6
+  version: 0.6.7
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -60,4 +60,5 @@ typescript:
   packageName: '@gusto/embedded-api'
   responseFormat: envelope-http
   templateVersion: v2
+  usageSDKInitImports: []
   useIndexModules: false

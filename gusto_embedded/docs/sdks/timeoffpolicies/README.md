@@ -31,6 +31,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -139,6 +140,7 @@ scope: `time_off_policies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -241,6 +243,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-time_off_policies-time_off_policy_uuid" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -355,6 +358,7 @@ scope: `time_off_policies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-time_off_policies" method="get" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -457,6 +461,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-time_off_policies" method="post" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -559,6 +564,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-version-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -653,6 +659,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -747,6 +754,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-version-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -841,6 +849,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-deactivate" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/deactivate" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

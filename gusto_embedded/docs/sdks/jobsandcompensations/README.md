@@ -24,6 +24,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-jobs-job_id" method="post" path="/v1/employees/{employee_id}/jobs" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -124,6 +125,7 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-jobs" method="get" path="/v1/employees/{employee_id}/jobs" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -226,6 +228,7 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-jobs-job_id" method="get" path="/v1/jobs/{job_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -328,6 +331,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-jobs-job_id" method="put" path="/v1/jobs/{job_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -430,6 +434,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-jobs-job_id" method="delete" path="/v1/jobs/{job_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -525,6 +530,7 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-jobs-job_id-compensations" method="get" path="/v1/jobs/{job_id}/compensations" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -627,6 +633,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-compensations-compensation_id" method="post" path="/v1/jobs/{job_id}/compensations" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -730,6 +737,7 @@ scope: `jobs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-compensations-compensation_id" method="get" path="/v1/compensations/{compensation_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -832,6 +840,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-compensations-compensation_id" method="put" path="/v1/compensations/{compensation_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -937,6 +946,7 @@ scope: `jobs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-compensations-compensation_id" method="delete" path="/v1/compensations/{compensation_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

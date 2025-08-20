@@ -3,19 +3,14 @@
 ## Example Usage
 
 ```typescript
-import { Taxes } from "@gusto/embedded-api/models/components/payrollemployeecompensationstype.js";
+import { Taxes } from "@gusto/embedded-api/models/components/payrollreceipt.js";
 
-let value: Taxes = {
-  name: "<value>",
-  employer: false,
-  amount: 4387.49,
-};
+let value: Taxes = {};
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `name`             | *string*           | :heavy_check_mark: | N/A                |
-| `employer`         | *boolean*          | :heavy_check_mark: | N/A                |
-| `amount`           | *number*           | :heavy_check_mark: | N/A                |
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `name`                                                            | *string*                                                          | :heavy_minus_sign:                                                | The amount paid for this tax.                                     |
+| `amount`                                                          | *string*                                                          | :heavy_minus_sign:                                                | The total amount paid by both employer and employee for this tax. |

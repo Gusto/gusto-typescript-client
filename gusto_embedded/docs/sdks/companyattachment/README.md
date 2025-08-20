@@ -16,6 +16,7 @@ scope: `company_attachments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-attachment-url" method="get" path="/v1/companies/{company_id}/attachments/{company_attachment_uuid}/download_url" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -15,6 +15,7 @@ scope: `ach_transactions:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-ach-transactions" method="get" path="/v1/companies/{company_uuid}/ach_transactions" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

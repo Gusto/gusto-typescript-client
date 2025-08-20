@@ -23,6 +23,7 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-sandbox-generate_w2" method="post" path="/v1/sandbox/generate_w2" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -119,6 +120,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employee-forms" method="get" path="/v1/employees/{employee_id}/forms" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -221,6 +223,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employee-form" method="get" path="/v1/employees/{employee_id}/forms/{form_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -325,6 +328,7 @@ scope: `employee_forms:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employee-form-pdf" method="get" path="/v1/employees/{employee_id}/forms/{form_id}/pdf" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -432,6 +436,7 @@ scope: `employee_forms:sign`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employee-form-sign" method="put" path="/v1/employees/{employee_id}/forms/{form_id}/sign" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

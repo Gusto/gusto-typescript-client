@@ -23,6 +23,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-external-payroll" method="post" path="/v1/companies/{company_uuid}/external_payrolls" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -125,6 +126,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-external-payrolls" method="get" path="/v1/companies/{company_uuid}/external_payrolls" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -227,6 +229,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-external-payroll" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -331,6 +334,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-external-payroll" method="delete" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -424,6 +428,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-external-payroll" method="put" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -608,6 +613,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-external-payroll-calculate-taxes" method="get" path="/v1/companies/{company_uuid}/external_payrolls/{external_payroll_id}/calculate_taxes" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -712,6 +718,7 @@ scope: `external_payrolls:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-tax-liabilities" method="get" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -814,6 +821,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-tax-liabilities" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -944,6 +952,7 @@ scope: `external_payrolls:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-tax-liabilities-finish" method="put" path="/v1/companies/{company_uuid}/external_payrolls/tax_liabilities/finish" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

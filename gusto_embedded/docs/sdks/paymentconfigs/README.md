@@ -16,6 +16,7 @@ scope: `company_payment_configs:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-payment-configs" method="get" path="/v1/companies/{company_uuid}/payment_configs" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -118,6 +119,7 @@ scope: `company_payment_configs:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-company-payment-configs" method="put" path="/v1/companies/{company_uuid}/payment_configs" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

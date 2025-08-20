@@ -19,6 +19,7 @@ scope: `events:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-events" method="get" path="/v1/events" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

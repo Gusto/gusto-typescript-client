@@ -15,6 +15,7 @@ scope: `flows:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-company-flows" method="post" path="/v1/companies/{company_uuid}/flows" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

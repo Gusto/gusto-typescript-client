@@ -19,6 +19,7 @@ scope: `garnishments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-garnishments" method="post" path="/v1/employees/{employee_id}/garnishments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -123,6 +124,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-garnishments" method="get" path="/v1/employees/{employee_id}/garnishments" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -225,6 +227,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-garnishments-garnishment_id" method="get" path="/v1/garnishments/{garnishment_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -327,6 +330,7 @@ scope: `garnishments:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-garnishments-garnishment_id" method="put" path="/v1/garnishments/{garnishment_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -427,6 +431,7 @@ scope: `garnishments:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-garnishments-child_support" method="get" path="/v1/garnishments/child_support" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

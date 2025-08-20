@@ -34,6 +34,7 @@ IMPORTANT: the returned access and refresh tokens are reserved for this company 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-partner-managed-companies" method="post" path="/v1/partner_managed_companies" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -156,6 +157,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies" method="get" path="/v1/companies/{company_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -258,6 +260,7 @@ scope: `companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies" method="put" path="/v1/companies/{company_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -358,6 +361,7 @@ scope: `partner_managed_companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-partner-managed-companies-company-uuid-migrate" method="put" path="/v1/partner_managed_companies/{company_uuid}/migrate" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -461,6 +465,7 @@ scope: `terms_of_services:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-partner-managed-companies-company_uuid-accept_terms_of_service" method="post" path="/v1/partner_managed_companies/{company_uuid}/accept_terms_of_service" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -563,6 +568,7 @@ scope: `terms_of_services:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-partner-managed-companies-company_uuid-retrieve_terms_of_service" method="post" path="/v1/partner_managed_companies/{company_uuid}/retrieve_terms_of_service" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -662,6 +668,7 @@ scope: `company_admin:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-admins" method="post" path="/v1/companies/{company_id}/admins" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -764,6 +771,7 @@ scope: `company_admin:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-admins" method="get" path="/v1/companies/{company_id}/admins" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -867,6 +875,7 @@ scope: `company_onboarding_status:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-onboarding-status" method="get" path="/v1/companies/{company_uuid}/onboarding_status" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -983,6 +992,7 @@ scope: `companies:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-company-finish-onboarding" method="put" path="/v1/companies/{company_uuid}/finish_onboarding" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1075,6 +1085,7 @@ scope: `companies:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-custom_fields" method="get" path="/v1/companies/{company_id}/custom_fields" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -18,6 +18,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-documents" method="get" path="/v1/contractors/{contractor_uuid}/documents" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -120,6 +121,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document" method="get" path="/v1/documents/{document_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -222,6 +224,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document-pdf" method="get" path="/v1/documents/{document_uuid}/pdf" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -324,6 +327,7 @@ scope: `contractor_documents:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

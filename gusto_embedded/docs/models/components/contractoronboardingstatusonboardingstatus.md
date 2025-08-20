@@ -13,5 +13,5 @@ let value: ContractorOnboardingStatusOnboardingStatus = "onboarding_completed";
 ## Values
 
 ```typescript
-"onboarding_completed" | "admin_onboarding_review" | "admin_onboarding_incomplete"
+"onboarding_completed" | "admin_onboarding_review" | "admin_onboarding_incomplete" | "self_onboarding_not_invited" | "self_onboarding_invited" | "self_onboarding_started" | "self_onboarding_review"
 ```

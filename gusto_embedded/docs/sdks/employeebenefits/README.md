@@ -21,6 +21,7 @@ scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-employee_benefits" method="post" path="/v1/employees/{employee_id}/employee_benefits" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -133,6 +134,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-employee_benefits" method="get" path="/v1/employees/{employee_id}/employee_benefits" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -237,6 +239,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employee_benefits-employee_benefit_id" method="get" path="/v1/employee_benefits/{employee_benefit_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -339,6 +342,7 @@ scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employee_benefits-employee_benefit_id" method="put" path="/v1/employee_benefits/{employee_benefit_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -439,6 +443,7 @@ scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-employee_benefits-employee_benefit_id" method="delete" path="/v1/employee_benefits/{employee_benefit_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -533,6 +538,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-employee-ytd-benefit-amounts-from-different-company" method="get" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -639,6 +645,7 @@ scope: `employee_benefits:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-employee-ytd-benefit-amounts-from-different-company" method="post" path="/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

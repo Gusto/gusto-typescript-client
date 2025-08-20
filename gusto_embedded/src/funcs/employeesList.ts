@@ -113,10 +113,12 @@ async function $do(
       "include": payload.include,
     }, { explode: false }),
     encodeFormQuery({
+      "onboarded": payload.onboarded,
       "page": payload.page,
       "per": payload.per,
       "search_term": payload.search_term,
       "terminated": payload.terminated,
+      "terminated_today": payload.terminated_today,
       "uuids": payload.uuids,
     }),
   );

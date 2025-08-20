@@ -10,7 +10,9 @@ import { companyBenefitsGetEmployeeBenefits } from "../funcs/companyBenefitsGetE
 import { companyBenefitsGetRequirements } from "../funcs/companyBenefitsGetRequirements.js";
 import { companyBenefitsGetSummary } from "../funcs/companyBenefitsGetSummary.js";
 import { companyBenefitsGetSupported } from "../funcs/companyBenefitsGetSupported.js";
+import { companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "../funcs/companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
 import { companyBenefitsList } from "../funcs/companyBenefitsList.js";
+import { companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "../funcs/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
 import { companyBenefitsUpdate } from "../funcs/companyBenefitsUpdate.js";
 import { companyBenefitsUpdateEmployeeBenefits } from "../funcs/companyBenefitsUpdateEmployeeBenefits.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -43,6 +45,10 @@ import {
   GetV1CompanyBenefitsCompanyBenefitIdResponse,
 } from "../models/operations/getv1companybenefitscompanybenefitid.js";
 import {
+  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
+  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
+} from "../models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.js";
+import {
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
 } from "../models/operations/getv1companybenefitscompanybenefitidemployeebenefits.js";
@@ -54,6 +60,10 @@ import {
   PutV1CompanyBenefitsCompanyBenefitIdRequest,
   PutV1CompanyBenefitsCompanyBenefitIdResponse,
 } from "../models/operations/putv1companybenefitscompanybenefitid.js";
+import {
+  PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
+  PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
+} from "../models/operations/putv1companybenefitscompanybenefitidcontributionexclusions.js";
 import {
   PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
@@ -297,5 +307,55 @@ export class CompanyBenefits extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Get contribution exclusions for a company benefit
+   *
+   * @remarks
+   * Returns all contributions for a given company benefit and whether they are excluded or not.
+   *
+   * Currently this endpoint only works for 401-k and Roth 401-k benefit types.
+   *
+   * scope: `company_benefits:read`
+   */
+  async getV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
+    request: GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
+    options?: RequestOptions,
+  ): Promise<
+    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse
+  > {
+    return unwrapAsync(
+      companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Update contribution exclusions for a company benefit
+   *
+   * @remarks
+   * Updates contribution exclusions for a given company benefit.
+   *
+   * Currently this endpoint only works for 401-k and Roth 401-k benefit types.
+   *
+   * scope: `company_benefits:write`
+   */
+  async putV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
+    request: PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
+    options?: RequestOptions,
+  ): Promise<
+    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse
+  > {
+    return unwrapAsync(
+      companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

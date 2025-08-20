@@ -18,6 +18,7 @@ scope: `company_reports:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -144,6 +145,7 @@ scope: `company_reports:write` OR `company_reports:write:general_ledger`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -244,6 +246,7 @@ scope: `company_reports:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-reports-request_uuid" method="get" path="/v1/reports/{request_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -346,6 +349,7 @@ scope: `company_reports:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-report-templates-report_type" method="get" path="/v1/companies/{company_uuid}/report_templates/{report_type}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -26,12 +26,6 @@ import {
   PayrollCreditBlockersType$outboundSchema,
 } from "./payrollcreditblockerstype.js";
 import {
-  PayrollEmployeeCompensationsType,
-  PayrollEmployeeCompensationsType$inboundSchema,
-  PayrollEmployeeCompensationsType$Outbound,
-  PayrollEmployeeCompensationsType$outboundSchema,
-} from "./payrollemployeecompensationstype.js";
-import {
   PayrollPaymentSpeedChangedType,
   PayrollPaymentSpeedChangedType$inboundSchema,
   PayrollPaymentSpeedChangedType$Outbound,
@@ -147,7 +141,6 @@ export type Payroll = {
    * The subtotals for the payroll.
    */
   totals?: PayrollTotalsType | undefined;
-  employeeCompensations?: Array<PayrollEmployeeCompensationsType> | undefined;
   /**
    * An array of taxes applicable to this payroll in addition to taxes included in `employee_compensations`. Only included for processed or calculated payrolls when `taxes` is present in the `include` parameter.
    */
@@ -198,9 +191,6 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
     pay_period: PayrollPayPeriodType$inboundSchema.optional(),
     payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
     totals: PayrollTotalsType$inboundSchema.optional(),
-    employee_compensations: z.array(
-      PayrollEmployeeCompensationsType$inboundSchema,
-    ).optional(),
     company_taxes: z.array(PayrollCompanyTaxesType$inboundSchema).optional(),
     payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
       .optional(),
@@ -231,7 +221,6 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
       "fixed_withholding_rate": "fixedWithholdingRate",
       "pay_period": "payPeriod",
       "payroll_status_meta": "payrollStatusMeta",
-      "employee_compensations": "employeeCompensations",
       "company_taxes": "companyTaxes",
       "payment_speed_changed": "paymentSpeedChanged",
       "created_at": "createdAt",
@@ -263,9 +252,6 @@ export type Payroll$Outbound = {
   pay_period?: PayrollPayPeriodType$Outbound | undefined;
   payroll_status_meta?: PayrollPayrollStatusMetaType$Outbound | undefined;
   totals?: PayrollTotalsType$Outbound | undefined;
-  employee_compensations?:
-    | Array<PayrollEmployeeCompensationsType$Outbound>
-    | undefined;
   company_taxes?: Array<PayrollCompanyTaxesType$Outbound> | undefined;
   payment_speed_changed?: PayrollPaymentSpeedChangedType$Outbound | undefined;
   created_at?: string | undefined;
@@ -304,9 +290,6 @@ export const Payroll$outboundSchema: z.ZodType<
   payPeriod: PayrollPayPeriodType$outboundSchema.optional(),
   payrollStatusMeta: PayrollPayrollStatusMetaType$outboundSchema.optional(),
   totals: PayrollTotalsType$outboundSchema.optional(),
-  employeeCompensations: z.array(
-    PayrollEmployeeCompensationsType$outboundSchema,
-  ).optional(),
   companyTaxes: z.array(PayrollCompanyTaxesType$outboundSchema).optional(),
   paymentSpeedChanged: PayrollPaymentSpeedChangedType$outboundSchema.optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
@@ -333,7 +316,6 @@ export const Payroll$outboundSchema: z.ZodType<
     fixedWithholdingRate: "fixed_withholding_rate",
     payPeriod: "pay_period",
     payrollStatusMeta: "payroll_status_meta",
-    employeeCompensations: "employee_compensations",
     companyTaxes: "company_taxes",
     paymentSpeedChanged: "payment_speed_changed",
     createdAt: "created_at",

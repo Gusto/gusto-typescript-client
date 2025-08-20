@@ -15,6 +15,7 @@ scope: `generated_documents:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-generated_documents-document_type-request_uuid" method="get" path="/v1/generated_documents/{document_type}/{request_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

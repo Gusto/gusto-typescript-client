@@ -149,7 +149,7 @@ export type Contractor = {
   /**
    * The boolean flag indicating whether Gusto will file a new hire report for the contractor
    */
-  fileNewHireReport?: boolean | undefined;
+  fileNewHireReport?: boolean | null | undefined;
   /**
    * State where the contractor will be conducting the majority of their work for the company.
    *
@@ -355,7 +355,7 @@ export const Contractor$inboundSchema: z.ZodType<
   start_date: z.string().optional(),
   address: z.nullable(z.lazy(() => Address$inboundSchema)).optional(),
   hourly_rate: z.string().optional(),
-  file_new_hire_report: z.boolean().default(false),
+  file_new_hire_report: z.nullable(z.boolean()).optional(),
   work_state: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
   onboarding_status: ContractorOnboardingStatus1$inboundSchema.optional(),
@@ -401,7 +401,7 @@ export type Contractor$Outbound = {
   start_date?: string | undefined;
   address?: Address$Outbound | null | undefined;
   hourly_rate?: string | undefined;
-  file_new_hire_report: boolean;
+  file_new_hire_report?: boolean | null | undefined;
   work_state?: string | null | undefined;
   onboarded?: boolean | undefined;
   onboarding_status?: string | undefined;
@@ -432,7 +432,7 @@ export const Contractor$outboundSchema: z.ZodType<
   startDate: z.string().optional(),
   address: z.nullable(z.lazy(() => Address$outboundSchema)).optional(),
   hourlyRate: z.string().optional(),
-  fileNewHireReport: z.boolean().default(false),
+  fileNewHireReport: z.nullable(z.boolean()).optional(),
   workState: z.nullable(z.string()).optional(),
   onboarded: z.boolean().optional(),
   onboardingStatus: ContractorOnboardingStatus1$outboundSchema.optional(),

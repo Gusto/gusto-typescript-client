@@ -23,6 +23,7 @@ scope: `i9_authorizations:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-i9_authorization" method="get" path="/v1/employees/{employee_id}/i9_authorization" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -143,6 +144,7 @@ scope: `i9_authorizations:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization" method="put" path="/v1/employees/{employee_id}/i9_authorization" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -243,6 +245,7 @@ scope: `i9_authorizations:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-i9_authorization-document_options" method="get" path="/v1/employees/{employee_id}/i9_authorization/document_options" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -345,6 +348,7 @@ scope: `i9_authorizations:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-i9_authorization-documents" method="get" path="/v1/employees/{employee_id}/i9_authorization/documents" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -454,6 +458,7 @@ scope: `i9_authorizations:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-documents" method="put" path="/v1/employees/{employee_id}/i9_authorization/documents" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -568,6 +573,7 @@ scope: `i9_authorizations:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-employees-employee_id-i9_authorization-documents-document_id" method="delete" path="/v1/employees/{employee_id}/i9_authorization/documents/{document_id}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -661,6 +667,7 @@ scope: `i9_authorizations:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-i9_authorization-employer_sign" method="put" path="/v1/employees/{employee_id}/i9_authorization/employer_sign" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

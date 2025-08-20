@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 3cd0c2220953704f5f13982f80fc83d6
+  docChecksum: d07994884780fa0de44172913feac1f0
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.582.0
-  generationVersion: 2.657.1
-  releaseVersion: 0.6.6
-  configChecksum: 0306c134f6231d987a53f4c2fab9e9a0
+  speakeasyVersion: 1.606.0
+  generationVersion: 2.686.7
+  releaseVersion: 0.6.7
+  configChecksum: ef82d7d4d0a98ddd2ffc074a8ef3748e
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
     constsAndDefaults: 0.1.12
-    core: 3.21.14
+    core: 3.21.20
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.0
@@ -89,6 +89,8 @@ generatedFiles:
   - docs/models/components/companyaddress.md
   - docs/models/components/companyattachment.md
   - docs/models/components/companybankaccount.md
+  - docs/models/components/companybankaccountrequest.md
+  - docs/models/components/companybankaccountrequestaccounttype.md
   - docs/models/components/companybenefit.md
   - docs/models/components/companybenefitwithemployeebenefits.md
   - docs/models/components/companybenefitwithemployeebenefitscontribution.md
@@ -151,6 +153,7 @@ generatedFiles:
   - docs/models/components/contractors.md
   - docs/models/components/contractortype.md
   - docs/models/components/contribution.md
+  - docs/models/components/contributionexclusion.md
   - docs/models/components/coverageamount.md
   - docs/models/components/coveragesalarymultiplier.md
   - docs/models/components/createreport.md
@@ -224,7 +227,6 @@ generatedFiles:
   - docs/models/components/externalpayroll.md
   - docs/models/components/externalpayrollbasic.md
   - docs/models/components/externalpayrollbasicstatus.md
-  - docs/models/components/externalpayrollbenefits.md
   - docs/models/components/externalpayrollitems.md
   - docs/models/components/externalpayrollmetadata.md
   - docs/models/components/externalpayrolltaxes.md
@@ -338,14 +340,21 @@ generatedFiles:
   - docs/models/components/payrollreceipt.md
   - docs/models/components/payrollreceiptemployeecompensations.md
   - docs/models/components/payrollreceiptpaymentmethod.md
-  - docs/models/components/payrollreceipttaxes.md
   - docs/models/components/payrollreversal.md
+  - docs/models/components/payrollshow.md
+  - docs/models/components/payrollshowbenefits.md
+  - docs/models/components/payrollshowfixedcompensations.md
+  - docs/models/components/payrollshowhourlycompensations.md
+  - docs/models/components/payrollshowpaidtimeoff.md
+  - docs/models/components/payrollshowpaymentmethod.md
+  - docs/models/components/payrollshowtaxes.md
   - docs/models/components/payrollsubmissionblockerstype.md
   - docs/models/components/payrollsubmissionblockerstypemetadata.md
   - docs/models/components/payrollsubmissionblockerstypestatus.md
   - docs/models/components/payrolltotalstype.md
   - docs/models/components/payrolltype.md
   - docs/models/components/payrollupdate.md
+  - docs/models/components/payrollupdateemployeecompensations.md
   - docs/models/components/payrollupdatefixedcompensations.md
   - docs/models/components/payrollupdatehourlycompensations.md
   - docs/models/components/payrollupdatepaidtimeoff.md
@@ -447,6 +456,7 @@ generatedFiles:
   - docs/models/components/workaddress.md
   - docs/models/components/ytdbenefitamountsfromdifferentcompany.md
   - docs/models/errors/base.md
+  - docs/models/errors/companysuspensioncreationerrors.md
   - docs/models/errors/deletev1companybenefitscompanybenefitiderrors.md
   - docs/models/errors/deletev1companybenefitscompanybenefitidresponsebody.md
   - docs/models/errors/errors.md
@@ -476,6 +486,9 @@ generatedFiles:
   - docs/models/operations/deletecompaniescompanyuuidholidaypaypolicyresponse.md
   - docs/models/operations/deletedepartmentrequest.md
   - docs/models/operations/deletedepartmentresponse.md
+  - docs/models/operations/deletev1companiescompanyidbankaccountsbankaccountidheaderxgustoapiversion.md
+  - docs/models/operations/deletev1companiescompanyidbankaccountsbankaccountidrequest.md
+  - docs/models/operations/deletev1companiescompanyidbankaccountsbankaccountidresponse.md
   - docs/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpaymentrequest.md
   - docs/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpaymentresponse.md
   - docs/models/operations/deletev1companiescompanyidearningtypesearningtypeuuidrequest.md
@@ -543,6 +556,7 @@ generatedFiles:
   - docs/models/operations/getcompaniescompanyuuidholidaypaypolicyresponse.md
   - docs/models/operations/getcompaniescompanyuuidreporttemplatesreporttyperequest.md
   - docs/models/operations/getcompaniescompanyuuidreporttemplatesreporttyperesponse.md
+  - docs/models/operations/getcompaniescompanyuuidsuspensionsheaderxgustoapiversion.md
   - docs/models/operations/getcompaniescompanyuuidsuspensionsrequest.md
   - docs/models/operations/getcompaniescompanyuuidsuspensionsresponse.md
   - docs/models/operations/getcompaniescompanyuuidtimeoffpoliciesrequest.md
@@ -591,6 +605,7 @@ generatedFiles:
   - docs/models/operations/getv1companiesattachmenturlresponsebody.md
   - docs/models/operations/getv1companiescompanyidadminsrequest.md
   - docs/models/operations/getv1companiescompanyidadminsresponse.md
+  - docs/models/operations/getv1companiescompanyidbankaccountsheaderxgustoapiversion.md
   - docs/models/operations/getv1companiescompanyidbankaccountsrequest.md
   - docs/models/operations/getv1companiescompanyidbankaccountsresponse.md
   - docs/models/operations/getv1companiescompanyidcompanybenefitsrequest.md
@@ -656,6 +671,8 @@ generatedFiles:
   - docs/models/operations/getv1companiespayrollblockerscompanyuuidresponse.md
   - docs/models/operations/getv1companiesrequest.md
   - docs/models/operations/getv1companiesresponse.md
+  - docs/models/operations/getv1companybenefitscompanybenefitidcontributionexclusionsrequest.md
+  - docs/models/operations/getv1companybenefitscompanybenefitidcontributionexclusionsresponse.md
   - docs/models/operations/getv1companybenefitscompanybenefitidemployeebenefitsrequest.md
   - docs/models/operations/getv1companybenefitscompanybenefitidemployeebenefitsresponse.md
   - docs/models/operations/getv1companybenefitscompanybenefitidrequest.md
@@ -862,6 +879,7 @@ generatedFiles:
   - docs/models/operations/postcompaniescompanyuuidreportsrequest.md
   - docs/models/operations/postcompaniescompanyuuidreportsrequestbody.md
   - docs/models/operations/postcompaniescompanyuuidreportsresponse.md
+  - docs/models/operations/postcompaniescompanyuuidsuspensionsheaderxgustoapiversion.md
   - docs/models/operations/postcompaniescompanyuuidsuspensionsrequest.md
   - docs/models/operations/postcompaniescompanyuuidsuspensionsrequestbody.md
   - docs/models/operations/postcompaniescompanyuuidsuspensionsresponse.md
@@ -897,8 +915,8 @@ generatedFiles:
   - docs/models/operations/postv1companiescompanyidadminsrequest.md
   - docs/models/operations/postv1companiescompanyidadminsrequestbody.md
   - docs/models/operations/postv1companiescompanyidadminsresponse.md
+  - docs/models/operations/postv1companiescompanyidbankaccountsheaderxgustoapiversion.md
   - docs/models/operations/postv1companiescompanyidbankaccountsrequest.md
-  - docs/models/operations/postv1companiescompanyidbankaccountsrequestbody.md
   - docs/models/operations/postv1companiescompanyidbankaccountsresponse.md
   - docs/models/operations/postv1companiescompanyidcompanybenefitsrequest.md
   - docs/models/operations/postv1companiescompanyidcompanybenefitsrequestbody.md
@@ -952,7 +970,6 @@ generatedFiles:
   - docs/models/operations/postv1contractorscontractoruuidbankaccountsrequest.md
   - docs/models/operations/postv1contractorscontractoruuidbankaccountsrequestbody.md
   - docs/models/operations/postv1contractorscontractoruuidbankaccountsresponse.md
-  - docs/models/operations/postv1employeesemployeeidbankaccountsaccounttype.md
   - docs/models/operations/postv1employeesemployeeidbankaccountsrequest.md
   - docs/models/operations/postv1employeesemployeeidbankaccountsrequestbody.md
   - docs/models/operations/postv1employeesemployeeidbankaccountsresponse.md
@@ -1090,6 +1107,9 @@ generatedFiles:
   - docs/models/operations/putv1companiesrequest.md
   - docs/models/operations/putv1companiesrequestbody.md
   - docs/models/operations/putv1companiesresponse.md
+  - docs/models/operations/putv1companybenefitscompanybenefitidcontributionexclusionsrequest.md
+  - docs/models/operations/putv1companybenefitscompanybenefitidcontributionexclusionsrequestbody.md
+  - docs/models/operations/putv1companybenefitscompanybenefitidcontributionexclusionsresponse.md
   - docs/models/operations/putv1companybenefitscompanybenefitidemployeebenefitsrequest.md
   - docs/models/operations/putv1companybenefitscompanybenefitidemployeebenefitsrequestbody.md
   - docs/models/operations/putv1companybenefitscompanybenefitidemployeebenefitsresponse.md
@@ -1338,6 +1358,7 @@ generatedFiles:
   - src/funcs/achTransactionsGetAll.ts
   - src/funcs/bankAccountsCreate.ts
   - src/funcs/bankAccountsCreateFromPlaidToken.ts
+  - src/funcs/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.ts
   - src/funcs/bankAccountsGet.ts
   - src/funcs/bankAccountsVerify.ts
   - src/funcs/companiesAcceptTermsOfService.ts
@@ -1365,7 +1386,9 @@ generatedFiles:
   - src/funcs/companyBenefitsGetRequirements.ts
   - src/funcs/companyBenefitsGetSummary.ts
   - src/funcs/companyBenefitsGetSupported.ts
+  - src/funcs/companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions.ts
   - src/funcs/companyBenefitsList.ts
+  - src/funcs/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.ts
   - src/funcs/companyBenefitsUpdate.ts
   - src/funcs/companyBenefitsUpdateEmployeeBenefits.ts
   - src/funcs/companyFormsGet.ts
@@ -1623,6 +1646,7 @@ generatedFiles:
   - src/models/components/companyaddress.ts
   - src/models/components/companyattachment.ts
   - src/models/components/companybankaccount.ts
+  - src/models/components/companybankaccountrequest.ts
   - src/models/components/companybenefit.ts
   - src/models/components/companybenefitwithemployeebenefits.ts
   - src/models/components/companycustomfield.ts
@@ -1644,6 +1668,7 @@ generatedFiles:
   - src/models/components/contractorpaymentreceipt.ts
   - src/models/components/contractorpaymentsummary.ts
   - src/models/components/contractorpaymentsummarybydates.ts
+  - src/models/components/contributionexclusion.ts
   - src/models/components/createreport.ts
   - src/models/components/customfieldtype.ts
   - src/models/components/department.ts
@@ -1728,6 +1753,7 @@ generatedFiles:
   - src/models/components/payrollprocessingrequest.ts
   - src/models/components/payrollreceipt.ts
   - src/models/components/payrollreversal.ts
+  - src/models/components/payrollshow.ts
   - src/models/components/payrollsubmissionblockerstype.ts
   - src/models/components/payrolltotalstype.ts
   - src/models/components/payrollupdate.ts
@@ -1770,6 +1796,7 @@ generatedFiles:
   - src/models/components/wireinrequest.ts
   - src/models/components/ytdbenefitamountsfromdifferentcompany.ts
   - src/models/errors/apierror.ts
+  - src/models/errors/companysuspensioncreationerrors.ts
   - src/models/errors/deletev1companybenefitscompanybenefitid.ts
   - src/models/errors/gustoembeddederror.ts
   - src/models/errors/httpclienterrors.ts
@@ -1784,6 +1811,7 @@ generatedFiles:
   - src/models/errors/unprocessableentityerrorobject1.ts
   - src/models/operations/deletecompaniescompanyuuidholidaypaypolicy.ts
   - src/models/operations/deletedepartment.ts
+  - src/models/operations/deletev1companiescompanyidbankaccountsbankaccountid.ts
   - src/models/operations/deletev1companiescompanyidcontractorpaymentcontractorpayment.ts
   - src/models/operations/deletev1companiescompanyidearningtypesearningtypeuuid.ts
   - src/models/operations/deletev1companiescompanyidpayrolls.ts
@@ -1857,6 +1885,7 @@ generatedFiles:
   - src/models/operations/getv1companiescompanyuuidtaxrequirementsstate.ts
   - src/models/operations/getv1companiespayrollblockerscompanyuuid.ts
   - src/models/operations/getv1companybenefitscompanybenefitid.ts
+  - src/models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.ts
   - src/models/operations/getv1companybenefitscompanybenefitidemployeebenefits.ts
   - src/models/operations/getv1companyexternalpayrolls.ts
   - src/models/operations/getv1companyfinishonboarding.ts
@@ -1995,6 +2024,7 @@ generatedFiles:
   - src/models/operations/putv1companiescompanyuuidsignatoriessignatoryuuid.ts
   - src/models/operations/putv1companiescompanyuuidtaxrequirementsstate.ts
   - src/models/operations/putv1companybenefitscompanybenefitid.ts
+  - src/models/operations/putv1companybenefitscompanybenefitidcontributionexclusions.ts
   - src/models/operations/putv1companybenefitscompanybenefitidemployeebenefits.ts
   - src/models/operations/putv1companyformsign.ts
   - src/models/operations/putv1companyindustry.ts
@@ -2044,6 +2074,7 @@ generatedFiles:
   - src/react-query/achTransactionsGetAll.ts
   - src/react-query/bankAccountsCreate.ts
   - src/react-query/bankAccountsCreateFromPlaidToken.ts
+  - src/react-query/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.ts
   - src/react-query/bankAccountsGet.ts
   - src/react-query/bankAccountsVerify.ts
   - src/react-query/companiesAcceptTermsOfService.ts
@@ -2071,7 +2102,9 @@ generatedFiles:
   - src/react-query/companyBenefitsGetRequirements.ts
   - src/react-query/companyBenefitsGetSummary.ts
   - src/react-query/companyBenefitsGetSupported.ts
+  - src/react-query/companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions.ts
   - src/react-query/companyBenefitsList.ts
+  - src/react-query/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.ts
   - src/react-query/companyBenefitsUpdate.ts
   - src/react-query/companyBenefitsUpdateEmployeeBenefits.ts
   - src/react-query/companyFormsGet.ts
@@ -2743,6 +2776,8 @@ examples:
       responses:
         "200":
           application/json: [{}, {}]
+        "404":
+          application/json: {"errors": []}
   post-companies-company_uuid-suspensions:
     Leaving to join another payroll provider:
       parameters:
@@ -2803,6 +2838,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-companies-company-uuid-suspensions:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"file_quarterly_forms": true, "file_yearly_forms": false, "reconcile_tax_method": "pay_taxes", "reason": "acquired"}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": []}
   get-invoices-invoice-period:
     example:
       parameters:
@@ -3442,6 +3490,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-companies-company-id-bank-accounts:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"routing_number": "<value>", "account_number": "<value>", "account_type": "Savings"}
+      responses:
+        "201":
+          application/json: {"uuid": "035098fc-43ca-4e65-9b38-e0b3c4343abe"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-companies-company_id-bank-accounts:
     Example:
       parameters:
@@ -3452,6 +3513,17 @@ examples:
       responses:
         "200":
           application/json: [{"uuid": "1263eae5-4411-48d9-bd6d-18ed93082e65", "company_uuid": "e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36", "account_type": "Checking", "routing_number": "851070439", "hidden_account_number": "XXXX4087", "verification_status": "verified", "verification_type": "bank_deposits", "name": "Employer Funding Account"}]
+    speakeasy-default-get-v1-companies-company-id-bank-accounts:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"uuid": "e6efb88c-6c67-46bf-9667-a7f5c6e14bb7"}]
+        "404":
+          application/json: {"errors": []}
   put-v1-companies-company_id-bank-accounts-verify:
     Example:
       parameters:
@@ -5970,7 +6042,7 @@ examples:
         application/json: {"type": "Individual", "wage_type": "Fixed", "start_date": "2020-04-01", "self_onboarding": true, "email": "johnson@johnson.com", "first_name": "Johnson", "last_name": "Johnson", "file_new_hire_report": false, "work_state": "CA"}
       responses:
         "201":
-          application/json: {"uuid": "dab2ac34-b5e4-4577-aaf6-ee525de18376", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
+          application/json: {"uuid": "dab2ac34-b5e4-4577-aaf6-ee525de18376", "is_active": true, "hourly_rate": "50.0"}
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
     Create a Business contractor:
@@ -5983,7 +6055,7 @@ examples:
         application/json: {"type": "Business", "wage_type": "Fixed", "start_date": "2020-04-01", "self_onboarding": false, "file_new_hire_report": false, "business_name": "Johnson-Johnson Contractors"}
       responses:
         "201":
-          application/json: {"uuid": "dab2ac34-b5e4-4577-aaf6-ee525de18376", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
+          application/json: {"uuid": "dab2ac34-b5e4-4577-aaf6-ee525de18376", "is_active": true, "hourly_rate": "50.0"}
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
     Individual Contractor:
@@ -6081,7 +6153,7 @@ examples:
         application/json: {"version": "b48c46abfed1487b873b442334b3c4ff", "type": "Individual", "wage_type": "Hourly", "start_date": "2021-01-01", "hourly_rate": "20.00", "self_onboarding": false, "first_name": "Chanel", "last_name": "Boyle", "middle_initial": "X", "file_new_hire_report": false, "is_active": true}
       responses:
         "200":
-          application/json: {"uuid": "1c0f975f-b446-4219-b9c7-27da3fb56262", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
+          application/json: {"uuid": "1c0f975f-b446-4219-b9c7-27da3fb56262", "is_active": true, "hourly_rate": "50.0"}
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
     Update a Business Contractor:
@@ -6094,7 +6166,7 @@ examples:
         application/json: {"version": "b48c46abfed1487b873b442334b3c4ff", "type": "Individual", "wage_type": "Fixed", "start_date": "2020-01-11", "self_onboarding": false, "file_new_hire_report": false, "business_name": "Contracting Solutions", "ein": "991113334", "is_active": false}
       responses:
         "200":
-          application/json: {"uuid": "1c0f975f-b446-4219-b9c7-27da3fb56262", "is_active": true, "hourly_rate": "50.0", "file_new_hire_report": false}
+          application/json: {"uuid": "1c0f975f-b446-4219-b9c7-27da3fb56262", "is_active": true, "hourly_rate": "50.0"}
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
     Individual Contractor:
@@ -7219,7 +7291,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "gross_pay": 2791.25, "net_pay": 1953.31, "check_amount": 1953.31, "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": 100, "company_contribution": 50, "imputed": true}, {"name": "401K", "employee_deduction": 100, "company_contribution": 50, "imputed": false}], "deductions": [{"name": "Child Support", "amount": 80}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 646.69}, {"name": "Social Security", "employer": true, "amount": 191.25}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "gross_pay": 2791.25, "net_pay": 1953.31, "check_amount": 1953.31, "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": 100, "company_contribution": 50, "imputed": true}, {"name": "401K", "employee_deduction": 100, "company_contribution": 50, "imputed": false}], "deductions": [{"name": "Child Support", "amount": 80}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 646.69}, {"name": "Social Security", "employer": true, "amount": 191.25}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "gross_pay": 2791.25, "net_pay": 1953.31, "check_amount": 1953.31, "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}], "benefits": [{"name": "Group Term Life", "employee_deduction": 100, "company_contribution": 50, "imputed": true}, {"name": "401K", "employee_deduction": 100, "company_contribution": 50, "imputed": false}], "deductions": [{"name": "Child Support", "amount": 80}], "taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 646.69}, {"name": "Social Security", "employer": true, "amount": 191.25}]}], "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10", "metadata": {}}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
+          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10", "metadata": {}}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
     Basic:
       parameters:
         path:
@@ -9646,5 +9718,71 @@ examples:
           application/json: {}
         "404":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  delete-v1-companies-company_id-bank-accounts-bank_account_id:
+    speakeasy-default-delete-v1-companies-company-id-bank-accounts-bank-account-id:
+      parameters:
+        path:
+          company_id: "<id>"
+          bank_account_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  get-v1-company_benefits-company_benefit_id-contribution_exclusions:
+    Example:
+      parameters:
+        path:
+          company_benefit_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"contribution_uuid": "b82e35c5-d7c6-4705-9e16-9f87499ade18", "contribution_type": "Bonus", "excluded": false}, {"contribution_uuid": "f5618c94-ed7d-4366-b2c4-ff05e430064f", "contribution_type": "Cash Tips", "excluded": false}, {"contribution_uuid": "60191999-004a-49d9-b163-630574433653", "contribution_type": "Commission", "excluded": false}, {"contribution_uuid": "75a7a827-1f2d-4d6f-94f2-514c1fc32b13", "contribution_type": "Regular", "excluded": false}, {"contribution_uuid": "eead3c7c-7964-4e3c-b609-670456127b09", "contribution_type": "Life insurance imputed benefit", "excluded": true}]
+  put-v1-company_benefits-company_benefit_id-contribution_exclusions:
+    Example:
+      parameters:
+        path:
+          company_benefit_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"contribution_exclusions": [{"contribution_uuid": "082dfd3e-5b55-11f0-bb42-ab7136ba04e2", "contribution_type": "Bonus", "excluded": true}, {"contribution_uuid": "082e034c-5b55-11f0-bb42-ab7136ba04e2", "contribution_type": "Commission", "excluded": false}, {"contribution_uuid": "082e1f6c-5b55-11f0-bb42-ab7136ba04e2", "contribution_type": "Regular", "excluded": true}]}
+      responses:
+        "200":
+          application/json: [{"contribution_uuid": "b82e35c5-d7c6-4705-9e16-9f87499ade18", "contribution_type": "Bonus", "excluded": false}, {"contribution_uuid": "f5618c94-ed7d-4366-b2c4-ff05e430064f", "contribution_type": "Cash Tips", "excluded": false}, {"contribution_uuid": "60191999-004a-49d9-b163-630574433653", "contribution_type": "Commission", "excluded": false}, {"contribution_uuid": "75a7a827-1f2d-4d6f-94f2-514c1fc32b13", "contribution_type": "Regular", "excluded": false}, {"contribution_uuid": "eead3c7c-7964-4e3c-b609-670456127b09", "contribution_type": "Life insurance imputed benefit", "excluded": true}]
+    Basic:
+      parameters:
+        path:
+          company_benefit_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"contribution_exclusions": [{"contribution_uuid": "<id>", "contribution_type": "<value>", "excluded": true}]}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
+    Resource:
+      parameters:
+        path:
+          company_benefit_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"contribution_exclusions": [{"contribution_uuid": "<id>", "contribution_type": "<value>", "excluded": true}]}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
+    Nested:
+      parameters:
+        path:
+          company_benefit_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"contribution_exclusions": [{"contribution_uuid": "<id>", "contribution_type": "<value>", "excluded": true}]}
+      responses:
+        "422":
+          application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
 examplesVersion: 1.0.2
 generatedTests: {}

@@ -19,12 +19,19 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion>;
 
 /**
  * How Gusto will handle taxes already collected.
@@ -44,7 +51,6 @@ export type ReconcileTaxMethod = ClosedEnum<typeof ReconcileTaxMethod>;
  * @remarks
  *
  * > 🚧 FEIN or entity type changes require Customer Support
- * >
  * > If a company is switching FEIN or changing their entity type, this change must be performed by Gusto Customer Support and cannot be performed via the API at this time.
  */
 export const Reason = {
@@ -60,21 +66,27 @@ export const Reason = {
  * @remarks
  *
  * > 🚧 FEIN or entity type changes require Customer Support
- * >
  * > If a company is switching FEIN or changing their entity type, this change must be performed by Gusto Customer Support and cannot be performed via the API at this time.
  */
 export type Reason = ClosedEnum<typeof Reason>;
 
 /**
- * Which competitor the company is joining instead. Required if `reason` is `'switching_provider'`.
+ * The competitor the company is switching to. Required if `reason` is `'switching_provider'`.
+ *
+ * @remarks
+ *
+ * > 🚧 Switching to Gusto requires Customer Support
+ * > If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
  */
 export const LeavingFor = {
-  Apd: "apd",
-  AdpTotalSource: "adp_total_source",
   Accountant: "accountant",
+  Adp: "adp",
+  AdpTotalSource: "adp_total_source",
   BambooHr: "bamboo_hr",
   BankOrFinancialInstitution: "bank_or_financial_institution",
   Check: "check",
+  GustoCom: "gusto_com",
+  Homebase: "homebase",
   Insperity: "insperity",
   IntuitOrQuickbooks: "intuit_or_quickbooks",
   Justworks: "justworks",
@@ -83,6 +95,7 @@ export const LeavingFor = {
   Onpay: "onpay",
   Other: "other",
   Patriot: "patriot",
+  Paychex: "paychex",
   Paycom: "paycom",
   Paylocity: "paylocity",
   Rippling: "rippling",
@@ -92,7 +105,12 @@ export const LeavingFor = {
   Zenefits: "zenefits",
 } as const;
 /**
- * Which competitor the company is joining instead. Required if `reason` is `'switching_provider'`.
+ * The competitor the company is switching to. Required if `reason` is `'switching_provider'`.
+ *
+ * @remarks
+ *
+ * > 🚧 Switching to Gusto requires Customer Support
+ * > If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
  */
 export type LeavingFor = ClosedEnum<typeof LeavingFor>;
 
@@ -119,35 +137,66 @@ export type PostCompaniesCompanyUuidSuspensionsRequestBody = {
    * @remarks
    *
    * > 🚧 FEIN or entity type changes require Customer Support
-   * >
    * > If a company is switching FEIN or changing their entity type, this change must be performed by Gusto Customer Support and cannot be performed via the API at this time.
    */
   reason: Reason;
   /**
-   * Which competitor the company is joining instead. Required if `reason` is `'switching_provider'`.
+   * The competitor the company is switching to. Required if `reason` is `'switching_provider'`.
+   *
+   * @remarks
+   *
+   * > 🚧 Switching to Gusto requires Customer Support
+   * > If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
    */
   leavingFor?: LeavingFor | undefined;
 };
 
 export type PostCompaniesCompanyUuidSuspensionsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostCompaniesCompanyUuidSuspensionsRequestBody;
 };
 
 export type PostCompaniesCompanyUuidSuspensionsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful response
    */
   companySuspension?: CompanySuspension | undefined;
 };
+
+/** @internal */
+export const PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+  > = PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const ReconcileTaxMethod$inboundSchema: z.ZodNativeEnum<
@@ -309,23 +358,25 @@ export function postCompaniesCompanyUuidSuspensionsRequestBodyFromJSON(
 export const PostCompaniesCompanyUuidSuspensionsRequest$inboundSchema:
   z.ZodType<PostCompaniesCompanyUuidSuspensionsRequest, z.ZodTypeDef, unknown> =
     z.object({
+      "X-Gusto-API-Version":
+        PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema
+          .default("2024-04-01"),
       company_uuid: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
       RequestBody: z.lazy(() =>
         PostCompaniesCompanyUuidSuspensionsRequestBody$inboundSchema
       ),
     }).transform((v) => {
       return remap$(v, {
-        "company_uuid": "companyUuid",
         "X-Gusto-API-Version": "xGustoAPIVersion",
+        "company_uuid": "companyUuid",
         "RequestBody": "requestBody",
       });
     });
 
 /** @internal */
 export type PostCompaniesCompanyUuidSuspensionsRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
+  company_uuid: string;
   RequestBody: PostCompaniesCompanyUuidSuspensionsRequestBody$Outbound;
 };
 
@@ -336,15 +387,17 @@ export const PostCompaniesCompanyUuidSuspensionsRequest$outboundSchema:
     z.ZodTypeDef,
     PostCompaniesCompanyUuidSuspensionsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostCompaniesCompanyUuidSuspensionsRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyUuid: "company_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyUuid: "company_uuid",
       requestBody: "RequestBody",
     });
   });

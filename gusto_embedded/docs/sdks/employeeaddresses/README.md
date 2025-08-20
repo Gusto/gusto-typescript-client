@@ -27,6 +27,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-home_addresses" method="get" path="/v1/employees/{employee_id}/home_addresses" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -133,6 +134,7 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-home_addresses" method="post" path="/v1/employees/{employee_id}/home_addresses" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -248,6 +250,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-home_addresses-home_address_uuid" method="get" path="/v1/home_addresses/{home_address_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -354,6 +357,7 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-home_addresses-home_address_uuid" method="put" path="/v1/home_addresses/{home_address_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -469,6 +473,7 @@ scope: `employees:write`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-home_addresses-home_address_uuid" method="delete" path="/v1/home_addresses/{home_address_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -562,6 +567,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-work_addresses" method="get" path="/v1/employees/{employee_id}/work_addresses" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -666,6 +672,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-work_addresses" method="post" path="/v1/employees/{employee_id}/work_addresses" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -769,6 +776,7 @@ scope: `employees:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-work_addresses-work_address_uuid" method="get" path="/v1/work_addresses/{work_address_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -873,6 +881,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="put-v1-work_addresses-work_address_uuid" method="put" path="/v1/work_addresses/{work_address_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -974,6 +983,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete-v1-work_addresses-work_address_uuid" method="delete" path="/v1/work_addresses/{work_address_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

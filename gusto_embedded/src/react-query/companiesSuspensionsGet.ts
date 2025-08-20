@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesSuspensionsGet } from "../funcs/companiesSuspensionsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion,
   GetCompaniesCompanyUuidSuspensionsRequest,
   GetCompaniesCompanyUuidSuspensionsResponse,
 } from "../models/operations/getcompaniescompanyuuidsuspensions.js";
@@ -38,7 +38,7 @@ export type CompaniesSuspensionsGetQueryData =
  * @remarks
  * Get existing suspension records for this company. A company may have multiple suspension records if they have suspended their Gusto account more than once.
  *
- * > 📘 To check if company is already suspended
+ * >📘 To check if company is already suspended
  * >
  * > To determine if a company is _currently_ suspended, use the `is_suspended` and `company_status` fields in the [Get a company](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies) endpoint.
  *
@@ -65,7 +65,7 @@ export function useCompaniesSuspensionsGet(
  * @remarks
  * Get existing suspension records for this company. A company may have multiple suspension records if they have suspended their Gusto account more than once.
  *
- * > 📘 To check if company is already suspended
+ * >📘 To check if company is already suspended
  * >
  * > To determine if a company is _currently_ suspended, use the `is_suspended` and `company_status` fields in the [Get a company](https://docs.gusto.com/embedded-payroll/reference/get-v1-companies) endpoint.
  *
@@ -103,7 +103,11 @@ export function setCompaniesSuspensionsGetData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: CompaniesSuspensionsGetQueryData,
 ): CompaniesSuspensionsGetQueryData | undefined {
@@ -117,7 +121,11 @@ export function invalidateCompaniesSuspensionsGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -172,7 +180,11 @@ export function buildCompaniesSuspensionsGetQuery(
 
 export function queryKeyCompaniesSuspensionsGet(
   companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return ["@gusto/embedded-api", "suspensions", "get", companyUuid, parameters];
 }

@@ -4,9 +4,14 @@
 
 import { bankAccountsCreate } from "../funcs/bankAccountsCreate.js";
 import { bankAccountsCreateFromPlaidToken } from "../funcs/bankAccountsCreateFromPlaidToken.js";
+import { bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId } from "../funcs/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.js";
 import { bankAccountsGet } from "../funcs/bankAccountsGet.js";
 import { bankAccountsVerify } from "../funcs/bankAccountsVerify.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import {
+  DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest,
+  DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse,
+} from "../models/operations/deletev1companiescompanyidbankaccountsbankaccountid.js";
 import {
   GetV1CompaniesCompanyIdBankAccountsRequest,
   GetV1CompaniesCompanyIdBankAccountsResponse,
@@ -27,34 +32,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class BankAccounts extends ClientSDK {
   /**
-   * Create a company bank account
-   *
-   * @remarks
-   * This endpoint creates a new company bank account.
-   *
-   * Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'.
-   *
-   * When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
-   * After successful verification, the bank account's verification_status is 'verified'.
-   *
-   * scope: `company_bank_accounts:write`
-   *
-   * > 🚧 Warning
-   * >
-   * > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
-   */
-  async create(
-    request: PostV1CompaniesCompanyIdBankAccountsRequest,
-    options?: RequestOptions,
-  ): Promise<PostV1CompaniesCompanyIdBankAccountsResponse> {
-    return unwrapAsync(bankAccountsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get all company bank accounts
    *
    * @remarks
@@ -67,6 +44,34 @@ export class BankAccounts extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1CompaniesCompanyIdBankAccountsResponse> {
     return unwrapAsync(bankAccountsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a company bank account
+   *
+   * @remarks
+   * This endpoint creates a new company bank account.
+   *
+   * Upon being created, two verification deposits are automatically sent to the bank account, and the bank account's verification_status is 'awaiting_deposits'.
+   *
+   * When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
+   * After successful verification, the bank account's verification_status is 'verified'.
+   *
+   * scope: `company_bank_accounts:write`
+   *
+   * >🚧 Warning
+   * >
+   * > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+   */
+  async create(
+    request: PostV1CompaniesCompanyIdBankAccountsRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdBankAccountsResponse> {
+    return unwrapAsync(bankAccountsCreate(
       this,
       request,
       options,
@@ -129,5 +134,28 @@ export class BankAccounts extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Delete a company bank account
+   *
+   * @remarks
+   * This endpoint disables a company bank account.
+   *
+   * A bank account cannot be disabled if it is used for any unprocessed payments.
+   *
+   * scope: `company_bank_accounts:write`
+   */
+  async deleteV1CompaniesCompanyIdBankAccountsBankAccountId(
+    request: DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest,
+    options?: RequestOptions,
+  ): Promise<DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse> {
+    return unwrapAsync(
+      bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

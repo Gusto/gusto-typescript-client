@@ -15,6 +15,7 @@ scope: `employee_payment_methods:read`
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-bank_accounts" method="get" path="/v1/employees/{employee_id}/bank_accounts" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
