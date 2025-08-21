@@ -54,7 +54,7 @@ export type ContractorPaymentMethod = {
   /**
    * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
    */
-  type?: ContractorPaymentMethodType | undefined;
+  type?: ContractorPaymentMethodType | null | undefined;
   /**
    * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last split amount must be nil to capture the remainder.
    */
@@ -111,7 +111,7 @@ export const ContractorPaymentMethod$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   version: z.string().optional(),
-  type: ContractorPaymentMethodType$inboundSchema.optional(),
+  type: z.nullable(ContractorPaymentMethodType$inboundSchema).optional(),
   split_by: z.nullable(ContractorPaymentMethodSplitBy$inboundSchema).optional(),
   splits: z.nullable(z.array(PaymentMethodBankAccount$inboundSchema))
     .optional(),
@@ -124,7 +124,7 @@ export const ContractorPaymentMethod$inboundSchema: z.ZodType<
 /** @internal */
 export type ContractorPaymentMethod$Outbound = {
   version?: string | undefined;
-  type?: string | undefined;
+  type?: string | null | undefined;
   split_by?: string | null | undefined;
   splits?: Array<PaymentMethodBankAccount$Outbound> | null | undefined;
 };
@@ -136,7 +136,7 @@ export const ContractorPaymentMethod$outboundSchema: z.ZodType<
   ContractorPaymentMethod
 > = z.object({
   version: z.string().optional(),
-  type: ContractorPaymentMethodType$outboundSchema.optional(),
+  type: z.nullable(ContractorPaymentMethodType$outboundSchema).optional(),
   splitBy: z.nullable(ContractorPaymentMethodSplitBy$outboundSchema).optional(),
   splits: z.nullable(z.array(PaymentMethodBankAccount$outboundSchema))
     .optional(),
