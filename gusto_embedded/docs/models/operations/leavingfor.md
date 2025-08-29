@@ -3,7 +3,7 @@
 The competitor the company is switching to. Required if `reason` is `'switching_provider'`.
 
 > 🚧 Switching to Gusto requires Customer Support
-> If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
+> If `'gusto_com'` is selected, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
 
 
 ## Example Usage

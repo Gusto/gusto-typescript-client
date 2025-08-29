@@ -138,9 +138,9 @@ export type EmployeeBenefit = {
    */
   limitOption?: string | null | undefined;
   /**
-   * Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
+   * Whether the employee should use a benefit's "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
    */
-  catchUp?: boolean | undefined;
+  catchUp?: boolean | null | undefined;
   /**
    * Identifier for a 401(k) loan assigned by the 401(k) provider
    */
@@ -157,9 +157,9 @@ export type EmployeeBenefit = {
     | null
     | undefined;
   /**
-   * The coverage amount as a multiple of the employee’s salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.
+   * The coverage amount as a multiple of the employee's salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.
    */
-  coverageSalaryMultiplier?: string | undefined;
+  coverageSalaryMultiplier?: string | null | undefined;
   /**
    * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
    *
@@ -428,13 +428,13 @@ export const EmployeeBenefit$inboundSchema: z.ZodType<
   elective: z.boolean().default(false),
   company_contribution_annual_maximum: z.nullable(z.string()).optional(),
   limit_option: z.nullable(z.string()).optional(),
-  catch_up: z.boolean().default(false),
+  catch_up: z.nullable(z.boolean().default(false)),
   retirement_loan_identifier: z.string().optional(),
   coverage_amount: z.nullable(z.string()).optional(),
   deduction_reduces_taxable_income: z.nullable(
     DeductionReducesTaxableIncome$inboundSchema.default("unset"),
   ),
-  coverage_salary_multiplier: z.string().default("0.00"),
+  coverage_salary_multiplier: z.nullable(z.string().default("0.00")),
   company_contribution: z.string().default("0.00"),
   contribute_as_percentage: z.boolean().default(false),
   employee_uuid: z.string().optional(),
@@ -470,11 +470,11 @@ export type EmployeeBenefit$Outbound = {
   elective: boolean;
   company_contribution_annual_maximum?: string | null | undefined;
   limit_option?: string | null | undefined;
-  catch_up: boolean;
+  catch_up: boolean | null;
   retirement_loan_identifier?: string | undefined;
   coverage_amount?: string | null | undefined;
   deduction_reduces_taxable_income: string | null;
-  coverage_salary_multiplier: string;
+  coverage_salary_multiplier: string | null;
   company_contribution: string;
   contribute_as_percentage: boolean;
   employee_uuid?: string | undefined;
@@ -497,13 +497,13 @@ export const EmployeeBenefit$outboundSchema: z.ZodType<
   elective: z.boolean().default(false),
   companyContributionAnnualMaximum: z.nullable(z.string()).optional(),
   limitOption: z.nullable(z.string()).optional(),
-  catchUp: z.boolean().default(false),
+  catchUp: z.nullable(z.boolean().default(false)),
   retirementLoanIdentifier: z.string().optional(),
   coverageAmount: z.nullable(z.string()).optional(),
   deductionReducesTaxableIncome: z.nullable(
     DeductionReducesTaxableIncome$outboundSchema.default("unset"),
   ),
-  coverageSalaryMultiplier: z.string().default("0.00"),
+  coverageSalaryMultiplier: z.nullable(z.string().default("0.00")),
   companyContribution: z.string().default("0.00"),
   contributeAsPercentage: z.boolean().default(false),
   employeeUuid: z.string().optional(),

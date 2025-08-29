@@ -76,7 +76,7 @@ export type Reason = ClosedEnum<typeof Reason>;
  * @remarks
  *
  * > 🚧 Switching to Gusto requires Customer Support
- * > If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
+ * > If `'gusto_com'` is selected, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
  */
 export const LeavingFor = {
   Accountant: "accountant",
@@ -110,7 +110,7 @@ export const LeavingFor = {
  * @remarks
  *
  * > 🚧 Switching to Gusto requires Customer Support
- * > If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
+ * > If `'gusto_com'` is selected, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
  */
 export type LeavingFor = ClosedEnum<typeof LeavingFor>;
 
@@ -128,7 +128,7 @@ export type PostCompaniesCompanyUuidSuspensionsRequestBody = {
    */
   reconcileTaxMethod: ReconcileTaxMethod;
   /**
-   * User-supplied comments describing why they are suspending their account.
+   * User-supplied comments describing why they are suspending their account. Required if the user is leaving for another provider and selects "other" instead of a defined provider.
    */
   comments?: string | undefined;
   /**
@@ -146,7 +146,7 @@ export type PostCompaniesCompanyUuidSuspensionsRequestBody = {
    * @remarks
    *
    * > 🚧 Switching to Gusto requires Customer Support
-   * > If `'gusto_com'` is provided, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
+   * > If `'gusto_com'` is selected, this change must be completed by Gusto Customer Support and cannot be performed via the API. This endpoint will return a 422 error in that case.
    */
   leavingFor?: LeavingFor | undefined;
 };

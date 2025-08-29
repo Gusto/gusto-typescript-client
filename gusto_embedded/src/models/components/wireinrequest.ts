@@ -73,7 +73,7 @@ export type WireInRequest = {
   /**
    * Notes for the wire in request
    */
-  additionalNotes?: string | undefined;
+  additionalNotes?: string | null | undefined;
   /**
    * Name of the bank initiating the wire in
    */
@@ -162,7 +162,7 @@ export const WireInRequest$inboundSchema: z.ZodType<
   recipient_address: z.string().optional(),
   recipient_account_number: z.string().optional(),
   recipient_routing_number: z.string().optional(),
-  additional_notes: z.string().optional(),
+  additional_notes: z.nullable(z.string()).optional(),
   bank_name: z.string().optional(),
   date_sent: z.string().optional(),
   unique_tracking_code: z.string().optional(),
@@ -201,7 +201,7 @@ export type WireInRequest$Outbound = {
   recipient_address?: string | undefined;
   recipient_account_number?: string | undefined;
   recipient_routing_number?: string | undefined;
-  additional_notes?: string | undefined;
+  additional_notes?: string | null | undefined;
   bank_name?: string | undefined;
   date_sent?: string | undefined;
   unique_tracking_code?: string | undefined;
@@ -226,7 +226,7 @@ export const WireInRequest$outboundSchema: z.ZodType<
   recipientAddress: z.string().optional(),
   recipientAccountNumber: z.string().optional(),
   recipientRoutingNumber: z.string().optional(),
-  additionalNotes: z.string().optional(),
+  additionalNotes: z.nullable(z.string()).optional(),
   bankName: z.string().optional(),
   dateSent: z.string().optional(),
   uniqueTrackingCode: z.string().optional(),

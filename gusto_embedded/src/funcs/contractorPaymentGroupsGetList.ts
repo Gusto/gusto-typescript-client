@@ -21,6 +21,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
   GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema,
   GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
@@ -35,7 +39,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
  *
- * scope: `payrolls:read`
+ *  scope: `payrolls:read`
  */
 export function contractorPaymentGroupsGetList(
   client: GustoEmbeddedCore,
@@ -44,6 +48,7 @@ export function contractorPaymentGroupsGetList(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -175,6 +181,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -187,9 +194,10 @@ async function $do(
     M.json(
       200,
       GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema,
-      { key: "Contractor-Payment-Group-List" },
+      { key: "Contractor-Payment-Groups" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

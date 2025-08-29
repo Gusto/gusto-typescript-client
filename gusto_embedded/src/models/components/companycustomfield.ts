@@ -32,7 +32,7 @@ export type CompanyCustomField = {
   /**
    * Description of the company custom field
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * An array of options for fields of type radio. Otherwise, null.
    */
@@ -48,7 +48,7 @@ export const CompanyCustomField$inboundSchema: z.ZodType<
   uuid: z.string(),
   name: z.string(),
   type: CustomFieldType$inboundSchema,
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   selection_options: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -61,7 +61,7 @@ export type CompanyCustomField$Outbound = {
   uuid: string;
   name: string;
   type: string;
-  description?: string | undefined;
+  description?: string | null | undefined;
   selection_options?: Array<string> | null | undefined;
 };
 
@@ -74,7 +74,7 @@ export const CompanyCustomField$outboundSchema: z.ZodType<
   uuid: z.string(),
   name: z.string(),
   type: CustomFieldType$outboundSchema,
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   selectionOptions: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {

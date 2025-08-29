@@ -185,12 +185,12 @@ async function $do(
     | SDKValidationError
   >(
     M.json(
-      200,
+      201,
       PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema,
       { key: "Contractor-Payment-Group" },
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

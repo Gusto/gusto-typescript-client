@@ -84,7 +84,7 @@ export type AchTransaction = {
   /**
    * The type of recipient associated with the ACH transaction
    */
-  recipientType?: AchTransactionRecipientType | undefined;
+  recipientType?: AchTransactionRecipientType | null | undefined;
   /**
    * Unique identifier for the recipient associated with the ACH transaction
    */
@@ -217,7 +217,8 @@ export const AchTransaction$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   payment_event_type: PaymentEventType$inboundSchema.optional(),
   payment_event_uuid: z.string().optional(),
-  recipient_type: AchTransactionRecipientType$inboundSchema.optional(),
+  recipient_type: z.nullable(AchTransactionRecipientType$inboundSchema)
+    .optional(),
   recipient_uuid: z.string().optional(),
   error_code: z.string().optional(),
   transaction_type: z.string().optional(),
@@ -249,7 +250,7 @@ export type AchTransaction$Outbound = {
   company_uuid?: string | undefined;
   payment_event_type?: string | undefined;
   payment_event_uuid?: string | undefined;
-  recipient_type?: string | undefined;
+  recipient_type?: string | null | undefined;
   recipient_uuid?: string | undefined;
   error_code?: string | undefined;
   transaction_type?: string | undefined;
@@ -271,7 +272,8 @@ export const AchTransaction$outboundSchema: z.ZodType<
   companyUuid: z.string().optional(),
   paymentEventType: PaymentEventType$outboundSchema.optional(),
   paymentEventUuid: z.string().optional(),
-  recipientType: AchTransactionRecipientType$outboundSchema.optional(),
+  recipientType: z.nullable(AchTransactionRecipientType$outboundSchema)
+    .optional(),
   recipientUuid: z.string().optional(),
   errorCode: z.string().optional(),
   transactionType: z.string().optional(),

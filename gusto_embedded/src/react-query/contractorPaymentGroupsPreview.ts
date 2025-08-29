@@ -31,9 +31,9 @@ export type ContractorPaymentGroupsPreviewMutationData =
  * Preview a contractor payment group
  *
  * @remarks
- * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+ * Preview a contractor payment group before creating it. This endpoint allows you to see what the payment group would look like with the provided parameters without actually creating it.
  *
- * scope: `payrolls:read`
+ * scope: `contractor_payment_groups:write`
  */
 export function useContractorPaymentGroupsPreviewMutation(
   options?: MutationHookOptions<

@@ -20,12 +20,22 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+  >;
 
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod = {
   DirectDeposit: "Direct Deposit",
@@ -69,7 +79,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
    */
   checkDate: RFCDate;
   /**
-   * Optional token used to make contractor payment group creation idempotent.  If provided, string must be unique for each group you intend to create.
+   * Optional token used to make contractor payment group creation idempotent. If provided, string must be unique for each group you intend to create.
    */
   creationToken?: string | undefined;
   contractorPayments: Array<ContractorPayments>;
@@ -77,13 +87,15 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody: PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody;
 };
 
@@ -94,6 +106,34 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsResponse = {
    */
   contractorPaymentGroup?: ContractorPaymentGroup | undefined;
 };
+
+/** @internal */
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+  > =
+    PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$inboundSchema:
@@ -302,23 +342,25 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchem
     z.ZodTypeDef,
     unknown
   > = z.object({
+    "X-Gusto-API-Version":
+      PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
     company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "company_id": "companyId",
       "X-Gusto-API-Version": "xGustoAPIVersion",
+      "company_id": "companyId",
       "RequestBody": "requestBody",
     });
   });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
   RequestBody:
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound;
 };
@@ -330,15 +372,17 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSche
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       requestBody: "RequestBody",
     });
   });

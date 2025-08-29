@@ -47,7 +47,7 @@ export type PaymentConfigs = {
   /**
    * Payment limit for 1-day or 2-day payroll
    */
-  fastPaymentLimit?: string | undefined;
+  fastPaymentLimit?: string | null | undefined;
   /**
    * Payment speed for 1-day, 2-day, 4-day
    */
@@ -154,7 +154,7 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string().optional(),
   partner_uuid: z.string().optional(),
-  fast_payment_limit: z.string().optional(),
+  fast_payment_limit: z.nullable(z.string()).optional(),
   payment_speed: z.string().optional(),
   partner_owned_disbursement: z.boolean().optional(),
   earned_fast_ach_blockers: z.array(
@@ -175,7 +175,7 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
 export type PaymentConfigs$Outbound = {
   company_uuid?: string | undefined;
   partner_uuid?: string | undefined;
-  fast_payment_limit?: string | undefined;
+  fast_payment_limit?: string | null | undefined;
   payment_speed?: string | undefined;
   partner_owned_disbursement?: boolean | undefined;
   earned_fast_ach_blockers?: Array<EarnedFastAchBlockers$Outbound> | undefined;
@@ -189,7 +189,7 @@ export const PaymentConfigs$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string().optional(),
   partnerUuid: z.string().optional(),
-  fastPaymentLimit: z.string().optional(),
+  fastPaymentLimit: z.nullable(z.string()).optional(),
   paymentSpeed: z.string().optional(),
   partnerOwnedDisbursement: z.boolean().optional(),
   earnedFastAchBlockers: z.array(

@@ -1,11 +1,11 @@
-# ContractorPaymentGroupMinimalTotals
+# ContractorPaymentGroupPreviewTotals
 
 ## Example Usage
 
 ```typescript
-import { ContractorPaymentGroupMinimalTotals } from "@gusto/embedded-api/models/components/contractorpaymentgroupminimal.js";
+import { ContractorPaymentGroupPreviewTotals } from "@gusto/embedded-api/models/components/contractorpaymentgrouppreview.js";
 
-let value: ContractorPaymentGroupMinimalTotals = {};
+let value: ContractorPaymentGroupPreviewTotals = {};
 ```
 
 ## Fields
@@ -16,3 +16,4 @@ let value: ContractorPaymentGroupMinimalTotals = {};
 | `debitAmount`                                                                                    | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total debit amount for the group of contractor payments. Sum of wage & reimbursement amount. |
 | `wageAmount`                                                                                     | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total wage amount for the group of contractor payments.                                      |
 | `reimbursementAmount`                                                                            | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total reimbursement amount for the group of contractor payments.                             |
+| `checkAmount`                                                                                    | *string*                                                                                         | :heavy_minus_sign:                                                                               | The total check amount for the group of contractor payments.                                     |

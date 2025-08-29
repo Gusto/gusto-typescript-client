@@ -52,11 +52,11 @@ export type TimeOffPolicy = {
   /**
    * The rate at which the time off hours will accrue for an employee on the policy. Represented as a float, e.g. "40.0".
    */
-  accrualRate?: string | undefined;
+  accrualRate?: string | null | undefined;
   /**
    * The number of hours an employee has to work or be paid for to accrue the number of hours set in the accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime, per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g. "40.0".
    */
-  accrualRateUnit?: string | undefined;
+  accrualRateUnit?: string | null | undefined;
   /**
    * Boolean representing if an employee's accrued time off hours will be paid out on termination
    */
@@ -64,7 +64,7 @@ export type TimeOffPolicy = {
   /**
    * Number of days before an employee on the policy will begin accruing time off hours
    */
-  accrualWaitingPeriodDays?: number | undefined;
+  accrualWaitingPeriodDays?: number | null | undefined;
   /**
    * The max number of hours an employee can carryover from one year to the next
    */
@@ -179,10 +179,10 @@ export const TimeOffPolicy$inboundSchema: z.ZodType<
   name: z.string(),
   policy_type: PolicyType$inboundSchema,
   accrual_method: z.string(),
-  accrual_rate: z.string().optional(),
-  accrual_rate_unit: z.string().optional(),
+  accrual_rate: z.nullable(z.string()).optional(),
+  accrual_rate_unit: z.nullable(z.string()).optional(),
   paid_out_on_termination: z.boolean().optional(),
-  accrual_waiting_period_days: z.number().int().optional(),
+  accrual_waiting_period_days: z.nullable(z.number().int()).optional(),
   carryover_limit_hours: z.string().optional(),
   max_accrual_hours_per_year: z.string().optional(),
   max_hours: z.string().optional(),
@@ -213,10 +213,10 @@ export type TimeOffPolicy$Outbound = {
   name: string;
   policy_type: string;
   accrual_method: string;
-  accrual_rate?: string | undefined;
-  accrual_rate_unit?: string | undefined;
+  accrual_rate?: string | null | undefined;
+  accrual_rate_unit?: string | null | undefined;
   paid_out_on_termination?: boolean | undefined;
-  accrual_waiting_period_days?: number | undefined;
+  accrual_waiting_period_days?: number | null | undefined;
   carryover_limit_hours?: string | undefined;
   max_accrual_hours_per_year?: string | undefined;
   max_hours?: string | undefined;
@@ -237,10 +237,10 @@ export const TimeOffPolicy$outboundSchema: z.ZodType<
   name: z.string(),
   policyType: PolicyType$outboundSchema,
   accrualMethod: z.string(),
-  accrualRate: z.string().optional(),
-  accrualRateUnit: z.string().optional(),
+  accrualRate: z.nullable(z.string()).optional(),
+  accrualRateUnit: z.nullable(z.string()).optional(),
   paidOutOnTermination: z.boolean().optional(),
-  accrualWaitingPeriodDays: z.number().int().optional(),
+  accrualWaitingPeriodDays: z.nullable(z.number().int()).optional(),
   carryoverLimitHours: z.string().optional(),
   maxAccrualHoursPerYear: z.string().optional(),
   maxHours: z.string().optional(),

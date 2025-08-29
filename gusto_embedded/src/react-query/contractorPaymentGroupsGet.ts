@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsGet } from "../funcs/contractorPaymentGroupsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion,
   GetV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
 } from "../models/operations/getv1contractorpaymentgroupscontractorpaymentgroupid.js";
@@ -33,7 +33,7 @@ export type ContractorPaymentGroupsGetQueryData =
   GetV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 
 /**
- * Fetch a contractor payment group
+ * Get a contractor payment group
  *
  * @remarks
  * Returns a contractor payment group with all associated contractor payments.
@@ -56,7 +56,7 @@ export function useContractorPaymentGroupsGet(
 }
 
 /**
- * Fetch a contractor payment group
+ * Get a contractor payment group
  *
  * @remarks
  * Returns a contractor payment group with all associated contractor payments.
@@ -95,7 +95,11 @@ export function setContractorPaymentGroupsGetData(
   client: QueryClient,
   queryKeyBase: [
     contractorPaymentGroupUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: ContractorPaymentGroupsGetQueryData,
 ): ContractorPaymentGroupsGetQueryData | undefined {
@@ -109,7 +113,11 @@ export function invalidateContractorPaymentGroupsGet(
   queryKeyBase: TupleToPrefixes<
     [
       contractorPaymentGroupUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -170,7 +178,11 @@ export function buildContractorPaymentGroupsGetQuery(
 
 export function queryKeyContractorPaymentGroupsGet(
   contractorPaymentGroupUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

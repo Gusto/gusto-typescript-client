@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 1aa2b3a9922d07e143048108250bb0e4
+  docChecksum: cc112940a7ab93d201ca23598487942e
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 0.6.8
-  configChecksum: 257ec5663fafc2f24bf2ce2cdef8a11c
+  speakeasyVersion: 1.606.9
+  generationVersion: 2.687.13
+  releaseVersion: 0.6.9
+  configChecksum: 63e32a66eaa728802ae630c1f3608b4c
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -122,15 +122,19 @@ generatedFiles:
   - docs/models/components/contractorpaymentdetailslistsplitby.md
   - docs/models/components/contractorpaymentforgroup.md
   - docs/models/components/contractorpaymentforgrouppaymentmethod.md
+  - docs/models/components/contractorpaymentforgrouppreview.md
+  - docs/models/components/contractorpaymentforgrouppreviewpaymentmethod.md
+  - docs/models/components/contractorpaymentforgrouppreviewstatus.md
+  - docs/models/components/contractorpaymentforgrouppreviewwagetype.md
   - docs/models/components/contractorpaymentforgroupstatus.md
   - docs/models/components/contractorpaymentforgroupwagetype.md
   - docs/models/components/contractorpaymentgroup.md
-  - docs/models/components/contractorpaymentgroupminimal.md
-  - docs/models/components/contractorpaymentgroupminimalstatus.md
-  - docs/models/components/contractorpaymentgroupminimaltotals.md
   - docs/models/components/contractorpaymentgrouppartnerdisbursements.md
   - docs/models/components/contractorpaymentgrouppartnerdisbursementspaymentmethod.md
   - docs/models/components/contractorpaymentgrouppartnerdisbursementspaymentstatus.md
+  - docs/models/components/contractorpaymentgrouppreview.md
+  - docs/models/components/contractorpaymentgrouppreviewstatus.md
+  - docs/models/components/contractorpaymentgrouppreviewtotals.md
   - docs/models/components/contractorpaymentgroupstatus.md
   - docs/models/components/contractorpaymentgrouptotals.md
   - docs/models/components/contractorpaymentmethod.md
@@ -461,6 +465,7 @@ generatedFiles:
   - docs/models/errors/deletev1companybenefitscompanybenefitidresponsebody.md
   - docs/models/errors/errors.md
   - docs/models/errors/metadata.md
+  - docs/models/errors/notfounderrorobject.md
   - docs/models/errors/payrollblockerserror.md
   - docs/models/errors/postcompaniespayrollskipcompanyuuidresponsebody.md
   - docs/models/errors/postpayrollsgrossuppayrolluuidresponsebody.md
@@ -502,6 +507,7 @@ generatedFiles:
   - docs/models/operations/deletev1companybenefitscompanybenefitidresponse.md
   - docs/models/operations/deletev1compensationscompensationidrequest.md
   - docs/models/operations/deletev1compensationscompensationidresponse.md
+  - docs/models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupidheaderxgustoapiversion.md
   - docs/models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupidrequest.md
   - docs/models/operations/deletev1contractorpaymentgroupscontractorpaymentgroupidresponse.md
   - docs/models/operations/deletev1contractorscontractoruuidrequest.md
@@ -612,6 +618,7 @@ generatedFiles:
   - docs/models/operations/getv1companiescompanyidcompanybenefitsresponse.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentcontractorpaymentrequest.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentcontractorpaymentresponse.md
+  - docs/models/operations/getv1companiescompanyidcontractorpaymentgroupsheaderxgustoapiversion.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentgroupsrequest.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentgroupsresponse.md
   - docs/models/operations/getv1companiescompanyidcontractorpaymentsrequest.md
@@ -707,6 +714,7 @@ generatedFiles:
   - docs/models/operations/getv1contractorformresponse.md
   - docs/models/operations/getv1contractorformsrequest.md
   - docs/models/operations/getv1contractorformsresponse.md
+  - docs/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidheaderxgustoapiversion.md
   - docs/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidrequest.md
   - docs/models/operations/getv1contractorpaymentgroupscontractorpaymentgroupidresponse.md
   - docs/models/operations/getv1contractorpaymentgroupsidpartnerdisbursementsheaderxgustoapiversion.md
@@ -921,8 +929,10 @@ generatedFiles:
   - docs/models/operations/postv1companiescompanyidcompanybenefitsrequest.md
   - docs/models/operations/postv1companiescompanyidcompanybenefitsrequestbody.md
   - docs/models/operations/postv1companiescompanyidcompanybenefitsresponse.md
+  - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupsheaderxgustoapiversion.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspaymentmethod.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewcontractorpayments.md
+  - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewheaderxgustoapiversion.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewpaymentmethod.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewrequest.md
   - docs/models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewrequestbody.md
@@ -1133,6 +1143,7 @@ generatedFiles:
   - docs/models/operations/putv1contractordocumentsignrequest.md
   - docs/models/operations/putv1contractordocumentsignrequestbody.md
   - docs/models/operations/putv1contractordocumentsignresponse.md
+  - docs/models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfundheaderxgustoapiversion.md
   - docs/models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfundrequest.md
   - docs/models/operations/putv1contractorpaymentgroupscontractorpaymentgroupidfundresponse.md
   - docs/models/operations/putv1contractorscontractoridpaymentmethodrequest.md
@@ -1661,9 +1672,10 @@ generatedFiles:
   - src/models/components/contractorpayment.ts
   - src/models/components/contractorpaymentdetailslist.ts
   - src/models/components/contractorpaymentforgroup.ts
+  - src/models/components/contractorpaymentforgrouppreview.ts
   - src/models/components/contractorpaymentgroup.ts
-  - src/models/components/contractorpaymentgroupminimal.ts
   - src/models/components/contractorpaymentgrouppartnerdisbursements.ts
+  - src/models/components/contractorpaymentgrouppreview.ts
   - src/models/components/contractorpaymentmethod.ts
   - src/models/components/contractorpaymentreceipt.ts
   - src/models/components/contractorpaymentsummary.ts
@@ -1800,6 +1812,7 @@ generatedFiles:
   - src/models/errors/deletev1companybenefitscompanybenefitid.ts
   - src/models/errors/gustoembeddederror.ts
   - src/models/errors/httpclienterrors.ts
+  - src/models/errors/notfounderrorobject.ts
   - src/models/errors/payrollblockerserror.ts
   - src/models/errors/postcompaniespayrollskipcompanyuuid.ts
   - src/models/errors/postpayrollsgrossuppayrolluuid.ts
@@ -7456,7 +7469,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 673837, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
+          application/json: {"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}
     Fixed Policy:
       parameters:
         path:
@@ -7465,7 +7478,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": "<value>", "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}
+          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}
     Hourly Policy:
       parameters:
         path:
@@ -7553,7 +7566,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": "<value>", "accrual_rate_unit": "<value>", "paid_out_on_termination": false, "accrual_waiting_period_days": 977877, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": "<value>", "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
+          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
   post-companies-company_uuid-time_off_policies:
     Unlimited Policy:
       parameters:
@@ -8042,6 +8055,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-companies-company-id-contractor-payment-groups:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"check_date": "2020-01-01", "creation_token": "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e", "contractor_payments": []}
+      responses:
+        "201":
+          application/json: {}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-companies-company_id-contractor_payment_groups:
     Example:
       parameters:
@@ -8055,6 +8081,20 @@ examples:
       responses:
         "200":
           application/json: [{"uuid": "7f2337f9-9b78-44b9-aeed-be4777b833a8", "company_uuid": "c54046f7-1be4-4c54-8194-f4842c30c86d", "check_date": "2024-03-15", "debit_date": "2024-03-11", "status": "Funded", "creation_token": "a51a3500-3200-43af-a738-169d4b66a9db", "totals": {"debit_amount": "740.00", "wage_amount": "720.00", "reimbursement_amount": "20.00"}}, {"uuid": "56260b3d-c375-415c-b77a-75d99f717193", "company_uuid": "c54046f7-1be4-4c54-8194-f4842c30c86d", "check_date": "2024-05-02", "debit_date": "2024-04-26", "status": "Unfunded", "creation_token": "45ef81bb-ae24-4ad1-b2c6-6e563a4c30ed", "totals": {"debit_amount": "2365.00", "wage_amount": "2270.00", "reimbursement_amount": "95.00"}}]
+    speakeasy-default-get-v1-companies-company-id-contractor-payment-groups:
+      parameters:
+        path:
+          company_id: "<id>"
+        query:
+          start_date: "2020-01-01"
+          end_date: "2020-12-31"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{}]
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-v1-companies-company_id-contractor_payment_groups-preview:
     Example:
       parameters:
@@ -8100,6 +8140,21 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-post-v1-companies-company-id-contractor-payment-groups-preview:
+      parameters:
+        path:
+          company_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"contractor_payments": []}
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": []}
+        "422":
+          application/json: {"errors": []}
   get-v1-contractor_payment_groups-contractor_payment_group_id:
     Example:
       parameters:
@@ -8110,6 +8165,17 @@ examples:
       responses:
         "200":
           application/json: {"uuid": "f693e034-d833-46e3-88d4-2c820c383c57", "company_uuid": "c54046f7-1be4-4c54-8194-f4842c30c86d", "check_date": "2024-05-07", "debit_date": "2024-05-01", "status": "Unfunded", "creation_token": "45ef81bb-ae24-4ad1-b2c6-6e563a4c30ed", "totals": {"amount": "2295.0", "debit_amount": "2295.0", "wage_amount": "2220.0", "reimbursement_amount": "75.0"}, "contractor_payments": [{"uuid": "630dc982-f498-4ebc-a6dc-4d76711027ce", "contractor_uuid": "2e6d0970-31bf-47ce-bdb4-713e4207ecf4", "bonus": "0.0", "hours": "40.0", "payment_method": "Direct Deposit", "reimbursement": "75.0", "status": "Unfunded", "hourly_rate": "18.0", "may_cancel": false, "wage": "0.0", "wage_type": "Hourly", "wage_total": "720.0"}, {"uuid": "12f51eba-d653-4357-8c05-1f1f8d0fd5e3", "contractor_uuid": "a975fda0-fcf5-469a-a5fd-06e43d1cd99d", "bonus": "0.0", "hours": "0.0", "payment_method": "Check", "reimbursement": "0.0", "status": "Unfunded", "hourly_rate": "0.0", "may_cancel": false, "wage": "1500.0", "wage_type": "Fixed", "wage_total": "1500.0"}]}
+    speakeasy-default-get-v1-contractor-payment-groups-contractor-payment-group-id:
+      parameters:
+        path:
+          contractor_payment_group_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": []}
   delete-v1-contractor_payment_groups-contractor_payment_group_id:
     Basic:
       parameters:
@@ -8138,6 +8204,15 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-delete-v1-contractor-payment-groups-contractor-payment-group-id:
+      parameters:
+        path:
+          contractor_payment_group_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "404":
+          application/json: {"errors": []}
   put-v1-contractor_payment_groups-contractor_payment_group_id-fund:
     Example:
       parameters:
@@ -8175,6 +8250,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    speakeasy-default-put-v1-contractor-payment-groups-contractor-payment-group-id-fund:
+      parameters:
+        path:
+          contractor_payment_group_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": []}
+        "422":
+          application/json: {"errors": []}
   get-v1-company-forms:
     Example:
       parameters:
@@ -9486,7 +9574,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "e83d273e-4ae9-4b61-9c71-4030c2f73093", "company_uuid": "c5e3e3e9-732f-4762-849e-20b5cec9036f", "status": "open", "latest_error_code": "R01", "original_debit_date": "2023-10-11", "check_date": "2023-10-13", "payroll_uuid": "210f2034-fb4a-4059-b109-6c3b5efe499d", "contractor_payment_uuids": ["<value 1>", "<value 2>", "<value 3>"], "amount_outstanding": "10499.43", "event_total_amount": "5912.07"}]
+          application/json: [{"uuid": "e83d273e-4ae9-4b61-9c71-4030c2f73093", "company_uuid": "c5e3e3e9-732f-4762-849e-20b5cec9036f", "status": "open", "latest_error_code": "R01", "original_debit_date": "2023-10-11", "check_date": "2023-10-13", "payroll_uuid": "210f2034-fb4a-4059-b109-6c3b5efe499d", "contractor_payment_uuids": null, "amount_outstanding": "10499.43", "event_total_amount": "5912.07"}]
   redebit-recovery-case:
     Basic:
       parameters:
@@ -9717,6 +9805,8 @@ examples:
         "200":
           application/json: {}
         "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+        "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   delete-v1-companies-company_id-bank-accounts-bank_account_id:
     speakeasy-default-delete-v1-companies-company-id-bank-accounts-bank-account-id:

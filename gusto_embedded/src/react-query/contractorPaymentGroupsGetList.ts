@@ -16,8 +16,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsGetList } from "../funcs/contractorPaymentGroupsGetList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
   GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
 } from "../models/operations/getv1companiescompanyidcontractorpaymentgroups.js";
@@ -38,7 +38,7 @@ export type ContractorPaymentGroupsGetListQueryData =
  * @remarks
  * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
  *
- * scope: `payrolls:read`
+ *  scope: `payrolls:read`
  */
 export function useContractorPaymentGroupsGetList(
   request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
@@ -61,7 +61,7 @@ export function useContractorPaymentGroupsGetList(
  * @remarks
  * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
  *
- * scope: `payrolls:read`
+ *  scope: `payrolls:read`
  */
 export function useContractorPaymentGroupsGetListSuspense(
   request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
@@ -100,7 +100,9 @@ export function setContractorPaymentGroupsGetListData(
       endDate?: string | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+        | undefined;
     },
   ],
   data: ContractorPaymentGroupsGetListQueryData,
@@ -123,7 +125,9 @@ export function invalidateContractorPaymentGroupsGetList(
         endDate?: string | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+          | undefined;
       },
     ]
   >,
@@ -193,7 +197,9 @@ export function queryKeyContractorPaymentGroupsGetList(
     endDate?: string | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+      | undefined;
   },
 ): QueryKey {
   return [
