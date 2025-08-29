@@ -59,7 +59,7 @@ export type RecoveryCase = {
   /**
    * The uuids of the associated contractor payments for which the recovery case was created. If the recovery case was created for a payroll, this field will be null.
    */
-  contractorPaymentUuids?: Array<string> | undefined;
+  contractorPaymentUuids?: Array<string> | null | undefined;
   /**
    * Amount outstanding for the recovery case
    */
@@ -104,7 +104,7 @@ export const RecoveryCase$inboundSchema: z.ZodType<
   original_debit_date: z.string().optional(),
   check_date: z.string().optional(),
   payroll_uuid: z.string().optional(),
-  contractor_payment_uuids: z.array(z.string()).optional(),
+  contractor_payment_uuids: z.nullable(z.array(z.string())).optional(),
   amount_outstanding: z.string().optional(),
   event_total_amount: z.string().optional(),
 }).transform((v) => {
@@ -129,7 +129,7 @@ export type RecoveryCase$Outbound = {
   original_debit_date?: string | undefined;
   check_date?: string | undefined;
   payroll_uuid?: string | undefined;
-  contractor_payment_uuids?: Array<string> | undefined;
+  contractor_payment_uuids?: Array<string> | null | undefined;
   amount_outstanding?: string | undefined;
   event_total_amount?: string | undefined;
 };
@@ -147,7 +147,7 @@ export const RecoveryCase$outboundSchema: z.ZodType<
   originalDebitDate: z.string().optional(),
   checkDate: z.string().optional(),
   payrollUuid: z.string().optional(),
-  contractorPaymentUuids: z.array(z.string()).optional(),
+  contractorPaymentUuids: z.nullable(z.array(z.string())).optional(),
   amountOutstanding: z.string().optional(),
   eventTotalAmount: z.string().optional(),
 }).transform((v) => {

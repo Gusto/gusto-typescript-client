@@ -34,7 +34,7 @@ export type PayrollCheck = {
   /**
    * The starting check number for the checks being printed.
    */
-  startingCheckNumber?: string | undefined;
+  startingCheckNumber?: string | null | undefined;
   /**
    * A unique identifier of the Generated Document request
    */
@@ -124,7 +124,7 @@ export const PayrollCheck$inboundSchema: z.ZodType<
 > = z.object({
   payroll_uuid: z.string().optional(),
   printing_format: z.string().optional(),
-  starting_check_number: z.string().optional(),
+  starting_check_number: z.nullable(z.string()).optional(),
   request_uuid: z.string().optional(),
   status: z.string().optional(),
   employee_check_number_mapping: z.array(
@@ -144,7 +144,7 @@ export const PayrollCheck$inboundSchema: z.ZodType<
 export type PayrollCheck$Outbound = {
   payroll_uuid?: string | undefined;
   printing_format?: string | undefined;
-  starting_check_number?: string | undefined;
+  starting_check_number?: string | null | undefined;
   request_uuid?: string | undefined;
   status?: string | undefined;
   employee_check_number_mapping?:
@@ -160,7 +160,7 @@ export const PayrollCheck$outboundSchema: z.ZodType<
 > = z.object({
   payrollUuid: z.string().optional(),
   printingFormat: z.string().optional(),
-  startingCheckNumber: z.string().optional(),
+  startingCheckNumber: z.nullable(z.string()).optional(),
   requestUuid: z.string().optional(),
   status: z.string().optional(),
   employeeCheckNumberMapping: z.array(

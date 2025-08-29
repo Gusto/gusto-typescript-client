@@ -53,7 +53,7 @@ export type InformationRequest = {
   /**
    * The type of information request
    */
-  type?: InformationRequestType | undefined;
+  type?: InformationRequestType | null | undefined;
   /**
    * The status of the information request
    */
@@ -114,7 +114,7 @@ export const InformationRequest$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string().optional(),
   company_uuid: z.string().optional(),
-  type: InformationRequestType$inboundSchema.optional(),
+  type: z.nullable(InformationRequestType$inboundSchema).optional(),
   status: InformationRequestStatus$inboundSchema.optional(),
   blocking_payroll: z.boolean().optional(),
 }).transform((v) => {
@@ -128,7 +128,7 @@ export const InformationRequest$inboundSchema: z.ZodType<
 export type InformationRequest$Outbound = {
   uuid?: string | undefined;
   company_uuid?: string | undefined;
-  type?: string | undefined;
+  type?: string | null | undefined;
   status?: string | undefined;
   blocking_payroll?: boolean | undefined;
 };
@@ -141,7 +141,7 @@ export const InformationRequest$outboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string().optional(),
   companyUuid: z.string().optional(),
-  type: InformationRequestType$outboundSchema.optional(),
+  type: z.nullable(InformationRequestType$outboundSchema).optional(),
   status: InformationRequestStatus$outboundSchema.optional(),
   blockingPayroll: z.boolean().optional(),
 }).transform((v) => {

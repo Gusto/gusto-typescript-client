@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,9 +41,9 @@ import { Result } from "../types/fp.js";
  * Preview a contractor payment group
  *
  * @remarks
- * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+ * Preview a contractor payment group before creating it. This endpoint allows you to see what the payment group would look like with the provided parameters without actually creating it.
  *
- * scope: `payrolls:read`
+ * scope: `contractor_payment_groups:write`
  */
 export function contractorPaymentGroupsPreview(
   client: GustoEmbeddedCore,
@@ -48,6 +52,7 @@ export function contractorPaymentGroupsPreview(
 ): APIPromise<
   Result<
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +79,7 @@ async function $do(
   [
     Result<
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -175,6 +181,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -188,10 +195,11 @@ async function $do(
     M.json(
       200,
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$inboundSchema,
-      { key: "Contractor-Payment-Group" },
+      { key: "Contractor-Payment-Group-Preview" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

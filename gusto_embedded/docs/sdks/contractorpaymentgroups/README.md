@@ -5,20 +5,130 @@
 
 ### Available Operations
 
-* [create](#create) - Create a contractor payment group
 * [getList](#getlist) - Get contractor payment groups for a company
+* [create](#create) - Create a contractor payment group
 * [preview](#preview) - Preview a contractor payment group
-* [get](#get) - Fetch a contractor payment group
+* [get](#get) - Get a contractor payment group
 * [delete](#delete) - Cancel a contractor payment group
 * [fund](#fund) - Fund a contractor payment group [DEMO]
 * [getV1ContractorPaymentGroupsIdPartnerDisbursements](#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
 * [patchV1ContractorPaymentGroupsIdPartnerDisbursements](#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
+
+## getList
+
+Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
+
+ scope: `payrolls:read`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractor_payment_groups" method="get" path="/v1/companies/{company_id}/contractor_payment_groups" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPaymentGroups.getList({
+    companyId: "<id>",
+    startDate: "2020-01-01",
+    endDate: "2020-12-31",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorPaymentGroupsGetList } from "@gusto/embedded-api/funcs/contractorPaymentGroupsGetList.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentGroupsGetList(gustoEmbedded, {
+    companyId: "<id>",
+    startDate: "2020-01-01",
+    endDate: "2020-12-31",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentGroupsGetList failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useContractorPaymentGroupsGetList,
+  useContractorPaymentGroupsGetListSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchContractorPaymentGroupsGetList,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateContractorPaymentGroupsGetList,
+  invalidateAllContractorPaymentGroupsGetList,
+} from "@gusto/embedded-api/react-query/contractorPaymentGroupsGetList.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest](../../models/operations/getv1companiescompanyidcontractorpaymentgroupsrequest.md)                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse](../../models/operations/getv1companiescompanyidcontractorpaymentgroupsresponse.md)\>**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## create
 
 Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
 
 scope: `payrolls:run`
+
 
 ### Example Usage
 
@@ -130,121 +240,15 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
-
-## getList
-
-Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
-
-scope: `payrolls:read`
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractor_payment_groups" method="get" path="/v1/companies/{company_id}/contractor_payment_groups" -->
-```typescript
-import { GustoEmbedded } from "@gusto/embedded-api";
-
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await gustoEmbedded.contractorPaymentGroups.getList({
-    companyId: "<id>",
-    startDate: "2020-01-01",
-    endDate: "2020-12-31",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { contractorPaymentGroupsGetList } from "@gusto/embedded-api/funcs/contractorPaymentGroupsGetList.js";
-
-// Use `GustoEmbeddedCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await contractorPaymentGroupsGetList(gustoEmbedded, {
-    companyId: "<id>",
-    startDate: "2020-01-01",
-    endDate: "2020-12-31",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("contractorPaymentGroupsGetList failed:", res.error);
-  }
-}
-
-run();
-```
-
-### React hooks and utilities
-
-This method can be used in React components through the following hooks and
-associated utilities.
-
-> Check out [this guide][hook-guide] for information about each of the utilities
-> below and how to get started using React hooks.
-
-[hook-guide]: ../../../REACT_QUERY.md
-
-```tsx
-import {
-  // Query hooks for fetching data.
-  useContractorPaymentGroupsGetList,
-  useContractorPaymentGroupsGetListSuspense,
-
-  // Utility for prefetching data during server-side rendering and in React
-  // Server Components that will be immediately available to client components
-  // using the hooks.
-  prefetchContractorPaymentGroupsGetList,
-  
-  // Utilities to invalidate the query cache for this query in response to
-  // mutations and other user actions.
-  invalidateContractorPaymentGroupsGetList,
-  invalidateAllContractorPaymentGroupsGetList,
-} from "@gusto/embedded-api/react-query/contractorPaymentGroupsGetList.js";
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyIdContractorPaymentGroupsRequest](../../models/operations/getv1companiescompanyidcontractorpaymentgroupsrequest.md)                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetV1CompaniesCompanyIdContractorPaymentGroupsResponse](../../models/operations/getv1companiescompanyidcontractorpaymentgroupsresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## preview
 
-Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+Preview a contractor payment group before creating it. This endpoint allows you to see what the payment group would look like with the provided parameters without actually creating it.
 
-scope: `payrolls:read`
+scope: `contractor_payment_groups:write`
+
 
 ### Example Usage
 
@@ -261,16 +265,14 @@ async function run() {
   const result = await gustoEmbedded.contractorPaymentGroups.preview({
     companyId: "<id>",
     requestBody: {
-      checkDate: new RFCDate("2020-01-01"),
-      creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
+          paymentMethod: "Direct Deposit",
           wage: 5000,
-          hours: 40,
-          bonus: 500,
           reimbursement: 20,
         },
       ],
+      checkDate: new RFCDate("2020-01-01"),
     },
   });
 
@@ -299,16 +301,14 @@ async function run() {
   const res = await contractorPaymentGroupsPreview(gustoEmbedded, {
     companyId: "<id>",
     requestBody: {
-      checkDate: new RFCDate("2020-01-01"),
-      creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
+          paymentMethod: "Direct Deposit",
           wage: 5000,
-          hours: 40,
-          bonus: 500,
           reimbursement: 20,
         },
       ],
+      checkDate: new RFCDate("2020-01-01"),
     },
   });
   if (res.ok) {
@@ -356,6 +356,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -364,6 +365,7 @@ import {
 Returns a contractor payment group with all associated contractor payments.
 
 scope: `payrolls:read`
+
 
 ### Example Usage
 
@@ -458,15 +460,17 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete
 
 Cancels a contractor payment group and all associated contractor payments. All contractor payments must be cancellable, unfunded.
 
 scope: `payrolls:run`
+
 
 ### Example Usage
 
@@ -552,18 +556,18 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## fund
 
 > 🚧 Demo action
->
 > This action is only available in the Demo environment
 
 Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
 
 scope: `payrolls:run`
+
 
 ### Example Usage
 
@@ -649,6 +653,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -862,5 +867,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

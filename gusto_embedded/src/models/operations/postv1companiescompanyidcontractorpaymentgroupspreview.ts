@@ -9,30 +9,45 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import {
-  ContractorPaymentGroup,
-  ContractorPaymentGroup$inboundSchema,
-  ContractorPaymentGroup$Outbound,
-  ContractorPaymentGroup$outboundSchema,
-} from "../components/contractorpaymentgroup.js";
+  ContractorPaymentGroupPreview,
+  ContractorPaymentGroupPreview$inboundSchema,
+  ContractorPaymentGroupPreview$Outbound,
+  ContractorPaymentGroupPreview$outboundSchema,
+} from "../components/contractorpaymentgrouppreview.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion
+  >;
+
+/**
+ * Payment method
+ */
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
   {
     DirectDeposit: "Direct Deposit",
     Check: "Check",
-    HistoricalPayment: "Historical Payment",
   } as const;
+/**
+ * Payment method
+ */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
   ClosedEnum<
     typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
@@ -41,54 +56,47 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments =
   {
     /**
-     * The contractor receiving the payment
+     * UUID of the contractor
      */
     contractorUuid?: string | undefined;
+    /**
+     * Payment method
+     */
     paymentMethod?:
       | PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
       | undefined;
     /**
-     * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
+     * Wage amount
      */
     wage?: number | undefined;
     /**
-     * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
-     */
-    hours?: number | undefined;
-    /**
-     * If the contractor is on an hourly wage, this is the bonus the contractor earned
-     */
-    bonus?: number | undefined;
-    /**
-     * Reimbursed wages for the contractor
+     * Reimbursement amount
      */
     reimbursement?: number | undefined;
   };
 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody =
   {
-    /**
-     * The payment check date
-     */
-    checkDate: RFCDate;
-    /**
-     * Optional token used to make contractor payment group creation idempotent.  If provided, string must be unique for each group you intend to create.
-     */
-    creationToken?: string | undefined;
     contractorPayments: Array<
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments
     >;
+    /**
+     * Date when payments should be processed
+     */
+    checkDate?: RFCDate | undefined;
   };
 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest = {
   /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion
+    | undefined;
+  /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
   requestBody:
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody;
 };
@@ -98,8 +106,36 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse = {
   /**
    * Full contractor payment group object with null uuid
    */
-  contractorPaymentGroup?: ContractorPaymentGroup | undefined;
+  contractorPaymentGroupPreview?: ContractorPaymentGroupPreview | undefined;
 };
+
+/** @internal */
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion
+  > =
+    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$ {
+  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod$inboundSchema:
@@ -139,10 +175,8 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     contractor_uuid: z.string().optional(),
     payment_method:
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod$inboundSchema
-        .default("Direct Deposit"),
+        .optional(),
     wage: z.number().optional(),
-    hours: z.number().optional(),
-    bonus: z.number().optional(),
     reimbursement: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -155,10 +189,8 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$Outbound =
   {
     contractor_uuid?: string | undefined;
-    payment_method: string;
+    payment_method?: string | undefined;
     wage?: number | undefined;
-    hours?: number | undefined;
-    bonus?: number | undefined;
     reimbursement?: number | undefined;
   };
 
@@ -172,10 +204,8 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     contractorUuid: z.string().optional(),
     paymentMethod:
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod$outboundSchema
-        .default("Direct Deposit"),
+        .optional(),
     wage: z.number().optional(),
-    hours: z.number().optional(),
-    bonus: z.number().optional(),
     reimbursement: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -234,29 +264,26 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$i
     z.ZodTypeDef,
     unknown
   > = z.object({
-    check_date: z.string().transform(v => new RFCDate(v)),
-    creation_token: z.string().optional(),
     contractor_payments: z.array(
       z.lazy(() =>
         PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$inboundSchema
       ),
     ),
+    check_date: z.string().transform(v => new RFCDate(v)).optional(),
   }).transform((v) => {
     return remap$(v, {
-      "check_date": "checkDate",
-      "creation_token": "creationToken",
       "contractor_payments": "contractorPayments",
+      "check_date": "checkDate",
     });
   });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$Outbound =
   {
-    check_date: string;
-    creation_token?: string | undefined;
     contractor_payments: Array<
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$Outbound
     >;
+    check_date?: string | undefined;
   };
 
 /** @internal */
@@ -266,18 +293,16 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$o
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody
   > = z.object({
-    checkDate: z.instanceof(RFCDate).transform(v => v.toString()),
-    creationToken: z.string().optional(),
     contractorPayments: z.array(
       z.lazy(() =>
         PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$outboundSchema
       ),
     ),
+    checkDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   }).transform((v) => {
     return remap$(v, {
-      checkDate: "check_date",
-      creationToken: "creation_token",
       contractorPayments: "contractor_payments",
+      checkDate: "check_date",
     });
   });
 
@@ -329,15 +354,17 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest$inbou
     z.ZodTypeDef,
     unknown
   > = z.object({
+    "X-Gusto-API-Version":
+      PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
     company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "company_id": "companyId",
       "X-Gusto-API-Version": "xGustoAPIVersion",
+      "company_id": "companyId",
       "RequestBody": "requestBody",
     });
   });
@@ -345,8 +372,8 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest$inbou
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest$Outbound =
   {
-    company_id: string;
     "X-Gusto-API-Version": string;
+    company_id: string;
     RequestBody:
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$Outbound;
   };
@@ -358,15 +385,17 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest$outbo
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
       requestBody: "RequestBody",
     });
   });
@@ -420,11 +449,12 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$inbo
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Contractor-Payment-Group": ContractorPaymentGroup$inboundSchema.optional(),
+    "Contractor-Payment-Group-Preview":
+      ContractorPaymentGroupPreview$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Contractor-Payment-Group": "contractorPaymentGroup",
+      "Contractor-Payment-Group-Preview": "contractorPaymentGroupPreview",
     });
   });
 
@@ -432,7 +462,9 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$inbo
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$Outbound =
   {
     HttpMeta: HTTPMetadata$Outbound;
-    "Contractor-Payment-Group"?: ContractorPaymentGroup$Outbound | undefined;
+    "Contractor-Payment-Group-Preview"?:
+      | ContractorPaymentGroupPreview$Outbound
+      | undefined;
   };
 
 /** @internal */
@@ -443,11 +475,12 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse$outb
     PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    contractorPaymentGroup: ContractorPaymentGroup$outboundSchema.optional(),
+    contractorPaymentGroupPreview: ContractorPaymentGroupPreview$outboundSchema
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
-      contractorPaymentGroup: "Contractor-Payment-Group",
+      contractorPaymentGroupPreview: "Contractor-Payment-Group-Preview",
     });
   });
 

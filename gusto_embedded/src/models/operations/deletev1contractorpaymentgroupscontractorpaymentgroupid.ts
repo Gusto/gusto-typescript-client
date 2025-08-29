@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -12,12 +13,22 @@ import {
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
+  >;
 
 export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest = {
   /**
@@ -27,12 +38,42 @@ export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse = {
   httpMeta: HTTPMetadata;
 };
+
+/** @internal */
+export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion
+  > =
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$ {
+  /** @deprecated use `DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$inboundSchema:
@@ -42,7 +83,9 @@ export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$inbo
     unknown
   > = z.object({
     contractor_payment_group_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version":
+      DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "contractor_payment_group_uuid": "contractorPaymentGroupUuid",
@@ -65,7 +108,9 @@ export const DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest$outb
     DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest
   > = z.object({
     contractorPaymentGroupUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       contractorPaymentGroupUuid: "contractor_payment_group_uuid",

@@ -37,7 +37,7 @@ export type EmploymentHistoryList = {
   /**
    * The employee's last day of work for an employment.
    */
-  terminationDate?: string | undefined;
+  terminationDate?: string | null | undefined;
   /**
    * The boolean flag indicating whether Gusto will file a new hire report for the employee.
    */
@@ -83,7 +83,7 @@ export const EmploymentHistoryList$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   hire_date: z.string().optional(),
-  termination_date: z.string().optional(),
+  termination_date: z.nullable(z.string()).optional(),
   file_new_hire_report: z.boolean().optional(),
   two_percent_shareholder: z.boolean().optional(),
   employment_status: EmploymentHistoryListEmploymentStatus$inboundSchema
@@ -101,7 +101,7 @@ export const EmploymentHistoryList$inboundSchema: z.ZodType<
 /** @internal */
 export type EmploymentHistoryList$Outbound = {
   hire_date?: string | undefined;
-  termination_date?: string | undefined;
+  termination_date?: string | null | undefined;
   file_new_hire_report?: boolean | undefined;
   two_percent_shareholder?: boolean | undefined;
   employment_status?: string | undefined;
@@ -114,7 +114,7 @@ export const EmploymentHistoryList$outboundSchema: z.ZodType<
   EmploymentHistoryList
 > = z.object({
   hireDate: z.string().optional(),
-  terminationDate: z.string().optional(),
+  terminationDate: z.nullable(z.string()).optional(),
   fileNewHireReport: z.boolean().optional(),
   twoPercentShareholder: z.boolean().optional(),
   employmentStatus: EmploymentHistoryListEmploymentStatus$outboundSchema

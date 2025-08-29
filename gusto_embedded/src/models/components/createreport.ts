@@ -23,7 +23,7 @@ export type CreateReport = {
   /**
    * Title of the report
    */
-  customName?: string | undefined;
+  customName?: string | null | undefined;
   /**
    * File type
    */
@@ -38,7 +38,7 @@ export const CreateReport$inboundSchema: z.ZodType<
 > = z.object({
   request_uuid: z.string().optional(),
   company_uuid: z.string().optional(),
-  custom_name: z.string().optional(),
+  custom_name: z.nullable(z.string()).optional(),
   file_type: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -53,7 +53,7 @@ export const CreateReport$inboundSchema: z.ZodType<
 export type CreateReport$Outbound = {
   request_uuid?: string | undefined;
   company_uuid?: string | undefined;
-  custom_name?: string | undefined;
+  custom_name?: string | null | undefined;
   file_type?: string | undefined;
 };
 
@@ -65,7 +65,7 @@ export const CreateReport$outboundSchema: z.ZodType<
 > = z.object({
   requestUuid: z.string().optional(),
   companyUuid: z.string().optional(),
-  customName: z.string().optional(),
+  customName: z.nullable(z.string()).optional(),
   fileType: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

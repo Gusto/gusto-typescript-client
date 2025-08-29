@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -38,7 +42,6 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * > 🚧 Demo action
- * >
  * > This action is only available in the Demo environment
  *
  * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.
@@ -52,6 +55,7 @@ export function contractorPaymentGroupsFund(
 ): APIPromise<
   Result<
     PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -78,6 +82,7 @@ async function $do(
   [
     Result<
       PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -179,6 +184,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -194,8 +200,9 @@ async function $do(
       PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse$inboundSchema,
       { key: "Contractor-Payment-Group" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -6,7 +6,6 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OffCycleReasonType,
@@ -59,7 +58,7 @@ export type PayrollPrepared = {
   /**
    * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on time.  If payroll has not been run by the deadline, a prepare request will update both the check date and deadline to reflect the soonest employees can be paid and the deadline by which the payroll must be run in order for said check date to be met.
    */
-  payrollDeadline?: RFCDate | undefined;
+  payrollDeadline?: Date | undefined;
   /**
    * The date on which employees will be paid for the payroll.
    */
@@ -75,7 +74,7 @@ export type PayrollPrepared = {
   /**
    * A timestamp of the last valid payroll calculation. Null if there isn't a valid calculation.
    */
-  calculatedAt?: string | null | undefined;
+  calculatedAt?: Date | null | undefined;
   /**
    * The UUID of the payroll.
    */
@@ -148,11 +147,15 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  payroll_deadline: z.string().transform(v => new RFCDate(v)).optional(),
+  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
   check_date: z.string().optional(),
   processed: z.boolean().optional(),
   processed_date: z.nullable(z.string()).optional(),
-  calculated_at: z.nullable(z.string()).optional(),
+  calculated_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   uuid: z.string().optional(),
   payroll_uuid: z.string().optional(),
   company_uuid: z.string().optional(),
@@ -244,12 +247,11 @@ export const PayrollPrepared$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PayrollPrepared
 > = z.object({
-  payrollDeadline: z.instanceof(RFCDate).transform(v => v.toString())
-    .optional(),
+  payrollDeadline: z.date().transform(v => v.toISOString()).optional(),
   checkDate: z.string().optional(),
   processed: z.boolean().optional(),
   processedDate: z.nullable(z.string()).optional(),
-  calculatedAt: z.nullable(z.string()).optional(),
+  calculatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   uuid: z.string().optional(),
   payrollUuid: z.string().optional(),
   companyUuid: z.string().optional(),

@@ -268,10 +268,10 @@ run();
 
 ### [contractorPaymentGroups](docs/sdks/contractorpaymentgroups/README.md)
 
-* [create](docs/sdks/contractorpaymentgroups/README.md#create) - Create a contractor payment group
 * [getList](docs/sdks/contractorpaymentgroups/README.md#getlist) - Get contractor payment groups for a company
+* [create](docs/sdks/contractorpaymentgroups/README.md#create) - Create a contractor payment group
 * [preview](docs/sdks/contractorpaymentgroups/README.md#preview) - Preview a contractor payment group
-* [get](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
+* [get](docs/sdks/contractorpaymentgroups/README.md#get) - Get a contractor payment group
 * [delete](docs/sdks/contractorpaymentgroups/README.md#delete) - Cancel a contractor payment group
 * [fund](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
 * [getV1ContractorPaymentGroupsIdPartnerDisbursements](docs/sdks/contractorpaymentgroups/README.md#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
@@ -671,7 +671,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contractorPaymentGroupsCreate`](docs/sdks/contractorpaymentgroups/README.md#create) - Create a contractor payment group
 - [`contractorPaymentGroupsDelete`](docs/sdks/contractorpaymentgroups/README.md#delete) - Cancel a contractor payment group
 - [`contractorPaymentGroupsFund`](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
-- [`contractorPaymentGroupsGet`](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
+- [`contractorPaymentGroupsGet`](docs/sdks/contractorpaymentgroups/README.md#get) - Get a contractor payment group
 - [`contractorPaymentGroupsGetList`](docs/sdks/contractorpaymentgroups/README.md#getlist) - Get contractor payment groups for a company
 - [`contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements`](docs/sdks/contractorpaymentgroups/README.md#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
 - [`contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements`](docs/sdks/contractorpaymentgroups/README.md#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
@@ -957,7 +957,7 @@ To learn about this feature and how to get started, check
 - [`useContractorPaymentGroupsCreateMutation`](docs/sdks/contractorpaymentgroups/README.md#create) - Create a contractor payment group
 - [`useContractorPaymentGroupsDeleteMutation`](docs/sdks/contractorpaymentgroups/README.md#delete) - Cancel a contractor payment group
 - [`useContractorPaymentGroupsFundMutation`](docs/sdks/contractorpaymentgroups/README.md#fund) - Fund a contractor payment group [DEMO]
-- [`useContractorPaymentGroupsGet`](docs/sdks/contractorpaymentgroups/README.md#get) - Fetch a contractor payment group
+- [`useContractorPaymentGroupsGet`](docs/sdks/contractorpaymentgroups/README.md#get) - Get a contractor payment group
 - [`useContractorPaymentGroupsGetList`](docs/sdks/contractorpaymentgroups/README.md#getlist) - Get contractor payment groups for a company
 - [`useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements`](docs/sdks/contractorpaymentgroups/README.md#getv1contractorpaymentgroupsidpartnerdisbursements) - Get partner disbursements for a contractor payment group
 - [`useContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutation`](docs/sdks/contractorpaymentgroups/README.md#patchv1contractorpaymentgroupsidpartnerdisbursements) - Update partner disbursements for a contractor payment group
@@ -1338,7 +1338,7 @@ run();
 **Primary error:**
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (11)</summary>
+<details><summary>Less common errors (12)</summary>
 
 <br />
 
@@ -1351,7 +1351,8 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 138 of 260 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 139 of 260 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 260 methods.*
 * [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 260 methods.*
 * [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 260 methods.*
 * [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 260 methods.*

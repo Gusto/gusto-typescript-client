@@ -47,6 +47,25 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ContractorPaymentGroups extends ClientSDK {
   /**
+   * Get contractor payment groups for a company
+   *
+   * @remarks
+   * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
+   *
+   *  scope: `payrolls:read`
+   */
+  async getList(
+    request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1CompaniesCompanyIdContractorPaymentGroupsResponse> {
+    return unwrapAsync(contractorPaymentGroupsGetList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create a contractor payment group
    *
    * @remarks
@@ -66,31 +85,12 @@ export class ContractorPaymentGroups extends ClientSDK {
   }
 
   /**
-   * Get contractor payment groups for a company
-   *
-   * @remarks
-   * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
-   *
-   * scope: `payrolls:read`
-   */
-  async getList(
-    request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-    options?: RequestOptions,
-  ): Promise<GetV1CompaniesCompanyIdContractorPaymentGroupsResponse> {
-    return unwrapAsync(contractorPaymentGroupsGetList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Preview a contractor payment group
    *
    * @remarks
-   * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+   * Preview a contractor payment group before creating it. This endpoint allows you to see what the payment group would look like with the provided parameters without actually creating it.
    *
-   * scope: `payrolls:read`
+   * scope: `contractor_payment_groups:write`
    */
   async preview(
     request: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest,
@@ -104,7 +104,7 @@ export class ContractorPaymentGroups extends ClientSDK {
   }
 
   /**
-   * Fetch a contractor payment group
+   * Get a contractor payment group
    *
    * @remarks
    * Returns a contractor payment group with all associated contractor payments.
@@ -146,7 +146,6 @@ export class ContractorPaymentGroups extends ClientSDK {
    *
    * @remarks
    * > 🚧 Demo action
-   * >
    * > This action is only available in the Demo environment
    *
    * Simulate funding a contractor payment group. Funding only occurs automatically in the production environment when bank transactions are generated. Use this action in the demo environment to transition a contractor payment group's `status` from `Unfunded` to `Funded`. A `Funded` status is required for generating a contractor payment receipt.

@@ -5,25 +5,36 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
-  ContractorPaymentGroupMinimal,
-  ContractorPaymentGroupMinimal$inboundSchema,
-  ContractorPaymentGroupMinimal$Outbound,
-  ContractorPaymentGroupMinimal$outboundSchema,
-} from "../components/contractorpaymentgroupminimal.js";
+  ContractorPaymentGroup,
+  ContractorPaymentGroup$inboundSchema,
+  ContractorPaymentGroup$Outbound,
+  ContractorPaymentGroup$outboundSchema,
+} from "../components/contractorpaymentgroup.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
   HTTPMetadata$Outbound,
   HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$inboundSchema,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+  >;
 
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
   /**
@@ -49,7 +60,9 @@ export type GetV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse = {
@@ -57,8 +70,36 @@ export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse = {
   /**
    * List of Contractor Payment Groups
    */
-  contractorPaymentGroupList?: Array<ContractorPaymentGroupMinimal> | undefined;
+  contractorPaymentGroups?: Array<ContractorPaymentGroup> | undefined;
 };
+
+/** @internal */
+export const GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
+  > =
+    GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$ {
+  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema;
+  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema;
+}
 
 /** @internal */
 export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema:
@@ -72,7 +113,9 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema
     end_date: z.string().optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version":
+      GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -104,7 +147,9 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchem
     endDate: z.string().optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
@@ -165,21 +210,20 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchem
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Contractor-Payment-Group-List": z.array(
-      ContractorPaymentGroupMinimal$inboundSchema,
-    ).optional(),
+    "Contractor-Payment-Groups": z.array(ContractorPaymentGroup$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Contractor-Payment-Group-List": "contractorPaymentGroupList",
+      "Contractor-Payment-Groups": "contractorPaymentGroups",
     });
   });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-Payment-Group-List"?:
-    | Array<ContractorPaymentGroupMinimal$Outbound>
+  "Contractor-Payment-Groups"?:
+    | Array<ContractorPaymentGroup$Outbound>
     | undefined;
 };
 
@@ -191,13 +235,12 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$outboundSche
     GetV1CompaniesCompanyIdContractorPaymentGroupsResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    contractorPaymentGroupList: z.array(
-      ContractorPaymentGroupMinimal$outboundSchema,
-    ).optional(),
+    contractorPaymentGroups: z.array(ContractorPaymentGroup$outboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
-      contractorPaymentGroupList: "Contractor-Payment-Group-List",
+      contractorPaymentGroups: "Contractor-Payment-Groups",
     });
   });
 

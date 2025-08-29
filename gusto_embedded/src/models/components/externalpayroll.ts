@@ -122,7 +122,7 @@ export type ExternalPayroll = {
   /**
    * Applicable benefits based on company provisioning.
    */
-  applicableBenefits?: Array<ApplicableBenefits> | undefined;
+  applicableBenefits?: Array<ApplicableBenefits> | null | undefined;
   /**
    * Applicable taxes based on company provisioning.
    */
@@ -705,8 +705,9 @@ export const ExternalPayroll$inboundSchema: z.ZodType<
   ).optional(),
   applicable_earnings: z.array(z.lazy(() => ApplicableEarnings$inboundSchema))
     .optional(),
-  applicable_benefits: z.array(z.lazy(() => ApplicableBenefits$inboundSchema))
-    .optional(),
+  applicable_benefits: z.nullable(
+    z.array(z.lazy(() => ApplicableBenefits$inboundSchema)),
+  ).optional(),
   applicable_taxes: z.array(z.lazy(() => ApplicableTaxes$inboundSchema))
     .optional(),
   metadata: z.lazy(() => ExternalPayrollMetadata$inboundSchema).optional(),
@@ -733,7 +734,7 @@ export type ExternalPayroll$Outbound = {
   status?: string | undefined;
   external_payroll_items?: Array<ExternalPayrollItems$Outbound> | undefined;
   applicable_earnings?: Array<ApplicableEarnings$Outbound> | undefined;
-  applicable_benefits?: Array<ApplicableBenefits$Outbound> | undefined;
+  applicable_benefits?: Array<ApplicableBenefits$Outbound> | null | undefined;
   applicable_taxes?: Array<ApplicableTaxes$Outbound> | undefined;
   metadata?: ExternalPayrollMetadata$Outbound | undefined;
 };
@@ -755,8 +756,9 @@ export const ExternalPayroll$outboundSchema: z.ZodType<
   ).optional(),
   applicableEarnings: z.array(z.lazy(() => ApplicableEarnings$outboundSchema))
     .optional(),
-  applicableBenefits: z.array(z.lazy(() => ApplicableBenefits$outboundSchema))
-    .optional(),
+  applicableBenefits: z.nullable(
+    z.array(z.lazy(() => ApplicableBenefits$outboundSchema)),
+  ).optional(),
   applicableTaxes: z.array(z.lazy(() => ApplicableTaxes$outboundSchema))
     .optional(),
   metadata: z.lazy(() => ExternalPayrollMetadata$outboundSchema).optional(),
