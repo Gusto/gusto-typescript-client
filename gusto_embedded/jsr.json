@@ -2,7 +2,7 @@
 
 {
   "name": "@gusto/embedded-api",
-  "version": "0.6.9",
+  "version": "0.6.10",
   "exports": {
     ".": "./src/index.ts",    
     "./models/errors": "./src/models/errors/index.ts",    

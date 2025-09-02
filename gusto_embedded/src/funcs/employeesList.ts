@@ -111,6 +111,7 @@ async function $do(
   const query = queryJoin(
     encodeFormQuery({
       "include": payload.include,
+      "uuids": payload.uuids,
     }, { explode: false }),
     encodeFormQuery({
       "onboarded": payload.onboarded,
@@ -119,7 +120,6 @@ async function $do(
       "search_term": payload.search_term,
       "terminated": payload.terminated,
       "terminated_today": payload.terminated_today,
-      "uuids": payload.uuids,
     }),
   );
 
