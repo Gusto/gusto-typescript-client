@@ -152,9 +152,17 @@ export type PayrollShowBenefits = {
   imputed?: boolean | undefined;
 };
 
+export const AmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+export type AmountType = ClosedEnum<typeof AmountType>;
+
 export type Deductions = {
   name?: string | undefined;
   amount?: number | undefined;
+  amountType?: AmountType | undefined;
+  uuid?: string | undefined;
 };
 
 export type EmployeeCompensations = {
@@ -211,7 +219,7 @@ export type EmployeeCompensations = {
    */
   benefits?: Array<PayrollShowBenefits> | undefined;
   /**
-   * An array of employee deductions for the pay period. Deductions are only included for processed payroll when the include parameter is present.
+   * An array of employee deductions for the pay period.
    */
   deductions?: Array<Deductions> | undefined;
 };
@@ -694,6 +702,25 @@ export function payrollShowBenefitsFromJSON(
 }
 
 /** @internal */
+export const AmountType$inboundSchema: z.ZodNativeEnum<typeof AmountType> = z
+  .nativeEnum(AmountType);
+
+/** @internal */
+export const AmountType$outboundSchema: z.ZodNativeEnum<typeof AmountType> =
+  AmountType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AmountType$ {
+  /** @deprecated use `AmountType$inboundSchema` instead. */
+  export const inboundSchema = AmountType$inboundSchema;
+  /** @deprecated use `AmountType$outboundSchema` instead. */
+  export const outboundSchema = AmountType$outboundSchema;
+}
+
+/** @internal */
 export const Deductions$inboundSchema: z.ZodType<
   Deductions,
   z.ZodTypeDef,
@@ -701,12 +728,20 @@ export const Deductions$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   amount: z.number().optional(),
+  amount_type: AmountType$inboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "amount_type": "amountType",
+  });
 });
 
 /** @internal */
 export type Deductions$Outbound = {
   name?: string | undefined;
   amount?: number | undefined;
+  amount_type?: string | undefined;
+  uuid?: string | undefined;
 };
 
 /** @internal */
@@ -717,6 +752,12 @@ export const Deductions$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   amount: z.number().optional(),
+  amountType: AmountType$outboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    amountType: "amount_type",
+  });
 });
 
 /**

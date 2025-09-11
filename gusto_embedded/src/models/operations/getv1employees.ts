@@ -40,6 +40,7 @@ export const QueryParamInclude = {
   CompanyName: "company_name",
   CurrentHomeAddress: "current_home_address",
   AllHomeAddresses: "all_home_addresses",
+  PortalInvitations: "portal_invitations",
 } as const;
 export type QueryParamInclude = ClosedEnum<typeof QueryParamInclude>;
 

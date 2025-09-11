@@ -19,12 +19,13 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.6.10
+  version: 0.6.11
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -59,6 +60,7 @@ typescript:
   outputModelSuffix: output
   packageName: '@gusto/embedded-api'
   responseFormat: envelope-http
+  sseFlatResponse: false
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: false

@@ -12,6 +12,7 @@
 * [deleteSubscription](#deletesubscription) - Delete a webhook subscription
 * [verify](#verify) - Verify the webhook subscription
 * [requestVerificationToken](#requestverificationtoken) - Request the webhook subscription verification_token
+* [getV1WebhooksHealthCheck](#getv1webhookshealthcheck) - Get the webhooks health status
 
 ## createSubscription
 
@@ -754,6 +755,107 @@ import {
 ### Response
 
 **Promise\<[operations.GetV1WebhookSubscriptionVerificationTokenUuidResponse](../../models/operations/getv1webhooksubscriptionverificationtokenuuidresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## getV1WebhooksHealthCheck
+
+Returns the health status (`healthy`, `unhealthy`, or `unknown`) of the webhooks system based on the last ten minutes of activity.
+
+scope: `webhook_subscriptions:read`
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-webhooks-health_check" method="get" path="/v1/webhooks/health_check" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded();
+
+async function run() {
+  const result = await gustoEmbedded.webhooks.getV1WebhooksHealthCheck({
+    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+  }, {});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { webhooksGetV1WebhooksHealthCheck } from "@gusto/embedded-api/funcs/webhooksGetV1WebhooksHealthCheck.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore();
+
+async function run() {
+  const res = await webhooksGetV1WebhooksHealthCheck(gustoEmbedded, {
+    systemAccessAuth: process.env["GUSTOEMBEDDED_SYSTEM_ACCESS_AUTH"] ?? "",
+  }, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhooksGetV1WebhooksHealthCheck failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWebhooksGetV1WebhooksHealthCheck,
+  useWebhooksGetV1WebhooksHealthCheckSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWebhooksGetV1WebhooksHealthCheck,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWebhooksGetV1WebhooksHealthCheck,
+  invalidateAllWebhooksGetV1WebhooksHealthCheck,
+} from "@gusto/embedded-api/react-query/webhooksGetV1WebhooksHealthCheck.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1WebhooksHealthCheckRequest](../../models/operations/getv1webhookshealthcheckrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [operations.GetV1WebhooksHealthCheckSecurity](../../models/operations/getv1webhookshealthchecksecurity.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1WebhooksHealthCheckResponse](../../models/operations/getv1webhookshealthcheckresponse.md)\>**
 
 ### Errors
 

@@ -11,5 +11,5 @@ let value: QueryParamInclude = "custom_fields";
 ## Values
 
 ```typescript
-"custom_fields" | "all_compensations" | "company_name" | "current_home_address" | "all_home_addresses"
+"custom_fields" | "all_compensations" | "company_name" | "current_home_address" | "all_home_addresses" | "portal_invitations"
 ```

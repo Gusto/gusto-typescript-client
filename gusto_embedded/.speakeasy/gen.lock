@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: da80d703ff7f423475c2be0c4f7b9f5d
+  docChecksum: 95e2073093ca124397046e763fc0604b
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.607.0
-  generationVersion: 2.690.1
-  releaseVersion: 0.6.10
-  configChecksum: 106bbae8ad2a79bf9311384de20d11e2
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 0.6.11
+  configChecksum: 2a0cccf4cf95a23a7c73aca5125165e1
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,14 +16,14 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
     constsAndDefaults: 0.1.12
-    core: 3.21.21
+    core: 3.21.22
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     errorUnions: 0.1.1
-    globalSecurity: 2.82.13
+    globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
@@ -60,6 +60,7 @@ generatedFiles:
   - docs/models/components/admin.md
   - docs/models/components/agencies.md
   - docs/models/components/aggregation.md
+  - docs/models/components/amounttype.md
   - docs/models/components/answers.md
   - docs/models/components/applicablebenefits.md
   - docs/models/components/applicableearnings.md
@@ -358,6 +359,8 @@ generatedFiles:
   - docs/models/components/payrolltotalstype.md
   - docs/models/components/payrolltype.md
   - docs/models/components/payrollupdate.md
+  - docs/models/components/payrollupdateamounttype.md
+  - docs/models/components/payrollupdatedeductions.md
   - docs/models/components/payrollupdateemployeecompensations.md
   - docs/models/components/payrollupdatefixedcompensations.md
   - docs/models/components/payrollupdatehourlycompensations.md
@@ -452,6 +455,8 @@ generatedFiles:
   - docs/models/components/veteransday.md
   - docs/models/components/w4datatype.md
   - docs/models/components/wagetype.md
+  - docs/models/components/webhookshealthcheckstatus.md
+  - docs/models/components/webhookshealthcheckstatusstatus.md
   - docs/models/components/webhooksubscription.md
   - docs/models/components/webhooksubscriptionstatus.md
   - docs/models/components/wireinrequest.md
@@ -825,6 +830,10 @@ generatedFiles:
   - docs/models/operations/getv1tokeninforesponse.md
   - docs/models/operations/getv1tokeninforesponsebody.md
   - docs/models/operations/getv1tokeninfotype.md
+  - docs/models/operations/getv1webhookshealthcheckheaderxgustoapiversion.md
+  - docs/models/operations/getv1webhookshealthcheckrequest.md
+  - docs/models/operations/getv1webhookshealthcheckresponse.md
+  - docs/models/operations/getv1webhookshealthchecksecurity.md
   - docs/models/operations/getv1webhooksubscriptionsrequest.md
   - docs/models/operations/getv1webhooksubscriptionsresponse.md
   - docs/models/operations/getv1webhooksubscriptionssecurity.md
@@ -1619,6 +1628,7 @@ generatedFiles:
   - src/funcs/webhooksCreateSubscription.ts
   - src/funcs/webhooksDeleteSubscription.ts
   - src/funcs/webhooksGetSubscription.ts
+  - src/funcs/webhooksGetV1WebhooksHealthCheck.ts
   - src/funcs/webhooksListSubscriptions.ts
   - src/funcs/webhooksRequestVerificationToken.ts
   - src/funcs/webhooksUpdateSubscription.ts
@@ -1804,6 +1814,7 @@ generatedFiles:
   - src/models/components/timeoffpolicy.ts
   - src/models/components/unprocessedterminationpayperiod.ts
   - src/models/components/versionheader.ts
+  - src/models/components/webhookshealthcheckstatus.ts
   - src/models/components/webhooksubscription.ts
   - src/models/components/wireinrequest.ts
   - src/models/components/ytdbenefitamountsfromdifferentcompany.ts
@@ -1961,6 +1972,7 @@ generatedFiles:
   - src/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.ts
   - src/models/operations/getv1taxliabilities.ts
   - src/models/operations/getv1tokeninfo.ts
+  - src/models/operations/getv1webhookshealthcheck.ts
   - src/models/operations/getv1webhooksubscriptions.ts
   - src/models/operations/getv1webhooksubscriptionuuid.ts
   - src/models/operations/getv1webhooksubscriptionverificationtokenuuid.ts
@@ -2338,6 +2350,7 @@ generatedFiles:
   - src/react-query/webhooksCreateSubscription.ts
   - src/react-query/webhooksDeleteSubscription.ts
   - src/react-query/webhooksGetSubscription.ts
+  - src/react-query/webhooksGetV1WebhooksHealthCheck.ts
   - src/react-query/webhooksListSubscriptions.ts
   - src/react-query/webhooksRequestVerificationToken.ts
   - src/react-query/webhooksUpdateSubscription.ts
@@ -9874,5 +9887,13 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+  get-v1-webhooks-health_check:
+    speakeasy-default-get-v1-webhooks-health-check:
+      parameters:
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
