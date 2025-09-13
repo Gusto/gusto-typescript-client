@@ -595,6 +595,7 @@ run();
 * [deleteSubscription](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 * [verify](docs/sdks/webhooks/README.md#verify) - Verify the webhook subscription
 * [requestVerificationToken](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
+* [getV1WebhooksHealthCheck](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 
 ### [wireInRequests](docs/sdks/wireinrequests/README.md)
 
@@ -873,6 +874,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`webhooksCreateSubscription`](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 - [`webhooksDeleteSubscription`](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 - [`webhooksGetSubscription`](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
+- [`webhooksGetV1WebhooksHealthCheck`](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 - [`webhooksListSubscriptions`](docs/sdks/webhooks/README.md#listsubscriptions) - List webhook subscriptions
 - [`webhooksRequestVerificationToken`](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
 - [`webhooksUpdateSubscription`](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
@@ -1159,6 +1161,7 @@ To learn about this feature and how to get started, check
 - [`useWebhooksCreateSubscriptionMutation`](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 - [`useWebhooksDeleteSubscriptionMutation`](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 - [`useWebhooksGetSubscription`](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
+- [`useWebhooksGetV1WebhooksHealthCheck`](docs/sdks/webhooks/README.md#getv1webhookshealthcheck) - Get the webhooks health status
 - [`useWebhooksListSubscriptions`](docs/sdks/webhooks/README.md#listsubscriptions) - List webhook subscriptions
 - [`useWebhooksRequestVerificationToken`](docs/sdks/webhooks/README.md#requestverificationtoken) - Request the webhook subscription verification_token
 - [`useWebhooksUpdateSubscriptionMutation`](docs/sdks/webhooks/README.md#updatesubscription) - Update a webhook subscription
@@ -1351,12 +1354,12 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 139 of 260 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 260 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 260 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 260 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 260 methods.*
-* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 260 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 139 of 261 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 261 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 261 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 261 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 261 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 261 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

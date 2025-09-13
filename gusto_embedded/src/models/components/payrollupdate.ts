@@ -59,6 +59,42 @@ export type PayrollUpdateHourlyCompensations = {
   jobUuid?: string | undefined;
 };
 
+/**
+ * The amount type of the deduction for the pay period.
+ */
+export const PayrollUpdateAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * The amount type of the deduction for the pay period.
+ */
+export type PayrollUpdateAmountType = ClosedEnum<
+  typeof PayrollUpdateAmountType
+>;
+
+/**
+ * An array of deductions for the employee.
+ */
+export type PayrollUpdateDeductions = {
+  /**
+   * The name of the deduction.
+   */
+  name?: string | undefined;
+  /**
+   * The amount of the deduction for the pay period.
+   */
+  amount?: number | undefined;
+  /**
+   * The amount type of the deduction for the pay period.
+   */
+  amountType?: PayrollUpdateAmountType | undefined;
+  /**
+   * The UUID of the deduction. This parameter is optional and can be provided in order to update an existing deduction.
+   */
+  uuid?: string | undefined;
+};
+
 export type PayrollUpdatePaidTimeOff = {
   /**
    * The name of the PTO. This also serves as the unique, immutable identifier for the PTO. Must pass in name or policy_uuid but not both.
@@ -101,6 +137,7 @@ export type PayrollUpdateEmployeeCompensations = {
   memo?: string | undefined;
   fixedCompensations?: Array<PayrollUpdateFixedCompensations> | undefined;
   hourlyCompensations?: Array<PayrollUpdateHourlyCompensations> | undefined;
+  deductions?: Array<PayrollUpdateDeductions> | undefined;
   /**
    * An array of all paid time off the employee is eligible for this pay period. Each paid time off object can be the name or the specific policy_uuid.
    */
@@ -302,6 +339,98 @@ export function payrollUpdateHourlyCompensationsFromJSON(
 }
 
 /** @internal */
+export const PayrollUpdateAmountType$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollUpdateAmountType
+> = z.nativeEnum(PayrollUpdateAmountType);
+
+/** @internal */
+export const PayrollUpdateAmountType$outboundSchema: z.ZodNativeEnum<
+  typeof PayrollUpdateAmountType
+> = PayrollUpdateAmountType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PayrollUpdateAmountType$ {
+  /** @deprecated use `PayrollUpdateAmountType$inboundSchema` instead. */
+  export const inboundSchema = PayrollUpdateAmountType$inboundSchema;
+  /** @deprecated use `PayrollUpdateAmountType$outboundSchema` instead. */
+  export const outboundSchema = PayrollUpdateAmountType$outboundSchema;
+}
+
+/** @internal */
+export const PayrollUpdateDeductions$inboundSchema: z.ZodType<
+  PayrollUpdateDeductions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  amount_type: PayrollUpdateAmountType$inboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "amount_type": "amountType",
+  });
+});
+
+/** @internal */
+export type PayrollUpdateDeductions$Outbound = {
+  name?: string | undefined;
+  amount?: number | undefined;
+  amount_type?: string | undefined;
+  uuid?: string | undefined;
+};
+
+/** @internal */
+export const PayrollUpdateDeductions$outboundSchema: z.ZodType<
+  PayrollUpdateDeductions$Outbound,
+  z.ZodTypeDef,
+  PayrollUpdateDeductions
+> = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  amountType: PayrollUpdateAmountType$outboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    amountType: "amount_type",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PayrollUpdateDeductions$ {
+  /** @deprecated use `PayrollUpdateDeductions$inboundSchema` instead. */
+  export const inboundSchema = PayrollUpdateDeductions$inboundSchema;
+  /** @deprecated use `PayrollUpdateDeductions$outboundSchema` instead. */
+  export const outboundSchema = PayrollUpdateDeductions$outboundSchema;
+  /** @deprecated use `PayrollUpdateDeductions$Outbound` instead. */
+  export type Outbound = PayrollUpdateDeductions$Outbound;
+}
+
+export function payrollUpdateDeductionsToJSON(
+  payrollUpdateDeductions: PayrollUpdateDeductions,
+): string {
+  return JSON.stringify(
+    PayrollUpdateDeductions$outboundSchema.parse(payrollUpdateDeductions),
+  );
+}
+
+export function payrollUpdateDeductionsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollUpdateDeductions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollUpdateDeductions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollUpdateDeductions' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollUpdatePaidTimeOff$inboundSchema: z.ZodType<
   PayrollUpdatePaidTimeOff,
   z.ZodTypeDef,
@@ -391,6 +520,8 @@ export const PayrollUpdateEmployeeCompensations$inboundSchema: z.ZodType<
   hourly_compensations: z.array(
     z.lazy(() => PayrollUpdateHourlyCompensations$inboundSchema),
   ).optional(),
+  deductions: z.array(z.lazy(() => PayrollUpdateDeductions$inboundSchema))
+    .optional(),
   paid_time_off: z.array(z.lazy(() => PayrollUpdatePaidTimeOff$inboundSchema))
     .optional(),
 }).transform((v) => {
@@ -416,6 +547,7 @@ export type PayrollUpdateEmployeeCompensations$Outbound = {
   hourly_compensations?:
     | Array<PayrollUpdateHourlyCompensations$Outbound>
     | undefined;
+  deductions?: Array<PayrollUpdateDeductions$Outbound> | undefined;
   paid_time_off?: Array<PayrollUpdatePaidTimeOff$Outbound> | undefined;
 };
 
@@ -436,6 +568,8 @@ export const PayrollUpdateEmployeeCompensations$outboundSchema: z.ZodType<
   hourlyCompensations: z.array(
     z.lazy(() => PayrollUpdateHourlyCompensations$outboundSchema),
   ).optional(),
+  deductions: z.array(z.lazy(() => PayrollUpdateDeductions$outboundSchema))
+    .optional(),
   paidTimeOff: z.array(z.lazy(() => PayrollUpdatePaidTimeOff$outboundSchema))
     .optional(),
 }).transform((v) => {

@@ -3,12 +3,12 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
+import { resolveSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
@@ -21,34 +21,31 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
-import {
-  GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-  GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema,
-  GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
-  GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema,
-} from "../models/operations/getv1companiescompanyidcontractorpaymentgroups.js";
+  GetV1WebhooksHealthCheckRequest,
+  GetV1WebhooksHealthCheckRequest$outboundSchema,
+  GetV1WebhooksHealthCheckResponse,
+  GetV1WebhooksHealthCheckResponse$inboundSchema,
+  GetV1WebhooksHealthCheckSecurity,
+} from "../models/operations/getv1webhookshealthcheck.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get contractor payment groups for a company
+ * Get the webhooks health status
  *
  * @remarks
- * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
+ * Returns the health status (`healthy`, `unhealthy`, or `unknown`) of the webhooks system based on the last ten minutes of activity.
  *
- *  scope: `payrolls:read`
+ * scope: `webhook_subscriptions:read`
  */
-export function contractorPaymentGroupsGetList(
+export function webhooksGetV1WebhooksHealthCheck(
   client: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
+  security: GetV1WebhooksHealthCheckSecurity,
+  request: GetV1WebhooksHealthCheckRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
-    | UnprocessableEntityErrorObject
+    GetV1WebhooksHealthCheckResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -61,6 +58,7 @@ export function contractorPaymentGroupsGetList(
 > {
   return new APIPromise($do(
     client,
+    security,
     request,
     options,
   ));
@@ -68,13 +66,13 @@ export function contractorPaymentGroupsGetList(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
+  security: GetV1WebhooksHealthCheckSecurity,
+  request: GetV1WebhooksHealthCheckRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
-      | UnprocessableEntityErrorObject
+      GetV1WebhooksHealthCheckResponse,
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -89,9 +87,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema
-        .parse(value),
+    (value) => GetV1WebhooksHealthCheckRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -100,23 +96,7 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const pathParams = {
-    company_id: encodeSimple("company_id", payload.company_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-
-  const path = pathToFunc(
-    "/v1/companies/{company_id}/contractor_payment_groups",
-  )(pathParams);
-
-  const query = encodeFormQuery({
-    "end_date": payload.end_date,
-    "page": payload.page,
-    "per": payload.per,
-    "start_date": payload.start_date,
-  });
+  const path = pathToFunc("/v1/webhooks/health_check")();
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -127,21 +107,25 @@ async function $do(
     ),
   }));
 
-  const secConfig = await extractSecurity(client._options.companyAccessAuth);
-  const securityInput = secConfig == null
-    ? {}
-    : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveSecurity(
+    [
+      {
+        fieldName: "Authorization",
+        type: "http:bearer",
+        value: security?.systemAccessAuth,
+      },
+    ],
+  );
 
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-v1-companies-company_id-contractor_payment_groups",
-    oAuth2Scopes: [],
+    operationID: "get-v1-webhooks-health_check",
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
-    securitySource: client._options.companyAccessAuth,
+    securitySource: security,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
@@ -154,7 +138,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -166,7 +149,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -180,8 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
-    | UnprocessableEntityErrorObject
+    GetV1WebhooksHealthCheckResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -191,12 +173,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema,
-      { key: "Contractor-Payment-Group-With-Blockers" },
-    ),
-    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.json(200, GetV1WebhooksHealthCheckResponse$inboundSchema, {
+      key: "Webhooks-Health-Check-Status",
+    }),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

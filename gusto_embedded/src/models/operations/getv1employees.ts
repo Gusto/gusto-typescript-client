@@ -35,11 +35,12 @@ export type GetV1EmployeesHeaderXGustoAPIVersion = ClosedEnum<
 >;
 
 export const QueryParamInclude = {
-  CustomFields: "custom_fields",
   AllCompensations: "all_compensations",
+  AllHomeAddresses: "all_home_addresses",
   CompanyName: "company_name",
   CurrentHomeAddress: "current_home_address",
-  AllHomeAddresses: "all_home_addresses",
+  CustomFields: "custom_fields",
+  PortalInvitations: "portal_invitations",
 } as const;
 export type QueryParamInclude = ClosedEnum<typeof QueryParamInclude>;
 
@@ -53,11 +54,7 @@ export type GetV1EmployeesRequest = {
    */
   employeeId: string;
   /**
-   * Include the requested attribute(s) in each employee response, multiple options are comma separated. Available options:
-   *
-   * @remarks
-   * - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
-   * - custom_fields: Include employees' custom fields
+   * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
    */
   include?: Array<QueryParamInclude> | undefined;
 };
