@@ -8,11 +8,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
-  ContractorPaymentGroup,
-  ContractorPaymentGroup$inboundSchema,
-  ContractorPaymentGroup$Outbound,
-  ContractorPaymentGroup$outboundSchema,
-} from "../components/contractorpaymentgroup.js";
+  ContractorPaymentGroupWithBlockers,
+  ContractorPaymentGroupWithBlockers$inboundSchema,
+  ContractorPaymentGroupWithBlockers$Outbound,
+  ContractorPaymentGroupWithBlockers$outboundSchema,
+} from "../components/contractorpaymentgroupwithblockers.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
@@ -70,7 +70,9 @@ export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse = {
   /**
    * List of Contractor Payment Groups
    */
-  contractorPaymentGroups?: Array<ContractorPaymentGroup> | undefined;
+  contractorPaymentGroupWithBlockers?:
+    | Array<ContractorPaymentGroupWithBlockers>
+    | undefined;
 };
 
 /** @internal */
@@ -210,20 +212,22 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchem
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Contractor-Payment-Groups": z.array(ContractorPaymentGroup$inboundSchema)
-      .optional(),
+    "Contractor-Payment-Group-With-Blockers": z.array(
+      ContractorPaymentGroupWithBlockers$inboundSchema,
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Contractor-Payment-Groups": "contractorPaymentGroups",
+      "Contractor-Payment-Group-With-Blockers":
+        "contractorPaymentGroupWithBlockers",
     });
   });
 
 /** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$Outbound = {
   HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-Payment-Groups"?:
-    | Array<ContractorPaymentGroup$Outbound>
+  "Contractor-Payment-Group-With-Blockers"?:
+    | Array<ContractorPaymentGroupWithBlockers$Outbound>
     | undefined;
 };
 
@@ -235,12 +239,14 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsResponse$outboundSche
     GetV1CompaniesCompanyIdContractorPaymentGroupsResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
-    contractorPaymentGroups: z.array(ContractorPaymentGroup$outboundSchema)
-      .optional(),
+    contractorPaymentGroupWithBlockers: z.array(
+      ContractorPaymentGroupWithBlockers$outboundSchema,
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
-      contractorPaymentGroups: "Contractor-Payment-Groups",
+      contractorPaymentGroupWithBlockers:
+        "Contractor-Payment-Group-With-Blockers",
     });
   });
 
