@@ -5,6 +5,7 @@
 import { webhooksCreateSubscription } from "../funcs/webhooksCreateSubscription.js";
 import { webhooksDeleteSubscription } from "../funcs/webhooksDeleteSubscription.js";
 import { webhooksGetSubscription } from "../funcs/webhooksGetSubscription.js";
+import { webhooksGetV1WebhooksHealthCheck } from "../funcs/webhooksGetV1WebhooksHealthCheck.js";
 import { webhooksListSubscriptions } from "../funcs/webhooksListSubscriptions.js";
 import { webhooksRequestVerificationToken } from "../funcs/webhooksRequestVerificationToken.js";
 import { webhooksUpdateSubscription } from "../funcs/webhooksUpdateSubscription.js";
@@ -15,6 +16,11 @@ import {
   DeleteV1WebhookSubscriptionUuidResponse,
   DeleteV1WebhookSubscriptionUuidSecurity,
 } from "../models/operations/deletev1webhooksubscriptionuuid.js";
+import {
+  GetV1WebhooksHealthCheckRequest,
+  GetV1WebhooksHealthCheckResponse,
+  GetV1WebhooksHealthCheckSecurity,
+} from "../models/operations/getv1webhookshealthcheck.js";
 import {
   GetV1WebhookSubscriptionsRequest,
   GetV1WebhookSubscriptionsResponse,
@@ -218,6 +224,27 @@ export class Webhooks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetV1WebhookSubscriptionVerificationTokenUuidResponse> {
     return unwrapAsync(webhooksRequestVerificationToken(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get the webhooks health status
+   *
+   * @remarks
+   * Returns the health status (`healthy`, `unhealthy`, or `unknown`) of the webhooks system based on the last ten minutes of activity.
+   *
+   * scope: `webhook_subscriptions:read`
+   */
+  async getV1WebhooksHealthCheck(
+    security: GetV1WebhooksHealthCheckSecurity,
+    request: GetV1WebhooksHealthCheckRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1WebhooksHealthCheckResponse> {
+    return unwrapAsync(webhooksGetV1WebhooksHealthCheck(
       this,
       security,
       request,

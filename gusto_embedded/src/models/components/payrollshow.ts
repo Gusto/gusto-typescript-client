@@ -152,9 +152,17 @@ export type PayrollShowBenefits = {
   imputed?: boolean | undefined;
 };
 
+export const AmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+export type AmountType = ClosedEnum<typeof AmountType>;
+
 export type Deductions = {
   name?: string | undefined;
   amount?: number | undefined;
+  amountType?: AmountType | undefined;
+  uuid?: string | undefined;
 };
 
 export type EmployeeCompensations = {
@@ -170,6 +178,18 @@ export type EmployeeCompensations = {
    * The current version of this employee compensation. This field is only available for prepared payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
   version?: string | undefined;
+  /**
+   * The first name of the employee.
+   */
+  firstName?: string | undefined;
+  /**
+   * The preferred first name of the employee.
+   */
+  preferredFirstName?: string | null | undefined;
+  /**
+   * The last name of the employee.
+   */
+  lastName?: string | undefined;
   /**
    * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is only available for processed payrolls.
    */
@@ -211,7 +231,7 @@ export type EmployeeCompensations = {
    */
   benefits?: Array<PayrollShowBenefits> | undefined;
   /**
-   * An array of employee deductions for the pay period. Deductions are only included for processed payroll when the include parameter is present.
+   * An array of employee deductions for the pay period.
    */
   deductions?: Array<Deductions> | undefined;
 };
@@ -694,6 +714,25 @@ export function payrollShowBenefitsFromJSON(
 }
 
 /** @internal */
+export const AmountType$inboundSchema: z.ZodNativeEnum<typeof AmountType> = z
+  .nativeEnum(AmountType);
+
+/** @internal */
+export const AmountType$outboundSchema: z.ZodNativeEnum<typeof AmountType> =
+  AmountType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AmountType$ {
+  /** @deprecated use `AmountType$inboundSchema` instead. */
+  export const inboundSchema = AmountType$inboundSchema;
+  /** @deprecated use `AmountType$outboundSchema` instead. */
+  export const outboundSchema = AmountType$outboundSchema;
+}
+
+/** @internal */
 export const Deductions$inboundSchema: z.ZodType<
   Deductions,
   z.ZodTypeDef,
@@ -701,12 +740,20 @@ export const Deductions$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   amount: z.number().optional(),
+  amount_type: AmountType$inboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "amount_type": "amountType",
+  });
 });
 
 /** @internal */
 export type Deductions$Outbound = {
   name?: string | undefined;
   amount?: number | undefined;
+  amount_type?: string | undefined;
+  uuid?: string | undefined;
 };
 
 /** @internal */
@@ -717,6 +764,12 @@ export const Deductions$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   amount: z.number().optional(),
+  amountType: AmountType$outboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    amountType: "amount_type",
+  });
 });
 
 /**
@@ -755,6 +808,9 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
   employee_uuid: z.string().optional(),
   excluded: z.boolean().optional(),
   version: z.string().optional(),
+  first_name: z.string().optional(),
+  preferred_first_name: z.nullable(z.string()).optional(),
+  last_name: z.string().optional(),
   gross_pay: z.nullable(z.number()).optional(),
   net_pay: z.nullable(z.number()).optional(),
   check_amount: z.nullable(z.number()).optional(),
@@ -774,6 +830,9 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
+    "first_name": "firstName",
+    "preferred_first_name": "preferredFirstName",
+    "last_name": "lastName",
     "gross_pay": "grossPay",
     "net_pay": "netPay",
     "check_amount": "checkAmount",
@@ -789,6 +848,9 @@ export type EmployeeCompensations$Outbound = {
   employee_uuid?: string | undefined;
   excluded?: boolean | undefined;
   version?: string | undefined;
+  first_name?: string | undefined;
+  preferred_first_name?: string | null | undefined;
+  last_name?: string | undefined;
   gross_pay?: number | null | undefined;
   net_pay?: number | null | undefined;
   check_amount?: number | null | undefined;
@@ -815,6 +877,9 @@ export const EmployeeCompensations$outboundSchema: z.ZodType<
   employeeUuid: z.string().optional(),
   excluded: z.boolean().optional(),
   version: z.string().optional(),
+  firstName: z.string().optional(),
+  preferredFirstName: z.nullable(z.string()).optional(),
+  lastName: z.string().optional(),
   grossPay: z.nullable(z.number()).optional(),
   netPay: z.nullable(z.number()).optional(),
   checkAmount: z.nullable(z.number()).optional(),
@@ -835,6 +900,9 @@ export const EmployeeCompensations$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",
+    firstName: "first_name",
+    preferredFirstName: "preferred_first_name",
+    lastName: "last_name",
     grossPay: "gross_pay",
     netPay: "net_pay",
     checkAmount: "check_amount",

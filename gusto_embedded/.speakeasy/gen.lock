@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: da80d703ff7f423475c2be0c4f7b9f5d
+  docChecksum: 94d27aea4d433d55ce46aa715cb74500
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.607.0
-  generationVersion: 2.690.1
-  releaseVersion: 0.6.10
-  configChecksum: 106bbae8ad2a79bf9311384de20d11e2
+  speakeasyVersion: 1.619.0
+  generationVersion: 2.706.0
+  releaseVersion: 0.6.11
+  configChecksum: 2a0cccf4cf95a23a7c73aca5125165e1
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,14 +16,14 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
     constsAndDefaults: 0.1.12
-    core: 3.21.21
+    core: 3.21.22
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     errorUnions: 0.1.1
-    globalSecurity: 2.82.13
+    globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
@@ -60,6 +60,7 @@ generatedFiles:
   - docs/models/components/admin.md
   - docs/models/components/agencies.md
   - docs/models/components/aggregation.md
+  - docs/models/components/amounttype.md
   - docs/models/components/answers.md
   - docs/models/components/applicablebenefits.md
   - docs/models/components/applicableearnings.md
@@ -137,6 +138,9 @@ generatedFiles:
   - docs/models/components/contractorpaymentgrouppreviewtotals.md
   - docs/models/components/contractorpaymentgroupstatus.md
   - docs/models/components/contractorpaymentgrouptotals.md
+  - docs/models/components/contractorpaymentgroupwithblockers.md
+  - docs/models/components/contractorpaymentgroupwithblockersstatus.md
+  - docs/models/components/contractorpaymentgroupwithblockerstotals.md
   - docs/models/components/contractorpaymentmethod.md
   - docs/models/components/contractorpaymentmethod1.md
   - docs/models/components/contractorpaymentmethodsplitby.md
@@ -358,6 +362,8 @@ generatedFiles:
   - docs/models/components/payrolltotalstype.md
   - docs/models/components/payrolltype.md
   - docs/models/components/payrollupdate.md
+  - docs/models/components/payrollupdateamounttype.md
+  - docs/models/components/payrollupdatedeductions.md
   - docs/models/components/payrollupdateemployeecompensations.md
   - docs/models/components/payrollupdatefixedcompensations.md
   - docs/models/components/payrollupdatehourlycompensations.md
@@ -452,6 +458,8 @@ generatedFiles:
   - docs/models/components/veteransday.md
   - docs/models/components/w4datatype.md
   - docs/models/components/wagetype.md
+  - docs/models/components/webhookshealthcheckstatus.md
+  - docs/models/components/webhookshealthcheckstatusstatus.md
   - docs/models/components/webhooksubscription.md
   - docs/models/components/webhooksubscriptionstatus.md
   - docs/models/components/wireinrequest.md
@@ -825,6 +833,10 @@ generatedFiles:
   - docs/models/operations/getv1tokeninforesponse.md
   - docs/models/operations/getv1tokeninforesponsebody.md
   - docs/models/operations/getv1tokeninfotype.md
+  - docs/models/operations/getv1webhookshealthcheckheaderxgustoapiversion.md
+  - docs/models/operations/getv1webhookshealthcheckrequest.md
+  - docs/models/operations/getv1webhookshealthcheckresponse.md
+  - docs/models/operations/getv1webhookshealthchecksecurity.md
   - docs/models/operations/getv1webhooksubscriptionsrequest.md
   - docs/models/operations/getv1webhooksubscriptionsresponse.md
   - docs/models/operations/getv1webhooksubscriptionssecurity.md
@@ -1619,6 +1631,7 @@ generatedFiles:
   - src/funcs/webhooksCreateSubscription.ts
   - src/funcs/webhooksDeleteSubscription.ts
   - src/funcs/webhooksGetSubscription.ts
+  - src/funcs/webhooksGetV1WebhooksHealthCheck.ts
   - src/funcs/webhooksListSubscriptions.ts
   - src/funcs/webhooksRequestVerificationToken.ts
   - src/funcs/webhooksUpdateSubscription.ts
@@ -1676,6 +1689,7 @@ generatedFiles:
   - src/models/components/contractorpaymentgroup.ts
   - src/models/components/contractorpaymentgrouppartnerdisbursements.ts
   - src/models/components/contractorpaymentgrouppreview.ts
+  - src/models/components/contractorpaymentgroupwithblockers.ts
   - src/models/components/contractorpaymentmethod.ts
   - src/models/components/contractorpaymentreceipt.ts
   - src/models/components/contractorpaymentsummary.ts
@@ -1804,6 +1818,7 @@ generatedFiles:
   - src/models/components/timeoffpolicy.ts
   - src/models/components/unprocessedterminationpayperiod.ts
   - src/models/components/versionheader.ts
+  - src/models/components/webhookshealthcheckstatus.ts
   - src/models/components/webhooksubscription.ts
   - src/models/components/wireinrequest.ts
   - src/models/components/ytdbenefitamountsfromdifferentcompany.ts
@@ -1961,6 +1976,7 @@ generatedFiles:
   - src/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.ts
   - src/models/operations/getv1taxliabilities.ts
   - src/models/operations/getv1tokeninfo.ts
+  - src/models/operations/getv1webhookshealthcheck.ts
   - src/models/operations/getv1webhooksubscriptions.ts
   - src/models/operations/getv1webhooksubscriptionuuid.ts
   - src/models/operations/getv1webhooksubscriptionverificationtokenuuid.ts
@@ -2338,6 +2354,7 @@ generatedFiles:
   - src/react-query/webhooksCreateSubscription.ts
   - src/react-query/webhooksDeleteSubscription.ts
   - src/react-query/webhooksGetSubscription.ts
+  - src/react-query/webhooksGetV1WebhooksHealthCheck.ts
   - src/react-query/webhooksListSubscriptions.ts
   - src/react-query/webhooksRequestVerificationToken.ts
   - src/react-query/webhooksUpdateSubscription.ts
@@ -7180,7 +7197,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": null, "calculated_at": null, "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "off_cycle_reason": null, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "version": "4ba36d23a78c7393b4900ef38019d8ff", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "version": "ff083257a5583291fb86656ad0df1b42", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "version": "259816479e3729bf855318af9b9adddf", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}], "created_at": "2022-02-01T22:00:00Z", "fixed_compensation_types": [{"name": "Bonus"}, {"name": "Commission"}, {"name": "Paycheck Tips"}, {"name": "Cash Tips"}, {"name": "Correction Payment"}, {"name": "Anniversary Bonus"}, {"name": "Internet Stipend"}, {"name": "Reimbursement"}], "processing_request": null}
+          application/json: {"payroll_deadline": "2022-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": null, "calculated_at": null, "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "off_cycle_reason": null, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2022-02-22", "initial_check_date": "2022-02-22", "expected_debit_time": "2022-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2022-02-18T22:00:00Z"}, "employee_compensations": [{"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7067", "excluded": false, "version": "4ba36d23a78c7393b4900ef38019d8ff", "first_name": "Patricia", "preferred_first_name": "Patricia", "last_name": "Hamil", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242ba5"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909ba"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "15.000", "job_uuid": "9d3760f0-d1f9-4700-8817-0fe2dce5cf23", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "b5eef9a9-4a87-4649-a80d-14878c05f44e", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}, {"name": "Regular Hours", "hours": "40.000", "job_uuid": "332bd171-9efc-432b-abbb-a75c9dba706a", "compensation_multiplier": 1, "flsa_status": "Nonexempt"}, {"name": "Overtime", "hours": "5.000", "job_uuid": "ca9b3dc1-57ac-4736-901a-9b1c9634b9d5", "compensation_multiplier": 1.5, "flsa_status": "Nonexempt"}, {"name": "Double overtime", "hours": "0.000", "job_uuid": "1bad01e2-140c-49ed-9542-2388ce4a19b3", "compensation_multiplier": 2, "flsa_status": "Nonexempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7012", "excluded": false, "version": "ff083257a5583291fb86656ad0df1b42", "first_name": "Soren", "preferred_first_name": "Soren", "last_name": "Keck", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242b34"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e90955"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Commission Only Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}, {"employee_uuid": "187412e1-3dbe-491a-bb2f-2f40323a7781", "excluded": false, "version": "259816479e3729bf855318af9b9adddf", "first_name": "Patty", "preferred_first_name": "Patty", "last_name": "Tam", "payment_method": "Direct Deposit", "fixed_compensations": [{"name": "Bonus", "amount": "100.00", "job_uuid": "94e0d15e-9ed2-4077-98f6-64554f242bab"}, {"name": "Reimbursement", "amount": "100.00", "job_uuid": "91bc3b43-ded0-4ee7-98fe-215499e909cd"}], "hourly_compensations": [{"name": "Regular Hours", "hours": "40.000", "job_uuid": "bd378298-3e0c-4145-904a-baadf8a91fa3", "compensation_multiplier": 1, "flsa_status": "Exempt"}], "paid_time_off": [{"name": "Vacation Hours", "hours": "20.000"}, {"name": "Sick Hours", "hours": "0.000"}, {"name": "Holiday Hours", "hours": "0.000"}]}], "created_at": "2022-02-01T22:00:00Z", "fixed_compensation_types": [{"name": "Bonus"}, {"name": "Commission"}, {"name": "Paycheck Tips"}, {"name": "Cash Tips"}, {"name": "Correction Payment"}, {"name": "Anniversary Bonus"}, {"name": "Internet Stipend"}, {"name": "Reimbursement"}], "processing_request": null}
   get-v1-payment-receipts-payrolls-payroll_uuid:
     Example:
       parameters:
@@ -9874,5 +9891,13 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+  get-v1-webhooks-health_check:
+    speakeasy-default-get-v1-webhooks-health-check:
+      parameters:
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
