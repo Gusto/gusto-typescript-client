@@ -95,6 +95,18 @@ export type PayrollEmployeeCompensationsType = {
    */
   version?: string | undefined;
   /**
+   * The first name of the employee.
+   */
+  firstName?: string | undefined;
+  /**
+   * The preferred first name of the employee.
+   */
+  preferredFirstName?: string | null | undefined;
+  /**
+   * The last name of the employee.
+   */
+  lastName?: string | undefined;
+  /**
    * The employee's gross pay, equal to regular wages + cash tips + payroll tips + any other additional earnings, excluding imputed income. This value is only available for processed payrolls.
    */
   grossPay?: number | null | undefined;
@@ -393,6 +405,9 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   employee_uuid: z.string().optional(),
   excluded: z.boolean().optional(),
   version: z.string().optional(),
+  first_name: z.string().optional(),
+  preferred_first_name: z.nullable(z.string()).optional(),
+  last_name: z.string().optional(),
   gross_pay: z.nullable(z.number()).optional(),
   net_pay: z.nullable(z.number()).optional(),
   check_amount: z.nullable(z.number()).optional(),
@@ -410,6 +425,9 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
+    "first_name": "firstName",
+    "preferred_first_name": "preferredFirstName",
+    "last_name": "lastName",
     "gross_pay": "grossPay",
     "net_pay": "netPay",
     "check_amount": "checkAmount",
@@ -425,6 +443,9 @@ export type PayrollEmployeeCompensationsType$Outbound = {
   employee_uuid?: string | undefined;
   excluded?: boolean | undefined;
   version?: string | undefined;
+  first_name?: string | undefined;
+  preferred_first_name?: string | null | undefined;
+  last_name?: string | undefined;
   gross_pay?: number | null | undefined;
   net_pay?: number | null | undefined;
   check_amount?: number | null | undefined;
@@ -446,6 +467,9 @@ export const PayrollEmployeeCompensationsType$outboundSchema: z.ZodType<
   employeeUuid: z.string().optional(),
   excluded: z.boolean().optional(),
   version: z.string().optional(),
+  firstName: z.string().optional(),
+  preferredFirstName: z.nullable(z.string()).optional(),
+  lastName: z.string().optional(),
   grossPay: z.nullable(z.number()).optional(),
   netPay: z.nullable(z.number()).optional(),
   checkAmount: z.nullable(z.number()).optional(),
@@ -463,6 +487,9 @@ export const PayrollEmployeeCompensationsType$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",
+    firstName: "first_name",
+    preferredFirstName: "preferred_first_name",
+    lastName: "last_name",
     grossPay: "gross_pay",
     netPay: "net_pay",
     checkAmount: "check_amount",

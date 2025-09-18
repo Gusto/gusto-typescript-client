@@ -29,35 +29,35 @@ export type PaidTimeOff = {
   /**
    * The name of the paid time off type.
    */
-  name?: Name | undefined;
+  name?: Name | null | undefined;
   /**
    * The name of the time off policy.
    */
-  policyName?: string | undefined;
+  policyName?: string | null | undefined;
   /**
    * The UUID of the time off policy.
    */
-  policyUuid?: string | undefined;
+  policyUuid?: string | null | undefined;
   /**
    * The unit the PTO type is accrued in.
    */
-  accrualUnit?: string | undefined;
+  accrualUnit?: string | null | undefined;
   /**
    * The number of accrual units accrued per accrual period.
    */
-  accrualRate?: string | undefined;
+  accrualRate?: string | null | undefined;
   /**
    * The accrual method of the time off policy
    */
-  accrualMethod?: string | undefined;
+  accrualMethod?: string | null | undefined;
   /**
    * The frequency at which the PTO type is accrued.
    */
-  accrualPeriod?: string | undefined;
+  accrualPeriod?: string | null | undefined;
   /**
    * The number of accrual units accrued.
    */
-  accrualBalance?: string | undefined;
+  accrualBalance?: string | null | undefined;
   /**
    * The maximum number of accrual units allowed. A null value signifies no maximum.
    */
@@ -94,14 +94,14 @@ export const PaidTimeOff$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: Name$inboundSchema.optional(),
-  policy_name: z.string().optional(),
-  policy_uuid: z.string().optional(),
-  accrual_unit: z.string().optional(),
-  accrual_rate: z.string().optional(),
-  accrual_method: z.string().optional(),
-  accrual_period: z.string().optional(),
-  accrual_balance: z.string().optional(),
+  name: z.nullable(Name$inboundSchema).optional(),
+  policy_name: z.nullable(z.string()).optional(),
+  policy_uuid: z.nullable(z.string()).optional(),
+  accrual_unit: z.nullable(z.string()).optional(),
+  accrual_rate: z.nullable(z.string()).optional(),
+  accrual_method: z.nullable(z.string()).optional(),
+  accrual_period: z.nullable(z.string()).optional(),
+  accrual_balance: z.nullable(z.string()).optional(),
   maximum_accrual_balance: z.nullable(z.string()).optional(),
   paid_at_termination: z.boolean().optional(),
 }).transform((v) => {
@@ -120,14 +120,14 @@ export const PaidTimeOff$inboundSchema: z.ZodType<
 
 /** @internal */
 export type PaidTimeOff$Outbound = {
-  name?: string | undefined;
-  policy_name?: string | undefined;
-  policy_uuid?: string | undefined;
-  accrual_unit?: string | undefined;
-  accrual_rate?: string | undefined;
-  accrual_method?: string | undefined;
-  accrual_period?: string | undefined;
-  accrual_balance?: string | undefined;
+  name?: string | null | undefined;
+  policy_name?: string | null | undefined;
+  policy_uuid?: string | null | undefined;
+  accrual_unit?: string | null | undefined;
+  accrual_rate?: string | null | undefined;
+  accrual_method?: string | null | undefined;
+  accrual_period?: string | null | undefined;
+  accrual_balance?: string | null | undefined;
   maximum_accrual_balance?: string | null | undefined;
   paid_at_termination?: boolean | undefined;
 };
@@ -138,14 +138,14 @@ export const PaidTimeOff$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PaidTimeOff
 > = z.object({
-  name: Name$outboundSchema.optional(),
-  policyName: z.string().optional(),
-  policyUuid: z.string().optional(),
-  accrualUnit: z.string().optional(),
-  accrualRate: z.string().optional(),
-  accrualMethod: z.string().optional(),
-  accrualPeriod: z.string().optional(),
-  accrualBalance: z.string().optional(),
+  name: z.nullable(Name$outboundSchema).optional(),
+  policyName: z.nullable(z.string()).optional(),
+  policyUuid: z.nullable(z.string()).optional(),
+  accrualUnit: z.nullable(z.string()).optional(),
+  accrualRate: z.nullable(z.string()).optional(),
+  accrualMethod: z.nullable(z.string()).optional(),
+  accrualPeriod: z.nullable(z.string()).optional(),
+  accrualBalance: z.nullable(z.string()).optional(),
   maximumAccrualBalance: z.nullable(z.string()).optional(),
   paidAtTermination: z.boolean().optional(),
 }).transform((v) => {

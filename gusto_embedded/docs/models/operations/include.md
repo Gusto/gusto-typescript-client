@@ -5,11 +5,11 @@
 ```typescript
 import { Include } from "@gusto/embedded-api/models/operations/getv1companiescompanyidemployees.js";
 
-let value: Include = "current_home_address";
+let value: Include = "custom_fields";
 ```
 
 ## Values
 
 ```typescript
-"custom_fields" | "all_compensations" | "company_name" | "current_home_address" | "all_home_addresses"
+"all_compensations" | "all_home_addresses" | "company_name" | "current_home_address" | "custom_fields" | "portal_invitations"
 ```
