@@ -79,6 +79,8 @@ export class CompanyBenefits extends ClientSDK {
    *
    * Note that company benefits can be deactivated only when no employees are enrolled.
    *
+   * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only create company benefits for benefit types that are permitted for the application.
+   *
    * scope: `company_benefits:write`
    */
   async create(
@@ -146,6 +148,8 @@ export class CompanyBenefits extends ClientSDK {
    *
    * Note that company benefits can be deactivated only when no employees are enrolled.
    *
+   * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only update company benefits for benefit types that are permitted for the application.
+   *
    * scope: `company_benefits:write`
    */
   async update(
@@ -167,6 +171,8 @@ export class CompanyBenefits extends ClientSDK {
    *   - There are no employee benefits associated with the company benefit
    *   - There are no payroll items associated with the company benefit
    *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
+   *
+   * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only delete company benefits for benefit types that are permitted for the application.
    *
    * scope: `company_benefits:write`
    */
@@ -276,6 +282,8 @@ export class CompanyBenefits extends ClientSDK {
    * Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
    *
    * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+   *
+   * When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only create or update employee benefits for benefit types that are permitted for the application.
    *
    * scope: `employee_benefits:write`
    */

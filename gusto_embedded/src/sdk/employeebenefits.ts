@@ -45,7 +45,9 @@ export class EmployeeBenefits extends ClientSDK {
    * Create an employee benefit
    *
    * @remarks
-   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
+   *
+   * When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only create employee benefits for benefit types that are permitted for the application.
    *
    * scope: `employee_benefits:write`
    */
@@ -108,7 +110,9 @@ export class EmployeeBenefits extends ClientSDK {
    * Update an employee benefit
    *
    * @remarks
-   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
+   *
+   * When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only update employee benefits for benefit types that are permitted for the application.
    *
    * scope: `employee_benefits:write`
    */
@@ -127,7 +131,9 @@ export class EmployeeBenefits extends ClientSDK {
    * Delete an employee benefit
    *
    * @remarks
-   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+   * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
+   *
+   * When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only delete employee benefits for benefit types that are permitted for the application.
    *
    * scope: `employee_benefits:write`
    */

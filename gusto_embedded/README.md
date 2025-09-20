@@ -1466,7 +1466,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new GustoEmbedded({ httpClient });
+const sdk = new GustoEmbedded({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
