@@ -25,6 +25,8 @@ Company benefits represent the benefits that a company is offering to employees.
 
 Note that company benefits can be deactivated only when no employees are enrolled.
 
+When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only create company benefits for benefit types that are permitted for the application.
+
 scope: `company_benefits:write`
 
 ### Example Usage
@@ -340,6 +342,8 @@ Company benefits represent the benefits that a company is offering to employees.
 
 Note that company benefits can be deactivated only when no employees are enrolled.
 
+When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only update company benefits for benefit types that are permitted for the application.
+
 scope: `company_benefits:write`
 
 ### Example Usage
@@ -443,6 +447,8 @@ The following must be true in order to delete a company benefit
   - There are no employee benefits associated with the company benefit
   - There are no payroll items associated with the company benefit
   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
+
+When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only delete company benefits for benefit types that are permitted for the application.
 
 scope: `company_benefits:write`
 
@@ -962,6 +968,8 @@ Employee benefits represent an employee enrolled in a particular company benefit
 Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
 
 Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
+
+When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only create or update employee benefits for benefit types that are permitted for the application.
 
 scope: `employee_benefits:write`
 
