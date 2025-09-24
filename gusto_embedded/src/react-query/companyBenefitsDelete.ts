@@ -36,6 +36,8 @@ export type CompanyBenefitsDeleteMutationData =
  *   - There are no payroll items associated with the company benefit
  *   - The benefit is not managed by a Partner or by Gusto (type must be 'External')
  *
+ * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only delete company benefits for benefit types that are permitted for the application.
+ *
  * scope: `company_benefits:write`
  */
 export function useCompanyBenefitsDeleteMutation(

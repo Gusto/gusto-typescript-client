@@ -41,6 +41,8 @@ import { Result } from "../types/fp.js";
  *
  * Note that company benefits can be deactivated only when no employees are enrolled.
  *
+ * When the application has the `company_benefits:write:benefit_type_limited` data scope, the application can only update company benefits for benefit types that are permitted for the application.
+ *
  * scope: `company_benefits:write`
  */
 export function companyBenefitsUpdate(

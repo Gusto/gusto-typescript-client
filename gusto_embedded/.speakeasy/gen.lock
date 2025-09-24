@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 94d27aea4d433d55ce46aa715cb74500
+  docChecksum: bf6982b8447b19879159d06ed77b3252
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.619.0
-  generationVersion: 2.706.0
-  releaseVersion: 0.6.11
-  configChecksum: 2a0cccf4cf95a23a7c73aca5125165e1
+  speakeasyVersion: 1.625.0
+  generationVersion: 2.715.0
+  releaseVersion: 0.7.0
+  configChecksum: 9346f7ccdea3ffb5dc607e3c7342f044
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,10 +16,11 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
     constsAndDefaults: 0.1.12
-    core: 3.21.22
+    core: 3.21.25
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
-    devContainers: 2.90.0
+    devContainers: 2.90.1
+    downloadStreams: 0.1.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     errorUnions: 0.1.1
@@ -7360,6 +7361,9 @@ examples:
           employee_id: "<id>"
         header:
           X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/pdf: "x-file: example.file"
   get-v1-employees-employee_uuid-pay_stubs:
     test_example:
       parameters:

@@ -5,7 +5,7 @@
 ```typescript
 import { GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse } from "@gusto/embedded-api/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.js";
 
-let value: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse = {};
+// No examples available for this model
 ```
 
 ## Fields
@@ -13,3 +13,4 @@ let value: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse = {};
 | Field                                                              | Type                                                               | Required                                                           | Description                                                        |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |
+| `responseStream`                                                   | *ReadableStream<Uint8Array>*                                       | :heavy_minus_sign:                                                 | successful                                                         |

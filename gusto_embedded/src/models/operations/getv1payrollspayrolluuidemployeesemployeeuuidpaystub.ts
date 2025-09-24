@@ -49,6 +49,10 @@ export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest = {
 
 export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse = {
   httpMeta: HTTPMetadata;
+  /**
+   * successful
+   */
+  responseStream?: ReadableStream<Uint8Array> | undefined;
 };
 
 /** @internal */
@@ -176,9 +180,11 @@ export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboun
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
+    "response-stream": z.instanceof(ReadableStream<Uint8Array>).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
+      "response-stream": "responseStream",
     });
   });
 
@@ -186,6 +192,7 @@ export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboun
 export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound =
   {
     HttpMeta: HTTPMetadata$Outbound;
+    "response-stream"?: ReadableStream<Uint8Array> | undefined;
   };
 
 /** @internal */
@@ -196,9 +203,11 @@ export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outbou
     GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse
   > = z.object({
     httpMeta: HTTPMetadata$outboundSchema,
+    responseStream: z.instanceof(ReadableStream<Uint8Array>).optional(),
   }).transform((v) => {
     return remap$(v, {
       httpMeta: "HttpMeta",
+      responseStream: "response-stream",
     });
   });
 

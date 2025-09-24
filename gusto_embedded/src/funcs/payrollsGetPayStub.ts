@@ -110,7 +110,7 @@ async function $do(
   )(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "*/*",
+    Accept: "application/pdf",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -181,9 +181,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.nil(
+    M.stream(
       200,
       GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema,
+      { ctype: "application/pdf", key: "response-stream" },
     ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
