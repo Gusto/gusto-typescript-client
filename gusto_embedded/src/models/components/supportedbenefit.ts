@@ -52,6 +52,10 @@ export type SupportedBenefit = {
    * Category where the benefit belongs to.
    */
   category?: string | undefined;
+  /**
+   * Whether this benefit can be written (created, updated, or destroyed). Returns true if the benefit type is permitted for the application, false otherwise.
+   */
+  writableByApplication?: boolean | undefined;
 };
 
 /** @internal */
@@ -70,10 +74,12 @@ export const SupportedBenefit$inboundSchema: z.ZodType<
   retirement: z.boolean().optional(),
   yearly_limit: z.boolean().optional(),
   category: z.string().optional(),
+  writable_by_application: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "benefit_type": "benefitType",
     "yearly_limit": "yearlyLimit",
+    "writable_by_application": "writableByApplication",
   });
 });
 
@@ -89,6 +95,7 @@ export type SupportedBenefit$Outbound = {
   retirement?: boolean | undefined;
   yearly_limit?: boolean | undefined;
   category?: string | undefined;
+  writable_by_application?: boolean | undefined;
 };
 
 /** @internal */
@@ -107,10 +114,12 @@ export const SupportedBenefit$outboundSchema: z.ZodType<
   retirement: z.boolean().optional(),
   yearlyLimit: z.boolean().optional(),
   category: z.string().optional(),
+  writableByApplication: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     benefitType: "benefit_type",
     yearlyLimit: "yearly_limit",
+    writableByApplication: "writable_by_application",
   });
 });
 

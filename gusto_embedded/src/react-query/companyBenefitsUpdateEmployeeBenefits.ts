@@ -37,6 +37,8 @@ export type CompanyBenefitsUpdateEmployeeBenefitsMutationData =
  *
  * Benefits containing PHI are only visible to applications with the `employee_benefits:read:phi` scope.
  *
+ * When the application has the `employee_benefits:write:benefit_type_limited` data scope, the application can only create or update employee benefits for benefit types that are permitted for the application.
+ *
  * scope: `employee_benefits:write`
  */
 export function useCompanyBenefitsUpdateEmployeeBenefitsMutation(

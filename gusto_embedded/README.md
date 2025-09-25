@@ -75,12 +75,9 @@ bun add @tanstack/react-query react react-dom
 ### Yarn
 
 ```bash
-yarn add @gusto/embedded-api zod
+yarn add @gusto/embedded-api
 # Install optional peer dependencies if you plan to use React hooks
 yarn add @tanstack/react-query react react-dom
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
 ```
 
 > [!NOTE]
@@ -1466,7 +1463,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new GustoEmbedded({ httpClient });
+const sdk = new GustoEmbedded({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
