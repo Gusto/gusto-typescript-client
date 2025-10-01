@@ -43,6 +43,10 @@ export type PostV1EmployeesRequestBody = {
    * The employee's personal email address.
    */
   email?: string | undefined;
+  /**
+   * The employee's work email address.
+   */
+  workEmail?: string | undefined;
   dateOfBirth?: RFCDate | undefined;
   ssn?: string | undefined;
   preferredFirstName?: string | undefined;
@@ -106,6 +110,7 @@ export const PostV1EmployeesRequestBody$inboundSchema: z.ZodType<
   middle_initial: z.string().optional(),
   last_name: z.string(),
   email: z.string().optional(),
+  work_email: z.string().optional(),
   date_of_birth: z.string().transform(v => new RFCDate(v)).optional(),
   ssn: z.string().optional(),
   preferred_first_name: z.string().optional(),
@@ -115,6 +120,7 @@ export const PostV1EmployeesRequestBody$inboundSchema: z.ZodType<
     "first_name": "firstName",
     "middle_initial": "middleInitial",
     "last_name": "lastName",
+    "work_email": "workEmail",
     "date_of_birth": "dateOfBirth",
     "preferred_first_name": "preferredFirstName",
     "self_onboarding": "selfOnboarding",
@@ -127,6 +133,7 @@ export type PostV1EmployeesRequestBody$Outbound = {
   middle_initial?: string | undefined;
   last_name: string;
   email?: string | undefined;
+  work_email?: string | undefined;
   date_of_birth?: string | undefined;
   ssn?: string | undefined;
   preferred_first_name?: string | undefined;
@@ -143,6 +150,7 @@ export const PostV1EmployeesRequestBody$outboundSchema: z.ZodType<
   middleInitial: z.string().optional(),
   lastName: z.string(),
   email: z.string().optional(),
+  workEmail: z.string().optional(),
   dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   ssn: z.string().optional(),
   preferredFirstName: z.string().optional(),
@@ -152,6 +160,7 @@ export const PostV1EmployeesRequestBody$outboundSchema: z.ZodType<
     firstName: "first_name",
     middleInitial: "middle_initial",
     lastName: "last_name",
+    workEmail: "work_email",
     dateOfBirth: "date_of_birth",
     preferredFirstName: "preferred_first_name",
     selfOnboarding: "self_onboarding",

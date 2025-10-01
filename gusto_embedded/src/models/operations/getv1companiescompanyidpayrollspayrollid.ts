@@ -48,6 +48,18 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude = {
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude =
   ClosedEnum<typeof GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>;
 
+/**
+ * Field to sort employee compensations by
+ */
+export const SortBy = {
+  FirstName: "first_name",
+  LastName: "last_name",
+} as const;
+/**
+ * Field to sort employee compensations by
+ */
+export type SortBy = ClosedEnum<typeof SortBy>;
+
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
   /**
    * The UUID of the company
@@ -69,6 +81,18 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest = {
   include?:
     | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
     | undefined;
+  /**
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+   */
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
+  /**
+   * Field to sort employee compensations by
+   */
+  sortBy?: SortBy | undefined;
 };
 
 export type GetV1CompaniesCompanyIdPayrollsPayrollIdResponse = {
@@ -133,6 +157,25 @@ export namespace GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$ {
 }
 
 /** @internal */
+export const SortBy$inboundSchema: z.ZodNativeEnum<typeof SortBy> = z
+  .nativeEnum(SortBy);
+
+/** @internal */
+export const SortBy$outboundSchema: z.ZodNativeEnum<typeof SortBy> =
+  SortBy$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SortBy$ {
+  /** @deprecated use `SortBy$inboundSchema` instead. */
+  export const inboundSchema = SortBy$inboundSchema;
+  /** @deprecated use `SortBy$outboundSchema` instead. */
+  export const outboundSchema = SortBy$outboundSchema;
+}
+
+/** @internal */
 export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$inboundSchema:
   z.ZodType<
     GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
@@ -147,11 +190,15 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$inboundSchema:
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$inboundSchema,
     ).optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
+    sort_by: SortBy$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
       "payroll_id": "payrollId",
       "X-Gusto-API-Version": "xGustoAPIVersion",
+      "sort_by": "sortBy",
     });
   });
 
@@ -161,6 +208,9 @@ export type GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$Outbound = {
   payroll_id: string;
   "X-Gusto-API-Version": string;
   include?: Array<string> | undefined;
+  page?: number | undefined;
+  per?: number | undefined;
+  sort_by?: string | undefined;
 };
 
 /** @internal */
@@ -178,11 +228,15 @@ export const GetV1CompaniesCompanyIdPayrollsPayrollIdRequest$outboundSchema:
     include: z.array(
       GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude$outboundSchema,
     ).optional(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
+    sortBy: SortBy$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
       payrollId: "payroll_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      sortBy: "sort_by",
     });
   });
 

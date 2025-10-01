@@ -27,7 +27,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetV1ContractorDocumentRequest = {
   /**
-   * The ID or UUID of the document
+   * The UUID of the document
    */
   documentUuid: string;
   /**

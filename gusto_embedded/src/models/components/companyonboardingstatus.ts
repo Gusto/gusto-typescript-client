@@ -61,11 +61,15 @@ export type OnboardingStep = {
    */
   completed?: boolean | undefined;
   /**
+   * The ISO 8601 timestamp indicating when the onboarding step was completed. Returns null for incomplete steps.
+   */
+  completedAt?: string | null | undefined;
+  /**
    * The boolean flag indicating whether the step can be skipped or not.
    */
   skippable?: boolean | undefined;
   /**
-   * A list of onboarding step that are required to be completed in order to proceed with the current onboarding step.
+   * A list of onboarding steps that are required to be completed in order to proceed with the current onboarding step.
    */
   requirements?: Array<Requirements> | undefined;
 };
@@ -134,8 +138,13 @@ export const OnboardingStep$inboundSchema: z.ZodType<
   id: Id$inboundSchema.optional(),
   required: z.boolean().optional(),
   completed: z.boolean().optional(),
+  completed_at: z.nullable(z.string()).optional(),
   skippable: z.boolean().optional(),
   requirements: z.array(Requirements$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "completed_at": "completedAt",
+  });
 });
 
 /** @internal */
@@ -144,6 +153,7 @@ export type OnboardingStep$Outbound = {
   id?: string | undefined;
   required?: boolean | undefined;
   completed?: boolean | undefined;
+  completed_at?: string | null | undefined;
   skippable?: boolean | undefined;
   requirements?: Array<string> | undefined;
 };
@@ -158,8 +168,13 @@ export const OnboardingStep$outboundSchema: z.ZodType<
   id: Id$outboundSchema.optional(),
   required: z.boolean().optional(),
   completed: z.boolean().optional(),
+  completedAt: z.nullable(z.string()).optional(),
   skippable: z.boolean().optional(),
   requirements: z.array(Requirements$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    completedAt: "completed_at",
+  });
 });
 
 /**

@@ -99,9 +99,13 @@ export function setEmployeesListData(
       xGustoAPIVersion?:
         | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
         | undefined;
+      locationUuid?: string | undefined;
+      payrollUuid?: string | undefined;
       searchTerm?: string | undefined;
+      sortBy?: string | undefined;
       include?: Array<Include> | undefined;
       onboarded?: boolean | undefined;
+      onboardedActive?: boolean | undefined;
       terminated?: boolean | undefined;
       terminatedToday?: boolean | undefined;
       uuids?: Array<string> | undefined;
@@ -125,9 +129,13 @@ export function invalidateEmployeesList(
         xGustoAPIVersion?:
           | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
           | undefined;
+        locationUuid?: string | undefined;
+        payrollUuid?: string | undefined;
         searchTerm?: string | undefined;
+        sortBy?: string | undefined;
         include?: Array<Include> | undefined;
         onboarded?: boolean | undefined;
+        onboardedActive?: boolean | undefined;
         terminated?: boolean | undefined;
         terminatedToday?: boolean | undefined;
         uuids?: Array<string> | undefined;
@@ -165,9 +173,13 @@ export function buildEmployeesListQuery(
   return {
     queryKey: queryKeyEmployeesList(request.companyId, {
       xGustoAPIVersion: request.xGustoAPIVersion,
+      locationUuid: request.locationUuid,
+      payrollUuid: request.payrollUuid,
       searchTerm: request.searchTerm,
+      sortBy: request.sortBy,
       include: request.include,
       onboarded: request.onboarded,
+      onboardedActive: request.onboardedActive,
       terminated: request.terminated,
       terminatedToday: request.terminatedToday,
       uuids: request.uuids,
@@ -198,9 +210,13 @@ export function queryKeyEmployeesList(
     xGustoAPIVersion?:
       | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
       | undefined;
+    locationUuid?: string | undefined;
+    payrollUuid?: string | undefined;
     searchTerm?: string | undefined;
+    sortBy?: string | undefined;
     include?: Array<Include> | undefined;
     onboarded?: boolean | undefined;
+    onboardedActive?: boolean | undefined;
     terminated?: boolean | undefined;
     terminatedToday?: boolean | undefined;
     uuids?: Array<string> | undefined;

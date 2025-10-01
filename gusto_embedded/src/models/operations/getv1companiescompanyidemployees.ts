@@ -56,9 +56,21 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
    */
   companyId: string;
   /**
+   * Filter employees by a specific primary work location
+   */
+  locationUuid?: string | undefined;
+  /**
+   * Filter employees by a specific payroll
+   */
+  payrollUuid?: string | undefined;
+  /**
    * A string to search for in the object's names
    */
   searchTerm?: string | undefined;
+  /**
+   * Sort employees by field. Cannot be used with search_term. Options: created_at, name, onboarding_status
+   */
+  sortBy?: string | undefined;
   /**
    * Include the requested attribute(s) in each employee response. Multiple options are comma separated.
    */
@@ -67,6 +79,10 @@ export type GetV1CompaniesCompanyIdEmployeesRequest = {
    * Filters employees by those who have completed onboarding
    */
   onboarded?: boolean | undefined;
+  /**
+   * Filters employees who are ready to work (onboarded AND active today)
+   */
+  onboardedActive?: boolean | undefined;
   /**
    * Filters employees by those who have been or are scheduled to be terminated
    */
@@ -151,9 +167,13 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
     GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion$inboundSchema
       .default("2024-04-01"),
   company_id: z.string(),
+  location_uuid: z.string().optional(),
+  payroll_uuid: z.string().optional(),
   search_term: z.string().optional(),
+  sort_by: z.string().optional(),
   include: z.array(Include$inboundSchema).optional(),
   onboarded: z.boolean().optional(),
+  onboarded_active: z.boolean().optional(),
   terminated: z.boolean().optional(),
   terminated_today: z.boolean().optional(),
   uuids: z.array(z.string()).optional(),
@@ -163,7 +183,11 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
   return remap$(v, {
     "X-Gusto-API-Version": "xGustoAPIVersion",
     "company_id": "companyId",
+    "location_uuid": "locationUuid",
+    "payroll_uuid": "payrollUuid",
     "search_term": "searchTerm",
+    "sort_by": "sortBy",
+    "onboarded_active": "onboardedActive",
     "terminated_today": "terminatedToday",
   });
 });
@@ -172,9 +196,13 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$inboundSchema: z.ZodType<
 export type GetV1CompaniesCompanyIdEmployeesRequest$Outbound = {
   "X-Gusto-API-Version": string;
   company_id: string;
+  location_uuid?: string | undefined;
+  payroll_uuid?: string | undefined;
   search_term?: string | undefined;
+  sort_by?: string | undefined;
   include?: Array<string> | undefined;
   onboarded?: boolean | undefined;
+  onboarded_active?: boolean | undefined;
   terminated?: boolean | undefined;
   terminated_today?: boolean | undefined;
   uuids?: Array<string> | undefined;
@@ -192,9 +220,13 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
     GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion$outboundSchema
       .default("2024-04-01"),
   companyId: z.string(),
+  locationUuid: z.string().optional(),
+  payrollUuid: z.string().optional(),
   searchTerm: z.string().optional(),
+  sortBy: z.string().optional(),
   include: z.array(Include$outboundSchema).optional(),
   onboarded: z.boolean().optional(),
+  onboardedActive: z.boolean().optional(),
   terminated: z.boolean().optional(),
   terminatedToday: z.boolean().optional(),
   uuids: z.array(z.string()).optional(),
@@ -204,7 +236,11 @@ export const GetV1CompaniesCompanyIdEmployeesRequest$outboundSchema: z.ZodType<
   return remap$(v, {
     xGustoAPIVersion: "X-Gusto-API-Version",
     companyId: "company_id",
+    locationUuid: "location_uuid",
+    payrollUuid: "payroll_uuid",
     searchTerm: "search_term",
+    sortBy: "sort_by",
+    onboardedActive: "onboarded_active",
     terminatedToday: "terminated_today",
   });
 });

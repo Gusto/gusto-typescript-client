@@ -48,7 +48,7 @@ export type Value2 = {
  *
  * For the `tiered` contribution type, an array of tiers.
  */
-export type EmployeeBenefitForCompanyBenefitValue = Value2 | string;
+export type EmployeeBenefitForCompanyBenefitValue = string | Value2;
 
 /**
  * An object representing the type and value of the company contribution.
@@ -73,7 +73,7 @@ export type EmployeeBenefitForCompanyBenefitContribution = {
    *
    * For the `tiered` contribution type, an array of tiers.
    */
-  value?: Value2 | string | undefined;
+  value?: string | Value2 | undefined;
 };
 
 /**
@@ -295,19 +295,19 @@ export const EmployeeBenefitForCompanyBenefitValue$inboundSchema: z.ZodType<
   EmployeeBenefitForCompanyBenefitValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => Value2$inboundSchema), z.string()]);
+> = z.union([z.string(), z.lazy(() => Value2$inboundSchema)]);
 
 /** @internal */
 export type EmployeeBenefitForCompanyBenefitValue$Outbound =
-  | Value2$Outbound
-  | string;
+  | string
+  | Value2$Outbound;
 
 /** @internal */
 export const EmployeeBenefitForCompanyBenefitValue$outboundSchema: z.ZodType<
   EmployeeBenefitForCompanyBenefitValue$Outbound,
   z.ZodTypeDef,
   EmployeeBenefitForCompanyBenefitValue
-> = z.union([z.lazy(() => Value2$outboundSchema), z.string()]);
+> = z.union([z.string(), z.lazy(() => Value2$outboundSchema)]);
 
 /**
  * @internal
@@ -353,13 +353,13 @@ export const EmployeeBenefitForCompanyBenefitContribution$inboundSchema:
     unknown
   > = z.object({
     type: z.string().optional(),
-    value: z.union([z.lazy(() => Value2$inboundSchema), z.string()]).optional(),
+    value: z.union([z.string(), z.lazy(() => Value2$inboundSchema)]).optional(),
   });
 
 /** @internal */
 export type EmployeeBenefitForCompanyBenefitContribution$Outbound = {
   type?: string | undefined;
-  value?: Value2$Outbound | string | undefined;
+  value?: string | Value2$Outbound | undefined;
 };
 
 /** @internal */
@@ -370,7 +370,7 @@ export const EmployeeBenefitForCompanyBenefitContribution$outboundSchema:
     EmployeeBenefitForCompanyBenefitContribution
   > = z.object({
     type: z.string().optional(),
-    value: z.union([z.lazy(() => Value2$outboundSchema), z.string()])
+    value: z.union([z.string(), z.lazy(() => Value2$outboundSchema)])
       .optional(),
   });
 

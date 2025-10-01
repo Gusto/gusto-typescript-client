@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: bf6982b8447b19879159d06ed77b3252
+  docChecksum: 60065968053490c2692c2b6b0861775b
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.625.0
-  generationVersion: 2.715.0
-  releaseVersion: 0.7.0
-  configChecksum: 9346f7ccdea3ffb5dc607e3c7342f044
+  speakeasyVersion: 1.631.5
+  generationVersion: 2.716.16
+  releaseVersion: 0.7.1
+  configChecksum: 78b3c210a41c40e3bccbc138c03b97c0
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -38,7 +38,7 @@ features:
     retries: 2.83.0
     sdkHooks: 0.3.0
     serverIDs: 2.81.2
-    unions: 2.85.11
+    unions: 2.85.12
     uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
@@ -351,7 +351,9 @@ generatedFiles:
   - docs/models/components/payrollreceiptpaymentmethod.md
   - docs/models/components/payrollreversal.md
   - docs/models/components/payrollshow.md
+  - docs/models/components/payrollshowamounttype.md
   - docs/models/components/payrollshowbenefits.md
+  - docs/models/components/payrollshowdeductions.md
   - docs/models/components/payrollshowfixedcompensations.md
   - docs/models/components/payrollshowhourlycompensations.md
   - docs/models/components/payrollshowpaidtimeoff.md
@@ -360,6 +362,7 @@ generatedFiles:
   - docs/models/components/payrollsubmissionblockerstype.md
   - docs/models/components/payrollsubmissionblockerstypemetadata.md
   - docs/models/components/payrollsubmissionblockerstypestatus.md
+  - docs/models/components/payrolltaxestype.md
   - docs/models/components/payrolltotalstype.md
   - docs/models/components/payrolltype.md
   - docs/models/components/payrollupdate.md
@@ -1298,6 +1301,7 @@ generatedFiles:
   - docs/models/operations/resource.md
   - docs/models/operations/resourceowner.md
   - docs/models/operations/responsebody.md
+  - docs/models/operations/sortby.md
   - docs/models/operations/sortorder.md
   - docs/models/operations/splitby.md
   - docs/models/operations/splits.md
@@ -1782,6 +1786,7 @@ generatedFiles:
   - src/models/components/payrollreversal.ts
   - src/models/components/payrollshow.ts
   - src/models/components/payrollsubmissionblockerstype.ts
+  - src/models/components/payrolltaxestype.ts
   - src/models/components/payrolltotalstype.ts
   - src/models/components/payrollupdate.ts
   - src/models/components/payrollwithholdingpayperiodtype.ts
@@ -2749,7 +2754,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "c44d66dc-c41b-4a60-9e25-5e93ff8583f2", "onboarding_completed": false, "onboarding_steps": [{"title": "Add Your Company's Addresses", "id": "add_addresses", "required": true, "completed": true, "skippable": false, "requirements": []}, {"title": "Enter Your Federal Tax Information", "id": "federal_tax_setup", "required": true, "completed": true, "skippable": false, "requirements": []}, {"title": "Select Industry", "id": "select_industry", "required": true, "completed": true, "skippable": false, "requirements": []}, {"title": "Add Your Bank Account", "id": "add_bank_info", "required": true, "completed": true, "skippable": false, "requirements": []}, {"title": "Add Your Employees", "id": "add_employees", "required": true, "completed": true, "skippable": true, "requirements": ["add_addresses"]}, {"title": "Enter Your State Tax Information", "id": "state_setup", "required": true, "completed": false, "skippable": false, "requirements": ["add_addresses", "add_employees"]}, {"title": "Select a Pay Schedule", "id": "payroll_schedule", "required": true, "completed": false, "skippable": false, "requirements": []}, {"title": "Sign Documents", "id": "sign_all_forms", "required": true, "completed": false, "skippable": false, "requirements": ["add_employees", "federal_tax_setup", "state_setup", "add_bank_info", "payroll_schedule"]}, {"title": "Verify Your Bank Account", "id": "verify_bank_info", "required": true, "completed": false, "skippable": false, "requirements": ["add_bank_info"]}]}
+          application/json: {"uuid": "c44d66dc-c41b-4a60-9e25-5e93ff8583f2", "onboarding_completed": false, "onboarding_steps": [{"title": "Add Your Company's Addresses", "id": "add_addresses", "required": true, "completed": true, "completed_at": "2025-02-18T10:00:00Z", "skippable": false, "requirements": []}, {"title": "Enter Your Federal Tax Information", "id": "federal_tax_setup", "required": true, "completed": true, "completed_at": "2025-02-18T10:00:00Z", "skippable": false, "requirements": []}, {"title": "Select Industry", "id": "select_industry", "required": true, "completed": true, "completed_at": "2025-02-18T10:00:00Z", "skippable": false, "requirements": []}, {"title": "Add Your Bank Account", "id": "add_bank_info", "required": true, "completed": true, "completed_at": "2025-02-18T10:00:00Z", "skippable": false, "requirements": []}, {"title": "Add Your Employees", "id": "add_employees", "required": true, "completed": true, "completed_at": "2025-02-18T10:00:00Z", "skippable": true, "requirements": ["add_addresses"]}, {"title": "Enter Your State Tax Information", "id": "state_setup", "required": true, "completed": false, "completed_at": null, "skippable": false, "requirements": ["add_addresses", "add_employees"]}, {"title": "Select a Pay Schedule", "id": "payroll_schedule", "required": true, "completed": false, "completed_at": null, "skippable": false, "requirements": []}, {"title": "Sign Documents", "id": "sign_all_forms", "required": true, "completed": false, "completed_at": null, "skippable": false, "requirements": ["add_employees", "federal_tax_setup", "state_setup", "add_bank_info", "payroll_schedule"]}, {"title": "Verify Your Bank Account", "id": "verify_bank_info", "required": true, "completed": false, "completed_at": null, "skippable": false, "requirements": ["add_bank_info"]}]}
   get-v1-company-finish-onboarding:
     Example:
       parameters:
@@ -4357,7 +4362,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "work_email": "new.partner.work@example.com", "date_of_birth": "1991-01-31", "ssn": "824920233"}
       responses:
         "200":
           application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
@@ -7322,7 +7327,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10", "metadata": {}}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
+          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "payroll_taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 3546.72}, {"name": "Social Security", "employer": true, "amount": 786}, {"name": "Social Security", "employer": false, "amount": 786}, {"name": "CA State Income Tax", "employer": false, "amount": 132.51}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10", "metadata": {}}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
     Basic:
       parameters:
         path:
@@ -7364,6 +7369,8 @@ examples:
       responses:
         "200":
           application/pdf: "x-file: example.file"
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   get-v1-employees-employee_uuid-pay_stubs:
     test_example:
       parameters:
