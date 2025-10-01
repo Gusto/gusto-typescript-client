@@ -43,6 +43,7 @@ export type PutV1EmployeesRequestBody = {
   middleInitial?: string | null | undefined;
   lastName?: string | undefined;
   email?: string | undefined;
+  workEmail?: string | undefined;
   dateOfBirth?: string | undefined;
   ssn?: string | undefined;
   preferredFirstName?: string | null | undefined;
@@ -50,7 +51,6 @@ export type PutV1EmployeesRequestBody = {
    * Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
    */
   twoPercentShareholder?: boolean | undefined;
-  workEmail?: string | undefined;
 };
 
 export type PutV1EmployeesRequest = {
@@ -108,20 +108,20 @@ export const PutV1EmployeesRequestBody$inboundSchema: z.ZodType<
   middle_initial: z.nullable(z.string()).optional(),
   last_name: z.string().optional(),
   email: z.string().optional(),
+  work_email: z.string().optional(),
   date_of_birth: z.string().optional(),
   ssn: z.string().optional(),
   preferred_first_name: z.nullable(z.string()).optional(),
   two_percent_shareholder: z.boolean().optional(),
-  work_email: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
     "middle_initial": "middleInitial",
     "last_name": "lastName",
+    "work_email": "workEmail",
     "date_of_birth": "dateOfBirth",
     "preferred_first_name": "preferredFirstName",
     "two_percent_shareholder": "twoPercentShareholder",
-    "work_email": "workEmail",
   });
 });
 
@@ -132,11 +132,11 @@ export type PutV1EmployeesRequestBody$Outbound = {
   middle_initial?: string | null | undefined;
   last_name?: string | undefined;
   email?: string | undefined;
+  work_email?: string | undefined;
   date_of_birth?: string | undefined;
   ssn?: string | undefined;
   preferred_first_name?: string | null | undefined;
   two_percent_shareholder?: boolean | undefined;
-  work_email?: string | undefined;
 };
 
 /** @internal */
@@ -150,20 +150,20 @@ export const PutV1EmployeesRequestBody$outboundSchema: z.ZodType<
   middleInitial: z.nullable(z.string()).optional(),
   lastName: z.string().optional(),
   email: z.string().optional(),
+  workEmail: z.string().optional(),
   dateOfBirth: z.string().optional(),
   ssn: z.string().optional(),
   preferredFirstName: z.nullable(z.string()).optional(),
   twoPercentShareholder: z.boolean().optional(),
-  workEmail: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
     middleInitial: "middle_initial",
     lastName: "last_name",
+    workEmail: "work_email",
     dateOfBirth: "date_of_birth",
     preferredFirstName: "preferred_first_name",
     twoPercentShareholder: "two_percent_shareholder",
-    workEmail: "work_email",
   });
 });
 

@@ -81,6 +81,40 @@ export type PayrollEmployeeCompensationsTypePaidTimeOff = {
   finalPayoutUnusedHoursInput?: string | undefined;
 };
 
+/**
+ * The amount type of the deduction for the pay period.
+ */
+export const AmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+/**
+ * The amount type of the deduction for the pay period.
+ */
+export type AmountType = ClosedEnum<typeof AmountType>;
+
+/**
+ * An array of deductions for the employee.
+ */
+export type Deductions = {
+  /**
+   * The name of the deduction.
+   */
+  name?: string | undefined;
+  /**
+   * The amount of the deduction for the pay period.
+   */
+  amount?: number | undefined;
+  /**
+   * The amount type of the deduction for the pay period.
+   */
+  amountType?: AmountType | undefined;
+  /**
+   * The UUID of the deduction. This parameter is optional and can be provided in order to update an existing deduction.
+   */
+  uuid?: string | undefined;
+};
+
 export type PayrollEmployeeCompensationsType = {
   /**
    * The UUID of the employee.
@@ -141,6 +175,7 @@ export type PayrollEmployeeCompensationsType = {
    * An array of all paid time off the employee is eligible for this pay period.
    */
   paidTimeOff?: Array<PayrollEmployeeCompensationsTypePaidTimeOff> | undefined;
+  deductions?: Array<Deductions> | undefined;
 };
 
 /** @internal */
@@ -397,6 +432,92 @@ export function payrollEmployeeCompensationsTypePaidTimeOffFromJSON(
 }
 
 /** @internal */
+export const AmountType$inboundSchema: z.ZodNativeEnum<typeof AmountType> = z
+  .nativeEnum(AmountType);
+
+/** @internal */
+export const AmountType$outboundSchema: z.ZodNativeEnum<typeof AmountType> =
+  AmountType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AmountType$ {
+  /** @deprecated use `AmountType$inboundSchema` instead. */
+  export const inboundSchema = AmountType$inboundSchema;
+  /** @deprecated use `AmountType$outboundSchema` instead. */
+  export const outboundSchema = AmountType$outboundSchema;
+}
+
+/** @internal */
+export const Deductions$inboundSchema: z.ZodType<
+  Deductions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  amount_type: AmountType$inboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "amount_type": "amountType",
+  });
+});
+
+/** @internal */
+export type Deductions$Outbound = {
+  name?: string | undefined;
+  amount?: number | undefined;
+  amount_type?: string | undefined;
+  uuid?: string | undefined;
+};
+
+/** @internal */
+export const Deductions$outboundSchema: z.ZodType<
+  Deductions$Outbound,
+  z.ZodTypeDef,
+  Deductions
+> = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  amountType: AmountType$outboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    amountType: "amount_type",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Deductions$ {
+  /** @deprecated use `Deductions$inboundSchema` instead. */
+  export const inboundSchema = Deductions$inboundSchema;
+  /** @deprecated use `Deductions$outboundSchema` instead. */
+  export const outboundSchema = Deductions$outboundSchema;
+  /** @deprecated use `Deductions$Outbound` instead. */
+  export type Outbound = Deductions$Outbound;
+}
+
+export function deductionsToJSON(deductions: Deductions): string {
+  return JSON.stringify(Deductions$outboundSchema.parse(deductions));
+}
+
+export function deductionsFromJSON(
+  jsonString: string,
+): SafeParseResult<Deductions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Deductions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Deductions' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   PayrollEmployeeCompensationsType,
   z.ZodTypeDef,
@@ -422,6 +543,7 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   paid_time_off: z.array(
     z.lazy(() => PayrollEmployeeCompensationsTypePaidTimeOff$inboundSchema),
   ).optional(),
+  deductions: z.array(z.lazy(() => Deductions$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -456,6 +578,7 @@ export type PayrollEmployeeCompensationsType$Outbound = {
   paid_time_off?:
     | Array<PayrollEmployeeCompensationsTypePaidTimeOff$Outbound>
     | undefined;
+  deductions?: Array<Deductions$Outbound> | undefined;
 };
 
 /** @internal */
@@ -484,6 +607,7 @@ export const PayrollEmployeeCompensationsType$outboundSchema: z.ZodType<
   paidTimeOff: z.array(
     z.lazy(() => PayrollEmployeeCompensationsTypePaidTimeOff$outboundSchema),
   ).optional(),
+  deductions: z.array(z.lazy(() => Deductions$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",

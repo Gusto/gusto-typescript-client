@@ -3,7 +3,7 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple, queryJoin } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -123,9 +123,16 @@ async function $do(
     pathParams,
   );
 
-  const query = encodeFormQuery({
-    "include": payload.include,
-  }, { explode: false });
+  const query = queryJoin(
+    encodeFormQuery({
+      "include": payload.include,
+    }, { explode: false }),
+    encodeFormQuery({
+      "page": payload.page,
+      "per": payload.per,
+      "sort_by": payload.sort_by,
+    }),
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

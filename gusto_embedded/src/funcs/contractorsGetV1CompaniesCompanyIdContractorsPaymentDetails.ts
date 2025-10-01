@@ -37,11 +37,29 @@ import { Result } from "../types/fp.js";
  * List contractor payment details
  *
  * @remarks
- * Get payment details for contractors in a company. This endpoint returns a list of all contractors associated with the specified company, including their payment methods and bank account details if they are paid via direct deposit.
+ * Get payment details for contractors in a company. This endpoint returns a list of all contractors
+ * associated with the specified company, including their payment methods and bank account details
+ * if they are paid via direct deposit.
  *
- * For contractors paid by direct deposit, the response includes their bank account information.
+ * For contractors paid by direct deposit, the response includes their bank account information
+ * with sensitive data masked for security. The payment details also include information about
+ * how their payments are split if they have multiple bank accounts configured.
  *
  * For contractors paid by check, only the basic payment method information is returned.
+ *
+ * ### Response Details
+ * - For direct deposit contractors:
+ *   - Bank account details (masked)
+ *   - Payment splits configuration
+ *   - Routing numbers
+ *   - Account types
+ * - For check payments:
+ *   - Basic payment method designation
+ *
+ * ### Common Use Cases
+ * - Fetching contractor payment information for payroll processing
+ * - Verifying contractor payment methods
+ * - Reviewing payment split configurations
  *
  * `encrypted_account_number` is available only with the additional scope `contractor_payment_methods:read:account_numbers`.
  *

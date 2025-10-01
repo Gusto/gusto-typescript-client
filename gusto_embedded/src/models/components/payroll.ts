@@ -55,6 +55,12 @@ import {
   PayrollSubmissionBlockersType$outboundSchema,
 } from "./payrollsubmissionblockerstype.js";
 import {
+  PayrollTaxesType,
+  PayrollTaxesType$inboundSchema,
+  PayrollTaxesType$Outbound,
+  PayrollTaxesType$outboundSchema,
+} from "./payrolltaxestype.js";
+import {
   PayrollTotalsType,
   PayrollTotalsType$inboundSchema,
   PayrollTotalsType$Outbound,
@@ -145,6 +151,10 @@ export type Payroll = {
    */
   companyTaxes?: Array<PayrollCompanyTaxesType> | undefined;
   /**
+   * An array of tax totals applicable to this payroll. Only included for processed or calculated payrolls when `payroll_taxes` is present in the `include` parameter.
+   */
+  payrollTaxes?: Array<PayrollTaxesType> | undefined;
+  /**
    * Only applicable when a payroll is moved to four day processing instead of fast ach.
    */
   paymentSpeedChanged?: PayrollPaymentSpeedChangedType | undefined;
@@ -195,6 +205,7 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
     payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
     totals: PayrollTotalsType$inboundSchema.optional(),
     company_taxes: z.array(PayrollCompanyTaxesType$inboundSchema).optional(),
+    payroll_taxes: z.array(PayrollTaxesType$inboundSchema).optional(),
     payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
       .optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
@@ -225,6 +236,7 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
       "pay_period": "payPeriod",
       "payroll_status_meta": "payrollStatusMeta",
       "company_taxes": "companyTaxes",
+      "payroll_taxes": "payrollTaxes",
       "payment_speed_changed": "paymentSpeedChanged",
       "created_at": "createdAt",
       "submission_blockers": "submissionBlockers",
@@ -256,6 +268,7 @@ export type Payroll$Outbound = {
   payroll_status_meta?: PayrollPayrollStatusMetaType$Outbound | undefined;
   totals?: PayrollTotalsType$Outbound | undefined;
   company_taxes?: Array<PayrollCompanyTaxesType$Outbound> | undefined;
+  payroll_taxes?: Array<PayrollTaxesType$Outbound> | undefined;
   payment_speed_changed?: PayrollPaymentSpeedChangedType$Outbound | undefined;
   created_at?: string | undefined;
   submission_blockers?:
@@ -293,6 +306,7 @@ export const Payroll$outboundSchema: z.ZodType<
   payrollStatusMeta: PayrollPayrollStatusMetaType$outboundSchema.optional(),
   totals: PayrollTotalsType$outboundSchema.optional(),
   companyTaxes: z.array(PayrollCompanyTaxesType$outboundSchema).optional(),
+  payrollTaxes: z.array(PayrollTaxesType$outboundSchema).optional(),
   paymentSpeedChanged: PayrollPaymentSpeedChangedType$outboundSchema.optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   submissionBlockers: z.array(PayrollSubmissionBlockersType$outboundSchema)
@@ -319,6 +333,7 @@ export const Payroll$outboundSchema: z.ZodType<
     payPeriod: "pay_period",
     payrollStatusMeta: "payroll_status_meta",
     companyTaxes: "company_taxes",
+    payrollTaxes: "payroll_taxes",
     paymentSpeedChanged: "payment_speed_changed",
     createdAt: "created_at",
     submissionBlockers: "submission_blockers",

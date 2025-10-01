@@ -64,8 +64,8 @@ export type CompanyBenefitWithEmployeeBenefitsValue2 = {
  * For the `tiered` contribution type, an array of tiers.
  */
 export type CompanyBenefitWithEmployeeBenefitsValue =
-  | CompanyBenefitWithEmployeeBenefitsValue2
-  | string;
+  | string
+  | CompanyBenefitWithEmployeeBenefitsValue2;
 
 /**
  * An object representing the type and value of the company contribution.
@@ -90,7 +90,7 @@ export type CompanyBenefitWithEmployeeBenefitsContribution = {
    *
    * For the `tiered` contribution type, an array of tiers.
    */
-  value?: CompanyBenefitWithEmployeeBenefitsValue2 | string | undefined;
+  value?: string | CompanyBenefitWithEmployeeBenefitsValue2 | undefined;
 };
 
 export type EmployeeBenefits = {
@@ -361,14 +361,14 @@ export const CompanyBenefitWithEmployeeBenefitsValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
   z.string(),
+  z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
 ]);
 
 /** @internal */
 export type CompanyBenefitWithEmployeeBenefitsValue$Outbound =
-  | CompanyBenefitWithEmployeeBenefitsValue2$Outbound
-  | string;
+  | string
+  | CompanyBenefitWithEmployeeBenefitsValue2$Outbound;
 
 /** @internal */
 export const CompanyBenefitWithEmployeeBenefitsValue$outboundSchema: z.ZodType<
@@ -376,8 +376,8 @@ export const CompanyBenefitWithEmployeeBenefitsValue$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CompanyBenefitWithEmployeeBenefitsValue
 > = z.union([
-  z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema),
   z.string(),
+  z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema),
 ]);
 
 /**
@@ -431,8 +431,8 @@ export const CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema:
   > = z.object({
     type: z.string().optional(),
     value: z.union([
-      z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
       z.string(),
+      z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
     ]).optional(),
   });
 
@@ -440,8 +440,8 @@ export const CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema:
 export type CompanyBenefitWithEmployeeBenefitsContribution$Outbound = {
   type?: string | undefined;
   value?:
-    | CompanyBenefitWithEmployeeBenefitsValue2$Outbound
     | string
+    | CompanyBenefitWithEmployeeBenefitsValue2$Outbound
     | undefined;
 };
 
@@ -454,8 +454,8 @@ export const CompanyBenefitWithEmployeeBenefitsContribution$outboundSchema:
   > = z.object({
     type: z.string().optional(),
     value: z.union([
-      z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema),
       z.string(),
+      z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema),
     ]).optional(),
   });
 

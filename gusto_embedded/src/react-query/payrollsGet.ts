@@ -21,6 +21,7 @@ import {
   GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
   GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
+  SortBy,
 } from "../models/operations/getv1companiescompanyidpayrollspayrollid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
@@ -118,6 +119,9 @@ export function setPayrollsGetData(
       include?:
         | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
         | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
+      sortBy?: SortBy | undefined;
     },
   ],
   data: PayrollsGetQueryData,
@@ -140,6 +144,9 @@ export function invalidatePayrollsGet(
         include?:
           | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
           | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
+        sortBy?: SortBy | undefined;
       },
     ]
   >,
@@ -173,6 +180,9 @@ export function buildPayrollsGetQuery(
     queryKey: queryKeyPayrollsGet(request.companyId, request.payrollId, {
       xGustoAPIVersion: request.xGustoAPIVersion,
       include: request.include,
+      page: request.page,
+      per: request.per,
+      sortBy: request.sortBy,
     }),
     queryFn: async function payrollsGetQueryFn(
       ctx,
@@ -202,6 +212,9 @@ export function queryKeyPayrollsGet(
     include?:
       | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
       | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
+    sortBy?: SortBy | undefined;
   },
 ): QueryKey {
   return [

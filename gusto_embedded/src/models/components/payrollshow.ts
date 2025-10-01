@@ -56,6 +56,12 @@ import {
   PayrollSubmissionBlockersType$outboundSchema,
 } from "./payrollsubmissionblockerstype.js";
 import {
+  PayrollTaxesType,
+  PayrollTaxesType$inboundSchema,
+  PayrollTaxesType$Outbound,
+  PayrollTaxesType$outboundSchema,
+} from "./payrolltaxestype.js";
+import {
   PayrollTotalsType,
   PayrollTotalsType$inboundSchema,
   PayrollTotalsType$Outbound,
@@ -139,6 +145,19 @@ export type PayrollShowPaidTimeOff = {
   finalPayoutUnusedHoursInput?: string | undefined;
 };
 
+export const PayrollShowAmountType = {
+  Fixed: "fixed",
+  Percent: "percent",
+} as const;
+export type PayrollShowAmountType = ClosedEnum<typeof PayrollShowAmountType>;
+
+export type PayrollShowDeductions = {
+  name?: string | undefined;
+  amount?: number | undefined;
+  amountType?: PayrollShowAmountType | undefined;
+  uuid?: string | undefined;
+};
+
 export type PayrollShowTaxes = {
   name: string;
   employer: boolean;
@@ -150,19 +169,6 @@ export type PayrollShowBenefits = {
   employeeDeduction?: number | undefined;
   companyContribution?: number | undefined;
   imputed?: boolean | undefined;
-};
-
-export const AmountType = {
-  Fixed: "fixed",
-  Percent: "percent",
-} as const;
-export type AmountType = ClosedEnum<typeof AmountType>;
-
-export type Deductions = {
-  name?: string | undefined;
-  amount?: number | undefined;
-  amountType?: AmountType | undefined;
-  uuid?: string | undefined;
 };
 
 export type EmployeeCompensations = {
@@ -223,6 +229,10 @@ export type EmployeeCompensations = {
    */
   paidTimeOff?: Array<PayrollShowPaidTimeOff> | undefined;
   /**
+   * An array of employee deductions for the pay period.
+   */
+  deductions?: Array<PayrollShowDeductions> | undefined;
+  /**
    * An array of employer and employee taxes for the pay period. Only included for processed or calculated payrolls when `taxes` is present in the `include` parameter.
    */
   taxes?: Array<PayrollShowTaxes> | undefined;
@@ -230,10 +240,6 @@ export type EmployeeCompensations = {
    * An array of employee benefits for the pay period. Benefits are only included for processed payroll when the include parameter is present.
    */
   benefits?: Array<PayrollShowBenefits> | undefined;
-  /**
-   * An array of employee deductions for the pay period.
-   */
-  deductions?: Array<Deductions> | undefined;
 };
 
 export type PayrollShow = {
@@ -314,6 +320,10 @@ export type PayrollShow = {
    * An array of taxes applicable to this payroll in addition to taxes included in `employee_compensations`. Only included for processed or calculated payrolls when `taxes` is present in the `include` parameter.
    */
   companyTaxes?: Array<PayrollCompanyTaxesType> | undefined;
+  /**
+   * An array of tax totals applicable to this payroll. Only included for processed or calculated payrolls when `payroll_taxes` is present in the `include` parameter.
+   */
+  payrollTaxes?: Array<PayrollTaxesType> | undefined;
   /**
    * Only applicable when a payroll is moved to four day processing instead of fast ach.
    */
@@ -581,6 +591,98 @@ export function payrollShowPaidTimeOffFromJSON(
 }
 
 /** @internal */
+export const PayrollShowAmountType$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollShowAmountType
+> = z.nativeEnum(PayrollShowAmountType);
+
+/** @internal */
+export const PayrollShowAmountType$outboundSchema: z.ZodNativeEnum<
+  typeof PayrollShowAmountType
+> = PayrollShowAmountType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PayrollShowAmountType$ {
+  /** @deprecated use `PayrollShowAmountType$inboundSchema` instead. */
+  export const inboundSchema = PayrollShowAmountType$inboundSchema;
+  /** @deprecated use `PayrollShowAmountType$outboundSchema` instead. */
+  export const outboundSchema = PayrollShowAmountType$outboundSchema;
+}
+
+/** @internal */
+export const PayrollShowDeductions$inboundSchema: z.ZodType<
+  PayrollShowDeductions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  amount_type: PayrollShowAmountType$inboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "amount_type": "amountType",
+  });
+});
+
+/** @internal */
+export type PayrollShowDeductions$Outbound = {
+  name?: string | undefined;
+  amount?: number | undefined;
+  amount_type?: string | undefined;
+  uuid?: string | undefined;
+};
+
+/** @internal */
+export const PayrollShowDeductions$outboundSchema: z.ZodType<
+  PayrollShowDeductions$Outbound,
+  z.ZodTypeDef,
+  PayrollShowDeductions
+> = z.object({
+  name: z.string().optional(),
+  amount: z.number().optional(),
+  amountType: PayrollShowAmountType$outboundSchema.optional(),
+  uuid: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    amountType: "amount_type",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PayrollShowDeductions$ {
+  /** @deprecated use `PayrollShowDeductions$inboundSchema` instead. */
+  export const inboundSchema = PayrollShowDeductions$inboundSchema;
+  /** @deprecated use `PayrollShowDeductions$outboundSchema` instead. */
+  export const outboundSchema = PayrollShowDeductions$outboundSchema;
+  /** @deprecated use `PayrollShowDeductions$Outbound` instead. */
+  export type Outbound = PayrollShowDeductions$Outbound;
+}
+
+export function payrollShowDeductionsToJSON(
+  payrollShowDeductions: PayrollShowDeductions,
+): string {
+  return JSON.stringify(
+    PayrollShowDeductions$outboundSchema.parse(payrollShowDeductions),
+  );
+}
+
+export function payrollShowDeductionsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollShowDeductions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollShowDeductions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollShowDeductions' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollShowTaxes$inboundSchema: z.ZodType<
   PayrollShowTaxes,
   z.ZodTypeDef,
@@ -714,92 +816,6 @@ export function payrollShowBenefitsFromJSON(
 }
 
 /** @internal */
-export const AmountType$inboundSchema: z.ZodNativeEnum<typeof AmountType> = z
-  .nativeEnum(AmountType);
-
-/** @internal */
-export const AmountType$outboundSchema: z.ZodNativeEnum<typeof AmountType> =
-  AmountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AmountType$ {
-  /** @deprecated use `AmountType$inboundSchema` instead. */
-  export const inboundSchema = AmountType$inboundSchema;
-  /** @deprecated use `AmountType$outboundSchema` instead. */
-  export const outboundSchema = AmountType$outboundSchema;
-}
-
-/** @internal */
-export const Deductions$inboundSchema: z.ZodType<
-  Deductions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  amount: z.number().optional(),
-  amount_type: AmountType$inboundSchema.optional(),
-  uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "amount_type": "amountType",
-  });
-});
-
-/** @internal */
-export type Deductions$Outbound = {
-  name?: string | undefined;
-  amount?: number | undefined;
-  amount_type?: string | undefined;
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const Deductions$outboundSchema: z.ZodType<
-  Deductions$Outbound,
-  z.ZodTypeDef,
-  Deductions
-> = z.object({
-  name: z.string().optional(),
-  amount: z.number().optional(),
-  amountType: AmountType$outboundSchema.optional(),
-  uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    amountType: "amount_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Deductions$ {
-  /** @deprecated use `Deductions$inboundSchema` instead. */
-  export const inboundSchema = Deductions$inboundSchema;
-  /** @deprecated use `Deductions$outboundSchema` instead. */
-  export const outboundSchema = Deductions$outboundSchema;
-  /** @deprecated use `Deductions$Outbound` instead. */
-  export type Outbound = Deductions$Outbound;
-}
-
-export function deductionsToJSON(deductions: Deductions): string {
-  return JSON.stringify(Deductions$outboundSchema.parse(deductions));
-}
-
-export function deductionsFromJSON(
-  jsonString: string,
-): SafeParseResult<Deductions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Deductions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Deductions' from JSON`,
-  );
-}
-
-/** @internal */
 export const EmployeeCompensations$inboundSchema: z.ZodType<
   EmployeeCompensations,
   z.ZodTypeDef,
@@ -824,9 +840,10 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
   ).optional(),
   paid_time_off: z.array(z.lazy(() => PayrollShowPaidTimeOff$inboundSchema))
     .optional(),
+  deductions: z.array(z.lazy(() => PayrollShowDeductions$inboundSchema))
+    .optional(),
   taxes: z.array(z.lazy(() => PayrollShowTaxes$inboundSchema)).optional(),
   benefits: z.array(z.lazy(() => PayrollShowBenefits$inboundSchema)).optional(),
-  deductions: z.array(z.lazy(() => Deductions$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -863,9 +880,9 @@ export type EmployeeCompensations$Outbound = {
     | Array<PayrollShowHourlyCompensations$Outbound>
     | undefined;
   paid_time_off?: Array<PayrollShowPaidTimeOff$Outbound> | undefined;
+  deductions?: Array<PayrollShowDeductions$Outbound> | undefined;
   taxes?: Array<PayrollShowTaxes$Outbound> | undefined;
   benefits?: Array<PayrollShowBenefits$Outbound> | undefined;
-  deductions?: Array<Deductions$Outbound> | undefined;
 };
 
 /** @internal */
@@ -893,10 +910,11 @@ export const EmployeeCompensations$outboundSchema: z.ZodType<
   ).optional(),
   paidTimeOff: z.array(z.lazy(() => PayrollShowPaidTimeOff$outboundSchema))
     .optional(),
+  deductions: z.array(z.lazy(() => PayrollShowDeductions$outboundSchema))
+    .optional(),
   taxes: z.array(z.lazy(() => PayrollShowTaxes$outboundSchema)).optional(),
   benefits: z.array(z.lazy(() => PayrollShowBenefits$outboundSchema))
     .optional(),
-  deductions: z.array(z.lazy(() => Deductions$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",
@@ -975,6 +993,7 @@ export const PayrollShow$inboundSchema: z.ZodType<
   payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
   totals: PayrollTotalsType$inboundSchema.optional(),
   company_taxes: z.array(PayrollCompanyTaxesType$inboundSchema).optional(),
+  payroll_taxes: z.array(PayrollTaxesType$inboundSchema).optional(),
   payment_speed_changed: PayrollPaymentSpeedChangedType$inboundSchema
     .optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -1006,6 +1025,7 @@ export const PayrollShow$inboundSchema: z.ZodType<
     "pay_period": "payPeriod",
     "payroll_status_meta": "payrollStatusMeta",
     "company_taxes": "companyTaxes",
+    "payroll_taxes": "payrollTaxes",
     "payment_speed_changed": "paymentSpeedChanged",
     "created_at": "createdAt",
     "submission_blockers": "submissionBlockers",
@@ -1038,6 +1058,7 @@ export type PayrollShow$Outbound = {
   payroll_status_meta?: PayrollPayrollStatusMetaType$Outbound | undefined;
   totals?: PayrollTotalsType$Outbound | undefined;
   company_taxes?: Array<PayrollCompanyTaxesType$Outbound> | undefined;
+  payroll_taxes?: Array<PayrollTaxesType$Outbound> | undefined;
   payment_speed_changed?: PayrollPaymentSpeedChangedType$Outbound | undefined;
   created_at?: string | undefined;
   submission_blockers?:
@@ -1076,6 +1097,7 @@ export const PayrollShow$outboundSchema: z.ZodType<
   payrollStatusMeta: PayrollPayrollStatusMetaType$outboundSchema.optional(),
   totals: PayrollTotalsType$outboundSchema.optional(),
   companyTaxes: z.array(PayrollCompanyTaxesType$outboundSchema).optional(),
+  payrollTaxes: z.array(PayrollTaxesType$outboundSchema).optional(),
   paymentSpeedChanged: PayrollPaymentSpeedChangedType$outboundSchema.optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   submissionBlockers: z.array(PayrollSubmissionBlockersType$outboundSchema)
@@ -1105,6 +1127,7 @@ export const PayrollShow$outboundSchema: z.ZodType<
     payPeriod: "pay_period",
     payrollStatusMeta: "payroll_status_meta",
     companyTaxes: "company_taxes",
+    payrollTaxes: "payroll_taxes",
     paymentSpeedChanged: "payment_speed_changed",
     createdAt: "created_at",
     submissionBlockers: "submission_blockers",

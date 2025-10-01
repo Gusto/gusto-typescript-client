@@ -53,7 +53,7 @@ export type PutV1ContractorDocumentSignRequestBody = {
 
 export type PutV1ContractorDocumentSignRequest = {
   /**
-   * The ID or UUID of the document
+   * The UUID of the document
    */
   documentUuid: string;
   /**

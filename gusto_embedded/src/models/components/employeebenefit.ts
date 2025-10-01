@@ -48,7 +48,7 @@ export type Two = {
  *
  * For the `tiered` contribution type, an array of tiers.
  */
-export type EmployeeBenefitValue = Two | string;
+export type EmployeeBenefitValue = string | Two;
 
 /**
  * An object representing the type and value of the company contribution.
@@ -73,7 +73,7 @@ export type Contribution = {
    *
    * For the `tiered` contribution type, an array of tiers.
    */
-  value?: Two | string | undefined;
+  value?: string | Two | undefined;
 };
 
 /**
@@ -296,17 +296,17 @@ export const EmployeeBenefitValue$inboundSchema: z.ZodType<
   EmployeeBenefitValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => Two$inboundSchema), z.string()]);
+> = z.union([z.string(), z.lazy(() => Two$inboundSchema)]);
 
 /** @internal */
-export type EmployeeBenefitValue$Outbound = Two$Outbound | string;
+export type EmployeeBenefitValue$Outbound = string | Two$Outbound;
 
 /** @internal */
 export const EmployeeBenefitValue$outboundSchema: z.ZodType<
   EmployeeBenefitValue$Outbound,
   z.ZodTypeDef,
   EmployeeBenefitValue
-> = z.union([z.lazy(() => Two$outboundSchema), z.string()]);
+> = z.union([z.string(), z.lazy(() => Two$outboundSchema)]);
 
 /**
  * @internal
@@ -346,13 +346,13 @@ export const Contribution$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.string().optional(),
-  value: z.union([z.lazy(() => Two$inboundSchema), z.string()]).optional(),
+  value: z.union([z.string(), z.lazy(() => Two$inboundSchema)]).optional(),
 });
 
 /** @internal */
 export type Contribution$Outbound = {
   type?: string | undefined;
-  value?: Two$Outbound | string | undefined;
+  value?: string | Two$Outbound | undefined;
 };
 
 /** @internal */
@@ -362,7 +362,7 @@ export const Contribution$outboundSchema: z.ZodType<
   Contribution
 > = z.object({
   type: z.string().optional(),
-  value: z.union([z.lazy(() => Two$outboundSchema), z.string()]).optional(),
+  value: z.union([z.string(), z.lazy(() => Two$outboundSchema)]).optional(),
 });
 
 /**
