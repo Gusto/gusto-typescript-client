@@ -19,6 +19,7 @@ permissions:
     - cron: 0 0 * * *
 jobs:
   generate:
+    uses: Gusto/sdk-generation-action/.github/workflows/workflow-executor.yaml@main
     with:
       force: ${{ github.event.inputs.force }}
       mode: pr

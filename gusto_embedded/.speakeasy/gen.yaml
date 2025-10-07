@@ -1,29 +1,4 @@
 configVersion: 2.0.0
-generation:
-  devContainers:
-    enabled: true
-    schemaPath: https://raw.githubusercontent.com/api/v3/repos/Gusto/Gusto-Partner-API/contents/generated/embedded/api.v2024-04-01.embedded.yaml?ref=ar/add-speakeasy-github-action
-  sdkClassName: GustoEmbedded
-  maintainOpenAPIOrder: true
-  usageSnippets:
-    optionalPropertyRendering: withExample
-    sdkInitStyle: constructor
-  useClassNamesForArrayFields: true
-  fixes:
-    nameResolutionDec2023: true
-    nameResolutionFeb2025: false
-    parameterOrderingFeb2024: true
-    requestResponseComponentNamesFeb2024: true
-    securityFeb2025: false
-    sharedErrorComponentsApr2025: false
-  auth:
-    oAuth2ClientCredentialsEnabled: true
-    oAuth2PasswordEnabled: true
-    hoistGlobalSecurity: true
-  tests:
-    generateTests: true
-    generateNewTests: false
-    skipResponseBodyAssertions: false
 typescript:
   version: 0.7.1
   additionalDependencies:
