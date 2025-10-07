@@ -1,4 +1,4 @@
-configVersion: kjklj
+configVersion: 2.0.0
 generation:
   devContainers:
     enabled: true
@@ -59,7 +59,7 @@ typescript:
   modelPropertyCasing: camel
   moduleFormat: esm
   outputModelSuffix: output
-  packageName: '@gusto/embedded-api'
+  packageName: '@gusto/embedded-slayapi'
   responseFormat: envelope-http
   sseFlatResponse: false
   templateVersion: v2
