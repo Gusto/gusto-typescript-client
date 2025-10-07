@@ -59,7 +59,7 @@ typescript:
   modelPropertyCasing: camel
   moduleFormat: esm
   outputModelSuffix: output
-  packageName: '@gusto/embedded-slayapi'
+  packageName: '@gusto/embedded-api'
   responseFormat: envelope-http
   sseFlatResponse: false
   templateVersion: v2
