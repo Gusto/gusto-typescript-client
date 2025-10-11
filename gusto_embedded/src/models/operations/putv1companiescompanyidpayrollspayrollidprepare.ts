@@ -42,6 +42,14 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
    */
   payrollId: string;
   /**
+   * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+   */
+  page?: number | undefined;
+  /**
+   * Number of objects per page. For majority of endpoints will default to 25
+   */
+  per?: number | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: VersionHeader | undefined;
@@ -142,6 +150,8 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchem
   > = z.object({
     company_id: z.string(),
     payroll_id: z.string(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema
@@ -159,6 +169,8 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchem
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$Outbound = {
   company_id: string;
   payroll_id: string;
+  page?: number | undefined;
+  per?: number | undefined;
   "X-Gusto-API-Version": string;
   RequestBody?:
     | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound
@@ -174,6 +186,8 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
   > = z.object({
     companyId: z.string(),
     payrollId: z.string(),
+    page: z.number().int().optional(),
+    per: z.number().int().optional(),
     xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema

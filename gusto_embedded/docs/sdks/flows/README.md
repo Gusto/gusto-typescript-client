@@ -27,7 +27,7 @@ async function run() {
   const result = await gustoEmbedded.flows.create({
     companyUuid: "<id>",
     requestBody: {
-      flowType: "company_onboarding",
+      flowType: "company_retirement_benefits",
     },
   });
 
@@ -55,7 +55,7 @@ async function run() {
   const res = await flowsCreate(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
-      flowType: "company_onboarding",
+      flowType: "company_retirement_benefits",
     },
   });
   if (res.ok) {
