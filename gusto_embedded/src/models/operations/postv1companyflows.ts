@@ -51,6 +51,10 @@ export type PostV1CompanyFlowsRequestBody = {
    * the type of target entity applicable to the flow. This field is optional for company flows, please refer to the flow_types table above for more details.
    */
   entityType?: EntityType | undefined;
+  /**
+   * Optional configuration object that varies based on the flow_type. This can contain arbitrary key-value pairs specific to the flow being generated (e.g., { "provider": "guideline" }).
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 export type PostV1CompanyFlowsRequest = {
@@ -101,6 +105,7 @@ export const PostV1CompanyFlowsRequestBody$inboundSchema: z.ZodType<
   flow_type: z.string(),
   entity_uuid: z.string().optional(),
   entity_type: EntityType$inboundSchema.optional(),
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "flow_type": "flowType",
@@ -114,6 +119,7 @@ export type PostV1CompanyFlowsRequestBody$Outbound = {
   flow_type: string;
   entity_uuid?: string | undefined;
   entity_type?: string | undefined;
+  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -125,6 +131,7 @@ export const PostV1CompanyFlowsRequestBody$outboundSchema: z.ZodType<
   flowType: z.string(),
   entityUuid: z.string().optional(),
   entityType: EntityType$outboundSchema.optional(),
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     flowType: "flow_type",
