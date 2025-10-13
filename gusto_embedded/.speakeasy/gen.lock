@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 60065968053490c2692c2b6b0861775b
+  docChecksum: 4bc6af4d719f637b2c3cc6202d7c7476
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.631.5
-  generationVersion: 2.716.16
-  releaseVersion: 0.7.1
-  configChecksum: 78b3c210a41c40e3bccbc138c03b97c0
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 0.8.0
+  configChecksum: e5d67d5ed2133c329aec78c74d092b58
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
     constsAndDefaults: 0.1.12
-    core: 3.21.25
+    core: 3.21.26
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -28,7 +28,7 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
-    groups: 2.81.2
+    groups: 2.81.3
     inputOutputModels: 2.82.0
     methodSecurity: 2.82.6
     nameOverrides: 2.81.2
@@ -38,7 +38,7 @@ features:
     retries: 2.83.0
     sdkHooks: 0.3.0
     serverIDs: 2.81.2
-    unions: 2.85.12
+    unions: 2.86.0
     uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
@@ -1352,7 +1352,6 @@ generatedFiles:
   - docs/sdks/flows/README.md
   - docs/sdks/garnishments/README.md
   - docs/sdks/generateddocuments/README.md
-  - docs/sdks/gustoembedded/README.md
   - docs/sdks/historicalemployees/README.md
   - docs/sdks/holidaypaypolicies/README.md
   - docs/sdks/i9verification/README.md
@@ -3286,7 +3285,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"flow_type": "company_onboarding"}
+        application/json: {"flow_type": "company_retirement_benefits"}
       responses:
         "201":
           application/json: {"url": "https://flows.gusto-demo.com/flows/lO2BHHAMCScPVV9G5WEURW0Im_nP9mGYloQgjUWbenQ"}
@@ -3323,6 +3322,19 @@ examples:
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
+    Example with options:
+      parameters:
+        path:
+          company_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"flow_type": "company_retirement_benefits", "entity_type": "Company", "options": {"provider": "guideline"}}
+      responses:
+        "201":
+          application/json: {}
+        "422":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-v1-companies-company_id-locations:
     Example:
       parameters:
@@ -9912,3 +9924,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes Detected:\n* `gustoembedded.flows.create()`: \n  *  `request.requestBody.options` **Added**\n* `gustoembedded.payrolls.prepare()`:  `request` **Changed**\n"

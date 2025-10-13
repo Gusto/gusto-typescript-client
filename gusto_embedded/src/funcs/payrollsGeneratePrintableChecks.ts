@@ -134,7 +134,7 @@ async function $do(
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "post-v1-payrolls-payroll_uuid-generated_documents-printable_payroll_checks",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
