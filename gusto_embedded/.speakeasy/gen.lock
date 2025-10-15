@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 4bc6af4d719f637b2c3cc6202d7c7476
+  docChecksum: e8680b10cf3a909fee62a21fc95b6140
   docVersion: "2024-04-01"
   speakeasyVersion: 1.636.3
   generationVersion: 2.723.11
-  releaseVersion: 0.8.0
-  configChecksum: e5d67d5ed2133c329aec78c74d092b58
+  releaseVersion: 0.8.1
+  configChecksum: 149add8725a9fdc1bce6b5db327e770e
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -83,6 +83,7 @@ generatedFiles:
   - docs/models/components/benefittyperequirementsdefaultvalue.md
   - docs/models/components/benefittyperequirementslimitoptiondefaultvalue.md
   - docs/models/components/blockertype.md
+  - docs/models/components/blsoccupation.md
   - docs/models/components/catchup.md
   - docs/models/components/category.md
   - docs/models/components/childsupportdata.md
@@ -233,6 +234,7 @@ generatedFiles:
   - docs/models/components/entityerrorobject.md
   - docs/models/components/entitytype.md
   - docs/models/components/event.md
+  - docs/models/components/experiencelevel.md
   - docs/models/components/externalpayroll.md
   - docs/models/components/externalpayrollbasic.md
   - docs/models/components/externalpayrollbasicstatus.md
@@ -245,6 +247,7 @@ generatedFiles:
   - docs/models/components/federaltaxdetails.md
   - docs/models/components/federaltaxdetailsstatus.md
   - docs/models/components/fields.md
+  - docs/models/components/fiftyth.md
   - docs/models/components/fipscodes.md
   - docs/models/components/fixed.md
   - docs/models/components/fixedcompensations.md
@@ -300,9 +303,11 @@ generatedFiles:
   - docs/models/components/mlkday.md
   - docs/models/components/name.md
   - docs/models/components/newyearsday.md
+  - docs/models/components/ninetyth.md
   - docs/models/components/notification.md
   - docs/models/components/notificationentitytype.md
   - docs/models/components/notificationstatus.md
+  - docs/models/components/occupations.md
   - docs/models/components/offcyclereasontype.md
   - docs/models/components/onboardingdocumentsconfig.md
   - docs/models/components/onboardingstatus.md
@@ -344,6 +349,7 @@ generatedFiles:
   - docs/models/components/payrollpayperiodtype.md
   - docs/models/components/payrollpayrollstatusmetatype.md
   - docs/models/components/payrollprepared.md
+  - docs/models/components/payrollpreparesortby.md
   - docs/models/components/payrollprocessingrequest.md
   - docs/models/components/payrollprocessingrequeststatus.md
   - docs/models/components/payrollreceipt.md
@@ -412,8 +418,11 @@ generatedFiles:
   - docs/models/components/requirements.md
   - docs/models/components/resources.md
   - docs/models/components/resourcetype.md
+  - docs/models/components/salaries.md
+  - docs/models/components/salaryestimate.md
   - docs/models/components/section.md
   - docs/models/components/security.md
+  - docs/models/components/seventyfiveth.md
   - docs/models/components/showemployees.md
   - docs/models/components/signatory.md
   - docs/models/components/sortorder.md
@@ -438,6 +447,7 @@ generatedFiles:
   - docs/models/components/taxrequirementsstate.md
   - docs/models/components/taxrequirementvalue.md
   - docs/models/components/taxsuggestions.md
+  - docs/models/components/tenth.md
   - docs/models/components/termination.md
   - docs/models/components/thanksgiving.md
   - docs/models/components/tier.md
@@ -448,6 +458,7 @@ generatedFiles:
   - docs/models/components/timeofftype.md
   - docs/models/components/total.md
   - docs/models/components/totals.md
+  - docs/models/components/twentyfiveth.md
   - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/unblockoptions.md
@@ -561,6 +572,7 @@ generatedFiles:
   - docs/models/operations/employmentstatus.md
   - docs/models/operations/employmenttype.md
   - docs/models/operations/entitytype.md
+  - docs/models/operations/experiencelevel.md
   - docs/models/operations/externalpayrollitems.md
   - docs/models/operations/federalholidays.md
   - docs/models/operations/fields.md
@@ -831,6 +843,13 @@ generatedFiles:
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubheaderxgustoapiversion.md
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubrequest.md
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubresponse.md
+  - docs/models/operations/getv1salaryestimatesidheaderxgustoapiversion.md
+  - docs/models/operations/getv1salaryestimatesidrequest.md
+  - docs/models/operations/getv1salaryestimatesidresponse.md
+  - docs/models/operations/getv1salaryestimatesoccupationsheaderxgustoapiversion.md
+  - docs/models/operations/getv1salaryestimatesoccupationsrequest.md
+  - docs/models/operations/getv1salaryestimatesoccupationsresponse.md
+  - docs/models/operations/getv1salaryestimatesoccupationssecurity.md
   - docs/models/operations/getv1taxliabilitiesrequest.md
   - docs/models/operations/getv1taxliabilitiesresponse.md
   - docs/models/operations/getv1tokeninforequest.md
@@ -874,6 +893,7 @@ generatedFiles:
   - docs/models/operations/minimumwages.md
   - docs/models/operations/mlkday.md
   - docs/models/operations/newyearsday.md
+  - docs/models/operations/occupations.md
   - docs/models/operations/offcyclereason.md
   - docs/models/operations/onboardingstatus.md
   - docs/models/operations/ownertype.md
@@ -1012,6 +1032,10 @@ generatedFiles:
   - docs/models/operations/postv1employeesemployeeidhomeaddressesresponse.md
   - docs/models/operations/postv1employeesemployeeidrehirerequest.md
   - docs/models/operations/postv1employeesemployeeidrehireresponse.md
+  - docs/models/operations/postv1employeesemployeeidsalaryestimatesheaderxgustoapiversion.md
+  - docs/models/operations/postv1employeesemployeeidsalaryestimatesrequest.md
+  - docs/models/operations/postv1employeesemployeeidsalaryestimatesrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidsalaryestimatesresponse.md
   - docs/models/operations/postv1employeesemployeeidterminationsrequest.md
   - docs/models/operations/postv1employeesemployeeidterminationsrequestbody.md
   - docs/models/operations/postv1employeesemployeeidterminationsresponse.md
@@ -1046,6 +1070,10 @@ generatedFiles:
   - docs/models/operations/postv1plaidprocessortokenrequestbody.md
   - docs/models/operations/postv1plaidprocessortokenresponse.md
   - docs/models/operations/postv1plaidprocessortokenresponsebody.md
+  - docs/models/operations/postv1salaryestimatesuuidacceptheaderxgustoapiversion.md
+  - docs/models/operations/postv1salaryestimatesuuidacceptrequest.md
+  - docs/models/operations/postv1salaryestimatesuuidacceptrequestbody.md
+  - docs/models/operations/postv1salaryestimatesuuidacceptresponse.md
   - docs/models/operations/postv1sandboxgenerate1099request.md
   - docs/models/operations/postv1sandboxgenerate1099requestbody.md
   - docs/models/operations/postv1sandboxgenerate1099response.md
@@ -1249,6 +1277,12 @@ generatedFiles:
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigraterequestbody.md
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponse.md
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponsebody.md
+  - docs/models/operations/putv1salaryestimatesidexperiencelevel.md
+  - docs/models/operations/putv1salaryestimatesidheaderxgustoapiversion.md
+  - docs/models/operations/putv1salaryestimatesidoccupations.md
+  - docs/models/operations/putv1salaryestimatesidrequest.md
+  - docs/models/operations/putv1salaryestimatesidrequestbody.md
+  - docs/models/operations/putv1salaryestimatesidresponse.md
   - docs/models/operations/putv1taxliabilitiesfinishrequest.md
   - docs/models/operations/putv1taxliabilitiesfinishresponse.md
   - docs/models/operations/putv1taxliabilitiesrequest.md
@@ -1367,6 +1401,7 @@ generatedFiles:
   - docs/sdks/payschedules/README.md
   - docs/sdks/recoverycases/README.md
   - docs/sdks/reports/README.md
+  - docs/sdks/salaryestimates/README.md
   - docs/sdks/signatories/README.md
   - docs/sdks/suspensions/README.md
   - docs/sdks/taxrequirements/README.md
@@ -1615,6 +1650,11 @@ generatedFiles:
   - src/funcs/reportsGetReportsRequestUuid.ts
   - src/funcs/reportsGetTemplate.ts
   - src/funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.ts
+  - src/funcs/salaryEstimatesGetV1SalaryEstimatesId.ts
+  - src/funcs/salaryEstimatesGetV1SalaryEstimatesOccupations.ts
+  - src/funcs/salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates.ts
+  - src/funcs/salaryEstimatesPostV1SalaryEstimatesUuidAccept.ts
+  - src/funcs/salaryEstimatesPutV1SalaryEstimatesId.ts
   - src/funcs/signatoriesCreate.ts
   - src/funcs/signatoriesDelete.ts
   - src/funcs/signatoriesInvite.ts
@@ -1669,6 +1709,7 @@ generatedFiles:
   - src/models/components/authentication.ts
   - src/models/components/benefitsummary.ts
   - src/models/components/benefittyperequirements.ts
+  - src/models/components/blsoccupation.ts
   - src/models/components/childsupportdata.ts
   - src/models/components/company.ts
   - src/models/components/companyaddress.ts
@@ -1780,6 +1821,7 @@ generatedFiles:
   - src/models/components/payrollpayperiodtype.ts
   - src/models/components/payrollpayrollstatusmetatype.ts
   - src/models/components/payrollprepared.ts
+  - src/models/components/payrollpreparesortby.ts
   - src/models/components/payrollprocessingrequest.ts
   - src/models/components/payrollreceipt.ts
   - src/models/components/payrollreversal.ts
@@ -1808,6 +1850,7 @@ generatedFiles:
   - src/models/components/rehirebody.ts
   - src/models/components/report.ts
   - src/models/components/reporttemplate.ts
+  - src/models/components/salaryestimate.ts
   - src/models/components/security.ts
   - src/models/components/showemployees.ts
   - src/models/components/signatory.ts
@@ -1979,6 +2022,8 @@ generatedFiles:
   - src/models/operations/getv1locationslocationuuidminimumwages.ts
   - src/models/operations/getv1paymentreceiptspayrollspayrolluuid.ts
   - src/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.ts
+  - src/models/operations/getv1salaryestimatesid.ts
+  - src/models/operations/getv1salaryestimatesoccupations.ts
   - src/models/operations/getv1taxliabilities.ts
   - src/models/operations/getv1tokeninfo.ts
   - src/models/operations/getv1webhookshealthcheck.ts
@@ -2026,6 +2071,7 @@ generatedFiles:
   - src/models/operations/postv1employeesemployeeidgarnishments.ts
   - src/models/operations/postv1employeesemployeeidhomeaddresses.ts
   - src/models/operations/postv1employeesemployeeidrehire.ts
+  - src/models/operations/postv1employeesemployeeidsalaryestimates.ts
   - src/models/operations/postv1employeesemployeeidterminations.ts
   - src/models/operations/postv1employeesemployeeidworkaddresses.ts
   - src/models/operations/postv1externalpayroll.ts
@@ -2035,6 +2081,7 @@ generatedFiles:
   - src/models/operations/postv1payrollspayrollidcalculateaccruingtimeoffhours.ts
   - src/models/operations/postv1payrollspayrolluuidgenerateddocumentsprintablepayrollchecks.ts
   - src/models/operations/postv1plaidprocessortoken.ts
+  - src/models/operations/postv1salaryestimatesuuidaccept.ts
   - src/models/operations/postv1sandboxgenerate1099.ts
   - src/models/operations/postv1sandboxgeneratew2.ts
   - src/models/operations/postv1webhooksubscription.ts
@@ -2090,6 +2137,7 @@ generatedFiles:
   - src/models/operations/putv1jobsjobid.ts
   - src/models/operations/putv1locationslocationid.ts
   - src/models/operations/putv1partnermanagedcompaniescompanyuuidmigrate.ts
+  - src/models/operations/putv1salaryestimatesid.ts
   - src/models/operations/putv1taxliabilities.ts
   - src/models/operations/putv1taxliabilitiesfinish.ts
   - src/models/operations/putv1terminationsemployeeid.ts
@@ -2339,6 +2387,11 @@ generatedFiles:
   - src/react-query/reportsGetReportsRequestUuid.ts
   - src/react-query/reportsGetTemplate.ts
   - src/react-query/reportsPostPayrollsPayrollUuidReportsGeneralLedger.ts
+  - src/react-query/salaryEstimatesGetV1SalaryEstimatesId.ts
+  - src/react-query/salaryEstimatesGetV1SalaryEstimatesOccupations.ts
+  - src/react-query/salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates.ts
+  - src/react-query/salaryEstimatesPostV1SalaryEstimatesUuidAccept.ts
+  - src/react-query/salaryEstimatesPutV1SalaryEstimatesId.ts
   - src/react-query/signatoriesCreate.ts
   - src/react-query/signatoriesDelete.ts
   - src/react-query/signatoriesInvite.ts
@@ -2412,6 +2465,7 @@ generatedFiles:
   - src/sdk/payschedules.ts
   - src/sdk/recoverycases.ts
   - src/sdk/reports.ts
+  - src/sdk/salaryestimates.ts
   - src/sdk/sdk.ts
   - src/sdk/signatories.ts
   - src/sdk/suspensions.ts
@@ -7246,7 +7300,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"key": "wc_pending_approval", "message": "Worker's compensation policy needs to be accepted."}, {"key": "eftps_in_error", "message": "We could not make payments to the Electronic Federal Tax Payment System."}, {"key": "geocode_error", "message": "Company or employee address could not be verified. Please ensure all addresses are valid."}, {"key": "geocode_needed", "message": "Company or employee address verification is missing. Please ensure all addresses are entered correctly."}, {"key": "pay_schedule_setup_not_complete", "message": "Some employees don’t have a pay schedule set up yet. Please complete this step to run payroll."}, {"key": "invalid_signatory", "message": "A signatory who is authorized to sign documents on behalf of your company is required. Please ensure their identity verification is successful."}, {"key": "suspended", "message": "Company is suspended and cannot run payroll."}, {"key": "soft_suspended", "message": "Company is placed in a 'soft' suspension state and requires missing/incorrect information to be corrected."}, {"key": "pending_payroll_review", "message": "Payroll is blocked. We are reviewing payroll information in your account. Please contact support if you believe this is an error."}, {"key": "pending_recovery_case", "message": "Payroll is blocked due to an open recovery case. Please contact support if you believe this is an error."}, {"key": "pending_information_request", "message": "Payroll is blocked due to an open information request. Please contact support if you believe this is an error."}, {"key": "needs_approval", "message": "Company needs to be approved to run payroll."}, {"key": "missing_addresses", "message": "Company must add addresses in order to run payroll."}, {"key": "missing_federal_tax_setup", "message": "Company must complete federal tax setup in order to run payroll."}, {"key": "missing_industry_selection", "message": "Company must complete industry selection in order to run payroll."}, {"key": "missing_bank_info", "message": "Company must have a bank account in order to run payroll."}, {"key": "missing_employee_setup", "message": "Company must add employees in order to run payroll."}, {"key": "missing_state_tax_setup", "message": "Company must complete state tax setup in order to run payroll."}, {"key": "missing_pay_schedule", "message": "Company must have a pay schedule in order to run payroll."}, {"key": "missing_forms", "message": "Company forms must be signed in order to run payroll."}, {"key": "missing_bank_verification", "message": "Company bank account must be verified in order to run payroll."}, {"key": "missing_signatory", "message": "Company must have a verified signatory in order to run payroll."}]
+          application/json: [{"key": "eftps_in_error", "message": "We could not make payments to the Electronic Federal Tax Payment System."}, {"key": "geocode_error", "message": "Company or employee address could not be verified. Please ensure all addresses are valid."}, {"key": "geocode_needed", "message": "Company or employee address verification is missing. Please ensure all addresses are entered correctly."}, {"key": "pay_schedule_setup_not_complete", "message": "Some employees don’t have a pay schedule set up yet. Please complete this step to run payroll."}, {"key": "invalid_signatory", "message": "A signatory who is authorized to sign documents on behalf of your company is required. Please ensure their identity verification is successful."}, {"key": "suspended", "message": "Company is suspended and cannot run payroll."}, {"key": "soft_suspended", "message": "Company is placed in a 'soft' suspension state and requires missing/incorrect information to be corrected."}, {"key": "pending_payroll_review", "message": "Payroll is blocked. We are reviewing payroll information in your account. Please contact support if you believe this is an error."}, {"key": "pending_recovery_case", "message": "Payroll is blocked due to an open recovery case. Please contact support if you believe this is an error."}, {"key": "pending_information_request", "message": "Payroll is blocked due to an open information request. Please contact support if you believe this is an error."}, {"key": "needs_approval", "message": "Company needs to be approved to run payroll."}, {"key": "missing_addresses", "message": "Company must add addresses in order to run payroll."}, {"key": "missing_federal_tax_setup", "message": "Company must complete federal tax setup in order to run payroll."}, {"key": "missing_industry_selection", "message": "Company must complete industry selection in order to run payroll."}, {"key": "missing_bank_info", "message": "Company must have a bank account in order to run payroll."}, {"key": "missing_employee_setup", "message": "Company must add employees in order to run payroll."}, {"key": "missing_state_tax_setup", "message": "Company must complete state tax setup in order to run payroll."}, {"key": "missing_pay_schedule", "message": "Company must have a pay schedule in order to run payroll."}, {"key": "missing_forms", "message": "Company forms must be signed in order to run payroll."}, {"key": "missing_bank_verification", "message": "Company bank account must be verified in order to run payroll."}, {"key": "missing_signatory", "message": "Company must have a verified signatory in order to run payroll."}]
   post-companies-payroll-skip-company_uuid:
     Example:
       parameters:
@@ -9922,6 +9976,72 @@ examples:
       responses:
         "200":
           application/json: {}
+  post-v1-employees-employee_id-salary_estimates:
+    speakeasy-default-post-v1-employees-employee-id-salary-estimates:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"annual_net_revenue": 500000, "zip_code": "94107", "occupations": []}
+      responses:
+        "201":
+          application/json: {"uuid": "b598a3c7-0723-47a6-8b19-87db25374cdf", "employee_uuid": "<id>", "annual_net_revenue": "<value>", "zip_code": "96291", "created_at": "2023-10-16T09:54:22.423Z", "updated_at": "2023-03-05T20:58:56.689Z", "occupations": []}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  get-v1-salary_estimates-id:
+    speakeasy-default-get-v1-salary-estimates-id:
+      parameters:
+        path:
+          uuid: "3c9d1f7e-adda-44fb-ba0e-7e5843661514"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {"uuid": "632f1e66-036f-4581-b3e8-8d4b1b430f71", "employee_uuid": "<id>", "annual_net_revenue": "<value>", "zip_code": "17959-3505", "created_at": "2025-04-15T11:03:53.382Z", "updated_at": "2024-08-21T17:29:15.878Z", "occupations": []}
+        "404":
+          application/json: {"errors": []}
+  put-v1-salary_estimates-id:
+    speakeasy-default-put-v1-salary-estimates-id:
+      parameters:
+        path:
+          uuid: "969f5dac-57dd-4091-b195-2546171d3a76"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"annual_net_revenue": 600000, "zip_code": "94107", "occupations": [{"code": "151252", "experience_level": "expert", "time_percentage": "0.6", "primary": true}]}
+      responses:
+        "200":
+          application/json: {"uuid": "036222cd-57e6-4f9f-b8b4-0da3610fb9b0", "employee_uuid": "<id>", "annual_net_revenue": "<value>", "zip_code": "99537-5737", "created_at": "2024-01-13T09:25:43.529Z", "updated_at": "2023-11-30T08:47:23.683Z", "occupations": [{"code": "<value>", "experience_level": "intermediate", "time_percentage": "<value>"}]}
+        "404":
+          application/json: {"errors": []}
+  post-v1-salary_estimates-uuid-accept:
+    speakeasy-default-post-v1-salary-estimates-uuid-accept:
+      parameters:
+        path:
+          uuid: "22c00075-fa4c-4bdc-91e3-f72ab8ec7a1d"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"employee_job_uuid": "7f5d3d93-6d6f-48c0-9f4e-cd12c2d3e4b2"}
+      responses:
+        "200":
+          application/json: {"uuid": "c9c56b3f-9549-4cd6-bedf-53d6cddfed28", "employee_uuid": null, "annual_net_revenue": "<value>", "zip_code": null, "created_at": "2025-12-04T13:25:53.282Z", "updated_at": "2024-02-04T16:04:31.441Z", "occupations": [{"code": "<value>", "experience_level": "expert", "time_percentage": "<value>"}]}
+        "404":
+          application/json: {"errors": []}
+  get-v1-salary_estimates-occupations:
+    speakeasy-default-get-v1-salary-estimates-occupations:
+      parameters:
+        query:
+          search: "software"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"code": "15-1252", "title": "Software Developers", "description": "Research, design, and develop computer and network software or specialized utility programs."}]
+        "422":
+          application/json: {"errors": []}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `gustoembedded.flows.create()`: \n  *  `request.requestBody.options` **Added**\n* `gustoembedded.payrolls.prepare()`:  `request` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes Detected:\n* `gustoembedded.payrolls.createOffCycle()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.get()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.update()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.prepare()`: \n  *  `request.sortBy` **Added**\n  *  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.salaryEstimates.postV1EmployeesEmployeeIdSalaryEstimates()`: **Added**\n* `gustoembedded.salaryEstimates.getV1SalaryEstimatesId()`: **Added**\n* `gustoembedded.salaryEstimates.putV1SalaryEstimatesId()`: **Added**\n* `gustoembedded.salaryEstimates.postV1SalaryEstimatesUuidAccept()`: **Added**\n* `gustoembedded.salaryEstimates.getV1SalaryEstimatesOccupations()`: **Added**\n"

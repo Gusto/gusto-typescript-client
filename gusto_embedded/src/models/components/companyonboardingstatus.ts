@@ -61,7 +61,7 @@ export type OnboardingStep = {
    */
   completed?: boolean | undefined;
   /**
-   * The ISO 8601 timestamp indicating when the onboarding step was completed. Returns null for incomplete steps.
+   * The ISO 8601 timestamp indicating when the onboarding step was completed.
    */
   completedAt?: string | null | undefined;
   /**
