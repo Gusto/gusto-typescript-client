@@ -19,6 +19,11 @@ import {
   PayrollPrepared$outboundSchema,
 } from "../components/payrollprepared.js";
 import {
+  PayrollPrepareSortBy,
+  PayrollPrepareSortBy$inboundSchema,
+  PayrollPrepareSortBy$outboundSchema,
+} from "../components/payrollpreparesortby.js";
+import {
   VersionHeader,
   VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
@@ -49,6 +54,10 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
+  /**
+   * Sort employee compenstations by name. Options: first_name, last_name
+   */
+  sortBy?: PayrollPrepareSortBy | undefined;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
@@ -152,6 +161,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchem
     payroll_id: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
+    sort_by: PayrollPrepareSortBy$inboundSchema.optional(),
     "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema
@@ -160,6 +170,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchem
     return remap$(v, {
       "company_id": "companyId",
       "payroll_id": "payrollId",
+      "sort_by": "sortBy",
       "X-Gusto-API-Version": "xGustoAPIVersion",
       "RequestBody": "requestBody",
     });
@@ -171,6 +182,7 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$Outbound = {
   payroll_id: string;
   page?: number | undefined;
   per?: number | undefined;
+  sort_by?: string | undefined;
   "X-Gusto-API-Version": string;
   RequestBody?:
     | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound
@@ -188,6 +200,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
     payrollId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
+    sortBy: PayrollPrepareSortBy$outboundSchema.optional(),
     xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema
@@ -196,6 +209,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
     return remap$(v, {
       companyId: "company_id",
       payrollId: "payroll_id",
+      sortBy: "sort_by",
       xGustoAPIVersion: "X-Gusto-API-Version",
       requestBody: "RequestBody",
     });

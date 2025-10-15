@@ -48,6 +48,7 @@ import { Payrolls } from "./payrolls.js";
 import { PaySchedules } from "./payschedules.js";
 import { RecoveryCases } from "./recoverycases.js";
 import { Reports } from "./reports.js";
+import { SalaryEstimates } from "./salaryestimates.js";
 import { Signatories } from "./signatories.js";
 import { TaxRequirements } from "./taxrequirements.js";
 import { TimeOffPolicies } from "./timeoffpolicies.js";
@@ -323,5 +324,10 @@ export class GustoEmbedded extends ClientSDK {
   private _wireInRequests?: WireInRequests;
   get wireInRequests(): WireInRequests {
     return (this._wireInRequests ??= new WireInRequests(this._options));
+  }
+
+  private _salaryEstimates?: SalaryEstimates;
+  get salaryEstimates(): SalaryEstimates {
+    return (this._salaryEstimates ??= new SalaryEstimates(this._options));
   }
 }

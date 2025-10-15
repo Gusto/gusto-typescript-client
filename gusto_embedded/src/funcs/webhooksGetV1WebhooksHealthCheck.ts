@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * Get the webhooks health status
  *
  * @remarks
- * Returns the health status of our webhooks system based on the last ten minutes of activity.
+ * Returns the health status (`healthy`, `unhealthy`, or `unknown`) of the webhooks system based on the last ten minutes of activity.
  *
  * scope: `webhook_subscriptions:read`
  */
