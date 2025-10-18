@@ -27,7 +27,7 @@ export type MetadataWithOneEntity = {
   validUpTo?: string | null | undefined;
   key?: string | null | undefined;
   state?: string | null | undefined;
-  additionalProperties?: { [k: string]: any };
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -78,7 +78,7 @@ export const MetadataWithOneEntity$outboundSchema: z.ZodType<
   validUpTo: z.nullable(z.string()).optional(),
   key: z.nullable(z.string()).optional(),
   state: z.nullable(z.string()).optional(),
-  additionalProperties: z.record(z.any()),
+  additionalProperties: z.record(z.any()).optional(),
 }).transform((v) => {
   return {
     ...v.additionalProperties,
