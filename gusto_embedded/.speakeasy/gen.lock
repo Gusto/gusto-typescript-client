@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: e8680b10cf3a909fee62a21fc95b6140
+  docChecksum: d8c0a90da7fd5fad324c723bb323f652
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 0.8.1
-  configChecksum: 149add8725a9fdc1bce6b5db327e770e
+  speakeasyVersion: 1.637.0
+  generationVersion: 2.727.4
+  releaseVersion: 0.9.0
+  configChecksum: c121aa960020d5f7a1fc41317a3ca7a8
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -14,9 +14,9 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    additionalProperties: 0.1.1
+    additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.21.26
+    core: 3.22.0
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -247,7 +247,6 @@ generatedFiles:
   - docs/models/components/federaltaxdetails.md
   - docs/models/components/federaltaxdetailsstatus.md
   - docs/models/components/fields.md
-  - docs/models/components/fiftyth.md
   - docs/models/components/fipscodes.md
   - docs/models/components/fixed.md
   - docs/models/components/fixedcompensations.md
@@ -303,7 +302,6 @@ generatedFiles:
   - docs/models/components/mlkday.md
   - docs/models/components/name.md
   - docs/models/components/newyearsday.md
-  - docs/models/components/ninetyth.md
   - docs/models/components/notification.md
   - docs/models/components/notificationentitytype.md
   - docs/models/components/notificationstatus.md
@@ -418,11 +416,9 @@ generatedFiles:
   - docs/models/components/requirements.md
   - docs/models/components/resources.md
   - docs/models/components/resourcetype.md
-  - docs/models/components/salaries.md
   - docs/models/components/salaryestimate.md
   - docs/models/components/section.md
   - docs/models/components/security.md
-  - docs/models/components/seventyfiveth.md
   - docs/models/components/showemployees.md
   - docs/models/components/signatory.md
   - docs/models/components/sortorder.md
@@ -447,7 +443,6 @@ generatedFiles:
   - docs/models/components/taxrequirementsstate.md
   - docs/models/components/taxrequirementvalue.md
   - docs/models/components/taxsuggestions.md
-  - docs/models/components/tenth.md
   - docs/models/components/termination.md
   - docs/models/components/thanksgiving.md
   - docs/models/components/tier.md
@@ -458,7 +453,6 @@ generatedFiles:
   - docs/models/components/timeofftype.md
   - docs/models/components/total.md
   - docs/models/components/totals.md
-  - docs/models/components/twentyfiveth.md
   - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/unblockoptions.md
@@ -10044,4 +10038,9 @@ examples:
           application/json: {"errors": []}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `gustoembedded.payrolls.createOffCycle()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.get()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.update()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.prepare()`: \n  *  `request.sortBy` **Added**\n  *  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.salaryEstimates.postV1EmployeesEmployeeIdSalaryEstimates()`: **Added**\n* `gustoembedded.salaryEstimates.getV1SalaryEstimatesId()`: **Added**\n* `gustoembedded.salaryEstimates.putV1SalaryEstimatesId()`: **Added**\n* `gustoembedded.salaryEstimates.postV1SalaryEstimatesUuidAccept()`: **Added**\n* `gustoembedded.salaryEstimates.getV1SalaryEstimatesOccupations()`: **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `gustoembedded.salaryEstimates.postV1EmployeesEmployeeIdSalaryEstimates()`:  `response.occupations.[].salaries` **Removed** **Breaking** :warning:
+  * `gustoembedded.salaryEstimates.getV1SalaryEstimatesId()`:  `response.occupations.[].salaries` **Removed** **Breaking** :warning:
+  * `gustoembedded.salaryEstimates.putV1SalaryEstimatesId()`:  `response.occupations.[].salaries` **Removed** **Breaking** :warning:
+  * `gustoembedded.salaryEstimates.postV1SalaryEstimatesUuidAccept()`:  `response.occupations.[].salaries` **Removed** **Breaking** :warning:

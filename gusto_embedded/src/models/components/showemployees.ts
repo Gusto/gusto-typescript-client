@@ -219,7 +219,7 @@ export type ShowEmployees = {
   applicableTaxIds?: Array<number> | undefined;
   currentHomeAddress?: EmployeeHomeAddress | undefined;
   allHomeAddresses?: Array<EmployeeHomeAddress> | undefined;
-  additionalProperties?: { [k: string]: any };
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -517,7 +517,7 @@ export const ShowEmployees$outboundSchema: z.ZodType<
   applicableTaxIds: z.array(z.number()).optional(),
   currentHomeAddress: EmployeeHomeAddress$outboundSchema.optional(),
   allHomeAddresses: z.array(EmployeeHomeAddress$outboundSchema).optional(),
-  additionalProperties: z.record(z.any()),
+  additionalProperties: z.record(z.any()).optional(),
 }).transform((v) => {
   return {
     ...v.additionalProperties,
