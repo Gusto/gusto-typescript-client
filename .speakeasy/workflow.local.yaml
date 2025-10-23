@@ -1,7 +1,7 @@
 sources:
   GustoEmbedded-local:
     inputs:
-      - location: ../Gusto-Partner-API/generated/embedded/api.v2024-04-01.embedded.yaml
+      - location: ../Gusto-Partner-API/generated/embedded/api.v2025-06-15.embedded.yaml
     overlays:
       - location: ../Gusto-Partner-API/.speakeasy/speakeasy-modifications-overlay.yaml
     registry:
