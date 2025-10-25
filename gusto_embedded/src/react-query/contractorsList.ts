@@ -16,6 +16,7 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsList } from "../funcs/contractorsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { ContractorsSortBy } from "../models/components/contractorssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1CompaniesCompanyUuidContractorsRequest,
@@ -99,6 +100,7 @@ export function setContractorsListData(
       page?: number | undefined;
       per?: number | undefined;
       searchTerm?: string | undefined;
+      sortBy?: ContractorsSortBy | undefined;
       xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
@@ -118,6 +120,7 @@ export function invalidateContractorsList(
         page?: number | undefined;
         per?: number | undefined;
         searchTerm?: string | undefined;
+        sortBy?: ContractorsSortBy | undefined;
         xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
@@ -153,6 +156,7 @@ export function buildContractorsListQuery(
       page: request.page,
       per: request.per,
       searchTerm: request.searchTerm,
+      sortBy: request.sortBy,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function contractorsListQueryFn(
@@ -179,6 +183,7 @@ export function queryKeyContractorsList(
     page?: number | undefined;
     per?: number | undefined;
     searchTerm?: string | undefined;
+    sortBy?: ContractorsSortBy | undefined;
     xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {

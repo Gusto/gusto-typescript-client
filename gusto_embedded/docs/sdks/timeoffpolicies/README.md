@@ -264,6 +264,7 @@ async function run() {
       carryoverLimitHours: "200.0",
       maxAccrualHoursPerYear: "120.0",
       maxHours: "240.0",
+      version: "<value>",
     },
   });
 
@@ -300,6 +301,7 @@ async function run() {
       carryoverLimitHours: "200.0",
       maxAccrualHoursPerYear: "120.0",
       maxHours: "240.0",
+      version: "<value>",
     },
   });
   if (res.ok) {

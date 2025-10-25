@@ -7,7 +7,9 @@ import { PutTimeOffPoliciesTimeOffPolicyUuidRequest } from "@gusto/embedded-api/
 
 let value: PutTimeOffPoliciesTimeOffPolicyUuidRequest = {
   timeOffPolicyUuid: "<id>",
-  requestBody: {},
+  requestBody: {
+    version: "<value>",
+  },
 };
 ```
 
