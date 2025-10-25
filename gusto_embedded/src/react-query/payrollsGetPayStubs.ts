@@ -99,6 +99,8 @@ export function setPayrollsGetPayStubsData(
       xGustoAPIVersion?:
         | GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion
         | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
     },
   ],
   data: PayrollsGetPayStubsQueryData,
@@ -117,6 +119,8 @@ export function invalidatePayrollsGetPayStubs(
         xGustoAPIVersion?:
           | GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion
           | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
       },
     ]
   >,
@@ -156,6 +160,8 @@ export function buildPayrollsGetPayStubsQuery(
   return {
     queryKey: queryKeyPayrollsGetPayStubs(request.employeeId, {
       xGustoAPIVersion: request.xGustoAPIVersion,
+      page: request.page,
+      per: request.per,
     }),
     queryFn: async function payrollsGetPayStubsQueryFn(
       ctx,
@@ -181,6 +187,8 @@ export function queryKeyPayrollsGetPayStubs(
     xGustoAPIVersion?:
       | GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion
       | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
   },
 ): QueryKey {
   return [

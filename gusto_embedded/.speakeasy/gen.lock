@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: e8680b10cf3a909fee62a21fc95b6140
+  docChecksum: 226629049cf0b4c5dde3b1eb12ef019d
   docVersion: "2024-04-01"
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 0.8.1
-  configChecksum: 149add8725a9fdc1bce6b5db327e770e
+  speakeasyVersion: 1.639.3
+  generationVersion: 2.730.5
+  releaseVersion: 0.9.0
+  configChecksum: 26d66bc38585691978cfbee1c0b30a35
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -14,9 +14,9 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    additionalProperties: 0.1.1
+    additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.21.26
+    core: 3.24.1
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -104,6 +104,7 @@ generatedFiles:
   - docs/models/components/companycontributionannualmaximum.md
   - docs/models/components/companycustomfield.md
   - docs/models/components/companycustomfieldlist.md
+  - docs/models/components/companyformssortby.md
   - docs/models/components/companyhomeaddress.md
   - docs/models/components/companyonboardingstatus.md
   - docs/models/components/companypaidtimeoff.md
@@ -161,6 +162,7 @@ generatedFiles:
   - docs/models/components/contractorpaymentsummarycontractorpayments.md
   - docs/models/components/contractorpaymentwagetype.md
   - docs/models/components/contractors.md
+  - docs/models/components/contractorssortby.md
   - docs/models/components/contractortype.md
   - docs/models/components/contribution.md
   - docs/models/components/contributionexclusion.md
@@ -218,6 +220,7 @@ generatedFiles:
   - docs/models/components/employeepaymentmethodsplitby.md
   - docs/models/components/employeepaymentmethodtype.md
   - docs/models/components/employeepaystubslist.md
+  - docs/models/components/employeepaystubslistpaymentmethod.md
   - docs/models/components/employees.md
   - docs/models/components/employeestatetaxanswer.md
   - docs/models/components/employeestatetaxes.md
@@ -247,7 +250,6 @@ generatedFiles:
   - docs/models/components/federaltaxdetails.md
   - docs/models/components/federaltaxdetailsstatus.md
   - docs/models/components/fields.md
-  - docs/models/components/fiftyth.md
   - docs/models/components/fipscodes.md
   - docs/models/components/fixed.md
   - docs/models/components/fixedcompensations.md
@@ -303,7 +305,6 @@ generatedFiles:
   - docs/models/components/mlkday.md
   - docs/models/components/name.md
   - docs/models/components/newyearsday.md
-  - docs/models/components/ninetyth.md
   - docs/models/components/notification.md
   - docs/models/components/notificationentitytype.md
   - docs/models/components/notificationstatus.md
@@ -364,6 +365,7 @@ generatedFiles:
   - docs/models/components/payrollshowhourlycompensations.md
   - docs/models/components/payrollshowpaidtimeoff.md
   - docs/models/components/payrollshowpaymentmethod.md
+  - docs/models/components/payrollshowreimbursements.md
   - docs/models/components/payrollshowtaxes.md
   - docs/models/components/payrollsubmissionblockerstype.md
   - docs/models/components/payrollsubmissionblockerstypemetadata.md
@@ -412,17 +414,16 @@ generatedFiles:
   - docs/models/components/rehire.md
   - docs/models/components/rehirebody.md
   - docs/models/components/rehireemploymentstatus.md
+  - docs/models/components/reimbursements.md
   - docs/models/components/report.md
   - docs/models/components/reporttemplate.md
   - docs/models/components/requiredattributes.md
   - docs/models/components/requirements.md
   - docs/models/components/resources.md
   - docs/models/components/resourcetype.md
-  - docs/models/components/salaries.md
   - docs/models/components/salaryestimate.md
   - docs/models/components/section.md
   - docs/models/components/security.md
-  - docs/models/components/seventyfiveth.md
   - docs/models/components/showemployees.md
   - docs/models/components/signatory.md
   - docs/models/components/sortorder.md
@@ -447,7 +448,6 @@ generatedFiles:
   - docs/models/components/taxrequirementsstate.md
   - docs/models/components/taxrequirementvalue.md
   - docs/models/components/taxsuggestions.md
-  - docs/models/components/tenth.md
   - docs/models/components/termination.md
   - docs/models/components/thanksgiving.md
   - docs/models/components/tier.md
@@ -458,7 +458,6 @@ generatedFiles:
   - docs/models/components/timeofftype.md
   - docs/models/components/total.md
   - docs/models/components/totals.md
-  - docs/models/components/twentyfiveth.md
   - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/unblockoptions.md
@@ -555,6 +554,9 @@ generatedFiles:
   - docs/models/operations/deletev1homeaddresseshomeaddressuuidresponse.md
   - docs/models/operations/deletev1jobsjobidrequest.md
   - docs/models/operations/deletev1jobsjobidresponse.md
+  - docs/models/operations/deletev1recurringreimbursementsheaderxgustoapiversion.md
+  - docs/models/operations/deletev1recurringreimbursementsrequest.md
+  - docs/models/operations/deletev1recurringreimbursementsresponse.md
   - docs/models/operations/deletev1webhooksubscriptionuuidrequest.md
   - docs/models/operations/deletev1webhooksubscriptionuuidresponse.md
   - docs/models/operations/deletev1webhooksubscriptionuuidsecurity.md
@@ -797,6 +799,10 @@ generatedFiles:
   - docs/models/operations/getv1employeesemployeeidonboardingstatusresponse.md
   - docs/models/operations/getv1employeesemployeeidpaymentmethodrequest.md
   - docs/models/operations/getv1employeesemployeeidpaymentmethodresponse.md
+  - docs/models/operations/getv1employeesemployeeidrecurringreimbursementsheaderxgustoapiversion.md
+  - docs/models/operations/getv1employeesemployeeidrecurringreimbursementsrequest.md
+  - docs/models/operations/getv1employeesemployeeidrecurringreimbursementsresponse.md
+  - docs/models/operations/getv1employeesemployeeidrecurringreimbursementsresponsebody.md
   - docs/models/operations/getv1employeesemployeeidrehirerequest.md
   - docs/models/operations/getv1employeesemployeeidrehireresponse.md
   - docs/models/operations/getv1employeesemployeeidstatetaxesheaderxgustoapiversion.md
@@ -843,6 +849,10 @@ generatedFiles:
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubheaderxgustoapiversion.md
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubrequest.md
   - docs/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystubresponse.md
+  - docs/models/operations/getv1recurringreimbursementsheaderxgustoapiversion.md
+  - docs/models/operations/getv1recurringreimbursementsrequest.md
+  - docs/models/operations/getv1recurringreimbursementsresponse.md
+  - docs/models/operations/getv1recurringreimbursementsresponsebody.md
   - docs/models/operations/getv1salaryestimatesidheaderxgustoapiversion.md
   - docs/models/operations/getv1salaryestimatesidrequest.md
   - docs/models/operations/getv1salaryestimatesidresponse.md
@@ -1030,6 +1040,11 @@ generatedFiles:
   - docs/models/operations/postv1employeesemployeeidhomeaddressesrequest.md
   - docs/models/operations/postv1employeesemployeeidhomeaddressesrequestbody.md
   - docs/models/operations/postv1employeesemployeeidhomeaddressesresponse.md
+  - docs/models/operations/postv1employeesemployeeidrecurringreimbursementsheaderxgustoapiversion.md
+  - docs/models/operations/postv1employeesemployeeidrecurringreimbursementsrequest.md
+  - docs/models/operations/postv1employeesemployeeidrecurringreimbursementsrequestbody.md
+  - docs/models/operations/postv1employeesemployeeidrecurringreimbursementsresponse.md
+  - docs/models/operations/postv1employeesemployeeidrecurringreimbursementsresponsebody.md
   - docs/models/operations/postv1employeesemployeeidrehirerequest.md
   - docs/models/operations/postv1employeesemployeeidrehireresponse.md
   - docs/models/operations/postv1employeesemployeeidsalaryestimatesheaderxgustoapiversion.md
@@ -1277,6 +1292,11 @@ generatedFiles:
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigraterequestbody.md
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponse.md
   - docs/models/operations/putv1partnermanagedcompaniescompanyuuidmigrateresponsebody.md
+  - docs/models/operations/putv1recurringreimbursementsheaderxgustoapiversion.md
+  - docs/models/operations/putv1recurringreimbursementsrequest.md
+  - docs/models/operations/putv1recurringreimbursementsrequestbody.md
+  - docs/models/operations/putv1recurringreimbursementsresponse.md
+  - docs/models/operations/putv1recurringreimbursementsresponsebody.md
   - docs/models/operations/putv1salaryestimatesidexperiencelevel.md
   - docs/models/operations/putv1salaryestimatesidheaderxgustoapiversion.md
   - docs/models/operations/putv1salaryestimatesidoccupations.md
@@ -1400,6 +1420,7 @@ generatedFiles:
   - docs/sdks/payrolls/README.md
   - docs/sdks/payschedules/README.md
   - docs/sdks/recoverycases/README.md
+  - docs/sdks/reimbursements/README.md
   - docs/sdks/reports/README.md
   - docs/sdks/salaryestimates/README.md
   - docs/sdks/signatories/README.md
@@ -1646,6 +1667,11 @@ generatedFiles:
   - src/funcs/payrollsUpdate.ts
   - src/funcs/recoveryCasesGet.ts
   - src/funcs/recoveryCasesRedebit.ts
+  - src/funcs/reimbursementsDeleteV1RecurringReimbursements.ts
+  - src/funcs/reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.ts
+  - src/funcs/reimbursementsGetV1RecurringReimbursements.ts
+  - src/funcs/reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements.ts
+  - src/funcs/reimbursementsPutV1RecurringReimbursements.ts
   - src/funcs/reportsCreateCustom.ts
   - src/funcs/reportsGetReportsRequestUuid.ts
   - src/funcs/reportsGetTemplate.ts
@@ -1720,6 +1746,7 @@ generatedFiles:
   - src/models/components/companybenefitwithemployeebenefits.ts
   - src/models/components/companycustomfield.ts
   - src/models/components/companycustomfieldlist.ts
+  - src/models/components/companyformssortby.ts
   - src/models/components/companyonboardingstatus.ts
   - src/models/components/companysuspension.ts
   - src/models/components/compensation.ts
@@ -1739,6 +1766,7 @@ generatedFiles:
   - src/models/components/contractorpaymentreceipt.ts
   - src/models/components/contractorpaymentsummary.ts
   - src/models/components/contractorpaymentsummarybydates.ts
+  - src/models/components/contractorssortby.ts
   - src/models/components/contributionexclusion.ts
   - src/models/components/createreport.ts
   - src/models/components/customfieldtype.ts
@@ -1905,6 +1933,7 @@ generatedFiles:
   - src/models/operations/deletev1externalpayroll.ts
   - src/models/operations/deletev1homeaddresseshomeaddressuuid.ts
   - src/models/operations/deletev1jobsjobid.ts
+  - src/models/operations/deletev1recurringreimbursements.ts
   - src/models/operations/deletev1webhooksubscriptionuuid.ts
   - src/models/operations/deletev1workaddressesworkaddressuuid.ts
   - src/models/operations/getachtransactions.ts
@@ -2005,6 +2034,7 @@ generatedFiles:
   - src/models/operations/getv1employeesemployeeidjobs.ts
   - src/models/operations/getv1employeesemployeeidonboardingstatus.ts
   - src/models/operations/getv1employeesemployeeidpaymentmethod.ts
+  - src/models/operations/getv1employeesemployeeidrecurringreimbursements.ts
   - src/models/operations/getv1employeesemployeeidrehire.ts
   - src/models/operations/getv1employeesemployeeidstatetaxes.ts
   - src/models/operations/getv1employeesemployeeidterminations.ts
@@ -2022,6 +2052,7 @@ generatedFiles:
   - src/models/operations/getv1locationslocationuuidminimumwages.ts
   - src/models/operations/getv1paymentreceiptspayrollspayrolluuid.ts
   - src/models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.ts
+  - src/models/operations/getv1recurringreimbursements.ts
   - src/models/operations/getv1salaryestimatesid.ts
   - src/models/operations/getv1salaryestimatesoccupations.ts
   - src/models/operations/getv1taxliabilities.ts
@@ -2070,6 +2101,7 @@ generatedFiles:
   - src/models/operations/postv1employeesemployeeidemployeebenefits.ts
   - src/models/operations/postv1employeesemployeeidgarnishments.ts
   - src/models/operations/postv1employeesemployeeidhomeaddresses.ts
+  - src/models/operations/postv1employeesemployeeidrecurringreimbursements.ts
   - src/models/operations/postv1employeesemployeeidrehire.ts
   - src/models/operations/postv1employeesemployeeidsalaryestimates.ts
   - src/models/operations/postv1employeesemployeeidterminations.ts
@@ -2137,6 +2169,7 @@ generatedFiles:
   - src/models/operations/putv1jobsjobid.ts
   - src/models/operations/putv1locationslocationid.ts
   - src/models/operations/putv1partnermanagedcompaniescompanyuuidmigrate.ts
+  - src/models/operations/putv1recurringreimbursements.ts
   - src/models/operations/putv1salaryestimatesid.ts
   - src/models/operations/putv1taxliabilities.ts
   - src/models/operations/putv1taxliabilitiesfinish.ts
@@ -2383,6 +2416,11 @@ generatedFiles:
   - src/react-query/payrollsUpdate.ts
   - src/react-query/recoveryCasesGet.ts
   - src/react-query/recoveryCasesRedebit.ts
+  - src/react-query/reimbursementsDeleteV1RecurringReimbursements.ts
+  - src/react-query/reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.ts
+  - src/react-query/reimbursementsGetV1RecurringReimbursements.ts
+  - src/react-query/reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements.ts
+  - src/react-query/reimbursementsPutV1RecurringReimbursements.ts
   - src/react-query/reportsCreateCustom.ts
   - src/react-query/reportsGetReportsRequestUuid.ts
   - src/react-query/reportsGetTemplate.ts
@@ -2464,6 +2502,7 @@ generatedFiles:
   - src/sdk/payrolls.ts
   - src/sdk/payschedules.ts
   - src/sdk/recoverycases.ts
+  - src/sdk/reimbursements.ts
   - src/sdk/reports.ts
   - src/sdk/salaryestimates.ts
   - src/sdk/sdk.ts
@@ -6224,7 +6263,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "c9fc1ad3-c107-4e7b-aa21-2dd4b00a7a07", "company_uuid": "b7457fec-3b76-43bb-9c6e-69cca4688942", "wage_type": "Fixed", "is_active": false, "version": "63859768485e218ccf8a449bb60f14ed", "type": "Individual", "first_name": "Kory", "last_name": "Gottlieb", "middle_initial": "P", "business_name": null, "ein": null, "has_ein": false, "email": "keira.west@mckenzie.org", "start_date": "2022-01-01", "address": {"street_1": "621 Jast Row", "street_2": "Apt. 281", "city": "Coral Springs", "state": "FL", "zip": "33065", "country": "USA"}, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": true, "onboarding_status": "onboarding_completed", "has_ssn": true, "department_uuid": "1802465d-4f68-4865-920c-1307ab095f12"}, {"uuid": "183a86f4-a803-4b38-9357-cd9b78e2560c", "company_uuid": "afdd5d98-581b-4fc0-b988-706b7d23b2a5", "wage_type": "Fixed", "is_active": true, "version": "8aab307f1e8ed788697f8986346af559", "type": "Business", "first_name": null, "last_name": null, "middle_initial": null, "business_name": "Labadie-Stroman", "ein": "XX-XXX0001", "has_ein": true, "email": "jonatan@kerluke.info", "start_date": "2022-01-01", "address": {"street_1": "1625 Bednar Center", "street_2": "Apt. 480", "city": "Port Charlotte", "state": "FL", "zip": "33954", "country": "USA"}, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": true, "onboarding_status": "onboarding_completed", "has_ssn": false}, {"uuid": "ea1c2d65-b622-4899-bcb7-5cd0fe0232aa", "company_uuid": "281c763d-a2ba-4f51-b9e8-b1ed61576d62", "wage_type": "Fixed", "is_active": true, "version": "b48c46abfed1487b873b442334b3c4ff", "type": "Individual", "first_name": "Chanel", "last_name": "Boyle", "middle_initial": "X", "business_name": null, "ein": null, "has_ein": false, "email": "loyal@hettinger.biz", "address": {"street_1": "35913 Darrick Run", "street_2": "Apt. 913", "city": "Cypress", "state": "TX", "zip": "77433", "country": "USA"}, "hourly_rate": "0.00", "file_new_hire_report": true, "work_state": "TX", "onboarded": true, "onboarding_status": "onboarding_completed", "has_ssn": true}]
+          application/json: [{"uuid": "c9fc1ad3-c107-4e7b-aa21-2dd4b00a7a07", "company_uuid": "b7457fec-3b76-43bb-9c6e-69cca4688942", "wage_type": "Fixed", "is_active": false, "version": "63859768485e218ccf8a449bb60f14ed", "type": "Individual", "first_name": "Kory", "last_name": "Gottlieb", "middle_initial": "P", "business_name": null, "ein": null, "has_ein": false, "email": "keira.west@mckenzie.org", "start_date": "2022-01-01", "address": {"street_1": "621 Jast Row", "street_2": "Apt. 281", "city": "Coral Springs", "state": "FL", "zip": "33065", "country": "USA"}, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": true, "onboarding_status": "onboarding_completed", "has_ssn": true, "department": "Backup Dancer", "department_uuid": "1802465d-4f68-4865-920c-1307ab095f12"}, {"uuid": "183a86f4-a803-4b38-9357-cd9b78e2560c", "company_uuid": "afdd5d98-581b-4fc0-b988-706b7d23b2a5", "wage_type": "Fixed", "is_active": true, "version": "8aab307f1e8ed788697f8986346af559", "type": "Business", "first_name": null, "last_name": null, "middle_initial": null, "business_name": "Labadie-Stroman", "ein": "XX-XXX0001", "has_ein": true, "email": "jonatan@kerluke.info", "start_date": "2022-01-01", "address": {"street_1": "1625 Bednar Center", "street_2": "Apt. 480", "city": "Port Charlotte", "state": "FL", "zip": "33954", "country": "USA"}, "hourly_rate": "0.00", "file_new_hire_report": false, "work_state": null, "onboarded": true, "onboarding_status": "onboarding_completed", "has_ssn": false}, {"uuid": "ea1c2d65-b622-4899-bcb7-5cd0fe0232aa", "company_uuid": "281c763d-a2ba-4f51-b9e8-b1ed61576d62", "wage_type": "Fixed", "is_active": true, "version": "b48c46abfed1487b873b442334b3c4ff", "type": "Individual", "first_name": "Chanel", "last_name": "Boyle", "middle_initial": "X", "business_name": null, "ein": null, "has_ein": false, "email": "loyal@hettinger.biz", "address": {"street_1": "35913 Darrick Run", "street_2": "Apt. 913", "city": "Cypress", "state": "TX", "zip": "77433", "country": "USA"}, "hourly_rate": "0.00", "file_new_hire_report": true, "work_state": "TX", "onboarded": true, "onboarding_status": "onboarding_completed", "has_ssn": true}]
   get-v1-contractors-contractor_uuid:
     Individual Contractor:
       parameters:
@@ -7572,7 +7611,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}
+          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c", "balance": "80.0"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37", "balance": "60.0"}]}
     Hourly Policy:
       parameters:
         path:
@@ -7581,7 +7620,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}
+          application/json: {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4", "balance": "56.0"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8", "balance": "84.0"}]}
   put-time_off_policies-time_off_policy_uuid:
     example:
       parameters:
@@ -7590,7 +7629,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {"name": "Hourly Vacation Policy", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0"}
+        application/json: {"name": "Hourly Vacation Policy", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "version": "<value>"}
       responses:
         "200":
           application/json: {"uuid": "7ab84b34-487a-4d6d-a723-9d7b93561a65", "company_uuid": "<id>", "name": "<value>", "policy_type": "sick", "accrual_method": "<value>", "is_active": true, "employees": []}
@@ -7625,7 +7664,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {}
+        application/json: {"version": "<value>"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "base", "category": "payroll_blocker", "message": "Company must complete all onboarding requirements in order to run payroll.", "metadata": {"key": "needs_onboarding"}}]}
@@ -7636,7 +7675,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {}
+        application/json: {"version": "<value>"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "first_name", "category": "invalid_attribute_value", "message": "First name is required"}, {"error_key": "date_of_birth", "category": "invalid_attribute_value", "message": "Date of birth is not a valid date"}]}
@@ -7647,7 +7686,7 @@ examples:
         header:
           X-Gusto-API-Version: "2024-04-01"
       requestBody:
-        application/json: {}
+        application/json: {"version": "<value>"}
       responses:
         "422":
           application/json: {"errors": [{"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "72ae4617-daa9-4ed7-85e0-18ed5d0ee835"}, "errors": [{"error_key": "hours", "category": "invalid_attribute_value", "message": "Ella Fitzgerald is paid fixed wage and hours cannot be set on a contractor payment"}]}, {"error_key": "contractor_payments", "category": "nested_errors", "metadata": {"contractor_uuid": "2d7bf62c-babf-4a12-8292-340e2d9cab28"}, "errors": [{"error_key": "wage", "category": "invalid_attribute_value", "message": "Isaiah Berlin is paid hourly and wage cannot be set on a contractor payment"}]}]}
@@ -7660,7 +7699,7 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
       responses:
         "200":
-          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
+          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c", "balance": "80.0"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37", "balance": "60.0"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4", "balance": "56.0"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8", "balance": "84.0"}]}]
   post-companies-company_uuid-time_off_policies:
     Unlimited Policy:
       parameters:
@@ -10042,6 +10081,65 @@ examples:
           application/json: [{"code": "15-1252", "title": "Software Developers", "description": "Research, design, and develop computer and network software or specialized utility programs."}]
         "422":
           application/json: {"errors": []}
+  get-v1-employees-employee_id-recurring_reimbursements:
+    speakeasy-default-get-v1-employees-employee-id-recurring-reimbursements:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"uuid": "897ddfb9-d01f-46d5-a12f-643515816ebe", "employee_uuid": "<id>", "description": "atomize stiff keel", "amount": "667.29", "version": "<value>"}]
+        "404":
+          application/json: {"errors": []}
+  post-v1-employees-employee_id-recurring_reimbursements:
+    speakeasy-default-post-v1-employees-employee-id-recurring-reimbursements:
+      parameters:
+        path:
+          employee_id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"description": "as procrastinate produce provided gracefully huzzah likewise when", "amount": 2610.77}
+      responses:
+        "201":
+          application/json: {"uuid": "1cd7848e-26ee-46fa-bd94-dd5e5c9e7b13", "employee_uuid": "<id>", "description": "agreeable fray tense creaking fiercely by furthermore", "amount": "103.11", "version": "<value>"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  get-v1-recurring_reimbursements:
+    speakeasy-default-get-v1-recurring-reimbursements:
+      parameters:
+        path:
+          id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {"uuid": "85ac47b3-cfab-4c71-a3bb-94592cc07efe", "employee_uuid": "<id>", "description": "awkwardly fervently while aside weakly", "amount": "600.16", "version": "<value>"}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  put-v1-recurring_reimbursements:
+    speakeasy-default-put-v1-recurring-reimbursements:
+      parameters:
+        path:
+          id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4"}
+      responses:
+        "200":
+          application/json: {"uuid": "6d284604-28f3-4c8f-bb7b-3cb6b1f7fa47", "employee_uuid": "<id>", "description": "abaft including easily cruelly annually however hmph provided dandelion light", "amount": "171.94", "version": "<value>"}
+        "404":
+          application/json: {"errors": []}
+  delete-v1-recurring_reimbursements:
+    speakeasy-default-delete-v1-recurring-reimbursements:
+      parameters:
+        path:
+          id: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `gustoembedded.payrolls.createOffCycle()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.get()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.update()`:  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.payrolls.prepare()`: \n  *  `request.sortBy` **Added**\n  *  `response.employee_compensations.[]` **Changed** **Breaking** :warning:\n* `gustoembedded.salaryEstimates.postV1EmployeesEmployeeIdSalaryEstimates()`: **Added**\n* `gustoembedded.salaryEstimates.getV1SalaryEstimatesId()`: **Added**\n* `gustoembedded.salaryEstimates.putV1SalaryEstimatesId()`: **Added**\n* `gustoembedded.salaryEstimates.postV1SalaryEstimatesUuidAccept()`: **Added**\n* `gustoembedded.salaryEstimates.getV1SalaryEstimatesOccupations()`: **Added**\n"
+releaseNotes: "## Typescript SDK Changes Detected:\n* `gustoembedded.timeOffPolicies.update()`: \n  *  `request.requestBody.version` **Added** **Breaking** :warning:\n  *  `response.employees.[].balance` **Added**\n* `gustoembedded.salaryEstimates.postV1SalaryEstimatesUuidAccept()`:  `response.occupations.[].salaries` **Removed** **Breaking** :warning:\n* `gustoembedded.salaryEstimates.putV1SalaryEstimatesId()`: \n  *  `request.requestBody.annualNetRevenue` **Changed**\n  *  `response.occupations.[].salaries` **Removed** **Breaking** :warning:\n* `gustoembedded.salaryEstimates.getV1SalaryEstimatesId()`:  `response.occupations.[].salaries` **Removed** **Breaking** :warning:\n* `gustoembedded.salaryEstimates.postV1EmployeesEmployeeIdSalaryEstimates()`: \n  *  `request.requestBody.annualNetRevenue` **Changed**\n  *  `response.occupations.[].salaries` **Removed** **Breaking** :warning:\n* `gustoembedded.payrolls.prepare()`:  `response.employee_compensations.[].reimbursements` **Added**\n* `gustoembedded.timeOffPolicies.getAll()`:  `response.[].employees.[].balance` **Added**\n* `gustoembedded.contractors.get()`:  `response` **Changed**\n* `gustoembedded.contractors.update()`:  `response` **Changed**\n* `gustoembedded.payrolls.createOffCycle()`:  `response.employee_compensations.[].reimbursements` **Added**\n* `gustoembedded.payrolls.get()`:  `response.employee_compensations.[].reimbursements` **Added**\n* `gustoembedded.payrolls.update()`:  `response.employee_compensations.[].reimbursements` **Added**\n* `gustoembedded.reimbursements.getV1EmployeesEmployeeIdRecurringReimbursements()`: **Added**\n* `gustoembedded.payrolls.getPayStubs()`: \n  *  `request` **Changed**\n  *  `response.[].paymentMethod` **Added**\n* `gustoembedded.timeOffPolicies.get()`:  `response.employees.[].balance` **Added**\n* `gustoembedded.contractors.create()`:  `response` **Changed**\n* `gustoembedded.contractors.list()`: \n  *  `request.sortBy` **Added**\n  *  `response.[]` **Changed**\n* `gustoembedded.timeOffPolicies.create()`:  `response.employees.[].balance` **Added**\n* `gustoembedded.timeOffPolicies.addEmployees()`:  `response.employees.[].balance` **Added**\n* `gustoembedded.timeOffPolicies.removeEmployees()`:  `response.employees.[].balance` **Added**\n* `gustoembedded.timeOffPolicies.updateBalance()`:  `response.employees.[].balance` **Added**\n* `gustoembedded.timeOffPolicies.deactivate()`:  `response.employees.[].balance` **Added**\n* `gustoembedded.companyForms.getAll()`: \n  *  `request.sortBy` **Added**\n* `gustoembedded.reimbursements.deleteV1RecurringReimbursements()`: **Added**\n* `gustoembedded.reimbursements.putV1RecurringReimbursements()`: **Added**\n* `gustoembedded.reimbursements.getV1RecurringReimbursements()`: **Added**\n* `gustoembedded.reimbursements.postV1EmployeesEmployeeIdRecurringReimbursements()`: **Added**\n"

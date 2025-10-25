@@ -108,6 +108,7 @@ async function $do(
     "page": payload.page,
     "per": payload.per,
     "search_term": payload.search_term,
+    "sort_by": payload.sort_by,
   });
 
   const headers = new Headers(compactMap({

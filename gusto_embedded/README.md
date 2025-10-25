@@ -549,6 +549,14 @@ run();
 * [get](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
 * [redebit](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
 
+### [reimbursements](docs/sdks/reimbursements/README.md)
+
+* [getV1EmployeesEmployeeIdRecurringReimbursements](docs/sdks/reimbursements/README.md#getv1employeesemployeeidrecurringreimbursements) - Get recurring reimbursements for an employee
+* [postV1EmployeesEmployeeIdRecurringReimbursements](docs/sdks/reimbursements/README.md#postv1employeesemployeeidrecurringreimbursements) - Create a recurring reimbursement
+* [getV1RecurringReimbursements](docs/sdks/reimbursements/README.md#getv1recurringreimbursements) - Get a recurring reimbursement
+* [putV1RecurringReimbursements](docs/sdks/reimbursements/README.md#putv1recurringreimbursements) - Update a recurring reimbursement
+* [deleteV1RecurringReimbursements](docs/sdks/reimbursements/README.md#deletev1recurringreimbursements) - Delete a recurring reimbursement
+
 ### [reports](docs/sdks/reports/README.md)
 
 * [createCustom](docs/sdks/reports/README.md#createcustom) - Create a custom report
@@ -854,6 +862,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`paySchedulesUpdate`](docs/sdks/payschedules/README.md#update) - Update a pay schedule
 - [`recoveryCasesGet`](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
 - [`recoveryCasesRedebit`](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
+- [`reimbursementsDeleteV1RecurringReimbursements`](docs/sdks/reimbursements/README.md#deletev1recurringreimbursements) - Delete a recurring reimbursement
+- [`reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements`](docs/sdks/reimbursements/README.md#getv1employeesemployeeidrecurringreimbursements) - Get recurring reimbursements for an employee
+- [`reimbursementsGetV1RecurringReimbursements`](docs/sdks/reimbursements/README.md#getv1recurringreimbursements) - Get a recurring reimbursement
+- [`reimbursementsPostV1EmployeesEmployeeIdRecurringReimbursements`](docs/sdks/reimbursements/README.md#postv1employeesemployeeidrecurringreimbursements) - Create a recurring reimbursement
+- [`reimbursementsPutV1RecurringReimbursements`](docs/sdks/reimbursements/README.md#putv1recurringreimbursements) - Update a recurring reimbursement
 - [`reportsCreateCustom`](docs/sdks/reports/README.md#createcustom) - Create a custom report
 - [`reportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`reportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
@@ -1146,6 +1159,11 @@ To learn about this feature and how to get started, check
 - [`usePaySchedulesUpdateMutation`](docs/sdks/payschedules/README.md#update) - Update a pay schedule
 - [`useRecoveryCasesGet`](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
 - [`useRecoveryCasesRedebitMutation`](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
+- [`useReimbursementsDeleteV1RecurringReimbursementsMutation`](docs/sdks/reimbursements/README.md#deletev1recurringreimbursements) - Delete a recurring reimbursement
+- [`useReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements`](docs/sdks/reimbursements/README.md#getv1employeesemployeeidrecurringreimbursements) - Get recurring reimbursements for an employee
+- [`useReimbursementsGetV1RecurringReimbursements`](docs/sdks/reimbursements/README.md#getv1recurringreimbursements) - Get a recurring reimbursement
+- [`useReimbursementsPostV1EmployeesEmployeeIdRecurringReimbursementsMutation`](docs/sdks/reimbursements/README.md#postv1employeesemployeeidrecurringreimbursements) - Create a recurring reimbursement
+- [`useReimbursementsPutV1RecurringReimbursementsMutation`](docs/sdks/reimbursements/README.md#putv1recurringreimbursements) - Update a recurring reimbursement
 - [`useReportsCreateCustomMutation`](docs/sdks/reports/README.md#createcustom) - Create a custom report
 - [`useReportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`useReportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
@@ -1368,12 +1386,12 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 145 of 266 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 266 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 266 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 266 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 266 methods.*
-* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 266 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 149 of 271 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 271 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 271 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 271 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 271 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 271 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
