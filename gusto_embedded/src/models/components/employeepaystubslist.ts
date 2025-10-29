@@ -5,8 +5,23 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The payment method for the pay stub.
+ */
+export const EmployeePayStubsListPaymentMethod = {
+  DirectDeposit: "Direct Deposit",
+  Check: "Check",
+} as const;
+/**
+ * The payment method for the pay stub.
+ */
+export type EmployeePayStubsListPaymentMethod = ClosedEnum<
+  typeof EmployeePayStubsListPaymentMethod
+>;
 
 /**
  * The representation of an employee pay stub information.
@@ -36,7 +51,33 @@ export type EmployeePayStubsList = {
    * The check amount for the pay stub.
    */
   checkAmount?: string | undefined;
+  /**
+   * The payment method for the pay stub.
+   */
+  paymentMethod?: EmployeePayStubsListPaymentMethod | undefined;
 };
+
+/** @internal */
+export const EmployeePayStubsListPaymentMethod$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeePayStubsListPaymentMethod
+> = z.nativeEnum(EmployeePayStubsListPaymentMethod);
+
+/** @internal */
+export const EmployeePayStubsListPaymentMethod$outboundSchema: z.ZodNativeEnum<
+  typeof EmployeePayStubsListPaymentMethod
+> = EmployeePayStubsListPaymentMethod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EmployeePayStubsListPaymentMethod$ {
+  /** @deprecated use `EmployeePayStubsListPaymentMethod$inboundSchema` instead. */
+  export const inboundSchema = EmployeePayStubsListPaymentMethod$inboundSchema;
+  /** @deprecated use `EmployeePayStubsListPaymentMethod$outboundSchema` instead. */
+  export const outboundSchema =
+    EmployeePayStubsListPaymentMethod$outboundSchema;
+}
 
 /** @internal */
 export const EmployeePayStubsList$inboundSchema: z.ZodType<
@@ -50,6 +91,7 @@ export const EmployeePayStubsList$inboundSchema: z.ZodType<
   net_pay: z.string().optional(),
   payroll_uuid: z.string().optional(),
   check_amount: z.string().optional(),
+  payment_method: EmployeePayStubsListPaymentMethod$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "check_date": "checkDate",
@@ -57,6 +99,7 @@ export const EmployeePayStubsList$inboundSchema: z.ZodType<
     "net_pay": "netPay",
     "payroll_uuid": "payrollUuid",
     "check_amount": "checkAmount",
+    "payment_method": "paymentMethod",
   });
 });
 
@@ -68,6 +111,7 @@ export type EmployeePayStubsList$Outbound = {
   net_pay?: string | undefined;
   payroll_uuid?: string | undefined;
   check_amount?: string | undefined;
+  payment_method?: string | undefined;
 };
 
 /** @internal */
@@ -82,6 +126,7 @@ export const EmployeePayStubsList$outboundSchema: z.ZodType<
   netPay: z.string().optional(),
   payrollUuid: z.string().optional(),
   checkAmount: z.string().optional(),
+  paymentMethod: EmployeePayStubsListPaymentMethod$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     checkDate: "check_date",
@@ -89,6 +134,7 @@ export const EmployeePayStubsList$outboundSchema: z.ZodType<
     netPay: "net_pay",
     payrollUuid: "payroll_uuid",
     checkAmount: "check_amount",
+    paymentMethod: "payment_method",
   });
 });
 

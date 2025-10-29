@@ -51,7 +51,7 @@ export const GetV1ContractorDocumentPdfRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   document_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "document_uuid": "documentUuid",
@@ -72,7 +72,7 @@ export const GetV1ContractorDocumentPdfRequest$outboundSchema: z.ZodType<
   GetV1ContractorDocumentPdfRequest
 > = z.object({
   documentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     documentUuid: "document_uuid",

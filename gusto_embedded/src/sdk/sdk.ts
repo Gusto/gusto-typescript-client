@@ -47,6 +47,7 @@ import { PaymentConfigs } from "./paymentconfigs.js";
 import { Payrolls } from "./payrolls.js";
 import { PaySchedules } from "./payschedules.js";
 import { RecoveryCases } from "./recoverycases.js";
+import { Reimbursements } from "./reimbursements.js";
 import { Reports } from "./reports.js";
 import { SalaryEstimates } from "./salaryestimates.js";
 import { Signatories } from "./signatories.js";
@@ -329,5 +330,10 @@ export class GustoEmbedded extends ClientSDK {
   private _salaryEstimates?: SalaryEstimates;
   get salaryEstimates(): SalaryEstimates {
     return (this._salaryEstimates ??= new SalaryEstimates(this._options));
+  }
+
+  private _reimbursements?: Reimbursements;
+  get reimbursements(): Reimbursements {
+    return (this._reimbursements ??= new Reimbursements(this._options));
   }
 }

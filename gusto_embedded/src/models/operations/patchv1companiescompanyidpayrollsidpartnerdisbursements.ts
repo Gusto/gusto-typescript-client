@@ -26,7 +26,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -394,7 +394,7 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$inbo
     id: z.string(),
     "X-Gusto-API-Version":
       PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$inboundSchema
     ).optional(),
@@ -428,7 +428,7 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$outb
     id: z.string(),
     xGustoAPIVersion:
       PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     requestBody: z.lazy(() =>
       PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$outboundSchema
     ).optional(),

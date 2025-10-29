@@ -52,7 +52,7 @@ export const GetV1CompaniesCompanyUuidSignatoriesRequest$inboundSchema:
     unknown
   > = z.object({
     company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -74,7 +74,7 @@ export const GetV1CompaniesCompanyUuidSignatoriesRequest$outboundSchema:
     GetV1CompaniesCompanyUuidSignatoriesRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

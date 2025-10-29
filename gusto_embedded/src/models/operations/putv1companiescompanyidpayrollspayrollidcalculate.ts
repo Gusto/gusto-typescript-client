@@ -47,7 +47,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$inboundSch
   > = z.object({
     company_id: z.string(),
     payroll_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -73,7 +73,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSc
   > = z.object({
     companyId: z.string(),
     payrollId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

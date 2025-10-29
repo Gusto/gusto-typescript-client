@@ -26,7 +26,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -117,7 +117,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema
     per: z.number().int().optional(),
     "X-Gusto-API-Version":
       GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -151,7 +151,7 @@ export const GetV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchem
     per: z.number().int().optional(),
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

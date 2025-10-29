@@ -51,7 +51,7 @@ export const GetWireInRequestsWireInRequestUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   wire_in_request_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "wire_in_request_uuid": "wireInRequestUuid",
@@ -73,7 +73,7 @@ export const GetWireInRequestsWireInRequestUuidRequest$outboundSchema:
     GetWireInRequestsWireInRequestUuidRequest
   > = z.object({
     wireInRequestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       wireInRequestUuid: "wire_in_request_uuid",

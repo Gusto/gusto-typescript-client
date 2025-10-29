@@ -19,7 +19,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -78,7 +78,7 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema:
   > = z.object({
     "X-Gusto-API-Version":
       DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     home_address_uuid: z.string(),
   }).transform((v) => {
     return remap$(v, {
@@ -102,7 +102,7 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema:
   > = z.object({
     xGustoAPIVersion:
       DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     homeAddressUuid: z.string(),
   }).transform((v) => {
     return remap$(v, {

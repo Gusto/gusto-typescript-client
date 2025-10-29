@@ -56,7 +56,7 @@ export const GetV1ContractorFormRequest$inboundSchema: z.ZodType<
 > = z.object({
   contractor_uuid: z.string(),
   form_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",
@@ -80,7 +80,7 @@ export const GetV1ContractorFormRequest$outboundSchema: z.ZodType<
 > = z.object({
   contractorUuid: z.string(),
   formId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     contractorUuid: "contractor_uuid",

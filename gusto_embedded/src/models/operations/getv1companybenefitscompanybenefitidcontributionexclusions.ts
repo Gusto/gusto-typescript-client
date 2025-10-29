@@ -54,7 +54,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$i
     unknown
   > = z.object({
     company_benefit_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_benefit_id": "companyBenefitId",
@@ -77,7 +77,7 @@ export const GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$o
     GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest
   > = z.object({
     companyBenefitId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyBenefitId: "company_benefit_id",

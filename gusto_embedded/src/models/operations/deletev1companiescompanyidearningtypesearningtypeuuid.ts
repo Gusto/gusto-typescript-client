@@ -47,7 +47,7 @@ export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboun
   > = z.object({
     company_id: z.string(),
     earning_type_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -73,7 +73,7 @@ export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outbou
   > = z.object({
     companyId: z.string(),
     earningTypeUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

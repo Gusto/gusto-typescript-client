@@ -207,7 +207,7 @@ export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
 > = z.object({
   document_uuid: z.string(),
   "x-gusto-client-ip": z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$inboundSchema
   ),
@@ -236,7 +236,7 @@ export const PutV1ContractorDocumentSignRequest$outboundSchema: z.ZodType<
 > = z.object({
   documentUuid: z.string(),
   xGustoClientIp: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() =>
     PutV1ContractorDocumentSignRequestBody$outboundSchema
   ),

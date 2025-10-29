@@ -140,7 +140,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$inboundSchema:
     anchor_end_of_pay_period: z.string(),
     day_1: z.number().int().optional(),
     day_2: z.number().int().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_id": "companyId",
@@ -176,7 +176,7 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema:
     anchorEndOfPayPeriod: z.string(),
     day1: z.number().int().optional(),
     day2: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",

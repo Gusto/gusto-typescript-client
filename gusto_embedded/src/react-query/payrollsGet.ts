@@ -38,7 +38,7 @@ export type PayrollsGetQueryData =
  * Get a single payroll
  *
  * @remarks
- * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+ * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals. Results are paginated, with a maximum page size of 100 employee_compensations.
  *
  * Notes:
  * * Hour and dollar amounts are returned as string representations of numeric decimals.
@@ -68,7 +68,7 @@ export function usePayrollsGet(
  * Get a single payroll
  *
  * @remarks
- * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+ * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals. Results are paginated, with a maximum page size of 100 employee_compensations.
  *
  * Notes:
  * * Hour and dollar amounts are returned as string representations of numeric decimals.

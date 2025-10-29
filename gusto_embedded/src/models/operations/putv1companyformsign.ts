@@ -144,7 +144,7 @@ export const PutV1CompanyFormSignRequest$inboundSchema: z.ZodType<
 > = z.object({
   form_id: z.string(),
   "x-gusto-client-ip": z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -171,7 +171,7 @@ export const PutV1CompanyFormSignRequest$outboundSchema: z.ZodType<
 > = z.object({
   formId: z.string(),
   xGustoClientIp: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

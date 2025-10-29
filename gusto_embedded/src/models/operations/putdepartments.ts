@@ -117,7 +117,7 @@ export const PutDepartmentsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   department_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() => PutDepartmentsRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -141,7 +141,7 @@ export const PutDepartmentsRequest$outboundSchema: z.ZodType<
   PutDepartmentsRequest
 > = z.object({
   departmentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutDepartmentsRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

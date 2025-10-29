@@ -274,7 +274,7 @@ export const PostV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   job_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() =>
     PostV1CompensationsCompensationIdRequestBody$inboundSchema
   ),
@@ -300,7 +300,7 @@ export const PostV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<
   PostV1CompensationsCompensationIdRequest
 > = z.object({
   jobId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() =>
     PostV1CompensationsCompensationIdRequestBody$outboundSchema
   ),

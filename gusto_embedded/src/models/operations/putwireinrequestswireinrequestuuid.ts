@@ -161,7 +161,7 @@ export const PutWireInRequestsWireInRequestUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   wire_in_request_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() =>
     PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema
   ),
@@ -188,7 +188,7 @@ export const PutWireInRequestsWireInRequestUuidRequest$outboundSchema:
     PutWireInRequestsWireInRequestUuidRequest
   > = z.object({
     wireInRequestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutWireInRequestsWireInRequestUuidRequestBody$outboundSchema
     ),

@@ -52,7 +52,7 @@ export const GetV1ContractorPaymentsContractorPaymentUuidFundRequest$inboundSche
     unknown
   > = z.object({
     contractor_payment_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "contractor_payment_uuid": "contractorPaymentUuid",
@@ -74,7 +74,7 @@ export const GetV1ContractorPaymentsContractorPaymentUuidFundRequest$outboundSch
     GetV1ContractorPaymentsContractorPaymentUuidFundRequest
   > = z.object({
     contractorPaymentUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       contractorPaymentUuid: "contractor_payment_uuid",
