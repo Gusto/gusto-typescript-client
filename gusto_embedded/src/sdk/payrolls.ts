@@ -175,7 +175,7 @@ export class Payrolls extends ClientSDK {
    * Get a single payroll
    *
    * @remarks
-   * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals.
+   * Returns a payroll. If payroll is calculated or processed, will return employee_compensations and totals. Results are paginated, with a maximum page size of 100 employee_compensations.
    *
    * Notes:
    * * Hour and dollar amounts are returned as string representations of numeric decimals.
@@ -203,8 +203,9 @@ export class Payrolls extends ClientSDK {
    * @remarks
    * This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
    * payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
-   * of the fields included in the payroll.  If you do not include specific employee compensations or fixed/hourly compensations in your request body, they
-   * will not be removed from the payroll.
+   * of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
+   * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
+   * inputted will be returned.
    *
    * scope: `payrolls:write`
    */
@@ -245,6 +246,7 @@ export class Payrolls extends ClientSDK {
    *
    * @remarks
    * This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates & times.
+   * Results are paginated, with a maximum page size of 100 employee_compensations.
    *
    * Notes:
    *  * Will null out calculated_at & totals if a payroll has already been calculated.

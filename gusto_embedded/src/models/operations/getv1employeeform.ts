@@ -56,7 +56,7 @@ export const GetV1EmployeeFormRequest$inboundSchema: z.ZodType<
 > = z.object({
   employee_id: z.string(),
   form_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "employee_id": "employeeId",
@@ -80,7 +80,7 @@ export const GetV1EmployeeFormRequest$outboundSchema: z.ZodType<
 > = z.object({
   employeeId: z.string(),
   formId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     employeeId: "employee_id",

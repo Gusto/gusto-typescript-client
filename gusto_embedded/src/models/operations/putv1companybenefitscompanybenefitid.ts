@@ -142,7 +142,7 @@ export const PutV1CompanyBenefitsCompanyBenefitIdRequest$inboundSchema:
     unknown
   > = z.object({
     company_benefit_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PutV1CompanyBenefitsCompanyBenefitIdRequestBody$inboundSchema
     ),
@@ -169,7 +169,7 @@ export const PutV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
     PutV1CompanyBenefitsCompanyBenefitIdRequest
   > = z.object({
     companyBenefitId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1CompanyBenefitsCompanyBenefitIdRequestBody$outboundSchema
     ),

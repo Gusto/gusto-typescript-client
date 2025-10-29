@@ -31,7 +31,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -99,7 +99,7 @@ export const PutV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
 > = z.object({
   "X-Gusto-API-Version":
     PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2024-04-01",
+      "2025-06-15",
     ),
   company_id: z.string(),
   payroll_id: z.string(),
@@ -129,7 +129,7 @@ export const PutV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
 > = z.object({
   xGustoAPIVersion:
     PutV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
-      .default("2024-04-01"),
+      .default("2025-06-15"),
   companyId: z.string(),
   payrollId: z.string(),
   payrollUpdate: PayrollUpdate$outboundSchema,

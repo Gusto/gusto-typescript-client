@@ -31,7 +31,7 @@ export type CompanyBenefitsUpdateEmployeeBenefitsMutationData =
  * Bulk update employee benefits for a company benefit
  *
  * @remarks
- * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+ * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee's enrollment.
  *
  * Create or update(if the employee is already enrolled in the company benefit previously) an employee benefit for the company benefit.
  *

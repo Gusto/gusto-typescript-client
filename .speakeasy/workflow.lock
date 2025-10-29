@@ -2,27 +2,27 @@ speakeasyVersion: 1.636.3
 sources:
     GustoEmbedded-OAS:
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:7ca56e04e01363b249ae0e2009d09528887a5101cea9438408e391b27380bd36
-        sourceBlobDigest: sha256:2bf63c9df52696f1ab08685243e26b151c98487ad89361c79ea8efa83a6a8ad6
+        sourceRevisionDigest: sha256:020ccf92d487244bcff6bded30a1293e737ada9819e7a5e222174898746ec9d0
+        sourceBlobDigest: sha256:fd23172f80646966c1ceb209d85d1a68108f74fc99da4fc30cc46ff5a1629f03
         tags:
             - latest
-            - speakeasy-sdk-regen-1760487231
-            - "2024-04-01"
+            - speakeasy-sdk-regen-ar-bump-speakeasy-to-v2025-06-15-1761685032
+            - "2025-06-15"
 targets:
     gusto-embedded:
         source: GustoEmbedded-OAS
         sourceNamespace: gusto-embedded-oas
-        sourceRevisionDigest: sha256:7ca56e04e01363b249ae0e2009d09528887a5101cea9438408e391b27380bd36
-        sourceBlobDigest: sha256:2bf63c9df52696f1ab08685243e26b151c98487ad89361c79ea8efa83a6a8ad6
+        sourceRevisionDigest: sha256:020ccf92d487244bcff6bded30a1293e737ada9819e7a5e222174898746ec9d0
+        sourceBlobDigest: sha256:fd23172f80646966c1ceb209d85d1a68108f74fc99da4fc30cc46ff5a1629f03
         codeSamplesNamespace: gusto-embedded-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:f9616b24d9501a1b468b5e69646b1283b7b8e8c360024817be6c5a7ffcc17125
+        codeSamplesRevisionDigest: sha256:7d7148079bd5b5905b1df52f46131a7b6ccff30e3c3538ab0d91e0da6cb3121a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         GustoEmbedded-OAS:
             inputs:
-                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2024-04-01.embedded.yaml
+                - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2025-06-15.embedded.yaml
                   authHeader: Authorization
                   authSecret: $openapi_doc_auth_token
             overlays:
@@ -33,7 +33,7 @@ workflow:
                 location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
         GustoEmbedded-local:
             inputs:
-                - location: ../Gusto-Partner-API/generated/embedded/api.v2024-04-01.embedded.yaml
+                - location: ../Gusto-Partner-API/generated/embedded/api.v2025-06-15.embedded.yaml
             overlays:
                 - location: ../Gusto-Partner-API/.speakeasy/speakeasy-modifications-overlay.yaml
             registry:

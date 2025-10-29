@@ -33,8 +33,9 @@ export type PayrollsUpdateMutationData =
  * @remarks
  * This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.  You can think of the **unprocessed**
  * payroll object as a template of fields that you can update.  You cannot modify the structure of the payroll object through this endpoint, only values
- * of the fields included in the payroll.  If you do not include specific employee compensations or fixed/hourly compensations in your request body, they
- * will not be removed from the payroll.
+ * of the fields included in the payroll.  If you do not include specific employee compensations, fixed/hourly compensations, or deductions in your request body, they
+ * will not be removed from the payroll. A maximum of 100 employee_compensations can be updated at a time. Only the employee compensation objects that were
+ * inputted will be returned.
  *
  * scope: `payrolls:write`
  */

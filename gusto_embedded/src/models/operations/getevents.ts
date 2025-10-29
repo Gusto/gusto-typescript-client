@@ -142,7 +142,7 @@ export const GetEventsRequest$inboundSchema: z.ZodType<
   limit: z.string().optional(),
   event_type: z.string().optional(),
   sort_order: SortOrder$inboundSchema.optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "starting_after_uuid": "startingAfterUuid",
@@ -174,7 +174,7 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
   limit: z.string().optional(),
   eventType: z.string().optional(),
   sortOrder: SortOrder$outboundSchema.optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     startingAfterUuid: "starting_after_uuid",

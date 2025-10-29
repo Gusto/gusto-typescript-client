@@ -41,7 +41,7 @@ export const DeleteV1ContractorsContractorUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   contractor_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "contractor_uuid": "contractorUuid",
@@ -62,7 +62,7 @@ export const DeleteV1ContractorsContractorUuidRequest$outboundSchema: z.ZodType<
   DeleteV1ContractorsContractorUuidRequest
 > = z.object({
   contractorUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     contractorUuid: "contractor_uuid",

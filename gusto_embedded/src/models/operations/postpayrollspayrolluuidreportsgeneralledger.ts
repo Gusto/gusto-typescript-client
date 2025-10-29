@@ -209,7 +209,7 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerRequest$inboundSchema:
     unknown
   > = z.object({
     payroll_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchema
     ),
@@ -236,7 +236,7 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema:
     PostPayrollsPayrollUuidReportsGeneralLedgerRequest
   > = z.object({
     payrollUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSchema
     ),

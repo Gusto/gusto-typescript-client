@@ -186,7 +186,7 @@ export const PutV1EmployeesEmployeeIdBankAccountsRequest$inboundSchema:
   > = z.object({
     employee_id: z.string(),
     bank_account_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdBankAccountsRequestBody$inboundSchema
     ),
@@ -216,7 +216,7 @@ export const PutV1EmployeesEmployeeIdBankAccountsRequest$outboundSchema:
   > = z.object({
     employeeId: z.string(),
     bankAccountUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdBankAccountsRequestBody$outboundSchema
     ),

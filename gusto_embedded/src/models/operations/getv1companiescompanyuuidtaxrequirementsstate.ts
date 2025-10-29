@@ -62,7 +62,7 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema:
     company_uuid: z.string(),
     state: z.string(),
     scheduling: z.boolean().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
@@ -88,7 +88,7 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
     companyUuid: z.string(),
     state: z.string(),
     scheduling: z.boolean().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",

@@ -9,11 +9,11 @@ import { DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIV
 
 let value:
   DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdHeaderXGustoAPIVersion =
-    "2024-04-01";
+    "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```

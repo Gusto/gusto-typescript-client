@@ -9,11 +9,11 @@ import { PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPI
 
 let value:
   PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundHeaderXGustoAPIVersion =
-    "2024-04-01";
+    "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```

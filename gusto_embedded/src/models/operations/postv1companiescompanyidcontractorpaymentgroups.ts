@@ -27,7 +27,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -79,9 +79,9 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
    */
   checkDate: RFCDate;
   /**
-   * Optional token used to make contractor payment group creation idempotent. If provided, string must be unique for each group you intend to create.
+   * Required token used to make contractor payment group creation idempotent. String must be unique for each group you intend to create.
    */
-  creationToken?: string | undefined;
+  creationToken: string;
   contractorPayments: Array<ContractorPayments>;
 };
 
@@ -254,7 +254,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundS
     unknown
   > = z.object({
     check_date: z.string().transform(v => new RFCDate(v)),
-    creation_token: z.string().optional(),
+    creation_token: z.string(),
     contractor_payments: z.array(
       z.lazy(() => ContractorPayments$inboundSchema),
     ),
@@ -270,7 +270,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundS
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound =
   {
     check_date: string;
-    creation_token?: string | undefined;
+    creation_token: string;
     contractor_payments: Array<ContractorPayments$Outbound>;
   };
 
@@ -282,7 +282,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outbound
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody
   > = z.object({
     checkDate: z.instanceof(RFCDate).transform(v => v.toString()),
-    creationToken: z.string().optional(),
+    creationToken: z.string(),
     contractorPayments: z.array(
       z.lazy(() => ContractorPayments$outboundSchema),
     ),
@@ -344,7 +344,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchem
   > = z.object({
     "X-Gusto-API-Version":
       PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     company_id: z.string(),
     RequestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema
@@ -374,7 +374,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSche
   > = z.object({
     xGustoAPIVersion:
       PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     companyId: z.string(),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outboundSchema

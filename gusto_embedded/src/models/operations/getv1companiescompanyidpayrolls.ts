@@ -25,7 +25,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -98,7 +98,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    */
   includeOffCycle?: boolean | undefined;
   /**
-   * Include the requested attribute in the response, for multiple attributes comma separate the values, i.e. `?include=benefits,deductions,taxes`
+   * Include the requested attribute in the response. The risk_blockers option will include submission_blockers and credit_blockers if applicable. The reversals option will include reversal payroll UUIDs if applicable. In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the values, i.e. `?include=totals,payroll_status_meta`. Results are paginated, with a maximum page size of 100 payrolls.
    */
   include?: Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude> | undefined;
   /**
@@ -247,7 +247,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   company_id: z.string(),
   "X-Gusto-API-Version":
     GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2024-04-01",
+      "2025-06-15",
     ),
   processing_statuses: z.array(ProcessingStatuses$inboundSchema).optional(),
   payroll_types: z.array(PayrollTypes$inboundSchema).optional(),
@@ -299,7 +299,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   companyId: z.string(),
   xGustoAPIVersion:
     GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
-      .default("2024-04-01"),
+      .default("2025-06-15"),
   processingStatuses: z.array(ProcessingStatuses$outboundSchema).optional(),
   payrollTypes: z.array(PayrollTypes$outboundSchema).optional(),
   processed: z.boolean().optional(),

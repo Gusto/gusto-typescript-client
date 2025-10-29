@@ -39,7 +39,7 @@ export const DeleteV1CompensationsCompensationIdRequest$inboundSchema:
   z.ZodType<DeleteV1CompensationsCompensationIdRequest, z.ZodTypeDef, unknown> =
     z.object({
       compensation_id: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     }).transform((v) => {
       return remap$(v, {
         "compensation_id": "compensationId",
@@ -61,7 +61,7 @@ export const DeleteV1CompensationsCompensationIdRequest$outboundSchema:
     DeleteV1CompensationsCompensationIdRequest
   > = z.object({
     compensationId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       compensationId: "compensation_id",

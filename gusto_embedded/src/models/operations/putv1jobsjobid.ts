@@ -168,7 +168,7 @@ export const PutV1JobsJobIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   job_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() => PutV1JobsJobIdRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -192,7 +192,7 @@ export const PutV1JobsJobIdRequest$outboundSchema: z.ZodType<
   PutV1JobsJobIdRequest
 > = z.object({
   jobId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1JobsJobIdRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
