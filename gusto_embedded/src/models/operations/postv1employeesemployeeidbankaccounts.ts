@@ -175,7 +175,7 @@ export const PostV1EmployeesEmployeeIdBankAccountsRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdBankAccountsRequestBody$inboundSchema
     ),
@@ -202,7 +202,7 @@ export const PostV1EmployeesEmployeeIdBankAccountsRequest$outboundSchema:
     PostV1EmployeesEmployeeIdBankAccountsRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdBankAccountsRequestBody$outboundSchema
     ),

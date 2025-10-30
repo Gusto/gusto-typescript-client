@@ -113,7 +113,7 @@ export const GetV1EmployeesEmployeeIdJobsRequest$inboundSchema: z.ZodType<
   per: z.number().int().optional(),
   include: GetV1EmployeesEmployeeIdJobsQueryParamInclude$inboundSchema
     .optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "employee_id": "employeeId",
@@ -141,7 +141,7 @@ export const GetV1EmployeesEmployeeIdJobsRequest$outboundSchema: z.ZodType<
   per: z.number().int().optional(),
   include: GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema
     .optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     employeeId: "employee_id",

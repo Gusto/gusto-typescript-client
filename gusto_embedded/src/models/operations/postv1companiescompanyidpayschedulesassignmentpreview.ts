@@ -59,7 +59,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboun
     unknown
   > = z.object({
     company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     "Pay-Schedule-Assignment-Body": PayScheduleAssignmentBody$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
@@ -85,7 +85,7 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outbou
     PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest
   > = z.object({
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     payScheduleAssignmentBody: PayScheduleAssignmentBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {

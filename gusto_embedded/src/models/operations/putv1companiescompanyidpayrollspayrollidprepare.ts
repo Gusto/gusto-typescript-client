@@ -162,7 +162,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchem
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     sort_by: PayrollPrepareSortBy$inboundSchema.optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema
     ).optional(),
@@ -201,7 +201,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     sortBy: PayrollPrepareSortBy$outboundSchema.optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema
     ).optional(),

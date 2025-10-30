@@ -177,6 +177,14 @@ export type Contractor = {
    * The UUID of the department the contractor is under
    */
   departmentUuid?: string | null | undefined;
+  /**
+   * The contractor's department in the company.
+   */
+  department?: string | null | undefined;
+  /**
+   * The contractor's dismissal date.
+   */
+  dismissalDate?: string | null | undefined;
 };
 
 /** @internal */
@@ -362,6 +370,8 @@ export const Contractor$inboundSchema: z.ZodType<
   payment_method: z.nullable(ContractorPaymentMethod1$inboundSchema).optional(),
   has_ssn: z.boolean().optional(),
   department_uuid: z.nullable(z.string()).optional(),
+  department: z.nullable(z.string()).optional(),
+  dismissal_date: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -380,6 +390,7 @@ export const Contractor$inboundSchema: z.ZodType<
     "payment_method": "paymentMethod",
     "has_ssn": "hasSsn",
     "department_uuid": "departmentUuid",
+    "dismissal_date": "dismissalDate",
   });
 });
 
@@ -408,6 +419,8 @@ export type Contractor$Outbound = {
   payment_method?: string | null | undefined;
   has_ssn?: boolean | undefined;
   department_uuid?: string | null | undefined;
+  department?: string | null | undefined;
+  dismissal_date?: string | null | undefined;
 };
 
 /** @internal */
@@ -439,6 +452,8 @@ export const Contractor$outboundSchema: z.ZodType<
   paymentMethod: z.nullable(ContractorPaymentMethod1$outboundSchema).optional(),
   hasSsn: z.boolean().optional(),
   departmentUuid: z.nullable(z.string()).optional(),
+  department: z.nullable(z.string()).optional(),
+  dismissalDate: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",
@@ -457,6 +472,7 @@ export const Contractor$outboundSchema: z.ZodType<
     paymentMethod: "payment_method",
     hasSsn: "has_ssn",
     departmentUuid: "department_uuid",
+    dismissalDate: "dismissal_date",
   });
 });
 

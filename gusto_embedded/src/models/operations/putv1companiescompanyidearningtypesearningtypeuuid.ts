@@ -132,7 +132,7 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSc
   > = z.object({
     company_id: z.string(),
     earning_type_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema
     ),
@@ -164,7 +164,7 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundS
   > = z.object({
     companyId: z.string(),
     earningTypeUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outboundSchema
     ),

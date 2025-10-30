@@ -42,9 +42,7 @@ export type ContractorPaymentSummaryContractorPayments = {
    */
   wageTotal?: string | undefined;
   /**
-   * The contractor’s payments within a given time period.
-   *
-   * @remarks
+   * The contractor's payments within a given time period.
    */
   payments?: Array<ContractorPayment> | undefined;
 };

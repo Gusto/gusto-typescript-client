@@ -61,7 +61,7 @@ export const PostV1HistoricalEmployeesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   "Historical-Employee-Body": HistoricalEmployeeBody$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -85,7 +85,7 @@ export const PostV1HistoricalEmployeesRequest$outboundSchema: z.ZodType<
   PostV1HistoricalEmployeesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   historicalEmployeeBody: HistoricalEmployeeBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {

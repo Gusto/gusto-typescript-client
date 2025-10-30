@@ -62,7 +62,7 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$inboundSchema
   > = z.object({
     document_type: DocumentType$inboundSchema,
     request_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "document_type": "documentType",
@@ -87,7 +87,7 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchem
   > = z.object({
     documentType: DocumentType$outboundSchema,
     requestUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       documentType: "document_type",

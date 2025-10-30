@@ -84,6 +84,10 @@ export type PutTimeOffPoliciesTimeOffPolicyUuidRequestBody = {
    * The max number of hours an employee can accrue. If accrual_method is unlimited, then max_hours must be blank.
    */
   maxHours?: string | undefined;
+  /**
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/api-fundamentals#optimistic-version-control) for information on how to use this field.
+   */
+  version: string;
 };
 
 export type PutTimeOffPoliciesTimeOffPolicyUuidRequest = {
@@ -146,6 +150,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$inboundSchema:
     carryover_limit_hours: z.string().optional(),
     max_accrual_hours_per_year: z.string().optional(),
     max_hours: z.string().optional(),
+    version: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "accrual_method": "accrualMethod",
@@ -170,6 +175,7 @@ export type PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$Outbound = {
   carryover_limit_hours?: string | undefined;
   max_accrual_hours_per_year?: string | undefined;
   max_hours?: string | undefined;
+  version: string;
 };
 
 /** @internal */
@@ -188,6 +194,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$outboundSchema:
     carryoverLimitHours: z.string().optional(),
     maxAccrualHoursPerYear: z.string().optional(),
     maxHours: z.string().optional(),
+    version: z.string(),
   }).transform((v) => {
     return remap$(v, {
       accrualMethod: "accrual_method",
@@ -249,7 +256,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequest$inboundSchema:
   z.ZodType<PutTimeOffPoliciesTimeOffPolicyUuidRequest, z.ZodTypeDef, unknown> =
     z.object({
       time_off_policy_uuid: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
       RequestBody: z.lazy(() =>
         PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$inboundSchema
       ),
@@ -276,7 +283,7 @@ export const PutTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema:
     PutTimeOffPoliciesTimeOffPolicyUuidRequest
   > = z.object({
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutTimeOffPoliciesTimeOffPolicyUuidRequestBody$outboundSchema
     ),

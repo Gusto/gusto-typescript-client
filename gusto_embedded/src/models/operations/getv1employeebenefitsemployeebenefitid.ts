@@ -52,7 +52,7 @@ export const GetV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema:
     unknown
   > = z.object({
     employee_benefit_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "employee_benefit_id": "employeeBenefitId",
@@ -74,7 +74,7 @@ export const GetV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema:
     GetV1EmployeeBenefitsEmployeeBenefitIdRequest
   > = z.object({
     employeeBenefitId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       employeeBenefitId: "employee_benefit_id",

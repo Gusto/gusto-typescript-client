@@ -219,7 +219,7 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSch
     unknown
   > = z.object({
     time_off_policy_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema
     ),
@@ -248,7 +248,7 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$outboundSc
     PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest
   > = z.object({
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$outboundSchema
     ),

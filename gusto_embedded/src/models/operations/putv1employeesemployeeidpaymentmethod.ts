@@ -303,7 +303,7 @@ export const PutV1EmployeesEmployeeIdPaymentMethodRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdPaymentMethodRequestBody$inboundSchema
     ),
@@ -330,7 +330,7 @@ export const PutV1EmployeesEmployeeIdPaymentMethodRequest$outboundSchema:
     PutV1EmployeesEmployeeIdPaymentMethodRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1EmployeesEmployeeIdPaymentMethodRequestBody$outboundSchema
     ),

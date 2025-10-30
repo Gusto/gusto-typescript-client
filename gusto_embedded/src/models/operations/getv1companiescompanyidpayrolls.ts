@@ -25,7 +25,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -57,6 +57,17 @@ export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude = {
 export type GetV1CompaniesCompanyIdPayrollsQueryParamInclude = ClosedEnum<
   typeof GetV1CompaniesCompanyIdPayrollsQueryParamInclude
 >;
+
+/**
+ * Specifies which date field to use when filtering payrolls with start_date and end_date. This field applies only to regular processed payrolls and defaults to pay period if not provided.
+ */
+export const DateFilterBy = {
+  CheckDate: "check_date",
+} as const;
+/**
+ * Specifies which date field to use when filtering payrolls with start_date and end_date. This field applies only to regular processed payrolls and defaults to pay period if not provided.
+ */
+export type DateFilterBy = ClosedEnum<typeof DateFilterBy>;
 
 /**
  * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
@@ -98,7 +109,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    */
   includeOffCycle?: boolean | undefined;
   /**
-   * Include the requested attribute in the response, for multiple attributes comma separate the values, i.e. `?include=benefits,deductions,taxes`
+   * Include the requested attribute in the response. The risk_blockers option will include submission_blockers and credit_blockers if applicable. The reversals option will include reversal payroll UUIDs if applicable. In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the values, i.e. `?include=totals,payroll_status_meta`. Results are paginated, with a maximum page size of 100 payrolls.
    */
   include?: Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude> | undefined;
   /**
@@ -109,6 +120,10 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    * Return payrolls whose pay period is before the end date. If left empty, defaults to today's date.
    */
   endDate?: string | undefined;
+  /**
+   * Specifies which date field to use when filtering payrolls with start_date and end_date. This field applies only to regular processed payrolls and defaults to pay period if not provided.
+   */
+  dateFilterBy?: DateFilterBy | undefined;
   /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
@@ -220,6 +235,25 @@ export namespace GetV1CompaniesCompanyIdPayrollsQueryParamInclude$ {
 }
 
 /** @internal */
+export const DateFilterBy$inboundSchema: z.ZodNativeEnum<typeof DateFilterBy> =
+  z.nativeEnum(DateFilterBy);
+
+/** @internal */
+export const DateFilterBy$outboundSchema: z.ZodNativeEnum<typeof DateFilterBy> =
+  DateFilterBy$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DateFilterBy$ {
+  /** @deprecated use `DateFilterBy$inboundSchema` instead. */
+  export const inboundSchema = DateFilterBy$inboundSchema;
+  /** @deprecated use `DateFilterBy$outboundSchema` instead. */
+  export const outboundSchema = DateFilterBy$outboundSchema;
+}
+
+/** @internal */
 export const SortOrder$inboundSchema: z.ZodNativeEnum<typeof SortOrder> = z
   .nativeEnum(SortOrder);
 
@@ -247,7 +281,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   company_id: z.string(),
   "X-Gusto-API-Version":
     GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2024-04-01",
+      "2025-06-15",
     ),
   processing_statuses: z.array(ProcessingStatuses$inboundSchema).optional(),
   payroll_types: z.array(PayrollTypes$inboundSchema).optional(),
@@ -258,6 +292,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
   ).optional(),
   start_date: z.string().optional(),
   end_date: z.string().optional(),
+  date_filter_by: DateFilterBy$inboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   sort_order: SortOrder$inboundSchema.optional(),
@@ -270,6 +305,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
     "include_off_cycle": "includeOffCycle",
     "start_date": "startDate",
     "end_date": "endDate",
+    "date_filter_by": "dateFilterBy",
     "sort_order": "sortOrder",
   });
 });
@@ -285,6 +321,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest$Outbound = {
   include?: Array<string> | undefined;
   start_date?: string | undefined;
   end_date?: string | undefined;
+  date_filter_by?: string | undefined;
   page?: number | undefined;
   per?: number | undefined;
   sort_order?: string | undefined;
@@ -299,7 +336,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   companyId: z.string(),
   xGustoAPIVersion:
     GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema
-      .default("2024-04-01"),
+      .default("2025-06-15"),
   processingStatuses: z.array(ProcessingStatuses$outboundSchema).optional(),
   payrollTypes: z.array(PayrollTypes$outboundSchema).optional(),
   processed: z.boolean().optional(),
@@ -309,6 +346,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   ).optional(),
   startDate: z.string().optional(),
   endDate: z.string().optional(),
+  dateFilterBy: DateFilterBy$outboundSchema.optional(),
   page: z.number().int().optional(),
   per: z.number().int().optional(),
   sortOrder: SortOrder$outboundSchema.optional(),
@@ -321,6 +359,7 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
     includeOffCycle: "include_off_cycle",
     startDate: "start_date",
     endDate: "end_date",
+    dateFilterBy: "date_filter_by",
     sortOrder: "sort_order",
   });
 });

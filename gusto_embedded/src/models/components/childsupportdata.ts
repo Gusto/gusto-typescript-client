@@ -55,8 +55,6 @@ export type Agencies = {
   name?: string | undefined;
   /**
    * Specifies if remitting payment to the agency is required outside of Gusto. If true, Gusto includes garnishment amounts for this agency in payroll calculation, but does not debit for or remit payment to the agency automatically. As of September 2024, only garnishments for South Carolina Integrated Child Support Services require manual payment.
-   *
-   * @remarks
    */
   manualPaymentRequired?: boolean | undefined;
   /**

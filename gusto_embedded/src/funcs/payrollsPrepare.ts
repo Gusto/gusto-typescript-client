@@ -34,6 +34,7 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * This endpoint will build the payroll and get it ready for making updates. This includes adding/removing eligible employees from the Payroll and updating the check_date, payroll_deadline, and payroll_status_meta dates & times.
+ * Results are paginated, with a maximum page size of 100 employee_compensations.
  *
  * Notes:
  *  * Will null out calculated_at & totals if a payroll has already been calculated.

@@ -9,11 +9,11 @@ import { PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion }
 
 let value:
   PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion =
-    "2024-04-01";
+    "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```

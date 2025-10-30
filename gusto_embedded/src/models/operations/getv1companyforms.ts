@@ -7,6 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
+  CompanyFormsSortBy,
+  CompanyFormsSortBy$inboundSchema,
+  CompanyFormsSortBy$outboundSchema,
+} from "../components/companyformssortby.js";
+import {
   Form,
   Form$inboundSchema,
   Form$Outbound,
@@ -31,6 +36,10 @@ export type GetV1CompanyFormsRequest = {
    */
   companyId: string;
   /**
+   * Sort company forms. Options: name, year, quarter, draft, document_content_type
+   */
+  sortBy?: CompanyFormsSortBy | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: VersionHeader | undefined;
@@ -51,10 +60,12 @@ export const GetV1CompanyFormsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  sort_by: CompanyFormsSortBy$inboundSchema.optional(),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
+    "sort_by": "sortBy",
     "X-Gusto-API-Version": "xGustoAPIVersion",
   });
 });
@@ -62,6 +73,7 @@ export const GetV1CompanyFormsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetV1CompanyFormsRequest$Outbound = {
   company_id: string;
+  sort_by?: string | undefined;
   "X-Gusto-API-Version": string;
 };
 
@@ -72,10 +84,12 @@ export const GetV1CompanyFormsRequest$outboundSchema: z.ZodType<
   GetV1CompanyFormsRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  sortBy: CompanyFormsSortBy$outboundSchema.optional(),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",
+    sortBy: "sort_by",
     xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });

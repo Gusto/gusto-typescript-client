@@ -25,7 +25,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const HeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -204,7 +204,7 @@ export const PutV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "X-Gusto-API-Version": HeaderXGustoAPIVersion$inboundSchema.default(
-    "2024-04-01",
+    "2025-06-15",
   ),
   location_id: z.string(),
   RequestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$inboundSchema),
@@ -229,7 +229,7 @@ export const PutV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1LocationsLocationIdRequest
 > = z.object({
-  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2025-06-15"),
   locationId: z.string(),
   requestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$outboundSchema),
 }).transform((v) => {

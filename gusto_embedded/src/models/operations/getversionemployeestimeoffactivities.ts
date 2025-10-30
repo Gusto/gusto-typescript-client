@@ -57,7 +57,7 @@ export const GetVersionEmployeesTimeOffActivitiesRequest$inboundSchema:
   > = z.object({
     employee_uuid: z.string(),
     time_off_type: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "employee_uuid": "employeeUuid",
@@ -82,7 +82,7 @@ export const GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema:
   > = z.object({
     employeeUuid: z.string(),
     timeOffType: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       employeeUuid: "employee_uuid",
