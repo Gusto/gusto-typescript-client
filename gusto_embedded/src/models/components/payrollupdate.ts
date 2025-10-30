@@ -114,6 +114,21 @@ export type PayrollUpdatePaidTimeOff = {
   finalPayoutUnusedHoursInput?: string | undefined;
 };
 
+export type PayrollUpdateReimbursements = {
+  /**
+   * The dollar amount of the reimbursement for the pay period.
+   */
+  amount?: string | undefined;
+  /**
+   * The description of the reimbursement. If not provided, the reimbursement will be unnamed.
+   */
+  description?: string | undefined;
+  /**
+   * The UUID of an existing reimbursement. This parameter is optional and can be provided in order to update an existing reimbursement.
+   */
+  uuid?: string | undefined;
+};
+
 export type PayrollUpdateEmployeeCompensations = {
   /**
    * The UUID of the employee.
@@ -142,6 +157,10 @@ export type PayrollUpdateEmployeeCompensations = {
    * An array of all paid time off the employee is eligible for this pay period. Each paid time off object can be the name or the specific policy_uuid.
    */
   paidTimeOff?: Array<PayrollUpdatePaidTimeOff> | undefined;
+  /**
+   * An array of reimbursements for the employee.
+   */
+  reimbursements?: Array<PayrollUpdateReimbursements> | undefined;
 };
 
 /**
@@ -504,6 +523,68 @@ export function payrollUpdatePaidTimeOffFromJSON(
 }
 
 /** @internal */
+export const PayrollUpdateReimbursements$inboundSchema: z.ZodType<
+  PayrollUpdateReimbursements,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  amount: z.string().optional(),
+  description: z.string().optional(),
+  uuid: z.string().optional(),
+});
+
+/** @internal */
+export type PayrollUpdateReimbursements$Outbound = {
+  amount?: string | undefined;
+  description?: string | undefined;
+  uuid?: string | undefined;
+};
+
+/** @internal */
+export const PayrollUpdateReimbursements$outboundSchema: z.ZodType<
+  PayrollUpdateReimbursements$Outbound,
+  z.ZodTypeDef,
+  PayrollUpdateReimbursements
+> = z.object({
+  amount: z.string().optional(),
+  description: z.string().optional(),
+  uuid: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PayrollUpdateReimbursements$ {
+  /** @deprecated use `PayrollUpdateReimbursements$inboundSchema` instead. */
+  export const inboundSchema = PayrollUpdateReimbursements$inboundSchema;
+  /** @deprecated use `PayrollUpdateReimbursements$outboundSchema` instead. */
+  export const outboundSchema = PayrollUpdateReimbursements$outboundSchema;
+  /** @deprecated use `PayrollUpdateReimbursements$Outbound` instead. */
+  export type Outbound = PayrollUpdateReimbursements$Outbound;
+}
+
+export function payrollUpdateReimbursementsToJSON(
+  payrollUpdateReimbursements: PayrollUpdateReimbursements,
+): string {
+  return JSON.stringify(
+    PayrollUpdateReimbursements$outboundSchema.parse(
+      payrollUpdateReimbursements,
+    ),
+  );
+}
+
+export function payrollUpdateReimbursementsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollUpdateReimbursements, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollUpdateReimbursements$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollUpdateReimbursements' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollUpdateEmployeeCompensations$inboundSchema: z.ZodType<
   PayrollUpdateEmployeeCompensations,
   z.ZodTypeDef,
@@ -524,6 +605,9 @@ export const PayrollUpdateEmployeeCompensations$inboundSchema: z.ZodType<
     .optional(),
   paid_time_off: z.array(z.lazy(() => PayrollUpdatePaidTimeOff$inboundSchema))
     .optional(),
+  reimbursements: z.array(
+    z.lazy(() => PayrollUpdateReimbursements$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -549,6 +633,7 @@ export type PayrollUpdateEmployeeCompensations$Outbound = {
     | undefined;
   deductions?: Array<PayrollUpdateDeductions$Outbound> | undefined;
   paid_time_off?: Array<PayrollUpdatePaidTimeOff$Outbound> | undefined;
+  reimbursements?: Array<PayrollUpdateReimbursements$Outbound> | undefined;
 };
 
 /** @internal */
@@ -572,6 +657,9 @@ export const PayrollUpdateEmployeeCompensations$outboundSchema: z.ZodType<
     .optional(),
   paidTimeOff: z.array(z.lazy(() => PayrollUpdatePaidTimeOff$outboundSchema))
     .optional(),
+  reimbursements: z.array(
+    z.lazy(() => PayrollUpdateReimbursements$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",

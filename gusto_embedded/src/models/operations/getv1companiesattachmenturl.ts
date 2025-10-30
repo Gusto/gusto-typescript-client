@@ -60,7 +60,7 @@ export const GetV1CompaniesAttachmentUrlRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_id: z.string(),
   company_attachment_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -84,7 +84,7 @@ export const GetV1CompaniesAttachmentUrlRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyId: z.string(),
   companyAttachmentUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",

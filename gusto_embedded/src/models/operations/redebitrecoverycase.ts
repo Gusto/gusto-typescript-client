@@ -41,7 +41,7 @@ export const RedebitRecoveryCaseRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   recovery_case_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "recovery_case_uuid": "recoveryCaseUuid",
@@ -62,7 +62,7 @@ export const RedebitRecoveryCaseRequest$outboundSchema: z.ZodType<
   RedebitRecoveryCaseRequest
 > = z.object({
   recoveryCaseUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     recoveryCaseUuid: "recovery_case_uuid",

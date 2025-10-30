@@ -183,6 +183,7 @@ async function $do(
     M.json(200, GetV1EmployeesEmployeeIdRehireResponse$inboundSchema, {
       key: "Rehire",
     }),
+    M.nil(204, GetV1EmployeesEmployeeIdRehireResponse$inboundSchema),
     M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

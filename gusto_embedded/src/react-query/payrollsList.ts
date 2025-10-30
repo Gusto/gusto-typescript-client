@@ -17,6 +17,7 @@ import { payrollsList } from "../funcs/payrollsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
+  DateFilterBy,
   GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsRequest,
@@ -123,6 +124,7 @@ export function setPayrollsListData(
         | undefined;
       startDate?: string | undefined;
       endDate?: string | undefined;
+      dateFilterBy?: DateFilterBy | undefined;
       page?: number | undefined;
       per?: number | undefined;
       sortOrder?: SortOrder | undefined;
@@ -153,6 +155,7 @@ export function invalidatePayrollsList(
           | undefined;
         startDate?: string | undefined;
         endDate?: string | undefined;
+        dateFilterBy?: DateFilterBy | undefined;
         page?: number | undefined;
         per?: number | undefined;
         sortOrder?: SortOrder | undefined;
@@ -195,6 +198,7 @@ export function buildPayrollsListQuery(
       include: request.include,
       startDate: request.startDate,
       endDate: request.endDate,
+      dateFilterBy: request.dateFilterBy,
       page: request.page,
       per: request.per,
       sortOrder: request.sortOrder,
@@ -232,6 +236,7 @@ export function queryKeyPayrollsList(
       | undefined;
     startDate?: string | undefined;
     endDate?: string | undefined;
+    dateFilterBy?: DateFilterBy | undefined;
     page?: number | undefined;
     per?: number | undefined;
     sortOrder?: SortOrder | undefined;

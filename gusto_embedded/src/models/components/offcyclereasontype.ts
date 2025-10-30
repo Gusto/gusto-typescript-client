@@ -9,6 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
  * The off-cycle reason. Only included for off-cycle payrolls.
  */
 export const OffCycleReasonType = {
+  Adhoc: "Adhoc",
   BenefitReversal: "Benefit reversal",
   Bonus: "Bonus",
   Correction: "Correction",

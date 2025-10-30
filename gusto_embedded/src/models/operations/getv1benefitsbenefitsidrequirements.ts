@@ -49,7 +49,7 @@ export const GetV1BenefitsBenefitsIdRequirementsRequest$inboundSchema:
   z.ZodType<GetV1BenefitsBenefitsIdRequirementsRequest, z.ZodTypeDef, unknown> =
     z.object({
       benefit_id: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     }).transform((v) => {
       return remap$(v, {
         "benefit_id": "benefitId",
@@ -71,7 +71,7 @@ export const GetV1BenefitsBenefitsIdRequirementsRequest$outboundSchema:
     GetV1BenefitsBenefitsIdRequirementsRequest
   > = z.object({
     benefitId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       benefitId: "benefit_id",

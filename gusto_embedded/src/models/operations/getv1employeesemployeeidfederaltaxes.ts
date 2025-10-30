@@ -52,7 +52,7 @@ export const GetV1EmployeesEmployeeIdFederalTaxesRequest$inboundSchema:
     unknown
   > = z.object({
     employee_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "employee_uuid": "employeeUuid",
@@ -74,7 +74,7 @@ export const GetV1EmployeesEmployeeIdFederalTaxesRequest$outboundSchema:
     GetV1EmployeesEmployeeIdFederalTaxesRequest
   > = z.object({
     employeeUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       employeeUuid: "employee_uuid",

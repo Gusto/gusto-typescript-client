@@ -7,11 +7,11 @@ Determines the date-based API version associated with your API call. If none is 
 ```typescript
 import { XGustoAPIVersion } from "@gusto/embedded-api/models/operations/getv1locationslocationid.js";
 
-let value: XGustoAPIVersion = "2024-04-01";
+let value: XGustoAPIVersion = "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```

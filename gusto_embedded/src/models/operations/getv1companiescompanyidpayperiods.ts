@@ -63,7 +63,7 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$inboundSchema: z.ZodType<
   start_date: z.string().optional(),
   end_date: z.string().optional(),
   payroll_types: z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "company_id": "companyId",
@@ -93,7 +93,7 @@ export const GetV1CompaniesCompanyIdPayPeriodsRequest$outboundSchema: z.ZodType<
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   payrollTypes: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",

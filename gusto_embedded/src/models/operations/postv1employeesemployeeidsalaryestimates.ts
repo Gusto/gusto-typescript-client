@@ -73,7 +73,7 @@ export type PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody = {
   /**
    * The annual net revenue of the business (must be greater than 0)
    */
-  annualNetRevenue: number;
+  annualNetRevenue?: number | null | undefined;
   /**
    * The ZIP code for location-based salary calculations
    */
@@ -231,7 +231,7 @@ export const PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    annual_net_revenue: z.number(),
+    annual_net_revenue: z.nullable(z.number()).optional(),
     zip_code: z.string(),
     occupations: z.array(z.lazy(() => Occupations$inboundSchema)),
   }).transform((v) => {
@@ -243,7 +243,7 @@ export const PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$inboundSchema:
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$Outbound = {
-  annual_net_revenue: number;
+  annual_net_revenue?: number | null | undefined;
   zip_code: string;
   occupations: Array<Occupations$Outbound>;
 };
@@ -255,7 +255,7 @@ export const PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$outboundSchema:
     z.ZodTypeDef,
     PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody
   > = z.object({
-    annualNetRevenue: z.number(),
+    annualNetRevenue: z.nullable(z.number()).optional(),
     zipCode: z.string(),
     occupations: z.array(z.lazy(() => Occupations$outboundSchema)),
   }).transform((v) => {

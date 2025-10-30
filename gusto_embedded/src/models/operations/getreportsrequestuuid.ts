@@ -51,7 +51,7 @@ export const GetReportsRequestUuidRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   request_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "request_uuid": "requestUuid",
@@ -72,7 +72,7 @@ export const GetReportsRequestUuidRequest$outboundSchema: z.ZodType<
   GetReportsRequestUuidRequest
 > = z.object({
   requestUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     requestUuid: "request_uuid",

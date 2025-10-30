@@ -503,7 +503,7 @@ export const PutV1ExternalPayrollRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   external_payroll_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() => PutV1ExternalPayrollRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -530,7 +530,7 @@ export const PutV1ExternalPayrollRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   externalPayrollId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1ExternalPayrollRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

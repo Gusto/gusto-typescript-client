@@ -62,7 +62,7 @@ export const GetV1EmployeesEmployeeIdBankAccountsRequest$inboundSchema:
     employee_id: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -88,7 +88,7 @@ export const GetV1EmployeesEmployeeIdBankAccountsRequest$outboundSchema:
     employeeId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

@@ -121,6 +121,7 @@ async function $do(
       "processing_statuses": payload.processing_statuses,
     }, { explode: false }),
     encodeFormQuery({
+      "date_filter_by": payload.date_filter_by,
       "end_date": payload.end_date,
       "include_off_cycle": payload.include_off_cycle,
       "page": payload.page,

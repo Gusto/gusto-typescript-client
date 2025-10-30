@@ -164,7 +164,7 @@ export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest$i
     unknown
   > = z.object({
     company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$inboundSchema
     ),
@@ -193,7 +193,7 @@ export const PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest$o
     PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest
   > = z.object({
     companyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody$outboundSchema
     ),

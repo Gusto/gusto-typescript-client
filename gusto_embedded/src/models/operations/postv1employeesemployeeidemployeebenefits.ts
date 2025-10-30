@@ -614,7 +614,7 @@ export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$inboundSchema:
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$inboundSchema
     ),
@@ -641,7 +641,7 @@ export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema:
     PostV1EmployeesEmployeeIdEmployeeBenefitsRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$outboundSchema
     ),

@@ -13,6 +13,11 @@ import {
   Contractor$outboundSchema,
 } from "../components/contractor.js";
 import {
+  ContractorsSortBy,
+  ContractorsSortBy$inboundSchema,
+  ContractorsSortBy$outboundSchema,
+} from "../components/contractorssortby.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
   HTTPMetadata$Outbound,
@@ -43,6 +48,10 @@ export type GetV1CompaniesCompanyUuidContractorsRequest = {
    */
   searchTerm?: string | undefined;
   /**
+   * Sort contractors. Options: type, onboarding_status, name, created_at
+   */
+  sortBy?: ContractorsSortBy | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: VersionHeader | undefined;
@@ -67,11 +76,13 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     search_term: z.string().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    sort_by: ContractorsSortBy$inboundSchema.optional(),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "company_uuid": "companyUuid",
       "search_term": "searchTerm",
+      "sort_by": "sortBy",
       "X-Gusto-API-Version": "xGustoAPIVersion",
     });
   });
@@ -82,6 +93,7 @@ export type GetV1CompaniesCompanyUuidContractorsRequest$Outbound = {
   page?: number | undefined;
   per?: number | undefined;
   search_term?: string | undefined;
+  sort_by?: string | undefined;
   "X-Gusto-API-Version": string;
 };
 
@@ -96,11 +108,13 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     searchTerm: z.string().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    sortBy: ContractorsSortBy$outboundSchema.optional(),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyUuid: "company_uuid",
       searchTerm: "search_term",
+      sortBy: "sort_by",
       xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });

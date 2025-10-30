@@ -139,7 +139,7 @@ export const PutV1CompanyIndustryRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() => PutV1CompanyIndustryRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -163,7 +163,7 @@ export const PutV1CompanyIndustryRequest$outboundSchema: z.ZodType<
   PutV1CompanyIndustryRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1CompanyIndustryRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

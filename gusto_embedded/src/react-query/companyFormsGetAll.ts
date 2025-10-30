@@ -16,6 +16,7 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyFormsGetAll } from "../funcs/companyFormsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { CompanyFormsSortBy } from "../models/components/companyformssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1CompanyFormsRequest,
@@ -94,7 +95,10 @@ export function setCompanyFormsGetAllData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      sortBy?: CompanyFormsSortBy | undefined;
+      xGustoAPIVersion?: VersionHeader | undefined;
+    },
   ],
   data: CompanyFormsGetAllQueryData,
 ): CompanyFormsGetAllQueryData | undefined {
@@ -108,7 +112,10 @@ export function invalidateCompanyFormsGetAll(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        sortBy?: CompanyFormsSortBy | undefined;
+        xGustoAPIVersion?: VersionHeader | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -146,6 +153,7 @@ export function buildCompanyFormsGetAllQuery(
 } {
   return {
     queryKey: queryKeyCompanyFormsGetAll(request.companyId, {
+      sortBy: request.sortBy,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function companyFormsGetAllQueryFn(
@@ -168,7 +176,10 @@ export function buildCompanyFormsGetAllQuery(
 
 export function queryKeyCompanyFormsGetAll(
   companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: {
+    sortBy?: CompanyFormsSortBy | undefined;
+    xGustoAPIVersion?: VersionHeader | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

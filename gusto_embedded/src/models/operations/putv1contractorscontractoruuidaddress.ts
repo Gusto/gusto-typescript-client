@@ -158,7 +158,7 @@ export const PutV1ContractorsContractorUuidAddressRequest$inboundSchema:
     unknown
   > = z.object({
     contractor_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     RequestBody: z.lazy(() =>
       PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema
     ),
@@ -185,7 +185,7 @@ export const PutV1ContractorsContractorUuidAddressRequest$outboundSchema:
     PutV1ContractorsContractorUuidAddressRequest
   > = z.object({
     contractorUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema
     ),

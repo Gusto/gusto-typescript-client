@@ -56,7 +56,7 @@ export const GetV1CompanyOnboardingStatusRequest$inboundSchema: z.ZodType<
 > = z.object({
   company_uuid: z.string(),
   additional_steps: z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -80,7 +80,7 @@ export const GetV1CompanyOnboardingStatusRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   additionalSteps: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

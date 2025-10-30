@@ -52,7 +52,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$inboundSchem
     unknown
   > = z.object({
     time_off_policy_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "time_off_policy_uuid": "timeOffPolicyUuid",
@@ -74,7 +74,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSche
     PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest
   > = z.object({
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       timeOffPolicyUuid: "time_off_policy_uuid",

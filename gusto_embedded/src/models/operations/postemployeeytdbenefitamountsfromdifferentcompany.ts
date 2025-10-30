@@ -50,7 +50,7 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSch
     unknown
   > = z.object({
     employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
     "post-employee-ytd-benefit-amounts-from-different-company": z.lazy(() =>
       PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema
     ),
@@ -80,7 +80,7 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSc
     PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest
   > = z.object({
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     postEmployeeYtdBenefitAmountsFromDifferentCompany: z.lazy(() =>
       PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema
     ),

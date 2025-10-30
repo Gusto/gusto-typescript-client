@@ -129,7 +129,7 @@ export const PutV1CompanyPaymentConfigsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.union([
     FastPaymentLimitRequiredBody$inboundSchema,
     PaymentSpeedRequiredBody$inboundSchema,
@@ -158,7 +158,7 @@ export const PutV1CompanyPaymentConfigsRequest$outboundSchema: z.ZodType<
   PutV1CompanyPaymentConfigsRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.union([
     FastPaymentLimitRequiredBody$outboundSchema,
     PaymentSpeedRequiredBody$outboundSchema,

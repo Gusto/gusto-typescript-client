@@ -41,9 +41,10 @@ import { Result } from "../types/fp.js";
  * Preview a contractor payment group
  *
  * @remarks
- * Preview a contractor payment group before creating it. This endpoint allows you to see what the payment group would look like with the provided parameters without actually creating it.
+ * Preview a group of contractor payments. Request will validate inputs and return preview of the contractor payment group including the expected debit_date.  Uuid will be null in the response.
+ * The returned creation_token is a required parameter in order to create the contractor payment group.
  *
- * scope: `contractor_payment_groups:write`
+ * scope: `payrolls:read`
  */
 export function contractorPaymentGroupsPreview(
   client: GustoEmbeddedCore,

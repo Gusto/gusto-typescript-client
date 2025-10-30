@@ -158,6 +158,25 @@ export type PayrollShowDeductions = {
   uuid?: string | undefined;
 };
 
+export type PayrollShowReimbursements = {
+  /**
+   * The dollar amount of the reimbursement for the pay period.
+   */
+  amount: string;
+  /**
+   * The description of the reimbursement. Null for unnamed reimbursements.
+   */
+  description: string | null;
+  /**
+   * The UUID of the reimbursement. Null for unnamed reimbursements. This field is only available for unprocessed payrolls.
+   */
+  uuid?: string | null | undefined;
+  /**
+   * Whether the reimbursement is recurring. This field is only available for unprocessed payrolls.
+   */
+  recurring?: boolean | undefined;
+};
+
 export type PayrollShowTaxes = {
   name: string;
   employer: boolean;
@@ -232,6 +251,10 @@ export type EmployeeCompensations = {
    * An array of employee deductions for the pay period.
    */
   deductions?: Array<PayrollShowDeductions> | undefined;
+  /**
+   * An array of reimbursements for the employee.
+   */
+  reimbursements?: Array<PayrollShowReimbursements> | undefined;
   /**
    * An array of employer and employee taxes for the pay period. Only included for processed or calculated payrolls when `taxes` is present in the `include` parameter.
    */
@@ -683,6 +706,69 @@ export function payrollShowDeductionsFromJSON(
 }
 
 /** @internal */
+export const PayrollShowReimbursements$inboundSchema: z.ZodType<
+  PayrollShowReimbursements,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  amount: z.string(),
+  description: z.nullable(z.string()),
+  uuid: z.nullable(z.string()).optional(),
+  recurring: z.boolean().optional(),
+});
+
+/** @internal */
+export type PayrollShowReimbursements$Outbound = {
+  amount: string;
+  description: string | null;
+  uuid?: string | null | undefined;
+  recurring?: boolean | undefined;
+};
+
+/** @internal */
+export const PayrollShowReimbursements$outboundSchema: z.ZodType<
+  PayrollShowReimbursements$Outbound,
+  z.ZodTypeDef,
+  PayrollShowReimbursements
+> = z.object({
+  amount: z.string(),
+  description: z.nullable(z.string()),
+  uuid: z.nullable(z.string()).optional(),
+  recurring: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PayrollShowReimbursements$ {
+  /** @deprecated use `PayrollShowReimbursements$inboundSchema` instead. */
+  export const inboundSchema = PayrollShowReimbursements$inboundSchema;
+  /** @deprecated use `PayrollShowReimbursements$outboundSchema` instead. */
+  export const outboundSchema = PayrollShowReimbursements$outboundSchema;
+  /** @deprecated use `PayrollShowReimbursements$Outbound` instead. */
+  export type Outbound = PayrollShowReimbursements$Outbound;
+}
+
+export function payrollShowReimbursementsToJSON(
+  payrollShowReimbursements: PayrollShowReimbursements,
+): string {
+  return JSON.stringify(
+    PayrollShowReimbursements$outboundSchema.parse(payrollShowReimbursements),
+  );
+}
+
+export function payrollShowReimbursementsFromJSON(
+  jsonString: string,
+): SafeParseResult<PayrollShowReimbursements, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PayrollShowReimbursements$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollShowReimbursements' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollShowTaxes$inboundSchema: z.ZodType<
   PayrollShowTaxes,
   z.ZodTypeDef,
@@ -842,6 +928,8 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
     .optional(),
   deductions: z.array(z.lazy(() => PayrollShowDeductions$inboundSchema))
     .optional(),
+  reimbursements: z.array(z.lazy(() => PayrollShowReimbursements$inboundSchema))
+    .optional(),
   taxes: z.array(z.lazy(() => PayrollShowTaxes$inboundSchema)).optional(),
   benefits: z.array(z.lazy(() => PayrollShowBenefits$inboundSchema)).optional(),
 }).transform((v) => {
@@ -881,6 +969,7 @@ export type EmployeeCompensations$Outbound = {
     | undefined;
   paid_time_off?: Array<PayrollShowPaidTimeOff$Outbound> | undefined;
   deductions?: Array<PayrollShowDeductions$Outbound> | undefined;
+  reimbursements?: Array<PayrollShowReimbursements$Outbound> | undefined;
   taxes?: Array<PayrollShowTaxes$Outbound> | undefined;
   benefits?: Array<PayrollShowBenefits$Outbound> | undefined;
 };
@@ -912,6 +1001,9 @@ export const EmployeeCompensations$outboundSchema: z.ZodType<
     .optional(),
   deductions: z.array(z.lazy(() => PayrollShowDeductions$outboundSchema))
     .optional(),
+  reimbursements: z.array(
+    z.lazy(() => PayrollShowReimbursements$outboundSchema),
+  ).optional(),
   taxes: z.array(z.lazy(() => PayrollShowTaxes$outboundSchema)).optional(),
   benefits: z.array(z.lazy(() => PayrollShowBenefits$outboundSchema))
     .optional(),

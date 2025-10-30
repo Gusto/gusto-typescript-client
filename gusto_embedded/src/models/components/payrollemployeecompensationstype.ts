@@ -115,6 +115,25 @@ export type Deductions = {
   uuid?: string | undefined;
 };
 
+export type Reimbursements = {
+  /**
+   * The dollar amount of the reimbursement for the pay period.
+   */
+  amount: string;
+  /**
+   * The description of the reimbursement. Null for unnamed reimbursements.
+   */
+  description: string | null;
+  /**
+   * The UUID of the reimbursement. Null for unnamed reimbursements. This field is only available for unprocessed payrolls.
+   */
+  uuid?: string | null | undefined;
+  /**
+   * Whether the reimbursement is recurring. This field is only available for unprocessed payrolls.
+   */
+  recurring?: boolean | undefined;
+};
+
 export type PayrollEmployeeCompensationsType = {
   /**
    * The UUID of the employee.
@@ -176,6 +195,10 @@ export type PayrollEmployeeCompensationsType = {
    */
   paidTimeOff?: Array<PayrollEmployeeCompensationsTypePaidTimeOff> | undefined;
   deductions?: Array<Deductions> | undefined;
+  /**
+   * An array of reimbursements for the employee.
+   */
+  reimbursements?: Array<Reimbursements> | undefined;
 };
 
 /** @internal */
@@ -518,6 +541,65 @@ export function deductionsFromJSON(
 }
 
 /** @internal */
+export const Reimbursements$inboundSchema: z.ZodType<
+  Reimbursements,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  amount: z.string(),
+  description: z.nullable(z.string()),
+  uuid: z.nullable(z.string()).optional(),
+  recurring: z.boolean().optional(),
+});
+
+/** @internal */
+export type Reimbursements$Outbound = {
+  amount: string;
+  description: string | null;
+  uuid?: string | null | undefined;
+  recurring?: boolean | undefined;
+};
+
+/** @internal */
+export const Reimbursements$outboundSchema: z.ZodType<
+  Reimbursements$Outbound,
+  z.ZodTypeDef,
+  Reimbursements
+> = z.object({
+  amount: z.string(),
+  description: z.nullable(z.string()),
+  uuid: z.nullable(z.string()).optional(),
+  recurring: z.boolean().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Reimbursements$ {
+  /** @deprecated use `Reimbursements$inboundSchema` instead. */
+  export const inboundSchema = Reimbursements$inboundSchema;
+  /** @deprecated use `Reimbursements$outboundSchema` instead. */
+  export const outboundSchema = Reimbursements$outboundSchema;
+  /** @deprecated use `Reimbursements$Outbound` instead. */
+  export type Outbound = Reimbursements$Outbound;
+}
+
+export function reimbursementsToJSON(reimbursements: Reimbursements): string {
+  return JSON.stringify(Reimbursements$outboundSchema.parse(reimbursements));
+}
+
+export function reimbursementsFromJSON(
+  jsonString: string,
+): SafeParseResult<Reimbursements, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Reimbursements$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Reimbursements' from JSON`,
+  );
+}
+
+/** @internal */
 export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   PayrollEmployeeCompensationsType,
   z.ZodTypeDef,
@@ -544,6 +626,8 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
     z.lazy(() => PayrollEmployeeCompensationsTypePaidTimeOff$inboundSchema),
   ).optional(),
   deductions: z.array(z.lazy(() => Deductions$inboundSchema)).optional(),
+  reimbursements: z.array(z.lazy(() => Reimbursements$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",
@@ -579,6 +663,7 @@ export type PayrollEmployeeCompensationsType$Outbound = {
     | Array<PayrollEmployeeCompensationsTypePaidTimeOff$Outbound>
     | undefined;
   deductions?: Array<Deductions$Outbound> | undefined;
+  reimbursements?: Array<Reimbursements$Outbound> | undefined;
 };
 
 /** @internal */
@@ -608,6 +693,8 @@ export const PayrollEmployeeCompensationsType$outboundSchema: z.ZodType<
     z.lazy(() => PayrollEmployeeCompensationsTypePaidTimeOff$outboundSchema),
   ).optional(),
   deductions: z.array(z.lazy(() => Deductions$outboundSchema)).optional(),
+  reimbursements: z.array(z.lazy(() => Reimbursements$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeUuid: "employee_uuid",

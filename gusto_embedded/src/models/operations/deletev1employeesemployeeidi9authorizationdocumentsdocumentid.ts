@@ -49,7 +49,7 @@ export const DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdReques
   > = z.object({
     employee_id: z.string(),
     document_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       "employee_id": "employeeId",
@@ -75,7 +75,7 @@ export const DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdReques
   > = z.object({
     employeeId: z.string(),
     documentId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       employeeId: "employee_id",

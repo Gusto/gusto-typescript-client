@@ -51,7 +51,7 @@ export const GetV1CompanyFormPdfRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   form_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     "form_id": "formId",
@@ -72,7 +72,7 @@ export const GetV1CompanyFormPdfRequest$outboundSchema: z.ZodType<
   GetV1CompanyFormPdfRequest
 > = z.object({
   formId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {
     formId: "form_id",

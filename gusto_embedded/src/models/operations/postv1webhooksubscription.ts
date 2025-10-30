@@ -232,7 +232,7 @@ export const PostV1WebhookSubscriptionRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() => PostV1WebhookSubscriptionRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -253,7 +253,7 @@ export const PostV1WebhookSubscriptionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1WebhookSubscriptionRequest
 > = z.object({
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() =>
     PostV1WebhookSubscriptionRequestBody$outboundSchema
   ),

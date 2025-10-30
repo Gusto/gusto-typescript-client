@@ -209,7 +209,7 @@ export const PutV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2024-04-01"),
+  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
   RequestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -233,7 +233,7 @@ export const PutV1TaxLiabilitiesRequest$outboundSchema: z.ZodType<
   PutV1TaxLiabilitiesRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2024-04-01"),
+  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   requestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
