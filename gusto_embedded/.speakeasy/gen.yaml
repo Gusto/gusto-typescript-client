@@ -20,18 +20,21 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
     hoistGlobalSecurity: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.9.0
+  version: 0.10.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
+  additionalScripts: {}
   author: Speakeasy
   baseErrorName: GustoEmbeddedError
   clientServerStatusCodesAsErrors: true
@@ -66,3 +69,4 @@ typescript:
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: false
+  zodVersion: v3

@@ -1,6 +1,6 @@
 {
   "name": "@gusto/embedded-api",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "author": "Speakeasy",
   "type": "module",
   "main": "./esm/index.js",
@@ -53,6 +53,6 @@
     "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
-    "zod": "^3.20.0"
+    "zod": "^3.25.0 || ^4.0.0"
   }
 }

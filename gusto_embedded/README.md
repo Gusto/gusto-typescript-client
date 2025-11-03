@@ -1417,7 +1417,7 @@ You can override the default server globally by passing a server name to the `se
 import { GustoEmbedded } from "@gusto/embedded-api";
 
 const gustoEmbedded = new GustoEmbedded({
-  server: "prod",
+  server: "demo",
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
 });
 
