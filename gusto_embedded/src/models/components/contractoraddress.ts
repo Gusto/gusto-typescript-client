@@ -52,63 +52,6 @@ export const ContractorAddress$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ContractorAddress$Outbound = {
-  version?: string | undefined;
-  street_1?: string | null | undefined;
-  street_2?: string | null | undefined;
-  city?: string | null | undefined;
-  state?: string | null | undefined;
-  zip?: string | null | undefined;
-  country: string | null;
-  active?: boolean | undefined;
-  contractor_uuid?: string | undefined;
-};
-
-/** @internal */
-export const ContractorAddress$outboundSchema: z.ZodType<
-  ContractorAddress$Outbound,
-  z.ZodTypeDef,
-  ContractorAddress
-> = z.object({
-  version: z.string().optional(),
-  street1: z.nullable(z.string()).optional(),
-  street2: z.nullable(z.string()).optional(),
-  city: z.nullable(z.string()).optional(),
-  state: z.nullable(z.string()).optional(),
-  zip: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string().default("USA")),
-  active: z.boolean().optional(),
-  contractorUuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
-    contractorUuid: "contractor_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorAddress$ {
-  /** @deprecated use `ContractorAddress$inboundSchema` instead. */
-  export const inboundSchema = ContractorAddress$inboundSchema;
-  /** @deprecated use `ContractorAddress$outboundSchema` instead. */
-  export const outboundSchema = ContractorAddress$outboundSchema;
-  /** @deprecated use `ContractorAddress$Outbound` instead. */
-  export type Outbound = ContractorAddress$Outbound;
-}
-
-export function contractorAddressToJSON(
-  contractorAddress: ContractorAddress,
-): string {
-  return JSON.stringify(
-    ContractorAddress$outboundSchema.parse(contractorAddress),
-  );
-}
-
 export function contractorAddressFromJSON(
   jsonString: string,
 ): SafeParseResult<ContractorAddress, SDKValidationError> {

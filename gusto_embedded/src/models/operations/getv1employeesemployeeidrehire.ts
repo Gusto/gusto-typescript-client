@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Rehire,
-  Rehire$inboundSchema,
-  Rehire$Outbound,
-  Rehire$outboundSchema,
-} from "../components/rehire.js";
+import { Rehire, Rehire$inboundSchema } from "../components/rehire.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +37,6 @@ export type GetV1EmployeesEmployeeIdRehireResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
-  GetV1EmployeesEmployeeIdRehireRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1EmployeesEmployeeIdRehireRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version": string;
@@ -80,21 +57,6 @@ export const GetV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdRehireRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdRehireRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdRehireRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRehireRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdRehireRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRehireRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdRehireRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdRehireRequestToJSON(
   getV1EmployeesEmployeeIdRehireRequest: GetV1EmployeesEmployeeIdRehireRequest,
 ): string {
@@ -102,17 +64,6 @@ export function getV1EmployeesEmployeeIdRehireRequestToJSON(
     GetV1EmployeesEmployeeIdRehireRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdRehireRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdRehireRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1EmployeesEmployeeIdRehireRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdRehireRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1EmployeesEmployeeIdRehireRequest' from JSON`,
   );
 }
 
@@ -130,53 +81,6 @@ export const GetV1EmployeesEmployeeIdRehireResponse$inboundSchema: z.ZodType<
     "Rehire": "rehire",
   });
 });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdRehireResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Rehire?: Rehire$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdRehireResponse$outboundSchema: z.ZodType<
-  GetV1EmployeesEmployeeIdRehireResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1EmployeesEmployeeIdRehireResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  rehire: Rehire$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    rehire: "Rehire",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdRehireResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdRehireResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdRehireResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRehireResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdRehireResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRehireResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdRehireResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdRehireResponseToJSON(
-  getV1EmployeesEmployeeIdRehireResponse:
-    GetV1EmployeesEmployeeIdRehireResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdRehireResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdRehireResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdRehireResponseFromJSON(
   jsonString: string,

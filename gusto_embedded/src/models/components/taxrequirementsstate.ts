@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaxRequirementSet,
   TaxRequirementSet$inboundSchema,
-  TaxRequirementSet$Outbound,
-  TaxRequirementSet$outboundSchema,
 } from "./taxrequirementset.js";
 
 export type TaxRequirementsState = {
@@ -38,50 +36,6 @@ export const TaxRequirementsState$inboundSchema: z.ZodType<
     "requirement_sets": "requirementSets",
   });
 });
-
-/** @internal */
-export type TaxRequirementsState$Outbound = {
-  company_uuid?: string | undefined;
-  state?: string | undefined;
-  requirement_sets?: Array<TaxRequirementSet$Outbound> | undefined;
-};
-
-/** @internal */
-export const TaxRequirementsState$outboundSchema: z.ZodType<
-  TaxRequirementsState$Outbound,
-  z.ZodTypeDef,
-  TaxRequirementsState
-> = z.object({
-  companyUuid: z.string().optional(),
-  state: z.string().optional(),
-  requirementSets: z.array(TaxRequirementSet$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    requirementSets: "requirement_sets",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementsState$ {
-  /** @deprecated use `TaxRequirementsState$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementsState$inboundSchema;
-  /** @deprecated use `TaxRequirementsState$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementsState$outboundSchema;
-  /** @deprecated use `TaxRequirementsState$Outbound` instead. */
-  export type Outbound = TaxRequirementsState$Outbound;
-}
-
-export function taxRequirementsStateToJSON(
-  taxRequirementsState: TaxRequirementsState,
-): string {
-  return JSON.stringify(
-    TaxRequirementsState$outboundSchema.parse(taxRequirementsState),
-  );
-}
 
 export function taxRequirementsStateFromJSON(
   jsonString: string,

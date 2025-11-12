@@ -64,48 +64,6 @@ export const EmployeeCheckNumberMapping$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type EmployeeCheckNumberMapping$Outbound = {
-  employee_uuid?: string | undefined;
-  check_number?: number | undefined;
-};
-
-/** @internal */
-export const EmployeeCheckNumberMapping$outboundSchema: z.ZodType<
-  EmployeeCheckNumberMapping$Outbound,
-  z.ZodTypeDef,
-  EmployeeCheckNumberMapping
-> = z.object({
-  employeeUuid: z.string().optional(),
-  checkNumber: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    checkNumber: "check_number",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeCheckNumberMapping$ {
-  /** @deprecated use `EmployeeCheckNumberMapping$inboundSchema` instead. */
-  export const inboundSchema = EmployeeCheckNumberMapping$inboundSchema;
-  /** @deprecated use `EmployeeCheckNumberMapping$outboundSchema` instead. */
-  export const outboundSchema = EmployeeCheckNumberMapping$outboundSchema;
-  /** @deprecated use `EmployeeCheckNumberMapping$Outbound` instead. */
-  export type Outbound = EmployeeCheckNumberMapping$Outbound;
-}
-
-export function employeeCheckNumberMappingToJSON(
-  employeeCheckNumberMapping: EmployeeCheckNumberMapping,
-): string {
-  return JSON.stringify(
-    EmployeeCheckNumberMapping$outboundSchema.parse(employeeCheckNumberMapping),
-  );
-}
-
 export function employeeCheckNumberMappingFromJSON(
   jsonString: string,
 ): SafeParseResult<EmployeeCheckNumberMapping, SDKValidationError> {
@@ -139,59 +97,6 @@ export const PayrollCheck$inboundSchema: z.ZodType<
     "employee_check_number_mapping": "employeeCheckNumberMapping",
   });
 });
-
-/** @internal */
-export type PayrollCheck$Outbound = {
-  payroll_uuid?: string | undefined;
-  printing_format?: string | undefined;
-  starting_check_number?: string | null | undefined;
-  request_uuid?: string | undefined;
-  status?: string | undefined;
-  employee_check_number_mapping?:
-    | Array<EmployeeCheckNumberMapping$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const PayrollCheck$outboundSchema: z.ZodType<
-  PayrollCheck$Outbound,
-  z.ZodTypeDef,
-  PayrollCheck
-> = z.object({
-  payrollUuid: z.string().optional(),
-  printingFormat: z.string().optional(),
-  startingCheckNumber: z.nullable(z.string()).optional(),
-  requestUuid: z.string().optional(),
-  status: z.string().optional(),
-  employeeCheckNumberMapping: z.array(
-    z.lazy(() => EmployeeCheckNumberMapping$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payrollUuid: "payroll_uuid",
-    printingFormat: "printing_format",
-    startingCheckNumber: "starting_check_number",
-    requestUuid: "request_uuid",
-    employeeCheckNumberMapping: "employee_check_number_mapping",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollCheck$ {
-  /** @deprecated use `PayrollCheck$inboundSchema` instead. */
-  export const inboundSchema = PayrollCheck$inboundSchema;
-  /** @deprecated use `PayrollCheck$outboundSchema` instead. */
-  export const outboundSchema = PayrollCheck$outboundSchema;
-  /** @deprecated use `PayrollCheck$Outbound` instead. */
-  export type Outbound = PayrollCheck$Outbound;
-}
-
-export function payrollCheckToJSON(payrollCheck: PayrollCheck): string {
-  return JSON.stringify(PayrollCheck$outboundSchema.parse(payrollCheck));
-}
 
 export function payrollCheckFromJSON(
   jsonString: string,

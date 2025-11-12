@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,19 +30,6 @@ export type DeleteV1CompensationsCompensationIdRequest = {
 export type DeleteV1CompensationsCompensationIdResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1CompensationsCompensationIdRequest$inboundSchema:
-  z.ZodType<DeleteV1CompensationsCompensationIdRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      compensation_id: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    }).transform((v) => {
-      return remap$(v, {
-        "compensation_id": "compensationId",
-        "X-Gusto-API-Version": "xGustoAPIVersion",
-      });
-    });
 
 /** @internal */
 export type DeleteV1CompensationsCompensationIdRequest$Outbound = {
@@ -69,21 +53,6 @@ export const DeleteV1CompensationsCompensationIdRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompensationsCompensationIdRequest$ {
-  /** @deprecated use `DeleteV1CompensationsCompensationIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompensationsCompensationIdRequest$inboundSchema;
-  /** @deprecated use `DeleteV1CompensationsCompensationIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompensationsCompensationIdRequest$outboundSchema;
-  /** @deprecated use `DeleteV1CompensationsCompensationIdRequest$Outbound` instead. */
-  export type Outbound = DeleteV1CompensationsCompensationIdRequest$Outbound;
-}
-
 export function deleteV1CompensationsCompensationIdRequestToJSON(
   deleteV1CompensationsCompensationIdRequest:
     DeleteV1CompensationsCompensationIdRequest,
@@ -92,22 +61,6 @@ export function deleteV1CompensationsCompensationIdRequestToJSON(
     DeleteV1CompensationsCompensationIdRequest$outboundSchema.parse(
       deleteV1CompensationsCompensationIdRequest,
     ),
-  );
-}
-
-export function deleteV1CompensationsCompensationIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1CompensationsCompensationIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1CompensationsCompensationIdRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteV1CompensationsCompensationIdRequest' from JSON`,
   );
 }
 
@@ -124,51 +77,6 @@ export const DeleteV1CompensationsCompensationIdResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1CompensationsCompensationIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1CompensationsCompensationIdResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1CompensationsCompensationIdResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompensationsCompensationIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompensationsCompensationIdResponse$ {
-  /** @deprecated use `DeleteV1CompensationsCompensationIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompensationsCompensationIdResponse$inboundSchema;
-  /** @deprecated use `DeleteV1CompensationsCompensationIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompensationsCompensationIdResponse$outboundSchema;
-  /** @deprecated use `DeleteV1CompensationsCompensationIdResponse$Outbound` instead. */
-  export type Outbound = DeleteV1CompensationsCompensationIdResponse$Outbound;
-}
-
-export function deleteV1CompensationsCompensationIdResponseToJSON(
-  deleteV1CompensationsCompensationIdResponse:
-    DeleteV1CompensationsCompensationIdResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1CompensationsCompensationIdResponse$outboundSchema.parse(
-      deleteV1CompensationsCompensationIdResponse,
-    ),
-  );
-}
 
 export function deleteV1CompensationsCompensationIdResponseFromJSON(
   jsonString: string,

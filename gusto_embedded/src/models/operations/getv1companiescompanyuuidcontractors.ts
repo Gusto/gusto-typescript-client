@@ -9,23 +9,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Contractor,
   Contractor$inboundSchema,
-  Contractor$Outbound,
-  Contractor$outboundSchema,
 } from "../components/contractor.js";
 import {
   ContractorsSortBy,
-  ContractorsSortBy$inboundSchema,
   ContractorsSortBy$outboundSchema,
 } from "../components/contractorssortby.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -66,28 +60,6 @@ export type GetV1CompaniesCompanyUuidContractorsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyUuidContractorsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    page: z.number().int().optional(),
-    per: z.number().int().optional(),
-    search_term: z.string().optional(),
-    sort_by: ContractorsSortBy$inboundSchema.optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "search_term": "searchTerm",
-      "sort_by": "sortBy",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesCompanyUuidContractorsRequest$Outbound = {
   company_uuid: string;
   page?: number | undefined;
@@ -119,21 +91,6 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyUuidContractorsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyUuidContractorsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyUuidContractorsRequestToJSON(
   getV1CompaniesCompanyUuidContractorsRequest:
     GetV1CompaniesCompanyUuidContractorsRequest,
@@ -142,22 +99,6 @@ export function getV1CompaniesCompanyUuidContractorsRequestToJSON(
     GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema.parse(
       getV1CompaniesCompanyUuidContractorsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyUuidContractorsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyUuidContractorsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyUuidContractorsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyUuidContractorsRequest' from JSON`,
   );
 }
 
@@ -176,54 +117,6 @@ export const GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema:
       "Contractor-List": "contractorList",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyUuidContractorsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-List"?: Array<Contractor$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyUuidContractorsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyUuidContractorsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractorList: z.array(Contractor$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractorList: "Contractor-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyUuidContractorsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidContractorsResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyUuidContractorsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyUuidContractorsResponseToJSON(
-  getV1CompaniesCompanyUuidContractorsResponse:
-    GetV1CompaniesCompanyUuidContractorsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyUuidContractorsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyUuidContractorsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyUuidContractorsResponseFromJSON(
   jsonString: string,

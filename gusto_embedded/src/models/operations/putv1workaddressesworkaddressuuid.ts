@@ -11,14 +11,10 @@ import { RFCDate } from "../../types/rfcdate.js";
 import {
   EmployeeWorkAddress,
   EmployeeWorkAddress$inboundSchema,
-  EmployeeWorkAddress$Outbound,
-  EmployeeWorkAddress$outboundSchema,
 } from "../components/employeeworkaddress.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -69,46 +65,10 @@ export type PutV1WorkAddressesWorkAddressUuidResponse = {
 };
 
 /** @internal */
-export const PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
-  > = z.nativeEnum(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
-
-/** @internal */
 export const PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
-  > = PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1WorkAddressesWorkAddressUuidRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    location_uuid: z.string().optional(),
-    effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "location_uuid": "locationUuid",
-      "effective_date": "effectiveDate",
-    });
-  });
+  > = z.nativeEnum(PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1WorkAddressesWorkAddressUuidRequestBody$Outbound = {
@@ -135,21 +95,6 @@ export const PutV1WorkAddressesWorkAddressUuidRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1WorkAddressesWorkAddressUuidRequestBody$ {
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema;
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1WorkAddressesWorkAddressUuidRequestBody$outboundSchema;
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidRequestBody$Outbound` instead. */
-  export type Outbound = PutV1WorkAddressesWorkAddressUuidRequestBody$Outbound;
-}
-
 export function putV1WorkAddressesWorkAddressUuidRequestBodyToJSON(
   putV1WorkAddressesWorkAddressUuidRequestBody:
     PutV1WorkAddressesWorkAddressUuidRequestBody,
@@ -160,43 +105,6 @@ export function putV1WorkAddressesWorkAddressUuidRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1WorkAddressesWorkAddressUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1WorkAddressesWorkAddressUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1WorkAddressesWorkAddressUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1WorkAddressesWorkAddressUuidRequest$inboundSchema: z.ZodType<
-  PutV1WorkAddressesWorkAddressUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  work_address_uuid: z.string(),
-  "X-Gusto-API-Version":
-    PutV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutV1WorkAddressesWorkAddressUuidRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "work_address_uuid": "workAddressUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1WorkAddressesWorkAddressUuidRequest$Outbound = {
@@ -226,21 +134,6 @@ export const PutV1WorkAddressesWorkAddressUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1WorkAddressesWorkAddressUuidRequest$ {
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1WorkAddressesWorkAddressUuidRequest$inboundSchema;
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1WorkAddressesWorkAddressUuidRequest$outboundSchema;
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidRequest$Outbound` instead. */
-  export type Outbound = PutV1WorkAddressesWorkAddressUuidRequest$Outbound;
-}
-
 export function putV1WorkAddressesWorkAddressUuidRequestToJSON(
   putV1WorkAddressesWorkAddressUuidRequest:
     PutV1WorkAddressesWorkAddressUuidRequest,
@@ -249,22 +142,6 @@ export function putV1WorkAddressesWorkAddressUuidRequestToJSON(
     PutV1WorkAddressesWorkAddressUuidRequest$outboundSchema.parse(
       putV1WorkAddressesWorkAddressUuidRequest,
     ),
-  );
-}
-
-export function putV1WorkAddressesWorkAddressUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1WorkAddressesWorkAddressUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1WorkAddressesWorkAddressUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1WorkAddressesWorkAddressUuidRequest' from JSON`,
   );
 }
 
@@ -282,54 +159,6 @@ export const PutV1WorkAddressesWorkAddressUuidResponse$inboundSchema: z.ZodType<
     "Employee-Work-Address": "employeeWorkAddress",
   });
 });
-
-/** @internal */
-export type PutV1WorkAddressesWorkAddressUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Work-Address"?: EmployeeWorkAddress$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema:
-  z.ZodType<
-    PutV1WorkAddressesWorkAddressUuidResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1WorkAddressesWorkAddressUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeWorkAddress: EmployeeWorkAddress$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeWorkAddress: "Employee-Work-Address",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1WorkAddressesWorkAddressUuidResponse$ {
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1WorkAddressesWorkAddressUuidResponse$inboundSchema;
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema;
-  /** @deprecated use `PutV1WorkAddressesWorkAddressUuidResponse$Outbound` instead. */
-  export type Outbound = PutV1WorkAddressesWorkAddressUuidResponse$Outbound;
-}
-
-export function putV1WorkAddressesWorkAddressUuidResponseToJSON(
-  putV1WorkAddressesWorkAddressUuidResponse:
-    PutV1WorkAddressesWorkAddressUuidResponse,
-): string {
-  return JSON.stringify(
-    PutV1WorkAddressesWorkAddressUuidResponse$outboundSchema.parse(
-      putV1WorkAddressesWorkAddressUuidResponse,
-    ),
-  );
-}
 
 export function putV1WorkAddressesWorkAddressUuidResponseFromJSON(
   jsonString: string,

@@ -10,18 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Job,
-  Job$inboundSchema,
-  Job$Outbound,
-  Job$outboundSchema,
-} from "../components/job.js";
+import { Job, Job$inboundSchema } from "../components/job.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -80,46 +72,9 @@ export type GetV1EmployeesEmployeeIdJobsResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdJobsQueryParamInclude$inboundSchema:
+export const GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema:
   z.ZodNativeEnum<typeof GetV1EmployeesEmployeeIdJobsQueryParamInclude> = z
     .nativeEnum(GetV1EmployeesEmployeeIdJobsQueryParamInclude);
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema:
-  z.ZodNativeEnum<typeof GetV1EmployeesEmployeeIdJobsQueryParamInclude> =
-    GetV1EmployeesEmployeeIdJobsQueryParamInclude$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdJobsQueryParamInclude$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsQueryParamInclude$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdJobsQueryParamInclude$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdJobsQueryParamInclude$outboundSchema;
-}
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdJobsRequest$inboundSchema: z.ZodType<
-  GetV1EmployeesEmployeeIdJobsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-  include: GetV1EmployeesEmployeeIdJobsQueryParamInclude$inboundSchema
-    .optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdJobsRequest$Outbound = {
@@ -149,21 +104,6 @@ export const GetV1EmployeesEmployeeIdJobsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdJobsRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdJobsRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdJobsRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdJobsRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdJobsRequestToJSON(
   getV1EmployeesEmployeeIdJobsRequest: GetV1EmployeesEmployeeIdJobsRequest,
 ): string {
@@ -171,17 +111,6 @@ export function getV1EmployeesEmployeeIdJobsRequestToJSON(
     GetV1EmployeesEmployeeIdJobsRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdJobsRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdJobsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1EmployeesEmployeeIdJobsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdJobsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1EmployeesEmployeeIdJobsRequest' from JSON`,
   );
 }
 
@@ -199,52 +128,6 @@ export const GetV1EmployeesEmployeeIdJobsResponse$inboundSchema: z.ZodType<
     "Job-List": "jobList",
   });
 });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdJobsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Job-List"?: Array<Job$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdJobsResponse$outboundSchema: z.ZodType<
-  GetV1EmployeesEmployeeIdJobsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1EmployeesEmployeeIdJobsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  jobList: z.array(Job$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    jobList: "Job-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdJobsResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdJobsResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdJobsResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdJobsResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdJobsResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdJobsResponseToJSON(
-  getV1EmployeesEmployeeIdJobsResponse: GetV1EmployeesEmployeeIdJobsResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdJobsResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdJobsResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdJobsResponseFromJSON(
   jsonString: string,

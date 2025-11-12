@@ -118,41 +118,6 @@ export const NewYearsDay$inboundSchema: z.ZodType<
   date: z.string().optional(),
 });
 
-/** @internal */
-export type NewYearsDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const NewYearsDay$outboundSchema: z.ZodType<
-  NewYearsDay$Outbound,
-  z.ZodTypeDef,
-  NewYearsDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace NewYearsDay$ {
-  /** @deprecated use `NewYearsDay$inboundSchema` instead. */
-  export const inboundSchema = NewYearsDay$inboundSchema;
-  /** @deprecated use `NewYearsDay$outboundSchema` instead. */
-  export const outboundSchema = NewYearsDay$outboundSchema;
-  /** @deprecated use `NewYearsDay$Outbound` instead. */
-  export type Outbound = NewYearsDay$Outbound;
-}
-
-export function newYearsDayToJSON(newYearsDay: NewYearsDay): string {
-  return JSON.stringify(NewYearsDay$outboundSchema.parse(newYearsDay));
-}
-
 export function newYearsDayFromJSON(
   jsonString: string,
 ): SafeParseResult<NewYearsDay, SDKValidationError> {
@@ -170,41 +135,6 @@ export const MlkDay$inboundSchema: z.ZodType<MlkDay, z.ZodTypeDef, unknown> = z
     name: z.string().optional(),
     date: z.string().optional(),
   });
-
-/** @internal */
-export type MlkDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const MlkDay$outboundSchema: z.ZodType<
-  MlkDay$Outbound,
-  z.ZodTypeDef,
-  MlkDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MlkDay$ {
-  /** @deprecated use `MlkDay$inboundSchema` instead. */
-  export const inboundSchema = MlkDay$inboundSchema;
-  /** @deprecated use `MlkDay$outboundSchema` instead. */
-  export const outboundSchema = MlkDay$outboundSchema;
-  /** @deprecated use `MlkDay$Outbound` instead. */
-  export type Outbound = MlkDay$Outbound;
-}
-
-export function mlkDayToJSON(mlkDay: MlkDay): string {
-  return JSON.stringify(MlkDay$outboundSchema.parse(mlkDay));
-}
 
 export function mlkDayFromJSON(
   jsonString: string,
@@ -227,41 +157,6 @@ export const PresidentsDay$inboundSchema: z.ZodType<
   date: z.string().optional(),
 });
 
-/** @internal */
-export type PresidentsDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const PresidentsDay$outboundSchema: z.ZodType<
-  PresidentsDay$Outbound,
-  z.ZodTypeDef,
-  PresidentsDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PresidentsDay$ {
-  /** @deprecated use `PresidentsDay$inboundSchema` instead. */
-  export const inboundSchema = PresidentsDay$inboundSchema;
-  /** @deprecated use `PresidentsDay$outboundSchema` instead. */
-  export const outboundSchema = PresidentsDay$outboundSchema;
-  /** @deprecated use `PresidentsDay$Outbound` instead. */
-  export type Outbound = PresidentsDay$Outbound;
-}
-
-export function presidentsDayToJSON(presidentsDay: PresidentsDay): string {
-  return JSON.stringify(PresidentsDay$outboundSchema.parse(presidentsDay));
-}
-
 export function presidentsDayFromJSON(
   jsonString: string,
 ): SafeParseResult<PresidentsDay, SDKValidationError> {
@@ -282,41 +177,6 @@ export const MemorialDay$inboundSchema: z.ZodType<
   name: z.string().optional(),
   date: z.string().optional(),
 });
-
-/** @internal */
-export type MemorialDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const MemorialDay$outboundSchema: z.ZodType<
-  MemorialDay$Outbound,
-  z.ZodTypeDef,
-  MemorialDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MemorialDay$ {
-  /** @deprecated use `MemorialDay$inboundSchema` instead. */
-  export const inboundSchema = MemorialDay$inboundSchema;
-  /** @deprecated use `MemorialDay$outboundSchema` instead. */
-  export const outboundSchema = MemorialDay$outboundSchema;
-  /** @deprecated use `MemorialDay$Outbound` instead. */
-  export type Outbound = MemorialDay$Outbound;
-}
-
-export function memorialDayToJSON(memorialDay: MemorialDay): string {
-  return JSON.stringify(MemorialDay$outboundSchema.parse(memorialDay));
-}
 
 export function memorialDayFromJSON(
   jsonString: string,
@@ -339,41 +199,6 @@ export const Juneteenth$inboundSchema: z.ZodType<
   date: z.string().optional(),
 });
 
-/** @internal */
-export type Juneteenth$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const Juneteenth$outboundSchema: z.ZodType<
-  Juneteenth$Outbound,
-  z.ZodTypeDef,
-  Juneteenth
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Juneteenth$ {
-  /** @deprecated use `Juneteenth$inboundSchema` instead. */
-  export const inboundSchema = Juneteenth$inboundSchema;
-  /** @deprecated use `Juneteenth$outboundSchema` instead. */
-  export const outboundSchema = Juneteenth$outboundSchema;
-  /** @deprecated use `Juneteenth$Outbound` instead. */
-  export type Outbound = Juneteenth$Outbound;
-}
-
-export function juneteenthToJSON(juneteenth: Juneteenth): string {
-  return JSON.stringify(Juneteenth$outboundSchema.parse(juneteenth));
-}
-
 export function juneteenthFromJSON(
   jsonString: string,
 ): SafeParseResult<Juneteenth, SDKValidationError> {
@@ -394,43 +219,6 @@ export const IndependenceDay$inboundSchema: z.ZodType<
   name: z.string().optional(),
   date: z.string().optional(),
 });
-
-/** @internal */
-export type IndependenceDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const IndependenceDay$outboundSchema: z.ZodType<
-  IndependenceDay$Outbound,
-  z.ZodTypeDef,
-  IndependenceDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace IndependenceDay$ {
-  /** @deprecated use `IndependenceDay$inboundSchema` instead. */
-  export const inboundSchema = IndependenceDay$inboundSchema;
-  /** @deprecated use `IndependenceDay$outboundSchema` instead. */
-  export const outboundSchema = IndependenceDay$outboundSchema;
-  /** @deprecated use `IndependenceDay$Outbound` instead. */
-  export type Outbound = IndependenceDay$Outbound;
-}
-
-export function independenceDayToJSON(
-  independenceDay: IndependenceDay,
-): string {
-  return JSON.stringify(IndependenceDay$outboundSchema.parse(independenceDay));
-}
 
 export function independenceDayFromJSON(
   jsonString: string,
@@ -453,41 +241,6 @@ export const LaborDay$inboundSchema: z.ZodType<
   date: z.string().optional(),
 });
 
-/** @internal */
-export type LaborDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const LaborDay$outboundSchema: z.ZodType<
-  LaborDay$Outbound,
-  z.ZodTypeDef,
-  LaborDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace LaborDay$ {
-  /** @deprecated use `LaborDay$inboundSchema` instead. */
-  export const inboundSchema = LaborDay$inboundSchema;
-  /** @deprecated use `LaborDay$outboundSchema` instead. */
-  export const outboundSchema = LaborDay$outboundSchema;
-  /** @deprecated use `LaborDay$Outbound` instead. */
-  export type Outbound = LaborDay$Outbound;
-}
-
-export function laborDayToJSON(laborDay: LaborDay): string {
-  return JSON.stringify(LaborDay$outboundSchema.parse(laborDay));
-}
-
 export function laborDayFromJSON(
   jsonString: string,
 ): SafeParseResult<LaborDay, SDKValidationError> {
@@ -508,41 +261,6 @@ export const ColumbusDay$inboundSchema: z.ZodType<
   name: z.string().optional(),
   date: z.string().optional(),
 });
-
-/** @internal */
-export type ColumbusDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const ColumbusDay$outboundSchema: z.ZodType<
-  ColumbusDay$Outbound,
-  z.ZodTypeDef,
-  ColumbusDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ColumbusDay$ {
-  /** @deprecated use `ColumbusDay$inboundSchema` instead. */
-  export const inboundSchema = ColumbusDay$inboundSchema;
-  /** @deprecated use `ColumbusDay$outboundSchema` instead. */
-  export const outboundSchema = ColumbusDay$outboundSchema;
-  /** @deprecated use `ColumbusDay$Outbound` instead. */
-  export type Outbound = ColumbusDay$Outbound;
-}
-
-export function columbusDayToJSON(columbusDay: ColumbusDay): string {
-  return JSON.stringify(ColumbusDay$outboundSchema.parse(columbusDay));
-}
 
 export function columbusDayFromJSON(
   jsonString: string,
@@ -565,41 +283,6 @@ export const VeteransDay$inboundSchema: z.ZodType<
   date: z.string().optional(),
 });
 
-/** @internal */
-export type VeteransDay$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const VeteransDay$outboundSchema: z.ZodType<
-  VeteransDay$Outbound,
-  z.ZodTypeDef,
-  VeteransDay
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace VeteransDay$ {
-  /** @deprecated use `VeteransDay$inboundSchema` instead. */
-  export const inboundSchema = VeteransDay$inboundSchema;
-  /** @deprecated use `VeteransDay$outboundSchema` instead. */
-  export const outboundSchema = VeteransDay$outboundSchema;
-  /** @deprecated use `VeteransDay$Outbound` instead. */
-  export type Outbound = VeteransDay$Outbound;
-}
-
-export function veteransDayToJSON(veteransDay: VeteransDay): string {
-  return JSON.stringify(VeteransDay$outboundSchema.parse(veteransDay));
-}
-
 export function veteransDayFromJSON(
   jsonString: string,
 ): SafeParseResult<VeteransDay, SDKValidationError> {
@@ -620,41 +303,6 @@ export const Thanksgiving$inboundSchema: z.ZodType<
   name: z.string().optional(),
   date: z.string().optional(),
 });
-
-/** @internal */
-export type Thanksgiving$Outbound = {
-  selected?: boolean | undefined;
-  name?: string | undefined;
-  date?: string | undefined;
-};
-
-/** @internal */
-export const Thanksgiving$outboundSchema: z.ZodType<
-  Thanksgiving$Outbound,
-  z.ZodTypeDef,
-  Thanksgiving
-> = z.object({
-  selected: z.boolean().optional(),
-  name: z.string().optional(),
-  date: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Thanksgiving$ {
-  /** @deprecated use `Thanksgiving$inboundSchema` instead. */
-  export const inboundSchema = Thanksgiving$inboundSchema;
-  /** @deprecated use `Thanksgiving$outboundSchema` instead. */
-  export const outboundSchema = Thanksgiving$outboundSchema;
-  /** @deprecated use `Thanksgiving$Outbound` instead. */
-  export type Outbound = Thanksgiving$Outbound;
-}
-
-export function thanksgivingToJSON(thanksgiving: Thanksgiving): string {
-  return JSON.stringify(Thanksgiving$outboundSchema.parse(thanksgiving));
-}
 
 export function thanksgivingFromJSON(
   jsonString: string,
@@ -695,68 +343,6 @@ export const FederalHolidays$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type FederalHolidays$Outbound = {
-  new_years_day?: NewYearsDay$Outbound | undefined;
-  mlk_day?: MlkDay$Outbound | undefined;
-  presidents_day?: PresidentsDay$Outbound | undefined;
-  memorial_day?: MemorialDay$Outbound | undefined;
-  juneteenth?: Juneteenth$Outbound | undefined;
-  independence_day?: IndependenceDay$Outbound | undefined;
-  labor_day?: LaborDay$Outbound | undefined;
-  columbus_day?: ColumbusDay$Outbound | undefined;
-  veterans_day?: VeteransDay$Outbound | undefined;
-  thanksgiving?: Thanksgiving$Outbound | undefined;
-};
-
-/** @internal */
-export const FederalHolidays$outboundSchema: z.ZodType<
-  FederalHolidays$Outbound,
-  z.ZodTypeDef,
-  FederalHolidays
-> = z.object({
-  newYearsDay: z.lazy(() => NewYearsDay$outboundSchema).optional(),
-  mlkDay: z.lazy(() => MlkDay$outboundSchema).optional(),
-  presidentsDay: z.lazy(() => PresidentsDay$outboundSchema).optional(),
-  memorialDay: z.lazy(() => MemorialDay$outboundSchema).optional(),
-  juneteenth: z.lazy(() => Juneteenth$outboundSchema).optional(),
-  independenceDay: z.lazy(() => IndependenceDay$outboundSchema).optional(),
-  laborDay: z.lazy(() => LaborDay$outboundSchema).optional(),
-  columbusDay: z.lazy(() => ColumbusDay$outboundSchema).optional(),
-  veteransDay: z.lazy(() => VeteransDay$outboundSchema).optional(),
-  thanksgiving: z.lazy(() => Thanksgiving$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    newYearsDay: "new_years_day",
-    mlkDay: "mlk_day",
-    presidentsDay: "presidents_day",
-    memorialDay: "memorial_day",
-    independenceDay: "independence_day",
-    laborDay: "labor_day",
-    columbusDay: "columbus_day",
-    veteransDay: "veterans_day",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FederalHolidays$ {
-  /** @deprecated use `FederalHolidays$inboundSchema` instead. */
-  export const inboundSchema = FederalHolidays$inboundSchema;
-  /** @deprecated use `FederalHolidays$outboundSchema` instead. */
-  export const outboundSchema = FederalHolidays$outboundSchema;
-  /** @deprecated use `FederalHolidays$Outbound` instead. */
-  export type Outbound = FederalHolidays$Outbound;
-}
-
-export function federalHolidaysToJSON(
-  federalHolidays: FederalHolidays,
-): string {
-  return JSON.stringify(FederalHolidays$outboundSchema.parse(federalHolidays));
-}
-
 export function federalHolidaysFromJSON(
   jsonString: string,
 ): SafeParseResult<FederalHolidays, SDKValidationError> {
@@ -775,41 +361,6 @@ export const HolidayPayPolicyEmployees$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string().optional(),
 });
-
-/** @internal */
-export type HolidayPayPolicyEmployees$Outbound = {
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const HolidayPayPolicyEmployees$outboundSchema: z.ZodType<
-  HolidayPayPolicyEmployees$Outbound,
-  z.ZodTypeDef,
-  HolidayPayPolicyEmployees
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HolidayPayPolicyEmployees$ {
-  /** @deprecated use `HolidayPayPolicyEmployees$inboundSchema` instead. */
-  export const inboundSchema = HolidayPayPolicyEmployees$inboundSchema;
-  /** @deprecated use `HolidayPayPolicyEmployees$outboundSchema` instead. */
-  export const outboundSchema = HolidayPayPolicyEmployees$outboundSchema;
-  /** @deprecated use `HolidayPayPolicyEmployees$Outbound` instead. */
-  export type Outbound = HolidayPayPolicyEmployees$Outbound;
-}
-
-export function holidayPayPolicyEmployeesToJSON(
-  holidayPayPolicyEmployees: HolidayPayPolicyEmployees,
-): string {
-  return JSON.stringify(
-    HolidayPayPolicyEmployees$outboundSchema.parse(holidayPayPolicyEmployees),
-  );
-}
 
 export function holidayPayPolicyEmployeesFromJSON(
   jsonString: string,
@@ -837,52 +388,6 @@ export const HolidayPayPolicy$inboundSchema: z.ZodType<
     "federal_holidays": "federalHolidays",
   });
 });
-
-/** @internal */
-export type HolidayPayPolicy$Outbound = {
-  version: string;
-  company_uuid: string;
-  federal_holidays: Array<FederalHolidays$Outbound>;
-  employees: Array<HolidayPayPolicyEmployees$Outbound>;
-};
-
-/** @internal */
-export const HolidayPayPolicy$outboundSchema: z.ZodType<
-  HolidayPayPolicy$Outbound,
-  z.ZodTypeDef,
-  HolidayPayPolicy
-> = z.object({
-  version: z.string(),
-  companyUuid: z.string(),
-  federalHolidays: z.array(z.lazy(() => FederalHolidays$outboundSchema)),
-  employees: z.array(z.lazy(() => HolidayPayPolicyEmployees$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    federalHolidays: "federal_holidays",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HolidayPayPolicy$ {
-  /** @deprecated use `HolidayPayPolicy$inboundSchema` instead. */
-  export const inboundSchema = HolidayPayPolicy$inboundSchema;
-  /** @deprecated use `HolidayPayPolicy$outboundSchema` instead. */
-  export const outboundSchema = HolidayPayPolicy$outboundSchema;
-  /** @deprecated use `HolidayPayPolicy$Outbound` instead. */
-  export type Outbound = HolidayPayPolicy$Outbound;
-}
-
-export function holidayPayPolicyToJSON(
-  holidayPayPolicy: HolidayPayPolicy,
-): string {
-  return JSON.stringify(
-    HolidayPayPolicy$outboundSchema.parse(holidayPayPolicy),
-  );
-}
 
 export function holidayPayPolicyFromJSON(
   jsonString: string,

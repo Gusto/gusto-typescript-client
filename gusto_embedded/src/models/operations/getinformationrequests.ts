@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   InformationRequest,
   InformationRequest$inboundSchema,
-  InformationRequest$Outbound,
-  InformationRequest$outboundSchema,
 } from "../components/informationrequest.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetInformationRequestsResponse = {
 };
 
 /** @internal */
-export const GetInformationRequestsRequest$inboundSchema: z.ZodType<
-  GetInformationRequestsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetInformationRequestsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,19 +60,6 @@ export const GetInformationRequestsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetInformationRequestsRequest$ {
-  /** @deprecated use `GetInformationRequestsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetInformationRequestsRequest$inboundSchema;
-  /** @deprecated use `GetInformationRequestsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetInformationRequestsRequest$outboundSchema;
-  /** @deprecated use `GetInformationRequestsRequest$Outbound` instead. */
-  export type Outbound = GetInformationRequestsRequest$Outbound;
-}
-
 export function getInformationRequestsRequestToJSON(
   getInformationRequestsRequest: GetInformationRequestsRequest,
 ): string {
@@ -100,16 +67,6 @@ export function getInformationRequestsRequestToJSON(
     GetInformationRequestsRequest$outboundSchema.parse(
       getInformationRequestsRequest,
     ),
-  );
-}
-
-export function getInformationRequestsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetInformationRequestsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetInformationRequestsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetInformationRequestsRequest' from JSON`,
   );
 }
 
@@ -128,50 +85,6 @@ export const GetInformationRequestsResponse$inboundSchema: z.ZodType<
     "Information-Request-List": "informationRequestList",
   });
 });
-
-/** @internal */
-export type GetInformationRequestsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Information-Request-List"?: Array<InformationRequest$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetInformationRequestsResponse$outboundSchema: z.ZodType<
-  GetInformationRequestsResponse$Outbound,
-  z.ZodTypeDef,
-  GetInformationRequestsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  informationRequestList: z.array(InformationRequest$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    informationRequestList: "Information-Request-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetInformationRequestsResponse$ {
-  /** @deprecated use `GetInformationRequestsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetInformationRequestsResponse$inboundSchema;
-  /** @deprecated use `GetInformationRequestsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetInformationRequestsResponse$outboundSchema;
-  /** @deprecated use `GetInformationRequestsResponse$Outbound` instead. */
-  export type Outbound = GetInformationRequestsResponse$Outbound;
-}
-
-export function getInformationRequestsResponseToJSON(
-  getInformationRequestsResponse: GetInformationRequestsResponse,
-): string {
-  return JSON.stringify(
-    GetInformationRequestsResponse$outboundSchema.parse(
-      getInformationRequestsResponse,
-    ),
-  );
-}
 
 export function getInformationRequestsResponseFromJSON(
   jsonString: string,

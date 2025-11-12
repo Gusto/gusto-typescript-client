@@ -15,12 +15,9 @@ import {
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,20 +54,6 @@ export type PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse =
   };
 
 /** @internal */
-export const PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    contribution_exclusions: z.array(ContributionExclusion$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "contribution_exclusions": "contributionExclusions",
-    });
-  });
-
-/** @internal */
 export type PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$Outbound =
   {
     contribution_exclusions: Array<ContributionExclusion$Outbound>;
@@ -90,22 +73,6 @@ export const PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBo
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$ {
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$Outbound;
-}
-
 export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBodyToJSON(
   putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody:
     PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody,
@@ -117,41 +84,6 @@ export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsReques
       ),
   );
 }
-
-export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_benefit_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_benefit_id": "companyBenefitId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$Outbound =
@@ -182,22 +114,6 @@ export const PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$o
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$ {
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$outboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$Outbound;
-}
-
 export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestToJSON(
   putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest:
     PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
@@ -205,21 +121,6 @@ export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsReques
   return JSON.stringify(
     PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$outboundSchema
       .parse(putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest),
-  );
-}
-
-export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest' from JSON`,
   );
 }
 
@@ -239,60 +140,6 @@ export const PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$
       "Contribution-Exclusion-List": "contributionExclusionList",
     });
   });
-
-/** @internal */
-export type PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Contribution-Exclusion-List"?:
-      | Array<ContributionExclusion$Outbound>
-      | undefined;
-  };
-
-/** @internal */
-export const PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contributionExclusionList: z.array(ContributionExclusion$outboundSchema)
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contributionExclusionList: "Contribution-Exclusion-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$ {
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$inboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound;
-}
-
-export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponseToJSON(
-  putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse:
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema
-      .parse(
-        putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
-      ),
-  );
-}
 
 export function putV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponseFromJSON(
   jsonString: string,

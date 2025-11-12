@@ -31,41 +31,6 @@ export const GrossUpPay$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type GrossUpPay$Outbound = {
-  gross_up?: string | undefined;
-};
-
-/** @internal */
-export const GrossUpPay$outboundSchema: z.ZodType<
-  GrossUpPay$Outbound,
-  z.ZodTypeDef,
-  GrossUpPay
-> = z.object({
-  grossUp: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    grossUp: "gross_up",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrossUpPay$ {
-  /** @deprecated use `GrossUpPay$inboundSchema` instead. */
-  export const inboundSchema = GrossUpPay$inboundSchema;
-  /** @deprecated use `GrossUpPay$outboundSchema` instead. */
-  export const outboundSchema = GrossUpPay$outboundSchema;
-  /** @deprecated use `GrossUpPay$Outbound` instead. */
-  export type Outbound = GrossUpPay$Outbound;
-}
-
-export function grossUpPayToJSON(grossUpPay: GrossUpPay): string {
-  return JSON.stringify(GrossUpPay$outboundSchema.parse(grossUpPay));
-}
-
 export function grossUpPayFromJSON(
   jsonString: string,
 ): SafeParseResult<GrossUpPay, SDKValidationError> {

@@ -44,54 +44,6 @@ export const CompanyAddress$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type CompanyAddress$Outbound = {
-  street_1?: string | undefined;
-  street_2?: string | null | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country: string;
-  inactive?: boolean | undefined;
-};
-
-/** @internal */
-export const CompanyAddress$outboundSchema: z.ZodType<
-  CompanyAddress$Outbound,
-  z.ZodTypeDef,
-  CompanyAddress
-> = z.object({
-  street1: z.string().optional(),
-  street2: z.nullable(z.string()).optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().default("USA"),
-  inactive: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyAddress$ {
-  /** @deprecated use `CompanyAddress$inboundSchema` instead. */
-  export const inboundSchema = CompanyAddress$inboundSchema;
-  /** @deprecated use `CompanyAddress$outboundSchema` instead. */
-  export const outboundSchema = CompanyAddress$outboundSchema;
-  /** @deprecated use `CompanyAddress$Outbound` instead. */
-  export type Outbound = CompanyAddress$Outbound;
-}
-
-export function companyAddressToJSON(companyAddress: CompanyAddress): string {
-  return JSON.stringify(CompanyAddress$outboundSchema.parse(companyAddress));
-}
-
 export function companyAddressFromJSON(
   jsonString: string,
 ): SafeParseResult<CompanyAddress, SDKValidationError> {

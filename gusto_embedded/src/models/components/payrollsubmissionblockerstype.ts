@@ -73,41 +73,6 @@ export const PayrollSubmissionBlockersTypeMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type PayrollSubmissionBlockersTypeMetadata$Outbound = {};
-
-/** @internal */
-export const PayrollSubmissionBlockersTypeMetadata$outboundSchema: z.ZodType<
-  PayrollSubmissionBlockersTypeMetadata$Outbound,
-  z.ZodTypeDef,
-  PayrollSubmissionBlockersTypeMetadata
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollSubmissionBlockersTypeMetadata$ {
-  /** @deprecated use `PayrollSubmissionBlockersTypeMetadata$inboundSchema` instead. */
-  export const inboundSchema =
-    PayrollSubmissionBlockersTypeMetadata$inboundSchema;
-  /** @deprecated use `PayrollSubmissionBlockersTypeMetadata$outboundSchema` instead. */
-  export const outboundSchema =
-    PayrollSubmissionBlockersTypeMetadata$outboundSchema;
-  /** @deprecated use `PayrollSubmissionBlockersTypeMetadata$Outbound` instead. */
-  export type Outbound = PayrollSubmissionBlockersTypeMetadata$Outbound;
-}
-
-export function payrollSubmissionBlockersTypeMetadataToJSON(
-  payrollSubmissionBlockersTypeMetadata: PayrollSubmissionBlockersTypeMetadata,
-): string {
-  return JSON.stringify(
-    PayrollSubmissionBlockersTypeMetadata$outboundSchema.parse(
-      payrollSubmissionBlockersTypeMetadata,
-    ),
-  );
-}
-
 export function payrollSubmissionBlockersTypeMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollSubmissionBlockersTypeMetadata, SDKValidationError> {
@@ -136,47 +101,6 @@ export const UnblockOptions$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type UnblockOptions$Outbound = {
-  unblock_type?: string | undefined;
-  check_date?: string | undefined;
-  metadata?: PayrollSubmissionBlockersTypeMetadata$Outbound | undefined;
-};
-
-/** @internal */
-export const UnblockOptions$outboundSchema: z.ZodType<
-  UnblockOptions$Outbound,
-  z.ZodTypeDef,
-  UnblockOptions
-> = z.object({
-  unblockType: z.string().optional(),
-  checkDate: z.string().optional(),
-  metadata: z.lazy(() => PayrollSubmissionBlockersTypeMetadata$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    unblockType: "unblock_type",
-    checkDate: "check_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnblockOptions$ {
-  /** @deprecated use `UnblockOptions$inboundSchema` instead. */
-  export const inboundSchema = UnblockOptions$inboundSchema;
-  /** @deprecated use `UnblockOptions$outboundSchema` instead. */
-  export const outboundSchema = UnblockOptions$outboundSchema;
-  /** @deprecated use `UnblockOptions$Outbound` instead. */
-  export type Outbound = UnblockOptions$Outbound;
-}
-
-export function unblockOptionsToJSON(unblockOptions: UnblockOptions): string {
-  return JSON.stringify(UnblockOptions$outboundSchema.parse(unblockOptions));
-}
-
 export function unblockOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<UnblockOptions, SDKValidationError> {
@@ -191,24 +115,6 @@ export function unblockOptionsFromJSON(
 export const PayrollSubmissionBlockersTypeStatus$inboundSchema: z.ZodNativeEnum<
   typeof PayrollSubmissionBlockersTypeStatus
 > = z.nativeEnum(PayrollSubmissionBlockersTypeStatus);
-
-/** @internal */
-export const PayrollSubmissionBlockersTypeStatus$outboundSchema:
-  z.ZodNativeEnum<typeof PayrollSubmissionBlockersTypeStatus> =
-    PayrollSubmissionBlockersTypeStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollSubmissionBlockersTypeStatus$ {
-  /** @deprecated use `PayrollSubmissionBlockersTypeStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    PayrollSubmissionBlockersTypeStatus$inboundSchema;
-  /** @deprecated use `PayrollSubmissionBlockersTypeStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    PayrollSubmissionBlockersTypeStatus$outboundSchema;
-}
 
 /** @internal */
 export const PayrollSubmissionBlockersType$inboundSchema: z.ZodType<
@@ -230,59 +136,6 @@ export const PayrollSubmissionBlockersType$inboundSchema: z.ZodType<
     "selected_option": "selectedOption",
   });
 });
-
-/** @internal */
-export type PayrollSubmissionBlockersType$Outbound = {
-  blocker_type?: string | undefined;
-  blocker_name?: string | undefined;
-  unblock_options?: Array<UnblockOptions$Outbound> | undefined;
-  selected_option?: string | null | undefined;
-  status?: string | undefined;
-};
-
-/** @internal */
-export const PayrollSubmissionBlockersType$outboundSchema: z.ZodType<
-  PayrollSubmissionBlockersType$Outbound,
-  z.ZodTypeDef,
-  PayrollSubmissionBlockersType
-> = z.object({
-  blockerType: z.string().optional(),
-  blockerName: z.string().optional(),
-  unblockOptions: z.array(z.lazy(() => UnblockOptions$outboundSchema))
-    .optional(),
-  selectedOption: z.nullable(z.string()).optional(),
-  status: PayrollSubmissionBlockersTypeStatus$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    blockerType: "blocker_type",
-    blockerName: "blocker_name",
-    unblockOptions: "unblock_options",
-    selectedOption: "selected_option",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollSubmissionBlockersType$ {
-  /** @deprecated use `PayrollSubmissionBlockersType$inboundSchema` instead. */
-  export const inboundSchema = PayrollSubmissionBlockersType$inboundSchema;
-  /** @deprecated use `PayrollSubmissionBlockersType$outboundSchema` instead. */
-  export const outboundSchema = PayrollSubmissionBlockersType$outboundSchema;
-  /** @deprecated use `PayrollSubmissionBlockersType$Outbound` instead. */
-  export type Outbound = PayrollSubmissionBlockersType$Outbound;
-}
-
-export function payrollSubmissionBlockersTypeToJSON(
-  payrollSubmissionBlockersType: PayrollSubmissionBlockersType,
-): string {
-  return JSON.stringify(
-    PayrollSubmissionBlockersType$outboundSchema.parse(
-      payrollSubmissionBlockersType,
-    ),
-  );
-}
 
 export function payrollSubmissionBlockersTypeFromJSON(
   jsonString: string,

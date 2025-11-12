@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -52,52 +50,12 @@ export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse = {
 };
 
 /** @internal */
-export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$inboundSchema:
+export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion
   > = z.nativeEnum(
     DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion
-  > =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    bank_account_id: z.string(),
-    "X-Gusto-API-Version":
-      DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "bank_account_id": "bankAccountId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$Outbound =
@@ -127,22 +85,6 @@ export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$outbound
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$Outbound;
-}
-
 export function deleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestToJSON(
   deleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest:
     DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest,
@@ -150,21 +92,6 @@ export function deleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestToJSON
   return JSON.stringify(
     DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$outboundSchema
       .parse(deleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest),
-  );
-}
-
-export function deleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest' from JSON`,
   );
 }
 
@@ -181,52 +108,6 @@ export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$inbound
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$Outbound;
-}
-
-export function deleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponseToJSON(
-  deleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse:
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse$outboundSchema
-      .parse(deleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse),
-  );
-}
 
 export function deleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponseFromJSON(
   jsonString: string,

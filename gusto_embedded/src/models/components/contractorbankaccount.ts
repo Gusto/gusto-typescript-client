@@ -59,22 +59,6 @@ export const ContractorBankAccountAccountType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorBankAccountAccountType);
 
 /** @internal */
-export const ContractorBankAccountAccountType$outboundSchema: z.ZodNativeEnum<
-  typeof ContractorBankAccountAccountType
-> = ContractorBankAccountAccountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorBankAccountAccountType$ {
-  /** @deprecated use `ContractorBankAccountAccountType$inboundSchema` instead. */
-  export const inboundSchema = ContractorBankAccountAccountType$inboundSchema;
-  /** @deprecated use `ContractorBankAccountAccountType$outboundSchema` instead. */
-  export const outboundSchema = ContractorBankAccountAccountType$outboundSchema;
-}
-
-/** @internal */
 export const ContractorBankAccount$inboundSchema: z.ZodType<
   ContractorBankAccount,
   z.ZodTypeDef,
@@ -94,58 +78,6 @@ export const ContractorBankAccount$inboundSchema: z.ZodType<
     "hidden_account_number": "hiddenAccountNumber",
   });
 });
-
-/** @internal */
-export type ContractorBankAccount$Outbound = {
-  uuid: string;
-  contractor_uuid?: string | undefined;
-  account_type?: string | undefined;
-  name?: string | undefined;
-  routing_number?: string | undefined;
-  hidden_account_number?: string | undefined;
-};
-
-/** @internal */
-export const ContractorBankAccount$outboundSchema: z.ZodType<
-  ContractorBankAccount$Outbound,
-  z.ZodTypeDef,
-  ContractorBankAccount
-> = z.object({
-  uuid: z.string(),
-  contractorUuid: z.string().optional(),
-  accountType: ContractorBankAccountAccountType$outboundSchema.optional(),
-  name: z.string().optional(),
-  routingNumber: z.string().optional(),
-  hiddenAccountNumber: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorUuid: "contractor_uuid",
-    accountType: "account_type",
-    routingNumber: "routing_number",
-    hiddenAccountNumber: "hidden_account_number",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorBankAccount$ {
-  /** @deprecated use `ContractorBankAccount$inboundSchema` instead. */
-  export const inboundSchema = ContractorBankAccount$inboundSchema;
-  /** @deprecated use `ContractorBankAccount$outboundSchema` instead. */
-  export const outboundSchema = ContractorBankAccount$outboundSchema;
-  /** @deprecated use `ContractorBankAccount$Outbound` instead. */
-  export type Outbound = ContractorBankAccount$Outbound;
-}
-
-export function contractorBankAccountToJSON(
-  contractorBankAccount: ContractorBankAccount,
-): string {
-  return JSON.stringify(
-    ContractorBankAccount$outboundSchema.parse(contractorBankAccount),
-  );
-}
 
 export function contractorBankAccountFromJSON(
   jsonString: string,

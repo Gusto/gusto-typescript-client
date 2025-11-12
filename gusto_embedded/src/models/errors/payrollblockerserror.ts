@@ -9,8 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -87,37 +85,6 @@ export const Metadata$inboundSchema: z.ZodType<
   key: z.string().optional(),
 });
 
-/** @internal */
-export type Metadata$Outbound = {
-  key?: string | undefined;
-};
-
-/** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
-  z.ZodTypeDef,
-  Metadata
-> = z.object({
-  key: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Metadata$ {
-  /** @deprecated use `Metadata$inboundSchema` instead. */
-  export const inboundSchema = Metadata$inboundSchema;
-  /** @deprecated use `Metadata$outboundSchema` instead. */
-  export const outboundSchema = Metadata$outboundSchema;
-  /** @deprecated use `Metadata$Outbound` instead. */
-  export type Outbound = Metadata$Outbound;
-}
-
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
-}
-
 export function metadataFromJSON(
   jsonString: string,
 ): SafeParseResult<Metadata, SDKValidationError> {
@@ -140,47 +107,6 @@ export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
       "error_key": "errorKey",
     });
   });
-
-/** @internal */
-export type Errors$Outbound = {
-  error_key?: string | undefined;
-  category?: string | undefined;
-  message?: string | undefined;
-  metadata?: Metadata$Outbound | undefined;
-};
-
-/** @internal */
-export const Errors$outboundSchema: z.ZodType<
-  Errors$Outbound,
-  z.ZodTypeDef,
-  Errors
-> = z.object({
-  errorKey: z.string().optional(),
-  category: z.string().optional(),
-  message: z.string().optional(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    errorKey: "error_key",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Errors$ {
-  /** @deprecated use `Errors$inboundSchema` instead. */
-  export const inboundSchema = Errors$inboundSchema;
-  /** @deprecated use `Errors$outboundSchema` instead. */
-  export const outboundSchema = Errors$outboundSchema;
-  /** @deprecated use `Errors$Outbound` instead. */
-  export type Outbound = Errors$Outbound;
-}
-
-export function errorsToJSON(errors: Errors): string {
-  return JSON.stringify(Errors$outboundSchema.parse(errors));
-}
 
 export function errorsFromJSON(
   jsonString: string,
@@ -215,40 +141,3 @@ export const PayrollBlockersError$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type PayrollBlockersError$Outbound = {
-  errors?: Array<Errors$Outbound> | undefined;
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const PayrollBlockersError$outboundSchema: z.ZodType<
-  PayrollBlockersError$Outbound,
-  z.ZodTypeDef,
-  PayrollBlockersError
-> = z.instanceof(PayrollBlockersError)
-  .transform(v => v.data$)
-  .pipe(
-    z.object({
-      errors: z.array(z.lazy(() => Errors$outboundSchema)).optional(),
-      httpMeta: HTTPMetadata$outboundSchema,
-    }).transform((v) => {
-      return remap$(v, {
-        httpMeta: "HttpMeta",
-      });
-    }),
-  );
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollBlockersError$ {
-  /** @deprecated use `PayrollBlockersError$inboundSchema` instead. */
-  export const inboundSchema = PayrollBlockersError$inboundSchema;
-  /** @deprecated use `PayrollBlockersError$outboundSchema` instead. */
-  export const outboundSchema = PayrollBlockersError$outboundSchema;
-  /** @deprecated use `PayrollBlockersError$Outbound` instead. */
-  export type Outbound = PayrollBlockersError$Outbound;
-}

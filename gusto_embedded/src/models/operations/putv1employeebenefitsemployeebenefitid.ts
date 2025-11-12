@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeBenefit,
   EmployeeBenefit$inboundSchema,
-  EmployeeBenefit$Outbound,
-  EmployeeBenefit$outboundSchema,
 } from "../components/employeebenefit.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -266,34 +261,9 @@ export type PutV1EmployeeBenefitsEmployeeBenefitIdResponse = {
 };
 
 /** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdType$inboundSchema:
+export const PutV1EmployeeBenefitsEmployeeBenefitIdType$outboundSchema:
   z.ZodNativeEnum<typeof PutV1EmployeeBenefitsEmployeeBenefitIdType> = z
     .nativeEnum(PutV1EmployeeBenefitsEmployeeBenefitIdType);
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdType$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1EmployeeBenefitsEmployeeBenefitIdType> =
-    PutV1EmployeeBenefitsEmployeeBenefitIdType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdType$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdType$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdType$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdType$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdType$outboundSchema;
-}
-
-/** @internal */
-export const Value2$inboundSchema: z.ZodType<Value2, z.ZodTypeDef, unknown> = z
-  .object({
-    rate: z.string().optional(),
-    threshold: z.string().optional(),
-  });
 
 /** @internal */
 export type Value2$Outbound = {
@@ -311,40 +281,9 @@ export const Value2$outboundSchema: z.ZodType<
   threshold: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Value2$ {
-  /** @deprecated use `Value2$inboundSchema` instead. */
-  export const inboundSchema = Value2$inboundSchema;
-  /** @deprecated use `Value2$outboundSchema` instead. */
-  export const outboundSchema = Value2$outboundSchema;
-  /** @deprecated use `Value2$Outbound` instead. */
-  export type Outbound = Value2$Outbound;
-}
-
 export function value2ToJSON(value2: Value2): string {
   return JSON.stringify(Value2$outboundSchema.parse(value2));
 }
-
-export function value2FromJSON(
-  jsonString: string,
-): SafeParseResult<Value2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Value2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Value2' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdValue$inboundSchema:
-  z.ZodType<
-    PutV1EmployeeBenefitsEmployeeBenefitIdValue,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([z.string(), z.array(z.lazy(() => Value2$inboundSchema))]);
 
 /** @internal */
 export type PutV1EmployeeBenefitsEmployeeBenefitIdValue$Outbound =
@@ -359,21 +298,6 @@ export const PutV1EmployeeBenefitsEmployeeBenefitIdValue$outboundSchema:
     PutV1EmployeeBenefitsEmployeeBenefitIdValue
   > = z.union([z.string(), z.array(z.lazy(() => Value2$outboundSchema))]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdValue$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdValue$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdValue$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdValue$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdValue$outboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdValue$Outbound` instead. */
-  export type Outbound = PutV1EmployeeBenefitsEmployeeBenefitIdValue$Outbound;
-}
-
 export function putV1EmployeeBenefitsEmployeeBenefitIdValueToJSON(
   putV1EmployeeBenefitsEmployeeBenefitIdValue:
     PutV1EmployeeBenefitsEmployeeBenefitIdValue,
@@ -384,34 +308,6 @@ export function putV1EmployeeBenefitsEmployeeBenefitIdValueToJSON(
     ),
   );
 }
-
-export function putV1EmployeeBenefitsEmployeeBenefitIdValueFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeeBenefitsEmployeeBenefitIdValue,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeeBenefitsEmployeeBenefitIdValue$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeeBenefitsEmployeeBenefitIdValue' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdContribution$inboundSchema:
-  z.ZodType<
-    PutV1EmployeeBenefitsEmployeeBenefitIdContribution,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: PutV1EmployeeBenefitsEmployeeBenefitIdType$inboundSchema.optional(),
-    value: z.union([z.string(), z.array(z.lazy(() => Value2$inboundSchema))])
-      .optional(),
-  });
 
 /** @internal */
 export type PutV1EmployeeBenefitsEmployeeBenefitIdContribution$Outbound = {
@@ -431,22 +327,6 @@ export const PutV1EmployeeBenefitsEmployeeBenefitIdContribution$outboundSchema:
       .optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdContribution$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdContribution$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdContribution$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdContribution$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdContribution$outboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdContribution$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeeBenefitsEmployeeBenefitIdContribution$Outbound;
-}
-
 export function putV1EmployeeBenefitsEmployeeBenefitIdContributionToJSON(
   putV1EmployeeBenefitsEmployeeBenefitIdContribution:
     PutV1EmployeeBenefitsEmployeeBenefitIdContribution,
@@ -458,117 +338,18 @@ export function putV1EmployeeBenefitsEmployeeBenefitIdContributionToJSON(
   );
 }
 
-export function putV1EmployeeBenefitsEmployeeBenefitIdContributionFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeeBenefitsEmployeeBenefitIdContribution,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeeBenefitsEmployeeBenefitIdContribution$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeeBenefitsEmployeeBenefitIdContribution' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$inboundSchema:
-  z.ZodNativeEnum<typeof PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption> = z
-    .nativeEnum(PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption);
-
 /** @internal */
 export const PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption> =
-    PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$outboundSchema;
-}
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome
-  > = z.nativeEnum(
-    PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome,
-  );
+  z.ZodNativeEnum<typeof PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption> = z
+    .nativeEnum(PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption);
 
 /** @internal */
 export const PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$outboundSchema:
   z.ZodNativeEnum<
     typeof PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome
-  > =
-    PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$outboundSchema;
-}
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    active: z.boolean().optional(),
-    employee_deduction: z.string().default("0.00"),
-    deduct_as_percentage: z.boolean().optional(),
-    employee_deduction_annual_maximum: z.nullable(z.string()).optional(),
-    contribution: z.lazy(() =>
-      PutV1EmployeeBenefitsEmployeeBenefitIdContribution$inboundSchema
-    ).optional(),
-    elective: z.boolean().default(false),
-    company_contribution_annual_maximum: z.nullable(z.string()).optional(),
-    limit_option: z.nullable(
-      PutV1EmployeeBenefitsEmployeeBenefitIdLimitOption$inboundSchema,
-    ).optional(),
-    catch_up: z.boolean().default(false),
-    coverage_amount: z.nullable(z.string()).optional(),
-    deduction_reduces_taxable_income: z.nullable(
-      PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome$inboundSchema
-        .default("unset"),
-    ),
-    coverage_salary_multiplier: z.string().default("0.00"),
-    company_contribution: z.string().default("0.00"),
-    contribute_as_percentage: z.boolean().default(false),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_deduction": "employeeDeduction",
-      "deduct_as_percentage": "deductAsPercentage",
-      "employee_deduction_annual_maximum": "employeeDeductionAnnualMaximum",
-      "company_contribution_annual_maximum": "companyContributionAnnualMaximum",
-      "limit_option": "limitOption",
-      "catch_up": "catchUp",
-      "coverage_amount": "coverageAmount",
-      "deduction_reduces_taxable_income": "deductionReducesTaxableIncome",
-      "coverage_salary_multiplier": "coverageSalaryMultiplier",
-      "company_contribution": "companyContribution",
-      "contribute_as_percentage": "contributeAsPercentage",
-    });
-  });
+  > = z.nativeEnum(
+    PutV1EmployeeBenefitsEmployeeBenefitIdDeductionReducesTaxableIncome,
+  );
 
 /** @internal */
 export type PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$Outbound = {
@@ -636,22 +417,6 @@ export const PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$Outbound;
-}
-
 export function putV1EmployeeBenefitsEmployeeBenefitIdRequestBodyToJSON(
   putV1EmployeeBenefitsEmployeeBenefitIdRequestBody:
     PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody,
@@ -662,42 +427,6 @@ export function putV1EmployeeBenefitsEmployeeBenefitIdRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1EmployeeBenefitsEmployeeBenefitIdRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema:
-  z.ZodType<
-    PutV1EmployeeBenefitsEmployeeBenefitIdRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_benefit_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_benefit_id": "employeeBenefitId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1EmployeeBenefitsEmployeeBenefitIdRequest$Outbound = {
@@ -726,21 +455,6 @@ export const PutV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdRequest$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdRequest$Outbound` instead. */
-  export type Outbound = PutV1EmployeeBenefitsEmployeeBenefitIdRequest$Outbound;
-}
-
 export function putV1EmployeeBenefitsEmployeeBenefitIdRequestToJSON(
   putV1EmployeeBenefitsEmployeeBenefitIdRequest:
     PutV1EmployeeBenefitsEmployeeBenefitIdRequest,
@@ -749,22 +463,6 @@ export function putV1EmployeeBenefitsEmployeeBenefitIdRequestToJSON(
     PutV1EmployeeBenefitsEmployeeBenefitIdRequest$outboundSchema.parse(
       putV1EmployeeBenefitsEmployeeBenefitIdRequest,
     ),
-  );
-}
-
-export function putV1EmployeeBenefitsEmployeeBenefitIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeeBenefitsEmployeeBenefitIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeeBenefitsEmployeeBenefitIdRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeeBenefitsEmployeeBenefitIdRequest' from JSON`,
   );
 }
 
@@ -783,55 +481,6 @@ export const PutV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema:
       "Employee-Benefit": "employeeBenefit",
     });
   });
-
-/** @internal */
-export type PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Benefit"?: EmployeeBenefit$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema:
-  z.ZodType<
-    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeeBenefitsEmployeeBenefitIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeBenefit: EmployeeBenefit$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeBenefit: "Employee-Benefit",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeBenefitsEmployeeBenefitIdResponse$ {
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$Outbound;
-}
-
-export function putV1EmployeeBenefitsEmployeeBenefitIdResponseToJSON(
-  putV1EmployeeBenefitsEmployeeBenefitIdResponse:
-    PutV1EmployeeBenefitsEmployeeBenefitIdResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeeBenefitsEmployeeBenefitIdResponse$outboundSchema.parse(
-      putV1EmployeeBenefitsEmployeeBenefitIdResponse,
-    ),
-  );
-}
 
 export function putV1EmployeeBenefitsEmployeeBenefitIdResponseFromJSON(
   jsonString: string,

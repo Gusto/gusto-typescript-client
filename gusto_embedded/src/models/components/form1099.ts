@@ -75,61 +75,6 @@ export const Form1099$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type Form1099$Outbound = {
-  uuid: string;
-  name?: string | undefined;
-  title?: string | undefined;
-  description?: string | undefined;
-  draft?: boolean | undefined;
-  year?: number | null | undefined;
-  quarter?: number | null | undefined;
-  requires_signing?: boolean | undefined;
-  document_content_type?: string | null | undefined;
-  contractor_uuid?: string | undefined;
-};
-
-/** @internal */
-export const Form1099$outboundSchema: z.ZodType<
-  Form1099$Outbound,
-  z.ZodTypeDef,
-  Form1099
-> = z.object({
-  uuid: z.string(),
-  name: z.string().optional(),
-  title: z.string().optional(),
-  description: z.string().optional(),
-  draft: z.boolean().optional(),
-  year: z.nullable(z.number().int()).optional(),
-  quarter: z.nullable(z.number().int()).optional(),
-  requiresSigning: z.boolean().optional(),
-  documentContentType: z.nullable(z.string()).optional(),
-  contractorUuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresSigning: "requires_signing",
-    documentContentType: "document_content_type",
-    contractorUuid: "contractor_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Form1099$ {
-  /** @deprecated use `Form1099$inboundSchema` instead. */
-  export const inboundSchema = Form1099$inboundSchema;
-  /** @deprecated use `Form1099$outboundSchema` instead. */
-  export const outboundSchema = Form1099$outboundSchema;
-  /** @deprecated use `Form1099$Outbound` instead. */
-  export type Outbound = Form1099$Outbound;
-}
-
-export function form1099ToJSON(form1099: Form1099): string {
-  return JSON.stringify(Form1099$outboundSchema.parse(form1099));
-}
-
 export function form1099FromJSON(
   jsonString: string,
 ): SafeParseResult<Form1099, SDKValidationError> {

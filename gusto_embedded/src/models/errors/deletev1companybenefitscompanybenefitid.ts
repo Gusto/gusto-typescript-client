@@ -9,8 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -71,42 +69,6 @@ export const Base$inboundSchema: z.ZodType<Base, z.ZodTypeDef, unknown> = z
     });
   });
 
-/** @internal */
-export type Base$Outbound = {
-  type?: string | undefined;
-  message?: string | undefined;
-  full_message?: string | undefined;
-};
-
-/** @internal */
-export const Base$outboundSchema: z.ZodType<Base$Outbound, z.ZodTypeDef, Base> =
-  z.object({
-    type: z.string().optional(),
-    message: z.string().optional(),
-    fullMessage: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      fullMessage: "full_message",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Base$ {
-  /** @deprecated use `Base$inboundSchema` instead. */
-  export const inboundSchema = Base$inboundSchema;
-  /** @deprecated use `Base$outboundSchema` instead. */
-  export const outboundSchema = Base$outboundSchema;
-  /** @deprecated use `Base$Outbound` instead. */
-  export type Outbound = Base$Outbound;
-}
-
-export function baseToJSON(base: Base): string {
-  return JSON.stringify(Base$outboundSchema.parse(base));
-}
-
 export function baseFromJSON(
   jsonString: string,
 ): SafeParseResult<Base, SDKValidationError> {
@@ -126,47 +88,6 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdErrors$inboundSchema:
   > = z.object({
     base: z.array(z.lazy(() => Base$inboundSchema)).optional(),
   });
-
-/** @internal */
-export type DeleteV1CompanyBenefitsCompanyBenefitIdErrors$Outbound = {
-  base?: Array<Base$Outbound> | undefined;
-};
-
-/** @internal */
-export const DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema:
-  z.ZodType<
-    DeleteV1CompanyBenefitsCompanyBenefitIdErrors$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompanyBenefitsCompanyBenefitIdErrors
-  > = z.object({
-    base: z.array(z.lazy(() => Base$outboundSchema)).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompanyBenefitsCompanyBenefitIdErrors$ {
-  /** @deprecated use `DeleteV1CompanyBenefitsCompanyBenefitIdErrors$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompanyBenefitsCompanyBenefitIdErrors$inboundSchema;
-  /** @deprecated use `DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema;
-  /** @deprecated use `DeleteV1CompanyBenefitsCompanyBenefitIdErrors$Outbound` instead. */
-  export type Outbound = DeleteV1CompanyBenefitsCompanyBenefitIdErrors$Outbound;
-}
-
-export function deleteV1CompanyBenefitsCompanyBenefitIdErrorsToJSON(
-  deleteV1CompanyBenefitsCompanyBenefitIdErrors:
-    DeleteV1CompanyBenefitsCompanyBenefitIdErrors,
-): string {
-  return JSON.stringify(
-    DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema.parse(
-      deleteV1CompanyBenefitsCompanyBenefitIdErrors,
-    ),
-  );
-}
 
 export function deleteV1CompanyBenefitsCompanyBenefitIdErrorsFromJSON(
   jsonString: string,
@@ -210,46 +131,3 @@ export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema:
         body: v.body$,
       });
     });
-
-/** @internal */
-export type DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$Outbound = {
-  errors?: DeleteV1CompanyBenefitsCompanyBenefitIdErrors$Outbound | undefined;
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$outboundSchema:
-  z.ZodType<
-    DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
-  > = z.instanceof(DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody)
-    .transform(v => v.data$)
-    .pipe(
-      z.object({
-        errors: z.lazy(() =>
-          DeleteV1CompanyBenefitsCompanyBenefitIdErrors$outboundSchema
-        ).optional(),
-        httpMeta: HTTPMetadata$outboundSchema,
-      }).transform((v) => {
-        return remap$(v, {
-          httpMeta: "HttpMeta",
-        });
-      }),
-    );
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$ {
-  /** @deprecated use `DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema;
-  /** @deprecated use `DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$outboundSchema;
-  /** @deprecated use `DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$Outbound;
-}

@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeOnboardingDocument,
   EmployeeOnboardingDocument$inboundSchema,
-  EmployeeOnboardingDocument$Outbound,
-  EmployeeOnboardingDocument$outboundSchema,
 } from "../components/employeeonboardingdocument.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,20 +48,6 @@ export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse = {
 };
 
 /** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    i9_document: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "i9_document": "i9Document",
-    });
-  });
-
-/** @internal */
 export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$Outbound =
   {
     i9_document?: boolean | undefined;
@@ -86,22 +67,6 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outbou
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBodyToJSON(
   putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody:
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody,
@@ -111,41 +76,6 @@ export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBodyToJS
       .parse(putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody),
   );
 }
-
-export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$Outbound =
@@ -176,22 +106,6 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSc
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestToJSON(
   putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest:
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
@@ -199,21 +113,6 @@ export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestToJSON(
   return JSON.stringify(
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSchema
       .parse(putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest),
-  );
-}
-
-export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest' from JSON`,
   );
 }
 
@@ -233,58 +132,6 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSc
       "Employee-Onboarding-Document": "employeeOnboardingDocument",
     });
   });
-
-/** @internal */
-export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Employee-Onboarding-Document"?:
-      | EmployeeOnboardingDocument$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeOnboardingDocument: EmployeeOnboardingDocument$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeOnboardingDocument: "Employee-Onboarding-Document",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$Outbound;
-}
-
-export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponseToJSON(
-  putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse:
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$outboundSchema
-      .parse(putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse),
-  );
-}
 
 export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigResponseFromJSON(
   jsonString: string,

@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Industry,
-  Industry$inboundSchema,
-  Industry$Outbound,
-  Industry$outboundSchema,
-} from "../components/industry.js";
+import { Industry, Industry$inboundSchema } from "../components/industry.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,22 +53,6 @@ export type PutV1CompanyIndustryResponse = {
 };
 
 /** @internal */
-export const PutV1CompanyIndustryRequestBody$inboundSchema: z.ZodType<
-  PutV1CompanyIndustryRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  title: z.string().optional(),
-  naics_code: z.string(),
-  sic_codes: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "naics_code": "naicsCode",
-    "sic_codes": "sicCodes",
-  });
-});
-
-/** @internal */
 export type PutV1CompanyIndustryRequestBody$Outbound = {
   title?: string | undefined;
   naics_code: string;
@@ -99,19 +75,6 @@ export const PutV1CompanyIndustryRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyIndustryRequestBody$ {
-  /** @deprecated use `PutV1CompanyIndustryRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyIndustryRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompanyIndustryRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompanyIndustryRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompanyIndustryRequestBody$Outbound` instead. */
-  export type Outbound = PutV1CompanyIndustryRequestBody$Outbound;
-}
-
 export function putV1CompanyIndustryRequestBodyToJSON(
   putV1CompanyIndustryRequestBody: PutV1CompanyIndustryRequestBody,
 ): string {
@@ -121,33 +84,6 @@ export function putV1CompanyIndustryRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1CompanyIndustryRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompanyIndustryRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1CompanyIndustryRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyIndustryRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompanyIndustryRequest$inboundSchema: z.ZodType<
-  PutV1CompanyIndustryRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutV1CompanyIndustryRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1CompanyIndustryRequest$Outbound = {
@@ -173,19 +109,6 @@ export const PutV1CompanyIndustryRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyIndustryRequest$ {
-  /** @deprecated use `PutV1CompanyIndustryRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyIndustryRequest$inboundSchema;
-  /** @deprecated use `PutV1CompanyIndustryRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompanyIndustryRequest$outboundSchema;
-  /** @deprecated use `PutV1CompanyIndustryRequest$Outbound` instead. */
-  export type Outbound = PutV1CompanyIndustryRequest$Outbound;
-}
-
 export function putV1CompanyIndustryRequestToJSON(
   putV1CompanyIndustryRequest: PutV1CompanyIndustryRequest,
 ): string {
@@ -193,16 +116,6 @@ export function putV1CompanyIndustryRequestToJSON(
     PutV1CompanyIndustryRequest$outboundSchema.parse(
       putV1CompanyIndustryRequest,
     ),
-  );
-}
-
-export function putV1CompanyIndustryRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompanyIndustryRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1CompanyIndustryRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyIndustryRequest' from JSON`,
   );
 }
 
@@ -220,50 +133,6 @@ export const PutV1CompanyIndustryResponse$inboundSchema: z.ZodType<
     "Industry": "industry",
   });
 });
-
-/** @internal */
-export type PutV1CompanyIndustryResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Industry?: Industry$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1CompanyIndustryResponse$outboundSchema: z.ZodType<
-  PutV1CompanyIndustryResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1CompanyIndustryResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  industry: Industry$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    industry: "Industry",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyIndustryResponse$ {
-  /** @deprecated use `PutV1CompanyIndustryResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyIndustryResponse$inboundSchema;
-  /** @deprecated use `PutV1CompanyIndustryResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompanyIndustryResponse$outboundSchema;
-  /** @deprecated use `PutV1CompanyIndustryResponse$Outbound` instead. */
-  export type Outbound = PutV1CompanyIndustryResponse$Outbound;
-}
-
-export function putV1CompanyIndustryResponseToJSON(
-  putV1CompanyIndustryResponse: PutV1CompanyIndustryResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompanyIndustryResponse$outboundSchema.parse(
-      putV1CompanyIndustryResponse,
-    ),
-  );
-}
 
 export function putV1CompanyIndustryResponseFromJSON(
   jsonString: string,

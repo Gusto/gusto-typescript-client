@@ -10,14 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmployeeStateTaxAnswer,
   EmployeeStateTaxAnswer$inboundSchema,
-  EmployeeStateTaxAnswer$Outbound,
-  EmployeeStateTaxAnswer$outboundSchema,
 } from "./employeestatetaxanswer.js";
 import {
   EmployeeStateTaxInputQuestionFormat,
   EmployeeStateTaxInputQuestionFormat$inboundSchema,
-  EmployeeStateTaxInputQuestionFormat$Outbound,
-  EmployeeStateTaxInputQuestionFormat$outboundSchema,
 } from "./employeestatetaxinputquestionformat.js";
 
 export type EmployeeStateTaxQuestion = {
@@ -56,56 +52,6 @@ export const EmployeeStateTaxQuestion$inboundSchema: z.ZodType<
     "input_question_format": "inputQuestionFormat",
   });
 });
-
-/** @internal */
-export type EmployeeStateTaxQuestion$Outbound = {
-  label: string;
-  description: string | null;
-  key: string;
-  is_question_for_admin_only: boolean;
-  input_question_format: EmployeeStateTaxInputQuestionFormat$Outbound;
-  answers: Array<EmployeeStateTaxAnswer$Outbound>;
-};
-
-/** @internal */
-export const EmployeeStateTaxQuestion$outboundSchema: z.ZodType<
-  EmployeeStateTaxQuestion$Outbound,
-  z.ZodTypeDef,
-  EmployeeStateTaxQuestion
-> = z.object({
-  label: z.string(),
-  description: z.nullable(z.string()),
-  key: z.string(),
-  isQuestionForAdminOnly: z.boolean(),
-  inputQuestionFormat: EmployeeStateTaxInputQuestionFormat$outboundSchema,
-  answers: z.array(EmployeeStateTaxAnswer$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    isQuestionForAdminOnly: "is_question_for_admin_only",
-    inputQuestionFormat: "input_question_format",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeStateTaxQuestion$ {
-  /** @deprecated use `EmployeeStateTaxQuestion$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxQuestion$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxQuestion$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxQuestion$outboundSchema;
-  /** @deprecated use `EmployeeStateTaxQuestion$Outbound` instead. */
-  export type Outbound = EmployeeStateTaxQuestion$Outbound;
-}
-
-export function employeeStateTaxQuestionToJSON(
-  employeeStateTaxQuestion: EmployeeStateTaxQuestion,
-): string {
-  return JSON.stringify(
-    EmployeeStateTaxQuestion$outboundSchema.parse(employeeStateTaxQuestion),
-  );
-}
 
 export function employeeStateTaxQuestionFromJSON(
   jsonString: string,

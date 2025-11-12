@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ExternalPayrollBasic,
   ExternalPayrollBasic$inboundSchema,
-  ExternalPayrollBasic$Outbound,
-  ExternalPayrollBasic$outboundSchema,
 } from "../components/externalpayrollbasic.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetV1CompanyExternalPayrollsResponse = {
 };
 
 /** @internal */
-export const GetV1CompanyExternalPayrollsRequest$inboundSchema: z.ZodType<
-  GetV1CompanyExternalPayrollsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompanyExternalPayrollsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,21 +60,6 @@ export const GetV1CompanyExternalPayrollsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyExternalPayrollsRequest$ {
-  /** @deprecated use `GetV1CompanyExternalPayrollsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompanyExternalPayrollsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompanyExternalPayrollsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyExternalPayrollsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompanyExternalPayrollsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompanyExternalPayrollsRequest$Outbound;
-}
-
 export function getV1CompanyExternalPayrollsRequestToJSON(
   getV1CompanyExternalPayrollsRequest: GetV1CompanyExternalPayrollsRequest,
 ): string {
@@ -102,17 +67,6 @@ export function getV1CompanyExternalPayrollsRequestToJSON(
     GetV1CompanyExternalPayrollsRequest$outboundSchema.parse(
       getV1CompanyExternalPayrollsRequest,
     ),
-  );
-}
-
-export function getV1CompanyExternalPayrollsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompanyExternalPayrollsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompanyExternalPayrollsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompanyExternalPayrollsRequest' from JSON`,
   );
 }
 
@@ -131,52 +85,6 @@ export const GetV1CompanyExternalPayrollsResponse$inboundSchema: z.ZodType<
     "External-Payroll-List": "externalPayrollList",
   });
 });
-
-/** @internal */
-export type GetV1CompanyExternalPayrollsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "External-Payroll-List"?: Array<ExternalPayrollBasic$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1CompanyExternalPayrollsResponse$outboundSchema: z.ZodType<
-  GetV1CompanyExternalPayrollsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompanyExternalPayrollsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  externalPayrollList: z.array(ExternalPayrollBasic$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    externalPayrollList: "External-Payroll-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyExternalPayrollsResponse$ {
-  /** @deprecated use `GetV1CompanyExternalPayrollsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompanyExternalPayrollsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompanyExternalPayrollsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyExternalPayrollsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompanyExternalPayrollsResponse$Outbound` instead. */
-  export type Outbound = GetV1CompanyExternalPayrollsResponse$Outbound;
-}
-
-export function getV1CompanyExternalPayrollsResponseToJSON(
-  getV1CompanyExternalPayrollsResponse: GetV1CompanyExternalPayrollsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompanyExternalPayrollsResponse$outboundSchema.parse(
-      getV1CompanyExternalPayrollsResponse,
-    ),
-  );
-}
 
 export function getV1CompanyExternalPayrollsResponseFromJSON(
   jsonString: string,

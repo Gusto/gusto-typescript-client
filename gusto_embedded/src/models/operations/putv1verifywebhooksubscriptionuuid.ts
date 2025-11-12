@@ -9,19 +9,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import {
   WebhookSubscription,
   WebhookSubscription$inboundSchema,
-  WebhookSubscription$Outbound,
-  WebhookSubscription$outboundSchema,
 } from "../components/webhooksubscription.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -57,17 +52,6 @@ export type PutV1VerifyWebhookSubscriptionUuidResponse = {
 };
 
 /** @internal */
-export const PutV1VerifyWebhookSubscriptionUuidSecurity$inboundSchema:
-  z.ZodType<PutV1VerifyWebhookSubscriptionUuidSecurity, z.ZodTypeDef, unknown> =
-    z.object({
-      SystemAccessAuth: z.string(),
-    }).transform((v) => {
-      return remap$(v, {
-        "SystemAccessAuth": "systemAccessAuth",
-      });
-    });
-
-/** @internal */
 export type PutV1VerifyWebhookSubscriptionUuidSecurity$Outbound = {
   SystemAccessAuth: string;
 };
@@ -86,21 +70,6 @@ export const PutV1VerifyWebhookSubscriptionUuidSecurity$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1VerifyWebhookSubscriptionUuidSecurity$ {
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidSecurity$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidSecurity$inboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidSecurity$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidSecurity$outboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidSecurity$Outbound` instead. */
-  export type Outbound = PutV1VerifyWebhookSubscriptionUuidSecurity$Outbound;
-}
-
 export function putV1VerifyWebhookSubscriptionUuidSecurityToJSON(
   putV1VerifyWebhookSubscriptionUuidSecurity:
     PutV1VerifyWebhookSubscriptionUuidSecurity,
@@ -111,36 +80,6 @@ export function putV1VerifyWebhookSubscriptionUuidSecurityToJSON(
     ),
   );
 }
-
-export function putV1VerifyWebhookSubscriptionUuidSecurityFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1VerifyWebhookSubscriptionUuidSecurity,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1VerifyWebhookSubscriptionUuidSecurity$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1VerifyWebhookSubscriptionUuidSecurity' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1VerifyWebhookSubscriptionUuidRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1VerifyWebhookSubscriptionUuidRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    verification_token: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "verification_token": "verificationToken",
-    });
-  });
 
 /** @internal */
 export type PutV1VerifyWebhookSubscriptionUuidRequestBody$Outbound = {
@@ -161,21 +100,6 @@ export const PutV1VerifyWebhookSubscriptionUuidRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1VerifyWebhookSubscriptionUuidRequestBody$ {
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidRequestBody$inboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidRequestBody$outboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidRequestBody$Outbound` instead. */
-  export type Outbound = PutV1VerifyWebhookSubscriptionUuidRequestBody$Outbound;
-}
-
 export function putV1VerifyWebhookSubscriptionUuidRequestBodyToJSON(
   putV1VerifyWebhookSubscriptionUuidRequestBody:
     PutV1VerifyWebhookSubscriptionUuidRequestBody,
@@ -186,41 +110,6 @@ export function putV1VerifyWebhookSubscriptionUuidRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1VerifyWebhookSubscriptionUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1VerifyWebhookSubscriptionUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1VerifyWebhookSubscriptionUuidRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1VerifyWebhookSubscriptionUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1VerifyWebhookSubscriptionUuidRequest$inboundSchema: z.ZodType<
-  PutV1VerifyWebhookSubscriptionUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  webhook_subscription_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutV1VerifyWebhookSubscriptionUuidRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "webhook_subscription_uuid": "webhookSubscriptionUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1VerifyWebhookSubscriptionUuidRequest$Outbound = {
@@ -249,21 +138,6 @@ export const PutV1VerifyWebhookSubscriptionUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1VerifyWebhookSubscriptionUuidRequest$ {
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidRequest$inboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidRequest$outboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidRequest$Outbound` instead. */
-  export type Outbound = PutV1VerifyWebhookSubscriptionUuidRequest$Outbound;
-}
-
 export function putV1VerifyWebhookSubscriptionUuidRequestToJSON(
   putV1VerifyWebhookSubscriptionUuidRequest:
     PutV1VerifyWebhookSubscriptionUuidRequest,
@@ -272,22 +146,6 @@ export function putV1VerifyWebhookSubscriptionUuidRequestToJSON(
     PutV1VerifyWebhookSubscriptionUuidRequest$outboundSchema.parse(
       putV1VerifyWebhookSubscriptionUuidRequest,
     ),
-  );
-}
-
-export function putV1VerifyWebhookSubscriptionUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1VerifyWebhookSubscriptionUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1VerifyWebhookSubscriptionUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1VerifyWebhookSubscriptionUuidRequest' from JSON`,
   );
 }
 
@@ -303,54 +161,6 @@ export const PutV1VerifyWebhookSubscriptionUuidResponse$inboundSchema:
         "Webhook-Subscription": "webhookSubscription",
       });
     });
-
-/** @internal */
-export type PutV1VerifyWebhookSubscriptionUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Webhook-Subscription"?: WebhookSubscription$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema:
-  z.ZodType<
-    PutV1VerifyWebhookSubscriptionUuidResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1VerifyWebhookSubscriptionUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    webhookSubscription: WebhookSubscription$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      webhookSubscription: "Webhook-Subscription",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1VerifyWebhookSubscriptionUuidResponse$ {
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidResponse$inboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema;
-  /** @deprecated use `PutV1VerifyWebhookSubscriptionUuidResponse$Outbound` instead. */
-  export type Outbound = PutV1VerifyWebhookSubscriptionUuidResponse$Outbound;
-}
-
-export function putV1VerifyWebhookSubscriptionUuidResponseToJSON(
-  putV1VerifyWebhookSubscriptionUuidResponse:
-    PutV1VerifyWebhookSubscriptionUuidResponse,
-): string {
-  return JSON.stringify(
-    PutV1VerifyWebhookSubscriptionUuidResponse$outboundSchema.parse(
-      putV1VerifyWebhookSubscriptionUuidResponse,
-    ),
-  );
-}
 
 export function putV1VerifyWebhookSubscriptionUuidResponseFromJSON(
   jsonString: string,

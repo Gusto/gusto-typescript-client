@@ -49,50 +49,6 @@ export const CreateReport$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type CreateReport$Outbound = {
-  request_uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  custom_name?: string | null | undefined;
-  file_type?: string | undefined;
-};
-
-/** @internal */
-export const CreateReport$outboundSchema: z.ZodType<
-  CreateReport$Outbound,
-  z.ZodTypeDef,
-  CreateReport
-> = z.object({
-  requestUuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  customName: z.nullable(z.string()).optional(),
-  fileType: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestUuid: "request_uuid",
-    companyUuid: "company_uuid",
-    customName: "custom_name",
-    fileType: "file_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateReport$ {
-  /** @deprecated use `CreateReport$inboundSchema` instead. */
-  export const inboundSchema = CreateReport$inboundSchema;
-  /** @deprecated use `CreateReport$outboundSchema` instead. */
-  export const outboundSchema = CreateReport$outboundSchema;
-  /** @deprecated use `CreateReport$Outbound` instead. */
-  export type Outbound = CreateReport$Outbound;
-}
-
-export function createReportToJSON(createReport: CreateReport): string {
-  return JSON.stringify(CreateReport$outboundSchema.parse(createReport));
-}
-
 export function createReportFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateReport, SDKValidationError> {

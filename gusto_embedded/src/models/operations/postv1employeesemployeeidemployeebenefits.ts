@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeBenefit,
   EmployeeBenefit$inboundSchema,
-  EmployeeBenefit$Outbound,
-  EmployeeBenefit$outboundSchema,
 } from "../components/employeebenefit.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -257,34 +252,9 @@ export type PostV1EmployeesEmployeeIdEmployeeBenefitsResponse = {
 };
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdEmployeeBenefitsType$inboundSchema:
+export const PostV1EmployeesEmployeeIdEmployeeBenefitsType$outboundSchema:
   z.ZodNativeEnum<typeof PostV1EmployeesEmployeeIdEmployeeBenefitsType> = z
     .nativeEnum(PostV1EmployeesEmployeeIdEmployeeBenefitsType);
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdEmployeeBenefitsType$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1EmployeesEmployeeIdEmployeeBenefitsType> =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdEmployeeBenefitsType$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsType$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsType$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsType$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsType$outboundSchema;
-}
-
-/** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
-  .object({
-    rate: z.string().optional(),
-    threshold: z.string().optional(),
-  });
 
 /** @internal */
 export type Two$Outbound = {
@@ -299,36 +269,9 @@ export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
     threshold: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Two$ {
-  /** @deprecated use `Two$inboundSchema` instead. */
-  export const inboundSchema = Two$inboundSchema;
-  /** @deprecated use `Two$outboundSchema` instead. */
-  export const outboundSchema = Two$outboundSchema;
-  /** @deprecated use `Two$Outbound` instead. */
-  export type Outbound = Two$Outbound;
-}
-
 export function twoToJSON(two: Two): string {
   return JSON.stringify(Two$outboundSchema.parse(two));
 }
-
-export function twoFromJSON(
-  jsonString: string,
-): SafeParseResult<Two, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Two$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two' from JSON`,
-  );
-}
-
-/** @internal */
-export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.lazy(() => Two$inboundSchema))]);
 
 /** @internal */
 export type Value$Outbound = string | Array<Two$Outbound>;
@@ -340,43 +283,9 @@ export const Value$outboundSchema: z.ZodType<
   Value
 > = z.union([z.string(), z.array(z.lazy(() => Two$outboundSchema))]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Value$ {
-  /** @deprecated use `Value$inboundSchema` instead. */
-  export const inboundSchema = Value$inboundSchema;
-  /** @deprecated use `Value$outboundSchema` instead. */
-  export const outboundSchema = Value$outboundSchema;
-  /** @deprecated use `Value$Outbound` instead. */
-  export type Outbound = Value$Outbound;
-}
-
 export function valueToJSON(value: Value): string {
   return JSON.stringify(Value$outboundSchema.parse(value));
 }
-
-export function valueFromJSON(
-  jsonString: string,
-): SafeParseResult<Value, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Value$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Value' from JSON`,
-  );
-}
-
-/** @internal */
-export const Contribution$inboundSchema: z.ZodType<
-  Contribution,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: PostV1EmployeesEmployeeIdEmployeeBenefitsType$inboundSchema.optional(),
-  value: z.union([z.string(), z.array(z.lazy(() => Two$inboundSchema))])
-    .optional(),
-});
 
 /** @internal */
 export type Contribution$Outbound = {
@@ -395,113 +304,18 @@ export const Contribution$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Contribution$ {
-  /** @deprecated use `Contribution$inboundSchema` instead. */
-  export const inboundSchema = Contribution$inboundSchema;
-  /** @deprecated use `Contribution$outboundSchema` instead. */
-  export const outboundSchema = Contribution$outboundSchema;
-  /** @deprecated use `Contribution$Outbound` instead. */
-  export type Outbound = Contribution$Outbound;
-}
-
 export function contributionToJSON(contribution: Contribution): string {
   return JSON.stringify(Contribution$outboundSchema.parse(contribution));
 }
 
-export function contributionFromJSON(
-  jsonString: string,
-): SafeParseResult<Contribution, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Contribution$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Contribution' from JSON`,
-  );
-}
-
 /** @internal */
-export const LimitOption$inboundSchema: z.ZodNativeEnum<typeof LimitOption> = z
+export const LimitOption$outboundSchema: z.ZodNativeEnum<typeof LimitOption> = z
   .nativeEnum(LimitOption);
-
-/** @internal */
-export const LimitOption$outboundSchema: z.ZodNativeEnum<typeof LimitOption> =
-  LimitOption$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace LimitOption$ {
-  /** @deprecated use `LimitOption$inboundSchema` instead. */
-  export const inboundSchema = LimitOption$inboundSchema;
-  /** @deprecated use `LimitOption$outboundSchema` instead. */
-  export const outboundSchema = LimitOption$outboundSchema;
-}
-
-/** @internal */
-export const DeductionReducesTaxableIncome$inboundSchema: z.ZodNativeEnum<
-  typeof DeductionReducesTaxableIncome
-> = z.nativeEnum(DeductionReducesTaxableIncome);
 
 /** @internal */
 export const DeductionReducesTaxableIncome$outboundSchema: z.ZodNativeEnum<
   typeof DeductionReducesTaxableIncome
-> = DeductionReducesTaxableIncome$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeductionReducesTaxableIncome$ {
-  /** @deprecated use `DeductionReducesTaxableIncome$inboundSchema` instead. */
-  export const inboundSchema = DeductionReducesTaxableIncome$inboundSchema;
-  /** @deprecated use `DeductionReducesTaxableIncome$outboundSchema` instead. */
-  export const outboundSchema = DeductionReducesTaxableIncome$outboundSchema;
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_benefit_uuid: z.string(),
-    active: z.boolean().default(true),
-    employee_deduction: z.string().default("0.00"),
-    deduct_as_percentage: z.boolean().default(false),
-    employee_deduction_annual_maximum: z.nullable(z.string()).optional(),
-    contribution: z.lazy(() => Contribution$inboundSchema).optional(),
-    elective: z.boolean().default(false),
-    company_contribution_annual_maximum: z.nullable(z.string()).optional(),
-    limit_option: z.nullable(LimitOption$inboundSchema).optional(),
-    catch_up: z.boolean().default(false),
-    coverage_amount: z.nullable(z.string()).optional(),
-    coverage_salary_multiplier: z.string().default("0.00"),
-    deduction_reduces_taxable_income: z.nullable(
-      DeductionReducesTaxableIncome$inboundSchema,
-    ).optional(),
-    company_contribution: z.string().default("0.00"),
-    contribute_as_percentage: z.boolean().default(false),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_benefit_uuid": "companyBenefitUuid",
-      "employee_deduction": "employeeDeduction",
-      "deduct_as_percentage": "deductAsPercentage",
-      "employee_deduction_annual_maximum": "employeeDeductionAnnualMaximum",
-      "company_contribution_annual_maximum": "companyContributionAnnualMaximum",
-      "limit_option": "limitOption",
-      "catch_up": "catchUp",
-      "coverage_amount": "coverageAmount",
-      "coverage_salary_multiplier": "coverageSalaryMultiplier",
-      "deduction_reduces_taxable_income": "deductionReducesTaxableIncome",
-      "company_contribution": "companyContribution",
-      "contribute_as_percentage": "contributeAsPercentage",
-    });
-  });
+> = z.nativeEnum(DeductionReducesTaxableIncome);
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$Outbound = {
@@ -563,22 +377,6 @@ export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdEmployeeBenefitsRequestBodyToJSON(
   postV1EmployeesEmployeeIdEmployeeBenefitsRequestBody:
     PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody,
@@ -589,42 +387,6 @@ export function postV1EmployeesEmployeeIdEmployeeBenefitsRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1EmployeesEmployeeIdEmployeeBenefitsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$Outbound = {
@@ -653,22 +415,6 @@ export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdEmployeeBenefitsRequestToJSON(
   postV1EmployeesEmployeeIdEmployeeBenefitsRequest:
     PostV1EmployeesEmployeeIdEmployeeBenefitsRequest,
@@ -677,22 +423,6 @@ export function postV1EmployeesEmployeeIdEmployeeBenefitsRequestToJSON(
     PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$outboundSchema.parse(
       postV1EmployeesEmployeeIdEmployeeBenefitsRequest,
     ),
-  );
-}
-
-export function postV1EmployeesEmployeeIdEmployeeBenefitsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdEmployeeBenefitsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdEmployeeBenefitsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdEmployeeBenefitsRequest' from JSON`,
   );
 }
 
@@ -711,55 +441,6 @@ export const PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema:
       "Employee-Benefit": "employeeBenefit",
     });
   });
-
-/** @internal */
-export type PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Benefit"?: EmployeeBenefit$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeBenefit: EmployeeBenefit$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeBenefit: "Employee-Benefit",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$Outbound;
-}
-
-export function postV1EmployeesEmployeeIdEmployeeBenefitsResponseToJSON(
-  postV1EmployeesEmployeeIdEmployeeBenefitsResponse:
-    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdEmployeeBenefitsResponse$outboundSchema.parse(
-      postV1EmployeesEmployeeIdEmployeeBenefitsResponse,
-    ),
-  );
-}
 
 export function postV1EmployeesEmployeeIdEmployeeBenefitsResponseFromJSON(
   jsonString: string,

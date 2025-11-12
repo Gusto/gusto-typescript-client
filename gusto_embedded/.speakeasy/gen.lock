@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: e002d486c100d462ce8d759e4efae5a6
+  docChecksum: 7eacbfab5786e1dfa3ca616a25e2d645
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.648.0
-  generationVersion: 2.737.0
-  releaseVersion: 0.10.0
-  configChecksum: aec70a2d07c3f2b536cba69e5c7bc99f
+  speakeasyVersion: 1.654.0
+  generationVersion: 2.750.0
+  releaseVersion: 0.10.1
+  configChecksum: 29fd9c9fb975e4f5aa2edb3bad58e99e
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.26.0
+    core: 3.26.5
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -9758,7 +9758,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "awaiting_funds", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "123454321", "additional_notes": "Additional Notes", "bank_name": "JP Morgan Chase", "date_sent": "2024-06-10", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "payroll", "payment_uuid": "5faae454-e629-490b-a72a-c022c2c9e6bc", "amount_sent": "1014500.00", "requested_amount": "1014500.00", "wire_in_deadline": "2024-06-21T18:00:00Z"}
+          application/json: {"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "awaiting_funds", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "123454321", "additional_notes": "Additional Notes", "bank_name": "JP Morgan Chase", "date_sent": "2024-06-10", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll", "payment_uuid": "5faae454-e629-490b-a72a-c022c2c9e6bc", "amount_sent": "1014500.00", "requested_amount": "1014500.00", "wire_in_deadline": "2024-06-21T18:00:00Z"}
   put-wire_in_requests-wire_in_request_uuid:
     Example:
       parameters:
@@ -9783,7 +9783,7 @@ examples:
         application/json: {"date_sent": "<value>", "bank_name": "<value>", "amount_sent": "<value>"}
       responses:
         "200":
-          application/json: {"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "awaiting_funds", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "123454321", "additional_notes": "Additional Notes", "bank_name": "JP Morgan Chase", "date_sent": "2024-06-10", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "payroll", "payment_uuid": "5faae454-e629-490b-a72a-c022c2c9e6bc", "amount_sent": "1014500.00", "requested_amount": "1014500.00", "wire_in_deadline": "2024-06-21T18:00:00Z"}
+          application/json: {"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "awaiting_funds", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "123454321", "additional_notes": "Additional Notes", "bank_name": "JP Morgan Chase", "date_sent": "2024-06-10", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll", "payment_uuid": "5faae454-e629-490b-a72a-c022c2c9e6bc", "amount_sent": "1014500.00", "requested_amount": "1014500.00", "wire_in_deadline": "2024-06-21T18:00:00Z"}
     Basic:
       parameters:
         path:
@@ -9826,7 +9826,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "awaiting_funds", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "5773243", "additional_notes": "Additional Notes", "bank_name": "Chase", "date_sent": "2024-06-10", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "payroll", "payment_uuid": "5faae454-e629-490b-a72a-c022c2c9e6bc", "amount_sent": "1054693.52", "requested_amount": "1054693.52", "wire_in_deadline": "2024-06-21T18:00:00Z"}]
+          application/json: [{"uuid": "c5fdae57-5483-4529-9aae-f0edceed92d4", "status": "awaiting_funds", "origination_bank": "JP Morgan Chase", "origination_bank_address": "1 Chase Plaza, New York, NY 10081", "recipient_name": "Gusto, Inc", "recipient_address": "525 20th Street, San Francisco, CA 94107", "recipient_account_number": "21911761", "recipient_routing_number": "5773243", "additional_notes": "Additional Notes", "bank_name": "Chase", "date_sent": "2024-06-10", "unique_tracking_code": "1trvxwxp57zf", "payment_type": "Payroll", "payment_uuid": "5faae454-e629-490b-a72a-c022c2c9e6bc", "amount_sent": "1054693.52", "requested_amount": "1054693.52", "wire_in_deadline": "2024-06-21T18:00:00Z"}]
   get-v1-companies-company_id-employees-payment_details:
     Example:
       parameters:
@@ -10145,4 +10145,8 @@ examples:
           X-Gusto-API-Version: "2024-04-01"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `gustoembedded.garnishments.create()`: \n  *  `request.requestBody.totalAmount` **Changed**\n* `gustoembedded.garnishments.update()`: \n  *  `request.requestBody.totalAmount` **Changed**\n"
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `gustoembedded.wireInRequests.get()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.wireInRequests.submit()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.wireInRequests.list()`:  `response.[]` **Changed** **Breaking** :warning:

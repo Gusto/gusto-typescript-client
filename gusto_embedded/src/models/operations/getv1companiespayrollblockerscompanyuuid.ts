@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayrollBlocker,
   PayrollBlocker$inboundSchema,
-  PayrollBlocker$Outbound,
-  PayrollBlocker$outboundSchema,
 } from "../components/payrollblocker.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetV1CompaniesPayrollBlockersCompanyUuidResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesPayrollBlockersCompanyUuidRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesPayrollBlockersCompanyUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesPayrollBlockersCompanyUuidRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,22 +61,6 @@ export const GetV1CompaniesPayrollBlockersCompanyUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesPayrollBlockersCompanyUuidRequest$ {
-  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesPayrollBlockersCompanyUuidRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesPayrollBlockersCompanyUuidRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesPayrollBlockersCompanyUuidRequest$Outbound;
-}
-
 export function getV1CompaniesPayrollBlockersCompanyUuidRequestToJSON(
   getV1CompaniesPayrollBlockersCompanyUuidRequest:
     GetV1CompaniesPayrollBlockersCompanyUuidRequest,
@@ -106,22 +69,6 @@ export function getV1CompaniesPayrollBlockersCompanyUuidRequestToJSON(
     GetV1CompaniesPayrollBlockersCompanyUuidRequest$outboundSchema.parse(
       getV1CompaniesPayrollBlockersCompanyUuidRequest,
     ),
-  );
-}
-
-export function getV1CompaniesPayrollBlockersCompanyUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesPayrollBlockersCompanyUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesPayrollBlockersCompanyUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesPayrollBlockersCompanyUuidRequest' from JSON`,
   );
 }
 
@@ -140,55 +87,6 @@ export const GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema:
       "Payroll-Blocker-List": "payrollBlockerList",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Payroll-Blocker-List"?: Array<PayrollBlocker$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesPayrollBlockersCompanyUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payrollBlockerList: z.array(PayrollBlocker$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payrollBlockerList: "Payroll-Blocker-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesPayrollBlockersCompanyUuidResponse$ {
-  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesPayrollBlockersCompanyUuidResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesPayrollBlockersCompanyUuidResponse$Outbound;
-}
-
-export function getV1CompaniesPayrollBlockersCompanyUuidResponseToJSON(
-  getV1CompaniesPayrollBlockersCompanyUuidResponse:
-    GetV1CompaniesPayrollBlockersCompanyUuidResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesPayrollBlockersCompanyUuidResponse$outboundSchema.parse(
-      getV1CompaniesPayrollBlockersCompanyUuidResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesPayrollBlockersCompanyUuidResponseFromJSON(
   jsonString: string,

@@ -31,45 +31,6 @@ export const EmployeeOnboardingDocument$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type EmployeeOnboardingDocument$Outbound = {
-  i9_document?: string | undefined;
-};
-
-/** @internal */
-export const EmployeeOnboardingDocument$outboundSchema: z.ZodType<
-  EmployeeOnboardingDocument$Outbound,
-  z.ZodTypeDef,
-  EmployeeOnboardingDocument
-> = z.object({
-  i9Document: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    i9Document: "i9_document",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeOnboardingDocument$ {
-  /** @deprecated use `EmployeeOnboardingDocument$inboundSchema` instead. */
-  export const inboundSchema = EmployeeOnboardingDocument$inboundSchema;
-  /** @deprecated use `EmployeeOnboardingDocument$outboundSchema` instead. */
-  export const outboundSchema = EmployeeOnboardingDocument$outboundSchema;
-  /** @deprecated use `EmployeeOnboardingDocument$Outbound` instead. */
-  export type Outbound = EmployeeOnboardingDocument$Outbound;
-}
-
-export function employeeOnboardingDocumentToJSON(
-  employeeOnboardingDocument: EmployeeOnboardingDocument,
-): string {
-  return JSON.stringify(
-    EmployeeOnboardingDocument$outboundSchema.parse(employeeOnboardingDocument),
-  );
-}
-
 export function employeeOnboardingDocumentFromJSON(
   jsonString: string,
 ): SafeParseResult<EmployeeOnboardingDocument, SDKValidationError> {

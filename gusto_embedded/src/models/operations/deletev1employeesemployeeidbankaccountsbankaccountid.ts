@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,24 +34,6 @@ export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest = {
 export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    bank_account_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "bank_account_uuid": "bankAccountUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$Outbound =
@@ -82,22 +61,6 @@ export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$ {
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$Outbound;
-}
-
 export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestToJSON(
   deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest:
     DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
@@ -105,21 +68,6 @@ export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestToJSO
   return JSON.stringify(
     DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$outboundSchema
       .parse(deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest),
-  );
-}
-
-export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest' from JSON`,
   );
 }
 
@@ -136,52 +84,6 @@ export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboun
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$ {
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$Outbound;
-}
-
-export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponseToJSON(
-  deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse:
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse$outboundSchema
-      .parse(deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse),
-  );
-}
 
 export function deleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponseFromJSON(
   jsonString: string,

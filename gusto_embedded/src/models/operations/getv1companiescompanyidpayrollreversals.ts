@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayrollReversal,
   PayrollReversal$inboundSchema,
-  PayrollReversal$Outbound,
-  PayrollReversal$outboundSchema,
 } from "../components/payrollreversal.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,24 +48,6 @@ export type GetV1CompaniesCompanyIdPayrollReversalsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdPayrollReversalsRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPayrollReversalsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    page: z.number().int().optional(),
-    per: z.number().int().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesCompanyIdPayrollReversalsRequest$Outbound = {
   company_id: string;
   page?: number | undefined;
@@ -96,22 +73,6 @@ export const GetV1CompaniesCompanyIdPayrollReversalsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPayrollReversalsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPayrollReversalsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPayrollReversalsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdPayrollReversalsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdPayrollReversalsRequestToJSON(
   getV1CompaniesCompanyIdPayrollReversalsRequest:
     GetV1CompaniesCompanyIdPayrollReversalsRequest,
@@ -120,22 +81,6 @@ export function getV1CompaniesCompanyIdPayrollReversalsRequestToJSON(
     GetV1CompaniesCompanyIdPayrollReversalsRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdPayrollReversalsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdPayrollReversalsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdPayrollReversalsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdPayrollReversalsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyIdPayrollReversalsRequest' from JSON`,
   );
 }
 
@@ -154,55 +99,6 @@ export const GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema:
       "Payroll-Reversal": "payrollReversal",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Payroll-Reversal"?: PayrollReversal$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdPayrollReversalsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payrollReversal: PayrollReversal$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payrollReversal: "Payroll-Reversal",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPayrollReversalsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPayrollReversalsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdPayrollReversalsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdPayrollReversalsResponseToJSON(
-  getV1CompaniesCompanyIdPayrollReversalsResponse:
-    GetV1CompaniesCompanyIdPayrollReversalsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdPayrollReversalsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdPayrollReversalsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdPayrollReversalsResponseFromJSON(
   jsonString: string,

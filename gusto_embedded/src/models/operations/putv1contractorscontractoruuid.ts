@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Contractor,
   Contractor$inboundSchema,
-  Contractor$Outbound,
-  Contractor$outboundSchema,
 } from "../components/contractor.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -176,88 +171,15 @@ export type PutV1ContractorsContractorUuidResponse = {
 };
 
 /** @internal */
-export const PutV1ContractorsContractorUuidType$inboundSchema: z.ZodNativeEnum<
+export const PutV1ContractorsContractorUuidType$outboundSchema: z.ZodNativeEnum<
   typeof PutV1ContractorsContractorUuidType
 > = z.nativeEnum(PutV1ContractorsContractorUuidType);
 
 /** @internal */
-export const PutV1ContractorsContractorUuidType$outboundSchema: z.ZodNativeEnum<
-  typeof PutV1ContractorsContractorUuidType
-> = PutV1ContractorsContractorUuidType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidType$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidType$inboundSchema` instead. */
-  export const inboundSchema = PutV1ContractorsContractorUuidType$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidType$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidType$outboundSchema;
-}
-
-/** @internal */
-export const PutV1ContractorsContractorUuidWageType$inboundSchema:
+export const PutV1ContractorsContractorUuidWageType$outboundSchema:
   z.ZodNativeEnum<typeof PutV1ContractorsContractorUuidWageType> = z.nativeEnum(
     PutV1ContractorsContractorUuidWageType,
   );
-
-/** @internal */
-export const PutV1ContractorsContractorUuidWageType$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1ContractorsContractorUuidWageType> =
-    PutV1ContractorsContractorUuidWageType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidWageType$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidWageType$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorUuidWageType$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidWageType$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidWageType$outboundSchema;
-}
-
-/** @internal */
-export const PutV1ContractorsContractorUuidRequestBody$inboundSchema: z.ZodType<
-  PutV1ContractorsContractorUuidRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string(),
-  type: PutV1ContractorsContractorUuidType$inboundSchema.default("Individual"),
-  wage_type: PutV1ContractorsContractorUuidWageType$inboundSchema.optional(),
-  start_date: z.string().optional(),
-  hourly_rate: z.string().optional(),
-  self_onboarding: z.boolean().default(false),
-  email: z.string().optional(),
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  middle_initial: z.string().optional(),
-  file_new_hire_report: z.boolean().default(false),
-  work_state: z.nullable(z.string()).optional(),
-  ssn: z.string().optional(),
-  business_name: z.string().optional(),
-  ein: z.string().optional(),
-  is_active: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "wage_type": "wageType",
-    "start_date": "startDate",
-    "hourly_rate": "hourlyRate",
-    "self_onboarding": "selfOnboarding",
-    "first_name": "firstName",
-    "last_name": "lastName",
-    "middle_initial": "middleInitial",
-    "file_new_hire_report": "fileNewHireReport",
-    "work_state": "workState",
-    "business_name": "businessName",
-    "is_active": "isActive",
-  });
-});
 
 /** @internal */
 export type PutV1ContractorsContractorUuidRequestBody$Outbound = {
@@ -320,21 +242,6 @@ export const PutV1ContractorsContractorUuidRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidRequestBody$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorUuidRequestBody$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidRequestBody$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidRequestBody$Outbound` instead. */
-  export type Outbound = PutV1ContractorsContractorUuidRequestBody$Outbound;
-}
-
 export function putV1ContractorsContractorUuidRequestBodyToJSON(
   putV1ContractorsContractorUuidRequestBody:
     PutV1ContractorsContractorUuidRequestBody,
@@ -345,41 +252,6 @@ export function putV1ContractorsContractorUuidRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1ContractorsContractorUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1ContractorsContractorUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorsContractorUuidRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1ContractorsContractorUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1ContractorsContractorUuidRequest$inboundSchema: z.ZodType<
-  PutV1ContractorsContractorUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutV1ContractorsContractorUuidRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_uuid": "contractorUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1ContractorsContractorUuidRequest$Outbound = {
@@ -407,21 +279,6 @@ export const PutV1ContractorsContractorUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidRequest$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorUuidRequest$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidRequest$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidRequest$Outbound` instead. */
-  export type Outbound = PutV1ContractorsContractorUuidRequest$Outbound;
-}
-
 export function putV1ContractorsContractorUuidRequestToJSON(
   putV1ContractorsContractorUuidRequest: PutV1ContractorsContractorUuidRequest,
 ): string {
@@ -429,17 +286,6 @@ export function putV1ContractorsContractorUuidRequestToJSON(
     PutV1ContractorsContractorUuidRequest$outboundSchema.parse(
       putV1ContractorsContractorUuidRequest,
     ),
-  );
-}
-
-export function putV1ContractorsContractorUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1ContractorsContractorUuidRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorsContractorUuidRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1ContractorsContractorUuidRequest' from JSON`,
   );
 }
 
@@ -457,53 +303,6 @@ export const PutV1ContractorsContractorUuidResponse$inboundSchema: z.ZodType<
     "Contractor": "contractor",
   });
 });
-
-/** @internal */
-export type PutV1ContractorsContractorUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Contractor?: Contractor$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1ContractorsContractorUuidResponse$outboundSchema: z.ZodType<
-  PutV1ContractorsContractorUuidResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1ContractorsContractorUuidResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  contractor: Contractor$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    contractor: "Contractor",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidResponse$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorUuidResponse$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidResponse$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidResponse$Outbound` instead. */
-  export type Outbound = PutV1ContractorsContractorUuidResponse$Outbound;
-}
-
-export function putV1ContractorsContractorUuidResponseToJSON(
-  putV1ContractorsContractorUuidResponse:
-    PutV1ContractorsContractorUuidResponse,
-): string {
-  return JSON.stringify(
-    PutV1ContractorsContractorUuidResponse$outboundSchema.parse(
-      putV1ContractorsContractorUuidResponse,
-    ),
-  );
-}
 
 export function putV1ContractorsContractorUuidResponseFromJSON(
   jsonString: string,

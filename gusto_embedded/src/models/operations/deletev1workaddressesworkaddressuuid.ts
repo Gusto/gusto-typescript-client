@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,47 +43,10 @@ export type DeleteV1WorkAddressesWorkAddressUuidResponse = {
 };
 
 /** @internal */
-export const DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
-  > = z.nativeEnum(DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
-
-/** @internal */
 export const DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
-  > = DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$ {
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const DeleteV1WorkAddressesWorkAddressUuidRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1WorkAddressesWorkAddressUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    work_address_uuid: z.string(),
-    "X-Gusto-API-Version":
-      DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "work_address_uuid": "workAddressUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
+  > = z.nativeEnum(DeleteV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type DeleteV1WorkAddressesWorkAddressUuidRequest$Outbound = {
@@ -111,21 +72,6 @@ export const DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1WorkAddressesWorkAddressUuidRequest$ {
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1WorkAddressesWorkAddressUuidRequest$inboundSchema;
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema;
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidRequest$Outbound` instead. */
-  export type Outbound = DeleteV1WorkAddressesWorkAddressUuidRequest$Outbound;
-}
-
 export function deleteV1WorkAddressesWorkAddressUuidRequestToJSON(
   deleteV1WorkAddressesWorkAddressUuidRequest:
     DeleteV1WorkAddressesWorkAddressUuidRequest,
@@ -134,22 +80,6 @@ export function deleteV1WorkAddressesWorkAddressUuidRequestToJSON(
     DeleteV1WorkAddressesWorkAddressUuidRequest$outboundSchema.parse(
       deleteV1WorkAddressesWorkAddressUuidRequest,
     ),
-  );
-}
-
-export function deleteV1WorkAddressesWorkAddressUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1WorkAddressesWorkAddressUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1WorkAddressesWorkAddressUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteV1WorkAddressesWorkAddressUuidRequest' from JSON`,
   );
 }
 
@@ -166,51 +96,6 @@ export const DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1WorkAddressesWorkAddressUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1WorkAddressesWorkAddressUuidResponse$ {
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1WorkAddressesWorkAddressUuidResponse$inboundSchema;
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema;
-  /** @deprecated use `DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound` instead. */
-  export type Outbound = DeleteV1WorkAddressesWorkAddressUuidResponse$Outbound;
-}
-
-export function deleteV1WorkAddressesWorkAddressUuidResponseToJSON(
-  deleteV1WorkAddressesWorkAddressUuidResponse:
-    DeleteV1WorkAddressesWorkAddressUuidResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1WorkAddressesWorkAddressUuidResponse$outboundSchema.parse(
-      deleteV1WorkAddressesWorkAddressUuidResponse,
-    ),
-  );
-}
 
 export function deleteV1WorkAddressesWorkAddressUuidResponseFromJSON(
   jsonString: string,

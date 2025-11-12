@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WorkAddress = {
   /**
@@ -68,19 +65,6 @@ export type HistoricalEmployeeBody = {
 };
 
 /** @internal */
-export const WorkAddress$inboundSchema: z.ZodType<
-  WorkAddress,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  location_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "location_uuid": "locationUuid",
-  });
-});
-
-/** @internal */
 export type WorkAddress$Outbound = {
   location_uuid?: string | undefined;
 };
@@ -98,50 +82,9 @@ export const WorkAddress$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WorkAddress$ {
-  /** @deprecated use `WorkAddress$inboundSchema` instead. */
-  export const inboundSchema = WorkAddress$inboundSchema;
-  /** @deprecated use `WorkAddress$outboundSchema` instead. */
-  export const outboundSchema = WorkAddress$outboundSchema;
-  /** @deprecated use `WorkAddress$Outbound` instead. */
-  export type Outbound = WorkAddress$Outbound;
-}
-
 export function workAddressToJSON(workAddress: WorkAddress): string {
   return JSON.stringify(WorkAddress$outboundSchema.parse(workAddress));
 }
-
-export function workAddressFromJSON(
-  jsonString: string,
-): SafeParseResult<WorkAddress, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WorkAddress$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WorkAddress' from JSON`,
-  );
-}
-
-/** @internal */
-export const HistoricalEmployeeBodyHomeAddress$inboundSchema: z.ZodType<
-  HistoricalEmployeeBodyHomeAddress,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  street_1: z.string(),
-  street_2: z.nullable(z.string()).optional(),
-  city: z.string(),
-  state: z.string(),
-  zip: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "street_1": "street1",
-    "street_2": "street2",
-  });
-});
 
 /** @internal */
 export type HistoricalEmployeeBodyHomeAddress$Outbound = {
@@ -170,20 +113,6 @@ export const HistoricalEmployeeBodyHomeAddress$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HistoricalEmployeeBodyHomeAddress$ {
-  /** @deprecated use `HistoricalEmployeeBodyHomeAddress$inboundSchema` instead. */
-  export const inboundSchema = HistoricalEmployeeBodyHomeAddress$inboundSchema;
-  /** @deprecated use `HistoricalEmployeeBodyHomeAddress$outboundSchema` instead. */
-  export const outboundSchema =
-    HistoricalEmployeeBodyHomeAddress$outboundSchema;
-  /** @deprecated use `HistoricalEmployeeBodyHomeAddress$Outbound` instead. */
-  export type Outbound = HistoricalEmployeeBodyHomeAddress$Outbound;
-}
-
 export function historicalEmployeeBodyHomeAddressToJSON(
   historicalEmployeeBodyHomeAddress: HistoricalEmployeeBodyHomeAddress,
 ): string {
@@ -193,29 +122,6 @@ export function historicalEmployeeBodyHomeAddressToJSON(
     ),
   );
 }
-
-export function historicalEmployeeBodyHomeAddressFromJSON(
-  jsonString: string,
-): SafeParseResult<HistoricalEmployeeBodyHomeAddress, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => HistoricalEmployeeBodyHomeAddress$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HistoricalEmployeeBodyHomeAddress' from JSON`,
-  );
-}
-
-/** @internal */
-export const HistoricalEmployeeBodyTermination$inboundSchema: z.ZodType<
-  HistoricalEmployeeBodyTermination,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "effective_date": "effectiveDate",
-  });
-});
 
 /** @internal */
 export type HistoricalEmployeeBodyTermination$Outbound = {
@@ -235,20 +141,6 @@ export const HistoricalEmployeeBodyTermination$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HistoricalEmployeeBodyTermination$ {
-  /** @deprecated use `HistoricalEmployeeBodyTermination$inboundSchema` instead. */
-  export const inboundSchema = HistoricalEmployeeBodyTermination$inboundSchema;
-  /** @deprecated use `HistoricalEmployeeBodyTermination$outboundSchema` instead. */
-  export const outboundSchema =
-    HistoricalEmployeeBodyTermination$outboundSchema;
-  /** @deprecated use `HistoricalEmployeeBodyTermination$Outbound` instead. */
-  export type Outbound = HistoricalEmployeeBodyTermination$Outbound;
-}
-
 export function historicalEmployeeBodyTerminationToJSON(
   historicalEmployeeBodyTermination: HistoricalEmployeeBodyTermination,
 ): string {
@@ -258,29 +150,6 @@ export function historicalEmployeeBodyTerminationToJSON(
     ),
   );
 }
-
-export function historicalEmployeeBodyTerminationFromJSON(
-  jsonString: string,
-): SafeParseResult<HistoricalEmployeeBodyTermination, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => HistoricalEmployeeBodyTermination$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HistoricalEmployeeBodyTermination' from JSON`,
-  );
-}
-
-/** @internal */
-export const HistoricalEmployeeBodyJob$inboundSchema: z.ZodType<
-  HistoricalEmployeeBodyJob,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  hire_date: z.string().transform(v => new RFCDate(v)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "hire_date": "hireDate",
-  });
-});
 
 /** @internal */
 export type HistoricalEmployeeBodyJob$Outbound = {
@@ -300,19 +169,6 @@ export const HistoricalEmployeeBodyJob$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HistoricalEmployeeBodyJob$ {
-  /** @deprecated use `HistoricalEmployeeBodyJob$inboundSchema` instead. */
-  export const inboundSchema = HistoricalEmployeeBodyJob$inboundSchema;
-  /** @deprecated use `HistoricalEmployeeBodyJob$outboundSchema` instead. */
-  export const outboundSchema = HistoricalEmployeeBodyJob$outboundSchema;
-  /** @deprecated use `HistoricalEmployeeBodyJob$Outbound` instead. */
-  export type Outbound = HistoricalEmployeeBodyJob$Outbound;
-}
-
 export function historicalEmployeeBodyJobToJSON(
   historicalEmployeeBodyJob: HistoricalEmployeeBodyJob,
 ): string {
@@ -320,31 +176,6 @@ export function historicalEmployeeBodyJobToJSON(
     HistoricalEmployeeBodyJob$outboundSchema.parse(historicalEmployeeBodyJob),
   );
 }
-
-export function historicalEmployeeBodyJobFromJSON(
-  jsonString: string,
-): SafeParseResult<HistoricalEmployeeBodyJob, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => HistoricalEmployeeBodyJob$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HistoricalEmployeeBodyJob' from JSON`,
-  );
-}
-
-/** @internal */
-export const EmployeeStateTaxes$inboundSchema: z.ZodType<
-  EmployeeStateTaxes,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  wc_covered: z.boolean().optional(),
-  wc_class_code: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "wc_covered": "wcCovered",
-    "wc_class_code": "wcClassCode",
-  });
-});
 
 /** @internal */
 export type EmployeeStateTaxes$Outbound = {
@@ -367,19 +198,6 @@ export const EmployeeStateTaxes$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeStateTaxes$ {
-  /** @deprecated use `EmployeeStateTaxes$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxes$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxes$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxes$outboundSchema;
-  /** @deprecated use `EmployeeStateTaxes$Outbound` instead. */
-  export type Outbound = EmployeeStateTaxes$Outbound;
-}
-
 export function employeeStateTaxesToJSON(
   employeeStateTaxes: EmployeeStateTaxes,
 ): string {
@@ -387,48 +205,6 @@ export function employeeStateTaxesToJSON(
     EmployeeStateTaxes$outboundSchema.parse(employeeStateTaxes),
   );
 }
-
-export function employeeStateTaxesFromJSON(
-  jsonString: string,
-): SafeParseResult<EmployeeStateTaxes, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EmployeeStateTaxes$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeStateTaxes' from JSON`,
-  );
-}
-
-/** @internal */
-export const HistoricalEmployeeBody$inboundSchema: z.ZodType<
-  HistoricalEmployeeBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  first_name: z.string(),
-  middle_initial: z.string().optional(),
-  last_name: z.string(),
-  preferred_first_name: z.string().optional(),
-  date_of_birth: z.string(),
-  ssn: z.string(),
-  work_address: z.lazy(() => WorkAddress$inboundSchema),
-  home_address: z.lazy(() => HistoricalEmployeeBodyHomeAddress$inboundSchema),
-  termination: z.lazy(() => HistoricalEmployeeBodyTermination$inboundSchema),
-  email: z.string().optional(),
-  job: z.lazy(() => HistoricalEmployeeBodyJob$inboundSchema),
-  employee_state_taxes: z.lazy(() => EmployeeStateTaxes$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_name": "firstName",
-    "middle_initial": "middleInitial",
-    "last_name": "lastName",
-    "preferred_first_name": "preferredFirstName",
-    "date_of_birth": "dateOfBirth",
-    "work_address": "workAddress",
-    "home_address": "homeAddress",
-    "employee_state_taxes": "employeeStateTaxes",
-  });
-});
 
 /** @internal */
 export type HistoricalEmployeeBody$Outbound = {
@@ -478,33 +254,10 @@ export const HistoricalEmployeeBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HistoricalEmployeeBody$ {
-  /** @deprecated use `HistoricalEmployeeBody$inboundSchema` instead. */
-  export const inboundSchema = HistoricalEmployeeBody$inboundSchema;
-  /** @deprecated use `HistoricalEmployeeBody$outboundSchema` instead. */
-  export const outboundSchema = HistoricalEmployeeBody$outboundSchema;
-  /** @deprecated use `HistoricalEmployeeBody$Outbound` instead. */
-  export type Outbound = HistoricalEmployeeBody$Outbound;
-}
-
 export function historicalEmployeeBodyToJSON(
   historicalEmployeeBody: HistoricalEmployeeBody,
 ): string {
   return JSON.stringify(
     HistoricalEmployeeBody$outboundSchema.parse(historicalEmployeeBody),
-  );
-}
-
-export function historicalEmployeeBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<HistoricalEmployeeBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => HistoricalEmployeeBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HistoricalEmployeeBody' from JSON`,
   );
 }

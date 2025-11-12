@@ -7,18 +7,8 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Compensation,
-  Compensation$inboundSchema,
-  Compensation$Outbound,
-  Compensation$outboundSchema,
-} from "./compensation.js";
-import {
-  Location,
-  Location$inboundSchema,
-  Location$Outbound,
-  Location$outboundSchema,
-} from "./location.js";
+import { Compensation, Compensation$inboundSchema } from "./compensation.js";
+import { Location, Location$inboundSchema } from "./location.js";
 
 /**
  * The representation of a job in Gusto.
@@ -113,73 +103,6 @@ export const Job$inboundSchema: z.ZodType<Job, z.ZodTypeDef, unknown> = z
       "location_uuid": "locationUuid",
     });
   });
-
-/** @internal */
-export type Job$Outbound = {
-  uuid: string;
-  version?: string | undefined;
-  employee_uuid?: string | undefined;
-  hire_date?: string | undefined;
-  title: string | null;
-  primary?: boolean | undefined;
-  rate?: string | undefined;
-  payment_unit?: string | null | undefined;
-  current_compensation_uuid?: string | undefined;
-  two_percent_shareholder?: boolean | undefined;
-  state_wc_covered?: boolean | null | undefined;
-  state_wc_class_code?: string | null | undefined;
-  compensations?: Array<Compensation$Outbound> | undefined;
-  location_uuid?: string | undefined;
-  location?: Location$Outbound | undefined;
-};
-
-/** @internal */
-export const Job$outboundSchema: z.ZodType<Job$Outbound, z.ZodTypeDef, Job> = z
-  .object({
-    uuid: z.string(),
-    version: z.string().optional(),
-    employeeUuid: z.string().optional(),
-    hireDate: z.string().optional(),
-    title: z.nullable(z.string()).default(null),
-    primary: z.boolean().optional(),
-    rate: z.string().optional(),
-    paymentUnit: z.nullable(z.string()).optional(),
-    currentCompensationUuid: z.string().optional(),
-    twoPercentShareholder: z.boolean().optional(),
-    stateWcCovered: z.nullable(z.boolean()).optional(),
-    stateWcClassCode: z.nullable(z.string()).optional(),
-    compensations: z.array(Compensation$outboundSchema).optional(),
-    locationUuid: z.string().optional(),
-    location: Location$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      employeeUuid: "employee_uuid",
-      hireDate: "hire_date",
-      paymentUnit: "payment_unit",
-      currentCompensationUuid: "current_compensation_uuid",
-      twoPercentShareholder: "two_percent_shareholder",
-      stateWcCovered: "state_wc_covered",
-      stateWcClassCode: "state_wc_class_code",
-      locationUuid: "location_uuid",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Job$ {
-  /** @deprecated use `Job$inboundSchema` instead. */
-  export const inboundSchema = Job$inboundSchema;
-  /** @deprecated use `Job$outboundSchema` instead. */
-  export const outboundSchema = Job$outboundSchema;
-  /** @deprecated use `Job$Outbound` instead. */
-  export type Outbound = Job$Outbound;
-}
-
-export function jobToJSON(job: Job): string {
-  return JSON.stringify(Job$outboundSchema.parse(job));
-}
 
 export function jobFromJSON(
   jsonString: string,

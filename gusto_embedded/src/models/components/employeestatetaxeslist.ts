@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmployeeStateTaxQuestion,
   EmployeeStateTaxQuestion$inboundSchema,
-  EmployeeStateTaxQuestion$Outbound,
-  EmployeeStateTaxQuestion$outboundSchema,
 } from "./employeestatetaxquestion.js";
 
 export type EmployeeStateTaxesList = {
@@ -46,55 +44,6 @@ export const EmployeeStateTaxesList$inboundSchema: z.ZodType<
     "is_work_state": "isWorkState",
   });
 });
-
-/** @internal */
-export type EmployeeStateTaxesList$Outbound = {
-  employee_uuid?: string | undefined;
-  state?: string | undefined;
-  file_new_hire_report?: boolean | null | undefined;
-  is_work_state?: boolean | undefined;
-  questions?: Array<EmployeeStateTaxQuestion$Outbound> | undefined;
-};
-
-/** @internal */
-export const EmployeeStateTaxesList$outboundSchema: z.ZodType<
-  EmployeeStateTaxesList$Outbound,
-  z.ZodTypeDef,
-  EmployeeStateTaxesList
-> = z.object({
-  employeeUuid: z.string().optional(),
-  state: z.string().optional(),
-  fileNewHireReport: z.nullable(z.boolean()).optional(),
-  isWorkState: z.boolean().optional(),
-  questions: z.array(EmployeeStateTaxQuestion$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    fileNewHireReport: "file_new_hire_report",
-    isWorkState: "is_work_state",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeStateTaxesList$ {
-  /** @deprecated use `EmployeeStateTaxesList$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxesList$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxesList$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxesList$outboundSchema;
-  /** @deprecated use `EmployeeStateTaxesList$Outbound` instead. */
-  export type Outbound = EmployeeStateTaxesList$Outbound;
-}
-
-export function employeeStateTaxesListToJSON(
-  employeeStateTaxesList: EmployeeStateTaxesList,
-): string {
-  return JSON.stringify(
-    EmployeeStateTaxesList$outboundSchema.parse(employeeStateTaxesList),
-  );
-}
 
 export function employeeStateTaxesListFromJSON(
   jsonString: string,

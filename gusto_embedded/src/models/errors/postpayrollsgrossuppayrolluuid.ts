@@ -8,15 +8,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   PayrollBlockersError,
   PayrollBlockersError$inboundSchema,
-  PayrollBlockersError$Outbound,
-  PayrollBlockersError$outboundSchema,
 } from "./payrollblockerserror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 import {
   UnprocessableEntityErrorObject1,
   UnprocessableEntityErrorObject1$inboundSchema,
-  UnprocessableEntityErrorObject1$Outbound,
-  UnprocessableEntityErrorObject1$outboundSchema,
 } from "./unprocessableentityerrorobject1.js";
 
 /**
@@ -33,48 +29,6 @@ export const PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema:
       UnprocessableEntityErrorObject1$inboundSchema,
       PayrollBlockersError$inboundSchema,
     ]);
-
-/** @internal */
-export type PostPayrollsGrossUpPayrollUuidResponseBody$Outbound =
-  | UnprocessableEntityErrorObject1$Outbound
-  | PayrollBlockersError$Outbound;
-
-/** @internal */
-export const PostPayrollsGrossUpPayrollUuidResponseBody$outboundSchema:
-  z.ZodType<
-    PostPayrollsGrossUpPayrollUuidResponseBody$Outbound,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    UnprocessableEntityErrorObject1$outboundSchema,
-    PayrollBlockersError$outboundSchema,
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPayrollsGrossUpPayrollUuidResponseBody$ {
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPayrollsGrossUpPayrollUuidResponseBody$outboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponseBody$Outbound` instead. */
-  export type Outbound = PostPayrollsGrossUpPayrollUuidResponseBody$Outbound;
-}
-
-export function postPayrollsGrossUpPayrollUuidResponseBodyToJSON(
-  postPayrollsGrossUpPayrollUuidResponseBody:
-    PostPayrollsGrossUpPayrollUuidResponseBody,
-): string {
-  return JSON.stringify(
-    PostPayrollsGrossUpPayrollUuidResponseBody$outboundSchema.parse(
-      postPayrollsGrossUpPayrollUuidResponseBody,
-    ),
-  );
-}
 
 export function postPayrollsGrossUpPayrollUuidResponseBodyFromJSON(
   jsonString: string,

@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TimeOffPolicy,
   TimeOffPolicy$inboundSchema,
-  TimeOffPolicy$Outbound,
-  TimeOffPolicy$outboundSchema,
 } from "../components/timeoffpolicy.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse = {
 };
 
 /** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$inboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    time_off_policy_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "time_off_policy_uuid": "timeOffPolicyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$Outbound = {
   time_off_policy_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,22 +61,6 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSche
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$ {
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$inboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$Outbound;
-}
-
 export function putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestToJSON(
   putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest:
     PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
@@ -106,21 +69,6 @@ export function putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestToJSON(
     PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSchema.parse(
       putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
     ),
-  );
-}
-
-export function putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest' from JSON`,
   );
 }
 
@@ -139,54 +87,6 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$inboundSche
       "Time-Off-Policy": "timeOffPolicy",
     });
   });
-
-/** @internal */
-export type PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Time-Off-Policy"?: TimeOffPolicy$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$outboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    timeOffPolicy: TimeOffPolicy$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      timeOffPolicy: "Time-Off-Policy",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$ {
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$inboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$outboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$Outbound;
-}
-
-export function putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponseToJSON(
-  putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse:
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse,
-): string {
-  return JSON.stringify(
-    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse$outboundSchema
-      .parse(putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse),
-  );
-}
 
 export function putV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponseFromJSON(
   jsonString: string,

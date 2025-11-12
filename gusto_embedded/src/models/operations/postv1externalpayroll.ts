@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ExternalPayroll,
   ExternalPayroll$inboundSchema,
-  ExternalPayroll$Outbound,
-  ExternalPayroll$outboundSchema,
 } from "../components/externalpayroll.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,23 +56,6 @@ export type PostV1ExternalPayrollResponse = {
 };
 
 /** @internal */
-export const PostV1ExternalPayrollRequestBody$inboundSchema: z.ZodType<
-  PostV1ExternalPayrollRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  check_date: z.string(),
-  payment_period_start_date: z.string(),
-  payment_period_end_date: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "check_date": "checkDate",
-    "payment_period_start_date": "paymentPeriodStartDate",
-    "payment_period_end_date": "paymentPeriodEndDate",
-  });
-});
-
-/** @internal */
 export type PostV1ExternalPayrollRequestBody$Outbound = {
   check_date: string;
   payment_period_start_date: string;
@@ -101,19 +79,6 @@ export const PostV1ExternalPayrollRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1ExternalPayrollRequestBody$ {
-  /** @deprecated use `PostV1ExternalPayrollRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PostV1ExternalPayrollRequestBody$inboundSchema;
-  /** @deprecated use `PostV1ExternalPayrollRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PostV1ExternalPayrollRequestBody$outboundSchema;
-  /** @deprecated use `PostV1ExternalPayrollRequestBody$Outbound` instead. */
-  export type Outbound = PostV1ExternalPayrollRequestBody$Outbound;
-}
-
 export function postV1ExternalPayrollRequestBodyToJSON(
   postV1ExternalPayrollRequestBody: PostV1ExternalPayrollRequestBody,
 ): string {
@@ -123,33 +88,6 @@ export function postV1ExternalPayrollRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1ExternalPayrollRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1ExternalPayrollRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1ExternalPayrollRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1ExternalPayrollRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1ExternalPayrollRequest$inboundSchema: z.ZodType<
-  PostV1ExternalPayrollRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PostV1ExternalPayrollRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1ExternalPayrollRequest$Outbound = {
@@ -175,19 +113,6 @@ export const PostV1ExternalPayrollRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1ExternalPayrollRequest$ {
-  /** @deprecated use `PostV1ExternalPayrollRequest$inboundSchema` instead. */
-  export const inboundSchema = PostV1ExternalPayrollRequest$inboundSchema;
-  /** @deprecated use `PostV1ExternalPayrollRequest$outboundSchema` instead. */
-  export const outboundSchema = PostV1ExternalPayrollRequest$outboundSchema;
-  /** @deprecated use `PostV1ExternalPayrollRequest$Outbound` instead. */
-  export type Outbound = PostV1ExternalPayrollRequest$Outbound;
-}
-
 export function postV1ExternalPayrollRequestToJSON(
   postV1ExternalPayrollRequest: PostV1ExternalPayrollRequest,
 ): string {
@@ -195,16 +120,6 @@ export function postV1ExternalPayrollRequestToJSON(
     PostV1ExternalPayrollRequest$outboundSchema.parse(
       postV1ExternalPayrollRequest,
     ),
-  );
-}
-
-export function postV1ExternalPayrollRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1ExternalPayrollRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1ExternalPayrollRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1ExternalPayrollRequest' from JSON`,
   );
 }
 
@@ -222,50 +137,6 @@ export const PostV1ExternalPayrollResponse$inboundSchema: z.ZodType<
     "External-Payroll": "externalPayroll",
   });
 });
-
-/** @internal */
-export type PostV1ExternalPayrollResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "External-Payroll"?: ExternalPayroll$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1ExternalPayrollResponse$outboundSchema: z.ZodType<
-  PostV1ExternalPayrollResponse$Outbound,
-  z.ZodTypeDef,
-  PostV1ExternalPayrollResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  externalPayroll: ExternalPayroll$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    externalPayroll: "External-Payroll",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1ExternalPayrollResponse$ {
-  /** @deprecated use `PostV1ExternalPayrollResponse$inboundSchema` instead. */
-  export const inboundSchema = PostV1ExternalPayrollResponse$inboundSchema;
-  /** @deprecated use `PostV1ExternalPayrollResponse$outboundSchema` instead. */
-  export const outboundSchema = PostV1ExternalPayrollResponse$outboundSchema;
-  /** @deprecated use `PostV1ExternalPayrollResponse$Outbound` instead. */
-  export type Outbound = PostV1ExternalPayrollResponse$Outbound;
-}
-
-export function postV1ExternalPayrollResponseToJSON(
-  postV1ExternalPayrollResponse: PostV1ExternalPayrollResponse,
-): string {
-  return JSON.stringify(
-    PostV1ExternalPayrollResponse$outboundSchema.parse(
-      postV1ExternalPayrollResponse,
-    ),
-  );
-}
 
 export function postV1ExternalPayrollResponseFromJSON(
   jsonString: string,

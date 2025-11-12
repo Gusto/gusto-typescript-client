@@ -60,55 +60,6 @@ export const Authentication$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type Authentication$Outbound = {
-  access_token?: string | undefined;
-  token_type: string;
-  expires_in: number;
-  refresh_token?: string | undefined;
-  created_at?: string | undefined;
-  scope?: string | undefined;
-};
-
-/** @internal */
-export const Authentication$outboundSchema: z.ZodType<
-  Authentication$Outbound,
-  z.ZodTypeDef,
-  Authentication
-> = z.object({
-  accessToken: z.string().optional(),
-  tokenType: z.string().default("bearer"),
-  expiresIn: z.number().default(7200),
-  refreshToken: z.string().optional(),
-  createdAt: z.string().optional(),
-  scope: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessToken: "access_token",
-    tokenType: "token_type",
-    expiresIn: "expires_in",
-    refreshToken: "refresh_token",
-    createdAt: "created_at",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Authentication$ {
-  /** @deprecated use `Authentication$inboundSchema` instead. */
-  export const inboundSchema = Authentication$inboundSchema;
-  /** @deprecated use `Authentication$outboundSchema` instead. */
-  export const outboundSchema = Authentication$outboundSchema;
-  /** @deprecated use `Authentication$Outbound` instead. */
-  export type Outbound = Authentication$Outbound;
-}
-
-export function authenticationToJSON(authentication: Authentication): string {
-  return JSON.stringify(Authentication$outboundSchema.parse(authentication));
-}
-
 export function authenticationFromJSON(
   jsonString: string,
 ): SafeParseResult<Authentication, SDKValidationError> {

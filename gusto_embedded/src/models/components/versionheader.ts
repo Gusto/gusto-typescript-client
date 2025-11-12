@@ -11,22 +11,6 @@ export const VersionHeader = {
 export type VersionHeader = ClosedEnum<typeof VersionHeader>;
 
 /** @internal */
-export const VersionHeader$inboundSchema: z.ZodNativeEnum<
-  typeof VersionHeader
-> = z.nativeEnum(VersionHeader);
-
-/** @internal */
 export const VersionHeader$outboundSchema: z.ZodNativeEnum<
   typeof VersionHeader
-> = VersionHeader$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace VersionHeader$ {
-  /** @deprecated use `VersionHeader$inboundSchema` instead. */
-  export const inboundSchema = VersionHeader$inboundSchema;
-  /** @deprecated use `VersionHeader$outboundSchema` instead. */
-  export const outboundSchema = VersionHeader$outboundSchema;
-}
+> = z.nativeEnum(VersionHeader);

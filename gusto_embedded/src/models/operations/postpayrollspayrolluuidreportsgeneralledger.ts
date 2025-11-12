@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   GeneralLedgerReport,
   GeneralLedgerReport$inboundSchema,
-  GeneralLedgerReport$Outbound,
-  GeneralLedgerReport$outboundSchema,
 } from "../components/generalledgerreport.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -84,59 +79,13 @@ export type PostPayrollsPayrollUuidReportsGeneralLedgerResponse = {
 };
 
 /** @internal */
-export const Aggregation$inboundSchema: z.ZodNativeEnum<typeof Aggregation> = z
+export const Aggregation$outboundSchema: z.ZodNativeEnum<typeof Aggregation> = z
   .nativeEnum(Aggregation);
-
-/** @internal */
-export const Aggregation$outboundSchema: z.ZodNativeEnum<typeof Aggregation> =
-  Aggregation$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Aggregation$ {
-  /** @deprecated use `Aggregation$inboundSchema` instead. */
-  export const inboundSchema = Aggregation$inboundSchema;
-  /** @deprecated use `Aggregation$outboundSchema` instead. */
-  export const outboundSchema = Aggregation$outboundSchema;
-}
-
-/** @internal */
-export const IntegrationType$inboundSchema: z.ZodNativeEnum<
-  typeof IntegrationType
-> = z.nativeEnum(IntegrationType);
 
 /** @internal */
 export const IntegrationType$outboundSchema: z.ZodNativeEnum<
   typeof IntegrationType
-> = IntegrationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace IntegrationType$ {
-  /** @deprecated use `IntegrationType$inboundSchema` instead. */
-  export const inboundSchema = IntegrationType$inboundSchema;
-  /** @deprecated use `IntegrationType$outboundSchema` instead. */
-  export const outboundSchema = IntegrationType$outboundSchema;
-}
-
-/** @internal */
-export const PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchema:
-  z.ZodType<
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    aggregation: Aggregation$inboundSchema,
-    integration_type: z.nullable(IntegrationType$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "integration_type": "integrationType",
-    });
-  });
+> = z.nativeEnum(IntegrationType);
 
 /** @internal */
 export type PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$Outbound = {
@@ -159,22 +108,6 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSche
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$ {
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchema;
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$outboundSchema;
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$Outbound;
-}
-
 export function postPayrollsPayrollUuidReportsGeneralLedgerRequestBodyToJSON(
   postPayrollsPayrollUuidReportsGeneralLedgerRequestBody:
     PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody,
@@ -185,41 +118,6 @@ export function postPayrollsPayrollUuidReportsGeneralLedgerRequestBodyToJSON(
     ),
   );
 }
-
-export function postPayrollsPayrollUuidReportsGeneralLedgerRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostPayrollsPayrollUuidReportsGeneralLedgerRequest$inboundSchema:
-  z.ZodType<
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    payroll_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostPayrollsPayrollUuidReportsGeneralLedgerRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "payroll_uuid": "payrollUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostPayrollsPayrollUuidReportsGeneralLedgerRequest$Outbound = {
@@ -248,22 +146,6 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPayrollsPayrollUuidReportsGeneralLedgerRequest$ {
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequest$inboundSchema;
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema;
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerRequest$Outbound` instead. */
-  export type Outbound =
-    PostPayrollsPayrollUuidReportsGeneralLedgerRequest$Outbound;
-}
-
 export function postPayrollsPayrollUuidReportsGeneralLedgerRequestToJSON(
   postPayrollsPayrollUuidReportsGeneralLedgerRequest:
     PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
@@ -272,22 +154,6 @@ export function postPayrollsPayrollUuidReportsGeneralLedgerRequestToJSON(
     PostPayrollsPayrollUuidReportsGeneralLedgerRequest$outboundSchema.parse(
       postPayrollsPayrollUuidReportsGeneralLedgerRequest,
     ),
-  );
-}
-
-export function postPayrollsPayrollUuidReportsGeneralLedgerRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostPayrollsPayrollUuidReportsGeneralLedgerRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostPayrollsPayrollUuidReportsGeneralLedgerRequest' from JSON`,
   );
 }
 
@@ -306,55 +172,6 @@ export const PostPayrollsPayrollUuidReportsGeneralLedgerResponse$inboundSchema:
       "General-Ledger-Report": "generalLedgerReport",
     });
   });
-
-/** @internal */
-export type PostPayrollsPayrollUuidReportsGeneralLedgerResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "General-Ledger-Report"?: GeneralLedgerReport$Outbound | undefined;
-};
-
-/** @internal */
-export const PostPayrollsPayrollUuidReportsGeneralLedgerResponse$outboundSchema:
-  z.ZodType<
-    PostPayrollsPayrollUuidReportsGeneralLedgerResponse$Outbound,
-    z.ZodTypeDef,
-    PostPayrollsPayrollUuidReportsGeneralLedgerResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    generalLedgerReport: GeneralLedgerReport$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      generalLedgerReport: "General-Ledger-Report",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPayrollsPayrollUuidReportsGeneralLedgerResponse$ {
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPayrollsPayrollUuidReportsGeneralLedgerResponse$inboundSchema;
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPayrollsPayrollUuidReportsGeneralLedgerResponse$outboundSchema;
-  /** @deprecated use `PostPayrollsPayrollUuidReportsGeneralLedgerResponse$Outbound` instead. */
-  export type Outbound =
-    PostPayrollsPayrollUuidReportsGeneralLedgerResponse$Outbound;
-}
-
-export function postPayrollsPayrollUuidReportsGeneralLedgerResponseToJSON(
-  postPayrollsPayrollUuidReportsGeneralLedgerResponse:
-    PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
-): string {
-  return JSON.stringify(
-    PostPayrollsPayrollUuidReportsGeneralLedgerResponse$outboundSchema.parse(
-      postPayrollsPayrollUuidReportsGeneralLedgerResponse,
-    ),
-  );
-}
 
 export function postPayrollsPayrollUuidReportsGeneralLedgerResponseFromJSON(
   jsonString: string,

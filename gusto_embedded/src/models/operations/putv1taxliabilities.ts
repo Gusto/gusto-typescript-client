@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TaxLiabilitiesSelections,
   TaxLiabilitiesSelections$inboundSchema,
-  TaxLiabilitiesSelections$Outbound,
-  TaxLiabilitiesSelections$outboundSchema,
 } from "../components/taxliabilitiesselections.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,23 +60,6 @@ export type PutV1TaxLiabilitiesResponse = {
 };
 
 /** @internal */
-export const LiabilitySelections$inboundSchema: z.ZodType<
-  LiabilitySelections,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  tax_id: z.number().int(),
-  last_unpaid_external_payroll_uuid: z.nullable(z.string()),
-  unpaid_liability_amount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "tax_id": "taxId",
-    "last_unpaid_external_payroll_uuid": "lastUnpaidExternalPayrollUuid",
-    "unpaid_liability_amount": "unpaidLiabilityAmount",
-  });
-});
-
-/** @internal */
 export type LiabilitySelections$Outbound = {
   tax_id: number;
   last_unpaid_external_payroll_uuid: string | null;
@@ -105,19 +83,6 @@ export const LiabilitySelections$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace LiabilitySelections$ {
-  /** @deprecated use `LiabilitySelections$inboundSchema` instead. */
-  export const inboundSchema = LiabilitySelections$inboundSchema;
-  /** @deprecated use `LiabilitySelections$outboundSchema` instead. */
-  export const outboundSchema = LiabilitySelections$outboundSchema;
-  /** @deprecated use `LiabilitySelections$Outbound` instead. */
-  export type Outbound = LiabilitySelections$Outbound;
-}
-
 export function liabilitySelectionsToJSON(
   liabilitySelections: LiabilitySelections,
 ): string {
@@ -125,30 +90,6 @@ export function liabilitySelectionsToJSON(
     LiabilitySelections$outboundSchema.parse(liabilitySelections),
   );
 }
-
-export function liabilitySelectionsFromJSON(
-  jsonString: string,
-): SafeParseResult<LiabilitySelections, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => LiabilitySelections$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'LiabilitySelections' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1TaxLiabilitiesRequestBody$inboundSchema: z.ZodType<
-  PutV1TaxLiabilitiesRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  liability_selections: z.array(z.lazy(() => LiabilitySelections$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "liability_selections": "liabilitySelections",
-  });
-});
 
 /** @internal */
 export type PutV1TaxLiabilitiesRequestBody$Outbound = {
@@ -169,19 +110,6 @@ export const PutV1TaxLiabilitiesRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TaxLiabilitiesRequestBody$ {
-  /** @deprecated use `PutV1TaxLiabilitiesRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1TaxLiabilitiesRequestBody$inboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1TaxLiabilitiesRequestBody$outboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesRequestBody$Outbound` instead. */
-  export type Outbound = PutV1TaxLiabilitiesRequestBody$Outbound;
-}
-
 export function putV1TaxLiabilitiesRequestBodyToJSON(
   putV1TaxLiabilitiesRequestBody: PutV1TaxLiabilitiesRequestBody,
 ): string {
@@ -191,33 +119,6 @@ export function putV1TaxLiabilitiesRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1TaxLiabilitiesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1TaxLiabilitiesRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1TaxLiabilitiesRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TaxLiabilitiesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
-  PutV1TaxLiabilitiesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutV1TaxLiabilitiesRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1TaxLiabilitiesRequest$Outbound = {
@@ -243,34 +144,11 @@ export const PutV1TaxLiabilitiesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TaxLiabilitiesRequest$ {
-  /** @deprecated use `PutV1TaxLiabilitiesRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1TaxLiabilitiesRequest$inboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1TaxLiabilitiesRequest$outboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesRequest$Outbound` instead. */
-  export type Outbound = PutV1TaxLiabilitiesRequest$Outbound;
-}
-
 export function putV1TaxLiabilitiesRequestToJSON(
   putV1TaxLiabilitiesRequest: PutV1TaxLiabilitiesRequest,
 ): string {
   return JSON.stringify(
     PutV1TaxLiabilitiesRequest$outboundSchema.parse(putV1TaxLiabilitiesRequest),
-  );
-}
-
-export function putV1TaxLiabilitiesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1TaxLiabilitiesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1TaxLiabilitiesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TaxLiabilitiesRequest' from JSON`,
   );
 }
 
@@ -290,53 +168,6 @@ export const PutV1TaxLiabilitiesResponse$inboundSchema: z.ZodType<
     "Tax-Liabilities-List": "taxLiabilitiesList",
   });
 });
-
-/** @internal */
-export type PutV1TaxLiabilitiesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Tax-Liabilities-List"?:
-    | Array<Array<TaxLiabilitiesSelections$Outbound>>
-    | undefined;
-};
-
-/** @internal */
-export const PutV1TaxLiabilitiesResponse$outboundSchema: z.ZodType<
-  PutV1TaxLiabilitiesResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1TaxLiabilitiesResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  taxLiabilitiesList: z.array(z.array(TaxLiabilitiesSelections$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    taxLiabilitiesList: "Tax-Liabilities-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TaxLiabilitiesResponse$ {
-  /** @deprecated use `PutV1TaxLiabilitiesResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1TaxLiabilitiesResponse$inboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1TaxLiabilitiesResponse$outboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesResponse$Outbound` instead. */
-  export type Outbound = PutV1TaxLiabilitiesResponse$Outbound;
-}
-
-export function putV1TaxLiabilitiesResponseToJSON(
-  putV1TaxLiabilitiesResponse: PutV1TaxLiabilitiesResponse,
-): string {
-  return JSON.stringify(
-    PutV1TaxLiabilitiesResponse$outboundSchema.parse(
-      putV1TaxLiabilitiesResponse,
-    ),
-  );
-}
 
 export function putV1TaxLiabilitiesResponseFromJSON(
   jsonString: string,

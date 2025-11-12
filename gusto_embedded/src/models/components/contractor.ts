@@ -192,40 +192,9 @@ export const WageType$inboundSchema: z.ZodNativeEnum<typeof WageType> = z
   .nativeEnum(WageType);
 
 /** @internal */
-export const WageType$outboundSchema: z.ZodNativeEnum<typeof WageType> =
-  WageType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WageType$ {
-  /** @deprecated use `WageType$inboundSchema` instead. */
-  export const inboundSchema = WageType$inboundSchema;
-  /** @deprecated use `WageType$outboundSchema` instead. */
-  export const outboundSchema = WageType$outboundSchema;
-}
-
-/** @internal */
 export const ContractorType$inboundSchema: z.ZodNativeEnum<
   typeof ContractorType
 > = z.nativeEnum(ContractorType);
-
-/** @internal */
-export const ContractorType$outboundSchema: z.ZodNativeEnum<
-  typeof ContractorType
-> = ContractorType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorType$ {
-  /** @deprecated use `ContractorType$inboundSchema` instead. */
-  export const inboundSchema = ContractorType$inboundSchema;
-  /** @deprecated use `ContractorType$outboundSchema` instead. */
-  export const outboundSchema = ContractorType$outboundSchema;
-}
 
 /** @internal */
 export const Address$inboundSchema: z.ZodType<Address, z.ZodTypeDef, unknown> =
@@ -243,52 +212,6 @@ export const Address$inboundSchema: z.ZodType<Address, z.ZodTypeDef, unknown> =
     });
   });
 
-/** @internal */
-export type Address$Outbound = {
-  street_1?: string | undefined;
-  street_2?: string | null | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country?: string | undefined;
-};
-
-/** @internal */
-export const Address$outboundSchema: z.ZodType<
-  Address$Outbound,
-  z.ZodTypeDef,
-  Address
-> = z.object({
-  street1: z.string().optional(),
-  street2: z.nullable(z.string()).optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Address$ {
-  /** @deprecated use `Address$inboundSchema` instead. */
-  export const inboundSchema = Address$inboundSchema;
-  /** @deprecated use `Address$outboundSchema` instead. */
-  export const outboundSchema = Address$outboundSchema;
-  /** @deprecated use `Address$Outbound` instead. */
-  export type Outbound = Address$Outbound;
-}
-
-export function addressToJSON(address: Address): string {
-  return JSON.stringify(Address$outboundSchema.parse(address));
-}
-
 export function addressFromJSON(
   jsonString: string,
 ): SafeParseResult<Address, SDKValidationError> {
@@ -305,41 +228,9 @@ export const ContractorOnboardingStatus1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorOnboardingStatus1);
 
 /** @internal */
-export const ContractorOnboardingStatus1$outboundSchema: z.ZodNativeEnum<
-  typeof ContractorOnboardingStatus1
-> = ContractorOnboardingStatus1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorOnboardingStatus1$ {
-  /** @deprecated use `ContractorOnboardingStatus1$inboundSchema` instead. */
-  export const inboundSchema = ContractorOnboardingStatus1$inboundSchema;
-  /** @deprecated use `ContractorOnboardingStatus1$outboundSchema` instead. */
-  export const outboundSchema = ContractorOnboardingStatus1$outboundSchema;
-}
-
-/** @internal */
 export const ContractorPaymentMethod1$inboundSchema: z.ZodNativeEnum<
   typeof ContractorPaymentMethod1
 > = z.nativeEnum(ContractorPaymentMethod1);
-
-/** @internal */
-export const ContractorPaymentMethod1$outboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentMethod1
-> = ContractorPaymentMethod1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentMethod1$ {
-  /** @deprecated use `ContractorPaymentMethod1$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentMethod1$inboundSchema;
-  /** @deprecated use `ContractorPaymentMethod1$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentMethod1$outboundSchema;
-}
 
 /** @internal */
 export const Contractor$inboundSchema: z.ZodType<
@@ -393,105 +284,6 @@ export const Contractor$inboundSchema: z.ZodType<
     "dismissal_date": "dismissalDate",
   });
 });
-
-/** @internal */
-export type Contractor$Outbound = {
-  uuid: string;
-  company_uuid?: string | undefined;
-  wage_type?: string | undefined;
-  is_active: boolean;
-  version?: string | undefined;
-  type?: string | undefined;
-  first_name?: string | null | undefined;
-  last_name?: string | null | undefined;
-  middle_initial?: string | null | undefined;
-  business_name?: string | null | undefined;
-  ein?: string | null | undefined;
-  has_ein?: boolean | null | undefined;
-  email?: string | null | undefined;
-  start_date?: string | undefined;
-  address?: Address$Outbound | null | undefined;
-  hourly_rate?: string | undefined;
-  file_new_hire_report?: boolean | null | undefined;
-  work_state?: string | null | undefined;
-  onboarded?: boolean | undefined;
-  onboarding_status?: string | undefined;
-  payment_method?: string | null | undefined;
-  has_ssn?: boolean | undefined;
-  department_uuid?: string | null | undefined;
-  department?: string | null | undefined;
-  dismissal_date?: string | null | undefined;
-};
-
-/** @internal */
-export const Contractor$outboundSchema: z.ZodType<
-  Contractor$Outbound,
-  z.ZodTypeDef,
-  Contractor
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string().optional(),
-  wageType: WageType$outboundSchema.optional(),
-  isActive: z.boolean().default(true),
-  version: z.string().optional(),
-  type: ContractorType$outboundSchema.optional(),
-  firstName: z.nullable(z.string()).optional(),
-  lastName: z.nullable(z.string()).optional(),
-  middleInitial: z.nullable(z.string()).optional(),
-  businessName: z.nullable(z.string()).optional(),
-  ein: z.nullable(z.string()).optional(),
-  hasEin: z.nullable(z.boolean()).optional(),
-  email: z.nullable(z.string()).optional(),
-  startDate: z.string().optional(),
-  address: z.nullable(z.lazy(() => Address$outboundSchema)).optional(),
-  hourlyRate: z.string().optional(),
-  fileNewHireReport: z.nullable(z.boolean()).optional(),
-  workState: z.nullable(z.string()).optional(),
-  onboarded: z.boolean().optional(),
-  onboardingStatus: ContractorOnboardingStatus1$outboundSchema.optional(),
-  paymentMethod: z.nullable(ContractorPaymentMethod1$outboundSchema).optional(),
-  hasSsn: z.boolean().optional(),
-  departmentUuid: z.nullable(z.string()).optional(),
-  department: z.nullable(z.string()).optional(),
-  dismissalDate: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    wageType: "wage_type",
-    isActive: "is_active",
-    firstName: "first_name",
-    lastName: "last_name",
-    middleInitial: "middle_initial",
-    businessName: "business_name",
-    hasEin: "has_ein",
-    startDate: "start_date",
-    hourlyRate: "hourly_rate",
-    fileNewHireReport: "file_new_hire_report",
-    workState: "work_state",
-    onboardingStatus: "onboarding_status",
-    paymentMethod: "payment_method",
-    hasSsn: "has_ssn",
-    departmentUuid: "department_uuid",
-    dismissalDate: "dismissal_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Contractor$ {
-  /** @deprecated use `Contractor$inboundSchema` instead. */
-  export const inboundSchema = Contractor$inboundSchema;
-  /** @deprecated use `Contractor$outboundSchema` instead. */
-  export const outboundSchema = Contractor$outboundSchema;
-  /** @deprecated use `Contractor$Outbound` instead. */
-  export type Outbound = Contractor$Outbound;
-}
-
-export function contractorToJSON(contractor: Contractor): string {
-  return JSON.stringify(Contractor$outboundSchema.parse(contractor));
-}
 
 export function contractorFromJSON(
   jsonString: string,

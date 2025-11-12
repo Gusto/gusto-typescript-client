@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EntityErrorObject,
   EntityErrorObject$inboundSchema,
-  EntityErrorObject$Outbound,
-  EntityErrorObject$outboundSchema,
 } from "./entityerrorobject.js";
 
 /**
@@ -48,22 +46,6 @@ export const PayrollProcessingRequestStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollProcessingRequestStatus);
 
 /** @internal */
-export const PayrollProcessingRequestStatus$outboundSchema: z.ZodNativeEnum<
-  typeof PayrollProcessingRequestStatus
-> = PayrollProcessingRequestStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollProcessingRequestStatus$ {
-  /** @deprecated use `PayrollProcessingRequestStatus$inboundSchema` instead. */
-  export const inboundSchema = PayrollProcessingRequestStatus$inboundSchema;
-  /** @deprecated use `PayrollProcessingRequestStatus$outboundSchema` instead. */
-  export const outboundSchema = PayrollProcessingRequestStatus$outboundSchema;
-}
-
-/** @internal */
 export const PayrollProcessingRequest$inboundSchema: z.ZodType<
   PayrollProcessingRequest,
   z.ZodTypeDef,
@@ -72,43 +54,6 @@ export const PayrollProcessingRequest$inboundSchema: z.ZodType<
   status: PayrollProcessingRequestStatus$inboundSchema.optional(),
   errors: z.array(EntityErrorObject$inboundSchema).optional(),
 });
-
-/** @internal */
-export type PayrollProcessingRequest$Outbound = {
-  status?: string | undefined;
-  errors?: Array<EntityErrorObject$Outbound> | undefined;
-};
-
-/** @internal */
-export const PayrollProcessingRequest$outboundSchema: z.ZodType<
-  PayrollProcessingRequest$Outbound,
-  z.ZodTypeDef,
-  PayrollProcessingRequest
-> = z.object({
-  status: PayrollProcessingRequestStatus$outboundSchema.optional(),
-  errors: z.array(EntityErrorObject$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollProcessingRequest$ {
-  /** @deprecated use `PayrollProcessingRequest$inboundSchema` instead. */
-  export const inboundSchema = PayrollProcessingRequest$inboundSchema;
-  /** @deprecated use `PayrollProcessingRequest$outboundSchema` instead. */
-  export const outboundSchema = PayrollProcessingRequest$outboundSchema;
-  /** @deprecated use `PayrollProcessingRequest$Outbound` instead. */
-  export type Outbound = PayrollProcessingRequest$Outbound;
-}
-
-export function payrollProcessingRequestToJSON(
-  payrollProcessingRequest: PayrollProcessingRequest,
-): string {
-  return JSON.stringify(
-    PayrollProcessingRequest$outboundSchema.parse(payrollProcessingRequest),
-  );
-}
 
 export function payrollProcessingRequestFromJSON(
   jsonString: string,

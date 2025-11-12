@@ -49,56 +49,6 @@ export const PayScheduleAssignmentPayPeriod$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayScheduleAssignmentPayPeriod$Outbound = {
-  pay_schedule_uuid?: string | undefined;
-  start_date?: string | undefined;
-  end_date?: string | undefined;
-  check_date?: string | undefined;
-};
-
-/** @internal */
-export const PayScheduleAssignmentPayPeriod$outboundSchema: z.ZodType<
-  PayScheduleAssignmentPayPeriod$Outbound,
-  z.ZodTypeDef,
-  PayScheduleAssignmentPayPeriod
-> = z.object({
-  payScheduleUuid: z.string().optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  checkDate: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payScheduleUuid: "pay_schedule_uuid",
-    startDate: "start_date",
-    endDate: "end_date",
-    checkDate: "check_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleAssignmentPayPeriod$ {
-  /** @deprecated use `PayScheduleAssignmentPayPeriod$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleAssignmentPayPeriod$inboundSchema;
-  /** @deprecated use `PayScheduleAssignmentPayPeriod$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleAssignmentPayPeriod$outboundSchema;
-  /** @deprecated use `PayScheduleAssignmentPayPeriod$Outbound` instead. */
-  export type Outbound = PayScheduleAssignmentPayPeriod$Outbound;
-}
-
-export function payScheduleAssignmentPayPeriodToJSON(
-  payScheduleAssignmentPayPeriod: PayScheduleAssignmentPayPeriod,
-): string {
-  return JSON.stringify(
-    PayScheduleAssignmentPayPeriod$outboundSchema.parse(
-      payScheduleAssignmentPayPeriod,
-    ),
-  );
-}
-
 export function payScheduleAssignmentPayPeriodFromJSON(
   jsonString: string,
 ): SafeParseResult<PayScheduleAssignmentPayPeriod, SDKValidationError> {

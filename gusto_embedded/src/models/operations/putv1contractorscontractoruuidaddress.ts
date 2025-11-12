@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorAddress,
   ContractorAddress$inboundSchema,
-  ContractorAddress$Outbound,
-  ContractorAddress$outboundSchema,
 } from "../components/contractoraddress.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -58,26 +53,6 @@ export type PutV1ContractorsContractorUuidAddressResponse = {
 };
 
 /** @internal */
-export const PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorUuidAddressRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    street_1: z.string().optional(),
-    street_2: z.string().optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "street_1": "street1",
-      "street_2": "street2",
-    });
-  });
-
-/** @internal */
 export type PutV1ContractorsContractorUuidAddressRequestBody$Outbound = {
   version: string;
   street_1?: string | undefined;
@@ -107,22 +82,6 @@ export const PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidAddressRequestBody$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidAddressRequestBody$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1ContractorsContractorUuidAddressRequestBody$Outbound;
-}
-
 export function putV1ContractorsContractorUuidAddressRequestBodyToJSON(
   putV1ContractorsContractorUuidAddressRequestBody:
     PutV1ContractorsContractorUuidAddressRequestBody,
@@ -133,42 +92,6 @@ export function putV1ContractorsContractorUuidAddressRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1ContractorsContractorUuidAddressRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1ContractorsContractorUuidAddressRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1ContractorsContractorUuidAddressRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1ContractorsContractorUuidAddressRequest$inboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorUuidAddressRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    contractor_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1ContractorsContractorUuidAddressRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "contractor_uuid": "contractorUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1ContractorsContractorUuidAddressRequest$Outbound = {
@@ -197,21 +120,6 @@ export const PutV1ContractorsContractorUuidAddressRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidAddressRequest$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorUuidAddressRequest$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidAddressRequest$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressRequest$Outbound` instead. */
-  export type Outbound = PutV1ContractorsContractorUuidAddressRequest$Outbound;
-}
-
 export function putV1ContractorsContractorUuidAddressRequestToJSON(
   putV1ContractorsContractorUuidAddressRequest:
     PutV1ContractorsContractorUuidAddressRequest,
@@ -220,22 +128,6 @@ export function putV1ContractorsContractorUuidAddressRequestToJSON(
     PutV1ContractorsContractorUuidAddressRequest$outboundSchema.parse(
       putV1ContractorsContractorUuidAddressRequest,
     ),
-  );
-}
-
-export function putV1ContractorsContractorUuidAddressRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1ContractorsContractorUuidAddressRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorsContractorUuidAddressRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1ContractorsContractorUuidAddressRequest' from JSON`,
   );
 }
 
@@ -254,54 +146,6 @@ export const PutV1ContractorsContractorUuidAddressResponse$inboundSchema:
       "Contractor-Address": "contractorAddress",
     });
   });
-
-/** @internal */
-export type PutV1ContractorsContractorUuidAddressResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-Address"?: ContractorAddress$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1ContractorsContractorUuidAddressResponse$outboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorUuidAddressResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1ContractorsContractorUuidAddressResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractorAddress: ContractorAddress$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractorAddress: "Contractor-Address",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorUuidAddressResponse$ {
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorUuidAddressResponse$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorUuidAddressResponse$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorUuidAddressResponse$Outbound` instead. */
-  export type Outbound = PutV1ContractorsContractorUuidAddressResponse$Outbound;
-}
-
-export function putV1ContractorsContractorUuidAddressResponseToJSON(
-  putV1ContractorsContractorUuidAddressResponse:
-    PutV1ContractorsContractorUuidAddressResponse,
-): string {
-  return JSON.stringify(
-    PutV1ContractorsContractorUuidAddressResponse$outboundSchema.parse(
-      putV1ContractorsContractorUuidAddressResponse,
-    ),
-  );
-}
 
 export function putV1ContractorsContractorUuidAddressResponseFromJSON(
   jsonString: string,

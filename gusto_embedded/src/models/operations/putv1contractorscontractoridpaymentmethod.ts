@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorPaymentMethod,
   ContractorPaymentMethod$inboundSchema,
-  ContractorPaymentMethod$Outbound,
-  ContractorPaymentMethod$outboundSchema,
 } from "../components/contractorpaymentmethod.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -81,38 +76,9 @@ export type PutV1ContractorsContractorIdPaymentMethodResponse = {
 };
 
 /** @internal */
-export const PutV1ContractorsContractorIdPaymentMethodType$inboundSchema:
+export const PutV1ContractorsContractorIdPaymentMethodType$outboundSchema:
   z.ZodNativeEnum<typeof PutV1ContractorsContractorIdPaymentMethodType> = z
     .nativeEnum(PutV1ContractorsContractorIdPaymentMethodType);
-
-/** @internal */
-export const PutV1ContractorsContractorIdPaymentMethodType$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1ContractorsContractorIdPaymentMethodType> =
-    PutV1ContractorsContractorIdPaymentMethodType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorIdPaymentMethodType$ {
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodType$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodType$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodType$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodType$outboundSchema;
-}
-
-/** @internal */
-export const PutV1ContractorsContractorIdPaymentMethodRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorIdPaymentMethodRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    type: PutV1ContractorsContractorIdPaymentMethodType$inboundSchema,
-  });
 
 /** @internal */
 export type PutV1ContractorsContractorIdPaymentMethodRequestBody$Outbound = {
@@ -131,22 +97,6 @@ export const PutV1ContractorsContractorIdPaymentMethodRequestBody$outboundSchema
     type: PutV1ContractorsContractorIdPaymentMethodType$outboundSchema,
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorIdPaymentMethodRequestBody$ {
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodRequestBody$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodRequestBody$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1ContractorsContractorIdPaymentMethodRequestBody$Outbound;
-}
-
 export function putV1ContractorsContractorIdPaymentMethodRequestBodyToJSON(
   putV1ContractorsContractorIdPaymentMethodRequestBody:
     PutV1ContractorsContractorIdPaymentMethodRequestBody,
@@ -157,42 +107,6 @@ export function putV1ContractorsContractorIdPaymentMethodRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1ContractorsContractorIdPaymentMethodRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1ContractorsContractorIdPaymentMethodRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorsContractorIdPaymentMethodRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1ContractorsContractorIdPaymentMethodRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1ContractorsContractorIdPaymentMethodRequest$inboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorIdPaymentMethodRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    contractor_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1ContractorsContractorIdPaymentMethodRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "contractor_uuid": "contractorUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1ContractorsContractorIdPaymentMethodRequest$Outbound = {
@@ -221,22 +135,6 @@ export const PutV1ContractorsContractorIdPaymentMethodRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorIdPaymentMethodRequest$ {
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodRequest$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodRequest$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1ContractorsContractorIdPaymentMethodRequest$Outbound;
-}
-
 export function putV1ContractorsContractorIdPaymentMethodRequestToJSON(
   putV1ContractorsContractorIdPaymentMethodRequest:
     PutV1ContractorsContractorIdPaymentMethodRequest,
@@ -245,22 +143,6 @@ export function putV1ContractorsContractorIdPaymentMethodRequestToJSON(
     PutV1ContractorsContractorIdPaymentMethodRequest$outboundSchema.parse(
       putV1ContractorsContractorIdPaymentMethodRequest,
     ),
-  );
-}
-
-export function putV1ContractorsContractorIdPaymentMethodRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1ContractorsContractorIdPaymentMethodRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorsContractorIdPaymentMethodRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1ContractorsContractorIdPaymentMethodRequest' from JSON`,
   );
 }
 
@@ -280,55 +162,6 @@ export const PutV1ContractorsContractorIdPaymentMethodResponse$inboundSchema:
       "Contractor-Payment-Method": "contractorPaymentMethod",
     });
   });
-
-/** @internal */
-export type PutV1ContractorsContractorIdPaymentMethodResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-Payment-Method"?: ContractorPaymentMethod$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorIdPaymentMethodResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1ContractorsContractorIdPaymentMethodResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractorPaymentMethod: ContractorPaymentMethod$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractorPaymentMethod: "Contractor-Payment-Method",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorsContractorIdPaymentMethodResponse$ {
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodResponse$inboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema;
-  /** @deprecated use `PutV1ContractorsContractorIdPaymentMethodResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1ContractorsContractorIdPaymentMethodResponse$Outbound;
-}
-
-export function putV1ContractorsContractorIdPaymentMethodResponseToJSON(
-  putV1ContractorsContractorIdPaymentMethodResponse:
-    PutV1ContractorsContractorIdPaymentMethodResponse,
-): string {
-  return JSON.stringify(
-    PutV1ContractorsContractorIdPaymentMethodResponse$outboundSchema.parse(
-      putV1ContractorsContractorIdPaymentMethodResponse,
-    ),
-  );
-}
 
 export function putV1ContractorsContractorIdPaymentMethodResponseFromJSON(
   jsonString: string,

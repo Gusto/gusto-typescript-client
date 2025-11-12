@@ -11,66 +11,46 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OffCycleReasonType,
   OffCycleReasonType$inboundSchema,
-  OffCycleReasonType$outboundSchema,
 } from "./offcyclereasontype.js";
 import {
   PayrollCompanyTaxesType,
   PayrollCompanyTaxesType$inboundSchema,
-  PayrollCompanyTaxesType$Outbound,
-  PayrollCompanyTaxesType$outboundSchema,
 } from "./payrollcompanytaxestype.js";
 import {
   PayrollCreditBlockersType,
   PayrollCreditBlockersType$inboundSchema,
-  PayrollCreditBlockersType$Outbound,
-  PayrollCreditBlockersType$outboundSchema,
 } from "./payrollcreditblockerstype.js";
 import {
   PayrollPaymentSpeedChangedType,
   PayrollPaymentSpeedChangedType$inboundSchema,
-  PayrollPaymentSpeedChangedType$Outbound,
-  PayrollPaymentSpeedChangedType$outboundSchema,
 } from "./payrollpaymentspeedchangedtype.js";
 import {
   PayrollPayPeriodType,
   PayrollPayPeriodType$inboundSchema,
-  PayrollPayPeriodType$Outbound,
-  PayrollPayPeriodType$outboundSchema,
 } from "./payrollpayperiodtype.js";
 import {
   PayrollPayrollStatusMetaType,
   PayrollPayrollStatusMetaType$inboundSchema,
-  PayrollPayrollStatusMetaType$Outbound,
-  PayrollPayrollStatusMetaType$outboundSchema,
 } from "./payrollpayrollstatusmetatype.js";
 import {
   PayrollProcessingRequest,
   PayrollProcessingRequest$inboundSchema,
-  PayrollProcessingRequest$Outbound,
-  PayrollProcessingRequest$outboundSchema,
 } from "./payrollprocessingrequest.js";
 import {
   PayrollSubmissionBlockersType,
   PayrollSubmissionBlockersType$inboundSchema,
-  PayrollSubmissionBlockersType$Outbound,
-  PayrollSubmissionBlockersType$outboundSchema,
 } from "./payrollsubmissionblockerstype.js";
 import {
   PayrollTaxesType,
   PayrollTaxesType$inboundSchema,
-  PayrollTaxesType$Outbound,
-  PayrollTaxesType$outboundSchema,
 } from "./payrolltaxestype.js";
 import {
   PayrollTotalsType,
   PayrollTotalsType$inboundSchema,
-  PayrollTotalsType$Outbound,
-  PayrollTotalsType$outboundSchema,
 } from "./payrolltotalstype.js";
 import {
   PayrollWithholdingPayPeriodType,
   PayrollWithholdingPayPeriodType$inboundSchema,
-  PayrollWithholdingPayPeriodType$outboundSchema,
 } from "./payrollwithholdingpayperiodtype.js";
 
 /**
@@ -377,22 +357,6 @@ export const PayrollShowPaymentMethod$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollShowPaymentMethod);
 
 /** @internal */
-export const PayrollShowPaymentMethod$outboundSchema: z.ZodNativeEnum<
-  typeof PayrollShowPaymentMethod
-> = PayrollShowPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowPaymentMethod$ {
-  /** @deprecated use `PayrollShowPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowPaymentMethod$inboundSchema;
-  /** @deprecated use `PayrollShowPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowPaymentMethod$outboundSchema;
-}
-
-/** @internal */
 export const PayrollShowFixedCompensations$inboundSchema: z.ZodType<
   PayrollShowFixedCompensations,
   z.ZodTypeDef,
@@ -406,51 +370,6 @@ export const PayrollShowFixedCompensations$inboundSchema: z.ZodType<
     "job_uuid": "jobUuid",
   });
 });
-
-/** @internal */
-export type PayrollShowFixedCompensations$Outbound = {
-  name?: string | undefined;
-  amount?: string | undefined;
-  job_uuid?: string | undefined;
-};
-
-/** @internal */
-export const PayrollShowFixedCompensations$outboundSchema: z.ZodType<
-  PayrollShowFixedCompensations$Outbound,
-  z.ZodTypeDef,
-  PayrollShowFixedCompensations
-> = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-  jobUuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    jobUuid: "job_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowFixedCompensations$ {
-  /** @deprecated use `PayrollShowFixedCompensations$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowFixedCompensations$inboundSchema;
-  /** @deprecated use `PayrollShowFixedCompensations$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowFixedCompensations$outboundSchema;
-  /** @deprecated use `PayrollShowFixedCompensations$Outbound` instead. */
-  export type Outbound = PayrollShowFixedCompensations$Outbound;
-}
-
-export function payrollShowFixedCompensationsToJSON(
-  payrollShowFixedCompensations: PayrollShowFixedCompensations,
-): string {
-  return JSON.stringify(
-    PayrollShowFixedCompensations$outboundSchema.parse(
-      payrollShowFixedCompensations,
-    ),
-  );
-}
 
 export function payrollShowFixedCompensationsFromJSON(
   jsonString: string,
@@ -482,59 +401,6 @@ export const PayrollShowHourlyCompensations$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollShowHourlyCompensations$Outbound = {
-  name?: string | undefined;
-  hours?: string | undefined;
-  amount?: string | undefined;
-  job_uuid?: string | undefined;
-  compensation_multiplier?: number | undefined;
-  flsa_status?: string | undefined;
-};
-
-/** @internal */
-export const PayrollShowHourlyCompensations$outboundSchema: z.ZodType<
-  PayrollShowHourlyCompensations$Outbound,
-  z.ZodTypeDef,
-  PayrollShowHourlyCompensations
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  amount: z.string().optional(),
-  jobUuid: z.string().optional(),
-  compensationMultiplier: z.number().optional(),
-  flsaStatus: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    jobUuid: "job_uuid",
-    compensationMultiplier: "compensation_multiplier",
-    flsaStatus: "flsa_status",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowHourlyCompensations$ {
-  /** @deprecated use `PayrollShowHourlyCompensations$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowHourlyCompensations$inboundSchema;
-  /** @deprecated use `PayrollShowHourlyCompensations$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowHourlyCompensations$outboundSchema;
-  /** @deprecated use `PayrollShowHourlyCompensations$Outbound` instead. */
-  export type Outbound = PayrollShowHourlyCompensations$Outbound;
-}
-
-export function payrollShowHourlyCompensationsToJSON(
-  payrollShowHourlyCompensations: PayrollShowHourlyCompensations,
-): string {
-  return JSON.stringify(
-    PayrollShowHourlyCompensations$outboundSchema.parse(
-      payrollShowHourlyCompensations,
-    ),
-  );
-}
-
 export function payrollShowHourlyCompensationsFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollShowHourlyCompensations, SDKValidationError> {
@@ -560,49 +426,6 @@ export const PayrollShowPaidTimeOff$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollShowPaidTimeOff$Outbound = {
-  name?: string | undefined;
-  hours?: string | undefined;
-  final_payout_unused_hours_input?: string | undefined;
-};
-
-/** @internal */
-export const PayrollShowPaidTimeOff$outboundSchema: z.ZodType<
-  PayrollShowPaidTimeOff$Outbound,
-  z.ZodTypeDef,
-  PayrollShowPaidTimeOff
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  finalPayoutUnusedHoursInput: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    finalPayoutUnusedHoursInput: "final_payout_unused_hours_input",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowPaidTimeOff$ {
-  /** @deprecated use `PayrollShowPaidTimeOff$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowPaidTimeOff$inboundSchema;
-  /** @deprecated use `PayrollShowPaidTimeOff$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowPaidTimeOff$outboundSchema;
-  /** @deprecated use `PayrollShowPaidTimeOff$Outbound` instead. */
-  export type Outbound = PayrollShowPaidTimeOff$Outbound;
-}
-
-export function payrollShowPaidTimeOffToJSON(
-  payrollShowPaidTimeOff: PayrollShowPaidTimeOff,
-): string {
-  return JSON.stringify(
-    PayrollShowPaidTimeOff$outboundSchema.parse(payrollShowPaidTimeOff),
-  );
-}
-
 export function payrollShowPaidTimeOffFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollShowPaidTimeOff, SDKValidationError> {
@@ -619,22 +442,6 @@ export const PayrollShowAmountType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayrollShowAmountType);
 
 /** @internal */
-export const PayrollShowAmountType$outboundSchema: z.ZodNativeEnum<
-  typeof PayrollShowAmountType
-> = PayrollShowAmountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowAmountType$ {
-  /** @deprecated use `PayrollShowAmountType$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowAmountType$inboundSchema;
-  /** @deprecated use `PayrollShowAmountType$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowAmountType$outboundSchema;
-}
-
-/** @internal */
 export const PayrollShowDeductions$inboundSchema: z.ZodType<
   PayrollShowDeductions,
   z.ZodTypeDef,
@@ -649,51 +456,6 @@ export const PayrollShowDeductions$inboundSchema: z.ZodType<
     "amount_type": "amountType",
   });
 });
-
-/** @internal */
-export type PayrollShowDeductions$Outbound = {
-  name?: string | undefined;
-  amount?: number | undefined;
-  amount_type?: string | undefined;
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const PayrollShowDeductions$outboundSchema: z.ZodType<
-  PayrollShowDeductions$Outbound,
-  z.ZodTypeDef,
-  PayrollShowDeductions
-> = z.object({
-  name: z.string().optional(),
-  amount: z.number().optional(),
-  amountType: PayrollShowAmountType$outboundSchema.optional(),
-  uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    amountType: "amount_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowDeductions$ {
-  /** @deprecated use `PayrollShowDeductions$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowDeductions$inboundSchema;
-  /** @deprecated use `PayrollShowDeductions$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowDeductions$outboundSchema;
-  /** @deprecated use `PayrollShowDeductions$Outbound` instead. */
-  export type Outbound = PayrollShowDeductions$Outbound;
-}
-
-export function payrollShowDeductionsToJSON(
-  payrollShowDeductions: PayrollShowDeductions,
-): string {
-  return JSON.stringify(
-    PayrollShowDeductions$outboundSchema.parse(payrollShowDeductions),
-  );
-}
 
 export function payrollShowDeductionsFromJSON(
   jsonString: string,
@@ -717,47 +479,6 @@ export const PayrollShowReimbursements$inboundSchema: z.ZodType<
   recurring: z.boolean().optional(),
 });
 
-/** @internal */
-export type PayrollShowReimbursements$Outbound = {
-  amount: string;
-  description: string | null;
-  uuid?: string | null | undefined;
-  recurring?: boolean | undefined;
-};
-
-/** @internal */
-export const PayrollShowReimbursements$outboundSchema: z.ZodType<
-  PayrollShowReimbursements$Outbound,
-  z.ZodTypeDef,
-  PayrollShowReimbursements
-> = z.object({
-  amount: z.string(),
-  description: z.nullable(z.string()),
-  uuid: z.nullable(z.string()).optional(),
-  recurring: z.boolean().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowReimbursements$ {
-  /** @deprecated use `PayrollShowReimbursements$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowReimbursements$inboundSchema;
-  /** @deprecated use `PayrollShowReimbursements$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowReimbursements$outboundSchema;
-  /** @deprecated use `PayrollShowReimbursements$Outbound` instead. */
-  export type Outbound = PayrollShowReimbursements$Outbound;
-}
-
-export function payrollShowReimbursementsToJSON(
-  payrollShowReimbursements: PayrollShowReimbursements,
-): string {
-  return JSON.stringify(
-    PayrollShowReimbursements$outboundSchema.parse(payrollShowReimbursements),
-  );
-}
-
 export function payrollShowReimbursementsFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollShowReimbursements, SDKValidationError> {
@@ -778,45 +499,6 @@ export const PayrollShowTaxes$inboundSchema: z.ZodType<
   employer: z.boolean(),
   amount: z.number(),
 });
-
-/** @internal */
-export type PayrollShowTaxes$Outbound = {
-  name: string;
-  employer: boolean;
-  amount: number;
-};
-
-/** @internal */
-export const PayrollShowTaxes$outboundSchema: z.ZodType<
-  PayrollShowTaxes$Outbound,
-  z.ZodTypeDef,
-  PayrollShowTaxes
-> = z.object({
-  name: z.string(),
-  employer: z.boolean(),
-  amount: z.number(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowTaxes$ {
-  /** @deprecated use `PayrollShowTaxes$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowTaxes$inboundSchema;
-  /** @deprecated use `PayrollShowTaxes$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowTaxes$outboundSchema;
-  /** @deprecated use `PayrollShowTaxes$Outbound` instead. */
-  export type Outbound = PayrollShowTaxes$Outbound;
-}
-
-export function payrollShowTaxesToJSON(
-  payrollShowTaxes: PayrollShowTaxes,
-): string {
-  return JSON.stringify(
-    PayrollShowTaxes$outboundSchema.parse(payrollShowTaxes),
-  );
-}
 
 export function payrollShowTaxesFromJSON(
   jsonString: string,
@@ -844,52 +526,6 @@ export const PayrollShowBenefits$inboundSchema: z.ZodType<
     "company_contribution": "companyContribution",
   });
 });
-
-/** @internal */
-export type PayrollShowBenefits$Outbound = {
-  name?: string | undefined;
-  employee_deduction?: number | undefined;
-  company_contribution?: number | undefined;
-  imputed?: boolean | undefined;
-};
-
-/** @internal */
-export const PayrollShowBenefits$outboundSchema: z.ZodType<
-  PayrollShowBenefits$Outbound,
-  z.ZodTypeDef,
-  PayrollShowBenefits
-> = z.object({
-  name: z.string().optional(),
-  employeeDeduction: z.number().optional(),
-  companyContribution: z.number().optional(),
-  imputed: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeDeduction: "employee_deduction",
-    companyContribution: "company_contribution",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShowBenefits$ {
-  /** @deprecated use `PayrollShowBenefits$inboundSchema` instead. */
-  export const inboundSchema = PayrollShowBenefits$inboundSchema;
-  /** @deprecated use `PayrollShowBenefits$outboundSchema` instead. */
-  export const outboundSchema = PayrollShowBenefits$outboundSchema;
-  /** @deprecated use `PayrollShowBenefits$Outbound` instead. */
-  export type Outbound = PayrollShowBenefits$Outbound;
-}
-
-export function payrollShowBenefitsToJSON(
-  payrollShowBenefits: PayrollShowBenefits,
-): string {
-  return JSON.stringify(
-    PayrollShowBenefits$outboundSchema.parse(payrollShowBenefits),
-  );
-}
 
 export function payrollShowBenefitsFromJSON(
   jsonString: string,
@@ -947,102 +583,6 @@ export const EmployeeCompensations$inboundSchema: z.ZodType<
     "paid_time_off": "paidTimeOff",
   });
 });
-
-/** @internal */
-export type EmployeeCompensations$Outbound = {
-  employee_uuid?: string | undefined;
-  excluded?: boolean | undefined;
-  version?: string | undefined;
-  first_name?: string | null | undefined;
-  preferred_first_name?: string | null | undefined;
-  last_name?: string | null | undefined;
-  gross_pay?: number | null | undefined;
-  net_pay?: number | null | undefined;
-  check_amount?: number | null | undefined;
-  payment_method?: string | null | undefined;
-  memo?: string | null | undefined;
-  fixed_compensations?:
-    | Array<PayrollShowFixedCompensations$Outbound>
-    | undefined;
-  hourly_compensations?:
-    | Array<PayrollShowHourlyCompensations$Outbound>
-    | undefined;
-  paid_time_off?: Array<PayrollShowPaidTimeOff$Outbound> | undefined;
-  deductions?: Array<PayrollShowDeductions$Outbound> | undefined;
-  reimbursements?: Array<PayrollShowReimbursements$Outbound> | undefined;
-  taxes?: Array<PayrollShowTaxes$Outbound> | undefined;
-  benefits?: Array<PayrollShowBenefits$Outbound> | undefined;
-};
-
-/** @internal */
-export const EmployeeCompensations$outboundSchema: z.ZodType<
-  EmployeeCompensations$Outbound,
-  z.ZodTypeDef,
-  EmployeeCompensations
-> = z.object({
-  employeeUuid: z.string().optional(),
-  excluded: z.boolean().optional(),
-  version: z.string().optional(),
-  firstName: z.nullable(z.string()).optional(),
-  preferredFirstName: z.nullable(z.string()).optional(),
-  lastName: z.nullable(z.string()).optional(),
-  grossPay: z.nullable(z.number()).optional(),
-  netPay: z.nullable(z.number()).optional(),
-  checkAmount: z.nullable(z.number()).optional(),
-  paymentMethod: z.nullable(PayrollShowPaymentMethod$outboundSchema).optional(),
-  memo: z.nullable(z.string()).optional(),
-  fixedCompensations: z.array(
-    z.lazy(() => PayrollShowFixedCompensations$outboundSchema),
-  ).optional(),
-  hourlyCompensations: z.array(
-    z.lazy(() => PayrollShowHourlyCompensations$outboundSchema),
-  ).optional(),
-  paidTimeOff: z.array(z.lazy(() => PayrollShowPaidTimeOff$outboundSchema))
-    .optional(),
-  deductions: z.array(z.lazy(() => PayrollShowDeductions$outboundSchema))
-    .optional(),
-  reimbursements: z.array(
-    z.lazy(() => PayrollShowReimbursements$outboundSchema),
-  ).optional(),
-  taxes: z.array(z.lazy(() => PayrollShowTaxes$outboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => PayrollShowBenefits$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    firstName: "first_name",
-    preferredFirstName: "preferred_first_name",
-    lastName: "last_name",
-    grossPay: "gross_pay",
-    netPay: "net_pay",
-    checkAmount: "check_amount",
-    paymentMethod: "payment_method",
-    fixedCompensations: "fixed_compensations",
-    hourlyCompensations: "hourly_compensations",
-    paidTimeOff: "paid_time_off",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeCompensations$ {
-  /** @deprecated use `EmployeeCompensations$inboundSchema` instead. */
-  export const inboundSchema = EmployeeCompensations$inboundSchema;
-  /** @deprecated use `EmployeeCompensations$outboundSchema` instead. */
-  export const outboundSchema = EmployeeCompensations$outboundSchema;
-  /** @deprecated use `EmployeeCompensations$Outbound` instead. */
-  export type Outbound = EmployeeCompensations$Outbound;
-}
-
-export function employeeCompensationsToJSON(
-  employeeCompensations: EmployeeCompensations,
-): string {
-  return JSON.stringify(
-    EmployeeCompensations$outboundSchema.parse(employeeCompensations),
-  );
-}
 
 export function employeeCompensationsFromJSON(
   jsonString: string,
@@ -1127,125 +667,6 @@ export const PayrollShow$inboundSchema: z.ZodType<
     "employee_compensations": "employeeCompensations",
   });
 });
-
-/** @internal */
-export type PayrollShow$Outbound = {
-  payroll_deadline?: string | undefined;
-  check_date?: string | undefined;
-  processed?: boolean | undefined;
-  processed_date?: string | null | undefined;
-  calculated_at?: string | null | undefined;
-  uuid?: string | undefined;
-  payroll_uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  off_cycle?: boolean | undefined;
-  off_cycle_reason?: string | null | undefined;
-  auto_pilot?: boolean | undefined;
-  external?: boolean | undefined;
-  final_termination_payroll?: boolean | undefined;
-  withholding_pay_period?: string | undefined;
-  skip_regular_deductions?: boolean | undefined;
-  fixed_withholding_rate?: boolean | undefined;
-  pay_period?: PayrollPayPeriodType$Outbound | undefined;
-  payroll_status_meta?: PayrollPayrollStatusMetaType$Outbound | undefined;
-  totals?: PayrollTotalsType$Outbound | undefined;
-  company_taxes?: Array<PayrollCompanyTaxesType$Outbound> | undefined;
-  payroll_taxes?: Array<PayrollTaxesType$Outbound> | undefined;
-  payment_speed_changed?: PayrollPaymentSpeedChangedType$Outbound | undefined;
-  created_at?: string | undefined;
-  submission_blockers?:
-    | Array<PayrollSubmissionBlockersType$Outbound>
-    | undefined;
-  credit_blockers?: Array<PayrollCreditBlockersType$Outbound> | undefined;
-  processing_request?: PayrollProcessingRequest$Outbound | null | undefined;
-  partner_owned_disbursement?: boolean | null | undefined;
-  employee_compensations?: Array<EmployeeCompensations$Outbound> | undefined;
-};
-
-/** @internal */
-export const PayrollShow$outboundSchema: z.ZodType<
-  PayrollShow$Outbound,
-  z.ZodTypeDef,
-  PayrollShow
-> = z.object({
-  payrollDeadline: z.date().transform(v => v.toISOString()).optional(),
-  checkDate: z.string().optional(),
-  processed: z.boolean().optional(),
-  processedDate: z.nullable(z.string()).optional(),
-  calculatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  uuid: z.string().optional(),
-  payrollUuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  offCycle: z.boolean().optional(),
-  offCycleReason: z.nullable(OffCycleReasonType$outboundSchema).optional(),
-  autoPilot: z.boolean().optional(),
-  external: z.boolean().optional(),
-  finalTerminationPayroll: z.boolean().optional(),
-  withholdingPayPeriod: PayrollWithholdingPayPeriodType$outboundSchema
-    .optional(),
-  skipRegularDeductions: z.boolean().optional(),
-  fixedWithholdingRate: z.boolean().optional(),
-  payPeriod: PayrollPayPeriodType$outboundSchema.optional(),
-  payrollStatusMeta: PayrollPayrollStatusMetaType$outboundSchema.optional(),
-  totals: PayrollTotalsType$outboundSchema.optional(),
-  companyTaxes: z.array(PayrollCompanyTaxesType$outboundSchema).optional(),
-  payrollTaxes: z.array(PayrollTaxesType$outboundSchema).optional(),
-  paymentSpeedChanged: PayrollPaymentSpeedChangedType$outboundSchema.optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  submissionBlockers: z.array(PayrollSubmissionBlockersType$outboundSchema)
-    .optional(),
-  creditBlockers: z.array(PayrollCreditBlockersType$outboundSchema).optional(),
-  processingRequest: z.nullable(PayrollProcessingRequest$outboundSchema)
-    .optional(),
-  partnerOwnedDisbursement: z.nullable(z.boolean()).optional(),
-  employeeCompensations: z.array(
-    z.lazy(() => EmployeeCompensations$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payrollDeadline: "payroll_deadline",
-    checkDate: "check_date",
-    processedDate: "processed_date",
-    calculatedAt: "calculated_at",
-    payrollUuid: "payroll_uuid",
-    companyUuid: "company_uuid",
-    offCycle: "off_cycle",
-    offCycleReason: "off_cycle_reason",
-    autoPilot: "auto_pilot",
-    finalTerminationPayroll: "final_termination_payroll",
-    withholdingPayPeriod: "withholding_pay_period",
-    skipRegularDeductions: "skip_regular_deductions",
-    fixedWithholdingRate: "fixed_withholding_rate",
-    payPeriod: "pay_period",
-    payrollStatusMeta: "payroll_status_meta",
-    companyTaxes: "company_taxes",
-    payrollTaxes: "payroll_taxes",
-    paymentSpeedChanged: "payment_speed_changed",
-    createdAt: "created_at",
-    submissionBlockers: "submission_blockers",
-    creditBlockers: "credit_blockers",
-    processingRequest: "processing_request",
-    partnerOwnedDisbursement: "partner_owned_disbursement",
-    employeeCompensations: "employee_compensations",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollShow$ {
-  /** @deprecated use `PayrollShow$inboundSchema` instead. */
-  export const inboundSchema = PayrollShow$inboundSchema;
-  /** @deprecated use `PayrollShow$outboundSchema` instead. */
-  export const outboundSchema = PayrollShow$outboundSchema;
-  /** @deprecated use `PayrollShow$Outbound` instead. */
-  export type Outbound = PayrollShow$Outbound;
-}
-
-export function payrollShowToJSON(payrollShow: PayrollShow): string {
-  return JSON.stringify(PayrollShow$outboundSchema.parse(payrollShow));
-}
 
 export function payrollShowFromJSON(
   jsonString: string,

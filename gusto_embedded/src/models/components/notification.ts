@@ -120,41 +120,9 @@ export const NotificationStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(NotificationStatus);
 
 /** @internal */
-export const NotificationStatus$outboundSchema: z.ZodNativeEnum<
-  typeof NotificationStatus
-> = NotificationStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace NotificationStatus$ {
-  /** @deprecated use `NotificationStatus$inboundSchema` instead. */
-  export const inboundSchema = NotificationStatus$inboundSchema;
-  /** @deprecated use `NotificationStatus$outboundSchema` instead. */
-  export const outboundSchema = NotificationStatus$outboundSchema;
-}
-
-/** @internal */
 export const NotificationEntityType$inboundSchema: z.ZodNativeEnum<
   typeof NotificationEntityType
 > = z.nativeEnum(NotificationEntityType);
-
-/** @internal */
-export const NotificationEntityType$outboundSchema: z.ZodNativeEnum<
-  typeof NotificationEntityType
-> = NotificationEntityType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace NotificationEntityType$ {
-  /** @deprecated use `NotificationEntityType$inboundSchema` instead. */
-  export const inboundSchema = NotificationEntityType$inboundSchema;
-  /** @deprecated use `NotificationEntityType$outboundSchema` instead. */
-  export const outboundSchema = NotificationEntityType$outboundSchema;
-}
 
 /** @internal */
 export const Resources$inboundSchema: z.ZodType<
@@ -174,50 +142,6 @@ export const Resources$inboundSchema: z.ZodType<
     "reference_uuid": "referenceUuid",
   });
 });
-
-/** @internal */
-export type Resources$Outbound = {
-  entity_type: string;
-  entity_uuid: string;
-  reference_type?: string | undefined;
-  reference_uuid?: string | undefined;
-};
-
-/** @internal */
-export const Resources$outboundSchema: z.ZodType<
-  Resources$Outbound,
-  z.ZodTypeDef,
-  Resources
-> = z.object({
-  entityType: NotificationEntityType$outboundSchema,
-  entityUuid: z.string(),
-  referenceType: z.string().optional(),
-  referenceUuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityType: "entity_type",
-    entityUuid: "entity_uuid",
-    referenceType: "reference_type",
-    referenceUuid: "reference_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Resources$ {
-  /** @deprecated use `Resources$inboundSchema` instead. */
-  export const inboundSchema = Resources$inboundSchema;
-  /** @deprecated use `Resources$outboundSchema` instead. */
-  export const outboundSchema = Resources$outboundSchema;
-  /** @deprecated use `Resources$Outbound` instead. */
-  export type Outbound = Resources$Outbound;
-}
-
-export function resourcesToJSON(resources: Resources): string {
-  return JSON.stringify(Resources$outboundSchema.parse(resources));
-}
 
 export function resourcesFromJSON(
   jsonString: string,
@@ -256,67 +180,6 @@ export const Notification$inboundSchema: z.ZodType<
     "template_variables": "templateVariables",
   });
 });
-
-/** @internal */
-export type Notification$Outbound = {
-  uuid: string;
-  company_uuid: string;
-  title: string;
-  message: string;
-  status: string;
-  category: string;
-  actionable: boolean;
-  can_block_payroll: boolean;
-  published_at: string;
-  due_at: string | null;
-  template_variables?: { [k: string]: string } | undefined;
-  resources: Array<Resources$Outbound>;
-};
-
-/** @internal */
-export const Notification$outboundSchema: z.ZodType<
-  Notification$Outbound,
-  z.ZodTypeDef,
-  Notification
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string(),
-  title: z.string(),
-  message: z.string(),
-  status: NotificationStatus$outboundSchema,
-  category: z.string(),
-  actionable: z.boolean(),
-  canBlockPayroll: z.boolean(),
-  publishedAt: z.string(),
-  dueAt: z.nullable(z.string()),
-  templateVariables: z.record(z.string()).optional(),
-  resources: z.array(z.lazy(() => Resources$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    canBlockPayroll: "can_block_payroll",
-    publishedAt: "published_at",
-    dueAt: "due_at",
-    templateVariables: "template_variables",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Notification$ {
-  /** @deprecated use `Notification$inboundSchema` instead. */
-  export const inboundSchema = Notification$inboundSchema;
-  /** @deprecated use `Notification$outboundSchema` instead. */
-  export const outboundSchema = Notification$outboundSchema;
-  /** @deprecated use `Notification$Outbound` instead. */
-  export type Outbound = Notification$Outbound;
-}
-
-export function notificationToJSON(notification: Notification): string {
-  return JSON.stringify(Notification$outboundSchema.parse(notification));
-}
 
 export function notificationFromJSON(
   jsonString: string,

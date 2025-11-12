@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ChildSupportData,
   ChildSupportData$inboundSchema,
-  ChildSupportData$Outbound,
-  ChildSupportData$outboundSchema,
 } from "../components/childsupportdata.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,19 +36,6 @@ export type GetV1GarnishmentsChildSupportResponse = {
 };
 
 /** @internal */
-export const GetV1GarnishmentsChildSupportRequest$inboundSchema: z.ZodType<
-  GetV1GarnishmentsChildSupportRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1GarnishmentsChildSupportRequest$Outbound = {
   "X-Gusto-API-Version": string;
 };
@@ -71,21 +53,6 @@ export const GetV1GarnishmentsChildSupportRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1GarnishmentsChildSupportRequest$ {
-  /** @deprecated use `GetV1GarnishmentsChildSupportRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1GarnishmentsChildSupportRequest$inboundSchema;
-  /** @deprecated use `GetV1GarnishmentsChildSupportRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1GarnishmentsChildSupportRequest$outboundSchema;
-  /** @deprecated use `GetV1GarnishmentsChildSupportRequest$Outbound` instead. */
-  export type Outbound = GetV1GarnishmentsChildSupportRequest$Outbound;
-}
-
 export function getV1GarnishmentsChildSupportRequestToJSON(
   getV1GarnishmentsChildSupportRequest: GetV1GarnishmentsChildSupportRequest,
 ): string {
@@ -93,17 +60,6 @@ export function getV1GarnishmentsChildSupportRequestToJSON(
     GetV1GarnishmentsChildSupportRequest$outboundSchema.parse(
       getV1GarnishmentsChildSupportRequest,
     ),
-  );
-}
-
-export function getV1GarnishmentsChildSupportRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1GarnishmentsChildSupportRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1GarnishmentsChildSupportRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1GarnishmentsChildSupportRequest' from JSON`,
   );
 }
 
@@ -121,52 +77,6 @@ export const GetV1GarnishmentsChildSupportResponse$inboundSchema: z.ZodType<
     "Child-Support-Data": "childSupportData",
   });
 });
-
-/** @internal */
-export type GetV1GarnishmentsChildSupportResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Child-Support-Data"?: ChildSupportData$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1GarnishmentsChildSupportResponse$outboundSchema: z.ZodType<
-  GetV1GarnishmentsChildSupportResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1GarnishmentsChildSupportResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  childSupportData: ChildSupportData$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    childSupportData: "Child-Support-Data",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1GarnishmentsChildSupportResponse$ {
-  /** @deprecated use `GetV1GarnishmentsChildSupportResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1GarnishmentsChildSupportResponse$inboundSchema;
-  /** @deprecated use `GetV1GarnishmentsChildSupportResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1GarnishmentsChildSupportResponse$outboundSchema;
-  /** @deprecated use `GetV1GarnishmentsChildSupportResponse$Outbound` instead. */
-  export type Outbound = GetV1GarnishmentsChildSupportResponse$Outbound;
-}
-
-export function getV1GarnishmentsChildSupportResponseToJSON(
-  getV1GarnishmentsChildSupportResponse: GetV1GarnishmentsChildSupportResponse,
-): string {
-  return JSON.stringify(
-    GetV1GarnishmentsChildSupportResponse$outboundSchema.parse(
-      getV1GarnishmentsChildSupportResponse,
-    ),
-  );
-}
 
 export function getV1GarnishmentsChildSupportResponseFromJSON(
   jsonString: string,

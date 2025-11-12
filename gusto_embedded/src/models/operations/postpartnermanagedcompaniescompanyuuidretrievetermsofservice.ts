@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -64,16 +61,6 @@ export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse
   };
 
 /** @internal */
-export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$inboundSchema:
-  z.ZodType<
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    email: z.string(),
-  });
-
-/** @internal */
 export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$Outbound =
   {
     email: string;
@@ -89,22 +76,6 @@ export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
     email: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$ {
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$inboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$outboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$Outbound;
-}
-
 export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBodyToJSON(
   postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody:
     PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody,
@@ -116,41 +87,6 @@ export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequ
       ),
   );
 }
-
-export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$inboundSchema:
-  z.ZodType<
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$Outbound =
@@ -181,22 +117,6 @@ export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$ {
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$inboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$outboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$Outbound` instead. */
-  export type Outbound =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$Outbound;
-}
-
 export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestToJSON(
   postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest:
     PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
@@ -206,21 +126,6 @@ export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequ
       .parse(
         postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
       ),
-  );
-}
-
-export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRequest' from JSON`,
   );
 }
 
@@ -237,54 +142,6 @@ export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRespons
       "latest_terms_accepted": "latestTermsAccepted",
     });
   });
-
-/** @internal */
-export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$Outbound =
-  {
-    latest_terms_accepted?: boolean | undefined;
-  };
-
-/** @internal */
-export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$outboundSchema:
-  z.ZodType<
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$Outbound,
-    z.ZodTypeDef,
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody
-  > = z.object({
-    latestTermsAccepted: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      latestTermsAccepted: "latest_terms_accepted",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$ {
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$inboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$outboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$Outbound` instead. */
-  export type Outbound =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$Outbound;
-}
-
-export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBodyToJSON(
-  postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody:
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody,
-): string {
-  return JSON.stringify(
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$outboundSchema
-      .parse(
-        postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody,
-      ),
-  );
-}
 
 export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBodyFromJSON(
   jsonString: string,
@@ -317,60 +174,6 @@ export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceRespons
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    object?:
-      | PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$outboundSchema:
-  z.ZodType<
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$Outbound,
-    z.ZodTypeDef,
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    object: z.lazy(() =>
-      PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$ {
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$inboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$outboundSchema;
-  /** @deprecated use `PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$Outbound` instead. */
-  export type Outbound =
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$Outbound;
-}
-
-export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseToJSON(
-  postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse:
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
-): string {
-  return JSON.stringify(
-    PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse$outboundSchema
-      .parse(
-        postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse,
-      ),
-  );
-}
 
 export function postPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseFromJSON(
   jsonString: string,

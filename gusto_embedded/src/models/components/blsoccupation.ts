@@ -36,41 +36,6 @@ export const BLSOccupation$inboundSchema: z.ZodType<
   description: z.string().optional(),
 });
 
-/** @internal */
-export type BLSOccupation$Outbound = {
-  code: string;
-  title: string;
-  description?: string | undefined;
-};
-
-/** @internal */
-export const BLSOccupation$outboundSchema: z.ZodType<
-  BLSOccupation$Outbound,
-  z.ZodTypeDef,
-  BLSOccupation
-> = z.object({
-  code: z.string(),
-  title: z.string(),
-  description: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BLSOccupation$ {
-  /** @deprecated use `BLSOccupation$inboundSchema` instead. */
-  export const inboundSchema = BLSOccupation$inboundSchema;
-  /** @deprecated use `BLSOccupation$outboundSchema` instead. */
-  export const outboundSchema = BLSOccupation$outboundSchema;
-  /** @deprecated use `BLSOccupation$Outbound` instead. */
-  export type Outbound = BLSOccupation$Outbound;
-}
-
-export function blsOccupationToJSON(blsOccupation: BLSOccupation): string {
-  return JSON.stringify(BLSOccupation$outboundSchema.parse(blsOccupation));
-}
-
 export function blsOccupationFromJSON(
   jsonString: string,
 ): SafeParseResult<BLSOccupation, SDKValidationError> {

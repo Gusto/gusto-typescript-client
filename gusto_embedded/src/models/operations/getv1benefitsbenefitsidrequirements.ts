@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   BenefitTypeRequirements,
   BenefitTypeRequirements$inboundSchema,
-  BenefitTypeRequirements$Outbound,
-  BenefitTypeRequirements$outboundSchema,
 } from "../components/benefittyperequirements.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,19 +40,6 @@ export type GetV1BenefitsBenefitsIdRequirementsResponse = {
 };
 
 /** @internal */
-export const GetV1BenefitsBenefitsIdRequirementsRequest$inboundSchema:
-  z.ZodType<GetV1BenefitsBenefitsIdRequirementsRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      benefit_id: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    }).transform((v) => {
-      return remap$(v, {
-        "benefit_id": "benefitId",
-        "X-Gusto-API-Version": "xGustoAPIVersion",
-      });
-    });
-
-/** @internal */
 export type GetV1BenefitsBenefitsIdRequirementsRequest$Outbound = {
   benefit_id: string;
   "X-Gusto-API-Version": string;
@@ -79,21 +61,6 @@ export const GetV1BenefitsBenefitsIdRequirementsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1BenefitsBenefitsIdRequirementsRequest$ {
-  /** @deprecated use `GetV1BenefitsBenefitsIdRequirementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1BenefitsBenefitsIdRequirementsRequest$inboundSchema;
-  /** @deprecated use `GetV1BenefitsBenefitsIdRequirementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1BenefitsBenefitsIdRequirementsRequest$outboundSchema;
-  /** @deprecated use `GetV1BenefitsBenefitsIdRequirementsRequest$Outbound` instead. */
-  export type Outbound = GetV1BenefitsBenefitsIdRequirementsRequest$Outbound;
-}
-
 export function getV1BenefitsBenefitsIdRequirementsRequestToJSON(
   getV1BenefitsBenefitsIdRequirementsRequest:
     GetV1BenefitsBenefitsIdRequirementsRequest,
@@ -102,22 +69,6 @@ export function getV1BenefitsBenefitsIdRequirementsRequestToJSON(
     GetV1BenefitsBenefitsIdRequirementsRequest$outboundSchema.parse(
       getV1BenefitsBenefitsIdRequirementsRequest,
     ),
-  );
-}
-
-export function getV1BenefitsBenefitsIdRequirementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1BenefitsBenefitsIdRequirementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1BenefitsBenefitsIdRequirementsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1BenefitsBenefitsIdRequirementsRequest' from JSON`,
   );
 }
 
@@ -137,54 +88,6 @@ export const GetV1BenefitsBenefitsIdRequirementsResponse$inboundSchema:
       "Benefit-Type-Requirements": "benefitTypeRequirements",
     });
   });
-
-/** @internal */
-export type GetV1BenefitsBenefitsIdRequirementsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Benefit-Type-Requirements"?: BenefitTypeRequirements$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1BenefitsBenefitsIdRequirementsResponse$outboundSchema:
-  z.ZodType<
-    GetV1BenefitsBenefitsIdRequirementsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1BenefitsBenefitsIdRequirementsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    benefitTypeRequirements: BenefitTypeRequirements$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      benefitTypeRequirements: "Benefit-Type-Requirements",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1BenefitsBenefitsIdRequirementsResponse$ {
-  /** @deprecated use `GetV1BenefitsBenefitsIdRequirementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1BenefitsBenefitsIdRequirementsResponse$inboundSchema;
-  /** @deprecated use `GetV1BenefitsBenefitsIdRequirementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1BenefitsBenefitsIdRequirementsResponse$outboundSchema;
-  /** @deprecated use `GetV1BenefitsBenefitsIdRequirementsResponse$Outbound` instead. */
-  export type Outbound = GetV1BenefitsBenefitsIdRequirementsResponse$Outbound;
-}
-
-export function getV1BenefitsBenefitsIdRequirementsResponseToJSON(
-  getV1BenefitsBenefitsIdRequirementsResponse:
-    GetV1BenefitsBenefitsIdRequirementsResponse,
-): string {
-  return JSON.stringify(
-    GetV1BenefitsBenefitsIdRequirementsResponse$outboundSchema.parse(
-      getV1BenefitsBenefitsIdRequirementsResponse,
-    ),
-  );
-}
 
 export function getV1BenefitsBenefitsIdRequirementsResponseFromJSON(
   jsonString: string,

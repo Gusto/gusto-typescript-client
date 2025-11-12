@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   FederalTaxDetails,
   FederalTaxDetails$inboundSchema,
-  FederalTaxDetails$Outbound,
-  FederalTaxDetails$outboundSchema,
 } from "../components/federaltaxdetails.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -126,64 +121,12 @@ export type PutV1CompaniesCompanyIdFederalTaxDetailsResponse = {
 };
 
 /** @internal */
-export const TaxPayerType$inboundSchema: z.ZodNativeEnum<typeof TaxPayerType> =
+export const TaxPayerType$outboundSchema: z.ZodNativeEnum<typeof TaxPayerType> =
   z.nativeEnum(TaxPayerType);
 
 /** @internal */
-export const TaxPayerType$outboundSchema: z.ZodNativeEnum<typeof TaxPayerType> =
-  TaxPayerType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxPayerType$ {
-  /** @deprecated use `TaxPayerType$inboundSchema` instead. */
-  export const inboundSchema = TaxPayerType$inboundSchema;
-  /** @deprecated use `TaxPayerType$outboundSchema` instead. */
-  export const outboundSchema = TaxPayerType$outboundSchema;
-}
-
-/** @internal */
-export const FilingForm$inboundSchema: z.ZodNativeEnum<typeof FilingForm> = z
+export const FilingForm$outboundSchema: z.ZodNativeEnum<typeof FilingForm> = z
   .nativeEnum(FilingForm);
-
-/** @internal */
-export const FilingForm$outboundSchema: z.ZodNativeEnum<typeof FilingForm> =
-  FilingForm$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FilingForm$ {
-  /** @deprecated use `FilingForm$inboundSchema` instead. */
-  export const inboundSchema = FilingForm$inboundSchema;
-  /** @deprecated use `FilingForm$outboundSchema` instead. */
-  export const outboundSchema = FilingForm$outboundSchema;
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    legal_name: z.string().optional(),
-    ein: z.string().optional(),
-    tax_payer_type: TaxPayerType$inboundSchema.optional(),
-    filing_form: FilingForm$inboundSchema.optional(),
-    taxable_as_scorp: z.boolean().optional(),
-    version: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "legal_name": "legalName",
-      "tax_payer_type": "taxPayerType",
-      "filing_form": "filingForm",
-      "taxable_as_scorp": "taxableAsScorp",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound = {
@@ -217,22 +160,6 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$Outbound;
-}
-
 export function putV1CompaniesCompanyIdFederalTaxDetailsRequestBodyToJSON(
   putV1CompaniesCompanyIdFederalTaxDetailsRequestBody:
     PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody,
@@ -243,42 +170,6 @@ export function putV1CompaniesCompanyIdFederalTaxDetailsRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1CompaniesCompanyIdFederalTaxDetailsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdFederalTaxDetailsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdFederalTaxDetailsRequest$Outbound = {
@@ -307,22 +198,6 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdFederalTaxDetailsRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdFederalTaxDetailsRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyIdFederalTaxDetailsRequestToJSON(
   putV1CompaniesCompanyIdFederalTaxDetailsRequest:
     PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
@@ -331,22 +206,6 @@ export function putV1CompaniesCompanyIdFederalTaxDetailsRequestToJSON(
     PutV1CompaniesCompanyIdFederalTaxDetailsRequest$outboundSchema.parse(
       putV1CompaniesCompanyIdFederalTaxDetailsRequest,
     ),
-  );
-}
-
-export function putV1CompaniesCompanyIdFederalTaxDetailsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdFederalTaxDetailsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1CompaniesCompanyIdFederalTaxDetailsRequest' from JSON`,
   );
 }
 
@@ -365,55 +224,6 @@ export const PutV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema:
       "Federal-Tax-Details": "federalTaxDetails",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdFederalTaxDetailsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Federal-Tax-Details"?: FederalTaxDetails$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1CompaniesCompanyIdFederalTaxDetailsResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdFederalTaxDetailsResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdFederalTaxDetailsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    federalTaxDetails: FederalTaxDetails$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      federalTaxDetails: "Federal-Tax-Details",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdFederalTaxDetailsResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdFederalTaxDetailsResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdFederalTaxDetailsResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdFederalTaxDetailsResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdFederalTaxDetailsResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyIdFederalTaxDetailsResponseToJSON(
-  putV1CompaniesCompanyIdFederalTaxDetailsResponse:
-    PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdFederalTaxDetailsResponse$outboundSchema.parse(
-      putV1CompaniesCompanyIdFederalTaxDetailsResponse,
-    ),
-  );
-}
 
 export function putV1CompaniesCompanyIdFederalTaxDetailsResponseFromJSON(
   jsonString: string,

@@ -34,50 +34,6 @@ export const PayScheduleAssignmentEmployee$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayScheduleAssignmentEmployee$Outbound = {
-  employee_uuid?: string | undefined;
-  pay_schedule_uuid?: string | null | undefined;
-};
-
-/** @internal */
-export const PayScheduleAssignmentEmployee$outboundSchema: z.ZodType<
-  PayScheduleAssignmentEmployee$Outbound,
-  z.ZodTypeDef,
-  PayScheduleAssignmentEmployee
-> = z.object({
-  employeeUuid: z.string().optional(),
-  payScheduleUuid: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    payScheduleUuid: "pay_schedule_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleAssignmentEmployee$ {
-  /** @deprecated use `PayScheduleAssignmentEmployee$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleAssignmentEmployee$inboundSchema;
-  /** @deprecated use `PayScheduleAssignmentEmployee$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleAssignmentEmployee$outboundSchema;
-  /** @deprecated use `PayScheduleAssignmentEmployee$Outbound` instead. */
-  export type Outbound = PayScheduleAssignmentEmployee$Outbound;
-}
-
-export function payScheduleAssignmentEmployeeToJSON(
-  payScheduleAssignmentEmployee: PayScheduleAssignmentEmployee,
-): string {
-  return JSON.stringify(
-    PayScheduleAssignmentEmployee$outboundSchema.parse(
-      payScheduleAssignmentEmployee,
-    ),
-  );
-}
-
 export function payScheduleAssignmentEmployeeFromJSON(
   jsonString: string,
 ): SafeParseResult<PayScheduleAssignmentEmployee, SDKValidationError> {

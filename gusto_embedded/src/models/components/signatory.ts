@@ -93,22 +93,6 @@ export const IdentityVerificationStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(IdentityVerificationStatus);
 
 /** @internal */
-export const IdentityVerificationStatus$outboundSchema: z.ZodNativeEnum<
-  typeof IdentityVerificationStatus
-> = IdentityVerificationStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace IdentityVerificationStatus$ {
-  /** @deprecated use `IdentityVerificationStatus$inboundSchema` instead. */
-  export const inboundSchema = IdentityVerificationStatus$inboundSchema;
-  /** @deprecated use `IdentityVerificationStatus$outboundSchema` instead. */
-  export const outboundSchema = IdentityVerificationStatus$outboundSchema;
-}
-
-/** @internal */
 export const HomeAddress$inboundSchema: z.ZodType<
   HomeAddress,
   z.ZodTypeDef,
@@ -126,52 +110,6 @@ export const HomeAddress$inboundSchema: z.ZodType<
     "street_2": "street2",
   });
 });
-
-/** @internal */
-export type HomeAddress$Outbound = {
-  street_1?: string | undefined;
-  street_2?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country: string;
-};
-
-/** @internal */
-export const HomeAddress$outboundSchema: z.ZodType<
-  HomeAddress$Outbound,
-  z.ZodTypeDef,
-  HomeAddress
-> = z.object({
-  street1: z.string().optional(),
-  street2: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().default("USA"),
-}).transform((v) => {
-  return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HomeAddress$ {
-  /** @deprecated use `HomeAddress$inboundSchema` instead. */
-  export const inboundSchema = HomeAddress$inboundSchema;
-  /** @deprecated use `HomeAddress$outboundSchema` instead. */
-  export const outboundSchema = HomeAddress$outboundSchema;
-  /** @deprecated use `HomeAddress$Outbound` instead. */
-  export type Outbound = HomeAddress$Outbound;
-}
-
-export function homeAddressToJSON(homeAddress: HomeAddress): string {
-  return JSON.stringify(HomeAddress$outboundSchema.parse(homeAddress));
-}
 
 export function homeAddressFromJSON(
   jsonString: string,
@@ -213,70 +151,6 @@ export const Signatory$inboundSchema: z.ZodType<
     "home_address": "homeAddress",
   });
 });
-
-/** @internal */
-export type Signatory$Outbound = {
-  uuid: string;
-  first_name?: string | null | undefined;
-  last_name?: string | null | undefined;
-  title?: string | null | undefined;
-  phone?: string | null | undefined;
-  email?: string | undefined;
-  birthday?: string | null | undefined;
-  is_admin?: boolean | undefined;
-  has_ssn?: boolean | undefined;
-  version?: string | undefined;
-  identity_verification_status?: string | null | undefined;
-  home_address?: HomeAddress$Outbound | null | undefined;
-};
-
-/** @internal */
-export const Signatory$outboundSchema: z.ZodType<
-  Signatory$Outbound,
-  z.ZodTypeDef,
-  Signatory
-> = z.object({
-  uuid: z.string(),
-  firstName: z.nullable(z.string()).optional(),
-  lastName: z.nullable(z.string()).optional(),
-  title: z.nullable(z.string()).optional(),
-  phone: z.nullable(z.string()).optional(),
-  email: z.string().optional(),
-  birthday: z.nullable(z.string()).optional(),
-  isAdmin: z.boolean().optional(),
-  hasSsn: z.boolean().optional(),
-  version: z.string().optional(),
-  identityVerificationStatus: z.nullable(
-    IdentityVerificationStatus$outboundSchema,
-  ).optional(),
-  homeAddress: z.nullable(z.lazy(() => HomeAddress$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    lastName: "last_name",
-    isAdmin: "is_admin",
-    hasSsn: "has_ssn",
-    identityVerificationStatus: "identity_verification_status",
-    homeAddress: "home_address",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Signatory$ {
-  /** @deprecated use `Signatory$inboundSchema` instead. */
-  export const inboundSchema = Signatory$inboundSchema;
-  /** @deprecated use `Signatory$outboundSchema` instead. */
-  export const outboundSchema = Signatory$outboundSchema;
-  /** @deprecated use `Signatory$Outbound` instead. */
-  export type Outbound = Signatory$Outbound;
-}
-
-export function signatoryToJSON(signatory: Signatory): string {
-  return JSON.stringify(Signatory$outboundSchema.parse(signatory));
-}
 
 export function signatoryFromJSON(
   jsonString: string,

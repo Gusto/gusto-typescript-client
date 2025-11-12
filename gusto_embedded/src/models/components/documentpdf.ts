@@ -33,43 +33,6 @@ export const DocumentPdf$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type DocumentPdf$Outbound = {
-  uuid?: string | undefined;
-  document_url?: string | undefined;
-};
-
-/** @internal */
-export const DocumentPdf$outboundSchema: z.ZodType<
-  DocumentPdf$Outbound,
-  z.ZodTypeDef,
-  DocumentPdf
-> = z.object({
-  uuid: z.string().optional(),
-  documentUrl: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    documentUrl: "document_url",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DocumentPdf$ {
-  /** @deprecated use `DocumentPdf$inboundSchema` instead. */
-  export const inboundSchema = DocumentPdf$inboundSchema;
-  /** @deprecated use `DocumentPdf$outboundSchema` instead. */
-  export const outboundSchema = DocumentPdf$outboundSchema;
-  /** @deprecated use `DocumentPdf$Outbound` instead. */
-  export type Outbound = DocumentPdf$Outbound;
-}
-
-export function documentPdfToJSON(documentPdf: DocumentPdf): string {
-  return JSON.stringify(DocumentPdf$outboundSchema.parse(documentPdf));
-}
-
 export function documentPdfFromJSON(
   jsonString: string,
 ): SafeParseResult<DocumentPdf, SDKValidationError> {

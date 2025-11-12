@@ -10,48 +10,34 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OffCycleReasonType,
   OffCycleReasonType$inboundSchema,
-  OffCycleReasonType$outboundSchema,
 } from "./offcyclereasontype.js";
 import {
   PayrollEmployeeCompensationsType,
   PayrollEmployeeCompensationsType$inboundSchema,
-  PayrollEmployeeCompensationsType$Outbound,
-  PayrollEmployeeCompensationsType$outboundSchema,
 } from "./payrollemployeecompensationstype.js";
 import {
   PayrollFixedCompensationTypesType,
   PayrollFixedCompensationTypesType$inboundSchema,
-  PayrollFixedCompensationTypesType$Outbound,
-  PayrollFixedCompensationTypesType$outboundSchema,
 } from "./payrollfixedcompensationtypestype.js";
 import {
   PayrollPaymentSpeedChangedType,
   PayrollPaymentSpeedChangedType$inboundSchema,
-  PayrollPaymentSpeedChangedType$Outbound,
-  PayrollPaymentSpeedChangedType$outboundSchema,
 } from "./payrollpaymentspeedchangedtype.js";
 import {
   PayrollPayPeriodType,
   PayrollPayPeriodType$inboundSchema,
-  PayrollPayPeriodType$Outbound,
-  PayrollPayPeriodType$outboundSchema,
 } from "./payrollpayperiodtype.js";
 import {
   PayrollPayrollStatusMetaType,
   PayrollPayrollStatusMetaType$inboundSchema,
-  PayrollPayrollStatusMetaType$Outbound,
-  PayrollPayrollStatusMetaType$outboundSchema,
 } from "./payrollpayrollstatusmetatype.js";
 import {
   PayrollProcessingRequest,
   PayrollProcessingRequest$inboundSchema,
-  PayrollProcessingRequest$Outbound,
-  PayrollProcessingRequest$outboundSchema,
 } from "./payrollprocessingrequest.js";
 import {
   PayrollWithholdingPayPeriodType,
   PayrollWithholdingPayPeriodType$inboundSchema,
-  PayrollWithholdingPayPeriodType$outboundSchema,
 } from "./payrollwithholdingpayperiodtype.js";
 
 export type PayrollPrepared = {
@@ -208,119 +194,6 @@ export const PayrollPrepared$inboundSchema: z.ZodType<
     "partner_owned_disbursement": "partnerOwnedDisbursement",
   });
 });
-
-/** @internal */
-export type PayrollPrepared$Outbound = {
-  payroll_deadline?: string | undefined;
-  check_date?: string | undefined;
-  processed?: boolean | undefined;
-  processed_date?: string | null | undefined;
-  calculated_at?: string | null | undefined;
-  uuid?: string | undefined;
-  payroll_uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  off_cycle?: boolean | undefined;
-  off_cycle_reason?: string | null | undefined;
-  auto_pilot?: boolean | undefined;
-  external?: boolean | undefined;
-  final_termination_payroll?: boolean | undefined;
-  withholding_pay_period?: string | undefined;
-  skip_regular_deductions?: boolean | undefined;
-  fixed_withholding_rate?: boolean | undefined;
-  pay_period?: PayrollPayPeriodType$Outbound | undefined;
-  payroll_status_meta?: PayrollPayrollStatusMetaType$Outbound | undefined;
-  employee_compensations?:
-    | Array<PayrollEmployeeCompensationsType$Outbound>
-    | undefined;
-  payment_speed_changed?: PayrollPaymentSpeedChangedType$Outbound | undefined;
-  created_at?: string | undefined;
-  fixed_compensation_types?:
-    | Array<PayrollFixedCompensationTypesType$Outbound>
-    | undefined;
-  processing_request?: PayrollProcessingRequest$Outbound | null | undefined;
-  partner_owned_disbursement?: boolean | null | undefined;
-};
-
-/** @internal */
-export const PayrollPrepared$outboundSchema: z.ZodType<
-  PayrollPrepared$Outbound,
-  z.ZodTypeDef,
-  PayrollPrepared
-> = z.object({
-  payrollDeadline: z.date().transform(v => v.toISOString()).optional(),
-  checkDate: z.string().optional(),
-  processed: z.boolean().optional(),
-  processedDate: z.nullable(z.string()).optional(),
-  calculatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  uuid: z.string().optional(),
-  payrollUuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  offCycle: z.boolean().optional(),
-  offCycleReason: z.nullable(OffCycleReasonType$outboundSchema).optional(),
-  autoPilot: z.boolean().optional(),
-  external: z.boolean().optional(),
-  finalTerminationPayroll: z.boolean().optional(),
-  withholdingPayPeriod: PayrollWithholdingPayPeriodType$outboundSchema
-    .optional(),
-  skipRegularDeductions: z.boolean().optional(),
-  fixedWithholdingRate: z.boolean().optional(),
-  payPeriod: PayrollPayPeriodType$outboundSchema.optional(),
-  payrollStatusMeta: PayrollPayrollStatusMetaType$outboundSchema.optional(),
-  employeeCompensations: z.array(
-    PayrollEmployeeCompensationsType$outboundSchema,
-  ).optional(),
-  paymentSpeedChanged: PayrollPaymentSpeedChangedType$outboundSchema.optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  fixedCompensationTypes: z.array(
-    PayrollFixedCompensationTypesType$outboundSchema,
-  ).optional(),
-  processingRequest: z.nullable(PayrollProcessingRequest$outboundSchema)
-    .optional(),
-  partnerOwnedDisbursement: z.nullable(z.boolean()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payrollDeadline: "payroll_deadline",
-    checkDate: "check_date",
-    processedDate: "processed_date",
-    calculatedAt: "calculated_at",
-    payrollUuid: "payroll_uuid",
-    companyUuid: "company_uuid",
-    offCycle: "off_cycle",
-    offCycleReason: "off_cycle_reason",
-    autoPilot: "auto_pilot",
-    finalTerminationPayroll: "final_termination_payroll",
-    withholdingPayPeriod: "withholding_pay_period",
-    skipRegularDeductions: "skip_regular_deductions",
-    fixedWithholdingRate: "fixed_withholding_rate",
-    payPeriod: "pay_period",
-    payrollStatusMeta: "payroll_status_meta",
-    employeeCompensations: "employee_compensations",
-    paymentSpeedChanged: "payment_speed_changed",
-    createdAt: "created_at",
-    fixedCompensationTypes: "fixed_compensation_types",
-    processingRequest: "processing_request",
-    partnerOwnedDisbursement: "partner_owned_disbursement",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollPrepared$ {
-  /** @deprecated use `PayrollPrepared$inboundSchema` instead. */
-  export const inboundSchema = PayrollPrepared$inboundSchema;
-  /** @deprecated use `PayrollPrepared$outboundSchema` instead. */
-  export const outboundSchema = PayrollPrepared$outboundSchema;
-  /** @deprecated use `PayrollPrepared$Outbound` instead. */
-  export type Outbound = PayrollPrepared$Outbound;
-}
-
-export function payrollPreparedToJSON(
-  payrollPrepared: PayrollPrepared,
-): string {
-  return JSON.stringify(PayrollPrepared$outboundSchema.parse(payrollPrepared));
-}
 
 export function payrollPreparedFromJSON(
   jsonString: string,

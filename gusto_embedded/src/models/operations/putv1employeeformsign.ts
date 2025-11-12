@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Form,
-  Form$inboundSchema,
-  Form$Outbound,
-  Form$outboundSchema,
-} from "../components/form.js";
+import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -127,90 +119,6 @@ export type PutV1EmployeeFormSignResponse = {
    */
   form?: Form | undefined;
 };
-
-/** @internal */
-export const PutV1EmployeeFormSignRequestBody$inboundSchema: z.ZodType<
-  PutV1EmployeeFormSignRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  signature_text: z.string(),
-  agree: z.boolean(),
-  signed_by_ip_address: z.string().optional(),
-  preparer: z.boolean().optional(),
-  preparer_first_name: z.string().optional(),
-  preparer_last_name: z.string().optional(),
-  preparer_street_1: z.string().optional(),
-  preparer_street_2: z.string().optional(),
-  preparer_city: z.string().optional(),
-  preparer_state: z.string().optional(),
-  preparer_zip: z.string().optional(),
-  preparer_agree: z.string().optional(),
-  preparer2: z.boolean().optional(),
-  preparer2_first_name: z.string().optional(),
-  preparer2_last_name: z.string().optional(),
-  preparer2_street_1: z.string().optional(),
-  preparer2_street_2: z.string().optional(),
-  preparer2_city: z.string().optional(),
-  preparer2_state: z.string().optional(),
-  preparer2_zip: z.string().optional(),
-  preparer2_agree: z.string().optional(),
-  preparer3: z.boolean().optional(),
-  preparer3_first_name: z.string().optional(),
-  preparer3_last_name: z.string().optional(),
-  preparer3_street_1: z.string().optional(),
-  preparer3_street_2: z.string().optional(),
-  preparer3_city: z.string().optional(),
-  preparer3_state: z.string().optional(),
-  preparer3_zip: z.string().optional(),
-  preparer3_agree: z.string().optional(),
-  preparer4: z.boolean().optional(),
-  preparer4_first_name: z.string().optional(),
-  preparer4_last_name: z.string().optional(),
-  preparer4_street_1: z.string().optional(),
-  preparer4_street_2: z.string().optional(),
-  preparer4_city: z.string().optional(),
-  preparer4_state: z.string().optional(),
-  preparer4_zip: z.string().optional(),
-  preparer4_agree: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "signature_text": "signatureText",
-    "signed_by_ip_address": "signedByIpAddress",
-    "preparer_first_name": "preparerFirstName",
-    "preparer_last_name": "preparerLastName",
-    "preparer_street_1": "preparerStreet1",
-    "preparer_street_2": "preparerStreet2",
-    "preparer_city": "preparerCity",
-    "preparer_state": "preparerState",
-    "preparer_zip": "preparerZip",
-    "preparer_agree": "preparerAgree",
-    "preparer2_first_name": "preparer2FirstName",
-    "preparer2_last_name": "preparer2LastName",
-    "preparer2_street_1": "preparer2Street1",
-    "preparer2_street_2": "preparer2Street2",
-    "preparer2_city": "preparer2City",
-    "preparer2_state": "preparer2State",
-    "preparer2_zip": "preparer2Zip",
-    "preparer2_agree": "preparer2Agree",
-    "preparer3_first_name": "preparer3FirstName",
-    "preparer3_last_name": "preparer3LastName",
-    "preparer3_street_1": "preparer3Street1",
-    "preparer3_street_2": "preparer3Street2",
-    "preparer3_city": "preparer3City",
-    "preparer3_state": "preparer3State",
-    "preparer3_zip": "preparer3Zip",
-    "preparer3_agree": "preparer3Agree",
-    "preparer4_first_name": "preparer4FirstName",
-    "preparer4_last_name": "preparer4LastName",
-    "preparer4_street_1": "preparer4Street1",
-    "preparer4_street_2": "preparer4Street2",
-    "preparer4_city": "preparer4City",
-    "preparer4_state": "preparer4State",
-    "preparer4_zip": "preparer4Zip",
-    "preparer4_agree": "preparer4Agree",
-  });
-});
 
 /** @internal */
 export type PutV1EmployeeFormSignRequestBody$Outbound = {
@@ -339,19 +247,6 @@ export const PutV1EmployeeFormSignRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeFormSignRequestBody$ {
-  /** @deprecated use `PutV1EmployeeFormSignRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1EmployeeFormSignRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeeFormSignRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1EmployeeFormSignRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeeFormSignRequestBody$Outbound` instead. */
-  export type Outbound = PutV1EmployeeFormSignRequestBody$Outbound;
-}
-
 export function putV1EmployeeFormSignRequestBodyToJSON(
   putV1EmployeeFormSignRequestBody: PutV1EmployeeFormSignRequestBody,
 ): string {
@@ -361,37 +256,6 @@ export function putV1EmployeeFormSignRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1EmployeeFormSignRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1EmployeeFormSignRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1EmployeeFormSignRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeeFormSignRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeeFormSignRequest$inboundSchema: z.ZodType<
-  PutV1EmployeeFormSignRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  form_id: z.string(),
-  "x-gusto-client-ip": z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutV1EmployeeFormSignRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-    "form_id": "formId",
-    "x-gusto-client-ip": "xGustoClientIp",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1EmployeeFormSignRequest$Outbound = {
@@ -423,19 +287,6 @@ export const PutV1EmployeeFormSignRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeFormSignRequest$ {
-  /** @deprecated use `PutV1EmployeeFormSignRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1EmployeeFormSignRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeeFormSignRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1EmployeeFormSignRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeeFormSignRequest$Outbound` instead. */
-  export type Outbound = PutV1EmployeeFormSignRequest$Outbound;
-}
-
 export function putV1EmployeeFormSignRequestToJSON(
   putV1EmployeeFormSignRequest: PutV1EmployeeFormSignRequest,
 ): string {
@@ -443,16 +294,6 @@ export function putV1EmployeeFormSignRequestToJSON(
     PutV1EmployeeFormSignRequest$outboundSchema.parse(
       putV1EmployeeFormSignRequest,
     ),
-  );
-}
-
-export function putV1EmployeeFormSignRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1EmployeeFormSignRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1EmployeeFormSignRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeeFormSignRequest' from JSON`,
   );
 }
 
@@ -470,50 +311,6 @@ export const PutV1EmployeeFormSignResponse$inboundSchema: z.ZodType<
     "Form": "form",
   });
 });
-
-/** @internal */
-export type PutV1EmployeeFormSignResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Form?: Form$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1EmployeeFormSignResponse$outboundSchema: z.ZodType<
-  PutV1EmployeeFormSignResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1EmployeeFormSignResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  form: Form$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    form: "Form",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeeFormSignResponse$ {
-  /** @deprecated use `PutV1EmployeeFormSignResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1EmployeeFormSignResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeeFormSignResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1EmployeeFormSignResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeeFormSignResponse$Outbound` instead. */
-  export type Outbound = PutV1EmployeeFormSignResponse$Outbound;
-}
-
-export function putV1EmployeeFormSignResponseToJSON(
-  putV1EmployeeFormSignResponse: PutV1EmployeeFormSignResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeeFormSignResponse$outboundSchema.parse(
-      putV1EmployeeFormSignResponse,
-    ),
-  );
-}
 
 export function putV1EmployeeFormSignResponseFromJSON(
   jsonString: string,

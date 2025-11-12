@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TaxRequirementsState,
   TaxRequirementsState$inboundSchema,
-  TaxRequirementsState$Outbound,
-  TaxRequirementsState$outboundSchema,
 } from "../components/taxrequirementsstate.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,24 +48,6 @@ export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    state: z.string(),
-    scheduling: z.boolean().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$Outbound = {
   company_uuid: string;
   state: string;
@@ -96,22 +73,6 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyUuidTaxRequirementsStateRequestToJSON(
   getV1CompaniesCompanyUuidTaxRequirementsStateRequest:
     GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
@@ -120,22 +81,6 @@ export function getV1CompaniesCompanyUuidTaxRequirementsStateRequestToJSON(
     GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$outboundSchema.parse(
       getV1CompaniesCompanyUuidTaxRequirementsStateRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyUuidTaxRequirementsStateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyUuidTaxRequirementsStateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyUuidTaxRequirementsStateRequest' from JSON`,
   );
 }
 
@@ -154,55 +99,6 @@ export const GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema
       "Tax-Requirements-State": "taxRequirementsState",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Tax-Requirements-State"?: TaxRequirementsState$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    taxRequirementsState: TaxRequirementsState$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      taxRequirementsState: "Tax-Requirements-State",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyUuidTaxRequirementsStateResponseToJSON(
-  getV1CompaniesCompanyUuidTaxRequirementsStateResponse:
-    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyUuidTaxRequirementsStateResponse$outboundSchema.parse(
-      getV1CompaniesCompanyUuidTaxRequirementsStateResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyUuidTaxRequirementsStateResponseFromJSON(
   jsonString: string,

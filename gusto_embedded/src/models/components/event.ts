@@ -59,21 +59,6 @@ export const ResourceType$inboundSchema: z.ZodNativeEnum<typeof ResourceType> =
   z.nativeEnum(ResourceType);
 
 /** @internal */
-export const ResourceType$outboundSchema: z.ZodNativeEnum<typeof ResourceType> =
-  ResourceType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResourceType$ {
-  /** @deprecated use `ResourceType$inboundSchema` instead. */
-  export const inboundSchema = ResourceType$inboundSchema;
-  /** @deprecated use `ResourceType$outboundSchema` instead. */
-  export const outboundSchema = ResourceType$outboundSchema;
-}
-
-/** @internal */
 export const Event$inboundSchema: z.ZodType<Event, z.ZodTypeDef, unknown> = z
   .object({
     uuid: z.string(),
@@ -92,57 +77,6 @@ export const Event$inboundSchema: z.ZodType<Event, z.ZodTypeDef, unknown> = z
       "entity_uuid": "entityUuid",
     });
   });
-
-/** @internal */
-export type Event$Outbound = {
-  uuid: string;
-  event_type?: string | undefined;
-  resource_type?: string | undefined;
-  resource_uuid?: string | undefined;
-  entity_type?: string | undefined;
-  entity_uuid?: string | undefined;
-  timestamp?: number | undefined;
-};
-
-/** @internal */
-export const Event$outboundSchema: z.ZodType<
-  Event$Outbound,
-  z.ZodTypeDef,
-  Event
-> = z.object({
-  uuid: z.string(),
-  eventType: z.string().optional(),
-  resourceType: ResourceType$outboundSchema.optional(),
-  resourceUuid: z.string().optional(),
-  entityType: z.string().optional(),
-  entityUuid: z.string().optional(),
-  timestamp: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    eventType: "event_type",
-    resourceType: "resource_type",
-    resourceUuid: "resource_uuid",
-    entityType: "entity_type",
-    entityUuid: "entity_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Event$ {
-  /** @deprecated use `Event$inboundSchema` instead. */
-  export const inboundSchema = Event$inboundSchema;
-  /** @deprecated use `Event$outboundSchema` instead. */
-  export const outboundSchema = Event$outboundSchema;
-  /** @deprecated use `Event$Outbound` instead. */
-  export type Outbound = Event$Outbound;
-}
-
-export function eventToJSON(event: Event): string {
-  return JSON.stringify(Event$outboundSchema.parse(event));
-}
 
 export function eventFromJSON(
   jsonString: string,

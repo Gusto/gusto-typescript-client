@@ -8,15 +8,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   PayrollBlockersError,
   PayrollBlockersError$inboundSchema,
-  PayrollBlockersError$Outbound,
-  PayrollBlockersError$outboundSchema,
 } from "./payrollblockerserror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 import {
   UnprocessableEntityErrorObject1,
   UnprocessableEntityErrorObject1$inboundSchema,
-  UnprocessableEntityErrorObject1$Outbound,
-  UnprocessableEntityErrorObject1$outboundSchema,
 } from "./unprocessableentityerrorobject1.js";
 
 /**
@@ -36,49 +32,6 @@ export const PostCompaniesPayrollSkipCompanyUuidResponseBody$inboundSchema:
     UnprocessableEntityErrorObject1$inboundSchema,
     PayrollBlockersError$inboundSchema,
   ]);
-
-/** @internal */
-export type PostCompaniesPayrollSkipCompanyUuidResponseBody$Outbound =
-  | UnprocessableEntityErrorObject1$Outbound
-  | PayrollBlockersError$Outbound;
-
-/** @internal */
-export const PostCompaniesPayrollSkipCompanyUuidResponseBody$outboundSchema:
-  z.ZodType<
-    PostCompaniesPayrollSkipCompanyUuidResponseBody$Outbound,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    UnprocessableEntityErrorObject1$outboundSchema,
-    PayrollBlockersError$outboundSchema,
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesPayrollSkipCompanyUuidResponseBody$ {
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidResponseBody$inboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidResponseBody$outboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponseBody$Outbound` instead. */
-  export type Outbound =
-    PostCompaniesPayrollSkipCompanyUuidResponseBody$Outbound;
-}
-
-export function postCompaniesPayrollSkipCompanyUuidResponseBodyToJSON(
-  postCompaniesPayrollSkipCompanyUuidResponseBody:
-    PostCompaniesPayrollSkipCompanyUuidResponseBody,
-): string {
-  return JSON.stringify(
-    PostCompaniesPayrollSkipCompanyUuidResponseBody$outboundSchema.parse(
-      postCompaniesPayrollSkipCompanyUuidResponseBody,
-    ),
-  );
-}
 
 export function postCompaniesPayrollSkipCompanyUuidResponseBodyFromJSON(
   jsonString: string,

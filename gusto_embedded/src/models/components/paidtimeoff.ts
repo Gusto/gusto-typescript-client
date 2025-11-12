@@ -74,21 +74,6 @@ export const Name$inboundSchema: z.ZodNativeEnum<typeof Name> = z.nativeEnum(
 );
 
 /** @internal */
-export const Name$outboundSchema: z.ZodNativeEnum<typeof Name> =
-  Name$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Name$ {
-  /** @deprecated use `Name$inboundSchema` instead. */
-  export const inboundSchema = Name$inboundSchema;
-  /** @deprecated use `Name$outboundSchema` instead. */
-  export const outboundSchema = Name$outboundSchema;
-}
-
-/** @internal */
 export const PaidTimeOff$inboundSchema: z.ZodType<
   PaidTimeOff,
   z.ZodTypeDef,
@@ -117,67 +102,6 @@ export const PaidTimeOff$inboundSchema: z.ZodType<
     "paid_at_termination": "paidAtTermination",
   });
 });
-
-/** @internal */
-export type PaidTimeOff$Outbound = {
-  name?: string | null | undefined;
-  policy_name?: string | null | undefined;
-  policy_uuid?: string | null | undefined;
-  accrual_unit?: string | null | undefined;
-  accrual_rate?: string | null | undefined;
-  accrual_method?: string | null | undefined;
-  accrual_period?: string | null | undefined;
-  accrual_balance?: string | null | undefined;
-  maximum_accrual_balance?: string | null | undefined;
-  paid_at_termination?: boolean | undefined;
-};
-
-/** @internal */
-export const PaidTimeOff$outboundSchema: z.ZodType<
-  PaidTimeOff$Outbound,
-  z.ZodTypeDef,
-  PaidTimeOff
-> = z.object({
-  name: z.nullable(Name$outboundSchema).optional(),
-  policyName: z.nullable(z.string()).optional(),
-  policyUuid: z.nullable(z.string()).optional(),
-  accrualUnit: z.nullable(z.string()).optional(),
-  accrualRate: z.nullable(z.string()).optional(),
-  accrualMethod: z.nullable(z.string()).optional(),
-  accrualPeriod: z.nullable(z.string()).optional(),
-  accrualBalance: z.nullable(z.string()).optional(),
-  maximumAccrualBalance: z.nullable(z.string()).optional(),
-  paidAtTermination: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    policyName: "policy_name",
-    policyUuid: "policy_uuid",
-    accrualUnit: "accrual_unit",
-    accrualRate: "accrual_rate",
-    accrualMethod: "accrual_method",
-    accrualPeriod: "accrual_period",
-    accrualBalance: "accrual_balance",
-    maximumAccrualBalance: "maximum_accrual_balance",
-    paidAtTermination: "paid_at_termination",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaidTimeOff$ {
-  /** @deprecated use `PaidTimeOff$inboundSchema` instead. */
-  export const inboundSchema = PaidTimeOff$inboundSchema;
-  /** @deprecated use `PaidTimeOff$outboundSchema` instead. */
-  export const outboundSchema = PaidTimeOff$outboundSchema;
-  /** @deprecated use `PaidTimeOff$Outbound` instead. */
-  export type Outbound = PaidTimeOff$Outbound;
-}
-
-export function paidTimeOffToJSON(paidTimeOff: PaidTimeOff): string {
-  return JSON.stringify(PaidTimeOff$outboundSchema.parse(paidTimeOff));
-}
 
 export function paidTimeOffFromJSON(
   jsonString: string,

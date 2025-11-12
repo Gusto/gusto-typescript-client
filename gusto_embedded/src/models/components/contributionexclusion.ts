@@ -41,7 +41,6 @@ export const ContributionExclusion$inboundSchema: z.ZodType<
     "contribution_type": "contributionType",
   });
 });
-
 /** @internal */
 export type ContributionExclusion$Outbound = {
   contribution_uuid: string;
@@ -65,19 +64,6 @@ export const ContributionExclusion$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContributionExclusion$ {
-  /** @deprecated use `ContributionExclusion$inboundSchema` instead. */
-  export const inboundSchema = ContributionExclusion$inboundSchema;
-  /** @deprecated use `ContributionExclusion$outboundSchema` instead. */
-  export const outboundSchema = ContributionExclusion$outboundSchema;
-  /** @deprecated use `ContributionExclusion$Outbound` instead. */
-  export type Outbound = ContributionExclusion$Outbound;
-}
-
 export function contributionExclusionToJSON(
   contributionExclusion: ContributionExclusion,
 ): string {
@@ -85,7 +71,6 @@ export function contributionExclusionToJSON(
     ContributionExclusion$outboundSchema.parse(contributionExclusion),
   );
 }
-
 export function contributionExclusionFromJSON(
   jsonString: string,
 ): SafeParseResult<ContributionExclusion, SDKValidationError> {

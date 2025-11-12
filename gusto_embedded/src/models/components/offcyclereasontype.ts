@@ -30,19 +30,3 @@ export type OffCycleReasonType = ClosedEnum<typeof OffCycleReasonType>;
 export const OffCycleReasonType$inboundSchema: z.ZodNativeEnum<
   typeof OffCycleReasonType
 > = z.nativeEnum(OffCycleReasonType);
-
-/** @internal */
-export const OffCycleReasonType$outboundSchema: z.ZodNativeEnum<
-  typeof OffCycleReasonType
-> = OffCycleReasonType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OffCycleReasonType$ {
-  /** @deprecated use `OffCycleReasonType$inboundSchema` instead. */
-  export const inboundSchema = OffCycleReasonType$inboundSchema;
-  /** @deprecated use `OffCycleReasonType$outboundSchema` instead. */
-  export const outboundSchema = OffCycleReasonType$outboundSchema;
-}

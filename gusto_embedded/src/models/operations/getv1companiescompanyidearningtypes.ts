@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EarningTypeList,
   EarningTypeList$inboundSchema,
-  EarningTypeList$Outbound,
-  EarningTypeList$outboundSchema,
 } from "../components/earningtypelist.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,19 +40,6 @@ export type GetV1CompaniesCompanyIdEarningTypesResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdEarningTypesRequest$inboundSchema:
-  z.ZodType<GetV1CompaniesCompanyIdEarningTypesRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      company_id: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    }).transform((v) => {
-      return remap$(v, {
-        "company_id": "companyId",
-        "X-Gusto-API-Version": "xGustoAPIVersion",
-      });
-    });
-
-/** @internal */
 export type GetV1CompaniesCompanyIdEarningTypesRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
@@ -79,21 +61,6 @@ export const GetV1CompaniesCompanyIdEarningTypesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdEarningTypesRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdEarningTypesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdEarningTypesRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdEarningTypesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdEarningTypesRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdEarningTypesRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdEarningTypesRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdEarningTypesRequestToJSON(
   getV1CompaniesCompanyIdEarningTypesRequest:
     GetV1CompaniesCompanyIdEarningTypesRequest,
@@ -102,22 +69,6 @@ export function getV1CompaniesCompanyIdEarningTypesRequestToJSON(
     GetV1CompaniesCompanyIdEarningTypesRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdEarningTypesRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdEarningTypesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdEarningTypesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdEarningTypesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyIdEarningTypesRequest' from JSON`,
   );
 }
 
@@ -136,54 +87,6 @@ export const GetV1CompaniesCompanyIdEarningTypesResponse$inboundSchema:
       "Earning-Type-List": "earningTypeList",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdEarningTypesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Earning-Type-List"?: EarningTypeList$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdEarningTypesResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdEarningTypesResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdEarningTypesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    earningTypeList: EarningTypeList$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      earningTypeList: "Earning-Type-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdEarningTypesResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdEarningTypesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdEarningTypesResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdEarningTypesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdEarningTypesResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdEarningTypesResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdEarningTypesResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdEarningTypesResponseToJSON(
-  getV1CompaniesCompanyIdEarningTypesResponse:
-    GetV1CompaniesCompanyIdEarningTypesResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdEarningTypesResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdEarningTypesResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdEarningTypesResponseFromJSON(
   jsonString: string,

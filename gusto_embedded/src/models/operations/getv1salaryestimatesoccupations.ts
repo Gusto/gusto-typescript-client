@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   BLSOccupation,
   BLSOccupation$inboundSchema,
-  BLSOccupation$Outbound,
-  BLSOccupation$outboundSchema,
 } from "../components/blsoccupation.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -60,19 +56,6 @@ export type GetV1SalaryEstimatesOccupationsResponse = {
 };
 
 /** @internal */
-export const GetV1SalaryEstimatesOccupationsSecurity$inboundSchema: z.ZodType<
-  GetV1SalaryEstimatesOccupationsSecurity,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  SystemAccessAuth: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "SystemAccessAuth": "systemAccessAuth",
-  });
-});
-
-/** @internal */
 export type GetV1SalaryEstimatesOccupationsSecurity$Outbound = {
   SystemAccessAuth: string;
 };
@@ -90,21 +73,6 @@ export const GetV1SalaryEstimatesOccupationsSecurity$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1SalaryEstimatesOccupationsSecurity$ {
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsSecurity$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1SalaryEstimatesOccupationsSecurity$inboundSchema;
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsSecurity$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1SalaryEstimatesOccupationsSecurity$outboundSchema;
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsSecurity$Outbound` instead. */
-  export type Outbound = GetV1SalaryEstimatesOccupationsSecurity$Outbound;
-}
-
 export function getV1SalaryEstimatesOccupationsSecurityToJSON(
   getV1SalaryEstimatesOccupationsSecurity:
     GetV1SalaryEstimatesOccupationsSecurity,
@@ -116,63 +84,11 @@ export function getV1SalaryEstimatesOccupationsSecurityToJSON(
   );
 }
 
-export function getV1SalaryEstimatesOccupationsSecurityFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1SalaryEstimatesOccupationsSecurity,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1SalaryEstimatesOccupationsSecurity$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1SalaryEstimatesOccupationsSecurity' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion
-  > = z.nativeEnum(GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion);
-
 /** @internal */
 export const GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion
-  > = GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1SalaryEstimatesOccupationsRequest$inboundSchema: z.ZodType<
-  GetV1SalaryEstimatesOccupationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2024-04-01",
-    ),
-  search: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
+  > = z.nativeEnum(GetV1SalaryEstimatesOccupationsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1SalaryEstimatesOccupationsRequest$Outbound = {
@@ -196,21 +112,6 @@ export const GetV1SalaryEstimatesOccupationsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1SalaryEstimatesOccupationsRequest$ {
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1SalaryEstimatesOccupationsRequest$inboundSchema;
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1SalaryEstimatesOccupationsRequest$outboundSchema;
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsRequest$Outbound` instead. */
-  export type Outbound = GetV1SalaryEstimatesOccupationsRequest$Outbound;
-}
-
 export function getV1SalaryEstimatesOccupationsRequestToJSON(
   getV1SalaryEstimatesOccupationsRequest:
     GetV1SalaryEstimatesOccupationsRequest,
@@ -219,17 +120,6 @@ export function getV1SalaryEstimatesOccupationsRequestToJSON(
     GetV1SalaryEstimatesOccupationsRequest$outboundSchema.parse(
       getV1SalaryEstimatesOccupationsRequest,
     ),
-  );
-}
-
-export function getV1SalaryEstimatesOccupationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1SalaryEstimatesOccupationsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1SalaryEstimatesOccupationsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1SalaryEstimatesOccupationsRequest' from JSON`,
   );
 }
 
@@ -247,53 +137,6 @@ export const GetV1SalaryEstimatesOccupationsResponse$inboundSchema: z.ZodType<
     "BLS-Occupations": "blsOccupations",
   });
 });
-
-/** @internal */
-export type GetV1SalaryEstimatesOccupationsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "BLS-Occupations"?: Array<BLSOccupation$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1SalaryEstimatesOccupationsResponse$outboundSchema: z.ZodType<
-  GetV1SalaryEstimatesOccupationsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1SalaryEstimatesOccupationsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  blsOccupations: z.array(BLSOccupation$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    blsOccupations: "BLS-Occupations",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1SalaryEstimatesOccupationsResponse$ {
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1SalaryEstimatesOccupationsResponse$inboundSchema;
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1SalaryEstimatesOccupationsResponse$outboundSchema;
-  /** @deprecated use `GetV1SalaryEstimatesOccupationsResponse$Outbound` instead. */
-  export type Outbound = GetV1SalaryEstimatesOccupationsResponse$Outbound;
-}
-
-export function getV1SalaryEstimatesOccupationsResponseToJSON(
-  getV1SalaryEstimatesOccupationsResponse:
-    GetV1SalaryEstimatesOccupationsResponse,
-): string {
-  return JSON.stringify(
-    GetV1SalaryEstimatesOccupationsResponse$outboundSchema.parse(
-      getV1SalaryEstimatesOccupationsResponse,
-    ),
-  );
-}
 
 export function getV1SalaryEstimatesOccupationsResponseFromJSON(
   jsonString: string,

@@ -7,17 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Employee,
-  Employee$inboundSchema,
-  Employee$Outbound,
-  Employee$outboundSchema,
-} from "../components/employee.js";
+import { Employee, Employee$inboundSchema } from "../components/employee.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -74,56 +67,10 @@ export type PutV1EmployeesResponse = {
 };
 
 /** @internal */
-export const PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema:
+export const PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<typeof PutV1EmployeesHeaderXGustoAPIVersion> = z.nativeEnum(
     PutV1EmployeesHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1EmployeesHeaderXGustoAPIVersion> =
-    PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PutV1EmployeesRequestBody$inboundSchema: z.ZodType<
-  PutV1EmployeesRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string(),
-  first_name: z.string().optional(),
-  middle_initial: z.nullable(z.string()).optional(),
-  last_name: z.string().optional(),
-  email: z.string().optional(),
-  date_of_birth: z.string().optional(),
-  ssn: z.string().optional(),
-  preferred_first_name: z.nullable(z.string()).optional(),
-  two_percent_shareholder: z.boolean().optional(),
-  work_email: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_name": "firstName",
-    "middle_initial": "middleInitial",
-    "last_name": "lastName",
-    "date_of_birth": "dateOfBirth",
-    "preferred_first_name": "preferredFirstName",
-    "two_percent_shareholder": "twoPercentShareholder",
-    "work_email": "workEmail",
-  });
-});
 
 /** @internal */
 export type PutV1EmployeesRequestBody$Outbound = {
@@ -167,19 +114,6 @@ export const PutV1EmployeesRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesRequestBody$ {
-  /** @deprecated use `PutV1EmployeesRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1EmployeesRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeesRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1EmployeesRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeesRequestBody$Outbound` instead. */
-  export type Outbound = PutV1EmployeesRequestBody$Outbound;
-}
-
 export function putV1EmployeesRequestBodyToJSON(
   putV1EmployeesRequestBody: PutV1EmployeesRequestBody,
 ): string {
@@ -187,34 +121,6 @@ export function putV1EmployeesRequestBodyToJSON(
     PutV1EmployeesRequestBody$outboundSchema.parse(putV1EmployeesRequestBody),
   );
 }
-
-export function putV1EmployeesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1EmployeesRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1EmployeesRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeesRequest$inboundSchema: z.ZodType<
-  PutV1EmployeesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": PutV1EmployeesHeaderXGustoAPIVersion$inboundSchema
-    .default("2025-06-15"),
-  employee_id: z.string(),
-  RequestBody: z.lazy(() => PutV1EmployeesRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "employee_id": "employeeId",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1EmployeesRequest$Outbound = {
@@ -242,34 +148,11 @@ export const PutV1EmployeesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesRequest$ {
-  /** @deprecated use `PutV1EmployeesRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1EmployeesRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeesRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1EmployeesRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeesRequest$Outbound` instead. */
-  export type Outbound = PutV1EmployeesRequest$Outbound;
-}
-
 export function putV1EmployeesRequestToJSON(
   putV1EmployeesRequest: PutV1EmployeesRequest,
 ): string {
   return JSON.stringify(
     PutV1EmployeesRequest$outboundSchema.parse(putV1EmployeesRequest),
-  );
-}
-
-export function putV1EmployeesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1EmployeesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1EmployeesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeesRequest' from JSON`,
   );
 }
 
@@ -287,48 +170,6 @@ export const PutV1EmployeesResponse$inboundSchema: z.ZodType<
     "Employee": "employee",
   });
 });
-
-/** @internal */
-export type PutV1EmployeesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Employee?: Employee$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1EmployeesResponse$outboundSchema: z.ZodType<
-  PutV1EmployeesResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1EmployeesResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  employee: Employee$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    employee: "Employee",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesResponse$ {
-  /** @deprecated use `PutV1EmployeesResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1EmployeesResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeesResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1EmployeesResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeesResponse$Outbound` instead. */
-  export type Outbound = PutV1EmployeesResponse$Outbound;
-}
-
-export function putV1EmployeesResponseToJSON(
-  putV1EmployeesResponse: PutV1EmployeesResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesResponse$outboundSchema.parse(putV1EmployeesResponse),
-  );
-}
 
 export function putV1EmployeesResponseFromJSON(
   jsonString: string,

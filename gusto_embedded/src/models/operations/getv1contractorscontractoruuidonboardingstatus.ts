@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorOnboardingStatus,
   ContractorOnboardingStatus$inboundSchema,
-  ContractorOnboardingStatus$Outbound,
-  ContractorOnboardingStatus$outboundSchema,
 } from "../components/contractoronboardingstatus.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetV1ContractorsContractorUuidOnboardingStatusResponse = {
 };
 
 /** @internal */
-export const GetV1ContractorsContractorUuidOnboardingStatusRequest$inboundSchema:
-  z.ZodType<
-    GetV1ContractorsContractorUuidOnboardingStatusRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    contractor_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "contractor_uuid": "contractorUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1ContractorsContractorUuidOnboardingStatusRequest$Outbound = {
   contractor_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,22 +61,6 @@ export const GetV1ContractorsContractorUuidOnboardingStatusRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorsContractorUuidOnboardingStatusRequest$ {
-  /** @deprecated use `GetV1ContractorsContractorUuidOnboardingStatusRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1ContractorsContractorUuidOnboardingStatusRequest$inboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidOnboardingStatusRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1ContractorsContractorUuidOnboardingStatusRequest$outboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidOnboardingStatusRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1ContractorsContractorUuidOnboardingStatusRequest$Outbound;
-}
-
 export function getV1ContractorsContractorUuidOnboardingStatusRequestToJSON(
   getV1ContractorsContractorUuidOnboardingStatusRequest:
     GetV1ContractorsContractorUuidOnboardingStatusRequest,
@@ -106,22 +69,6 @@ export function getV1ContractorsContractorUuidOnboardingStatusRequestToJSON(
     GetV1ContractorsContractorUuidOnboardingStatusRequest$outboundSchema.parse(
       getV1ContractorsContractorUuidOnboardingStatusRequest,
     ),
-  );
-}
-
-export function getV1ContractorsContractorUuidOnboardingStatusRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1ContractorsContractorUuidOnboardingStatusRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1ContractorsContractorUuidOnboardingStatusRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1ContractorsContractorUuidOnboardingStatusRequest' from JSON`,
   );
 }
 
@@ -141,58 +88,6 @@ export const GetV1ContractorsContractorUuidOnboardingStatusResponse$inboundSchem
       "Contractor-Onboarding-Status": "contractorOnboardingStatus",
     });
   });
-
-/** @internal */
-export type GetV1ContractorsContractorUuidOnboardingStatusResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-Onboarding-Status"?:
-    | ContractorOnboardingStatus$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const GetV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema:
-  z.ZodType<
-    GetV1ContractorsContractorUuidOnboardingStatusResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1ContractorsContractorUuidOnboardingStatusResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractorOnboardingStatus: ContractorOnboardingStatus$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractorOnboardingStatus: "Contractor-Onboarding-Status",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorsContractorUuidOnboardingStatusResponse$ {
-  /** @deprecated use `GetV1ContractorsContractorUuidOnboardingStatusResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1ContractorsContractorUuidOnboardingStatusResponse$inboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidOnboardingStatusResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1ContractorsContractorUuidOnboardingStatusResponse$Outbound;
-}
-
-export function getV1ContractorsContractorUuidOnboardingStatusResponseToJSON(
-  getV1ContractorsContractorUuidOnboardingStatusResponse:
-    GetV1ContractorsContractorUuidOnboardingStatusResponse,
-): string {
-  return JSON.stringify(
-    GetV1ContractorsContractorUuidOnboardingStatusResponse$outboundSchema.parse(
-      getV1ContractorsContractorUuidOnboardingStatusResponse,
-    ),
-  );
-}
 
 export function getV1ContractorsContractorUuidOnboardingStatusResponseFromJSON(
   jsonString: string,

@@ -20,34 +20,6 @@ export const Flow$inboundSchema: z.ZodType<Flow, z.ZodTypeDef, unknown> = z
     url: z.string().optional(),
   });
 
-/** @internal */
-export type Flow$Outbound = {
-  url?: string | undefined;
-};
-
-/** @internal */
-export const Flow$outboundSchema: z.ZodType<Flow$Outbound, z.ZodTypeDef, Flow> =
-  z.object({
-    url: z.string().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Flow$ {
-  /** @deprecated use `Flow$inboundSchema` instead. */
-  export const inboundSchema = Flow$inboundSchema;
-  /** @deprecated use `Flow$outboundSchema` instead. */
-  export const outboundSchema = Flow$outboundSchema;
-  /** @deprecated use `Flow$Outbound` instead. */
-  export type Outbound = Flow$Outbound;
-}
-
-export function flowToJSON(flow: Flow): string {
-  return JSON.stringify(Flow$outboundSchema.parse(flow));
-}
-
 export function flowFromJSON(
   jsonString: string,
 ): SafeParseResult<Flow, SDKValidationError> {

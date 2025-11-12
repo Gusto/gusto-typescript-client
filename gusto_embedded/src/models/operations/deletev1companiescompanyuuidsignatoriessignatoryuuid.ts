@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,24 +34,6 @@ export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest = {
 export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    signatory_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "signatory_uuid": "signatoryUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound =
@@ -82,22 +61,6 @@ export const DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound;
-}
-
 export function deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestToJSON(
   deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest:
     DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
@@ -105,21 +68,6 @@ export function deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestToJSO
   return JSON.stringify(
     DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSchema
       .parse(deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest),
-  );
-}
-
-export function deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest' from JSON`,
   );
 }
 
@@ -136,52 +84,6 @@ export const DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboun
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound;
-}
-
-export function deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponseToJSON(
-  deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse:
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema
-      .parse(deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse),
-  );
-}
 
 export function deleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponseFromJSON(
   jsonString: string,

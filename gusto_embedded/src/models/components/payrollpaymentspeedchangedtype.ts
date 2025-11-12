@@ -54,58 +54,6 @@ export const PayrollPaymentSpeedChangedType$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollPaymentSpeedChangedType$Outbound = {
-  original_check_date?: string | undefined;
-  current_check_date?: string | undefined;
-  original_debit_date?: string | undefined;
-  current_debit_date?: string | undefined;
-  reason?: string | undefined;
-};
-
-/** @internal */
-export const PayrollPaymentSpeedChangedType$outboundSchema: z.ZodType<
-  PayrollPaymentSpeedChangedType$Outbound,
-  z.ZodTypeDef,
-  PayrollPaymentSpeedChangedType
-> = z.object({
-  originalCheckDate: z.string().optional(),
-  currentCheckDate: z.string().optional(),
-  originalDebitDate: z.string().optional(),
-  currentDebitDate: z.string().optional(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    originalCheckDate: "original_check_date",
-    currentCheckDate: "current_check_date",
-    originalDebitDate: "original_debit_date",
-    currentDebitDate: "current_debit_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollPaymentSpeedChangedType$ {
-  /** @deprecated use `PayrollPaymentSpeedChangedType$inboundSchema` instead. */
-  export const inboundSchema = PayrollPaymentSpeedChangedType$inboundSchema;
-  /** @deprecated use `PayrollPaymentSpeedChangedType$outboundSchema` instead. */
-  export const outboundSchema = PayrollPaymentSpeedChangedType$outboundSchema;
-  /** @deprecated use `PayrollPaymentSpeedChangedType$Outbound` instead. */
-  export type Outbound = PayrollPaymentSpeedChangedType$Outbound;
-}
-
-export function payrollPaymentSpeedChangedTypeToJSON(
-  payrollPaymentSpeedChangedType: PayrollPaymentSpeedChangedType,
-): string {
-  return JSON.stringify(
-    PayrollPaymentSpeedChangedType$outboundSchema.parse(
-      payrollPaymentSpeedChangedType,
-    ),
-  );
-}
-
 export function payrollPaymentSpeedChangedTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollPaymentSpeedChangedType, SDKValidationError> {

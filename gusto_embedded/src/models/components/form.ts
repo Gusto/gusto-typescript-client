@@ -69,55 +69,6 @@ export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
     });
   });
 
-/** @internal */
-export type Form$Outbound = {
-  uuid: string;
-  name?: string | undefined;
-  title?: string | undefined;
-  description?: string | undefined;
-  draft?: boolean | undefined;
-  year?: number | null | undefined;
-  quarter?: number | null | undefined;
-  requires_signing?: boolean | undefined;
-  document_content_type?: string | null | undefined;
-};
-
-/** @internal */
-export const Form$outboundSchema: z.ZodType<Form$Outbound, z.ZodTypeDef, Form> =
-  z.object({
-    uuid: z.string(),
-    name: z.string().optional(),
-    title: z.string().optional(),
-    description: z.string().optional(),
-    draft: z.boolean().optional(),
-    year: z.nullable(z.number().int()).optional(),
-    quarter: z.nullable(z.number().int()).optional(),
-    requiresSigning: z.boolean().optional(),
-    documentContentType: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requiresSigning: "requires_signing",
-      documentContentType: "document_content_type",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Form$ {
-  /** @deprecated use `Form$inboundSchema` instead. */
-  export const inboundSchema = Form$inboundSchema;
-  /** @deprecated use `Form$outboundSchema` instead. */
-  export const outboundSchema = Form$outboundSchema;
-  /** @deprecated use `Form$Outbound` instead. */
-  export type Outbound = Form$Outbound;
-}
-
-export function formToJSON(form: Form): string {
-  return JSON.stringify(Form$outboundSchema.parse(form));
-}
-
 export function formFromJSON(
   jsonString: string,
 ): SafeParseResult<Form, SDKValidationError> {

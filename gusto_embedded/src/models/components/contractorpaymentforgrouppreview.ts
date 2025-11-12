@@ -113,69 +113,15 @@ export const ContractorPaymentForGroupPreviewPaymentMethod$inboundSchema:
     .nativeEnum(ContractorPaymentForGroupPreviewPaymentMethod);
 
 /** @internal */
-export const ContractorPaymentForGroupPreviewPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentForGroupPreviewPaymentMethod> =
-    ContractorPaymentForGroupPreviewPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentForGroupPreviewPaymentMethod$ {
-  /** @deprecated use `ContractorPaymentForGroupPreviewPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentForGroupPreviewPaymentMethod$inboundSchema;
-  /** @deprecated use `ContractorPaymentForGroupPreviewPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentForGroupPreviewPaymentMethod$outboundSchema;
-}
-
-/** @internal */
 export const ContractorPaymentForGroupPreviewStatus$inboundSchema:
   z.ZodNativeEnum<typeof ContractorPaymentForGroupPreviewStatus> = z.nativeEnum(
     ContractorPaymentForGroupPreviewStatus,
   );
 
 /** @internal */
-export const ContractorPaymentForGroupPreviewStatus$outboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentForGroupPreviewStatus> =
-    ContractorPaymentForGroupPreviewStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentForGroupPreviewStatus$ {
-  /** @deprecated use `ContractorPaymentForGroupPreviewStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentForGroupPreviewStatus$inboundSchema;
-  /** @deprecated use `ContractorPaymentForGroupPreviewStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentForGroupPreviewStatus$outboundSchema;
-}
-
-/** @internal */
 export const ContractorPaymentForGroupPreviewWageType$inboundSchema:
   z.ZodNativeEnum<typeof ContractorPaymentForGroupPreviewWageType> = z
     .nativeEnum(ContractorPaymentForGroupPreviewWageType);
-
-/** @internal */
-export const ContractorPaymentForGroupPreviewWageType$outboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentForGroupPreviewWageType> =
-    ContractorPaymentForGroupPreviewWageType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentForGroupPreviewWageType$ {
-  /** @deprecated use `ContractorPaymentForGroupPreviewWageType$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentForGroupPreviewWageType$inboundSchema;
-  /** @deprecated use `ContractorPaymentForGroupPreviewWageType$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentForGroupPreviewWageType$outboundSchema;
-}
 
 /** @internal */
 export const ContractorPaymentForGroupPreview$inboundSchema: z.ZodType<
@@ -206,75 +152,6 @@ export const ContractorPaymentForGroupPreview$inboundSchema: z.ZodType<
     "wage_total": "wageTotal",
   });
 });
-
-/** @internal */
-export type ContractorPaymentForGroupPreview$Outbound = {
-  uuid?: string | null | undefined;
-  contractor_uuid?: string | undefined;
-  bonus?: string | undefined;
-  hours?: string | undefined;
-  payment_method?: string | undefined;
-  reimbursement?: string | undefined;
-  status?: string | undefined;
-  hourly_rate?: string | undefined;
-  may_cancel?: boolean | undefined;
-  wage?: string | undefined;
-  wage_type?: string | undefined;
-  wage_total?: string | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentForGroupPreview$outboundSchema: z.ZodType<
-  ContractorPaymentForGroupPreview$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentForGroupPreview
-> = z.object({
-  uuid: z.nullable(z.string()).optional(),
-  contractorUuid: z.string().optional(),
-  bonus: z.string().optional(),
-  hours: z.string().optional(),
-  paymentMethod: ContractorPaymentForGroupPreviewPaymentMethod$outboundSchema
-    .optional(),
-  reimbursement: z.string().optional(),
-  status: ContractorPaymentForGroupPreviewStatus$outboundSchema.optional(),
-  hourlyRate: z.string().optional(),
-  mayCancel: z.boolean().optional(),
-  wage: z.string().optional(),
-  wageType: ContractorPaymentForGroupPreviewWageType$outboundSchema.optional(),
-  wageTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorUuid: "contractor_uuid",
-    paymentMethod: "payment_method",
-    hourlyRate: "hourly_rate",
-    mayCancel: "may_cancel",
-    wageType: "wage_type",
-    wageTotal: "wage_total",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentForGroupPreview$ {
-  /** @deprecated use `ContractorPaymentForGroupPreview$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentForGroupPreview$inboundSchema;
-  /** @deprecated use `ContractorPaymentForGroupPreview$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentForGroupPreview$outboundSchema;
-  /** @deprecated use `ContractorPaymentForGroupPreview$Outbound` instead. */
-  export type Outbound = ContractorPaymentForGroupPreview$Outbound;
-}
-
-export function contractorPaymentForGroupPreviewToJSON(
-  contractorPaymentForGroupPreview: ContractorPaymentForGroupPreview,
-): string {
-  return JSON.stringify(
-    ContractorPaymentForGroupPreview$outboundSchema.parse(
-      contractorPaymentForGroupPreview,
-    ),
-  );
-}
 
 export function contractorPaymentForGroupPreviewFromJSON(
   jsonString: string,

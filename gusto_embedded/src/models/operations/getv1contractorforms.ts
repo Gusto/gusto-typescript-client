@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Form1099,
-  Form1099$inboundSchema,
-  Form1099$Outbound,
-  Form1099$outboundSchema,
-} from "../components/form1099.js";
+import { Form1099, Form1099$inboundSchema } from "../components/form1099.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +37,6 @@ export type GetV1ContractorFormsResponse = {
 };
 
 /** @internal */
-export const GetV1ContractorFormsRequest$inboundSchema: z.ZodType<
-  GetV1ContractorFormsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_uuid": "contractorUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1ContractorFormsRequest$Outbound = {
   contractor_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,19 +57,6 @@ export const GetV1ContractorFormsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorFormsRequest$ {
-  /** @deprecated use `GetV1ContractorFormsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1ContractorFormsRequest$inboundSchema;
-  /** @deprecated use `GetV1ContractorFormsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1ContractorFormsRequest$outboundSchema;
-  /** @deprecated use `GetV1ContractorFormsRequest$Outbound` instead. */
-  export type Outbound = GetV1ContractorFormsRequest$Outbound;
-}
-
 export function getV1ContractorFormsRequestToJSON(
   getV1ContractorFormsRequest: GetV1ContractorFormsRequest,
 ): string {
@@ -100,16 +64,6 @@ export function getV1ContractorFormsRequestToJSON(
     GetV1ContractorFormsRequest$outboundSchema.parse(
       getV1ContractorFormsRequest,
     ),
-  );
-}
-
-export function getV1ContractorFormsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1ContractorFormsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1ContractorFormsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1ContractorFormsRequest' from JSON`,
   );
 }
 
@@ -127,50 +81,6 @@ export const GetV1ContractorFormsResponse$inboundSchema: z.ZodType<
     "Form_1099s": "form1099s",
   });
 });
-
-/** @internal */
-export type GetV1ContractorFormsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Form_1099s?: Array<Form1099$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1ContractorFormsResponse$outboundSchema: z.ZodType<
-  GetV1ContractorFormsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1ContractorFormsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  form1099s: z.array(Form1099$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    form1099s: "Form_1099s",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorFormsResponse$ {
-  /** @deprecated use `GetV1ContractorFormsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1ContractorFormsResponse$inboundSchema;
-  /** @deprecated use `GetV1ContractorFormsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1ContractorFormsResponse$outboundSchema;
-  /** @deprecated use `GetV1ContractorFormsResponse$Outbound` instead. */
-  export type Outbound = GetV1ContractorFormsResponse$Outbound;
-}
-
-export function getV1ContractorFormsResponseToJSON(
-  getV1ContractorFormsResponse: GetV1ContractorFormsResponse,
-): string {
-  return JSON.stringify(
-    GetV1ContractorFormsResponse$outboundSchema.parse(
-      getV1ContractorFormsResponse,
-    ),
-  );
-}
 
 export function getV1ContractorFormsResponseFromJSON(
   jsonString: string,

@@ -9,24 +9,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorPaymentSummary,
   ContractorPaymentSummary$inboundSchema,
-  ContractorPaymentSummary$Outbound,
-  ContractorPaymentSummary$outboundSchema,
 } from "../components/contractorpaymentsummary.js";
 import {
   ContractorPaymentSummaryByDates,
   ContractorPaymentSummaryByDates$inboundSchema,
-  ContractorPaymentSummaryByDates$Outbound,
-  ContractorPaymentSummaryByDates$outboundSchema,
 } from "../components/contractorpaymentsummarybydates.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -85,32 +78,6 @@ export type GetV1CompaniesCompanyIdContractorPaymentsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdContractorPaymentsRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdContractorPaymentsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    start_date: z.string(),
-    end_date: z.string(),
-    contractor_uuid: z.string().optional(),
-    group_by_date: z.boolean().optional(),
-    page: z.number().int().optional(),
-    per: z.number().int().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "start_date": "startDate",
-      "end_date": "endDate",
-      "contractor_uuid": "contractorUuid",
-      "group_by_date": "groupByDate",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentsRequest$Outbound = {
   company_id: string;
   start_date: string;
@@ -148,22 +115,6 @@ export const GetV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdContractorPaymentsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdContractorPaymentsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdContractorPaymentsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdContractorPaymentsRequestToJSON(
   getV1CompaniesCompanyIdContractorPaymentsRequest:
     GetV1CompaniesCompanyIdContractorPaymentsRequest,
@@ -172,22 +123,6 @@ export function getV1CompaniesCompanyIdContractorPaymentsRequestToJSON(
     GetV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdContractorPaymentsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdContractorPaymentsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdContractorPaymentsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdContractorPaymentsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyIdContractorPaymentsRequest' from JSON`,
   );
 }
 
@@ -201,49 +136,6 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponseBody$inboundSchema
     ContractorPaymentSummary$inboundSchema,
     ContractorPaymentSummaryByDates$inboundSchema,
   ]);
-
-/** @internal */
-export type GetV1CompaniesCompanyIdContractorPaymentsResponseBody$Outbound =
-  | ContractorPaymentSummary$Outbound
-  | ContractorPaymentSummaryByDates$Outbound;
-
-/** @internal */
-export const GetV1CompaniesCompanyIdContractorPaymentsResponseBody$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdContractorPaymentsResponseBody$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdContractorPaymentsResponseBody
-  > = z.union([
-    ContractorPaymentSummary$outboundSchema,
-    ContractorPaymentSummaryByDates$outboundSchema,
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdContractorPaymentsResponseBody$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdContractorPaymentsResponseBody$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdContractorPaymentsResponseBody$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsResponseBody$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdContractorPaymentsResponseBody$Outbound;
-}
-
-export function getV1CompaniesCompanyIdContractorPaymentsResponseBodyToJSON(
-  getV1CompaniesCompanyIdContractorPaymentsResponseBody:
-    GetV1CompaniesCompanyIdContractorPaymentsResponseBody,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdContractorPaymentsResponseBody$outboundSchema.parse(
-      getV1CompaniesCompanyIdContractorPaymentsResponseBody,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdContractorPaymentsResponseBodyFromJSON(
   jsonString: string,
@@ -278,60 +170,6 @@ export const GetV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdContractorPaymentsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  oneOf?:
-    | ContractorPaymentSummary$Outbound
-    | ContractorPaymentSummaryByDates$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdContractorPaymentsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdContractorPaymentsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    oneOf: z.union([
-      ContractorPaymentSummary$outboundSchema,
-      ContractorPaymentSummaryByDates$outboundSchema,
-    ]).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdContractorPaymentsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdContractorPaymentsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdContractorPaymentsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdContractorPaymentsResponseToJSON(
-  getV1CompaniesCompanyIdContractorPaymentsResponse:
-    GetV1CompaniesCompanyIdContractorPaymentsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdContractorPaymentsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdContractorPaymentsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdContractorPaymentsResponseFromJSON(
   jsonString: string,

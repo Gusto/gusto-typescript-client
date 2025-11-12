@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
-  Department$Outbound,
-  Department$outboundSchema,
 } from "../components/department.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetDepartmentResponse = {
 };
 
 /** @internal */
-export const GetDepartmentRequest$inboundSchema: z.ZodType<
-  GetDepartmentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  department_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "department_uuid": "departmentUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetDepartmentRequest$Outbound = {
   department_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,34 +60,11 @@ export const GetDepartmentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetDepartmentRequest$ {
-  /** @deprecated use `GetDepartmentRequest$inboundSchema` instead. */
-  export const inboundSchema = GetDepartmentRequest$inboundSchema;
-  /** @deprecated use `GetDepartmentRequest$outboundSchema` instead. */
-  export const outboundSchema = GetDepartmentRequest$outboundSchema;
-  /** @deprecated use `GetDepartmentRequest$Outbound` instead. */
-  export type Outbound = GetDepartmentRequest$Outbound;
-}
-
 export function getDepartmentRequestToJSON(
   getDepartmentRequest: GetDepartmentRequest,
 ): string {
   return JSON.stringify(
     GetDepartmentRequest$outboundSchema.parse(getDepartmentRequest),
-  );
-}
-
-export function getDepartmentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetDepartmentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetDepartmentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetDepartmentRequest' from JSON`,
   );
 }
 
@@ -125,48 +82,6 @@ export const GetDepartmentResponse$inboundSchema: z.ZodType<
     "Department": "department",
   });
 });
-
-/** @internal */
-export type GetDepartmentResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Department?: Department$Outbound | undefined;
-};
-
-/** @internal */
-export const GetDepartmentResponse$outboundSchema: z.ZodType<
-  GetDepartmentResponse$Outbound,
-  z.ZodTypeDef,
-  GetDepartmentResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  department: Department$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    department: "Department",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetDepartmentResponse$ {
-  /** @deprecated use `GetDepartmentResponse$inboundSchema` instead. */
-  export const inboundSchema = GetDepartmentResponse$inboundSchema;
-  /** @deprecated use `GetDepartmentResponse$outboundSchema` instead. */
-  export const outboundSchema = GetDepartmentResponse$outboundSchema;
-  /** @deprecated use `GetDepartmentResponse$Outbound` instead. */
-  export type Outbound = GetDepartmentResponse$Outbound;
-}
-
-export function getDepartmentResponseToJSON(
-  getDepartmentResponse: GetDepartmentResponse,
-): string {
-  return JSON.stringify(
-    GetDepartmentResponse$outboundSchema.parse(getDepartmentResponse),
-  );
-}
 
 export function getDepartmentResponseFromJSON(
   jsonString: string,

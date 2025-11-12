@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Garnishment,
   Garnishment$inboundSchema,
-  Garnishment$Outbound,
-  Garnishment$outboundSchema,
 } from "../components/garnishment.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetV1GarnishmentsGarnishmentIdResponse = {
 };
 
 /** @internal */
-export const GetV1GarnishmentsGarnishmentIdRequest$inboundSchema: z.ZodType<
-  GetV1GarnishmentsGarnishmentIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  garnishment_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "garnishment_id": "garnishmentId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1GarnishmentsGarnishmentIdRequest$Outbound = {
   garnishment_id: string;
   "X-Gusto-API-Version": string;
@@ -80,21 +60,6 @@ export const GetV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1GarnishmentsGarnishmentIdRequest$ {
-  /** @deprecated use `GetV1GarnishmentsGarnishmentIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1GarnishmentsGarnishmentIdRequest$inboundSchema;
-  /** @deprecated use `GetV1GarnishmentsGarnishmentIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1GarnishmentsGarnishmentIdRequest$outboundSchema;
-  /** @deprecated use `GetV1GarnishmentsGarnishmentIdRequest$Outbound` instead. */
-  export type Outbound = GetV1GarnishmentsGarnishmentIdRequest$Outbound;
-}
-
 export function getV1GarnishmentsGarnishmentIdRequestToJSON(
   getV1GarnishmentsGarnishmentIdRequest: GetV1GarnishmentsGarnishmentIdRequest,
 ): string {
@@ -102,17 +67,6 @@ export function getV1GarnishmentsGarnishmentIdRequestToJSON(
     GetV1GarnishmentsGarnishmentIdRequest$outboundSchema.parse(
       getV1GarnishmentsGarnishmentIdRequest,
     ),
-  );
-}
-
-export function getV1GarnishmentsGarnishmentIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1GarnishmentsGarnishmentIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1GarnishmentsGarnishmentIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1GarnishmentsGarnishmentIdRequest' from JSON`,
   );
 }
 
@@ -130,53 +84,6 @@ export const GetV1GarnishmentsGarnishmentIdResponse$inboundSchema: z.ZodType<
     "Garnishment": "garnishment",
   });
 });
-
-/** @internal */
-export type GetV1GarnishmentsGarnishmentIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Garnishment?: Garnishment$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1GarnishmentsGarnishmentIdResponse$outboundSchema: z.ZodType<
-  GetV1GarnishmentsGarnishmentIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1GarnishmentsGarnishmentIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  garnishment: Garnishment$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    garnishment: "Garnishment",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1GarnishmentsGarnishmentIdResponse$ {
-  /** @deprecated use `GetV1GarnishmentsGarnishmentIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1GarnishmentsGarnishmentIdResponse$inboundSchema;
-  /** @deprecated use `GetV1GarnishmentsGarnishmentIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1GarnishmentsGarnishmentIdResponse$outboundSchema;
-  /** @deprecated use `GetV1GarnishmentsGarnishmentIdResponse$Outbound` instead. */
-  export type Outbound = GetV1GarnishmentsGarnishmentIdResponse$Outbound;
-}
-
-export function getV1GarnishmentsGarnishmentIdResponseToJSON(
-  getV1GarnishmentsGarnishmentIdResponse:
-    GetV1GarnishmentsGarnishmentIdResponse,
-): string {
-  return JSON.stringify(
-    GetV1GarnishmentsGarnishmentIdResponse$outboundSchema.parse(
-      getV1GarnishmentsGarnishmentIdResponse,
-    ),
-  );
-}
 
 export function getV1GarnishmentsGarnishmentIdResponseFromJSON(
   jsonString: string,

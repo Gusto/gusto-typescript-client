@@ -10,7 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleFrequencyCreateUpdate,
   PayScheduleFrequencyCreateUpdate$inboundSchema,
-  PayScheduleFrequencyCreateUpdate$outboundSchema,
 } from "./payschedulefrequencycreateupdate.js";
 
 /**
@@ -85,68 +84,6 @@ export const PayScheduleCreateUpdate$inboundSchema: z.ZodType<
     "auto_pilot": "autoPilot",
   });
 });
-
-/** @internal */
-export type PayScheduleCreateUpdate$Outbound = {
-  uuid: string;
-  frequency?: string | undefined;
-  anchor_pay_date?: string | undefined;
-  anchor_end_of_pay_period?: string | undefined;
-  day_1?: number | null | undefined;
-  day_2?: number | null | undefined;
-  name?: string | null | undefined;
-  custom_name?: string | undefined;
-  auto_pilot?: boolean | undefined;
-  active?: boolean | undefined;
-};
-
-/** @internal */
-export const PayScheduleCreateUpdate$outboundSchema: z.ZodType<
-  PayScheduleCreateUpdate$Outbound,
-  z.ZodTypeDef,
-  PayScheduleCreateUpdate
-> = z.object({
-  uuid: z.string(),
-  frequency: PayScheduleFrequencyCreateUpdate$outboundSchema.optional(),
-  anchorPayDate: z.string().optional(),
-  anchorEndOfPayPeriod: z.string().optional(),
-  day1: z.nullable(z.number().int()).optional(),
-  day2: z.nullable(z.number().int()).optional(),
-  name: z.nullable(z.string()).optional(),
-  customName: z.string().optional(),
-  autoPilot: z.boolean().optional(),
-  active: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    anchorPayDate: "anchor_pay_date",
-    anchorEndOfPayPeriod: "anchor_end_of_pay_period",
-    day1: "day_1",
-    day2: "day_2",
-    customName: "custom_name",
-    autoPilot: "auto_pilot",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleCreateUpdate$ {
-  /** @deprecated use `PayScheduleCreateUpdate$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleCreateUpdate$inboundSchema;
-  /** @deprecated use `PayScheduleCreateUpdate$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleCreateUpdate$outboundSchema;
-  /** @deprecated use `PayScheduleCreateUpdate$Outbound` instead. */
-  export type Outbound = PayScheduleCreateUpdate$Outbound;
-}
-
-export function payScheduleCreateUpdateToJSON(
-  payScheduleCreateUpdate: PayScheduleCreateUpdate,
-): string {
-  return JSON.stringify(
-    PayScheduleCreateUpdate$outboundSchema.parse(payScheduleCreateUpdate),
-  );
-}
 
 export function payScheduleCreateUpdateFromJSON(
   jsonString: string,

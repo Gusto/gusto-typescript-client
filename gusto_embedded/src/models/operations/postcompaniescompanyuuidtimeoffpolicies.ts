@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TimeOffPolicy,
   TimeOffPolicy$inboundSchema,
-  TimeOffPolicy$Outbound,
-  TimeOffPolicy$outboundSchema,
 } from "../components/timeoffpolicy.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -116,59 +111,9 @@ export type PostCompaniesCompanyUuidTimeOffPoliciesResponse = {
 };
 
 /** @internal */
-export const PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$inboundSchema:
-  z.ZodNativeEnum<typeof PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod> =
-    z.nativeEnum(PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod);
-
-/** @internal */
 export const PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$outboundSchema:
   z.ZodNativeEnum<typeof PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod> =
-    PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$ {
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$outboundSchema;
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$inboundSchema:
-  z.ZodType<
-    PostCompaniesCompanyUuidTimeOffPoliciesRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    name: z.string(),
-    policy_type: z.string(),
-    accrual_method:
-      PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod$inboundSchema,
-    accrual_rate: z.string().optional(),
-    accrual_rate_unit: z.string().optional(),
-    paid_out_on_termination: z.boolean().optional(),
-    accrual_waiting_period_days: z.number().int().optional(),
-    carryover_limit_hours: z.string().optional(),
-    max_accrual_hours_per_year: z.string().optional(),
-    max_hours: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "policy_type": "policyType",
-      "accrual_method": "accrualMethod",
-      "accrual_rate": "accrualRate",
-      "accrual_rate_unit": "accrualRateUnit",
-      "paid_out_on_termination": "paidOutOnTermination",
-      "accrual_waiting_period_days": "accrualWaitingPeriodDays",
-      "carryover_limit_hours": "carryoverLimitHours",
-      "max_accrual_hours_per_year": "maxAccrualHoursPerYear",
-      "max_hours": "maxHours",
-    });
-  });
+    z.nativeEnum(PostCompaniesCompanyUuidTimeOffPoliciesAccrualMethod);
 
 /** @internal */
 export type PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$Outbound = {
@@ -216,22 +161,6 @@ export const PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$ {
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$Outbound;
-}
-
 export function postCompaniesCompanyUuidTimeOffPoliciesRequestBodyToJSON(
   postCompaniesCompanyUuidTimeOffPoliciesRequestBody:
     PostCompaniesCompanyUuidTimeOffPoliciesRequestBody,
@@ -242,42 +171,6 @@ export function postCompaniesCompanyUuidTimeOffPoliciesRequestBodyToJSON(
     ),
   );
 }
-
-export function postCompaniesCompanyUuidTimeOffPoliciesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostCompaniesCompanyUuidTimeOffPoliciesRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostCompaniesCompanyUuidTimeOffPoliciesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema:
-  z.ZodType<
-    PostCompaniesCompanyUuidTimeOffPoliciesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostCompaniesCompanyUuidTimeOffPoliciesRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostCompaniesCompanyUuidTimeOffPoliciesRequest$Outbound = {
@@ -306,22 +199,6 @@ export const PostCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidTimeOffPoliciesRequest$ {
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesRequest$Outbound` instead. */
-  export type Outbound =
-    PostCompaniesCompanyUuidTimeOffPoliciesRequest$Outbound;
-}
-
 export function postCompaniesCompanyUuidTimeOffPoliciesRequestToJSON(
   postCompaniesCompanyUuidTimeOffPoliciesRequest:
     PostCompaniesCompanyUuidTimeOffPoliciesRequest,
@@ -330,22 +207,6 @@ export function postCompaniesCompanyUuidTimeOffPoliciesRequestToJSON(
     PostCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema.parse(
       postCompaniesCompanyUuidTimeOffPoliciesRequest,
     ),
-  );
-}
-
-export function postCompaniesCompanyUuidTimeOffPoliciesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostCompaniesCompanyUuidTimeOffPoliciesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostCompaniesCompanyUuidTimeOffPoliciesRequest' from JSON`,
   );
 }
 
@@ -364,55 +225,6 @@ export const PostCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema:
       "Time-Off-Policy": "timeOffPolicy",
     });
   });
-
-/** @internal */
-export type PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Time-Off-Policy"?: TimeOffPolicy$Outbound | undefined;
-};
-
-/** @internal */
-export const PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema:
-  z.ZodType<
-    PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound,
-    z.ZodTypeDef,
-    PostCompaniesCompanyUuidTimeOffPoliciesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    timeOffPolicy: TimeOffPolicy$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      timeOffPolicy: "Time-Off-Policy",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidTimeOffPoliciesResponse$ {
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound` instead. */
-  export type Outbound =
-    PostCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound;
-}
-
-export function postCompaniesCompanyUuidTimeOffPoliciesResponseToJSON(
-  postCompaniesCompanyUuidTimeOffPoliciesResponse:
-    PostCompaniesCompanyUuidTimeOffPoliciesResponse,
-): string {
-  return JSON.stringify(
-    PostCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema.parse(
-      postCompaniesCompanyUuidTimeOffPoliciesResponse,
-    ),
-  );
-}
 
 export function postCompaniesCompanyUuidTimeOffPoliciesResponseFromJSON(
   jsonString: string,

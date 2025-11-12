@@ -11,14 +11,10 @@ import { RFCDate } from "../../types/rfcdate.js";
 import {
   EmployeeWorkAddress,
   EmployeeWorkAddress$inboundSchema,
-  EmployeeWorkAddress$Outbound,
-  EmployeeWorkAddress$outboundSchema,
 } from "../components/employeeworkaddress.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -70,48 +66,12 @@ export type PostV1EmployeesEmployeeIdWorkAddressesResponse = {
 };
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema:
+export const PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
   > = z.nativeEnum(
     PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion
-  > =
-    PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdWorkAddressesRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    location_uuid: z.string().optional(),
-    effective_date: z.string().transform(v => new RFCDate(v)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "location_uuid": "locationUuid",
-      "effective_date": "effectiveDate",
-    });
-  });
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdWorkAddressesRequestBody$Outbound = {
@@ -136,22 +96,6 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdWorkAddressesRequestBody$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesRequestBody$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdWorkAddressesRequestBody$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdWorkAddressesRequestBodyToJSON(
   postV1EmployeesEmployeeIdWorkAddressesRequestBody:
     PostV1EmployeesEmployeeIdWorkAddressesRequestBody,
@@ -162,44 +106,6 @@ export function postV1EmployeesEmployeeIdWorkAddressesRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1EmployeesEmployeeIdWorkAddressesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdWorkAddressesRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdWorkAddressesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdWorkAddressesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version":
-      PostV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostV1EmployeesEmployeeIdWorkAddressesRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdWorkAddressesRequest$Outbound = {
@@ -230,21 +136,6 @@ export const PostV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdWorkAddressesRequest$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesRequest$Outbound` instead. */
-  export type Outbound = PostV1EmployeesEmployeeIdWorkAddressesRequest$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdWorkAddressesRequestToJSON(
   postV1EmployeesEmployeeIdWorkAddressesRequest:
     PostV1EmployeesEmployeeIdWorkAddressesRequest,
@@ -253,22 +144,6 @@ export function postV1EmployeesEmployeeIdWorkAddressesRequestToJSON(
     PostV1EmployeesEmployeeIdWorkAddressesRequest$outboundSchema.parse(
       postV1EmployeesEmployeeIdWorkAddressesRequest,
     ),
-  );
-}
-
-export function postV1EmployeesEmployeeIdWorkAddressesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdWorkAddressesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdWorkAddressesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdWorkAddressesRequest' from JSON`,
   );
 }
 
@@ -287,55 +162,6 @@ export const PostV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema:
       "Employee-Work-Address": "employeeWorkAddress",
     });
   });
-
-/** @internal */
-export type PostV1EmployeesEmployeeIdWorkAddressesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Work-Address"?: EmployeeWorkAddress$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdWorkAddressesResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdWorkAddressesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeWorkAddress: EmployeeWorkAddress$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeWorkAddress: "Employee-Work-Address",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdWorkAddressesResponse$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesResponse$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdWorkAddressesResponse$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdWorkAddressesResponse$Outbound;
-}
-
-export function postV1EmployeesEmployeeIdWorkAddressesResponseToJSON(
-  postV1EmployeesEmployeeIdWorkAddressesResponse:
-    PostV1EmployeesEmployeeIdWorkAddressesResponse,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdWorkAddressesResponse$outboundSchema.parse(
-      postV1EmployeesEmployeeIdWorkAddressesResponse,
-    ),
-  );
-}
 
 export function postV1EmployeesEmployeeIdWorkAddressesResponseFromJSON(
   jsonString: string,

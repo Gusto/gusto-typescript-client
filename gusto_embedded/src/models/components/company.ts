@@ -11,8 +11,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CompanyAddress,
   CompanyAddress$inboundSchema,
-  CompanyAddress$Outbound,
-  CompanyAddress$outboundSchema,
 } from "./companyaddress.js";
 
 /**
@@ -290,39 +288,9 @@ export const EntityType$inboundSchema: z.ZodNativeEnum<typeof EntityType> = z
   .nativeEnum(EntityType);
 
 /** @internal */
-export const EntityType$outboundSchema: z.ZodNativeEnum<typeof EntityType> =
-  EntityType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntityType$ {
-  /** @deprecated use `EntityType$inboundSchema` instead. */
-  export const inboundSchema = EntityType$inboundSchema;
-  /** @deprecated use `EntityType$outboundSchema` instead. */
-  export const outboundSchema = EntityType$outboundSchema;
-}
-
-/** @internal */
 export const Tier$inboundSchema: z.ZodNativeEnum<typeof Tier> = z.nativeEnum(
   Tier,
 );
-
-/** @internal */
-export const Tier$outboundSchema: z.ZodNativeEnum<typeof Tier> =
-  Tier$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Tier$ {
-  /** @deprecated use `Tier$inboundSchema` instead. */
-  export const inboundSchema = Tier$inboundSchema;
-  /** @deprecated use `Tier$outboundSchema` instead. */
-  export const outboundSchema = Tier$outboundSchema;
-}
 
 /** @internal */
 export const CompanyStatus$inboundSchema: z.ZodNativeEnum<
@@ -330,60 +298,13 @@ export const CompanyStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CompanyStatus);
 
 /** @internal */
-export const CompanyStatus$outboundSchema: z.ZodNativeEnum<
-  typeof CompanyStatus
-> = CompanyStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyStatus$ {
-  /** @deprecated use `CompanyStatus$inboundSchema` instead. */
-  export const inboundSchema = CompanyStatus$inboundSchema;
-  /** @deprecated use `CompanyStatus$outboundSchema` instead. */
-  export const outboundSchema = CompanyStatus$outboundSchema;
-}
-
-/** @internal */
 export const PayScheduleType$inboundSchema: z.ZodNativeEnum<
   typeof PayScheduleType
 > = z.nativeEnum(PayScheduleType);
 
 /** @internal */
-export const PayScheduleType$outboundSchema: z.ZodNativeEnum<
-  typeof PayScheduleType
-> = PayScheduleType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleType$ {
-  /** @deprecated use `PayScheduleType$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleType$inboundSchema;
-  /** @deprecated use `PayScheduleType$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleType$outboundSchema;
-}
-
-/** @internal */
 export const FundingType$inboundSchema: z.ZodNativeEnum<typeof FundingType> = z
   .nativeEnum(FundingType);
-
-/** @internal */
-export const FundingType$outboundSchema: z.ZodNativeEnum<typeof FundingType> =
-  FundingType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FundingType$ {
-  /** @deprecated use `FundingType$inboundSchema` instead. */
-  export const inboundSchema = FundingType$inboundSchema;
-  /** @deprecated use `FundingType$outboundSchema` instead. */
-  export const outboundSchema = FundingType$outboundSchema;
-}
 
 /** @internal */
 export const Hourly$inboundSchema: z.ZodType<Hourly, z.ZodTypeDef, unknown> = z
@@ -391,39 +312,6 @@ export const Hourly$inboundSchema: z.ZodType<Hourly, z.ZodTypeDef, unknown> = z
     name: z.string().optional(),
     multiple: z.number().optional(),
   });
-
-/** @internal */
-export type Hourly$Outbound = {
-  name?: string | undefined;
-  multiple?: number | undefined;
-};
-
-/** @internal */
-export const Hourly$outboundSchema: z.ZodType<
-  Hourly$Outbound,
-  z.ZodTypeDef,
-  Hourly
-> = z.object({
-  name: z.string().optional(),
-  multiple: z.number().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Hourly$ {
-  /** @deprecated use `Hourly$inboundSchema` instead. */
-  export const inboundSchema = Hourly$inboundSchema;
-  /** @deprecated use `Hourly$outboundSchema` instead. */
-  export const outboundSchema = Hourly$outboundSchema;
-  /** @deprecated use `Hourly$Outbound` instead. */
-  export type Outbound = Hourly$Outbound;
-}
-
-export function hourlyToJSON(hourly: Hourly): string {
-  return JSON.stringify(Hourly$outboundSchema.parse(hourly));
-}
 
 export function hourlyFromJSON(
   jsonString: string,
@@ -440,37 +328,6 @@ export const Fixed$inboundSchema: z.ZodType<Fixed, z.ZodTypeDef, unknown> = z
   .object({
     name: z.string().optional(),
   });
-
-/** @internal */
-export type Fixed$Outbound = {
-  name?: string | undefined;
-};
-
-/** @internal */
-export const Fixed$outboundSchema: z.ZodType<
-  Fixed$Outbound,
-  z.ZodTypeDef,
-  Fixed
-> = z.object({
-  name: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Fixed$ {
-  /** @deprecated use `Fixed$inboundSchema` instead. */
-  export const inboundSchema = Fixed$inboundSchema;
-  /** @deprecated use `Fixed$outboundSchema` instead. */
-  export const outboundSchema = Fixed$outboundSchema;
-  /** @deprecated use `Fixed$Outbound` instead. */
-  export type Outbound = Fixed$Outbound;
-}
-
-export function fixedToJSON(fixed: Fixed): string {
-  return JSON.stringify(Fixed$outboundSchema.parse(fixed));
-}
 
 export function fixedFromJSON(
   jsonString: string,
@@ -490,41 +347,6 @@ export const CompanyPaidTimeOff$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
 });
-
-/** @internal */
-export type CompanyPaidTimeOff$Outbound = {
-  name?: string | undefined;
-};
-
-/** @internal */
-export const CompanyPaidTimeOff$outboundSchema: z.ZodType<
-  CompanyPaidTimeOff$Outbound,
-  z.ZodTypeDef,
-  CompanyPaidTimeOff
-> = z.object({
-  name: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyPaidTimeOff$ {
-  /** @deprecated use `CompanyPaidTimeOff$inboundSchema` instead. */
-  export const inboundSchema = CompanyPaidTimeOff$inboundSchema;
-  /** @deprecated use `CompanyPaidTimeOff$outboundSchema` instead. */
-  export const outboundSchema = CompanyPaidTimeOff$outboundSchema;
-  /** @deprecated use `CompanyPaidTimeOff$Outbound` instead. */
-  export type Outbound = CompanyPaidTimeOff$Outbound;
-}
-
-export function companyPaidTimeOffToJSON(
-  companyPaidTimeOff: CompanyPaidTimeOff,
-): string {
-  return JSON.stringify(
-    CompanyPaidTimeOff$outboundSchema.parse(companyPaidTimeOff),
-  );
-}
 
 export function companyPaidTimeOffFromJSON(
   jsonString: string,
@@ -551,46 +373,6 @@ export const Compensations$inboundSchema: z.ZodType<
     "paid_time_off": "paidTimeOff",
   });
 });
-
-/** @internal */
-export type Compensations$Outbound = {
-  hourly?: Array<Hourly$Outbound> | undefined;
-  fixed?: Array<Fixed$Outbound> | undefined;
-  paid_time_off?: Array<CompanyPaidTimeOff$Outbound> | undefined;
-};
-
-/** @internal */
-export const Compensations$outboundSchema: z.ZodType<
-  Compensations$Outbound,
-  z.ZodTypeDef,
-  Compensations
-> = z.object({
-  hourly: z.array(z.lazy(() => Hourly$outboundSchema)).optional(),
-  fixed: z.array(z.lazy(() => Fixed$outboundSchema)).optional(),
-  paidTimeOff: z.array(z.lazy(() => CompanyPaidTimeOff$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    paidTimeOff: "paid_time_off",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Compensations$ {
-  /** @deprecated use `Compensations$inboundSchema` instead. */
-  export const inboundSchema = Compensations$inboundSchema;
-  /** @deprecated use `Compensations$outboundSchema` instead. */
-  export const outboundSchema = Compensations$outboundSchema;
-  /** @deprecated use `Compensations$Outbound` instead. */
-  export type Outbound = Compensations$Outbound;
-}
-
-export function compensationsToJSON(compensations: Compensations): string {
-  return JSON.stringify(Compensations$outboundSchema.parse(compensations));
-}
 
 export function compensationsFromJSON(
   jsonString: string,
@@ -620,56 +402,6 @@ export const CompanyHomeAddress$inboundSchema: z.ZodType<
     "street_2": "street2",
   });
 });
-
-/** @internal */
-export type CompanyHomeAddress$Outbound = {
-  street_1?: string | undefined;
-  street_2?: string | null | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country?: string | undefined;
-};
-
-/** @internal */
-export const CompanyHomeAddress$outboundSchema: z.ZodType<
-  CompanyHomeAddress$Outbound,
-  z.ZodTypeDef,
-  CompanyHomeAddress
-> = z.object({
-  street1: z.string().optional(),
-  street2: z.nullable(z.string()).optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyHomeAddress$ {
-  /** @deprecated use `CompanyHomeAddress$inboundSchema` instead. */
-  export const inboundSchema = CompanyHomeAddress$inboundSchema;
-  /** @deprecated use `CompanyHomeAddress$outboundSchema` instead. */
-  export const outboundSchema = CompanyHomeAddress$outboundSchema;
-  /** @deprecated use `CompanyHomeAddress$Outbound` instead. */
-  export type Outbound = CompanyHomeAddress$Outbound;
-}
-
-export function companyHomeAddressToJSON(
-  companyHomeAddress: CompanyHomeAddress,
-): string {
-  return JSON.stringify(
-    CompanyHomeAddress$outboundSchema.parse(companyHomeAddress),
-  );
-}
 
 export function companyHomeAddressFromJSON(
   jsonString: string,
@@ -703,60 +435,6 @@ export const PrimarySignatory$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PrimarySignatory$Outbound = {
-  uuid?: string | undefined;
-  first_name?: string | undefined;
-  middle_initial?: string | null | undefined;
-  last_name?: string | undefined;
-  phone?: string | undefined;
-  email?: string | undefined;
-  home_address?: CompanyHomeAddress$Outbound | undefined;
-};
-
-/** @internal */
-export const PrimarySignatory$outboundSchema: z.ZodType<
-  PrimarySignatory$Outbound,
-  z.ZodTypeDef,
-  PrimarySignatory
-> = z.object({
-  uuid: z.string().optional(),
-  firstName: z.string().optional(),
-  middleInitial: z.nullable(z.string()).optional(),
-  lastName: z.string().optional(),
-  phone: z.string().optional(),
-  email: z.string().optional(),
-  homeAddress: z.lazy(() => CompanyHomeAddress$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    middleInitial: "middle_initial",
-    lastName: "last_name",
-    homeAddress: "home_address",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrimarySignatory$ {
-  /** @deprecated use `PrimarySignatory$inboundSchema` instead. */
-  export const inboundSchema = PrimarySignatory$inboundSchema;
-  /** @deprecated use `PrimarySignatory$outboundSchema` instead. */
-  export const outboundSchema = PrimarySignatory$outboundSchema;
-  /** @deprecated use `PrimarySignatory$Outbound` instead. */
-  export type Outbound = PrimarySignatory$Outbound;
-}
-
-export function primarySignatoryToJSON(
-  primarySignatory: PrimarySignatory,
-): string {
-  return JSON.stringify(
-    PrimarySignatory$outboundSchema.parse(primarySignatory),
-  );
-}
-
 export function primarySignatoryFromJSON(
   jsonString: string,
 ): SafeParseResult<PrimarySignatory, SDKValidationError> {
@@ -783,52 +461,6 @@ export const PrimaryPayrollAdmin$inboundSchema: z.ZodType<
     "last_name": "lastName",
   });
 });
-
-/** @internal */
-export type PrimaryPayrollAdmin$Outbound = {
-  first_name?: string | undefined;
-  last_name?: string | undefined;
-  phone?: string | null | undefined;
-  email?: string | undefined;
-};
-
-/** @internal */
-export const PrimaryPayrollAdmin$outboundSchema: z.ZodType<
-  PrimaryPayrollAdmin$Outbound,
-  z.ZodTypeDef,
-  PrimaryPayrollAdmin
-> = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  phone: z.nullable(z.string()).optional(),
-  email: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    lastName: "last_name",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrimaryPayrollAdmin$ {
-  /** @deprecated use `PrimaryPayrollAdmin$inboundSchema` instead. */
-  export const inboundSchema = PrimaryPayrollAdmin$inboundSchema;
-  /** @deprecated use `PrimaryPayrollAdmin$outboundSchema` instead. */
-  export const outboundSchema = PrimaryPayrollAdmin$outboundSchema;
-  /** @deprecated use `PrimaryPayrollAdmin$Outbound` instead. */
-  export type Outbound = PrimaryPayrollAdmin$Outbound;
-}
-
-export function primaryPayrollAdminToJSON(
-  primaryPayrollAdmin: PrimaryPayrollAdmin,
-): string {
-  return JSON.stringify(
-    PrimaryPayrollAdmin$outboundSchema.parse(primaryPayrollAdmin),
-  );
-}
 
 export function primaryPayrollAdminFromJSON(
   jsonString: string,
@@ -878,87 +510,6 @@ export const Company$inboundSchema: z.ZodType<Company, z.ZodTypeDef, unknown> =
       "primary_payroll_admin": "primaryPayrollAdmin",
     });
   });
-
-/** @internal */
-export type Company$Outbound = {
-  ein?: string | undefined;
-  entity_type?: string | null | undefined;
-  contractor_only?: boolean | undefined;
-  tier?: string | null | undefined;
-  is_suspended?: boolean | undefined;
-  company_status?: string | undefined;
-  uuid: string;
-  name?: string | undefined;
-  slug?: string | undefined;
-  trade_name?: string | null | undefined;
-  is_partner_managed?: boolean | undefined;
-  pay_schedule_type?: string | null | undefined;
-  join_date?: string | null | undefined;
-  funding_type?: string | null | undefined;
-  locations?: Array<CompanyAddress$Outbound> | undefined;
-  compensations?: Compensations$Outbound | undefined;
-  primary_signatory?: PrimarySignatory$Outbound | null | undefined;
-  primary_payroll_admin?: PrimaryPayrollAdmin$Outbound | undefined;
-};
-
-/** @internal */
-export const Company$outboundSchema: z.ZodType<
-  Company$Outbound,
-  z.ZodTypeDef,
-  Company
-> = z.object({
-  ein: z.string().optional(),
-  entityType: z.nullable(EntityType$outboundSchema).optional(),
-  contractorOnly: z.boolean().optional(),
-  tier: z.nullable(Tier$outboundSchema).optional(),
-  isSuspended: z.boolean().optional(),
-  companyStatus: CompanyStatus$outboundSchema.optional(),
-  uuid: z.string(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  tradeName: z.nullable(z.string()).optional(),
-  isPartnerManaged: z.boolean().optional(),
-  payScheduleType: z.nullable(PayScheduleType$outboundSchema).optional(),
-  joinDate: z.nullable(z.string()).optional(),
-  fundingType: z.nullable(FundingType$outboundSchema).optional(),
-  locations: z.array(CompanyAddress$outboundSchema).optional(),
-  compensations: z.lazy(() => Compensations$outboundSchema).optional(),
-  primarySignatory: z.nullable(z.lazy(() => PrimarySignatory$outboundSchema))
-    .optional(),
-  primaryPayrollAdmin: z.lazy(() => PrimaryPayrollAdmin$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityType: "entity_type",
-    contractorOnly: "contractor_only",
-    isSuspended: "is_suspended",
-    companyStatus: "company_status",
-    tradeName: "trade_name",
-    isPartnerManaged: "is_partner_managed",
-    payScheduleType: "pay_schedule_type",
-    joinDate: "join_date",
-    fundingType: "funding_type",
-    primarySignatory: "primary_signatory",
-    primaryPayrollAdmin: "primary_payroll_admin",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Company$ {
-  /** @deprecated use `Company$inboundSchema` instead. */
-  export const inboundSchema = Company$inboundSchema;
-  /** @deprecated use `Company$outboundSchema` instead. */
-  export const outboundSchema = Company$outboundSchema;
-  /** @deprecated use `Company$Outbound` instead. */
-  export type Outbound = Company$Outbound;
-}
-
-export function companyToJSON(company: Company): string {
-  return JSON.stringify(Company$outboundSchema.parse(company));
-}
 
 export function companyFromJSON(
   jsonString: string,

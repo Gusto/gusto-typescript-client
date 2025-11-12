@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -56,52 +54,12 @@ export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse = {
 };
 
 /** @internal */
-export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$inboundSchema:
+export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion
   > = z.nativeEnum(
     GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion
-  > =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$inboundSchema:
-  z.ZodType<
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    "X-Gusto-API-Version":
-      GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-    payroll_id: z.string(),
-    employee_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "payroll_id": "payrollId",
-      "employee_id": "employeeId",
-    });
-  });
 
 /** @internal */
 export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$Outbound =
@@ -131,22 +89,6 @@ export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$ {
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$inboundSchema;
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$outboundSchema;
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$Outbound;
-}
-
 export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestToJSON(
   getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest:
     GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
@@ -154,21 +96,6 @@ export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestToJSO
   return JSON.stringify(
     GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$outboundSchema
       .parse(getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest),
-  );
-}
-
-export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest' from JSON`,
   );
 }
 
@@ -187,55 +114,6 @@ export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboun
       "response-stream": "responseStream",
     });
   });
-
-/** @internal */
-export type GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "response-stream"?: ReadableStream<Uint8Array> | undefined;
-  };
-
-/** @internal */
-export const GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema:
-  z.ZodType<
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    responseStream: z.instanceof(ReadableStream<Uint8Array>).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      responseStream: "response-stream",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$ {
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$inboundSchema;
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema;
-  /** @deprecated use `GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$Outbound;
-}
-
-export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponseToJSON(
-  getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse:
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
-): string {
-  return JSON.stringify(
-    GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse$outboundSchema
-      .parse(getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse),
-  );
-}
 
 export function getV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponseFromJSON(
   jsonString: string,

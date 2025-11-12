@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeOnboardingStatus,
   EmployeeOnboardingStatus$inboundSchema,
-  EmployeeOnboardingStatus$Outbound,
-  EmployeeOnboardingStatus$outboundSchema,
 } from "../components/employeeonboardingstatus.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -83,7 +79,7 @@ export type PutV1EmployeesEmployeeIdOnboardingStatusResponse = {
 };
 
 /** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema:
+export const PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
   > = z.nativeEnum(
@@ -91,59 +87,9 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inbo
   );
 
 /** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
-  > =
-    PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const OnboardingStatus$inboundSchema: z.ZodNativeEnum<
-  typeof OnboardingStatus
-> = z.nativeEnum(OnboardingStatus);
-
-/** @internal */
 export const OnboardingStatus$outboundSchema: z.ZodNativeEnum<
   typeof OnboardingStatus
-> = OnboardingStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OnboardingStatus$ {
-  /** @deprecated use `OnboardingStatus$inboundSchema` instead. */
-  export const inboundSchema = OnboardingStatus$inboundSchema;
-  /** @deprecated use `OnboardingStatus$outboundSchema` instead. */
-  export const outboundSchema = OnboardingStatus$outboundSchema;
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdOnboardingStatusRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    onboarding_status: OnboardingStatus$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "onboarding_status": "onboardingStatus",
-    });
-  });
+> = z.nativeEnum(OnboardingStatus);
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$Outbound = {
@@ -164,22 +110,6 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdOnboardingStatusRequestBodyToJSON(
   putV1EmployeesEmployeeIdOnboardingStatusRequestBody:
     PutV1EmployeesEmployeeIdOnboardingStatusRequestBody,
@@ -190,44 +120,6 @@ export function putV1EmployeesEmployeeIdOnboardingStatusRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1EmployeesEmployeeIdOnboardingStatusRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdOnboardingStatusRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingStatusRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdOnboardingStatusRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    "X-Gusto-API-Version":
-      PutV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-    employee_id: z.string(),
-    RequestBody: z.lazy(() =>
-      PutV1EmployeesEmployeeIdOnboardingStatusRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "employee_id": "employeeId",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdOnboardingStatusRequest$Outbound = {
@@ -258,22 +150,6 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdOnboardingStatusRequest$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdOnboardingStatusRequest$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdOnboardingStatusRequestToJSON(
   putV1EmployeesEmployeeIdOnboardingStatusRequest:
     PutV1EmployeesEmployeeIdOnboardingStatusRequest,
@@ -282,22 +158,6 @@ export function putV1EmployeesEmployeeIdOnboardingStatusRequestToJSON(
     PutV1EmployeesEmployeeIdOnboardingStatusRequest$outboundSchema.parse(
       putV1EmployeesEmployeeIdOnboardingStatusRequest,
     ),
-  );
-}
-
-export function putV1EmployeesEmployeeIdOnboardingStatusRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdOnboardingStatusRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdOnboardingStatusRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeesEmployeeIdOnboardingStatusRequest' from JSON`,
   );
 }
 
@@ -317,56 +177,6 @@ export const PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema:
       "Employee-Onboarding-Status": "employeeOnboardingStatus",
     });
   });
-
-/** @internal */
-export type PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Onboarding-Status"?: EmployeeOnboardingStatus$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdOnboardingStatusResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeOnboardingStatus: EmployeeOnboardingStatus$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeOnboardingStatus: "Employee-Onboarding-Status",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdOnboardingStatusResponse$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdOnboardingStatusResponse$Outbound;
-}
-
-export function putV1EmployeesEmployeeIdOnboardingStatusResponseToJSON(
-  putV1EmployeesEmployeeIdOnboardingStatusResponse:
-    PutV1EmployeesEmployeeIdOnboardingStatusResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdOnboardingStatusResponse$outboundSchema.parse(
-      putV1EmployeesEmployeeIdOnboardingStatusResponse,
-    ),
-  );
-}
 
 export function putV1EmployeesEmployeeIdOnboardingStatusResponseFromJSON(
   jsonString: string,

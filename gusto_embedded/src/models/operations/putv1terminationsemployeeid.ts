@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   Termination,
   Termination$inboundSchema,
-  Termination$Outbound,
-  Termination$outboundSchema,
 } from "../components/termination.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,22 +56,6 @@ export type PutV1TerminationsEmployeeIdResponse = {
 };
 
 /** @internal */
-export const PutV1TerminationsEmployeeIdRequestBody$inboundSchema: z.ZodType<
-  PutV1TerminationsEmployeeIdRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string(),
-  effective_date: z.string(),
-  run_termination_payroll: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "effective_date": "effectiveDate",
-    "run_termination_payroll": "runTerminationPayroll",
-  });
-});
-
-/** @internal */
 export type PutV1TerminationsEmployeeIdRequestBody$Outbound = {
   version: string;
   effective_date: string;
@@ -99,21 +78,6 @@ export const PutV1TerminationsEmployeeIdRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TerminationsEmployeeIdRequestBody$ {
-  /** @deprecated use `PutV1TerminationsEmployeeIdRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TerminationsEmployeeIdRequestBody$inboundSchema;
-  /** @deprecated use `PutV1TerminationsEmployeeIdRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TerminationsEmployeeIdRequestBody$outboundSchema;
-  /** @deprecated use `PutV1TerminationsEmployeeIdRequestBody$Outbound` instead. */
-  export type Outbound = PutV1TerminationsEmployeeIdRequestBody$Outbound;
-}
-
 export function putV1TerminationsEmployeeIdRequestBodyToJSON(
   putV1TerminationsEmployeeIdRequestBody:
     PutV1TerminationsEmployeeIdRequestBody,
@@ -124,36 +88,6 @@ export function putV1TerminationsEmployeeIdRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1TerminationsEmployeeIdRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1TerminationsEmployeeIdRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1TerminationsEmployeeIdRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TerminationsEmployeeIdRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1TerminationsEmployeeIdRequest$inboundSchema: z.ZodType<
-  PutV1TerminationsEmployeeIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutV1TerminationsEmployeeIdRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1TerminationsEmployeeIdRequest$Outbound = {
@@ -181,20 +115,6 @@ export const PutV1TerminationsEmployeeIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TerminationsEmployeeIdRequest$ {
-  /** @deprecated use `PutV1TerminationsEmployeeIdRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1TerminationsEmployeeIdRequest$inboundSchema;
-  /** @deprecated use `PutV1TerminationsEmployeeIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TerminationsEmployeeIdRequest$outboundSchema;
-  /** @deprecated use `PutV1TerminationsEmployeeIdRequest$Outbound` instead. */
-  export type Outbound = PutV1TerminationsEmployeeIdRequest$Outbound;
-}
-
 export function putV1TerminationsEmployeeIdRequestToJSON(
   putV1TerminationsEmployeeIdRequest: PutV1TerminationsEmployeeIdRequest,
 ): string {
@@ -202,17 +122,6 @@ export function putV1TerminationsEmployeeIdRequestToJSON(
     PutV1TerminationsEmployeeIdRequest$outboundSchema.parse(
       putV1TerminationsEmployeeIdRequest,
     ),
-  );
-}
-
-export function putV1TerminationsEmployeeIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1TerminationsEmployeeIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1TerminationsEmployeeIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TerminationsEmployeeIdRequest' from JSON`,
   );
 }
 
@@ -230,52 +139,6 @@ export const PutV1TerminationsEmployeeIdResponse$inboundSchema: z.ZodType<
     "Termination": "termination",
   });
 });
-
-/** @internal */
-export type PutV1TerminationsEmployeeIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Termination?: Termination$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1TerminationsEmployeeIdResponse$outboundSchema: z.ZodType<
-  PutV1TerminationsEmployeeIdResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1TerminationsEmployeeIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  termination: Termination$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    termination: "Termination",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TerminationsEmployeeIdResponse$ {
-  /** @deprecated use `PutV1TerminationsEmployeeIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TerminationsEmployeeIdResponse$inboundSchema;
-  /** @deprecated use `PutV1TerminationsEmployeeIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TerminationsEmployeeIdResponse$outboundSchema;
-  /** @deprecated use `PutV1TerminationsEmployeeIdResponse$Outbound` instead. */
-  export type Outbound = PutV1TerminationsEmployeeIdResponse$Outbound;
-}
-
-export function putV1TerminationsEmployeeIdResponseToJSON(
-  putV1TerminationsEmployeeIdResponse: PutV1TerminationsEmployeeIdResponse,
-): string {
-  return JSON.stringify(
-    PutV1TerminationsEmployeeIdResponse$outboundSchema.parse(
-      putV1TerminationsEmployeeIdResponse,
-    ),
-  );
-}
 
 export function putV1TerminationsEmployeeIdResponseFromJSON(
   jsonString: string,

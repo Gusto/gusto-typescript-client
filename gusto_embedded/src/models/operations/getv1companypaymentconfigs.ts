@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PaymentConfigs,
   PaymentConfigs$inboundSchema,
-  PaymentConfigs$Outbound,
-  PaymentConfigs$outboundSchema,
 } from "../components/paymentconfigs.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetV1CompanyPaymentConfigsResponse = {
 };
 
 /** @internal */
-export const GetV1CompanyPaymentConfigsRequest$inboundSchema: z.ZodType<
-  GetV1CompanyPaymentConfigsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompanyPaymentConfigsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,20 +60,6 @@ export const GetV1CompanyPaymentConfigsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyPaymentConfigsRequest$ {
-  /** @deprecated use `GetV1CompanyPaymentConfigsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompanyPaymentConfigsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompanyPaymentConfigsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyPaymentConfigsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompanyPaymentConfigsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompanyPaymentConfigsRequest$Outbound;
-}
-
 export function getV1CompanyPaymentConfigsRequestToJSON(
   getV1CompanyPaymentConfigsRequest: GetV1CompanyPaymentConfigsRequest,
 ): string {
@@ -101,16 +67,6 @@ export function getV1CompanyPaymentConfigsRequestToJSON(
     GetV1CompanyPaymentConfigsRequest$outboundSchema.parse(
       getV1CompanyPaymentConfigsRequest,
     ),
-  );
-}
-
-export function getV1CompanyPaymentConfigsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompanyPaymentConfigsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1CompanyPaymentConfigsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompanyPaymentConfigsRequest' from JSON`,
   );
 }
 
@@ -128,51 +84,6 @@ export const GetV1CompanyPaymentConfigsResponse$inboundSchema: z.ZodType<
     "Payment-Configs": "paymentConfigs",
   });
 });
-
-/** @internal */
-export type GetV1CompanyPaymentConfigsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Payment-Configs"?: PaymentConfigs$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompanyPaymentConfigsResponse$outboundSchema: z.ZodType<
-  GetV1CompanyPaymentConfigsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompanyPaymentConfigsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  paymentConfigs: PaymentConfigs$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    paymentConfigs: "Payment-Configs",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyPaymentConfigsResponse$ {
-  /** @deprecated use `GetV1CompanyPaymentConfigsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompanyPaymentConfigsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompanyPaymentConfigsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyPaymentConfigsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompanyPaymentConfigsResponse$Outbound` instead. */
-  export type Outbound = GetV1CompanyPaymentConfigsResponse$Outbound;
-}
-
-export function getV1CompanyPaymentConfigsResponseToJSON(
-  getV1CompanyPaymentConfigsResponse: GetV1CompanyPaymentConfigsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompanyPaymentConfigsResponse$outboundSchema.parse(
-      getV1CompanyPaymentConfigsResponse,
-    ),
-  );
-}
 
 export function getV1CompanyPaymentConfigsResponseFromJSON(
   jsonString: string,

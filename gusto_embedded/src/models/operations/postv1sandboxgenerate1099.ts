@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Form1099,
-  Form1099$inboundSchema,
-  Form1099$Outbound,
-  Form1099$outboundSchema,
-} from "../components/form1099.js";
+import { Form1099, Form1099$inboundSchema } from "../components/form1099.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -55,20 +47,6 @@ export type PostV1SandboxGenerate1099Response = {
 };
 
 /** @internal */
-export const PostV1SandboxGenerate1099RequestBody$inboundSchema: z.ZodType<
-  PostV1SandboxGenerate1099RequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_id: z.string(),
-  year: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_id": "contractorId",
-  });
-});
-
-/** @internal */
 export type PostV1SandboxGenerate1099RequestBody$Outbound = {
   contractor_id: string;
   year?: number | undefined;
@@ -88,21 +66,6 @@ export const PostV1SandboxGenerate1099RequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1SandboxGenerate1099RequestBody$ {
-  /** @deprecated use `PostV1SandboxGenerate1099RequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1SandboxGenerate1099RequestBody$inboundSchema;
-  /** @deprecated use `PostV1SandboxGenerate1099RequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1SandboxGenerate1099RequestBody$outboundSchema;
-  /** @deprecated use `PostV1SandboxGenerate1099RequestBody$Outbound` instead. */
-  export type Outbound = PostV1SandboxGenerate1099RequestBody$Outbound;
-}
-
 export function postV1SandboxGenerate1099RequestBodyToJSON(
   postV1SandboxGenerate1099RequestBody: PostV1SandboxGenerate1099RequestBody,
 ): string {
@@ -112,32 +75,6 @@ export function postV1SandboxGenerate1099RequestBodyToJSON(
     ),
   );
 }
-
-export function postV1SandboxGenerate1099RequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1SandboxGenerate1099RequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1SandboxGenerate1099RequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1SandboxGenerate1099RequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1SandboxGenerate1099Request$inboundSchema: z.ZodType<
-  PostV1SandboxGenerate1099Request,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PostV1SandboxGenerate1099RequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1SandboxGenerate1099Request$Outbound = {
@@ -162,19 +99,6 @@ export const PostV1SandboxGenerate1099Request$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1SandboxGenerate1099Request$ {
-  /** @deprecated use `PostV1SandboxGenerate1099Request$inboundSchema` instead. */
-  export const inboundSchema = PostV1SandboxGenerate1099Request$inboundSchema;
-  /** @deprecated use `PostV1SandboxGenerate1099Request$outboundSchema` instead. */
-  export const outboundSchema = PostV1SandboxGenerate1099Request$outboundSchema;
-  /** @deprecated use `PostV1SandboxGenerate1099Request$Outbound` instead. */
-  export type Outbound = PostV1SandboxGenerate1099Request$Outbound;
-}
-
 export function postV1SandboxGenerate1099RequestToJSON(
   postV1SandboxGenerate1099Request: PostV1SandboxGenerate1099Request,
 ): string {
@@ -182,16 +106,6 @@ export function postV1SandboxGenerate1099RequestToJSON(
     PostV1SandboxGenerate1099Request$outboundSchema.parse(
       postV1SandboxGenerate1099Request,
     ),
-  );
-}
-
-export function postV1SandboxGenerate1099RequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1SandboxGenerate1099Request, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1SandboxGenerate1099Request$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1SandboxGenerate1099Request' from JSON`,
   );
 }
 
@@ -209,51 +123,6 @@ export const PostV1SandboxGenerate1099Response$inboundSchema: z.ZodType<
     "Form_1099": "form1099",
   });
 });
-
-/** @internal */
-export type PostV1SandboxGenerate1099Response$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Form_1099?: Form1099$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1SandboxGenerate1099Response$outboundSchema: z.ZodType<
-  PostV1SandboxGenerate1099Response$Outbound,
-  z.ZodTypeDef,
-  PostV1SandboxGenerate1099Response
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  form1099: Form1099$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    form1099: "Form_1099",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1SandboxGenerate1099Response$ {
-  /** @deprecated use `PostV1SandboxGenerate1099Response$inboundSchema` instead. */
-  export const inboundSchema = PostV1SandboxGenerate1099Response$inboundSchema;
-  /** @deprecated use `PostV1SandboxGenerate1099Response$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1SandboxGenerate1099Response$outboundSchema;
-  /** @deprecated use `PostV1SandboxGenerate1099Response$Outbound` instead. */
-  export type Outbound = PostV1SandboxGenerate1099Response$Outbound;
-}
-
-export function postV1SandboxGenerate1099ResponseToJSON(
-  postV1SandboxGenerate1099Response: PostV1SandboxGenerate1099Response,
-): string {
-  return JSON.stringify(
-    PostV1SandboxGenerate1099Response$outboundSchema.parse(
-      postV1SandboxGenerate1099Response,
-    ),
-  );
-}
 
 export function postV1SandboxGenerate1099ResponseFromJSON(
   jsonString: string,

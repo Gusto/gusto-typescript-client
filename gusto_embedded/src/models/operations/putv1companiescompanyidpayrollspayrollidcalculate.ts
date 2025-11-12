@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,24 +34,6 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest = {
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    payroll_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "payroll_id": "payrollId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$Outbound =
@@ -82,22 +61,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSc
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestToJSON(
   putV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest:
     PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
@@ -105,21 +68,6 @@ export function putV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestToJSON(
   return JSON.stringify(
     PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSchema
       .parse(putV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest),
-  );
-}
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest' from JSON`,
   );
 }
 
@@ -136,52 +84,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$inboundSc
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseToJSON(
-  putV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse:
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$outboundSchema
-      .parse(putV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse),
-  );
-}
 
 export function putV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseFromJSON(
   jsonString: string,

@@ -85,21 +85,6 @@ export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
   .nativeEnum(Source);
 
 /** @internal */
-export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
-  Source$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Source$ {
-  /** @deprecated use `Source$inboundSchema` instead. */
-  export const inboundSchema = Source$inboundSchema;
-  /** @deprecated use `Source$outboundSchema` instead. */
-  export const outboundSchema = Source$outboundSchema;
-}
-
-/** @internal */
 export const CompanyBenefit$inboundSchema: z.ZodType<
   CompanyBenefit,
   z.ZodTypeDef,
@@ -129,71 +114,6 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
     "responsible_for_employee_w2": "responsibleForEmployeeW2",
   });
 });
-
-/** @internal */
-export type CompanyBenefit$Outbound = {
-  version?: string | undefined;
-  enrollment_count?: number | undefined;
-  company_uuid?: string | undefined;
-  uuid: string;
-  benefit_type?: number | undefined;
-  active: boolean;
-  description?: string | undefined;
-  source?: string | undefined;
-  partner_name?: string | null | undefined;
-  deletable?: boolean | undefined;
-  supports_percentage_amounts?: boolean | undefined;
-  responsible_for_employer_taxes?: boolean | undefined;
-  responsible_for_employee_w2?: boolean | undefined;
-};
-
-/** @internal */
-export const CompanyBenefit$outboundSchema: z.ZodType<
-  CompanyBenefit$Outbound,
-  z.ZodTypeDef,
-  CompanyBenefit
-> = z.object({
-  version: z.string().optional(),
-  enrollmentCount: z.number().int().optional(),
-  companyUuid: z.string().optional(),
-  uuid: z.string(),
-  benefitType: z.number().int().optional(),
-  active: z.boolean().default(true),
-  description: z.string().optional(),
-  source: Source$outboundSchema.optional(),
-  partnerName: z.nullable(z.string()).optional(),
-  deletable: z.boolean().optional(),
-  supportsPercentageAmounts: z.boolean().optional(),
-  responsibleForEmployerTaxes: z.boolean().optional(),
-  responsibleForEmployeeW2: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    enrollmentCount: "enrollment_count",
-    companyUuid: "company_uuid",
-    benefitType: "benefit_type",
-    partnerName: "partner_name",
-    supportsPercentageAmounts: "supports_percentage_amounts",
-    responsibleForEmployerTaxes: "responsible_for_employer_taxes",
-    responsibleForEmployeeW2: "responsible_for_employee_w2",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBenefit$ {
-  /** @deprecated use `CompanyBenefit$inboundSchema` instead. */
-  export const inboundSchema = CompanyBenefit$inboundSchema;
-  /** @deprecated use `CompanyBenefit$outboundSchema` instead. */
-  export const outboundSchema = CompanyBenefit$outboundSchema;
-  /** @deprecated use `CompanyBenefit$Outbound` instead. */
-  export type Outbound = CompanyBenefit$Outbound;
-}
-
-export function companyBenefitToJSON(companyBenefit: CompanyBenefit): string {
-  return JSON.stringify(CompanyBenefit$outboundSchema.parse(companyBenefit));
-}
 
 export function companyBenefitFromJSON(
   jsonString: string,

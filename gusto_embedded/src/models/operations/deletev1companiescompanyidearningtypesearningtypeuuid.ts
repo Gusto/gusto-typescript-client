@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,24 +34,6 @@ export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest = {
 export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    earning_type_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "earning_type_uuid": "earningTypeUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outbound =
@@ -82,22 +61,6 @@ export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outbou
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outbound;
-}
-
 export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestToJSON(
   deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest:
     DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
@@ -105,21 +68,6 @@ export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestToJS
   return JSON.stringify(
     DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundSchema
       .parse(deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest),
-  );
-}
-
-export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest' from JSON`,
   );
 }
 
@@ -136,52 +84,6 @@ export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inbou
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound;
-}
-
-export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponseToJSON(
-  deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse:
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema
-      .parse(deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse),
-  );
-}
 
 export function deleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponseFromJSON(
   jsonString: string,

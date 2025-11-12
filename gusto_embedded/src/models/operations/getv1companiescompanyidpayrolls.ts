@@ -10,15 +10,8 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Payroll,
-  Payroll$inboundSchema,
-  Payroll$Outbound,
-  Payroll$outboundSchema,
-} from "../components/payroll.js";
+import { Payroll, Payroll$inboundSchema } from "../components/payroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -147,168 +140,32 @@ export type GetV1CompaniesCompanyIdPayrollsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema:
+export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
   > = z.nativeEnum(GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion);
 
 /** @internal */
-export const GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
-  > = GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const ProcessingStatuses$inboundSchema: z.ZodNativeEnum<
+export const ProcessingStatuses$outboundSchema: z.ZodNativeEnum<
   typeof ProcessingStatuses
 > = z.nativeEnum(ProcessingStatuses);
 
 /** @internal */
-export const ProcessingStatuses$outboundSchema: z.ZodNativeEnum<
-  typeof ProcessingStatuses
-> = ProcessingStatuses$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProcessingStatuses$ {
-  /** @deprecated use `ProcessingStatuses$inboundSchema` instead. */
-  export const inboundSchema = ProcessingStatuses$inboundSchema;
-  /** @deprecated use `ProcessingStatuses$outboundSchema` instead. */
-  export const outboundSchema = ProcessingStatuses$outboundSchema;
-}
-
-/** @internal */
-export const PayrollTypes$inboundSchema: z.ZodNativeEnum<typeof PayrollTypes> =
+export const PayrollTypes$outboundSchema: z.ZodNativeEnum<typeof PayrollTypes> =
   z.nativeEnum(PayrollTypes);
 
 /** @internal */
-export const PayrollTypes$outboundSchema: z.ZodNativeEnum<typeof PayrollTypes> =
-  PayrollTypes$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollTypes$ {
-  /** @deprecated use `PayrollTypes$inboundSchema` instead. */
-  export const inboundSchema = PayrollTypes$inboundSchema;
-  /** @deprecated use `PayrollTypes$outboundSchema` instead. */
-  export const outboundSchema = PayrollTypes$outboundSchema;
-}
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude$inboundSchema:
+export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude$outboundSchema:
   z.ZodNativeEnum<typeof GetV1CompaniesCompanyIdPayrollsQueryParamInclude> = z
     .nativeEnum(GetV1CompaniesCompanyIdPayrollsQueryParamInclude);
 
 /** @internal */
-export const GetV1CompaniesCompanyIdPayrollsQueryParamInclude$outboundSchema:
-  z.ZodNativeEnum<typeof GetV1CompaniesCompanyIdPayrollsQueryParamInclude> =
-    GetV1CompaniesCompanyIdPayrollsQueryParamInclude$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPayrollsQueryParamInclude$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsQueryParamInclude$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPayrollsQueryParamInclude$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsQueryParamInclude$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPayrollsQueryParamInclude$outboundSchema;
-}
-
-/** @internal */
-export const DateFilterBy$inboundSchema: z.ZodNativeEnum<typeof DateFilterBy> =
+export const DateFilterBy$outboundSchema: z.ZodNativeEnum<typeof DateFilterBy> =
   z.nativeEnum(DateFilterBy);
 
 /** @internal */
-export const DateFilterBy$outboundSchema: z.ZodNativeEnum<typeof DateFilterBy> =
-  DateFilterBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DateFilterBy$ {
-  /** @deprecated use `DateFilterBy$inboundSchema` instead. */
-  export const inboundSchema = DateFilterBy$inboundSchema;
-  /** @deprecated use `DateFilterBy$outboundSchema` instead. */
-  export const outboundSchema = DateFilterBy$outboundSchema;
-}
-
-/** @internal */
-export const SortOrder$inboundSchema: z.ZodNativeEnum<typeof SortOrder> = z
+export const SortOrder$outboundSchema: z.ZodNativeEnum<typeof SortOrder> = z
   .nativeEnum(SortOrder);
-
-/** @internal */
-export const SortOrder$outboundSchema: z.ZodNativeEnum<typeof SortOrder> =
-  SortOrder$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SortOrder$ {
-  /** @deprecated use `SortOrder$inboundSchema` instead. */
-  export const inboundSchema = SortOrder$inboundSchema;
-  /** @deprecated use `SortOrder$outboundSchema` instead. */
-  export const outboundSchema = SortOrder$outboundSchema;
-}
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
-  GetV1CompaniesCompanyIdPayrollsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  "X-Gusto-API-Version":
-    GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2025-06-15",
-    ),
-  processing_statuses: z.array(ProcessingStatuses$inboundSchema).optional(),
-  payroll_types: z.array(PayrollTypes$inboundSchema).optional(),
-  processed: z.boolean().optional(),
-  include_off_cycle: z.boolean().optional(),
-  include: z.array(
-    GetV1CompaniesCompanyIdPayrollsQueryParamInclude$inboundSchema,
-  ).optional(),
-  start_date: z.string().optional(),
-  end_date: z.string().optional(),
-  date_filter_by: DateFilterBy$inboundSchema.optional(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-  sort_order: SortOrder$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "processing_statuses": "processingStatuses",
-    "payroll_types": "payrollTypes",
-    "include_off_cycle": "includeOffCycle",
-    "start_date": "startDate",
-    "end_date": "endDate",
-    "date_filter_by": "dateFilterBy",
-    "sort_order": "sortOrder",
-  });
-});
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPayrollsRequest$Outbound = {
@@ -364,21 +221,6 @@ export const GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPayrollsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdPayrollsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdPayrollsRequestToJSON(
   getV1CompaniesCompanyIdPayrollsRequest:
     GetV1CompaniesCompanyIdPayrollsRequest,
@@ -387,17 +229,6 @@ export function getV1CompaniesCompanyIdPayrollsRequestToJSON(
     GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdPayrollsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdPayrollsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompaniesCompanyIdPayrollsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdPayrollsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesCompanyIdPayrollsRequest' from JSON`,
   );
 }
 
@@ -415,53 +246,6 @@ export const GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
     "Payroll-List": "payrollList",
   });
 });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdPayrollsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Payroll-List"?: Array<Payroll$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPayrollsResponse$outboundSchema: z.ZodType<
-  GetV1CompaniesCompanyIdPayrollsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompaniesCompanyIdPayrollsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  payrollList: z.array(Payroll$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    payrollList: "Payroll-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPayrollsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPayrollsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPayrollsResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdPayrollsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdPayrollsResponseToJSON(
-  getV1CompaniesCompanyIdPayrollsResponse:
-    GetV1CompaniesCompanyIdPayrollsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdPayrollsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdPayrollsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdPayrollsResponseFromJSON(
   jsonString: string,

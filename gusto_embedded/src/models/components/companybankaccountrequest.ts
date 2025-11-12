@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The bank account type
@@ -39,45 +36,10 @@ export type CompanyBankAccountRequest = {
 };
 
 /** @internal */
-export const CompanyBankAccountRequestAccountType$inboundSchema:
+export const CompanyBankAccountRequestAccountType$outboundSchema:
   z.ZodNativeEnum<typeof CompanyBankAccountRequestAccountType> = z.nativeEnum(
     CompanyBankAccountRequestAccountType,
   );
-
-/** @internal */
-export const CompanyBankAccountRequestAccountType$outboundSchema:
-  z.ZodNativeEnum<typeof CompanyBankAccountRequestAccountType> =
-    CompanyBankAccountRequestAccountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBankAccountRequestAccountType$ {
-  /** @deprecated use `CompanyBankAccountRequestAccountType$inboundSchema` instead. */
-  export const inboundSchema =
-    CompanyBankAccountRequestAccountType$inboundSchema;
-  /** @deprecated use `CompanyBankAccountRequestAccountType$outboundSchema` instead. */
-  export const outboundSchema =
-    CompanyBankAccountRequestAccountType$outboundSchema;
-}
-
-/** @internal */
-export const CompanyBankAccountRequest$inboundSchema: z.ZodType<
-  CompanyBankAccountRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  routing_number: z.string(),
-  account_number: z.string(),
-  account_type: CompanyBankAccountRequestAccountType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "routing_number": "routingNumber",
-    "account_number": "accountNumber",
-    "account_type": "accountType",
-  });
-});
 
 /** @internal */
 export type CompanyBankAccountRequest$Outbound = {
@@ -103,33 +65,10 @@ export const CompanyBankAccountRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBankAccountRequest$ {
-  /** @deprecated use `CompanyBankAccountRequest$inboundSchema` instead. */
-  export const inboundSchema = CompanyBankAccountRequest$inboundSchema;
-  /** @deprecated use `CompanyBankAccountRequest$outboundSchema` instead. */
-  export const outboundSchema = CompanyBankAccountRequest$outboundSchema;
-  /** @deprecated use `CompanyBankAccountRequest$Outbound` instead. */
-  export type Outbound = CompanyBankAccountRequest$Outbound;
-}
-
 export function companyBankAccountRequestToJSON(
   companyBankAccountRequest: CompanyBankAccountRequest,
 ): string {
   return JSON.stringify(
     CompanyBankAccountRequest$outboundSchema.parse(companyBankAccountRequest),
-  );
-}
-
-export function companyBankAccountRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CompanyBankAccountRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CompanyBankAccountRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CompanyBankAccountRequest' from JSON`,
   );
 }

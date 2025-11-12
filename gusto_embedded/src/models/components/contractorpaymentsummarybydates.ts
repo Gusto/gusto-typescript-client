@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContractorPayment,
   ContractorPayment$inboundSchema,
-  ContractorPayment$Outbound,
-  ContractorPayment$outboundSchema,
 } from "./contractorpayment.js";
 
 /**
@@ -77,47 +75,6 @@ export const ContractorPaymentSummaryByDatesTotal$inboundSchema: z.ZodType<
   wages: z.string().optional(),
 });
 
-/** @internal */
-export type ContractorPaymentSummaryByDatesTotal$Outbound = {
-  reimbursements?: string | undefined;
-  wages?: string | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentSummaryByDatesTotal$outboundSchema: z.ZodType<
-  ContractorPaymentSummaryByDatesTotal$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentSummaryByDatesTotal
-> = z.object({
-  reimbursements: z.string().optional(),
-  wages: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentSummaryByDatesTotal$ {
-  /** @deprecated use `ContractorPaymentSummaryByDatesTotal$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentSummaryByDatesTotal$inboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryByDatesTotal$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentSummaryByDatesTotal$outboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryByDatesTotal$Outbound` instead. */
-  export type Outbound = ContractorPaymentSummaryByDatesTotal$Outbound;
-}
-
-export function contractorPaymentSummaryByDatesTotalToJSON(
-  contractorPaymentSummaryByDatesTotal: ContractorPaymentSummaryByDatesTotal,
-): string {
-  return JSON.stringify(
-    ContractorPaymentSummaryByDatesTotal$outboundSchema.parse(
-      contractorPaymentSummaryByDatesTotal,
-    ),
-  );
-}
-
 export function contractorPaymentSummaryByDatesTotalFromJSON(
   jsonString: string,
 ): SafeParseResult<ContractorPaymentSummaryByDatesTotal, SDKValidationError> {
@@ -149,63 +106,6 @@ export const ContractorPaymentSummaryByDatesContractorPayments$inboundSchema:
       "wage_total": "wageTotal",
     });
   });
-
-/** @internal */
-export type ContractorPaymentSummaryByDatesContractorPayments$Outbound = {
-  contractor_uuid?: string | undefined;
-  check_date?: string | undefined;
-  reimbursement_total?: string | undefined;
-  wage_total?: string | undefined;
-  payments?: Array<ContractorPayment$Outbound> | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentSummaryByDatesContractorPayments$outboundSchema:
-  z.ZodType<
-    ContractorPaymentSummaryByDatesContractorPayments$Outbound,
-    z.ZodTypeDef,
-    ContractorPaymentSummaryByDatesContractorPayments
-  > = z.object({
-    contractorUuid: z.string().optional(),
-    checkDate: z.string().optional(),
-    reimbursementTotal: z.string().optional(),
-    wageTotal: z.string().optional(),
-    payments: z.array(ContractorPayment$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contractorUuid: "contractor_uuid",
-      checkDate: "check_date",
-      reimbursementTotal: "reimbursement_total",
-      wageTotal: "wage_total",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentSummaryByDatesContractorPayments$ {
-  /** @deprecated use `ContractorPaymentSummaryByDatesContractorPayments$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentSummaryByDatesContractorPayments$inboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryByDatesContractorPayments$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentSummaryByDatesContractorPayments$outboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryByDatesContractorPayments$Outbound` instead. */
-  export type Outbound =
-    ContractorPaymentSummaryByDatesContractorPayments$Outbound;
-}
-
-export function contractorPaymentSummaryByDatesContractorPaymentsToJSON(
-  contractorPaymentSummaryByDatesContractorPayments:
-    ContractorPaymentSummaryByDatesContractorPayments,
-): string {
-  return JSON.stringify(
-    ContractorPaymentSummaryByDatesContractorPayments$outboundSchema.parse(
-      contractorPaymentSummaryByDatesContractorPayments,
-    ),
-  );
-}
 
 export function contractorPaymentSummaryByDatesContractorPaymentsFromJSON(
   jsonString: string,
@@ -241,56 +141,6 @@ export const ContractorPaymentSummaryByDates$inboundSchema: z.ZodType<
     "contractor_payments": "contractorPayments",
   });
 });
-
-/** @internal */
-export type ContractorPaymentSummaryByDates$Outbound = {
-  total?: ContractorPaymentSummaryByDatesTotal$Outbound | undefined;
-  contractor_payments?:
-    | Array<ContractorPaymentSummaryByDatesContractorPayments$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentSummaryByDates$outboundSchema: z.ZodType<
-  ContractorPaymentSummaryByDates$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentSummaryByDates
-> = z.object({
-  total: z.lazy(() => ContractorPaymentSummaryByDatesTotal$outboundSchema)
-    .optional(),
-  contractorPayments: z.array(
-    z.lazy(() =>
-      ContractorPaymentSummaryByDatesContractorPayments$outboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorPayments: "contractor_payments",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentSummaryByDates$ {
-  /** @deprecated use `ContractorPaymentSummaryByDates$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentSummaryByDates$inboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryByDates$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentSummaryByDates$outboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryByDates$Outbound` instead. */
-  export type Outbound = ContractorPaymentSummaryByDates$Outbound;
-}
-
-export function contractorPaymentSummaryByDatesToJSON(
-  contractorPaymentSummaryByDates: ContractorPaymentSummaryByDates,
-): string {
-  return JSON.stringify(
-    ContractorPaymentSummaryByDates$outboundSchema.parse(
-      contractorPaymentSummaryByDates,
-    ),
-  );
-}
 
 export function contractorPaymentSummaryByDatesFromJSON(
   jsonString: string,

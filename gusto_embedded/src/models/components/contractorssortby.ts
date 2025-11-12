@@ -14,22 +14,6 @@ export const ContractorsSortBy = {
 export type ContractorsSortBy = ClosedEnum<typeof ContractorsSortBy>;
 
 /** @internal */
-export const ContractorsSortBy$inboundSchema: z.ZodNativeEnum<
-  typeof ContractorsSortBy
-> = z.nativeEnum(ContractorsSortBy);
-
-/** @internal */
 export const ContractorsSortBy$outboundSchema: z.ZodNativeEnum<
   typeof ContractorsSortBy
-> = ContractorsSortBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorsSortBy$ {
-  /** @deprecated use `ContractorsSortBy$inboundSchema` instead. */
-  export const inboundSchema = ContractorsSortBy$inboundSchema;
-  /** @deprecated use `ContractorsSortBy$outboundSchema` instead. */
-  export const outboundSchema = ContractorsSortBy$outboundSchema;
-}
+> = z.nativeEnum(ContractorsSortBy);

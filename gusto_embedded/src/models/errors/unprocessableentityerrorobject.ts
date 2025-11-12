@@ -6,8 +6,6 @@ import * as z from "zod/v3";
 import {
   EntityErrorObject,
   EntityErrorObject$inboundSchema,
-  EntityErrorObject$Outbound,
-  EntityErrorObject$outboundSchema,
 } from "../components/entityerrorobject.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 
@@ -68,32 +66,3 @@ export const UnprocessableEntityErrorObject$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type UnprocessableEntityErrorObject$Outbound = {
-  errors: Array<EntityErrorObject$Outbound>;
-};
-
-/** @internal */
-export const UnprocessableEntityErrorObject$outboundSchema: z.ZodType<
-  UnprocessableEntityErrorObject$Outbound,
-  z.ZodTypeDef,
-  UnprocessableEntityErrorObject
-> = z.instanceof(UnprocessableEntityErrorObject)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    errors: z.array(EntityErrorObject$outboundSchema),
-  }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnprocessableEntityErrorObject$ {
-  /** @deprecated use `UnprocessableEntityErrorObject$inboundSchema` instead. */
-  export const inboundSchema = UnprocessableEntityErrorObject$inboundSchema;
-  /** @deprecated use `UnprocessableEntityErrorObject$outboundSchema` instead. */
-  export const outboundSchema = UnprocessableEntityErrorObject$outboundSchema;
-  /** @deprecated use `UnprocessableEntityErrorObject$Outbound` instead. */
-  export type Outbound = UnprocessableEntityErrorObject$Outbound;
-}

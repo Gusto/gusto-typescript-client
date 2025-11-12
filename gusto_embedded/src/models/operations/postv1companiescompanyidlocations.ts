@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Location,
-  Location$inboundSchema,
-  Location$Outbound,
-  Location$outboundSchema,
-} from "../components/location.js";
+import { Location, Location$inboundSchema } from "../components/location.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,31 +61,6 @@ export type PostV1CompaniesCompanyIdLocationsResponse = {
 };
 
 /** @internal */
-export const PostV1CompaniesCompanyIdLocationsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdLocationsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    phone_number: z.string(),
-    street_1: z.string(),
-    street_2: z.nullable(z.string()).optional(),
-    city: z.string(),
-    state: z.string(),
-    zip: z.string(),
-    mailing_address: z.boolean().optional(),
-    filing_address: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "phone_number": "phoneNumber",
-      "street_1": "street1",
-      "street_2": "street2",
-      "mailing_address": "mailingAddress",
-      "filing_address": "filingAddress",
-    });
-  });
-
-/** @internal */
 export type PostV1CompaniesCompanyIdLocationsRequestBody$Outbound = {
   phone_number: string;
   street_1: string;
@@ -130,21 +97,6 @@ export const PostV1CompaniesCompanyIdLocationsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdLocationsRequestBody$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdLocationsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdLocationsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsRequestBody$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdLocationsRequestBody$Outbound;
-}
-
 export function postV1CompaniesCompanyIdLocationsRequestBodyToJSON(
   postV1CompaniesCompanyIdLocationsRequestBody:
     PostV1CompaniesCompanyIdLocationsRequestBody,
@@ -155,41 +107,6 @@ export function postV1CompaniesCompanyIdLocationsRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1CompaniesCompanyIdLocationsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdLocationsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdLocationsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyIdLocationsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdLocationsRequest$inboundSchema: z.ZodType<
-  PostV1CompaniesCompanyIdLocationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PostV1CompaniesCompanyIdLocationsRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1CompaniesCompanyIdLocationsRequest$Outbound = {
@@ -217,21 +134,6 @@ export const PostV1CompaniesCompanyIdLocationsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdLocationsRequest$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdLocationsRequest$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdLocationsRequest$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsRequest$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdLocationsRequest$Outbound;
-}
-
 export function postV1CompaniesCompanyIdLocationsRequestToJSON(
   postV1CompaniesCompanyIdLocationsRequest:
     PostV1CompaniesCompanyIdLocationsRequest,
@@ -240,22 +142,6 @@ export function postV1CompaniesCompanyIdLocationsRequestToJSON(
     PostV1CompaniesCompanyIdLocationsRequest$outboundSchema.parse(
       postV1CompaniesCompanyIdLocationsRequest,
     ),
-  );
-}
-
-export function postV1CompaniesCompanyIdLocationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdLocationsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdLocationsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyIdLocationsRequest' from JSON`,
   );
 }
 
@@ -273,54 +159,6 @@ export const PostV1CompaniesCompanyIdLocationsResponse$inboundSchema: z.ZodType<
     "Location": "location",
   });
 });
-
-/** @internal */
-export type PostV1CompaniesCompanyIdLocationsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Location?: Location$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdLocationsResponse$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdLocationsResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdLocationsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    location: Location$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      location: "Location",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdLocationsResponse$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdLocationsResponse$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdLocationsResponse$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdLocationsResponse$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdLocationsResponse$Outbound;
-}
-
-export function postV1CompaniesCompanyIdLocationsResponseToJSON(
-  postV1CompaniesCompanyIdLocationsResponse:
-    PostV1CompaniesCompanyIdLocationsResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdLocationsResponse$outboundSchema.parse(
-      postV1CompaniesCompanyIdLocationsResponse,
-    ),
-  );
-}
 
 export function postV1CompaniesCompanyIdLocationsResponseFromJSON(
   jsonString: string,

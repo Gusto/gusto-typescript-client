@@ -48,57 +48,6 @@ export const YtdBenefitAmountsFromDifferentCompany$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type YtdBenefitAmountsFromDifferentCompany$Outbound = {
-  uuid: string;
-  benefit_type: number;
-  ytd_employee_deduction_amount: string;
-  ytd_company_contribution_amount: string;
-};
-
-/** @internal */
-export const YtdBenefitAmountsFromDifferentCompany$outboundSchema: z.ZodType<
-  YtdBenefitAmountsFromDifferentCompany$Outbound,
-  z.ZodTypeDef,
-  YtdBenefitAmountsFromDifferentCompany
-> = z.object({
-  uuid: z.string(),
-  benefitType: z.number().int(),
-  ytdEmployeeDeductionAmount: z.string(),
-  ytdCompanyContributionAmount: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    benefitType: "benefit_type",
-    ytdEmployeeDeductionAmount: "ytd_employee_deduction_amount",
-    ytdCompanyContributionAmount: "ytd_company_contribution_amount",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace YtdBenefitAmountsFromDifferentCompany$ {
-  /** @deprecated use `YtdBenefitAmountsFromDifferentCompany$inboundSchema` instead. */
-  export const inboundSchema =
-    YtdBenefitAmountsFromDifferentCompany$inboundSchema;
-  /** @deprecated use `YtdBenefitAmountsFromDifferentCompany$outboundSchema` instead. */
-  export const outboundSchema =
-    YtdBenefitAmountsFromDifferentCompany$outboundSchema;
-  /** @deprecated use `YtdBenefitAmountsFromDifferentCompany$Outbound` instead. */
-  export type Outbound = YtdBenefitAmountsFromDifferentCompany$Outbound;
-}
-
-export function ytdBenefitAmountsFromDifferentCompanyToJSON(
-  ytdBenefitAmountsFromDifferentCompany: YtdBenefitAmountsFromDifferentCompany,
-): string {
-  return JSON.stringify(
-    YtdBenefitAmountsFromDifferentCompany$outboundSchema.parse(
-      ytdBenefitAmountsFromDifferentCompany,
-    ),
-  );
-}
-
 export function ytdBenefitAmountsFromDifferentCompanyFromJSON(
   jsonString: string,
 ): SafeParseResult<YtdBenefitAmountsFromDifferentCompany, SDKValidationError> {

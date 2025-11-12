@@ -10,20 +10,15 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBankAccount,
   CompanyBankAccount$inboundSchema,
-  CompanyBankAccount$Outbound,
-  CompanyBankAccount$outboundSchema,
 } from "../components/companybankaccount.js";
 import {
   CompanyBankAccountRequest,
-  CompanyBankAccountRequest$inboundSchema,
   CompanyBankAccountRequest$Outbound,
   CompanyBankAccountRequest$outboundSchema,
 } from "../components/companybankaccountrequest.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -62,49 +57,10 @@ export type PostV1CompaniesCompanyIdBankAccountsResponse = {
 };
 
 /** @internal */
-export const PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
-  > = z.nativeEnum(PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion);
-
-/** @internal */
 export const PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
-  > = PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdBankAccountsRequest$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdBankAccountsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    "X-Gusto-API-Version":
-      PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-    "Company-Bank-Account-Request": CompanyBankAccountRequest$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "Company-Bank-Account-Request": "companyBankAccountRequest",
-    });
-  });
+  > = z.nativeEnum(PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompaniesCompanyIdBankAccountsRequest$Outbound = {
@@ -133,21 +89,6 @@ export const PostV1CompaniesCompanyIdBankAccountsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdBankAccountsRequest$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsRequest$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsRequest$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsRequest$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdBankAccountsRequest$Outbound;
-}
-
 export function postV1CompaniesCompanyIdBankAccountsRequestToJSON(
   postV1CompaniesCompanyIdBankAccountsRequest:
     PostV1CompaniesCompanyIdBankAccountsRequest,
@@ -156,22 +97,6 @@ export function postV1CompaniesCompanyIdBankAccountsRequestToJSON(
     PostV1CompaniesCompanyIdBankAccountsRequest$outboundSchema.parse(
       postV1CompaniesCompanyIdBankAccountsRequest,
     ),
-  );
-}
-
-export function postV1CompaniesCompanyIdBankAccountsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdBankAccountsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdBankAccountsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyIdBankAccountsRequest' from JSON`,
   );
 }
 
@@ -190,54 +115,6 @@ export const PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema:
       "Company-Bank-Account": "companyBankAccount",
     });
   });
-
-/** @internal */
-export type PostV1CompaniesCompanyIdBankAccountsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Bank-Account"?: CompanyBankAccount$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdBankAccountsResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdBankAccountsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    companyBankAccount: CompanyBankAccount$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      companyBankAccount: "Company-Bank-Account",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdBankAccountsResponse$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsResponse$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdBankAccountsResponse$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdBankAccountsResponse$Outbound;
-}
-
-export function postV1CompaniesCompanyIdBankAccountsResponseToJSON(
-  postV1CompaniesCompanyIdBankAccountsResponse:
-    PostV1CompaniesCompanyIdBankAccountsResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdBankAccountsResponse$outboundSchema.parse(
-      postV1CompaniesCompanyIdBankAccountsResponse,
-    ),
-  );
-}
 
 export function postV1CompaniesCompanyIdBankAccountsResponseFromJSON(
   jsonString: string,

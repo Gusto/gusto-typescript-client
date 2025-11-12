@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBenefit,
   CompanyBenefit$inboundSchema,
-  CompanyBenefit$Outbound,
-  CompanyBenefit$outboundSchema,
 } from "../components/companybenefit.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,25 +48,6 @@ export type GetV1CompaniesCompanyIdCompanyBenefitsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdCompanyBenefitsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    active: z.boolean().optional(),
-    enrollment_count: z.boolean().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "enrollment_count": "enrollmentCount",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesCompanyIdCompanyBenefitsRequest$Outbound = {
   company_id: string;
   active?: boolean | undefined;
@@ -98,21 +74,6 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdCompanyBenefitsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdCompanyBenefitsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdCompanyBenefitsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCompanyBenefitsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdCompanyBenefitsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdCompanyBenefitsRequestToJSON(
   getV1CompaniesCompanyIdCompanyBenefitsRequest:
     GetV1CompaniesCompanyIdCompanyBenefitsRequest,
@@ -121,22 +82,6 @@ export function getV1CompaniesCompanyIdCompanyBenefitsRequestToJSON(
     GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdCompanyBenefitsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdCompanyBenefitsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdCompanyBenefitsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdCompanyBenefitsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyIdCompanyBenefitsRequest' from JSON`,
   );
 }
 
@@ -155,55 +100,6 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema:
       "Company-Benefit-List": "companyBenefitList",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Benefit-List"?: Array<CompanyBenefit$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdCompanyBenefitsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    companyBenefitList: z.array(CompanyBenefit$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      companyBenefitList: "Company-Benefit-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdCompanyBenefitsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdCompanyBenefitsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdCompanyBenefitsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdCompanyBenefitsResponseToJSON(
-  getV1CompaniesCompanyIdCompanyBenefitsResponse:
-    GetV1CompaniesCompanyIdCompanyBenefitsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdCompanyBenefitsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdCompanyBenefitsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdCompanyBenefitsResponseFromJSON(
   jsonString: string,

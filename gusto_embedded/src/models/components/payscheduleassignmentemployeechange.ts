@@ -10,14 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleAssignmentPayPeriod,
   PayScheduleAssignmentPayPeriod$inboundSchema,
-  PayScheduleAssignmentPayPeriod$Outbound,
-  PayScheduleAssignmentPayPeriod$outboundSchema,
 } from "./payscheduleassignmentpayperiod.js";
 import {
   PayScheduleAssignmentTransitionPayPeriod,
   PayScheduleAssignmentTransitionPayPeriod$inboundSchema,
-  PayScheduleAssignmentTransitionPayPeriod$Outbound,
-  PayScheduleAssignmentTransitionPayPeriod$outboundSchema,
 } from "./payscheduleassignmenttransitionpayperiod.js";
 
 export type PayScheduleAssignmentEmployeeChange = {
@@ -70,67 +66,6 @@ export const PayScheduleAssignmentEmployeeChange$inboundSchema: z.ZodType<
     "transition_pay_period": "transitionPayPeriod",
   });
 });
-
-/** @internal */
-export type PayScheduleAssignmentEmployeeChange$Outbound = {
-  employee_uuid?: string | undefined;
-  first_name?: string | undefined;
-  last_name?: string | undefined;
-  pay_frequency?: string | undefined;
-  first_pay_period?: PayScheduleAssignmentPayPeriod$Outbound | undefined;
-  transition_pay_period?:
-    | PayScheduleAssignmentTransitionPayPeriod$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const PayScheduleAssignmentEmployeeChange$outboundSchema: z.ZodType<
-  PayScheduleAssignmentEmployeeChange$Outbound,
-  z.ZodTypeDef,
-  PayScheduleAssignmentEmployeeChange
-> = z.object({
-  employeeUuid: z.string().optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  payFrequency: z.string().optional(),
-  firstPayPeriod: PayScheduleAssignmentPayPeriod$outboundSchema.optional(),
-  transitionPayPeriod: PayScheduleAssignmentTransitionPayPeriod$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    firstName: "first_name",
-    lastName: "last_name",
-    payFrequency: "pay_frequency",
-    firstPayPeriod: "first_pay_period",
-    transitionPayPeriod: "transition_pay_period",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleAssignmentEmployeeChange$ {
-  /** @deprecated use `PayScheduleAssignmentEmployeeChange$inboundSchema` instead. */
-  export const inboundSchema =
-    PayScheduleAssignmentEmployeeChange$inboundSchema;
-  /** @deprecated use `PayScheduleAssignmentEmployeeChange$outboundSchema` instead. */
-  export const outboundSchema =
-    PayScheduleAssignmentEmployeeChange$outboundSchema;
-  /** @deprecated use `PayScheduleAssignmentEmployeeChange$Outbound` instead. */
-  export type Outbound = PayScheduleAssignmentEmployeeChange$Outbound;
-}
-
-export function payScheduleAssignmentEmployeeChangeToJSON(
-  payScheduleAssignmentEmployeeChange: PayScheduleAssignmentEmployeeChange,
-): string {
-  return JSON.stringify(
-    PayScheduleAssignmentEmployeeChange$outboundSchema.parse(
-      payScheduleAssignmentEmployeeChange,
-    ),
-  );
-}
 
 export function payScheduleAssignmentEmployeeChangeFromJSON(
   jsonString: string,

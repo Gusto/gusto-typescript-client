@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Signatory,
-  Signatory$inboundSchema,
-  Signatory$Outbound,
-  Signatory$outboundSchema,
-} from "../components/signatory.js";
+import { Signatory, Signatory$inboundSchema } from "../components/signatory.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -72,24 +64,6 @@ export type PostV1CompanySignatoriesResponse = {
 };
 
 /** @internal */
-export const HomeAddress$inboundSchema: z.ZodType<
-  HomeAddress,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  street_1: z.string(),
-  street_2: z.string().optional(),
-  city: z.string(),
-  state: z.string(),
-  zip: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "street_1": "street1",
-    "street_2": "street2",
-  });
-});
-
-/** @internal */
 export type HomeAddress$Outbound = {
   street_1: string;
   street_2?: string | undefined;
@@ -116,56 +90,9 @@ export const HomeAddress$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace HomeAddress$ {
-  /** @deprecated use `HomeAddress$inboundSchema` instead. */
-  export const inboundSchema = HomeAddress$inboundSchema;
-  /** @deprecated use `HomeAddress$outboundSchema` instead. */
-  export const outboundSchema = HomeAddress$outboundSchema;
-  /** @deprecated use `HomeAddress$Outbound` instead. */
-  export type Outbound = HomeAddress$Outbound;
-}
-
 export function homeAddressToJSON(homeAddress: HomeAddress): string {
   return JSON.stringify(HomeAddress$outboundSchema.parse(homeAddress));
 }
-
-export function homeAddressFromJSON(
-  jsonString: string,
-): SafeParseResult<HomeAddress, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => HomeAddress$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HomeAddress' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompanySignatoriesRequestBody$inboundSchema: z.ZodType<
-  PostV1CompanySignatoriesRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ssn: z.string(),
-  first_name: z.string(),
-  middle_initial: z.string().optional(),
-  last_name: z.string(),
-  email: z.string(),
-  title: z.string(),
-  phone: z.string(),
-  birthday: z.string(),
-  home_address: z.lazy(() => HomeAddress$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "first_name": "firstName",
-    "middle_initial": "middleInitial",
-    "last_name": "lastName",
-    "home_address": "homeAddress",
-  });
-});
 
 /** @internal */
 export type PostV1CompanySignatoriesRequestBody$Outbound = {
@@ -204,21 +131,6 @@ export const PostV1CompanySignatoriesRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompanySignatoriesRequestBody$ {
-  /** @deprecated use `PostV1CompanySignatoriesRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompanySignatoriesRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompanySignatoriesRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompanySignatoriesRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompanySignatoriesRequestBody$Outbound` instead. */
-  export type Outbound = PostV1CompanySignatoriesRequestBody$Outbound;
-}
-
 export function postV1CompanySignatoriesRequestBodyToJSON(
   postV1CompanySignatoriesRequestBody: PostV1CompanySignatoriesRequestBody,
 ): string {
@@ -228,34 +140,6 @@ export function postV1CompanySignatoriesRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1CompanySignatoriesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1CompanySignatoriesRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompanySignatoriesRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompanySignatoriesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompanySignatoriesRequest$inboundSchema: z.ZodType<
-  PostV1CompanySignatoriesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PostV1CompanySignatoriesRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1CompanySignatoriesRequest$Outbound = {
@@ -281,19 +165,6 @@ export const PostV1CompanySignatoriesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompanySignatoriesRequest$ {
-  /** @deprecated use `PostV1CompanySignatoriesRequest$inboundSchema` instead. */
-  export const inboundSchema = PostV1CompanySignatoriesRequest$inboundSchema;
-  /** @deprecated use `PostV1CompanySignatoriesRequest$outboundSchema` instead. */
-  export const outboundSchema = PostV1CompanySignatoriesRequest$outboundSchema;
-  /** @deprecated use `PostV1CompanySignatoriesRequest$Outbound` instead. */
-  export type Outbound = PostV1CompanySignatoriesRequest$Outbound;
-}
-
 export function postV1CompanySignatoriesRequestToJSON(
   postV1CompanySignatoriesRequest: PostV1CompanySignatoriesRequest,
 ): string {
@@ -301,16 +172,6 @@ export function postV1CompanySignatoriesRequestToJSON(
     PostV1CompanySignatoriesRequest$outboundSchema.parse(
       postV1CompanySignatoriesRequest,
     ),
-  );
-}
-
-export function postV1CompanySignatoriesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1CompanySignatoriesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1CompanySignatoriesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompanySignatoriesRequest' from JSON`,
   );
 }
 
@@ -328,50 +189,6 @@ export const PostV1CompanySignatoriesResponse$inboundSchema: z.ZodType<
     "Signatory": "signatory",
   });
 });
-
-/** @internal */
-export type PostV1CompanySignatoriesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Signatory?: Signatory$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompanySignatoriesResponse$outboundSchema: z.ZodType<
-  PostV1CompanySignatoriesResponse$Outbound,
-  z.ZodTypeDef,
-  PostV1CompanySignatoriesResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  signatory: Signatory$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    signatory: "Signatory",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompanySignatoriesResponse$ {
-  /** @deprecated use `PostV1CompanySignatoriesResponse$inboundSchema` instead. */
-  export const inboundSchema = PostV1CompanySignatoriesResponse$inboundSchema;
-  /** @deprecated use `PostV1CompanySignatoriesResponse$outboundSchema` instead. */
-  export const outboundSchema = PostV1CompanySignatoriesResponse$outboundSchema;
-  /** @deprecated use `PostV1CompanySignatoriesResponse$Outbound` instead. */
-  export type Outbound = PostV1CompanySignatoriesResponse$Outbound;
-}
-
-export function postV1CompanySignatoriesResponseToJSON(
-  postV1CompanySignatoriesResponse: PostV1CompanySignatoriesResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompanySignatoriesResponse$outboundSchema.parse(
-      postV1CompanySignatoriesResponse,
-    ),
-  );
-}
 
 export function postV1CompanySignatoriesResponseFromJSON(
   jsonString: string,

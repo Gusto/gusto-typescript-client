@@ -59,24 +59,6 @@ export const EmploymentHistoryListEmploymentStatus$inboundSchema:
   );
 
 /** @internal */
-export const EmploymentHistoryListEmploymentStatus$outboundSchema:
-  z.ZodNativeEnum<typeof EmploymentHistoryListEmploymentStatus> =
-    EmploymentHistoryListEmploymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmploymentHistoryListEmploymentStatus$ {
-  /** @deprecated use `EmploymentHistoryListEmploymentStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    EmploymentHistoryListEmploymentStatus$inboundSchema;
-  /** @deprecated use `EmploymentHistoryListEmploymentStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    EmploymentHistoryListEmploymentStatus$outboundSchema;
-}
-
-/** @internal */
 export const EmploymentHistoryList$inboundSchema: z.ZodType<
   EmploymentHistoryList,
   z.ZodTypeDef,
@@ -97,58 +79,6 @@ export const EmploymentHistoryList$inboundSchema: z.ZodType<
     "employment_status": "employmentStatus",
   });
 });
-
-/** @internal */
-export type EmploymentHistoryList$Outbound = {
-  hire_date?: string | undefined;
-  termination_date?: string | null | undefined;
-  file_new_hire_report?: boolean | undefined;
-  two_percent_shareholder?: boolean | undefined;
-  employment_status?: string | undefined;
-};
-
-/** @internal */
-export const EmploymentHistoryList$outboundSchema: z.ZodType<
-  EmploymentHistoryList$Outbound,
-  z.ZodTypeDef,
-  EmploymentHistoryList
-> = z.object({
-  hireDate: z.string().optional(),
-  terminationDate: z.nullable(z.string()).optional(),
-  fileNewHireReport: z.boolean().optional(),
-  twoPercentShareholder: z.boolean().optional(),
-  employmentStatus: EmploymentHistoryListEmploymentStatus$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hireDate: "hire_date",
-    terminationDate: "termination_date",
-    fileNewHireReport: "file_new_hire_report",
-    twoPercentShareholder: "two_percent_shareholder",
-    employmentStatus: "employment_status",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmploymentHistoryList$ {
-  /** @deprecated use `EmploymentHistoryList$inboundSchema` instead. */
-  export const inboundSchema = EmploymentHistoryList$inboundSchema;
-  /** @deprecated use `EmploymentHistoryList$outboundSchema` instead. */
-  export const outboundSchema = EmploymentHistoryList$outboundSchema;
-  /** @deprecated use `EmploymentHistoryList$Outbound` instead. */
-  export type Outbound = EmploymentHistoryList$Outbound;
-}
-
-export function employmentHistoryListToJSON(
-  employmentHistoryList: EmploymentHistoryList,
-): string {
-  return JSON.stringify(
-    EmploymentHistoryList$outboundSchema.parse(employmentHistoryList),
-  );
-}
 
 export function employmentHistoryListFromJSON(
   jsonString: string,

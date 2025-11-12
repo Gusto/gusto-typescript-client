@@ -67,65 +67,6 @@ export const UnprocessedTerminationPayPeriod$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type UnprocessedTerminationPayPeriod$Outbound = {
-  start_date?: string | undefined;
-  end_date?: string | undefined;
-  check_date?: string | undefined;
-  debit_date?: string | undefined;
-  employee_name?: string | undefined;
-  employee_uuid?: string | undefined;
-  pay_schedule_uuid?: string | undefined;
-};
-
-/** @internal */
-export const UnprocessedTerminationPayPeriod$outboundSchema: z.ZodType<
-  UnprocessedTerminationPayPeriod$Outbound,
-  z.ZodTypeDef,
-  UnprocessedTerminationPayPeriod
-> = z.object({
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  checkDate: z.string().optional(),
-  debitDate: z.string().optional(),
-  employeeName: z.string().optional(),
-  employeeUuid: z.string().optional(),
-  payScheduleUuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startDate: "start_date",
-    endDate: "end_date",
-    checkDate: "check_date",
-    debitDate: "debit_date",
-    employeeName: "employee_name",
-    employeeUuid: "employee_uuid",
-    payScheduleUuid: "pay_schedule_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnprocessedTerminationPayPeriod$ {
-  /** @deprecated use `UnprocessedTerminationPayPeriod$inboundSchema` instead. */
-  export const inboundSchema = UnprocessedTerminationPayPeriod$inboundSchema;
-  /** @deprecated use `UnprocessedTerminationPayPeriod$outboundSchema` instead. */
-  export const outboundSchema = UnprocessedTerminationPayPeriod$outboundSchema;
-  /** @deprecated use `UnprocessedTerminationPayPeriod$Outbound` instead. */
-  export type Outbound = UnprocessedTerminationPayPeriod$Outbound;
-}
-
-export function unprocessedTerminationPayPeriodToJSON(
-  unprocessedTerminationPayPeriod: UnprocessedTerminationPayPeriod,
-): string {
-  return JSON.stringify(
-    UnprocessedTerminationPayPeriod$outboundSchema.parse(
-      unprocessedTerminationPayPeriod,
-    ),
-  );
-}
-
 export function unprocessedTerminationPayPeriodFromJSON(
   jsonString: string,
 ): SafeParseResult<UnprocessedTerminationPayPeriod, SDKValidationError> {

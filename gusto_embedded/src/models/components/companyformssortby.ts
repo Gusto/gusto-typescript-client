@@ -15,22 +15,6 @@ export const CompanyFormsSortBy = {
 export type CompanyFormsSortBy = ClosedEnum<typeof CompanyFormsSortBy>;
 
 /** @internal */
-export const CompanyFormsSortBy$inboundSchema: z.ZodNativeEnum<
-  typeof CompanyFormsSortBy
-> = z.nativeEnum(CompanyFormsSortBy);
-
-/** @internal */
 export const CompanyFormsSortBy$outboundSchema: z.ZodNativeEnum<
   typeof CompanyFormsSortBy
-> = CompanyFormsSortBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyFormsSortBy$ {
-  /** @deprecated use `CompanyFormsSortBy$inboundSchema` instead. */
-  export const inboundSchema = CompanyFormsSortBy$inboundSchema;
-  /** @deprecated use `CompanyFormsSortBy$outboundSchema` instead. */
-  export const outboundSchema = CompanyFormsSortBy$outboundSchema;
-}
+> = z.nativeEnum(CompanyFormsSortBy);

@@ -10,7 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CustomFieldType,
   CustomFieldType$inboundSchema,
-  CustomFieldType$outboundSchema,
 } from "./customfieldtype.js";
 
 /**
@@ -55,53 +54,6 @@ export const CompanyCustomField$inboundSchema: z.ZodType<
     "selection_options": "selectionOptions",
   });
 });
-
-/** @internal */
-export type CompanyCustomField$Outbound = {
-  uuid: string;
-  name: string;
-  type: string;
-  description?: string | null | undefined;
-  selection_options?: Array<string> | null | undefined;
-};
-
-/** @internal */
-export const CompanyCustomField$outboundSchema: z.ZodType<
-  CompanyCustomField$Outbound,
-  z.ZodTypeDef,
-  CompanyCustomField
-> = z.object({
-  uuid: z.string(),
-  name: z.string(),
-  type: CustomFieldType$outboundSchema,
-  description: z.nullable(z.string()).optional(),
-  selectionOptions: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    selectionOptions: "selection_options",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyCustomField$ {
-  /** @deprecated use `CompanyCustomField$inboundSchema` instead. */
-  export const inboundSchema = CompanyCustomField$inboundSchema;
-  /** @deprecated use `CompanyCustomField$outboundSchema` instead. */
-  export const outboundSchema = CompanyCustomField$outboundSchema;
-  /** @deprecated use `CompanyCustomField$Outbound` instead. */
-  export type Outbound = CompanyCustomField$Outbound;
-}
-
-export function companyCustomFieldToJSON(
-  companyCustomField: CompanyCustomField,
-): string {
-  return JSON.stringify(
-    CompanyCustomField$outboundSchema.parse(companyCustomField),
-  );
-}
 
 export function companyCustomFieldFromJSON(
   jsonString: string,

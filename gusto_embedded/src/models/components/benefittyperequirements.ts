@@ -185,39 +185,6 @@ export const DefaultValue$inboundSchema: z.ZodType<
   type: z.string().optional(),
 });
 
-/** @internal */
-export type DefaultValue$Outbound = {
-  value?: string | undefined;
-  type?: string | undefined;
-};
-
-/** @internal */
-export const DefaultValue$outboundSchema: z.ZodType<
-  DefaultValue$Outbound,
-  z.ZodTypeDef,
-  DefaultValue
-> = z.object({
-  value: z.string().optional(),
-  type: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DefaultValue$ {
-  /** @deprecated use `DefaultValue$inboundSchema` instead. */
-  export const inboundSchema = DefaultValue$inboundSchema;
-  /** @deprecated use `DefaultValue$outboundSchema` instead. */
-  export const outboundSchema = DefaultValue$outboundSchema;
-  /** @deprecated use `DefaultValue$Outbound` instead. */
-  export type Outbound = DefaultValue$Outbound;
-}
-
-export function defaultValueToJSON(defaultValue: DefaultValue): string {
-  return JSON.stringify(DefaultValue$outboundSchema.parse(defaultValue));
-}
-
 export function defaultValueFromJSON(
   jsonString: string,
 ): SafeParseResult<DefaultValue, SDKValidationError> {
@@ -244,51 +211,6 @@ export const EmployeeDeduction$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type EmployeeDeduction$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?: DefaultValue$Outbound | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const EmployeeDeduction$outboundSchema: z.ZodType<
-  EmployeeDeduction$Outbound,
-  z.ZodTypeDef,
-  EmployeeDeduction
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() => DefaultValue$outboundSchema).optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeDeduction$ {
-  /** @deprecated use `EmployeeDeduction$inboundSchema` instead. */
-  export const inboundSchema = EmployeeDeduction$inboundSchema;
-  /** @deprecated use `EmployeeDeduction$outboundSchema` instead. */
-  export const outboundSchema = EmployeeDeduction$outboundSchema;
-  /** @deprecated use `EmployeeDeduction$Outbound` instead. */
-  export type Outbound = EmployeeDeduction$Outbound;
-}
-
-export function employeeDeductionToJSON(
-  employeeDeduction: EmployeeDeduction,
-): string {
-  return JSON.stringify(
-    EmployeeDeduction$outboundSchema.parse(employeeDeduction),
-  );
-}
-
 export function employeeDeductionFromJSON(
   jsonString: string,
 ): SafeParseResult<EmployeeDeduction, SDKValidationError> {
@@ -308,47 +230,6 @@ export const BenefitTypeRequirementsDefaultValue$inboundSchema: z.ZodType<
   value: z.string().optional(),
   type: z.string().optional(),
 });
-
-/** @internal */
-export type BenefitTypeRequirementsDefaultValue$Outbound = {
-  value?: string | undefined;
-  type?: string | undefined;
-};
-
-/** @internal */
-export const BenefitTypeRequirementsDefaultValue$outboundSchema: z.ZodType<
-  BenefitTypeRequirementsDefaultValue$Outbound,
-  z.ZodTypeDef,
-  BenefitTypeRequirementsDefaultValue
-> = z.object({
-  value: z.string().optional(),
-  type: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsDefaultValue$ {
-  /** @deprecated use `BenefitTypeRequirementsDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsDefaultValue$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsDefaultValue$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsDefaultValue$Outbound` instead. */
-  export type Outbound = BenefitTypeRequirementsDefaultValue$Outbound;
-}
-
-export function benefitTypeRequirementsDefaultValueToJSON(
-  benefitTypeRequirementsDefaultValue: BenefitTypeRequirementsDefaultValue,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsDefaultValue$outboundSchema.parse(
-      benefitTypeRequirementsDefaultValue,
-    ),
-  );
-}
 
 export function benefitTypeRequirementsDefaultValueFromJSON(
   jsonString: string,
@@ -378,56 +259,6 @@ export const BenefitTypeRequirementsContribution$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type BenefitTypeRequirementsContribution$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?: BenefitTypeRequirementsDefaultValue$Outbound | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const BenefitTypeRequirementsContribution$outboundSchema: z.ZodType<
-  BenefitTypeRequirementsContribution$Outbound,
-  z.ZodTypeDef,
-  BenefitTypeRequirementsContribution
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() => BenefitTypeRequirementsDefaultValue$outboundSchema)
-    .optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsContribution$ {
-  /** @deprecated use `BenefitTypeRequirementsContribution$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsContribution$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsContribution$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsContribution$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsContribution$Outbound` instead. */
-  export type Outbound = BenefitTypeRequirementsContribution$Outbound;
-}
-
-export function benefitTypeRequirementsContributionToJSON(
-  benefitTypeRequirementsContribution: BenefitTypeRequirementsContribution,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsContribution$outboundSchema.parse(
-      benefitTypeRequirementsContribution,
-    ),
-  );
-}
-
 export function benefitTypeRequirementsContributionFromJSON(
   jsonString: string,
 ): SafeParseResult<BenefitTypeRequirementsContribution, SDKValidationError> {
@@ -449,50 +280,6 @@ export const BenefitTypeRequirementsDeductAsPercentageDefaultValue$inboundSchema
     value: z.string().optional(),
     type: z.string().optional(),
   });
-
-/** @internal */
-export type BenefitTypeRequirementsDeductAsPercentageDefaultValue$Outbound = {
-  value?: string | undefined;
-  type?: string | undefined;
-};
-
-/** @internal */
-export const BenefitTypeRequirementsDeductAsPercentageDefaultValue$outboundSchema:
-  z.ZodType<
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue$Outbound,
-    z.ZodTypeDef,
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue
-  > = z.object({
-    value: z.string().optional(),
-    type: z.string().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsDeductAsPercentageDefaultValue$ {
-  /** @deprecated use `BenefitTypeRequirementsDeductAsPercentageDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsDeductAsPercentageDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsDeductAsPercentageDefaultValue$Outbound` instead. */
-  export type Outbound =
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue$Outbound;
-}
-
-export function benefitTypeRequirementsDeductAsPercentageDefaultValueToJSON(
-  benefitTypeRequirementsDeductAsPercentageDefaultValue:
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue$outboundSchema.parse(
-      benefitTypeRequirementsDeductAsPercentageDefaultValue,
-    ),
-  );
-}
 
 export function benefitTypeRequirementsDeductAsPercentageDefaultValueFromJSON(
   jsonString: string,
@@ -528,55 +315,6 @@ export const DeductAsPercentage$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type DeductAsPercentage$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?:
-    | BenefitTypeRequirementsDeductAsPercentageDefaultValue$Outbound
-    | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const DeductAsPercentage$outboundSchema: z.ZodType<
-  DeductAsPercentage$Outbound,
-  z.ZodTypeDef,
-  DeductAsPercentage
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() =>
-    BenefitTypeRequirementsDeductAsPercentageDefaultValue$outboundSchema
-  ).optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeductAsPercentage$ {
-  /** @deprecated use `DeductAsPercentage$inboundSchema` instead. */
-  export const inboundSchema = DeductAsPercentage$inboundSchema;
-  /** @deprecated use `DeductAsPercentage$outboundSchema` instead. */
-  export const outboundSchema = DeductAsPercentage$outboundSchema;
-  /** @deprecated use `DeductAsPercentage$Outbound` instead. */
-  export type Outbound = DeductAsPercentage$Outbound;
-}
-
-export function deductAsPercentageToJSON(
-  deductAsPercentage: DeductAsPercentage,
-): string {
-  return JSON.stringify(
-    DeductAsPercentage$outboundSchema.parse(deductAsPercentage),
-  );
-}
-
 export function deductAsPercentageFromJSON(
   jsonString: string,
 ): SafeParseResult<DeductAsPercentage, SDKValidationError> {
@@ -594,49 +332,6 @@ export const BenefitTypeRequirementsCatchUpDefaultValue$inboundSchema:
       value: z.string().optional(),
       type: z.string().optional(),
     });
-
-/** @internal */
-export type BenefitTypeRequirementsCatchUpDefaultValue$Outbound = {
-  value?: string | undefined;
-  type?: string | undefined;
-};
-
-/** @internal */
-export const BenefitTypeRequirementsCatchUpDefaultValue$outboundSchema:
-  z.ZodType<
-    BenefitTypeRequirementsCatchUpDefaultValue$Outbound,
-    z.ZodTypeDef,
-    BenefitTypeRequirementsCatchUpDefaultValue
-  > = z.object({
-    value: z.string().optional(),
-    type: z.string().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsCatchUpDefaultValue$ {
-  /** @deprecated use `BenefitTypeRequirementsCatchUpDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsCatchUpDefaultValue$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCatchUpDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsCatchUpDefaultValue$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCatchUpDefaultValue$Outbound` instead. */
-  export type Outbound = BenefitTypeRequirementsCatchUpDefaultValue$Outbound;
-}
-
-export function benefitTypeRequirementsCatchUpDefaultValueToJSON(
-  benefitTypeRequirementsCatchUpDefaultValue:
-    BenefitTypeRequirementsCatchUpDefaultValue,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsCatchUpDefaultValue$outboundSchema.parse(
-      benefitTypeRequirementsCatchUpDefaultValue,
-    ),
-  );
-}
 
 export function benefitTypeRequirementsCatchUpDefaultValueFromJSON(
   jsonString: string,
@@ -669,51 +364,6 @@ export const CatchUp$inboundSchema: z.ZodType<CatchUp, z.ZodTypeDef, unknown> =
     });
   });
 
-/** @internal */
-export type CatchUp$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?:
-    | BenefitTypeRequirementsCatchUpDefaultValue$Outbound
-    | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CatchUp$outboundSchema: z.ZodType<
-  CatchUp$Outbound,
-  z.ZodTypeDef,
-  CatchUp
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() =>
-    BenefitTypeRequirementsCatchUpDefaultValue$outboundSchema
-  ).optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CatchUp$ {
-  /** @deprecated use `CatchUp$inboundSchema` instead. */
-  export const inboundSchema = CatchUp$inboundSchema;
-  /** @deprecated use `CatchUp$outboundSchema` instead. */
-  export const outboundSchema = CatchUp$outboundSchema;
-  /** @deprecated use `CatchUp$Outbound` instead. */
-  export type Outbound = CatchUp$Outbound;
-}
-
-export function catchUpToJSON(catchUp: CatchUp): string {
-  return JSON.stringify(CatchUp$outboundSchema.parse(catchUp));
-}
-
 export function catchUpFromJSON(
   jsonString: string,
 ): SafeParseResult<CatchUp, SDKValidationError> {
@@ -734,50 +384,6 @@ export const BenefitTypeRequirementsLimitOptionDefaultValue$inboundSchema:
     value: z.string().optional(),
     type: z.string().optional(),
   });
-
-/** @internal */
-export type BenefitTypeRequirementsLimitOptionDefaultValue$Outbound = {
-  value?: string | undefined;
-  type?: string | undefined;
-};
-
-/** @internal */
-export const BenefitTypeRequirementsLimitOptionDefaultValue$outboundSchema:
-  z.ZodType<
-    BenefitTypeRequirementsLimitOptionDefaultValue$Outbound,
-    z.ZodTypeDef,
-    BenefitTypeRequirementsLimitOptionDefaultValue
-  > = z.object({
-    value: z.string().optional(),
-    type: z.string().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsLimitOptionDefaultValue$ {
-  /** @deprecated use `BenefitTypeRequirementsLimitOptionDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsLimitOptionDefaultValue$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsLimitOptionDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsLimitOptionDefaultValue$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsLimitOptionDefaultValue$Outbound` instead. */
-  export type Outbound =
-    BenefitTypeRequirementsLimitOptionDefaultValue$Outbound;
-}
-
-export function benefitTypeRequirementsLimitOptionDefaultValueToJSON(
-  benefitTypeRequirementsLimitOptionDefaultValue:
-    BenefitTypeRequirementsLimitOptionDefaultValue,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsLimitOptionDefaultValue$outboundSchema.parse(
-      benefitTypeRequirementsLimitOptionDefaultValue,
-    ),
-  );
-}
 
 export function benefitTypeRequirementsLimitOptionDefaultValueFromJSON(
   jsonString: string,
@@ -813,51 +419,6 @@ export const LimitOption$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type LimitOption$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?:
-    | BenefitTypeRequirementsLimitOptionDefaultValue$Outbound
-    | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const LimitOption$outboundSchema: z.ZodType<
-  LimitOption$Outbound,
-  z.ZodTypeDef,
-  LimitOption
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() =>
-    BenefitTypeRequirementsLimitOptionDefaultValue$outboundSchema
-  ).optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace LimitOption$ {
-  /** @deprecated use `LimitOption$inboundSchema` instead. */
-  export const inboundSchema = LimitOption$inboundSchema;
-  /** @deprecated use `LimitOption$outboundSchema` instead. */
-  export const outboundSchema = LimitOption$outboundSchema;
-  /** @deprecated use `LimitOption$Outbound` instead. */
-  export type Outbound = LimitOption$Outbound;
-}
-
-export function limitOptionToJSON(limitOption: LimitOption): string {
-  return JSON.stringify(LimitOption$outboundSchema.parse(limitOption));
-}
-
 export function limitOptionFromJSON(
   jsonString: string,
 ): SafeParseResult<LimitOption, SDKValidationError> {
@@ -878,52 +439,6 @@ export const BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue
     value: z.string().optional(),
     type: z.string().optional(),
   });
-
-/** @internal */
-export type BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$Outbound =
-  {
-    value?: string | undefined;
-    type?: string | undefined;
-  };
-
-/** @internal */
-export const BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$outboundSchema:
-  z.ZodType<
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$Outbound,
-    z.ZodTypeDef,
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue
-  > = z.object({
-    value: z.string().optional(),
-    type: z.string().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$ {
-  /** @deprecated use `BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$Outbound` instead. */
-  export type Outbound =
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$Outbound;
-}
-
-export function benefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValueToJSON(
-  benefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue:
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$outboundSchema
-      .parse(
-        benefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue,
-      ),
-  );
-}
 
 export function benefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValueFromJSON(
   jsonString: string,
@@ -958,57 +473,6 @@ export const CompanyContributionAnnualMaximum$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type CompanyContributionAnnualMaximum$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?:
-    | BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$Outbound
-    | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CompanyContributionAnnualMaximum$outboundSchema: z.ZodType<
-  CompanyContributionAnnualMaximum$Outbound,
-  z.ZodTypeDef,
-  CompanyContributionAnnualMaximum
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() =>
-    BenefitTypeRequirementsCompanyContributionAnnualMaximumDefaultValue$outboundSchema
-  ).optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyContributionAnnualMaximum$ {
-  /** @deprecated use `CompanyContributionAnnualMaximum$inboundSchema` instead. */
-  export const inboundSchema = CompanyContributionAnnualMaximum$inboundSchema;
-  /** @deprecated use `CompanyContributionAnnualMaximum$outboundSchema` instead. */
-  export const outboundSchema = CompanyContributionAnnualMaximum$outboundSchema;
-  /** @deprecated use `CompanyContributionAnnualMaximum$Outbound` instead. */
-  export type Outbound = CompanyContributionAnnualMaximum$Outbound;
-}
-
-export function companyContributionAnnualMaximumToJSON(
-  companyContributionAnnualMaximum: CompanyContributionAnnualMaximum,
-): string {
-  return JSON.stringify(
-    CompanyContributionAnnualMaximum$outboundSchema.parse(
-      companyContributionAnnualMaximum,
-    ),
-  );
-}
-
 export function companyContributionAnnualMaximumFromJSON(
   jsonString: string,
 ): SafeParseResult<CompanyContributionAnnualMaximum, SDKValidationError> {
@@ -1029,50 +493,6 @@ export const BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$inbound
     value: z.string().optional(),
     type: z.string().optional(),
   });
-
-/** @internal */
-export type BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$Outbound =
-  {
-    value?: string | undefined;
-    type?: string | undefined;
-  };
-
-/** @internal */
-export const BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$outboundSchema:
-  z.ZodType<
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$Outbound,
-    z.ZodTypeDef,
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue
-  > = z.object({
-    value: z.string().optional(),
-    type: z.string().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$ {
-  /** @deprecated use `BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$Outbound` instead. */
-  export type Outbound =
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$Outbound;
-}
-
-export function benefitTypeRequirementsCoverageSalaryMultiplierDefaultValueToJSON(
-  benefitTypeRequirementsCoverageSalaryMultiplierDefaultValue:
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$outboundSchema
-      .parse(benefitTypeRequirementsCoverageSalaryMultiplierDefaultValue),
-  );
-}
 
 export function benefitTypeRequirementsCoverageSalaryMultiplierDefaultValueFromJSON(
   jsonString: string,
@@ -1107,55 +527,6 @@ export const CoverageSalaryMultiplier$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type CoverageSalaryMultiplier$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?:
-    | BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$Outbound
-    | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CoverageSalaryMultiplier$outboundSchema: z.ZodType<
-  CoverageSalaryMultiplier$Outbound,
-  z.ZodTypeDef,
-  CoverageSalaryMultiplier
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() =>
-    BenefitTypeRequirementsCoverageSalaryMultiplierDefaultValue$outboundSchema
-  ).optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CoverageSalaryMultiplier$ {
-  /** @deprecated use `CoverageSalaryMultiplier$inboundSchema` instead. */
-  export const inboundSchema = CoverageSalaryMultiplier$inboundSchema;
-  /** @deprecated use `CoverageSalaryMultiplier$outboundSchema` instead. */
-  export const outboundSchema = CoverageSalaryMultiplier$outboundSchema;
-  /** @deprecated use `CoverageSalaryMultiplier$Outbound` instead. */
-  export type Outbound = CoverageSalaryMultiplier$Outbound;
-}
-
-export function coverageSalaryMultiplierToJSON(
-  coverageSalaryMultiplier: CoverageSalaryMultiplier,
-): string {
-  return JSON.stringify(
-    CoverageSalaryMultiplier$outboundSchema.parse(coverageSalaryMultiplier),
-  );
-}
-
 export function coverageSalaryMultiplierFromJSON(
   jsonString: string,
 ): SafeParseResult<CoverageSalaryMultiplier, SDKValidationError> {
@@ -1176,50 +547,6 @@ export const BenefitTypeRequirementsCoverageAmountDefaultValue$inboundSchema:
     value: z.string().optional(),
     type: z.string().optional(),
   });
-
-/** @internal */
-export type BenefitTypeRequirementsCoverageAmountDefaultValue$Outbound = {
-  value?: string | undefined;
-  type?: string | undefined;
-};
-
-/** @internal */
-export const BenefitTypeRequirementsCoverageAmountDefaultValue$outboundSchema:
-  z.ZodType<
-    BenefitTypeRequirementsCoverageAmountDefaultValue$Outbound,
-    z.ZodTypeDef,
-    BenefitTypeRequirementsCoverageAmountDefaultValue
-  > = z.object({
-    value: z.string().optional(),
-    type: z.string().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirementsCoverageAmountDefaultValue$ {
-  /** @deprecated use `BenefitTypeRequirementsCoverageAmountDefaultValue$inboundSchema` instead. */
-  export const inboundSchema =
-    BenefitTypeRequirementsCoverageAmountDefaultValue$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCoverageAmountDefaultValue$outboundSchema` instead. */
-  export const outboundSchema =
-    BenefitTypeRequirementsCoverageAmountDefaultValue$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirementsCoverageAmountDefaultValue$Outbound` instead. */
-  export type Outbound =
-    BenefitTypeRequirementsCoverageAmountDefaultValue$Outbound;
-}
-
-export function benefitTypeRequirementsCoverageAmountDefaultValueToJSON(
-  benefitTypeRequirementsCoverageAmountDefaultValue:
-    BenefitTypeRequirementsCoverageAmountDefaultValue,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirementsCoverageAmountDefaultValue$outboundSchema.parse(
-      benefitTypeRequirementsCoverageAmountDefaultValue,
-    ),
-  );
-}
 
 export function benefitTypeRequirementsCoverageAmountDefaultValueFromJSON(
   jsonString: string,
@@ -1254,51 +581,6 @@ export const CoverageAmount$inboundSchema: z.ZodType<
     "default_value": "defaultValue",
   });
 });
-
-/** @internal */
-export type CoverageAmount$Outbound = {
-  required?: boolean | undefined;
-  editable?: boolean | undefined;
-  default_value?:
-    | BenefitTypeRequirementsCoverageAmountDefaultValue$Outbound
-    | undefined;
-  choices?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CoverageAmount$outboundSchema: z.ZodType<
-  CoverageAmount$Outbound,
-  z.ZodTypeDef,
-  CoverageAmount
-> = z.object({
-  required: z.boolean().optional(),
-  editable: z.boolean().optional(),
-  defaultValue: z.lazy(() =>
-    BenefitTypeRequirementsCoverageAmountDefaultValue$outboundSchema
-  ).optional(),
-  choices: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CoverageAmount$ {
-  /** @deprecated use `CoverageAmount$inboundSchema` instead. */
-  export const inboundSchema = CoverageAmount$inboundSchema;
-  /** @deprecated use `CoverageAmount$outboundSchema` instead. */
-  export const outboundSchema = CoverageAmount$outboundSchema;
-  /** @deprecated use `CoverageAmount$Outbound` instead. */
-  export type Outbound = CoverageAmount$Outbound;
-}
-
-export function coverageAmountToJSON(coverageAmount: CoverageAmount): string {
-  return JSON.stringify(CoverageAmount$outboundSchema.parse(coverageAmount));
-}
 
 export function coverageAmountFromJSON(
   jsonString: string,
@@ -1341,73 +623,6 @@ export const BenefitTypeRequirements$inboundSchema: z.ZodType<
     "coverage_amount": "coverageAmount",
   });
 });
-
-/** @internal */
-export type BenefitTypeRequirements$Outbound = {
-  employee_deduction?: EmployeeDeduction$Outbound | undefined;
-  contribution?: BenefitTypeRequirementsContribution$Outbound | undefined;
-  deduct_as_percentage?: DeductAsPercentage$Outbound | undefined;
-  catch_up?: CatchUp$Outbound | undefined;
-  limit_option?: LimitOption$Outbound | undefined;
-  company_contribution_annual_maximum?:
-    | CompanyContributionAnnualMaximum$Outbound
-    | undefined;
-  coverage_salary_multiplier?: CoverageSalaryMultiplier$Outbound | undefined;
-  coverage_amount?: CoverageAmount$Outbound | undefined;
-};
-
-/** @internal */
-export const BenefitTypeRequirements$outboundSchema: z.ZodType<
-  BenefitTypeRequirements$Outbound,
-  z.ZodTypeDef,
-  BenefitTypeRequirements
-> = z.object({
-  employeeDeduction: z.lazy(() => EmployeeDeduction$outboundSchema).optional(),
-  contribution: z.lazy(() => BenefitTypeRequirementsContribution$outboundSchema)
-    .optional(),
-  deductAsPercentage: z.lazy(() => DeductAsPercentage$outboundSchema)
-    .optional(),
-  catchUp: z.lazy(() => CatchUp$outboundSchema).optional(),
-  limitOption: z.lazy(() => LimitOption$outboundSchema).optional(),
-  companyContributionAnnualMaximum: z.lazy(() =>
-    CompanyContributionAnnualMaximum$outboundSchema
-  ).optional(),
-  coverageSalaryMultiplier: z.lazy(() =>
-    CoverageSalaryMultiplier$outboundSchema
-  ).optional(),
-  coverageAmount: z.lazy(() => CoverageAmount$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeDeduction: "employee_deduction",
-    deductAsPercentage: "deduct_as_percentage",
-    catchUp: "catch_up",
-    limitOption: "limit_option",
-    companyContributionAnnualMaximum: "company_contribution_annual_maximum",
-    coverageSalaryMultiplier: "coverage_salary_multiplier",
-    coverageAmount: "coverage_amount",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitTypeRequirements$ {
-  /** @deprecated use `BenefitTypeRequirements$inboundSchema` instead. */
-  export const inboundSchema = BenefitTypeRequirements$inboundSchema;
-  /** @deprecated use `BenefitTypeRequirements$outboundSchema` instead. */
-  export const outboundSchema = BenefitTypeRequirements$outboundSchema;
-  /** @deprecated use `BenefitTypeRequirements$Outbound` instead. */
-  export type Outbound = BenefitTypeRequirements$Outbound;
-}
-
-export function benefitTypeRequirementsToJSON(
-  benefitTypeRequirements: BenefitTypeRequirements,
-): string {
-  return JSON.stringify(
-    BenefitTypeRequirements$outboundSchema.parse(benefitTypeRequirements),
-  );
-}
 
 export function benefitTypeRequirementsFromJSON(
   jsonString: string,

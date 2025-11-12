@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeFederalTax,
   EmployeeFederalTax$inboundSchema,
-  EmployeeFederalTax$Outbound,
-  EmployeeFederalTax$outboundSchema,
 } from "../components/employeefederaltax.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetV1EmployeesEmployeeIdFederalTaxesResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdFederalTaxesRequest$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdFederalTaxesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_uuid": "employeeUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1EmployeesEmployeeIdFederalTaxesRequest$Outbound = {
   employee_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,21 +61,6 @@ export const GetV1EmployeesEmployeeIdFederalTaxesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdFederalTaxesRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdFederalTaxesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdFederalTaxesRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdFederalTaxesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdFederalTaxesRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdFederalTaxesRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdFederalTaxesRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdFederalTaxesRequestToJSON(
   getV1EmployeesEmployeeIdFederalTaxesRequest:
     GetV1EmployeesEmployeeIdFederalTaxesRequest,
@@ -105,22 +69,6 @@ export function getV1EmployeesEmployeeIdFederalTaxesRequestToJSON(
     GetV1EmployeesEmployeeIdFederalTaxesRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdFederalTaxesRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdFederalTaxesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdFederalTaxesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdFederalTaxesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeIdFederalTaxesRequest' from JSON`,
   );
 }
 
@@ -139,54 +87,6 @@ export const GetV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema:
       "Employee-Federal-Tax": "employeeFederalTax",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdFederalTaxesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Federal-Tax"?: EmployeeFederalTax$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdFederalTaxesResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdFederalTaxesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeFederalTax: EmployeeFederalTax$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeFederalTax: "Employee-Federal-Tax",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdFederalTaxesResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdFederalTaxesResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdFederalTaxesResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdFederalTaxesResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdFederalTaxesResponseToJSON(
-  getV1EmployeesEmployeeIdFederalTaxesResponse:
-    GetV1EmployeesEmployeeIdFederalTaxesResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdFederalTaxesResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdFederalTaxesResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdFederalTaxesResponseFromJSON(
   jsonString: string,

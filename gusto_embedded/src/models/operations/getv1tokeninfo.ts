@@ -10,12 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -86,19 +83,6 @@ export type GetV1TokenInfoResponse = {
 };
 
 /** @internal */
-export const GetV1TokenInfoRequest$inboundSchema: z.ZodType<
-  GetV1TokenInfoRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1TokenInfoRequest$Outbound = {
   "X-Gusto-API-Version": string;
 };
@@ -116,34 +100,11 @@ export const GetV1TokenInfoRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1TokenInfoRequest$ {
-  /** @deprecated use `GetV1TokenInfoRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1TokenInfoRequest$inboundSchema;
-  /** @deprecated use `GetV1TokenInfoRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1TokenInfoRequest$outboundSchema;
-  /** @deprecated use `GetV1TokenInfoRequest$Outbound` instead. */
-  export type Outbound = GetV1TokenInfoRequest$Outbound;
-}
-
 export function getV1TokenInfoRequestToJSON(
   getV1TokenInfoRequest: GetV1TokenInfoRequest,
 ): string {
   return JSON.stringify(
     GetV1TokenInfoRequest$outboundSchema.parse(getV1TokenInfoRequest),
-  );
-}
-
-export function getV1TokenInfoRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1TokenInfoRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1TokenInfoRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1TokenInfoRequest' from JSON`,
   );
 }
 
@@ -156,39 +117,6 @@ export const Resource$inboundSchema: z.ZodType<
   type: z.string(),
   uuid: z.string(),
 });
-
-/** @internal */
-export type Resource$Outbound = {
-  type: string;
-  uuid: string;
-};
-
-/** @internal */
-export const Resource$outboundSchema: z.ZodType<
-  Resource$Outbound,
-  z.ZodTypeDef,
-  Resource
-> = z.object({
-  type: z.string(),
-  uuid: z.string(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Resource$ {
-  /** @deprecated use `Resource$inboundSchema` instead. */
-  export const inboundSchema = Resource$inboundSchema;
-  /** @deprecated use `Resource$outboundSchema` instead. */
-  export const outboundSchema = Resource$outboundSchema;
-  /** @deprecated use `Resource$Outbound` instead. */
-  export type Outbound = Resource$Outbound;
-}
-
-export function resourceToJSON(resource: Resource): string {
-  return JSON.stringify(Resource$outboundSchema.parse(resource));
-}
 
 export function resourceFromJSON(
   jsonString: string,
@@ -206,22 +134,6 @@ export const GetV1TokenInfoType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetV1TokenInfoType);
 
 /** @internal */
-export const GetV1TokenInfoType$outboundSchema: z.ZodNativeEnum<
-  typeof GetV1TokenInfoType
-> = GetV1TokenInfoType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1TokenInfoType$ {
-  /** @deprecated use `GetV1TokenInfoType$inboundSchema` instead. */
-  export const inboundSchema = GetV1TokenInfoType$inboundSchema;
-  /** @deprecated use `GetV1TokenInfoType$outboundSchema` instead. */
-  export const outboundSchema = GetV1TokenInfoType$outboundSchema;
-}
-
-/** @internal */
 export const ResourceOwner$inboundSchema: z.ZodType<
   ResourceOwner,
   z.ZodTypeDef,
@@ -230,39 +142,6 @@ export const ResourceOwner$inboundSchema: z.ZodType<
   type: GetV1TokenInfoType$inboundSchema,
   uuid: z.string(),
 });
-
-/** @internal */
-export type ResourceOwner$Outbound = {
-  type: string;
-  uuid: string;
-};
-
-/** @internal */
-export const ResourceOwner$outboundSchema: z.ZodType<
-  ResourceOwner$Outbound,
-  z.ZodTypeDef,
-  ResourceOwner
-> = z.object({
-  type: GetV1TokenInfoType$outboundSchema,
-  uuid: z.string(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResourceOwner$ {
-  /** @deprecated use `ResourceOwner$inboundSchema` instead. */
-  export const inboundSchema = ResourceOwner$inboundSchema;
-  /** @deprecated use `ResourceOwner$outboundSchema` instead. */
-  export const outboundSchema = ResourceOwner$outboundSchema;
-  /** @deprecated use `ResourceOwner$Outbound` instead. */
-  export type Outbound = ResourceOwner$Outbound;
-}
-
-export function resourceOwnerToJSON(resourceOwner: ResourceOwner): string {
-  return JSON.stringify(ResourceOwner$outboundSchema.parse(resourceOwner));
-}
 
 export function resourceOwnerFromJSON(
   jsonString: string,
@@ -289,49 +168,6 @@ export const GetV1TokenInfoResponseBody$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type GetV1TokenInfoResponseBody$Outbound = {
-  scope: string;
-  resource: Resource$Outbound | null;
-  resource_owner: ResourceOwner$Outbound | null;
-};
-
-/** @internal */
-export const GetV1TokenInfoResponseBody$outboundSchema: z.ZodType<
-  GetV1TokenInfoResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetV1TokenInfoResponseBody
-> = z.object({
-  scope: z.string(),
-  resource: z.nullable(z.lazy(() => Resource$outboundSchema)),
-  resourceOwner: z.nullable(z.lazy(() => ResourceOwner$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    resourceOwner: "resource_owner",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1TokenInfoResponseBody$ {
-  /** @deprecated use `GetV1TokenInfoResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetV1TokenInfoResponseBody$inboundSchema;
-  /** @deprecated use `GetV1TokenInfoResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetV1TokenInfoResponseBody$outboundSchema;
-  /** @deprecated use `GetV1TokenInfoResponseBody$Outbound` instead. */
-  export type Outbound = GetV1TokenInfoResponseBody$Outbound;
-}
-
-export function getV1TokenInfoResponseBodyToJSON(
-  getV1TokenInfoResponseBody: GetV1TokenInfoResponseBody,
-): string {
-  return JSON.stringify(
-    GetV1TokenInfoResponseBody$outboundSchema.parse(getV1TokenInfoResponseBody),
-  );
-}
-
 export function getV1TokenInfoResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetV1TokenInfoResponseBody, SDKValidationError> {
@@ -355,47 +191,6 @@ export const GetV1TokenInfoResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type GetV1TokenInfoResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  object?: GetV1TokenInfoResponseBody$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1TokenInfoResponse$outboundSchema: z.ZodType<
-  GetV1TokenInfoResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1TokenInfoResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  object: z.lazy(() => GetV1TokenInfoResponseBody$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1TokenInfoResponse$ {
-  /** @deprecated use `GetV1TokenInfoResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1TokenInfoResponse$inboundSchema;
-  /** @deprecated use `GetV1TokenInfoResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1TokenInfoResponse$outboundSchema;
-  /** @deprecated use `GetV1TokenInfoResponse$Outbound` instead. */
-  export type Outbound = GetV1TokenInfoResponse$Outbound;
-}
-
-export function getV1TokenInfoResponseToJSON(
-  getV1TokenInfoResponse: GetV1TokenInfoResponse,
-): string {
-  return JSON.stringify(
-    GetV1TokenInfoResponse$outboundSchema.parse(getV1TokenInfoResponse),
-  );
-}
 
 export function getV1TokenInfoResponseFromJSON(
   jsonString: string,

@@ -70,69 +70,6 @@ export const EmployeeAddress$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type EmployeeAddress$Outbound = {
-  uuid: string;
-  employee_uuid?: string | undefined;
-  effective_date?: string | undefined;
-  courtesy_withholding?: boolean | undefined;
-  street_1?: string | undefined;
-  street_2?: string | null | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  zip?: string | undefined;
-  country: string;
-  active?: boolean | undefined;
-  version: string;
-};
-
-/** @internal */
-export const EmployeeAddress$outboundSchema: z.ZodType<
-  EmployeeAddress$Outbound,
-  z.ZodTypeDef,
-  EmployeeAddress
-> = z.object({
-  uuid: z.string(),
-  employeeUuid: z.string().optional(),
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  courtesyWithholding: z.boolean().optional(),
-  street1: z.string().optional(),
-  street2: z.nullable(z.string()).optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  zip: z.string().optional(),
-  country: z.string().default("USA"),
-  active: z.boolean().optional(),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    effectiveDate: "effective_date",
-    courtesyWithholding: "courtesy_withholding",
-    street1: "street_1",
-    street2: "street_2",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeAddress$ {
-  /** @deprecated use `EmployeeAddress$inboundSchema` instead. */
-  export const inboundSchema = EmployeeAddress$inboundSchema;
-  /** @deprecated use `EmployeeAddress$outboundSchema` instead. */
-  export const outboundSchema = EmployeeAddress$outboundSchema;
-  /** @deprecated use `EmployeeAddress$Outbound` instead. */
-  export type Outbound = EmployeeAddress$Outbound;
-}
-
-export function employeeAddressToJSON(
-  employeeAddress: EmployeeAddress,
-): string {
-  return JSON.stringify(EmployeeAddress$outboundSchema.parse(employeeAddress));
-}
-
 export function employeeAddressFromJSON(
   jsonString: string,
 ): SafeParseResult<EmployeeAddress, SDKValidationError> {

@@ -39,46 +39,6 @@ export const Report$inboundSchema: z.ZodType<Report, z.ZodTypeDef, unknown> = z
     });
   });
 
-/** @internal */
-export type Report$Outbound = {
-  request_uuid?: string | undefined;
-  status?: string | undefined;
-  report_urls?: Array<string> | undefined;
-};
-
-/** @internal */
-export const Report$outboundSchema: z.ZodType<
-  Report$Outbound,
-  z.ZodTypeDef,
-  Report
-> = z.object({
-  requestUuid: z.string().optional(),
-  status: z.string().optional(),
-  reportUrls: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestUuid: "request_uuid",
-    reportUrls: "report_urls",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Report$ {
-  /** @deprecated use `Report$inboundSchema` instead. */
-  export const inboundSchema = Report$inboundSchema;
-  /** @deprecated use `Report$outboundSchema` instead. */
-  export const outboundSchema = Report$outboundSchema;
-  /** @deprecated use `Report$Outbound` instead. */
-  export type Outbound = Report$Outbound;
-}
-
-export function reportToJSON(report: Report): string {
-  return JSON.stringify(Report$outboundSchema.parse(report));
-}
-
 export function reportFromJSON(
   jsonString: string,
 ): SafeParseResult<Report, SDKValidationError> {

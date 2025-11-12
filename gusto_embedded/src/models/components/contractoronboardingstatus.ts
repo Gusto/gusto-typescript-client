@@ -75,24 +75,6 @@ export const ContractorOnboardingStatusOnboardingStatus$inboundSchema:
     .nativeEnum(ContractorOnboardingStatusOnboardingStatus);
 
 /** @internal */
-export const ContractorOnboardingStatusOnboardingStatus$outboundSchema:
-  z.ZodNativeEnum<typeof ContractorOnboardingStatusOnboardingStatus> =
-    ContractorOnboardingStatusOnboardingStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorOnboardingStatusOnboardingStatus$ {
-  /** @deprecated use `ContractorOnboardingStatusOnboardingStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorOnboardingStatusOnboardingStatus$inboundSchema;
-  /** @deprecated use `ContractorOnboardingStatusOnboardingStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorOnboardingStatusOnboardingStatus$outboundSchema;
-}
-
-/** @internal */
 export const ContractorOnboardingStatusOnboardingStep$inboundSchema: z.ZodType<
   ContractorOnboardingStatusOnboardingStep,
   z.ZodTypeDef,
@@ -104,54 +86,6 @@ export const ContractorOnboardingStatusOnboardingStep$inboundSchema: z.ZodType<
   completed: z.boolean().optional(),
   requirements: z.array(z.string()).optional(),
 });
-
-/** @internal */
-export type ContractorOnboardingStatusOnboardingStep$Outbound = {
-  title?: string | undefined;
-  id?: string | undefined;
-  required?: boolean | undefined;
-  completed?: boolean | undefined;
-  requirements?: Array<string> | undefined;
-};
-
-/** @internal */
-export const ContractorOnboardingStatusOnboardingStep$outboundSchema: z.ZodType<
-  ContractorOnboardingStatusOnboardingStep$Outbound,
-  z.ZodTypeDef,
-  ContractorOnboardingStatusOnboardingStep
-> = z.object({
-  title: z.string().optional(),
-  id: z.string().optional(),
-  required: z.boolean().optional(),
-  completed: z.boolean().optional(),
-  requirements: z.array(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorOnboardingStatusOnboardingStep$ {
-  /** @deprecated use `ContractorOnboardingStatusOnboardingStep$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorOnboardingStatusOnboardingStep$inboundSchema;
-  /** @deprecated use `ContractorOnboardingStatusOnboardingStep$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorOnboardingStatusOnboardingStep$outboundSchema;
-  /** @deprecated use `ContractorOnboardingStatusOnboardingStep$Outbound` instead. */
-  export type Outbound = ContractorOnboardingStatusOnboardingStep$Outbound;
-}
-
-export function contractorOnboardingStatusOnboardingStepToJSON(
-  contractorOnboardingStatusOnboardingStep:
-    ContractorOnboardingStatusOnboardingStep,
-): string {
-  return JSON.stringify(
-    ContractorOnboardingStatusOnboardingStep$outboundSchema.parse(
-      contractorOnboardingStatusOnboardingStep,
-    ),
-  );
-}
 
 export function contractorOnboardingStatusOnboardingStepFromJSON(
   jsonString: string,
@@ -187,55 +121,6 @@ export const ContractorOnboardingStatus$inboundSchema: z.ZodType<
     "onboarding_steps": "onboardingSteps",
   });
 });
-
-/** @internal */
-export type ContractorOnboardingStatus$Outbound = {
-  uuid: string;
-  onboarding_status?: string | undefined;
-  onboarding_steps?:
-    | Array<ContractorOnboardingStatusOnboardingStep$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const ContractorOnboardingStatus$outboundSchema: z.ZodType<
-  ContractorOnboardingStatus$Outbound,
-  z.ZodTypeDef,
-  ContractorOnboardingStatus
-> = z.object({
-  uuid: z.string(),
-  onboardingStatus: ContractorOnboardingStatusOnboardingStatus$outboundSchema
-    .optional(),
-  onboardingSteps: z.array(
-    z.lazy(() => ContractorOnboardingStatusOnboardingStep$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onboardingStatus: "onboarding_status",
-    onboardingSteps: "onboarding_steps",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorOnboardingStatus$ {
-  /** @deprecated use `ContractorOnboardingStatus$inboundSchema` instead. */
-  export const inboundSchema = ContractorOnboardingStatus$inboundSchema;
-  /** @deprecated use `ContractorOnboardingStatus$outboundSchema` instead. */
-  export const outboundSchema = ContractorOnboardingStatus$outboundSchema;
-  /** @deprecated use `ContractorOnboardingStatus$Outbound` instead. */
-  export type Outbound = ContractorOnboardingStatus$Outbound;
-}
-
-export function contractorOnboardingStatusToJSON(
-  contractorOnboardingStatus: ContractorOnboardingStatus,
-): string {
-  return JSON.stringify(
-    ContractorOnboardingStatus$outboundSchema.parse(contractorOnboardingStatus),
-  );
-}
 
 export function contractorOnboardingStatusFromJSON(
   jsonString: string,

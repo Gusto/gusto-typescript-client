@@ -27,7 +27,7 @@ export type WireInRequestStatus = ClosedEnum<typeof WireInRequestStatus>;
  * Type of payment for the wire in
  */
 export const PaymentType = {
-  Payroll: "payroll",
+  Payroll: "Payroll",
 } as const;
 /**
  * Type of payment for the wire in
@@ -77,11 +77,11 @@ export type WireInRequest = {
   /**
    * Name of the bank initiating the wire in
    */
-  bankName?: string | undefined;
+  bankName?: string | null | undefined;
   /**
    * Date the wire in was sent
    */
-  dateSent?: string | undefined;
+  dateSent?: string | null | undefined;
   /**
    * Include in note with bank to track payment
    */
@@ -97,7 +97,7 @@ export type WireInRequest = {
   /**
    * Amount sent through wire in
    */
-  amountSent?: string | undefined;
+  amountSent?: string | null | undefined;
   /**
    * Requested amount for the payment
    */
@@ -114,39 +114,8 @@ export const WireInRequestStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(WireInRequestStatus);
 
 /** @internal */
-export const WireInRequestStatus$outboundSchema: z.ZodNativeEnum<
-  typeof WireInRequestStatus
-> = WireInRequestStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WireInRequestStatus$ {
-  /** @deprecated use `WireInRequestStatus$inboundSchema` instead. */
-  export const inboundSchema = WireInRequestStatus$inboundSchema;
-  /** @deprecated use `WireInRequestStatus$outboundSchema` instead. */
-  export const outboundSchema = WireInRequestStatus$outboundSchema;
-}
-
-/** @internal */
 export const PaymentType$inboundSchema: z.ZodNativeEnum<typeof PaymentType> = z
   .nativeEnum(PaymentType);
-
-/** @internal */
-export const PaymentType$outboundSchema: z.ZodNativeEnum<typeof PaymentType> =
-  PaymentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentType$ {
-  /** @deprecated use `PaymentType$inboundSchema` instead. */
-  export const inboundSchema = PaymentType$inboundSchema;
-  /** @deprecated use `PaymentType$outboundSchema` instead. */
-  export const outboundSchema = PaymentType$outboundSchema;
-}
 
 /** @internal */
 export const WireInRequest$inboundSchema: z.ZodType<
@@ -163,12 +132,12 @@ export const WireInRequest$inboundSchema: z.ZodType<
   recipient_account_number: z.string().optional(),
   recipient_routing_number: z.string().optional(),
   additional_notes: z.nullable(z.string()).optional(),
-  bank_name: z.string().optional(),
-  date_sent: z.string().optional(),
+  bank_name: z.nullable(z.string()).optional(),
+  date_sent: z.nullable(z.string()).optional(),
   unique_tracking_code: z.string().optional(),
   payment_type: PaymentType$inboundSchema.optional(),
   payment_uuid: z.string().optional(),
-  amount_sent: z.string().optional(),
+  amount_sent: z.nullable(z.string()).optional(),
   requested_amount: z.string().optional(),
   wire_in_deadline: z.string().optional(),
 }).transform((v) => {
@@ -190,87 +159,6 @@ export const WireInRequest$inboundSchema: z.ZodType<
     "wire_in_deadline": "wireInDeadline",
   });
 });
-
-/** @internal */
-export type WireInRequest$Outbound = {
-  uuid?: string | undefined;
-  status?: string | undefined;
-  origination_bank?: string | undefined;
-  origination_bank_address?: string | undefined;
-  recipient_name?: string | undefined;
-  recipient_address?: string | undefined;
-  recipient_account_number?: string | undefined;
-  recipient_routing_number?: string | undefined;
-  additional_notes?: string | null | undefined;
-  bank_name?: string | undefined;
-  date_sent?: string | undefined;
-  unique_tracking_code?: string | undefined;
-  payment_type?: string | undefined;
-  payment_uuid?: string | undefined;
-  amount_sent?: string | undefined;
-  requested_amount?: string | undefined;
-  wire_in_deadline?: string | undefined;
-};
-
-/** @internal */
-export const WireInRequest$outboundSchema: z.ZodType<
-  WireInRequest$Outbound,
-  z.ZodTypeDef,
-  WireInRequest
-> = z.object({
-  uuid: z.string().optional(),
-  status: WireInRequestStatus$outboundSchema.optional(),
-  originationBank: z.string().optional(),
-  originationBankAddress: z.string().optional(),
-  recipientName: z.string().optional(),
-  recipientAddress: z.string().optional(),
-  recipientAccountNumber: z.string().optional(),
-  recipientRoutingNumber: z.string().optional(),
-  additionalNotes: z.nullable(z.string()).optional(),
-  bankName: z.string().optional(),
-  dateSent: z.string().optional(),
-  uniqueTrackingCode: z.string().optional(),
-  paymentType: PaymentType$outboundSchema.optional(),
-  paymentUuid: z.string().optional(),
-  amountSent: z.string().optional(),
-  requestedAmount: z.string().optional(),
-  wireInDeadline: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    originationBank: "origination_bank",
-    originationBankAddress: "origination_bank_address",
-    recipientName: "recipient_name",
-    recipientAddress: "recipient_address",
-    recipientAccountNumber: "recipient_account_number",
-    recipientRoutingNumber: "recipient_routing_number",
-    additionalNotes: "additional_notes",
-    bankName: "bank_name",
-    dateSent: "date_sent",
-    uniqueTrackingCode: "unique_tracking_code",
-    paymentType: "payment_type",
-    paymentUuid: "payment_uuid",
-    amountSent: "amount_sent",
-    requestedAmount: "requested_amount",
-    wireInDeadline: "wire_in_deadline",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WireInRequest$ {
-  /** @deprecated use `WireInRequest$inboundSchema` instead. */
-  export const inboundSchema = WireInRequest$inboundSchema;
-  /** @deprecated use `WireInRequest$outboundSchema` instead. */
-  export const outboundSchema = WireInRequest$outboundSchema;
-  /** @deprecated use `WireInRequest$Outbound` instead. */
-  export type Outbound = WireInRequest$Outbound;
-}
-
-export function wireInRequestToJSON(wireInRequest: WireInRequest): string {
-  return JSON.stringify(WireInRequest$outboundSchema.parse(wireInRequest));
-}
 
 export function wireInRequestFromJSON(
   jsonString: string,

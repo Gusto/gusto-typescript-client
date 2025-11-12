@@ -54,56 +54,6 @@ export const I9AuthorizationDocument$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type I9AuthorizationDocument$Outbound = {
-  uuid: string;
-  document_type: string;
-  document_title: string;
-  expiration_date?: string | undefined;
-  issuing_authority: string;
-};
-
-/** @internal */
-export const I9AuthorizationDocument$outboundSchema: z.ZodType<
-  I9AuthorizationDocument$Outbound,
-  z.ZodTypeDef,
-  I9AuthorizationDocument
-> = z.object({
-  uuid: z.string(),
-  documentType: z.string(),
-  documentTitle: z.string(),
-  expirationDate: z.string().optional(),
-  issuingAuthority: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    documentType: "document_type",
-    documentTitle: "document_title",
-    expirationDate: "expiration_date",
-    issuingAuthority: "issuing_authority",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace I9AuthorizationDocument$ {
-  /** @deprecated use `I9AuthorizationDocument$inboundSchema` instead. */
-  export const inboundSchema = I9AuthorizationDocument$inboundSchema;
-  /** @deprecated use `I9AuthorizationDocument$outboundSchema` instead. */
-  export const outboundSchema = I9AuthorizationDocument$outboundSchema;
-  /** @deprecated use `I9AuthorizationDocument$Outbound` instead. */
-  export type Outbound = I9AuthorizationDocument$Outbound;
-}
-
-export function i9AuthorizationDocumentToJSON(
-  i9AuthorizationDocument: I9AuthorizationDocument,
-): string {
-  return JSON.stringify(
-    I9AuthorizationDocument$outboundSchema.parse(i9AuthorizationDocument),
-  );
-}
-
 export function i9AuthorizationDocumentFromJSON(
   jsonString: string,
 ): SafeParseResult<I9AuthorizationDocument, SDKValidationError> {

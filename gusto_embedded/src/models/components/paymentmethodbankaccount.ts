@@ -52,54 +52,6 @@ export const PaymentMethodBankAccount$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PaymentMethodBankAccount$Outbound = {
-  uuid: string;
-  name?: string | undefined;
-  hidden_account_number?: string | undefined;
-  priority?: number | undefined;
-  split_amount?: number | null | undefined;
-};
-
-/** @internal */
-export const PaymentMethodBankAccount$outboundSchema: z.ZodType<
-  PaymentMethodBankAccount$Outbound,
-  z.ZodTypeDef,
-  PaymentMethodBankAccount
-> = z.object({
-  uuid: z.string(),
-  name: z.string().optional(),
-  hiddenAccountNumber: z.string().optional(),
-  priority: z.number().int().optional(),
-  splitAmount: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hiddenAccountNumber: "hidden_account_number",
-    splitAmount: "split_amount",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentMethodBankAccount$ {
-  /** @deprecated use `PaymentMethodBankAccount$inboundSchema` instead. */
-  export const inboundSchema = PaymentMethodBankAccount$inboundSchema;
-  /** @deprecated use `PaymentMethodBankAccount$outboundSchema` instead. */
-  export const outboundSchema = PaymentMethodBankAccount$outboundSchema;
-  /** @deprecated use `PaymentMethodBankAccount$Outbound` instead. */
-  export type Outbound = PaymentMethodBankAccount$Outbound;
-}
-
-export function paymentMethodBankAccountToJSON(
-  paymentMethodBankAccount: PaymentMethodBankAccount,
-): string {
-  return JSON.stringify(
-    PaymentMethodBankAccount$outboundSchema.parse(paymentMethodBankAccount),
-  );
-}
-
 export function paymentMethodBankAccountFromJSON(
   jsonString: string,
 ): SafeParseResult<PaymentMethodBankAccount, SDKValidationError> {

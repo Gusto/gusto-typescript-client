@@ -83,67 +83,6 @@ export const SupportedBenefit$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type SupportedBenefit$Outbound = {
-  benefit_type?: number | undefined;
-  name?: string | undefined;
-  description?: string | undefined;
-  pretax?: boolean | undefined;
-  posttax?: boolean | undefined;
-  imputed?: boolean | undefined;
-  healthcare?: boolean | undefined;
-  retirement?: boolean | undefined;
-  yearly_limit?: boolean | undefined;
-  category?: string | undefined;
-  writable_by_application?: boolean | undefined;
-};
-
-/** @internal */
-export const SupportedBenefit$outboundSchema: z.ZodType<
-  SupportedBenefit$Outbound,
-  z.ZodTypeDef,
-  SupportedBenefit
-> = z.object({
-  benefitType: z.number().int().optional(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  pretax: z.boolean().optional(),
-  posttax: z.boolean().optional(),
-  imputed: z.boolean().optional(),
-  healthcare: z.boolean().optional(),
-  retirement: z.boolean().optional(),
-  yearlyLimit: z.boolean().optional(),
-  category: z.string().optional(),
-  writableByApplication: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    benefitType: "benefit_type",
-    yearlyLimit: "yearly_limit",
-    writableByApplication: "writable_by_application",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SupportedBenefit$ {
-  /** @deprecated use `SupportedBenefit$inboundSchema` instead. */
-  export const inboundSchema = SupportedBenefit$inboundSchema;
-  /** @deprecated use `SupportedBenefit$outboundSchema` instead. */
-  export const outboundSchema = SupportedBenefit$outboundSchema;
-  /** @deprecated use `SupportedBenefit$Outbound` instead. */
-  export type Outbound = SupportedBenefit$Outbound;
-}
-
-export function supportedBenefitToJSON(
-  supportedBenefit: SupportedBenefit,
-): string {
-  return JSON.stringify(
-    SupportedBenefit$outboundSchema.parse(supportedBenefit),
-  );
-}
-
 export function supportedBenefitFromJSON(
   jsonString: string,
 ): SafeParseResult<SupportedBenefit, SDKValidationError> {

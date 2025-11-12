@@ -9,24 +9,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeBenefit,
   EmployeeBenefit$inboundSchema,
-  EmployeeBenefit$Outbound,
-  EmployeeBenefit$outboundSchema,
 } from "../components/employeebenefit.js";
 import {
   EmployeeBenefitForCompanyBenefit,
-  EmployeeBenefitForCompanyBenefit$inboundSchema,
   EmployeeBenefitForCompanyBenefit$Outbound,
   EmployeeBenefitForCompanyBenefit$outboundSchema,
 } from "../components/employeebenefitforcompanybenefit.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,20 +53,6 @@ export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse = {
 };
 
 /** @internal */
-export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_benefits: z.array(EmployeeBenefitForCompanyBenefit$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_benefits": "employeeBenefits",
-    });
-  });
-
-/** @internal */
 export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$Outbound =
   {
     employee_benefits: Array<EmployeeBenefitForCompanyBenefit$Outbound>;
@@ -92,22 +72,6 @@ export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$out
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$ {
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$Outbound;
-}
-
 export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBodyToJSON(
   putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody:
     PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody,
@@ -117,41 +81,6 @@ export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBodyT
       .parse(putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody),
   );
 }
-
-export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_benefit_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_benefit_id": "companyBenefitId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$Outbound =
@@ -182,22 +111,6 @@ export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$ {
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$inboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$Outbound;
-}
-
 export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestToJSON(
   putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest:
     PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
@@ -205,21 +118,6 @@ export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestToJSO
   return JSON.stringify(
     PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$outboundSchema
       .parse(putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest),
-  );
-}
-
-export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest' from JSON`,
   );
 }
 
@@ -238,55 +136,6 @@ export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboun
       "Employee-Benefit-List": "employeeBenefitList",
     });
   });
-
-/** @internal */
-export type PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Employee-Benefit-List"?: Array<EmployeeBenefit$Outbound> | undefined;
-  };
-
-/** @internal */
-export const PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeBenefitList: z.array(EmployeeBenefit$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeBenefitList: "Employee-Benefit-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$ {
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$inboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$outboundSchema;
-  /** @deprecated use `PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$Outbound;
-}
-
-export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponseToJSON(
-  putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse:
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse$outboundSchema
-      .parse(putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponse),
-  );
-}
 
 export function putV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsResponseFromJSON(
   jsonString: string,

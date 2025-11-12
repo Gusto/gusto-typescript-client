@@ -55,64 +55,6 @@ export const MetadataWithOneEntity$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type MetadataWithOneEntity$Outbound = {
-  entity_type?: string | undefined;
-  entity_uuid?: string | undefined;
-  valid_from?: string | null | undefined;
-  valid_up_to?: string | null | undefined;
-  key?: string | null | undefined;
-  state?: string | null | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const MetadataWithOneEntity$outboundSchema: z.ZodType<
-  MetadataWithOneEntity$Outbound,
-  z.ZodTypeDef,
-  MetadataWithOneEntity
-> = z.object({
-  entityType: z.string().optional(),
-  entityUuid: z.string().optional(),
-  validFrom: z.nullable(z.string()).optional(),
-  validUpTo: z.nullable(z.string()).optional(),
-  key: z.nullable(z.string()).optional(),
-  state: z.nullable(z.string()).optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      entityType: "entity_type",
-      entityUuid: "entity_uuid",
-      validFrom: "valid_from",
-      validUpTo: "valid_up_to",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MetadataWithOneEntity$ {
-  /** @deprecated use `MetadataWithOneEntity$inboundSchema` instead. */
-  export const inboundSchema = MetadataWithOneEntity$inboundSchema;
-  /** @deprecated use `MetadataWithOneEntity$outboundSchema` instead. */
-  export const outboundSchema = MetadataWithOneEntity$outboundSchema;
-  /** @deprecated use `MetadataWithOneEntity$Outbound` instead. */
-  export type Outbound = MetadataWithOneEntity$Outbound;
-}
-
-export function metadataWithOneEntityToJSON(
-  metadataWithOneEntity: MetadataWithOneEntity,
-): string {
-  return JSON.stringify(
-    MetadataWithOneEntity$outboundSchema.parse(metadataWithOneEntity),
-  );
-}
-
 export function metadataWithOneEntityFromJSON(
   jsonString: string,
 ): SafeParseResult<MetadataWithOneEntity, SDKValidationError> {

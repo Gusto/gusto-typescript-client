@@ -9,19 +9,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import {
   WireInRequest,
   WireInRequest$inboundSchema,
-  WireInRequest$Outbound,
-  WireInRequest$outboundSchema,
 } from "../components/wireinrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,21 +40,6 @@ export type GetWireInRequestsWireInRequestUuidResponse = {
 };
 
 /** @internal */
-export const GetWireInRequestsWireInRequestUuidRequest$inboundSchema: z.ZodType<
-  GetWireInRequestsWireInRequestUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  wire_in_request_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "wire_in_request_uuid": "wireInRequestUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetWireInRequestsWireInRequestUuidRequest$Outbound = {
   wire_in_request_uuid: string;
   "X-Gusto-API-Version": string;
@@ -81,21 +61,6 @@ export const GetWireInRequestsWireInRequestUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetWireInRequestsWireInRequestUuidRequest$ {
-  /** @deprecated use `GetWireInRequestsWireInRequestUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetWireInRequestsWireInRequestUuidRequest$inboundSchema;
-  /** @deprecated use `GetWireInRequestsWireInRequestUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetWireInRequestsWireInRequestUuidRequest$outboundSchema;
-  /** @deprecated use `GetWireInRequestsWireInRequestUuidRequest$Outbound` instead. */
-  export type Outbound = GetWireInRequestsWireInRequestUuidRequest$Outbound;
-}
-
 export function getWireInRequestsWireInRequestUuidRequestToJSON(
   getWireInRequestsWireInRequestUuidRequest:
     GetWireInRequestsWireInRequestUuidRequest,
@@ -104,22 +69,6 @@ export function getWireInRequestsWireInRequestUuidRequestToJSON(
     GetWireInRequestsWireInRequestUuidRequest$outboundSchema.parse(
       getWireInRequestsWireInRequestUuidRequest,
     ),
-  );
-}
-
-export function getWireInRequestsWireInRequestUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetWireInRequestsWireInRequestUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetWireInRequestsWireInRequestUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetWireInRequestsWireInRequestUuidRequest' from JSON`,
   );
 }
 
@@ -135,54 +84,6 @@ export const GetWireInRequestsWireInRequestUuidResponse$inboundSchema:
         "Wire-In-Request": "wireInRequest",
       });
     });
-
-/** @internal */
-export type GetWireInRequestsWireInRequestUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Wire-In-Request"?: WireInRequest$Outbound | undefined;
-};
-
-/** @internal */
-export const GetWireInRequestsWireInRequestUuidResponse$outboundSchema:
-  z.ZodType<
-    GetWireInRequestsWireInRequestUuidResponse$Outbound,
-    z.ZodTypeDef,
-    GetWireInRequestsWireInRequestUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    wireInRequest: WireInRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      wireInRequest: "Wire-In-Request",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetWireInRequestsWireInRequestUuidResponse$ {
-  /** @deprecated use `GetWireInRequestsWireInRequestUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetWireInRequestsWireInRequestUuidResponse$inboundSchema;
-  /** @deprecated use `GetWireInRequestsWireInRequestUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetWireInRequestsWireInRequestUuidResponse$outboundSchema;
-  /** @deprecated use `GetWireInRequestsWireInRequestUuidResponse$Outbound` instead. */
-  export type Outbound = GetWireInRequestsWireInRequestUuidResponse$Outbound;
-}
-
-export function getWireInRequestsWireInRequestUuidResponseToJSON(
-  getWireInRequestsWireInRequestUuidResponse:
-    GetWireInRequestsWireInRequestUuidResponse,
-): string {
-  return JSON.stringify(
-    GetWireInRequestsWireInRequestUuidResponse$outboundSchema.parse(
-      getWireInRequestsWireInRequestUuidResponse,
-    ),
-  );
-}
 
 export function getWireInRequestsWireInRequestUuidResponseFromJSON(
   jsonString: string,

@@ -56,52 +56,6 @@ export const ActiveCompanies$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ActiveCompanies$Outbound = {
-  company_uuid?: string | undefined;
-  active_employees?: number | undefined;
-  active_contractors?: number | undefined;
-  initial_invoice_period?: string | undefined;
-};
-
-/** @internal */
-export const ActiveCompanies$outboundSchema: z.ZodType<
-  ActiveCompanies$Outbound,
-  z.ZodTypeDef,
-  ActiveCompanies
-> = z.object({
-  companyUuid: z.string().optional(),
-  activeEmployees: z.number().int().optional(),
-  activeContractors: z.number().int().optional(),
-  initialInvoicePeriod: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    activeEmployees: "active_employees",
-    activeContractors: "active_contractors",
-    initialInvoicePeriod: "initial_invoice_period",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ActiveCompanies$ {
-  /** @deprecated use `ActiveCompanies$inboundSchema` instead. */
-  export const inboundSchema = ActiveCompanies$inboundSchema;
-  /** @deprecated use `ActiveCompanies$outboundSchema` instead. */
-  export const outboundSchema = ActiveCompanies$outboundSchema;
-  /** @deprecated use `ActiveCompanies$Outbound` instead. */
-  export type Outbound = ActiveCompanies$Outbound;
-}
-
-export function activeCompaniesToJSON(
-  activeCompanies: ActiveCompanies,
-): string {
-  return JSON.stringify(ActiveCompanies$outboundSchema.parse(activeCompanies));
-}
-
 export function activeCompaniesFromJSON(
   jsonString: string,
 ): SafeParseResult<ActiveCompanies, SDKValidationError> {
@@ -125,42 +79,6 @@ export const InvoiceData$inboundSchema: z.ZodType<
     "active_companies": "activeCompanies",
   });
 });
-
-/** @internal */
-export type InvoiceData$Outbound = {
-  active_companies?: Array<ActiveCompanies$Outbound> | undefined;
-};
-
-/** @internal */
-export const InvoiceData$outboundSchema: z.ZodType<
-  InvoiceData$Outbound,
-  z.ZodTypeDef,
-  InvoiceData
-> = z.object({
-  activeCompanies: z.array(z.lazy(() => ActiveCompanies$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    activeCompanies: "active_companies",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvoiceData$ {
-  /** @deprecated use `InvoiceData$inboundSchema` instead. */
-  export const inboundSchema = InvoiceData$inboundSchema;
-  /** @deprecated use `InvoiceData$outboundSchema` instead. */
-  export const outboundSchema = InvoiceData$outboundSchema;
-  /** @deprecated use `InvoiceData$Outbound` instead. */
-  export type Outbound = InvoiceData$Outbound;
-}
-
-export function invoiceDataToJSON(invoiceData: InvoiceData): string {
-  return JSON.stringify(InvoiceData$outboundSchema.parse(invoiceData));
-}
 
 export function invoiceDataFromJSON(
   jsonString: string,

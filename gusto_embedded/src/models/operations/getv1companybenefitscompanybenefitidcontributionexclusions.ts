@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContributionExclusion,
   ContributionExclusion$inboundSchema,
-  ContributionExclusion$Outbound,
-  ContributionExclusion$outboundSchema,
 } from "../components/contributionexclusion.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,22 +42,6 @@ export type GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse =
   };
 
 /** @internal */
-export const GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_benefit_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_benefit_id": "companyBenefitId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$Outbound =
   {
     company_benefit_id: string;
@@ -85,22 +64,6 @@ export const GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$o
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$ {
-  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$Outbound;
-}
-
 export function getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestToJSON(
   getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest:
     GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
@@ -108,21 +71,6 @@ export function getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsReques
   return JSON.stringify(
     GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$outboundSchema
       .parse(getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest),
-  );
-}
-
-export function getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest' from JSON`,
   );
 }
 
@@ -142,60 +90,6 @@ export const GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$
       "Contribution-Exclusion-List": "contributionExclusionList",
     });
   });
-
-/** @internal */
-export type GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Contribution-Exclusion-List"?:
-      | Array<ContributionExclusion$Outbound>
-      | undefined;
-  };
-
-/** @internal */
-export const GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contributionExclusionList: z.array(ContributionExclusion$outboundSchema)
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contributionExclusionList: "Contribution-Exclusion-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$ {
-  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$Outbound;
-}
-
-export function getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponseToJSON(
-  getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse:
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse$outboundSchema
-      .parse(
-        getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
-      ),
-  );
-}
 
 export function getV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponseFromJSON(
   jsonString: string,

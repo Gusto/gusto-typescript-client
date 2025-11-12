@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanySuspension,
   CompanySuspension$inboundSchema,
-  CompanySuspension$Outbound,
-  CompanySuspension$outboundSchema,
 } from "../components/companysuspension.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -55,46 +51,10 @@ export type GetCompaniesCompanyUuidSuspensionsResponse = {
 };
 
 /** @internal */
-export const GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
-  > = z.nativeEnum(GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion);
-
-/** @internal */
 export const GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
-  > = GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetCompaniesCompanyUuidSuspensionsRequest$inboundSchema: z.ZodType<
-  GetCompaniesCompanyUuidSuspensionsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-  company_uuid: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "company_uuid": "companyUuid",
-  });
-});
+  > = z.nativeEnum(GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetCompaniesCompanyUuidSuspensionsRequest$Outbound = {
@@ -120,21 +80,6 @@ export const GetCompaniesCompanyUuidSuspensionsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidSuspensionsRequest$ {
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidSuspensionsRequest$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidSuspensionsRequest$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsRequest$Outbound` instead. */
-  export type Outbound = GetCompaniesCompanyUuidSuspensionsRequest$Outbound;
-}
-
 export function getCompaniesCompanyUuidSuspensionsRequestToJSON(
   getCompaniesCompanyUuidSuspensionsRequest:
     GetCompaniesCompanyUuidSuspensionsRequest,
@@ -143,22 +88,6 @@ export function getCompaniesCompanyUuidSuspensionsRequestToJSON(
     GetCompaniesCompanyUuidSuspensionsRequest$outboundSchema.parse(
       getCompaniesCompanyUuidSuspensionsRequest,
     ),
-  );
-}
-
-export function getCompaniesCompanyUuidSuspensionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetCompaniesCompanyUuidSuspensionsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetCompaniesCompanyUuidSuspensionsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetCompaniesCompanyUuidSuspensionsRequest' from JSON`,
   );
 }
 
@@ -175,54 +104,6 @@ export const GetCompaniesCompanyUuidSuspensionsResponse$inboundSchema:
         "Company-Suspension-List": "companySuspensionList",
       });
     });
-
-/** @internal */
-export type GetCompaniesCompanyUuidSuspensionsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Suspension-List"?: Array<CompanySuspension$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetCompaniesCompanyUuidSuspensionsResponse$outboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidSuspensionsResponse$Outbound,
-    z.ZodTypeDef,
-    GetCompaniesCompanyUuidSuspensionsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    companySuspensionList: z.array(CompanySuspension$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      companySuspensionList: "Company-Suspension-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidSuspensionsResponse$ {
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidSuspensionsResponse$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidSuspensionsResponse$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidSuspensionsResponse$Outbound` instead. */
-  export type Outbound = GetCompaniesCompanyUuidSuspensionsResponse$Outbound;
-}
-
-export function getCompaniesCompanyUuidSuspensionsResponseToJSON(
-  getCompaniesCompanyUuidSuspensionsResponse:
-    GetCompaniesCompanyUuidSuspensionsResponse,
-): string {
-  return JSON.stringify(
-    GetCompaniesCompanyUuidSuspensionsResponse$outboundSchema.parse(
-      getCompaniesCompanyUuidSuspensionsResponse,
-    ),
-  );
-}
 
 export function getCompaniesCompanyUuidSuspensionsResponseFromJSON(
   jsonString: string,

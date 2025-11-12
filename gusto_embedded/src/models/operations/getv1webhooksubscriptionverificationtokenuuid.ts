@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,20 +36,6 @@ export type GetV1WebhookSubscriptionVerificationTokenUuidResponse = {
 };
 
 /** @internal */
-export const GetV1WebhookSubscriptionVerificationTokenUuidSecurity$inboundSchema:
-  z.ZodType<
-    GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    SystemAccessAuth: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "SystemAccessAuth": "systemAccessAuth",
-    });
-  });
-
-/** @internal */
 export type GetV1WebhookSubscriptionVerificationTokenUuidSecurity$Outbound = {
   SystemAccessAuth: string;
 };
@@ -71,22 +54,6 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidSecurity$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WebhookSubscriptionVerificationTokenUuidSecurity$ {
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidSecurity$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1WebhookSubscriptionVerificationTokenUuidSecurity$inboundSchema;
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidSecurity$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1WebhookSubscriptionVerificationTokenUuidSecurity$outboundSchema;
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidSecurity$Outbound` instead. */
-  export type Outbound =
-    GetV1WebhookSubscriptionVerificationTokenUuidSecurity$Outbound;
-}
-
 export function getV1WebhookSubscriptionVerificationTokenUuidSecurityToJSON(
   getV1WebhookSubscriptionVerificationTokenUuidSecurity:
     GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
@@ -97,38 +64,6 @@ export function getV1WebhookSubscriptionVerificationTokenUuidSecurityToJSON(
     ),
   );
 }
-
-export function getV1WebhookSubscriptionVerificationTokenUuidSecurityFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1WebhookSubscriptionVerificationTokenUuidSecurity$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1WebhookSubscriptionVerificationTokenUuidSecurity' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$inboundSchema:
-  z.ZodType<
-    GetV1WebhookSubscriptionVerificationTokenUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    webhook_subscription_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "webhook_subscription_uuid": "webhookSubscriptionUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type GetV1WebhookSubscriptionVerificationTokenUuidRequest$Outbound = {
@@ -152,22 +87,6 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WebhookSubscriptionVerificationTokenUuidRequest$ {
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1WebhookSubscriptionVerificationTokenUuidRequest$inboundSchema;
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema;
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1WebhookSubscriptionVerificationTokenUuidRequest$Outbound;
-}
-
 export function getV1WebhookSubscriptionVerificationTokenUuidRequestToJSON(
   getV1WebhookSubscriptionVerificationTokenUuidRequest:
     GetV1WebhookSubscriptionVerificationTokenUuidRequest,
@@ -176,22 +95,6 @@ export function getV1WebhookSubscriptionVerificationTokenUuidRequestToJSON(
     GetV1WebhookSubscriptionVerificationTokenUuidRequest$outboundSchema.parse(
       getV1WebhookSubscriptionVerificationTokenUuidRequest,
     ),
-  );
-}
-
-export function getV1WebhookSubscriptionVerificationTokenUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1WebhookSubscriptionVerificationTokenUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1WebhookSubscriptionVerificationTokenUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1WebhookSubscriptionVerificationTokenUuidRequest' from JSON`,
   );
 }
 
@@ -208,52 +111,6 @@ export const GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema:
-  z.ZodType<
-    GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1WebhookSubscriptionVerificationTokenUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WebhookSubscriptionVerificationTokenUuidResponse$ {
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1WebhookSubscriptionVerificationTokenUuidResponse$inboundSchema;
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema;
-  /** @deprecated use `GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1WebhookSubscriptionVerificationTokenUuidResponse$Outbound;
-}
-
-export function getV1WebhookSubscriptionVerificationTokenUuidResponseToJSON(
-  getV1WebhookSubscriptionVerificationTokenUuidResponse:
-    GetV1WebhookSubscriptionVerificationTokenUuidResponse,
-): string {
-  return JSON.stringify(
-    GetV1WebhookSubscriptionVerificationTokenUuidResponse$outboundSchema.parse(
-      getV1WebhookSubscriptionVerificationTokenUuidResponse,
-    ),
-  );
-}
 
 export function getV1WebhookSubscriptionVerificationTokenUuidResponseFromJSON(
   jsonString: string,

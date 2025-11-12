@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   DocumentSigned,
   DocumentSigned$inboundSchema,
-  DocumentSigned$Outbound,
-  DocumentSigned$outboundSchema,
 } from "../components/documentsigned.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -76,13 +71,6 @@ export type PutV1ContractorDocumentSignResponse = {
 };
 
 /** @internal */
-export const Fields$inboundSchema: z.ZodType<Fields, z.ZodTypeDef, unknown> = z
-  .object({
-    key: z.string().optional(),
-    value: z.string().optional(),
-  });
-
-/** @internal */
 export type Fields$Outbound = {
   key?: string | undefined;
   value?: string | undefined;
@@ -98,47 +86,9 @@ export const Fields$outboundSchema: z.ZodType<
   value: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Fields$ {
-  /** @deprecated use `Fields$inboundSchema` instead. */
-  export const inboundSchema = Fields$inboundSchema;
-  /** @deprecated use `Fields$outboundSchema` instead. */
-  export const outboundSchema = Fields$outboundSchema;
-  /** @deprecated use `Fields$Outbound` instead. */
-  export type Outbound = Fields$Outbound;
-}
-
 export function fieldsToJSON(fields: Fields): string {
   return JSON.stringify(Fields$outboundSchema.parse(fields));
 }
-
-export function fieldsFromJSON(
-  jsonString: string,
-): SafeParseResult<Fields, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Fields$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Fields' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1ContractorDocumentSignRequestBody$inboundSchema: z.ZodType<
-  PutV1ContractorDocumentSignRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  fields: z.array(z.lazy(() => Fields$inboundSchema)),
-  agree: z.boolean(),
-  signed_by_ip_address: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "signed_by_ip_address": "signedByIpAddress",
-  });
-});
 
 /** @internal */
 export type PutV1ContractorDocumentSignRequestBody$Outbound = {
@@ -162,21 +112,6 @@ export const PutV1ContractorDocumentSignRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorDocumentSignRequestBody$ {
-  /** @deprecated use `PutV1ContractorDocumentSignRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorDocumentSignRequestBody$inboundSchema;
-  /** @deprecated use `PutV1ContractorDocumentSignRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorDocumentSignRequestBody$outboundSchema;
-  /** @deprecated use `PutV1ContractorDocumentSignRequestBody$Outbound` instead. */
-  export type Outbound = PutV1ContractorDocumentSignRequestBody$Outbound;
-}
-
 export function putV1ContractorDocumentSignRequestBodyToJSON(
   putV1ContractorDocumentSignRequestBody:
     PutV1ContractorDocumentSignRequestBody,
@@ -187,38 +122,6 @@ export function putV1ContractorDocumentSignRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1ContractorDocumentSignRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1ContractorDocumentSignRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorDocumentSignRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1ContractorDocumentSignRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1ContractorDocumentSignRequest$inboundSchema: z.ZodType<
-  PutV1ContractorDocumentSignRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  document_uuid: z.string(),
-  "x-gusto-client-ip": z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutV1ContractorDocumentSignRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "document_uuid": "documentUuid",
-    "x-gusto-client-ip": "xGustoClientIp",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1ContractorDocumentSignRequest$Outbound = {
@@ -249,20 +152,6 @@ export const PutV1ContractorDocumentSignRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorDocumentSignRequest$ {
-  /** @deprecated use `PutV1ContractorDocumentSignRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1ContractorDocumentSignRequest$inboundSchema;
-  /** @deprecated use `PutV1ContractorDocumentSignRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorDocumentSignRequest$outboundSchema;
-  /** @deprecated use `PutV1ContractorDocumentSignRequest$Outbound` instead. */
-  export type Outbound = PutV1ContractorDocumentSignRequest$Outbound;
-}
-
 export function putV1ContractorDocumentSignRequestToJSON(
   putV1ContractorDocumentSignRequest: PutV1ContractorDocumentSignRequest,
 ): string {
@@ -270,17 +159,6 @@ export function putV1ContractorDocumentSignRequestToJSON(
     PutV1ContractorDocumentSignRequest$outboundSchema.parse(
       putV1ContractorDocumentSignRequest,
     ),
-  );
-}
-
-export function putV1ContractorDocumentSignRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1ContractorDocumentSignRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1ContractorDocumentSignRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1ContractorDocumentSignRequest' from JSON`,
   );
 }
 
@@ -298,52 +176,6 @@ export const PutV1ContractorDocumentSignResponse$inboundSchema: z.ZodType<
     "Document-Signed": "documentSigned",
   });
 });
-
-/** @internal */
-export type PutV1ContractorDocumentSignResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Document-Signed"?: DocumentSigned$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1ContractorDocumentSignResponse$outboundSchema: z.ZodType<
-  PutV1ContractorDocumentSignResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1ContractorDocumentSignResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  documentSigned: DocumentSigned$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    documentSigned: "Document-Signed",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ContractorDocumentSignResponse$ {
-  /** @deprecated use `PutV1ContractorDocumentSignResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1ContractorDocumentSignResponse$inboundSchema;
-  /** @deprecated use `PutV1ContractorDocumentSignResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1ContractorDocumentSignResponse$outboundSchema;
-  /** @deprecated use `PutV1ContractorDocumentSignResponse$Outbound` instead. */
-  export type Outbound = PutV1ContractorDocumentSignResponse$Outbound;
-}
-
-export function putV1ContractorDocumentSignResponseToJSON(
-  putV1ContractorDocumentSignResponse: PutV1ContractorDocumentSignResponse,
-): string {
-  return JSON.stringify(
-    PutV1ContractorDocumentSignResponse$outboundSchema.parse(
-      putV1ContractorDocumentSignResponse,
-    ),
-  );
-}
 
 export function putV1ContractorDocumentSignResponseFromJSON(
   jsonString: string,

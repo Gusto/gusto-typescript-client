@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   SalaryEstimate,
   SalaryEstimate$inboundSchema,
-  SalaryEstimate$Outbound,
-  SalaryEstimate$outboundSchema,
 } from "../components/salaryestimate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -106,68 +102,15 @@ export type PutV1SalaryEstimatesIdResponse = {
 };
 
 /** @internal */
-export const PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$inboundSchema:
+export const PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<typeof PutV1SalaryEstimatesIdHeaderXGustoAPIVersion> = z
     .nativeEnum(PutV1SalaryEstimatesIdHeaderXGustoAPIVersion);
 
 /** @internal */
-export const PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1SalaryEstimatesIdHeaderXGustoAPIVersion> =
-    PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PutV1SalaryEstimatesIdExperienceLevel$inboundSchema:
+export const PutV1SalaryEstimatesIdExperienceLevel$outboundSchema:
   z.ZodNativeEnum<typeof PutV1SalaryEstimatesIdExperienceLevel> = z.nativeEnum(
     PutV1SalaryEstimatesIdExperienceLevel,
   );
-
-/** @internal */
-export const PutV1SalaryEstimatesIdExperienceLevel$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1SalaryEstimatesIdExperienceLevel> =
-    PutV1SalaryEstimatesIdExperienceLevel$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1SalaryEstimatesIdExperienceLevel$ {
-  /** @deprecated use `PutV1SalaryEstimatesIdExperienceLevel$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1SalaryEstimatesIdExperienceLevel$inboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdExperienceLevel$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1SalaryEstimatesIdExperienceLevel$outboundSchema;
-}
-
-/** @internal */
-export const PutV1SalaryEstimatesIdOccupations$inboundSchema: z.ZodType<
-  PutV1SalaryEstimatesIdOccupations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  experience_level: PutV1SalaryEstimatesIdExperienceLevel$inboundSchema,
-  time_percentage: z.string(),
-  primary: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "experience_level": "experienceLevel",
-    "time_percentage": "timePercentage",
-  });
-});
 
 /** @internal */
 export type PutV1SalaryEstimatesIdOccupations$Outbound = {
@@ -194,20 +137,6 @@ export const PutV1SalaryEstimatesIdOccupations$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1SalaryEstimatesIdOccupations$ {
-  /** @deprecated use `PutV1SalaryEstimatesIdOccupations$inboundSchema` instead. */
-  export const inboundSchema = PutV1SalaryEstimatesIdOccupations$inboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdOccupations$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1SalaryEstimatesIdOccupations$outboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdOccupations$Outbound` instead. */
-  export type Outbound = PutV1SalaryEstimatesIdOccupations$Outbound;
-}
-
 export function putV1SalaryEstimatesIdOccupationsToJSON(
   putV1SalaryEstimatesIdOccupations: PutV1SalaryEstimatesIdOccupations,
 ): string {
@@ -217,34 +146,6 @@ export function putV1SalaryEstimatesIdOccupationsToJSON(
     ),
   );
 }
-
-export function putV1SalaryEstimatesIdOccupationsFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1SalaryEstimatesIdOccupations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1SalaryEstimatesIdOccupations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1SalaryEstimatesIdOccupations' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1SalaryEstimatesIdRequestBody$inboundSchema: z.ZodType<
-  PutV1SalaryEstimatesIdRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  annual_net_revenue: z.nullable(z.number()).optional(),
-  zip_code: z.string(),
-  occupations: z.array(
-    z.lazy(() => PutV1SalaryEstimatesIdOccupations$inboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "annual_net_revenue": "annualNetRevenue",
-    "zip_code": "zipCode",
-  });
-});
 
 /** @internal */
 export type PutV1SalaryEstimatesIdRequestBody$Outbound = {
@@ -271,20 +172,6 @@ export const PutV1SalaryEstimatesIdRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1SalaryEstimatesIdRequestBody$ {
-  /** @deprecated use `PutV1SalaryEstimatesIdRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1SalaryEstimatesIdRequestBody$inboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1SalaryEstimatesIdRequestBody$outboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdRequestBody$Outbound` instead. */
-  export type Outbound = PutV1SalaryEstimatesIdRequestBody$Outbound;
-}
-
 export function putV1SalaryEstimatesIdRequestBodyToJSON(
   putV1SalaryEstimatesIdRequestBody: PutV1SalaryEstimatesIdRequestBody,
 ): string {
@@ -294,35 +181,6 @@ export function putV1SalaryEstimatesIdRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1SalaryEstimatesIdRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1SalaryEstimatesIdRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1SalaryEstimatesIdRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1SalaryEstimatesIdRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1SalaryEstimatesIdRequest$inboundSchema: z.ZodType<
-  PutV1SalaryEstimatesIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    PutV1SalaryEstimatesIdHeaderXGustoAPIVersion$inboundSchema.default(
-      "2024-04-01",
-    ),
-  uuid: z.string(),
-  RequestBody: z.lazy(() => PutV1SalaryEstimatesIdRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1SalaryEstimatesIdRequest$Outbound = {
@@ -348,19 +206,6 @@ export const PutV1SalaryEstimatesIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1SalaryEstimatesIdRequest$ {
-  /** @deprecated use `PutV1SalaryEstimatesIdRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1SalaryEstimatesIdRequest$inboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1SalaryEstimatesIdRequest$outboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdRequest$Outbound` instead. */
-  export type Outbound = PutV1SalaryEstimatesIdRequest$Outbound;
-}
-
 export function putV1SalaryEstimatesIdRequestToJSON(
   putV1SalaryEstimatesIdRequest: PutV1SalaryEstimatesIdRequest,
 ): string {
@@ -368,16 +213,6 @@ export function putV1SalaryEstimatesIdRequestToJSON(
     PutV1SalaryEstimatesIdRequest$outboundSchema.parse(
       putV1SalaryEstimatesIdRequest,
     ),
-  );
-}
-
-export function putV1SalaryEstimatesIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1SalaryEstimatesIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1SalaryEstimatesIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1SalaryEstimatesIdRequest' from JSON`,
   );
 }
 
@@ -395,50 +230,6 @@ export const PutV1SalaryEstimatesIdResponse$inboundSchema: z.ZodType<
     "Salary-Estimate": "salaryEstimate",
   });
 });
-
-/** @internal */
-export type PutV1SalaryEstimatesIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Salary-Estimate"?: SalaryEstimate$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1SalaryEstimatesIdResponse$outboundSchema: z.ZodType<
-  PutV1SalaryEstimatesIdResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1SalaryEstimatesIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  salaryEstimate: SalaryEstimate$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    salaryEstimate: "Salary-Estimate",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1SalaryEstimatesIdResponse$ {
-  /** @deprecated use `PutV1SalaryEstimatesIdResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1SalaryEstimatesIdResponse$inboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1SalaryEstimatesIdResponse$outboundSchema;
-  /** @deprecated use `PutV1SalaryEstimatesIdResponse$Outbound` instead. */
-  export type Outbound = PutV1SalaryEstimatesIdResponse$Outbound;
-}
-
-export function putV1SalaryEstimatesIdResponseToJSON(
-  putV1SalaryEstimatesIdResponse: PutV1SalaryEstimatesIdResponse,
-): string {
-  return JSON.stringify(
-    PutV1SalaryEstimatesIdResponse$outboundSchema.parse(
-      putV1SalaryEstimatesIdResponse,
-    ),
-  );
-}
 
 export function putV1SalaryEstimatesIdResponseFromJSON(
   jsonString: string,

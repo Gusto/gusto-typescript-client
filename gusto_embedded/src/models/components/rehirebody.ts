@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The employee's employment status. Supplying an invalid option will set the employment_status to *not_set*.
@@ -49,46 +46,9 @@ export type RehireBody = {
 };
 
 /** @internal */
-export const EmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof EmploymentStatus
-> = z.nativeEnum(EmploymentStatus);
-
-/** @internal */
 export const EmploymentStatus$outboundSchema: z.ZodNativeEnum<
   typeof EmploymentStatus
-> = EmploymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmploymentStatus$ {
-  /** @deprecated use `EmploymentStatus$inboundSchema` instead. */
-  export const inboundSchema = EmploymentStatus$inboundSchema;
-  /** @deprecated use `EmploymentStatus$outboundSchema` instead. */
-  export const outboundSchema = EmploymentStatus$outboundSchema;
-}
-
-/** @internal */
-export const RehireBody$inboundSchema: z.ZodType<
-  RehireBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  effective_date: z.string(),
-  file_new_hire_report: z.boolean(),
-  work_location_uuid: z.string(),
-  employment_status: EmploymentStatus$inboundSchema.optional(),
-  two_percent_shareholder: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "effective_date": "effectiveDate",
-    "file_new_hire_report": "fileNewHireReport",
-    "work_location_uuid": "workLocationUuid",
-    "employment_status": "employmentStatus",
-    "two_percent_shareholder": "twoPercentShareholder",
-  });
-});
+> = z.nativeEnum(EmploymentStatus);
 
 /** @internal */
 export type RehireBody$Outbound = {
@@ -120,29 +80,6 @@ export const RehireBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RehireBody$ {
-  /** @deprecated use `RehireBody$inboundSchema` instead. */
-  export const inboundSchema = RehireBody$inboundSchema;
-  /** @deprecated use `RehireBody$outboundSchema` instead. */
-  export const outboundSchema = RehireBody$outboundSchema;
-  /** @deprecated use `RehireBody$Outbound` instead. */
-  export type Outbound = RehireBody$Outbound;
-}
-
 export function rehireBodyToJSON(rehireBody: RehireBody): string {
   return JSON.stringify(RehireBody$outboundSchema.parse(rehireBody));
-}
-
-export function rehireBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RehireBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RehireBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RehireBody' from JSON`,
-  );
 }

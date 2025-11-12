@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
-  Department$Outbound,
-  Department$outboundSchema,
 } from "../components/department.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetCompaniesDepartmentsResponse = {
 };
 
 /** @internal */
-export const GetCompaniesDepartmentsRequest$inboundSchema: z.ZodType<
-  GetCompaniesDepartmentsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetCompaniesDepartmentsRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,19 +60,6 @@ export const GetCompaniesDepartmentsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesDepartmentsRequest$ {
-  /** @deprecated use `GetCompaniesDepartmentsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetCompaniesDepartmentsRequest$inboundSchema;
-  /** @deprecated use `GetCompaniesDepartmentsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetCompaniesDepartmentsRequest$outboundSchema;
-  /** @deprecated use `GetCompaniesDepartmentsRequest$Outbound` instead. */
-  export type Outbound = GetCompaniesDepartmentsRequest$Outbound;
-}
-
 export function getCompaniesDepartmentsRequestToJSON(
   getCompaniesDepartmentsRequest: GetCompaniesDepartmentsRequest,
 ): string {
@@ -100,16 +67,6 @@ export function getCompaniesDepartmentsRequestToJSON(
     GetCompaniesDepartmentsRequest$outboundSchema.parse(
       getCompaniesDepartmentsRequest,
     ),
-  );
-}
-
-export function getCompaniesDepartmentsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetCompaniesDepartmentsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetCompaniesDepartmentsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetCompaniesDepartmentsRequest' from JSON`,
   );
 }
 
@@ -127,50 +84,6 @@ export const GetCompaniesDepartmentsResponse$inboundSchema: z.ZodType<
     "Department-List": "departmentList",
   });
 });
-
-/** @internal */
-export type GetCompaniesDepartmentsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Department-List"?: Array<Department$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetCompaniesDepartmentsResponse$outboundSchema: z.ZodType<
-  GetCompaniesDepartmentsResponse$Outbound,
-  z.ZodTypeDef,
-  GetCompaniesDepartmentsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  departmentList: z.array(Department$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    departmentList: "Department-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesDepartmentsResponse$ {
-  /** @deprecated use `GetCompaniesDepartmentsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetCompaniesDepartmentsResponse$inboundSchema;
-  /** @deprecated use `GetCompaniesDepartmentsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetCompaniesDepartmentsResponse$outboundSchema;
-  /** @deprecated use `GetCompaniesDepartmentsResponse$Outbound` instead. */
-  export type Outbound = GetCompaniesDepartmentsResponse$Outbound;
-}
-
-export function getCompaniesDepartmentsResponseToJSON(
-  getCompaniesDepartmentsResponse: GetCompaniesDepartmentsResponse,
-): string {
-  return JSON.stringify(
-    GetCompaniesDepartmentsResponse$outboundSchema.parse(
-      getCompaniesDepartmentsResponse,
-    ),
-  );
-}
 
 export function getCompaniesDepartmentsResponseFromJSON(
   jsonString: string,

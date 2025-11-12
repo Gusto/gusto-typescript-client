@@ -11,8 +11,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GarnishmentChildSupport,
   GarnishmentChildSupport$inboundSchema,
-  GarnishmentChildSupport$Outbound,
-  GarnishmentChildSupport$outboundSchema,
 } from "./garnishmentchildsupport.js";
 
 /**
@@ -104,22 +102,6 @@ export const GarnishmentType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GarnishmentType);
 
 /** @internal */
-export const GarnishmentType$outboundSchema: z.ZodNativeEnum<
-  typeof GarnishmentType
-> = GarnishmentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GarnishmentType$ {
-  /** @deprecated use `GarnishmentType$inboundSchema` instead. */
-  export const inboundSchema = GarnishmentType$inboundSchema;
-  /** @deprecated use `GarnishmentType$outboundSchema` instead. */
-  export const outboundSchema = GarnishmentType$outboundSchema;
-}
-
-/** @internal */
 export const Garnishment$inboundSchema: z.ZodType<
   Garnishment,
   z.ZodTypeDef,
@@ -152,76 +134,6 @@ export const Garnishment$inboundSchema: z.ZodType<
     "child_support": "childSupport",
   });
 });
-
-/** @internal */
-export type Garnishment$Outbound = {
-  uuid: string;
-  version?: string | undefined;
-  employee_uuid?: string | undefined;
-  active: boolean;
-  amount?: string | undefined;
-  description?: string | undefined;
-  court_ordered?: boolean | undefined;
-  times: number | null;
-  recurring: boolean;
-  annual_maximum: string | null;
-  total_amount: string | null;
-  pay_period_maximum: string | null;
-  deduct_as_percentage: boolean;
-  garnishment_type?: string | null | undefined;
-  child_support?: GarnishmentChildSupport$Outbound | null | undefined;
-};
-
-/** @internal */
-export const Garnishment$outboundSchema: z.ZodType<
-  Garnishment$Outbound,
-  z.ZodTypeDef,
-  Garnishment
-> = z.object({
-  uuid: z.string(),
-  version: z.string().optional(),
-  employeeUuid: z.string().optional(),
-  active: z.boolean().default(true),
-  amount: z.string().optional(),
-  description: z.string().optional(),
-  courtOrdered: z.boolean().optional(),
-  times: z.nullable(z.number().int()).default(null),
-  recurring: z.boolean().default(false),
-  annualMaximum: z.nullable(z.string()).default(null),
-  totalAmount: z.nullable(z.string()).default(null),
-  payPeriodMaximum: z.nullable(z.string()).default(null),
-  deductAsPercentage: z.boolean().default(false),
-  garnishmentType: z.nullable(GarnishmentType$outboundSchema).optional(),
-  childSupport: z.nullable(GarnishmentChildSupport$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    courtOrdered: "court_ordered",
-    annualMaximum: "annual_maximum",
-    totalAmount: "total_amount",
-    payPeriodMaximum: "pay_period_maximum",
-    deductAsPercentage: "deduct_as_percentage",
-    garnishmentType: "garnishment_type",
-    childSupport: "child_support",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Garnishment$ {
-  /** @deprecated use `Garnishment$inboundSchema` instead. */
-  export const inboundSchema = Garnishment$inboundSchema;
-  /** @deprecated use `Garnishment$outboundSchema` instead. */
-  export const outboundSchema = Garnishment$outboundSchema;
-  /** @deprecated use `Garnishment$Outbound` instead. */
-  export type Outbound = Garnishment$Outbound;
-}
-
-export function garnishmentToJSON(garnishment: Garnishment): string {
-  return JSON.stringify(Garnishment$outboundSchema.parse(garnishment));
-}
 
 export function garnishmentFromJSON(
   jsonString: string,

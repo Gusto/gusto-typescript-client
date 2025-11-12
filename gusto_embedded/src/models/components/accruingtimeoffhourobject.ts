@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccruingTimeOffHour,
   AccruingTimeOffHour$inboundSchema,
-  AccruingTimeOffHour$Outbound,
-  AccruingTimeOffHour$outboundSchema,
 } from "./accruingtimeoffhour.js";
 
 /**
@@ -33,45 +31,6 @@ export const AccruingTimeOffHourObject$inboundSchema: z.ZodType<
     "hours_earned": "hoursEarned",
   });
 });
-
-/** @internal */
-export type AccruingTimeOffHourObject$Outbound = {
-  hours_earned: Array<AccruingTimeOffHour$Outbound>;
-};
-
-/** @internal */
-export const AccruingTimeOffHourObject$outboundSchema: z.ZodType<
-  AccruingTimeOffHourObject$Outbound,
-  z.ZodTypeDef,
-  AccruingTimeOffHourObject
-> = z.object({
-  hoursEarned: z.array(AccruingTimeOffHour$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    hoursEarned: "hours_earned",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccruingTimeOffHourObject$ {
-  /** @deprecated use `AccruingTimeOffHourObject$inboundSchema` instead. */
-  export const inboundSchema = AccruingTimeOffHourObject$inboundSchema;
-  /** @deprecated use `AccruingTimeOffHourObject$outboundSchema` instead. */
-  export const outboundSchema = AccruingTimeOffHourObject$outboundSchema;
-  /** @deprecated use `AccruingTimeOffHourObject$Outbound` instead. */
-  export type Outbound = AccruingTimeOffHourObject$Outbound;
-}
-
-export function accruingTimeOffHourObjectToJSON(
-  accruingTimeOffHourObject: AccruingTimeOffHourObject,
-): string {
-  return JSON.stringify(
-    AccruingTimeOffHourObject$outboundSchema.parse(accruingTimeOffHourObject),
-  );
-}
 
 export function accruingTimeOffHourObjectFromJSON(
   jsonString: string,

@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayScheduleObject,
   PayScheduleObject$inboundSchema,
-  PayScheduleObject$Outbound,
-  PayScheduleObject$outboundSchema,
 } from "../components/payscheduleobject.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,24 +44,6 @@ export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    pay_schedule_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "pay_schedule_id": "payScheduleId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$Outbound = {
   company_id: string;
   pay_schedule_id: string;
@@ -91,22 +68,6 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSch
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestToJSON(
   getV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest:
     GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
@@ -114,21 +75,6 @@ export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestToJSON(
   return JSON.stringify(
     GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema
       .parse(getV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest),
-  );
-}
-
-export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest' from JSON`,
   );
 }
 
@@ -147,55 +93,6 @@ export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSch
       "Pay-Schedule-Object": "payScheduleObject",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Pay-Schedule-Object"?: PayScheduleObject$Outbound | undefined;
-  };
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payScheduleObject: PayScheduleObject$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payScheduleObject: "Pay-Schedule-Object",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseToJSON(
-  getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse:
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema
-      .parse(getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse),
-  );
-}
 
 export function getV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseFromJSON(
   jsonString: string,

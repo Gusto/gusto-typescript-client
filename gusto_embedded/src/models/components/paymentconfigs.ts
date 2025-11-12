@@ -67,21 +67,6 @@ export const BlockerType$inboundSchema: z.ZodNativeEnum<typeof BlockerType> = z
   .nativeEnum(BlockerType);
 
 /** @internal */
-export const BlockerType$outboundSchema: z.ZodNativeEnum<typeof BlockerType> =
-  BlockerType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BlockerType$ {
-  /** @deprecated use `BlockerType$inboundSchema` instead. */
-  export const inboundSchema = BlockerType$inboundSchema;
-  /** @deprecated use `BlockerType$outboundSchema` instead. */
-  export const outboundSchema = BlockerType$outboundSchema;
-}
-
-/** @internal */
 export const EarnedFastAchBlockers$inboundSchema: z.ZodType<
   EarnedFastAchBlockers,
   z.ZodTypeDef,
@@ -94,47 +79,6 @@ export const EarnedFastAchBlockers$inboundSchema: z.ZodType<
     "blocker_type": "blockerType",
   });
 });
-
-/** @internal */
-export type EarnedFastAchBlockers$Outbound = {
-  blocker_type?: string | undefined;
-  threshold?: number | undefined;
-};
-
-/** @internal */
-export const EarnedFastAchBlockers$outboundSchema: z.ZodType<
-  EarnedFastAchBlockers$Outbound,
-  z.ZodTypeDef,
-  EarnedFastAchBlockers
-> = z.object({
-  blockerType: BlockerType$outboundSchema.optional(),
-  threshold: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    blockerType: "blocker_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EarnedFastAchBlockers$ {
-  /** @deprecated use `EarnedFastAchBlockers$inboundSchema` instead. */
-  export const inboundSchema = EarnedFastAchBlockers$inboundSchema;
-  /** @deprecated use `EarnedFastAchBlockers$outboundSchema` instead. */
-  export const outboundSchema = EarnedFastAchBlockers$outboundSchema;
-  /** @deprecated use `EarnedFastAchBlockers$Outbound` instead. */
-  export type Outbound = EarnedFastAchBlockers$Outbound;
-}
-
-export function earnedFastAchBlockersToJSON(
-  earnedFastAchBlockers: EarnedFastAchBlockers,
-): string {
-  return JSON.stringify(
-    EarnedFastAchBlockers$outboundSchema.parse(earnedFastAchBlockers),
-  );
-}
 
 export function earnedFastAchBlockersFromJSON(
   jsonString: string,
@@ -170,58 +114,6 @@ export const PaymentConfigs$inboundSchema: z.ZodType<
     "earned_fast_ach_blockers": "earnedFastAchBlockers",
   });
 });
-
-/** @internal */
-export type PaymentConfigs$Outbound = {
-  company_uuid?: string | undefined;
-  partner_uuid?: string | undefined;
-  fast_payment_limit?: string | null | undefined;
-  payment_speed?: string | undefined;
-  partner_owned_disbursement?: boolean | undefined;
-  earned_fast_ach_blockers?: Array<EarnedFastAchBlockers$Outbound> | undefined;
-};
-
-/** @internal */
-export const PaymentConfigs$outboundSchema: z.ZodType<
-  PaymentConfigs$Outbound,
-  z.ZodTypeDef,
-  PaymentConfigs
-> = z.object({
-  companyUuid: z.string().optional(),
-  partnerUuid: z.string().optional(),
-  fastPaymentLimit: z.nullable(z.string()).optional(),
-  paymentSpeed: z.string().optional(),
-  partnerOwnedDisbursement: z.boolean().optional(),
-  earnedFastAchBlockers: z.array(
-    z.lazy(() => EarnedFastAchBlockers$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    partnerUuid: "partner_uuid",
-    fastPaymentLimit: "fast_payment_limit",
-    paymentSpeed: "payment_speed",
-    partnerOwnedDisbursement: "partner_owned_disbursement",
-    earnedFastAchBlockers: "earned_fast_ach_blockers",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentConfigs$ {
-  /** @deprecated use `PaymentConfigs$inboundSchema` instead. */
-  export const inboundSchema = PaymentConfigs$inboundSchema;
-  /** @deprecated use `PaymentConfigs$outboundSchema` instead. */
-  export const outboundSchema = PaymentConfigs$outboundSchema;
-  /** @deprecated use `PaymentConfigs$Outbound` instead. */
-  export type Outbound = PaymentConfigs$Outbound;
-}
-
-export function paymentConfigsToJSON(paymentConfigs: PaymentConfigs): string {
-  return JSON.stringify(PaymentConfigs$outboundSchema.parse(paymentConfigs));
-}
 
 export function paymentConfigsFromJSON(
   jsonString: string,

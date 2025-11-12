@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   UnprocessedTerminationPayPeriod,
   UnprocessedTerminationPayPeriod$inboundSchema,
-  UnprocessedTerminationPayPeriod$Outbound,
-  UnprocessedTerminationPayPeriod$outboundSchema,
 } from "../components/unprocessedterminationpayperiod.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,22 +42,6 @@ export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$Outbound =
   {
     company_id: string;
@@ -85,22 +64,6 @@ export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outb
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestToJSON(
   getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest:
     GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
@@ -108,21 +71,6 @@ export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestTo
   return JSON.stringify(
     GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$outboundSchema
       .parse(getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest),
-  );
-}
-
-export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest' from JSON`,
   );
 }
 
@@ -144,60 +92,6 @@ export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inb
         "unprocessedTerminationPayPeriodList",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Unprocessed-Termination-Pay-Period-List"?:
-      | Array<UnprocessedTerminationPayPeriod$Outbound>
-      | undefined;
-  };
-
-/** @internal */
-export const GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    unprocessedTerminationPayPeriodList: z.array(
-      UnprocessedTerminationPayPeriod$outboundSchema,
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      unprocessedTerminationPayPeriodList:
-        "Unprocessed-Termination-Pay-Period-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponseToJSON(
-  getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse:
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse$outboundSchema
-      .parse(getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse),
-  );
-}
 
 export function getV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponseFromJSON(
   jsonString: string,

@@ -25,19 +25,7 @@ export type FlsaStatusType = ClosedEnum<typeof FlsaStatusType>;
 export const FlsaStatusType$inboundSchema: z.ZodNativeEnum<
   typeof FlsaStatusType
 > = z.nativeEnum(FlsaStatusType);
-
 /** @internal */
 export const FlsaStatusType$outboundSchema: z.ZodNativeEnum<
   typeof FlsaStatusType
 > = FlsaStatusType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FlsaStatusType$ {
-  /** @deprecated use `FlsaStatusType$inboundSchema` instead. */
-  export const inboundSchema = FlsaStatusType$inboundSchema;
-  /** @deprecated use `FlsaStatusType$outboundSchema` instead. */
-  export const outboundSchema = FlsaStatusType$outboundSchema;
-}

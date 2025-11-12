@@ -36,47 +36,6 @@ export const AccruingTimeOffHour$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type AccruingTimeOffHour$Outbound = {
-  time_off_policy_uuid?: string | undefined;
-  hours?: string | undefined;
-};
-
-/** @internal */
-export const AccruingTimeOffHour$outboundSchema: z.ZodType<
-  AccruingTimeOffHour$Outbound,
-  z.ZodTypeDef,
-  AccruingTimeOffHour
-> = z.object({
-  timeOffPolicyUuid: z.string().optional(),
-  hours: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    timeOffPolicyUuid: "time_off_policy_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccruingTimeOffHour$ {
-  /** @deprecated use `AccruingTimeOffHour$inboundSchema` instead. */
-  export const inboundSchema = AccruingTimeOffHour$inboundSchema;
-  /** @deprecated use `AccruingTimeOffHour$outboundSchema` instead. */
-  export const outboundSchema = AccruingTimeOffHour$outboundSchema;
-  /** @deprecated use `AccruingTimeOffHour$Outbound` instead. */
-  export type Outbound = AccruingTimeOffHour$Outbound;
-}
-
-export function accruingTimeOffHourToJSON(
-  accruingTimeOffHour: AccruingTimeOffHour,
-): string {
-  return JSON.stringify(
-    AccruingTimeOffHour$outboundSchema.parse(accruingTimeOffHour),
-  );
-}
-
 export function accruingTimeOffHourFromJSON(
   jsonString: string,
 ): SafeParseResult<AccruingTimeOffHour, SDKValidationError> {

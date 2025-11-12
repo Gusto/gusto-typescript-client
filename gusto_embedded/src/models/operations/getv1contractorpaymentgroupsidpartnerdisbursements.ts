@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorPaymentGroupPartnerDisbursements,
   ContractorPaymentGroupPartnerDisbursements$inboundSchema,
-  ContractorPaymentGroupPartnerDisbursements$Outbound,
-  ContractorPaymentGroupPartnerDisbursements$outboundSchema,
 } from "../components/contractorpaymentgrouppartnerdisbursements.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -60,49 +56,12 @@ export type GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse = {
 };
 
 /** @internal */
-export const GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema:
+export const GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion
   > = z.nativeEnum(
     GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion
-  > =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$inboundSchema:
-  z.ZodType<
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.string(),
-    "X-Gusto-API-Version":
-      GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$Outbound =
@@ -128,22 +87,6 @@ export const GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$outboundS
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$ {
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$inboundSchema;
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$outboundSchema;
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$Outbound;
-}
-
 export function getV1ContractorPaymentGroupsIdPartnerDisbursementsRequestToJSON(
   getV1ContractorPaymentGroupsIdPartnerDisbursementsRequest:
     GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
@@ -151,21 +94,6 @@ export function getV1ContractorPaymentGroupsIdPartnerDisbursementsRequestToJSON(
   return JSON.stringify(
     GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$outboundSchema
       .parse(getV1ContractorPaymentGroupsIdPartnerDisbursementsRequest),
-  );
-}
-
-export function getV1ContractorPaymentGroupsIdPartnerDisbursementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest' from JSON`,
   );
 }
 
@@ -186,59 +114,6 @@ export const GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$inboundS
         "contractorPaymentGroupPartnerDisbursements",
     });
   });
-
-/** @internal */
-export type GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Contractor-Payment-Group-Partner-Disbursements"?:
-      | ContractorPaymentGroupPartnerDisbursements$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$outboundSchema:
-  z.ZodType<
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractorPaymentGroupPartnerDisbursements:
-      ContractorPaymentGroupPartnerDisbursements$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractorPaymentGroupPartnerDisbursements:
-        "Contractor-Payment-Group-Partner-Disbursements",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$ {
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$inboundSchema;
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$outboundSchema;
-  /** @deprecated use `GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$Outbound;
-}
-
-export function getV1ContractorPaymentGroupsIdPartnerDisbursementsResponseToJSON(
-  getV1ContractorPaymentGroupsIdPartnerDisbursementsResponse:
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse,
-): string {
-  return JSON.stringify(
-    GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse$outboundSchema
-      .parse(getV1ContractorPaymentGroupsIdPartnerDisbursementsResponse),
-  );
-}
 
 export function getV1ContractorPaymentGroupsIdPartnerDisbursementsResponseFromJSON(
   jsonString: string,

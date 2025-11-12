@@ -8,31 +8,24 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   FastPaymentLimitRequiredBody,
-  FastPaymentLimitRequiredBody$inboundSchema,
   FastPaymentLimitRequiredBody$Outbound,
   FastPaymentLimitRequiredBody$outboundSchema,
 } from "../components/fastpaymentlimitrequiredbody.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PaymentConfigs,
   PaymentConfigs$inboundSchema,
-  PaymentConfigs$Outbound,
-  PaymentConfigs$outboundSchema,
 } from "../components/paymentconfigs.js";
 import {
   PaymentSpeedRequiredBody,
-  PaymentSpeedRequiredBody$inboundSchema,
   PaymentSpeedRequiredBody$Outbound,
   PaymentSpeedRequiredBody$outboundSchema,
 } from "../components/paymentspeedrequiredbody.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -62,16 +55,6 @@ export type PutV1CompanyPaymentConfigsResponse = {
 };
 
 /** @internal */
-export const PutV1CompanyPaymentConfigsRequestBody$inboundSchema: z.ZodType<
-  PutV1CompanyPaymentConfigsRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  FastPaymentLimitRequiredBody$inboundSchema,
-  PaymentSpeedRequiredBody$inboundSchema,
-]);
-
-/** @internal */
 export type PutV1CompanyPaymentConfigsRequestBody$Outbound =
   | FastPaymentLimitRequiredBody$Outbound
   | PaymentSpeedRequiredBody$Outbound;
@@ -86,21 +69,6 @@ export const PutV1CompanyPaymentConfigsRequestBody$outboundSchema: z.ZodType<
   PaymentSpeedRequiredBody$outboundSchema,
 ]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyPaymentConfigsRequestBody$ {
-  /** @deprecated use `PutV1CompanyPaymentConfigsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompanyPaymentConfigsRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompanyPaymentConfigsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyPaymentConfigsRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompanyPaymentConfigsRequestBody$Outbound` instead. */
-  export type Outbound = PutV1CompanyPaymentConfigsRequestBody$Outbound;
-}
-
 export function putV1CompanyPaymentConfigsRequestBodyToJSON(
   putV1CompanyPaymentConfigsRequestBody: PutV1CompanyPaymentConfigsRequestBody,
 ): string {
@@ -110,37 +78,6 @@ export function putV1CompanyPaymentConfigsRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1CompanyPaymentConfigsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompanyPaymentConfigsRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompanyPaymentConfigsRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyPaymentConfigsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompanyPaymentConfigsRequest$inboundSchema: z.ZodType<
-  PutV1CompanyPaymentConfigsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.union([
-    FastPaymentLimitRequiredBody$inboundSchema,
-    PaymentSpeedRequiredBody$inboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1CompanyPaymentConfigsRequest$Outbound = {
@@ -171,20 +108,6 @@ export const PutV1CompanyPaymentConfigsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyPaymentConfigsRequest$ {
-  /** @deprecated use `PutV1CompanyPaymentConfigsRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyPaymentConfigsRequest$inboundSchema;
-  /** @deprecated use `PutV1CompanyPaymentConfigsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyPaymentConfigsRequest$outboundSchema;
-  /** @deprecated use `PutV1CompanyPaymentConfigsRequest$Outbound` instead. */
-  export type Outbound = PutV1CompanyPaymentConfigsRequest$Outbound;
-}
-
 export function putV1CompanyPaymentConfigsRequestToJSON(
   putV1CompanyPaymentConfigsRequest: PutV1CompanyPaymentConfigsRequest,
 ): string {
@@ -192,16 +115,6 @@ export function putV1CompanyPaymentConfigsRequestToJSON(
     PutV1CompanyPaymentConfigsRequest$outboundSchema.parse(
       putV1CompanyPaymentConfigsRequest,
     ),
-  );
-}
-
-export function putV1CompanyPaymentConfigsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompanyPaymentConfigsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1CompanyPaymentConfigsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyPaymentConfigsRequest' from JSON`,
   );
 }
 
@@ -219,51 +132,6 @@ export const PutV1CompanyPaymentConfigsResponse$inboundSchema: z.ZodType<
     "Payment-Configs": "paymentConfigs",
   });
 });
-
-/** @internal */
-export type PutV1CompanyPaymentConfigsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Payment-Configs"?: PaymentConfigs$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1CompanyPaymentConfigsResponse$outboundSchema: z.ZodType<
-  PutV1CompanyPaymentConfigsResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1CompanyPaymentConfigsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  paymentConfigs: PaymentConfigs$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    paymentConfigs: "Payment-Configs",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyPaymentConfigsResponse$ {
-  /** @deprecated use `PutV1CompanyPaymentConfigsResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyPaymentConfigsResponse$inboundSchema;
-  /** @deprecated use `PutV1CompanyPaymentConfigsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompanyPaymentConfigsResponse$outboundSchema;
-  /** @deprecated use `PutV1CompanyPaymentConfigsResponse$Outbound` instead. */
-  export type Outbound = PutV1CompanyPaymentConfigsResponse$Outbound;
-}
-
-export function putV1CompanyPaymentConfigsResponseToJSON(
-  putV1CompanyPaymentConfigsResponse: PutV1CompanyPaymentConfigsResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompanyPaymentConfigsResponse$outboundSchema.parse(
-      putV1CompanyPaymentConfigsResponse,
-    ),
-  );
-}
 
 export function putV1CompanyPaymentConfigsResponseFromJSON(
   jsonString: string,

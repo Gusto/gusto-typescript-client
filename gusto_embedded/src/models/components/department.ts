@@ -52,41 +52,6 @@ export const DepartmentEmployees$inboundSchema: z.ZodType<
   uuid: z.string().optional(),
 });
 
-/** @internal */
-export type DepartmentEmployees$Outbound = {
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const DepartmentEmployees$outboundSchema: z.ZodType<
-  DepartmentEmployees$Outbound,
-  z.ZodTypeDef,
-  DepartmentEmployees
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DepartmentEmployees$ {
-  /** @deprecated use `DepartmentEmployees$inboundSchema` instead. */
-  export const inboundSchema = DepartmentEmployees$inboundSchema;
-  /** @deprecated use `DepartmentEmployees$outboundSchema` instead. */
-  export const outboundSchema = DepartmentEmployees$outboundSchema;
-  /** @deprecated use `DepartmentEmployees$Outbound` instead. */
-  export type Outbound = DepartmentEmployees$Outbound;
-}
-
-export function departmentEmployeesToJSON(
-  departmentEmployees: DepartmentEmployees,
-): string {
-  return JSON.stringify(
-    DepartmentEmployees$outboundSchema.parse(departmentEmployees),
-  );
-}
-
 export function departmentEmployeesFromJSON(
   jsonString: string,
 ): SafeParseResult<DepartmentEmployees, SDKValidationError> {
@@ -105,37 +70,6 @@ export const Contractors$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string().optional(),
 });
-
-/** @internal */
-export type Contractors$Outbound = {
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const Contractors$outboundSchema: z.ZodType<
-  Contractors$Outbound,
-  z.ZodTypeDef,
-  Contractors
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Contractors$ {
-  /** @deprecated use `Contractors$inboundSchema` instead. */
-  export const inboundSchema = Contractors$inboundSchema;
-  /** @deprecated use `Contractors$outboundSchema` instead. */
-  export const outboundSchema = Contractors$outboundSchema;
-  /** @deprecated use `Contractors$Outbound` instead. */
-  export type Outbound = Contractors$Outbound;
-}
-
-export function contractorsToJSON(contractors: Contractors): string {
-  return JSON.stringify(Contractors$outboundSchema.parse(contractors));
-}
 
 export function contractorsFromJSON(
   jsonString: string,
@@ -165,52 +99,6 @@ export const Department$inboundSchema: z.ZodType<
     "company_uuid": "companyUuid",
   });
 });
-
-/** @internal */
-export type Department$Outbound = {
-  version?: string | undefined;
-  uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  title?: string | undefined;
-  employees?: Array<DepartmentEmployees$Outbound> | undefined;
-  contractors?: Array<Contractors$Outbound> | undefined;
-};
-
-/** @internal */
-export const Department$outboundSchema: z.ZodType<
-  Department$Outbound,
-  z.ZodTypeDef,
-  Department
-> = z.object({
-  version: z.string().optional(),
-  uuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  title: z.string().optional(),
-  employees: z.array(z.lazy(() => DepartmentEmployees$outboundSchema))
-    .optional(),
-  contractors: z.array(z.lazy(() => Contractors$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Department$ {
-  /** @deprecated use `Department$inboundSchema` instead. */
-  export const inboundSchema = Department$inboundSchema;
-  /** @deprecated use `Department$outboundSchema` instead. */
-  export const outboundSchema = Department$outboundSchema;
-  /** @deprecated use `Department$Outbound` instead. */
-  export type Outbound = Department$Outbound;
-}
-
-export function departmentToJSON(department: Department): string {
-  return JSON.stringify(Department$outboundSchema.parse(department));
-}
 
 export function departmentFromJSON(
   jsonString: string,

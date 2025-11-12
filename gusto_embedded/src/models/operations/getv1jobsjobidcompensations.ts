@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Compensation,
   Compensation$inboundSchema,
-  Compensation$Outbound,
-  Compensation$outboundSchema,
 } from "../components/compensation.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -80,46 +75,9 @@ export type GetV1JobsJobIdCompensationsResponse = {
 };
 
 /** @internal */
-export const GetV1JobsJobIdCompensationsQueryParamInclude$inboundSchema:
+export const GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema:
   z.ZodNativeEnum<typeof GetV1JobsJobIdCompensationsQueryParamInclude> = z
     .nativeEnum(GetV1JobsJobIdCompensationsQueryParamInclude);
-
-/** @internal */
-export const GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema:
-  z.ZodNativeEnum<typeof GetV1JobsJobIdCompensationsQueryParamInclude> =
-    GetV1JobsJobIdCompensationsQueryParamInclude$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1JobsJobIdCompensationsQueryParamInclude$ {
-  /** @deprecated use `GetV1JobsJobIdCompensationsQueryParamInclude$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1JobsJobIdCompensationsQueryParamInclude$inboundSchema;
-  /** @deprecated use `GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1JobsJobIdCompensationsQueryParamInclude$outboundSchema;
-}
-
-/** @internal */
-export const GetV1JobsJobIdCompensationsRequest$inboundSchema: z.ZodType<
-  GetV1JobsJobIdCompensationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  job_id: z.string(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-  include: GetV1JobsJobIdCompensationsQueryParamInclude$inboundSchema
-    .optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "job_id": "jobId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type GetV1JobsJobIdCompensationsRequest$Outbound = {
@@ -149,20 +107,6 @@ export const GetV1JobsJobIdCompensationsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1JobsJobIdCompensationsRequest$ {
-  /** @deprecated use `GetV1JobsJobIdCompensationsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1JobsJobIdCompensationsRequest$inboundSchema;
-  /** @deprecated use `GetV1JobsJobIdCompensationsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1JobsJobIdCompensationsRequest$outboundSchema;
-  /** @deprecated use `GetV1JobsJobIdCompensationsRequest$Outbound` instead. */
-  export type Outbound = GetV1JobsJobIdCompensationsRequest$Outbound;
-}
-
 export function getV1JobsJobIdCompensationsRequestToJSON(
   getV1JobsJobIdCompensationsRequest: GetV1JobsJobIdCompensationsRequest,
 ): string {
@@ -170,17 +114,6 @@ export function getV1JobsJobIdCompensationsRequestToJSON(
     GetV1JobsJobIdCompensationsRequest$outboundSchema.parse(
       getV1JobsJobIdCompensationsRequest,
     ),
-  );
-}
-
-export function getV1JobsJobIdCompensationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1JobsJobIdCompensationsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1JobsJobIdCompensationsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1JobsJobIdCompensationsRequest' from JSON`,
   );
 }
 
@@ -198,52 +131,6 @@ export const GetV1JobsJobIdCompensationsResponse$inboundSchema: z.ZodType<
     "Compensation-List": "compensationList",
   });
 });
-
-/** @internal */
-export type GetV1JobsJobIdCompensationsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Compensation-List"?: Array<Compensation$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1JobsJobIdCompensationsResponse$outboundSchema: z.ZodType<
-  GetV1JobsJobIdCompensationsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1JobsJobIdCompensationsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  compensationList: z.array(Compensation$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    compensationList: "Compensation-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1JobsJobIdCompensationsResponse$ {
-  /** @deprecated use `GetV1JobsJobIdCompensationsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1JobsJobIdCompensationsResponse$inboundSchema;
-  /** @deprecated use `GetV1JobsJobIdCompensationsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1JobsJobIdCompensationsResponse$outboundSchema;
-  /** @deprecated use `GetV1JobsJobIdCompensationsResponse$Outbound` instead. */
-  export type Outbound = GetV1JobsJobIdCompensationsResponse$Outbound;
-}
-
-export function getV1JobsJobIdCompensationsResponseToJSON(
-  getV1JobsJobIdCompensationsResponse: GetV1JobsJobIdCompensationsResponse,
-): string {
-  return JSON.stringify(
-    GetV1JobsJobIdCompensationsResponse$outboundSchema.parse(
-      getV1JobsJobIdCompensationsResponse,
-    ),
-  );
-}
 
 export function getV1JobsJobIdCompensationsResponseFromJSON(
   jsonString: string,

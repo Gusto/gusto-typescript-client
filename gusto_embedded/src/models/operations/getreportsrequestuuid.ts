@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Report,
-  Report$inboundSchema,
-  Report$Outbound,
-  Report$outboundSchema,
-} from "../components/report.js";
+import { Report, Report$inboundSchema } from "../components/report.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +37,6 @@ export type GetReportsRequestUuidResponse = {
 };
 
 /** @internal */
-export const GetReportsRequestUuidRequest$inboundSchema: z.ZodType<
-  GetReportsRequestUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  request_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "request_uuid": "requestUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetReportsRequestUuidRequest$Outbound = {
   request_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,19 +57,6 @@ export const GetReportsRequestUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetReportsRequestUuidRequest$ {
-  /** @deprecated use `GetReportsRequestUuidRequest$inboundSchema` instead. */
-  export const inboundSchema = GetReportsRequestUuidRequest$inboundSchema;
-  /** @deprecated use `GetReportsRequestUuidRequest$outboundSchema` instead. */
-  export const outboundSchema = GetReportsRequestUuidRequest$outboundSchema;
-  /** @deprecated use `GetReportsRequestUuidRequest$Outbound` instead. */
-  export type Outbound = GetReportsRequestUuidRequest$Outbound;
-}
-
 export function getReportsRequestUuidRequestToJSON(
   getReportsRequestUuidRequest: GetReportsRequestUuidRequest,
 ): string {
@@ -100,16 +64,6 @@ export function getReportsRequestUuidRequestToJSON(
     GetReportsRequestUuidRequest$outboundSchema.parse(
       getReportsRequestUuidRequest,
     ),
-  );
-}
-
-export function getReportsRequestUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetReportsRequestUuidRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetReportsRequestUuidRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetReportsRequestUuidRequest' from JSON`,
   );
 }
 
@@ -127,50 +81,6 @@ export const GetReportsRequestUuidResponse$inboundSchema: z.ZodType<
     "Report": "report",
   });
 });
-
-/** @internal */
-export type GetReportsRequestUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Report?: Report$Outbound | undefined;
-};
-
-/** @internal */
-export const GetReportsRequestUuidResponse$outboundSchema: z.ZodType<
-  GetReportsRequestUuidResponse$Outbound,
-  z.ZodTypeDef,
-  GetReportsRequestUuidResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  report: Report$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    report: "Report",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetReportsRequestUuidResponse$ {
-  /** @deprecated use `GetReportsRequestUuidResponse$inboundSchema` instead. */
-  export const inboundSchema = GetReportsRequestUuidResponse$inboundSchema;
-  /** @deprecated use `GetReportsRequestUuidResponse$outboundSchema` instead. */
-  export const outboundSchema = GetReportsRequestUuidResponse$outboundSchema;
-  /** @deprecated use `GetReportsRequestUuidResponse$Outbound` instead. */
-  export type Outbound = GetReportsRequestUuidResponse$Outbound;
-}
-
-export function getReportsRequestUuidResponseToJSON(
-  getReportsRequestUuidResponse: GetReportsRequestUuidResponse,
-): string {
-  return JSON.stringify(
-    GetReportsRequestUuidResponse$outboundSchema.parse(
-      getReportsRequestUuidResponse,
-    ),
-  );
-}
 
 export function getReportsRequestUuidResponseFromJSON(
   jsonString: string,

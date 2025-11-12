@@ -69,45 +69,9 @@ export const ContractorPaymentDetailsListPaymentMethod$inboundSchema:
     .nativeEnum(ContractorPaymentDetailsListPaymentMethod);
 
 /** @internal */
-export const ContractorPaymentDetailsListPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentDetailsListPaymentMethod> =
-    ContractorPaymentDetailsListPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentDetailsListPaymentMethod$ {
-  /** @deprecated use `ContractorPaymentDetailsListPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentDetailsListPaymentMethod$inboundSchema;
-  /** @deprecated use `ContractorPaymentDetailsListPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentDetailsListPaymentMethod$outboundSchema;
-}
-
-/** @internal */
 export const ContractorPaymentDetailsListSplitBy$inboundSchema: z.ZodNativeEnum<
   typeof ContractorPaymentDetailsListSplitBy
 > = z.nativeEnum(ContractorPaymentDetailsListSplitBy);
-
-/** @internal */
-export const ContractorPaymentDetailsListSplitBy$outboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentDetailsListSplitBy> =
-    ContractorPaymentDetailsListSplitBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentDetailsListSplitBy$ {
-  /** @deprecated use `ContractorPaymentDetailsListSplitBy$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentDetailsListSplitBy$inboundSchema;
-  /** @deprecated use `ContractorPaymentDetailsListSplitBy$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentDetailsListSplitBy$outboundSchema;
-}
 
 /** @internal */
 export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
@@ -130,60 +94,6 @@ export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
       "account_type": "accountType",
     });
   });
-
-/** @internal */
-export type Splits$Outbound = {
-  bank_account_uuid?: string | undefined;
-  name?: string | undefined;
-  hidden_account_number?: string | undefined;
-  encrypted_account_number?: string | null | undefined;
-  routing_number?: string | undefined;
-  priority?: number | undefined;
-  split_amount?: number | undefined;
-  account_type?: string | undefined;
-};
-
-/** @internal */
-export const Splits$outboundSchema: z.ZodType<
-  Splits$Outbound,
-  z.ZodTypeDef,
-  Splits
-> = z.object({
-  bankAccountUuid: z.string().optional(),
-  name: z.string().optional(),
-  hiddenAccountNumber: z.string().optional(),
-  encryptedAccountNumber: z.nullable(z.string()).optional(),
-  routingNumber: z.string().optional(),
-  priority: z.number().int().optional(),
-  splitAmount: z.number().optional(),
-  accountType: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    bankAccountUuid: "bank_account_uuid",
-    hiddenAccountNumber: "hidden_account_number",
-    encryptedAccountNumber: "encrypted_account_number",
-    routingNumber: "routing_number",
-    splitAmount: "split_amount",
-    accountType: "account_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Splits$ {
-  /** @deprecated use `Splits$inboundSchema` instead. */
-  export const inboundSchema = Splits$inboundSchema;
-  /** @deprecated use `Splits$outboundSchema` instead. */
-  export const outboundSchema = Splits$outboundSchema;
-  /** @deprecated use `Splits$Outbound` instead. */
-  export type Outbound = Splits$Outbound;
-}
-
-export function splitsToJSON(splits: Splits): string {
-  return JSON.stringify(Splits$outboundSchema.parse(splits));
-}
 
 export function splitsFromJSON(
   jsonString: string,
@@ -218,63 +128,6 @@ export const ContractorPaymentDetailsList$inboundSchema: z.ZodType<
     "split_by": "splitBy",
   });
 });
-
-/** @internal */
-export type ContractorPaymentDetailsList$Outbound = {
-  contractor_uuid?: string | undefined;
-  payment_method?: string | undefined;
-  first_name?: string | undefined;
-  last_name?: string | undefined;
-  split_by?: string | null | undefined;
-  splits?: Array<Splits$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentDetailsList$outboundSchema: z.ZodType<
-  ContractorPaymentDetailsList$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentDetailsList
-> = z.object({
-  contractorUuid: z.string().optional(),
-  paymentMethod: ContractorPaymentDetailsListPaymentMethod$outboundSchema
-    .optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  splitBy: z.nullable(ContractorPaymentDetailsListSplitBy$outboundSchema)
-    .optional(),
-  splits: z.nullable(z.array(z.lazy(() => Splits$outboundSchema))).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorUuid: "contractor_uuid",
-    paymentMethod: "payment_method",
-    firstName: "first_name",
-    lastName: "last_name",
-    splitBy: "split_by",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentDetailsList$ {
-  /** @deprecated use `ContractorPaymentDetailsList$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentDetailsList$inboundSchema;
-  /** @deprecated use `ContractorPaymentDetailsList$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentDetailsList$outboundSchema;
-  /** @deprecated use `ContractorPaymentDetailsList$Outbound` instead. */
-  export type Outbound = ContractorPaymentDetailsList$Outbound;
-}
-
-export function contractorPaymentDetailsListToJSON(
-  contractorPaymentDetailsList: ContractorPaymentDetailsList,
-): string {
-  return JSON.stringify(
-    ContractorPaymentDetailsList$outboundSchema.parse(
-      contractorPaymentDetailsList,
-    ),
-  );
-}
 
 export function contractorPaymentDetailsListFromJSON(
   jsonString: string,

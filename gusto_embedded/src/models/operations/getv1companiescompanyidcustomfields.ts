@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyCustomFieldList,
   CompanyCustomFieldList$inboundSchema,
-  CompanyCustomFieldList$Outbound,
-  CompanyCustomFieldList$outboundSchema,
 } from "../components/companycustomfieldlist.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,21 +48,6 @@ export type GetV1CompaniesCompanyIdCustomFieldsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdCustomFieldsRequest$inboundSchema:
-  z.ZodType<GetV1CompaniesCompanyIdCustomFieldsRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      company_id: z.string(),
-      page: z.number().int().optional(),
-      per: z.number().int().optional(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    }).transform((v) => {
-      return remap$(v, {
-        "company_id": "companyId",
-        "X-Gusto-API-Version": "xGustoAPIVersion",
-      });
-    });
-
-/** @internal */
 export type GetV1CompaniesCompanyIdCustomFieldsRequest$Outbound = {
   company_id: string;
   page?: number | undefined;
@@ -93,21 +73,6 @@ export const GetV1CompaniesCompanyIdCustomFieldsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdCustomFieldsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdCustomFieldsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdCustomFieldsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdCustomFieldsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdCustomFieldsRequestToJSON(
   getV1CompaniesCompanyIdCustomFieldsRequest:
     GetV1CompaniesCompanyIdCustomFieldsRequest,
@@ -116,22 +81,6 @@ export function getV1CompaniesCompanyIdCustomFieldsRequestToJSON(
     GetV1CompaniesCompanyIdCustomFieldsRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdCustomFieldsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdCustomFieldsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdCustomFieldsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdCustomFieldsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyIdCustomFieldsRequest' from JSON`,
   );
 }
 
@@ -151,54 +100,6 @@ export const GetV1CompaniesCompanyIdCustomFieldsResponse$inboundSchema:
       "Company-Custom-Field-List": "companyCustomFieldList",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Custom-Field-List"?: CompanyCustomFieldList$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdCustomFieldsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    companyCustomFieldList: CompanyCustomFieldList$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      companyCustomFieldList: "Company-Custom-Field-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdCustomFieldsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdCustomFieldsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdCustomFieldsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdCustomFieldsResponseToJSON(
-  getV1CompaniesCompanyIdCustomFieldsResponse:
-    GetV1CompaniesCompanyIdCustomFieldsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdCustomFieldsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdCustomFieldsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdCustomFieldsResponseFromJSON(
   jsonString: string,

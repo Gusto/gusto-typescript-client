@@ -9,24 +9,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayScheduleAssignmentBody,
-  PayScheduleAssignmentBody$inboundSchema,
   PayScheduleAssignmentBody$Outbound,
   PayScheduleAssignmentBody$outboundSchema,
 } from "../components/payscheduleassignmentbody.js";
 import {
   PayScheduleAssignmentPreview,
   PayScheduleAssignmentPreview$inboundSchema,
-  PayScheduleAssignmentPreview$Outbound,
-  PayScheduleAssignmentPreview$outboundSchema,
 } from "../components/payscheduleassignmentpreview.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -50,24 +44,6 @@ export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse = {
    */
   payScheduleAssignmentPreview?: PayScheduleAssignmentPreview | undefined;
 };
-
-/** @internal */
-export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    "Pay-Schedule-Assignment-Body": PayScheduleAssignmentBody$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "Pay-Schedule-Assignment-Body": "payScheduleAssignmentBody",
-    });
-  });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$Outbound =
@@ -95,22 +71,6 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outbou
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$Outbound` instead. */
-  export type Outbound =
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$Outbound;
-}
-
 export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestToJSON(
   postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest:
     PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
@@ -118,21 +78,6 @@ export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestToJS
   return JSON.stringify(
     PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$outboundSchema
       .parse(postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest),
-  );
-}
-
-export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest' from JSON`,
   );
 }
 
@@ -152,58 +97,6 @@ export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inbou
       "Pay-Schedule-Assignment-Preview": "payScheduleAssignmentPreview",
     });
   });
-
-/** @internal */
-export type PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Pay-Schedule-Assignment-Preview"?:
-      | PayScheduleAssignmentPreview$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payScheduleAssignmentPreview: PayScheduleAssignmentPreview$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payScheduleAssignmentPreview: "Pay-Schedule-Assignment-Preview",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound` instead. */
-  export type Outbound =
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$Outbound;
-}
-
-export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponseToJSON(
-  postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse:
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse$outboundSchema
-      .parse(postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse),
-  );
-}
 
 export function postV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponseFromJSON(
   jsonString: string,

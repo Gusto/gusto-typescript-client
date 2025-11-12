@@ -40,51 +40,6 @@ export const PayrollPayPeriodType$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollPayPeriodType$Outbound = {
-  start_date?: string | undefined;
-  end_date?: string | undefined;
-  pay_schedule_uuid?: string | null | undefined;
-};
-
-/** @internal */
-export const PayrollPayPeriodType$outboundSchema: z.ZodType<
-  PayrollPayPeriodType$Outbound,
-  z.ZodTypeDef,
-  PayrollPayPeriodType
-> = z.object({
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  payScheduleUuid: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startDate: "start_date",
-    endDate: "end_date",
-    payScheduleUuid: "pay_schedule_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollPayPeriodType$ {
-  /** @deprecated use `PayrollPayPeriodType$inboundSchema` instead. */
-  export const inboundSchema = PayrollPayPeriodType$inboundSchema;
-  /** @deprecated use `PayrollPayPeriodType$outboundSchema` instead. */
-  export const outboundSchema = PayrollPayPeriodType$outboundSchema;
-  /** @deprecated use `PayrollPayPeriodType$Outbound` instead. */
-  export type Outbound = PayrollPayPeriodType$Outbound;
-}
-
-export function payrollPayPeriodTypeToJSON(
-  payrollPayPeriodType: PayrollPayPeriodType,
-): string {
-  return JSON.stringify(
-    PayrollPayPeriodType$outboundSchema.parse(payrollPayPeriodType),
-  );
-}
-
 export function payrollPayPeriodTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollPayPeriodType, SDKValidationError> {

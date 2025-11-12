@@ -202,53 +202,6 @@ export const Totals$inboundSchema: z.ZodType<Totals, z.ZodTypeDef, unknown> = z
     });
   });
 
-/** @internal */
-export type Totals$Outbound = {
-  company_debit?: string | undefined;
-  net_pay_debit?: string | undefined;
-  child_support_debit?: string | undefined;
-  reimbursement_debit?: string | undefined;
-  tax_debit?: string | undefined;
-};
-
-/** @internal */
-export const Totals$outboundSchema: z.ZodType<
-  Totals$Outbound,
-  z.ZodTypeDef,
-  Totals
-> = z.object({
-  companyDebit: z.string().optional(),
-  netPayDebit: z.string().optional(),
-  childSupportDebit: z.string().optional(),
-  reimbursementDebit: z.string().optional(),
-  taxDebit: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyDebit: "company_debit",
-    netPayDebit: "net_pay_debit",
-    childSupportDebit: "child_support_debit",
-    reimbursementDebit: "reimbursement_debit",
-    taxDebit: "tax_debit",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Totals$ {
-  /** @deprecated use `Totals$inboundSchema` instead. */
-  export const inboundSchema = Totals$inboundSchema;
-  /** @deprecated use `Totals$outboundSchema` instead. */
-  export const outboundSchema = Totals$outboundSchema;
-  /** @deprecated use `Totals$Outbound` instead. */
-  export type Outbound = Totals$Outbound;
-}
-
-export function totalsToJSON(totals: Totals): string {
-  return JSON.stringify(Totals$outboundSchema.parse(totals));
-}
-
 export function totalsFromJSON(
   jsonString: string,
 ): SafeParseResult<Totals, SDKValidationError> {
@@ -266,39 +219,6 @@ export const Taxes$inboundSchema: z.ZodType<Taxes, z.ZodTypeDef, unknown> = z
     amount: z.string().optional(),
   });
 
-/** @internal */
-export type Taxes$Outbound = {
-  name?: string | undefined;
-  amount?: string | undefined;
-};
-
-/** @internal */
-export const Taxes$outboundSchema: z.ZodType<
-  Taxes$Outbound,
-  z.ZodTypeDef,
-  Taxes
-> = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Taxes$ {
-  /** @deprecated use `Taxes$inboundSchema` instead. */
-  export const inboundSchema = Taxes$inboundSchema;
-  /** @deprecated use `Taxes$outboundSchema` instead. */
-  export const outboundSchema = Taxes$outboundSchema;
-  /** @deprecated use `Taxes$Outbound` instead. */
-  export type Outbound = Taxes$Outbound;
-}
-
-export function taxesToJSON(taxes: Taxes): string {
-  return JSON.stringify(Taxes$outboundSchema.parse(taxes));
-}
-
 export function taxesFromJSON(
   jsonString: string,
 ): SafeParseResult<Taxes, SDKValidationError> {
@@ -313,22 +233,6 @@ export function taxesFromJSON(
 export const PayrollReceiptPaymentMethod$inboundSchema: z.ZodNativeEnum<
   typeof PayrollReceiptPaymentMethod
 > = z.nativeEnum(PayrollReceiptPaymentMethod);
-
-/** @internal */
-export const PayrollReceiptPaymentMethod$outboundSchema: z.ZodNativeEnum<
-  typeof PayrollReceiptPaymentMethod
-> = PayrollReceiptPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollReceiptPaymentMethod$ {
-  /** @deprecated use `PayrollReceiptPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema = PayrollReceiptPaymentMethod$inboundSchema;
-  /** @deprecated use `PayrollReceiptPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema = PayrollReceiptPaymentMethod$outboundSchema;
-}
 
 /** @internal */
 export const PayrollReceiptEmployeeCompensations$inboundSchema: z.ZodType<
@@ -359,73 +263,6 @@ export const PayrollReceiptEmployeeCompensations$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollReceiptEmployeeCompensations$Outbound = {
-  employee_uuid?: string | undefined;
-  employee_first_name?: string | undefined;
-  employee_last_name?: string | undefined;
-  payment_method?: string | undefined;
-  net_pay?: string | undefined;
-  total_tax?: string | undefined;
-  total_garnishments?: string | undefined;
-  child_support_garnishment?: string | undefined;
-  total_reimbursement?: string | undefined;
-};
-
-/** @internal */
-export const PayrollReceiptEmployeeCompensations$outboundSchema: z.ZodType<
-  PayrollReceiptEmployeeCompensations$Outbound,
-  z.ZodTypeDef,
-  PayrollReceiptEmployeeCompensations
-> = z.object({
-  employeeUuid: z.string().optional(),
-  employeeFirstName: z.string().optional(),
-  employeeLastName: z.string().optional(),
-  paymentMethod: PayrollReceiptPaymentMethod$outboundSchema.optional(),
-  netPay: z.string().optional(),
-  totalTax: z.string().optional(),
-  totalGarnishments: z.string().optional(),
-  childSupportGarnishment: z.string().optional(),
-  totalReimbursement: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    employeeFirstName: "employee_first_name",
-    employeeLastName: "employee_last_name",
-    paymentMethod: "payment_method",
-    netPay: "net_pay",
-    totalTax: "total_tax",
-    totalGarnishments: "total_garnishments",
-    childSupportGarnishment: "child_support_garnishment",
-    totalReimbursement: "total_reimbursement",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollReceiptEmployeeCompensations$ {
-  /** @deprecated use `PayrollReceiptEmployeeCompensations$inboundSchema` instead. */
-  export const inboundSchema =
-    PayrollReceiptEmployeeCompensations$inboundSchema;
-  /** @deprecated use `PayrollReceiptEmployeeCompensations$outboundSchema` instead. */
-  export const outboundSchema =
-    PayrollReceiptEmployeeCompensations$outboundSchema;
-  /** @deprecated use `PayrollReceiptEmployeeCompensations$Outbound` instead. */
-  export type Outbound = PayrollReceiptEmployeeCompensations$Outbound;
-}
-
-export function payrollReceiptEmployeeCompensationsToJSON(
-  payrollReceiptEmployeeCompensations: PayrollReceiptEmployeeCompensations,
-): string {
-  return JSON.stringify(
-    PayrollReceiptEmployeeCompensations$outboundSchema.parse(
-      payrollReceiptEmployeeCompensations,
-    ),
-  );
-}
-
 export function payrollReceiptEmployeeCompensationsFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollReceiptEmployeeCompensations, SDKValidationError> {
@@ -455,52 +292,6 @@ export const Licensee$inboundSchema: z.ZodType<
     "phone_number": "phoneNumber",
   });
 });
-
-/** @internal */
-export type Licensee$Outbound = {
-  name?: string | undefined;
-  address?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  postal_code?: string | undefined;
-  phone_number?: string | undefined;
-};
-
-/** @internal */
-export const Licensee$outboundSchema: z.ZodType<
-  Licensee$Outbound,
-  z.ZodTypeDef,
-  Licensee
-> = z.object({
-  name: z.string().optional(),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  postalCode: z.string().optional(),
-  phoneNumber: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    postalCode: "postal_code",
-    phoneNumber: "phone_number",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Licensee$ {
-  /** @deprecated use `Licensee$inboundSchema` instead. */
-  export const inboundSchema = Licensee$inboundSchema;
-  /** @deprecated use `Licensee$outboundSchema` instead. */
-  export const outboundSchema = Licensee$outboundSchema;
-  /** @deprecated use `Licensee$Outbound` instead. */
-  export type Outbound = Licensee$Outbound;
-}
-
-export function licenseeToJSON(licensee: Licensee): string {
-  return JSON.stringify(Licensee$outboundSchema.parse(licensee));
-}
 
 export function licenseeFromJSON(
   jsonString: string,
@@ -548,80 +339,6 @@ export const PayrollReceipt$inboundSchema: z.ZodType<
     "employee_compensations": "employeeCompensations",
   });
 });
-
-/** @internal */
-export type PayrollReceipt$Outbound = {
-  payroll_uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  name_of_sender?: string | undefined;
-  name_of_recipient?: string | undefined;
-  recipient_notice?: string | undefined;
-  debit_date?: string | undefined;
-  license?: string | undefined;
-  license_uri?: string | undefined;
-  right_to_refund?: string | undefined;
-  liability_of_licensee?: string | undefined;
-  totals?: Totals$Outbound | undefined;
-  taxes?: Array<Taxes$Outbound> | undefined;
-  employee_compensations?:
-    | Array<PayrollReceiptEmployeeCompensations$Outbound>
-    | undefined;
-  licensee?: Licensee$Outbound | undefined;
-};
-
-/** @internal */
-export const PayrollReceipt$outboundSchema: z.ZodType<
-  PayrollReceipt$Outbound,
-  z.ZodTypeDef,
-  PayrollReceipt
-> = z.object({
-  payrollUuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  nameOfSender: z.string().optional(),
-  nameOfRecipient: z.string().optional(),
-  recipientNotice: z.string().optional(),
-  debitDate: z.string().optional(),
-  license: z.string().optional(),
-  licenseUri: z.string().optional(),
-  rightToRefund: z.string().optional(),
-  liabilityOfLicensee: z.string().optional(),
-  totals: z.lazy(() => Totals$outboundSchema).optional(),
-  taxes: z.array(z.lazy(() => Taxes$outboundSchema)).optional(),
-  employeeCompensations: z.array(
-    z.lazy(() => PayrollReceiptEmployeeCompensations$outboundSchema),
-  ).optional(),
-  licensee: z.lazy(() => Licensee$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payrollUuid: "payroll_uuid",
-    companyUuid: "company_uuid",
-    nameOfSender: "name_of_sender",
-    nameOfRecipient: "name_of_recipient",
-    recipientNotice: "recipient_notice",
-    debitDate: "debit_date",
-    licenseUri: "license_uri",
-    rightToRefund: "right_to_refund",
-    liabilityOfLicensee: "liability_of_licensee",
-    employeeCompensations: "employee_compensations",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollReceipt$ {
-  /** @deprecated use `PayrollReceipt$inboundSchema` instead. */
-  export const inboundSchema = PayrollReceipt$inboundSchema;
-  /** @deprecated use `PayrollReceipt$outboundSchema` instead. */
-  export const outboundSchema = PayrollReceipt$outboundSchema;
-  /** @deprecated use `PayrollReceipt$Outbound` instead. */
-  export type Outbound = PayrollReceipt$Outbound;
-}
-
-export function payrollReceiptToJSON(payrollReceipt: PayrollReceipt): string {
-  return JSON.stringify(PayrollReceipt$outboundSchema.parse(payrollReceipt));
-}
 
 export function payrollReceiptFromJSON(
   jsonString: string,

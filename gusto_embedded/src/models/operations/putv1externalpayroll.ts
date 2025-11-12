@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ExternalPayroll,
   ExternalPayroll$inboundSchema,
-  ExternalPayroll$Outbound,
-  ExternalPayroll$outboundSchema,
 } from "../components/externalpayroll.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -138,40 +133,8 @@ export type PutV1ExternalPayrollResponse = {
 };
 
 /** @internal */
-export const EarningType$inboundSchema: z.ZodNativeEnum<typeof EarningType> = z
+export const EarningType$outboundSchema: z.ZodNativeEnum<typeof EarningType> = z
   .nativeEnum(EarningType);
-
-/** @internal */
-export const EarningType$outboundSchema: z.ZodNativeEnum<typeof EarningType> =
-  EarningType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EarningType$ {
-  /** @deprecated use `EarningType$inboundSchema` instead. */
-  export const inboundSchema = EarningType$inboundSchema;
-  /** @deprecated use `EarningType$outboundSchema` instead. */
-  export const outboundSchema = EarningType$outboundSchema;
-}
-
-/** @internal */
-export const Earnings$inboundSchema: z.ZodType<
-  Earnings,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  hours: z.string().optional(),
-  amount: z.string().optional(),
-  earning_id: z.number().int().optional(),
-  earning_type: EarningType$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "earning_id": "earningId",
-    "earning_type": "earningType",
-  });
-});
 
 /** @internal */
 export type Earnings$Outbound = {
@@ -198,49 +161,9 @@ export const Earnings$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Earnings$ {
-  /** @deprecated use `Earnings$inboundSchema` instead. */
-  export const inboundSchema = Earnings$inboundSchema;
-  /** @deprecated use `Earnings$outboundSchema` instead. */
-  export const outboundSchema = Earnings$outboundSchema;
-  /** @deprecated use `Earnings$Outbound` instead. */
-  export type Outbound = Earnings$Outbound;
-}
-
 export function earningsToJSON(earnings: Earnings): string {
   return JSON.stringify(Earnings$outboundSchema.parse(earnings));
 }
-
-export function earningsFromJSON(
-  jsonString: string,
-): SafeParseResult<Earnings, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Earnings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Earnings' from JSON`,
-  );
-}
-
-/** @internal */
-export const Benefits$inboundSchema: z.ZodType<
-  Benefits,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_contribution_amount: z.string().optional(),
-  employee_deduction_amount: z.string().optional(),
-  benefit_id: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "company_contribution_amount": "companyContributionAmount",
-    "employee_deduction_amount": "employeeDeductionAmount",
-    "benefit_id": "benefitId",
-  });
-});
 
 /** @internal */
 export type Benefits$Outbound = {
@@ -266,43 +189,9 @@ export const Benefits$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Benefits$ {
-  /** @deprecated use `Benefits$inboundSchema` instead. */
-  export const inboundSchema = Benefits$inboundSchema;
-  /** @deprecated use `Benefits$outboundSchema` instead. */
-  export const outboundSchema = Benefits$outboundSchema;
-  /** @deprecated use `Benefits$Outbound` instead. */
-  export type Outbound = Benefits$Outbound;
-}
-
 export function benefitsToJSON(benefits: Benefits): string {
   return JSON.stringify(Benefits$outboundSchema.parse(benefits));
 }
-
-export function benefitsFromJSON(
-  jsonString: string,
-): SafeParseResult<Benefits, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Benefits$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Benefits' from JSON`,
-  );
-}
-
-/** @internal */
-export const Taxes$inboundSchema: z.ZodType<Taxes, z.ZodTypeDef, unknown> = z
-  .object({
-    amount: z.string().optional(),
-    tax_id: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tax_id": "taxId",
-    });
-  });
 
 /** @internal */
 export type Taxes$Outbound = {
@@ -324,48 +213,9 @@ export const Taxes$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Taxes$ {
-  /** @deprecated use `Taxes$inboundSchema` instead. */
-  export const inboundSchema = Taxes$inboundSchema;
-  /** @deprecated use `Taxes$outboundSchema` instead. */
-  export const outboundSchema = Taxes$outboundSchema;
-  /** @deprecated use `Taxes$Outbound` instead. */
-  export type Outbound = Taxes$Outbound;
-}
-
 export function taxesToJSON(taxes: Taxes): string {
   return JSON.stringify(Taxes$outboundSchema.parse(taxes));
 }
-
-export function taxesFromJSON(
-  jsonString: string,
-): SafeParseResult<Taxes, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Taxes$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Taxes' from JSON`,
-  );
-}
-
-/** @internal */
-export const ExternalPayrollItems$inboundSchema: z.ZodType<
-  ExternalPayrollItems,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_uuid: z.string().optional(),
-  earnings: z.array(z.lazy(() => Earnings$inboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => Benefits$inboundSchema)).optional(),
-  taxes: z.array(z.lazy(() => Taxes$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_uuid": "employeeUuid",
-  });
-});
 
 /** @internal */
 export type ExternalPayrollItems$Outbound = {
@@ -391,19 +241,6 @@ export const ExternalPayrollItems$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayrollItems$ {
-  /** @deprecated use `ExternalPayrollItems$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollItems$inboundSchema;
-  /** @deprecated use `ExternalPayrollItems$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollItems$outboundSchema;
-  /** @deprecated use `ExternalPayrollItems$Outbound` instead. */
-  export type Outbound = ExternalPayrollItems$Outbound;
-}
-
 export function externalPayrollItemsToJSON(
   externalPayrollItems: ExternalPayrollItems,
 ): string {
@@ -411,33 +248,6 @@ export function externalPayrollItemsToJSON(
     ExternalPayrollItems$outboundSchema.parse(externalPayrollItems),
   );
 }
-
-export function externalPayrollItemsFromJSON(
-  jsonString: string,
-): SafeParseResult<ExternalPayrollItems, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExternalPayrollItems$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExternalPayrollItems' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1ExternalPayrollRequestBody$inboundSchema: z.ZodType<
-  PutV1ExternalPayrollRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  replace_fields: z.boolean().optional(),
-  external_payroll_items: z.array(
-    z.lazy(() => ExternalPayrollItems$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "replace_fields": "replaceFields",
-    "external_payroll_items": "externalPayrollItems",
-  });
-});
 
 /** @internal */
 export type PutV1ExternalPayrollRequestBody$Outbound = {
@@ -462,19 +272,6 @@ export const PutV1ExternalPayrollRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ExternalPayrollRequestBody$ {
-  /** @deprecated use `PutV1ExternalPayrollRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1ExternalPayrollRequestBody$inboundSchema;
-  /** @deprecated use `PutV1ExternalPayrollRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1ExternalPayrollRequestBody$outboundSchema;
-  /** @deprecated use `PutV1ExternalPayrollRequestBody$Outbound` instead. */
-  export type Outbound = PutV1ExternalPayrollRequestBody$Outbound;
-}
-
 export function putV1ExternalPayrollRequestBodyToJSON(
   putV1ExternalPayrollRequestBody: PutV1ExternalPayrollRequestBody,
 ): string {
@@ -484,35 +281,6 @@ export function putV1ExternalPayrollRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1ExternalPayrollRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1ExternalPayrollRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1ExternalPayrollRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1ExternalPayrollRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1ExternalPayrollRequest$inboundSchema: z.ZodType<
-  PutV1ExternalPayrollRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  external_payroll_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutV1ExternalPayrollRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "external_payroll_id": "externalPayrollId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1ExternalPayrollRequest$Outbound = {
@@ -541,19 +309,6 @@ export const PutV1ExternalPayrollRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ExternalPayrollRequest$ {
-  /** @deprecated use `PutV1ExternalPayrollRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1ExternalPayrollRequest$inboundSchema;
-  /** @deprecated use `PutV1ExternalPayrollRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1ExternalPayrollRequest$outboundSchema;
-  /** @deprecated use `PutV1ExternalPayrollRequest$Outbound` instead. */
-  export type Outbound = PutV1ExternalPayrollRequest$Outbound;
-}
-
 export function putV1ExternalPayrollRequestToJSON(
   putV1ExternalPayrollRequest: PutV1ExternalPayrollRequest,
 ): string {
@@ -561,16 +316,6 @@ export function putV1ExternalPayrollRequestToJSON(
     PutV1ExternalPayrollRequest$outboundSchema.parse(
       putV1ExternalPayrollRequest,
     ),
-  );
-}
-
-export function putV1ExternalPayrollRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1ExternalPayrollRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1ExternalPayrollRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1ExternalPayrollRequest' from JSON`,
   );
 }
 
@@ -588,50 +333,6 @@ export const PutV1ExternalPayrollResponse$inboundSchema: z.ZodType<
     "External-Payroll": "externalPayroll",
   });
 });
-
-/** @internal */
-export type PutV1ExternalPayrollResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "External-Payroll"?: ExternalPayroll$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1ExternalPayrollResponse$outboundSchema: z.ZodType<
-  PutV1ExternalPayrollResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1ExternalPayrollResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  externalPayroll: ExternalPayroll$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    externalPayroll: "External-Payroll",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1ExternalPayrollResponse$ {
-  /** @deprecated use `PutV1ExternalPayrollResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1ExternalPayrollResponse$inboundSchema;
-  /** @deprecated use `PutV1ExternalPayrollResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1ExternalPayrollResponse$outboundSchema;
-  /** @deprecated use `PutV1ExternalPayrollResponse$Outbound` instead. */
-  export type Outbound = PutV1ExternalPayrollResponse$Outbound;
-}
-
-export function putV1ExternalPayrollResponseToJSON(
-  putV1ExternalPayrollResponse: PutV1ExternalPayrollResponse,
-): string {
-  return JSON.stringify(
-    PutV1ExternalPayrollResponse$outboundSchema.parse(
-      putV1ExternalPayrollResponse,
-    ),
-  );
-}
 
 export function putV1ExternalPayrollResponseFromJSON(
   jsonString: string,

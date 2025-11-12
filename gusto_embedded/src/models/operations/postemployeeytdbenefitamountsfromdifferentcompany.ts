@@ -9,18 +9,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PostEmployeeYtdBenefitAmountsFromDifferentCompany,
-  PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema,
   PostEmployeeYtdBenefitAmountsFromDifferentCompany$Outbound,
   PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema,
 } from "../components/postemployeeytdbenefitamountsfromdifferentcompany.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,27 +37,6 @@ export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest = {
 export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema:
-  z.ZodType<
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    "post-employee-ytd-benefit-amounts-from-different-company": z.lazy(() =>
-      PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "post-employee-ytd-benefit-amounts-from-different-company":
-        "postEmployeeYtdBenefitAmountsFromDifferentCompany",
-    });
-  });
 
 /** @internal */
 export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$Outbound =
@@ -93,22 +68,6 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSc
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$ {
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema;
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSchema;
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$Outbound` instead. */
-  export type Outbound =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$Outbound;
-}
-
 export function postEmployeeYtdBenefitAmountsFromDifferentCompanyRequestToJSON(
   postEmployeeYtdBenefitAmountsFromDifferentCompanyRequest:
     PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
@@ -116,21 +75,6 @@ export function postEmployeeYtdBenefitAmountsFromDifferentCompanyRequestToJSON(
   return JSON.stringify(
     PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$outboundSchema
       .parse(postEmployeeYtdBenefitAmountsFromDifferentCompanyRequest),
-  );
-}
-
-export function postEmployeeYtdBenefitAmountsFromDifferentCompanyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest' from JSON`,
   );
 }
 
@@ -147,52 +91,6 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSc
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema:
-  z.ZodType<
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound,
-    z.ZodTypeDef,
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$ {
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$inboundSchema;
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema;
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound` instead. */
-  export type Outbound =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$Outbound;
-}
-
-export function postEmployeeYtdBenefitAmountsFromDifferentCompanyResponseToJSON(
-  postEmployeeYtdBenefitAmountsFromDifferentCompanyResponse:
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
-): string {
-  return JSON.stringify(
-    PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse$outboundSchema
-      .parse(postEmployeeYtdBenefitAmountsFromDifferentCompanyResponse),
-  );
-}
 
 export function postEmployeeYtdBenefitAmountsFromDifferentCompanyResponseFromJSON(
   jsonString: string,

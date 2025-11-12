@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -53,49 +51,10 @@ export type DeleteV1CompaniesCompanyIdPayrollsResponse = {
 };
 
 /** @internal */
-export const DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
-  > = z.nativeEnum(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion);
-
-/** @internal */
 export const DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
-  > = DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
-  DeleteV1CompaniesCompanyIdPayrollsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  payroll_id: z.string(),
-  async: z.boolean().optional(),
-  "X-Gusto-API-Version":
-    DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "payroll_id": "payrollId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
+  > = z.nativeEnum(DeleteV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type DeleteV1CompaniesCompanyIdPayrollsRequest$Outbound = {
@@ -126,21 +85,6 @@ export const DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdPayrollsRequest$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdPayrollsRequest$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsRequest$Outbound` instead. */
-  export type Outbound = DeleteV1CompaniesCompanyIdPayrollsRequest$Outbound;
-}
-
 export function deleteV1CompaniesCompanyIdPayrollsRequestToJSON(
   deleteV1CompaniesCompanyIdPayrollsRequest:
     DeleteV1CompaniesCompanyIdPayrollsRequest,
@@ -149,22 +93,6 @@ export function deleteV1CompaniesCompanyIdPayrollsRequestToJSON(
     DeleteV1CompaniesCompanyIdPayrollsRequest$outboundSchema.parse(
       deleteV1CompaniesCompanyIdPayrollsRequest,
     ),
-  );
-}
-
-export function deleteV1CompaniesCompanyIdPayrollsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1CompaniesCompanyIdPayrollsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1CompaniesCompanyIdPayrollsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteV1CompaniesCompanyIdPayrollsRequest' from JSON`,
   );
 }
 
@@ -178,51 +106,6 @@ export const DeleteV1CompaniesCompanyIdPayrollsResponse$inboundSchema:
         "HttpMeta": "httpMeta",
       });
     });
-
-/** @internal */
-export type DeleteV1CompaniesCompanyIdPayrollsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdPayrollsResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyIdPayrollsResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompaniesCompanyIdPayrollsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdPayrollsResponse$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdPayrollsResponse$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdPayrollsResponse$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdPayrollsResponse$Outbound` instead. */
-  export type Outbound = DeleteV1CompaniesCompanyIdPayrollsResponse$Outbound;
-}
-
-export function deleteV1CompaniesCompanyIdPayrollsResponseToJSON(
-  deleteV1CompaniesCompanyIdPayrollsResponse:
-    DeleteV1CompaniesCompanyIdPayrollsResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1CompaniesCompanyIdPayrollsResponse$outboundSchema.parse(
-      deleteV1CompaniesCompanyIdPayrollsResponse,
-    ),
-  );
-}
 
 export function deleteV1CompaniesCompanyIdPayrollsResponseFromJSON(
   jsonString: string,

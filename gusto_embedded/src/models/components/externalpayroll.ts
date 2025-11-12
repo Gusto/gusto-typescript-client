@@ -138,21 +138,6 @@ export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
   .nativeEnum(Status);
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> =
-  Status$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Status$ {
-  /** @deprecated use `Status$inboundSchema` instead. */
-  export const inboundSchema = Status$inboundSchema;
-  /** @deprecated use `Status$outboundSchema` instead. */
-  export const outboundSchema = Status$outboundSchema;
-}
-
-/** @internal */
 export const Earnings$inboundSchema: z.ZodType<
   Earnings,
   z.ZodTypeDef,
@@ -168,48 +153,6 @@ export const Earnings$inboundSchema: z.ZodType<
     "earning_id": "earningId",
   });
 });
-
-/** @internal */
-export type Earnings$Outbound = {
-  amount?: string | undefined;
-  hours?: string | undefined;
-  earning_type?: string | undefined;
-  earning_id?: number | undefined;
-};
-
-/** @internal */
-export const Earnings$outboundSchema: z.ZodType<
-  Earnings$Outbound,
-  z.ZodTypeDef,
-  Earnings
-> = z.object({
-  amount: z.string().optional(),
-  hours: z.string().optional(),
-  earningType: z.string().optional(),
-  earningId: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    earningType: "earning_type",
-    earningId: "earning_id",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Earnings$ {
-  /** @deprecated use `Earnings$inboundSchema` instead. */
-  export const inboundSchema = Earnings$inboundSchema;
-  /** @deprecated use `Earnings$outboundSchema` instead. */
-  export const outboundSchema = Earnings$outboundSchema;
-  /** @deprecated use `Earnings$Outbound` instead. */
-  export type Outbound = Earnings$Outbound;
-}
-
-export function earningsToJSON(earnings: Earnings): string {
-  return JSON.stringify(Earnings$outboundSchema.parse(earnings));
-}
 
 export function earningsFromJSON(
   jsonString: string,
@@ -238,47 +181,6 @@ export const Benefits$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type Benefits$Outbound = {
-  benefit_id?: number | undefined;
-  company_contribution_amount?: string | undefined;
-  employee_deduction_amount?: string | undefined;
-};
-
-/** @internal */
-export const Benefits$outboundSchema: z.ZodType<
-  Benefits$Outbound,
-  z.ZodTypeDef,
-  Benefits
-> = z.object({
-  benefitId: z.number().int().optional(),
-  companyContributionAmount: z.string().optional(),
-  employeeDeductionAmount: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    benefitId: "benefit_id",
-    companyContributionAmount: "company_contribution_amount",
-    employeeDeductionAmount: "employee_deduction_amount",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Benefits$ {
-  /** @deprecated use `Benefits$inboundSchema` instead. */
-  export const inboundSchema = Benefits$inboundSchema;
-  /** @deprecated use `Benefits$outboundSchema` instead. */
-  export const outboundSchema = Benefits$outboundSchema;
-  /** @deprecated use `Benefits$Outbound` instead. */
-  export type Outbound = Benefits$Outbound;
-}
-
-export function benefitsToJSON(benefits: Benefits): string {
-  return JSON.stringify(Benefits$outboundSchema.parse(benefits));
-}
-
 export function benefitsFromJSON(
   jsonString: string,
 ): SafeParseResult<Benefits, SDKValidationError> {
@@ -302,47 +204,6 @@ export const ExternalPayrollTaxes$inboundSchema: z.ZodType<
     "tax_id": "taxId",
   });
 });
-
-/** @internal */
-export type ExternalPayrollTaxes$Outbound = {
-  tax_id?: number | undefined;
-  amount?: string | undefined;
-};
-
-/** @internal */
-export const ExternalPayrollTaxes$outboundSchema: z.ZodType<
-  ExternalPayrollTaxes$Outbound,
-  z.ZodTypeDef,
-  ExternalPayrollTaxes
-> = z.object({
-  taxId: z.number().int().optional(),
-  amount: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taxId: "tax_id",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayrollTaxes$ {
-  /** @deprecated use `ExternalPayrollTaxes$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollTaxes$inboundSchema;
-  /** @deprecated use `ExternalPayrollTaxes$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollTaxes$outboundSchema;
-  /** @deprecated use `ExternalPayrollTaxes$Outbound` instead. */
-  export type Outbound = ExternalPayrollTaxes$Outbound;
-}
-
-export function externalPayrollTaxesToJSON(
-  externalPayrollTaxes: ExternalPayrollTaxes,
-): string {
-  return JSON.stringify(
-    ExternalPayrollTaxes$outboundSchema.parse(externalPayrollTaxes),
-  );
-}
 
 export function externalPayrollTaxesFromJSON(
   jsonString: string,
@@ -369,51 +230,6 @@ export const ExternalPayrollItems$inboundSchema: z.ZodType<
     "employee_uuid": "employeeUuid",
   });
 });
-
-/** @internal */
-export type ExternalPayrollItems$Outbound = {
-  employee_uuid?: string | undefined;
-  earnings?: Array<Earnings$Outbound> | undefined;
-  benefits?: Array<Benefits$Outbound> | undefined;
-  taxes?: Array<ExternalPayrollTaxes$Outbound> | undefined;
-};
-
-/** @internal */
-export const ExternalPayrollItems$outboundSchema: z.ZodType<
-  ExternalPayrollItems$Outbound,
-  z.ZodTypeDef,
-  ExternalPayrollItems
-> = z.object({
-  employeeUuid: z.string().optional(),
-  earnings: z.array(z.lazy(() => Earnings$outboundSchema)).optional(),
-  benefits: z.array(z.lazy(() => Benefits$outboundSchema)).optional(),
-  taxes: z.array(z.lazy(() => ExternalPayrollTaxes$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayrollItems$ {
-  /** @deprecated use `ExternalPayrollItems$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollItems$inboundSchema;
-  /** @deprecated use `ExternalPayrollItems$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollItems$outboundSchema;
-  /** @deprecated use `ExternalPayrollItems$Outbound` instead. */
-  export type Outbound = ExternalPayrollItems$Outbound;
-}
-
-export function externalPayrollItemsToJSON(
-  externalPayrollItems: ExternalPayrollItems,
-): string {
-  return JSON.stringify(
-    ExternalPayrollItems$outboundSchema.parse(externalPayrollItems),
-  );
-}
 
 export function externalPayrollItemsFromJSON(
   jsonString: string,
@@ -444,55 +260,6 @@ export const ApplicableEarnings$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ApplicableEarnings$Outbound = {
-  earning_type?: string | undefined;
-  earning_id?: number | undefined;
-  name?: string | undefined;
-  input_type?: string | undefined;
-  category?: string | undefined;
-};
-
-/** @internal */
-export const ApplicableEarnings$outboundSchema: z.ZodType<
-  ApplicableEarnings$Outbound,
-  z.ZodTypeDef,
-  ApplicableEarnings
-> = z.object({
-  earningType: z.string().optional(),
-  earningId: z.number().optional(),
-  name: z.string().optional(),
-  inputType: z.string().optional(),
-  category: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    earningType: "earning_type",
-    earningId: "earning_id",
-    inputType: "input_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApplicableEarnings$ {
-  /** @deprecated use `ApplicableEarnings$inboundSchema` instead. */
-  export const inboundSchema = ApplicableEarnings$inboundSchema;
-  /** @deprecated use `ApplicableEarnings$outboundSchema` instead. */
-  export const outboundSchema = ApplicableEarnings$outboundSchema;
-  /** @deprecated use `ApplicableEarnings$Outbound` instead. */
-  export type Outbound = ApplicableEarnings$Outbound;
-}
-
-export function applicableEarningsToJSON(
-  applicableEarnings: ApplicableEarnings,
-): string {
-  return JSON.stringify(
-    ApplicableEarnings$outboundSchema.parse(applicableEarnings),
-  );
-}
-
 export function applicableEarningsFromJSON(
   jsonString: string,
 ): SafeParseResult<ApplicableEarnings, SDKValidationError> {
@@ -513,45 +280,6 @@ export const ApplicableBenefits$inboundSchema: z.ZodType<
   description: z.string().optional(),
   active: z.boolean().optional(),
 });
-
-/** @internal */
-export type ApplicableBenefits$Outbound = {
-  id?: number | undefined;
-  description?: string | undefined;
-  active?: boolean | undefined;
-};
-
-/** @internal */
-export const ApplicableBenefits$outboundSchema: z.ZodType<
-  ApplicableBenefits$Outbound,
-  z.ZodTypeDef,
-  ApplicableBenefits
-> = z.object({
-  id: z.number().int().optional(),
-  description: z.string().optional(),
-  active: z.boolean().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApplicableBenefits$ {
-  /** @deprecated use `ApplicableBenefits$inboundSchema` instead. */
-  export const inboundSchema = ApplicableBenefits$inboundSchema;
-  /** @deprecated use `ApplicableBenefits$outboundSchema` instead. */
-  export const outboundSchema = ApplicableBenefits$outboundSchema;
-  /** @deprecated use `ApplicableBenefits$Outbound` instead. */
-  export type Outbound = ApplicableBenefits$Outbound;
-}
-
-export function applicableBenefitsToJSON(
-  applicableBenefits: ApplicableBenefits,
-): string {
-  return JSON.stringify(
-    ApplicableBenefits$outboundSchema.parse(applicableBenefits),
-  );
-}
 
 export function applicableBenefitsFromJSON(
   jsonString: string,
@@ -580,50 +308,6 @@ export const ApplicableTaxes$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ApplicableTaxes$Outbound = {
-  id?: number | undefined;
-  name?: string | undefined;
-  employer_tax?: boolean | undefined;
-  resident_tax?: boolean | undefined;
-};
-
-/** @internal */
-export const ApplicableTaxes$outboundSchema: z.ZodType<
-  ApplicableTaxes$Outbound,
-  z.ZodTypeDef,
-  ApplicableTaxes
-> = z.object({
-  id: z.number().int().optional(),
-  name: z.string().optional(),
-  employerTax: z.boolean().optional(),
-  residentTax: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employerTax: "employer_tax",
-    residentTax: "resident_tax",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApplicableTaxes$ {
-  /** @deprecated use `ApplicableTaxes$inboundSchema` instead. */
-  export const inboundSchema = ApplicableTaxes$inboundSchema;
-  /** @deprecated use `ApplicableTaxes$outboundSchema` instead. */
-  export const outboundSchema = ApplicableTaxes$outboundSchema;
-  /** @deprecated use `ApplicableTaxes$Outbound` instead. */
-  export type Outbound = ApplicableTaxes$Outbound;
-}
-
-export function applicableTaxesToJSON(
-  applicableTaxes: ApplicableTaxes,
-): string {
-  return JSON.stringify(ApplicableTaxes$outboundSchema.parse(applicableTaxes));
-}
-
 export function applicableTaxesFromJSON(
   jsonString: string,
 ): SafeParseResult<ApplicableTaxes, SDKValidationError> {
@@ -642,41 +326,6 @@ export const ExternalPayrollMetadata$inboundSchema: z.ZodType<
 > = z.object({
   deletable: z.boolean().optional(),
 });
-
-/** @internal */
-export type ExternalPayrollMetadata$Outbound = {
-  deletable?: boolean | undefined;
-};
-
-/** @internal */
-export const ExternalPayrollMetadata$outboundSchema: z.ZodType<
-  ExternalPayrollMetadata$Outbound,
-  z.ZodTypeDef,
-  ExternalPayrollMetadata
-> = z.object({
-  deletable: z.boolean().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayrollMetadata$ {
-  /** @deprecated use `ExternalPayrollMetadata$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollMetadata$inboundSchema;
-  /** @deprecated use `ExternalPayrollMetadata$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollMetadata$outboundSchema;
-  /** @deprecated use `ExternalPayrollMetadata$Outbound` instead. */
-  export type Outbound = ExternalPayrollMetadata$Outbound;
-}
-
-export function externalPayrollMetadataToJSON(
-  externalPayrollMetadata: ExternalPayrollMetadata,
-): string {
-  return JSON.stringify(
-    ExternalPayrollMetadata$outboundSchema.parse(externalPayrollMetadata),
-  );
-}
 
 export function externalPayrollMetadataFromJSON(
   jsonString: string,
@@ -723,76 +372,6 @@ export const ExternalPayroll$inboundSchema: z.ZodType<
     "applicable_taxes": "applicableTaxes",
   });
 });
-
-/** @internal */
-export type ExternalPayroll$Outbound = {
-  uuid: string;
-  company_uuid?: string | undefined;
-  check_date?: string | undefined;
-  payment_period_start_date?: string | undefined;
-  payment_period_end_date?: string | undefined;
-  status?: string | undefined;
-  external_payroll_items?: Array<ExternalPayrollItems$Outbound> | undefined;
-  applicable_earnings?: Array<ApplicableEarnings$Outbound> | undefined;
-  applicable_benefits?: Array<ApplicableBenefits$Outbound> | null | undefined;
-  applicable_taxes?: Array<ApplicableTaxes$Outbound> | undefined;
-  metadata?: ExternalPayrollMetadata$Outbound | undefined;
-};
-
-/** @internal */
-export const ExternalPayroll$outboundSchema: z.ZodType<
-  ExternalPayroll$Outbound,
-  z.ZodTypeDef,
-  ExternalPayroll
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string().optional(),
-  checkDate: z.string().optional(),
-  paymentPeriodStartDate: z.string().optional(),
-  paymentPeriodEndDate: z.string().optional(),
-  status: Status$outboundSchema.optional(),
-  externalPayrollItems: z.array(
-    z.lazy(() => ExternalPayrollItems$outboundSchema),
-  ).optional(),
-  applicableEarnings: z.array(z.lazy(() => ApplicableEarnings$outboundSchema))
-    .optional(),
-  applicableBenefits: z.nullable(
-    z.array(z.lazy(() => ApplicableBenefits$outboundSchema)),
-  ).optional(),
-  applicableTaxes: z.array(z.lazy(() => ApplicableTaxes$outboundSchema))
-    .optional(),
-  metadata: z.lazy(() => ExternalPayrollMetadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    checkDate: "check_date",
-    paymentPeriodStartDate: "payment_period_start_date",
-    paymentPeriodEndDate: "payment_period_end_date",
-    externalPayrollItems: "external_payroll_items",
-    applicableEarnings: "applicable_earnings",
-    applicableBenefits: "applicable_benefits",
-    applicableTaxes: "applicable_taxes",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayroll$ {
-  /** @deprecated use `ExternalPayroll$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayroll$inboundSchema;
-  /** @deprecated use `ExternalPayroll$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayroll$outboundSchema;
-  /** @deprecated use `ExternalPayroll$Outbound` instead. */
-  export type Outbound = ExternalPayroll$Outbound;
-}
-
-export function externalPayrollToJSON(
-  externalPayroll: ExternalPayroll,
-): string {
-  return JSON.stringify(ExternalPayroll$outboundSchema.parse(externalPayroll));
-}
 
 export function externalPayrollFromJSON(
   jsonString: string,

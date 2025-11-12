@@ -10,12 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -83,23 +80,6 @@ export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse = {
 };
 
 /** @internal */
-export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    email: z.string(),
-    ip_address: z.string(),
-    external_user_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ip_address": "ipAddress",
-      "external_user_id": "externalUserId",
-    });
-  });
-
-/** @internal */
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound =
   {
     email: string;
@@ -124,22 +104,6 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundS
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$ {
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$outboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$Outbound;
-}
-
 export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBodyToJSON(
   putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody:
     PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody,
@@ -149,41 +113,6 @@ export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBodyToJSON(
       .parse(putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody),
   );
 }
-
-export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema:
-  z.ZodType<
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$Outbound = {
@@ -213,22 +142,6 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$ {
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$Outbound;
-}
-
 export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestToJSON(
   putV1PartnerManagedCompaniesCompanyUuidMigrateRequest:
     PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
@@ -240,42 +153,10 @@ export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestToJSON(
   );
 }
 
-export function putV1PartnerManagedCompaniesCompanyUuidMigrateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest' from JSON`,
-  );
-}
-
 /** @internal */
 export const MigrationStatus$inboundSchema: z.ZodNativeEnum<
   typeof MigrationStatus
 > = z.nativeEnum(MigrationStatus);
-
-/** @internal */
-export const MigrationStatus$outboundSchema: z.ZodNativeEnum<
-  typeof MigrationStatus
-> = MigrationStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MigrationStatus$ {
-  /** @deprecated use `MigrationStatus$inboundSchema` instead. */
-  export const inboundSchema = MigrationStatus$inboundSchema;
-  /** @deprecated use `MigrationStatus$outboundSchema` instead. */
-  export const outboundSchema = MigrationStatus$outboundSchema;
-}
 
 /** @internal */
 export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema:
@@ -292,55 +173,6 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundS
       "migration_status": "migrationStatus",
     });
   });
-
-/** @internal */
-export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$Outbound =
-  {
-    company_uuid?: string | undefined;
-    migration_status?: string | undefined;
-  };
-
-/** @internal */
-export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$outboundSchema:
-  z.ZodType<
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$Outbound,
-    z.ZodTypeDef,
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
-  > = z.object({
-    companyUuid: z.string().optional(),
-    migrationStatus: MigrationStatus$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      companyUuid: "company_uuid",
-      migrationStatus: "migration_status",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$ {
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$outboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$Outbound` instead. */
-  export type Outbound =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$Outbound;
-}
-
-export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseBodyToJSON(
-  putV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody:
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
-): string {
-  return JSON.stringify(
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$outboundSchema
-      .parse(putV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody),
-  );
-}
 
 export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseBodyFromJSON(
   jsonString: string,
@@ -373,58 +205,6 @@ export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchem
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  object?:
-    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema:
-  z.ZodType<
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    object: z.lazy(() =>
-      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$ {
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema;
-  /** @deprecated use `PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$Outbound;
-}
-
-export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseToJSON(
-  putV1PartnerManagedCompaniesCompanyUuidMigrateResponse:
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-): string {
-  return JSON.stringify(
-    PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$outboundSchema.parse(
-      putV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-    ),
-  );
-}
 
 export function putV1PartnerManagedCompaniesCompanyUuidMigrateResponseFromJSON(
   jsonString: string,

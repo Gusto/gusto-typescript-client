@@ -31,39 +31,6 @@ export const EarningType$inboundSchema: z.ZodType<
   uuid: z.string(),
 });
 
-/** @internal */
-export type EarningType$Outbound = {
-  name?: string | undefined;
-  uuid: string;
-};
-
-/** @internal */
-export const EarningType$outboundSchema: z.ZodType<
-  EarningType$Outbound,
-  z.ZodTypeDef,
-  EarningType
-> = z.object({
-  name: z.string().optional(),
-  uuid: z.string(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EarningType$ {
-  /** @deprecated use `EarningType$inboundSchema` instead. */
-  export const inboundSchema = EarningType$inboundSchema;
-  /** @deprecated use `EarningType$outboundSchema` instead. */
-  export const outboundSchema = EarningType$outboundSchema;
-  /** @deprecated use `EarningType$Outbound` instead. */
-  export type Outbound = EarningType$Outbound;
-}
-
-export function earningTypeToJSON(earningType: EarningType): string {
-  return JSON.stringify(EarningType$outboundSchema.parse(earningType));
-}
-
 export function earningTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<EarningType, SDKValidationError> {

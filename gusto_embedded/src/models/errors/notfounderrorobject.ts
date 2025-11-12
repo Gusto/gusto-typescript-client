@@ -6,8 +6,6 @@ import * as z from "zod/v3";
 import {
   EntityErrorObject,
   EntityErrorObject$inboundSchema,
-  EntityErrorObject$Outbound,
-  EntityErrorObject$outboundSchema,
 } from "../components/entityerrorobject.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 
@@ -68,32 +66,3 @@ export const NotFoundErrorObject$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type NotFoundErrorObject$Outbound = {
-  errors: Array<EntityErrorObject$Outbound>;
-};
-
-/** @internal */
-export const NotFoundErrorObject$outboundSchema: z.ZodType<
-  NotFoundErrorObject$Outbound,
-  z.ZodTypeDef,
-  NotFoundErrorObject
-> = z.instanceof(NotFoundErrorObject)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    errors: z.array(EntityErrorObject$outboundSchema),
-  }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace NotFoundErrorObject$ {
-  /** @deprecated use `NotFoundErrorObject$inboundSchema` instead. */
-  export const inboundSchema = NotFoundErrorObject$inboundSchema;
-  /** @deprecated use `NotFoundErrorObject$outboundSchema` instead. */
-  export const outboundSchema = NotFoundErrorObject$outboundSchema;
-  /** @deprecated use `NotFoundErrorObject$Outbound` instead. */
-  export type Outbound = NotFoundErrorObject$Outbound;
-}

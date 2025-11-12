@@ -11,7 +11,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FlsaStatusType,
   FlsaStatusType$inboundSchema,
-  FlsaStatusType$outboundSchema,
 } from "./flsastatustype.js";
 
 /**
@@ -95,21 +94,6 @@ export const PaymentUnit$inboundSchema: z.ZodNativeEnum<typeof PaymentUnit> = z
   .nativeEnum(PaymentUnit);
 
 /** @internal */
-export const PaymentUnit$outboundSchema: z.ZodNativeEnum<typeof PaymentUnit> =
-  PaymentUnit$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentUnit$ {
-  /** @deprecated use `PaymentUnit$inboundSchema` instead. */
-  export const inboundSchema = PaymentUnit$inboundSchema;
-  /** @deprecated use `PaymentUnit$outboundSchema` instead. */
-  export const outboundSchema = PaymentUnit$outboundSchema;
-}
-
-/** @internal */
 export const MinimumWages$inboundSchema: z.ZodType<
   MinimumWages,
   z.ZodTypeDef,
@@ -123,45 +107,6 @@ export const MinimumWages$inboundSchema: z.ZodType<
     "effective_date": "effectiveDate",
   });
 });
-
-/** @internal */
-export type MinimumWages$Outbound = {
-  uuid?: string | undefined;
-  wage?: string | undefined;
-  effective_date?: string | undefined;
-};
-
-/** @internal */
-export const MinimumWages$outboundSchema: z.ZodType<
-  MinimumWages$Outbound,
-  z.ZodTypeDef,
-  MinimumWages
-> = z.object({
-  uuid: z.string().optional(),
-  wage: z.string().optional(),
-  effectiveDate: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    effectiveDate: "effective_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MinimumWages$ {
-  /** @deprecated use `MinimumWages$inboundSchema` instead. */
-  export const inboundSchema = MinimumWages$inboundSchema;
-  /** @deprecated use `MinimumWages$outboundSchema` instead. */
-  export const outboundSchema = MinimumWages$outboundSchema;
-  /** @deprecated use `MinimumWages$Outbound` instead. */
-  export type Outbound = MinimumWages$Outbound;
-}
-
-export function minimumWagesToJSON(minimumWages: MinimumWages): string {
-  return JSON.stringify(MinimumWages$outboundSchema.parse(minimumWages));
-}
 
 export function minimumWagesFromJSON(
   jsonString: string,
@@ -200,65 +145,6 @@ export const Compensation$inboundSchema: z.ZodType<
     "minimum_wages": "minimumWages",
   });
 });
-
-/** @internal */
-export type Compensation$Outbound = {
-  uuid: string;
-  version?: string | undefined;
-  job_uuid?: string | undefined;
-  employee_uuid?: string | undefined;
-  rate?: string | undefined;
-  payment_unit?: string | undefined;
-  flsa_status?: string | undefined;
-  effective_date?: string | undefined;
-  adjust_for_minimum_wage?: boolean | undefined;
-  minimum_wages?: Array<MinimumWages$Outbound> | undefined;
-};
-
-/** @internal */
-export const Compensation$outboundSchema: z.ZodType<
-  Compensation$Outbound,
-  z.ZodTypeDef,
-  Compensation
-> = z.object({
-  uuid: z.string(),
-  version: z.string().optional(),
-  jobUuid: z.string().optional(),
-  employeeUuid: z.string().optional(),
-  rate: z.string().optional(),
-  paymentUnit: PaymentUnit$outboundSchema.optional(),
-  flsaStatus: FlsaStatusType$outboundSchema.optional(),
-  effectiveDate: z.string().optional(),
-  adjustForMinimumWage: z.boolean().optional(),
-  minimumWages: z.array(z.lazy(() => MinimumWages$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    jobUuid: "job_uuid",
-    employeeUuid: "employee_uuid",
-    paymentUnit: "payment_unit",
-    flsaStatus: "flsa_status",
-    effectiveDate: "effective_date",
-    adjustForMinimumWage: "adjust_for_minimum_wage",
-    minimumWages: "minimum_wages",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Compensation$ {
-  /** @deprecated use `Compensation$inboundSchema` instead. */
-  export const inboundSchema = Compensation$inboundSchema;
-  /** @deprecated use `Compensation$outboundSchema` instead. */
-  export const outboundSchema = Compensation$outboundSchema;
-  /** @deprecated use `Compensation$Outbound` instead. */
-  export type Outbound = Compensation$Outbound;
-}
-
-export function compensationToJSON(compensation: Compensation): string {
-  return JSON.stringify(Compensation$outboundSchema.parse(compensation));
-}
 
 export function compensationFromJSON(
   jsonString: string,

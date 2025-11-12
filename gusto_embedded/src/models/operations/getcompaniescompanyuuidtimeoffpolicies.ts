@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TimeOffPolicy,
   TimeOffPolicy$inboundSchema,
-  TimeOffPolicy$Outbound,
-  TimeOffPolicy$outboundSchema,
 } from "../components/timeoffpolicy.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetCompaniesCompanyUuidTimeOffPoliciesResponse = {
 };
 
 /** @internal */
-export const GetCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidTimeOffPoliciesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetCompaniesCompanyUuidTimeOffPoliciesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,21 +61,6 @@ export const GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidTimeOffPoliciesRequest$ {
-  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesRequest$Outbound` instead. */
-  export type Outbound = GetCompaniesCompanyUuidTimeOffPoliciesRequest$Outbound;
-}
-
 export function getCompaniesCompanyUuidTimeOffPoliciesRequestToJSON(
   getCompaniesCompanyUuidTimeOffPoliciesRequest:
     GetCompaniesCompanyUuidTimeOffPoliciesRequest,
@@ -105,22 +69,6 @@ export function getCompaniesCompanyUuidTimeOffPoliciesRequestToJSON(
     GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema.parse(
       getCompaniesCompanyUuidTimeOffPoliciesRequest,
     ),
-  );
-}
-
-export function getCompaniesCompanyUuidTimeOffPoliciesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetCompaniesCompanyUuidTimeOffPoliciesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetCompaniesCompanyUuidTimeOffPoliciesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetCompaniesCompanyUuidTimeOffPoliciesRequest' from JSON`,
   );
 }
 
@@ -139,55 +87,6 @@ export const GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema:
       "Time-Off-Policy-List": "timeOffPolicyList",
     });
   });
-
-/** @internal */
-export type GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Time-Off-Policy-List"?: Array<TimeOffPolicy$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound,
-    z.ZodTypeDef,
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    timeOffPolicyList: z.array(TimeOffPolicy$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      timeOffPolicyList: "Time-Off-Policy-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidTimeOffPoliciesResponse$ {
-  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound` instead. */
-  export type Outbound =
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse$Outbound;
-}
-
-export function getCompaniesCompanyUuidTimeOffPoliciesResponseToJSON(
-  getCompaniesCompanyUuidTimeOffPoliciesResponse:
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse,
-): string {
-  return JSON.stringify(
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse$outboundSchema.parse(
-      getCompaniesCompanyUuidTimeOffPoliciesResponse,
-    ),
-  );
-}
 
 export function getCompaniesCompanyUuidTimeOffPoliciesResponseFromJSON(
   jsonString: string,

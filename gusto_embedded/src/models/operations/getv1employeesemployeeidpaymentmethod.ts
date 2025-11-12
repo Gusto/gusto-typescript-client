@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeePaymentMethod,
   EmployeePaymentMethod$inboundSchema,
-  EmployeePaymentMethod$Outbound,
-  EmployeePaymentMethod$outboundSchema,
 } from "../components/employeepaymentmethod.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetV1EmployeesEmployeeIdPaymentMethodResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdPaymentMethodRequest$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdPaymentMethodRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1EmployeesEmployeeIdPaymentMethodRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version": string;
@@ -82,21 +61,6 @@ export const GetV1EmployeesEmployeeIdPaymentMethodRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdPaymentMethodRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdPaymentMethodRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdPaymentMethodRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdPaymentMethodRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdPaymentMethodRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdPaymentMethodRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdPaymentMethodRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdPaymentMethodRequestToJSON(
   getV1EmployeesEmployeeIdPaymentMethodRequest:
     GetV1EmployeesEmployeeIdPaymentMethodRequest,
@@ -105,22 +69,6 @@ export function getV1EmployeesEmployeeIdPaymentMethodRequestToJSON(
     GetV1EmployeesEmployeeIdPaymentMethodRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdPaymentMethodRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdPaymentMethodRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdPaymentMethodRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdPaymentMethodRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeIdPaymentMethodRequest' from JSON`,
   );
 }
 
@@ -139,54 +87,6 @@ export const GetV1EmployeesEmployeeIdPaymentMethodResponse$inboundSchema:
       "Employee-Payment-Method": "employeePaymentMethod",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdPaymentMethodResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Payment-Method"?: EmployeePaymentMethod$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdPaymentMethodResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdPaymentMethodResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdPaymentMethodResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeePaymentMethod: EmployeePaymentMethod$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeePaymentMethod: "Employee-Payment-Method",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdPaymentMethodResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdPaymentMethodResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdPaymentMethodResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdPaymentMethodResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdPaymentMethodResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdPaymentMethodResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdPaymentMethodResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdPaymentMethodResponseToJSON(
-  getV1EmployeesEmployeeIdPaymentMethodResponse:
-    GetV1EmployeesEmployeeIdPaymentMethodResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdPaymentMethodResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdPaymentMethodResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdPaymentMethodResponseFromJSON(
   jsonString: string,

@@ -103,22 +103,6 @@ export const ExperienceLevel$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ExperienceLevel);
 
 /** @internal */
-export const ExperienceLevel$outboundSchema: z.ZodNativeEnum<
-  typeof ExperienceLevel
-> = ExperienceLevel$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExperienceLevel$ {
-  /** @deprecated use `ExperienceLevel$inboundSchema` instead. */
-  export const inboundSchema = ExperienceLevel$inboundSchema;
-  /** @deprecated use `ExperienceLevel$outboundSchema` instead. */
-  export const outboundSchema = ExperienceLevel$outboundSchema;
-}
-
-/** @internal */
 export const Occupations$inboundSchema: z.ZodType<
   Occupations,
   z.ZodTypeDef,
@@ -136,52 +120,6 @@ export const Occupations$inboundSchema: z.ZodType<
     "time_percentage": "timePercentage",
   });
 });
-
-/** @internal */
-export type Occupations$Outbound = {
-  code: string;
-  name?: string | undefined;
-  description?: string | undefined;
-  experience_level: string;
-  time_percentage: string;
-  primary?: boolean | undefined;
-};
-
-/** @internal */
-export const Occupations$outboundSchema: z.ZodType<
-  Occupations$Outbound,
-  z.ZodTypeDef,
-  Occupations
-> = z.object({
-  code: z.string(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  experienceLevel: ExperienceLevel$outboundSchema,
-  timePercentage: z.string(),
-  primary: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    experienceLevel: "experience_level",
-    timePercentage: "time_percentage",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Occupations$ {
-  /** @deprecated use `Occupations$inboundSchema` instead. */
-  export const inboundSchema = Occupations$inboundSchema;
-  /** @deprecated use `Occupations$outboundSchema` instead. */
-  export const outboundSchema = Occupations$outboundSchema;
-  /** @deprecated use `Occupations$Outbound` instead. */
-  export type Outbound = Occupations$Outbound;
-}
-
-export function occupationsToJSON(occupations: Occupations): string {
-  return JSON.stringify(Occupations$outboundSchema.parse(occupations));
-}
 
 export function occupationsFromJSON(
   jsonString: string,
@@ -222,65 +160,6 @@ export const SalaryEstimate$inboundSchema: z.ZodType<
     "updated_at": "updatedAt",
   });
 });
-
-/** @internal */
-export type SalaryEstimate$Outbound = {
-  uuid: string;
-  employee_uuid: string | null;
-  employee_job_uuid?: string | null | undefined;
-  annual_net_revenue: string | null;
-  zip_code: string | null;
-  result?: number | null | undefined;
-  accepted_at?: string | null | undefined;
-  created_at: string;
-  updated_at: string;
-  occupations: Array<Occupations$Outbound>;
-};
-
-/** @internal */
-export const SalaryEstimate$outboundSchema: z.ZodType<
-  SalaryEstimate$Outbound,
-  z.ZodTypeDef,
-  SalaryEstimate
-> = z.object({
-  uuid: z.string(),
-  employeeUuid: z.nullable(z.string()),
-  employeeJobUuid: z.nullable(z.string()).optional(),
-  annualNetRevenue: z.nullable(z.string()),
-  zipCode: z.nullable(z.string()),
-  result: z.nullable(z.number().int()).optional(),
-  acceptedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  occupations: z.array(z.lazy(() => Occupations$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    employeeJobUuid: "employee_job_uuid",
-    annualNetRevenue: "annual_net_revenue",
-    zipCode: "zip_code",
-    acceptedAt: "accepted_at",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SalaryEstimate$ {
-  /** @deprecated use `SalaryEstimate$inboundSchema` instead. */
-  export const inboundSchema = SalaryEstimate$inboundSchema;
-  /** @deprecated use `SalaryEstimate$outboundSchema` instead. */
-  export const outboundSchema = SalaryEstimate$outboundSchema;
-  /** @deprecated use `SalaryEstimate$Outbound` instead. */
-  export type Outbound = SalaryEstimate$Outbound;
-}
-
-export function salaryEstimateToJSON(salaryEstimate: SalaryEstimate): string {
-  return JSON.stringify(SalaryEstimate$outboundSchema.parse(salaryEstimate));
-}
 
 export function salaryEstimateFromJSON(
   jsonString: string,

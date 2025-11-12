@@ -6,26 +6,17 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Event,
-  Event$inboundSchema,
-  Event$Outbound,
-  Event$outboundSchema,
-} from "../components/event.js";
+import { Event, Event$inboundSchema } from "../components/event.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   SortOrder,
-  SortOrder$inboundSchema,
   SortOrder$outboundSchema,
 } from "../components/sortorder.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -70,19 +61,6 @@ export type GetEventsResponse = {
 };
 
 /** @internal */
-export const GetEventsSecurity$inboundSchema: z.ZodType<
-  GetEventsSecurity,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  SystemAccessAuth: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "SystemAccessAuth": "systemAccessAuth",
-  });
-});
-
-/** @internal */
 export type GetEventsSecurity$Outbound = {
   SystemAccessAuth: string;
 };
@@ -100,19 +78,6 @@ export const GetEventsSecurity$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetEventsSecurity$ {
-  /** @deprecated use `GetEventsSecurity$inboundSchema` instead. */
-  export const inboundSchema = GetEventsSecurity$inboundSchema;
-  /** @deprecated use `GetEventsSecurity$outboundSchema` instead. */
-  export const outboundSchema = GetEventsSecurity$outboundSchema;
-  /** @deprecated use `GetEventsSecurity$Outbound` instead. */
-  export type Outbound = GetEventsSecurity$Outbound;
-}
-
 export function getEventsSecurityToJSON(
   getEventsSecurity: GetEventsSecurity,
 ): string {
@@ -120,38 +85,6 @@ export function getEventsSecurityToJSON(
     GetEventsSecurity$outboundSchema.parse(getEventsSecurity),
   );
 }
-
-export function getEventsSecurityFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEventsSecurity, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEventsSecurity$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEventsSecurity' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEventsRequest$inboundSchema: z.ZodType<
-  GetEventsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  starting_after_uuid: z.string().optional(),
-  resource_uuid: z.string().optional(),
-  limit: z.string().optional(),
-  event_type: z.string().optional(),
-  sort_order: SortOrder$inboundSchema.optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after_uuid": "startingAfterUuid",
-    "resource_uuid": "resourceUuid",
-    "event_type": "eventType",
-    "sort_order": "sortOrder",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type GetEventsRequest$Outbound = {
@@ -185,34 +118,11 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetEventsRequest$ {
-  /** @deprecated use `GetEventsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetEventsRequest$inboundSchema;
-  /** @deprecated use `GetEventsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetEventsRequest$outboundSchema;
-  /** @deprecated use `GetEventsRequest$Outbound` instead. */
-  export type Outbound = GetEventsRequest$Outbound;
-}
-
 export function getEventsRequestToJSON(
   getEventsRequest: GetEventsRequest,
 ): string {
   return JSON.stringify(
     GetEventsRequest$outboundSchema.parse(getEventsRequest),
-  );
-}
-
-export function getEventsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEventsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEventsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEventsRequest' from JSON`,
   );
 }
 
@@ -230,48 +140,6 @@ export const GetEventsResponse$inboundSchema: z.ZodType<
     "Event-List": "eventList",
   });
 });
-
-/** @internal */
-export type GetEventsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Event-List"?: Array<Event$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetEventsResponse$outboundSchema: z.ZodType<
-  GetEventsResponse$Outbound,
-  z.ZodTypeDef,
-  GetEventsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  eventList: z.array(Event$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    eventList: "Event-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetEventsResponse$ {
-  /** @deprecated use `GetEventsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetEventsResponse$inboundSchema;
-  /** @deprecated use `GetEventsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetEventsResponse$outboundSchema;
-  /** @deprecated use `GetEventsResponse$Outbound` instead. */
-  export type Outbound = GetEventsResponse$Outbound;
-}
-
-export function getEventsResponseToJSON(
-  getEventsResponse: GetEventsResponse,
-): string {
-  return JSON.stringify(
-    GetEventsResponse$outboundSchema.parse(getEventsResponse),
-  );
-}
 
 export function getEventsResponseFromJSON(
   jsonString: string,

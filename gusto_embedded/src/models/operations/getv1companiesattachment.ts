@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyAttachment,
   CompanyAttachment$inboundSchema,
-  CompanyAttachment$Outbound,
-  CompanyAttachment$outboundSchema,
 } from "../components/companyattachment.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,23 +44,6 @@ export type GetV1CompaniesAttachmentResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesAttachmentRequest$inboundSchema: z.ZodType<
-  GetV1CompaniesAttachmentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  company_attachment_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "company_attachment_uuid": "companyAttachmentUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompaniesAttachmentRequest$Outbound = {
   company_id: string;
   company_attachment_uuid: string;
@@ -89,19 +67,6 @@ export const GetV1CompaniesAttachmentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesAttachmentRequest$ {
-  /** @deprecated use `GetV1CompaniesAttachmentRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompaniesAttachmentRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1CompaniesAttachmentRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesAttachmentRequest$Outbound;
-}
-
 export function getV1CompaniesAttachmentRequestToJSON(
   getV1CompaniesAttachmentRequest: GetV1CompaniesAttachmentRequest,
 ): string {
@@ -109,16 +74,6 @@ export function getV1CompaniesAttachmentRequestToJSON(
     GetV1CompaniesAttachmentRequest$outboundSchema.parse(
       getV1CompaniesAttachmentRequest,
     ),
-  );
-}
-
-export function getV1CompaniesAttachmentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompaniesAttachmentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1CompaniesAttachmentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesAttachmentRequest' from JSON`,
   );
 }
 
@@ -136,50 +91,6 @@ export const GetV1CompaniesAttachmentResponse$inboundSchema: z.ZodType<
     "Company-Attachment": "companyAttachment",
   });
 });
-
-/** @internal */
-export type GetV1CompaniesAttachmentResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Attachment"?: CompanyAttachment$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesAttachmentResponse$outboundSchema: z.ZodType<
-  GetV1CompaniesAttachmentResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompaniesAttachmentResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  companyAttachment: CompanyAttachment$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    companyAttachment: "Company-Attachment",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesAttachmentResponse$ {
-  /** @deprecated use `GetV1CompaniesAttachmentResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompaniesAttachmentResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1CompaniesAttachmentResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesAttachmentResponse$Outbound;
-}
-
-export function getV1CompaniesAttachmentResponseToJSON(
-  getV1CompaniesAttachmentResponse: GetV1CompaniesAttachmentResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesAttachmentResponse$outboundSchema.parse(
-      getV1CompaniesAttachmentResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesAttachmentResponseFromJSON(
   jsonString: string,

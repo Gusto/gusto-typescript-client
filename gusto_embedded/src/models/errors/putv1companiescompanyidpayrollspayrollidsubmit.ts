@@ -8,15 +8,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   PayrollBlockersError,
   PayrollBlockersError$inboundSchema,
-  PayrollBlockersError$Outbound,
-  PayrollBlockersError$outboundSchema,
 } from "./payrollblockerserror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
 import {
   UnprocessableEntityErrorObject1,
   UnprocessableEntityErrorObject1$inboundSchema,
-  UnprocessableEntityErrorObject1$Outbound,
-  UnprocessableEntityErrorObject1$outboundSchema,
 } from "./unprocessableentityerrorobject1.js";
 
 /**
@@ -36,48 +32,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$inboundS
     UnprocessableEntityErrorObject1$inboundSchema,
     PayrollBlockersError$inboundSchema,
   ]);
-
-/** @internal */
-export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$Outbound =
-  | UnprocessableEntityErrorObject1$Outbound
-  | PayrollBlockersError$Outbound;
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$Outbound,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    UnprocessableEntityErrorObject1$outboundSchema,
-    PayrollBlockersError$outboundSchema,
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$Outbound;
-}
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBodyToJSON(
-  putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody:
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody$outboundSchema
-      .parse(putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody),
-  );
-}
 
 export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBodyFromJSON(
   jsonString: string,

@@ -10,24 +10,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Garnishment,
   Garnishment$inboundSchema,
-  Garnishment$Outbound,
-  Garnishment$outboundSchema,
 } from "../components/garnishment.js";
 import {
   GarnishmentChildSupport,
-  GarnishmentChildSupport$inboundSchema,
   GarnishmentChildSupport$Outbound,
   GarnishmentChildSupport$outboundSchema,
 } from "../components/garnishmentchildsupport.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -121,56 +115,9 @@ export type PostV1EmployeesEmployeeIdGarnishmentsResponse = {
 };
 
 /** @internal */
-export const GarnishmentType$inboundSchema: z.ZodNativeEnum<
-  typeof GarnishmentType
-> = z.nativeEnum(GarnishmentType);
-
-/** @internal */
 export const GarnishmentType$outboundSchema: z.ZodNativeEnum<
   typeof GarnishmentType
-> = GarnishmentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GarnishmentType$ {
-  /** @deprecated use `GarnishmentType$inboundSchema` instead. */
-  export const inboundSchema = GarnishmentType$inboundSchema;
-  /** @deprecated use `GarnishmentType$outboundSchema` instead. */
-  export const outboundSchema = GarnishmentType$outboundSchema;
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    active: z.boolean().default(true),
-    amount: z.string(),
-    description: z.string().optional(),
-    court_ordered: z.boolean(),
-    garnishment_type: z.nullable(GarnishmentType$inboundSchema).optional(),
-    times: z.nullable(z.number().int()).default(null),
-    recurring: z.boolean().default(false),
-    annual_maximum: z.nullable(z.string()).default(null),
-    pay_period_maximum: z.nullable(z.string()).default(null),
-    deduct_as_percentage: z.boolean().default(false),
-    total_amount: z.nullable(z.string()).optional(),
-    child_support: z.nullable(GarnishmentChildSupport$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "court_ordered": "courtOrdered",
-      "garnishment_type": "garnishmentType",
-      "annual_maximum": "annualMaximum",
-      "pay_period_maximum": "payPeriodMaximum",
-      "deduct_as_percentage": "deductAsPercentage",
-      "total_amount": "totalAmount",
-      "child_support": "childSupport",
-    });
-  });
+> = z.nativeEnum(GarnishmentType);
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound = {
@@ -219,22 +166,6 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdGarnishmentsRequestBody$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdGarnishmentsRequestBody$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdGarnishmentsRequestBodyToJSON(
   postV1EmployeesEmployeeIdGarnishmentsRequestBody:
     PostV1EmployeesEmployeeIdGarnishmentsRequestBody,
@@ -245,42 +176,6 @@ export function postV1EmployeesEmployeeIdGarnishmentsRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1EmployeesEmployeeIdGarnishmentsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdGarnishmentsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdGarnishmentsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdGarnishmentsRequest$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdGarnishmentsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostV1EmployeesEmployeeIdGarnishmentsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdGarnishmentsRequest$Outbound = {
@@ -309,21 +204,6 @@ export const PostV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdGarnishmentsRequest$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdGarnishmentsRequest$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsRequest$Outbound` instead. */
-  export type Outbound = PostV1EmployeesEmployeeIdGarnishmentsRequest$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdGarnishmentsRequestToJSON(
   postV1EmployeesEmployeeIdGarnishmentsRequest:
     PostV1EmployeesEmployeeIdGarnishmentsRequest,
@@ -332,22 +212,6 @@ export function postV1EmployeesEmployeeIdGarnishmentsRequestToJSON(
     PostV1EmployeesEmployeeIdGarnishmentsRequest$outboundSchema.parse(
       postV1EmployeesEmployeeIdGarnishmentsRequest,
     ),
-  );
-}
-
-export function postV1EmployeesEmployeeIdGarnishmentsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdGarnishmentsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdGarnishmentsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdGarnishmentsRequest' from JSON`,
   );
 }
 
@@ -366,54 +230,6 @@ export const PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema:
       "Garnishment": "garnishment",
     });
   });
-
-/** @internal */
-export type PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Garnishment?: Garnishment$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdGarnishmentsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    garnishment: Garnishment$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      garnishment: "Garnishment",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdGarnishmentsResponse$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdGarnishmentsResponse$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound` instead. */
-  export type Outbound = PostV1EmployeesEmployeeIdGarnishmentsResponse$Outbound;
-}
-
-export function postV1EmployeesEmployeeIdGarnishmentsResponseToJSON(
-  postV1EmployeesEmployeeIdGarnishmentsResponse:
-    PostV1EmployeesEmployeeIdGarnishmentsResponse,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdGarnishmentsResponse$outboundSchema.parse(
-      postV1EmployeesEmployeeIdGarnishmentsResponse,
-    ),
-  );
-}
 
 export function postV1EmployeesEmployeeIdGarnishmentsResponseFromJSON(
   jsonString: string,

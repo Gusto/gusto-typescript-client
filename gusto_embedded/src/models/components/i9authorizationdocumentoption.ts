@@ -56,21 +56,6 @@ export const Section$inboundSchema: z.ZodNativeEnum<typeof Section> = z
   .nativeEnum(Section);
 
 /** @internal */
-export const Section$outboundSchema: z.ZodNativeEnum<typeof Section> =
-  Section$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Section$ {
-  /** @deprecated use `Section$inboundSchema` instead. */
-  export const inboundSchema = Section$inboundSchema;
-  /** @deprecated use `Section$outboundSchema` instead. */
-  export const outboundSchema = Section$outboundSchema;
-}
-
-/** @internal */
 export const I9AuthorizationDocumentOption$inboundSchema: z.ZodType<
   I9AuthorizationDocumentOption,
   z.ZodTypeDef,
@@ -88,57 +73,6 @@ export const I9AuthorizationDocumentOption$inboundSchema: z.ZodType<
     "common_choice": "commonChoice",
   });
 });
-
-/** @internal */
-export type I9AuthorizationDocumentOption$Outbound = {
-  section: string;
-  description: string;
-  document_type: string;
-  document_title: Array<string>;
-  common_choice: boolean;
-};
-
-/** @internal */
-export const I9AuthorizationDocumentOption$outboundSchema: z.ZodType<
-  I9AuthorizationDocumentOption$Outbound,
-  z.ZodTypeDef,
-  I9AuthorizationDocumentOption
-> = z.object({
-  section: Section$outboundSchema,
-  description: z.string(),
-  documentType: z.string(),
-  documentTitle: z.array(z.string()),
-  commonChoice: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    documentType: "document_type",
-    documentTitle: "document_title",
-    commonChoice: "common_choice",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace I9AuthorizationDocumentOption$ {
-  /** @deprecated use `I9AuthorizationDocumentOption$inboundSchema` instead. */
-  export const inboundSchema = I9AuthorizationDocumentOption$inboundSchema;
-  /** @deprecated use `I9AuthorizationDocumentOption$outboundSchema` instead. */
-  export const outboundSchema = I9AuthorizationDocumentOption$outboundSchema;
-  /** @deprecated use `I9AuthorizationDocumentOption$Outbound` instead. */
-  export type Outbound = I9AuthorizationDocumentOption$Outbound;
-}
-
-export function i9AuthorizationDocumentOptionToJSON(
-  i9AuthorizationDocumentOption: I9AuthorizationDocumentOption,
-): string {
-  return JSON.stringify(
-    I9AuthorizationDocumentOption$outboundSchema.parse(
-      i9AuthorizationDocumentOption,
-    ),
-  );
-}
 
 export function i9AuthorizationDocumentOptionFromJSON(
   jsonString: string,

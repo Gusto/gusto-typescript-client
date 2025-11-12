@@ -32,33 +32,6 @@ export type EmployeeStateTaxAnswer = {
 export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
   .union([z.string(), z.number(), z.boolean()]);
 
-/** @internal */
-export type Value$Outbound = string | number | boolean;
-
-/** @internal */
-export const Value$outboundSchema: z.ZodType<
-  Value$Outbound,
-  z.ZodTypeDef,
-  Value
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Value$ {
-  /** @deprecated use `Value$inboundSchema` instead. */
-  export const inboundSchema = Value$inboundSchema;
-  /** @deprecated use `Value$outboundSchema` instead. */
-  export const outboundSchema = Value$outboundSchema;
-  /** @deprecated use `Value$Outbound` instead. */
-  export type Outbound = Value$Outbound;
-}
-
-export function valueToJSON(value: Value): string {
-  return JSON.stringify(Value$outboundSchema.parse(value));
-}
-
 export function valueFromJSON(
   jsonString: string,
 ): SafeParseResult<Value, SDKValidationError> {
@@ -84,50 +57,6 @@ export const EmployeeStateTaxAnswer$inboundSchema: z.ZodType<
     "valid_up_to": "validUpTo",
   });
 });
-
-/** @internal */
-export type EmployeeStateTaxAnswer$Outbound = {
-  value?: string | number | boolean | null | undefined;
-  valid_from?: string | undefined;
-  valid_up_to?: any | null | undefined;
-};
-
-/** @internal */
-export const EmployeeStateTaxAnswer$outboundSchema: z.ZodType<
-  EmployeeStateTaxAnswer$Outbound,
-  z.ZodTypeDef,
-  EmployeeStateTaxAnswer
-> = z.object({
-  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  validFrom: z.string().optional(),
-  validUpTo: z.nullable(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    validFrom: "valid_from",
-    validUpTo: "valid_up_to",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeStateTaxAnswer$ {
-  /** @deprecated use `EmployeeStateTaxAnswer$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxAnswer$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxAnswer$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxAnswer$outboundSchema;
-  /** @deprecated use `EmployeeStateTaxAnswer$Outbound` instead. */
-  export type Outbound = EmployeeStateTaxAnswer$Outbound;
-}
-
-export function employeeStateTaxAnswerToJSON(
-  employeeStateTaxAnswer: EmployeeStateTaxAnswer,
-): string {
-  return JSON.stringify(
-    EmployeeStateTaxAnswer$outboundSchema.parse(employeeStateTaxAnswer),
-  );
-}
 
 export function employeeStateTaxAnswerFromJSON(
   jsonString: string,

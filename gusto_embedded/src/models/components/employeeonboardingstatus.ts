@@ -62,54 +62,6 @@ export const EmployeeOnboardingStatusOnboardingStep$inboundSchema: z.ZodType<
   requirements: z.array(z.string()).optional(),
 });
 
-/** @internal */
-export type EmployeeOnboardingStatusOnboardingStep$Outbound = {
-  title?: string | undefined;
-  id?: string | undefined;
-  required?: boolean | undefined;
-  completed?: boolean | undefined;
-  requirements?: Array<string> | undefined;
-};
-
-/** @internal */
-export const EmployeeOnboardingStatusOnboardingStep$outboundSchema: z.ZodType<
-  EmployeeOnboardingStatusOnboardingStep$Outbound,
-  z.ZodTypeDef,
-  EmployeeOnboardingStatusOnboardingStep
-> = z.object({
-  title: z.string().optional(),
-  id: z.string().optional(),
-  required: z.boolean().optional(),
-  completed: z.boolean().optional(),
-  requirements: z.array(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeOnboardingStatusOnboardingStep$ {
-  /** @deprecated use `EmployeeOnboardingStatusOnboardingStep$inboundSchema` instead. */
-  export const inboundSchema =
-    EmployeeOnboardingStatusOnboardingStep$inboundSchema;
-  /** @deprecated use `EmployeeOnboardingStatusOnboardingStep$outboundSchema` instead. */
-  export const outboundSchema =
-    EmployeeOnboardingStatusOnboardingStep$outboundSchema;
-  /** @deprecated use `EmployeeOnboardingStatusOnboardingStep$Outbound` instead. */
-  export type Outbound = EmployeeOnboardingStatusOnboardingStep$Outbound;
-}
-
-export function employeeOnboardingStatusOnboardingStepToJSON(
-  employeeOnboardingStatusOnboardingStep:
-    EmployeeOnboardingStatusOnboardingStep,
-): string {
-  return JSON.stringify(
-    EmployeeOnboardingStatusOnboardingStep$outboundSchema.parse(
-      employeeOnboardingStatusOnboardingStep,
-    ),
-  );
-}
-
 export function employeeOnboardingStatusOnboardingStepFromJSON(
   jsonString: string,
 ): SafeParseResult<EmployeeOnboardingStatusOnboardingStep, SDKValidationError> {
@@ -138,54 +90,6 @@ export const EmployeeOnboardingStatus$inboundSchema: z.ZodType<
     "onboarding_steps": "onboardingSteps",
   });
 });
-
-/** @internal */
-export type EmployeeOnboardingStatus$Outbound = {
-  uuid: string;
-  onboarding_status?: string | undefined;
-  onboarding_steps?:
-    | Array<EmployeeOnboardingStatusOnboardingStep$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const EmployeeOnboardingStatus$outboundSchema: z.ZodType<
-  EmployeeOnboardingStatus$Outbound,
-  z.ZodTypeDef,
-  EmployeeOnboardingStatus
-> = z.object({
-  uuid: z.string(),
-  onboardingStatus: z.string().optional(),
-  onboardingSteps: z.array(
-    z.lazy(() => EmployeeOnboardingStatusOnboardingStep$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onboardingStatus: "onboarding_status",
-    onboardingSteps: "onboarding_steps",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeOnboardingStatus$ {
-  /** @deprecated use `EmployeeOnboardingStatus$inboundSchema` instead. */
-  export const inboundSchema = EmployeeOnboardingStatus$inboundSchema;
-  /** @deprecated use `EmployeeOnboardingStatus$outboundSchema` instead. */
-  export const outboundSchema = EmployeeOnboardingStatus$outboundSchema;
-  /** @deprecated use `EmployeeOnboardingStatus$Outbound` instead. */
-  export type Outbound = EmployeeOnboardingStatus$Outbound;
-}
-
-export function employeeOnboardingStatusToJSON(
-  employeeOnboardingStatus: EmployeeOnboardingStatus,
-): string {
-  return JSON.stringify(
-    EmployeeOnboardingStatus$outboundSchema.parse(employeeOnboardingStatus),
-  );
-}
 
 export function employeeOnboardingStatusFromJSON(
   jsonString: string,
