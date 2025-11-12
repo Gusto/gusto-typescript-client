@@ -44,48 +44,6 @@ export const Admin$inboundSchema: z.ZodType<Admin, z.ZodTypeDef, unknown> = z
     });
   });
 
-/** @internal */
-export type Admin$Outbound = {
-  uuid: string;
-  email?: string | undefined;
-  first_name?: string | undefined;
-  last_name?: string | undefined;
-};
-
-/** @internal */
-export const Admin$outboundSchema: z.ZodType<
-  Admin$Outbound,
-  z.ZodTypeDef,
-  Admin
-> = z.object({
-  uuid: z.string(),
-  email: z.string().optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    lastName: "last_name",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Admin$ {
-  /** @deprecated use `Admin$inboundSchema` instead. */
-  export const inboundSchema = Admin$inboundSchema;
-  /** @deprecated use `Admin$outboundSchema` instead. */
-  export const outboundSchema = Admin$outboundSchema;
-  /** @deprecated use `Admin$Outbound` instead. */
-  export type Outbound = Admin$Outbound;
-}
-
-export function adminToJSON(admin: Admin): string {
-  return JSON.stringify(Admin$outboundSchema.parse(admin));
-}
-
 export function adminFromJSON(
   jsonString: string,
 ): SafeParseResult<Admin, SDKValidationError> {

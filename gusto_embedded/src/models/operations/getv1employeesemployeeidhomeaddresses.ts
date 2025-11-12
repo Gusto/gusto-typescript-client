@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeAddress,
   EmployeeAddress$inboundSchema,
-  EmployeeAddress$Outbound,
-  EmployeeAddress$outboundSchema,
 } from "../components/employeeaddress.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -57,47 +53,10 @@ export type GetV1EmployeesEmployeeIdHomeAddressesResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
-  > = z.nativeEnum(GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion);
-
-/** @internal */
 export const GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
-  > = GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdHomeAddressesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version":
-      GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
+  > = z.nativeEnum(GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdHomeAddressesRequest$Outbound = {
@@ -123,21 +82,6 @@ export const GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdHomeAddressesRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdHomeAddressesRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdHomeAddressesRequestToJSON(
   getV1EmployeesEmployeeIdHomeAddressesRequest:
     GetV1EmployeesEmployeeIdHomeAddressesRequest,
@@ -146,22 +90,6 @@ export function getV1EmployeesEmployeeIdHomeAddressesRequestToJSON(
     GetV1EmployeesEmployeeIdHomeAddressesRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdHomeAddressesRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdHomeAddressesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdHomeAddressesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdHomeAddressesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeIdHomeAddressesRequest' from JSON`,
   );
 }
 
@@ -180,54 +108,6 @@ export const GetV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema:
       "Employee-Address-List": "employeeAddressList",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdHomeAddressesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Address-List"?: Array<EmployeeAddress$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdHomeAddressesResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdHomeAddressesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeAddressList: z.array(EmployeeAddress$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeAddressList: "Employee-Address-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdHomeAddressesResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdHomeAddressesResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdHomeAddressesResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdHomeAddressesResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdHomeAddressesResponseToJSON(
-  getV1EmployeesEmployeeIdHomeAddressesResponse:
-    GetV1EmployeesEmployeeIdHomeAddressesResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdHomeAddressesResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdHomeAddressesResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdHomeAddressesResponseFromJSON(
   jsonString: string,

@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TaxLiabilitiesSelections,
   TaxLiabilitiesSelections$inboundSchema,
-  TaxLiabilitiesSelections$Outbound,
-  TaxLiabilitiesSelections$outboundSchema,
 } from "../components/taxliabilitiesselections.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetV1TaxLiabilitiesResponse = {
 };
 
 /** @internal */
-export const GetV1TaxLiabilitiesRequest$inboundSchema: z.ZodType<
-  GetV1TaxLiabilitiesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1TaxLiabilitiesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,34 +60,11 @@ export const GetV1TaxLiabilitiesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1TaxLiabilitiesRequest$ {
-  /** @deprecated use `GetV1TaxLiabilitiesRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1TaxLiabilitiesRequest$inboundSchema;
-  /** @deprecated use `GetV1TaxLiabilitiesRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1TaxLiabilitiesRequest$outboundSchema;
-  /** @deprecated use `GetV1TaxLiabilitiesRequest$Outbound` instead. */
-  export type Outbound = GetV1TaxLiabilitiesRequest$Outbound;
-}
-
 export function getV1TaxLiabilitiesRequestToJSON(
   getV1TaxLiabilitiesRequest: GetV1TaxLiabilitiesRequest,
 ): string {
   return JSON.stringify(
     GetV1TaxLiabilitiesRequest$outboundSchema.parse(getV1TaxLiabilitiesRequest),
-  );
-}
-
-export function getV1TaxLiabilitiesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1TaxLiabilitiesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1TaxLiabilitiesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1TaxLiabilitiesRequest' from JSON`,
   );
 }
 
@@ -127,53 +84,6 @@ export const GetV1TaxLiabilitiesResponse$inboundSchema: z.ZodType<
     "Tax-Liabilities-List": "taxLiabilitiesList",
   });
 });
-
-/** @internal */
-export type GetV1TaxLiabilitiesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Tax-Liabilities-List"?:
-    | Array<Array<TaxLiabilitiesSelections$Outbound>>
-    | undefined;
-};
-
-/** @internal */
-export const GetV1TaxLiabilitiesResponse$outboundSchema: z.ZodType<
-  GetV1TaxLiabilitiesResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1TaxLiabilitiesResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  taxLiabilitiesList: z.array(z.array(TaxLiabilitiesSelections$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    taxLiabilitiesList: "Tax-Liabilities-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1TaxLiabilitiesResponse$ {
-  /** @deprecated use `GetV1TaxLiabilitiesResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1TaxLiabilitiesResponse$inboundSchema;
-  /** @deprecated use `GetV1TaxLiabilitiesResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1TaxLiabilitiesResponse$outboundSchema;
-  /** @deprecated use `GetV1TaxLiabilitiesResponse$Outbound` instead. */
-  export type Outbound = GetV1TaxLiabilitiesResponse$Outbound;
-}
-
-export function getV1TaxLiabilitiesResponseToJSON(
-  getV1TaxLiabilitiesResponse: GetV1TaxLiabilitiesResponse,
-): string {
-  return JSON.stringify(
-    GetV1TaxLiabilitiesResponse$outboundSchema.parse(
-      getV1TaxLiabilitiesResponse,
-    ),
-  );
-}
 
 export function getV1TaxLiabilitiesResponseFromJSON(
   jsonString: string,

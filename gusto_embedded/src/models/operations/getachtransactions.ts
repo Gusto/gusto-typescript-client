@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   AchTransaction,
   AchTransaction$inboundSchema,
-  AchTransaction$Outbound,
-  AchTransaction$outboundSchema,
 } from "../components/achtransaction.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,31 +64,6 @@ export type GetAchTransactionsResponse = {
 };
 
 /** @internal */
-export const GetAchTransactionsRequest$inboundSchema: z.ZodType<
-  GetAchTransactionsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  contractor_payment_uuid: z.string().optional(),
-  payroll_uuid: z.string().optional(),
-  transaction_type: z.string().optional(),
-  payment_direction: z.string().optional(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "contractor_payment_uuid": "contractorPaymentUuid",
-    "payroll_uuid": "payrollUuid",
-    "transaction_type": "transactionType",
-    "payment_direction": "paymentDirection",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetAchTransactionsRequest$Outbound = {
   company_uuid: string;
   contractor_payment_uuid?: string | undefined;
@@ -130,34 +100,11 @@ export const GetAchTransactionsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAchTransactionsRequest$ {
-  /** @deprecated use `GetAchTransactionsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetAchTransactionsRequest$inboundSchema;
-  /** @deprecated use `GetAchTransactionsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetAchTransactionsRequest$outboundSchema;
-  /** @deprecated use `GetAchTransactionsRequest$Outbound` instead. */
-  export type Outbound = GetAchTransactionsRequest$Outbound;
-}
-
 export function getAchTransactionsRequestToJSON(
   getAchTransactionsRequest: GetAchTransactionsRequest,
 ): string {
   return JSON.stringify(
     GetAchTransactionsRequest$outboundSchema.parse(getAchTransactionsRequest),
-  );
-}
-
-export function getAchTransactionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAchTransactionsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAchTransactionsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAchTransactionsRequest' from JSON`,
   );
 }
 
@@ -175,48 +122,6 @@ export const GetAchTransactionsResponse$inboundSchema: z.ZodType<
     "Ach-Transaction-List": "achTransactionList",
   });
 });
-
-/** @internal */
-export type GetAchTransactionsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Ach-Transaction-List"?: Array<AchTransaction$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetAchTransactionsResponse$outboundSchema: z.ZodType<
-  GetAchTransactionsResponse$Outbound,
-  z.ZodTypeDef,
-  GetAchTransactionsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  achTransactionList: z.array(AchTransaction$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    achTransactionList: "Ach-Transaction-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAchTransactionsResponse$ {
-  /** @deprecated use `GetAchTransactionsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAchTransactionsResponse$inboundSchema;
-  /** @deprecated use `GetAchTransactionsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAchTransactionsResponse$outboundSchema;
-  /** @deprecated use `GetAchTransactionsResponse$Outbound` instead. */
-  export type Outbound = GetAchTransactionsResponse$Outbound;
-}
-
-export function getAchTransactionsResponseToJSON(
-  getAchTransactionsResponse: GetAchTransactionsResponse,
-): string {
-  return JSON.stringify(
-    GetAchTransactionsResponse$outboundSchema.parse(getAchTransactionsResponse),
-  );
-}
 
 export function getAchTransactionsResponseFromJSON(
   jsonString: string,

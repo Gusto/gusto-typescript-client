@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeAddress,
   EmployeeAddress$inboundSchema,
-  EmployeeAddress$Outbound,
-  EmployeeAddress$outboundSchema,
 } from "../components/employeeaddress.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -55,46 +51,10 @@ export type GetV1HomeAddressesHomeAddressUuidResponse = {
 };
 
 /** @internal */
-export const GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
-  > = z.nativeEnum(GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
-
-/** @internal */
 export const GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
-  > = GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1HomeAddressesHomeAddressUuidRequest$inboundSchema: z.ZodType<
-  GetV1HomeAddressesHomeAddressUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  home_address_uuid: z.string(),
-  "X-Gusto-API-Version":
-    GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "home_address_uuid": "homeAddressUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
+  > = z.nativeEnum(GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1HomeAddressesHomeAddressUuidRequest$Outbound = {
@@ -119,21 +79,6 @@ export const GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1HomeAddressesHomeAddressUuidRequest$ {
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1HomeAddressesHomeAddressUuidRequest$inboundSchema;
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema;
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidRequest$Outbound` instead. */
-  export type Outbound = GetV1HomeAddressesHomeAddressUuidRequest$Outbound;
-}
-
 export function getV1HomeAddressesHomeAddressUuidRequestToJSON(
   getV1HomeAddressesHomeAddressUuidRequest:
     GetV1HomeAddressesHomeAddressUuidRequest,
@@ -142,22 +87,6 @@ export function getV1HomeAddressesHomeAddressUuidRequestToJSON(
     GetV1HomeAddressesHomeAddressUuidRequest$outboundSchema.parse(
       getV1HomeAddressesHomeAddressUuidRequest,
     ),
-  );
-}
-
-export function getV1HomeAddressesHomeAddressUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1HomeAddressesHomeAddressUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1HomeAddressesHomeAddressUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1HomeAddressesHomeAddressUuidRequest' from JSON`,
   );
 }
 
@@ -175,54 +104,6 @@ export const GetV1HomeAddressesHomeAddressUuidResponse$inboundSchema: z.ZodType<
     "Employee-Address": "employeeAddress",
   });
 });
-
-/** @internal */
-export type GetV1HomeAddressesHomeAddressUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Address"?: EmployeeAddress$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1HomeAddressesHomeAddressUuidResponse$outboundSchema:
-  z.ZodType<
-    GetV1HomeAddressesHomeAddressUuidResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1HomeAddressesHomeAddressUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeAddress: EmployeeAddress$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeAddress: "Employee-Address",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1HomeAddressesHomeAddressUuidResponse$ {
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1HomeAddressesHomeAddressUuidResponse$inboundSchema;
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1HomeAddressesHomeAddressUuidResponse$outboundSchema;
-  /** @deprecated use `GetV1HomeAddressesHomeAddressUuidResponse$Outbound` instead. */
-  export type Outbound = GetV1HomeAddressesHomeAddressUuidResponse$Outbound;
-}
-
-export function getV1HomeAddressesHomeAddressUuidResponseToJSON(
-  getV1HomeAddressesHomeAddressUuidResponse:
-    GetV1HomeAddressesHomeAddressUuidResponse,
-): string {
-  return JSON.stringify(
-    GetV1HomeAddressesHomeAddressUuidResponse$outboundSchema.parse(
-      getV1HomeAddressesHomeAddressUuidResponse,
-    ),
-  );
-}
 
 export function getV1HomeAddressesHomeAddressUuidResponseFromJSON(
   jsonString: string,

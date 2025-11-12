@@ -47,43 +47,6 @@ export const TaxSuggestions$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaxSuggestions$Outbound = {
-  tax_id?: number | undefined;
-  amount?: string | undefined;
-};
-
-/** @internal */
-export const TaxSuggestions$outboundSchema: z.ZodType<
-  TaxSuggestions$Outbound,
-  z.ZodTypeDef,
-  TaxSuggestions
-> = z.object({
-  taxId: z.number().int().optional(),
-  amount: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taxId: "tax_id",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxSuggestions$ {
-  /** @deprecated use `TaxSuggestions$inboundSchema` instead. */
-  export const inboundSchema = TaxSuggestions$inboundSchema;
-  /** @deprecated use `TaxSuggestions$outboundSchema` instead. */
-  export const outboundSchema = TaxSuggestions$outboundSchema;
-  /** @deprecated use `TaxSuggestions$Outbound` instead. */
-  export type Outbound = TaxSuggestions$Outbound;
-}
-
-export function taxSuggestionsToJSON(taxSuggestions: TaxSuggestions): string {
-  return JSON.stringify(TaxSuggestions$outboundSchema.parse(taxSuggestions));
-}
-
 export function taxSuggestionsFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxSuggestions, SDKValidationError> {
@@ -109,51 +72,6 @@ export const ExternalPayrollTaxSuggestions$inboundSchema: z.ZodType<
     "tax_suggestions": "taxSuggestions",
   });
 });
-
-/** @internal */
-export type ExternalPayrollTaxSuggestions$Outbound = {
-  employee_uuid?: string | undefined;
-  tax_suggestions?: Array<TaxSuggestions$Outbound> | undefined;
-};
-
-/** @internal */
-export const ExternalPayrollTaxSuggestions$outboundSchema: z.ZodType<
-  ExternalPayrollTaxSuggestions$Outbound,
-  z.ZodTypeDef,
-  ExternalPayrollTaxSuggestions
-> = z.object({
-  employeeUuid: z.string().optional(),
-  taxSuggestions: z.array(z.lazy(() => TaxSuggestions$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    taxSuggestions: "tax_suggestions",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayrollTaxSuggestions$ {
-  /** @deprecated use `ExternalPayrollTaxSuggestions$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollTaxSuggestions$inboundSchema;
-  /** @deprecated use `ExternalPayrollTaxSuggestions$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollTaxSuggestions$outboundSchema;
-  /** @deprecated use `ExternalPayrollTaxSuggestions$Outbound` instead. */
-  export type Outbound = ExternalPayrollTaxSuggestions$Outbound;
-}
-
-export function externalPayrollTaxSuggestionsToJSON(
-  externalPayrollTaxSuggestions: ExternalPayrollTaxSuggestions,
-): string {
-  return JSON.stringify(
-    ExternalPayrollTaxSuggestions$outboundSchema.parse(
-      externalPayrollTaxSuggestions,
-    ),
-  );
-}
 
 export function externalPayrollTaxSuggestionsFromJSON(
   jsonString: string,

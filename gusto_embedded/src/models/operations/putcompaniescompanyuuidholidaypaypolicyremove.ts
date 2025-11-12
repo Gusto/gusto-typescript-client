@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HolidayPayPolicy,
   HolidayPayPolicy$inboundSchema,
-  HolidayPayPolicy$Outbound,
-  HolidayPayPolicy$outboundSchema,
 } from "../components/holidaypaypolicy.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -63,16 +58,6 @@ export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse = {
 };
 
 /** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    uuid: z.string().optional(),
-  });
-
-/** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$Outbound = {
   uuid?: string | undefined;
 };
@@ -87,22 +72,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$outboundSche
     uuid: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyRemoveEmployeesToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees:
     PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees,
@@ -113,36 +82,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyRemoveEmployeesToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyRemoveEmployeesFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    employees: z.array(
-      z.lazy(() =>
-        PutCompaniesCompanyUuidHolidayPayPolicyRemoveEmployees$inboundSchema
-      ),
-    ).optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$Outbound =
@@ -168,22 +107,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$outboundSc
     ).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBodyToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody:
     PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody,
@@ -193,41 +116,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBodyToJSON(
       .parse(putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$Outbound = {
@@ -257,22 +145,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyRemoveRequest:
     PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
@@ -281,22 +153,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestToJSON(
     PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema.parse(
       putCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
     ),
-  );
-}
-
-export function putCompaniesCompanyUuidHolidayPayPolicyRemoveRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest' from JSON`,
   );
 }
 
@@ -315,55 +171,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema
       "Holiday-Pay-Policy": "holidayPayPolicy",
     });
   });
-
-/** @internal */
-export type PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Holiday-Pay-Policy"?: HolidayPayPolicy$Outbound | undefined;
-};
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound,
-    z.ZodTypeDef,
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    holidayPayPolicy: HolidayPayPolicy$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      holidayPayPolicy: "Holiday-Pay-Policy",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$Outbound;
-}
-
-export function putCompaniesCompanyUuidHolidayPayPolicyRemoveResponseToJSON(
-  putCompaniesCompanyUuidHolidayPayPolicyRemoveResponse:
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
-): string {
-  return JSON.stringify(
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$outboundSchema.parse(
-      putCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
-    ),
-  );
-}
 
 export function putCompaniesCompanyUuidHolidayPayPolicyRemoveResponseFromJSON(
   jsonString: string,

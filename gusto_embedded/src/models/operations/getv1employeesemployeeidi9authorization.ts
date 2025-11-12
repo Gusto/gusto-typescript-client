@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   I9Authorization,
   I9Authorization$inboundSchema,
-  I9Authorization$Outbound,
-  I9Authorization$outboundSchema,
 } from "../components/i9authorization.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetV1EmployeesEmployeeIdI9AuthorizationResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdI9AuthorizationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1EmployeesEmployeeIdI9AuthorizationRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version": string;
@@ -82,22 +61,6 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdI9AuthorizationRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1EmployeesEmployeeIdI9AuthorizationRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdI9AuthorizationRequestToJSON(
   getV1EmployeesEmployeeIdI9AuthorizationRequest:
     GetV1EmployeesEmployeeIdI9AuthorizationRequest,
@@ -106,22 +69,6 @@ export function getV1EmployeesEmployeeIdI9AuthorizationRequestToJSON(
     GetV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdI9AuthorizationRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdI9AuthorizationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdI9AuthorizationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeIdI9AuthorizationRequest' from JSON`,
   );
 }
 
@@ -140,55 +87,6 @@ export const GetV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema:
       "I9-Authorization": "i9Authorization",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "I9-Authorization"?: I9Authorization$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdI9AuthorizationResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    i9Authorization: I9Authorization$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      i9Authorization: "I9-Authorization",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdI9AuthorizationResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdI9AuthorizationResponseToJSON(
-  getV1EmployeesEmployeeIdI9AuthorizationResponse:
-    GetV1EmployeesEmployeeIdI9AuthorizationResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdI9AuthorizationResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdI9AuthorizationResponseFromJSON(
   jsonString: string,

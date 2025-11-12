@@ -11,8 +11,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleAssignmentEmployeeChange,
   PayScheduleAssignmentEmployeeChange$inboundSchema,
-  PayScheduleAssignmentEmployeeChange$Outbound,
-  PayScheduleAssignmentEmployeeChange$outboundSchema,
 } from "./payscheduleassignmentemployeechange.js";
 
 /**
@@ -51,22 +49,6 @@ export const PayScheduleAssignmentPreviewType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PayScheduleAssignmentPreviewType);
 
 /** @internal */
-export const PayScheduleAssignmentPreviewType$outboundSchema: z.ZodNativeEnum<
-  typeof PayScheduleAssignmentPreviewType
-> = PayScheduleAssignmentPreviewType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleAssignmentPreviewType$ {
-  /** @deprecated use `PayScheduleAssignmentPreviewType$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleAssignmentPreviewType$inboundSchema;
-  /** @deprecated use `PayScheduleAssignmentPreviewType$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleAssignmentPreviewType$outboundSchema;
-}
-
-/** @internal */
 export const PayScheduleAssignmentPreview$inboundSchema: z.ZodType<
   PayScheduleAssignmentPreview,
   z.ZodTypeDef,
@@ -80,52 +62,6 @@ export const PayScheduleAssignmentPreview$inboundSchema: z.ZodType<
     "employee_changes": "employeeChanges",
   });
 });
-
-/** @internal */
-export type PayScheduleAssignmentPreview$Outbound = {
-  type?: string | null | undefined;
-  employee_changes?:
-    | Array<PayScheduleAssignmentEmployeeChange$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const PayScheduleAssignmentPreview$outboundSchema: z.ZodType<
-  PayScheduleAssignmentPreview$Outbound,
-  z.ZodTypeDef,
-  PayScheduleAssignmentPreview
-> = z.object({
-  type: z.nullable(PayScheduleAssignmentPreviewType$outboundSchema).optional(),
-  employeeChanges: z.array(PayScheduleAssignmentEmployeeChange$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeChanges: "employee_changes",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleAssignmentPreview$ {
-  /** @deprecated use `PayScheduleAssignmentPreview$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleAssignmentPreview$inboundSchema;
-  /** @deprecated use `PayScheduleAssignmentPreview$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleAssignmentPreview$outboundSchema;
-  /** @deprecated use `PayScheduleAssignmentPreview$Outbound` instead. */
-  export type Outbound = PayScheduleAssignmentPreview$Outbound;
-}
-
-export function payScheduleAssignmentPreviewToJSON(
-  payScheduleAssignmentPreview: PayScheduleAssignmentPreview,
-): string {
-  return JSON.stringify(
-    PayScheduleAssignmentPreview$outboundSchema.parse(
-      payScheduleAssignmentPreview,
-    ),
-  );
-}
 
 export function payScheduleAssignmentPreviewFromJSON(
   jsonString: string,

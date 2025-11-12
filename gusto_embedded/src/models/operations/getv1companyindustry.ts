@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Industry,
-  Industry$inboundSchema,
-  Industry$Outbound,
-  Industry$outboundSchema,
-} from "../components/industry.js";
+import { Industry, Industry$inboundSchema } from "../components/industry.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +37,6 @@ export type GetV1CompanyIndustryResponse = {
 };
 
 /** @internal */
-export const GetV1CompanyIndustryRequest$inboundSchema: z.ZodType<
-  GetV1CompanyIndustryRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompanyIndustryRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
@@ -80,19 +57,6 @@ export const GetV1CompanyIndustryRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyIndustryRequest$ {
-  /** @deprecated use `GetV1CompanyIndustryRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompanyIndustryRequest$inboundSchema;
-  /** @deprecated use `GetV1CompanyIndustryRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1CompanyIndustryRequest$outboundSchema;
-  /** @deprecated use `GetV1CompanyIndustryRequest$Outbound` instead. */
-  export type Outbound = GetV1CompanyIndustryRequest$Outbound;
-}
-
 export function getV1CompanyIndustryRequestToJSON(
   getV1CompanyIndustryRequest: GetV1CompanyIndustryRequest,
 ): string {
@@ -100,16 +64,6 @@ export function getV1CompanyIndustryRequestToJSON(
     GetV1CompanyIndustryRequest$outboundSchema.parse(
       getV1CompanyIndustryRequest,
     ),
-  );
-}
-
-export function getV1CompanyIndustryRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompanyIndustryRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1CompanyIndustryRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompanyIndustryRequest' from JSON`,
   );
 }
 
@@ -127,50 +81,6 @@ export const GetV1CompanyIndustryResponse$inboundSchema: z.ZodType<
     "Industry": "industry",
   });
 });
-
-/** @internal */
-export type GetV1CompanyIndustryResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Industry?: Industry$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompanyIndustryResponse$outboundSchema: z.ZodType<
-  GetV1CompanyIndustryResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompanyIndustryResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  industry: Industry$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    industry: "Industry",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyIndustryResponse$ {
-  /** @deprecated use `GetV1CompanyIndustryResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompanyIndustryResponse$inboundSchema;
-  /** @deprecated use `GetV1CompanyIndustryResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1CompanyIndustryResponse$outboundSchema;
-  /** @deprecated use `GetV1CompanyIndustryResponse$Outbound` instead. */
-  export type Outbound = GetV1CompanyIndustryResponse$Outbound;
-}
-
-export function getV1CompanyIndustryResponseToJSON(
-  getV1CompanyIndustryResponse: GetV1CompanyIndustryResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompanyIndustryResponse$outboundSchema.parse(
-      getV1CompanyIndustryResponse,
-    ),
-  );
-}
 
 export function getV1CompanyIndustryResponseFromJSON(
   jsonString: string,

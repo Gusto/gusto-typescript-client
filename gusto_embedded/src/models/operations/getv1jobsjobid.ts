@@ -10,18 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Job,
-  Job$inboundSchema,
-  Job$Outbound,
-  Job$outboundSchema,
-} from "../components/job.js";
+import { Job, Job$inboundSchema } from "../components/job.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -72,41 +64,9 @@ export type GetV1JobsJobIdResponse = {
 };
 
 /** @internal */
-export const GetV1JobsJobIdQueryParamInclude$inboundSchema: z.ZodNativeEnum<
-  typeof GetV1JobsJobIdQueryParamInclude
-> = z.nativeEnum(GetV1JobsJobIdQueryParamInclude);
-
-/** @internal */
 export const GetV1JobsJobIdQueryParamInclude$outboundSchema: z.ZodNativeEnum<
   typeof GetV1JobsJobIdQueryParamInclude
-> = GetV1JobsJobIdQueryParamInclude$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1JobsJobIdQueryParamInclude$ {
-  /** @deprecated use `GetV1JobsJobIdQueryParamInclude$inboundSchema` instead. */
-  export const inboundSchema = GetV1JobsJobIdQueryParamInclude$inboundSchema;
-  /** @deprecated use `GetV1JobsJobIdQueryParamInclude$outboundSchema` instead. */
-  export const outboundSchema = GetV1JobsJobIdQueryParamInclude$outboundSchema;
-}
-
-/** @internal */
-export const GetV1JobsJobIdRequest$inboundSchema: z.ZodType<
-  GetV1JobsJobIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  job_id: z.string(),
-  include: GetV1JobsJobIdQueryParamInclude$inboundSchema.optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "job_id": "jobId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
+> = z.nativeEnum(GetV1JobsJobIdQueryParamInclude);
 
 /** @internal */
 export type GetV1JobsJobIdRequest$Outbound = {
@@ -131,34 +91,11 @@ export const GetV1JobsJobIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1JobsJobIdRequest$ {
-  /** @deprecated use `GetV1JobsJobIdRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1JobsJobIdRequest$inboundSchema;
-  /** @deprecated use `GetV1JobsJobIdRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1JobsJobIdRequest$outboundSchema;
-  /** @deprecated use `GetV1JobsJobIdRequest$Outbound` instead. */
-  export type Outbound = GetV1JobsJobIdRequest$Outbound;
-}
-
 export function getV1JobsJobIdRequestToJSON(
   getV1JobsJobIdRequest: GetV1JobsJobIdRequest,
 ): string {
   return JSON.stringify(
     GetV1JobsJobIdRequest$outboundSchema.parse(getV1JobsJobIdRequest),
-  );
-}
-
-export function getV1JobsJobIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1JobsJobIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1JobsJobIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1JobsJobIdRequest' from JSON`,
   );
 }
 
@@ -176,48 +113,6 @@ export const GetV1JobsJobIdResponse$inboundSchema: z.ZodType<
     "Job": "job",
   });
 });
-
-/** @internal */
-export type GetV1JobsJobIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Job?: Job$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1JobsJobIdResponse$outboundSchema: z.ZodType<
-  GetV1JobsJobIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1JobsJobIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  job: Job$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    job: "Job",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1JobsJobIdResponse$ {
-  /** @deprecated use `GetV1JobsJobIdResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1JobsJobIdResponse$inboundSchema;
-  /** @deprecated use `GetV1JobsJobIdResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1JobsJobIdResponse$outboundSchema;
-  /** @deprecated use `GetV1JobsJobIdResponse$Outbound` instead. */
-  export type Outbound = GetV1JobsJobIdResponse$Outbound;
-}
-
-export function getV1JobsJobIdResponseToJSON(
-  getV1JobsJobIdResponse: GetV1JobsJobIdResponse,
-): string {
-  return JSON.stringify(
-    GetV1JobsJobIdResponse$outboundSchema.parse(getV1JobsJobIdResponse),
-  );
-}
 
 export function getV1JobsJobIdResponseFromJSON(
   jsonString: string,

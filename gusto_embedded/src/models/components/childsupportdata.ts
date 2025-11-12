@@ -87,39 +87,6 @@ export const FipsCodes$inboundSchema: z.ZodType<
   county: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type FipsCodes$Outbound = {
-  code?: string | undefined;
-  county?: string | null | undefined;
-};
-
-/** @internal */
-export const FipsCodes$outboundSchema: z.ZodType<
-  FipsCodes$Outbound,
-  z.ZodTypeDef,
-  FipsCodes
-> = z.object({
-  code: z.string().optional(),
-  county: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FipsCodes$ {
-  /** @deprecated use `FipsCodes$inboundSchema` instead. */
-  export const inboundSchema = FipsCodes$inboundSchema;
-  /** @deprecated use `FipsCodes$outboundSchema` instead. */
-  export const outboundSchema = FipsCodes$outboundSchema;
-  /** @deprecated use `FipsCodes$Outbound` instead. */
-  export type Outbound = FipsCodes$Outbound;
-}
-
-export function fipsCodesToJSON(fipsCodes: FipsCodes): string {
-  return JSON.stringify(FipsCodes$outboundSchema.parse(fipsCodes));
-}
-
 export function fipsCodesFromJSON(
   jsonString: string,
 ): SafeParseResult<FipsCodes, SDKValidationError> {
@@ -134,21 +101,6 @@ export function fipsCodesFromJSON(
 export const Key$inboundSchema: z.ZodNativeEnum<typeof Key> = z.nativeEnum(Key);
 
 /** @internal */
-export const Key$outboundSchema: z.ZodNativeEnum<typeof Key> =
-  Key$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Key$ {
-  /** @deprecated use `Key$inboundSchema` instead. */
-  export const inboundSchema = Key$inboundSchema;
-  /** @deprecated use `Key$outboundSchema` instead. */
-  export const outboundSchema = Key$outboundSchema;
-}
-
-/** @internal */
 export const RequiredAttributes$inboundSchema: z.ZodType<
   RequiredAttributes,
   z.ZodTypeDef,
@@ -157,43 +109,6 @@ export const RequiredAttributes$inboundSchema: z.ZodType<
   key: Key$inboundSchema.optional(),
   label: z.string().optional(),
 });
-
-/** @internal */
-export type RequiredAttributes$Outbound = {
-  key?: string | undefined;
-  label?: string | undefined;
-};
-
-/** @internal */
-export const RequiredAttributes$outboundSchema: z.ZodType<
-  RequiredAttributes$Outbound,
-  z.ZodTypeDef,
-  RequiredAttributes
-> = z.object({
-  key: Key$outboundSchema.optional(),
-  label: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequiredAttributes$ {
-  /** @deprecated use `RequiredAttributes$inboundSchema` instead. */
-  export const inboundSchema = RequiredAttributes$inboundSchema;
-  /** @deprecated use `RequiredAttributes$outboundSchema` instead. */
-  export const outboundSchema = RequiredAttributes$outboundSchema;
-  /** @deprecated use `RequiredAttributes$Outbound` instead. */
-  export type Outbound = RequiredAttributes$Outbound;
-}
-
-export function requiredAttributesToJSON(
-  requiredAttributes: RequiredAttributes,
-): string {
-  return JSON.stringify(
-    RequiredAttributes$outboundSchema.parse(requiredAttributes),
-  );
-}
 
 export function requiredAttributesFromJSON(
   jsonString: string,
@@ -225,52 +140,6 @@ export const Agencies$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type Agencies$Outbound = {
-  state?: string | undefined;
-  name?: string | undefined;
-  manual_payment_required?: boolean | undefined;
-  fips_codes?: Array<FipsCodes$Outbound> | undefined;
-  required_attributes?: Array<RequiredAttributes$Outbound> | undefined;
-};
-
-/** @internal */
-export const Agencies$outboundSchema: z.ZodType<
-  Agencies$Outbound,
-  z.ZodTypeDef,
-  Agencies
-> = z.object({
-  state: z.string().optional(),
-  name: z.string().optional(),
-  manualPaymentRequired: z.boolean().optional(),
-  fipsCodes: z.array(z.lazy(() => FipsCodes$outboundSchema)).optional(),
-  requiredAttributes: z.array(z.lazy(() => RequiredAttributes$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    manualPaymentRequired: "manual_payment_required",
-    fipsCodes: "fips_codes",
-    requiredAttributes: "required_attributes",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Agencies$ {
-  /** @deprecated use `Agencies$inboundSchema` instead. */
-  export const inboundSchema = Agencies$inboundSchema;
-  /** @deprecated use `Agencies$outboundSchema` instead. */
-  export const outboundSchema = Agencies$outboundSchema;
-  /** @deprecated use `Agencies$Outbound` instead. */
-  export type Outbound = Agencies$Outbound;
-}
-
-export function agenciesToJSON(agencies: Agencies): string {
-  return JSON.stringify(Agencies$outboundSchema.parse(agencies));
-}
-
 export function agenciesFromJSON(
   jsonString: string,
 ): SafeParseResult<Agencies, SDKValidationError> {
@@ -289,41 +158,6 @@ export const ChildSupportData$inboundSchema: z.ZodType<
 > = z.object({
   agencies: z.array(z.lazy(() => Agencies$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type ChildSupportData$Outbound = {
-  agencies?: Array<Agencies$Outbound> | undefined;
-};
-
-/** @internal */
-export const ChildSupportData$outboundSchema: z.ZodType<
-  ChildSupportData$Outbound,
-  z.ZodTypeDef,
-  ChildSupportData
-> = z.object({
-  agencies: z.array(z.lazy(() => Agencies$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChildSupportData$ {
-  /** @deprecated use `ChildSupportData$inboundSchema` instead. */
-  export const inboundSchema = ChildSupportData$inboundSchema;
-  /** @deprecated use `ChildSupportData$outboundSchema` instead. */
-  export const outboundSchema = ChildSupportData$outboundSchema;
-  /** @deprecated use `ChildSupportData$Outbound` instead. */
-  export type Outbound = ChildSupportData$Outbound;
-}
-
-export function childSupportDataToJSON(
-  childSupportData: ChildSupportData,
-): string {
-  return JSON.stringify(
-    ChildSupportData$outboundSchema.parse(childSupportData),
-  );
-}
 
 export function childSupportDataFromJSON(
   jsonString: string,

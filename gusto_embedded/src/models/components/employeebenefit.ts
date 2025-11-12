@@ -198,45 +198,6 @@ export const Tiers$inboundSchema: z.ZodType<Tiers, z.ZodTypeDef, unknown> = z
     });
   });
 
-/** @internal */
-export type Tiers$Outbound = {
-  rate?: string | undefined;
-  threshold?: string | undefined;
-  threshold_delta?: string | undefined;
-};
-
-/** @internal */
-export const Tiers$outboundSchema: z.ZodType<
-  Tiers$Outbound,
-  z.ZodTypeDef,
-  Tiers
-> = z.object({
-  rate: z.string().optional(),
-  threshold: z.string().optional(),
-  thresholdDelta: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thresholdDelta: "threshold_delta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Tiers$ {
-  /** @deprecated use `Tiers$inboundSchema` instead. */
-  export const inboundSchema = Tiers$inboundSchema;
-  /** @deprecated use `Tiers$outboundSchema` instead. */
-  export const outboundSchema = Tiers$outboundSchema;
-  /** @deprecated use `Tiers$Outbound` instead. */
-  export type Outbound = Tiers$Outbound;
-}
-
-export function tiersToJSON(tiers: Tiers): string {
-  return JSON.stringify(Tiers$outboundSchema.parse(tiers));
-}
-
 export function tiersFromJSON(
   jsonString: string,
 ): SafeParseResult<Tiers, SDKValidationError> {
@@ -252,34 +213,6 @@ export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
   .object({
     tiers: z.array(z.lazy(() => Tiers$inboundSchema)).optional(),
   });
-
-/** @internal */
-export type Two$Outbound = {
-  tiers?: Array<Tiers$Outbound> | undefined;
-};
-
-/** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    tiers: z.array(z.lazy(() => Tiers$outboundSchema)).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Two$ {
-  /** @deprecated use `Two$inboundSchema` instead. */
-  export const inboundSchema = Two$inboundSchema;
-  /** @deprecated use `Two$outboundSchema` instead. */
-  export const outboundSchema = Two$outboundSchema;
-  /** @deprecated use `Two$Outbound` instead. */
-  export type Outbound = Two$Outbound;
-}
-
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
-}
 
 export function twoFromJSON(
   jsonString: string,
@@ -297,37 +230,6 @@ export const EmployeeBenefitValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.lazy(() => Two$inboundSchema)]);
-
-/** @internal */
-export type EmployeeBenefitValue$Outbound = string | Two$Outbound;
-
-/** @internal */
-export const EmployeeBenefitValue$outboundSchema: z.ZodType<
-  EmployeeBenefitValue$Outbound,
-  z.ZodTypeDef,
-  EmployeeBenefitValue
-> = z.union([z.string(), z.lazy(() => Two$outboundSchema)]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeBenefitValue$ {
-  /** @deprecated use `EmployeeBenefitValue$inboundSchema` instead. */
-  export const inboundSchema = EmployeeBenefitValue$inboundSchema;
-  /** @deprecated use `EmployeeBenefitValue$outboundSchema` instead. */
-  export const outboundSchema = EmployeeBenefitValue$outboundSchema;
-  /** @deprecated use `EmployeeBenefitValue$Outbound` instead. */
-  export type Outbound = EmployeeBenefitValue$Outbound;
-}
-
-export function employeeBenefitValueToJSON(
-  employeeBenefitValue: EmployeeBenefitValue,
-): string {
-  return JSON.stringify(
-    EmployeeBenefitValue$outboundSchema.parse(employeeBenefitValue),
-  );
-}
 
 export function employeeBenefitValueFromJSON(
   jsonString: string,
@@ -349,39 +251,6 @@ export const Contribution$inboundSchema: z.ZodType<
   value: z.union([z.string(), z.lazy(() => Two$inboundSchema)]).optional(),
 });
 
-/** @internal */
-export type Contribution$Outbound = {
-  type?: string | undefined;
-  value?: string | Two$Outbound | undefined;
-};
-
-/** @internal */
-export const Contribution$outboundSchema: z.ZodType<
-  Contribution$Outbound,
-  z.ZodTypeDef,
-  Contribution
-> = z.object({
-  type: z.string().optional(),
-  value: z.union([z.string(), z.lazy(() => Two$outboundSchema)]).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Contribution$ {
-  /** @deprecated use `Contribution$inboundSchema` instead. */
-  export const inboundSchema = Contribution$inboundSchema;
-  /** @deprecated use `Contribution$outboundSchema` instead. */
-  export const outboundSchema = Contribution$outboundSchema;
-  /** @deprecated use `Contribution$Outbound` instead. */
-  export type Outbound = Contribution$Outbound;
-}
-
-export function contributionToJSON(contribution: Contribution): string {
-  return JSON.stringify(Contribution$outboundSchema.parse(contribution));
-}
-
 export function contributionFromJSON(
   jsonString: string,
 ): SafeParseResult<Contribution, SDKValidationError> {
@@ -396,22 +265,6 @@ export function contributionFromJSON(
 export const DeductionReducesTaxableIncome$inboundSchema: z.ZodNativeEnum<
   typeof DeductionReducesTaxableIncome
 > = z.nativeEnum(DeductionReducesTaxableIncome);
-
-/** @internal */
-export const DeductionReducesTaxableIncome$outboundSchema: z.ZodNativeEnum<
-  typeof DeductionReducesTaxableIncome
-> = DeductionReducesTaxableIncome$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeductionReducesTaxableIncome$ {
-  /** @deprecated use `DeductionReducesTaxableIncome$inboundSchema` instead. */
-  export const inboundSchema = DeductionReducesTaxableIncome$inboundSchema;
-  /** @deprecated use `DeductionReducesTaxableIncome$outboundSchema` instead. */
-  export const outboundSchema = DeductionReducesTaxableIncome$outboundSchema;
-}
 
 /** @internal */
 export const EmployeeBenefit$inboundSchema: z.ZodType<
@@ -458,94 +311,6 @@ export const EmployeeBenefit$inboundSchema: z.ZodType<
     "company_benefit_uuid": "companyBenefitUuid",
   });
 });
-
-/** @internal */
-export type EmployeeBenefit$Outbound = {
-  version?: string | undefined;
-  active: boolean;
-  employee_deduction: string;
-  deduct_as_percentage: boolean;
-  employee_deduction_annual_maximum?: string | null | undefined;
-  contribution?: Contribution$Outbound | undefined;
-  elective: boolean;
-  company_contribution_annual_maximum?: string | null | undefined;
-  limit_option?: string | null | undefined;
-  catch_up: boolean | null;
-  retirement_loan_identifier?: string | undefined;
-  coverage_amount?: string | null | undefined;
-  deduction_reduces_taxable_income: string | null;
-  coverage_salary_multiplier: string | null;
-  company_contribution: string;
-  contribute_as_percentage: boolean;
-  employee_uuid?: string | undefined;
-  company_benefit_uuid?: string | undefined;
-  uuid: string;
-};
-
-/** @internal */
-export const EmployeeBenefit$outboundSchema: z.ZodType<
-  EmployeeBenefit$Outbound,
-  z.ZodTypeDef,
-  EmployeeBenefit
-> = z.object({
-  version: z.string().optional(),
-  active: z.boolean().default(true),
-  employeeDeduction: z.string().default("0.00"),
-  deductAsPercentage: z.boolean().default(false),
-  employeeDeductionAnnualMaximum: z.nullable(z.string()).optional(),
-  contribution: z.lazy(() => Contribution$outboundSchema).optional(),
-  elective: z.boolean().default(false),
-  companyContributionAnnualMaximum: z.nullable(z.string()).optional(),
-  limitOption: z.nullable(z.string()).optional(),
-  catchUp: z.nullable(z.boolean().default(false)),
-  retirementLoanIdentifier: z.string().optional(),
-  coverageAmount: z.nullable(z.string()).optional(),
-  deductionReducesTaxableIncome: z.nullable(
-    DeductionReducesTaxableIncome$outboundSchema.default("unset"),
-  ),
-  coverageSalaryMultiplier: z.nullable(z.string().default("0.00")),
-  companyContribution: z.string().default("0.00"),
-  contributeAsPercentage: z.boolean().default(false),
-  employeeUuid: z.string().optional(),
-  companyBenefitUuid: z.string().optional(),
-  uuid: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeDeduction: "employee_deduction",
-    deductAsPercentage: "deduct_as_percentage",
-    employeeDeductionAnnualMaximum: "employee_deduction_annual_maximum",
-    companyContributionAnnualMaximum: "company_contribution_annual_maximum",
-    limitOption: "limit_option",
-    catchUp: "catch_up",
-    retirementLoanIdentifier: "retirement_loan_identifier",
-    coverageAmount: "coverage_amount",
-    deductionReducesTaxableIncome: "deduction_reduces_taxable_income",
-    coverageSalaryMultiplier: "coverage_salary_multiplier",
-    companyContribution: "company_contribution",
-    contributeAsPercentage: "contribute_as_percentage",
-    employeeUuid: "employee_uuid",
-    companyBenefitUuid: "company_benefit_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeBenefit$ {
-  /** @deprecated use `EmployeeBenefit$inboundSchema` instead. */
-  export const inboundSchema = EmployeeBenefit$inboundSchema;
-  /** @deprecated use `EmployeeBenefit$outboundSchema` instead. */
-  export const outboundSchema = EmployeeBenefit$outboundSchema;
-  /** @deprecated use `EmployeeBenefit$Outbound` instead. */
-  export type Outbound = EmployeeBenefit$Outbound;
-}
-
-export function employeeBenefitToJSON(
-  employeeBenefit: EmployeeBenefit,
-): string {
-  return JSON.stringify(EmployeeBenefit$outboundSchema.parse(employeeBenefit));
-}
 
 export function employeeBenefitFromJSON(
   jsonString: string,

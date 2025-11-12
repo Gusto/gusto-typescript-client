@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -58,21 +55,6 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse = {
 };
 
 /** @internal */
-export const SubmissionBlockers$inboundSchema: z.ZodType<
-  SubmissionBlockers,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  blocker_type: z.string().optional(),
-  selected_option: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "blocker_type": "blockerType",
-    "selected_option": "selectedOption",
-  });
-});
-
-/** @internal */
 export type SubmissionBlockers$Outbound = {
   blocker_type?: string | undefined;
   selected_option?: string | undefined;
@@ -93,19 +75,6 @@ export const SubmissionBlockers$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SubmissionBlockers$ {
-  /** @deprecated use `SubmissionBlockers$inboundSchema` instead. */
-  export const inboundSchema = SubmissionBlockers$inboundSchema;
-  /** @deprecated use `SubmissionBlockers$outboundSchema` instead. */
-  export const outboundSchema = SubmissionBlockers$outboundSchema;
-  /** @deprecated use `SubmissionBlockers$Outbound` instead. */
-  export type Outbound = SubmissionBlockers$Outbound;
-}
-
 export function submissionBlockersToJSON(
   submissionBlockers: SubmissionBlockers,
 ): string {
@@ -113,31 +82,6 @@ export function submissionBlockersToJSON(
     SubmissionBlockers$outboundSchema.parse(submissionBlockers),
   );
 }
-
-export function submissionBlockersFromJSON(
-  jsonString: string,
-): SafeParseResult<SubmissionBlockers, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SubmissionBlockers$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SubmissionBlockers' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    submission_blockers: z.array(z.lazy(() => SubmissionBlockers$inboundSchema))
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "submission_blockers": "submissionBlockers",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$Outbound =
@@ -160,22 +104,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$outboundS
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$Outbound;
-}
-
 export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBodyToJSON(
   putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody:
     PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody,
@@ -185,43 +113,6 @@ export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBodyToJSON(
       .parse(putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody),
   );
 }
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    payroll_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "payroll_id": "payrollId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$Outbound = {
@@ -254,22 +145,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestToJSON(
   putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest:
     PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
@@ -278,22 +153,6 @@ export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestToJSON(
     PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$outboundSchema.parse(
       putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
     ),
-  );
-}
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest' from JSON`,
   );
 }
 
@@ -310,52 +169,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$inboundSchem
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseToJSON(
-  putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse:
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse$outboundSchema.parse(
-      putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse,
-    ),
-  );
-}
 
 export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseFromJSON(
   jsonString: string,

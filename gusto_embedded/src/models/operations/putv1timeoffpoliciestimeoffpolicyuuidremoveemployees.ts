@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TimeOffPolicy,
   TimeOffPolicy$inboundSchema,
-  TimeOffPolicy$Outbound,
-  TimeOffPolicy$outboundSchema,
 } from "../components/timeoffpolicy.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -62,16 +57,6 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse = {
 };
 
 /** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$inboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    uuid: z.string().optional(),
-  });
-
-/** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$Outbound =
   {
     uuid?: string | undefined;
@@ -87,22 +72,6 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$outbo
     uuid: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$ {
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$inboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$outboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$Outbound` instead. */
-  export type Outbound =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$Outbound;
-}
-
 export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployeesToJSON(
   putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees:
     PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees,
@@ -112,35 +81,6 @@ export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployeesToJ
       .parse(putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees),
   );
 }
-
-export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployeesFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employees: z.array(
-      z.lazy(() =>
-        PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$inboundSchema
-      ),
-    ).optional(),
-  });
 
 /** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound =
@@ -166,22 +106,6 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$out
     ).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$ {
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$inboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$outboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound;
-}
-
 export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBodyToJSON(
   putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody:
     PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody,
@@ -191,41 +115,6 @@ export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBodyT
       .parse(putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody),
   );
 }
-
-export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    time_off_policy_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "time_off_policy_uuid": "timeOffPolicyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$Outbound =
@@ -256,22 +145,6 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$ {
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$outboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$Outbound;
-}
-
 export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestToJSON(
   putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest:
     PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
@@ -279,21 +152,6 @@ export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestToJSO
   return JSON.stringify(
     PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$outboundSchema
       .parse(putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest),
-  );
-}
-
-export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest' from JSON`,
   );
 }
 
@@ -312,55 +170,6 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboun
       "Time-Off-Policy": "timeOffPolicy",
     });
   });
-
-/** @internal */
-export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Time-Off-Policy"?: TimeOffPolicy$Outbound | undefined;
-  };
-
-/** @internal */
-export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema:
-  z.ZodType<
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    timeOffPolicy: TimeOffPolicy$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      timeOffPolicy: "Time-Off-Policy",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$ {
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$inboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema;
-  /** @deprecated use `PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$Outbound;
-}
-
-export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponseToJSON(
-  putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse:
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
-): string {
-  return JSON.stringify(
-    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse$outboundSchema
-      .parse(putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse),
-  );
-}
 
 export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponseFromJSON(
   jsonString: string,

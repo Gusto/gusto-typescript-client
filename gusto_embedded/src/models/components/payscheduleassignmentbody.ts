@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The pay schedule assignment type.
@@ -79,40 +76,9 @@ export type PayScheduleAssignmentBody = {
 };
 
 /** @internal */
-export const PayScheduleAssignmentBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof PayScheduleAssignmentBodyType
-> = z.nativeEnum(PayScheduleAssignmentBodyType);
-
-/** @internal */
 export const PayScheduleAssignmentBodyType$outboundSchema: z.ZodNativeEnum<
   typeof PayScheduleAssignmentBodyType
-> = PayScheduleAssignmentBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleAssignmentBodyType$ {
-  /** @deprecated use `PayScheduleAssignmentBodyType$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleAssignmentBodyType$inboundSchema;
-  /** @deprecated use `PayScheduleAssignmentBodyType$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleAssignmentBodyType$outboundSchema;
-}
-
-/** @internal */
-export const Employees$inboundSchema: z.ZodType<
-  Employees,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_uuid: z.string().optional(),
-  pay_schedule_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_uuid": "employeeUuid",
-    "pay_schedule_uuid": "payScheduleUuid",
-  });
-});
+> = z.nativeEnum(PayScheduleAssignmentBodyType);
 
 /** @internal */
 export type Employees$Outbound = {
@@ -135,47 +101,9 @@ export const Employees$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Employees$ {
-  /** @deprecated use `Employees$inboundSchema` instead. */
-  export const inboundSchema = Employees$inboundSchema;
-  /** @deprecated use `Employees$outboundSchema` instead. */
-  export const outboundSchema = Employees$outboundSchema;
-  /** @deprecated use `Employees$Outbound` instead. */
-  export type Outbound = Employees$Outbound;
-}
-
 export function employeesToJSON(employees: Employees): string {
   return JSON.stringify(Employees$outboundSchema.parse(employees));
 }
-
-export function employeesFromJSON(
-  jsonString: string,
-): SafeParseResult<Employees, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Employees$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Employees' from JSON`,
-  );
-}
-
-/** @internal */
-export const Departments$inboundSchema: z.ZodType<
-  Departments,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  department_uuid: z.string().optional(),
-  pay_schedule_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "department_uuid": "departmentUuid",
-    "pay_schedule_uuid": "payScheduleUuid",
-  });
-});
 
 /** @internal */
 export type Departments$Outbound = {
@@ -198,54 +126,9 @@ export const Departments$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Departments$ {
-  /** @deprecated use `Departments$inboundSchema` instead. */
-  export const inboundSchema = Departments$inboundSchema;
-  /** @deprecated use `Departments$outboundSchema` instead. */
-  export const outboundSchema = Departments$outboundSchema;
-  /** @deprecated use `Departments$Outbound` instead. */
-  export type Outbound = Departments$Outbound;
-}
-
 export function departmentsToJSON(departments: Departments): string {
   return JSON.stringify(Departments$outboundSchema.parse(departments));
 }
-
-export function departmentsFromJSON(
-  jsonString: string,
-): SafeParseResult<Departments, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Departments$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Departments' from JSON`,
-  );
-}
-
-/** @internal */
-export const PayScheduleAssignmentBody$inboundSchema: z.ZodType<
-  PayScheduleAssignmentBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.nullable(PayScheduleAssignmentBodyType$inboundSchema),
-  hourly_pay_schedule_uuid: z.string().optional(),
-  salaried_pay_schedule_uuid: z.string().optional(),
-  default_pay_schedule_uuid: z.string().optional(),
-  partial_assignment: z.boolean().optional(),
-  employees: z.array(z.lazy(() => Employees$inboundSchema)).optional(),
-  departments: z.array(z.lazy(() => Departments$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "hourly_pay_schedule_uuid": "hourlyPayScheduleUuid",
-    "salaried_pay_schedule_uuid": "salariedPayScheduleUuid",
-    "default_pay_schedule_uuid": "defaultPayScheduleUuid",
-    "partial_assignment": "partialAssignment",
-  });
-});
 
 /** @internal */
 export type PayScheduleAssignmentBody$Outbound = {
@@ -280,33 +163,10 @@ export const PayScheduleAssignmentBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleAssignmentBody$ {
-  /** @deprecated use `PayScheduleAssignmentBody$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleAssignmentBody$inboundSchema;
-  /** @deprecated use `PayScheduleAssignmentBody$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleAssignmentBody$outboundSchema;
-  /** @deprecated use `PayScheduleAssignmentBody$Outbound` instead. */
-  export type Outbound = PayScheduleAssignmentBody$Outbound;
-}
-
 export function payScheduleAssignmentBodyToJSON(
   payScheduleAssignmentBody: PayScheduleAssignmentBody,
 ): string {
   return JSON.stringify(
     PayScheduleAssignmentBody$outboundSchema.parse(payScheduleAssignmentBody),
-  );
-}
-
-export function payScheduleAssignmentBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PayScheduleAssignmentBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayScheduleAssignmentBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayScheduleAssignmentBody' from JSON`,
   );
 }

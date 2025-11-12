@@ -90,22 +90,6 @@ export const ReconcileTaxMethod$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ReconcileTaxMethod);
 
 /** @internal */
-export const ReconcileTaxMethod$outboundSchema: z.ZodNativeEnum<
-  typeof ReconcileTaxMethod
-> = ReconcileTaxMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReconcileTaxMethod$ {
-  /** @deprecated use `ReconcileTaxMethod$inboundSchema` instead. */
-  export const inboundSchema = ReconcileTaxMethod$inboundSchema;
-  /** @deprecated use `ReconcileTaxMethod$outboundSchema` instead. */
-  export const outboundSchema = ReconcileTaxMethod$outboundSchema;
-}
-
-/** @internal */
 export const TaxRefunds$inboundSchema: z.ZodType<
   TaxRefunds,
   z.ZodTypeDef,
@@ -114,39 +98,6 @@ export const TaxRefunds$inboundSchema: z.ZodType<
   amount: z.string().optional(),
   description: z.string().optional(),
 });
-
-/** @internal */
-export type TaxRefunds$Outbound = {
-  amount?: string | undefined;
-  description?: string | undefined;
-};
-
-/** @internal */
-export const TaxRefunds$outboundSchema: z.ZodType<
-  TaxRefunds$Outbound,
-  z.ZodTypeDef,
-  TaxRefunds
-> = z.object({
-  amount: z.string().optional(),
-  description: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRefunds$ {
-  /** @deprecated use `TaxRefunds$inboundSchema` instead. */
-  export const inboundSchema = TaxRefunds$inboundSchema;
-  /** @deprecated use `TaxRefunds$outboundSchema` instead. */
-  export const outboundSchema = TaxRefunds$outboundSchema;
-  /** @deprecated use `TaxRefunds$Outbound` instead. */
-  export type Outbound = TaxRefunds$Outbound;
-}
-
-export function taxRefundsToJSON(taxRefunds: TaxRefunds): string {
-  return JSON.stringify(TaxRefunds$outboundSchema.parse(taxRefunds));
-}
 
 export function taxRefundsFromJSON(
   jsonString: string,
@@ -185,69 +136,6 @@ export const CompanySuspension$inboundSchema: z.ZodType<
     "tax_refunds": "taxRefunds",
   });
 });
-
-/** @internal */
-export type CompanySuspension$Outbound = {
-  uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  effective_date?: string | undefined;
-  leaving_for?: string | null | undefined;
-  reason?: string | undefined;
-  reconcile_tax_method?: string | undefined;
-  file_quarterly_forms?: boolean | undefined;
-  file_yearly_forms?: boolean | undefined;
-  comments?: string | null | undefined;
-  tax_refunds?: Array<TaxRefunds$Outbound> | undefined;
-};
-
-/** @internal */
-export const CompanySuspension$outboundSchema: z.ZodType<
-  CompanySuspension$Outbound,
-  z.ZodTypeDef,
-  CompanySuspension
-> = z.object({
-  uuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  effectiveDate: z.string().optional(),
-  leavingFor: z.nullable(z.string()).optional(),
-  reason: z.string().optional(),
-  reconcileTaxMethod: ReconcileTaxMethod$outboundSchema.optional(),
-  fileQuarterlyForms: z.boolean().optional(),
-  fileYearlyForms: z.boolean().optional(),
-  comments: z.nullable(z.string()).optional(),
-  taxRefunds: z.array(z.lazy(() => TaxRefunds$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    effectiveDate: "effective_date",
-    leavingFor: "leaving_for",
-    reconcileTaxMethod: "reconcile_tax_method",
-    fileQuarterlyForms: "file_quarterly_forms",
-    fileYearlyForms: "file_yearly_forms",
-    taxRefunds: "tax_refunds",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanySuspension$ {
-  /** @deprecated use `CompanySuspension$inboundSchema` instead. */
-  export const inboundSchema = CompanySuspension$inboundSchema;
-  /** @deprecated use `CompanySuspension$outboundSchema` instead. */
-  export const outboundSchema = CompanySuspension$outboundSchema;
-  /** @deprecated use `CompanySuspension$Outbound` instead. */
-  export type Outbound = CompanySuspension$Outbound;
-}
-
-export function companySuspensionToJSON(
-  companySuspension: CompanySuspension,
-): string {
-  return JSON.stringify(
-    CompanySuspension$outboundSchema.parse(companySuspension),
-  );
-}
 
 export function companySuspensionFromJSON(
   jsonString: string,

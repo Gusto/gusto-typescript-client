@@ -63,23 +63,6 @@ export const EmployeePayStubsListPaymentMethod$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EmployeePayStubsListPaymentMethod);
 
 /** @internal */
-export const EmployeePayStubsListPaymentMethod$outboundSchema: z.ZodNativeEnum<
-  typeof EmployeePayStubsListPaymentMethod
-> = EmployeePayStubsListPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeePayStubsListPaymentMethod$ {
-  /** @deprecated use `EmployeePayStubsListPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema = EmployeePayStubsListPaymentMethod$inboundSchema;
-  /** @deprecated use `EmployeePayStubsListPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    EmployeePayStubsListPaymentMethod$outboundSchema;
-}
-
-/** @internal */
 export const EmployeePayStubsList$inboundSchema: z.ZodType<
   EmployeePayStubsList,
   z.ZodTypeDef,
@@ -102,62 +85,6 @@ export const EmployeePayStubsList$inboundSchema: z.ZodType<
     "payment_method": "paymentMethod",
   });
 });
-
-/** @internal */
-export type EmployeePayStubsList$Outbound = {
-  uuid: string;
-  check_date?: string | undefined;
-  gross_pay?: string | undefined;
-  net_pay?: string | undefined;
-  payroll_uuid?: string | undefined;
-  check_amount?: string | undefined;
-  payment_method?: string | undefined;
-};
-
-/** @internal */
-export const EmployeePayStubsList$outboundSchema: z.ZodType<
-  EmployeePayStubsList$Outbound,
-  z.ZodTypeDef,
-  EmployeePayStubsList
-> = z.object({
-  uuid: z.string(),
-  checkDate: z.string().optional(),
-  grossPay: z.string().optional(),
-  netPay: z.string().optional(),
-  payrollUuid: z.string().optional(),
-  checkAmount: z.string().optional(),
-  paymentMethod: EmployeePayStubsListPaymentMethod$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    checkDate: "check_date",
-    grossPay: "gross_pay",
-    netPay: "net_pay",
-    payrollUuid: "payroll_uuid",
-    checkAmount: "check_amount",
-    paymentMethod: "payment_method",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeePayStubsList$ {
-  /** @deprecated use `EmployeePayStubsList$inboundSchema` instead. */
-  export const inboundSchema = EmployeePayStubsList$inboundSchema;
-  /** @deprecated use `EmployeePayStubsList$outboundSchema` instead. */
-  export const outboundSchema = EmployeePayStubsList$outboundSchema;
-  /** @deprecated use `EmployeePayStubsList$Outbound` instead. */
-  export type Outbound = EmployeePayStubsList$Outbound;
-}
-
-export function employeePayStubsListToJSON(
-  employeePayStubsList: EmployeePayStubsList,
-): string {
-  return JSON.stringify(
-    EmployeePayStubsList$outboundSchema.parse(employeePayStubsList),
-  );
-}
 
 export function employeePayStubsListFromJSON(
   jsonString: string,

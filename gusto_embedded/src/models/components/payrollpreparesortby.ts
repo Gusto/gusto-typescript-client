@@ -12,22 +12,6 @@ export const PayrollPrepareSortBy = {
 export type PayrollPrepareSortBy = ClosedEnum<typeof PayrollPrepareSortBy>;
 
 /** @internal */
-export const PayrollPrepareSortBy$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollPrepareSortBy
-> = z.nativeEnum(PayrollPrepareSortBy);
-
-/** @internal */
 export const PayrollPrepareSortBy$outboundSchema: z.ZodNativeEnum<
   typeof PayrollPrepareSortBy
-> = PayrollPrepareSortBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollPrepareSortBy$ {
-  /** @deprecated use `PayrollPrepareSortBy$inboundSchema` instead. */
-  export const inboundSchema = PayrollPrepareSortBy$inboundSchema;
-  /** @deprecated use `PayrollPrepareSortBy$outboundSchema` instead. */
-  export const outboundSchema = PayrollPrepareSortBy$outboundSchema;
-}
+> = z.nativeEnum(PayrollPrepareSortBy);

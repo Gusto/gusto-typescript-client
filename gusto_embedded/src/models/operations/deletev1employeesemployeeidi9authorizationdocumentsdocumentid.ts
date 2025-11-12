@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,24 +36,6 @@ export type DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRespons
   {
     httpMeta: HTTPMetadata;
   };
-
-/** @internal */
-export const DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    document_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "document_id": "documentId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$Outbound =
@@ -84,22 +63,6 @@ export const DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdReques
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$ {
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$Outbound;
-}
-
 export function deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequestToJSON(
   deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest:
     DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
@@ -109,21 +72,6 @@ export function deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdReq
       .parse(
         deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
       ),
-  );
-}
-
-export function deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest' from JSON`,
   );
 }
 
@@ -140,54 +88,6 @@ export const DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRespon
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$ {
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$Outbound;
-}
-
-export function deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponseToJSON(
-  deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse:
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse$outboundSchema
-      .parse(
-        deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
-      ),
-  );
-}
 
 export function deleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponseFromJSON(
   jsonString: string,

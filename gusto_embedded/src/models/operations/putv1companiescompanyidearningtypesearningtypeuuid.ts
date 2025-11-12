@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EarningType,
   EarningType$inboundSchema,
-  EarningType$Outbound,
-  EarningType$outboundSchema,
 } from "../components/earningtype.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,16 +52,6 @@ export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse = {
 };
 
 /** @internal */
-export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    name: z.string().optional(),
-  });
-
-/** @internal */
 export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$Outbound =
   {
     name?: string | undefined;
@@ -82,22 +67,6 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outbo
     name: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$Outbound;
-}
-
 export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBodyToJSON(
   putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody:
     PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody,
@@ -107,43 +76,6 @@ export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBodyToJ
       .parse(putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody),
   );
 }
-
-export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    earning_type_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "earning_type_uuid": "earningTypeUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outbound =
@@ -177,22 +109,6 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundS
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestToJSON(
   putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest:
     PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
@@ -200,21 +116,6 @@ export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestToJSON(
   return JSON.stringify(
     PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$outboundSchema
       .parse(putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest),
-  );
-}
-
-export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest' from JSON`,
   );
 }
 
@@ -233,55 +134,6 @@ export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundS
       "Earning-Type": "earningType",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Earning-Type"?: EarningType$Outbound | undefined;
-  };
-
-/** @internal */
-export const PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    earningType: EarningType$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      earningType: "Earning-Type",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponseToJSON(
-  putV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse:
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse$outboundSchema
-      .parse(putV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse),
-  );
-}
 
 export function putV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponseFromJSON(
   jsonString: string,

@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   Notification,
   Notification$inboundSchema,
-  Notification$Outbound,
-  Notification$outboundSchema,
 } from "../components/notification.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetNotificationsNotificationUuidResponse = {
 };
 
 /** @internal */
-export const GetNotificationsNotificationUuidRequest$inboundSchema: z.ZodType<
-  GetNotificationsNotificationUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  notification_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "notification_uuid": "notificationUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetNotificationsNotificationUuidRequest$Outbound = {
   notification_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,21 +60,6 @@ export const GetNotificationsNotificationUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetNotificationsNotificationUuidRequest$ {
-  /** @deprecated use `GetNotificationsNotificationUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetNotificationsNotificationUuidRequest$inboundSchema;
-  /** @deprecated use `GetNotificationsNotificationUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetNotificationsNotificationUuidRequest$outboundSchema;
-  /** @deprecated use `GetNotificationsNotificationUuidRequest$Outbound` instead. */
-  export type Outbound = GetNotificationsNotificationUuidRequest$Outbound;
-}
-
 export function getNotificationsNotificationUuidRequestToJSON(
   getNotificationsNotificationUuidRequest:
     GetNotificationsNotificationUuidRequest,
@@ -103,22 +68,6 @@ export function getNotificationsNotificationUuidRequestToJSON(
     GetNotificationsNotificationUuidRequest$outboundSchema.parse(
       getNotificationsNotificationUuidRequest,
     ),
-  );
-}
-
-export function getNotificationsNotificationUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetNotificationsNotificationUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetNotificationsNotificationUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetNotificationsNotificationUuidRequest' from JSON`,
   );
 }
 
@@ -136,53 +85,6 @@ export const GetNotificationsNotificationUuidResponse$inboundSchema: z.ZodType<
     "Notification": "notification",
   });
 });
-
-/** @internal */
-export type GetNotificationsNotificationUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Notification?: Notification$Outbound | undefined;
-};
-
-/** @internal */
-export const GetNotificationsNotificationUuidResponse$outboundSchema: z.ZodType<
-  GetNotificationsNotificationUuidResponse$Outbound,
-  z.ZodTypeDef,
-  GetNotificationsNotificationUuidResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  notification: Notification$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    notification: "Notification",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetNotificationsNotificationUuidResponse$ {
-  /** @deprecated use `GetNotificationsNotificationUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetNotificationsNotificationUuidResponse$inboundSchema;
-  /** @deprecated use `GetNotificationsNotificationUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetNotificationsNotificationUuidResponse$outboundSchema;
-  /** @deprecated use `GetNotificationsNotificationUuidResponse$Outbound` instead. */
-  export type Outbound = GetNotificationsNotificationUuidResponse$Outbound;
-}
-
-export function getNotificationsNotificationUuidResponseToJSON(
-  getNotificationsNotificationUuidResponse:
-    GetNotificationsNotificationUuidResponse,
-): string {
-  return JSON.stringify(
-    GetNotificationsNotificationUuidResponse$outboundSchema.parse(
-      getNotificationsNotificationUuidResponse,
-    ),
-  );
-}
 
 export function getNotificationsNotificationUuidResponseFromJSON(
   jsonString: string,

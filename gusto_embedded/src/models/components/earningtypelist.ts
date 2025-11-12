@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EarningType,
-  EarningType$inboundSchema,
-  EarningType$Outbound,
-  EarningType$outboundSchema,
-} from "./earningtype.js";
+import { EarningType, EarningType$inboundSchema } from "./earningtype.js";
 
 /**
  * Example response
@@ -36,41 +31,6 @@ export const EarningTypeList$inboundSchema: z.ZodType<
   default: z.array(EarningType$inboundSchema).optional(),
   custom: z.array(EarningType$inboundSchema).optional(),
 });
-
-/** @internal */
-export type EarningTypeList$Outbound = {
-  default?: Array<EarningType$Outbound> | undefined;
-  custom?: Array<EarningType$Outbound> | undefined;
-};
-
-/** @internal */
-export const EarningTypeList$outboundSchema: z.ZodType<
-  EarningTypeList$Outbound,
-  z.ZodTypeDef,
-  EarningTypeList
-> = z.object({
-  default: z.array(EarningType$outboundSchema).optional(),
-  custom: z.array(EarningType$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EarningTypeList$ {
-  /** @deprecated use `EarningTypeList$inboundSchema` instead. */
-  export const inboundSchema = EarningTypeList$inboundSchema;
-  /** @deprecated use `EarningTypeList$outboundSchema` instead. */
-  export const outboundSchema = EarningTypeList$outboundSchema;
-  /** @deprecated use `EarningTypeList$Outbound` instead. */
-  export type Outbound = EarningTypeList$Outbound;
-}
-
-export function earningTypeListToJSON(
-  earningTypeList: EarningTypeList,
-): string {
-  return JSON.stringify(EarningTypeList$outboundSchema.parse(earningTypeList));
-}
 
 export function earningTypeListFromJSON(
   jsonString: string,

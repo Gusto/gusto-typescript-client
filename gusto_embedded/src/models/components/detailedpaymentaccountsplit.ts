@@ -59,60 +59,6 @@ export const DetailedPaymentAccountSplit$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type DetailedPaymentAccountSplit$Outbound = {
-  bank_account_uuid?: string | undefined;
-  hidden_account_number?: string | undefined;
-  name?: string | undefined;
-  priority?: number | undefined;
-  split_amount?: number | undefined;
-  encrypted_account_number?: string | null | undefined;
-};
-
-/** @internal */
-export const DetailedPaymentAccountSplit$outboundSchema: z.ZodType<
-  DetailedPaymentAccountSplit$Outbound,
-  z.ZodTypeDef,
-  DetailedPaymentAccountSplit
-> = z.object({
-  bankAccountUuid: z.string().optional(),
-  hiddenAccountNumber: z.string().optional(),
-  name: z.string().optional(),
-  priority: z.number().int().optional(),
-  splitAmount: z.number().int().optional(),
-  encryptedAccountNumber: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    bankAccountUuid: "bank_account_uuid",
-    hiddenAccountNumber: "hidden_account_number",
-    splitAmount: "split_amount",
-    encryptedAccountNumber: "encrypted_account_number",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DetailedPaymentAccountSplit$ {
-  /** @deprecated use `DetailedPaymentAccountSplit$inboundSchema` instead. */
-  export const inboundSchema = DetailedPaymentAccountSplit$inboundSchema;
-  /** @deprecated use `DetailedPaymentAccountSplit$outboundSchema` instead. */
-  export const outboundSchema = DetailedPaymentAccountSplit$outboundSchema;
-  /** @deprecated use `DetailedPaymentAccountSplit$Outbound` instead. */
-  export type Outbound = DetailedPaymentAccountSplit$Outbound;
-}
-
-export function detailedPaymentAccountSplitToJSON(
-  detailedPaymentAccountSplit: DetailedPaymentAccountSplit,
-): string {
-  return JSON.stringify(
-    DetailedPaymentAccountSplit$outboundSchema.parse(
-      detailedPaymentAccountSplit,
-    ),
-  );
-}
-
 export function detailedPaymentAccountSplitFromJSON(
   jsonString: string,
 ): SafeParseResult<DetailedPaymentAccountSplit, SDKValidationError> {

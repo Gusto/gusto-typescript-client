@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Admin,
-  Admin$inboundSchema,
-  Admin$Outbound,
-  Admin$outboundSchema,
-} from "../components/admin.js";
+import { Admin, Admin$inboundSchema } from "../components/admin.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,23 +45,6 @@ export type GetV1CompaniesCompanyIdAdminsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdAdminsRequest$inboundSchema: z.ZodType<
-  GetV1CompaniesCompanyIdAdminsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompaniesCompanyIdAdminsRequest$Outbound = {
   company_id: string;
   page?: number | undefined;
@@ -94,21 +69,6 @@ export const GetV1CompaniesCompanyIdAdminsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdAdminsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdAdminsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdAdminsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdAdminsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdAdminsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdAdminsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdAdminsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdAdminsRequestToJSON(
   getV1CompaniesCompanyIdAdminsRequest: GetV1CompaniesCompanyIdAdminsRequest,
 ): string {
@@ -116,17 +76,6 @@ export function getV1CompaniesCompanyIdAdminsRequestToJSON(
     GetV1CompaniesCompanyIdAdminsRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdAdminsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdAdminsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompaniesCompanyIdAdminsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdAdminsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesCompanyIdAdminsRequest' from JSON`,
   );
 }
 
@@ -144,52 +93,6 @@ export const GetV1CompaniesCompanyIdAdminsResponse$inboundSchema: z.ZodType<
     "Admin-List": "adminList",
   });
 });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdAdminsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Admin-List"?: Array<Admin$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdAdminsResponse$outboundSchema: z.ZodType<
-  GetV1CompaniesCompanyIdAdminsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompaniesCompanyIdAdminsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  adminList: z.array(Admin$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    adminList: "Admin-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdAdminsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdAdminsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdAdminsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdAdminsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdAdminsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdAdminsResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdAdminsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdAdminsResponseToJSON(
-  getV1CompaniesCompanyIdAdminsResponse: GetV1CompaniesCompanyIdAdminsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdAdminsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdAdminsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdAdminsResponseFromJSON(
   jsonString: string,

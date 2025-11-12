@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Job,
-  Job$inboundSchema,
-  Job$Outbound,
-  Job$outboundSchema,
-} from "../components/job.js";
+import { Job, Job$inboundSchema } from "../components/job.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -79,27 +71,6 @@ export type PutV1JobsJobIdResponse = {
 };
 
 /** @internal */
-export const PutV1JobsJobIdRequestBody$inboundSchema: z.ZodType<
-  PutV1JobsJobIdRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string(),
-  title: z.string().optional(),
-  hire_date: z.string().optional(),
-  two_percent_shareholder: z.boolean().optional(),
-  state_wc_covered: z.nullable(z.boolean()).optional(),
-  state_wc_class_code: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "hire_date": "hireDate",
-    "two_percent_shareholder": "twoPercentShareholder",
-    "state_wc_covered": "stateWcCovered",
-    "state_wc_class_code": "stateWcClassCode",
-  });
-});
-
-/** @internal */
 export type PutV1JobsJobIdRequestBody$Outbound = {
   version: string;
   title?: string | undefined;
@@ -130,19 +101,6 @@ export const PutV1JobsJobIdRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1JobsJobIdRequestBody$ {
-  /** @deprecated use `PutV1JobsJobIdRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1JobsJobIdRequestBody$inboundSchema;
-  /** @deprecated use `PutV1JobsJobIdRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1JobsJobIdRequestBody$outboundSchema;
-  /** @deprecated use `PutV1JobsJobIdRequestBody$Outbound` instead. */
-  export type Outbound = PutV1JobsJobIdRequestBody$Outbound;
-}
-
 export function putV1JobsJobIdRequestBodyToJSON(
   putV1JobsJobIdRequestBody: PutV1JobsJobIdRequestBody,
 ): string {
@@ -150,33 +108,6 @@ export function putV1JobsJobIdRequestBodyToJSON(
     PutV1JobsJobIdRequestBody$outboundSchema.parse(putV1JobsJobIdRequestBody),
   );
 }
-
-export function putV1JobsJobIdRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1JobsJobIdRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1JobsJobIdRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1JobsJobIdRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1JobsJobIdRequest$inboundSchema: z.ZodType<
-  PutV1JobsJobIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  job_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutV1JobsJobIdRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "job_id": "jobId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1JobsJobIdRequest$Outbound = {
@@ -202,34 +133,11 @@ export const PutV1JobsJobIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1JobsJobIdRequest$ {
-  /** @deprecated use `PutV1JobsJobIdRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1JobsJobIdRequest$inboundSchema;
-  /** @deprecated use `PutV1JobsJobIdRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1JobsJobIdRequest$outboundSchema;
-  /** @deprecated use `PutV1JobsJobIdRequest$Outbound` instead. */
-  export type Outbound = PutV1JobsJobIdRequest$Outbound;
-}
-
 export function putV1JobsJobIdRequestToJSON(
   putV1JobsJobIdRequest: PutV1JobsJobIdRequest,
 ): string {
   return JSON.stringify(
     PutV1JobsJobIdRequest$outboundSchema.parse(putV1JobsJobIdRequest),
-  );
-}
-
-export function putV1JobsJobIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1JobsJobIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1JobsJobIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1JobsJobIdRequest' from JSON`,
   );
 }
 
@@ -247,48 +155,6 @@ export const PutV1JobsJobIdResponse$inboundSchema: z.ZodType<
     "Job": "job",
   });
 });
-
-/** @internal */
-export type PutV1JobsJobIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Job?: Job$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1JobsJobIdResponse$outboundSchema: z.ZodType<
-  PutV1JobsJobIdResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1JobsJobIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  job: Job$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    job: "Job",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1JobsJobIdResponse$ {
-  /** @deprecated use `PutV1JobsJobIdResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1JobsJobIdResponse$inboundSchema;
-  /** @deprecated use `PutV1JobsJobIdResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1JobsJobIdResponse$outboundSchema;
-  /** @deprecated use `PutV1JobsJobIdResponse$Outbound` instead. */
-  export type Outbound = PutV1JobsJobIdResponse$Outbound;
-}
-
-export function putV1JobsJobIdResponseToJSON(
-  putV1JobsJobIdResponse: PutV1JobsJobIdResponse,
-): string {
-  return JSON.stringify(
-    PutV1JobsJobIdResponse$outboundSchema.parse(putV1JobsJobIdResponse),
-  );
-}
 
 export function putV1JobsJobIdResponseFromJSON(
   jsonString: string,

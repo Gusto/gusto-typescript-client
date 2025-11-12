@@ -11,18 +11,13 @@ import { RFCDate } from "../../types/rfcdate.js";
 import {
   CreateReport,
   CreateReport$inboundSchema,
-  CreateReport$Outbound,
-  CreateReport$outboundSchema,
 } from "../components/createreport.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -268,169 +263,31 @@ export type PostCompaniesCompanyUuidReportsResponse = {
 };
 
 /** @internal */
-export const Columns$inboundSchema: z.ZodNativeEnum<typeof Columns> = z
+export const Columns$outboundSchema: z.ZodNativeEnum<typeof Columns> = z
   .nativeEnum(Columns);
 
 /** @internal */
-export const Columns$outboundSchema: z.ZodNativeEnum<typeof Columns> =
-  Columns$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Columns$ {
-  /** @deprecated use `Columns$inboundSchema` instead. */
-  export const inboundSchema = Columns$inboundSchema;
-  /** @deprecated use `Columns$outboundSchema` instead. */
-  export const outboundSchema = Columns$outboundSchema;
-}
-
-/** @internal */
-export const Groupings$inboundSchema: z.ZodNativeEnum<typeof Groupings> = z
+export const Groupings$outboundSchema: z.ZodNativeEnum<typeof Groupings> = z
   .nativeEnum(Groupings);
 
 /** @internal */
-export const Groupings$outboundSchema: z.ZodNativeEnum<typeof Groupings> =
-  Groupings$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Groupings$ {
-  /** @deprecated use `Groupings$inboundSchema` instead. */
-  export const inboundSchema = Groupings$inboundSchema;
-  /** @deprecated use `Groupings$outboundSchema` instead. */
-  export const outboundSchema = Groupings$outboundSchema;
-}
-
-/** @internal */
-export const FileType$inboundSchema: z.ZodNativeEnum<typeof FileType> = z
+export const FileType$outboundSchema: z.ZodNativeEnum<typeof FileType> = z
   .nativeEnum(FileType);
 
 /** @internal */
-export const FileType$outboundSchema: z.ZodNativeEnum<typeof FileType> =
-  FileType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileType$ {
-  /** @deprecated use `FileType$inboundSchema` instead. */
-  export const inboundSchema = FileType$inboundSchema;
-  /** @deprecated use `FileType$outboundSchema` instead. */
-  export const outboundSchema = FileType$outboundSchema;
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidReportsPaymentMethod$inboundSchema:
+export const PostCompaniesCompanyUuidReportsPaymentMethod$outboundSchema:
   z.ZodNativeEnum<typeof PostCompaniesCompanyUuidReportsPaymentMethod> = z
     .nativeEnum(PostCompaniesCompanyUuidReportsPaymentMethod);
 
 /** @internal */
-export const PostCompaniesCompanyUuidReportsPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<typeof PostCompaniesCompanyUuidReportsPaymentMethod> =
-    PostCompaniesCompanyUuidReportsPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidReportsPaymentMethod$ {
-  /** @deprecated use `PostCompaniesCompanyUuidReportsPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidReportsPaymentMethod$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidReportsPaymentMethod$outboundSchema;
-}
-
-/** @internal */
-export const EmploymentType$inboundSchema: z.ZodNativeEnum<
+export const EmploymentType$outboundSchema: z.ZodNativeEnum<
   typeof EmploymentType
 > = z.nativeEnum(EmploymentType);
 
 /** @internal */
-export const EmploymentType$outboundSchema: z.ZodNativeEnum<
-  typeof EmploymentType
-> = EmploymentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmploymentType$ {
-  /** @deprecated use `EmploymentType$inboundSchema` instead. */
-  export const inboundSchema = EmploymentType$inboundSchema;
-  /** @deprecated use `EmploymentType$outboundSchema` instead. */
-  export const outboundSchema = EmploymentType$outboundSchema;
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidReportsEmploymentStatus$inboundSchema:
+export const PostCompaniesCompanyUuidReportsEmploymentStatus$outboundSchema:
   z.ZodNativeEnum<typeof PostCompaniesCompanyUuidReportsEmploymentStatus> = z
     .nativeEnum(PostCompaniesCompanyUuidReportsEmploymentStatus);
-
-/** @internal */
-export const PostCompaniesCompanyUuidReportsEmploymentStatus$outboundSchema:
-  z.ZodNativeEnum<typeof PostCompaniesCompanyUuidReportsEmploymentStatus> =
-    PostCompaniesCompanyUuidReportsEmploymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidReportsEmploymentStatus$ {
-  /** @deprecated use `PostCompaniesCompanyUuidReportsEmploymentStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidReportsEmploymentStatus$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsEmploymentStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidReportsEmploymentStatus$outboundSchema;
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidReportsRequestBody$inboundSchema:
-  z.ZodType<PostCompaniesCompanyUuidReportsRequestBody, z.ZodTypeDef, unknown> =
-    z.object({
-      columns: z.array(Columns$inboundSchema),
-      groupings: z.array(Groupings$inboundSchema),
-      custom_name: z.string().optional(),
-      file_type: FileType$inboundSchema,
-      with_totals: z.boolean().default(false),
-      start_date: z.string().transform(v => new RFCDate(v)).optional(),
-      end_date: z.string().transform(v => new RFCDate(v)).optional(),
-      dismissed_start_date: z.string().transform(v => new RFCDate(v))
-        .optional(),
-      dismissed_end_date: z.string().transform(v => new RFCDate(v)).optional(),
-      payment_method: PostCompaniesCompanyUuidReportsPaymentMethod$inboundSchema
-        .optional(),
-      employment_type: EmploymentType$inboundSchema.optional(),
-      employment_status:
-        PostCompaniesCompanyUuidReportsEmploymentStatus$inboundSchema
-          .optional(),
-      employee_uuids: z.array(z.string()).optional(),
-      department_uuids: z.array(z.string()).optional(),
-      work_address_uuids: z.array(z.string()).optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "custom_name": "customName",
-        "file_type": "fileType",
-        "with_totals": "withTotals",
-        "start_date": "startDate",
-        "end_date": "endDate",
-        "dismissed_start_date": "dismissedStartDate",
-        "dismissed_end_date": "dismissedEndDate",
-        "payment_method": "paymentMethod",
-        "employment_type": "employmentType",
-        "employment_status": "employmentStatus",
-        "employee_uuids": "employeeUuids",
-        "department_uuids": "departmentUuids",
-        "work_address_uuids": "workAddressUuids",
-      });
-    });
 
 /** @internal */
 export type PostCompaniesCompanyUuidReportsRequestBody$Outbound = {
@@ -495,21 +352,6 @@ export const PostCompaniesCompanyUuidReportsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidReportsRequestBody$ {
-  /** @deprecated use `PostCompaniesCompanyUuidReportsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidReportsRequestBody$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidReportsRequestBody$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsRequestBody$Outbound` instead. */
-  export type Outbound = PostCompaniesCompanyUuidReportsRequestBody$Outbound;
-}
-
 export function postCompaniesCompanyUuidReportsRequestBodyToJSON(
   postCompaniesCompanyUuidReportsRequestBody:
     PostCompaniesCompanyUuidReportsRequestBody,
@@ -520,41 +362,6 @@ export function postCompaniesCompanyUuidReportsRequestBodyToJSON(
     ),
   );
 }
-
-export function postCompaniesCompanyUuidReportsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostCompaniesCompanyUuidReportsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesCompanyUuidReportsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostCompaniesCompanyUuidReportsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidReportsRequest$inboundSchema: z.ZodType<
-  PostCompaniesCompanyUuidReportsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PostCompaniesCompanyUuidReportsRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostCompaniesCompanyUuidReportsRequest$Outbound = {
@@ -582,21 +389,6 @@ export const PostCompaniesCompanyUuidReportsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidReportsRequest$ {
-  /** @deprecated use `PostCompaniesCompanyUuidReportsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidReportsRequest$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidReportsRequest$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsRequest$Outbound` instead. */
-  export type Outbound = PostCompaniesCompanyUuidReportsRequest$Outbound;
-}
-
 export function postCompaniesCompanyUuidReportsRequestToJSON(
   postCompaniesCompanyUuidReportsRequest:
     PostCompaniesCompanyUuidReportsRequest,
@@ -605,17 +397,6 @@ export function postCompaniesCompanyUuidReportsRequestToJSON(
     PostCompaniesCompanyUuidReportsRequest$outboundSchema.parse(
       postCompaniesCompanyUuidReportsRequest,
     ),
-  );
-}
-
-export function postCompaniesCompanyUuidReportsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostCompaniesCompanyUuidReportsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesCompanyUuidReportsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostCompaniesCompanyUuidReportsRequest' from JSON`,
   );
 }
 
@@ -633,53 +414,6 @@ export const PostCompaniesCompanyUuidReportsResponse$inboundSchema: z.ZodType<
     "Create-Report": "createReport",
   });
 });
-
-/** @internal */
-export type PostCompaniesCompanyUuidReportsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Create-Report"?: CreateReport$Outbound | undefined;
-};
-
-/** @internal */
-export const PostCompaniesCompanyUuidReportsResponse$outboundSchema: z.ZodType<
-  PostCompaniesCompanyUuidReportsResponse$Outbound,
-  z.ZodTypeDef,
-  PostCompaniesCompanyUuidReportsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  createReport: CreateReport$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    createReport: "Create-Report",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidReportsResponse$ {
-  /** @deprecated use `PostCompaniesCompanyUuidReportsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidReportsResponse$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidReportsResponse$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidReportsResponse$Outbound` instead. */
-  export type Outbound = PostCompaniesCompanyUuidReportsResponse$Outbound;
-}
-
-export function postCompaniesCompanyUuidReportsResponseToJSON(
-  postCompaniesCompanyUuidReportsResponse:
-    PostCompaniesCompanyUuidReportsResponse,
-): string {
-  return JSON.stringify(
-    PostCompaniesCompanyUuidReportsResponse$outboundSchema.parse(
-      postCompaniesCompanyUuidReportsResponse,
-    ),
-  );
-}
 
 export function postCompaniesCompanyUuidReportsResponseFromJSON(
   jsonString: string,

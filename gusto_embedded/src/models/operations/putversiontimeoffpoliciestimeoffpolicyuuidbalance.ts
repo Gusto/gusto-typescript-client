@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TimeOffPolicy,
   TimeOffPolicy$inboundSchema,
-  TimeOffPolicy$Outbound,
-  TimeOffPolicy$outboundSchema,
 } from "../components/timeoffpolicy.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -63,17 +58,6 @@ export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse = {
 };
 
 /** @internal */
-export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$inboundSchema:
-  z.ZodType<
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    uuid: z.string().optional(),
-    balance: z.string().optional(),
-  });
-
-/** @internal */
 export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$Outbound =
   {
     uuid?: string | undefined;
@@ -91,22 +75,6 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$outbound
     balance: z.string().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$ {
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$inboundSchema` instead. */
-  export const inboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$inboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$outboundSchema` instead. */
-  export const outboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$outboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$Outbound` instead. */
-  export type Outbound =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$Outbound;
-}
-
 export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployeesToJSON(
   putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees:
     PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees,
@@ -116,35 +84,6 @@ export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployeesToJSON
       .parse(putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees),
   );
 }
-
-export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployeesFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema:
-  z.ZodType<
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employees: z.array(
-      z.lazy(() =>
-        PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceEmployees$inboundSchema
-      ),
-    ).optional(),
-  });
 
 /** @internal */
 export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$Outbound =
@@ -170,22 +109,6 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$outbou
     ).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$ {
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$outboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$Outbound;
-}
-
 export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBodyToJSON(
   putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody:
     PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody,
@@ -195,41 +118,6 @@ export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBodyToJS
       .parse(putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody),
   );
 }
-
-export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSchema:
-  z.ZodType<
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    time_off_policy_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "time_off_policy_uuid": "timeOffPolicyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$Outbound =
@@ -260,22 +148,6 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$outboundSc
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$ {
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$outboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$Outbound` instead. */
-  export type Outbound =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$Outbound;
-}
-
 export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestToJSON(
   putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest:
     PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
@@ -283,21 +155,6 @@ export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestToJSON(
   return JSON.stringify(
     PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$outboundSchema
       .parse(putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest),
-  );
-}
-
-export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest' from JSON`,
   );
 }
 
@@ -316,55 +173,6 @@ export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$inboundSc
       "Time-Off-Policy": "timeOffPolicy",
     });
   });
-
-/** @internal */
-export type PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Time-Off-Policy"?: TimeOffPolicy$Outbound | undefined;
-  };
-
-/** @internal */
-export const PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema:
-  z.ZodType<
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound,
-    z.ZodTypeDef,
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    timeOffPolicy: TimeOffPolicy$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      timeOffPolicy: "Time-Off-Policy",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$ {
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$inboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema;
-  /** @deprecated use `PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound` instead. */
-  export type Outbound =
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$Outbound;
-}
-
-export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponseToJSON(
-  putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse:
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
-): string {
-  return JSON.stringify(
-    PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse$outboundSchema
-      .parse(putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse),
-  );
-}
 
 export function putVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponseFromJSON(
   jsonString: string,

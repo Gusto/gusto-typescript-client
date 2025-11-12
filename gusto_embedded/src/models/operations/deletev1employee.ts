@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,44 +42,10 @@ export type DeleteV1EmployeeResponse = {
 };
 
 /** @internal */
-export const DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema:
+export const DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<typeof DeleteV1EmployeeHeaderXGustoAPIVersion> = z.nativeEnum(
     DeleteV1EmployeeHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof DeleteV1EmployeeHeaderXGustoAPIVersion> =
-    DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeeHeaderXGustoAPIVersion$ {
-  /** @deprecated use `DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1EmployeeHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const DeleteV1EmployeeRequest$inboundSchema: z.ZodType<
-  DeleteV1EmployeeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": DeleteV1EmployeeHeaderXGustoAPIVersion$inboundSchema
-    .default("2025-06-15"),
-  employee_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "employee_id": "employeeId",
-  });
-});
 
 /** @internal */
 export type DeleteV1EmployeeRequest$Outbound = {
@@ -105,34 +69,11 @@ export const DeleteV1EmployeeRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeeRequest$ {
-  /** @deprecated use `DeleteV1EmployeeRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteV1EmployeeRequest$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeeRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteV1EmployeeRequest$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeeRequest$Outbound` instead. */
-  export type Outbound = DeleteV1EmployeeRequest$Outbound;
-}
-
 export function deleteV1EmployeeRequestToJSON(
   deleteV1EmployeeRequest: DeleteV1EmployeeRequest,
 ): string {
   return JSON.stringify(
     DeleteV1EmployeeRequest$outboundSchema.parse(deleteV1EmployeeRequest),
-  );
-}
-
-export function deleteV1EmployeeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteV1EmployeeRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteV1EmployeeRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1EmployeeRequest' from JSON`,
   );
 }
 
@@ -148,45 +89,6 @@ export const DeleteV1EmployeeResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type DeleteV1EmployeeResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1EmployeeResponse$outboundSchema: z.ZodType<
-  DeleteV1EmployeeResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteV1EmployeeResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeeResponse$ {
-  /** @deprecated use `DeleteV1EmployeeResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteV1EmployeeResponse$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeeResponse$outboundSchema` instead. */
-  export const outboundSchema = DeleteV1EmployeeResponse$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeeResponse$Outbound` instead. */
-  export type Outbound = DeleteV1EmployeeResponse$Outbound;
-}
-
-export function deleteV1EmployeeResponseToJSON(
-  deleteV1EmployeeResponse: DeleteV1EmployeeResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1EmployeeResponse$outboundSchema.parse(deleteV1EmployeeResponse),
-  );
-}
 
 export function deleteV1EmployeeResponseFromJSON(
   jsonString: string,

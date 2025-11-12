@@ -4,12 +4,8 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PaymentSpeedParam,
-  PaymentSpeedParam$inboundSchema,
   PaymentSpeedParam$outboundSchema,
 } from "./paymentspeedparam.js";
 
@@ -23,21 +19,6 @@ export type FastPaymentLimitRequiredBody = {
    */
   paymentSpeed?: PaymentSpeedParam | undefined;
 };
-
-/** @internal */
-export const FastPaymentLimitRequiredBody$inboundSchema: z.ZodType<
-  FastPaymentLimitRequiredBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  fast_payment_limit: z.string(),
-  payment_speed: PaymentSpeedParam$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "fast_payment_limit": "fastPaymentLimit",
-    "payment_speed": "paymentSpeed",
-  });
-});
 
 /** @internal */
 export type FastPaymentLimitRequiredBody$Outbound = {
@@ -60,19 +41,6 @@ export const FastPaymentLimitRequiredBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FastPaymentLimitRequiredBody$ {
-  /** @deprecated use `FastPaymentLimitRequiredBody$inboundSchema` instead. */
-  export const inboundSchema = FastPaymentLimitRequiredBody$inboundSchema;
-  /** @deprecated use `FastPaymentLimitRequiredBody$outboundSchema` instead. */
-  export const outboundSchema = FastPaymentLimitRequiredBody$outboundSchema;
-  /** @deprecated use `FastPaymentLimitRequiredBody$Outbound` instead. */
-  export type Outbound = FastPaymentLimitRequiredBody$Outbound;
-}
-
 export function fastPaymentLimitRequiredBodyToJSON(
   fastPaymentLimitRequiredBody: FastPaymentLimitRequiredBody,
 ): string {
@@ -80,15 +48,5 @@ export function fastPaymentLimitRequiredBodyToJSON(
     FastPaymentLimitRequiredBody$outboundSchema.parse(
       fastPaymentLimitRequiredBody,
     ),
-  );
-}
-
-export function fastPaymentLimitRequiredBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<FastPaymentLimitRequiredBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FastPaymentLimitRequiredBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FastPaymentLimitRequiredBody' from JSON`,
   );
 }

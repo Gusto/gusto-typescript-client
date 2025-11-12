@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
-  Department$Outbound,
-  Department$outboundSchema,
 } from "../components/department.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,15 +64,6 @@ export type PutAddPeopleToDepartmentResponse = {
 };
 
 /** @internal */
-export const Employees$inboundSchema: z.ZodType<
-  Employees,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-/** @internal */
 export type Employees$Outbound = {
   uuid?: string | undefined;
 };
@@ -91,41 +77,9 @@ export const Employees$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Employees$ {
-  /** @deprecated use `Employees$inboundSchema` instead. */
-  export const inboundSchema = Employees$inboundSchema;
-  /** @deprecated use `Employees$outboundSchema` instead. */
-  export const outboundSchema = Employees$outboundSchema;
-  /** @deprecated use `Employees$Outbound` instead. */
-  export type Outbound = Employees$Outbound;
-}
-
 export function employeesToJSON(employees: Employees): string {
   return JSON.stringify(Employees$outboundSchema.parse(employees));
 }
-
-export function employeesFromJSON(
-  jsonString: string,
-): SafeParseResult<Employees, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Employees$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Employees' from JSON`,
-  );
-}
-
-/** @internal */
-export const Contractors$inboundSchema: z.ZodType<
-  Contractors,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uuid: z.string().optional(),
-});
 
 /** @internal */
 export type Contractors$Outbound = {
@@ -141,43 +95,9 @@ export const Contractors$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Contractors$ {
-  /** @deprecated use `Contractors$inboundSchema` instead. */
-  export const inboundSchema = Contractors$inboundSchema;
-  /** @deprecated use `Contractors$outboundSchema` instead. */
-  export const outboundSchema = Contractors$outboundSchema;
-  /** @deprecated use `Contractors$Outbound` instead. */
-  export type Outbound = Contractors$Outbound;
-}
-
 export function contractorsToJSON(contractors: Contractors): string {
   return JSON.stringify(Contractors$outboundSchema.parse(contractors));
 }
-
-export function contractorsFromJSON(
-  jsonString: string,
-): SafeParseResult<Contractors, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Contractors$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Contractors' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutAddPeopleToDepartmentRequestBody$inboundSchema: z.ZodType<
-  PutAddPeopleToDepartmentRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string().optional(),
-  employees: z.array(z.lazy(() => Employees$inboundSchema)).optional(),
-  contractors: z.array(z.lazy(() => Contractors$inboundSchema)).optional(),
-});
 
 /** @internal */
 export type PutAddPeopleToDepartmentRequestBody$Outbound = {
@@ -197,21 +117,6 @@ export const PutAddPeopleToDepartmentRequestBody$outboundSchema: z.ZodType<
   contractors: z.array(z.lazy(() => Contractors$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutAddPeopleToDepartmentRequestBody$ {
-  /** @deprecated use `PutAddPeopleToDepartmentRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutAddPeopleToDepartmentRequestBody$inboundSchema;
-  /** @deprecated use `PutAddPeopleToDepartmentRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutAddPeopleToDepartmentRequestBody$outboundSchema;
-  /** @deprecated use `PutAddPeopleToDepartmentRequestBody$Outbound` instead. */
-  export type Outbound = PutAddPeopleToDepartmentRequestBody$Outbound;
-}
-
 export function putAddPeopleToDepartmentRequestBodyToJSON(
   putAddPeopleToDepartmentRequestBody: PutAddPeopleToDepartmentRequestBody,
 ): string {
@@ -221,34 +126,6 @@ export function putAddPeopleToDepartmentRequestBodyToJSON(
     ),
   );
 }
-
-export function putAddPeopleToDepartmentRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutAddPeopleToDepartmentRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutAddPeopleToDepartmentRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutAddPeopleToDepartmentRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutAddPeopleToDepartmentRequest$inboundSchema: z.ZodType<
-  PutAddPeopleToDepartmentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  department_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutAddPeopleToDepartmentRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "department_uuid": "departmentUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutAddPeopleToDepartmentRequest$Outbound = {
@@ -274,19 +151,6 @@ export const PutAddPeopleToDepartmentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutAddPeopleToDepartmentRequest$ {
-  /** @deprecated use `PutAddPeopleToDepartmentRequest$inboundSchema` instead. */
-  export const inboundSchema = PutAddPeopleToDepartmentRequest$inboundSchema;
-  /** @deprecated use `PutAddPeopleToDepartmentRequest$outboundSchema` instead. */
-  export const outboundSchema = PutAddPeopleToDepartmentRequest$outboundSchema;
-  /** @deprecated use `PutAddPeopleToDepartmentRequest$Outbound` instead. */
-  export type Outbound = PutAddPeopleToDepartmentRequest$Outbound;
-}
-
 export function putAddPeopleToDepartmentRequestToJSON(
   putAddPeopleToDepartmentRequest: PutAddPeopleToDepartmentRequest,
 ): string {
@@ -294,16 +158,6 @@ export function putAddPeopleToDepartmentRequestToJSON(
     PutAddPeopleToDepartmentRequest$outboundSchema.parse(
       putAddPeopleToDepartmentRequest,
     ),
-  );
-}
-
-export function putAddPeopleToDepartmentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutAddPeopleToDepartmentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutAddPeopleToDepartmentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutAddPeopleToDepartmentRequest' from JSON`,
   );
 }
 
@@ -321,50 +175,6 @@ export const PutAddPeopleToDepartmentResponse$inboundSchema: z.ZodType<
     "Department": "department",
   });
 });
-
-/** @internal */
-export type PutAddPeopleToDepartmentResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Department?: Department$Outbound | undefined;
-};
-
-/** @internal */
-export const PutAddPeopleToDepartmentResponse$outboundSchema: z.ZodType<
-  PutAddPeopleToDepartmentResponse$Outbound,
-  z.ZodTypeDef,
-  PutAddPeopleToDepartmentResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  department: Department$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    department: "Department",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutAddPeopleToDepartmentResponse$ {
-  /** @deprecated use `PutAddPeopleToDepartmentResponse$inboundSchema` instead. */
-  export const inboundSchema = PutAddPeopleToDepartmentResponse$inboundSchema;
-  /** @deprecated use `PutAddPeopleToDepartmentResponse$outboundSchema` instead. */
-  export const outboundSchema = PutAddPeopleToDepartmentResponse$outboundSchema;
-  /** @deprecated use `PutAddPeopleToDepartmentResponse$Outbound` instead. */
-  export type Outbound = PutAddPeopleToDepartmentResponse$Outbound;
-}
-
-export function putAddPeopleToDepartmentResponseToJSON(
-  putAddPeopleToDepartmentResponse: PutAddPeopleToDepartmentResponse,
-): string {
-  return JSON.stringify(
-    PutAddPeopleToDepartmentResponse$outboundSchema.parse(
-      putAddPeopleToDepartmentResponse,
-    ),
-  );
-}
 
 export function putAddPeopleToDepartmentResponseFromJSON(
   jsonString: string,

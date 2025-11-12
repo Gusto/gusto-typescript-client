@@ -128,22 +128,6 @@ export const FederalTaxDetailsStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(FederalTaxDetailsStatus);
 
 /** @internal */
-export const FederalTaxDetailsStatus$outboundSchema: z.ZodNativeEnum<
-  typeof FederalTaxDetailsStatus
-> = FederalTaxDetailsStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FederalTaxDetailsStatus$ {
-  /** @deprecated use `FederalTaxDetailsStatus$inboundSchema` instead. */
-  export const inboundSchema = FederalTaxDetailsStatus$inboundSchema;
-  /** @deprecated use `FederalTaxDetailsStatus$outboundSchema` instead. */
-  export const outboundSchema = FederalTaxDetailsStatus$outboundSchema;
-}
-
-/** @internal */
 export const EinVerification$inboundSchema: z.ZodType<
   EinVerification,
   z.ZodTypeDef,
@@ -151,39 +135,6 @@ export const EinVerification$inboundSchema: z.ZodType<
 > = z.object({
   status: FederalTaxDetailsStatus$inboundSchema.optional(),
 });
-
-/** @internal */
-export type EinVerification$Outbound = {
-  status?: string | undefined;
-};
-
-/** @internal */
-export const EinVerification$outboundSchema: z.ZodType<
-  EinVerification$Outbound,
-  z.ZodTypeDef,
-  EinVerification
-> = z.object({
-  status: FederalTaxDetailsStatus$outboundSchema.optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EinVerification$ {
-  /** @deprecated use `EinVerification$inboundSchema` instead. */
-  export const inboundSchema = EinVerification$inboundSchema;
-  /** @deprecated use `EinVerification$outboundSchema` instead. */
-  export const outboundSchema = EinVerification$outboundSchema;
-  /** @deprecated use `EinVerification$Outbound` instead. */
-  export type Outbound = EinVerification$Outbound;
-}
-
-export function einVerificationToJSON(
-  einVerification: EinVerification,
-): string {
-  return JSON.stringify(EinVerification$outboundSchema.parse(einVerification));
-}
 
 export function einVerificationFromJSON(
   jsonString: string,
@@ -224,71 +175,6 @@ export const FederalTaxDetails$inboundSchema: z.ZodType<
     "deposit_schedule": "depositSchedule",
   });
 });
-
-/** @internal */
-export type FederalTaxDetails$Outbound = {
-  version?: string | undefined;
-  tax_payer_type?: string | null | undefined;
-  taxable_as_scorp?: boolean | undefined;
-  filing_form?: string | undefined;
-  has_ein?: boolean | undefined;
-  ein_verified?: boolean | undefined;
-  ein_verification?: EinVerification$Outbound | undefined;
-  legal_name?: string | undefined;
-  effective_date?: string | undefined;
-  deposit_schedule?: string | undefined;
-};
-
-/** @internal */
-export const FederalTaxDetails$outboundSchema: z.ZodType<
-  FederalTaxDetails$Outbound,
-  z.ZodTypeDef,
-  FederalTaxDetails
-> = z.object({
-  version: z.string().optional(),
-  taxPayerType: z.nullable(z.string()).optional(),
-  taxableAsScorp: z.boolean().optional(),
-  filingForm: z.string().optional(),
-  hasEin: z.boolean().optional(),
-  einVerified: z.boolean().optional(),
-  einVerification: z.lazy(() => EinVerification$outboundSchema).optional(),
-  legalName: z.string().optional(),
-  effectiveDate: z.string().optional(),
-  depositSchedule: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taxPayerType: "tax_payer_type",
-    taxableAsScorp: "taxable_as_scorp",
-    filingForm: "filing_form",
-    hasEin: "has_ein",
-    einVerified: "ein_verified",
-    einVerification: "ein_verification",
-    legalName: "legal_name",
-    effectiveDate: "effective_date",
-    depositSchedule: "deposit_schedule",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FederalTaxDetails$ {
-  /** @deprecated use `FederalTaxDetails$inboundSchema` instead. */
-  export const inboundSchema = FederalTaxDetails$inboundSchema;
-  /** @deprecated use `FederalTaxDetails$outboundSchema` instead. */
-  export const outboundSchema = FederalTaxDetails$outboundSchema;
-  /** @deprecated use `FederalTaxDetails$Outbound` instead. */
-  export type Outbound = FederalTaxDetails$Outbound;
-}
-
-export function federalTaxDetailsToJSON(
-  federalTaxDetails: FederalTaxDetails,
-): string {
-  return JSON.stringify(
-    FederalTaxDetails$outboundSchema.parse(federalTaxDetails),
-  );
-}
 
 export function federalTaxDetailsFromJSON(
   jsonString: string,

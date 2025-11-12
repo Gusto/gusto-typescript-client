@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   Termination,
   Termination$inboundSchema,
-  Termination$Outbound,
-  Termination$outboundSchema,
 } from "../components/termination.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetV1EmployeesEmployeeIdTerminationsResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdTerminationsRequest$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdTerminationsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1EmployeesEmployeeIdTerminationsRequest$Outbound = {
   employee_id: string;
   "X-Gusto-API-Version": string;
@@ -82,21 +61,6 @@ export const GetV1EmployeesEmployeeIdTerminationsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdTerminationsRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdTerminationsRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdTerminationsRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdTerminationsRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdTerminationsRequestToJSON(
   getV1EmployeesEmployeeIdTerminationsRequest:
     GetV1EmployeesEmployeeIdTerminationsRequest,
@@ -105,22 +69,6 @@ export function getV1EmployeesEmployeeIdTerminationsRequestToJSON(
     GetV1EmployeesEmployeeIdTerminationsRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdTerminationsRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdTerminationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdTerminationsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdTerminationsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeIdTerminationsRequest' from JSON`,
   );
 }
 
@@ -139,54 +87,6 @@ export const GetV1EmployeesEmployeeIdTerminationsResponse$inboundSchema:
       "Termination-List": "terminationList",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdTerminationsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Termination-List"?: Array<Termination$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdTerminationsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdTerminationsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    terminationList: z.array(Termination$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      terminationList: "Termination-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdTerminationsResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdTerminationsResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdTerminationsResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdTerminationsResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdTerminationsResponseToJSON(
-  getV1EmployeesEmployeeIdTerminationsResponse:
-    GetV1EmployeesEmployeeIdTerminationsResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdTerminationsResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdTerminationsResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdTerminationsResponseFromJSON(
   jsonString: string,

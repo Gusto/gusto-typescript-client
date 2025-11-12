@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   I9Authorization,
   I9Authorization$inboundSchema,
-  I9Authorization$Outbound,
-  I9Authorization$outboundSchema,
 } from "../components/i9authorization.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -77,29 +72,6 @@ export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse = {
 };
 
 /** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    signature_text: z.string(),
-    signer_title: z.string(),
-    signed_by_ip_address: z.string().optional(),
-    agree: z.boolean(),
-    additional_info: z.string().optional(),
-    alt_procedure: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "signature_text": "signatureText",
-      "signer_title": "signerTitle",
-      "signed_by_ip_address": "signedByIpAddress",
-      "additional_info": "additionalInfo",
-      "alt_procedure": "altProcedure",
-    });
-  });
-
-/** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$Outbound =
   {
     signature_text: string;
@@ -133,22 +105,6 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$outb
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBodyToJSON(
   putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody:
     PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody,
@@ -158,43 +114,6 @@ export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBodyTo
       .parse(putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody),
   );
 }
-
-export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "x-gusto-client-ip": z.string().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "x-gusto-client-ip": "xGustoClientIp",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$Outbound =
@@ -228,22 +147,6 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$outbound
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestToJSON(
   putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest:
     PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
@@ -251,21 +154,6 @@ export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestToJSON
   return JSON.stringify(
     PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$outboundSchema
       .parse(putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest),
-  );
-}
-
-export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest' from JSON`,
   );
 }
 
@@ -284,55 +172,6 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$inbound
       "I9-Authorization": "i9Authorization",
     });
   });
-
-/** @internal */
-export type PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "I9-Authorization"?: I9Authorization$Outbound | undefined;
-  };
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    i9Authorization: I9Authorization$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      i9Authorization: "I9-Authorization",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$Outbound;
-}
-
-export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponseToJSON(
-  putV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse:
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse$outboundSchema
-      .parse(putV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse),
-  );
-}
 
 export function putV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponseFromJSON(
   jsonString: string,

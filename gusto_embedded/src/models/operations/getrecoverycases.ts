@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   RecoveryCase,
   RecoveryCase$inboundSchema,
-  RecoveryCase$Outbound,
-  RecoveryCase$outboundSchema,
 } from "../components/recoverycase.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetRecoveryCasesResponse = {
 };
 
 /** @internal */
-export const GetRecoveryCasesRequest$inboundSchema: z.ZodType<
-  GetRecoveryCasesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetRecoveryCasesRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,34 +60,11 @@ export const GetRecoveryCasesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetRecoveryCasesRequest$ {
-  /** @deprecated use `GetRecoveryCasesRequest$inboundSchema` instead. */
-  export const inboundSchema = GetRecoveryCasesRequest$inboundSchema;
-  /** @deprecated use `GetRecoveryCasesRequest$outboundSchema` instead. */
-  export const outboundSchema = GetRecoveryCasesRequest$outboundSchema;
-  /** @deprecated use `GetRecoveryCasesRequest$Outbound` instead. */
-  export type Outbound = GetRecoveryCasesRequest$Outbound;
-}
-
 export function getRecoveryCasesRequestToJSON(
   getRecoveryCasesRequest: GetRecoveryCasesRequest,
 ): string {
   return JSON.stringify(
     GetRecoveryCasesRequest$outboundSchema.parse(getRecoveryCasesRequest),
-  );
-}
-
-export function getRecoveryCasesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetRecoveryCasesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetRecoveryCasesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetRecoveryCasesRequest' from JSON`,
   );
 }
 
@@ -125,48 +82,6 @@ export const GetRecoveryCasesResponse$inboundSchema: z.ZodType<
     "Recovery-Case-List": "recoveryCaseList",
   });
 });
-
-/** @internal */
-export type GetRecoveryCasesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Recovery-Case-List"?: Array<RecoveryCase$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetRecoveryCasesResponse$outboundSchema: z.ZodType<
-  GetRecoveryCasesResponse$Outbound,
-  z.ZodTypeDef,
-  GetRecoveryCasesResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  recoveryCaseList: z.array(RecoveryCase$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    recoveryCaseList: "Recovery-Case-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetRecoveryCasesResponse$ {
-  /** @deprecated use `GetRecoveryCasesResponse$inboundSchema` instead. */
-  export const inboundSchema = GetRecoveryCasesResponse$inboundSchema;
-  /** @deprecated use `GetRecoveryCasesResponse$outboundSchema` instead. */
-  export const outboundSchema = GetRecoveryCasesResponse$outboundSchema;
-  /** @deprecated use `GetRecoveryCasesResponse$Outbound` instead. */
-  export type Outbound = GetRecoveryCasesResponse$Outbound;
-}
-
-export function getRecoveryCasesResponseToJSON(
-  getRecoveryCasesResponse: GetRecoveryCasesResponse,
-): string {
-  return JSON.stringify(
-    GetRecoveryCasesResponse$outboundSchema.parse(getRecoveryCasesResponse),
-  );
-}
 
 export function getRecoveryCasesResponseFromJSON(
   jsonString: string,

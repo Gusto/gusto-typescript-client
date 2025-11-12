@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,46 +44,10 @@ export type DeleteV1RecurringReimbursementsResponse = {
 };
 
 /** @internal */
-export const DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion
-  > = z.nativeEnum(DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion);
-
-/** @internal */
 export const DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion
-  > = DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const DeleteV1RecurringReimbursementsRequest$inboundSchema: z.ZodType<
-  DeleteV1RecurringReimbursementsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2024-04-01",
-    ),
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
+  > = z.nativeEnum(DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type DeleteV1RecurringReimbursementsRequest$Outbound = {
@@ -109,21 +71,6 @@ export const DeleteV1RecurringReimbursementsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1RecurringReimbursementsRequest$ {
-  /** @deprecated use `DeleteV1RecurringReimbursementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1RecurringReimbursementsRequest$inboundSchema;
-  /** @deprecated use `DeleteV1RecurringReimbursementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1RecurringReimbursementsRequest$outboundSchema;
-  /** @deprecated use `DeleteV1RecurringReimbursementsRequest$Outbound` instead. */
-  export type Outbound = DeleteV1RecurringReimbursementsRequest$Outbound;
-}
-
 export function deleteV1RecurringReimbursementsRequestToJSON(
   deleteV1RecurringReimbursementsRequest:
     DeleteV1RecurringReimbursementsRequest,
@@ -132,17 +79,6 @@ export function deleteV1RecurringReimbursementsRequestToJSON(
     DeleteV1RecurringReimbursementsRequest$outboundSchema.parse(
       deleteV1RecurringReimbursementsRequest,
     ),
-  );
-}
-
-export function deleteV1RecurringReimbursementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteV1RecurringReimbursementsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1RecurringReimbursementsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1RecurringReimbursementsRequest' from JSON`,
   );
 }
 
@@ -158,50 +94,6 @@ export const DeleteV1RecurringReimbursementsResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type DeleteV1RecurringReimbursementsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1RecurringReimbursementsResponse$outboundSchema: z.ZodType<
-  DeleteV1RecurringReimbursementsResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteV1RecurringReimbursementsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1RecurringReimbursementsResponse$ {
-  /** @deprecated use `DeleteV1RecurringReimbursementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1RecurringReimbursementsResponse$inboundSchema;
-  /** @deprecated use `DeleteV1RecurringReimbursementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1RecurringReimbursementsResponse$outboundSchema;
-  /** @deprecated use `DeleteV1RecurringReimbursementsResponse$Outbound` instead. */
-  export type Outbound = DeleteV1RecurringReimbursementsResponse$Outbound;
-}
-
-export function deleteV1RecurringReimbursementsResponseToJSON(
-  deleteV1RecurringReimbursementsResponse:
-    DeleteV1RecurringReimbursementsResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1RecurringReimbursementsResponse$outboundSchema.parse(
-      deleteV1RecurringReimbursementsResponse,
-    ),
-  );
-}
 
 export function deleteV1RecurringReimbursementsResponseFromJSON(
   jsonString: string,

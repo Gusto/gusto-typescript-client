@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,21 +30,6 @@ export type DeleteV1EmployeesEmployeeIdRehireRequest = {
 export type DeleteV1EmployeesEmployeeIdRehireResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
-  DeleteV1EmployeesEmployeeIdRehireRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type DeleteV1EmployeesEmployeeIdRehireRequest$Outbound = {
@@ -70,21 +52,6 @@ export const DeleteV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeesEmployeeIdRehireRequest$ {
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdRehireRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1EmployeesEmployeeIdRehireRequest$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdRehireRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1EmployeesEmployeeIdRehireRequest$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdRehireRequest$Outbound` instead. */
-  export type Outbound = DeleteV1EmployeesEmployeeIdRehireRequest$Outbound;
-}
-
 export function deleteV1EmployeesEmployeeIdRehireRequestToJSON(
   deleteV1EmployeesEmployeeIdRehireRequest:
     DeleteV1EmployeesEmployeeIdRehireRequest,
@@ -93,22 +60,6 @@ export function deleteV1EmployeesEmployeeIdRehireRequestToJSON(
     DeleteV1EmployeesEmployeeIdRehireRequest$outboundSchema.parse(
       deleteV1EmployeesEmployeeIdRehireRequest,
     ),
-  );
-}
-
-export function deleteV1EmployeesEmployeeIdRehireRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1EmployeesEmployeeIdRehireRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1EmployeesEmployeeIdRehireRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteV1EmployeesEmployeeIdRehireRequest' from JSON`,
   );
 }
 
@@ -124,51 +75,6 @@ export const DeleteV1EmployeesEmployeeIdRehireResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type DeleteV1EmployeesEmployeeIdRehireResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1EmployeesEmployeeIdRehireResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1EmployeesEmployeeIdRehireResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1EmployeesEmployeeIdRehireResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1EmployeesEmployeeIdRehireResponse$ {
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdRehireResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1EmployeesEmployeeIdRehireResponse$inboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdRehireResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1EmployeesEmployeeIdRehireResponse$outboundSchema;
-  /** @deprecated use `DeleteV1EmployeesEmployeeIdRehireResponse$Outbound` instead. */
-  export type Outbound = DeleteV1EmployeesEmployeeIdRehireResponse$Outbound;
-}
-
-export function deleteV1EmployeesEmployeeIdRehireResponseToJSON(
-  deleteV1EmployeesEmployeeIdRehireResponse:
-    DeleteV1EmployeesEmployeeIdRehireResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1EmployeesEmployeeIdRehireResponse$outboundSchema.parse(
-      deleteV1EmployeesEmployeeIdRehireResponse,
-    ),
-  );
-}
 
 export function deleteV1EmployeesEmployeeIdRehireResponseFromJSON(
   jsonString: string,

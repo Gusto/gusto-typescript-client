@@ -28,19 +28,3 @@ export type PayrollWithholdingPayPeriodType = ClosedEnum<
 export const PayrollWithholdingPayPeriodType$inboundSchema: z.ZodNativeEnum<
   typeof PayrollWithholdingPayPeriodType
 > = z.nativeEnum(PayrollWithholdingPayPeriodType);
-
-/** @internal */
-export const PayrollWithholdingPayPeriodType$outboundSchema: z.ZodNativeEnum<
-  typeof PayrollWithholdingPayPeriodType
-> = PayrollWithholdingPayPeriodType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollWithholdingPayPeriodType$ {
-  /** @deprecated use `PayrollWithholdingPayPeriodType$inboundSchema` instead. */
-  export const inboundSchema = PayrollWithholdingPayPeriodType$inboundSchema;
-  /** @deprecated use `PayrollWithholdingPayPeriodType$outboundSchema` instead. */
-  export const outboundSchema = PayrollWithholdingPayPeriodType$outboundSchema;
-}

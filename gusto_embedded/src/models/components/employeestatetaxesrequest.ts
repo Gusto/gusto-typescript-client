@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EmployeeStateTaxesRequestValue = string | number | boolean;
 
@@ -31,13 +28,6 @@ export type EmployeeStateTaxesRequest = {
 };
 
 /** @internal */
-export const EmployeeStateTaxesRequestValue$inboundSchema: z.ZodType<
-  EmployeeStateTaxesRequestValue,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/** @internal */
 export type EmployeeStateTaxesRequestValue$Outbound = string | number | boolean;
 
 /** @internal */
@@ -46,19 +36,6 @@ export const EmployeeStateTaxesRequestValue$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmployeeStateTaxesRequestValue
 > = z.union([z.string(), z.number(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeStateTaxesRequestValue$ {
-  /** @deprecated use `EmployeeStateTaxesRequestValue$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxesRequestValue$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxesRequestValue$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxesRequestValue$outboundSchema;
-  /** @deprecated use `EmployeeStateTaxesRequestValue$Outbound` instead. */
-  export type Outbound = EmployeeStateTaxesRequestValue$Outbound;
-}
 
 export function employeeStateTaxesRequestValueToJSON(
   employeeStateTaxesRequestValue: EmployeeStateTaxesRequestValue,
@@ -69,29 +46,6 @@ export function employeeStateTaxesRequestValueToJSON(
     ),
   );
 }
-
-export function employeeStateTaxesRequestValueFromJSON(
-  jsonString: string,
-): SafeParseResult<EmployeeStateTaxesRequestValue, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EmployeeStateTaxesRequestValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeStateTaxesRequestValue' from JSON`,
-  );
-}
-
-/** @internal */
-export const Answers$inboundSchema: z.ZodType<Answers, z.ZodTypeDef, unknown> =
-  z.object({
-    value: z.nullable(z.union([z.string(), z.number(), z.boolean()])),
-    valid_from: z.string(),
-    valid_up_to: z.nullable(z.any()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "valid_from": "validFrom",
-      "valid_up_to": "validUpTo",
-    });
-  });
 
 /** @internal */
 export type Answers$Outbound = {
@@ -116,42 +70,9 @@ export const Answers$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Answers$ {
-  /** @deprecated use `Answers$inboundSchema` instead. */
-  export const inboundSchema = Answers$inboundSchema;
-  /** @deprecated use `Answers$outboundSchema` instead. */
-  export const outboundSchema = Answers$outboundSchema;
-  /** @deprecated use `Answers$Outbound` instead. */
-  export type Outbound = Answers$Outbound;
-}
-
 export function answersToJSON(answers: Answers): string {
   return JSON.stringify(Answers$outboundSchema.parse(answers));
 }
-
-export function answersFromJSON(
-  jsonString: string,
-): SafeParseResult<Answers, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Answers$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Answers' from JSON`,
-  );
-}
-
-/** @internal */
-export const Questions$inboundSchema: z.ZodType<
-  Questions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  answers: z.array(z.lazy(() => Answers$inboundSchema)).optional(),
-});
 
 /** @internal */
 export type Questions$Outbound = {
@@ -169,39 +90,9 @@ export const Questions$outboundSchema: z.ZodType<
   answers: z.array(z.lazy(() => Answers$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Questions$ {
-  /** @deprecated use `Questions$inboundSchema` instead. */
-  export const inboundSchema = Questions$inboundSchema;
-  /** @deprecated use `Questions$outboundSchema` instead. */
-  export const outboundSchema = Questions$outboundSchema;
-  /** @deprecated use `Questions$Outbound` instead. */
-  export type Outbound = Questions$Outbound;
-}
-
 export function questionsToJSON(questions: Questions): string {
   return JSON.stringify(Questions$outboundSchema.parse(questions));
 }
-
-export function questionsFromJSON(
-  jsonString: string,
-): SafeParseResult<Questions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Questions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Questions' from JSON`,
-  );
-}
-
-/** @internal */
-export const States$inboundSchema: z.ZodType<States, z.ZodTypeDef, unknown> = z
-  .object({
-    state: z.string(),
-    questions: z.array(z.lazy(() => Questions$inboundSchema)).optional(),
-  });
 
 /** @internal */
 export type States$Outbound = {
@@ -219,41 +110,9 @@ export const States$outboundSchema: z.ZodType<
   questions: z.array(z.lazy(() => Questions$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace States$ {
-  /** @deprecated use `States$inboundSchema` instead. */
-  export const inboundSchema = States$inboundSchema;
-  /** @deprecated use `States$outboundSchema` instead. */
-  export const outboundSchema = States$outboundSchema;
-  /** @deprecated use `States$Outbound` instead. */
-  export type Outbound = States$Outbound;
-}
-
 export function statesToJSON(states: States): string {
   return JSON.stringify(States$outboundSchema.parse(states));
 }
-
-export function statesFromJSON(
-  jsonString: string,
-): SafeParseResult<States, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => States$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'States' from JSON`,
-  );
-}
-
-/** @internal */
-export const EmployeeStateTaxesRequest$inboundSchema: z.ZodType<
-  EmployeeStateTaxesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  states: z.array(z.lazy(() => States$inboundSchema)),
-});
 
 /** @internal */
 export type EmployeeStateTaxesRequest$Outbound = {
@@ -269,33 +128,10 @@ export const EmployeeStateTaxesRequest$outboundSchema: z.ZodType<
   states: z.array(z.lazy(() => States$outboundSchema)),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeStateTaxesRequest$ {
-  /** @deprecated use `EmployeeStateTaxesRequest$inboundSchema` instead. */
-  export const inboundSchema = EmployeeStateTaxesRequest$inboundSchema;
-  /** @deprecated use `EmployeeStateTaxesRequest$outboundSchema` instead. */
-  export const outboundSchema = EmployeeStateTaxesRequest$outboundSchema;
-  /** @deprecated use `EmployeeStateTaxesRequest$Outbound` instead. */
-  export type Outbound = EmployeeStateTaxesRequest$Outbound;
-}
-
 export function employeeStateTaxesRequestToJSON(
   employeeStateTaxesRequest: EmployeeStateTaxesRequest,
 ): string {
   return JSON.stringify(
     EmployeeStateTaxesRequest$outboundSchema.parse(employeeStateTaxesRequest),
-  );
-}
-
-export function employeeStateTaxesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<EmployeeStateTaxesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EmployeeStateTaxesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EmployeeStateTaxesRequest' from JSON`,
   );
 }

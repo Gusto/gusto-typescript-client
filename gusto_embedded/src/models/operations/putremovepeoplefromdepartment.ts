@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
-  Department$Outbound,
-  Department$outboundSchema,
 } from "../components/department.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,15 +64,6 @@ export type PutRemovePeopleFromDepartmentResponse = {
 };
 
 /** @internal */
-export const PutRemovePeopleFromDepartmentEmployees$inboundSchema: z.ZodType<
-  PutRemovePeopleFromDepartmentEmployees,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-/** @internal */
 export type PutRemovePeopleFromDepartmentEmployees$Outbound = {
   uuid?: string | undefined;
 };
@@ -91,21 +77,6 @@ export const PutRemovePeopleFromDepartmentEmployees$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutRemovePeopleFromDepartmentEmployees$ {
-  /** @deprecated use `PutRemovePeopleFromDepartmentEmployees$inboundSchema` instead. */
-  export const inboundSchema =
-    PutRemovePeopleFromDepartmentEmployees$inboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentEmployees$outboundSchema` instead. */
-  export const outboundSchema =
-    PutRemovePeopleFromDepartmentEmployees$outboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentEmployees$Outbound` instead. */
-  export type Outbound = PutRemovePeopleFromDepartmentEmployees$Outbound;
-}
-
 export function putRemovePeopleFromDepartmentEmployeesToJSON(
   putRemovePeopleFromDepartmentEmployees:
     PutRemovePeopleFromDepartmentEmployees,
@@ -116,26 +87,6 @@ export function putRemovePeopleFromDepartmentEmployeesToJSON(
     ),
   );
 }
-
-export function putRemovePeopleFromDepartmentEmployeesFromJSON(
-  jsonString: string,
-): SafeParseResult<PutRemovePeopleFromDepartmentEmployees, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutRemovePeopleFromDepartmentEmployees$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutRemovePeopleFromDepartmentEmployees' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutRemovePeopleFromDepartmentContractors$inboundSchema: z.ZodType<
-  PutRemovePeopleFromDepartmentContractors,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uuid: z.string().optional(),
-});
 
 /** @internal */
 export type PutRemovePeopleFromDepartmentContractors$Outbound = {
@@ -151,21 +102,6 @@ export const PutRemovePeopleFromDepartmentContractors$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutRemovePeopleFromDepartmentContractors$ {
-  /** @deprecated use `PutRemovePeopleFromDepartmentContractors$inboundSchema` instead. */
-  export const inboundSchema =
-    PutRemovePeopleFromDepartmentContractors$inboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentContractors$outboundSchema` instead. */
-  export const outboundSchema =
-    PutRemovePeopleFromDepartmentContractors$outboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentContractors$Outbound` instead. */
-  export type Outbound = PutRemovePeopleFromDepartmentContractors$Outbound;
-}
-
 export function putRemovePeopleFromDepartmentContractorsToJSON(
   putRemovePeopleFromDepartmentContractors:
     PutRemovePeopleFromDepartmentContractors,
@@ -176,37 +112,6 @@ export function putRemovePeopleFromDepartmentContractorsToJSON(
     ),
   );
 }
-
-export function putRemovePeopleFromDepartmentContractorsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutRemovePeopleFromDepartmentContractors,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutRemovePeopleFromDepartmentContractors$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutRemovePeopleFromDepartmentContractors' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutRemovePeopleFromDepartmentRequestBody$inboundSchema: z.ZodType<
-  PutRemovePeopleFromDepartmentRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string().optional(),
-  employees: z.array(
-    z.lazy(() => PutRemovePeopleFromDepartmentEmployees$inboundSchema),
-  ).optional(),
-  contractors: z.array(
-    z.lazy(() => PutRemovePeopleFromDepartmentContractors$inboundSchema),
-  ).optional(),
-});
 
 /** @internal */
 export type PutRemovePeopleFromDepartmentRequestBody$Outbound = {
@@ -234,21 +139,6 @@ export const PutRemovePeopleFromDepartmentRequestBody$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutRemovePeopleFromDepartmentRequestBody$ {
-  /** @deprecated use `PutRemovePeopleFromDepartmentRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutRemovePeopleFromDepartmentRequestBody$inboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutRemovePeopleFromDepartmentRequestBody$outboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentRequestBody$Outbound` instead. */
-  export type Outbound = PutRemovePeopleFromDepartmentRequestBody$Outbound;
-}
-
 export function putRemovePeopleFromDepartmentRequestBodyToJSON(
   putRemovePeopleFromDepartmentRequestBody:
     PutRemovePeopleFromDepartmentRequestBody,
@@ -259,41 +149,6 @@ export function putRemovePeopleFromDepartmentRequestBodyToJSON(
     ),
   );
 }
-
-export function putRemovePeopleFromDepartmentRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutRemovePeopleFromDepartmentRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutRemovePeopleFromDepartmentRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutRemovePeopleFromDepartmentRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutRemovePeopleFromDepartmentRequest$inboundSchema: z.ZodType<
-  PutRemovePeopleFromDepartmentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  department_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutRemovePeopleFromDepartmentRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "department_uuid": "departmentUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutRemovePeopleFromDepartmentRequest$Outbound = {
@@ -321,21 +176,6 @@ export const PutRemovePeopleFromDepartmentRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutRemovePeopleFromDepartmentRequest$ {
-  /** @deprecated use `PutRemovePeopleFromDepartmentRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutRemovePeopleFromDepartmentRequest$inboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutRemovePeopleFromDepartmentRequest$outboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentRequest$Outbound` instead. */
-  export type Outbound = PutRemovePeopleFromDepartmentRequest$Outbound;
-}
-
 export function putRemovePeopleFromDepartmentRequestToJSON(
   putRemovePeopleFromDepartmentRequest: PutRemovePeopleFromDepartmentRequest,
 ): string {
@@ -343,17 +183,6 @@ export function putRemovePeopleFromDepartmentRequestToJSON(
     PutRemovePeopleFromDepartmentRequest$outboundSchema.parse(
       putRemovePeopleFromDepartmentRequest,
     ),
-  );
-}
-
-export function putRemovePeopleFromDepartmentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutRemovePeopleFromDepartmentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutRemovePeopleFromDepartmentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutRemovePeopleFromDepartmentRequest' from JSON`,
   );
 }
 
@@ -371,52 +200,6 @@ export const PutRemovePeopleFromDepartmentResponse$inboundSchema: z.ZodType<
     "Department": "department",
   });
 });
-
-/** @internal */
-export type PutRemovePeopleFromDepartmentResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Department?: Department$Outbound | undefined;
-};
-
-/** @internal */
-export const PutRemovePeopleFromDepartmentResponse$outboundSchema: z.ZodType<
-  PutRemovePeopleFromDepartmentResponse$Outbound,
-  z.ZodTypeDef,
-  PutRemovePeopleFromDepartmentResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  department: Department$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    department: "Department",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutRemovePeopleFromDepartmentResponse$ {
-  /** @deprecated use `PutRemovePeopleFromDepartmentResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutRemovePeopleFromDepartmentResponse$inboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutRemovePeopleFromDepartmentResponse$outboundSchema;
-  /** @deprecated use `PutRemovePeopleFromDepartmentResponse$Outbound` instead. */
-  export type Outbound = PutRemovePeopleFromDepartmentResponse$Outbound;
-}
-
-export function putRemovePeopleFromDepartmentResponseToJSON(
-  putRemovePeopleFromDepartmentResponse: PutRemovePeopleFromDepartmentResponse,
-): string {
-  return JSON.stringify(
-    PutRemovePeopleFromDepartmentResponse$outboundSchema.parse(
-      putRemovePeopleFromDepartmentResponse,
-    ),
-  );
-}
 
 export function putRemovePeopleFromDepartmentResponseFromJSON(
   jsonString: string,

@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   Termination,
   Termination$inboundSchema,
-  Termination$Outbound,
-  Termination$outboundSchema,
 } from "../components/termination.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,22 +52,6 @@ export type PostV1EmployeesEmployeeIdTerminationsResponse = {
 };
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdTerminationsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdTerminationsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    effective_date: z.string(),
-    run_termination_payroll: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "effective_date": "effectiveDate",
-      "run_termination_payroll": "runTerminationPayroll",
-    });
-  });
-
-/** @internal */
 export type PostV1EmployeesEmployeeIdTerminationsRequestBody$Outbound = {
   effective_date: string;
   run_termination_payroll?: boolean | undefined;
@@ -94,22 +73,6 @@ export const PostV1EmployeesEmployeeIdTerminationsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdTerminationsRequestBody$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdTerminationsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdTerminationsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdTerminationsRequestBody$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdTerminationsRequestBodyToJSON(
   postV1EmployeesEmployeeIdTerminationsRequestBody:
     PostV1EmployeesEmployeeIdTerminationsRequestBody,
@@ -120,42 +83,6 @@ export function postV1EmployeesEmployeeIdTerminationsRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1EmployeesEmployeeIdTerminationsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdTerminationsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdTerminationsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdTerminationsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdTerminationsRequest$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdTerminationsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostV1EmployeesEmployeeIdTerminationsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdTerminationsRequest$Outbound = {
@@ -184,21 +111,6 @@ export const PostV1EmployeesEmployeeIdTerminationsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdTerminationsRequest$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdTerminationsRequest$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdTerminationsRequest$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsRequest$Outbound` instead. */
-  export type Outbound = PostV1EmployeesEmployeeIdTerminationsRequest$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdTerminationsRequestToJSON(
   postV1EmployeesEmployeeIdTerminationsRequest:
     PostV1EmployeesEmployeeIdTerminationsRequest,
@@ -207,22 +119,6 @@ export function postV1EmployeesEmployeeIdTerminationsRequestToJSON(
     PostV1EmployeesEmployeeIdTerminationsRequest$outboundSchema.parse(
       postV1EmployeesEmployeeIdTerminationsRequest,
     ),
-  );
-}
-
-export function postV1EmployeesEmployeeIdTerminationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdTerminationsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdTerminationsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdTerminationsRequest' from JSON`,
   );
 }
 
@@ -241,54 +137,6 @@ export const PostV1EmployeesEmployeeIdTerminationsResponse$inboundSchema:
       "Termination": "termination",
     });
   });
-
-/** @internal */
-export type PostV1EmployeesEmployeeIdTerminationsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Termination?: Termination$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdTerminationsResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdTerminationsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    termination: Termination$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      termination: "Termination",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdTerminationsResponse$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdTerminationsResponse$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdTerminationsResponse$Outbound` instead. */
-  export type Outbound = PostV1EmployeesEmployeeIdTerminationsResponse$Outbound;
-}
-
-export function postV1EmployeesEmployeeIdTerminationsResponseToJSON(
-  postV1EmployeesEmployeeIdTerminationsResponse:
-    PostV1EmployeesEmployeeIdTerminationsResponse,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdTerminationsResponse$outboundSchema.parse(
-      postV1EmployeesEmployeeIdTerminationsResponse,
-    ),
-  );
-}
 
 export function postV1EmployeesEmployeeIdTerminationsResponseFromJSON(
   jsonString: string,

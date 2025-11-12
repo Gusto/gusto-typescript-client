@@ -12,38 +12,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   EmployeeCustomField,
   EmployeeCustomField$inboundSchema,
-  EmployeeCustomField$Outbound,
-  EmployeeCustomField$outboundSchema,
 } from "./employeecustomfield.js";
 import {
   FlsaStatusType,
   FlsaStatusType$inboundSchema,
-  FlsaStatusType$outboundSchema,
 } from "./flsastatustype.js";
-import {
-  Garnishment,
-  Garnishment$inboundSchema,
-  Garnishment$Outbound,
-  Garnishment$outboundSchema,
-} from "./garnishment.js";
-import {
-  Job,
-  Job$inboundSchema,
-  Job$Outbound,
-  Job$outboundSchema,
-} from "./job.js";
-import {
-  PaidTimeOff,
-  PaidTimeOff$inboundSchema,
-  PaidTimeOff$Outbound,
-  PaidTimeOff$outboundSchema,
-} from "./paidtimeoff.js";
-import {
-  Termination,
-  Termination$inboundSchema,
-  Termination$Outbound,
-  Termination$outboundSchema,
-} from "./termination.js";
+import { Garnishment, Garnishment$inboundSchema } from "./garnishment.js";
+import { Job, Job$inboundSchema } from "./job.js";
+import { PaidTimeOff, PaidTimeOff$inboundSchema } from "./paidtimeoff.js";
+import { Termination, Termination$inboundSchema } from "./termination.js";
 
 /**
  * The current onboarding status of the employee
@@ -218,22 +195,6 @@ export const EmployeeOnboardingStatus1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EmployeeOnboardingStatus1);
 
 /** @internal */
-export const EmployeeOnboardingStatus1$outboundSchema: z.ZodNativeEnum<
-  typeof EmployeeOnboardingStatus1
-> = EmployeeOnboardingStatus1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeOnboardingStatus1$ {
-  /** @deprecated use `EmployeeOnboardingStatus1$inboundSchema` instead. */
-  export const inboundSchema = EmployeeOnboardingStatus1$inboundSchema;
-  /** @deprecated use `EmployeeOnboardingStatus1$outboundSchema` instead. */
-  export const outboundSchema = EmployeeOnboardingStatus1$outboundSchema;
-}
-
-/** @internal */
 export const EmployeeOnboardingDocumentsConfig$inboundSchema: z.ZodType<
   EmployeeOnboardingDocumentsConfig,
   z.ZodTypeDef,
@@ -246,50 +207,6 @@ export const EmployeeOnboardingDocumentsConfig$inboundSchema: z.ZodType<
     "i9_document": "i9Document",
   });
 });
-
-/** @internal */
-export type EmployeeOnboardingDocumentsConfig$Outbound = {
-  uuid?: string | null | undefined;
-  i9_document?: boolean | undefined;
-};
-
-/** @internal */
-export const EmployeeOnboardingDocumentsConfig$outboundSchema: z.ZodType<
-  EmployeeOnboardingDocumentsConfig$Outbound,
-  z.ZodTypeDef,
-  EmployeeOnboardingDocumentsConfig
-> = z.object({
-  uuid: z.nullable(z.string()).optional(),
-  i9Document: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    i9Document: "i9_document",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeOnboardingDocumentsConfig$ {
-  /** @deprecated use `EmployeeOnboardingDocumentsConfig$inboundSchema` instead. */
-  export const inboundSchema = EmployeeOnboardingDocumentsConfig$inboundSchema;
-  /** @deprecated use `EmployeeOnboardingDocumentsConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    EmployeeOnboardingDocumentsConfig$outboundSchema;
-  /** @deprecated use `EmployeeOnboardingDocumentsConfig$Outbound` instead. */
-  export type Outbound = EmployeeOnboardingDocumentsConfig$Outbound;
-}
-
-export function employeeOnboardingDocumentsConfigToJSON(
-  employeeOnboardingDocumentsConfig: EmployeeOnboardingDocumentsConfig,
-): string {
-  return JSON.stringify(
-    EmployeeOnboardingDocumentsConfig$outboundSchema.parse(
-      employeeOnboardingDocumentsConfig,
-    ),
-  );
-}
 
 export function employeeOnboardingDocumentsConfigFromJSON(
   jsonString: string,
@@ -307,41 +224,9 @@ export const EmployeePaymentMethod1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EmployeePaymentMethod1);
 
 /** @internal */
-export const EmployeePaymentMethod1$outboundSchema: z.ZodNativeEnum<
-  typeof EmployeePaymentMethod1
-> = EmployeePaymentMethod1$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeePaymentMethod1$ {
-  /** @deprecated use `EmployeePaymentMethod1$inboundSchema` instead. */
-  export const inboundSchema = EmployeePaymentMethod1$inboundSchema;
-  /** @deprecated use `EmployeePaymentMethod1$outboundSchema` instead. */
-  export const outboundSchema = EmployeePaymentMethod1$outboundSchema;
-}
-
-/** @internal */
 export const EmployeeCurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
   typeof EmployeeCurrentEmploymentStatus
 > = z.nativeEnum(EmployeeCurrentEmploymentStatus);
-
-/** @internal */
-export const EmployeeCurrentEmploymentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof EmployeeCurrentEmploymentStatus
-> = EmployeeCurrentEmploymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeCurrentEmploymentStatus$ {
-  /** @deprecated use `EmployeeCurrentEmploymentStatus$inboundSchema` instead. */
-  export const inboundSchema = EmployeeCurrentEmploymentStatus$inboundSchema;
-  /** @deprecated use `EmployeeCurrentEmploymentStatus$outboundSchema` instead. */
-  export const outboundSchema = EmployeeCurrentEmploymentStatus$outboundSchema;
-}
 
 /** @internal */
 export const Employee$inboundSchema: z.ZodType<
@@ -415,137 +300,6 @@ export const Employee$inboundSchema: z.ZodType<
     "applicable_tax_ids": "applicableTaxIds",
   });
 });
-
-/** @internal */
-export type Employee$Outbound = {
-  uuid: string;
-  first_name: string;
-  middle_initial?: string | null | undefined;
-  last_name: string;
-  email?: string | null | undefined;
-  company_uuid?: string | undefined;
-  manager_uuid?: string | null | undefined;
-  version?: string | undefined;
-  department?: string | null | undefined;
-  terminated?: boolean | undefined;
-  two_percent_shareholder?: boolean | null | undefined;
-  work_email?: string | null | undefined;
-  onboarded?: boolean | undefined;
-  onboarding_status?: string | null | undefined;
-  onboarding_documents_config?:
-    | EmployeeOnboardingDocumentsConfig$Outbound
-    | undefined;
-  jobs?: Array<Job$Outbound> | undefined;
-  eligible_paid_time_off?: Array<PaidTimeOff$Outbound> | undefined;
-  terminations?: Array<Termination$Outbound> | undefined;
-  garnishments?: Array<Garnishment$Outbound> | undefined;
-  custom_fields?: Array<EmployeeCustomField$Outbound> | undefined;
-  date_of_birth?: string | null | undefined;
-  has_ssn?: boolean | undefined;
-  ssn?: string | undefined;
-  phone?: string | null | undefined;
-  preferred_first_name?: string | null | undefined;
-  payment_method: string;
-  current_employment_status?: string | null | undefined;
-  historical?: boolean | undefined;
-  employee_code?: string | undefined;
-  department_uuid?: string | null | undefined;
-  title?: string | undefined;
-  hired_at?: string | undefined;
-  hidden_ssn?: string | undefined;
-  flsa_status?: string | undefined;
-  applicable_tax_ids?: Array<number> | undefined;
-};
-
-/** @internal */
-export const Employee$outboundSchema: z.ZodType<
-  Employee$Outbound,
-  z.ZodTypeDef,
-  Employee
-> = z.object({
-  uuid: z.string(),
-  firstName: z.string(),
-  middleInitial: z.nullable(z.string()).optional(),
-  lastName: z.string(),
-  email: z.nullable(z.string()).optional(),
-  companyUuid: z.string().optional(),
-  managerUuid: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  department: z.nullable(z.string()).optional(),
-  terminated: z.boolean().optional(),
-  twoPercentShareholder: z.nullable(z.boolean()).optional(),
-  workEmail: z.nullable(z.string()).optional(),
-  onboarded: z.boolean().optional(),
-  onboardingStatus: z.nullable(EmployeeOnboardingStatus1$outboundSchema)
-    .optional(),
-  onboardingDocumentsConfig: z.lazy(() =>
-    EmployeeOnboardingDocumentsConfig$outboundSchema
-  ).optional(),
-  jobs: z.array(Job$outboundSchema).optional(),
-  eligiblePaidTimeOff: z.array(PaidTimeOff$outboundSchema).optional(),
-  terminations: z.array(Termination$outboundSchema).optional(),
-  garnishments: z.array(Garnishment$outboundSchema).optional(),
-  customFields: z.array(EmployeeCustomField$outboundSchema).optional(),
-  dateOfBirth: z.nullable(z.string()).optional(),
-  hasSsn: z.boolean().optional(),
-  ssn: z.string().optional(),
-  phone: z.nullable(z.string()).optional(),
-  preferredFirstName: z.nullable(z.string()).optional(),
-  paymentMethod: EmployeePaymentMethod1$outboundSchema.default("Check"),
-  currentEmploymentStatus: z.nullable(
-    EmployeeCurrentEmploymentStatus$outboundSchema,
-  ).optional(),
-  historical: z.boolean().optional(),
-  employeeCode: z.string().optional(),
-  departmentUuid: z.nullable(z.string()).optional(),
-  title: z.string().optional(),
-  hiredAt: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  hiddenSsn: z.string().optional(),
-  flsaStatus: FlsaStatusType$outboundSchema.optional(),
-  applicableTaxIds: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    middleInitial: "middle_initial",
-    lastName: "last_name",
-    companyUuid: "company_uuid",
-    managerUuid: "manager_uuid",
-    twoPercentShareholder: "two_percent_shareholder",
-    workEmail: "work_email",
-    onboardingStatus: "onboarding_status",
-    onboardingDocumentsConfig: "onboarding_documents_config",
-    eligiblePaidTimeOff: "eligible_paid_time_off",
-    customFields: "custom_fields",
-    dateOfBirth: "date_of_birth",
-    hasSsn: "has_ssn",
-    preferredFirstName: "preferred_first_name",
-    paymentMethod: "payment_method",
-    currentEmploymentStatus: "current_employment_status",
-    employeeCode: "employee_code",
-    departmentUuid: "department_uuid",
-    hiredAt: "hired_at",
-    hiddenSsn: "hidden_ssn",
-    flsaStatus: "flsa_status",
-    applicableTaxIds: "applicable_tax_ids",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Employee$ {
-  /** @deprecated use `Employee$inboundSchema` instead. */
-  export const inboundSchema = Employee$inboundSchema;
-  /** @deprecated use `Employee$outboundSchema` instead. */
-  export const outboundSchema = Employee$outboundSchema;
-  /** @deprecated use `Employee$Outbound` instead. */
-  export type Outbound = Employee$Outbound;
-}
-
-export function employeeToJSON(employee: Employee): string {
-  return JSON.stringify(Employee$outboundSchema.parse(employee));
-}
 
 export function employeeFromJSON(
   jsonString: string,

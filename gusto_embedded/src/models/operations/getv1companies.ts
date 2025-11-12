@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Company,
-  Company$inboundSchema,
-  Company$Outbound,
-  Company$outboundSchema,
-} from "../components/company.js";
+import { Company, Company$inboundSchema } from "../components/company.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +37,6 @@ export type GetV1CompaniesResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesRequest$inboundSchema: z.ZodType<
-  GetV1CompaniesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompaniesRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
@@ -80,34 +57,11 @@ export const GetV1CompaniesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesRequest$ {
-  /** @deprecated use `GetV1CompaniesRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompaniesRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1CompaniesRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesRequest$Outbound;
-}
-
 export function getV1CompaniesRequestToJSON(
   getV1CompaniesRequest: GetV1CompaniesRequest,
 ): string {
   return JSON.stringify(
     GetV1CompaniesRequest$outboundSchema.parse(getV1CompaniesRequest),
-  );
-}
-
-export function getV1CompaniesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompaniesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1CompaniesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesRequest' from JSON`,
   );
 }
 
@@ -125,48 +79,6 @@ export const GetV1CompaniesResponse$inboundSchema: z.ZodType<
     "Company": "company",
   });
 });
-
-/** @internal */
-export type GetV1CompaniesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Company?: Company$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesResponse$outboundSchema: z.ZodType<
-  GetV1CompaniesResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompaniesResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  company: Company$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    company: "Company",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesResponse$ {
-  /** @deprecated use `GetV1CompaniesResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompaniesResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1CompaniesResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesResponse$Outbound;
-}
-
-export function getV1CompaniesResponseToJSON(
-  getV1CompaniesResponse: GetV1CompaniesResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesResponse$outboundSchema.parse(getV1CompaniesResponse),
-  );
-}
 
 export function getV1CompaniesResponseFromJSON(
   jsonString: string,

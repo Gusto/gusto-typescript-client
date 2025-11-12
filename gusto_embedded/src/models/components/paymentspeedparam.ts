@@ -19,22 +19,6 @@ export const PaymentSpeedParam = {
 export type PaymentSpeedParam = ClosedEnum<typeof PaymentSpeedParam>;
 
 /** @internal */
-export const PaymentSpeedParam$inboundSchema: z.ZodNativeEnum<
-  typeof PaymentSpeedParam
-> = z.nativeEnum(PaymentSpeedParam);
-
-/** @internal */
 export const PaymentSpeedParam$outboundSchema: z.ZodNativeEnum<
   typeof PaymentSpeedParam
-> = PaymentSpeedParam$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentSpeedParam$ {
-  /** @deprecated use `PaymentSpeedParam$inboundSchema` instead. */
-  export const inboundSchema = PaymentSpeedParam$inboundSchema;
-  /** @deprecated use `PaymentSpeedParam$outboundSchema` instead. */
-  export const outboundSchema = PaymentSpeedParam$outboundSchema;
-}
+> = z.nativeEnum(PaymentSpeedParam);

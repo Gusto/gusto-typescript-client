@@ -122,48 +122,6 @@ export const BenefitSummaryPayPeriod$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type BenefitSummaryPayPeriod$Outbound = {
-  start_date?: string | null | undefined;
-  end_date?: string | null | undefined;
-};
-
-/** @internal */
-export const BenefitSummaryPayPeriod$outboundSchema: z.ZodType<
-  BenefitSummaryPayPeriod$Outbound,
-  z.ZodTypeDef,
-  BenefitSummaryPayPeriod
-> = z.object({
-  startDate: z.nullable(z.string()).optional(),
-  endDate: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startDate: "start_date",
-    endDate: "end_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitSummaryPayPeriod$ {
-  /** @deprecated use `BenefitSummaryPayPeriod$inboundSchema` instead. */
-  export const inboundSchema = BenefitSummaryPayPeriod$inboundSchema;
-  /** @deprecated use `BenefitSummaryPayPeriod$outboundSchema` instead. */
-  export const outboundSchema = BenefitSummaryPayPeriod$outboundSchema;
-  /** @deprecated use `BenefitSummaryPayPeriod$Outbound` instead. */
-  export type Outbound = BenefitSummaryPayPeriod$Outbound;
-}
-
-export function benefitSummaryPayPeriodToJSON(
-  benefitSummaryPayPeriod: BenefitSummaryPayPeriod,
-): string {
-  return JSON.stringify(
-    BenefitSummaryPayPeriod$outboundSchema.parse(benefitSummaryPayPeriod),
-  );
-}
-
 export function benefitSummaryPayPeriodFromJSON(
   jsonString: string,
 ): SafeParseResult<BenefitSummaryPayPeriod, SDKValidationError> {
@@ -201,64 +159,6 @@ export const PayrollBenefits$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollBenefits$Outbound = {
-  payroll_uuid?: string | undefined;
-  payroll_type?: string | undefined;
-  check_date?: string | undefined;
-  gross_pay?: string | undefined;
-  imputed_pay?: string | undefined;
-  company_benefit_deduction?: string | undefined;
-  company_benefit_contribution?: string | undefined;
-  pay_period?: BenefitSummaryPayPeriod$Outbound | undefined;
-};
-
-/** @internal */
-export const PayrollBenefits$outboundSchema: z.ZodType<
-  PayrollBenefits$Outbound,
-  z.ZodTypeDef,
-  PayrollBenefits
-> = z.object({
-  payrollUuid: z.string().optional(),
-  payrollType: z.string().optional(),
-  checkDate: z.string().optional(),
-  grossPay: z.string().optional(),
-  imputedPay: z.string().optional(),
-  companyBenefitDeduction: z.string().optional(),
-  companyBenefitContribution: z.string().optional(),
-  payPeriod: z.lazy(() => BenefitSummaryPayPeriod$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payrollUuid: "payroll_uuid",
-    payrollType: "payroll_type",
-    checkDate: "check_date",
-    grossPay: "gross_pay",
-    imputedPay: "imputed_pay",
-    companyBenefitDeduction: "company_benefit_deduction",
-    companyBenefitContribution: "company_benefit_contribution",
-    payPeriod: "pay_period",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollBenefits$ {
-  /** @deprecated use `PayrollBenefits$inboundSchema` instead. */
-  export const inboundSchema = PayrollBenefits$inboundSchema;
-  /** @deprecated use `PayrollBenefits$outboundSchema` instead. */
-  export const outboundSchema = PayrollBenefits$outboundSchema;
-  /** @deprecated use `PayrollBenefits$Outbound` instead. */
-  export type Outbound = PayrollBenefits$Outbound;
-}
-
-export function payrollBenefitsToJSON(
-  payrollBenefits: PayrollBenefits,
-): string {
-  return JSON.stringify(PayrollBenefits$outboundSchema.parse(payrollBenefits));
-}
-
 export function payrollBenefitsFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollBenefits, SDKValidationError> {
@@ -295,65 +195,6 @@ export const BenefitSummaryEmployees$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type BenefitSummaryEmployees$Outbound = {
-  uuid?: string | undefined;
-  company_benefit_deduction?: string | undefined;
-  company_benefit_contribution?: string | undefined;
-  benefit_deduction?: string | undefined;
-  benefit_contribution?: string | undefined;
-  gross_pay?: string | undefined;
-  imputed_pay?: string | undefined;
-  payroll_benefits?: PayrollBenefits$Outbound | undefined;
-};
-
-/** @internal */
-export const BenefitSummaryEmployees$outboundSchema: z.ZodType<
-  BenefitSummaryEmployees$Outbound,
-  z.ZodTypeDef,
-  BenefitSummaryEmployees
-> = z.object({
-  uuid: z.string().optional(),
-  companyBenefitDeduction: z.string().optional(),
-  companyBenefitContribution: z.string().optional(),
-  benefitDeduction: z.string().optional(),
-  benefitContribution: z.string().optional(),
-  grossPay: z.string().optional(),
-  imputedPay: z.string().optional(),
-  payrollBenefits: z.lazy(() => PayrollBenefits$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyBenefitDeduction: "company_benefit_deduction",
-    companyBenefitContribution: "company_benefit_contribution",
-    benefitDeduction: "benefit_deduction",
-    benefitContribution: "benefit_contribution",
-    grossPay: "gross_pay",
-    imputedPay: "imputed_pay",
-    payrollBenefits: "payroll_benefits",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitSummaryEmployees$ {
-  /** @deprecated use `BenefitSummaryEmployees$inboundSchema` instead. */
-  export const inboundSchema = BenefitSummaryEmployees$inboundSchema;
-  /** @deprecated use `BenefitSummaryEmployees$outboundSchema` instead. */
-  export const outboundSchema = BenefitSummaryEmployees$outboundSchema;
-  /** @deprecated use `BenefitSummaryEmployees$Outbound` instead. */
-  export type Outbound = BenefitSummaryEmployees$Outbound;
-}
-
-export function benefitSummaryEmployeesToJSON(
-  benefitSummaryEmployees: BenefitSummaryEmployees,
-): string {
-  return JSON.stringify(
-    BenefitSummaryEmployees$outboundSchema.parse(benefitSummaryEmployees),
-  );
-}
-
 export function benefitSummaryEmployeesFromJSON(
   jsonString: string,
 ): SafeParseResult<BenefitSummaryEmployees, SDKValidationError> {
@@ -384,54 +225,6 @@ export const BenefitSummary$inboundSchema: z.ZodType<
     "company_benefit_contribution": "companyBenefitContribution",
   });
 });
-
-/** @internal */
-export type BenefitSummary$Outbound = {
-  start_date?: string | undefined;
-  end_date?: string | undefined;
-  description?: string | undefined;
-  company_benefit_deduction?: string | undefined;
-  company_benefit_contribution?: string | undefined;
-  employees?: BenefitSummaryEmployees$Outbound | undefined;
-};
-
-/** @internal */
-export const BenefitSummary$outboundSchema: z.ZodType<
-  BenefitSummary$Outbound,
-  z.ZodTypeDef,
-  BenefitSummary
-> = z.object({
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  description: z.string().optional(),
-  companyBenefitDeduction: z.string().optional(),
-  companyBenefitContribution: z.string().optional(),
-  employees: z.lazy(() => BenefitSummaryEmployees$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startDate: "start_date",
-    endDate: "end_date",
-    companyBenefitDeduction: "company_benefit_deduction",
-    companyBenefitContribution: "company_benefit_contribution",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BenefitSummary$ {
-  /** @deprecated use `BenefitSummary$inboundSchema` instead. */
-  export const inboundSchema = BenefitSummary$inboundSchema;
-  /** @deprecated use `BenefitSummary$outboundSchema` instead. */
-  export const outboundSchema = BenefitSummary$outboundSchema;
-  /** @deprecated use `BenefitSummary$Outbound` instead. */
-  export type Outbound = BenefitSummary$Outbound;
-}
-
-export function benefitSummaryToJSON(benefitSummary: BenefitSummary): string {
-  return JSON.stringify(BenefitSummary$outboundSchema.parse(benefitSummary));
-}
 
 export function benefitSummaryFromJSON(
   jsonString: string,

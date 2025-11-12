@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Contractor,
   Contractor$inboundSchema,
-  Contractor$Outbound,
-  Contractor$outboundSchema,
 } from "../components/contractor.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -176,86 +171,13 @@ export type PostV1CompaniesCompanyUuidContractorsResponse = {
 };
 
 /** @internal */
-export const PostV1CompaniesCompanyUuidContractorsType$inboundSchema:
+export const PostV1CompaniesCompanyUuidContractorsType$outboundSchema:
   z.ZodNativeEnum<typeof PostV1CompaniesCompanyUuidContractorsType> = z
     .nativeEnum(PostV1CompaniesCompanyUuidContractorsType);
 
 /** @internal */
-export const PostV1CompaniesCompanyUuidContractorsType$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1CompaniesCompanyUuidContractorsType> =
-    PostV1CompaniesCompanyUuidContractorsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyUuidContractorsType$ {
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsType$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyUuidContractorsType$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsType$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyUuidContractorsType$outboundSchema;
-}
-
-/** @internal */
-export const WageType$inboundSchema: z.ZodNativeEnum<typeof WageType> = z
+export const WageType$outboundSchema: z.ZodNativeEnum<typeof WageType> = z
   .nativeEnum(WageType);
-
-/** @internal */
-export const WageType$outboundSchema: z.ZodNativeEnum<typeof WageType> =
-  WageType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WageType$ {
-  /** @deprecated use `WageType$inboundSchema` instead. */
-  export const inboundSchema = WageType$inboundSchema;
-  /** @deprecated use `WageType$outboundSchema` instead. */
-  export const outboundSchema = WageType$outboundSchema;
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyUuidContractorsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyUuidContractorsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: PostV1CompaniesCompanyUuidContractorsType$inboundSchema.default(
-      "Individual",
-    ),
-    wage_type: WageType$inboundSchema,
-    start_date: z.string(),
-    hourly_rate: z.string().optional(),
-    self_onboarding: z.boolean().default(false),
-    email: z.string().optional(),
-    first_name: z.string().optional(),
-    last_name: z.string().optional(),
-    middle_initial: z.string().optional(),
-    file_new_hire_report: z.boolean().default(false),
-    work_state: z.nullable(z.string()).optional(),
-    ssn: z.string().optional(),
-    business_name: z.string().optional(),
-    ein: z.string().optional(),
-    is_active: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "wage_type": "wageType",
-      "start_date": "startDate",
-      "hourly_rate": "hourlyRate",
-      "self_onboarding": "selfOnboarding",
-      "first_name": "firstName",
-      "last_name": "lastName",
-      "middle_initial": "middleInitial",
-      "file_new_hire_report": "fileNewHireReport",
-      "work_state": "workState",
-      "business_name": "businessName",
-      "is_active": "isActive",
-    });
-  });
 
 /** @internal */
 export type PostV1CompaniesCompanyUuidContractorsRequestBody$Outbound = {
@@ -316,22 +238,6 @@ export const PostV1CompaniesCompanyUuidContractorsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyUuidContractorsRequestBody$ {
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyUuidContractorsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyUuidContractorsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1CompaniesCompanyUuidContractorsRequestBody$Outbound;
-}
-
 export function postV1CompaniesCompanyUuidContractorsRequestBodyToJSON(
   postV1CompaniesCompanyUuidContractorsRequestBody:
     PostV1CompaniesCompanyUuidContractorsRequestBody,
@@ -342,42 +248,6 @@ export function postV1CompaniesCompanyUuidContractorsRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1CompaniesCompanyUuidContractorsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyUuidContractorsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyUuidContractorsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyUuidContractorsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyUuidContractorsRequest$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyUuidContractorsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PostV1CompaniesCompanyUuidContractorsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostV1CompaniesCompanyUuidContractorsRequest$Outbound = {
@@ -406,21 +276,6 @@ export const PostV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyUuidContractorsRequest$ {
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyUuidContractorsRequest$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyUuidContractorsRequest$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsRequest$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyUuidContractorsRequest$Outbound;
-}
-
 export function postV1CompaniesCompanyUuidContractorsRequestToJSON(
   postV1CompaniesCompanyUuidContractorsRequest:
     PostV1CompaniesCompanyUuidContractorsRequest,
@@ -429,22 +284,6 @@ export function postV1CompaniesCompanyUuidContractorsRequestToJSON(
     PostV1CompaniesCompanyUuidContractorsRequest$outboundSchema.parse(
       postV1CompaniesCompanyUuidContractorsRequest,
     ),
-  );
-}
-
-export function postV1CompaniesCompanyUuidContractorsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyUuidContractorsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyUuidContractorsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyUuidContractorsRequest' from JSON`,
   );
 }
 
@@ -463,54 +302,6 @@ export const PostV1CompaniesCompanyUuidContractorsResponse$inboundSchema:
       "Contractor": "contractor",
     });
   });
-
-/** @internal */
-export type PostV1CompaniesCompanyUuidContractorsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Contractor?: Contractor$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyUuidContractorsResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyUuidContractorsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractor: Contractor$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractor: "Contractor",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyUuidContractorsResponse$ {
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyUuidContractorsResponse$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyUuidContractorsResponse$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyUuidContractorsResponse$Outbound;
-}
-
-export function postV1CompaniesCompanyUuidContractorsResponseToJSON(
-  postV1CompaniesCompanyUuidContractorsResponse:
-    PostV1CompaniesCompanyUuidContractorsResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyUuidContractorsResponse$outboundSchema.parse(
-      postV1CompaniesCompanyUuidContractorsResponse,
-    ),
-  );
-}
 
 export function postV1CompaniesCompanyUuidContractorsResponseFromJSON(
   jsonString: string,

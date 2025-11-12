@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostEmployeeYtdBenefitAmountsFromDifferentCompany = {
   /**
@@ -26,26 +23,6 @@ export type PostEmployeeYtdBenefitAmountsFromDifferentCompany = {
    */
   ytdCompanyContributionAmount?: string | undefined;
 };
-
-/** @internal */
-export const PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema:
-  z.ZodType<
-    PostEmployeeYtdBenefitAmountsFromDifferentCompany,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    benefit_type: z.number().int().optional(),
-    tax_year: z.number(),
-    ytd_employee_deduction_amount: z.string().default("0.00"),
-    ytd_company_contribution_amount: z.string().default("0.00"),
-  }).transform((v) => {
-    return remap$(v, {
-      "benefit_type": "benefitType",
-      "tax_year": "taxYear",
-      "ytd_employee_deduction_amount": "ytdEmployeeDeductionAmount",
-      "ytd_company_contribution_amount": "ytdCompanyContributionAmount",
-    });
-  });
 
 /** @internal */
 export type PostEmployeeYtdBenefitAmountsFromDifferentCompany$Outbound = {
@@ -75,22 +52,6 @@ export const PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostEmployeeYtdBenefitAmountsFromDifferentCompany$ {
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema` instead. */
-  export const inboundSchema =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema;
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema` instead. */
-  export const outboundSchema =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema;
-  /** @deprecated use `PostEmployeeYtdBenefitAmountsFromDifferentCompany$Outbound` instead. */
-  export type Outbound =
-    PostEmployeeYtdBenefitAmountsFromDifferentCompany$Outbound;
-}
-
 export function postEmployeeYtdBenefitAmountsFromDifferentCompanyToJSON(
   postEmployeeYtdBenefitAmountsFromDifferentCompany:
     PostEmployeeYtdBenefitAmountsFromDifferentCompany,
@@ -99,21 +60,5 @@ export function postEmployeeYtdBenefitAmountsFromDifferentCompanyToJSON(
     PostEmployeeYtdBenefitAmountsFromDifferentCompany$outboundSchema.parse(
       postEmployeeYtdBenefitAmountsFromDifferentCompany,
     ),
-  );
-}
-
-export function postEmployeeYtdBenefitAmountsFromDifferentCompanyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostEmployeeYtdBenefitAmountsFromDifferentCompany,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostEmployeeYtdBenefitAmountsFromDifferentCompany$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostEmployeeYtdBenefitAmountsFromDifferentCompany' from JSON`,
   );
 }

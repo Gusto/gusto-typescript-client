@@ -6,8 +6,6 @@ import * as z from "zod/v3";
 import {
   EntityErrorObject,
   EntityErrorObject$inboundSchema,
-  EntityErrorObject$Outbound,
-  EntityErrorObject$outboundSchema,
 } from "../components/entityerrorobject.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 
@@ -68,32 +66,3 @@ export const CompanySuspensionCreationErrors$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type CompanySuspensionCreationErrors$Outbound = {
-  errors: Array<EntityErrorObject$Outbound>;
-};
-
-/** @internal */
-export const CompanySuspensionCreationErrors$outboundSchema: z.ZodType<
-  CompanySuspensionCreationErrors$Outbound,
-  z.ZodTypeDef,
-  CompanySuspensionCreationErrors
-> = z.instanceof(CompanySuspensionCreationErrors)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    errors: z.array(EntityErrorObject$outboundSchema),
-  }));
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanySuspensionCreationErrors$ {
-  /** @deprecated use `CompanySuspensionCreationErrors$inboundSchema` instead. */
-  export const inboundSchema = CompanySuspensionCreationErrors$inboundSchema;
-  /** @deprecated use `CompanySuspensionCreationErrors$outboundSchema` instead. */
-  export const outboundSchema = CompanySuspensionCreationErrors$outboundSchema;
-  /** @deprecated use `CompanySuspensionCreationErrors$Outbound` instead. */
-  export type Outbound = CompanySuspensionCreationErrors$Outbound;
-}

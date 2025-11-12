@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   SalaryEstimate,
   SalaryEstimate$inboundSchema,
-  SalaryEstimate$Outbound,
-  SalaryEstimate$outboundSchema,
 } from "../components/salaryestimate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -107,7 +103,7 @@ export type PostV1EmployeesEmployeeIdSalaryEstimatesResponse = {
 };
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$inboundSchema:
+export const PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion
   > = z.nativeEnum(
@@ -115,62 +111,9 @@ export const PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$inbo
   );
 
 /** @internal */
-export const PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion
-  > =
-    PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const ExperienceLevel$inboundSchema: z.ZodNativeEnum<
-  typeof ExperienceLevel
-> = z.nativeEnum(ExperienceLevel);
-
-/** @internal */
 export const ExperienceLevel$outboundSchema: z.ZodNativeEnum<
   typeof ExperienceLevel
-> = ExperienceLevel$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExperienceLevel$ {
-  /** @deprecated use `ExperienceLevel$inboundSchema` instead. */
-  export const inboundSchema = ExperienceLevel$inboundSchema;
-  /** @deprecated use `ExperienceLevel$outboundSchema` instead. */
-  export const outboundSchema = ExperienceLevel$outboundSchema;
-}
-
-/** @internal */
-export const Occupations$inboundSchema: z.ZodType<
-  Occupations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  code: z.string(),
-  experience_level: ExperienceLevel$inboundSchema,
-  time_percentage: z.string(),
-  primary: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "experience_level": "experienceLevel",
-    "time_percentage": "timePercentage",
-  });
-});
+> = z.nativeEnum(ExperienceLevel);
 
 /** @internal */
 export type Occupations$Outbound = {
@@ -197,49 +140,9 @@ export const Occupations$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Occupations$ {
-  /** @deprecated use `Occupations$inboundSchema` instead. */
-  export const inboundSchema = Occupations$inboundSchema;
-  /** @deprecated use `Occupations$outboundSchema` instead. */
-  export const outboundSchema = Occupations$outboundSchema;
-  /** @deprecated use `Occupations$Outbound` instead. */
-  export type Outbound = Occupations$Outbound;
-}
-
 export function occupationsToJSON(occupations: Occupations): string {
   return JSON.stringify(Occupations$outboundSchema.parse(occupations));
 }
-
-export function occupationsFromJSON(
-  jsonString: string,
-): SafeParseResult<Occupations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Occupations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Occupations' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    annual_net_revenue: z.nullable(z.number()).optional(),
-    zip_code: z.string(),
-    occupations: z.array(z.lazy(() => Occupations$inboundSchema)),
-  }).transform((v) => {
-    return remap$(v, {
-      "annual_net_revenue": "annualNetRevenue",
-      "zip_code": "zipCode",
-    });
-  });
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$Outbound = {
@@ -265,22 +168,6 @@ export const PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdSalaryEstimatesRequestBodyToJSON(
   postV1EmployeesEmployeeIdSalaryEstimatesRequestBody:
     PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody,
@@ -291,44 +178,6 @@ export function postV1EmployeesEmployeeIdSalaryEstimatesRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1EmployeesEmployeeIdSalaryEstimatesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdSalaryEstimatesRequest$inboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    "X-Gusto-API-Version":
-      PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion$inboundSchema
-        .default("2024-04-01"),
-    employee_id: z.string(),
-    RequestBody: z.lazy(() =>
-      PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "employee_id": "employeeId",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostV1EmployeesEmployeeIdSalaryEstimatesRequest$Outbound = {
@@ -359,22 +208,6 @@ export const PostV1EmployeesEmployeeIdSalaryEstimatesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdSalaryEstimatesRequest$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequest$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequest$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesRequest$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdSalaryEstimatesRequest$Outbound;
-}
-
 export function postV1EmployeesEmployeeIdSalaryEstimatesRequestToJSON(
   postV1EmployeesEmployeeIdSalaryEstimatesRequest:
     PostV1EmployeesEmployeeIdSalaryEstimatesRequest,
@@ -383,22 +216,6 @@ export function postV1EmployeesEmployeeIdSalaryEstimatesRequestToJSON(
     PostV1EmployeesEmployeeIdSalaryEstimatesRequest$outboundSchema.parse(
       postV1EmployeesEmployeeIdSalaryEstimatesRequest,
     ),
-  );
-}
-
-export function postV1EmployeesEmployeeIdSalaryEstimatesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1EmployeesEmployeeIdSalaryEstimatesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1EmployeesEmployeeIdSalaryEstimatesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1EmployeesEmployeeIdSalaryEstimatesRequest' from JSON`,
   );
 }
 
@@ -417,55 +234,6 @@ export const PostV1EmployeesEmployeeIdSalaryEstimatesResponse$inboundSchema:
       "Salary-Estimate": "salaryEstimate",
     });
   });
-
-/** @internal */
-export type PostV1EmployeesEmployeeIdSalaryEstimatesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Salary-Estimate"?: SalaryEstimate$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1EmployeesEmployeeIdSalaryEstimatesResponse$outboundSchema:
-  z.ZodType<
-    PostV1EmployeesEmployeeIdSalaryEstimatesResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1EmployeesEmployeeIdSalaryEstimatesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    salaryEstimate: SalaryEstimate$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      salaryEstimate: "Salary-Estimate",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1EmployeesEmployeeIdSalaryEstimatesResponse$ {
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesResponse$inboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1EmployeesEmployeeIdSalaryEstimatesResponse$outboundSchema;
-  /** @deprecated use `PostV1EmployeesEmployeeIdSalaryEstimatesResponse$Outbound` instead. */
-  export type Outbound =
-    PostV1EmployeesEmployeeIdSalaryEstimatesResponse$Outbound;
-}
-
-export function postV1EmployeesEmployeeIdSalaryEstimatesResponseToJSON(
-  postV1EmployeesEmployeeIdSalaryEstimatesResponse:
-    PostV1EmployeesEmployeeIdSalaryEstimatesResponse,
-): string {
-  return JSON.stringify(
-    PostV1EmployeesEmployeeIdSalaryEstimatesResponse$outboundSchema.parse(
-      postV1EmployeesEmployeeIdSalaryEstimatesResponse,
-    ),
-  );
-}
 
 export function postV1EmployeesEmployeeIdSalaryEstimatesResponseFromJSON(
   jsonString: string,

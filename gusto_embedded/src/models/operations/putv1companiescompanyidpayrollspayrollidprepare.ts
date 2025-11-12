@@ -9,23 +9,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayrollPrepared,
   PayrollPrepared$inboundSchema,
-  PayrollPrepared$Outbound,
-  PayrollPrepared$outboundSchema,
 } from "../components/payrollprepared.js";
 import {
   PayrollPrepareSortBy,
-  PayrollPrepareSortBy$inboundSchema,
   PayrollPrepareSortBy$outboundSchema,
 } from "../components/payrollpreparesortby.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -76,20 +70,6 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse = {
 };
 
 /** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_uuids: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_uuids": "employeeUuids",
-    });
-  });
-
-/** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound =
   {
     employee_uuids?: Array<string> | undefined;
@@ -109,22 +89,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outbound
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound;
-}
-
 export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBodyToJSON(
   putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody:
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody,
@@ -134,47 +98,6 @@ export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBodyToJSON
       .parse(putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody),
   );
 }
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    payroll_id: z.string(),
-    page: z.number().int().optional(),
-    per: z.number().int().optional(),
-    sort_by: PayrollPrepareSortBy$inboundSchema.optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "payroll_id": "payrollId",
-      "sort_by": "sortBy",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$Outbound = {
@@ -215,22 +138,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestToJSON(
   putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest:
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
@@ -239,21 +146,6 @@ export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestToJSON(
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSchema.parse(
       putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
     ),
-  );
-}
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest' from JSON`,
   );
 }
 
@@ -272,54 +164,6 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$inboundSche
       "Payroll-Prepared": "payrollPrepared",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Payroll-Prepared"?: PayrollPrepared$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payrollPrepared: PayrollPrepared$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payrollPrepared: "Payroll-Prepared",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponseToJSON(
-  putV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse:
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$outboundSchema
-      .parse(putV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse),
-  );
-}
 
 export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponseFromJSON(
   jsonString: string,

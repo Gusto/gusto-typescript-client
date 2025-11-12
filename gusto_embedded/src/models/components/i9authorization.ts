@@ -98,41 +98,9 @@ export const AuthorizationStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(AuthorizationStatus);
 
 /** @internal */
-export const AuthorizationStatus$outboundSchema: z.ZodNativeEnum<
-  typeof AuthorizationStatus
-> = AuthorizationStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AuthorizationStatus$ {
-  /** @deprecated use `AuthorizationStatus$inboundSchema` instead. */
-  export const inboundSchema = AuthorizationStatus$inboundSchema;
-  /** @deprecated use `AuthorizationStatus$outboundSchema` instead. */
-  export const outboundSchema = AuthorizationStatus$outboundSchema;
-}
-
-/** @internal */
 export const I9AuthorizationDocumentType$inboundSchema: z.ZodNativeEnum<
   typeof I9AuthorizationDocumentType
 > = z.nativeEnum(I9AuthorizationDocumentType);
-
-/** @internal */
-export const I9AuthorizationDocumentType$outboundSchema: z.ZodNativeEnum<
-  typeof I9AuthorizationDocumentType
-> = I9AuthorizationDocumentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace I9AuthorizationDocumentType$ {
-  /** @deprecated use `I9AuthorizationDocumentType$inboundSchema` instead. */
-  export const inboundSchema = I9AuthorizationDocumentType$inboundSchema;
-  /** @deprecated use `I9AuthorizationDocumentType$outboundSchema` instead. */
-  export const outboundSchema = I9AuthorizationDocumentType$outboundSchema;
-}
 
 /** @internal */
 export const I9Authorization$inboundSchema: z.ZodType<
@@ -165,73 +133,6 @@ export const I9Authorization$inboundSchema: z.ZodType<
     "alt_procedure": "altProcedure",
   });
 });
-
-/** @internal */
-export type I9Authorization$Outbound = {
-  uuid: string;
-  form_uuid?: string | undefined;
-  version: string;
-  authorization_status: string;
-  document_type?: string | undefined;
-  has_document_number?: boolean | undefined;
-  expiration_date?: string | undefined;
-  country?: string | undefined;
-  employer_signed: boolean;
-  employee_signed: boolean;
-  additional_info?: string | undefined;
-  alt_procedure?: boolean | undefined;
-};
-
-/** @internal */
-export const I9Authorization$outboundSchema: z.ZodType<
-  I9Authorization$Outbound,
-  z.ZodTypeDef,
-  I9Authorization
-> = z.object({
-  uuid: z.string(),
-  formUuid: z.string().optional(),
-  version: z.string(),
-  authorizationStatus: AuthorizationStatus$outboundSchema,
-  documentType: I9AuthorizationDocumentType$outboundSchema.optional(),
-  hasDocumentNumber: z.boolean().optional(),
-  expirationDate: z.string().optional(),
-  country: z.string().optional(),
-  employerSigned: z.boolean(),
-  employeeSigned: z.boolean(),
-  additionalInfo: z.string().optional(),
-  altProcedure: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    formUuid: "form_uuid",
-    authorizationStatus: "authorization_status",
-    documentType: "document_type",
-    hasDocumentNumber: "has_document_number",
-    expirationDate: "expiration_date",
-    employerSigned: "employer_signed",
-    employeeSigned: "employee_signed",
-    additionalInfo: "additional_info",
-    altProcedure: "alt_procedure",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace I9Authorization$ {
-  /** @deprecated use `I9Authorization$inboundSchema` instead. */
-  export const inboundSchema = I9Authorization$inboundSchema;
-  /** @deprecated use `I9Authorization$outboundSchema` instead. */
-  export const outboundSchema = I9Authorization$outboundSchema;
-  /** @deprecated use `I9Authorization$Outbound` instead. */
-  export type Outbound = I9Authorization$Outbound;
-}
-
-export function i9AuthorizationToJSON(
-  i9Authorization: I9Authorization,
-): string {
-  return JSON.stringify(I9Authorization$outboundSchema.parse(i9Authorization));
-}
 
 export function i9AuthorizationFromJSON(
   jsonString: string,

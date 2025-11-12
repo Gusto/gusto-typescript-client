@@ -39,46 +39,6 @@ export const FormPdf$inboundSchema: z.ZodType<FormPdf, z.ZodTypeDef, unknown> =
     });
   });
 
-/** @internal */
-export type FormPdf$Outbound = {
-  uuid: string;
-  document_url?: string | null | undefined;
-  document_content_type?: string | null | undefined;
-};
-
-/** @internal */
-export const FormPdf$outboundSchema: z.ZodType<
-  FormPdf$Outbound,
-  z.ZodTypeDef,
-  FormPdf
-> = z.object({
-  uuid: z.string(),
-  documentUrl: z.nullable(z.string()).optional(),
-  documentContentType: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    documentUrl: "document_url",
-    documentContentType: "document_content_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormPdf$ {
-  /** @deprecated use `FormPdf$inboundSchema` instead. */
-  export const inboundSchema = FormPdf$inboundSchema;
-  /** @deprecated use `FormPdf$outboundSchema` instead. */
-  export const outboundSchema = FormPdf$outboundSchema;
-  /** @deprecated use `FormPdf$Outbound` instead. */
-  export type Outbound = FormPdf$Outbound;
-}
-
-export function formPdfToJSON(formPdf: FormPdf): string {
-  return JSON.stringify(FormPdf$outboundSchema.parse(formPdf));
-}
-
 export function formPdfFromJSON(
   jsonString: string,
 ): SafeParseResult<FormPdf, SDKValidationError> {

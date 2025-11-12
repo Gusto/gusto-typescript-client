@@ -31,39 +31,6 @@ export const PayrollBlocker$inboundSchema: z.ZodType<
   message: z.string().optional(),
 });
 
-/** @internal */
-export type PayrollBlocker$Outbound = {
-  key?: string | undefined;
-  message?: string | undefined;
-};
-
-/** @internal */
-export const PayrollBlocker$outboundSchema: z.ZodType<
-  PayrollBlocker$Outbound,
-  z.ZodTypeDef,
-  PayrollBlocker
-> = z.object({
-  key: z.string().optional(),
-  message: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollBlocker$ {
-  /** @deprecated use `PayrollBlocker$inboundSchema` instead. */
-  export const inboundSchema = PayrollBlocker$inboundSchema;
-  /** @deprecated use `PayrollBlocker$outboundSchema` instead. */
-  export const outboundSchema = PayrollBlocker$outboundSchema;
-  /** @deprecated use `PayrollBlocker$Outbound` instead. */
-  export type Outbound = PayrollBlocker$Outbound;
-}
-
-export function payrollBlockerToJSON(payrollBlocker: PayrollBlocker): string {
-  return JSON.stringify(PayrollBlocker$outboundSchema.parse(payrollBlocker));
-}
-
 export function payrollBlockerFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollBlocker, SDKValidationError> {

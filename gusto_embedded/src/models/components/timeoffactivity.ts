@@ -64,21 +64,6 @@ export const TimeOffType$inboundSchema: z.ZodNativeEnum<typeof TimeOffType> = z
   .nativeEnum(TimeOffType);
 
 /** @internal */
-export const TimeOffType$outboundSchema: z.ZodNativeEnum<typeof TimeOffType> =
-  TimeOffType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TimeOffType$ {
-  /** @deprecated use `TimeOffType$inboundSchema` instead. */
-  export const inboundSchema = TimeOffType$inboundSchema;
-  /** @deprecated use `TimeOffType$outboundSchema` instead. */
-  export const outboundSchema = TimeOffType$outboundSchema;
-}
-
-/** @internal */
 export const TimeOffActivity$inboundSchema: z.ZodType<
   TimeOffActivity,
   z.ZodTypeDef,
@@ -103,63 +88,6 @@ export const TimeOffActivity$inboundSchema: z.ZodType<
     "balance_change": "balanceChange",
   });
 });
-
-/** @internal */
-export type TimeOffActivity$Outbound = {
-  policy_uuid?: string | undefined;
-  time_off_type?: string | undefined;
-  policy_name?: string | undefined;
-  event_type?: string | undefined;
-  event_description?: string | undefined;
-  effective_time?: string | undefined;
-  balance?: string | undefined;
-  balance_change?: string | undefined;
-};
-
-/** @internal */
-export const TimeOffActivity$outboundSchema: z.ZodType<
-  TimeOffActivity$Outbound,
-  z.ZodTypeDef,
-  TimeOffActivity
-> = z.object({
-  policyUuid: z.string().optional(),
-  timeOffType: TimeOffType$outboundSchema.optional(),
-  policyName: z.string().optional(),
-  eventType: z.string().optional(),
-  eventDescription: z.string().optional(),
-  effectiveTime: z.string().optional(),
-  balance: z.string().optional(),
-  balanceChange: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    policyUuid: "policy_uuid",
-    timeOffType: "time_off_type",
-    policyName: "policy_name",
-    eventType: "event_type",
-    eventDescription: "event_description",
-    effectiveTime: "effective_time",
-    balanceChange: "balance_change",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TimeOffActivity$ {
-  /** @deprecated use `TimeOffActivity$inboundSchema` instead. */
-  export const inboundSchema = TimeOffActivity$inboundSchema;
-  /** @deprecated use `TimeOffActivity$outboundSchema` instead. */
-  export const outboundSchema = TimeOffActivity$outboundSchema;
-  /** @deprecated use `TimeOffActivity$Outbound` instead. */
-  export type Outbound = TimeOffActivity$Outbound;
-}
-
-export function timeOffActivityToJSON(
-  timeOffActivity: TimeOffActivity,
-): string {
-  return JSON.stringify(TimeOffActivity$outboundSchema.parse(timeOffActivity));
-}
 
 export function timeOffActivityFromJSON(
   jsonString: string,

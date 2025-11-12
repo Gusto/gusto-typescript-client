@@ -10,14 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MetadataWithMultipleEntities,
   MetadataWithMultipleEntities$inboundSchema,
-  MetadataWithMultipleEntities$Outbound,
-  MetadataWithMultipleEntities$outboundSchema,
 } from "./metadatawithmultipleentities.js";
 import {
   MetadataWithOneEntity,
   MetadataWithOneEntity$inboundSchema,
-  MetadataWithOneEntity$Outbound,
-  MetadataWithOneEntity$outboundSchema,
 } from "./metadatawithoneentity.js";
 
 /**
@@ -58,38 +54,6 @@ export const Metadata$inboundSchema: z.ZodType<
   MetadataWithOneEntity$inboundSchema,
 ]);
 
-/** @internal */
-export type Metadata$Outbound =
-  | MetadataWithMultipleEntities$Outbound
-  | MetadataWithOneEntity$Outbound;
-
-/** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
-  z.ZodTypeDef,
-  Metadata
-> = z.union([
-  MetadataWithMultipleEntities$outboundSchema,
-  MetadataWithOneEntity$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Metadata$ {
-  /** @deprecated use `Metadata$inboundSchema` instead. */
-  export const inboundSchema = Metadata$inboundSchema;
-  /** @deprecated use `Metadata$outboundSchema` instead. */
-  export const outboundSchema = Metadata$outboundSchema;
-  /** @deprecated use `Metadata$Outbound` instead. */
-  export type Outbound = Metadata$Outbound;
-}
-
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
-}
-
 export function metadataFromJSON(
   jsonString: string,
 ): SafeParseResult<Metadata, SDKValidationError> {
@@ -119,59 +83,6 @@ export const EntityErrorObject$inboundSchema: z.ZodType<
     "error_key": "errorKey",
   });
 });
-
-/** @internal */
-export type EntityErrorObject$Outbound = {
-  error_key: string;
-  category: string;
-  message?: string | undefined;
-  metadata?:
-    | MetadataWithMultipleEntities$Outbound
-    | MetadataWithOneEntity$Outbound
-    | undefined;
-  errors?: Array<EntityErrorObject$Outbound> | undefined;
-};
-
-/** @internal */
-export const EntityErrorObject$outboundSchema: z.ZodType<
-  EntityErrorObject$Outbound,
-  z.ZodTypeDef,
-  EntityErrorObject
-> = z.object({
-  errorKey: z.string(),
-  category: z.string(),
-  message: z.string().optional(),
-  metadata: z.union([
-    MetadataWithMultipleEntities$outboundSchema,
-    MetadataWithOneEntity$outboundSchema,
-  ]).optional(),
-  errors: z.array(z.lazy(() => EntityErrorObject$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    errorKey: "error_key",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntityErrorObject$ {
-  /** @deprecated use `EntityErrorObject$inboundSchema` instead. */
-  export const inboundSchema = EntityErrorObject$inboundSchema;
-  /** @deprecated use `EntityErrorObject$outboundSchema` instead. */
-  export const outboundSchema = EntityErrorObject$outboundSchema;
-  /** @deprecated use `EntityErrorObject$Outbound` instead. */
-  export type Outbound = EntityErrorObject$Outbound;
-}
-
-export function entityErrorObjectToJSON(
-  entityErrorObject: EntityErrorObject,
-): string {
-  return JSON.stringify(
-    EntityErrorObject$outboundSchema.parse(entityErrorObject),
-  );
-}
 
 export function entityErrorObjectFromJSON(
   jsonString: string,

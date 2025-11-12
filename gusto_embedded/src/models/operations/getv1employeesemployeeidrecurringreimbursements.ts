@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -72,52 +70,12 @@ export type GetV1EmployeesEmployeeIdRecurringReimbursementsResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema:
+export const GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion
   > = z.nativeEnum(
     GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion,
   );
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion
-  > =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdRecurringReimbursementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    "X-Gusto-API-Version":
-      GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema
-        .default("2024-04-01"),
-    employee_id: z.string(),
-    page: z.number().int().optional(),
-    per: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "employee_id": "employeeId",
-    });
-  });
 
 /** @internal */
 export type GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$Outbound = {
@@ -147,22 +105,6 @@ export const GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$outboundSche
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdRecurringReimbursementsRequestToJSON(
   getV1EmployeesEmployeeIdRecurringReimbursementsRequest:
     GetV1EmployeesEmployeeIdRecurringReimbursementsRequest,
@@ -171,21 +113,6 @@ export function getV1EmployeesEmployeeIdRecurringReimbursementsRequestToJSON(
     GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdRecurringReimbursementsRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdRecurringReimbursementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdRecurringReimbursementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdRecurringReimbursementsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetV1EmployeesEmployeeIdRecurringReimbursementsRequest' from JSON`,
   );
 }
 
@@ -210,66 +137,6 @@ export const GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$inbound
       "updated_at": "updatedAt",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$Outbound =
-  {
-    uuid: string;
-    employee_uuid: string;
-    description: string;
-    amount: string;
-    version: string;
-    created_at?: string | undefined;
-    updated_at?: string | undefined;
-  };
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody
-  > = z.object({
-    uuid: z.string(),
-    employeeUuid: z.string(),
-    description: z.string(),
-    amount: z.string(),
-    version: z.string(),
-    createdAt: z.string().optional(),
-    updatedAt: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      employeeUuid: "employee_uuid",
-      createdAt: "created_at",
-      updatedAt: "updated_at",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$Outbound` instead. */
-  export type Outbound =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdRecurringReimbursementsResponseBodyToJSON(
-  getV1EmployeesEmployeeIdRecurringReimbursementsResponseBody:
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$outboundSchema
-      .parse(getV1EmployeesEmployeeIdRecurringReimbursementsResponseBody),
-  );
-}
 
 export function getV1EmployeesEmployeeIdRecurringReimbursementsResponseBodyFromJSON(
   jsonString: string,
@@ -304,61 +171,6 @@ export const GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$inboundSche
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  responseBodies?:
-    | Array<
-      GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$Outbound
-    >
-    | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    responseBodies: z.array(
-      z.lazy(() =>
-        GetV1EmployeesEmployeeIdRecurringReimbursementsResponseBody$outboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdRecurringReimbursementsResponseToJSON(
-  getV1EmployeesEmployeeIdRecurringReimbursementsResponse:
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdRecurringReimbursementsResponse$outboundSchema
-      .parse(getV1EmployeesEmployeeIdRecurringReimbursementsResponse),
-  );
-}
 
 export function getV1EmployeesEmployeeIdRecurringReimbursementsResponseFromJSON(
   jsonString: string,

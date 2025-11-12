@@ -77,22 +77,6 @@ export const DocumentSignedRecipientType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DocumentSignedRecipientType);
 
 /** @internal */
-export const DocumentSignedRecipientType$outboundSchema: z.ZodNativeEnum<
-  typeof DocumentSignedRecipientType
-> = DocumentSignedRecipientType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DocumentSignedRecipientType$ {
-  /** @deprecated use `DocumentSignedRecipientType$inboundSchema` instead. */
-  export const inboundSchema = DocumentSignedRecipientType$inboundSchema;
-  /** @deprecated use `DocumentSignedRecipientType$outboundSchema` instead. */
-  export const outboundSchema = DocumentSignedRecipientType$outboundSchema;
-}
-
-/** @internal */
 export const DocumentSigned$inboundSchema: z.ZodType<
   DocumentSigned,
   z.ZodTypeDef,
@@ -117,64 +101,6 @@ export const DocumentSigned$inboundSchema: z.ZodType<
     "requires_signing": "requiresSigning",
   });
 });
-
-/** @internal */
-export type DocumentSigned$Outbound = {
-  uuid?: string | undefined;
-  title?: string | undefined;
-  name?: string | undefined;
-  recipient_type?: string | undefined;
-  recipient_uuid?: string | undefined;
-  signed_at?: string | null | undefined;
-  description?: string | undefined;
-  requires_signing?: boolean | undefined;
-  draft?: boolean | undefined;
-  year?: number | null | undefined;
-  quarter?: number | null | undefined;
-};
-
-/** @internal */
-export const DocumentSigned$outboundSchema: z.ZodType<
-  DocumentSigned$Outbound,
-  z.ZodTypeDef,
-  DocumentSigned
-> = z.object({
-  uuid: z.string().optional(),
-  title: z.string().optional(),
-  name: z.string().optional(),
-  recipientType: DocumentSignedRecipientType$outboundSchema.optional(),
-  recipientUuid: z.string().optional(),
-  signedAt: z.nullable(z.string()).optional(),
-  description: z.string().optional(),
-  requiresSigning: z.boolean().optional(),
-  draft: z.boolean().optional(),
-  year: z.nullable(z.number().int()).optional(),
-  quarter: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    recipientType: "recipient_type",
-    recipientUuid: "recipient_uuid",
-    signedAt: "signed_at",
-    requiresSigning: "requires_signing",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DocumentSigned$ {
-  /** @deprecated use `DocumentSigned$inboundSchema` instead. */
-  export const inboundSchema = DocumentSigned$inboundSchema;
-  /** @deprecated use `DocumentSigned$outboundSchema` instead. */
-  export const outboundSchema = DocumentSigned$outboundSchema;
-  /** @deprecated use `DocumentSigned$Outbound` instead. */
-  export type Outbound = DocumentSigned$Outbound;
-}
-
-export function documentSignedToJSON(documentSigned: DocumentSigned): string {
-  return JSON.stringify(DocumentSigned$outboundSchema.parse(documentSigned));
-}
 
 export function documentSignedFromJSON(
   jsonString: string,

@@ -58,52 +58,6 @@ export const MinimumWage$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type MinimumWage$Outbound = {
-  uuid: string;
-  wage: string;
-  wage_type: string;
-  effective_date: string;
-  authority: string;
-  notes?: string | undefined;
-};
-
-/** @internal */
-export const MinimumWage$outboundSchema: z.ZodType<
-  MinimumWage$Outbound,
-  z.ZodTypeDef,
-  MinimumWage
-> = z.object({
-  uuid: z.string(),
-  wage: z.string(),
-  wageType: z.string(),
-  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()),
-  authority: z.string(),
-  notes: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    wageType: "wage_type",
-    effectiveDate: "effective_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MinimumWage$ {
-  /** @deprecated use `MinimumWage$inboundSchema` instead. */
-  export const inboundSchema = MinimumWage$inboundSchema;
-  /** @deprecated use `MinimumWage$outboundSchema` instead. */
-  export const outboundSchema = MinimumWage$outboundSchema;
-  /** @deprecated use `MinimumWage$Outbound` instead. */
-  export type Outbound = MinimumWage$Outbound;
-}
-
-export function minimumWageToJSON(minimumWage: MinimumWage): string {
-  return JSON.stringify(MinimumWage$outboundSchema.parse(minimumWage));
-}
-
 export function minimumWageFromJSON(
   jsonString: string,
 ): SafeParseResult<MinimumWage, SDKValidationError> {

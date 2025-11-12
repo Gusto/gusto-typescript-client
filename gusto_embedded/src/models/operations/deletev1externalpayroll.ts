@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,23 +34,6 @@ export type DeleteV1ExternalPayrollRequest = {
 export type DeleteV1ExternalPayrollResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1ExternalPayrollRequest$inboundSchema: z.ZodType<
-  DeleteV1ExternalPayrollRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  external_payroll_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "external_payroll_id": "externalPayrollId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type DeleteV1ExternalPayrollRequest$Outbound = {
@@ -79,19 +59,6 @@ export const DeleteV1ExternalPayrollRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1ExternalPayrollRequest$ {
-  /** @deprecated use `DeleteV1ExternalPayrollRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteV1ExternalPayrollRequest$inboundSchema;
-  /** @deprecated use `DeleteV1ExternalPayrollRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteV1ExternalPayrollRequest$outboundSchema;
-  /** @deprecated use `DeleteV1ExternalPayrollRequest$Outbound` instead. */
-  export type Outbound = DeleteV1ExternalPayrollRequest$Outbound;
-}
-
 export function deleteV1ExternalPayrollRequestToJSON(
   deleteV1ExternalPayrollRequest: DeleteV1ExternalPayrollRequest,
 ): string {
@@ -99,16 +66,6 @@ export function deleteV1ExternalPayrollRequestToJSON(
     DeleteV1ExternalPayrollRequest$outboundSchema.parse(
       deleteV1ExternalPayrollRequest,
     ),
-  );
-}
-
-export function deleteV1ExternalPayrollRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteV1ExternalPayrollRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteV1ExternalPayrollRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1ExternalPayrollRequest' from JSON`,
   );
 }
 
@@ -124,47 +81,6 @@ export const DeleteV1ExternalPayrollResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type DeleteV1ExternalPayrollResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1ExternalPayrollResponse$outboundSchema: z.ZodType<
-  DeleteV1ExternalPayrollResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteV1ExternalPayrollResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1ExternalPayrollResponse$ {
-  /** @deprecated use `DeleteV1ExternalPayrollResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteV1ExternalPayrollResponse$inboundSchema;
-  /** @deprecated use `DeleteV1ExternalPayrollResponse$outboundSchema` instead. */
-  export const outboundSchema = DeleteV1ExternalPayrollResponse$outboundSchema;
-  /** @deprecated use `DeleteV1ExternalPayrollResponse$Outbound` instead. */
-  export type Outbound = DeleteV1ExternalPayrollResponse$Outbound;
-}
-
-export function deleteV1ExternalPayrollResponseToJSON(
-  deleteV1ExternalPayrollResponse: DeleteV1ExternalPayrollResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1ExternalPayrollResponse$outboundSchema.parse(
-      deleteV1ExternalPayrollResponse,
-    ),
-  );
-}
 
 export function deleteV1ExternalPayrollResponseFromJSON(
   jsonString: string,

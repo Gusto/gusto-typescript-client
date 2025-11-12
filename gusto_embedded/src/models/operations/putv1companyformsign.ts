@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Form,
-  Form$inboundSchema,
-  Form$Outbound,
-  Form$outboundSchema,
-} from "../components/form.js";
+import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,22 +57,6 @@ export type PutV1CompanyFormSignResponse = {
 };
 
 /** @internal */
-export const PutV1CompanyFormSignRequestBody$inboundSchema: z.ZodType<
-  PutV1CompanyFormSignRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  signature_text: z.string(),
-  agree: z.boolean(),
-  signed_by_ip_address: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "signature_text": "signatureText",
-    "signed_by_ip_address": "signedByIpAddress",
-  });
-});
-
-/** @internal */
 export type PutV1CompanyFormSignRequestBody$Outbound = {
   signature_text: string;
   agree: boolean;
@@ -103,19 +79,6 @@ export const PutV1CompanyFormSignRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyFormSignRequestBody$ {
-  /** @deprecated use `PutV1CompanyFormSignRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyFormSignRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompanyFormSignRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompanyFormSignRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompanyFormSignRequestBody$Outbound` instead. */
-  export type Outbound = PutV1CompanyFormSignRequestBody$Outbound;
-}
-
 export function putV1CompanyFormSignRequestBodyToJSON(
   putV1CompanyFormSignRequestBody: PutV1CompanyFormSignRequestBody,
 ): string {
@@ -125,35 +88,6 @@ export function putV1CompanyFormSignRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1CompanyFormSignRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompanyFormSignRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1CompanyFormSignRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyFormSignRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompanyFormSignRequest$inboundSchema: z.ZodType<
-  PutV1CompanyFormSignRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  form_id: z.string(),
-  "x-gusto-client-ip": z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutV1CompanyFormSignRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "form_id": "formId",
-    "x-gusto-client-ip": "xGustoClientIp",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1CompanyFormSignRequest$Outbound = {
@@ -182,19 +116,6 @@ export const PutV1CompanyFormSignRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyFormSignRequest$ {
-  /** @deprecated use `PutV1CompanyFormSignRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyFormSignRequest$inboundSchema;
-  /** @deprecated use `PutV1CompanyFormSignRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompanyFormSignRequest$outboundSchema;
-  /** @deprecated use `PutV1CompanyFormSignRequest$Outbound` instead. */
-  export type Outbound = PutV1CompanyFormSignRequest$Outbound;
-}
-
 export function putV1CompanyFormSignRequestToJSON(
   putV1CompanyFormSignRequest: PutV1CompanyFormSignRequest,
 ): string {
@@ -202,16 +123,6 @@ export function putV1CompanyFormSignRequestToJSON(
     PutV1CompanyFormSignRequest$outboundSchema.parse(
       putV1CompanyFormSignRequest,
     ),
-  );
-}
-
-export function putV1CompanyFormSignRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompanyFormSignRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1CompanyFormSignRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompanyFormSignRequest' from JSON`,
   );
 }
 
@@ -229,50 +140,6 @@ export const PutV1CompanyFormSignResponse$inboundSchema: z.ZodType<
     "Form": "form",
   });
 });
-
-/** @internal */
-export type PutV1CompanyFormSignResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Form?: Form$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1CompanyFormSignResponse$outboundSchema: z.ZodType<
-  PutV1CompanyFormSignResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1CompanyFormSignResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  form: Form$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    form: "Form",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompanyFormSignResponse$ {
-  /** @deprecated use `PutV1CompanyFormSignResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompanyFormSignResponse$inboundSchema;
-  /** @deprecated use `PutV1CompanyFormSignResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompanyFormSignResponse$outboundSchema;
-  /** @deprecated use `PutV1CompanyFormSignResponse$Outbound` instead. */
-  export type Outbound = PutV1CompanyFormSignResponse$Outbound;
-}
-
-export function putV1CompanyFormSignResponseToJSON(
-  putV1CompanyFormSignResponse: PutV1CompanyFormSignResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompanyFormSignResponse$outboundSchema.parse(
-      putV1CompanyFormSignResponse,
-    ),
-  );
-}
 
 export function putV1CompanyFormSignResponseFromJSON(
   jsonString: string,

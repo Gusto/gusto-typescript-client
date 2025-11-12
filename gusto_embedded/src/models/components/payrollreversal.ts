@@ -59,56 +59,6 @@ export const PayrollReversal$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollReversal$Outbound = {
-  reversed_payroll_uuid?: string | undefined;
-  reversal_payroll_uuid?: string | undefined;
-  reason?: string | undefined;
-  approved_at?: string | null | undefined;
-  category?: string | undefined;
-  reversed_employee_uuids?: Array<string> | undefined;
-};
-
-/** @internal */
-export const PayrollReversal$outboundSchema: z.ZodType<
-  PayrollReversal$Outbound,
-  z.ZodTypeDef,
-  PayrollReversal
-> = z.object({
-  reversedPayrollUuid: z.string().optional(),
-  reversalPayrollUuid: z.string().optional(),
-  reason: z.string().optional(),
-  approvedAt: z.nullable(z.string()).optional(),
-  category: z.string().optional(),
-  reversedEmployeeUuids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reversedPayrollUuid: "reversed_payroll_uuid",
-    reversalPayrollUuid: "reversal_payroll_uuid",
-    approvedAt: "approved_at",
-    reversedEmployeeUuids: "reversed_employee_uuids",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollReversal$ {
-  /** @deprecated use `PayrollReversal$inboundSchema` instead. */
-  export const inboundSchema = PayrollReversal$inboundSchema;
-  /** @deprecated use `PayrollReversal$outboundSchema` instead. */
-  export const outboundSchema = PayrollReversal$outboundSchema;
-  /** @deprecated use `PayrollReversal$Outbound` instead. */
-  export type Outbound = PayrollReversal$Outbound;
-}
-
-export function payrollReversalToJSON(
-  payrollReversal: PayrollReversal,
-): string {
-  return JSON.stringify(PayrollReversal$outboundSchema.parse(payrollReversal));
-}
-
 export function payrollReversalFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollReversal, SDKValidationError> {

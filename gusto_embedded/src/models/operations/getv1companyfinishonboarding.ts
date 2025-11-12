@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyOnboardingStatus,
   CompanyOnboardingStatus$inboundSchema,
-  CompanyOnboardingStatus$Outbound,
-  CompanyOnboardingStatus$outboundSchema,
 } from "../components/companyonboardingstatus.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +40,6 @@ export type GetV1CompanyFinishOnboardingResponse = {
 };
 
 /** @internal */
-export const GetV1CompanyFinishOnboardingRequest$inboundSchema: z.ZodType<
-  GetV1CompanyFinishOnboardingRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompanyFinishOnboardingRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,21 +60,6 @@ export const GetV1CompanyFinishOnboardingRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyFinishOnboardingRequest$ {
-  /** @deprecated use `GetV1CompanyFinishOnboardingRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompanyFinishOnboardingRequest$inboundSchema;
-  /** @deprecated use `GetV1CompanyFinishOnboardingRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyFinishOnboardingRequest$outboundSchema;
-  /** @deprecated use `GetV1CompanyFinishOnboardingRequest$Outbound` instead. */
-  export type Outbound = GetV1CompanyFinishOnboardingRequest$Outbound;
-}
-
 export function getV1CompanyFinishOnboardingRequestToJSON(
   getV1CompanyFinishOnboardingRequest: GetV1CompanyFinishOnboardingRequest,
 ): string {
@@ -102,17 +67,6 @@ export function getV1CompanyFinishOnboardingRequestToJSON(
     GetV1CompanyFinishOnboardingRequest$outboundSchema.parse(
       getV1CompanyFinishOnboardingRequest,
     ),
-  );
-}
-
-export function getV1CompanyFinishOnboardingRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompanyFinishOnboardingRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompanyFinishOnboardingRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompanyFinishOnboardingRequest' from JSON`,
   );
 }
 
@@ -130,52 +84,6 @@ export const GetV1CompanyFinishOnboardingResponse$inboundSchema: z.ZodType<
     "Company-Onboarding-Status": "companyOnboardingStatus",
   });
 });
-
-/** @internal */
-export type GetV1CompanyFinishOnboardingResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Onboarding-Status"?: CompanyOnboardingStatus$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompanyFinishOnboardingResponse$outboundSchema: z.ZodType<
-  GetV1CompanyFinishOnboardingResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompanyFinishOnboardingResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  companyOnboardingStatus: CompanyOnboardingStatus$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    companyOnboardingStatus: "Company-Onboarding-Status",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompanyFinishOnboardingResponse$ {
-  /** @deprecated use `GetV1CompanyFinishOnboardingResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompanyFinishOnboardingResponse$inboundSchema;
-  /** @deprecated use `GetV1CompanyFinishOnboardingResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompanyFinishOnboardingResponse$outboundSchema;
-  /** @deprecated use `GetV1CompanyFinishOnboardingResponse$Outbound` instead. */
-  export type Outbound = GetV1CompanyFinishOnboardingResponse$Outbound;
-}
-
-export function getV1CompanyFinishOnboardingResponseToJSON(
-  getV1CompanyFinishOnboardingResponse: GetV1CompanyFinishOnboardingResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompanyFinishOnboardingResponse$outboundSchema.parse(
-      getV1CompanyFinishOnboardingResponse,
-    ),
-  );
-}
 
 export function getV1CompanyFinishOnboardingResponseFromJSON(
   jsonString: string,

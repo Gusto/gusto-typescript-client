@@ -74,21 +74,6 @@ export const PayrollType$inboundSchema: z.ZodNativeEnum<typeof PayrollType> = z
   .nativeEnum(PayrollType);
 
 /** @internal */
-export const PayrollType$outboundSchema: z.ZodNativeEnum<typeof PayrollType> =
-  PayrollType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollType$ {
-  /** @deprecated use `PayrollType$inboundSchema` instead. */
-  export const inboundSchema = PayrollType$inboundSchema;
-  /** @deprecated use `PayrollType$outboundSchema` instead. */
-  export const outboundSchema = PayrollType$outboundSchema;
-}
-
-/** @internal */
 export const PayPeriodPayroll$inboundSchema: z.ZodType<
   PayPeriodPayroll,
   z.ZodTypeDef,
@@ -109,56 +94,6 @@ export const PayPeriodPayroll$inboundSchema: z.ZodType<
     "payroll_type": "payrollType",
   });
 });
-
-/** @internal */
-export type PayPeriodPayroll$Outbound = {
-  payroll_uuid?: string | undefined;
-  check_date?: string | undefined;
-  processed?: boolean | undefined;
-  payroll_deadline?: string | undefined;
-  payroll_type?: string | undefined;
-};
-
-/** @internal */
-export const PayPeriodPayroll$outboundSchema: z.ZodType<
-  PayPeriodPayroll$Outbound,
-  z.ZodTypeDef,
-  PayPeriodPayroll
-> = z.object({
-  payrollUuid: z.string().optional(),
-  checkDate: z.string().optional(),
-  processed: z.boolean().optional(),
-  payrollDeadline: z.date().transform(v => v.toISOString()).optional(),
-  payrollType: PayrollType$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payrollUuid: "payroll_uuid",
-    checkDate: "check_date",
-    payrollDeadline: "payroll_deadline",
-    payrollType: "payroll_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayPeriodPayroll$ {
-  /** @deprecated use `PayPeriodPayroll$inboundSchema` instead. */
-  export const inboundSchema = PayPeriodPayroll$inboundSchema;
-  /** @deprecated use `PayPeriodPayroll$outboundSchema` instead. */
-  export const outboundSchema = PayPeriodPayroll$outboundSchema;
-  /** @deprecated use `PayPeriodPayroll$Outbound` instead. */
-  export type Outbound = PayPeriodPayroll$Outbound;
-}
-
-export function payPeriodPayrollToJSON(
-  payPeriodPayroll: PayPeriodPayroll,
-): string {
-  return JSON.stringify(
-    PayPeriodPayroll$outboundSchema.parse(payPeriodPayroll),
-  );
-}
 
 export function payPeriodPayrollFromJSON(
   jsonString: string,
@@ -187,49 +122,6 @@ export const PayPeriod$inboundSchema: z.ZodType<
     "pay_schedule_uuid": "payScheduleUuid",
   });
 });
-
-/** @internal */
-export type PayPeriod$Outbound = {
-  start_date?: string | undefined;
-  end_date?: string | undefined;
-  pay_schedule_uuid?: string | undefined;
-  payroll?: PayPeriodPayroll$Outbound | undefined;
-};
-
-/** @internal */
-export const PayPeriod$outboundSchema: z.ZodType<
-  PayPeriod$Outbound,
-  z.ZodTypeDef,
-  PayPeriod
-> = z.object({
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  payScheduleUuid: z.string().optional(),
-  payroll: z.lazy(() => PayPeriodPayroll$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startDate: "start_date",
-    endDate: "end_date",
-    payScheduleUuid: "pay_schedule_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayPeriod$ {
-  /** @deprecated use `PayPeriod$inboundSchema` instead. */
-  export const inboundSchema = PayPeriod$inboundSchema;
-  /** @deprecated use `PayPeriod$outboundSchema` instead. */
-  export const outboundSchema = PayPeriod$outboundSchema;
-  /** @deprecated use `PayPeriod$Outbound` instead. */
-  export type Outbound = PayPeriod$Outbound;
-}
-
-export function payPeriodToJSON(payPeriod: PayPeriod): string {
-  return JSON.stringify(PayPeriod$outboundSchema.parse(payPeriod));
-}
 
 export function payPeriodFromJSON(
   jsonString: string,

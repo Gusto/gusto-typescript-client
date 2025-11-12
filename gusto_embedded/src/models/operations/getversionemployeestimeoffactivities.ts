@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   TimeOffActivity,
   TimeOffActivity$inboundSchema,
-  TimeOffActivity$Outbound,
-  TimeOffActivity$outboundSchema,
 } from "../components/timeoffactivity.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,24 +44,6 @@ export type GetVersionEmployeesTimeOffActivitiesResponse = {
 };
 
 /** @internal */
-export const GetVersionEmployeesTimeOffActivitiesRequest$inboundSchema:
-  z.ZodType<
-    GetVersionEmployeesTimeOffActivitiesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_uuid: z.string(),
-    time_off_type: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_uuid": "employeeUuid",
-      "time_off_type": "timeOffType",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetVersionEmployeesTimeOffActivitiesRequest$Outbound = {
   employee_uuid: string;
   time_off_type: string;
@@ -91,21 +68,6 @@ export const GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetVersionEmployeesTimeOffActivitiesRequest$ {
-  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetVersionEmployeesTimeOffActivitiesRequest$inboundSchema;
-  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema;
-  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesRequest$Outbound` instead. */
-  export type Outbound = GetVersionEmployeesTimeOffActivitiesRequest$Outbound;
-}
-
 export function getVersionEmployeesTimeOffActivitiesRequestToJSON(
   getVersionEmployeesTimeOffActivitiesRequest:
     GetVersionEmployeesTimeOffActivitiesRequest,
@@ -114,22 +76,6 @@ export function getVersionEmployeesTimeOffActivitiesRequestToJSON(
     GetVersionEmployeesTimeOffActivitiesRequest$outboundSchema.parse(
       getVersionEmployeesTimeOffActivitiesRequest,
     ),
-  );
-}
-
-export function getVersionEmployeesTimeOffActivitiesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetVersionEmployeesTimeOffActivitiesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetVersionEmployeesTimeOffActivitiesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetVersionEmployeesTimeOffActivitiesRequest' from JSON`,
   );
 }
 
@@ -148,54 +94,6 @@ export const GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema:
       "Time-Off-Activity": "timeOffActivity",
     });
   });
-
-/** @internal */
-export type GetVersionEmployeesTimeOffActivitiesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Time-Off-Activity"?: TimeOffActivity$Outbound | undefined;
-};
-
-/** @internal */
-export const GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema:
-  z.ZodType<
-    GetVersionEmployeesTimeOffActivitiesResponse$Outbound,
-    z.ZodTypeDef,
-    GetVersionEmployeesTimeOffActivitiesResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    timeOffActivity: TimeOffActivity$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      timeOffActivity: "Time-Off-Activity",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetVersionEmployeesTimeOffActivitiesResponse$ {
-  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetVersionEmployeesTimeOffActivitiesResponse$inboundSchema;
-  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema;
-  /** @deprecated use `GetVersionEmployeesTimeOffActivitiesResponse$Outbound` instead. */
-  export type Outbound = GetVersionEmployeesTimeOffActivitiesResponse$Outbound;
-}
-
-export function getVersionEmployeesTimeOffActivitiesResponseToJSON(
-  getVersionEmployeesTimeOffActivitiesResponse:
-    GetVersionEmployeesTimeOffActivitiesResponse,
-): string {
-  return JSON.stringify(
-    GetVersionEmployeesTimeOffActivitiesResponse$outboundSchema.parse(
-      getVersionEmployeesTimeOffActivitiesResponse,
-    ),
-  );
-}
 
 export function getVersionEmployeesTimeOffActivitiesResponseFromJSON(
   jsonString: string,

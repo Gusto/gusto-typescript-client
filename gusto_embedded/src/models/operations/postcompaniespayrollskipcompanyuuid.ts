@@ -10,12 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -74,45 +71,8 @@ export type PostCompaniesPayrollSkipCompanyUuidResponse = {
 };
 
 /** @internal */
-export const PayrollType$inboundSchema: z.ZodNativeEnum<typeof PayrollType> = z
+export const PayrollType$outboundSchema: z.ZodNativeEnum<typeof PayrollType> = z
   .nativeEnum(PayrollType);
-
-/** @internal */
-export const PayrollType$outboundSchema: z.ZodNativeEnum<typeof PayrollType> =
-  PayrollType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollType$ {
-  /** @deprecated use `PayrollType$inboundSchema` instead. */
-  export const inboundSchema = PayrollType$inboundSchema;
-  /** @deprecated use `PayrollType$outboundSchema` instead. */
-  export const outboundSchema = PayrollType$outboundSchema;
-}
-
-/** @internal */
-export const PostCompaniesPayrollSkipCompanyUuidRequestBody$inboundSchema:
-  z.ZodType<
-    PostCompaniesPayrollSkipCompanyUuidRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    payroll_type: PayrollType$inboundSchema,
-    start_date: z.string().optional(),
-    end_date: z.string().optional(),
-    pay_schedule_uuid: z.string().optional(),
-    employee_uuids: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "payroll_type": "payrollType",
-      "start_date": "startDate",
-      "end_date": "endDate",
-      "pay_schedule_uuid": "payScheduleUuid",
-      "employee_uuids": "employeeUuids",
-    });
-  });
 
 /** @internal */
 export type PostCompaniesPayrollSkipCompanyUuidRequestBody$Outbound = {
@@ -145,22 +105,6 @@ export const PostCompaniesPayrollSkipCompanyUuidRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesPayrollSkipCompanyUuidRequestBody$ {
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidRequestBody$inboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidRequestBody$outboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostCompaniesPayrollSkipCompanyUuidRequestBody$Outbound;
-}
-
 export function postCompaniesPayrollSkipCompanyUuidRequestBodyToJSON(
   postCompaniesPayrollSkipCompanyUuidRequestBody:
     PostCompaniesPayrollSkipCompanyUuidRequestBody,
@@ -171,39 +115,6 @@ export function postCompaniesPayrollSkipCompanyUuidRequestBodyToJSON(
     ),
   );
 }
-
-export function postCompaniesPayrollSkipCompanyUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostCompaniesPayrollSkipCompanyUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesPayrollSkipCompanyUuidRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostCompaniesPayrollSkipCompanyUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostCompaniesPayrollSkipCompanyUuidRequest$inboundSchema:
-  z.ZodType<PostCompaniesPayrollSkipCompanyUuidRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      company_uuid: z.string(),
-      "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-      RequestBody: z.lazy(() =>
-        PostCompaniesPayrollSkipCompanyUuidRequestBody$inboundSchema
-      ),
-    }).transform((v) => {
-      return remap$(v, {
-        "company_uuid": "companyUuid",
-        "X-Gusto-API-Version": "xGustoAPIVersion",
-        "RequestBody": "requestBody",
-      });
-    });
 
 /** @internal */
 export type PostCompaniesPayrollSkipCompanyUuidRequest$Outbound = {
@@ -232,21 +143,6 @@ export const PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesPayrollSkipCompanyUuidRequest$ {
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidRequest$inboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidRequest$Outbound` instead. */
-  export type Outbound = PostCompaniesPayrollSkipCompanyUuidRequest$Outbound;
-}
-
 export function postCompaniesPayrollSkipCompanyUuidRequestToJSON(
   postCompaniesPayrollSkipCompanyUuidRequest:
     PostCompaniesPayrollSkipCompanyUuidRequest,
@@ -255,22 +151,6 @@ export function postCompaniesPayrollSkipCompanyUuidRequestToJSON(
     PostCompaniesPayrollSkipCompanyUuidRequest$outboundSchema.parse(
       postCompaniesPayrollSkipCompanyUuidRequest,
     ),
-  );
-}
-
-export function postCompaniesPayrollSkipCompanyUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostCompaniesPayrollSkipCompanyUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesPayrollSkipCompanyUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostCompaniesPayrollSkipCompanyUuidRequest' from JSON`,
   );
 }
 
@@ -287,51 +167,6 @@ export const PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type PostCompaniesPayrollSkipCompanyUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema:
-  z.ZodType<
-    PostCompaniesPayrollSkipCompanyUuidResponse$Outbound,
-    z.ZodTypeDef,
-    PostCompaniesPayrollSkipCompanyUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesPayrollSkipCompanyUuidResponse$ {
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidResponse$inboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema;
-  /** @deprecated use `PostCompaniesPayrollSkipCompanyUuidResponse$Outbound` instead. */
-  export type Outbound = PostCompaniesPayrollSkipCompanyUuidResponse$Outbound;
-}
-
-export function postCompaniesPayrollSkipCompanyUuidResponseToJSON(
-  postCompaniesPayrollSkipCompanyUuidResponse:
-    PostCompaniesPayrollSkipCompanyUuidResponse,
-): string {
-  return JSON.stringify(
-    PostCompaniesPayrollSkipCompanyUuidResponse$outboundSchema.parse(
-      postCompaniesPayrollSkipCompanyUuidResponse,
-    ),
-  );
-}
 
 export function postCompaniesPayrollSkipCompanyUuidResponseFromJSON(
   jsonString: string,

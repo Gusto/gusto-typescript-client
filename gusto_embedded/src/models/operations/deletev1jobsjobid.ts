@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,21 +30,6 @@ export type DeleteV1JobsJobIdRequest = {
 export type DeleteV1JobsJobIdResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1JobsJobIdRequest$inboundSchema: z.ZodType<
-  DeleteV1JobsJobIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  job_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "job_id": "jobId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type DeleteV1JobsJobIdRequest$Outbound = {
@@ -70,34 +52,11 @@ export const DeleteV1JobsJobIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1JobsJobIdRequest$ {
-  /** @deprecated use `DeleteV1JobsJobIdRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteV1JobsJobIdRequest$inboundSchema;
-  /** @deprecated use `DeleteV1JobsJobIdRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteV1JobsJobIdRequest$outboundSchema;
-  /** @deprecated use `DeleteV1JobsJobIdRequest$Outbound` instead. */
-  export type Outbound = DeleteV1JobsJobIdRequest$Outbound;
-}
-
 export function deleteV1JobsJobIdRequestToJSON(
   deleteV1JobsJobIdRequest: DeleteV1JobsJobIdRequest,
 ): string {
   return JSON.stringify(
     DeleteV1JobsJobIdRequest$outboundSchema.parse(deleteV1JobsJobIdRequest),
-  );
-}
-
-export function deleteV1JobsJobIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteV1JobsJobIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteV1JobsJobIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1JobsJobIdRequest' from JSON`,
   );
 }
 
@@ -113,45 +72,6 @@ export const DeleteV1JobsJobIdResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type DeleteV1JobsJobIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1JobsJobIdResponse$outboundSchema: z.ZodType<
-  DeleteV1JobsJobIdResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteV1JobsJobIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1JobsJobIdResponse$ {
-  /** @deprecated use `DeleteV1JobsJobIdResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteV1JobsJobIdResponse$inboundSchema;
-  /** @deprecated use `DeleteV1JobsJobIdResponse$outboundSchema` instead. */
-  export const outboundSchema = DeleteV1JobsJobIdResponse$outboundSchema;
-  /** @deprecated use `DeleteV1JobsJobIdResponse$Outbound` instead. */
-  export type Outbound = DeleteV1JobsJobIdResponse$Outbound;
-}
-
-export function deleteV1JobsJobIdResponseToJSON(
-  deleteV1JobsJobIdResponse: DeleteV1JobsJobIdResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1JobsJobIdResponse$outboundSchema.parse(deleteV1JobsJobIdResponse),
-  );
-}
 
 export function deleteV1JobsJobIdResponseFromJSON(
   jsonString: string,

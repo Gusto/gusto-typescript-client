@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Document,
-  Document$inboundSchema,
-  Document$Outbound,
-  Document$outboundSchema,
-} from "../components/document.js";
+import { Document, Document$inboundSchema } from "../components/document.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,21 +37,6 @@ export type GetV1ContractorDocumentsResponse = {
 };
 
 /** @internal */
-export const GetV1ContractorDocumentsRequest$inboundSchema: z.ZodType<
-  GetV1ContractorDocumentsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_uuid": "contractorUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1ContractorDocumentsRequest$Outbound = {
   contractor_uuid: string;
   "X-Gusto-API-Version": string;
@@ -80,19 +57,6 @@ export const GetV1ContractorDocumentsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorDocumentsRequest$ {
-  /** @deprecated use `GetV1ContractorDocumentsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1ContractorDocumentsRequest$inboundSchema;
-  /** @deprecated use `GetV1ContractorDocumentsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1ContractorDocumentsRequest$outboundSchema;
-  /** @deprecated use `GetV1ContractorDocumentsRequest$Outbound` instead. */
-  export type Outbound = GetV1ContractorDocumentsRequest$Outbound;
-}
-
 export function getV1ContractorDocumentsRequestToJSON(
   getV1ContractorDocumentsRequest: GetV1ContractorDocumentsRequest,
 ): string {
@@ -100,16 +64,6 @@ export function getV1ContractorDocumentsRequestToJSON(
     GetV1ContractorDocumentsRequest$outboundSchema.parse(
       getV1ContractorDocumentsRequest,
     ),
-  );
-}
-
-export function getV1ContractorDocumentsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1ContractorDocumentsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1ContractorDocumentsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1ContractorDocumentsRequest' from JSON`,
   );
 }
 
@@ -127,50 +81,6 @@ export const GetV1ContractorDocumentsResponse$inboundSchema: z.ZodType<
     "Documents": "documents",
   });
 });
-
-/** @internal */
-export type GetV1ContractorDocumentsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Documents?: Array<Document$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1ContractorDocumentsResponse$outboundSchema: z.ZodType<
-  GetV1ContractorDocumentsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1ContractorDocumentsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  documents: z.array(Document$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    documents: "Documents",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorDocumentsResponse$ {
-  /** @deprecated use `GetV1ContractorDocumentsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1ContractorDocumentsResponse$inboundSchema;
-  /** @deprecated use `GetV1ContractorDocumentsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1ContractorDocumentsResponse$outboundSchema;
-  /** @deprecated use `GetV1ContractorDocumentsResponse$Outbound` instead. */
-  export type Outbound = GetV1ContractorDocumentsResponse$Outbound;
-}
-
-export function getV1ContractorDocumentsResponseToJSON(
-  getV1ContractorDocumentsResponse: GetV1ContractorDocumentsResponse,
-): string {
-  return JSON.stringify(
-    GetV1ContractorDocumentsResponse$outboundSchema.parse(
-      getV1ContractorDocumentsResponse,
-    ),
-  );
-}
 
 export function getV1ContractorDocumentsResponseFromJSON(
   jsonString: string,

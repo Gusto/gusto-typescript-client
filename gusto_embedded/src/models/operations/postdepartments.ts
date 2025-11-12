@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Department,
   Department$inboundSchema,
-  Department$Outbound,
-  Department$outboundSchema,
 } from "../components/department.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -50,15 +45,6 @@ export type PostDepartmentsResponse = {
 };
 
 /** @internal */
-export const PostDepartmentsRequestBody$inboundSchema: z.ZodType<
-  PostDepartmentsRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  title: z.string().optional(),
-});
-
-/** @internal */
 export type PostDepartmentsRequestBody$Outbound = {
   title?: string | undefined;
 };
@@ -72,19 +58,6 @@ export const PostDepartmentsRequestBody$outboundSchema: z.ZodType<
   title: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostDepartmentsRequestBody$ {
-  /** @deprecated use `PostDepartmentsRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PostDepartmentsRequestBody$inboundSchema;
-  /** @deprecated use `PostDepartmentsRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PostDepartmentsRequestBody$outboundSchema;
-  /** @deprecated use `PostDepartmentsRequestBody$Outbound` instead. */
-  export type Outbound = PostDepartmentsRequestBody$Outbound;
-}
-
 export function postDepartmentsRequestBodyToJSON(
   postDepartmentsRequestBody: PostDepartmentsRequestBody,
 ): string {
@@ -92,33 +65,6 @@ export function postDepartmentsRequestBodyToJSON(
     PostDepartmentsRequestBody$outboundSchema.parse(postDepartmentsRequestBody),
   );
 }
-
-export function postDepartmentsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostDepartmentsRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostDepartmentsRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostDepartmentsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostDepartmentsRequest$inboundSchema: z.ZodType<
-  PostDepartmentsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PostDepartmentsRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostDepartmentsRequest$Outbound = {
@@ -144,34 +90,11 @@ export const PostDepartmentsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostDepartmentsRequest$ {
-  /** @deprecated use `PostDepartmentsRequest$inboundSchema` instead. */
-  export const inboundSchema = PostDepartmentsRequest$inboundSchema;
-  /** @deprecated use `PostDepartmentsRequest$outboundSchema` instead. */
-  export const outboundSchema = PostDepartmentsRequest$outboundSchema;
-  /** @deprecated use `PostDepartmentsRequest$Outbound` instead. */
-  export type Outbound = PostDepartmentsRequest$Outbound;
-}
-
 export function postDepartmentsRequestToJSON(
   postDepartmentsRequest: PostDepartmentsRequest,
 ): string {
   return JSON.stringify(
     PostDepartmentsRequest$outboundSchema.parse(postDepartmentsRequest),
-  );
-}
-
-export function postDepartmentsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostDepartmentsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostDepartmentsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostDepartmentsRequest' from JSON`,
   );
 }
 
@@ -189,48 +112,6 @@ export const PostDepartmentsResponse$inboundSchema: z.ZodType<
     "Department": "department",
   });
 });
-
-/** @internal */
-export type PostDepartmentsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Department?: Department$Outbound | undefined;
-};
-
-/** @internal */
-export const PostDepartmentsResponse$outboundSchema: z.ZodType<
-  PostDepartmentsResponse$Outbound,
-  z.ZodTypeDef,
-  PostDepartmentsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  department: Department$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    department: "Department",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostDepartmentsResponse$ {
-  /** @deprecated use `PostDepartmentsResponse$inboundSchema` instead. */
-  export const inboundSchema = PostDepartmentsResponse$inboundSchema;
-  /** @deprecated use `PostDepartmentsResponse$outboundSchema` instead. */
-  export const outboundSchema = PostDepartmentsResponse$outboundSchema;
-  /** @deprecated use `PostDepartmentsResponse$Outbound` instead. */
-  export type Outbound = PostDepartmentsResponse$Outbound;
-}
-
-export function postDepartmentsResponseToJSON(
-  postDepartmentsResponse: PostDepartmentsResponse,
-): string {
-  return JSON.stringify(
-    PostDepartmentsResponse$outboundSchema.parse(postDepartmentsResponse),
-  );
-}
 
 export function postDepartmentsResponseFromJSON(
   jsonString: string,

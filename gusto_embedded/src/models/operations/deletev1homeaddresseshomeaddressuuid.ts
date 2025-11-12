@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,47 +43,10 @@ export type DeleteV1HomeAddressesHomeAddressUuidResponse = {
 };
 
 /** @internal */
-export const DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
-  > = z.nativeEnum(DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
-
-/** @internal */
 export const DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
-  > = DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$ {
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1HomeAddressesHomeAddressUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    "X-Gusto-API-Version":
-      DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-    home_address_uuid: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "home_address_uuid": "homeAddressUuid",
-    });
-  });
+  > = z.nativeEnum(DeleteV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type DeleteV1HomeAddressesHomeAddressUuidRequest$Outbound = {
@@ -111,21 +72,6 @@ export const DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1HomeAddressesHomeAddressUuidRequest$ {
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema;
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema;
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidRequest$Outbound` instead. */
-  export type Outbound = DeleteV1HomeAddressesHomeAddressUuidRequest$Outbound;
-}
-
 export function deleteV1HomeAddressesHomeAddressUuidRequestToJSON(
   deleteV1HomeAddressesHomeAddressUuidRequest:
     DeleteV1HomeAddressesHomeAddressUuidRequest,
@@ -134,22 +80,6 @@ export function deleteV1HomeAddressesHomeAddressUuidRequestToJSON(
     DeleteV1HomeAddressesHomeAddressUuidRequest$outboundSchema.parse(
       deleteV1HomeAddressesHomeAddressUuidRequest,
     ),
-  );
-}
-
-export function deleteV1HomeAddressesHomeAddressUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1HomeAddressesHomeAddressUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1HomeAddressesHomeAddressUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteV1HomeAddressesHomeAddressUuidRequest' from JSON`,
   );
 }
 
@@ -166,51 +96,6 @@ export const DeleteV1HomeAddressesHomeAddressUuidResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1HomeAddressesHomeAddressUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1HomeAddressesHomeAddressUuidResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1HomeAddressesHomeAddressUuidResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1HomeAddressesHomeAddressUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1HomeAddressesHomeAddressUuidResponse$ {
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1HomeAddressesHomeAddressUuidResponse$inboundSchema;
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1HomeAddressesHomeAddressUuidResponse$outboundSchema;
-  /** @deprecated use `DeleteV1HomeAddressesHomeAddressUuidResponse$Outbound` instead. */
-  export type Outbound = DeleteV1HomeAddressesHomeAddressUuidResponse$Outbound;
-}
-
-export function deleteV1HomeAddressesHomeAddressUuidResponseToJSON(
-  deleteV1HomeAddressesHomeAddressUuidResponse:
-    DeleteV1HomeAddressesHomeAddressUuidResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1HomeAddressesHomeAddressUuidResponse$outboundSchema.parse(
-      deleteV1HomeAddressesHomeAddressUuidResponse,
-    ),
-  );
-}
 
 export function deleteV1HomeAddressesHomeAddressUuidResponseFromJSON(
   jsonString: string,

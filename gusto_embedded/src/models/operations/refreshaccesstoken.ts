@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Authentication,
   Authentication$inboundSchema,
-  Authentication$Outbound,
-  Authentication$outboundSchema,
 } from "../components/authentication.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,27 +60,6 @@ export type RefreshAccessTokenResponse = {
 };
 
 /** @internal */
-export const RefreshAccessTokenRequestBody$inboundSchema: z.ZodType<
-  RefreshAccessTokenRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  client_id: z.string(),
-  client_secret: z.string(),
-  redirect_uri: z.string().optional(),
-  refresh_token: z.string(),
-  grant_type: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "client_id": "clientId",
-    "client_secret": "clientSecret",
-    "redirect_uri": "redirectUri",
-    "refresh_token": "refreshToken",
-    "grant_type": "grantType",
-  });
-});
-
-/** @internal */
 export type RefreshAccessTokenRequestBody$Outbound = {
   client_id: string;
   client_secret: string;
@@ -115,19 +89,6 @@ export const RefreshAccessTokenRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RefreshAccessTokenRequestBody$ {
-  /** @deprecated use `RefreshAccessTokenRequestBody$inboundSchema` instead. */
-  export const inboundSchema = RefreshAccessTokenRequestBody$inboundSchema;
-  /** @deprecated use `RefreshAccessTokenRequestBody$outboundSchema` instead. */
-  export const outboundSchema = RefreshAccessTokenRequestBody$outboundSchema;
-  /** @deprecated use `RefreshAccessTokenRequestBody$Outbound` instead. */
-  export type Outbound = RefreshAccessTokenRequestBody$Outbound;
-}
-
 export function refreshAccessTokenRequestBodyToJSON(
   refreshAccessTokenRequestBody: RefreshAccessTokenRequestBody,
 ): string {
@@ -137,31 +98,6 @@ export function refreshAccessTokenRequestBodyToJSON(
     ),
   );
 }
-
-export function refreshAccessTokenRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RefreshAccessTokenRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RefreshAccessTokenRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RefreshAccessTokenRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const RefreshAccessTokenRequest$inboundSchema: z.ZodType<
-  RefreshAccessTokenRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => RefreshAccessTokenRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type RefreshAccessTokenRequest$Outbound = {
@@ -184,34 +120,11 @@ export const RefreshAccessTokenRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RefreshAccessTokenRequest$ {
-  /** @deprecated use `RefreshAccessTokenRequest$inboundSchema` instead. */
-  export const inboundSchema = RefreshAccessTokenRequest$inboundSchema;
-  /** @deprecated use `RefreshAccessTokenRequest$outboundSchema` instead. */
-  export const outboundSchema = RefreshAccessTokenRequest$outboundSchema;
-  /** @deprecated use `RefreshAccessTokenRequest$Outbound` instead. */
-  export type Outbound = RefreshAccessTokenRequest$Outbound;
-}
-
 export function refreshAccessTokenRequestToJSON(
   refreshAccessTokenRequest: RefreshAccessTokenRequest,
 ): string {
   return JSON.stringify(
     RefreshAccessTokenRequest$outboundSchema.parse(refreshAccessTokenRequest),
-  );
-}
-
-export function refreshAccessTokenRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RefreshAccessTokenRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RefreshAccessTokenRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RefreshAccessTokenRequest' from JSON`,
   );
 }
 
@@ -229,48 +142,6 @@ export const RefreshAccessTokenResponse$inboundSchema: z.ZodType<
     "Authentication": "authentication",
   });
 });
-
-/** @internal */
-export type RefreshAccessTokenResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Authentication?: Authentication$Outbound | undefined;
-};
-
-/** @internal */
-export const RefreshAccessTokenResponse$outboundSchema: z.ZodType<
-  RefreshAccessTokenResponse$Outbound,
-  z.ZodTypeDef,
-  RefreshAccessTokenResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  authentication: Authentication$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    authentication: "Authentication",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RefreshAccessTokenResponse$ {
-  /** @deprecated use `RefreshAccessTokenResponse$inboundSchema` instead. */
-  export const inboundSchema = RefreshAccessTokenResponse$inboundSchema;
-  /** @deprecated use `RefreshAccessTokenResponse$outboundSchema` instead. */
-  export const outboundSchema = RefreshAccessTokenResponse$outboundSchema;
-  /** @deprecated use `RefreshAccessTokenResponse$Outbound` instead. */
-  export type Outbound = RefreshAccessTokenResponse$Outbound;
-}
-
-export function refreshAccessTokenResponseToJSON(
-  refreshAccessTokenResponse: RefreshAccessTokenResponse,
-): string {
-  return JSON.stringify(
-    RefreshAccessTokenResponse$outboundSchema.parse(refreshAccessTokenResponse),
-  );
-}
 
 export function refreshAccessTokenResponseFromJSON(
   jsonString: string,

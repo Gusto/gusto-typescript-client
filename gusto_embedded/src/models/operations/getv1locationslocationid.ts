@@ -10,15 +10,8 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Location,
-  Location$inboundSchema,
-  Location$Outbound,
-  Location$outboundSchema,
-} from "../components/location.js";
+import { Location, Location$inboundSchema } from "../components/location.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -52,40 +45,9 @@ export type GetV1LocationsLocationIdResponse = {
 };
 
 /** @internal */
-export const XGustoAPIVersion$inboundSchema: z.ZodNativeEnum<
-  typeof XGustoAPIVersion
-> = z.nativeEnum(XGustoAPIVersion);
-
-/** @internal */
 export const XGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
   typeof XGustoAPIVersion
-> = XGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace XGustoAPIVersion$ {
-  /** @deprecated use `XGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema = XGustoAPIVersion$inboundSchema;
-  /** @deprecated use `XGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema = XGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1LocationsLocationIdRequest$inboundSchema: z.ZodType<
-  GetV1LocationsLocationIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": XGustoAPIVersion$inboundSchema.default("2025-06-15"),
-  location_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "location_id": "locationId",
-  });
-});
+> = z.nativeEnum(XGustoAPIVersion);
 
 /** @internal */
 export type GetV1LocationsLocationIdRequest$Outbound = {
@@ -108,19 +70,6 @@ export const GetV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1LocationsLocationIdRequest$ {
-  /** @deprecated use `GetV1LocationsLocationIdRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1LocationsLocationIdRequest$inboundSchema;
-  /** @deprecated use `GetV1LocationsLocationIdRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1LocationsLocationIdRequest$outboundSchema;
-  /** @deprecated use `GetV1LocationsLocationIdRequest$Outbound` instead. */
-  export type Outbound = GetV1LocationsLocationIdRequest$Outbound;
-}
-
 export function getV1LocationsLocationIdRequestToJSON(
   getV1LocationsLocationIdRequest: GetV1LocationsLocationIdRequest,
 ): string {
@@ -128,16 +77,6 @@ export function getV1LocationsLocationIdRequestToJSON(
     GetV1LocationsLocationIdRequest$outboundSchema.parse(
       getV1LocationsLocationIdRequest,
     ),
-  );
-}
-
-export function getV1LocationsLocationIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1LocationsLocationIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1LocationsLocationIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1LocationsLocationIdRequest' from JSON`,
   );
 }
 
@@ -155,50 +94,6 @@ export const GetV1LocationsLocationIdResponse$inboundSchema: z.ZodType<
     "Location": "location",
   });
 });
-
-/** @internal */
-export type GetV1LocationsLocationIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Location?: Location$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1LocationsLocationIdResponse$outboundSchema: z.ZodType<
-  GetV1LocationsLocationIdResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1LocationsLocationIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  location: Location$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    location: "Location",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1LocationsLocationIdResponse$ {
-  /** @deprecated use `GetV1LocationsLocationIdResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1LocationsLocationIdResponse$inboundSchema;
-  /** @deprecated use `GetV1LocationsLocationIdResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1LocationsLocationIdResponse$outboundSchema;
-  /** @deprecated use `GetV1LocationsLocationIdResponse$Outbound` instead. */
-  export type Outbound = GetV1LocationsLocationIdResponse$Outbound;
-}
-
-export function getV1LocationsLocationIdResponseToJSON(
-  getV1LocationsLocationIdResponse: GetV1LocationsLocationIdResponse,
-): string {
-  return JSON.stringify(
-    GetV1LocationsLocationIdResponse$outboundSchema.parse(
-      getV1LocationsLocationIdResponse,
-    ),
-  );
-}
 
 export function getV1LocationsLocationIdResponseFromJSON(
   jsonString: string,

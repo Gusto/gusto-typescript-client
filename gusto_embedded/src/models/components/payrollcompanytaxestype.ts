@@ -33,45 +33,6 @@ export const PayrollCompanyTaxesType$inboundSchema: z.ZodType<
   amount: z.string().optional(),
 });
 
-/** @internal */
-export type PayrollCompanyTaxesType$Outbound = {
-  name?: string | undefined;
-  employer?: boolean | undefined;
-  amount?: string | undefined;
-};
-
-/** @internal */
-export const PayrollCompanyTaxesType$outboundSchema: z.ZodType<
-  PayrollCompanyTaxesType$Outbound,
-  z.ZodTypeDef,
-  PayrollCompanyTaxesType
-> = z.object({
-  name: z.string().optional(),
-  employer: z.boolean().optional(),
-  amount: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollCompanyTaxesType$ {
-  /** @deprecated use `PayrollCompanyTaxesType$inboundSchema` instead. */
-  export const inboundSchema = PayrollCompanyTaxesType$inboundSchema;
-  /** @deprecated use `PayrollCompanyTaxesType$outboundSchema` instead. */
-  export const outboundSchema = PayrollCompanyTaxesType$outboundSchema;
-  /** @deprecated use `PayrollCompanyTaxesType$Outbound` instead. */
-  export type Outbound = PayrollCompanyTaxesType$Outbound;
-}
-
-export function payrollCompanyTaxesTypeToJSON(
-  payrollCompanyTaxesType: PayrollCompanyTaxesType,
-): string {
-  return JSON.stringify(
-    PayrollCompanyTaxesType$outboundSchema.parse(payrollCompanyTaxesType),
-  );
-}
-
 export function payrollCompanyTaxesTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollCompanyTaxesType, SDKValidationError> {

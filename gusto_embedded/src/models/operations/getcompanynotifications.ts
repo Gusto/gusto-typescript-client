@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   Notification,
   Notification$inboundSchema,
-  Notification$Outbound,
-  Notification$outboundSchema,
 } from "../components/notification.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -70,67 +66,13 @@ export type GetCompanyNotificationsResponse = {
 };
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
+export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
   .nativeEnum(Status);
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> =
-  Status$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Status$ {
-  /** @deprecated use `Status$inboundSchema` instead. */
-  export const inboundSchema = Status$inboundSchema;
-  /** @deprecated use `Status$outboundSchema` instead. */
-  export const outboundSchema = Status$outboundSchema;
-}
-
-/** @internal */
-export const GetCompanyNotificationsHeaderXGustoAPIVersion$inboundSchema:
+export const GetCompanyNotificationsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<typeof GetCompanyNotificationsHeaderXGustoAPIVersion> = z
     .nativeEnum(GetCompanyNotificationsHeaderXGustoAPIVersion);
-
-/** @internal */
-export const GetCompanyNotificationsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof GetCompanyNotificationsHeaderXGustoAPIVersion> =
-    GetCompanyNotificationsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompanyNotificationsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetCompanyNotificationsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompanyNotificationsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetCompanyNotificationsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompanyNotificationsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetCompanyNotificationsRequest$inboundSchema: z.ZodType<
-  GetCompanyNotificationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  status: Status$inboundSchema.optional(),
-  "X-Gusto-API-Version":
-    GetCompanyNotificationsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2025-06-15",
-    ),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type GetCompanyNotificationsRequest$Outbound = {
@@ -160,19 +102,6 @@ export const GetCompanyNotificationsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompanyNotificationsRequest$ {
-  /** @deprecated use `GetCompanyNotificationsRequest$inboundSchema` instead. */
-  export const inboundSchema = GetCompanyNotificationsRequest$inboundSchema;
-  /** @deprecated use `GetCompanyNotificationsRequest$outboundSchema` instead. */
-  export const outboundSchema = GetCompanyNotificationsRequest$outboundSchema;
-  /** @deprecated use `GetCompanyNotificationsRequest$Outbound` instead. */
-  export type Outbound = GetCompanyNotificationsRequest$Outbound;
-}
-
 export function getCompanyNotificationsRequestToJSON(
   getCompanyNotificationsRequest: GetCompanyNotificationsRequest,
 ): string {
@@ -180,16 +109,6 @@ export function getCompanyNotificationsRequestToJSON(
     GetCompanyNotificationsRequest$outboundSchema.parse(
       getCompanyNotificationsRequest,
     ),
-  );
-}
-
-export function getCompanyNotificationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetCompanyNotificationsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetCompanyNotificationsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetCompanyNotificationsRequest' from JSON`,
   );
 }
 
@@ -207,50 +126,6 @@ export const GetCompanyNotificationsResponse$inboundSchema: z.ZodType<
     "Notifications-List": "notificationsList",
   });
 });
-
-/** @internal */
-export type GetCompanyNotificationsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Notifications-List"?: Array<Notification$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetCompanyNotificationsResponse$outboundSchema: z.ZodType<
-  GetCompanyNotificationsResponse$Outbound,
-  z.ZodTypeDef,
-  GetCompanyNotificationsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  notificationsList: z.array(Notification$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    notificationsList: "Notifications-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompanyNotificationsResponse$ {
-  /** @deprecated use `GetCompanyNotificationsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetCompanyNotificationsResponse$inboundSchema;
-  /** @deprecated use `GetCompanyNotificationsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetCompanyNotificationsResponse$outboundSchema;
-  /** @deprecated use `GetCompanyNotificationsResponse$Outbound` instead. */
-  export type Outbound = GetCompanyNotificationsResponse$Outbound;
-}
-
-export function getCompanyNotificationsResponseToJSON(
-  getCompanyNotificationsResponse: GetCompanyNotificationsResponse,
-): string {
-  return JSON.stringify(
-    GetCompanyNotificationsResponse$outboundSchema.parse(
-      getCompanyNotificationsResponse,
-    ),
-  );
-}
 
 export function getCompanyNotificationsResponseFromJSON(
   jsonString: string,

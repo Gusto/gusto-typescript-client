@@ -8,24 +8,18 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   DocumentType,
-  DocumentType$inboundSchema,
   DocumentType$outboundSchema,
 } from "../components/documenttype.js";
 import {
   GeneratedDocument,
   GeneratedDocument$inboundSchema,
-  GeneratedDocument$Outbound,
-  GeneratedDocument$outboundSchema,
 } from "../components/generateddocument.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -54,24 +48,6 @@ export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse = {
 };
 
 /** @internal */
-export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$inboundSchema:
-  z.ZodType<
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    document_type: DocumentType$inboundSchema,
-    request_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "document_type": "documentType",
-      "request_uuid": "requestUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$Outbound = {
   document_type: string;
   request_uuid: string;
@@ -96,22 +72,6 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$ {
-  /** @deprecated use `GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$inboundSchema;
-  /** @deprecated use `GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchema;
-  /** @deprecated use `GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$Outbound;
-}
-
 export function getV1GeneratedDocumentsDocumentTypeRequestUuidRequestToJSON(
   getV1GeneratedDocumentsDocumentTypeRequestUuidRequest:
     GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
@@ -120,22 +80,6 @@ export function getV1GeneratedDocumentsDocumentTypeRequestUuidRequestToJSON(
     GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$outboundSchema.parse(
       getV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
     ),
-  );
-}
-
-export function getV1GeneratedDocumentsDocumentTypeRequestUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest' from JSON`,
   );
 }
 
@@ -154,55 +98,6 @@ export const GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$inboundSchem
       "Generated-Document": "generatedDocument",
     });
   });
-
-/** @internal */
-export type GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Generated-Document"?: GeneratedDocument$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$outboundSchema:
-  z.ZodType<
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    generatedDocument: GeneratedDocument$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      generatedDocument: "Generated-Document",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$ {
-  /** @deprecated use `GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$inboundSchema;
-  /** @deprecated use `GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$outboundSchema;
-  /** @deprecated use `GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$Outbound;
-}
-
-export function getV1GeneratedDocumentsDocumentTypeRequestUuidResponseToJSON(
-  getV1GeneratedDocumentsDocumentTypeRequestUuidResponse:
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
-): string {
-  return JSON.stringify(
-    GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse$outboundSchema.parse(
-      getV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
-    ),
-  );
-}
 
 export function getV1GeneratedDocumentsDocumentTypeRequestUuidResponseFromJSON(
   jsonString: string,

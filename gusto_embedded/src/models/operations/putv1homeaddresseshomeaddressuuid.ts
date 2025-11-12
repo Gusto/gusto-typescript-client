@@ -11,14 +11,10 @@ import { RFCDate } from "../../types/rfcdate.js";
 import {
   EmployeeAddress,
   EmployeeAddress$inboundSchema,
-  EmployeeAddress$Outbound,
-  EmployeeAddress$outboundSchema,
 } from "../components/employeeaddress.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -71,54 +67,10 @@ export type PutV1HomeAddressesHomeAddressUuidResponse = {
 };
 
 /** @internal */
-export const PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
-  > = z.nativeEnum(PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
-
-/** @internal */
 export const PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
-  > = PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1HomeAddressesHomeAddressUuidRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    street_1: z.string().optional(),
-    street_2: z.nullable(z.string()).optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip: z.string().optional(),
-    effective_date: z.nullable(z.string().transform(v => new RFCDate(v)))
-      .optional(),
-    courtesy_withholding: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "street_1": "street1",
-      "street_2": "street2",
-      "effective_date": "effectiveDate",
-      "courtesy_withholding": "courtesyWithholding",
-    });
-  });
+  > = z.nativeEnum(PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1HomeAddressesHomeAddressUuidRequestBody$Outbound = {
@@ -158,21 +110,6 @@ export const PutV1HomeAddressesHomeAddressUuidRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1HomeAddressesHomeAddressUuidRequestBody$ {
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema;
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1HomeAddressesHomeAddressUuidRequestBody$outboundSchema;
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidRequestBody$Outbound` instead. */
-  export type Outbound = PutV1HomeAddressesHomeAddressUuidRequestBody$Outbound;
-}
-
 export function putV1HomeAddressesHomeAddressUuidRequestBodyToJSON(
   putV1HomeAddressesHomeAddressUuidRequestBody:
     PutV1HomeAddressesHomeAddressUuidRequestBody,
@@ -183,43 +120,6 @@ export function putV1HomeAddressesHomeAddressUuidRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1HomeAddressesHomeAddressUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1HomeAddressesHomeAddressUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1HomeAddressesHomeAddressUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1HomeAddressesHomeAddressUuidRequest$inboundSchema: z.ZodType<
-  PutV1HomeAddressesHomeAddressUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    PutV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-  home_address_uuid: z.string(),
-  RequestBody: z.lazy(() =>
-    PutV1HomeAddressesHomeAddressUuidRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "home_address_uuid": "homeAddressUuid",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1HomeAddressesHomeAddressUuidRequest$Outbound = {
@@ -249,21 +149,6 @@ export const PutV1HomeAddressesHomeAddressUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1HomeAddressesHomeAddressUuidRequest$ {
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1HomeAddressesHomeAddressUuidRequest$inboundSchema;
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1HomeAddressesHomeAddressUuidRequest$outboundSchema;
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidRequest$Outbound` instead. */
-  export type Outbound = PutV1HomeAddressesHomeAddressUuidRequest$Outbound;
-}
-
 export function putV1HomeAddressesHomeAddressUuidRequestToJSON(
   putV1HomeAddressesHomeAddressUuidRequest:
     PutV1HomeAddressesHomeAddressUuidRequest,
@@ -272,22 +157,6 @@ export function putV1HomeAddressesHomeAddressUuidRequestToJSON(
     PutV1HomeAddressesHomeAddressUuidRequest$outboundSchema.parse(
       putV1HomeAddressesHomeAddressUuidRequest,
     ),
-  );
-}
-
-export function putV1HomeAddressesHomeAddressUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1HomeAddressesHomeAddressUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1HomeAddressesHomeAddressUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1HomeAddressesHomeAddressUuidRequest' from JSON`,
   );
 }
 
@@ -305,54 +174,6 @@ export const PutV1HomeAddressesHomeAddressUuidResponse$inboundSchema: z.ZodType<
     "Employee-Address": "employeeAddress",
   });
 });
-
-/** @internal */
-export type PutV1HomeAddressesHomeAddressUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Address"?: EmployeeAddress$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1HomeAddressesHomeAddressUuidResponse$outboundSchema:
-  z.ZodType<
-    PutV1HomeAddressesHomeAddressUuidResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1HomeAddressesHomeAddressUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeAddress: EmployeeAddress$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeAddress: "Employee-Address",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1HomeAddressesHomeAddressUuidResponse$ {
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1HomeAddressesHomeAddressUuidResponse$inboundSchema;
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1HomeAddressesHomeAddressUuidResponse$outboundSchema;
-  /** @deprecated use `PutV1HomeAddressesHomeAddressUuidResponse$Outbound` instead. */
-  export type Outbound = PutV1HomeAddressesHomeAddressUuidResponse$Outbound;
-}
-
-export function putV1HomeAddressesHomeAddressUuidResponseToJSON(
-  putV1HomeAddressesHomeAddressUuidResponse:
-    PutV1HomeAddressesHomeAddressUuidResponse,
-): string {
-  return JSON.stringify(
-    PutV1HomeAddressesHomeAddressUuidResponse$outboundSchema.parse(
-      putV1HomeAddressesHomeAddressUuidResponse,
-    ),
-  );
-}
 
 export function putV1HomeAddressesHomeAddressUuidResponseFromJSON(
   jsonString: string,

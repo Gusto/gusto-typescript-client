@@ -11,8 +11,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PaymentMethodBankAccount,
   PaymentMethodBankAccount$inboundSchema,
-  PaymentMethodBankAccount$Outbound,
-  PaymentMethodBankAccount$outboundSchema,
 } from "./paymentmethodbankaccount.js";
 
 /**
@@ -68,41 +66,9 @@ export const ContractorPaymentMethodType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorPaymentMethodType);
 
 /** @internal */
-export const ContractorPaymentMethodType$outboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentMethodType
-> = ContractorPaymentMethodType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentMethodType$ {
-  /** @deprecated use `ContractorPaymentMethodType$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentMethodType$inboundSchema;
-  /** @deprecated use `ContractorPaymentMethodType$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentMethodType$outboundSchema;
-}
-
-/** @internal */
 export const ContractorPaymentMethodSplitBy$inboundSchema: z.ZodNativeEnum<
   typeof ContractorPaymentMethodSplitBy
 > = z.nativeEnum(ContractorPaymentMethodSplitBy);
-
-/** @internal */
-export const ContractorPaymentMethodSplitBy$outboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentMethodSplitBy
-> = ContractorPaymentMethodSplitBy$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentMethodSplitBy$ {
-  /** @deprecated use `ContractorPaymentMethodSplitBy$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentMethodSplitBy$inboundSchema;
-  /** @deprecated use `ContractorPaymentMethodSplitBy$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentMethodSplitBy$outboundSchema;
-}
 
 /** @internal */
 export const ContractorPaymentMethod$inboundSchema: z.ZodType<
@@ -120,52 +86,6 @@ export const ContractorPaymentMethod$inboundSchema: z.ZodType<
     "split_by": "splitBy",
   });
 });
-
-/** @internal */
-export type ContractorPaymentMethod$Outbound = {
-  version?: string | undefined;
-  type?: string | null | undefined;
-  split_by?: string | null | undefined;
-  splits?: Array<PaymentMethodBankAccount$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentMethod$outboundSchema: z.ZodType<
-  ContractorPaymentMethod$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentMethod
-> = z.object({
-  version: z.string().optional(),
-  type: z.nullable(ContractorPaymentMethodType$outboundSchema).optional(),
-  splitBy: z.nullable(ContractorPaymentMethodSplitBy$outboundSchema).optional(),
-  splits: z.nullable(z.array(PaymentMethodBankAccount$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    splitBy: "split_by",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentMethod$ {
-  /** @deprecated use `ContractorPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentMethod$inboundSchema;
-  /** @deprecated use `ContractorPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentMethod$outboundSchema;
-  /** @deprecated use `ContractorPaymentMethod$Outbound` instead. */
-  export type Outbound = ContractorPaymentMethod$Outbound;
-}
-
-export function contractorPaymentMethodToJSON(
-  contractorPaymentMethod: ContractorPaymentMethod,
-): string {
-  return JSON.stringify(
-    ContractorPaymentMethod$outboundSchema.parse(contractorPaymentMethod),
-  );
-}
 
 export function contractorPaymentMethodFromJSON(
   jsonString: string,

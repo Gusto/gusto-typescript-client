@@ -11,14 +11,10 @@ import { RFCDate } from "../../types/rfcdate.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayrollPrepared,
   PayrollPrepared$inboundSchema,
-  PayrollPrepared$Outbound,
-  PayrollPrepared$outboundSchema,
 } from "../components/payrollprepared.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -133,103 +129,20 @@ export type PostV1CompaniesCompanyIdPayrollsResponse = {
 };
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema:
+export const PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
   > = z.nativeEnum(PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion);
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
-  > = PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const OffCycleReason$inboundSchema: z.ZodNativeEnum<
+export const OffCycleReason$outboundSchema: z.ZodNativeEnum<
   typeof OffCycleReason
 > = z.nativeEnum(OffCycleReason);
 
 /** @internal */
-export const OffCycleReason$outboundSchema: z.ZodNativeEnum<
-  typeof OffCycleReason
-> = OffCycleReason$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OffCycleReason$ {
-  /** @deprecated use `OffCycleReason$inboundSchema` instead. */
-  export const inboundSchema = OffCycleReason$inboundSchema;
-  /** @deprecated use `OffCycleReason$outboundSchema` instead. */
-  export const outboundSchema = OffCycleReason$outboundSchema;
-}
-
-/** @internal */
-export const WithholdingPayPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof WithholdingPayPeriod
-> = z.nativeEnum(WithholdingPayPeriod);
-
-/** @internal */
 export const WithholdingPayPeriod$outboundSchema: z.ZodNativeEnum<
   typeof WithholdingPayPeriod
-> = WithholdingPayPeriod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WithholdingPayPeriod$ {
-  /** @deprecated use `WithholdingPayPeriod$inboundSchema` instead. */
-  export const inboundSchema = WithholdingPayPeriod$inboundSchema;
-  /** @deprecated use `WithholdingPayPeriod$outboundSchema` instead. */
-  export const outboundSchema = WithholdingPayPeriod$outboundSchema;
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdPayrollsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    off_cycle: z.boolean(),
-    off_cycle_reason: OffCycleReason$inboundSchema,
-    start_date: z.string().transform(v => new RFCDate(v)),
-    end_date: z.string().transform(v => new RFCDate(v)),
-    pay_schedule_uuid: z.string().optional(),
-    employee_uuids: z.array(z.string()).optional(),
-    check_date: z.string().transform(v => new RFCDate(v)).optional(),
-    withholding_pay_period: WithholdingPayPeriod$inboundSchema.optional(),
-    skip_regular_deductions: z.boolean().optional(),
-    fixed_withholding_rate: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "off_cycle": "offCycle",
-      "off_cycle_reason": "offCycleReason",
-      "start_date": "startDate",
-      "end_date": "endDate",
-      "pay_schedule_uuid": "payScheduleUuid",
-      "employee_uuids": "employeeUuids",
-      "check_date": "checkDate",
-      "withholding_pay_period": "withholdingPayPeriod",
-      "skip_regular_deductions": "skipRegularDeductions",
-      "fixed_withholding_rate": "fixedWithholdingRate",
-    });
-  });
+> = z.nativeEnum(WithholdingPayPeriod);
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound = {
@@ -277,21 +190,6 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdPayrollsRequestBody$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound;
-}
-
 export function postV1CompaniesCompanyIdPayrollsRequestBodyToJSON(
   postV1CompaniesCompanyIdPayrollsRequestBody:
     PostV1CompaniesCompanyIdPayrollsRequestBody,
@@ -302,43 +200,6 @@ export function postV1CompaniesCompanyIdPayrollsRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1CompaniesCompanyIdPayrollsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdPayrollsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyIdPayrollsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdPayrollsRequest$inboundSchema: z.ZodType<
-  PostV1CompaniesCompanyIdPayrollsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    PostV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-  company_id: z.string(),
-  RequestBody: z.lazy(() =>
-    PostV1CompaniesCompanyIdPayrollsRequestBody$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "company_id": "companyId",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1CompaniesCompanyIdPayrollsRequest$Outbound = {
@@ -370,21 +231,6 @@ export const PostV1CompaniesCompanyIdPayrollsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdPayrollsRequest$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdPayrollsRequest$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdPayrollsRequest$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsRequest$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdPayrollsRequest$Outbound;
-}
-
 export function postV1CompaniesCompanyIdPayrollsRequestToJSON(
   postV1CompaniesCompanyIdPayrollsRequest:
     PostV1CompaniesCompanyIdPayrollsRequest,
@@ -393,22 +239,6 @@ export function postV1CompaniesCompanyIdPayrollsRequestToJSON(
     PostV1CompaniesCompanyIdPayrollsRequest$outboundSchema.parse(
       postV1CompaniesCompanyIdPayrollsRequest,
     ),
-  );
-}
-
-export function postV1CompaniesCompanyIdPayrollsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdPayrollsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdPayrollsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompaniesCompanyIdPayrollsRequest' from JSON`,
   );
 }
 
@@ -426,53 +256,6 @@ export const PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema: z.ZodType<
     "Payroll-Prepared": "payrollPrepared",
   });
 });
-
-/** @internal */
-export type PostV1CompaniesCompanyIdPayrollsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Payroll-Prepared"?: PayrollPrepared$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema: z.ZodType<
-  PostV1CompaniesCompanyIdPayrollsResponse$Outbound,
-  z.ZodTypeDef,
-  PostV1CompaniesCompanyIdPayrollsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  payrollPrepared: PayrollPrepared$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    payrollPrepared: "Payroll-Prepared",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdPayrollsResponse$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdPayrollsResponse$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdPayrollsResponse$Outbound` instead. */
-  export type Outbound = PostV1CompaniesCompanyIdPayrollsResponse$Outbound;
-}
-
-export function postV1CompaniesCompanyIdPayrollsResponseToJSON(
-  postV1CompaniesCompanyIdPayrollsResponse:
-    PostV1CompaniesCompanyIdPayrollsResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdPayrollsResponse$outboundSchema.parse(
-      postV1CompaniesCompanyIdPayrollsResponse,
-    ),
-  );
-}
 
 export function postV1CompaniesCompanyIdPayrollsResponseFromJSON(
   jsonString: string,

@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,21 +30,6 @@ export type DeleteV1ContractorsContractorUuidRequest = {
 export type DeleteV1ContractorsContractorUuidResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteV1ContractorsContractorUuidRequest$inboundSchema: z.ZodType<
-  DeleteV1ContractorsContractorUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_uuid": "contractorUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type DeleteV1ContractorsContractorUuidRequest$Outbound = {
@@ -70,21 +52,6 @@ export const DeleteV1ContractorsContractorUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1ContractorsContractorUuidRequest$ {
-  /** @deprecated use `DeleteV1ContractorsContractorUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1ContractorsContractorUuidRequest$inboundSchema;
-  /** @deprecated use `DeleteV1ContractorsContractorUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1ContractorsContractorUuidRequest$outboundSchema;
-  /** @deprecated use `DeleteV1ContractorsContractorUuidRequest$Outbound` instead. */
-  export type Outbound = DeleteV1ContractorsContractorUuidRequest$Outbound;
-}
-
 export function deleteV1ContractorsContractorUuidRequestToJSON(
   deleteV1ContractorsContractorUuidRequest:
     DeleteV1ContractorsContractorUuidRequest,
@@ -93,22 +60,6 @@ export function deleteV1ContractorsContractorUuidRequestToJSON(
     DeleteV1ContractorsContractorUuidRequest$outboundSchema.parse(
       deleteV1ContractorsContractorUuidRequest,
     ),
-  );
-}
-
-export function deleteV1ContractorsContractorUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1ContractorsContractorUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1ContractorsContractorUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteV1ContractorsContractorUuidRequest' from JSON`,
   );
 }
 
@@ -124,51 +75,6 @@ export const DeleteV1ContractorsContractorUuidResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type DeleteV1ContractorsContractorUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1ContractorsContractorUuidResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1ContractorsContractorUuidResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1ContractorsContractorUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1ContractorsContractorUuidResponse$ {
-  /** @deprecated use `DeleteV1ContractorsContractorUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1ContractorsContractorUuidResponse$inboundSchema;
-  /** @deprecated use `DeleteV1ContractorsContractorUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1ContractorsContractorUuidResponse$outboundSchema;
-  /** @deprecated use `DeleteV1ContractorsContractorUuidResponse$Outbound` instead. */
-  export type Outbound = DeleteV1ContractorsContractorUuidResponse$Outbound;
-}
-
-export function deleteV1ContractorsContractorUuidResponseToJSON(
-  deleteV1ContractorsContractorUuidResponse:
-    DeleteV1ContractorsContractorUuidResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1ContractorsContractorUuidResponse$outboundSchema.parse(
-      deleteV1ContractorsContractorUuidResponse,
-    ),
-  );
-}
 
 export function deleteV1ContractorsContractorUuidResponseFromJSON(
   jsonString: string,

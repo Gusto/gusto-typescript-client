@@ -129,41 +129,9 @@ export const PaymentEventType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PaymentEventType);
 
 /** @internal */
-export const PaymentEventType$outboundSchema: z.ZodNativeEnum<
-  typeof PaymentEventType
-> = PaymentEventType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentEventType$ {
-  /** @deprecated use `PaymentEventType$inboundSchema` instead. */
-  export const inboundSchema = PaymentEventType$inboundSchema;
-  /** @deprecated use `PaymentEventType$outboundSchema` instead. */
-  export const outboundSchema = PaymentEventType$outboundSchema;
-}
-
-/** @internal */
 export const AchTransactionRecipientType$inboundSchema: z.ZodNativeEnum<
   typeof AchTransactionRecipientType
 > = z.nativeEnum(AchTransactionRecipientType);
-
-/** @internal */
-export const AchTransactionRecipientType$outboundSchema: z.ZodNativeEnum<
-  typeof AchTransactionRecipientType
-> = AchTransactionRecipientType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AchTransactionRecipientType$ {
-  /** @deprecated use `AchTransactionRecipientType$inboundSchema` instead. */
-  export const inboundSchema = AchTransactionRecipientType$inboundSchema;
-  /** @deprecated use `AchTransactionRecipientType$outboundSchema` instead. */
-  export const outboundSchema = AchTransactionRecipientType$outboundSchema;
-}
 
 /** @internal */
 export const PaymentStatus$inboundSchema: z.ZodNativeEnum<
@@ -171,41 +139,9 @@ export const PaymentStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PaymentStatus);
 
 /** @internal */
-export const PaymentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof PaymentStatus
-> = PaymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentStatus$ {
-  /** @deprecated use `PaymentStatus$inboundSchema` instead. */
-  export const inboundSchema = PaymentStatus$inboundSchema;
-  /** @deprecated use `PaymentStatus$outboundSchema` instead. */
-  export const outboundSchema = PaymentStatus$outboundSchema;
-}
-
-/** @internal */
 export const PaymentDirection$inboundSchema: z.ZodNativeEnum<
   typeof PaymentDirection
 > = z.nativeEnum(PaymentDirection);
-
-/** @internal */
-export const PaymentDirection$outboundSchema: z.ZodNativeEnum<
-  typeof PaymentDirection
-> = PaymentDirection$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentDirection$ {
-  /** @deprecated use `PaymentDirection$inboundSchema` instead. */
-  export const inboundSchema = PaymentDirection$inboundSchema;
-  /** @deprecated use `PaymentDirection$outboundSchema` instead. */
-  export const outboundSchema = PaymentDirection$outboundSchema;
-}
 
 /** @internal */
 export const AchTransaction$inboundSchema: z.ZodType<
@@ -243,78 +179,6 @@ export const AchTransaction$inboundSchema: z.ZodType<
     "payment_date": "paymentDate",
   });
 });
-
-/** @internal */
-export type AchTransaction$Outbound = {
-  uuid: string;
-  company_uuid?: string | undefined;
-  payment_event_type?: string | undefined;
-  payment_event_uuid?: string | undefined;
-  recipient_type?: string | null | undefined;
-  recipient_uuid?: string | undefined;
-  error_code?: string | undefined;
-  transaction_type?: string | undefined;
-  payment_status?: string | undefined;
-  payment_direction?: string | undefined;
-  payment_event_check_date?: string | undefined;
-  payment_date?: string | undefined;
-  amount?: string | undefined;
-  description?: string | undefined;
-};
-
-/** @internal */
-export const AchTransaction$outboundSchema: z.ZodType<
-  AchTransaction$Outbound,
-  z.ZodTypeDef,
-  AchTransaction
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string().optional(),
-  paymentEventType: PaymentEventType$outboundSchema.optional(),
-  paymentEventUuid: z.string().optional(),
-  recipientType: z.nullable(AchTransactionRecipientType$outboundSchema)
-    .optional(),
-  recipientUuid: z.string().optional(),
-  errorCode: z.string().optional(),
-  transactionType: z.string().optional(),
-  paymentStatus: PaymentStatus$outboundSchema.optional(),
-  paymentDirection: PaymentDirection$outboundSchema.optional(),
-  paymentEventCheckDate: z.string().optional(),
-  paymentDate: z.string().optional(),
-  amount: z.string().optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    paymentEventType: "payment_event_type",
-    paymentEventUuid: "payment_event_uuid",
-    recipientType: "recipient_type",
-    recipientUuid: "recipient_uuid",
-    errorCode: "error_code",
-    transactionType: "transaction_type",
-    paymentStatus: "payment_status",
-    paymentDirection: "payment_direction",
-    paymentEventCheckDate: "payment_event_check_date",
-    paymentDate: "payment_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AchTransaction$ {
-  /** @deprecated use `AchTransaction$inboundSchema` instead. */
-  export const inboundSchema = AchTransaction$inboundSchema;
-  /** @deprecated use `AchTransaction$outboundSchema` instead. */
-  export const outboundSchema = AchTransaction$outboundSchema;
-  /** @deprecated use `AchTransaction$Outbound` instead. */
-  export type Outbound = AchTransaction$Outbound;
-}
-
-export function achTransactionToJSON(achTransaction: AchTransaction): string {
-  return JSON.stringify(AchTransaction$outboundSchema.parse(achTransaction));
-}
 
 export function achTransactionFromJSON(
   jsonString: string,

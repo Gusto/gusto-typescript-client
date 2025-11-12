@@ -81,48 +81,10 @@ export const ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSche
   > = z.nativeEnum(ContractorPaymentGroupPartnerDisbursementsPaymentMethod);
 
 /** @internal */
-export const ContractorPaymentGroupPartnerDisbursementsPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<
-    typeof ContractorPaymentGroupPartnerDisbursementsPaymentMethod
-  > = ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentGroupPartnerDisbursementsPaymentMethod$ {
-  /** @deprecated use `ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentGroupPartnerDisbursementsPaymentMethod$inboundSchema;
-  /** @deprecated use `ContractorPaymentGroupPartnerDisbursementsPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentGroupPartnerDisbursementsPaymentMethod$outboundSchema;
-}
-
-/** @internal */
 export const ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema:
   z.ZodNativeEnum<
     typeof ContractorPaymentGroupPartnerDisbursementsPaymentStatus
   > = z.nativeEnum(ContractorPaymentGroupPartnerDisbursementsPaymentStatus);
-
-/** @internal */
-export const ContractorPaymentGroupPartnerDisbursementsPaymentStatus$outboundSchema:
-  z.ZodNativeEnum<
-    typeof ContractorPaymentGroupPartnerDisbursementsPaymentStatus
-  > = ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentGroupPartnerDisbursementsPaymentStatus$ {
-  /** @deprecated use `ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentGroupPartnerDisbursementsPaymentStatus$inboundSchema;
-  /** @deprecated use `ContractorPaymentGroupPartnerDisbursementsPaymentStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentGroupPartnerDisbursementsPaymentStatus$outboundSchema;
-}
 
 /** @internal */
 export const Disbursements$inboundSchema: z.ZodType<
@@ -147,54 +109,6 @@ export const Disbursements$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type Disbursements$Outbound = {
-  contractor_payment_uuid?: string | undefined;
-  contractor_uuid?: string | undefined;
-  payment_method?: string | undefined;
-  payment_status?: string | undefined;
-};
-
-/** @internal */
-export const Disbursements$outboundSchema: z.ZodType<
-  Disbursements$Outbound,
-  z.ZodTypeDef,
-  Disbursements
-> = z.object({
-  contractorPaymentUuid: z.string().optional(),
-  contractorUuid: z.string().optional(),
-  paymentMethod:
-    ContractorPaymentGroupPartnerDisbursementsPaymentMethod$outboundSchema
-      .optional(),
-  paymentStatus:
-    ContractorPaymentGroupPartnerDisbursementsPaymentStatus$outboundSchema
-      .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorPaymentUuid: "contractor_payment_uuid",
-    contractorUuid: "contractor_uuid",
-    paymentMethod: "payment_method",
-    paymentStatus: "payment_status",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Disbursements$ {
-  /** @deprecated use `Disbursements$inboundSchema` instead. */
-  export const inboundSchema = Disbursements$inboundSchema;
-  /** @deprecated use `Disbursements$outboundSchema` instead. */
-  export const outboundSchema = Disbursements$outboundSchema;
-  /** @deprecated use `Disbursements$Outbound` instead. */
-  export type Outbound = Disbursements$Outbound;
-}
-
-export function disbursementsToJSON(disbursements: Disbursements): string {
-  return JSON.stringify(Disbursements$outboundSchema.parse(disbursements));
-}
-
 export function disbursementsFromJSON(
   jsonString: string,
 ): SafeParseResult<Disbursements, SDKValidationError> {
@@ -217,54 +131,6 @@ export const ContractorPaymentGroupPartnerDisbursements$inboundSchema:
         "contractor_payment_group_uuid": "contractorPaymentGroupUuid",
       });
     });
-
-/** @internal */
-export type ContractorPaymentGroupPartnerDisbursements$Outbound = {
-  contractor_payment_group_uuid?: string | undefined;
-  disbursements?: Array<Disbursements$Outbound> | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentGroupPartnerDisbursements$outboundSchema:
-  z.ZodType<
-    ContractorPaymentGroupPartnerDisbursements$Outbound,
-    z.ZodTypeDef,
-    ContractorPaymentGroupPartnerDisbursements
-  > = z.object({
-    contractorPaymentGroupUuid: z.string().optional(),
-    disbursements: z.array(z.lazy(() => Disbursements$outboundSchema))
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contractorPaymentGroupUuid: "contractor_payment_group_uuid",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentGroupPartnerDisbursements$ {
-  /** @deprecated use `ContractorPaymentGroupPartnerDisbursements$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentGroupPartnerDisbursements$inboundSchema;
-  /** @deprecated use `ContractorPaymentGroupPartnerDisbursements$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentGroupPartnerDisbursements$outboundSchema;
-  /** @deprecated use `ContractorPaymentGroupPartnerDisbursements$Outbound` instead. */
-  export type Outbound = ContractorPaymentGroupPartnerDisbursements$Outbound;
-}
-
-export function contractorPaymentGroupPartnerDisbursementsToJSON(
-  contractorPaymentGroupPartnerDisbursements:
-    ContractorPaymentGroupPartnerDisbursements,
-): string {
-  return JSON.stringify(
-    ContractorPaymentGroupPartnerDisbursements$outboundSchema.parse(
-      contractorPaymentGroupPartnerDisbursements,
-    ),
-  );
-}
 
 export function contractorPaymentGroupPartnerDisbursementsFromJSON(
   jsonString: string,

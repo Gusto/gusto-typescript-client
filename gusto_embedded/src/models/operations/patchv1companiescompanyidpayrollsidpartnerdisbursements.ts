@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayrollPartnerDisbursements,
   PayrollPartnerDisbursements$inboundSchema,
-  PayrollPartnerDisbursements$Outbound,
-  PayrollPartnerDisbursements$outboundSchema,
 } from "../components/payrollpartnerdisbursements.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -126,7 +122,7 @@ export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse = {
 };
 
 /** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema:
+export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion
   > = z.nativeEnum(
@@ -134,27 +130,7 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGusto
   );
 
 /** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion
-  > =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$inboundSchema:
+export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$outboundSchema:
   z.ZodNativeEnum<
     typeof PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod
   > = z.nativeEnum(
@@ -162,74 +138,12 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMetho
   );
 
 /** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod
-  > =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$ {
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$inboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$outboundSchema;
-}
-
-/** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$inboundSchema:
+export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$outboundSchema:
   z.ZodNativeEnum<
     typeof PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus
   > = z.nativeEnum(
     PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus,
   );
-
-/** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus
-  > =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$ {
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$inboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$outboundSchema;
-}
-
-/** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$inboundSchema:
-  z.ZodType<
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_uuid: z.string(),
-    payment_method:
-      PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentMethod$inboundSchema
-        .optional(),
-    payment_status:
-      PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsPaymentStatus$inboundSchema
-        .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_uuid": "employeeUuid",
-      "payment_method": "paymentMethod",
-      "payment_status": "paymentStatus",
-    });
-  });
 
 /** @internal */
 export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$Outbound =
@@ -261,22 +175,6 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursement
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$ {
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$inboundSchema` instead. */
-  export const inboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$inboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$outboundSchema` instead. */
-  export const outboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$outboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$Outbound` instead. */
-  export type Outbound =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$Outbound;
-}
-
 export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursementsToJSON(
   patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements:
     PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements,
@@ -288,35 +186,6 @@ export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursem
       ),
   );
 }
-
-export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursementsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements' from JSON`,
-  );
-}
-
-/** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$inboundSchema:
-  z.ZodType<
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    disbursements: z.array(
-      z.lazy(() =>
-        PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsDisbursements$inboundSchema
-      ),
-    ),
-  });
 
 /** @internal */
 export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$Outbound =
@@ -340,22 +209,6 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$
     ),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$ {
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$inboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$outboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$Outbound;
-}
-
 export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBodyToJSON(
   patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody:
     PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody,
@@ -367,44 +220,6 @@ export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBo
       ),
   );
 }
-
-export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$inboundSchema:
-  z.ZodType<
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    id: z.string(),
-    "X-Gusto-API-Version":
-      PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestBody$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$Outbound =
@@ -440,22 +255,6 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$outb
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$ {
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$inboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$outboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$Outbound` instead. */
-  export type Outbound =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$Outbound;
-}
-
 export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestToJSON(
   patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest:
     PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
@@ -463,21 +262,6 @@ export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestTo
   return JSON.stringify(
     PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$outboundSchema
       .parse(patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest),
-  );
-}
-
-export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest' from JSON`,
   );
 }
 
@@ -497,58 +281,6 @@ export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$inb
       "Payroll-Partner-Disbursements": "payrollPartnerDisbursements",
     });
   });
-
-/** @internal */
-export type PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Payroll-Partner-Disbursements"?:
-      | PayrollPartnerDisbursements$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$outboundSchema:
-  z.ZodType<
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$Outbound,
-    z.ZodTypeDef,
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payrollPartnerDisbursements: PayrollPartnerDisbursements$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payrollPartnerDisbursements: "Payroll-Partner-Disbursements",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$ {
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$inboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$outboundSchema;
-  /** @deprecated use `PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$Outbound` instead. */
-  export type Outbound =
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$Outbound;
-}
-
-export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponseToJSON(
-  patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse:
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse,
-): string {
-  return JSON.stringify(
-    PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse$outboundSchema
-      .parse(patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse),
-  );
-}
 
 export function patchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponseFromJSON(
   jsonString: string,

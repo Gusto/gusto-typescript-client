@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Form,
-  Form$inboundSchema,
-  Form$Outbound,
-  Form$outboundSchema,
-} from "../components/form.js";
+import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,23 +41,6 @@ export type GetV1EmployeeFormResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeeFormRequest$inboundSchema: z.ZodType<
-  GetV1EmployeeFormRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  form_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-    "form_id": "formId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1EmployeeFormRequest$Outbound = {
   employee_id: string;
   form_id: string;
@@ -89,34 +64,11 @@ export const GetV1EmployeeFormRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeeFormRequest$ {
-  /** @deprecated use `GetV1EmployeeFormRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1EmployeeFormRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeeFormRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1EmployeeFormRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeeFormRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeeFormRequest$Outbound;
-}
-
 export function getV1EmployeeFormRequestToJSON(
   getV1EmployeeFormRequest: GetV1EmployeeFormRequest,
 ): string {
   return JSON.stringify(
     GetV1EmployeeFormRequest$outboundSchema.parse(getV1EmployeeFormRequest),
-  );
-}
-
-export function getV1EmployeeFormRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1EmployeeFormRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1EmployeeFormRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1EmployeeFormRequest' from JSON`,
   );
 }
 
@@ -134,48 +86,6 @@ export const GetV1EmployeeFormResponse$inboundSchema: z.ZodType<
     "Form": "form",
   });
 });
-
-/** @internal */
-export type GetV1EmployeeFormResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Form?: Form$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeeFormResponse$outboundSchema: z.ZodType<
-  GetV1EmployeeFormResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1EmployeeFormResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  form: Form$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    form: "Form",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeeFormResponse$ {
-  /** @deprecated use `GetV1EmployeeFormResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1EmployeeFormResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeeFormResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1EmployeeFormResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeeFormResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeeFormResponse$Outbound;
-}
-
-export function getV1EmployeeFormResponseToJSON(
-  getV1EmployeeFormResponse: GetV1EmployeeFormResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeeFormResponse$outboundSchema.parse(getV1EmployeeFormResponse),
-  );
-}
 
 export function getV1EmployeeFormResponseFromJSON(
   jsonString: string,

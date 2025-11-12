@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,23 +50,6 @@ export type GetV1CompaniesAttachmentUrlResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesAttachmentUrlRequest$inboundSchema: z.ZodType<
-  GetV1CompaniesAttachmentUrlRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  company_attachment_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "company_attachment_uuid": "companyAttachmentUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompaniesAttachmentUrlRequest$Outbound = {
   company_id: string;
   company_attachment_uuid: string;
@@ -93,20 +73,6 @@ export const GetV1CompaniesAttachmentUrlRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesAttachmentUrlRequest$ {
-  /** @deprecated use `GetV1CompaniesAttachmentUrlRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1CompaniesAttachmentUrlRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentUrlRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesAttachmentUrlRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentUrlRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesAttachmentUrlRequest$Outbound;
-}
-
 export function getV1CompaniesAttachmentUrlRequestToJSON(
   getV1CompaniesAttachmentUrlRequest: GetV1CompaniesAttachmentUrlRequest,
 ): string {
@@ -114,17 +80,6 @@ export function getV1CompaniesAttachmentUrlRequestToJSON(
     GetV1CompaniesAttachmentUrlRequest$outboundSchema.parse(
       getV1CompaniesAttachmentUrlRequest,
     ),
-  );
-}
-
-export function getV1CompaniesAttachmentUrlRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1CompaniesAttachmentUrlRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesAttachmentUrlRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1CompaniesAttachmentUrlRequest' from JSON`,
   );
 }
 
@@ -136,46 +91,6 @@ export const GetV1CompaniesAttachmentUrlResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   url: z.string(),
 });
-
-/** @internal */
-export type GetV1CompaniesAttachmentUrlResponseBody$Outbound = {
-  url: string;
-};
-
-/** @internal */
-export const GetV1CompaniesAttachmentUrlResponseBody$outboundSchema: z.ZodType<
-  GetV1CompaniesAttachmentUrlResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetV1CompaniesAttachmentUrlResponseBody
-> = z.object({
-  url: z.string(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesAttachmentUrlResponseBody$ {
-  /** @deprecated use `GetV1CompaniesAttachmentUrlResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesAttachmentUrlResponseBody$inboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentUrlResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesAttachmentUrlResponseBody$outboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentUrlResponseBody$Outbound` instead. */
-  export type Outbound = GetV1CompaniesAttachmentUrlResponseBody$Outbound;
-}
-
-export function getV1CompaniesAttachmentUrlResponseBodyToJSON(
-  getV1CompaniesAttachmentUrlResponseBody:
-    GetV1CompaniesAttachmentUrlResponseBody,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesAttachmentUrlResponseBody$outboundSchema.parse(
-      getV1CompaniesAttachmentUrlResponseBody,
-    ),
-  );
-}
 
 export function getV1CompaniesAttachmentUrlResponseBodyFromJSON(
   jsonString: string,
@@ -207,52 +122,6 @@ export const GetV1CompaniesAttachmentUrlResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type GetV1CompaniesAttachmentUrlResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  object?: GetV1CompaniesAttachmentUrlResponseBody$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesAttachmentUrlResponse$outboundSchema: z.ZodType<
-  GetV1CompaniesAttachmentUrlResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompaniesAttachmentUrlResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  object: z.lazy(() => GetV1CompaniesAttachmentUrlResponseBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesAttachmentUrlResponse$ {
-  /** @deprecated use `GetV1CompaniesAttachmentUrlResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesAttachmentUrlResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentUrlResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesAttachmentUrlResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesAttachmentUrlResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesAttachmentUrlResponse$Outbound;
-}
-
-export function getV1CompaniesAttachmentUrlResponseToJSON(
-  getV1CompaniesAttachmentUrlResponse: GetV1CompaniesAttachmentUrlResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesAttachmentUrlResponse$outboundSchema.parse(
-      getV1CompaniesAttachmentUrlResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesAttachmentUrlResponseFromJSON(
   jsonString: string,

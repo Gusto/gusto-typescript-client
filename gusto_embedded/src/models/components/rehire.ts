@@ -69,22 +69,6 @@ export const RehireEmploymentStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RehireEmploymentStatus);
 
 /** @internal */
-export const RehireEmploymentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof RehireEmploymentStatus
-> = RehireEmploymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RehireEmploymentStatus$ {
-  /** @deprecated use `RehireEmploymentStatus$inboundSchema` instead. */
-  export const inboundSchema = RehireEmploymentStatus$inboundSchema;
-  /** @deprecated use `RehireEmploymentStatus$outboundSchema` instead. */
-  export const outboundSchema = RehireEmploymentStatus$outboundSchema;
-}
-
-/** @internal */
 export const Rehire$inboundSchema: z.ZodType<Rehire, z.ZodTypeDef, unknown> = z
   .object({
     version: z.string().optional(),
@@ -105,60 +89,6 @@ export const Rehire$inboundSchema: z.ZodType<Rehire, z.ZodTypeDef, unknown> = z
       "employee_uuid": "employeeUuid",
     });
   });
-
-/** @internal */
-export type Rehire$Outbound = {
-  version?: string | undefined;
-  effective_date?: string | undefined;
-  file_new_hire_report?: boolean | undefined;
-  work_location_uuid?: string | undefined;
-  employment_status?: string | undefined;
-  two_percent_shareholder?: boolean | undefined;
-  employee_uuid?: string | undefined;
-  active?: boolean | undefined;
-};
-
-/** @internal */
-export const Rehire$outboundSchema: z.ZodType<
-  Rehire$Outbound,
-  z.ZodTypeDef,
-  Rehire
-> = z.object({
-  version: z.string().optional(),
-  effectiveDate: z.string().optional(),
-  fileNewHireReport: z.boolean().optional(),
-  workLocationUuid: z.string().optional(),
-  employmentStatus: RehireEmploymentStatus$outboundSchema.optional(),
-  twoPercentShareholder: z.boolean().optional(),
-  employeeUuid: z.string().optional(),
-  active: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    effectiveDate: "effective_date",
-    fileNewHireReport: "file_new_hire_report",
-    workLocationUuid: "work_location_uuid",
-    employmentStatus: "employment_status",
-    twoPercentShareholder: "two_percent_shareholder",
-    employeeUuid: "employee_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Rehire$ {
-  /** @deprecated use `Rehire$inboundSchema` instead. */
-  export const inboundSchema = Rehire$inboundSchema;
-  /** @deprecated use `Rehire$outboundSchema` instead. */
-  export const outboundSchema = Rehire$outboundSchema;
-  /** @deprecated use `Rehire$Outbound` instead. */
-  export type Outbound = Rehire$Outbound;
-}
-
-export function rehireToJSON(rehire: Rehire): string {
-  return JSON.stringify(Rehire$outboundSchema.parse(rehire));
-}
 
 export function rehireFromJSON(
   jsonString: string,

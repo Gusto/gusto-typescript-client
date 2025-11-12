@@ -87,21 +87,6 @@ export const W4DataType$inboundSchema: z.ZodNativeEnum<typeof W4DataType> = z
   .nativeEnum(W4DataType);
 
 /** @internal */
-export const W4DataType$outboundSchema: z.ZodNativeEnum<typeof W4DataType> =
-  W4DataType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace W4DataType$ {
-  /** @deprecated use `W4DataType$inboundSchema` instead. */
-  export const inboundSchema = W4DataType$inboundSchema;
-  /** @deprecated use `W4DataType$outboundSchema` instead. */
-  export const outboundSchema = W4DataType$outboundSchema;
-}
-
-/** @internal */
 export const EmployeeFederalTax$inboundSchema: z.ZodType<
   EmployeeFederalTax,
   z.ZodTypeDef,
@@ -129,70 +114,6 @@ export const EmployeeFederalTax$inboundSchema: z.ZodType<
     "additional_withholding": "additionalWithholding",
   });
 });
-
-/** @internal */
-export type EmployeeFederalTax$Outbound = {
-  version: string;
-  filing_status: string | null;
-  extra_withholding: string | null;
-  two_jobs: boolean | null;
-  dependents_amount: string | null;
-  other_income: string | null;
-  deductions: string | null;
-  w4_data_type: string;
-  federal_withholding_allowance?: number | undefined;
-  additional_withholding?: string | undefined;
-};
-
-/** @internal */
-export const EmployeeFederalTax$outboundSchema: z.ZodType<
-  EmployeeFederalTax$Outbound,
-  z.ZodTypeDef,
-  EmployeeFederalTax
-> = z.object({
-  version: z.string(),
-  filingStatus: z.nullable(z.string()),
-  extraWithholding: z.nullable(z.string()),
-  twoJobs: z.nullable(z.boolean()),
-  dependentsAmount: z.nullable(z.string()),
-  otherIncome: z.nullable(z.string()),
-  deductions: z.nullable(z.string()),
-  w4DataType: W4DataType$outboundSchema,
-  federalWithholdingAllowance: z.number().optional(),
-  additionalWithholding: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filingStatus: "filing_status",
-    extraWithholding: "extra_withholding",
-    twoJobs: "two_jobs",
-    dependentsAmount: "dependents_amount",
-    otherIncome: "other_income",
-    w4DataType: "w4_data_type",
-    federalWithholdingAllowance: "federal_withholding_allowance",
-    additionalWithholding: "additional_withholding",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeFederalTax$ {
-  /** @deprecated use `EmployeeFederalTax$inboundSchema` instead. */
-  export const inboundSchema = EmployeeFederalTax$inboundSchema;
-  /** @deprecated use `EmployeeFederalTax$outboundSchema` instead. */
-  export const outboundSchema = EmployeeFederalTax$outboundSchema;
-  /** @deprecated use `EmployeeFederalTax$Outbound` instead. */
-  export type Outbound = EmployeeFederalTax$Outbound;
-}
-
-export function employeeFederalTaxToJSON(
-  employeeFederalTax: EmployeeFederalTax,
-): string {
-  return JSON.stringify(
-    EmployeeFederalTax$outboundSchema.parse(employeeFederalTax),
-  );
-}
 
 export function employeeFederalTaxFromJSON(
   jsonString: string,

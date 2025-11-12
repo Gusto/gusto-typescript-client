@@ -11,20 +11,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContractorPaymentForGroup,
   ContractorPaymentForGroup$inboundSchema,
-  ContractorPaymentForGroup$Outbound,
-  ContractorPaymentForGroup$outboundSchema,
 } from "./contractorpaymentforgroup.js";
 import {
   PayrollCreditBlockersType,
   PayrollCreditBlockersType$inboundSchema,
-  PayrollCreditBlockersType$Outbound,
-  PayrollCreditBlockersType$outboundSchema,
 } from "./payrollcreditblockerstype.js";
 import {
   PayrollSubmissionBlockersType,
   PayrollSubmissionBlockersType$inboundSchema,
-  PayrollSubmissionBlockersType$Outbound,
-  PayrollSubmissionBlockersType$outboundSchema,
 } from "./payrollsubmissionblockerstype.js";
 
 /**
@@ -114,22 +108,6 @@ export const ContractorPaymentGroupStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorPaymentGroupStatus);
 
 /** @internal */
-export const ContractorPaymentGroupStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ContractorPaymentGroupStatus
-> = ContractorPaymentGroupStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentGroupStatus$ {
-  /** @deprecated use `ContractorPaymentGroupStatus$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentGroupStatus$inboundSchema;
-  /** @deprecated use `ContractorPaymentGroupStatus$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentGroupStatus$outboundSchema;
-}
-
-/** @internal */
 export const ContractorPaymentGroupTotals$inboundSchema: z.ZodType<
   ContractorPaymentGroupTotals,
   z.ZodTypeDef,
@@ -148,58 +126,6 @@ export const ContractorPaymentGroupTotals$inboundSchema: z.ZodType<
     "check_amount": "checkAmount",
   });
 });
-
-/** @internal */
-export type ContractorPaymentGroupTotals$Outbound = {
-  amount?: string | undefined;
-  debit_amount?: string | undefined;
-  wage_amount?: string | undefined;
-  reimbursement_amount?: string | undefined;
-  check_amount?: string | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentGroupTotals$outboundSchema: z.ZodType<
-  ContractorPaymentGroupTotals$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentGroupTotals
-> = z.object({
-  amount: z.string().optional(),
-  debitAmount: z.string().optional(),
-  wageAmount: z.string().optional(),
-  reimbursementAmount: z.string().optional(),
-  checkAmount: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    debitAmount: "debit_amount",
-    wageAmount: "wage_amount",
-    reimbursementAmount: "reimbursement_amount",
-    checkAmount: "check_amount",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentGroupTotals$ {
-  /** @deprecated use `ContractorPaymentGroupTotals$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentGroupTotals$inboundSchema;
-  /** @deprecated use `ContractorPaymentGroupTotals$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentGroupTotals$outboundSchema;
-  /** @deprecated use `ContractorPaymentGroupTotals$Outbound` instead. */
-  export type Outbound = ContractorPaymentGroupTotals$Outbound;
-}
-
-export function contractorPaymentGroupTotalsToJSON(
-  contractorPaymentGroupTotals: ContractorPaymentGroupTotals,
-): string {
-  return JSON.stringify(
-    ContractorPaymentGroupTotals$outboundSchema.parse(
-      contractorPaymentGroupTotals,
-    ),
-  );
-}
 
 export function contractorPaymentGroupTotalsFromJSON(
   jsonString: string,
@@ -244,80 +170,6 @@ export const ContractorPaymentGroup$inboundSchema: z.ZodType<
     "contractor_payments": "contractorPayments",
   });
 });
-
-/** @internal */
-export type ContractorPaymentGroup$Outbound = {
-  uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  check_date?: string | undefined;
-  debit_date?: string | undefined;
-  status?: string | undefined;
-  creation_token?: string | null | undefined;
-  partner_owned_disbursement?: boolean | null | undefined;
-  submission_blockers?:
-    | Array<Array<PayrollSubmissionBlockersType$Outbound>>
-    | undefined;
-  credit_blockers?:
-    | Array<Array<PayrollCreditBlockersType$Outbound>>
-    | undefined;
-  totals?: ContractorPaymentGroupTotals$Outbound | undefined;
-  contractor_payments?: Array<ContractorPaymentForGroup$Outbound> | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentGroup$outboundSchema: z.ZodType<
-  ContractorPaymentGroup$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentGroup
-> = z.object({
-  uuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  checkDate: z.string().optional(),
-  debitDate: z.string().optional(),
-  status: ContractorPaymentGroupStatus$outboundSchema.optional(),
-  creationToken: z.nullable(z.string()).optional(),
-  partnerOwnedDisbursement: z.nullable(z.boolean()).optional(),
-  submissionBlockers: z.array(
-    z.array(PayrollSubmissionBlockersType$outboundSchema),
-  ).optional(),
-  creditBlockers: z.array(z.array(PayrollCreditBlockersType$outboundSchema))
-    .optional(),
-  totals: z.lazy(() => ContractorPaymentGroupTotals$outboundSchema).optional(),
-  contractorPayments: z.array(ContractorPaymentForGroup$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    checkDate: "check_date",
-    debitDate: "debit_date",
-    creationToken: "creation_token",
-    partnerOwnedDisbursement: "partner_owned_disbursement",
-    submissionBlockers: "submission_blockers",
-    creditBlockers: "credit_blockers",
-    contractorPayments: "contractor_payments",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentGroup$ {
-  /** @deprecated use `ContractorPaymentGroup$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentGroup$inboundSchema;
-  /** @deprecated use `ContractorPaymentGroup$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentGroup$outboundSchema;
-  /** @deprecated use `ContractorPaymentGroup$Outbound` instead. */
-  export type Outbound = ContractorPaymentGroup$Outbound;
-}
-
-export function contractorPaymentGroupToJSON(
-  contractorPaymentGroup: ContractorPaymentGroup,
-): string {
-  return JSON.stringify(
-    ContractorPaymentGroup$outboundSchema.parse(contractorPaymentGroup),
-  );
-}
 
 export function contractorPaymentGroupFromJSON(
   jsonString: string,

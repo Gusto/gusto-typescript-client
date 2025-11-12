@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HolidayPayPolicy,
   HolidayPayPolicy$inboundSchema,
-  HolidayPayPolicy$Outbound,
-  HolidayPayPolicy$outboundSchema,
 } from "../components/holidaypaypolicy.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetCompaniesCompanyUuidHolidayPayPolicyResponse = {
 };
 
 /** @internal */
-export const GetCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidHolidayPayPolicyRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,22 +61,6 @@ export const GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidHolidayPayPolicyRequest$ {
-  /** @deprecated use `GetCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound` instead. */
-  export type Outbound =
-    GetCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound;
-}
-
 export function getCompaniesCompanyUuidHolidayPayPolicyRequestToJSON(
   getCompaniesCompanyUuidHolidayPayPolicyRequest:
     GetCompaniesCompanyUuidHolidayPayPolicyRequest,
@@ -106,22 +69,6 @@ export function getCompaniesCompanyUuidHolidayPayPolicyRequestToJSON(
     GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
       getCompaniesCompanyUuidHolidayPayPolicyRequest,
     ),
-  );
-}
-
-export function getCompaniesCompanyUuidHolidayPayPolicyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetCompaniesCompanyUuidHolidayPayPolicyRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetCompaniesCompanyUuidHolidayPayPolicyRequest' from JSON`,
   );
 }
 
@@ -140,55 +87,6 @@ export const GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema:
       "Holiday-Pay-Policy": "holidayPayPolicy",
     });
   });
-
-/** @internal */
-export type GetCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Holiday-Pay-Policy"?: HolidayPayPolicy$Outbound | undefined;
-};
-
-/** @internal */
-export const GetCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound,
-    z.ZodTypeDef,
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    holidayPayPolicy: HolidayPayPolicy$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      holidayPayPolicy: "Holiday-Pay-Policy",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidHolidayPayPolicyResponse$ {
-  /** @deprecated use `GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound` instead. */
-  export type Outbound =
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound;
-}
-
-export function getCompaniesCompanyUuidHolidayPayPolicyResponseToJSON(
-  getCompaniesCompanyUuidHolidayPayPolicyResponse:
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse,
-): string {
-  return JSON.stringify(
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema.parse(
-      getCompaniesCompanyUuidHolidayPayPolicyResponse,
-    ),
-  );
-}
 
 export function getCompaniesCompanyUuidHolidayPayPolicyResponseFromJSON(
   jsonString: string,

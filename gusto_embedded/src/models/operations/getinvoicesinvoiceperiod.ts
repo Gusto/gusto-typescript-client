@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   InvoiceData,
   InvoiceData$inboundSchema,
-  InvoiceData$Outbound,
-  InvoiceData$outboundSchema,
 } from "../components/invoicedata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,19 +56,6 @@ export type GetInvoicesInvoicePeriodResponse = {
 };
 
 /** @internal */
-export const GetInvoicesInvoicePeriodSecurity$inboundSchema: z.ZodType<
-  GetInvoicesInvoicePeriodSecurity,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  SystemAccessAuth: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "SystemAccessAuth": "systemAccessAuth",
-  });
-});
-
-/** @internal */
 export type GetInvoicesInvoicePeriodSecurity$Outbound = {
   SystemAccessAuth: string;
 };
@@ -91,19 +73,6 @@ export const GetInvoicesInvoicePeriodSecurity$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetInvoicesInvoicePeriodSecurity$ {
-  /** @deprecated use `GetInvoicesInvoicePeriodSecurity$inboundSchema` instead. */
-  export const inboundSchema = GetInvoicesInvoicePeriodSecurity$inboundSchema;
-  /** @deprecated use `GetInvoicesInvoicePeriodSecurity$outboundSchema` instead. */
-  export const outboundSchema = GetInvoicesInvoicePeriodSecurity$outboundSchema;
-  /** @deprecated use `GetInvoicesInvoicePeriodSecurity$Outbound` instead. */
-  export type Outbound = GetInvoicesInvoicePeriodSecurity$Outbound;
-}
-
 export function getInvoicesInvoicePeriodSecurityToJSON(
   getInvoicesInvoicePeriodSecurity: GetInvoicesInvoicePeriodSecurity,
 ): string {
@@ -113,35 +82,6 @@ export function getInvoicesInvoicePeriodSecurityToJSON(
     ),
   );
 }
-
-export function getInvoicesInvoicePeriodSecurityFromJSON(
-  jsonString: string,
-): SafeParseResult<GetInvoicesInvoicePeriodSecurity, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetInvoicesInvoicePeriodSecurity$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetInvoicesInvoicePeriodSecurity' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetInvoicesInvoicePeriodRequest$inboundSchema: z.ZodType<
-  GetInvoicesInvoicePeriodRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  invoice_period: z.string(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-  company_uuids: z.string().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "invoice_period": "invoicePeriod",
-    "company_uuids": "companyUuids",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type GetInvoicesInvoicePeriodRequest$Outbound = {
@@ -171,19 +111,6 @@ export const GetInvoicesInvoicePeriodRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetInvoicesInvoicePeriodRequest$ {
-  /** @deprecated use `GetInvoicesInvoicePeriodRequest$inboundSchema` instead. */
-  export const inboundSchema = GetInvoicesInvoicePeriodRequest$inboundSchema;
-  /** @deprecated use `GetInvoicesInvoicePeriodRequest$outboundSchema` instead. */
-  export const outboundSchema = GetInvoicesInvoicePeriodRequest$outboundSchema;
-  /** @deprecated use `GetInvoicesInvoicePeriodRequest$Outbound` instead. */
-  export type Outbound = GetInvoicesInvoicePeriodRequest$Outbound;
-}
-
 export function getInvoicesInvoicePeriodRequestToJSON(
   getInvoicesInvoicePeriodRequest: GetInvoicesInvoicePeriodRequest,
 ): string {
@@ -191,16 +118,6 @@ export function getInvoicesInvoicePeriodRequestToJSON(
     GetInvoicesInvoicePeriodRequest$outboundSchema.parse(
       getInvoicesInvoicePeriodRequest,
     ),
-  );
-}
-
-export function getInvoicesInvoicePeriodRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetInvoicesInvoicePeriodRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetInvoicesInvoicePeriodRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetInvoicesInvoicePeriodRequest' from JSON`,
   );
 }
 
@@ -218,50 +135,6 @@ export const GetInvoicesInvoicePeriodResponse$inboundSchema: z.ZodType<
     "Invoice-Data": "invoiceData",
   });
 });
-
-/** @internal */
-export type GetInvoicesInvoicePeriodResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Invoice-Data"?: InvoiceData$Outbound | undefined;
-};
-
-/** @internal */
-export const GetInvoicesInvoicePeriodResponse$outboundSchema: z.ZodType<
-  GetInvoicesInvoicePeriodResponse$Outbound,
-  z.ZodTypeDef,
-  GetInvoicesInvoicePeriodResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  invoiceData: InvoiceData$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    invoiceData: "Invoice-Data",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetInvoicesInvoicePeriodResponse$ {
-  /** @deprecated use `GetInvoicesInvoicePeriodResponse$inboundSchema` instead. */
-  export const inboundSchema = GetInvoicesInvoicePeriodResponse$inboundSchema;
-  /** @deprecated use `GetInvoicesInvoicePeriodResponse$outboundSchema` instead. */
-  export const outboundSchema = GetInvoicesInvoicePeriodResponse$outboundSchema;
-  /** @deprecated use `GetInvoicesInvoicePeriodResponse$Outbound` instead. */
-  export type Outbound = GetInvoicesInvoicePeriodResponse$Outbound;
-}
-
-export function getInvoicesInvoicePeriodResponseToJSON(
-  getInvoicesInvoicePeriodResponse: GetInvoicesInvoicePeriodResponse,
-): string {
-  return JSON.stringify(
-    GetInvoicesInvoicePeriodResponse$outboundSchema.parse(
-      getInvoicesInvoicePeriodResponse,
-    ),
-  );
-}
 
 export function getInvoicesInvoicePeriodResponseFromJSON(
   jsonString: string,

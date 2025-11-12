@@ -10,7 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PayScheduleFrequency,
   PayScheduleFrequency$inboundSchema,
-  PayScheduleFrequency$outboundSchema,
 } from "./payschedulefrequency.js";
 
 /**
@@ -90,70 +89,6 @@ export const PayScheduleObject$inboundSchema: z.ZodType<
     "auto_pilot": "autoPilot",
   });
 });
-
-/** @internal */
-export type PayScheduleObject$Outbound = {
-  uuid: string;
-  frequency?: string | undefined;
-  anchor_pay_date?: string | undefined;
-  anchor_end_of_pay_period?: string | undefined;
-  day_1?: number | null | undefined;
-  day_2?: number | null | undefined;
-  name?: string | null | undefined;
-  custom_name?: string | undefined;
-  auto_pilot?: boolean | undefined;
-  active?: boolean | undefined;
-  version: string;
-};
-
-/** @internal */
-export const PayScheduleObject$outboundSchema: z.ZodType<
-  PayScheduleObject$Outbound,
-  z.ZodTypeDef,
-  PayScheduleObject
-> = z.object({
-  uuid: z.string(),
-  frequency: PayScheduleFrequency$outboundSchema.optional(),
-  anchorPayDate: z.string().optional(),
-  anchorEndOfPayPeriod: z.string().optional(),
-  day1: z.nullable(z.number().int()).optional(),
-  day2: z.nullable(z.number().int()).optional(),
-  name: z.nullable(z.string()).optional(),
-  customName: z.string().optional(),
-  autoPilot: z.boolean().optional(),
-  active: z.boolean().optional(),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    anchorPayDate: "anchor_pay_date",
-    anchorEndOfPayPeriod: "anchor_end_of_pay_period",
-    day1: "day_1",
-    day2: "day_2",
-    customName: "custom_name",
-    autoPilot: "auto_pilot",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayScheduleObject$ {
-  /** @deprecated use `PayScheduleObject$inboundSchema` instead. */
-  export const inboundSchema = PayScheduleObject$inboundSchema;
-  /** @deprecated use `PayScheduleObject$outboundSchema` instead. */
-  export const outboundSchema = PayScheduleObject$outboundSchema;
-  /** @deprecated use `PayScheduleObject$Outbound` instead. */
-  export type Outbound = PayScheduleObject$Outbound;
-}
-
-export function payScheduleObjectToJSON(
-  payScheduleObject: PayScheduleObject,
-): string {
-  return JSON.stringify(
-    PayScheduleObject$outboundSchema.parse(payScheduleObject),
-  );
-}
 
 export function payScheduleObjectFromJSON(
   jsonString: string,

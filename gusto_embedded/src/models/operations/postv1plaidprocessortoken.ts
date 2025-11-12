@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBankAccount,
   CompanyBankAccount$inboundSchema,
-  CompanyBankAccount$Outbound,
-  CompanyBankAccount$outboundSchema,
 } from "../components/companybankaccount.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -74,40 +69,8 @@ export type PostV1PlaidProcessorTokenResponse = {
 };
 
 /** @internal */
-export const OwnerType$inboundSchema: z.ZodNativeEnum<typeof OwnerType> = z
+export const OwnerType$outboundSchema: z.ZodNativeEnum<typeof OwnerType> = z
   .nativeEnum(OwnerType);
-
-/** @internal */
-export const OwnerType$outboundSchema: z.ZodNativeEnum<typeof OwnerType> =
-  OwnerType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OwnerType$ {
-  /** @deprecated use `OwnerType$inboundSchema` instead. */
-  export const inboundSchema = OwnerType$inboundSchema;
-  /** @deprecated use `OwnerType$outboundSchema` instead. */
-  export const outboundSchema = OwnerType$outboundSchema;
-}
-
-/** @internal */
-export const PostV1PlaidProcessorTokenRequestBody$inboundSchema: z.ZodType<
-  PostV1PlaidProcessorTokenRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  owner_type: OwnerType$inboundSchema,
-  owner_id: z.string(),
-  processor_token: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "owner_type": "ownerType",
-    "owner_id": "ownerId",
-    "processor_token": "processorToken",
-  });
-});
 
 /** @internal */
 export type PostV1PlaidProcessorTokenRequestBody$Outbound = {
@@ -133,21 +96,6 @@ export const PostV1PlaidProcessorTokenRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1PlaidProcessorTokenRequestBody$ {
-  /** @deprecated use `PostV1PlaidProcessorTokenRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1PlaidProcessorTokenRequestBody$inboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1PlaidProcessorTokenRequestBody$outboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenRequestBody$Outbound` instead. */
-  export type Outbound = PostV1PlaidProcessorTokenRequestBody$Outbound;
-}
-
 export function postV1PlaidProcessorTokenRequestBodyToJSON(
   postV1PlaidProcessorTokenRequestBody: PostV1PlaidProcessorTokenRequestBody,
 ): string {
@@ -157,32 +105,6 @@ export function postV1PlaidProcessorTokenRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1PlaidProcessorTokenRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1PlaidProcessorTokenRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1PlaidProcessorTokenRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1PlaidProcessorTokenRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1PlaidProcessorTokenRequest$inboundSchema: z.ZodType<
-  PostV1PlaidProcessorTokenRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PostV1PlaidProcessorTokenRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1PlaidProcessorTokenRequest$Outbound = {
@@ -207,19 +129,6 @@ export const PostV1PlaidProcessorTokenRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1PlaidProcessorTokenRequest$ {
-  /** @deprecated use `PostV1PlaidProcessorTokenRequest$inboundSchema` instead. */
-  export const inboundSchema = PostV1PlaidProcessorTokenRequest$inboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenRequest$outboundSchema` instead. */
-  export const outboundSchema = PostV1PlaidProcessorTokenRequest$outboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenRequest$Outbound` instead. */
-  export type Outbound = PostV1PlaidProcessorTokenRequest$Outbound;
-}
-
 export function postV1PlaidProcessorTokenRequestToJSON(
   postV1PlaidProcessorTokenRequest: PostV1PlaidProcessorTokenRequest,
 ): string {
@@ -230,58 +139,12 @@ export function postV1PlaidProcessorTokenRequestToJSON(
   );
 }
 
-export function postV1PlaidProcessorTokenRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1PlaidProcessorTokenRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1PlaidProcessorTokenRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1PlaidProcessorTokenRequest' from JSON`,
-  );
-}
-
 /** @internal */
 export const PostV1PlaidProcessorTokenResponseBody$inboundSchema: z.ZodType<
   PostV1PlaidProcessorTokenResponseBody,
   z.ZodTypeDef,
   unknown
 > = CompanyBankAccount$inboundSchema;
-
-/** @internal */
-export type PostV1PlaidProcessorTokenResponseBody$Outbound =
-  CompanyBankAccount$Outbound;
-
-/** @internal */
-export const PostV1PlaidProcessorTokenResponseBody$outboundSchema: z.ZodType<
-  PostV1PlaidProcessorTokenResponseBody$Outbound,
-  z.ZodTypeDef,
-  PostV1PlaidProcessorTokenResponseBody
-> = CompanyBankAccount$outboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1PlaidProcessorTokenResponseBody$ {
-  /** @deprecated use `PostV1PlaidProcessorTokenResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1PlaidProcessorTokenResponseBody$inboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1PlaidProcessorTokenResponseBody$outboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenResponseBody$Outbound` instead. */
-  export type Outbound = PostV1PlaidProcessorTokenResponseBody$Outbound;
-}
-
-export function postV1PlaidProcessorTokenResponseBodyToJSON(
-  postV1PlaidProcessorTokenResponseBody: PostV1PlaidProcessorTokenResponseBody,
-): string {
-  return JSON.stringify(
-    PostV1PlaidProcessorTokenResponseBody$outboundSchema.parse(
-      postV1PlaidProcessorTokenResponseBody,
-    ),
-  );
-}
 
 export function postV1PlaidProcessorTokenResponseBodyFromJSON(
   jsonString: string,
@@ -307,50 +170,6 @@ export const PostV1PlaidProcessorTokenResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type PostV1PlaidProcessorTokenResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  oneOf?: CompanyBankAccount$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1PlaidProcessorTokenResponse$outboundSchema: z.ZodType<
-  PostV1PlaidProcessorTokenResponse$Outbound,
-  z.ZodTypeDef,
-  PostV1PlaidProcessorTokenResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  oneOf: CompanyBankAccount$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1PlaidProcessorTokenResponse$ {
-  /** @deprecated use `PostV1PlaidProcessorTokenResponse$inboundSchema` instead. */
-  export const inboundSchema = PostV1PlaidProcessorTokenResponse$inboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1PlaidProcessorTokenResponse$outboundSchema;
-  /** @deprecated use `PostV1PlaidProcessorTokenResponse$Outbound` instead. */
-  export type Outbound = PostV1PlaidProcessorTokenResponse$Outbound;
-}
-
-export function postV1PlaidProcessorTokenResponseToJSON(
-  postV1PlaidProcessorTokenResponse: PostV1PlaidProcessorTokenResponse,
-): string {
-  return JSON.stringify(
-    PostV1PlaidProcessorTokenResponse$outboundSchema.parse(
-      postV1PlaidProcessorTokenResponse,
-    ),
-  );
-}
 
 export function postV1PlaidProcessorTokenResponseFromJSON(
   jsonString: string,

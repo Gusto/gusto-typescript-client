@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   ReportTemplate,
   ReportTemplate$inboundSchema,
-  ReportTemplate$Outbound,
-  ReportTemplate$outboundSchema,
 } from "../components/reporttemplate.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,24 +44,6 @@ export type GetCompaniesCompanyUuidReportTemplatesReportTypeResponse = {
 };
 
 /** @internal */
-export const GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    report_type: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "report_type": "reportType",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$Outbound = {
   company_uuid: string;
   report_type: string;
@@ -91,22 +68,6 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSch
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$ {
-  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$Outbound` instead. */
-  export type Outbound =
-    GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$Outbound;
-}
-
 export function getCompaniesCompanyUuidReportTemplatesReportTypeRequestToJSON(
   getCompaniesCompanyUuidReportTemplatesReportTypeRequest:
     GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
@@ -114,21 +75,6 @@ export function getCompaniesCompanyUuidReportTemplatesReportTypeRequestToJSON(
   return JSON.stringify(
     GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$outboundSchema
       .parse(getCompaniesCompanyUuidReportTemplatesReportTypeRequest),
-  );
-}
-
-export function getCompaniesCompanyUuidReportTemplatesReportTypeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetCompaniesCompanyUuidReportTemplatesReportTypeRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetCompaniesCompanyUuidReportTemplatesReportTypeRequest' from JSON`,
   );
 }
 
@@ -147,55 +93,6 @@ export const GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSch
       "Report-Template": "reportTemplate",
     });
   });
-
-/** @internal */
-export type GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Report-Template"?: ReportTemplate$Outbound | undefined;
-  };
-
-/** @internal */
-export const GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound,
-    z.ZodTypeDef,
-    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    reportTemplate: ReportTemplate$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      reportTemplate: "Report-Template",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$ {
-  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound` instead. */
-  export type Outbound =
-    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$Outbound;
-}
-
-export function getCompaniesCompanyUuidReportTemplatesReportTypeResponseToJSON(
-  getCompaniesCompanyUuidReportTemplatesReportTypeResponse:
-    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
-): string {
-  return JSON.stringify(
-    GetCompaniesCompanyUuidReportTemplatesReportTypeResponse$outboundSchema
-      .parse(getCompaniesCompanyUuidReportTemplatesReportTypeResponse),
-  );
-}
 
 export function getCompaniesCompanyUuidReportTemplatesReportTypeResponseFromJSON(
   jsonString: string,

@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,21 +30,6 @@ export type PutV1TaxLiabilitiesFinishRequest = {
 export type PutV1TaxLiabilitiesFinishResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const PutV1TaxLiabilitiesFinishRequest$inboundSchema: z.ZodType<
-  PutV1TaxLiabilitiesFinishRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type PutV1TaxLiabilitiesFinishRequest$Outbound = {
@@ -70,19 +52,6 @@ export const PutV1TaxLiabilitiesFinishRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TaxLiabilitiesFinishRequest$ {
-  /** @deprecated use `PutV1TaxLiabilitiesFinishRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1TaxLiabilitiesFinishRequest$inboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesFinishRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1TaxLiabilitiesFinishRequest$outboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesFinishRequest$Outbound` instead. */
-  export type Outbound = PutV1TaxLiabilitiesFinishRequest$Outbound;
-}
-
 export function putV1TaxLiabilitiesFinishRequestToJSON(
   putV1TaxLiabilitiesFinishRequest: PutV1TaxLiabilitiesFinishRequest,
 ): string {
@@ -90,16 +59,6 @@ export function putV1TaxLiabilitiesFinishRequestToJSON(
     PutV1TaxLiabilitiesFinishRequest$outboundSchema.parse(
       putV1TaxLiabilitiesFinishRequest,
     ),
-  );
-}
-
-export function putV1TaxLiabilitiesFinishRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1TaxLiabilitiesFinishRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1TaxLiabilitiesFinishRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1TaxLiabilitiesFinishRequest' from JSON`,
   );
 }
 
@@ -115,48 +74,6 @@ export const PutV1TaxLiabilitiesFinishResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type PutV1TaxLiabilitiesFinishResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const PutV1TaxLiabilitiesFinishResponse$outboundSchema: z.ZodType<
-  PutV1TaxLiabilitiesFinishResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1TaxLiabilitiesFinishResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1TaxLiabilitiesFinishResponse$ {
-  /** @deprecated use `PutV1TaxLiabilitiesFinishResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1TaxLiabilitiesFinishResponse$inboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesFinishResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1TaxLiabilitiesFinishResponse$outboundSchema;
-  /** @deprecated use `PutV1TaxLiabilitiesFinishResponse$Outbound` instead. */
-  export type Outbound = PutV1TaxLiabilitiesFinishResponse$Outbound;
-}
-
-export function putV1TaxLiabilitiesFinishResponseToJSON(
-  putV1TaxLiabilitiesFinishResponse: PutV1TaxLiabilitiesFinishResponse,
-): string {
-  return JSON.stringify(
-    PutV1TaxLiabilitiesFinishResponse$outboundSchema.parse(
-      putV1TaxLiabilitiesFinishResponse,
-    ),
-  );
-}
 
 export function putV1TaxLiabilitiesFinishResponseFromJSON(
   jsonString: string,

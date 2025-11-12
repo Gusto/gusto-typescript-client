@@ -9,19 +9,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import {
   WireInRequest,
   WireInRequest$inboundSchema,
-  WireInRequest$Outbound,
-  WireInRequest$outboundSchema,
 } from "../components/wireinrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -65,26 +60,6 @@ export type PutWireInRequestsWireInRequestUuidResponse = {
 };
 
 /** @internal */
-export const PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema:
-  z.ZodType<
-    PutWireInRequestsWireInRequestUuidRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    date_sent: z.string(),
-    bank_name: z.string(),
-    amount_sent: z.string(),
-    additional_notes: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "date_sent": "dateSent",
-      "bank_name": "bankName",
-      "amount_sent": "amountSent",
-      "additional_notes": "additionalNotes",
-    });
-  });
-
-/** @internal */
 export type PutWireInRequestsWireInRequestUuidRequestBody$Outbound = {
   date_sent: string;
   bank_name: string;
@@ -112,21 +87,6 @@ export const PutWireInRequestsWireInRequestUuidRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutWireInRequestsWireInRequestUuidRequestBody$ {
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema;
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutWireInRequestsWireInRequestUuidRequestBody$outboundSchema;
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidRequestBody$Outbound` instead. */
-  export type Outbound = PutWireInRequestsWireInRequestUuidRequestBody$Outbound;
-}
-
 export function putWireInRequestsWireInRequestUuidRequestBodyToJSON(
   putWireInRequestsWireInRequestUuidRequestBody:
     PutWireInRequestsWireInRequestUuidRequestBody,
@@ -137,41 +97,6 @@ export function putWireInRequestsWireInRequestUuidRequestBodyToJSON(
     ),
   );
 }
-
-export function putWireInRequestsWireInRequestUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutWireInRequestsWireInRequestUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutWireInRequestsWireInRequestUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutWireInRequestsWireInRequestUuidRequest$inboundSchema: z.ZodType<
-  PutWireInRequestsWireInRequestUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  wire_in_request_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutWireInRequestsWireInRequestUuidRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "wire_in_request_uuid": "wireInRequestUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutWireInRequestsWireInRequestUuidRequest$Outbound = {
@@ -200,21 +125,6 @@ export const PutWireInRequestsWireInRequestUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutWireInRequestsWireInRequestUuidRequest$ {
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutWireInRequestsWireInRequestUuidRequest$inboundSchema;
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutWireInRequestsWireInRequestUuidRequest$outboundSchema;
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidRequest$Outbound` instead. */
-  export type Outbound = PutWireInRequestsWireInRequestUuidRequest$Outbound;
-}
-
 export function putWireInRequestsWireInRequestUuidRequestToJSON(
   putWireInRequestsWireInRequestUuidRequest:
     PutWireInRequestsWireInRequestUuidRequest,
@@ -223,22 +133,6 @@ export function putWireInRequestsWireInRequestUuidRequestToJSON(
     PutWireInRequestsWireInRequestUuidRequest$outboundSchema.parse(
       putWireInRequestsWireInRequestUuidRequest,
     ),
-  );
-}
-
-export function putWireInRequestsWireInRequestUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutWireInRequestsWireInRequestUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutWireInRequestsWireInRequestUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutWireInRequestsWireInRequestUuidRequest' from JSON`,
   );
 }
 
@@ -254,54 +148,6 @@ export const PutWireInRequestsWireInRequestUuidResponse$inboundSchema:
         "Wire-In-Request": "wireInRequest",
       });
     });
-
-/** @internal */
-export type PutWireInRequestsWireInRequestUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Wire-In-Request"?: WireInRequest$Outbound | undefined;
-};
-
-/** @internal */
-export const PutWireInRequestsWireInRequestUuidResponse$outboundSchema:
-  z.ZodType<
-    PutWireInRequestsWireInRequestUuidResponse$Outbound,
-    z.ZodTypeDef,
-    PutWireInRequestsWireInRequestUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    wireInRequest: WireInRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      wireInRequest: "Wire-In-Request",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutWireInRequestsWireInRequestUuidResponse$ {
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutWireInRequestsWireInRequestUuidResponse$inboundSchema;
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutWireInRequestsWireInRequestUuidResponse$outboundSchema;
-  /** @deprecated use `PutWireInRequestsWireInRequestUuidResponse$Outbound` instead. */
-  export type Outbound = PutWireInRequestsWireInRequestUuidResponse$Outbound;
-}
-
-export function putWireInRequestsWireInRequestUuidResponseToJSON(
-  putWireInRequestsWireInRequestUuidResponse:
-    PutWireInRequestsWireInRequestUuidResponse,
-): string {
-  return JSON.stringify(
-    PutWireInRequestsWireInRequestUuidResponse$outboundSchema.parse(
-      putWireInRequestsWireInRequestUuidResponse,
-    ),
-  );
-}
 
 export function putWireInRequestsWireInRequestUuidResponseFromJSON(
   jsonString: string,

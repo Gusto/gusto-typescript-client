@@ -7,21 +7,13 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Flow,
-  Flow$inboundSchema,
-  Flow$Outbound,
-  Flow$outboundSchema,
-} from "../components/flow.js";
+import { Flow, Flow$inboundSchema } from "../components/flow.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -78,41 +70,8 @@ export type PostV1CompanyFlowsResponse = {
 };
 
 /** @internal */
-export const EntityType$inboundSchema: z.ZodNativeEnum<typeof EntityType> = z
+export const EntityType$outboundSchema: z.ZodNativeEnum<typeof EntityType> = z
   .nativeEnum(EntityType);
-
-/** @internal */
-export const EntityType$outboundSchema: z.ZodNativeEnum<typeof EntityType> =
-  EntityType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntityType$ {
-  /** @deprecated use `EntityType$inboundSchema` instead. */
-  export const inboundSchema = EntityType$inboundSchema;
-  /** @deprecated use `EntityType$outboundSchema` instead. */
-  export const outboundSchema = EntityType$outboundSchema;
-}
-
-/** @internal */
-export const PostV1CompanyFlowsRequestBody$inboundSchema: z.ZodType<
-  PostV1CompanyFlowsRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  flow_type: z.string(),
-  entity_uuid: z.string().optional(),
-  entity_type: EntityType$inboundSchema.optional(),
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "flow_type": "flowType",
-    "entity_uuid": "entityUuid",
-    "entity_type": "entityType",
-  });
-});
 
 /** @internal */
 export type PostV1CompanyFlowsRequestBody$Outbound = {
@@ -140,19 +99,6 @@ export const PostV1CompanyFlowsRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompanyFlowsRequestBody$ {
-  /** @deprecated use `PostV1CompanyFlowsRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PostV1CompanyFlowsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompanyFlowsRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PostV1CompanyFlowsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompanyFlowsRequestBody$Outbound` instead. */
-  export type Outbound = PostV1CompanyFlowsRequestBody$Outbound;
-}
-
 export function postV1CompanyFlowsRequestBodyToJSON(
   postV1CompanyFlowsRequestBody: PostV1CompanyFlowsRequestBody,
 ): string {
@@ -162,33 +108,6 @@ export function postV1CompanyFlowsRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1CompanyFlowsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1CompanyFlowsRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1CompanyFlowsRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompanyFlowsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompanyFlowsRequest$inboundSchema: z.ZodType<
-  PostV1CompanyFlowsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PostV1CompanyFlowsRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_uuid": "companyUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1CompanyFlowsRequest$Outbound = {
@@ -214,34 +133,11 @@ export const PostV1CompanyFlowsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompanyFlowsRequest$ {
-  /** @deprecated use `PostV1CompanyFlowsRequest$inboundSchema` instead. */
-  export const inboundSchema = PostV1CompanyFlowsRequest$inboundSchema;
-  /** @deprecated use `PostV1CompanyFlowsRequest$outboundSchema` instead. */
-  export const outboundSchema = PostV1CompanyFlowsRequest$outboundSchema;
-  /** @deprecated use `PostV1CompanyFlowsRequest$Outbound` instead. */
-  export type Outbound = PostV1CompanyFlowsRequest$Outbound;
-}
-
 export function postV1CompanyFlowsRequestToJSON(
   postV1CompanyFlowsRequest: PostV1CompanyFlowsRequest,
 ): string {
   return JSON.stringify(
     PostV1CompanyFlowsRequest$outboundSchema.parse(postV1CompanyFlowsRequest),
-  );
-}
-
-export function postV1CompanyFlowsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1CompanyFlowsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1CompanyFlowsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompanyFlowsRequest' from JSON`,
   );
 }
 
@@ -259,48 +155,6 @@ export const PostV1CompanyFlowsResponse$inboundSchema: z.ZodType<
     "Flow": "flow",
   });
 });
-
-/** @internal */
-export type PostV1CompanyFlowsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Flow?: Flow$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompanyFlowsResponse$outboundSchema: z.ZodType<
-  PostV1CompanyFlowsResponse$Outbound,
-  z.ZodTypeDef,
-  PostV1CompanyFlowsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  flow: Flow$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    flow: "Flow",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompanyFlowsResponse$ {
-  /** @deprecated use `PostV1CompanyFlowsResponse$inboundSchema` instead. */
-  export const inboundSchema = PostV1CompanyFlowsResponse$inboundSchema;
-  /** @deprecated use `PostV1CompanyFlowsResponse$outboundSchema` instead. */
-  export const outboundSchema = PostV1CompanyFlowsResponse$outboundSchema;
-  /** @deprecated use `PostV1CompanyFlowsResponse$Outbound` instead. */
-  export type Outbound = PostV1CompanyFlowsResponse$Outbound;
-}
-
-export function postV1CompanyFlowsResponseToJSON(
-  postV1CompanyFlowsResponse: PostV1CompanyFlowsResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompanyFlowsResponse$outboundSchema.parse(postV1CompanyFlowsResponse),
-  );
-}
 
 export function postV1CompanyFlowsResponseFromJSON(
   jsonString: string,

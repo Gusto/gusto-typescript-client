@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,22 +30,6 @@ export type DeleteCompaniesCompanyUuidHolidayPayPolicyRequest = {
 export type DeleteCompaniesCompanyUuidHolidayPayPolicyResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema:
-  z.ZodType<
-    DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound = {
@@ -72,22 +53,6 @@ export const DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$ {
-  /** @deprecated use `DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema;
-  /** @deprecated use `DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema;
-  /** @deprecated use `DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound;
-}
-
 export function deleteCompaniesCompanyUuidHolidayPayPolicyRequestToJSON(
   deleteCompaniesCompanyUuidHolidayPayPolicyRequest:
     DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
@@ -96,22 +61,6 @@ export function deleteCompaniesCompanyUuidHolidayPayPolicyRequestToJSON(
     DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
       deleteCompaniesCompanyUuidHolidayPayPolicyRequest,
     ),
-  );
-}
-
-export function deleteCompaniesCompanyUuidHolidayPayPolicyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteCompaniesCompanyUuidHolidayPayPolicyRequest' from JSON`,
   );
 }
 
@@ -128,52 +77,6 @@ export const DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema:
-  z.ZodType<
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$ {
-  /** @deprecated use `DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema;
-  /** @deprecated use `DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema;
-  /** @deprecated use `DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound;
-}
-
-export function deleteCompaniesCompanyUuidHolidayPayPolicyResponseToJSON(
-  deleteCompaniesCompanyUuidHolidayPayPolicyResponse:
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
-): string {
-  return JSON.stringify(
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema.parse(
-      deleteCompaniesCompanyUuidHolidayPayPolicyResponse,
-    ),
-  );
-}
 
 export function deleteCompaniesCompanyUuidHolidayPayPolicyResponseFromJSON(
   jsonString: string,

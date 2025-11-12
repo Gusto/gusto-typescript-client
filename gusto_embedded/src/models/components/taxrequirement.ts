@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaxRequirementMetadata,
   TaxRequirementMetadata$inboundSchema,
-  TaxRequirementMetadata$Outbound,
-  TaxRequirementMetadata$outboundSchema,
 } from "./taxrequirementmetadata.js";
 
 /**
@@ -66,42 +64,6 @@ export const TaxRequirementApplicableIfValue$inboundSchema: z.ZodType<
   unknown
 > = z.union([z.boolean(), z.string(), z.number()]);
 
-/** @internal */
-export type TaxRequirementApplicableIfValue$Outbound =
-  | boolean
-  | string
-  | number;
-
-/** @internal */
-export const TaxRequirementApplicableIfValue$outboundSchema: z.ZodType<
-  TaxRequirementApplicableIfValue$Outbound,
-  z.ZodTypeDef,
-  TaxRequirementApplicableIfValue
-> = z.union([z.boolean(), z.string(), z.number()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementApplicableIfValue$ {
-  /** @deprecated use `TaxRequirementApplicableIfValue$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementApplicableIfValue$inboundSchema;
-  /** @deprecated use `TaxRequirementApplicableIfValue$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementApplicableIfValue$outboundSchema;
-  /** @deprecated use `TaxRequirementApplicableIfValue$Outbound` instead. */
-  export type Outbound = TaxRequirementApplicableIfValue$Outbound;
-}
-
-export function taxRequirementApplicableIfValueToJSON(
-  taxRequirementApplicableIfValue: TaxRequirementApplicableIfValue,
-): string {
-  return JSON.stringify(
-    TaxRequirementApplicableIfValue$outboundSchema.parse(
-      taxRequirementApplicableIfValue,
-    ),
-  );
-}
-
 export function taxRequirementApplicableIfValueFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxRequirementApplicableIfValue, SDKValidationError> {
@@ -122,39 +84,6 @@ export const ApplicableIf$inboundSchema: z.ZodType<
   value: z.nullable(z.union([z.boolean(), z.string(), z.number()])).optional(),
 });
 
-/** @internal */
-export type ApplicableIf$Outbound = {
-  key?: string | undefined;
-  value?: boolean | string | number | null | undefined;
-};
-
-/** @internal */
-export const ApplicableIf$outboundSchema: z.ZodType<
-  ApplicableIf$Outbound,
-  z.ZodTypeDef,
-  ApplicableIf
-> = z.object({
-  key: z.string().optional(),
-  value: z.nullable(z.union([z.boolean(), z.string(), z.number()])).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApplicableIf$ {
-  /** @deprecated use `ApplicableIf$inboundSchema` instead. */
-  export const inboundSchema = ApplicableIf$inboundSchema;
-  /** @deprecated use `ApplicableIf$outboundSchema` instead. */
-  export const outboundSchema = ApplicableIf$outboundSchema;
-  /** @deprecated use `ApplicableIf$Outbound` instead. */
-  export type Outbound = ApplicableIf$Outbound;
-}
-
-export function applicableIfToJSON(applicableIf: ApplicableIf): string {
-  return JSON.stringify(ApplicableIf$outboundSchema.parse(applicableIf));
-}
-
 export function applicableIfFromJSON(
   jsonString: string,
 ): SafeParseResult<ApplicableIf, SDKValidationError> {
@@ -171,37 +100,6 @@ export const TaxRequirementValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.boolean(), z.string(), z.number()]);
-
-/** @internal */
-export type TaxRequirementValue$Outbound = boolean | string | number;
-
-/** @internal */
-export const TaxRequirementValue$outboundSchema: z.ZodType<
-  TaxRequirementValue$Outbound,
-  z.ZodTypeDef,
-  TaxRequirementValue
-> = z.union([z.boolean(), z.string(), z.number()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementValue$ {
-  /** @deprecated use `TaxRequirementValue$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementValue$inboundSchema;
-  /** @deprecated use `TaxRequirementValue$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementValue$outboundSchema;
-  /** @deprecated use `TaxRequirementValue$Outbound` instead. */
-  export type Outbound = TaxRequirementValue$Outbound;
-}
-
-export function taxRequirementValueToJSON(
-  taxRequirementValue: TaxRequirementValue,
-): string {
-  return JSON.stringify(
-    TaxRequirementValue$outboundSchema.parse(taxRequirementValue),
-  );
-}
 
 export function taxRequirementValueFromJSON(
   jsonString: string,
@@ -230,51 +128,6 @@ export const TaxRequirement$inboundSchema: z.ZodType<
     "applicable_if": "applicableIf",
   });
 });
-
-/** @internal */
-export type TaxRequirement$Outbound = {
-  key?: string | undefined;
-  applicable_if?: Array<ApplicableIf$Outbound> | undefined;
-  label?: string | undefined;
-  description?: string | null | undefined;
-  value?: boolean | string | number | null | undefined;
-  metadata?: TaxRequirementMetadata$Outbound | undefined;
-};
-
-/** @internal */
-export const TaxRequirement$outboundSchema: z.ZodType<
-  TaxRequirement$Outbound,
-  z.ZodTypeDef,
-  TaxRequirement
-> = z.object({
-  key: z.string().optional(),
-  applicableIf: z.array(z.lazy(() => ApplicableIf$outboundSchema)).optional(),
-  label: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  value: z.nullable(z.union([z.boolean(), z.string(), z.number()])).optional(),
-  metadata: TaxRequirementMetadata$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    applicableIf: "applicable_if",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirement$ {
-  /** @deprecated use `TaxRequirement$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirement$inboundSchema;
-  /** @deprecated use `TaxRequirement$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirement$outboundSchema;
-  /** @deprecated use `TaxRequirement$Outbound` instead. */
-  export type Outbound = TaxRequirement$Outbound;
-}
-
-export function taxRequirementToJSON(taxRequirement: TaxRequirement): string {
-  return JSON.stringify(TaxRequirement$outboundSchema.parse(taxRequirement));
-}
 
 export function taxRequirementFromJSON(
   jsonString: string,

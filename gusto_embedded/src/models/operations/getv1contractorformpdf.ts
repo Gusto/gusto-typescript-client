@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  FormPdf,
-  FormPdf$inboundSchema,
-  FormPdf$Outbound,
-  FormPdf$outboundSchema,
-} from "../components/formpdf.js";
+import { FormPdf, FormPdf$inboundSchema } from "../components/formpdf.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,23 +41,6 @@ export type GetV1ContractorFormPdfResponse = {
 };
 
 /** @internal */
-export const GetV1ContractorFormPdfRequest$inboundSchema: z.ZodType<
-  GetV1ContractorFormPdfRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_uuid: z.string(),
-  form_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_uuid": "contractorUuid",
-    "form_id": "formId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1ContractorFormPdfRequest$Outbound = {
   contractor_uuid: string;
   form_id: string;
@@ -89,19 +64,6 @@ export const GetV1ContractorFormPdfRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorFormPdfRequest$ {
-  /** @deprecated use `GetV1ContractorFormPdfRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1ContractorFormPdfRequest$inboundSchema;
-  /** @deprecated use `GetV1ContractorFormPdfRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1ContractorFormPdfRequest$outboundSchema;
-  /** @deprecated use `GetV1ContractorFormPdfRequest$Outbound` instead. */
-  export type Outbound = GetV1ContractorFormPdfRequest$Outbound;
-}
-
 export function getV1ContractorFormPdfRequestToJSON(
   getV1ContractorFormPdfRequest: GetV1ContractorFormPdfRequest,
 ): string {
@@ -109,16 +71,6 @@ export function getV1ContractorFormPdfRequestToJSON(
     GetV1ContractorFormPdfRequest$outboundSchema.parse(
       getV1ContractorFormPdfRequest,
     ),
-  );
-}
-
-export function getV1ContractorFormPdfRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1ContractorFormPdfRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1ContractorFormPdfRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1ContractorFormPdfRequest' from JSON`,
   );
 }
 
@@ -136,50 +88,6 @@ export const GetV1ContractorFormPdfResponse$inboundSchema: z.ZodType<
     "Form-Pdf": "formPdf",
   });
 });
-
-/** @internal */
-export type GetV1ContractorFormPdfResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Form-Pdf"?: FormPdf$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1ContractorFormPdfResponse$outboundSchema: z.ZodType<
-  GetV1ContractorFormPdfResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1ContractorFormPdfResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  formPdf: FormPdf$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    formPdf: "Form-Pdf",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorFormPdfResponse$ {
-  /** @deprecated use `GetV1ContractorFormPdfResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1ContractorFormPdfResponse$inboundSchema;
-  /** @deprecated use `GetV1ContractorFormPdfResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1ContractorFormPdfResponse$outboundSchema;
-  /** @deprecated use `GetV1ContractorFormPdfResponse$Outbound` instead. */
-  export type Outbound = GetV1ContractorFormPdfResponse$Outbound;
-}
-
-export function getV1ContractorFormPdfResponseToJSON(
-  getV1ContractorFormPdfResponse: GetV1ContractorFormPdfResponse,
-): string {
-  return JSON.stringify(
-    GetV1ContractorFormPdfResponse$outboundSchema.parse(
-      getV1ContractorFormPdfResponse,
-    ),
-  );
-}
 
 export function getV1ContractorFormPdfResponseFromJSON(
   jsonString: string,

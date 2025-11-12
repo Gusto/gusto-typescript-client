@@ -62,51 +62,6 @@ export const PossibleLiabilities$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PossibleLiabilities$Outbound = {
-  liability_amount?: string | undefined;
-  payroll_check_date?: string | null | undefined;
-  external_payroll_uuid?: string | null | undefined;
-};
-
-/** @internal */
-export const PossibleLiabilities$outboundSchema: z.ZodType<
-  PossibleLiabilities$Outbound,
-  z.ZodTypeDef,
-  PossibleLiabilities
-> = z.object({
-  liabilityAmount: z.string().optional(),
-  payrollCheckDate: z.nullable(z.string()).optional(),
-  externalPayrollUuid: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    liabilityAmount: "liability_amount",
-    payrollCheckDate: "payroll_check_date",
-    externalPayrollUuid: "external_payroll_uuid",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PossibleLiabilities$ {
-  /** @deprecated use `PossibleLiabilities$inboundSchema` instead. */
-  export const inboundSchema = PossibleLiabilities$inboundSchema;
-  /** @deprecated use `PossibleLiabilities$outboundSchema` instead. */
-  export const outboundSchema = PossibleLiabilities$outboundSchema;
-  /** @deprecated use `PossibleLiabilities$Outbound` instead. */
-  export type Outbound = PossibleLiabilities$Outbound;
-}
-
-export function possibleLiabilitiesToJSON(
-  possibleLiabilities: PossibleLiabilities,
-): string {
-  return JSON.stringify(
-    PossibleLiabilities$outboundSchema.parse(possibleLiabilities),
-  );
-}
-
 export function possibleLiabilitiesFromJSON(
   jsonString: string,
 ): SafeParseResult<PossibleLiabilities, SDKValidationError> {
@@ -136,55 +91,6 @@ export const TaxLiabilitiesSelections$inboundSchema: z.ZodType<
     "possible_liabilities": "possibleLiabilities",
   });
 });
-
-/** @internal */
-export type TaxLiabilitiesSelections$Outbound = {
-  tax_id?: number | undefined;
-  tax_name?: string | undefined;
-  last_unpaid_external_payroll_uuid?: string | null | undefined;
-  possible_liabilities?: Array<PossibleLiabilities$Outbound> | undefined;
-};
-
-/** @internal */
-export const TaxLiabilitiesSelections$outboundSchema: z.ZodType<
-  TaxLiabilitiesSelections$Outbound,
-  z.ZodTypeDef,
-  TaxLiabilitiesSelections
-> = z.object({
-  taxId: z.number().int().optional(),
-  taxName: z.string().optional(),
-  lastUnpaidExternalPayrollUuid: z.nullable(z.string()).optional(),
-  possibleLiabilities: z.array(z.lazy(() => PossibleLiabilities$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taxId: "tax_id",
-    taxName: "tax_name",
-    lastUnpaidExternalPayrollUuid: "last_unpaid_external_payroll_uuid",
-    possibleLiabilities: "possible_liabilities",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxLiabilitiesSelections$ {
-  /** @deprecated use `TaxLiabilitiesSelections$inboundSchema` instead. */
-  export const inboundSchema = TaxLiabilitiesSelections$inboundSchema;
-  /** @deprecated use `TaxLiabilitiesSelections$outboundSchema` instead. */
-  export const outboundSchema = TaxLiabilitiesSelections$outboundSchema;
-  /** @deprecated use `TaxLiabilitiesSelections$Outbound` instead. */
-  export type Outbound = TaxLiabilitiesSelections$Outbound;
-}
-
-export function taxLiabilitiesSelectionsToJSON(
-  taxLiabilitiesSelections: TaxLiabilitiesSelections,
-): string {
-  return JSON.stringify(
-    TaxLiabilitiesSelections$outboundSchema.parse(taxLiabilitiesSelections),
-  );
-}
 
 export function taxLiabilitiesSelectionsFromJSON(
   jsonString: string,

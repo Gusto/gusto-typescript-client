@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeePayStubsList,
   EmployeePayStubsList$inboundSchema,
-  EmployeePayStubsList$Outbound,
-  EmployeePayStubsList$outboundSchema,
 } from "../components/employeepaystubslist.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -63,48 +59,10 @@ export type GetV1EmployeesEmployeeUuidPayStubsResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion
-  > = z.nativeEnum(GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion);
-
-/** @internal */
 export const GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion
-  > = GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1EmployeesEmployeeUuidPayStubsRequest$inboundSchema: z.ZodType<
-  GetV1EmployeesEmployeeUuidPayStubsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-  employee_id: z.string(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "employee_id": "employeeId",
-  });
-});
+  > = z.nativeEnum(GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1EmployeesEmployeeUuidPayStubsRequest$Outbound = {
@@ -134,21 +92,6 @@ export const GetV1EmployeesEmployeeUuidPayStubsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeUuidPayStubsRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeUuidPayStubsRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeUuidPayStubsRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeUuidPayStubsRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeUuidPayStubsRequestToJSON(
   getV1EmployeesEmployeeUuidPayStubsRequest:
     GetV1EmployeesEmployeeUuidPayStubsRequest,
@@ -157,22 +100,6 @@ export function getV1EmployeesEmployeeUuidPayStubsRequestToJSON(
     GetV1EmployeesEmployeeUuidPayStubsRequest$outboundSchema.parse(
       getV1EmployeesEmployeeUuidPayStubsRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeUuidPayStubsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeUuidPayStubsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeUuidPayStubsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeUuidPayStubsRequest' from JSON`,
   );
 }
 
@@ -189,55 +116,6 @@ export const GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema:
         "Employee-Pay-Stubs-List": "employeePayStubsList",
       });
     });
-
-/** @internal */
-export type GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Pay-Stubs-List"?: Array<EmployeePayStubsList$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeUuidPayStubsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeePayStubsList: z.array(EmployeePayStubsList$outboundSchema)
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeePayStubsList: "Employee-Pay-Stubs-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeUuidPayStubsResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeUuidPayStubsResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeUuidPayStubsResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeUuidPayStubsResponseToJSON(
-  getV1EmployeesEmployeeUuidPayStubsResponse:
-    GetV1EmployeesEmployeeUuidPayStubsResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeUuidPayStubsResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeUuidPayStubsResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeUuidPayStubsResponseFromJSON(
   jsonString: string,

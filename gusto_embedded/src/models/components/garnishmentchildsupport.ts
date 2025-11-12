@@ -57,22 +57,10 @@ export type GarnishmentChildSupport = {
 export const PaymentPeriod$inboundSchema: z.ZodNativeEnum<
   typeof PaymentPeriod
 > = z.nativeEnum(PaymentPeriod);
-
 /** @internal */
 export const PaymentPeriod$outboundSchema: z.ZodNativeEnum<
   typeof PaymentPeriod
 > = PaymentPeriod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentPeriod$ {
-  /** @deprecated use `PaymentPeriod$inboundSchema` instead. */
-  export const inboundSchema = PaymentPeriod$inboundSchema;
-  /** @deprecated use `PaymentPeriod$outboundSchema` instead. */
-  export const outboundSchema = PaymentPeriod$outboundSchema;
-}
 
 /** @internal */
 export const GarnishmentChildSupport$inboundSchema: z.ZodType<
@@ -95,7 +83,6 @@ export const GarnishmentChildSupport$inboundSchema: z.ZodType<
     "remittance_number": "remittanceNumber",
   });
 });
-
 /** @internal */
 export type GarnishmentChildSupport$Outbound = {
   state?: string | undefined;
@@ -128,19 +115,6 @@ export const GarnishmentChildSupport$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GarnishmentChildSupport$ {
-  /** @deprecated use `GarnishmentChildSupport$inboundSchema` instead. */
-  export const inboundSchema = GarnishmentChildSupport$inboundSchema;
-  /** @deprecated use `GarnishmentChildSupport$outboundSchema` instead. */
-  export const outboundSchema = GarnishmentChildSupport$outboundSchema;
-  /** @deprecated use `GarnishmentChildSupport$Outbound` instead. */
-  export type Outbound = GarnishmentChildSupport$Outbound;
-}
-
 export function garnishmentChildSupportToJSON(
   garnishmentChildSupport: GarnishmentChildSupport,
 ): string {
@@ -148,7 +122,6 @@ export function garnishmentChildSupportToJSON(
     GarnishmentChildSupport$outboundSchema.parse(garnishmentChildSupport),
   );
 }
-
 export function garnishmentChildSupportFromJSON(
   jsonString: string,
 ): SafeParseResult<GarnishmentChildSupport, SDKValidationError> {

@@ -10,8 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -79,38 +77,9 @@ export type PutV1RecurringReimbursementsResponse = {
 };
 
 /** @internal */
-export const PutV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema:
+export const PutV1RecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<typeof PutV1RecurringReimbursementsHeaderXGustoAPIVersion> = z
     .nativeEnum(PutV1RecurringReimbursementsHeaderXGustoAPIVersion);
-
-/** @internal */
-export const PutV1RecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1RecurringReimbursementsHeaderXGustoAPIVersion> =
-    PutV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1RecurringReimbursementsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PutV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1RecurringReimbursementsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PutV1RecurringReimbursementsRequestBody$inboundSchema: z.ZodType<
-  PutV1RecurringReimbursementsRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string(),
-  description: z.string().optional(),
-  amount: z.number().optional(),
-});
 
 /** @internal */
 export type PutV1RecurringReimbursementsRequestBody$Outbound = {
@@ -130,21 +99,6 @@ export const PutV1RecurringReimbursementsRequestBody$outboundSchema: z.ZodType<
   amount: z.number().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1RecurringReimbursementsRequestBody$ {
-  /** @deprecated use `PutV1RecurringReimbursementsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1RecurringReimbursementsRequestBody$inboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1RecurringReimbursementsRequestBody$outboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsRequestBody$Outbound` instead. */
-  export type Outbound = PutV1RecurringReimbursementsRequestBody$Outbound;
-}
-
 export function putV1RecurringReimbursementsRequestBodyToJSON(
   putV1RecurringReimbursementsRequestBody:
     PutV1RecurringReimbursementsRequestBody,
@@ -155,43 +109,6 @@ export function putV1RecurringReimbursementsRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1RecurringReimbursementsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1RecurringReimbursementsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1RecurringReimbursementsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1RecurringReimbursementsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1RecurringReimbursementsRequest$inboundSchema: z.ZodType<
-  PutV1RecurringReimbursementsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    PutV1RecurringReimbursementsHeaderXGustoAPIVersion$inboundSchema.default(
-      "2024-04-01",
-    ),
-  id: z.string(),
-  RequestBody: z.lazy(() =>
-    PutV1RecurringReimbursementsRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1RecurringReimbursementsRequest$Outbound = {
@@ -221,21 +138,6 @@ export const PutV1RecurringReimbursementsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1RecurringReimbursementsRequest$ {
-  /** @deprecated use `PutV1RecurringReimbursementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1RecurringReimbursementsRequest$inboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1RecurringReimbursementsRequest$outboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsRequest$Outbound` instead. */
-  export type Outbound = PutV1RecurringReimbursementsRequest$Outbound;
-}
-
 export function putV1RecurringReimbursementsRequestToJSON(
   putV1RecurringReimbursementsRequest: PutV1RecurringReimbursementsRequest,
 ): string {
@@ -243,17 +145,6 @@ export function putV1RecurringReimbursementsRequestToJSON(
     PutV1RecurringReimbursementsRequest$outboundSchema.parse(
       putV1RecurringReimbursementsRequest,
     ),
-  );
-}
-
-export function putV1RecurringReimbursementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1RecurringReimbursementsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1RecurringReimbursementsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1RecurringReimbursementsRequest' from JSON`,
   );
 }
 
@@ -277,64 +168,6 @@ export const PutV1RecurringReimbursementsResponseBody$inboundSchema: z.ZodType<
     "updated_at": "updatedAt",
   });
 });
-
-/** @internal */
-export type PutV1RecurringReimbursementsResponseBody$Outbound = {
-  uuid: string;
-  employee_uuid: string;
-  description: string;
-  amount: string;
-  version: string;
-  created_at?: string | undefined;
-  updated_at?: string | undefined;
-};
-
-/** @internal */
-export const PutV1RecurringReimbursementsResponseBody$outboundSchema: z.ZodType<
-  PutV1RecurringReimbursementsResponseBody$Outbound,
-  z.ZodTypeDef,
-  PutV1RecurringReimbursementsResponseBody
-> = z.object({
-  uuid: z.string(),
-  employeeUuid: z.string(),
-  description: z.string(),
-  amount: z.string(),
-  version: z.string(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1RecurringReimbursementsResponseBody$ {
-  /** @deprecated use `PutV1RecurringReimbursementsResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1RecurringReimbursementsResponseBody$inboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1RecurringReimbursementsResponseBody$outboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsResponseBody$Outbound` instead. */
-  export type Outbound = PutV1RecurringReimbursementsResponseBody$Outbound;
-}
-
-export function putV1RecurringReimbursementsResponseBodyToJSON(
-  putV1RecurringReimbursementsResponseBody:
-    PutV1RecurringReimbursementsResponseBody,
-): string {
-  return JSON.stringify(
-    PutV1RecurringReimbursementsResponseBody$outboundSchema.parse(
-      putV1RecurringReimbursementsResponseBody,
-    ),
-  );
-}
 
 export function putV1RecurringReimbursementsResponseBodyFromJSON(
   jsonString: string,
@@ -366,52 +199,6 @@ export const PutV1RecurringReimbursementsResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type PutV1RecurringReimbursementsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  object?: PutV1RecurringReimbursementsResponseBody$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1RecurringReimbursementsResponse$outboundSchema: z.ZodType<
-  PutV1RecurringReimbursementsResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1RecurringReimbursementsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  object: z.lazy(() => PutV1RecurringReimbursementsResponseBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1RecurringReimbursementsResponse$ {
-  /** @deprecated use `PutV1RecurringReimbursementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1RecurringReimbursementsResponse$inboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1RecurringReimbursementsResponse$outboundSchema;
-  /** @deprecated use `PutV1RecurringReimbursementsResponse$Outbound` instead. */
-  export type Outbound = PutV1RecurringReimbursementsResponse$Outbound;
-}
-
-export function putV1RecurringReimbursementsResponseToJSON(
-  putV1RecurringReimbursementsResponse: PutV1RecurringReimbursementsResponse,
-): string {
-  return JSON.stringify(
-    PutV1RecurringReimbursementsResponse$outboundSchema.parse(
-      putV1RecurringReimbursementsResponse,
-    ),
-  );
-}
 
 export function putV1RecurringReimbursementsResponseFromJSON(
   jsonString: string,

@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorBankAccount,
   ContractorBankAccount$inboundSchema,
-  ContractorBankAccount$Outbound,
-  ContractorBankAccount$outboundSchema,
 } from "../components/contractorbankaccount.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,22 +40,6 @@ export type GetV1ContractorsContractorUuidBankAccountsResponse = {
 };
 
 /** @internal */
-export const GetV1ContractorsContractorUuidBankAccountsRequest$inboundSchema:
-  z.ZodType<
-    GetV1ContractorsContractorUuidBankAccountsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    contractor_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "contractor_uuid": "contractorUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1ContractorsContractorUuidBankAccountsRequest$Outbound = {
   contractor_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,22 +61,6 @@ export const GetV1ContractorsContractorUuidBankAccountsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorsContractorUuidBankAccountsRequest$ {
-  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1ContractorsContractorUuidBankAccountsRequest$inboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1ContractorsContractorUuidBankAccountsRequest$outboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1ContractorsContractorUuidBankAccountsRequest$Outbound;
-}
-
 export function getV1ContractorsContractorUuidBankAccountsRequestToJSON(
   getV1ContractorsContractorUuidBankAccountsRequest:
     GetV1ContractorsContractorUuidBankAccountsRequest,
@@ -106,22 +69,6 @@ export function getV1ContractorsContractorUuidBankAccountsRequestToJSON(
     GetV1ContractorsContractorUuidBankAccountsRequest$outboundSchema.parse(
       getV1ContractorsContractorUuidBankAccountsRequest,
     ),
-  );
-}
-
-export function getV1ContractorsContractorUuidBankAccountsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1ContractorsContractorUuidBankAccountsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1ContractorsContractorUuidBankAccountsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1ContractorsContractorUuidBankAccountsRequest' from JSON`,
   );
 }
 
@@ -141,58 +88,6 @@ export const GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema:
       "Contractor-Bank-Account-List": "contractorBankAccountList",
     });
   });
-
-/** @internal */
-export type GetV1ContractorsContractorUuidBankAccountsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-Bank-Account-List"?:
-    | Array<ContractorBankAccount$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema:
-  z.ZodType<
-    GetV1ContractorsContractorUuidBankAccountsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1ContractorsContractorUuidBankAccountsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractorBankAccountList: z.array(ContractorBankAccount$outboundSchema)
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractorBankAccountList: "Contractor-Bank-Account-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1ContractorsContractorUuidBankAccountsResponse$ {
-  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1ContractorsContractorUuidBankAccountsResponse$inboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema;
-  /** @deprecated use `GetV1ContractorsContractorUuidBankAccountsResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1ContractorsContractorUuidBankAccountsResponse$Outbound;
-}
-
-export function getV1ContractorsContractorUuidBankAccountsResponseToJSON(
-  getV1ContractorsContractorUuidBankAccountsResponse:
-    GetV1ContractorsContractorUuidBankAccountsResponse,
-): string {
-  return JSON.stringify(
-    GetV1ContractorsContractorUuidBankAccountsResponse$outboundSchema.parse(
-      getV1ContractorsContractorUuidBankAccountsResponse,
-    ),
-  );
-}
 
 export function getV1ContractorsContractorUuidBankAccountsResponseFromJSON(
   jsonString: string,

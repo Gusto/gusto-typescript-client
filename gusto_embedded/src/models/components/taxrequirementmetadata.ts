@@ -199,60 +199,11 @@ export const TaxRequirementMetadataType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(TaxRequirementMetadataType);
 
 /** @internal */
-export const TaxRequirementMetadataType$outboundSchema: z.ZodNativeEnum<
-  typeof TaxRequirementMetadataType
-> = TaxRequirementMetadataType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementMetadataType$ {
-  /** @deprecated use `TaxRequirementMetadataType$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementMetadataType$inboundSchema;
-  /** @deprecated use `TaxRequirementMetadataType$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementMetadataType$outboundSchema;
-}
-
-/** @internal */
 export const TaxRequirementMetadataValue$inboundSchema: z.ZodType<
   TaxRequirementMetadataValue,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.boolean()]);
-
-/** @internal */
-export type TaxRequirementMetadataValue$Outbound = string | boolean;
-
-/** @internal */
-export const TaxRequirementMetadataValue$outboundSchema: z.ZodType<
-  TaxRequirementMetadataValue$Outbound,
-  z.ZodTypeDef,
-  TaxRequirementMetadataValue
-> = z.union([z.string(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementMetadataValue$ {
-  /** @deprecated use `TaxRequirementMetadataValue$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementMetadataValue$inboundSchema;
-  /** @deprecated use `TaxRequirementMetadataValue$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementMetadataValue$outboundSchema;
-  /** @deprecated use `TaxRequirementMetadataValue$Outbound` instead. */
-  export type Outbound = TaxRequirementMetadataValue$Outbound;
-}
-
-export function taxRequirementMetadataValueToJSON(
-  taxRequirementMetadataValue: TaxRequirementMetadataValue,
-): string {
-  return JSON.stringify(
-    TaxRequirementMetadataValue$outboundSchema.parse(
-      taxRequirementMetadataValue,
-    ),
-  );
-}
 
 export function taxRequirementMetadataValueFromJSON(
   jsonString: string,
@@ -279,51 +230,6 @@ export const TaxRequirementMetadataOptions$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaxRequirementMetadataOptions$Outbound = {
-  label: string;
-  value: string | boolean;
-  short_label?: string | null | undefined;
-};
-
-/** @internal */
-export const TaxRequirementMetadataOptions$outboundSchema: z.ZodType<
-  TaxRequirementMetadataOptions$Outbound,
-  z.ZodTypeDef,
-  TaxRequirementMetadataOptions
-> = z.object({
-  label: z.string(),
-  value: z.union([z.string(), z.boolean()]),
-  shortLabel: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    shortLabel: "short_label",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementMetadataOptions$ {
-  /** @deprecated use `TaxRequirementMetadataOptions$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementMetadataOptions$inboundSchema;
-  /** @deprecated use `TaxRequirementMetadataOptions$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementMetadataOptions$outboundSchema;
-  /** @deprecated use `TaxRequirementMetadataOptions$Outbound` instead. */
-  export type Outbound = TaxRequirementMetadataOptions$Outbound;
-}
-
-export function taxRequirementMetadataOptionsToJSON(
-  taxRequirementMetadataOptions: TaxRequirementMetadataOptions,
-): string {
-  return JSON.stringify(
-    TaxRequirementMetadataOptions$outboundSchema.parse(
-      taxRequirementMetadataOptions,
-    ),
-  );
-}
-
 export function taxRequirementMetadataOptionsFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxRequirementMetadataOptions, SDKValidationError> {
@@ -339,43 +245,10 @@ export const RateType$inboundSchema: z.ZodNativeEnum<typeof RateType> = z
   .nativeEnum(RateType);
 
 /** @internal */
-export const RateType$outboundSchema: z.ZodNativeEnum<typeof RateType> =
-  RateType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RateType$ {
-  /** @deprecated use `RateType$inboundSchema` instead. */
-  export const inboundSchema = RateType$inboundSchema;
-  /** @deprecated use `RateType$outboundSchema` instead. */
-  export const outboundSchema = RateType$outboundSchema;
-}
-
-/** @internal */
 export const TaxRequirementMetadataValidationType$inboundSchema:
   z.ZodNativeEnum<typeof TaxRequirementMetadataValidationType> = z.nativeEnum(
     TaxRequirementMetadataValidationType,
   );
-
-/** @internal */
-export const TaxRequirementMetadataValidationType$outboundSchema:
-  z.ZodNativeEnum<typeof TaxRequirementMetadataValidationType> =
-    TaxRequirementMetadataValidationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementMetadataValidationType$ {
-  /** @deprecated use `TaxRequirementMetadataValidationType$inboundSchema` instead. */
-  export const inboundSchema =
-    TaxRequirementMetadataValidationType$inboundSchema;
-  /** @deprecated use `TaxRequirementMetadataValidationType$outboundSchema` instead. */
-  export const outboundSchema =
-    TaxRequirementMetadataValidationType$outboundSchema;
-}
 
 /** @internal */
 export const Validation$inboundSchema: z.ZodType<
@@ -388,43 +261,6 @@ export const Validation$inboundSchema: z.ZodType<
   max: z.string().optional(),
   rates: z.array(z.string()).optional(),
 });
-
-/** @internal */
-export type Validation$Outbound = {
-  type: string;
-  min?: string | undefined;
-  max?: string | undefined;
-  rates?: Array<string> | undefined;
-};
-
-/** @internal */
-export const Validation$outboundSchema: z.ZodType<
-  Validation$Outbound,
-  z.ZodTypeDef,
-  Validation
-> = z.object({
-  type: TaxRequirementMetadataValidationType$outboundSchema,
-  min: z.string().optional(),
-  max: z.string().optional(),
-  rates: z.array(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Validation$ {
-  /** @deprecated use `Validation$inboundSchema` instead. */
-  export const inboundSchema = Validation$inboundSchema;
-  /** @deprecated use `Validation$outboundSchema` instead. */
-  export const outboundSchema = Validation$outboundSchema;
-  /** @deprecated use `Validation$Outbound` instead. */
-  export type Outbound = Validation$Outbound;
-}
-
-export function validationToJSON(validation: Validation): string {
-  return JSON.stringify(Validation$outboundSchema.parse(validation));
-}
 
 export function validationFromJSON(
   jsonString: string,
@@ -458,62 +294,6 @@ export const TaxRequirementMetadata$inboundSchema: z.ZodType<
     "rate_type": "rateType",
   });
 });
-
-/** @internal */
-export type TaxRequirementMetadata$Outbound = {
-  type: string;
-  options?: Array<TaxRequirementMetadataOptions$Outbound> | undefined;
-  risk_class_code?: string | undefined;
-  risk_class_description?: string | undefined;
-  rate_type?: string | undefined;
-  mask?: string | null | undefined;
-  prefix?: string | null | undefined;
-  validation?: Validation$Outbound | undefined;
-};
-
-/** @internal */
-export const TaxRequirementMetadata$outboundSchema: z.ZodType<
-  TaxRequirementMetadata$Outbound,
-  z.ZodTypeDef,
-  TaxRequirementMetadata
-> = z.object({
-  type: TaxRequirementMetadataType$outboundSchema,
-  options: z.array(z.lazy(() => TaxRequirementMetadataOptions$outboundSchema))
-    .optional(),
-  riskClassCode: z.string().optional(),
-  riskClassDescription: z.string().optional(),
-  rateType: RateType$outboundSchema.optional(),
-  mask: z.nullable(z.string()).optional(),
-  prefix: z.nullable(z.string()).optional(),
-  validation: z.lazy(() => Validation$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    riskClassCode: "risk_class_code",
-    riskClassDescription: "risk_class_description",
-    rateType: "rate_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaxRequirementMetadata$ {
-  /** @deprecated use `TaxRequirementMetadata$inboundSchema` instead. */
-  export const inboundSchema = TaxRequirementMetadata$inboundSchema;
-  /** @deprecated use `TaxRequirementMetadata$outboundSchema` instead. */
-  export const outboundSchema = TaxRequirementMetadata$outboundSchema;
-  /** @deprecated use `TaxRequirementMetadata$Outbound` instead. */
-  export type Outbound = TaxRequirementMetadata$Outbound;
-}
-
-export function taxRequirementMetadataToJSON(
-  taxRequirementMetadata: TaxRequirementMetadata,
-): string {
-  return JSON.stringify(
-    TaxRequirementMetadata$outboundSchema.parse(taxRequirementMetadata),
-  );
-}
 
 export function taxRequirementMetadataFromJSON(
   jsonString: string,

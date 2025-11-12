@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HolidayPayPolicy,
   HolidayPayPolicy$inboundSchema,
-  HolidayPayPolicy$Outbound,
-  HolidayPayPolicy$outboundSchema,
 } from "../components/holidaypaypolicy.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -128,16 +123,6 @@ export type PutCompaniesCompanyUuidHolidayPayPolicyResponse = {
 };
 
 /** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
-
-/** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$Outbound = {
   selected?: boolean | undefined;
 };
@@ -152,22 +137,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyNewYearsDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyNewYearsDay:
     PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay,
@@ -178,32 +147,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyNewYearsDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyNewYearsDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyMlkDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$Outbound = {
@@ -220,21 +163,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$Outbound` instead. */
-  export type Outbound = PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyMlkDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyMlkDay:
     PutCompaniesCompanyUuidHolidayPayPolicyMlkDay,
@@ -245,32 +173,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyMlkDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyMlkDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyMlkDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyMlkDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$Outbound = {
@@ -287,22 +189,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$outboundSchema
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyPresidentsDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyPresidentsDay:
     PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay,
@@ -313,32 +199,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyPresidentsDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyPresidentsDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$Outbound = {
@@ -355,22 +215,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyMemorialDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyMemorialDay:
     PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay,
@@ -381,32 +225,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyMemorialDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyMemorialDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$Outbound = {
@@ -423,22 +241,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyJuneteenthToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyJuneteenth:
     PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth,
@@ -449,32 +251,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyJuneteenthToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyJuneteenthFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$Outbound = {
@@ -491,22 +267,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$outboundSche
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyIndependenceDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyIndependenceDay:
     PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay,
@@ -517,31 +277,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyIndependenceDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyIndependenceDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyLaborDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$Outbound = {
@@ -558,22 +293,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyLaborDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyLaborDay:
     PutCompaniesCompanyUuidHolidayPayPolicyLaborDay,
@@ -584,32 +303,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyLaborDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyLaborDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyLaborDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyLaborDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$Outbound = {
@@ -626,22 +319,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyColumbusDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyColumbusDay:
     PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay,
@@ -652,32 +329,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyColumbusDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyColumbusDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$Outbound = {
@@ -694,22 +345,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyVeteransDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyVeteransDay:
     PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay,
@@ -720,32 +355,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyVeteransDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyVeteransDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$Outbound = {
@@ -762,22 +371,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyThanksgivingToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyThanksgiving:
     PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving,
@@ -788,32 +381,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyThanksgivingToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyThanksgivingFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    selected: z.boolean().optional(),
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$Outbound = {
@@ -830,22 +397,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$outboundSchema:
     selected: z.boolean().optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyChristmasDayToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyChristmasDay:
     PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay,
@@ -856,76 +407,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyChristmasDayToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyChristmasDayFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    new_years_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyNewYearsDay$inboundSchema
-    ).optional(),
-    mlk_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyMlkDay$inboundSchema
-    ).optional(),
-    presidents_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyPresidentsDay$inboundSchema
-    ).optional(),
-    memorial_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyMemorialDay$inboundSchema
-    ).optional(),
-    juneteenth: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyJuneteenth$inboundSchema
-    ).optional(),
-    independence_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyIndependenceDay$inboundSchema
-    ).optional(),
-    labor_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyLaborDay$inboundSchema
-    ).optional(),
-    columbus_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyColumbusDay$inboundSchema
-    ).optional(),
-    veterans_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyVeteransDay$inboundSchema
-    ).optional(),
-    thanksgiving: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyThanksgiving$inboundSchema
-    ).optional(),
-    christmas_day: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyChristmasDay$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "new_years_day": "newYearsDay",
-      "mlk_day": "mlkDay",
-      "presidents_day": "presidentsDay",
-      "memorial_day": "memorialDay",
-      "independence_day": "independenceDay",
-      "labor_day": "laborDay",
-      "columbus_day": "columbusDay",
-      "veterans_day": "veteransDay",
-      "christmas_day": "christmasDay",
-    });
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$Outbound = {
@@ -1016,22 +497,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$outboundSche
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyFederalHolidaysToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyFederalHolidays:
     PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays,
@@ -1042,38 +507,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyFederalHolidaysToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyFederalHolidaysFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    federal_holidays: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyFederalHolidays$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "federal_holidays": "federalHolidays",
-    });
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$Outbound = {
@@ -1100,22 +533,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyRequestBodyToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyRequestBody:
     PutCompaniesCompanyUuidHolidayPayPolicyRequestBody,
@@ -1126,42 +543,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyRequestBodyToJSON(
     ),
   );
 }
-
-export function putCompaniesCompanyUuidHolidayPayPolicyRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound = {
@@ -1190,22 +571,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyRequest$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyRequest$Outbound;
-}
-
 export function putCompaniesCompanyUuidHolidayPayPolicyRequestToJSON(
   putCompaniesCompanyUuidHolidayPayPolicyRequest:
     PutCompaniesCompanyUuidHolidayPayPolicyRequest,
@@ -1214,22 +579,6 @@ export function putCompaniesCompanyUuidHolidayPayPolicyRequestToJSON(
     PutCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
       putCompaniesCompanyUuidHolidayPayPolicyRequest,
     ),
-  );
-}
-
-export function putCompaniesCompanyUuidHolidayPayPolicyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutCompaniesCompanyUuidHolidayPayPolicyRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutCompaniesCompanyUuidHolidayPayPolicyRequest' from JSON`,
   );
 }
 
@@ -1248,55 +597,6 @@ export const PutCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema:
       "Holiday-Pay-Policy": "holidayPayPolicy",
     });
   });
-
-/** @internal */
-export type PutCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Holiday-Pay-Policy"?: HolidayPayPolicy$Outbound | undefined;
-};
-
-/** @internal */
-export const PutCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema:
-  z.ZodType<
-    PutCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound,
-    z.ZodTypeDef,
-    PutCompaniesCompanyUuidHolidayPayPolicyResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    holidayPayPolicy: HolidayPayPolicy$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      holidayPayPolicy: "Holiday-Pay-Policy",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutCompaniesCompanyUuidHolidayPayPolicyResponse$ {
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema;
-  /** @deprecated use `PutCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound` instead. */
-  export type Outbound =
-    PutCompaniesCompanyUuidHolidayPayPolicyResponse$Outbound;
-}
-
-export function putCompaniesCompanyUuidHolidayPayPolicyResponseToJSON(
-  putCompaniesCompanyUuidHolidayPayPolicyResponse:
-    PutCompaniesCompanyUuidHolidayPayPolicyResponse,
-): string {
-  return JSON.stringify(
-    PutCompaniesCompanyUuidHolidayPayPolicyResponse$outboundSchema.parse(
-      putCompaniesCompanyUuidHolidayPayPolicyResponse,
-    ),
-  );
-}
 
 export function putCompaniesCompanyUuidHolidayPayPolicyResponseFromJSON(
   jsonString: string,

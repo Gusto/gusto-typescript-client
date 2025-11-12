@@ -11,14 +11,10 @@ import { RFCDate } from "../../types/rfcdate.js";
 import {
   ContractorPaymentGroup,
   ContractorPaymentGroup$inboundSchema,
-  ContractorPaymentGroup$Outbound,
-  ContractorPaymentGroup$outboundSchema,
 } from "../components/contractorpaymentgroup.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -108,7 +104,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsResponse = {
 };
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema:
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
   > = z.nativeEnum(
@@ -116,73 +112,12 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersi
   );
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
-  > =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$inboundSchema:
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$outboundSchema:
   z.ZodNativeEnum<
     typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod
   > = z.nativeEnum(
     PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod,
   );
-
-/** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod
-  > =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$outboundSchema;
-}
-
-/** @internal */
-export const ContractorPayments$inboundSchema: z.ZodType<
-  ContractorPayments,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_uuid: z.string().optional(),
-  payment_method:
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$inboundSchema
-      .default("Direct Deposit"),
-  wage: z.number().optional(),
-  hours: z.number().optional(),
-  bonus: z.number().optional(),
-  reimbursement: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_uuid": "contractorUuid",
-    "payment_method": "paymentMethod",
-  });
-});
 
 /** @internal */
 export type ContractorPayments$Outbound = {
@@ -215,19 +150,6 @@ export const ContractorPayments$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPayments$ {
-  /** @deprecated use `ContractorPayments$inboundSchema` instead. */
-  export const inboundSchema = ContractorPayments$inboundSchema;
-  /** @deprecated use `ContractorPayments$outboundSchema` instead. */
-  export const outboundSchema = ContractorPayments$outboundSchema;
-  /** @deprecated use `ContractorPayments$Outbound` instead. */
-  export type Outbound = ContractorPayments$Outbound;
-}
-
 export function contractorPaymentsToJSON(
   contractorPayments: ContractorPayments,
 ): string {
@@ -235,36 +157,6 @@ export function contractorPaymentsToJSON(
     ContractorPayments$outboundSchema.parse(contractorPayments),
   );
 }
-
-export function contractorPaymentsFromJSON(
-  jsonString: string,
-): SafeParseResult<ContractorPayments, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ContractorPayments$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ContractorPayments' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    check_date: z.string().transform(v => new RFCDate(v)),
-    creation_token: z.string(),
-    contractor_payments: z.array(
-      z.lazy(() => ContractorPayments$inboundSchema),
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "check_date": "checkDate",
-      "creation_token": "creationToken",
-      "contractor_payments": "contractorPayments",
-    });
-  });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound =
@@ -294,22 +186,6 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outbound
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound;
-}
-
 export function postV1CompaniesCompanyIdContractorPaymentGroupsRequestBodyToJSON(
   postV1CompaniesCompanyIdContractorPaymentGroupsRequestBody:
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody,
@@ -319,43 +195,6 @@ export function postV1CompaniesCompanyIdContractorPaymentGroupsRequestBodyToJSON
       .parse(postV1CompaniesCompanyIdContractorPaymentGroupsRequestBody),
   );
 }
-
-export function postV1CompaniesCompanyIdContractorPaymentGroupsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    "X-Gusto-API-Version":
-      PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion$inboundSchema
-        .default("2025-06-15"),
-    company_id: z.string(),
-    RequestBody: z.lazy(() =>
-      PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "company_id": "companyId",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$Outbound = {
@@ -387,22 +226,6 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSche
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$Outbound` instead. */
-  export type Outbound =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$Outbound;
-}
-
 export function postV1CompaniesCompanyIdContractorPaymentGroupsRequestToJSON(
   postV1CompaniesCompanyIdContractorPaymentGroupsRequest:
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequest,
@@ -411,21 +234,6 @@ export function postV1CompaniesCompanyIdContractorPaymentGroupsRequestToJSON(
     PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$outboundSchema.parse(
       postV1CompaniesCompanyIdContractorPaymentGroupsRequest,
     ),
-  );
-}
-
-export function postV1CompaniesCompanyIdContractorPaymentGroupsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompaniesCompanyIdContractorPaymentGroupsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PostV1CompaniesCompanyIdContractorPaymentGroupsRequest' from JSON`,
   );
 }
 
@@ -444,54 +252,6 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSche
       "Contractor-Payment-Group": "contractorPaymentGroup",
     });
   });
-
-/** @internal */
-export type PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Contractor-Payment-Group"?: ContractorPaymentGroup$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdContractorPaymentGroupsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    contractorPaymentGroup: ContractorPaymentGroup$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      contractorPaymentGroup: "Contractor-Payment-Group",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$ {
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$inboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$outboundSchema;
-  /** @deprecated use `PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$Outbound` instead. */
-  export type Outbound =
-    PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$Outbound;
-}
-
-export function postV1CompaniesCompanyIdContractorPaymentGroupsResponseToJSON(
-  postV1CompaniesCompanyIdContractorPaymentGroupsResponse:
-    PostV1CompaniesCompanyIdContractorPaymentGroupsResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdContractorPaymentGroupsResponse$outboundSchema
-      .parse(postV1CompaniesCompanyIdContractorPaymentGroupsResponse),
-  );
-}
 
 export function postV1CompaniesCompanyIdContractorPaymentGroupsResponseFromJSON(
   jsonString: string,

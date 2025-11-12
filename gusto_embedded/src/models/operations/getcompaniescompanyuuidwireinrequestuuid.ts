@@ -9,19 +9,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import {
   WireInRequest,
   WireInRequest$inboundSchema,
-  WireInRequest$Outbound,
-  WireInRequest$outboundSchema,
 } from "../components/wireinrequest.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,22 +40,6 @@ export type GetCompaniesCompanyUuidWireInRequestUuidResponse = {
 };
 
 /** @internal */
-export const GetCompaniesCompanyUuidWireInRequestUuidRequest$inboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidWireInRequestUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetCompaniesCompanyUuidWireInRequestUuidRequest$Outbound = {
   company_uuid: string;
   "X-Gusto-API-Version": string;
@@ -82,22 +61,6 @@ export const GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidWireInRequestUuidRequest$ {
-  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidWireInRequestUuidRequest$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidRequest$Outbound` instead. */
-  export type Outbound =
-    GetCompaniesCompanyUuidWireInRequestUuidRequest$Outbound;
-}
-
 export function getCompaniesCompanyUuidWireInRequestUuidRequestToJSON(
   getCompaniesCompanyUuidWireInRequestUuidRequest:
     GetCompaniesCompanyUuidWireInRequestUuidRequest,
@@ -106,22 +69,6 @@ export function getCompaniesCompanyUuidWireInRequestUuidRequestToJSON(
     GetCompaniesCompanyUuidWireInRequestUuidRequest$outboundSchema.parse(
       getCompaniesCompanyUuidWireInRequestUuidRequest,
     ),
-  );
-}
-
-export function getCompaniesCompanyUuidWireInRequestUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetCompaniesCompanyUuidWireInRequestUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetCompaniesCompanyUuidWireInRequestUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetCompaniesCompanyUuidWireInRequestUuidRequest' from JSON`,
   );
 }
 
@@ -140,55 +87,6 @@ export const GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema:
       "Wire-In-Request-List": "wireInRequestList",
     });
   });
-
-/** @internal */
-export type GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Wire-In-Request-List"?: Array<WireInRequest$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema:
-  z.ZodType<
-    GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound,
-    z.ZodTypeDef,
-    GetCompaniesCompanyUuidWireInRequestUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    wireInRequestList: z.array(WireInRequest$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      wireInRequestList: "Wire-In-Request-List",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCompaniesCompanyUuidWireInRequestUuidResponse$ {
-  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetCompaniesCompanyUuidWireInRequestUuidResponse$inboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema;
-  /** @deprecated use `GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound` instead. */
-  export type Outbound =
-    GetCompaniesCompanyUuidWireInRequestUuidResponse$Outbound;
-}
-
-export function getCompaniesCompanyUuidWireInRequestUuidResponseToJSON(
-  getCompaniesCompanyUuidWireInRequestUuidResponse:
-    GetCompaniesCompanyUuidWireInRequestUuidResponse,
-): string {
-  return JSON.stringify(
-    GetCompaniesCompanyUuidWireInRequestUuidResponse$outboundSchema.parse(
-      getCompaniesCompanyUuidWireInRequestUuidResponse,
-    ),
-  );
-}
 
 export function getCompaniesCompanyUuidWireInRequestUuidResponseFromJSON(
   jsonString: string,

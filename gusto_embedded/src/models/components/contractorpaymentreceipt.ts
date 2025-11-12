@@ -176,47 +176,6 @@ export const ContractorPaymentReceiptTotals$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ContractorPaymentReceiptTotals$Outbound = {
-  company_debit?: string | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentReceiptTotals$outboundSchema: z.ZodType<
-  ContractorPaymentReceiptTotals$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentReceiptTotals
-> = z.object({
-  companyDebit: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyDebit: "company_debit",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentReceiptTotals$ {
-  /** @deprecated use `ContractorPaymentReceiptTotals$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentReceiptTotals$inboundSchema;
-  /** @deprecated use `ContractorPaymentReceiptTotals$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentReceiptTotals$outboundSchema;
-  /** @deprecated use `ContractorPaymentReceiptTotals$Outbound` instead. */
-  export type Outbound = ContractorPaymentReceiptTotals$Outbound;
-}
-
-export function contractorPaymentReceiptTotalsToJSON(
-  contractorPaymentReceiptTotals: ContractorPaymentReceiptTotals,
-): string {
-  return JSON.stringify(
-    ContractorPaymentReceiptTotals$outboundSchema.parse(
-      contractorPaymentReceiptTotals,
-    ),
-  );
-}
-
 export function contractorPaymentReceiptTotalsFromJSON(
   jsonString: string,
 ): SafeParseResult<ContractorPaymentReceiptTotals, SDKValidationError> {
@@ -232,24 +191,6 @@ export const ContractorPaymentReceiptPaymentMethod$inboundSchema:
   z.ZodNativeEnum<typeof ContractorPaymentReceiptPaymentMethod> = z.nativeEnum(
     ContractorPaymentReceiptPaymentMethod,
   );
-
-/** @internal */
-export const ContractorPaymentReceiptPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<typeof ContractorPaymentReceiptPaymentMethod> =
-    ContractorPaymentReceiptPaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentReceiptPaymentMethod$ {
-  /** @deprecated use `ContractorPaymentReceiptPaymentMethod$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentReceiptPaymentMethod$inboundSchema;
-  /** @deprecated use `ContractorPaymentReceiptPaymentMethod$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentReceiptPaymentMethod$outboundSchema;
-}
 
 /** @internal */
 export const ContractorPayments$inboundSchema: z.ZodType<
@@ -277,67 +218,6 @@ export const ContractorPayments$inboundSchema: z.ZodType<
     "payment_method": "paymentMethod",
   });
 });
-
-/** @internal */
-export type ContractorPayments$Outbound = {
-  contractor_uuid?: string | undefined;
-  contractor_first_name?: string | undefined;
-  contractor_last_name?: string | undefined;
-  contractor_business_name?: string | undefined;
-  contractor_type?: string | undefined;
-  payment_method?: string | undefined;
-  wage?: string | undefined;
-  bonus?: string | undefined;
-  reimbursement?: string | undefined;
-};
-
-/** @internal */
-export const ContractorPayments$outboundSchema: z.ZodType<
-  ContractorPayments$Outbound,
-  z.ZodTypeDef,
-  ContractorPayments
-> = z.object({
-  contractorUuid: z.string().optional(),
-  contractorFirstName: z.string().optional(),
-  contractorLastName: z.string().optional(),
-  contractorBusinessName: z.string().optional(),
-  contractorType: z.string().optional(),
-  paymentMethod: ContractorPaymentReceiptPaymentMethod$outboundSchema
-    .optional(),
-  wage: z.string().optional(),
-  bonus: z.string().optional(),
-  reimbursement: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorUuid: "contractor_uuid",
-    contractorFirstName: "contractor_first_name",
-    contractorLastName: "contractor_last_name",
-    contractorBusinessName: "contractor_business_name",
-    contractorType: "contractor_type",
-    paymentMethod: "payment_method",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPayments$ {
-  /** @deprecated use `ContractorPayments$inboundSchema` instead. */
-  export const inboundSchema = ContractorPayments$inboundSchema;
-  /** @deprecated use `ContractorPayments$outboundSchema` instead. */
-  export const outboundSchema = ContractorPayments$outboundSchema;
-  /** @deprecated use `ContractorPayments$Outbound` instead. */
-  export type Outbound = ContractorPayments$Outbound;
-}
-
-export function contractorPaymentsToJSON(
-  contractorPayments: ContractorPayments,
-): string {
-  return JSON.stringify(
-    ContractorPayments$outboundSchema.parse(contractorPayments),
-  );
-}
 
 export function contractorPaymentsFromJSON(
   jsonString: string,
@@ -367,58 +247,6 @@ export const ContractorPaymentReceiptLicensee$inboundSchema: z.ZodType<
     "phone_number": "phoneNumber",
   });
 });
-
-/** @internal */
-export type ContractorPaymentReceiptLicensee$Outbound = {
-  name?: string | undefined;
-  address?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  postal_code?: string | undefined;
-  phone_number?: string | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentReceiptLicensee$outboundSchema: z.ZodType<
-  ContractorPaymentReceiptLicensee$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentReceiptLicensee
-> = z.object({
-  name: z.string().optional(),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  postalCode: z.string().optional(),
-  phoneNumber: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    postalCode: "postal_code",
-    phoneNumber: "phone_number",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentReceiptLicensee$ {
-  /** @deprecated use `ContractorPaymentReceiptLicensee$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentReceiptLicensee$inboundSchema;
-  /** @deprecated use `ContractorPaymentReceiptLicensee$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentReceiptLicensee$outboundSchema;
-  /** @deprecated use `ContractorPaymentReceiptLicensee$Outbound` instead. */
-  export type Outbound = ContractorPaymentReceiptLicensee$Outbound;
-}
-
-export function contractorPaymentReceiptLicenseeToJSON(
-  contractorPaymentReceiptLicensee: ContractorPaymentReceiptLicensee,
-): string {
-  return JSON.stringify(
-    ContractorPaymentReceiptLicensee$outboundSchema.parse(
-      contractorPaymentReceiptLicensee,
-    ),
-  );
-}
 
 export function contractorPaymentReceiptLicenseeFromJSON(
   jsonString: string,
@@ -463,78 +291,6 @@ export const ContractorPaymentReceipt$inboundSchema: z.ZodType<
     "contractor_payments": "contractorPayments",
   });
 });
-
-/** @internal */
-export type ContractorPaymentReceipt$Outbound = {
-  contractor_payment_uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  name_of_sender?: string | undefined;
-  name_of_recipient?: string | undefined;
-  debit_date?: string | undefined;
-  license?: string | undefined;
-  license_uri?: string | undefined;
-  right_to_refund?: string | undefined;
-  liability_of_licensee?: string | undefined;
-  totals?: ContractorPaymentReceiptTotals$Outbound | undefined;
-  contractor_payments?: Array<ContractorPayments$Outbound> | undefined;
-  licensee?: ContractorPaymentReceiptLicensee$Outbound | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentReceipt$outboundSchema: z.ZodType<
-  ContractorPaymentReceipt$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentReceipt
-> = z.object({
-  contractorPaymentUuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  nameOfSender: z.string().optional(),
-  nameOfRecipient: z.string().optional(),
-  debitDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  license: z.string().optional(),
-  licenseUri: z.string().optional(),
-  rightToRefund: z.string().optional(),
-  liabilityOfLicensee: z.string().optional(),
-  totals: z.lazy(() => ContractorPaymentReceiptTotals$outboundSchema)
-    .optional(),
-  contractorPayments: z.array(z.lazy(() => ContractorPayments$outboundSchema))
-    .optional(),
-  licensee: z.lazy(() => ContractorPaymentReceiptLicensee$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorPaymentUuid: "contractor_payment_uuid",
-    companyUuid: "company_uuid",
-    nameOfSender: "name_of_sender",
-    nameOfRecipient: "name_of_recipient",
-    debitDate: "debit_date",
-    licenseUri: "license_uri",
-    rightToRefund: "right_to_refund",
-    liabilityOfLicensee: "liability_of_licensee",
-    contractorPayments: "contractor_payments",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentReceipt$ {
-  /** @deprecated use `ContractorPaymentReceipt$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentReceipt$inboundSchema;
-  /** @deprecated use `ContractorPaymentReceipt$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentReceipt$outboundSchema;
-  /** @deprecated use `ContractorPaymentReceipt$Outbound` instead. */
-  export type Outbound = ContractorPaymentReceipt$Outbound;
-}
-
-export function contractorPaymentReceiptToJSON(
-  contractorPaymentReceipt: ContractorPaymentReceipt,
-): string {
-  return JSON.stringify(
-    ContractorPaymentReceipt$outboundSchema.parse(contractorPaymentReceipt),
-  );
-}
 
 export function contractorPaymentReceiptFromJSON(
   jsonString: string,

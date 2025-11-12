@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   WebhooksHealthCheckStatus,
   WebhooksHealthCheckStatus$inboundSchema,
-  WebhooksHealthCheckStatus$Outbound,
-  WebhooksHealthCheckStatus$outboundSchema,
 } from "../components/webhookshealthcheckstatus.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -54,19 +50,6 @@ export type GetV1WebhooksHealthCheckResponse = {
 };
 
 /** @internal */
-export const GetV1WebhooksHealthCheckSecurity$inboundSchema: z.ZodType<
-  GetV1WebhooksHealthCheckSecurity,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  SystemAccessAuth: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "SystemAccessAuth": "systemAccessAuth",
-  });
-});
-
-/** @internal */
 export type GetV1WebhooksHealthCheckSecurity$Outbound = {
   SystemAccessAuth: string;
 };
@@ -84,19 +67,6 @@ export const GetV1WebhooksHealthCheckSecurity$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WebhooksHealthCheckSecurity$ {
-  /** @deprecated use `GetV1WebhooksHealthCheckSecurity$inboundSchema` instead. */
-  export const inboundSchema = GetV1WebhooksHealthCheckSecurity$inboundSchema;
-  /** @deprecated use `GetV1WebhooksHealthCheckSecurity$outboundSchema` instead. */
-  export const outboundSchema = GetV1WebhooksHealthCheckSecurity$outboundSchema;
-  /** @deprecated use `GetV1WebhooksHealthCheckSecurity$Outbound` instead. */
-  export type Outbound = GetV1WebhooksHealthCheckSecurity$Outbound;
-}
-
 export function getV1WebhooksHealthCheckSecurityToJSON(
   getV1WebhooksHealthCheckSecurity: GetV1WebhooksHealthCheckSecurity,
 ): string {
@@ -107,54 +77,10 @@ export function getV1WebhooksHealthCheckSecurityToJSON(
   );
 }
 
-export function getV1WebhooksHealthCheckSecurityFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1WebhooksHealthCheckSecurity, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1WebhooksHealthCheckSecurity$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1WebhooksHealthCheckSecurity' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<typeof GetV1WebhooksHealthCheckHeaderXGustoAPIVersion> = z
-    .nativeEnum(GetV1WebhooksHealthCheckHeaderXGustoAPIVersion);
-
 /** @internal */
 export const GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<typeof GetV1WebhooksHealthCheckHeaderXGustoAPIVersion> =
-    GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1WebhooksHealthCheckRequest$inboundSchema: z.ZodType<
-  GetV1WebhooksHealthCheckRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version":
-    GetV1WebhooksHealthCheckHeaderXGustoAPIVersion$inboundSchema.default(
-      "2025-06-15",
-    ),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
+  z.ZodNativeEnum<typeof GetV1WebhooksHealthCheckHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1WebhooksHealthCheckHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1WebhooksHealthCheckRequest$Outbound = {
@@ -177,19 +103,6 @@ export const GetV1WebhooksHealthCheckRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WebhooksHealthCheckRequest$ {
-  /** @deprecated use `GetV1WebhooksHealthCheckRequest$inboundSchema` instead. */
-  export const inboundSchema = GetV1WebhooksHealthCheckRequest$inboundSchema;
-  /** @deprecated use `GetV1WebhooksHealthCheckRequest$outboundSchema` instead. */
-  export const outboundSchema = GetV1WebhooksHealthCheckRequest$outboundSchema;
-  /** @deprecated use `GetV1WebhooksHealthCheckRequest$Outbound` instead. */
-  export type Outbound = GetV1WebhooksHealthCheckRequest$Outbound;
-}
-
 export function getV1WebhooksHealthCheckRequestToJSON(
   getV1WebhooksHealthCheckRequest: GetV1WebhooksHealthCheckRequest,
 ): string {
@@ -197,16 +110,6 @@ export function getV1WebhooksHealthCheckRequestToJSON(
     GetV1WebhooksHealthCheckRequest$outboundSchema.parse(
       getV1WebhooksHealthCheckRequest,
     ),
-  );
-}
-
-export function getV1WebhooksHealthCheckRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetV1WebhooksHealthCheckRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetV1WebhooksHealthCheckRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV1WebhooksHealthCheckRequest' from JSON`,
   );
 }
 
@@ -225,53 +128,6 @@ export const GetV1WebhooksHealthCheckResponse$inboundSchema: z.ZodType<
     "Webhooks-Health-Check-Status": "webhooksHealthCheckStatus",
   });
 });
-
-/** @internal */
-export type GetV1WebhooksHealthCheckResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Webhooks-Health-Check-Status"?:
-    | WebhooksHealthCheckStatus$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const GetV1WebhooksHealthCheckResponse$outboundSchema: z.ZodType<
-  GetV1WebhooksHealthCheckResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1WebhooksHealthCheckResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  webhooksHealthCheckStatus: WebhooksHealthCheckStatus$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    webhooksHealthCheckStatus: "Webhooks-Health-Check-Status",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WebhooksHealthCheckResponse$ {
-  /** @deprecated use `GetV1WebhooksHealthCheckResponse$inboundSchema` instead. */
-  export const inboundSchema = GetV1WebhooksHealthCheckResponse$inboundSchema;
-  /** @deprecated use `GetV1WebhooksHealthCheckResponse$outboundSchema` instead. */
-  export const outboundSchema = GetV1WebhooksHealthCheckResponse$outboundSchema;
-  /** @deprecated use `GetV1WebhooksHealthCheckResponse$Outbound` instead. */
-  export type Outbound = GetV1WebhooksHealthCheckResponse$Outbound;
-}
-
-export function getV1WebhooksHealthCheckResponseToJSON(
-  getV1WebhooksHealthCheckResponse: GetV1WebhooksHealthCheckResponse,
-): string {
-  return JSON.stringify(
-    GetV1WebhooksHealthCheckResponse$outboundSchema.parse(
-      getV1WebhooksHealthCheckResponse,
-    ),
-  );
-}
 
 export function getV1WebhooksHealthCheckResponseFromJSON(
   jsonString: string,

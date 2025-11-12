@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,21 +30,6 @@ export type RedebitRecoveryCaseRequest = {
 export type RedebitRecoveryCaseResponse = {
   httpMeta: HTTPMetadata;
 };
-
-/** @internal */
-export const RedebitRecoveryCaseRequest$inboundSchema: z.ZodType<
-  RedebitRecoveryCaseRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  recovery_case_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "recovery_case_uuid": "recoveryCaseUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type RedebitRecoveryCaseRequest$Outbound = {
@@ -70,34 +52,11 @@ export const RedebitRecoveryCaseRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RedebitRecoveryCaseRequest$ {
-  /** @deprecated use `RedebitRecoveryCaseRequest$inboundSchema` instead. */
-  export const inboundSchema = RedebitRecoveryCaseRequest$inboundSchema;
-  /** @deprecated use `RedebitRecoveryCaseRequest$outboundSchema` instead. */
-  export const outboundSchema = RedebitRecoveryCaseRequest$outboundSchema;
-  /** @deprecated use `RedebitRecoveryCaseRequest$Outbound` instead. */
-  export type Outbound = RedebitRecoveryCaseRequest$Outbound;
-}
-
 export function redebitRecoveryCaseRequestToJSON(
   redebitRecoveryCaseRequest: RedebitRecoveryCaseRequest,
 ): string {
   return JSON.stringify(
     RedebitRecoveryCaseRequest$outboundSchema.parse(redebitRecoveryCaseRequest),
-  );
-}
-
-export function redebitRecoveryCaseRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RedebitRecoveryCaseRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RedebitRecoveryCaseRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RedebitRecoveryCaseRequest' from JSON`,
   );
 }
 
@@ -113,47 +72,6 @@ export const RedebitRecoveryCaseResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type RedebitRecoveryCaseResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const RedebitRecoveryCaseResponse$outboundSchema: z.ZodType<
-  RedebitRecoveryCaseResponse$Outbound,
-  z.ZodTypeDef,
-  RedebitRecoveryCaseResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RedebitRecoveryCaseResponse$ {
-  /** @deprecated use `RedebitRecoveryCaseResponse$inboundSchema` instead. */
-  export const inboundSchema = RedebitRecoveryCaseResponse$inboundSchema;
-  /** @deprecated use `RedebitRecoveryCaseResponse$outboundSchema` instead. */
-  export const outboundSchema = RedebitRecoveryCaseResponse$outboundSchema;
-  /** @deprecated use `RedebitRecoveryCaseResponse$Outbound` instead. */
-  export type Outbound = RedebitRecoveryCaseResponse$Outbound;
-}
-
-export function redebitRecoveryCaseResponseToJSON(
-  redebitRecoveryCaseResponse: RedebitRecoveryCaseResponse,
-): string {
-  return JSON.stringify(
-    RedebitRecoveryCaseResponse$outboundSchema.parse(
-      redebitRecoveryCaseResponse,
-    ),
-  );
-}
 
 export function redebitRecoveryCaseResponseFromJSON(
   jsonString: string,

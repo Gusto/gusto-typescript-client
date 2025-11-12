@@ -10,18 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Rehire,
-  Rehire$inboundSchema,
-  Rehire$Outbound,
-  Rehire$outboundSchema,
-} from "../components/rehire.js";
+import { Rehire, Rehire$inboundSchema } from "../components/rehire.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -90,47 +82,9 @@ export type PutV1EmployeesEmployeeIdRehireResponse = {
 };
 
 /** @internal */
-export const EmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof EmploymentStatus
-> = z.nativeEnum(EmploymentStatus);
-
-/** @internal */
 export const EmploymentStatus$outboundSchema: z.ZodNativeEnum<
   typeof EmploymentStatus
-> = EmploymentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmploymentStatus$ {
-  /** @deprecated use `EmploymentStatus$inboundSchema` instead. */
-  export const inboundSchema = EmploymentStatus$inboundSchema;
-  /** @deprecated use `EmploymentStatus$outboundSchema` instead. */
-  export const outboundSchema = EmploymentStatus$outboundSchema;
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdRehireRequestBody$inboundSchema: z.ZodType<
-  PutV1EmployeesEmployeeIdRehireRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  version: z.string(),
-  effective_date: z.string(),
-  file_new_hire_report: z.boolean(),
-  work_location_uuid: z.string(),
-  employment_status: EmploymentStatus$inboundSchema.optional(),
-  two_percent_shareholder: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "effective_date": "effectiveDate",
-    "file_new_hire_report": "fileNewHireReport",
-    "work_location_uuid": "workLocationUuid",
-    "employment_status": "employmentStatus",
-    "two_percent_shareholder": "twoPercentShareholder",
-  });
-});
+> = z.nativeEnum(EmploymentStatus);
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdRehireRequestBody$Outbound = {
@@ -165,21 +119,6 @@ export const PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdRehireRequestBody$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdRehireRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdRehireRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireRequestBody$Outbound` instead. */
-  export type Outbound = PutV1EmployeesEmployeeIdRehireRequestBody$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdRehireRequestBodyToJSON(
   putV1EmployeesEmployeeIdRehireRequestBody:
     PutV1EmployeesEmployeeIdRehireRequestBody,
@@ -190,41 +129,6 @@ export function putV1EmployeesEmployeeIdRehireRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1EmployeesEmployeeIdRehireRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdRehireRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdRehireRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeesEmployeeIdRehireRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdRehireRequest$inboundSchema: z.ZodType<
-  PutV1EmployeesEmployeeIdRehireRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutV1EmployeesEmployeeIdRehireRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdRehireRequest$Outbound = {
@@ -252,21 +156,6 @@ export const PutV1EmployeesEmployeeIdRehireRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdRehireRequest$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdRehireRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdRehireRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireRequest$Outbound` instead. */
-  export type Outbound = PutV1EmployeesEmployeeIdRehireRequest$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdRehireRequestToJSON(
   putV1EmployeesEmployeeIdRehireRequest: PutV1EmployeesEmployeeIdRehireRequest,
 ): string {
@@ -274,17 +163,6 @@ export function putV1EmployeesEmployeeIdRehireRequestToJSON(
     PutV1EmployeesEmployeeIdRehireRequest$outboundSchema.parse(
       putV1EmployeesEmployeeIdRehireRequest,
     ),
-  );
-}
-
-export function putV1EmployeesEmployeeIdRehireRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1EmployeesEmployeeIdRehireRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdRehireRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1EmployeesEmployeeIdRehireRequest' from JSON`,
   );
 }
 
@@ -302,53 +180,6 @@ export const PutV1EmployeesEmployeeIdRehireResponse$inboundSchema: z.ZodType<
     "Rehire": "rehire",
   });
 });
-
-/** @internal */
-export type PutV1EmployeesEmployeeIdRehireResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Rehire?: Rehire$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdRehireResponse$outboundSchema: z.ZodType<
-  PutV1EmployeesEmployeeIdRehireResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1EmployeesEmployeeIdRehireResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  rehire: Rehire$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    rehire: "Rehire",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdRehireResponse$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdRehireResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdRehireResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdRehireResponse$Outbound` instead. */
-  export type Outbound = PutV1EmployeesEmployeeIdRehireResponse$Outbound;
-}
-
-export function putV1EmployeesEmployeeIdRehireResponseToJSON(
-  putV1EmployeesEmployeeIdRehireResponse:
-    PutV1EmployeesEmployeeIdRehireResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdRehireResponse$outboundSchema.parse(
-      putV1EmployeesEmployeeIdRehireResponse,
-    ),
-  );
-}
 
 export function putV1EmployeesEmployeeIdRehireResponseFromJSON(
   jsonString: string,

@@ -46,60 +46,6 @@ export const EmployeeHomeAddress$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type EmployeeHomeAddress$Outbound = {
-  street_1?: string | null | undefined;
-  street_2?: string | null | undefined;
-  city?: string | null | undefined;
-  state?: string | null | undefined;
-  zip?: string | null | undefined;
-  country: string | null;
-  active?: boolean | undefined;
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const EmployeeHomeAddress$outboundSchema: z.ZodType<
-  EmployeeHomeAddress$Outbound,
-  z.ZodTypeDef,
-  EmployeeHomeAddress
-> = z.object({
-  street1: z.nullable(z.string()).optional(),
-  street2: z.nullable(z.string()).optional(),
-  city: z.nullable(z.string()).optional(),
-  state: z.nullable(z.string()).optional(),
-  zip: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string().default("USA")),
-  active: z.boolean().optional(),
-  uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    street1: "street_1",
-    street2: "street_2",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeHomeAddress$ {
-  /** @deprecated use `EmployeeHomeAddress$inboundSchema` instead. */
-  export const inboundSchema = EmployeeHomeAddress$inboundSchema;
-  /** @deprecated use `EmployeeHomeAddress$outboundSchema` instead. */
-  export const outboundSchema = EmployeeHomeAddress$outboundSchema;
-  /** @deprecated use `EmployeeHomeAddress$Outbound` instead. */
-  export type Outbound = EmployeeHomeAddress$Outbound;
-}
-
-export function employeeHomeAddressToJSON(
-  employeeHomeAddress: EmployeeHomeAddress,
-): string {
-  return JSON.stringify(
-    EmployeeHomeAddress$outboundSchema.parse(employeeHomeAddress),
-  );
-}
-
 export function employeeHomeAddressFromJSON(
   jsonString: string,
 ): SafeParseResult<EmployeeHomeAddress, SDKValidationError> {

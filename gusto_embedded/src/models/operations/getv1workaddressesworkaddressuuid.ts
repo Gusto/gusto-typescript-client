@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeWorkAddress,
   EmployeeWorkAddress$inboundSchema,
-  EmployeeWorkAddress$Outbound,
-  EmployeeWorkAddress$outboundSchema,
 } from "../components/employeeworkaddress.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -55,46 +51,10 @@ export type GetV1WorkAddressesWorkAddressUuidResponse = {
 };
 
 /** @internal */
-export const GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
-  > = z.nativeEnum(GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
-
-/** @internal */
 export const GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
-  > = GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$ {
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetV1WorkAddressesWorkAddressUuidRequest$inboundSchema: z.ZodType<
-  GetV1WorkAddressesWorkAddressUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  work_address_uuid: z.string(),
-  "X-Gusto-API-Version":
-    GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion$inboundSchema
-      .default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "work_address_uuid": "workAddressUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
+  > = z.nativeEnum(GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1WorkAddressesWorkAddressUuidRequest$Outbound = {
@@ -119,21 +79,6 @@ export const GetV1WorkAddressesWorkAddressUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WorkAddressesWorkAddressUuidRequest$ {
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1WorkAddressesWorkAddressUuidRequest$inboundSchema;
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1WorkAddressesWorkAddressUuidRequest$outboundSchema;
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidRequest$Outbound` instead. */
-  export type Outbound = GetV1WorkAddressesWorkAddressUuidRequest$Outbound;
-}
-
 export function getV1WorkAddressesWorkAddressUuidRequestToJSON(
   getV1WorkAddressesWorkAddressUuidRequest:
     GetV1WorkAddressesWorkAddressUuidRequest,
@@ -142,22 +87,6 @@ export function getV1WorkAddressesWorkAddressUuidRequestToJSON(
     GetV1WorkAddressesWorkAddressUuidRequest$outboundSchema.parse(
       getV1WorkAddressesWorkAddressUuidRequest,
     ),
-  );
-}
-
-export function getV1WorkAddressesWorkAddressUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1WorkAddressesWorkAddressUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1WorkAddressesWorkAddressUuidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1WorkAddressesWorkAddressUuidRequest' from JSON`,
   );
 }
 
@@ -175,54 +104,6 @@ export const GetV1WorkAddressesWorkAddressUuidResponse$inboundSchema: z.ZodType<
     "Employee-Work-Address": "employeeWorkAddress",
   });
 });
-
-/** @internal */
-export type GetV1WorkAddressesWorkAddressUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Employee-Work-Address"?: EmployeeWorkAddress$Outbound | undefined;
-};
-
-/** @internal */
-export const GetV1WorkAddressesWorkAddressUuidResponse$outboundSchema:
-  z.ZodType<
-    GetV1WorkAddressesWorkAddressUuidResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1WorkAddressesWorkAddressUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    employeeWorkAddress: EmployeeWorkAddress$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      employeeWorkAddress: "Employee-Work-Address",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1WorkAddressesWorkAddressUuidResponse$ {
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1WorkAddressesWorkAddressUuidResponse$inboundSchema;
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1WorkAddressesWorkAddressUuidResponse$outboundSchema;
-  /** @deprecated use `GetV1WorkAddressesWorkAddressUuidResponse$Outbound` instead. */
-  export type Outbound = GetV1WorkAddressesWorkAddressUuidResponse$Outbound;
-}
-
-export function getV1WorkAddressesWorkAddressUuidResponseToJSON(
-  getV1WorkAddressesWorkAddressUuidResponse:
-    GetV1WorkAddressesWorkAddressUuidResponse,
-): string {
-  return JSON.stringify(
-    GetV1WorkAddressesWorkAddressUuidResponse$outboundSchema.parse(
-      getV1WorkAddressesWorkAddressUuidResponse,
-    ),
-  );
-}
 
 export function getV1WorkAddressesWorkAddressUuidResponseFromJSON(
   jsonString: string,

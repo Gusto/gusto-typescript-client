@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeCustomField,
   EmployeeCustomField$inboundSchema,
-  EmployeeCustomField$Outbound,
-  EmployeeCustomField$outboundSchema,
 } from "../components/employeecustomfield.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -60,24 +55,6 @@ export type GetV1EmployeesEmployeeIdCustomFieldsResponse = {
 };
 
 /** @internal */
-export const GetV1EmployeesEmployeeIdCustomFieldsRequest$inboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdCustomFieldsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    page: z.number().int().optional(),
-    per: z.number().int().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type GetV1EmployeesEmployeeIdCustomFieldsRequest$Outbound = {
   employee_id: string;
   page?: number | undefined;
@@ -103,21 +80,6 @@ export const GetV1EmployeesEmployeeIdCustomFieldsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdCustomFieldsRequest$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdCustomFieldsRequest$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdCustomFieldsRequest$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsRequest$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdCustomFieldsRequest$Outbound;
-}
-
 export function getV1EmployeesEmployeeIdCustomFieldsRequestToJSON(
   getV1EmployeesEmployeeIdCustomFieldsRequest:
     GetV1EmployeesEmployeeIdCustomFieldsRequest,
@@ -126,22 +88,6 @@ export function getV1EmployeesEmployeeIdCustomFieldsRequestToJSON(
     GetV1EmployeesEmployeeIdCustomFieldsRequest$outboundSchema.parse(
       getV1EmployeesEmployeeIdCustomFieldsRequest,
     ),
-  );
-}
-
-export function getV1EmployeesEmployeeIdCustomFieldsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1EmployeesEmployeeIdCustomFieldsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1EmployeesEmployeeIdCustomFieldsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1EmployeesEmployeeIdCustomFieldsRequest' from JSON`,
   );
 }
 
@@ -158,52 +104,6 @@ export const GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema:
       "custom_fields": "customFields",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdCustomFieldsResponseBody$Outbound = {
-  custom_fields?: Array<EmployeeCustomField$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdCustomFieldsResponseBody$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody
-  > = z.object({
-    customFields: z.array(EmployeeCustomField$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      customFields: "custom_fields",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdCustomFieldsResponseBody$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponseBody$Outbound` instead. */
-  export type Outbound =
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdCustomFieldsResponseBodyToJSON(
-  getV1EmployeesEmployeeIdCustomFieldsResponseBody:
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdCustomFieldsResponseBody$outboundSchema.parse(
-      getV1EmployeesEmployeeIdCustomFieldsResponseBody,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdCustomFieldsResponseBodyFromJSON(
   jsonString: string,
@@ -237,57 +137,6 @@ export const GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  object?:
-    | GetV1EmployeesEmployeeIdCustomFieldsResponseBody$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema:
-  z.ZodType<
-    GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1EmployeesEmployeeIdCustomFieldsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    object: z.lazy(() =>
-      GetV1EmployeesEmployeeIdCustomFieldsResponseBody$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1EmployeesEmployeeIdCustomFieldsResponse$ {
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1EmployeesEmployeeIdCustomFieldsResponse$inboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema;
-  /** @deprecated use `GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound` instead. */
-  export type Outbound = GetV1EmployeesEmployeeIdCustomFieldsResponse$Outbound;
-}
-
-export function getV1EmployeesEmployeeIdCustomFieldsResponseToJSON(
-  getV1EmployeesEmployeeIdCustomFieldsResponse:
-    GetV1EmployeesEmployeeIdCustomFieldsResponse,
-): string {
-  return JSON.stringify(
-    GetV1EmployeesEmployeeIdCustomFieldsResponse$outboundSchema.parse(
-      getV1EmployeesEmployeeIdCustomFieldsResponse,
-    ),
-  );
-}
 
 export function getV1EmployeesEmployeeIdCustomFieldsResponseFromJSON(
   jsonString: string,

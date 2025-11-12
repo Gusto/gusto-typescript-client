@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,24 +36,6 @@ export type DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse
   {
     httpMeta: HTTPMetadata;
   };
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$inboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    contractor_payment_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "contractor_payment_id": "contractorPaymentId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
 
 /** @internal */
 export type DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$Outbound =
@@ -84,22 +63,6 @@ export const DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$Outbound;
-}
-
 export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestToJSON(
   deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest:
     DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
@@ -109,21 +72,6 @@ export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequ
       .parse(
         deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
       ),
-  );
-}
-
-export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest' from JSON`,
   );
 }
 
@@ -140,54 +88,6 @@ export const DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentRespons
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-  };
-
-/** @internal */
-export const DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema:
-  z.ZodType<
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$ {
-  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$inboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema;
-  /** @deprecated use `DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$Outbound;
-}
-
-export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponseToJSON(
-  deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse:
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse$outboundSchema
-      .parse(
-        deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponse,
-      ),
-  );
-}
 
 export function deleteV1CompaniesCompanyIdContractorPaymentContractorPaymentResponseFromJSON(
   jsonString: string,

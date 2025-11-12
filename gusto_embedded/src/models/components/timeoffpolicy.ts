@@ -100,21 +100,6 @@ export const PolicyType$inboundSchema: z.ZodNativeEnum<typeof PolicyType> = z
   .nativeEnum(PolicyType);
 
 /** @internal */
-export const PolicyType$outboundSchema: z.ZodNativeEnum<typeof PolicyType> =
-  PolicyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyType$ {
-  /** @deprecated use `PolicyType$inboundSchema` instead. */
-  export const inboundSchema = PolicyType$inboundSchema;
-  /** @deprecated use `PolicyType$outboundSchema` instead. */
-  export const outboundSchema = PolicyType$outboundSchema;
-}
-
-/** @internal */
 export const TimeOffPolicyEmployees$inboundSchema: z.ZodType<
   TimeOffPolicyEmployees,
   z.ZodTypeDef,
@@ -122,41 +107,6 @@ export const TimeOffPolicyEmployees$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string().optional(),
 });
-
-/** @internal */
-export type TimeOffPolicyEmployees$Outbound = {
-  uuid?: string | undefined;
-};
-
-/** @internal */
-export const TimeOffPolicyEmployees$outboundSchema: z.ZodType<
-  TimeOffPolicyEmployees$Outbound,
-  z.ZodTypeDef,
-  TimeOffPolicyEmployees
-> = z.object({
-  uuid: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TimeOffPolicyEmployees$ {
-  /** @deprecated use `TimeOffPolicyEmployees$inboundSchema` instead. */
-  export const inboundSchema = TimeOffPolicyEmployees$inboundSchema;
-  /** @deprecated use `TimeOffPolicyEmployees$outboundSchema` instead. */
-  export const outboundSchema = TimeOffPolicyEmployees$outboundSchema;
-  /** @deprecated use `TimeOffPolicyEmployees$Outbound` instead. */
-  export type Outbound = TimeOffPolicyEmployees$Outbound;
-}
-
-export function timeOffPolicyEmployeesToJSON(
-  timeOffPolicyEmployees: TimeOffPolicyEmployees,
-): string {
-  return JSON.stringify(
-    TimeOffPolicyEmployees$outboundSchema.parse(timeOffPolicyEmployees),
-  );
-}
 
 export function timeOffPolicyEmployeesFromJSON(
   jsonString: string,
@@ -205,81 +155,6 @@ export const TimeOffPolicy$inboundSchema: z.ZodType<
     "is_active": "isActive",
   });
 });
-
-/** @internal */
-export type TimeOffPolicy$Outbound = {
-  uuid: string;
-  company_uuid: string;
-  name: string;
-  policy_type: string;
-  accrual_method: string;
-  accrual_rate?: string | null | undefined;
-  accrual_rate_unit?: string | null | undefined;
-  paid_out_on_termination?: boolean | undefined;
-  accrual_waiting_period_days?: number | null | undefined;
-  carryover_limit_hours?: string | undefined;
-  max_accrual_hours_per_year?: string | undefined;
-  max_hours?: string | undefined;
-  complete?: boolean | undefined;
-  version?: string | undefined;
-  is_active: boolean;
-  employees: Array<TimeOffPolicyEmployees$Outbound>;
-};
-
-/** @internal */
-export const TimeOffPolicy$outboundSchema: z.ZodType<
-  TimeOffPolicy$Outbound,
-  z.ZodTypeDef,
-  TimeOffPolicy
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string(),
-  name: z.string(),
-  policyType: PolicyType$outboundSchema,
-  accrualMethod: z.string(),
-  accrualRate: z.nullable(z.string()).optional(),
-  accrualRateUnit: z.nullable(z.string()).optional(),
-  paidOutOnTermination: z.boolean().optional(),
-  accrualWaitingPeriodDays: z.nullable(z.number().int()).optional(),
-  carryoverLimitHours: z.string().optional(),
-  maxAccrualHoursPerYear: z.string().optional(),
-  maxHours: z.string().optional(),
-  complete: z.boolean().optional(),
-  version: z.string().optional(),
-  isActive: z.boolean(),
-  employees: z.array(z.lazy(() => TimeOffPolicyEmployees$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    policyType: "policy_type",
-    accrualMethod: "accrual_method",
-    accrualRate: "accrual_rate",
-    accrualRateUnit: "accrual_rate_unit",
-    paidOutOnTermination: "paid_out_on_termination",
-    accrualWaitingPeriodDays: "accrual_waiting_period_days",
-    carryoverLimitHours: "carryover_limit_hours",
-    maxAccrualHoursPerYear: "max_accrual_hours_per_year",
-    maxHours: "max_hours",
-    isActive: "is_active",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TimeOffPolicy$ {
-  /** @deprecated use `TimeOffPolicy$inboundSchema` instead. */
-  export const inboundSchema = TimeOffPolicy$inboundSchema;
-  /** @deprecated use `TimeOffPolicy$outboundSchema` instead. */
-  export const outboundSchema = TimeOffPolicy$outboundSchema;
-  /** @deprecated use `TimeOffPolicy$Outbound` instead. */
-  export type Outbound = TimeOffPolicy$Outbound;
-}
-
-export function timeOffPolicyToJSON(timeOffPolicy: TimeOffPolicy): string {
-  return JSON.stringify(TimeOffPolicy$outboundSchema.parse(timeOffPolicy));
-}
 
 export function timeOffPolicyFromJSON(
   jsonString: string,

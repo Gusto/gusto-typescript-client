@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   PayScheduleCreateUpdate,
   PayScheduleCreateUpdate$inboundSchema,
-  PayScheduleCreateUpdate$Outbound,
-  PayScheduleCreateUpdate$outboundSchema,
 } from "../components/payschedulecreateupdate.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -103,57 +98,10 @@ export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse = {
 };
 
 /** @internal */
-export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency
-  > = z.nativeEnum(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency);
-
-/** @internal */
 export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$outboundSchema:
   z.ZodNativeEnum<
     typeof PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency
-  > = PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$outboundSchema;
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string(),
-    frequency:
-      PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency$inboundSchema
-        .optional(),
-    anchor_pay_date: z.string().optional(),
-    anchor_end_of_pay_period: z.string().optional(),
-    day_1: z.nullable(z.number().int()).optional(),
-    day_2: z.nullable(z.number().int()).optional(),
-    custom_name: z.string().optional(),
-    auto_pilot: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "anchor_pay_date": "anchorPayDate",
-      "anchor_end_of_pay_period": "anchorEndOfPayPeriod",
-      "day_1": "day1",
-      "day_2": "day2",
-      "custom_name": "customName",
-      "auto_pilot": "autoPilot",
-    });
-  });
+  > = z.nativeEnum(PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdFrequency);
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$Outbound =
@@ -196,22 +144,6 @@ export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$Outbound;
-}
-
 export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBodyToJSON(
   putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody:
     PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody,
@@ -221,43 +153,6 @@ export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBodyToJSO
       .parse(putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody),
   );
 }
-
-export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    pay_schedule_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "pay_schedule_id": "payScheduleId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$Outbound = {
@@ -290,22 +185,6 @@ export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSch
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestToJSON(
   putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest:
     PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
@@ -313,21 +192,6 @@ export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestToJSON(
   return JSON.stringify(
     PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$outboundSchema
       .parse(putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest),
-  );
-}
-
-export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest' from JSON`,
   );
 }
 
@@ -347,55 +211,6 @@ export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSch
       "Pay-Schedule-Create-Update": "payScheduleCreateUpdate",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    "Pay-Schedule-Create-Update"?: PayScheduleCreateUpdate$Outbound | undefined;
-  };
-
-/** @internal */
-export const PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payScheduleCreateUpdate: PayScheduleCreateUpdate$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payScheduleCreateUpdate: "Pay-Schedule-Create-Update",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseToJSON(
-  putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse:
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse$outboundSchema
-      .parse(putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponse),
-  );
-}
 
 export function putV1CompaniesCompanyIdPaySchedulesPayScheduleIdResponseFromJSON(
   jsonString: string,

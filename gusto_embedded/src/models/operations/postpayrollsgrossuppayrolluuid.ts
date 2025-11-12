@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   GrossUpPay,
   GrossUpPay$inboundSchema,
-  GrossUpPay$Outbound,
-  GrossUpPay$outboundSchema,
 } from "../components/grossuppay.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,21 +52,6 @@ export type PostPayrollsGrossUpPayrollUuidResponse = {
 };
 
 /** @internal */
-export const PostPayrollsGrossUpPayrollUuidRequestBody$inboundSchema: z.ZodType<
-  PostPayrollsGrossUpPayrollUuidRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_uuid: z.string(),
-  net_pay: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_uuid": "employeeUuid",
-    "net_pay": "netPay",
-  });
-});
-
-/** @internal */
 export type PostPayrollsGrossUpPayrollUuidRequestBody$Outbound = {
   employee_uuid: string;
   net_pay: string;
@@ -93,21 +73,6 @@ export const PostPayrollsGrossUpPayrollUuidRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPayrollsGrossUpPayrollUuidRequestBody$ {
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPayrollsGrossUpPayrollUuidRequestBody$inboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPayrollsGrossUpPayrollUuidRequestBody$outboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidRequestBody$Outbound` instead. */
-  export type Outbound = PostPayrollsGrossUpPayrollUuidRequestBody$Outbound;
-}
-
 export function postPayrollsGrossUpPayrollUuidRequestBodyToJSON(
   postPayrollsGrossUpPayrollUuidRequestBody:
     PostPayrollsGrossUpPayrollUuidRequestBody,
@@ -118,41 +83,6 @@ export function postPayrollsGrossUpPayrollUuidRequestBodyToJSON(
     ),
   );
 }
-
-export function postPayrollsGrossUpPayrollUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostPayrollsGrossUpPayrollUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostPayrollsGrossUpPayrollUuidRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostPayrollsGrossUpPayrollUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostPayrollsGrossUpPayrollUuidRequest$inboundSchema: z.ZodType<
-  PostPayrollsGrossUpPayrollUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  payroll_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PostPayrollsGrossUpPayrollUuidRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "payroll_uuid": "payrollUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostPayrollsGrossUpPayrollUuidRequest$Outbound = {
@@ -180,21 +110,6 @@ export const PostPayrollsGrossUpPayrollUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPayrollsGrossUpPayrollUuidRequest$ {
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPayrollsGrossUpPayrollUuidRequest$inboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPayrollsGrossUpPayrollUuidRequest$outboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidRequest$Outbound` instead. */
-  export type Outbound = PostPayrollsGrossUpPayrollUuidRequest$Outbound;
-}
-
 export function postPayrollsGrossUpPayrollUuidRequestToJSON(
   postPayrollsGrossUpPayrollUuidRequest: PostPayrollsGrossUpPayrollUuidRequest,
 ): string {
@@ -202,17 +117,6 @@ export function postPayrollsGrossUpPayrollUuidRequestToJSON(
     PostPayrollsGrossUpPayrollUuidRequest$outboundSchema.parse(
       postPayrollsGrossUpPayrollUuidRequest,
     ),
-  );
-}
-
-export function postPayrollsGrossUpPayrollUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostPayrollsGrossUpPayrollUuidRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostPayrollsGrossUpPayrollUuidRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostPayrollsGrossUpPayrollUuidRequest' from JSON`,
   );
 }
 
@@ -230,53 +134,6 @@ export const PostPayrollsGrossUpPayrollUuidResponse$inboundSchema: z.ZodType<
     "Gross-Up-Pay": "grossUpPay",
   });
 });
-
-/** @internal */
-export type PostPayrollsGrossUpPayrollUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Gross-Up-Pay"?: GrossUpPay$Outbound | undefined;
-};
-
-/** @internal */
-export const PostPayrollsGrossUpPayrollUuidResponse$outboundSchema: z.ZodType<
-  PostPayrollsGrossUpPayrollUuidResponse$Outbound,
-  z.ZodTypeDef,
-  PostPayrollsGrossUpPayrollUuidResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  grossUpPay: GrossUpPay$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    grossUpPay: "Gross-Up-Pay",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostPayrollsGrossUpPayrollUuidResponse$ {
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostPayrollsGrossUpPayrollUuidResponse$inboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostPayrollsGrossUpPayrollUuidResponse$outboundSchema;
-  /** @deprecated use `PostPayrollsGrossUpPayrollUuidResponse$Outbound` instead. */
-  export type Outbound = PostPayrollsGrossUpPayrollUuidResponse$Outbound;
-}
-
-export function postPayrollsGrossUpPayrollUuidResponseToJSON(
-  postPayrollsGrossUpPayrollUuidResponse:
-    PostPayrollsGrossUpPayrollUuidResponse,
-): string {
-  return JSON.stringify(
-    PostPayrollsGrossUpPayrollUuidResponse$outboundSchema.parse(
-      postPayrollsGrossUpPayrollUuidResponse,
-    ),
-  );
-}
 
 export function postPayrollsGrossUpPayrollUuidResponseFromJSON(
   jsonString: string,

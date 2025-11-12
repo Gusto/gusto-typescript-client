@@ -10,14 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanySuspension,
   CompanySuspension$inboundSchema,
-  CompanySuspension$Outbound,
-  CompanySuspension$outboundSchema,
 } from "../components/companysuspension.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -174,110 +170,23 @@ export type PostCompaniesCompanyUuidSuspensionsResponse = {
 };
 
 /** @internal */
-export const PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema:
+export const PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema:
   z.ZodNativeEnum<
     typeof PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
   > = z.nativeEnum(PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion);
 
 /** @internal */
-export const PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
-  > = PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$ {
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$outboundSchema;
-}
-
-/** @internal */
-export const ReconcileTaxMethod$inboundSchema: z.ZodNativeEnum<
+export const ReconcileTaxMethod$outboundSchema: z.ZodNativeEnum<
   typeof ReconcileTaxMethod
 > = z.nativeEnum(ReconcileTaxMethod);
 
 /** @internal */
-export const ReconcileTaxMethod$outboundSchema: z.ZodNativeEnum<
-  typeof ReconcileTaxMethod
-> = ReconcileTaxMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReconcileTaxMethod$ {
-  /** @deprecated use `ReconcileTaxMethod$inboundSchema` instead. */
-  export const inboundSchema = ReconcileTaxMethod$inboundSchema;
-  /** @deprecated use `ReconcileTaxMethod$outboundSchema` instead. */
-  export const outboundSchema = ReconcileTaxMethod$outboundSchema;
-}
-
-/** @internal */
-export const Reason$inboundSchema: z.ZodNativeEnum<typeof Reason> = z
+export const Reason$outboundSchema: z.ZodNativeEnum<typeof Reason> = z
   .nativeEnum(Reason);
 
 /** @internal */
-export const Reason$outboundSchema: z.ZodNativeEnum<typeof Reason> =
-  Reason$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Reason$ {
-  /** @deprecated use `Reason$inboundSchema` instead. */
-  export const inboundSchema = Reason$inboundSchema;
-  /** @deprecated use `Reason$outboundSchema` instead. */
-  export const outboundSchema = Reason$outboundSchema;
-}
-
-/** @internal */
-export const LeavingFor$inboundSchema: z.ZodNativeEnum<typeof LeavingFor> = z
+export const LeavingFor$outboundSchema: z.ZodNativeEnum<typeof LeavingFor> = z
   .nativeEnum(LeavingFor);
-
-/** @internal */
-export const LeavingFor$outboundSchema: z.ZodNativeEnum<typeof LeavingFor> =
-  LeavingFor$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace LeavingFor$ {
-  /** @deprecated use `LeavingFor$inboundSchema` instead. */
-  export const inboundSchema = LeavingFor$inboundSchema;
-  /** @deprecated use `LeavingFor$outboundSchema` instead. */
-  export const outboundSchema = LeavingFor$outboundSchema;
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidSuspensionsRequestBody$inboundSchema:
-  z.ZodType<
-    PostCompaniesCompanyUuidSuspensionsRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    file_quarterly_forms: z.boolean(),
-    file_yearly_forms: z.boolean(),
-    reconcile_tax_method: ReconcileTaxMethod$inboundSchema,
-    comments: z.string().optional(),
-    reason: Reason$inboundSchema,
-    leaving_for: LeavingFor$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "file_quarterly_forms": "fileQuarterlyForms",
-      "file_yearly_forms": "fileYearlyForms",
-      "reconcile_tax_method": "reconcileTaxMethod",
-      "leaving_for": "leavingFor",
-    });
-  });
 
 /** @internal */
 export type PostCompaniesCompanyUuidSuspensionsRequestBody$Outbound = {
@@ -311,22 +220,6 @@ export const PostCompaniesCompanyUuidSuspensionsRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidSuspensionsRequestBody$ {
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidSuspensionsRequestBody$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidSuspensionsRequestBody$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsRequestBody$Outbound` instead. */
-  export type Outbound =
-    PostCompaniesCompanyUuidSuspensionsRequestBody$Outbound;
-}
-
 export function postCompaniesCompanyUuidSuspensionsRequestBodyToJSON(
   postCompaniesCompanyUuidSuspensionsRequestBody:
     PostCompaniesCompanyUuidSuspensionsRequestBody,
@@ -337,41 +230,6 @@ export function postCompaniesCompanyUuidSuspensionsRequestBodyToJSON(
     ),
   );
 }
-
-export function postCompaniesCompanyUuidSuspensionsRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostCompaniesCompanyUuidSuspensionsRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesCompanyUuidSuspensionsRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostCompaniesCompanyUuidSuspensionsRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostCompaniesCompanyUuidSuspensionsRequest$inboundSchema:
-  z.ZodType<PostCompaniesCompanyUuidSuspensionsRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      "X-Gusto-API-Version":
-        PostCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion$inboundSchema
-          .default("2025-06-15"),
-      company_uuid: z.string(),
-      RequestBody: z.lazy(() =>
-        PostCompaniesCompanyUuidSuspensionsRequestBody$inboundSchema
-      ),
-    }).transform((v) => {
-      return remap$(v, {
-        "X-Gusto-API-Version": "xGustoAPIVersion",
-        "company_uuid": "companyUuid",
-        "RequestBody": "requestBody",
-      });
-    });
 
 /** @internal */
 export type PostCompaniesCompanyUuidSuspensionsRequest$Outbound = {
@@ -402,21 +260,6 @@ export const PostCompaniesCompanyUuidSuspensionsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidSuspensionsRequest$ {
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidSuspensionsRequest$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidSuspensionsRequest$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsRequest$Outbound` instead. */
-  export type Outbound = PostCompaniesCompanyUuidSuspensionsRequest$Outbound;
-}
-
 export function postCompaniesCompanyUuidSuspensionsRequestToJSON(
   postCompaniesCompanyUuidSuspensionsRequest:
     PostCompaniesCompanyUuidSuspensionsRequest,
@@ -425,22 +268,6 @@ export function postCompaniesCompanyUuidSuspensionsRequestToJSON(
     PostCompaniesCompanyUuidSuspensionsRequest$outboundSchema.parse(
       postCompaniesCompanyUuidSuspensionsRequest,
     ),
-  );
-}
-
-export function postCompaniesCompanyUuidSuspensionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostCompaniesCompanyUuidSuspensionsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostCompaniesCompanyUuidSuspensionsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostCompaniesCompanyUuidSuspensionsRequest' from JSON`,
   );
 }
 
@@ -459,54 +286,6 @@ export const PostCompaniesCompanyUuidSuspensionsResponse$inboundSchema:
       "Company-Suspension": "companySuspension",
     });
   });
-
-/** @internal */
-export type PostCompaniesCompanyUuidSuspensionsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Suspension"?: CompanySuspension$Outbound | undefined;
-};
-
-/** @internal */
-export const PostCompaniesCompanyUuidSuspensionsResponse$outboundSchema:
-  z.ZodType<
-    PostCompaniesCompanyUuidSuspensionsResponse$Outbound,
-    z.ZodTypeDef,
-    PostCompaniesCompanyUuidSuspensionsResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    companySuspension: CompanySuspension$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      companySuspension: "Company-Suspension",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostCompaniesCompanyUuidSuspensionsResponse$ {
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostCompaniesCompanyUuidSuspensionsResponse$inboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostCompaniesCompanyUuidSuspensionsResponse$outboundSchema;
-  /** @deprecated use `PostCompaniesCompanyUuidSuspensionsResponse$Outbound` instead. */
-  export type Outbound = PostCompaniesCompanyUuidSuspensionsResponse$Outbound;
-}
-
-export function postCompaniesCompanyUuidSuspensionsResponseToJSON(
-  postCompaniesCompanyUuidSuspensionsResponse:
-    PostCompaniesCompanyUuidSuspensionsResponse,
-): string {
-  return JSON.stringify(
-    PostCompaniesCompanyUuidSuspensionsResponse$outboundSchema.parse(
-      postCompaniesCompanyUuidSuspensionsResponse,
-    ),
-  );
-}
 
 export function postCompaniesCompanyUuidSuspensionsResponseFromJSON(
   jsonString: string,

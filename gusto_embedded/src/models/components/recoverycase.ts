@@ -76,22 +76,6 @@ export const RecoveryCaseStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RecoveryCaseStatus);
 
 /** @internal */
-export const RecoveryCaseStatus$outboundSchema: z.ZodNativeEnum<
-  typeof RecoveryCaseStatus
-> = RecoveryCaseStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RecoveryCaseStatus$ {
-  /** @deprecated use `RecoveryCaseStatus$inboundSchema` instead. */
-  export const inboundSchema = RecoveryCaseStatus$inboundSchema;
-  /** @deprecated use `RecoveryCaseStatus$outboundSchema` instead. */
-  export const outboundSchema = RecoveryCaseStatus$outboundSchema;
-}
-
-/** @internal */
 export const RecoveryCase$inboundSchema: z.ZodType<
   RecoveryCase,
   z.ZodTypeDef,
@@ -119,66 +103,6 @@ export const RecoveryCase$inboundSchema: z.ZodType<
     "event_total_amount": "eventTotalAmount",
   });
 });
-
-/** @internal */
-export type RecoveryCase$Outbound = {
-  uuid: string;
-  company_uuid?: string | undefined;
-  status?: string | undefined;
-  latest_error_code?: string | undefined;
-  original_debit_date?: string | undefined;
-  check_date?: string | undefined;
-  payroll_uuid?: string | undefined;
-  contractor_payment_uuids?: Array<string> | null | undefined;
-  amount_outstanding?: string | undefined;
-  event_total_amount?: string | undefined;
-};
-
-/** @internal */
-export const RecoveryCase$outboundSchema: z.ZodType<
-  RecoveryCase$Outbound,
-  z.ZodTypeDef,
-  RecoveryCase
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string().optional(),
-  status: RecoveryCaseStatus$outboundSchema.optional(),
-  latestErrorCode: z.string().optional(),
-  originalDebitDate: z.string().optional(),
-  checkDate: z.string().optional(),
-  payrollUuid: z.string().optional(),
-  contractorPaymentUuids: z.nullable(z.array(z.string())).optional(),
-  amountOutstanding: z.string().optional(),
-  eventTotalAmount: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    latestErrorCode: "latest_error_code",
-    originalDebitDate: "original_debit_date",
-    checkDate: "check_date",
-    payrollUuid: "payroll_uuid",
-    contractorPaymentUuids: "contractor_payment_uuids",
-    amountOutstanding: "amount_outstanding",
-    eventTotalAmount: "event_total_amount",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RecoveryCase$ {
-  /** @deprecated use `RecoveryCase$inboundSchema` instead. */
-  export const inboundSchema = RecoveryCase$inboundSchema;
-  /** @deprecated use `RecoveryCase$outboundSchema` instead. */
-  export const outboundSchema = RecoveryCase$outboundSchema;
-  /** @deprecated use `RecoveryCase$Outbound` instead. */
-  export type Outbound = RecoveryCase$Outbound;
-}
-
-export function recoveryCaseToJSON(recoveryCase: RecoveryCase): string {
-  return JSON.stringify(RecoveryCase$outboundSchema.parse(recoveryCase));
-}
 
 export function recoveryCaseFromJSON(
   jsonString: string,

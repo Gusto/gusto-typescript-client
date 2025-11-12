@@ -10,18 +10,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   I9Authorization,
   I9Authorization$inboundSchema,
-  I9Authorization$Outbound,
-  I9Authorization$outboundSchema,
 } from "../components/i9authorization.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -156,66 +151,13 @@ export type PutV1EmployeesEmployeeIdI9AuthorizationResponse = {
 };
 
 /** @internal */
-export const AuthorizationStatus$inboundSchema: z.ZodNativeEnum<
+export const AuthorizationStatus$outboundSchema: z.ZodNativeEnum<
   typeof AuthorizationStatus
 > = z.nativeEnum(AuthorizationStatus);
 
 /** @internal */
-export const AuthorizationStatus$outboundSchema: z.ZodNativeEnum<
-  typeof AuthorizationStatus
-> = AuthorizationStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AuthorizationStatus$ {
-  /** @deprecated use `AuthorizationStatus$inboundSchema` instead. */
-  export const inboundSchema = AuthorizationStatus$inboundSchema;
-  /** @deprecated use `AuthorizationStatus$outboundSchema` instead. */
-  export const outboundSchema = AuthorizationStatus$outboundSchema;
-}
-
-/** @internal */
-export const DocumentType$inboundSchema: z.ZodNativeEnum<typeof DocumentType> =
-  z.nativeEnum(DocumentType);
-
-/** @internal */
 export const DocumentType$outboundSchema: z.ZodNativeEnum<typeof DocumentType> =
-  DocumentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DocumentType$ {
-  /** @deprecated use `DocumentType$inboundSchema` instead. */
-  export const inboundSchema = DocumentType$inboundSchema;
-  /** @deprecated use `DocumentType$outboundSchema` instead. */
-  export const outboundSchema = DocumentType$outboundSchema;
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    authorization_status: AuthorizationStatus$inboundSchema,
-    document_type: DocumentType$inboundSchema.optional(),
-    document_number: z.string().optional(),
-    country: z.string().optional(),
-    expiration_date: z.string().optional(),
-    version: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "authorization_status": "authorizationStatus",
-      "document_type": "documentType",
-      "document_number": "documentNumber",
-      "expiration_date": "expirationDate",
-    });
-  });
+  z.nativeEnum(DocumentType);
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$Outbound = {
@@ -249,22 +191,6 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdI9AuthorizationRequestBodyToJSON(
   putV1EmployeesEmployeeIdI9AuthorizationRequestBody:
     PutV1EmployeesEmployeeIdI9AuthorizationRequestBody,
@@ -275,42 +201,6 @@ export function putV1EmployeesEmployeeIdI9AuthorizationRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1EmployeesEmployeeIdI9AuthorizationRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdI9AuthorizationRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeesEmployeeIdI9AuthorizationRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    employee_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1EmployeesEmployeeIdI9AuthorizationRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "employee_id": "employeeId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdI9AuthorizationRequest$Outbound = {
@@ -339,22 +229,6 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdI9AuthorizationRequest$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdI9AuthorizationRequest$Outbound;
-}
-
 export function putV1EmployeesEmployeeIdI9AuthorizationRequestToJSON(
   putV1EmployeesEmployeeIdI9AuthorizationRequest:
     PutV1EmployeesEmployeeIdI9AuthorizationRequest,
@@ -363,22 +237,6 @@ export function putV1EmployeesEmployeeIdI9AuthorizationRequestToJSON(
     PutV1EmployeesEmployeeIdI9AuthorizationRequest$outboundSchema.parse(
       putV1EmployeesEmployeeIdI9AuthorizationRequest,
     ),
-  );
-}
-
-export function putV1EmployeesEmployeeIdI9AuthorizationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1EmployeesEmployeeIdI9AuthorizationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1EmployeesEmployeeIdI9AuthorizationRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1EmployeesEmployeeIdI9AuthorizationRequest' from JSON`,
   );
 }
 
@@ -397,55 +255,6 @@ export const PutV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema:
       "I9-Authorization": "i9Authorization",
     });
   });
-
-/** @internal */
-export type PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "I9-Authorization"?: I9Authorization$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdI9AuthorizationResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    i9Authorization: I9Authorization$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      i9Authorization: "I9-Authorization",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1EmployeesEmployeeIdI9AuthorizationResponse$ {
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationResponse$inboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema;
-  /** @deprecated use `PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1EmployeesEmployeeIdI9AuthorizationResponse$Outbound;
-}
-
-export function putV1EmployeesEmployeeIdI9AuthorizationResponseToJSON(
-  putV1EmployeesEmployeeIdI9AuthorizationResponse:
-    PutV1EmployeesEmployeeIdI9AuthorizationResponse,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdI9AuthorizationResponse$outboundSchema.parse(
-      putV1EmployeesEmployeeIdI9AuthorizationResponse,
-    ),
-  );
-}
 
 export function putV1EmployeesEmployeeIdI9AuthorizationResponseFromJSON(
   jsonString: string,

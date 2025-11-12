@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Location,
-  Location$inboundSchema,
-  Location$Outbound,
-  Location$outboundSchema,
-} from "../components/location.js";
+import { Location, Location$inboundSchema } from "../components/location.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,23 +45,6 @@ export type GetV1CompaniesCompanyIdLocationsResponse = {
 };
 
 /** @internal */
-export const GetV1CompaniesCompanyIdLocationsRequest$inboundSchema: z.ZodType<
-  GetV1CompaniesCompanyIdLocationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  page: z.number().int().optional(),
-  per: z.number().int().optional(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
-
-/** @internal */
 export type GetV1CompaniesCompanyIdLocationsRequest$Outbound = {
   company_id: string;
   page?: number | undefined;
@@ -94,21 +69,6 @@ export const GetV1CompaniesCompanyIdLocationsRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdLocationsRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdLocationsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdLocationsRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdLocationsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdLocationsRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdLocationsRequest$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdLocationsRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdLocationsRequestToJSON(
   getV1CompaniesCompanyIdLocationsRequest:
     GetV1CompaniesCompanyIdLocationsRequest,
@@ -117,22 +77,6 @@ export function getV1CompaniesCompanyIdLocationsRequestToJSON(
     GetV1CompaniesCompanyIdLocationsRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdLocationsRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdLocationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdLocationsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdLocationsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyIdLocationsRequest' from JSON`,
   );
 }
 
@@ -150,53 +94,6 @@ export const GetV1CompaniesCompanyIdLocationsResponse$inboundSchema: z.ZodType<
     "Location-List": "locationList",
   });
 });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdLocationsResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Location-List"?: Array<Location$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdLocationsResponse$outboundSchema: z.ZodType<
-  GetV1CompaniesCompanyIdLocationsResponse$Outbound,
-  z.ZodTypeDef,
-  GetV1CompaniesCompanyIdLocationsResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  locationList: z.array(Location$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    locationList: "Location-List",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdLocationsResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdLocationsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdLocationsResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdLocationsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdLocationsResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdLocationsResponse$Outbound` instead. */
-  export type Outbound = GetV1CompaniesCompanyIdLocationsResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdLocationsResponseToJSON(
-  getV1CompaniesCompanyIdLocationsResponse:
-    GetV1CompaniesCompanyIdLocationsResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdLocationsResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdLocationsResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdLocationsResponseFromJSON(
   jsonString: string,

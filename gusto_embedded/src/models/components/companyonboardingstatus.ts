@@ -96,37 +96,8 @@ export type CompanyOnboardingStatus = {
 export const Id$inboundSchema: z.ZodNativeEnum<typeof Id> = z.nativeEnum(Id);
 
 /** @internal */
-export const Id$outboundSchema: z.ZodNativeEnum<typeof Id> = Id$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Id$ {
-  /** @deprecated use `Id$inboundSchema` instead. */
-  export const inboundSchema = Id$inboundSchema;
-  /** @deprecated use `Id$outboundSchema` instead. */
-  export const outboundSchema = Id$outboundSchema;
-}
-
-/** @internal */
 export const Requirements$inboundSchema: z.ZodNativeEnum<typeof Requirements> =
   z.nativeEnum(Requirements);
-
-/** @internal */
-export const Requirements$outboundSchema: z.ZodNativeEnum<typeof Requirements> =
-  Requirements$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Requirements$ {
-  /** @deprecated use `Requirements$inboundSchema` instead. */
-  export const inboundSchema = Requirements$inboundSchema;
-  /** @deprecated use `Requirements$outboundSchema` instead. */
-  export const outboundSchema = Requirements$outboundSchema;
-}
 
 /** @internal */
 export const OnboardingStep$inboundSchema: z.ZodType<
@@ -146,53 +117,6 @@ export const OnboardingStep$inboundSchema: z.ZodType<
     "completed_at": "completedAt",
   });
 });
-
-/** @internal */
-export type OnboardingStep$Outbound = {
-  title?: string | undefined;
-  id?: string | undefined;
-  required?: boolean | undefined;
-  completed?: boolean | undefined;
-  completed_at?: string | null | undefined;
-  skippable?: boolean | undefined;
-  requirements?: Array<string> | undefined;
-};
-
-/** @internal */
-export const OnboardingStep$outboundSchema: z.ZodType<
-  OnboardingStep$Outbound,
-  z.ZodTypeDef,
-  OnboardingStep
-> = z.object({
-  title: z.string().optional(),
-  id: Id$outboundSchema.optional(),
-  required: z.boolean().optional(),
-  completed: z.boolean().optional(),
-  completedAt: z.nullable(z.string()).optional(),
-  skippable: z.boolean().optional(),
-  requirements: z.array(Requirements$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    completedAt: "completed_at",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OnboardingStep$ {
-  /** @deprecated use `OnboardingStep$inboundSchema` instead. */
-  export const inboundSchema = OnboardingStep$inboundSchema;
-  /** @deprecated use `OnboardingStep$outboundSchema` instead. */
-  export const outboundSchema = OnboardingStep$outboundSchema;
-  /** @deprecated use `OnboardingStep$Outbound` instead. */
-  export type Outbound = OnboardingStep$Outbound;
-}
-
-export function onboardingStepToJSON(onboardingStep: OnboardingStep): string {
-  return JSON.stringify(OnboardingStep$outboundSchema.parse(onboardingStep));
-}
 
 export function onboardingStepFromJSON(
   jsonString: string,
@@ -220,51 +144,6 @@ export const CompanyOnboardingStatus$inboundSchema: z.ZodType<
     "onboarding_steps": "onboardingSteps",
   });
 });
-
-/** @internal */
-export type CompanyOnboardingStatus$Outbound = {
-  uuid: string;
-  onboarding_completed?: boolean | undefined;
-  onboarding_steps?: Array<OnboardingStep$Outbound> | undefined;
-};
-
-/** @internal */
-export const CompanyOnboardingStatus$outboundSchema: z.ZodType<
-  CompanyOnboardingStatus$Outbound,
-  z.ZodTypeDef,
-  CompanyOnboardingStatus
-> = z.object({
-  uuid: z.string(),
-  onboardingCompleted: z.boolean().optional(),
-  onboardingSteps: z.array(z.lazy(() => OnboardingStep$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onboardingCompleted: "onboarding_completed",
-    onboardingSteps: "onboarding_steps",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyOnboardingStatus$ {
-  /** @deprecated use `CompanyOnboardingStatus$inboundSchema` instead. */
-  export const inboundSchema = CompanyOnboardingStatus$inboundSchema;
-  /** @deprecated use `CompanyOnboardingStatus$outboundSchema` instead. */
-  export const outboundSchema = CompanyOnboardingStatus$outboundSchema;
-  /** @deprecated use `CompanyOnboardingStatus$Outbound` instead. */
-  export type Outbound = CompanyOnboardingStatus$Outbound;
-}
-
-export function companyOnboardingStatusToJSON(
-  companyOnboardingStatus: CompanyOnboardingStatus,
-): string {
-  return JSON.stringify(
-    CompanyOnboardingStatus$outboundSchema.parse(companyOnboardingStatus),
-  );
-}
 
 export function companyOnboardingStatusFromJSON(
   jsonString: string,

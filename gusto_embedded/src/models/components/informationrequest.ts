@@ -70,41 +70,9 @@ export const InformationRequestType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(InformationRequestType);
 
 /** @internal */
-export const InformationRequestType$outboundSchema: z.ZodNativeEnum<
-  typeof InformationRequestType
-> = InformationRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InformationRequestType$ {
-  /** @deprecated use `InformationRequestType$inboundSchema` instead. */
-  export const inboundSchema = InformationRequestType$inboundSchema;
-  /** @deprecated use `InformationRequestType$outboundSchema` instead. */
-  export const outboundSchema = InformationRequestType$outboundSchema;
-}
-
-/** @internal */
 export const InformationRequestStatus$inboundSchema: z.ZodNativeEnum<
   typeof InformationRequestStatus
 > = z.nativeEnum(InformationRequestStatus);
-
-/** @internal */
-export const InformationRequestStatus$outboundSchema: z.ZodNativeEnum<
-  typeof InformationRequestStatus
-> = InformationRequestStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InformationRequestStatus$ {
-  /** @deprecated use `InformationRequestStatus$inboundSchema` instead. */
-  export const inboundSchema = InformationRequestStatus$inboundSchema;
-  /** @deprecated use `InformationRequestStatus$outboundSchema` instead. */
-  export const outboundSchema = InformationRequestStatus$outboundSchema;
-}
 
 /** @internal */
 export const InformationRequest$inboundSchema: z.ZodType<
@@ -123,54 +91,6 @@ export const InformationRequest$inboundSchema: z.ZodType<
     "blocking_payroll": "blockingPayroll",
   });
 });
-
-/** @internal */
-export type InformationRequest$Outbound = {
-  uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  type?: string | null | undefined;
-  status?: string | undefined;
-  blocking_payroll?: boolean | undefined;
-};
-
-/** @internal */
-export const InformationRequest$outboundSchema: z.ZodType<
-  InformationRequest$Outbound,
-  z.ZodTypeDef,
-  InformationRequest
-> = z.object({
-  uuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  type: z.nullable(InformationRequestType$outboundSchema).optional(),
-  status: InformationRequestStatus$outboundSchema.optional(),
-  blockingPayroll: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    blockingPayroll: "blocking_payroll",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InformationRequest$ {
-  /** @deprecated use `InformationRequest$inboundSchema` instead. */
-  export const inboundSchema = InformationRequest$inboundSchema;
-  /** @deprecated use `InformationRequest$outboundSchema` instead. */
-  export const outboundSchema = InformationRequest$outboundSchema;
-  /** @deprecated use `InformationRequest$Outbound` instead. */
-  export type Outbound = InformationRequest$Outbound;
-}
-
-export function informationRequestToJSON(
-  informationRequest: InformationRequest,
-): string {
-  return JSON.stringify(
-    InformationRequest$outboundSchema.parse(informationRequest),
-  );
-}
 
 export function informationRequestFromJSON(
   jsonString: string,

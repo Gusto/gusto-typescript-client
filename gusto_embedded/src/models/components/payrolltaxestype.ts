@@ -33,45 +33,6 @@ export const PayrollTaxesType$inboundSchema: z.ZodType<
   amount: z.number().optional(),
 });
 
-/** @internal */
-export type PayrollTaxesType$Outbound = {
-  name?: string | undefined;
-  employer?: boolean | undefined;
-  amount?: number | undefined;
-};
-
-/** @internal */
-export const PayrollTaxesType$outboundSchema: z.ZodType<
-  PayrollTaxesType$Outbound,
-  z.ZodTypeDef,
-  PayrollTaxesType
-> = z.object({
-  name: z.string().optional(),
-  employer: z.boolean().optional(),
-  amount: z.number().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollTaxesType$ {
-  /** @deprecated use `PayrollTaxesType$inboundSchema` instead. */
-  export const inboundSchema = PayrollTaxesType$inboundSchema;
-  /** @deprecated use `PayrollTaxesType$outboundSchema` instead. */
-  export const outboundSchema = PayrollTaxesType$outboundSchema;
-  /** @deprecated use `PayrollTaxesType$Outbound` instead. */
-  export type Outbound = PayrollTaxesType$Outbound;
-}
-
-export function payrollTaxesTypeToJSON(
-  payrollTaxesType: PayrollTaxesType,
-): string {
-  return JSON.stringify(
-    PayrollTaxesType$outboundSchema.parse(payrollTaxesType),
-  );
-}
-
 export function payrollTaxesTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollTaxesType, SDKValidationError> {

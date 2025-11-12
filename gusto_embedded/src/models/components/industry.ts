@@ -48,49 +48,6 @@ export const Industry$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type Industry$Outbound = {
-  company_uuid?: string | undefined;
-  naics_code?: string | null | undefined;
-  sic_codes?: Array<string> | undefined;
-  title?: string | null | undefined;
-};
-
-/** @internal */
-export const Industry$outboundSchema: z.ZodType<
-  Industry$Outbound,
-  z.ZodTypeDef,
-  Industry
-> = z.object({
-  companyUuid: z.string().optional(),
-  naicsCode: z.nullable(z.string()).optional(),
-  sicCodes: z.array(z.string()).optional(),
-  title: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    naicsCode: "naics_code",
-    sicCodes: "sic_codes",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Industry$ {
-  /** @deprecated use `Industry$inboundSchema` instead. */
-  export const inboundSchema = Industry$inboundSchema;
-  /** @deprecated use `Industry$outboundSchema` instead. */
-  export const outboundSchema = Industry$outboundSchema;
-  /** @deprecated use `Industry$Outbound` instead. */
-  export type Outbound = Industry$Outbound;
-}
-
-export function industryToJSON(industry: Industry): string {
-  return JSON.stringify(Industry$outboundSchema.parse(industry));
-}
-
 export function industryFromJSON(
   jsonString: string,
 ): SafeParseResult<Industry, SDKValidationError> {

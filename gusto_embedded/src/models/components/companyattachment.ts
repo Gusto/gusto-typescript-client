@@ -49,21 +49,6 @@ export const Category$inboundSchema: z.ZodNativeEnum<typeof Category> = z
   .nativeEnum(Category);
 
 /** @internal */
-export const Category$outboundSchema: z.ZodNativeEnum<typeof Category> =
-  Category$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Category$ {
-  /** @deprecated use `Category$inboundSchema` instead. */
-  export const inboundSchema = Category$inboundSchema;
-  /** @deprecated use `Category$outboundSchema` instead. */
-  export const outboundSchema = Category$outboundSchema;
-}
-
-/** @internal */
 export const CompanyAttachment$inboundSchema: z.ZodType<
   CompanyAttachment,
   z.ZodTypeDef,
@@ -78,51 +63,6 @@ export const CompanyAttachment$inboundSchema: z.ZodType<
     "upload_time": "uploadTime",
   });
 });
-
-/** @internal */
-export type CompanyAttachment$Outbound = {
-  uuid?: string | undefined;
-  name?: string | undefined;
-  category?: string | undefined;
-  upload_time?: string | undefined;
-};
-
-/** @internal */
-export const CompanyAttachment$outboundSchema: z.ZodType<
-  CompanyAttachment$Outbound,
-  z.ZodTypeDef,
-  CompanyAttachment
-> = z.object({
-  uuid: z.string().optional(),
-  name: z.string().optional(),
-  category: Category$outboundSchema.optional(),
-  uploadTime: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    uploadTime: "upload_time",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyAttachment$ {
-  /** @deprecated use `CompanyAttachment$inboundSchema` instead. */
-  export const inboundSchema = CompanyAttachment$inboundSchema;
-  /** @deprecated use `CompanyAttachment$outboundSchema` instead. */
-  export const outboundSchema = CompanyAttachment$outboundSchema;
-  /** @deprecated use `CompanyAttachment$Outbound` instead. */
-  export type Outbound = CompanyAttachment$Outbound;
-}
-
-export function companyAttachmentToJSON(
-  companyAttachment: CompanyAttachment,
-): string {
-  return JSON.stringify(
-    CompanyAttachment$outboundSchema.parse(companyAttachment),
-  );
-}
 
 export function companyAttachmentFromJSON(
   jsonString: string,

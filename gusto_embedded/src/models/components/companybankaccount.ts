@@ -147,40 +147,9 @@ export const AccountType$inboundSchema: z.ZodNativeEnum<typeof AccountType> = z
   .nativeEnum(AccountType);
 
 /** @internal */
-export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> =
-  AccountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountType$ {
-  /** @deprecated use `AccountType$inboundSchema` instead. */
-  export const inboundSchema = AccountType$inboundSchema;
-  /** @deprecated use `AccountType$outboundSchema` instead. */
-  export const outboundSchema = AccountType$outboundSchema;
-}
-
-/** @internal */
 export const VerificationStatus$inboundSchema: z.ZodNativeEnum<
   typeof VerificationStatus
 > = z.nativeEnum(VerificationStatus);
-
-/** @internal */
-export const VerificationStatus$outboundSchema: z.ZodNativeEnum<
-  typeof VerificationStatus
-> = VerificationStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace VerificationStatus$ {
-  /** @deprecated use `VerificationStatus$inboundSchema` instead. */
-  export const inboundSchema = VerificationStatus$inboundSchema;
-  /** @deprecated use `VerificationStatus$outboundSchema` instead. */
-  export const outboundSchema = VerificationStatus$outboundSchema;
-}
 
 /** @internal */
 export const VerificationType$inboundSchema: z.ZodNativeEnum<
@@ -188,39 +157,8 @@ export const VerificationType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(VerificationType);
 
 /** @internal */
-export const VerificationType$outboundSchema: z.ZodNativeEnum<
-  typeof VerificationType
-> = VerificationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace VerificationType$ {
-  /** @deprecated use `VerificationType$inboundSchema` instead. */
-  export const inboundSchema = VerificationType$inboundSchema;
-  /** @deprecated use `VerificationType$outboundSchema` instead. */
-  export const outboundSchema = VerificationType$outboundSchema;
-}
-
-/** @internal */
 export const PlaidStatus$inboundSchema: z.ZodNativeEnum<typeof PlaidStatus> = z
   .nativeEnum(PlaidStatus);
-
-/** @internal */
-export const PlaidStatus$outboundSchema: z.ZodNativeEnum<typeof PlaidStatus> =
-  PlaidStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PlaidStatus$ {
-  /** @deprecated use `PlaidStatus$inboundSchema` instead. */
-  export const inboundSchema = PlaidStatus$inboundSchema;
-  /** @deprecated use `PlaidStatus$outboundSchema` instead. */
-  export const outboundSchema = PlaidStatus$outboundSchema;
-}
 
 /** @internal */
 export const CompanyBankAccount$inboundSchema: z.ZodType<
@@ -252,73 +190,6 @@ export const CompanyBankAccount$inboundSchema: z.ZodType<
     "balance_fetched_date": "balanceFetchedDate",
   });
 });
-
-/** @internal */
-export type CompanyBankAccount$Outbound = {
-  uuid: string;
-  company_uuid?: string | undefined;
-  account_type?: string | undefined;
-  routing_number?: string | undefined;
-  hidden_account_number?: string | undefined;
-  verification_status?: string | undefined;
-  verification_type?: string | undefined;
-  plaid_status?: string | null | undefined;
-  last_cached_balance?: string | null | undefined;
-  balance_fetched_date?: string | null | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const CompanyBankAccount$outboundSchema: z.ZodType<
-  CompanyBankAccount$Outbound,
-  z.ZodTypeDef,
-  CompanyBankAccount
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string().optional(),
-  accountType: AccountType$outboundSchema.optional(),
-  routingNumber: z.string().optional(),
-  hiddenAccountNumber: z.string().optional(),
-  verificationStatus: VerificationStatus$outboundSchema.optional(),
-  verificationType: VerificationType$outboundSchema.optional(),
-  plaidStatus: z.nullable(PlaidStatus$outboundSchema).optional(),
-  lastCachedBalance: z.nullable(z.string()).optional(),
-  balanceFetchedDate: z.nullable(z.string()).optional(),
-  name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    accountType: "account_type",
-    routingNumber: "routing_number",
-    hiddenAccountNumber: "hidden_account_number",
-    verificationStatus: "verification_status",
-    verificationType: "verification_type",
-    plaidStatus: "plaid_status",
-    lastCachedBalance: "last_cached_balance",
-    balanceFetchedDate: "balance_fetched_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBankAccount$ {
-  /** @deprecated use `CompanyBankAccount$inboundSchema` instead. */
-  export const inboundSchema = CompanyBankAccount$inboundSchema;
-  /** @deprecated use `CompanyBankAccount$outboundSchema` instead. */
-  export const outboundSchema = CompanyBankAccount$outboundSchema;
-  /** @deprecated use `CompanyBankAccount$Outbound` instead. */
-  export type Outbound = CompanyBankAccount$Outbound;
-}
-
-export function companyBankAccountToJSON(
-  companyBankAccount: CompanyBankAccount,
-): string {
-  return JSON.stringify(
-    CompanyBankAccount$outboundSchema.parse(companyBankAccount),
-  );
-}
 
 export function companyBankAccountFromJSON(
   jsonString: string,

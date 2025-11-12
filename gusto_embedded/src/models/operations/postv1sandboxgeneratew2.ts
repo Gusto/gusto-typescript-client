@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -95,20 +92,6 @@ export type PostV1SandboxGenerateW2Response = {
 };
 
 /** @internal */
-export const PostV1SandboxGenerateW2RequestBody$inboundSchema: z.ZodType<
-  PostV1SandboxGenerateW2RequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_id: z.string(),
-  year: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_id": "employeeId",
-  });
-});
-
-/** @internal */
 export type PostV1SandboxGenerateW2RequestBody$Outbound = {
   employee_id: string;
   year?: number | undefined;
@@ -128,20 +111,6 @@ export const PostV1SandboxGenerateW2RequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1SandboxGenerateW2RequestBody$ {
-  /** @deprecated use `PostV1SandboxGenerateW2RequestBody$inboundSchema` instead. */
-  export const inboundSchema = PostV1SandboxGenerateW2RequestBody$inboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2RequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1SandboxGenerateW2RequestBody$outboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2RequestBody$Outbound` instead. */
-  export type Outbound = PostV1SandboxGenerateW2RequestBody$Outbound;
-}
-
 export function postV1SandboxGenerateW2RequestBodyToJSON(
   postV1SandboxGenerateW2RequestBody: PostV1SandboxGenerateW2RequestBody,
 ): string {
@@ -151,32 +120,6 @@ export function postV1SandboxGenerateW2RequestBodyToJSON(
     ),
   );
 }
-
-export function postV1SandboxGenerateW2RequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1SandboxGenerateW2RequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1SandboxGenerateW2RequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1SandboxGenerateW2RequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1SandboxGenerateW2Request$inboundSchema: z.ZodType<
-  PostV1SandboxGenerateW2Request,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PostV1SandboxGenerateW2RequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1SandboxGenerateW2Request$Outbound = {
@@ -199,19 +142,6 @@ export const PostV1SandboxGenerateW2Request$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1SandboxGenerateW2Request$ {
-  /** @deprecated use `PostV1SandboxGenerateW2Request$inboundSchema` instead. */
-  export const inboundSchema = PostV1SandboxGenerateW2Request$inboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2Request$outboundSchema` instead. */
-  export const outboundSchema = PostV1SandboxGenerateW2Request$outboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2Request$Outbound` instead. */
-  export type Outbound = PostV1SandboxGenerateW2Request$Outbound;
-}
-
 export function postV1SandboxGenerateW2RequestToJSON(
   postV1SandboxGenerateW2Request: PostV1SandboxGenerateW2Request,
 ): string {
@@ -219,16 +149,6 @@ export function postV1SandboxGenerateW2RequestToJSON(
     PostV1SandboxGenerateW2Request$outboundSchema.parse(
       postV1SandboxGenerateW2Request,
     ),
-  );
-}
-
-export function postV1SandboxGenerateW2RequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PostV1SandboxGenerateW2Request, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PostV1SandboxGenerateW2Request$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1SandboxGenerateW2Request' from JSON`,
   );
 }
 
@@ -256,67 +176,6 @@ export const PostV1SandboxGenerateW2Form$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PostV1SandboxGenerateW2Form$Outbound = {
-  employee_uuid?: string | undefined;
-  uuid: string;
-  name?: string | undefined;
-  title?: string | undefined;
-  description?: string | undefined;
-  draft?: boolean | undefined;
-  year?: number | null | undefined;
-  quarter?: number | null | undefined;
-  requires_signing?: boolean | undefined;
-  document_content_type?: string | null | undefined;
-};
-
-/** @internal */
-export const PostV1SandboxGenerateW2Form$outboundSchema: z.ZodType<
-  PostV1SandboxGenerateW2Form$Outbound,
-  z.ZodTypeDef,
-  PostV1SandboxGenerateW2Form
-> = z.object({
-  employeeUuid: z.string().optional(),
-  uuid: z.string(),
-  name: z.string().optional(),
-  title: z.string().optional(),
-  description: z.string().optional(),
-  draft: z.boolean().optional(),
-  year: z.nullable(z.number().int()).optional(),
-  quarter: z.nullable(z.number().int()).optional(),
-  requiresSigning: z.boolean().optional(),
-  documentContentType: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    requiresSigning: "requires_signing",
-    documentContentType: "document_content_type",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1SandboxGenerateW2Form$ {
-  /** @deprecated use `PostV1SandboxGenerateW2Form$inboundSchema` instead. */
-  export const inboundSchema = PostV1SandboxGenerateW2Form$inboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2Form$outboundSchema` instead. */
-  export const outboundSchema = PostV1SandboxGenerateW2Form$outboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2Form$Outbound` instead. */
-  export type Outbound = PostV1SandboxGenerateW2Form$Outbound;
-}
-
-export function postV1SandboxGenerateW2FormToJSON(
-  postV1SandboxGenerateW2Form: PostV1SandboxGenerateW2Form,
-): string {
-  return JSON.stringify(
-    PostV1SandboxGenerateW2Form$outboundSchema.parse(
-      postV1SandboxGenerateW2Form,
-    ),
-  );
-}
-
 export function postV1SandboxGenerateW2FormFromJSON(
   jsonString: string,
 ): SafeParseResult<PostV1SandboxGenerateW2Form, SDKValidationError> {
@@ -341,50 +200,6 @@ export const PostV1SandboxGenerateW2Response$inboundSchema: z.ZodType<
     "Form": "form",
   });
 });
-
-/** @internal */
-export type PostV1SandboxGenerateW2Response$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Form?: PostV1SandboxGenerateW2Form$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1SandboxGenerateW2Response$outboundSchema: z.ZodType<
-  PostV1SandboxGenerateW2Response$Outbound,
-  z.ZodTypeDef,
-  PostV1SandboxGenerateW2Response
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  form: z.lazy(() => PostV1SandboxGenerateW2Form$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    form: "Form",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1SandboxGenerateW2Response$ {
-  /** @deprecated use `PostV1SandboxGenerateW2Response$inboundSchema` instead. */
-  export const inboundSchema = PostV1SandboxGenerateW2Response$inboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2Response$outboundSchema` instead. */
-  export const outboundSchema = PostV1SandboxGenerateW2Response$outboundSchema;
-  /** @deprecated use `PostV1SandboxGenerateW2Response$Outbound` instead. */
-  export type Outbound = PostV1SandboxGenerateW2Response$Outbound;
-}
-
-export function postV1SandboxGenerateW2ResponseToJSON(
-  postV1SandboxGenerateW2Response: PostV1SandboxGenerateW2Response,
-): string {
-  return JSON.stringify(
-    PostV1SandboxGenerateW2Response$outboundSchema.parse(
-      postV1SandboxGenerateW2Response,
-    ),
-  );
-}
 
 export function postV1SandboxGenerateW2ResponseFromJSON(
   jsonString: string,

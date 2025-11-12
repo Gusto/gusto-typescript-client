@@ -59,22 +59,6 @@ export const ExternalPayrollBasicStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ExternalPayrollBasicStatus);
 
 /** @internal */
-export const ExternalPayrollBasicStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ExternalPayrollBasicStatus
-> = ExternalPayrollBasicStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayrollBasicStatus$ {
-  /** @deprecated use `ExternalPayrollBasicStatus$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollBasicStatus$inboundSchema;
-  /** @deprecated use `ExternalPayrollBasicStatus$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollBasicStatus$outboundSchema;
-}
-
-/** @internal */
 export const ExternalPayrollBasic$inboundSchema: z.ZodType<
   ExternalPayrollBasic,
   z.ZodTypeDef,
@@ -94,58 +78,6 @@ export const ExternalPayrollBasic$inboundSchema: z.ZodType<
     "payment_period_end_date": "paymentPeriodEndDate",
   });
 });
-
-/** @internal */
-export type ExternalPayrollBasic$Outbound = {
-  uuid: string;
-  company_uuid?: string | undefined;
-  check_date?: string | undefined;
-  payment_period_start_date?: string | undefined;
-  payment_period_end_date?: string | undefined;
-  status?: string | undefined;
-};
-
-/** @internal */
-export const ExternalPayrollBasic$outboundSchema: z.ZodType<
-  ExternalPayrollBasic$Outbound,
-  z.ZodTypeDef,
-  ExternalPayrollBasic
-> = z.object({
-  uuid: z.string(),
-  companyUuid: z.string().optional(),
-  checkDate: z.string().optional(),
-  paymentPeriodStartDate: z.string().optional(),
-  paymentPeriodEndDate: z.string().optional(),
-  status: ExternalPayrollBasicStatus$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    checkDate: "check_date",
-    paymentPeriodStartDate: "payment_period_start_date",
-    paymentPeriodEndDate: "payment_period_end_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalPayrollBasic$ {
-  /** @deprecated use `ExternalPayrollBasic$inboundSchema` instead. */
-  export const inboundSchema = ExternalPayrollBasic$inboundSchema;
-  /** @deprecated use `ExternalPayrollBasic$outboundSchema` instead. */
-  export const outboundSchema = ExternalPayrollBasic$outboundSchema;
-  /** @deprecated use `ExternalPayrollBasic$Outbound` instead. */
-  export type Outbound = ExternalPayrollBasic$Outbound;
-}
-
-export function externalPayrollBasicToJSON(
-  externalPayrollBasic: ExternalPayrollBasic,
-): string {
-  return JSON.stringify(
-    ExternalPayrollBasic$outboundSchema.parse(externalPayrollBasic),
-  );
-}
 
 export function externalPayrollBasicFromJSON(
   jsonString: string,

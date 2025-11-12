@@ -44,22 +44,6 @@ export const WebhooksHealthCheckStatusStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(WebhooksHealthCheckStatusStatus);
 
 /** @internal */
-export const WebhooksHealthCheckStatusStatus$outboundSchema: z.ZodNativeEnum<
-  typeof WebhooksHealthCheckStatusStatus
-> = WebhooksHealthCheckStatusStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksHealthCheckStatusStatus$ {
-  /** @deprecated use `WebhooksHealthCheckStatusStatus$inboundSchema` instead. */
-  export const inboundSchema = WebhooksHealthCheckStatusStatus$inboundSchema;
-  /** @deprecated use `WebhooksHealthCheckStatusStatus$outboundSchema` instead. */
-  export const outboundSchema = WebhooksHealthCheckStatusStatus$outboundSchema;
-}
-
-/** @internal */
 export const WebhooksHealthCheckStatus$inboundSchema: z.ZodType<
   WebhooksHealthCheckStatus,
   z.ZodTypeDef,
@@ -74,47 +58,6 @@ export const WebhooksHealthCheckStatus$inboundSchema: z.ZodType<
     "last_checked_at": "lastCheckedAt",
   });
 });
-
-/** @internal */
-export type WebhooksHealthCheckStatus$Outbound = {
-  status?: string | undefined;
-  last_checked_at?: string | undefined;
-};
-
-/** @internal */
-export const WebhooksHealthCheckStatus$outboundSchema: z.ZodType<
-  WebhooksHealthCheckStatus$Outbound,
-  z.ZodTypeDef,
-  WebhooksHealthCheckStatus
-> = z.object({
-  status: WebhooksHealthCheckStatusStatus$outboundSchema.optional(),
-  lastCheckedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    lastCheckedAt: "last_checked_at",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksHealthCheckStatus$ {
-  /** @deprecated use `WebhooksHealthCheckStatus$inboundSchema` instead. */
-  export const inboundSchema = WebhooksHealthCheckStatus$inboundSchema;
-  /** @deprecated use `WebhooksHealthCheckStatus$outboundSchema` instead. */
-  export const outboundSchema = WebhooksHealthCheckStatus$outboundSchema;
-  /** @deprecated use `WebhooksHealthCheckStatus$Outbound` instead. */
-  export type Outbound = WebhooksHealthCheckStatus$Outbound;
-}
-
-export function webhooksHealthCheckStatusToJSON(
-  webhooksHealthCheckStatus: WebhooksHealthCheckStatus,
-): string {
-  return JSON.stringify(
-    WebhooksHealthCheckStatus$outboundSchema.parse(webhooksHealthCheckStatus),
-  );
-}
 
 export function webhooksHealthCheckStatusFromJSON(
   jsonString: string,

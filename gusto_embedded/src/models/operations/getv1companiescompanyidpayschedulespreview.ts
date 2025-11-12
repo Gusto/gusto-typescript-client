@@ -10,12 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -107,50 +104,9 @@ export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponse = {
 };
 
 /** @internal */
-export const QueryParamFrequency$inboundSchema: z.ZodNativeEnum<
-  typeof QueryParamFrequency
-> = z.nativeEnum(QueryParamFrequency);
-
-/** @internal */
 export const QueryParamFrequency$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamFrequency
-> = QueryParamFrequency$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace QueryParamFrequency$ {
-  /** @deprecated use `QueryParamFrequency$inboundSchema` instead. */
-  export const inboundSchema = QueryParamFrequency$inboundSchema;
-  /** @deprecated use `QueryParamFrequency$outboundSchema` instead. */
-  export const outboundSchema = QueryParamFrequency$outboundSchema;
-}
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$inboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    frequency: QueryParamFrequency$inboundSchema,
-    anchor_pay_date: z.string(),
-    anchor_end_of_pay_period: z.string(),
-    day_1: z.number().int().optional(),
-    day_2: z.number().int().optional(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "anchor_pay_date": "anchorPayDate",
-      "anchor_end_of_pay_period": "anchorEndOfPayPeriod",
-      "day_1": "day1",
-      "day_2": "day2",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
+> = z.nativeEnum(QueryParamFrequency);
 
 /** @internal */
 export type GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$Outbound = {
@@ -188,22 +144,6 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$Outbound;
-}
-
 export function getV1CompaniesCompanyIdPaySchedulesPreviewRequestToJSON(
   getV1CompaniesCompanyIdPaySchedulesPreviewRequest:
     GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
@@ -212,22 +152,6 @@ export function getV1CompaniesCompanyIdPaySchedulesPreviewRequestToJSON(
     GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema.parse(
       getV1CompaniesCompanyIdPaySchedulesPreviewRequest,
     ),
-  );
-}
-
-export function getV1CompaniesCompanyIdPaySchedulesPreviewRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1CompaniesCompanyIdPaySchedulesPreviewRequest' from JSON`,
   );
 }
 
@@ -249,50 +173,6 @@ export const PayPeriods$inboundSchema: z.ZodType<
     "end_date": "endDate",
   });
 });
-
-/** @internal */
-export type PayPeriods$Outbound = {
-  check_date?: string | undefined;
-  run_payroll_by?: string | undefined;
-  start_date?: string | undefined;
-  end_date?: string | undefined;
-};
-
-/** @internal */
-export const PayPeriods$outboundSchema: z.ZodType<
-  PayPeriods$Outbound,
-  z.ZodTypeDef,
-  PayPeriods
-> = z.object({
-  checkDate: z.string().optional(),
-  runPayrollBy: z.string().optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    checkDate: "check_date",
-    runPayrollBy: "run_payroll_by",
-    startDate: "start_date",
-    endDate: "end_date",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayPeriods$ {
-  /** @deprecated use `PayPeriods$inboundSchema` instead. */
-  export const inboundSchema = PayPeriods$inboundSchema;
-  /** @deprecated use `PayPeriods$outboundSchema` instead. */
-  export const outboundSchema = PayPeriods$outboundSchema;
-  /** @deprecated use `PayPeriods$Outbound` instead. */
-  export type Outbound = PayPeriods$Outbound;
-}
-
-export function payPeriodsToJSON(payPeriods: PayPeriods): string {
-  return JSON.stringify(PayPeriods$outboundSchema.parse(payPeriods));
-}
 
 export function payPeriodsFromJSON(
   jsonString: string,
@@ -318,54 +198,6 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchem
       "pay_periods": "payPeriods",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$Outbound = {
-  pay_periods?: Array<PayPeriods$Outbound> | undefined;
-  holidays?: Array<string> | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody
-  > = z.object({
-    payPeriods: z.array(z.lazy(() => PayPeriods$outboundSchema)).optional(),
-    holidays: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      payPeriods: "pay_periods",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$Outbound;
-}
-
-export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseBodyToJSON(
-  getV1CompaniesCompanyIdPaySchedulesPreviewResponseBody:
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$outboundSchema.parse(
-      getV1CompaniesCompanyIdPaySchedulesPreviewResponseBody,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseBodyFromJSON(
   jsonString: string,
@@ -398,58 +230,6 @@ export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema:
       "HttpMeta": "httpMeta",
     });
   });
-
-/** @internal */
-export type GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  object?:
-    | GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema:
-  z.ZodType<
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound,
-    z.ZodTypeDef,
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    object: z.lazy(() =>
-      GetV1CompaniesCompanyIdPaySchedulesPreviewResponseBody$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$ {
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema;
-  /** @deprecated use `GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound` instead. */
-  export type Outbound =
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$Outbound;
-}
-
-export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseToJSON(
-  getV1CompaniesCompanyIdPaySchedulesPreviewResponse:
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
-): string {
-  return JSON.stringify(
-    GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$outboundSchema.parse(
-      getV1CompaniesCompanyIdPaySchedulesPreviewResponse,
-    ),
-  );
-}
 
 export function getV1CompaniesCompanyIdPaySchedulesPreviewResponseFromJSON(
   jsonString: string,

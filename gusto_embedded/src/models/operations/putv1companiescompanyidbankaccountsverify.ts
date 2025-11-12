@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBankAccount,
   CompanyBankAccount$inboundSchema,
-  CompanyBankAccount$Outbound,
-  CompanyBankAccount$outboundSchema,
 } from "../components/companybankaccount.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,22 +56,6 @@ export type PutV1CompaniesCompanyIdBankAccountsVerifyResponse = {
 };
 
 /** @internal */
-export const PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    deposit_1: z.number(),
-    deposit_2: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      "deposit_1": "deposit1",
-      "deposit_2": "deposit2",
-    });
-  });
-
-/** @internal */
 export type PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$Outbound = {
   deposit_1: number;
   deposit_2: number;
@@ -98,22 +77,6 @@ export const PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$Outbound;
-}
-
 export function putV1CompaniesCompanyIdBankAccountsVerifyRequestBodyToJSON(
   putV1CompaniesCompanyIdBankAccountsVerifyRequestBody:
     PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody,
@@ -124,44 +87,6 @@ export function putV1CompaniesCompanyIdBankAccountsVerifyRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1CompaniesCompanyIdBankAccountsVerifyRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyIdBankAccountsVerifyRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    bank_account_uuid: z.string(),
-    company_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompaniesCompanyIdBankAccountsVerifyRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "bank_account_uuid": "bankAccountUuid",
-      "company_id": "companyId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyIdBankAccountsVerifyRequest$Outbound = {
@@ -193,22 +118,6 @@ export const PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdBankAccountsVerifyRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdBankAccountsVerifyRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyIdBankAccountsVerifyRequestToJSON(
   putV1CompaniesCompanyIdBankAccountsVerifyRequest:
     PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
@@ -217,22 +126,6 @@ export function putV1CompaniesCompanyIdBankAccountsVerifyRequestToJSON(
     PutV1CompaniesCompanyIdBankAccountsVerifyRequest$outboundSchema.parse(
       putV1CompaniesCompanyIdBankAccountsVerifyRequest,
     ),
-  );
-}
-
-export function putV1CompaniesCompanyIdBankAccountsVerifyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyIdBankAccountsVerifyRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1CompaniesCompanyIdBankAccountsVerifyRequest' from JSON`,
   );
 }
 
@@ -251,55 +144,6 @@ export const PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema:
       "Company-Bank-Account": "companyBankAccount",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  "Company-Bank-Account"?: CompanyBankAccount$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyIdBankAccountsVerifyResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    companyBankAccount: CompanyBankAccount$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      companyBankAccount: "Company-Bank-Account",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyIdBankAccountsVerifyResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyIdBankAccountsVerifyResponseToJSON(
-  putV1CompaniesCompanyIdBankAccountsVerifyResponse:
-    PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyIdBankAccountsVerifyResponse$outboundSchema.parse(
-      putV1CompaniesCompanyIdBankAccountsVerifyResponse,
-    ),
-  );
-}
 
 export function putV1CompaniesCompanyIdBankAccountsVerifyResponseFromJSON(
   jsonString: string,

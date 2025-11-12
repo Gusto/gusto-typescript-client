@@ -23,44 +23,6 @@ export const PayrollFixedCompensationTypesType$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-/** @internal */
-export type PayrollFixedCompensationTypesType$Outbound = {
-  name?: string | undefined;
-};
-
-/** @internal */
-export const PayrollFixedCompensationTypesType$outboundSchema: z.ZodType<
-  PayrollFixedCompensationTypesType$Outbound,
-  z.ZodTypeDef,
-  PayrollFixedCompensationTypesType
-> = z.object({
-  name: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollFixedCompensationTypesType$ {
-  /** @deprecated use `PayrollFixedCompensationTypesType$inboundSchema` instead. */
-  export const inboundSchema = PayrollFixedCompensationTypesType$inboundSchema;
-  /** @deprecated use `PayrollFixedCompensationTypesType$outboundSchema` instead. */
-  export const outboundSchema =
-    PayrollFixedCompensationTypesType$outboundSchema;
-  /** @deprecated use `PayrollFixedCompensationTypesType$Outbound` instead. */
-  export type Outbound = PayrollFixedCompensationTypesType$Outbound;
-}
-
-export function payrollFixedCompensationTypesTypeToJSON(
-  payrollFixedCompensationTypesType: PayrollFixedCompensationTypesType,
-): string {
-  return JSON.stringify(
-    PayrollFixedCompensationTypesType$outboundSchema.parse(
-      payrollFixedCompensationTypesType,
-    ),
-  );
-}
-
 export function payrollFixedCompensationTypesTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollFixedCompensationTypesType, SDKValidationError> {

@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Payroll,
-  Payroll$inboundSchema,
-  Payroll$Outbound,
-  Payroll$outboundSchema,
-} from "../components/payroll.js";
+import { Payroll, Payroll$inboundSchema } from "../components/payroll.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,24 +41,6 @@ export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse = {
 };
 
 /** @internal */
-export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$inboundSchema:
-  z.ZodType<
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_id: z.string(),
-    payroll_id: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_id": "companyId",
-      "payroll_id": "payrollId",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-    });
-  });
-
-/** @internal */
 export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$Outbound =
   {
     company_id: string;
@@ -92,22 +66,6 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSc
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$ {
-  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$inboundSchema;
-  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSchema;
-  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$Outbound` instead. */
-  export type Outbound =
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$Outbound;
-}
-
 export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestToJSON(
   putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest:
     PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
@@ -115,21 +73,6 @@ export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestToJSON(
   return JSON.stringify(
     PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSchema
       .parse(putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest),
-  );
-}
-
-export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest' from JSON`,
   );
 }
 
@@ -148,55 +91,6 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSc
       "Payroll": "payroll",
     });
   });
-
-/** @internal */
-export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    Payroll?: Payroll$Outbound | undefined;
-  };
-
-/** @internal */
-export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema:
-  z.ZodType<
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound,
-    z.ZodTypeDef,
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    payroll: Payroll$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      payroll: "Payroll",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$ {
-  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema;
-  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema;
-  /** @deprecated use `PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound` instead. */
-  export type Outbound =
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$Outbound;
-}
-
-export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponseToJSON(
-  putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse:
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
-): string {
-  return JSON.stringify(
-    PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$outboundSchema
-      .parse(putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse),
-  );
-}
 
 export function putApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponseFromJSON(
   jsonString: string,

@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The employee's compensation payment method. Invalid values will be ignored.
@@ -197,40 +194,9 @@ export type PayrollUpdate = {
 };
 
 /** @internal */
-export const PayrollUpdatePaymentMethod$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollUpdatePaymentMethod
-> = z.nativeEnum(PayrollUpdatePaymentMethod);
-
-/** @internal */
 export const PayrollUpdatePaymentMethod$outboundSchema: z.ZodNativeEnum<
   typeof PayrollUpdatePaymentMethod
-> = PayrollUpdatePaymentMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdatePaymentMethod$ {
-  /** @deprecated use `PayrollUpdatePaymentMethod$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdatePaymentMethod$inboundSchema;
-  /** @deprecated use `PayrollUpdatePaymentMethod$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdatePaymentMethod$outboundSchema;
-}
-
-/** @internal */
-export const PayrollUpdateFixedCompensations$inboundSchema: z.ZodType<
-  PayrollUpdateFixedCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-  job_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_uuid": "jobUuid",
-  });
-});
+> = z.nativeEnum(PayrollUpdatePaymentMethod);
 
 /** @internal */
 export type PayrollUpdateFixedCompensations$Outbound = {
@@ -254,19 +220,6 @@ export const PayrollUpdateFixedCompensations$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdateFixedCompensations$ {
-  /** @deprecated use `PayrollUpdateFixedCompensations$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdateFixedCompensations$inboundSchema;
-  /** @deprecated use `PayrollUpdateFixedCompensations$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdateFixedCompensations$outboundSchema;
-  /** @deprecated use `PayrollUpdateFixedCompensations$Outbound` instead. */
-  export type Outbound = PayrollUpdateFixedCompensations$Outbound;
-}
-
 export function payrollUpdateFixedCompensationsToJSON(
   payrollUpdateFixedCompensations: PayrollUpdateFixedCompensations,
 ): string {
@@ -276,31 +229,6 @@ export function payrollUpdateFixedCompensationsToJSON(
     ),
   );
 }
-
-export function payrollUpdateFixedCompensationsFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollUpdateFixedCompensations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollUpdateFixedCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollUpdateFixedCompensations' from JSON`,
-  );
-}
-
-/** @internal */
-export const PayrollUpdateHourlyCompensations$inboundSchema: z.ZodType<
-  PayrollUpdateHourlyCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  job_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_uuid": "jobUuid",
-  });
-});
 
 /** @internal */
 export type PayrollUpdateHourlyCompensations$Outbound = {
@@ -324,19 +252,6 @@ export const PayrollUpdateHourlyCompensations$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdateHourlyCompensations$ {
-  /** @deprecated use `PayrollUpdateHourlyCompensations$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdateHourlyCompensations$inboundSchema;
-  /** @deprecated use `PayrollUpdateHourlyCompensations$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdateHourlyCompensations$outboundSchema;
-  /** @deprecated use `PayrollUpdateHourlyCompensations$Outbound` instead. */
-  export type Outbound = PayrollUpdateHourlyCompensations$Outbound;
-}
-
 export function payrollUpdateHourlyCompensationsToJSON(
   payrollUpdateHourlyCompensations: PayrollUpdateHourlyCompensations,
 ): string {
@@ -347,52 +262,10 @@ export function payrollUpdateHourlyCompensationsToJSON(
   );
 }
 
-export function payrollUpdateHourlyCompensationsFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollUpdateHourlyCompensations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollUpdateHourlyCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollUpdateHourlyCompensations' from JSON`,
-  );
-}
-
-/** @internal */
-export const PayrollUpdateAmountType$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollUpdateAmountType
-> = z.nativeEnum(PayrollUpdateAmountType);
-
 /** @internal */
 export const PayrollUpdateAmountType$outboundSchema: z.ZodNativeEnum<
   typeof PayrollUpdateAmountType
-> = PayrollUpdateAmountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdateAmountType$ {
-  /** @deprecated use `PayrollUpdateAmountType$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdateAmountType$inboundSchema;
-  /** @deprecated use `PayrollUpdateAmountType$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdateAmountType$outboundSchema;
-}
-
-/** @internal */
-export const PayrollUpdateDeductions$inboundSchema: z.ZodType<
-  PayrollUpdateDeductions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  amount: z.number().optional(),
-  amount_type: PayrollUpdateAmountType$inboundSchema.optional(),
-  uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "amount_type": "amountType",
-  });
-});
+> = z.nativeEnum(PayrollUpdateAmountType);
 
 /** @internal */
 export type PayrollUpdateDeductions$Outbound = {
@@ -418,19 +291,6 @@ export const PayrollUpdateDeductions$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdateDeductions$ {
-  /** @deprecated use `PayrollUpdateDeductions$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdateDeductions$inboundSchema;
-  /** @deprecated use `PayrollUpdateDeductions$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdateDeductions$outboundSchema;
-  /** @deprecated use `PayrollUpdateDeductions$Outbound` instead. */
-  export type Outbound = PayrollUpdateDeductions$Outbound;
-}
-
 export function payrollUpdateDeductionsToJSON(
   payrollUpdateDeductions: PayrollUpdateDeductions,
 ): string {
@@ -438,33 +298,6 @@ export function payrollUpdateDeductionsToJSON(
     PayrollUpdateDeductions$outboundSchema.parse(payrollUpdateDeductions),
   );
 }
-
-export function payrollUpdateDeductionsFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollUpdateDeductions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollUpdateDeductions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollUpdateDeductions' from JSON`,
-  );
-}
-
-/** @internal */
-export const PayrollUpdatePaidTimeOff$inboundSchema: z.ZodType<
-  PayrollUpdatePaidTimeOff,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  policy_uuid: z.string().optional(),
-  final_payout_unused_hours_input: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "policy_uuid": "policyUuid",
-    "final_payout_unused_hours_input": "finalPayoutUnusedHoursInput",
-  });
-});
 
 /** @internal */
 export type PayrollUpdatePaidTimeOff$Outbound = {
@@ -491,19 +324,6 @@ export const PayrollUpdatePaidTimeOff$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdatePaidTimeOff$ {
-  /** @deprecated use `PayrollUpdatePaidTimeOff$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdatePaidTimeOff$inboundSchema;
-  /** @deprecated use `PayrollUpdatePaidTimeOff$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdatePaidTimeOff$outboundSchema;
-  /** @deprecated use `PayrollUpdatePaidTimeOff$Outbound` instead. */
-  export type Outbound = PayrollUpdatePaidTimeOff$Outbound;
-}
-
 export function payrollUpdatePaidTimeOffToJSON(
   payrollUpdatePaidTimeOff: PayrollUpdatePaidTimeOff,
 ): string {
@@ -511,27 +331,6 @@ export function payrollUpdatePaidTimeOffToJSON(
     PayrollUpdatePaidTimeOff$outboundSchema.parse(payrollUpdatePaidTimeOff),
   );
 }
-
-export function payrollUpdatePaidTimeOffFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollUpdatePaidTimeOff, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollUpdatePaidTimeOff$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollUpdatePaidTimeOff' from JSON`,
-  );
-}
-
-/** @internal */
-export const PayrollUpdateReimbursements$inboundSchema: z.ZodType<
-  PayrollUpdateReimbursements,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  amount: z.string().optional(),
-  description: z.string().optional(),
-  uuid: z.string().optional(),
-});
 
 /** @internal */
 export type PayrollUpdateReimbursements$Outbound = {
@@ -551,19 +350,6 @@ export const PayrollUpdateReimbursements$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdateReimbursements$ {
-  /** @deprecated use `PayrollUpdateReimbursements$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdateReimbursements$inboundSchema;
-  /** @deprecated use `PayrollUpdateReimbursements$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdateReimbursements$outboundSchema;
-  /** @deprecated use `PayrollUpdateReimbursements$Outbound` instead. */
-  export type Outbound = PayrollUpdateReimbursements$Outbound;
-}
-
 export function payrollUpdateReimbursementsToJSON(
   payrollUpdateReimbursements: PayrollUpdateReimbursements,
 ): string {
@@ -573,50 +359,6 @@ export function payrollUpdateReimbursementsToJSON(
     ),
   );
 }
-
-export function payrollUpdateReimbursementsFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollUpdateReimbursements, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollUpdateReimbursements$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollUpdateReimbursements' from JSON`,
-  );
-}
-
-/** @internal */
-export const PayrollUpdateEmployeeCompensations$inboundSchema: z.ZodType<
-  PayrollUpdateEmployeeCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_uuid: z.string().optional(),
-  version: z.string().optional(),
-  excluded: z.boolean().optional(),
-  payment_method: PayrollUpdatePaymentMethod$inboundSchema.optional(),
-  memo: z.string().optional(),
-  fixed_compensations: z.array(
-    z.lazy(() => PayrollUpdateFixedCompensations$inboundSchema),
-  ).optional(),
-  hourly_compensations: z.array(
-    z.lazy(() => PayrollUpdateHourlyCompensations$inboundSchema),
-  ).optional(),
-  deductions: z.array(z.lazy(() => PayrollUpdateDeductions$inboundSchema))
-    .optional(),
-  paid_time_off: z.array(z.lazy(() => PayrollUpdatePaidTimeOff$inboundSchema))
-    .optional(),
-  reimbursements: z.array(
-    z.lazy(() => PayrollUpdateReimbursements$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_uuid": "employeeUuid",
-    "payment_method": "paymentMethod",
-    "fixed_compensations": "fixedCompensations",
-    "hourly_compensations": "hourlyCompensations",
-    "paid_time_off": "paidTimeOff",
-  });
-});
 
 /** @internal */
 export type PayrollUpdateEmployeeCompensations$Outbound = {
@@ -670,20 +412,6 @@ export const PayrollUpdateEmployeeCompensations$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdateEmployeeCompensations$ {
-  /** @deprecated use `PayrollUpdateEmployeeCompensations$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdateEmployeeCompensations$inboundSchema;
-  /** @deprecated use `PayrollUpdateEmployeeCompensations$outboundSchema` instead. */
-  export const outboundSchema =
-    PayrollUpdateEmployeeCompensations$outboundSchema;
-  /** @deprecated use `PayrollUpdateEmployeeCompensations$Outbound` instead. */
-  export type Outbound = PayrollUpdateEmployeeCompensations$Outbound;
-}
-
 export function payrollUpdateEmployeeCompensationsToJSON(
   payrollUpdateEmployeeCompensations: PayrollUpdateEmployeeCompensations,
 ): string {
@@ -694,58 +422,10 @@ export function payrollUpdateEmployeeCompensationsToJSON(
   );
 }
 
-export function payrollUpdateEmployeeCompensationsFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollUpdateEmployeeCompensations, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PayrollUpdateEmployeeCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollUpdateEmployeeCompensations' from JSON`,
-  );
-}
-
-/** @internal */
-export const WithholdingPayPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof WithholdingPayPeriod
-> = z.nativeEnum(WithholdingPayPeriod);
-
 /** @internal */
 export const WithholdingPayPeriod$outboundSchema: z.ZodNativeEnum<
   typeof WithholdingPayPeriod
-> = WithholdingPayPeriod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WithholdingPayPeriod$ {
-  /** @deprecated use `WithholdingPayPeriod$inboundSchema` instead. */
-  export const inboundSchema = WithholdingPayPeriod$inboundSchema;
-  /** @deprecated use `WithholdingPayPeriod$outboundSchema` instead. */
-  export const outboundSchema = WithholdingPayPeriod$outboundSchema;
-}
-
-/** @internal */
-export const PayrollUpdate$inboundSchema: z.ZodType<
-  PayrollUpdate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  employee_compensations: z.array(
-    z.lazy(() => PayrollUpdateEmployeeCompensations$inboundSchema),
-  ),
-  withholding_pay_period: WithholdingPayPeriod$inboundSchema.optional(),
-  skip_regular_deductions: z.boolean().optional(),
-  fixed_withholding_rate: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "employee_compensations": "employeeCompensations",
-    "withholding_pay_period": "withholdingPayPeriod",
-    "skip_regular_deductions": "skipRegularDeductions",
-    "fixed_withholding_rate": "fixedWithholdingRate",
-  });
-});
+> = z.nativeEnum(WithholdingPayPeriod);
 
 /** @internal */
 export type PayrollUpdate$Outbound = {
@@ -776,29 +456,6 @@ export const PayrollUpdate$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollUpdate$ {
-  /** @deprecated use `PayrollUpdate$inboundSchema` instead. */
-  export const inboundSchema = PayrollUpdate$inboundSchema;
-  /** @deprecated use `PayrollUpdate$outboundSchema` instead. */
-  export const outboundSchema = PayrollUpdate$outboundSchema;
-  /** @deprecated use `PayrollUpdate$Outbound` instead. */
-  export type Outbound = PayrollUpdate$Outbound;
-}
-
 export function payrollUpdateToJSON(payrollUpdate: PayrollUpdate): string {
   return JSON.stringify(PayrollUpdate$outboundSchema.parse(payrollUpdate));
-}
-
-export function payrollUpdateFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollUpdate, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollUpdate$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollUpdate' from JSON`,
-  );
 }

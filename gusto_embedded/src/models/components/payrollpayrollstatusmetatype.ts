@@ -60,61 +60,6 @@ export const PayrollPayrollStatusMetaType$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type PayrollPayrollStatusMetaType$Outbound = {
-  cancellable?: boolean | undefined;
-  expected_check_date?: string | undefined;
-  initial_check_date?: string | undefined;
-  expected_debit_time?: string | undefined;
-  payroll_late?: boolean | undefined;
-  initial_debit_cutoff_time?: string | undefined;
-};
-
-/** @internal */
-export const PayrollPayrollStatusMetaType$outboundSchema: z.ZodType<
-  PayrollPayrollStatusMetaType$Outbound,
-  z.ZodTypeDef,
-  PayrollPayrollStatusMetaType
-> = z.object({
-  cancellable: z.boolean().optional(),
-  expectedCheckDate: z.string().optional(),
-  initialCheckDate: z.string().optional(),
-  expectedDebitTime: z.string().optional(),
-  payrollLate: z.boolean().optional(),
-  initialDebitCutoffTime: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expectedCheckDate: "expected_check_date",
-    initialCheckDate: "initial_check_date",
-    expectedDebitTime: "expected_debit_time",
-    payrollLate: "payroll_late",
-    initialDebitCutoffTime: "initial_debit_cutoff_time",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayrollPayrollStatusMetaType$ {
-  /** @deprecated use `PayrollPayrollStatusMetaType$inboundSchema` instead. */
-  export const inboundSchema = PayrollPayrollStatusMetaType$inboundSchema;
-  /** @deprecated use `PayrollPayrollStatusMetaType$outboundSchema` instead. */
-  export const outboundSchema = PayrollPayrollStatusMetaType$outboundSchema;
-  /** @deprecated use `PayrollPayrollStatusMetaType$Outbound` instead. */
-  export type Outbound = PayrollPayrollStatusMetaType$Outbound;
-}
-
-export function payrollPayrollStatusMetaTypeToJSON(
-  payrollPayrollStatusMetaType: PayrollPayrollStatusMetaType,
-): string {
-  return JSON.stringify(
-    PayrollPayrollStatusMetaType$outboundSchema.parse(
-      payrollPayrollStatusMetaType,
-    ),
-  );
-}
-
 export function payrollPayrollStatusMetaTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<PayrollPayrollStatusMetaType, SDKValidationError> {

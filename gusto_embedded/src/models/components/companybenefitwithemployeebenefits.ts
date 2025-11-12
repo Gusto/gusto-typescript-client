@@ -186,24 +186,6 @@ export const CompanyBenefitWithEmployeeBenefitsSource$inboundSchema:
     .nativeEnum(CompanyBenefitWithEmployeeBenefitsSource);
 
 /** @internal */
-export const CompanyBenefitWithEmployeeBenefitsSource$outboundSchema:
-  z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsSource> =
-    CompanyBenefitWithEmployeeBenefitsSource$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBenefitWithEmployeeBenefitsSource$ {
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsSource$inboundSchema` instead. */
-  export const inboundSchema =
-    CompanyBenefitWithEmployeeBenefitsSource$inboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsSource$outboundSchema` instead. */
-  export const outboundSchema =
-    CompanyBenefitWithEmployeeBenefitsSource$outboundSchema;
-}
-
-/** @internal */
 export const CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema:
   z.ZodType<
     CompanyBenefitWithEmployeeBenefitsValueTiers,
@@ -218,55 +200,6 @@ export const CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema:
       "threshold_delta": "thresholdDelta",
     });
   });
-
-/** @internal */
-export type CompanyBenefitWithEmployeeBenefitsValueTiers$Outbound = {
-  rate?: string | undefined;
-  threshold?: string | undefined;
-  threshold_delta?: string | undefined;
-};
-
-/** @internal */
-export const CompanyBenefitWithEmployeeBenefitsValueTiers$outboundSchema:
-  z.ZodType<
-    CompanyBenefitWithEmployeeBenefitsValueTiers$Outbound,
-    z.ZodTypeDef,
-    CompanyBenefitWithEmployeeBenefitsValueTiers
-  > = z.object({
-    rate: z.string().optional(),
-    threshold: z.string().optional(),
-    thresholdDelta: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      thresholdDelta: "threshold_delta",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBenefitWithEmployeeBenefitsValueTiers$ {
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema` instead. */
-  export const inboundSchema =
-    CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValueTiers$outboundSchema` instead. */
-  export const outboundSchema =
-    CompanyBenefitWithEmployeeBenefitsValueTiers$outboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValueTiers$Outbound` instead. */
-  export type Outbound = CompanyBenefitWithEmployeeBenefitsValueTiers$Outbound;
-}
-
-export function companyBenefitWithEmployeeBenefitsValueTiersToJSON(
-  companyBenefitWithEmployeeBenefitsValueTiers:
-    CompanyBenefitWithEmployeeBenefitsValueTiers,
-): string {
-  return JSON.stringify(
-    CompanyBenefitWithEmployeeBenefitsValueTiers$outboundSchema.parse(
-      companyBenefitWithEmployeeBenefitsValueTiers,
-    ),
-  );
-}
 
 export function companyBenefitWithEmployeeBenefitsValueTiersFromJSON(
   jsonString: string,
@@ -295,50 +228,6 @@ export const CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type CompanyBenefitWithEmployeeBenefitsValue2$Outbound = {
-  tiers?:
-    | Array<CompanyBenefitWithEmployeeBenefitsValueTiers$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema: z.ZodType<
-  CompanyBenefitWithEmployeeBenefitsValue2$Outbound,
-  z.ZodTypeDef,
-  CompanyBenefitWithEmployeeBenefitsValue2
-> = z.object({
-  tiers: z.array(
-    z.lazy(() => CompanyBenefitWithEmployeeBenefitsValueTiers$outboundSchema),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBenefitWithEmployeeBenefitsValue2$ {
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema` instead. */
-  export const inboundSchema =
-    CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema` instead. */
-  export const outboundSchema =
-    CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValue2$Outbound` instead. */
-  export type Outbound = CompanyBenefitWithEmployeeBenefitsValue2$Outbound;
-}
-
-export function companyBenefitWithEmployeeBenefitsValue2ToJSON(
-  companyBenefitWithEmployeeBenefitsValue2:
-    CompanyBenefitWithEmployeeBenefitsValue2,
-): string {
-  return JSON.stringify(
-    CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema.parse(
-      companyBenefitWithEmployeeBenefitsValue2,
-    ),
-  );
-}
-
 export function companyBenefitWithEmployeeBenefitsValue2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -364,47 +253,6 @@ export const CompanyBenefitWithEmployeeBenefitsValue$inboundSchema: z.ZodType<
   z.string(),
   z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
 ]);
-
-/** @internal */
-export type CompanyBenefitWithEmployeeBenefitsValue$Outbound =
-  | string
-  | CompanyBenefitWithEmployeeBenefitsValue2$Outbound;
-
-/** @internal */
-export const CompanyBenefitWithEmployeeBenefitsValue$outboundSchema: z.ZodType<
-  CompanyBenefitWithEmployeeBenefitsValue$Outbound,
-  z.ZodTypeDef,
-  CompanyBenefitWithEmployeeBenefitsValue
-> = z.union([
-  z.string(),
-  z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBenefitWithEmployeeBenefitsValue$ {
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValue$inboundSchema` instead. */
-  export const inboundSchema =
-    CompanyBenefitWithEmployeeBenefitsValue$inboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValue$outboundSchema` instead. */
-  export const outboundSchema =
-    CompanyBenefitWithEmployeeBenefitsValue$outboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsValue$Outbound` instead. */
-  export type Outbound = CompanyBenefitWithEmployeeBenefitsValue$Outbound;
-}
-
-export function companyBenefitWithEmployeeBenefitsValueToJSON(
-  companyBenefitWithEmployeeBenefitsValue:
-    CompanyBenefitWithEmployeeBenefitsValue,
-): string {
-  return JSON.stringify(
-    CompanyBenefitWithEmployeeBenefitsValue$outboundSchema.parse(
-      companyBenefitWithEmployeeBenefitsValue,
-    ),
-  );
-}
 
 export function companyBenefitWithEmployeeBenefitsValueFromJSON(
   jsonString: string,
@@ -435,56 +283,6 @@ export const CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema:
       z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$inboundSchema),
     ]).optional(),
   });
-
-/** @internal */
-export type CompanyBenefitWithEmployeeBenefitsContribution$Outbound = {
-  type?: string | undefined;
-  value?:
-    | string
-    | CompanyBenefitWithEmployeeBenefitsValue2$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const CompanyBenefitWithEmployeeBenefitsContribution$outboundSchema:
-  z.ZodType<
-    CompanyBenefitWithEmployeeBenefitsContribution$Outbound,
-    z.ZodTypeDef,
-    CompanyBenefitWithEmployeeBenefitsContribution
-  > = z.object({
-    type: z.string().optional(),
-    value: z.union([
-      z.string(),
-      z.lazy(() => CompanyBenefitWithEmployeeBenefitsValue2$outboundSchema),
-    ]).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBenefitWithEmployeeBenefitsContribution$ {
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema` instead. */
-  export const inboundSchema =
-    CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsContribution$outboundSchema` instead. */
-  export const outboundSchema =
-    CompanyBenefitWithEmployeeBenefitsContribution$outboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefitsContribution$Outbound` instead. */
-  export type Outbound =
-    CompanyBenefitWithEmployeeBenefitsContribution$Outbound;
-}
-
-export function companyBenefitWithEmployeeBenefitsContributionToJSON(
-  companyBenefitWithEmployeeBenefitsContribution:
-    CompanyBenefitWithEmployeeBenefitsContribution,
-): string {
-  return JSON.stringify(
-    CompanyBenefitWithEmployeeBenefitsContribution$outboundSchema.parse(
-      companyBenefitWithEmployeeBenefitsContribution,
-    ),
-  );
-}
 
 export function companyBenefitWithEmployeeBenefitsContributionFromJSON(
   jsonString: string,
@@ -528,67 +326,6 @@ export const EmployeeBenefits$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type EmployeeBenefits$Outbound = {
-  employee_uuid?: string | undefined;
-  company_benefit_uuid?: string | undefined;
-  active: boolean;
-  deduct_as_percentage: boolean;
-  employee_deduction: string;
-  company_contribution?: string | undefined;
-  uuid?: string | undefined;
-  contribution?:
-    | CompanyBenefitWithEmployeeBenefitsContribution$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const EmployeeBenefits$outboundSchema: z.ZodType<
-  EmployeeBenefits$Outbound,
-  z.ZodTypeDef,
-  EmployeeBenefits
-> = z.object({
-  employeeUuid: z.string().optional(),
-  companyBenefitUuid: z.string().optional(),
-  active: z.boolean().default(true),
-  deductAsPercentage: z.boolean().default(false),
-  employeeDeduction: z.string().default("0.00"),
-  companyContribution: z.string().optional(),
-  uuid: z.string().optional(),
-  contribution: z.lazy(() =>
-    CompanyBenefitWithEmployeeBenefitsContribution$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    companyBenefitUuid: "company_benefit_uuid",
-    deductAsPercentage: "deduct_as_percentage",
-    employeeDeduction: "employee_deduction",
-    companyContribution: "company_contribution",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeBenefits$ {
-  /** @deprecated use `EmployeeBenefits$inboundSchema` instead. */
-  export const inboundSchema = EmployeeBenefits$inboundSchema;
-  /** @deprecated use `EmployeeBenefits$outboundSchema` instead. */
-  export const outboundSchema = EmployeeBenefits$outboundSchema;
-  /** @deprecated use `EmployeeBenefits$Outbound` instead. */
-  export type Outbound = EmployeeBenefits$Outbound;
-}
-
-export function employeeBenefitsToJSON(
-  employeeBenefits: EmployeeBenefits,
-): string {
-  return JSON.stringify(
-    EmployeeBenefits$outboundSchema.parse(employeeBenefits),
-  );
-}
-
 export function employeeBenefitsFromJSON(
   jsonString: string,
 ): SafeParseResult<EmployeeBenefits, SDKValidationError> {
@@ -630,79 +367,6 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
     "employee_benefits": "employeeBenefits",
   });
 });
-
-/** @internal */
-export type CompanyBenefitWithEmployeeBenefits$Outbound = {
-  version?: string | undefined;
-  company_uuid?: string | undefined;
-  uuid: string;
-  benefit_type?: number | undefined;
-  active: boolean;
-  description?: string | undefined;
-  source?: string | undefined;
-  partner_name?: string | null | undefined;
-  deletable?: boolean | undefined;
-  supports_percentage_amounts?: boolean | undefined;
-  responsible_for_employer_taxes?: boolean | undefined;
-  responsible_for_employee_w2?: boolean | undefined;
-  employee_benefits?: Array<EmployeeBenefits$Outbound> | undefined;
-};
-
-/** @internal */
-export const CompanyBenefitWithEmployeeBenefits$outboundSchema: z.ZodType<
-  CompanyBenefitWithEmployeeBenefits$Outbound,
-  z.ZodTypeDef,
-  CompanyBenefitWithEmployeeBenefits
-> = z.object({
-  version: z.string().optional(),
-  companyUuid: z.string().optional(),
-  uuid: z.string(),
-  benefitType: z.number().int().optional(),
-  active: z.boolean().default(true),
-  description: z.string().optional(),
-  source: CompanyBenefitWithEmployeeBenefitsSource$outboundSchema.optional(),
-  partnerName: z.nullable(z.string()).optional(),
-  deletable: z.boolean().optional(),
-  supportsPercentageAmounts: z.boolean().optional(),
-  responsibleForEmployerTaxes: z.boolean().optional(),
-  responsibleForEmployeeW2: z.boolean().optional(),
-  employeeBenefits: z.array(z.lazy(() => EmployeeBenefits$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyUuid: "company_uuid",
-    benefitType: "benefit_type",
-    partnerName: "partner_name",
-    supportsPercentageAmounts: "supports_percentage_amounts",
-    responsibleForEmployerTaxes: "responsible_for_employer_taxes",
-    responsibleForEmployeeW2: "responsible_for_employee_w2",
-    employeeBenefits: "employee_benefits",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompanyBenefitWithEmployeeBenefits$ {
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefits$inboundSchema` instead. */
-  export const inboundSchema = CompanyBenefitWithEmployeeBenefits$inboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefits$outboundSchema` instead. */
-  export const outboundSchema =
-    CompanyBenefitWithEmployeeBenefits$outboundSchema;
-  /** @deprecated use `CompanyBenefitWithEmployeeBenefits$Outbound` instead. */
-  export type Outbound = CompanyBenefitWithEmployeeBenefits$Outbound;
-}
-
-export function companyBenefitWithEmployeeBenefitsToJSON(
-  companyBenefitWithEmployeeBenefits: CompanyBenefitWithEmployeeBenefits,
-): string {
-  return JSON.stringify(
-    CompanyBenefitWithEmployeeBenefits$outboundSchema.parse(
-      companyBenefitWithEmployeeBenefits,
-    ),
-  );
-}
 
 export function companyBenefitWithEmployeeBenefitsFromJSON(
   jsonString: string,

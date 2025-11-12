@@ -72,41 +72,9 @@ export const WebhookSubscriptionStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(WebhookSubscriptionStatus);
 
 /** @internal */
-export const WebhookSubscriptionStatus$outboundSchema: z.ZodNativeEnum<
-  typeof WebhookSubscriptionStatus
-> = WebhookSubscriptionStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSubscriptionStatus$ {
-  /** @deprecated use `WebhookSubscriptionStatus$inboundSchema` instead. */
-  export const inboundSchema = WebhookSubscriptionStatus$inboundSchema;
-  /** @deprecated use `WebhookSubscriptionStatus$outboundSchema` instead. */
-  export const outboundSchema = WebhookSubscriptionStatus$outboundSchema;
-}
-
-/** @internal */
 export const SubscriptionTypes$inboundSchema: z.ZodNativeEnum<
   typeof SubscriptionTypes
 > = z.nativeEnum(SubscriptionTypes);
-
-/** @internal */
-export const SubscriptionTypes$outboundSchema: z.ZodNativeEnum<
-  typeof SubscriptionTypes
-> = SubscriptionTypes$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SubscriptionTypes$ {
-  /** @deprecated use `SubscriptionTypes$inboundSchema` instead. */
-  export const inboundSchema = SubscriptionTypes$inboundSchema;
-  /** @deprecated use `SubscriptionTypes$outboundSchema` instead. */
-  export const outboundSchema = SubscriptionTypes$outboundSchema;
-}
 
 /** @internal */
 export const WebhookSubscription$inboundSchema: z.ZodType<
@@ -123,51 +91,6 @@ export const WebhookSubscription$inboundSchema: z.ZodType<
     "subscription_types": "subscriptionTypes",
   });
 });
-
-/** @internal */
-export type WebhookSubscription$Outbound = {
-  uuid: string;
-  url?: string | undefined;
-  status?: string | undefined;
-  subscription_types?: Array<string> | undefined;
-};
-
-/** @internal */
-export const WebhookSubscription$outboundSchema: z.ZodType<
-  WebhookSubscription$Outbound,
-  z.ZodTypeDef,
-  WebhookSubscription
-> = z.object({
-  uuid: z.string(),
-  url: z.string().optional(),
-  status: WebhookSubscriptionStatus$outboundSchema.optional(),
-  subscriptionTypes: z.array(SubscriptionTypes$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    subscriptionTypes: "subscription_types",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSubscription$ {
-  /** @deprecated use `WebhookSubscription$inboundSchema` instead. */
-  export const inboundSchema = WebhookSubscription$inboundSchema;
-  /** @deprecated use `WebhookSubscription$outboundSchema` instead. */
-  export const outboundSchema = WebhookSubscription$outboundSchema;
-  /** @deprecated use `WebhookSubscription$Outbound` instead. */
-  export type Outbound = WebhookSubscription$Outbound;
-}
-
-export function webhookSubscriptionToJSON(
-  webhookSubscription: WebhookSubscription,
-): string {
-  return JSON.stringify(
-    WebhookSubscription$outboundSchema.parse(webhookSubscription),
-  );
-}
 
 export function webhookSubscriptionFromJSON(
   jsonString: string,

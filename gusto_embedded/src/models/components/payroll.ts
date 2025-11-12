@@ -10,66 +10,46 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OffCycleReasonType,
   OffCycleReasonType$inboundSchema,
-  OffCycleReasonType$outboundSchema,
 } from "./offcyclereasontype.js";
 import {
   PayrollCompanyTaxesType,
   PayrollCompanyTaxesType$inboundSchema,
-  PayrollCompanyTaxesType$Outbound,
-  PayrollCompanyTaxesType$outboundSchema,
 } from "./payrollcompanytaxestype.js";
 import {
   PayrollCreditBlockersType,
   PayrollCreditBlockersType$inboundSchema,
-  PayrollCreditBlockersType$Outbound,
-  PayrollCreditBlockersType$outboundSchema,
 } from "./payrollcreditblockerstype.js";
 import {
   PayrollPaymentSpeedChangedType,
   PayrollPaymentSpeedChangedType$inboundSchema,
-  PayrollPaymentSpeedChangedType$Outbound,
-  PayrollPaymentSpeedChangedType$outboundSchema,
 } from "./payrollpaymentspeedchangedtype.js";
 import {
   PayrollPayPeriodType,
   PayrollPayPeriodType$inboundSchema,
-  PayrollPayPeriodType$Outbound,
-  PayrollPayPeriodType$outboundSchema,
 } from "./payrollpayperiodtype.js";
 import {
   PayrollPayrollStatusMetaType,
   PayrollPayrollStatusMetaType$inboundSchema,
-  PayrollPayrollStatusMetaType$Outbound,
-  PayrollPayrollStatusMetaType$outboundSchema,
 } from "./payrollpayrollstatusmetatype.js";
 import {
   PayrollProcessingRequest,
   PayrollProcessingRequest$inboundSchema,
-  PayrollProcessingRequest$Outbound,
-  PayrollProcessingRequest$outboundSchema,
 } from "./payrollprocessingrequest.js";
 import {
   PayrollSubmissionBlockersType,
   PayrollSubmissionBlockersType$inboundSchema,
-  PayrollSubmissionBlockersType$Outbound,
-  PayrollSubmissionBlockersType$outboundSchema,
 } from "./payrollsubmissionblockerstype.js";
 import {
   PayrollTaxesType,
   PayrollTaxesType$inboundSchema,
-  PayrollTaxesType$Outbound,
-  PayrollTaxesType$outboundSchema,
 } from "./payrolltaxestype.js";
 import {
   PayrollTotalsType,
   PayrollTotalsType$inboundSchema,
-  PayrollTotalsType$Outbound,
-  PayrollTotalsType$outboundSchema,
 } from "./payrolltotalstype.js";
 import {
   PayrollWithholdingPayPeriodType,
   PayrollWithholdingPayPeriodType$inboundSchema,
-  PayrollWithholdingPayPeriodType$outboundSchema,
 } from "./payrollwithholdingpayperiodtype.js";
 
 export type Payroll = {
@@ -245,120 +225,6 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
       "partner_owned_disbursement": "partnerOwnedDisbursement",
     });
   });
-
-/** @internal */
-export type Payroll$Outbound = {
-  payroll_deadline?: string | undefined;
-  check_date?: string | undefined;
-  processed?: boolean | undefined;
-  processed_date?: string | null | undefined;
-  calculated_at?: string | null | undefined;
-  uuid?: string | undefined;
-  payroll_uuid?: string | undefined;
-  company_uuid?: string | undefined;
-  off_cycle?: boolean | undefined;
-  off_cycle_reason?: string | null | undefined;
-  auto_pilot?: boolean | undefined;
-  external?: boolean | undefined;
-  final_termination_payroll?: boolean | undefined;
-  withholding_pay_period?: string | undefined;
-  skip_regular_deductions?: boolean | undefined;
-  fixed_withholding_rate?: boolean | undefined;
-  pay_period?: PayrollPayPeriodType$Outbound | undefined;
-  payroll_status_meta?: PayrollPayrollStatusMetaType$Outbound | undefined;
-  totals?: PayrollTotalsType$Outbound | undefined;
-  company_taxes?: Array<PayrollCompanyTaxesType$Outbound> | undefined;
-  payroll_taxes?: Array<PayrollTaxesType$Outbound> | undefined;
-  payment_speed_changed?: PayrollPaymentSpeedChangedType$Outbound | undefined;
-  created_at?: string | undefined;
-  submission_blockers?:
-    | Array<PayrollSubmissionBlockersType$Outbound>
-    | undefined;
-  credit_blockers?: Array<PayrollCreditBlockersType$Outbound> | undefined;
-  processing_request?: PayrollProcessingRequest$Outbound | null | undefined;
-  partner_owned_disbursement?: boolean | null | undefined;
-};
-
-/** @internal */
-export const Payroll$outboundSchema: z.ZodType<
-  Payroll$Outbound,
-  z.ZodTypeDef,
-  Payroll
-> = z.object({
-  payrollDeadline: z.date().transform(v => v.toISOString()).optional(),
-  checkDate: z.string().optional(),
-  processed: z.boolean().optional(),
-  processedDate: z.nullable(z.string()).optional(),
-  calculatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  uuid: z.string().optional(),
-  payrollUuid: z.string().optional(),
-  companyUuid: z.string().optional(),
-  offCycle: z.boolean().optional(),
-  offCycleReason: z.nullable(OffCycleReasonType$outboundSchema).optional(),
-  autoPilot: z.boolean().optional(),
-  external: z.boolean().optional(),
-  finalTerminationPayroll: z.boolean().optional(),
-  withholdingPayPeriod: PayrollWithholdingPayPeriodType$outboundSchema
-    .optional(),
-  skipRegularDeductions: z.boolean().optional(),
-  fixedWithholdingRate: z.boolean().optional(),
-  payPeriod: PayrollPayPeriodType$outboundSchema.optional(),
-  payrollStatusMeta: PayrollPayrollStatusMetaType$outboundSchema.optional(),
-  totals: PayrollTotalsType$outboundSchema.optional(),
-  companyTaxes: z.array(PayrollCompanyTaxesType$outboundSchema).optional(),
-  payrollTaxes: z.array(PayrollTaxesType$outboundSchema).optional(),
-  paymentSpeedChanged: PayrollPaymentSpeedChangedType$outboundSchema.optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  submissionBlockers: z.array(PayrollSubmissionBlockersType$outboundSchema)
-    .optional(),
-  creditBlockers: z.array(PayrollCreditBlockersType$outboundSchema).optional(),
-  processingRequest: z.nullable(PayrollProcessingRequest$outboundSchema)
-    .optional(),
-  partnerOwnedDisbursement: z.nullable(z.boolean()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    payrollDeadline: "payroll_deadline",
-    checkDate: "check_date",
-    processedDate: "processed_date",
-    calculatedAt: "calculated_at",
-    payrollUuid: "payroll_uuid",
-    companyUuid: "company_uuid",
-    offCycle: "off_cycle",
-    offCycleReason: "off_cycle_reason",
-    autoPilot: "auto_pilot",
-    finalTerminationPayroll: "final_termination_payroll",
-    withholdingPayPeriod: "withholding_pay_period",
-    skipRegularDeductions: "skip_regular_deductions",
-    fixedWithholdingRate: "fixed_withholding_rate",
-    payPeriod: "pay_period",
-    payrollStatusMeta: "payroll_status_meta",
-    companyTaxes: "company_taxes",
-    payrollTaxes: "payroll_taxes",
-    paymentSpeedChanged: "payment_speed_changed",
-    createdAt: "created_at",
-    submissionBlockers: "submission_blockers",
-    creditBlockers: "credit_blockers",
-    processingRequest: "processing_request",
-    partnerOwnedDisbursement: "partner_owned_disbursement",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Payroll$ {
-  /** @deprecated use `Payroll$inboundSchema` instead. */
-  export const inboundSchema = Payroll$inboundSchema;
-  /** @deprecated use `Payroll$outboundSchema` instead. */
-  export const outboundSchema = Payroll$outboundSchema;
-  /** @deprecated use `Payroll$Outbound` instead. */
-  export type Outbound = Payroll$Outbound;
-}
-
-export function payrollToJSON(payroll: Payroll): string {
-  return JSON.stringify(Payroll$outboundSchema.parse(payroll));
-}
 
 export function payrollFromJSON(
   jsonString: string,

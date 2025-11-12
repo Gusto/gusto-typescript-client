@@ -59,22 +59,6 @@ export const EmployeeBankAccountAccountType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EmployeeBankAccountAccountType);
 
 /** @internal */
-export const EmployeeBankAccountAccountType$outboundSchema: z.ZodNativeEnum<
-  typeof EmployeeBankAccountAccountType
-> = EmployeeBankAccountAccountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeBankAccountAccountType$ {
-  /** @deprecated use `EmployeeBankAccountAccountType$inboundSchema` instead. */
-  export const inboundSchema = EmployeeBankAccountAccountType$inboundSchema;
-  /** @deprecated use `EmployeeBankAccountAccountType$outboundSchema` instead. */
-  export const outboundSchema = EmployeeBankAccountAccountType$outboundSchema;
-}
-
-/** @internal */
 export const EmployeeBankAccount$inboundSchema: z.ZodType<
   EmployeeBankAccount,
   z.ZodTypeDef,
@@ -94,58 +78,6 @@ export const EmployeeBankAccount$inboundSchema: z.ZodType<
     "hidden_account_number": "hiddenAccountNumber",
   });
 });
-
-/** @internal */
-export type EmployeeBankAccount$Outbound = {
-  uuid: string;
-  employee_uuid?: string | undefined;
-  account_type?: string | undefined;
-  name?: string | undefined;
-  routing_number?: string | undefined;
-  hidden_account_number?: string | undefined;
-};
-
-/** @internal */
-export const EmployeeBankAccount$outboundSchema: z.ZodType<
-  EmployeeBankAccount$Outbound,
-  z.ZodTypeDef,
-  EmployeeBankAccount
-> = z.object({
-  uuid: z.string(),
-  employeeUuid: z.string().optional(),
-  accountType: EmployeeBankAccountAccountType$outboundSchema.optional(),
-  name: z.string().optional(),
-  routingNumber: z.string().optional(),
-  hiddenAccountNumber: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    employeeUuid: "employee_uuid",
-    accountType: "account_type",
-    routingNumber: "routing_number",
-    hiddenAccountNumber: "hidden_account_number",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeBankAccount$ {
-  /** @deprecated use `EmployeeBankAccount$inboundSchema` instead. */
-  export const inboundSchema = EmployeeBankAccount$inboundSchema;
-  /** @deprecated use `EmployeeBankAccount$outboundSchema` instead. */
-  export const outboundSchema = EmployeeBankAccount$outboundSchema;
-  /** @deprecated use `EmployeeBankAccount$Outbound` instead. */
-  export type Outbound = EmployeeBankAccount$Outbound;
-}
-
-export function employeeBankAccountToJSON(
-  employeeBankAccount: EmployeeBankAccount,
-): string {
-  return JSON.stringify(
-    EmployeeBankAccount$outboundSchema.parse(employeeBankAccount),
-  );
-}
 
 export function employeeBankAccountFromJSON(
   jsonString: string,

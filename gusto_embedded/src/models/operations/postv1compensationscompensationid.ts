@@ -10,23 +10,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Compensation,
   Compensation$inboundSchema,
-  Compensation$Outbound,
-  Compensation$outboundSchema,
 } from "../components/compensation.js";
 import {
   FlsaStatusType,
-  FlsaStatusType$inboundSchema,
   FlsaStatusType$outboundSchema,
 } from "../components/flsastatustype.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -101,32 +95,8 @@ export type PostV1CompensationsCompensationIdResponse = {
 };
 
 /** @internal */
-export const PaymentUnit$inboundSchema: z.ZodNativeEnum<typeof PaymentUnit> = z
+export const PaymentUnit$outboundSchema: z.ZodNativeEnum<typeof PaymentUnit> = z
   .nativeEnum(PaymentUnit);
-
-/** @internal */
-export const PaymentUnit$outboundSchema: z.ZodNativeEnum<typeof PaymentUnit> =
-  PaymentUnit$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaymentUnit$ {
-  /** @deprecated use `PaymentUnit$inboundSchema` instead. */
-  export const inboundSchema = PaymentUnit$inboundSchema;
-  /** @deprecated use `PaymentUnit$outboundSchema` instead. */
-  export const outboundSchema = PaymentUnit$outboundSchema;
-}
-
-/** @internal */
-export const MinimumWages$inboundSchema: z.ZodType<
-  MinimumWages,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uuid: z.string().optional(),
-});
 
 /** @internal */
 export type MinimumWages$Outbound = {
@@ -142,55 +112,9 @@ export const MinimumWages$outboundSchema: z.ZodType<
   uuid: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MinimumWages$ {
-  /** @deprecated use `MinimumWages$inboundSchema` instead. */
-  export const inboundSchema = MinimumWages$inboundSchema;
-  /** @deprecated use `MinimumWages$outboundSchema` instead. */
-  export const outboundSchema = MinimumWages$outboundSchema;
-  /** @deprecated use `MinimumWages$Outbound` instead. */
-  export type Outbound = MinimumWages$Outbound;
-}
-
 export function minimumWagesToJSON(minimumWages: MinimumWages): string {
   return JSON.stringify(MinimumWages$outboundSchema.parse(minimumWages));
 }
-
-export function minimumWagesFromJSON(
-  jsonString: string,
-): SafeParseResult<MinimumWages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MinimumWages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MinimumWages' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompensationsCompensationIdRequestBody$inboundSchema:
-  z.ZodType<
-    PostV1CompensationsCompensationIdRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    rate: z.string().optional(),
-    payment_unit: PaymentUnit$inboundSchema,
-    effective_date: z.string().optional(),
-    flsa_status: FlsaStatusType$inboundSchema,
-    adjust_for_minimum_wage: z.boolean().optional(),
-    minimum_wages: z.array(z.lazy(() => MinimumWages$inboundSchema)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "payment_unit": "paymentUnit",
-      "effective_date": "effectiveDate",
-      "flsa_status": "flsaStatus",
-      "adjust_for_minimum_wage": "adjustForMinimumWage",
-      "minimum_wages": "minimumWages",
-    });
-  });
 
 /** @internal */
 export type PostV1CompensationsCompensationIdRequestBody$Outbound = {
@@ -225,21 +149,6 @@ export const PostV1CompensationsCompensationIdRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompensationsCompensationIdRequestBody$ {
-  /** @deprecated use `PostV1CompensationsCompensationIdRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompensationsCompensationIdRequestBody$inboundSchema;
-  /** @deprecated use `PostV1CompensationsCompensationIdRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompensationsCompensationIdRequestBody$outboundSchema;
-  /** @deprecated use `PostV1CompensationsCompensationIdRequestBody$Outbound` instead. */
-  export type Outbound = PostV1CompensationsCompensationIdRequestBody$Outbound;
-}
-
 export function postV1CompensationsCompensationIdRequestBodyToJSON(
   postV1CompensationsCompensationIdRequestBody:
     PostV1CompensationsCompensationIdRequestBody,
@@ -250,41 +159,6 @@ export function postV1CompensationsCompensationIdRequestBodyToJSON(
     ),
   );
 }
-
-export function postV1CompensationsCompensationIdRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompensationsCompensationIdRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompensationsCompensationIdRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompensationsCompensationIdRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PostV1CompensationsCompensationIdRequest$inboundSchema: z.ZodType<
-  PostV1CompensationsCompensationIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  job_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PostV1CompensationsCompensationIdRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "job_id": "jobId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PostV1CompensationsCompensationIdRequest$Outbound = {
@@ -312,21 +186,6 @@ export const PostV1CompensationsCompensationIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompensationsCompensationIdRequest$ {
-  /** @deprecated use `PostV1CompensationsCompensationIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompensationsCompensationIdRequest$inboundSchema;
-  /** @deprecated use `PostV1CompensationsCompensationIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompensationsCompensationIdRequest$outboundSchema;
-  /** @deprecated use `PostV1CompensationsCompensationIdRequest$Outbound` instead. */
-  export type Outbound = PostV1CompensationsCompensationIdRequest$Outbound;
-}
-
 export function postV1CompensationsCompensationIdRequestToJSON(
   postV1CompensationsCompensationIdRequest:
     PostV1CompensationsCompensationIdRequest,
@@ -335,22 +194,6 @@ export function postV1CompensationsCompensationIdRequestToJSON(
     PostV1CompensationsCompensationIdRequest$outboundSchema.parse(
       postV1CompensationsCompensationIdRequest,
     ),
-  );
-}
-
-export function postV1CompensationsCompensationIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PostV1CompensationsCompensationIdRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PostV1CompensationsCompensationIdRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PostV1CompensationsCompensationIdRequest' from JSON`,
   );
 }
 
@@ -368,54 +211,6 @@ export const PostV1CompensationsCompensationIdResponse$inboundSchema: z.ZodType<
     "Compensation": "compensation",
   });
 });
-
-/** @internal */
-export type PostV1CompensationsCompensationIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Compensation?: Compensation$Outbound | undefined;
-};
-
-/** @internal */
-export const PostV1CompensationsCompensationIdResponse$outboundSchema:
-  z.ZodType<
-    PostV1CompensationsCompensationIdResponse$Outbound,
-    z.ZodTypeDef,
-    PostV1CompensationsCompensationIdResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    compensation: Compensation$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      compensation: "Compensation",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PostV1CompensationsCompensationIdResponse$ {
-  /** @deprecated use `PostV1CompensationsCompensationIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PostV1CompensationsCompensationIdResponse$inboundSchema;
-  /** @deprecated use `PostV1CompensationsCompensationIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PostV1CompensationsCompensationIdResponse$outboundSchema;
-  /** @deprecated use `PostV1CompensationsCompensationIdResponse$Outbound` instead. */
-  export type Outbound = PostV1CompensationsCompensationIdResponse$Outbound;
-}
-
-export function postV1CompensationsCompensationIdResponseToJSON(
-  postV1CompensationsCompensationIdResponse:
-    PostV1CompensationsCompensationIdResponse,
-): string {
-  return JSON.stringify(
-    PostV1CompensationsCompensationIdResponse$outboundSchema.parse(
-      postV1CompensationsCompensationIdResponse,
-    ),
-  );
-}
 
 export function postV1CompensationsCompensationIdResponseFromJSON(
   jsonString: string,

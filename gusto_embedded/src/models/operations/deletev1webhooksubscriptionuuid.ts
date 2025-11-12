@@ -9,12 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,19 +36,6 @@ export type DeleteV1WebhookSubscriptionUuidResponse = {
 };
 
 /** @internal */
-export const DeleteV1WebhookSubscriptionUuidSecurity$inboundSchema: z.ZodType<
-  DeleteV1WebhookSubscriptionUuidSecurity,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  SystemAccessAuth: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "SystemAccessAuth": "systemAccessAuth",
-  });
-});
-
-/** @internal */
 export type DeleteV1WebhookSubscriptionUuidSecurity$Outbound = {
   SystemAccessAuth: string;
 };
@@ -69,21 +53,6 @@ export const DeleteV1WebhookSubscriptionUuidSecurity$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1WebhookSubscriptionUuidSecurity$ {
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidSecurity$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1WebhookSubscriptionUuidSecurity$inboundSchema;
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidSecurity$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1WebhookSubscriptionUuidSecurity$outboundSchema;
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidSecurity$Outbound` instead. */
-  export type Outbound = DeleteV1WebhookSubscriptionUuidSecurity$Outbound;
-}
-
 export function deleteV1WebhookSubscriptionUuidSecurityToJSON(
   deleteV1WebhookSubscriptionUuidSecurity:
     DeleteV1WebhookSubscriptionUuidSecurity,
@@ -94,37 +63,6 @@ export function deleteV1WebhookSubscriptionUuidSecurityToJSON(
     ),
   );
 }
-
-export function deleteV1WebhookSubscriptionUuidSecurityFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteV1WebhookSubscriptionUuidSecurity,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1WebhookSubscriptionUuidSecurity$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteV1WebhookSubscriptionUuidSecurity' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeleteV1WebhookSubscriptionUuidRequest$inboundSchema: z.ZodType<
-  DeleteV1WebhookSubscriptionUuidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  webhook_subscription_uuid: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-}).transform((v) => {
-  return remap$(v, {
-    "webhook_subscription_uuid": "webhookSubscriptionUuid",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-  });
-});
 
 /** @internal */
 export type DeleteV1WebhookSubscriptionUuidRequest$Outbound = {
@@ -147,21 +85,6 @@ export const DeleteV1WebhookSubscriptionUuidRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1WebhookSubscriptionUuidRequest$ {
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1WebhookSubscriptionUuidRequest$inboundSchema;
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1WebhookSubscriptionUuidRequest$outboundSchema;
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidRequest$Outbound` instead. */
-  export type Outbound = DeleteV1WebhookSubscriptionUuidRequest$Outbound;
-}
-
 export function deleteV1WebhookSubscriptionUuidRequestToJSON(
   deleteV1WebhookSubscriptionUuidRequest:
     DeleteV1WebhookSubscriptionUuidRequest,
@@ -170,17 +93,6 @@ export function deleteV1WebhookSubscriptionUuidRequestToJSON(
     DeleteV1WebhookSubscriptionUuidRequest$outboundSchema.parse(
       deleteV1WebhookSubscriptionUuidRequest,
     ),
-  );
-}
-
-export function deleteV1WebhookSubscriptionUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteV1WebhookSubscriptionUuidRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteV1WebhookSubscriptionUuidRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteV1WebhookSubscriptionUuidRequest' from JSON`,
   );
 }
 
@@ -196,50 +108,6 @@ export const DeleteV1WebhookSubscriptionUuidResponse$inboundSchema: z.ZodType<
     "HttpMeta": "httpMeta",
   });
 });
-
-/** @internal */
-export type DeleteV1WebhookSubscriptionUuidResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const DeleteV1WebhookSubscriptionUuidResponse$outboundSchema: z.ZodType<
-  DeleteV1WebhookSubscriptionUuidResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteV1WebhookSubscriptionUuidResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteV1WebhookSubscriptionUuidResponse$ {
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteV1WebhookSubscriptionUuidResponse$inboundSchema;
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteV1WebhookSubscriptionUuidResponse$outboundSchema;
-  /** @deprecated use `DeleteV1WebhookSubscriptionUuidResponse$Outbound` instead. */
-  export type Outbound = DeleteV1WebhookSubscriptionUuidResponse$Outbound;
-}
-
-export function deleteV1WebhookSubscriptionUuidResponseToJSON(
-  deleteV1WebhookSubscriptionUuidResponse:
-    DeleteV1WebhookSubscriptionUuidResponse,
-): string {
-  return JSON.stringify(
-    DeleteV1WebhookSubscriptionUuidResponse$outboundSchema.parse(
-      deleteV1WebhookSubscriptionUuidResponse,
-    ),
-  );
-}
 
 export function deleteV1WebhookSubscriptionUuidResponseFromJSON(
   jsonString: string,

@@ -6,21 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  Company,
-  Company$inboundSchema,
-  Company$Outbound,
-  Company$outboundSchema,
-} from "../components/company.js";
+import { Company, Company$inboundSchema } from "../components/company.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,19 +45,6 @@ export type PutV1CompaniesResponse = {
 };
 
 /** @internal */
-export const PutV1CompaniesRequestBody$inboundSchema: z.ZodType<
-  PutV1CompaniesRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contractor_only: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "contractor_only": "contractorOnly",
-  });
-});
-
-/** @internal */
 export type PutV1CompaniesRequestBody$Outbound = {
   contractor_only: boolean;
 };
@@ -83,19 +62,6 @@ export const PutV1CompaniesRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesRequestBody$ {
-  /** @deprecated use `PutV1CompaniesRequestBody$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompaniesRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesRequestBody$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompaniesRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesRequestBody$Outbound` instead. */
-  export type Outbound = PutV1CompaniesRequestBody$Outbound;
-}
-
 export function putV1CompaniesRequestBodyToJSON(
   putV1CompaniesRequestBody: PutV1CompaniesRequestBody,
 ): string {
@@ -103,33 +69,6 @@ export function putV1CompaniesRequestBodyToJSON(
     PutV1CompaniesRequestBody$outboundSchema.parse(putV1CompaniesRequestBody),
   );
 }
-
-export function putV1CompaniesRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompaniesRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1CompaniesRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesRequest$inboundSchema: z.ZodType<
-  PutV1CompaniesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  company_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() => PutV1CompaniesRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "company_id": "companyId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1CompaniesRequest$Outbound = {
@@ -155,34 +94,11 @@ export const PutV1CompaniesRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesRequest$ {
-  /** @deprecated use `PutV1CompaniesRequest$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompaniesRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesRequest$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompaniesRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesRequest$Outbound` instead. */
-  export type Outbound = PutV1CompaniesRequest$Outbound;
-}
-
 export function putV1CompaniesRequestToJSON(
   putV1CompaniesRequest: PutV1CompaniesRequest,
 ): string {
   return JSON.stringify(
     PutV1CompaniesRequest$outboundSchema.parse(putV1CompaniesRequest),
-  );
-}
-
-export function putV1CompaniesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1CompaniesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PutV1CompaniesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesRequest' from JSON`,
   );
 }
 
@@ -200,48 +116,6 @@ export const PutV1CompaniesResponse$inboundSchema: z.ZodType<
     "Company": "company",
   });
 });
-
-/** @internal */
-export type PutV1CompaniesResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Company?: Company$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1CompaniesResponse$outboundSchema: z.ZodType<
-  PutV1CompaniesResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1CompaniesResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  company: Company$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    company: "Company",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesResponse$ {
-  /** @deprecated use `PutV1CompaniesResponse$inboundSchema` instead. */
-  export const inboundSchema = PutV1CompaniesResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesResponse$outboundSchema` instead. */
-  export const outboundSchema = PutV1CompaniesResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesResponse$Outbound` instead. */
-  export type Outbound = PutV1CompaniesResponse$Outbound;
-}
-
-export function putV1CompaniesResponseToJSON(
-  putV1CompaniesResponse: PutV1CompaniesResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesResponse$outboundSchema.parse(putV1CompaniesResponse),
-  );
-}
 
 export function putV1CompaniesResponseFromJSON(
   jsonString: string,

@@ -49,22 +49,6 @@ export const GeneratedDocumentStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GeneratedDocumentStatus);
 
 /** @internal */
-export const GeneratedDocumentStatus$outboundSchema: z.ZodNativeEnum<
-  typeof GeneratedDocumentStatus
-> = GeneratedDocumentStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GeneratedDocumentStatus$ {
-  /** @deprecated use `GeneratedDocumentStatus$inboundSchema` instead. */
-  export const inboundSchema = GeneratedDocumentStatus$inboundSchema;
-  /** @deprecated use `GeneratedDocumentStatus$outboundSchema` instead. */
-  export const outboundSchema = GeneratedDocumentStatus$outboundSchema;
-}
-
-/** @internal */
 export const GeneratedDocument$inboundSchema: z.ZodType<
   GeneratedDocument,
   z.ZodTypeDef,
@@ -79,50 +63,6 @@ export const GeneratedDocument$inboundSchema: z.ZodType<
     "document_urls": "documentUrls",
   });
 });
-
-/** @internal */
-export type GeneratedDocument$Outbound = {
-  request_uuid?: string | undefined;
-  status?: string | undefined;
-  document_urls?: Array<string> | undefined;
-};
-
-/** @internal */
-export const GeneratedDocument$outboundSchema: z.ZodType<
-  GeneratedDocument$Outbound,
-  z.ZodTypeDef,
-  GeneratedDocument
-> = z.object({
-  requestUuid: z.string().optional(),
-  status: GeneratedDocumentStatus$outboundSchema.optional(),
-  documentUrls: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestUuid: "request_uuid",
-    documentUrls: "document_urls",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GeneratedDocument$ {
-  /** @deprecated use `GeneratedDocument$inboundSchema` instead. */
-  export const inboundSchema = GeneratedDocument$inboundSchema;
-  /** @deprecated use `GeneratedDocument$outboundSchema` instead. */
-  export const outboundSchema = GeneratedDocument$outboundSchema;
-  /** @deprecated use `GeneratedDocument$Outbound` instead. */
-  export type Outbound = GeneratedDocument$Outbound;
-}
-
-export function generatedDocumentToJSON(
-  generatedDocument: GeneratedDocument,
-): string {
-  return JSON.stringify(
-    GeneratedDocument$outboundSchema.parse(generatedDocument),
-  );
-}
 
 export function generatedDocumentFromJSON(
   jsonString: string,

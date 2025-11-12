@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MetadataWithOneEntity,
   MetadataWithOneEntity$inboundSchema,
-  MetadataWithOneEntity$Outbound,
-  MetadataWithOneEntity$outboundSchema,
 } from "./metadatawithoneentity.js";
 
 /**
@@ -28,43 +26,6 @@ export const MetadataWithMultipleEntities$inboundSchema: z.ZodType<
 > = z.object({
   entities: z.array(MetadataWithOneEntity$inboundSchema),
 });
-
-/** @internal */
-export type MetadataWithMultipleEntities$Outbound = {
-  entities: Array<MetadataWithOneEntity$Outbound>;
-};
-
-/** @internal */
-export const MetadataWithMultipleEntities$outboundSchema: z.ZodType<
-  MetadataWithMultipleEntities$Outbound,
-  z.ZodTypeDef,
-  MetadataWithMultipleEntities
-> = z.object({
-  entities: z.array(MetadataWithOneEntity$outboundSchema),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MetadataWithMultipleEntities$ {
-  /** @deprecated use `MetadataWithMultipleEntities$inboundSchema` instead. */
-  export const inboundSchema = MetadataWithMultipleEntities$inboundSchema;
-  /** @deprecated use `MetadataWithMultipleEntities$outboundSchema` instead. */
-  export const outboundSchema = MetadataWithMultipleEntities$outboundSchema;
-  /** @deprecated use `MetadataWithMultipleEntities$Outbound` instead. */
-  export type Outbound = MetadataWithMultipleEntities$Outbound;
-}
-
-export function metadataWithMultipleEntitiesToJSON(
-  metadataWithMultipleEntities: MetadataWithMultipleEntities,
-): string {
-  return JSON.stringify(
-    MetadataWithMultipleEntities$outboundSchema.parse(
-      metadataWithMultipleEntities,
-    ),
-  );
-}
 
 export function metadataWithMultipleEntitiesFromJSON(
   jsonString: string,

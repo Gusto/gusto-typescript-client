@@ -7,14 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import {
   EntityErrorObject,
   EntityErrorObject$inboundSchema,
-  EntityErrorObject$Outbound,
-  EntityErrorObject$outboundSchema,
 } from "../components/entityerrorobject.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
 
@@ -81,40 +77,3 @@ export const UnprocessableEntityErrorObject1$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type UnprocessableEntityErrorObject1$Outbound = {
-  errors: Array<EntityErrorObject$Outbound>;
-  HttpMeta: HTTPMetadata$Outbound;
-};
-
-/** @internal */
-export const UnprocessableEntityErrorObject1$outboundSchema: z.ZodType<
-  UnprocessableEntityErrorObject1$Outbound,
-  z.ZodTypeDef,
-  UnprocessableEntityErrorObject1
-> = z.instanceof(UnprocessableEntityErrorObject1)
-  .transform(v => v.data$)
-  .pipe(
-    z.object({
-      errors: z.array(EntityErrorObject$outboundSchema),
-      httpMeta: HTTPMetadata$outboundSchema,
-    }).transform((v) => {
-      return remap$(v, {
-        httpMeta: "HttpMeta",
-      });
-    }),
-  );
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnprocessableEntityErrorObject1$ {
-  /** @deprecated use `UnprocessableEntityErrorObject1$inboundSchema` instead. */
-  export const inboundSchema = UnprocessableEntityErrorObject1$inboundSchema;
-  /** @deprecated use `UnprocessableEntityErrorObject1$outboundSchema` instead. */
-  export const outboundSchema = UnprocessableEntityErrorObject1$outboundSchema;
-  /** @deprecated use `UnprocessableEntityErrorObject1$Outbound` instead. */
-  export type Outbound = UnprocessableEntityErrorObject1$Outbound;
-}

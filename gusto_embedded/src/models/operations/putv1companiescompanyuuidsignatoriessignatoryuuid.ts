@@ -9,18 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  Signatory,
-  Signatory$inboundSchema,
-  Signatory$Outbound,
-  Signatory$outboundSchema,
-} from "../components/signatory.js";
+import { Signatory, Signatory$inboundSchema } from "../components/signatory.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -75,25 +67,6 @@ export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse = {
 };
 
 /** @internal */
-export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    street_1: z.string().optional(),
-    street_2: z.string().optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "street_1": "street1",
-      "street_2": "street2",
-    });
-  });
-
-/** @internal */
 export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$Outbound =
   {
     street_1?: string | undefined;
@@ -122,22 +95,6 @@ export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$outbou
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$ {
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$Outbound;
-}
-
 export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddressToJSON(
   putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress:
     PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress,
@@ -147,48 +104,6 @@ export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddressToJS
       .parse(putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress),
   );
 }
-
-export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddressFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    version: z.string().optional(),
-    first_name: z.string().optional(),
-    middle_initial: z.string().optional(),
-    last_name: z.string().optional(),
-    title: z.string().optional(),
-    phone: z.string().optional(),
-    birthday: z.string().optional(),
-    ssn: z.string().optional(),
-    home_address: z.lazy(() =>
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidHomeAddress$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "first_name": "firstName",
-      "middle_initial": "middleInitial",
-      "last_name": "lastName",
-      "home_address": "homeAddress",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$Outbound =
@@ -233,22 +148,6 @@ export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$outbou
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$ {
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$Outbound;
-}
-
 export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBodyToJSON(
   putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody:
     PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody,
@@ -258,43 +157,6 @@ export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBodyToJS
       .parse(putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody),
   );
 }
-
-export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    company_uuid: z.string(),
-    signatory_uuid: z.string(),
-    "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-    RequestBody: z.lazy(() =>
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestBody$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "company_uuid": "companyUuid",
-      "signatory_uuid": "signatoryUuid",
-      "X-Gusto-API-Version": "xGustoAPIVersion",
-      "RequestBody": "requestBody",
-    });
-  });
 
 /** @internal */
 export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound =
@@ -328,22 +190,6 @@ export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSc
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$ {
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$Outbound;
-}
-
 export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestToJSON(
   putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest:
     PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
@@ -351,21 +197,6 @@ export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestToJSON(
   return JSON.stringify(
     PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$outboundSchema
       .parse(putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest),
-  );
-}
-
-export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest' from JSON`,
   );
 }
 
@@ -384,55 +215,6 @@ export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSc
       "Signatory": "signatory",
     });
   });
-
-/** @internal */
-export type PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound =
-  {
-    HttpMeta: HTTPMetadata$Outbound;
-    Signatory?: Signatory$Outbound | undefined;
-  };
-
-/** @internal */
-export const PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema:
-  z.ZodType<
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound,
-    z.ZodTypeDef,
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse
-  > = z.object({
-    httpMeta: HTTPMetadata$outboundSchema,
-    signatory: Signatory$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      httpMeta: "HttpMeta",
-      signatory: "Signatory",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$ {
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema;
-  /** @deprecated use `PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound` instead. */
-  export type Outbound =
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$Outbound;
-}
-
-export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponseToJSON(
-  putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse:
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
-): string {
-  return JSON.stringify(
-    PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$outboundSchema
-      .parse(putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse),
-  );
-}
 
 export function putV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponseFromJSON(
   jsonString: string,

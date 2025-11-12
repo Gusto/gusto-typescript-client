@@ -9,24 +9,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Garnishment,
   Garnishment$inboundSchema,
-  Garnishment$Outbound,
-  Garnishment$outboundSchema,
 } from "../components/garnishment.js";
 import {
   GarnishmentChildSupport,
-  GarnishmentChildSupport$inboundSchema,
   GarnishmentChildSupport$Outbound,
   GarnishmentChildSupport$outboundSchema,
 } from "../components/garnishmentchildsupport.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
-  HTTPMetadata$Outbound,
-  HTTPMetadata$outboundSchema,
 } from "../components/httpmetadata.js";
 import {
   VersionHeader,
-  VersionHeader$inboundSchema,
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -103,35 +97,6 @@ export type PutV1GarnishmentsGarnishmentIdResponse = {
 };
 
 /** @internal */
-export const PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema: z.ZodType<
-  PutV1GarnishmentsGarnishmentIdRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  active: z.boolean().default(true),
-  amount: z.string().optional(),
-  description: z.string().optional(),
-  court_ordered: z.boolean().optional(),
-  times: z.nullable(z.number().int()).default(null),
-  recurring: z.boolean().default(false),
-  annual_maximum: z.nullable(z.string()).default(null),
-  pay_period_maximum: z.nullable(z.string()).default(null),
-  deduct_as_percentage: z.boolean().default(false),
-  total_amount: z.nullable(z.string()).optional(),
-  child_support: z.nullable(GarnishmentChildSupport$inboundSchema).optional(),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "court_ordered": "courtOrdered",
-    "annual_maximum": "annualMaximum",
-    "pay_period_maximum": "payPeriodMaximum",
-    "deduct_as_percentage": "deductAsPercentage",
-    "total_amount": "totalAmount",
-    "child_support": "childSupport",
-  });
-});
-
-/** @internal */
 export type PutV1GarnishmentsGarnishmentIdRequestBody$Outbound = {
   active: boolean;
   amount?: string | undefined;
@@ -177,21 +142,6 @@ export const PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1GarnishmentsGarnishmentIdRequestBody$ {
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema;
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1GarnishmentsGarnishmentIdRequestBody$outboundSchema;
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdRequestBody$Outbound` instead. */
-  export type Outbound = PutV1GarnishmentsGarnishmentIdRequestBody$Outbound;
-}
-
 export function putV1GarnishmentsGarnishmentIdRequestBodyToJSON(
   putV1GarnishmentsGarnishmentIdRequestBody:
     PutV1GarnishmentsGarnishmentIdRequestBody,
@@ -202,41 +152,6 @@ export function putV1GarnishmentsGarnishmentIdRequestBodyToJSON(
     ),
   );
 }
-
-export function putV1GarnishmentsGarnishmentIdRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PutV1GarnishmentsGarnishmentIdRequestBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PutV1GarnishmentsGarnishmentIdRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const PutV1GarnishmentsGarnishmentIdRequest$inboundSchema: z.ZodType<
-  PutV1GarnishmentsGarnishmentIdRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  garnishment_id: z.string(),
-  "X-Gusto-API-Version": VersionHeader$inboundSchema.default("2025-06-15"),
-  RequestBody: z.lazy(() =>
-    PutV1GarnishmentsGarnishmentIdRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "garnishment_id": "garnishmentId",
-    "X-Gusto-API-Version": "xGustoAPIVersion",
-    "RequestBody": "requestBody",
-  });
-});
 
 /** @internal */
 export type PutV1GarnishmentsGarnishmentIdRequest$Outbound = {
@@ -264,21 +179,6 @@ export const PutV1GarnishmentsGarnishmentIdRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1GarnishmentsGarnishmentIdRequest$ {
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1GarnishmentsGarnishmentIdRequest$inboundSchema;
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1GarnishmentsGarnishmentIdRequest$outboundSchema;
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdRequest$Outbound` instead. */
-  export type Outbound = PutV1GarnishmentsGarnishmentIdRequest$Outbound;
-}
-
 export function putV1GarnishmentsGarnishmentIdRequestToJSON(
   putV1GarnishmentsGarnishmentIdRequest: PutV1GarnishmentsGarnishmentIdRequest,
 ): string {
@@ -286,17 +186,6 @@ export function putV1GarnishmentsGarnishmentIdRequestToJSON(
     PutV1GarnishmentsGarnishmentIdRequest$outboundSchema.parse(
       putV1GarnishmentsGarnishmentIdRequest,
     ),
-  );
-}
-
-export function putV1GarnishmentsGarnishmentIdRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PutV1GarnishmentsGarnishmentIdRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PutV1GarnishmentsGarnishmentIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PutV1GarnishmentsGarnishmentIdRequest' from JSON`,
   );
 }
 
@@ -314,53 +203,6 @@ export const PutV1GarnishmentsGarnishmentIdResponse$inboundSchema: z.ZodType<
     "Garnishment": "garnishment",
   });
 });
-
-/** @internal */
-export type PutV1GarnishmentsGarnishmentIdResponse$Outbound = {
-  HttpMeta: HTTPMetadata$Outbound;
-  Garnishment?: Garnishment$Outbound | undefined;
-};
-
-/** @internal */
-export const PutV1GarnishmentsGarnishmentIdResponse$outboundSchema: z.ZodType<
-  PutV1GarnishmentsGarnishmentIdResponse$Outbound,
-  z.ZodTypeDef,
-  PutV1GarnishmentsGarnishmentIdResponse
-> = z.object({
-  httpMeta: HTTPMetadata$outboundSchema,
-  garnishment: Garnishment$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpMeta: "HttpMeta",
-    garnishment: "Garnishment",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PutV1GarnishmentsGarnishmentIdResponse$ {
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PutV1GarnishmentsGarnishmentIdResponse$inboundSchema;
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PutV1GarnishmentsGarnishmentIdResponse$outboundSchema;
-  /** @deprecated use `PutV1GarnishmentsGarnishmentIdResponse$Outbound` instead. */
-  export type Outbound = PutV1GarnishmentsGarnishmentIdResponse$Outbound;
-}
-
-export function putV1GarnishmentsGarnishmentIdResponseToJSON(
-  putV1GarnishmentsGarnishmentIdResponse:
-    PutV1GarnishmentsGarnishmentIdResponse,
-): string {
-  return JSON.stringify(
-    PutV1GarnishmentsGarnishmentIdResponse$outboundSchema.parse(
-      putV1GarnishmentsGarnishmentIdResponse,
-    ),
-  );
-}
 
 export function putV1GarnishmentsGarnishmentIdResponseFromJSON(
   jsonString: string,

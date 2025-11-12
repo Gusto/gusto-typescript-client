@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContractorPayment,
   ContractorPayment$inboundSchema,
-  ContractorPayment$Outbound,
-  ContractorPayment$outboundSchema,
 } from "./contractorpayment.js";
 
 /**
@@ -70,39 +68,6 @@ export const Total$inboundSchema: z.ZodType<Total, z.ZodTypeDef, unknown> = z
     wages: z.string().optional(),
   });
 
-/** @internal */
-export type Total$Outbound = {
-  reimbursements?: string | undefined;
-  wages?: string | undefined;
-};
-
-/** @internal */
-export const Total$outboundSchema: z.ZodType<
-  Total$Outbound,
-  z.ZodTypeDef,
-  Total
-> = z.object({
-  reimbursements: z.string().optional(),
-  wages: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Total$ {
-  /** @deprecated use `Total$inboundSchema` instead. */
-  export const inboundSchema = Total$inboundSchema;
-  /** @deprecated use `Total$outboundSchema` instead. */
-  export const outboundSchema = Total$outboundSchema;
-  /** @deprecated use `Total$Outbound` instead. */
-  export type Outbound = Total$Outbound;
-}
-
-export function totalToJSON(total: Total): string {
-  return JSON.stringify(Total$outboundSchema.parse(total));
-}
-
 export function totalFromJSON(
   jsonString: string,
 ): SafeParseResult<Total, SDKValidationError> {
@@ -128,59 +93,6 @@ export const ContractorPaymentSummaryContractorPayments$inboundSchema:
         "wage_total": "wageTotal",
       });
     });
-
-/** @internal */
-export type ContractorPaymentSummaryContractorPayments$Outbound = {
-  contractor_uuid?: number | undefined;
-  reimbursement_total?: string | undefined;
-  wage_total?: string | undefined;
-  payments?: Array<ContractorPayment$Outbound> | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentSummaryContractorPayments$outboundSchema:
-  z.ZodType<
-    ContractorPaymentSummaryContractorPayments$Outbound,
-    z.ZodTypeDef,
-    ContractorPaymentSummaryContractorPayments
-  > = z.object({
-    contractorUuid: z.number().optional(),
-    reimbursementTotal: z.string().optional(),
-    wageTotal: z.string().optional(),
-    payments: z.array(ContractorPayment$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contractorUuid: "contractor_uuid",
-      reimbursementTotal: "reimbursement_total",
-      wageTotal: "wage_total",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentSummaryContractorPayments$ {
-  /** @deprecated use `ContractorPaymentSummaryContractorPayments$inboundSchema` instead. */
-  export const inboundSchema =
-    ContractorPaymentSummaryContractorPayments$inboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryContractorPayments$outboundSchema` instead. */
-  export const outboundSchema =
-    ContractorPaymentSummaryContractorPayments$outboundSchema;
-  /** @deprecated use `ContractorPaymentSummaryContractorPayments$Outbound` instead. */
-  export type Outbound = ContractorPaymentSummaryContractorPayments$Outbound;
-}
-
-export function contractorPaymentSummaryContractorPaymentsToJSON(
-  contractorPaymentSummaryContractorPayments:
-    ContractorPaymentSummaryContractorPayments,
-): string {
-  return JSON.stringify(
-    ContractorPaymentSummaryContractorPayments$outboundSchema.parse(
-      contractorPaymentSummaryContractorPayments,
-    ),
-  );
-}
 
 export function contractorPaymentSummaryContractorPaymentsFromJSON(
   jsonString: string,
@@ -213,51 +125,6 @@ export const ContractorPaymentSummary$inboundSchema: z.ZodType<
     "contractor_payments": "contractorPayments",
   });
 });
-
-/** @internal */
-export type ContractorPaymentSummary$Outbound = {
-  total?: Total$Outbound | undefined;
-  contractor_payments?:
-    | Array<ContractorPaymentSummaryContractorPayments$Outbound>
-    | undefined;
-};
-
-/** @internal */
-export const ContractorPaymentSummary$outboundSchema: z.ZodType<
-  ContractorPaymentSummary$Outbound,
-  z.ZodTypeDef,
-  ContractorPaymentSummary
-> = z.object({
-  total: z.lazy(() => Total$outboundSchema).optional(),
-  contractorPayments: z.array(
-    z.lazy(() => ContractorPaymentSummaryContractorPayments$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contractorPayments: "contractor_payments",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ContractorPaymentSummary$ {
-  /** @deprecated use `ContractorPaymentSummary$inboundSchema` instead. */
-  export const inboundSchema = ContractorPaymentSummary$inboundSchema;
-  /** @deprecated use `ContractorPaymentSummary$outboundSchema` instead. */
-  export const outboundSchema = ContractorPaymentSummary$outboundSchema;
-  /** @deprecated use `ContractorPaymentSummary$Outbound` instead. */
-  export type Outbound = ContractorPaymentSummary$Outbound;
-}
-
-export function contractorPaymentSummaryToJSON(
-  contractorPaymentSummary: ContractorPaymentSummary,
-): string {
-  return JSON.stringify(
-    ContractorPaymentSummary$outboundSchema.parse(contractorPaymentSummary),
-  );
-}
 
 export function contractorPaymentSummaryFromJSON(
   jsonString: string,

@@ -10,7 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CustomFieldType,
   CustomFieldType$inboundSchema,
-  CustomFieldType$outboundSchema,
 } from "./customfieldtype.js";
 
 /**
@@ -54,58 +53,6 @@ export const EmployeeCustomField$inboundSchema: z.ZodType<
     "selection_options": "selectionOptions",
   });
 });
-
-/** @internal */
-export type EmployeeCustomField$Outbound = {
-  id: string;
-  company_custom_field_id: string;
-  name: string;
-  type: string;
-  description?: string | undefined;
-  value: string;
-  selection_options?: Array<string> | null | undefined;
-};
-
-/** @internal */
-export const EmployeeCustomField$outboundSchema: z.ZodType<
-  EmployeeCustomField$Outbound,
-  z.ZodTypeDef,
-  EmployeeCustomField
-> = z.object({
-  id: z.string(),
-  companyCustomFieldId: z.string(),
-  name: z.string(),
-  type: CustomFieldType$outboundSchema,
-  description: z.string().optional(),
-  value: z.string(),
-  selectionOptions: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    companyCustomFieldId: "company_custom_field_id",
-    selectionOptions: "selection_options",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmployeeCustomField$ {
-  /** @deprecated use `EmployeeCustomField$inboundSchema` instead. */
-  export const inboundSchema = EmployeeCustomField$inboundSchema;
-  /** @deprecated use `EmployeeCustomField$outboundSchema` instead. */
-  export const outboundSchema = EmployeeCustomField$outboundSchema;
-  /** @deprecated use `EmployeeCustomField$Outbound` instead. */
-  export type Outbound = EmployeeCustomField$Outbound;
-}
-
-export function employeeCustomFieldToJSON(
-  employeeCustomField: EmployeeCustomField,
-): string {
-  return JSON.stringify(
-    EmployeeCustomField$outboundSchema.parse(employeeCustomField),
-  );
-}
 
 export function employeeCustomFieldFromJSON(
   jsonString: string,
