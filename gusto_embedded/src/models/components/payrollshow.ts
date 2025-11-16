@@ -305,11 +305,11 @@ export type PayrollShow = {
   /**
    * Block regular deductions and contributions for this payroll.  Only included for off-cycle payrolls.
    */
-  skipRegularDeductions?: boolean | undefined;
+  skipRegularDeductions?: boolean | null | undefined;
   /**
    * Enable taxes to be withheld at the IRS's required rate of 22% for federal income taxes. State income taxes will be taxed at the state's supplemental tax rate. Otherwise, we'll sum the entirety of the employee's wages and withhold taxes on the entire amount at the rate for regular wages. Only included for off-cycle payrolls.
    */
-  fixedWithholdingRate?: boolean | undefined;
+  fixedWithholdingRate?: boolean | null | undefined;
   payPeriod?: PayrollPayPeriodType | undefined;
   /**
    * Information about the payroll's status and expected dates
@@ -619,8 +619,8 @@ export const PayrollShow$inboundSchema: z.ZodType<
   final_termination_payroll: z.boolean().optional(),
   withholding_pay_period: PayrollWithholdingPayPeriodType$inboundSchema
     .optional(),
-  skip_regular_deductions: z.boolean().optional(),
-  fixed_withholding_rate: z.boolean().optional(),
+  skip_regular_deductions: z.nullable(z.boolean()).optional(),
+  fixed_withholding_rate: z.nullable(z.boolean()).optional(),
   pay_period: PayrollPayPeriodType$inboundSchema.optional(),
   payroll_status_meta: PayrollPayrollStatusMetaType$inboundSchema.optional(),
   totals: PayrollTotalsType$inboundSchema.optional(),

@@ -1,17 +1,55 @@
 # PayrollCreditBlockersTypeUnblockOptions
 
-## Example Usage
+
+## Supported Types
+
+### `components.PayrollCreditBlockerUnblockOptionSubmitWire`
 
 ```typescript
-import { PayrollCreditBlockersTypeUnblockOptions } from "@gusto/embedded-api/models/components/payrollcreditblockerstype.js";
-
-let value: PayrollCreditBlockersTypeUnblockOptions = {};
+const value: components.PayrollCreditBlockerUnblockOptionSubmitWire = {
+  unblockType: "submit_wire",
+  checkDate: "<value>",
+  metadata: {
+    wireInAmount: "<value>",
+    wireInDeadline: new Date("2024-02-05T09:58:20.700Z"),
+    wireInRequestUuid: "<id>",
+  },
+};
 ```
 
-## Fields
+### `components.PayrollCreditBlockerUnblockOptionSubmitBankScreenshot`
 
-| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `unblockType`                                                                                                | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The type of unblock option for the credit blocker.                                                           |
-| `checkDate`                                                                                                  | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The payment check date associated with the unblock option.                                                   |
-| `metadata`                                                                                                   | [components.PayrollCreditBlockersTypeMetadata](../../models/components/payrollcreditblockerstypemetadata.md) | :heavy_minus_sign:                                                                                           | Additional data associated with the unblock option.                                                          |
+```typescript
+const value: components.PayrollCreditBlockerUnblockOptionSubmitBankScreenshot =
+  {
+    unblockType: "submit_bank_screenshot",
+    checkDate: "<value>",
+    metadata: {
+      informationRequestUuid: "<id>",
+    },
+  };
+```
+
+### `components.PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi`
+
+```typescript
+const value:
+  components.PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi = {
+    unblockType: "respond_to_high_risk_fraud_rfi",
+    checkDate: "<value>",
+    metadata: {
+      informationRequestUuid: "<id>",
+    },
+  };
+```
+
+### `components.PayrollCreditBlockerUnblockOptionWaitForReverseWire`
+
+```typescript
+const value: components.PayrollCreditBlockerUnblockOptionWaitForReverseWire = {
+  unblockType: "wait_for_reverse_wire",
+  checkDate: "<value>",
+  metadata: {},
+};
+```
+
