@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 7eacbfab5786e1dfa3ca616a25e2d645
+  docChecksum: 8e6cf1c3904698015efa1aeb2d6877cd
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.654.0
-  generationVersion: 2.750.0
-  releaseVersion: 0.10.1
-  configChecksum: 29fd9c9fb975e4f5aa2edb3bad58e99e
+  speakeasyVersion: 1.658.1
+  generationVersion: 2.755.6
+  releaseVersion: 0.10.2
+  configChecksum: b64726fe618fbb0aa93863b080009b8f
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.26.5
+    core: 3.26.7
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -335,9 +335,19 @@ generatedFiles:
   - docs/models/components/payrollcheck.md
   - docs/models/components/payrollcompanytaxestype.md
   - docs/models/components/payrollcreditblockerstype.md
-  - docs/models/components/payrollcreditblockerstypemetadata.md
   - docs/models/components/payrollcreditblockerstypestatus.md
   - docs/models/components/payrollcreditblockerstypeunblockoptions.md
+  - docs/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfi.md
+  - docs/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfimetadata.md
+  - docs/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfiunblocktype.md
+  - docs/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshot.md
+  - docs/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshotmetadata.md
+  - docs/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshotunblocktype.md
+  - docs/models/components/payrollcreditblockerunblockoptionsubmitwire.md
+  - docs/models/components/payrollcreditblockerunblockoptionsubmitwiremetadata.md
+  - docs/models/components/payrollcreditblockerunblockoptionwaitforreversewire.md
+  - docs/models/components/payrollcreditblockerunblockoptionwaitforreversewiremetadata.md
+  - docs/models/components/payrollcreditblockerunblockoptionwaitforreversewireunblocktype.md
   - docs/models/components/payrollemployeecompensationstype.md
   - docs/models/components/payrollemployeecompensationstypepaidtimeoff.md
   - docs/models/components/payrollemployeecompensationstypepaymentmethod.md
@@ -462,6 +472,7 @@ generatedFiles:
   - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/unblockoptions.md
+  - docs/models/components/unblocktype.md
   - docs/models/components/unprocessedterminationpayperiod.md
   - docs/models/components/validation.md
   - docs/models/components/value.md
@@ -1844,6 +1855,10 @@ generatedFiles:
   - src/models/components/payrollcheck.ts
   - src/models/components/payrollcompanytaxestype.ts
   - src/models/components/payrollcreditblockerstype.ts
+  - src/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfi.ts
+  - src/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshot.ts
+  - src/models/components/payrollcreditblockerunblockoptionsubmitwire.ts
+  - src/models/components/payrollcreditblockerunblockoptionwaitforreversewire.ts
   - src/models/components/payrollemployeecompensationstype.ts
   - src/models/components/payrollfixedcompensationtypestype.ts
   - src/models/components/payrollpartnerdisbursements.ts
@@ -4357,7 +4372,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "201":
-          application/json: {"uuid": "9f634ba6-53c8-4290-8751-3ec38c369860", "first_name": "Lela", "last_name": "Graham", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+          application/json: {"uuid": "9f634ba6-53c8-4290-8751-3ec38c369860", "first_name": "Lela", "last_name": "Graham", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
         "404":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-v1-historical_employees:
@@ -4371,7 +4386,7 @@ examples:
         application/json: {"first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "preferred_first_name": "Angel", "date_of_birth": "1995-05-05T00:00:00Z", "ssn": "123456294", "work_address": {"location_uuid": "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a"}, "home_address": {"street_1": "300 3rd Street", "street_2": null, "city": "San Francisco", "state": "CA", "zip": "94107"}, "termination": {"effective_date": "2022-09-15T00:00:00Z"}, "job": {"hire_date": "2018-05-09T00:00:00Z"}, "employee_state_taxes": {"wc_covered": true, "wc_class_code": "20992"}}
       responses:
         "201":
-          application/json: {"uuid": "45116f7a-de06-4b2f-909d-e165750c815e", "first_name": "Darrion", "last_name": "Von", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+          application/json: {"uuid": "45116f7a-de06-4b2f-909d-e165750c815e", "first_name": "Darrion", "last_name": "Von", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
     Create Historical Employee Example:
@@ -4436,7 +4451,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"uuid": "c069967c-b407-431f-b3ee-0c687b3a2622", "first_name": "Dario", "last_name": "Zulauf", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+          application/json: {"uuid": "c069967c-b407-431f-b3ee-0c687b3a2622", "first_name": "Dario", "last_name": "Zulauf", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
         "404":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   put-v1-employees:
@@ -4472,7 +4487,7 @@ examples:
         application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
       responses:
         "200":
-          application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+          application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
         "404":
           application/json: {"errors": []}
   delete-v1-employee:
@@ -4598,7 +4613,7 @@ examples:
         application/json: {"version": "db0edd04aaac4506f7edab03ac855d56", "first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "date_of_birth": "1995-05-05T00:00:00Z", "ssn": "123456294", "work_address": {"location_uuid": "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a"}, "home_address": {"street_1": "300 3rd Street", "street_2": null, "city": "San Francisco", "state": "CA", "zip": "94107"}, "termination": {"effective_date": "2022-09-15T00:00:00Z"}, "job": {"hire_date": "2018-05-09T00:00:00Z"}, "employee_state_taxes": {"wc_covered": true, "wc_class_code": "20992"}}
       responses:
         "200":
-          application/json: {"uuid": "bbb71476-e905-4ca0-98b7-eae0f22f0ab2", "first_name": "Austyn", "last_name": "Mayer", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
+          application/json: {"uuid": "bbb71476-e905-4ca0-98b7-eae0f22f0ab2", "first_name": "Austyn", "last_name": "Mayer", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
     Create Historical Employee Example:
       parameters:
         path:
@@ -7435,7 +7450,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "payroll_taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 3546.72}, {"name": "Social Security", "employer": true, "amount": 786}, {"name": "Social Security", "employer": false, "amount": 786}, {"name": "CA State Income Tax", "employer": false, "amount": 132.51}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10", "metadata": {}}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
+          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": true, "processed_date": "2021-02-18", "calculated_at": "2021-02-18T12:00:00Z", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": true, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "totals": {"company_debit": "121747.71", "net_pay_debit": "79283.80", "tax_debit": "42463.91", "reimbursement_debit": "0.00", "child_support_debit": "0.00", "reimbursements": "0.00", "net_pay": "81752.94", "gross_pay": "130635.89", "employee_bonuses": "0.00", "employee_commissions": "18536.37", "employee_cash_tips": "0.00", "employee_paycheck_tips": "0.00", "additional_earnings": "0.00", "owners_draw": "0.00", "check_amount": "2469.14", "employer_taxes": "6917.19", "employee_taxes": "35546.72", "benefits": "0.00", "employee_benefits_deductions": "13336.23", "imputed_pay": "0.00", "deferred_payroll_taxes": "0.00", "other_deductions": "240.00"}, "company_taxes": [{"name": "MO Compensation Deduction", "employer": true, "amount": "-0.92"}, {"name": "NY MCTMT", "employer": true, "amount": "5.00"}], "payroll_taxes": [{"name": "Federal Income Tax", "employer": false, "amount": 3546.72}, {"name": "Social Security", "employer": true, "amount": 786}, {"name": "Social Security", "employer": false, "amount": 786}, {"name": "CA State Income Tax", "employer": false, "amount": 132.51}], "created_at": "2022-02-01T22:00:00Z", "credit_blockers": [{"blocker_type": "waiting_for_wire_in", "blocker_name": "Waiting for Wire In", "unblock_options": [{"unblock_type": "submit_wire", "check_date": "2024-06-10", "metadata": {"wire_in_amount": "400000", "wire_in_deadline": "2024-06-19T18:00:00Z", "wire_in_request_uuid": "187412e1-3dbe-491a-bb2f-2f40323a421a"}}], "selected_option": "submit_wire", "status": "unresolved"}], "processing_request": {"status": "submit_success", "errors": []}}
     Basic:
       parameters:
         path:
@@ -10147,6 +10162,20 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Typescript SDK Changes Detected:
-  * `gustoembedded.wireInRequests.get()`:  `response` **Changed** **Breaking** :warning:
-  * `gustoembedded.wireInRequests.submit()`:  `response` **Changed** **Breaking** :warning:
-  * `gustoembedded.wireInRequests.list()`:  `response.[]` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.getList()`:  `response.[].creditBlockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.create()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.fund()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.get()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.preview()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.prepare()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.list()`:  `response.[]` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.createOffCycle()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.cancel()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.update()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.get()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.employees.create()`:  `response` **Changed**
+  * `gustoembedded.employees.list()`:  `response.[].currentHomeAddress` **Changed**
+  * `gustoembedded.historicalEmployees.update()`:  `response` **Changed**
+  * `gustoembedded.employees.update()`:  `response` **Changed**
+  * `gustoembedded.employees.get()`:  `response` **Changed**
+  * `gustoembedded.employees.createHistorical()`:  `response` **Changed**
