@@ -8,26 +8,36 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi,
+  PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundSchema,
+} from "./payrollcreditblockerunblockoptionrespondtohighriskfraudrfi.js";
+import {
+  PayrollCreditBlockerUnblockOptionSubmitBankScreenshot,
+  PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema,
+} from "./payrollcreditblockerunblockoptionsubmitbankscreenshot.js";
+import {
+  PayrollCreditBlockerUnblockOptionSubmitWire,
+  PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema,
+} from "./payrollcreditblockerunblockoptionsubmitwire.js";
+import {
+  PayrollCreditBlockerUnblockOptionWaitForReverseWire,
+  PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema,
+} from "./payrollcreditblockerunblockoptionwaitforreversewire.js";
 
-/**
- * Additional data associated with the unblock option.
- */
-export type PayrollCreditBlockersTypeMetadata = {};
-
-export type PayrollCreditBlockersTypeUnblockOptions = {
-  /**
-   * The type of unblock option for the credit blocker.
-   */
-  unblockType?: string | undefined;
-  /**
-   * The payment check date associated with the unblock option.
-   */
-  checkDate?: string | undefined;
-  /**
-   * Additional data associated with the unblock option.
-   */
-  metadata?: PayrollCreditBlockersTypeMetadata | undefined;
-};
+export type PayrollCreditBlockersTypeUnblockOptions =
+  | (PayrollCreditBlockerUnblockOptionSubmitWire & {
+    unblockType: "submit_wire";
+  })
+  | (PayrollCreditBlockerUnblockOptionSubmitBankScreenshot & {
+    unblockType: "submit_bank_screenshot";
+  })
+  | (PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi & {
+    unblockType: "respond_to_high_risk_fraud_rfi";
+  })
+  | (PayrollCreditBlockerUnblockOptionWaitForReverseWire & {
+    unblockType: "wait_for_reverse_wire";
+  });
 
 /**
  * The status of the credit blocker
@@ -57,7 +67,22 @@ export type PayrollCreditBlockersType = {
   /**
    * The available options to unblock a credit blocker.
    */
-  unblockOptions?: Array<PayrollCreditBlockersTypeUnblockOptions> | undefined;
+  unblockOptions?:
+    | Array<
+      | (PayrollCreditBlockerUnblockOptionSubmitWire & {
+        unblockType: "submit_wire";
+      })
+      | (PayrollCreditBlockerUnblockOptionSubmitBankScreenshot & {
+        unblockType: "submit_bank_screenshot";
+      })
+      | (PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi & {
+        unblockType: "respond_to_high_risk_fraud_rfi";
+      })
+      | (PayrollCreditBlockerUnblockOptionWaitForReverseWire & {
+        unblockType: "wait_for_reverse_wire";
+      })
+    >
+    | undefined;
   /**
    * The unblock option that's been selected to resolve the credit blocker.
    */
@@ -69,38 +94,31 @@ export type PayrollCreditBlockersType = {
 };
 
 /** @internal */
-export const PayrollCreditBlockersTypeMetadata$inboundSchema: z.ZodType<
-  PayrollCreditBlockersTypeMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-export function payrollCreditBlockersTypeMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollCreditBlockersTypeMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PayrollCreditBlockersTypeMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollCreditBlockersTypeMetadata' from JSON`,
-  );
-}
-
-/** @internal */
 export const PayrollCreditBlockersTypeUnblockOptions$inboundSchema: z.ZodType<
   PayrollCreditBlockersTypeUnblockOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  unblock_type: z.string().optional(),
-  check_date: z.string().optional(),
-  metadata: z.lazy(() => PayrollCreditBlockersTypeMetadata$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "unblock_type": "unblockType",
-    "check_date": "checkDate",
-  });
-});
+> = z.union([
+  PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema.and(
+    z.object({ unblock_type: z.literal("submit_wire") }).transform((v) => ({
+      unblockType: v.unblock_type,
+    })),
+  ),
+  PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema.and(
+    z.object({ unblock_type: z.literal("submit_bank_screenshot") }).transform((
+      v,
+    ) => ({ unblockType: v.unblock_type })),
+  ),
+  PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundSchema.and(
+    z.object({ unblock_type: z.literal("respond_to_high_risk_fraud_rfi") })
+      .transform((v) => ({ unblockType: v.unblock_type })),
+  ),
+  PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema.and(
+    z.object({ unblock_type: z.literal("wait_for_reverse_wire") }).transform((
+      v,
+    ) => ({ unblockType: v.unblock_type })),
+  ),
+]);
 
 export function payrollCreditBlockersTypeUnblockOptionsFromJSON(
   jsonString: string,
@@ -132,7 +150,27 @@ export const PayrollCreditBlockersType$inboundSchema: z.ZodType<
   blocker_type: z.string().optional(),
   blocker_name: z.string().optional(),
   unblock_options: z.array(
-    z.lazy(() => PayrollCreditBlockersTypeUnblockOptions$inboundSchema),
+    z.union([
+      PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema.and(
+        z.object({ unblock_type: z.literal("submit_wire") }).transform((v) => ({
+          unblockType: v.unblock_type,
+        })),
+      ),
+      PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema.and(
+        z.object({ unblock_type: z.literal("submit_bank_screenshot") })
+          .transform((v) => ({ unblockType: v.unblock_type })),
+      ),
+      PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundSchema
+        .and(
+          z.object({
+            unblock_type: z.literal("respond_to_high_risk_fraud_rfi"),
+          }).transform((v) => ({ unblockType: v.unblock_type })),
+        ),
+      PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema.and(
+        z.object({ unblock_type: z.literal("wait_for_reverse_wire") })
+          .transform((v) => ({ unblockType: v.unblock_type })),
+      ),
+    ]),
   ).optional(),
   selected_option: z.nullable(z.string()).optional(),
   status: PayrollCreditBlockersTypeStatus$inboundSchema.optional(),
