@@ -9,11 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Additional data associated with the unblock option.
- */
-export type PayrollSubmissionBlockersTypeMetadata = {};
-
 export type UnblockOptions = {
   /**
    * The type of unblock option for the submission blocker.
@@ -26,7 +21,7 @@ export type UnblockOptions = {
   /**
    * Additional data associated with the unblock option.
    */
-  metadata?: PayrollSubmissionBlockersTypeMetadata | undefined;
+  metadata?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -67,24 +62,6 @@ export type PayrollSubmissionBlockersType = {
 };
 
 /** @internal */
-export const PayrollSubmissionBlockersTypeMetadata$inboundSchema: z.ZodType<
-  PayrollSubmissionBlockersTypeMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-export function payrollSubmissionBlockersTypeMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<PayrollSubmissionBlockersTypeMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PayrollSubmissionBlockersTypeMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollSubmissionBlockersTypeMetadata' from JSON`,
-  );
-}
-
-/** @internal */
 export const UnblockOptions$inboundSchema: z.ZodType<
   UnblockOptions,
   z.ZodTypeDef,
@@ -92,8 +69,7 @@ export const UnblockOptions$inboundSchema: z.ZodType<
 > = z.object({
   unblock_type: z.string().optional(),
   check_date: z.string().optional(),
-  metadata: z.lazy(() => PayrollSubmissionBlockersTypeMetadata$inboundSchema)
-    .optional(),
+  metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "unblock_type": "unblockType",
