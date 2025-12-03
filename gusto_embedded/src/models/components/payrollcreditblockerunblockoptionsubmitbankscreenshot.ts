@@ -5,24 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * The type of unblock option for the credit blocker
- */
-export const PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType =
-  {
-    SubmitBankScreenshot: "submit_bank_screenshot",
-  } as const;
-/**
- * The type of unblock option for the credit blocker
- */
-export type PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType =
-  ClosedEnum<
-    typeof PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType
-  >;
 
 export type PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata = {
   /**
@@ -38,21 +22,13 @@ export type PayrollCreditBlockerUnblockOptionSubmitBankScreenshot = {
   /**
    * The type of unblock option for the credit blocker
    */
-  unblockType: PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType;
+  unblockType: "submit_bank_screenshot";
   /**
    * The payment check date associated with the unblock option
    */
   checkDate: string;
   metadata: PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata;
 };
-
-/** @internal */
-export const PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType
-  > = z.nativeEnum(
-    PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType,
-  );
 
 /** @internal */
 export const PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata$inboundSchema:
@@ -90,8 +66,7 @@ export const PayrollCreditBlockerUnblockOptionSubmitBankScreenshot$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type:
-      PayrollCreditBlockerUnblockOptionSubmitBankScreenshotUnblockType$inboundSchema,
+    unblock_type: z.literal("submit_bank_screenshot"),
     check_date: z.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata$inboundSchema

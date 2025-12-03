@@ -38,8 +38,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
- * - `processed` is true
- * - Current time is earlier than 3:30pm PT on the payroll_deadline
+ * - `processed` is `true`
+ * - Current time is earlier than 4pm PT on the `payroll_deadline`
  *
  * scope: `payrolls:run`
  */

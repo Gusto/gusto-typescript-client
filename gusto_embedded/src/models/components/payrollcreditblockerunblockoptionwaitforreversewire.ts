@@ -5,23 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * The type of unblock option for the credit blocker
- */
-export const PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType = {
-  WaitForReverseWire: "wait_for_reverse_wire",
-} as const;
-/**
- * The type of unblock option for the credit blocker
- */
-export type PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType =
-  ClosedEnum<
-    typeof PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType
-  >;
 
 export type PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata = {
   /**
@@ -37,21 +22,13 @@ export type PayrollCreditBlockerUnblockOptionWaitForReverseWire = {
   /**
    * The type of unblock option for the credit blocker
    */
-  unblockType: PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType;
+  unblockType: "wait_for_reverse_wire";
   /**
    * The payment check date associated with the unblock option
    */
   checkDate: string;
   metadata: PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata;
 };
-
-/** @internal */
-export const PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType
-  > = z.nativeEnum(
-    PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType,
-  );
 
 /** @internal */
 export const PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata$inboundSchema:
@@ -89,8 +66,7 @@ export const PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type:
-      PayrollCreditBlockerUnblockOptionWaitForReverseWireUnblockType$inboundSchema,
+    unblock_type: z.literal("wait_for_reverse_wire"),
     check_date: z.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata$inboundSchema

@@ -13,7 +13,7 @@
 * [getOnboardingStatus](#getonboardingstatus) - Get the contractor's onboarding status
 * [updateOnboardingStatus](#updateonboardingstatus) - Change the contractor's onboarding status
 * [getAddress](#getaddress) - Get a contractor address
-* [updateAddress](#updateaddress) - Update a contractor's address
+* [updateAddress](#updateaddress) - Create or update a contractor's address
 * [getV1CompaniesCompanyIdContractorsPaymentDetails](#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 
 ## create
@@ -889,6 +889,10 @@ import {
 The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
 
 scope: `contractors:write`
+
+> 🚧 Contractors can only have one address.
+> 
+> When a contractor is created, an address is created for them by default. Updating the address will replace the existing address.
 
 ### Example Usage
 

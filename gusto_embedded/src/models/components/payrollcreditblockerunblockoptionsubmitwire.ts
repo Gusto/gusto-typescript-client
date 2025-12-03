@@ -5,20 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * The type of unblock option for the credit blocker
- */
-export const UnblockType = {
-  SubmitWire: "submit_wire",
-} as const;
-/**
- * The type of unblock option for the credit blocker
- */
-export type UnblockType = ClosedEnum<typeof UnblockType>;
 
 export type PayrollCreditBlockerUnblockOptionSubmitWireMetadata = {
   /**
@@ -42,17 +30,13 @@ export type PayrollCreditBlockerUnblockOptionSubmitWire = {
   /**
    * The type of unblock option for the credit blocker
    */
-  unblockType: UnblockType;
+  unblockType: "submit_wire";
   /**
    * The payment check date associated with the unblock option
    */
   checkDate: string;
   metadata: PayrollCreditBlockerUnblockOptionSubmitWireMetadata;
 };
-
-/** @internal */
-export const UnblockType$inboundSchema: z.ZodNativeEnum<typeof UnblockType> = z
-  .nativeEnum(UnblockType);
 
 /** @internal */
 export const PayrollCreditBlockerUnblockOptionSubmitWireMetadata$inboundSchema:
@@ -97,7 +81,7 @@ export const PayrollCreditBlockerUnblockOptionSubmitWire$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type: UnblockType$inboundSchema,
+    unblock_type: z.literal("submit_wire"),
     check_date: z.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionSubmitWireMetadata$inboundSchema
