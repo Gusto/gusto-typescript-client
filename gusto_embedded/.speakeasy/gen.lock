@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 02744d1a2309a96c92a154cc063bbf2d
+  docChecksum: b2d6cdf3fd8281c5fbe2538515a56a76
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.666.2
-  generationVersion: 2.768.1
-  releaseVersion: 0.11.0
-  configChecksum: e2f902be64d7417e5d2420bd8453bade
+  speakeasyVersion: 1.668.0
+  generationVersion: 2.770.0
+  releaseVersion: 0.11.1
+  configChecksum: 8f18756515b5eb670ba61268ac169b52
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -375,7 +375,6 @@ generatedFiles:
   - docs/models/components/payrollshowreimbursements.md
   - docs/models/components/payrollshowtaxes.md
   - docs/models/components/payrollsubmissionblockerstype.md
-  - docs/models/components/payrollsubmissionblockerstypemetadata.md
   - docs/models/components/payrollsubmissionblockerstypestatus.md
   - docs/models/components/payrolltaxestype.md
   - docs/models/components/payrolltotalstype.md
@@ -7437,7 +7436,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": null, "calculated_at": null, "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "created_at": "2022-02-01T22:00:00Z", "submission_blockers": [{"blocker_type": "fast_ach_threshold_exceeded", "blocker_name": "Fast ACH Threshold Exceeded", "unblock_options": [{"unblock_type": "wire_in", "check_date": "2024-06-10", "metadata": {}}, {"unblock_type": "move_to_four_day", "check_date": "2024-06-12", "metadata": {}}], "selected_option": null, "status": "unresolved"}], "processing_request": null}
+          application/json: {"payroll_deadline": "2021-02-18T22:00:00Z", "check_date": "2021-02-22", "processed": false, "processed_date": null, "calculated_at": null, "uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "payroll_uuid": "b50e611d-8f3d-4f24-b001-46675f7b5777", "company_uuid": "6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb", "off_cycle": false, "auto_pilot": false, "external": false, "pay_period": {"start_date": "2021-02-01", "end_date": "2021-02-15", "pay_schedule_uuid": "00ebc4a4-ec88-4435-8f45-c505bb63e501"}, "payroll_status_meta": {"cancellable": false, "expected_check_date": "2021-02-22", "initial_check_date": "2021-02-22", "expected_debit_time": "2021-02-18T22:00:00Z", "payroll_late": false, "initial_debit_cutoff_time": "2021-02-18T22:00:00Z"}, "created_at": "2022-02-01T22:00:00Z", "submission_blockers": [{"blocker_type": "fast_ach_threshold_exceeded", "blocker_name": "Fast ACH Threshold Exceeded", "unblock_options": [{"unblock_type": "wire_in", "check_date": "2024-06-10", "metadata": {"wire_in_deadline": "2024-06-19T18:00:00Z", "wire_in_amount": 400000}}, {"unblock_type": "move_to_four_day", "check_date": "2024-06-12", "metadata": {}}], "selected_option": null, "status": "unresolved"}], "processing_request": null}
     Processed:
       parameters:
         path:
@@ -10159,11 +10158,11 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `gustoembedded.timeOffPolicies.get()`:  `response.employees.[].balance` **Added**
-  * `gustoembedded.timeOffPolicies.update()`:  `response.employees.[].balance` **Added**
-  * `gustoembedded.timeOffPolicies.getAll()`:  `response.[].employees.[].balance` **Added**
-  * `gustoembedded.timeOffPolicies.create()`:  `response.employees.[].balance` **Added**
-  * `gustoembedded.timeOffPolicies.addEmployees()`:  `response.employees.[].balance` **Added**
-  * `gustoembedded.timeOffPolicies.removeEmployees()`:  `response.employees.[].balance` **Added**
-  * `gustoembedded.timeOffPolicies.updateBalance()`:  `response.employees.[].balance` **Added**
-  * `gustoembedded.timeOffPolicies.deactivate()`:  `response.employees.[].balance` **Added**
+  * `gustoembedded.payrolls.list()`:  `response.[].submissionBlockers.[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.get()`:  `response.submission_blockers.[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.payrolls.cancel()`:  `response.submission_blockers.[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.getList()`:  `response.[].submissionBlockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.create()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.preview()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.get()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.contractorPaymentGroups.fund()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
