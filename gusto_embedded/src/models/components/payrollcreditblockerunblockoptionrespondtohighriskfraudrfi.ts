@@ -5,24 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * The type of unblock option for the credit blocker
- */
-export const PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType =
-  {
-    RespondToHighRiskFraudRfi: "respond_to_high_risk_fraud_rfi",
-  } as const;
-/**
- * The type of unblock option for the credit blocker
- */
-export type PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType =
-  ClosedEnum<
-    typeof PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType
-  >;
 
 export type PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiMetadata =
   {
@@ -39,22 +23,13 @@ export type PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi = {
   /**
    * The type of unblock option for the credit blocker
    */
-  unblockType:
-    PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType;
+  unblockType: "respond_to_high_risk_fraud_rfi";
   /**
    * The payment check date associated with the unblock option
    */
   checkDate: string;
   metadata: PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiMetadata;
 };
-
-/** @internal */
-export const PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType
-  > = z.nativeEnum(
-    PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType,
-  );
 
 /** @internal */
 export const PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiMetadata$inboundSchema:
@@ -92,8 +67,7 @@ export const PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi$inboundS
     z.ZodTypeDef,
     unknown
   > = z.object({
-    unblock_type:
-      PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiUnblockType$inboundSchema,
+    unblock_type: z.literal("respond_to_high_risk_fraud_rfi"),
     check_date: z.string(),
     metadata: z.lazy(() =>
       PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfiMetadata$inboundSchema

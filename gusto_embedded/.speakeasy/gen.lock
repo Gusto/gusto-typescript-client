@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 8e6cf1c3904698015efa1aeb2d6877cd
+  docChecksum: 02744d1a2309a96c92a154cc063bbf2d
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.658.1
-  generationVersion: 2.755.6
-  releaseVersion: 0.10.2
-  configChecksum: b64726fe618fbb0aa93863b080009b8f
+  speakeasyVersion: 1.666.2
+  generationVersion: 2.768.1
+  releaseVersion: 0.11.0
+  configChecksum: e2f902be64d7417e5d2420bd8453bade
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -16,7 +16,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.26.7
+    core: 3.26.14
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -36,9 +36,9 @@ features:
     reactQueryHooks: 0.2.3
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.3.0
+    sdkHooks: 0.4.0
     serverIDs: 2.81.2
-    unions: 2.86.0
+    unions: 2.86.3
     uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
@@ -339,15 +339,12 @@ generatedFiles:
   - docs/models/components/payrollcreditblockerstypeunblockoptions.md
   - docs/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfi.md
   - docs/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfimetadata.md
-  - docs/models/components/payrollcreditblockerunblockoptionrespondtohighriskfraudrfiunblocktype.md
   - docs/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshot.md
   - docs/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshotmetadata.md
-  - docs/models/components/payrollcreditblockerunblockoptionsubmitbankscreenshotunblocktype.md
   - docs/models/components/payrollcreditblockerunblockoptionsubmitwire.md
   - docs/models/components/payrollcreditblockerunblockoptionsubmitwiremetadata.md
   - docs/models/components/payrollcreditblockerunblockoptionwaitforreversewire.md
   - docs/models/components/payrollcreditblockerunblockoptionwaitforreversewiremetadata.md
-  - docs/models/components/payrollcreditblockerunblockoptionwaitforreversewireunblocktype.md
   - docs/models/components/payrollemployeecompensationstype.md
   - docs/models/components/payrollemployeecompensationstypepaidtimeoff.md
   - docs/models/components/payrollemployeecompensationstypepaymentmethod.md
@@ -472,7 +469,6 @@ generatedFiles:
   - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/unblockoptions.md
-  - docs/models/components/unblocktype.md
   - docs/models/components/unprocessedterminationpayperiod.md
   - docs/models/components/validation.md
   - docs/models/components/value.md
@@ -2537,6 +2533,7 @@ generatedFiles:
   - src/types/operations.ts
   - src/types/rfcdate.ts
   - src/types/streams.ts
+  - src/types/unrecognized.ts
   - tsconfig.json
 examples:
   get-v1-token-info:
@@ -7629,7 +7626,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}
+          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c", "balance": "80.0"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37", "balance": "60.0"}]}
     Hourly Policy:
       parameters:
         path:
@@ -7638,7 +7635,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}
+          application/json: {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4", "balance": "56.0"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8", "balance": "84.0"}]}
   put-time_off_policies-time_off_policy_uuid:
     example:
       parameters:
@@ -7717,7 +7714,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
+          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c", "balance": "80.0"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37", "balance": "60.0"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4", "balance": "56.0"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8", "balance": "84.0"}]}]
   post-companies-company_uuid-time_off_policies:
     Unlimited Policy:
       parameters:
@@ -10161,21 +10158,12 @@ examples:
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
-  ## Typescript SDK Changes Detected:
-  * `gustoembedded.contractorPaymentGroups.getList()`:  `response.[].creditBlockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.create()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.fund()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.get()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.preview()`:  `response.credit_blockers.[].[].unblockOptions.[]` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.prepare()`:  `response` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.list()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.createOffCycle()`:  `response` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.cancel()`:  `response` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.update()`:  `response` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.get()`:  `response` **Changed** **Breaking** :warning:
-  * `gustoembedded.employees.create()`:  `response` **Changed**
-  * `gustoembedded.employees.list()`:  `response.[].currentHomeAddress` **Changed**
-  * `gustoembedded.historicalEmployees.update()`:  `response` **Changed**
-  * `gustoembedded.employees.update()`:  `response` **Changed**
-  * `gustoembedded.employees.get()`:  `response` **Changed**
-  * `gustoembedded.employees.createHistorical()`:  `response` **Changed**
+  ## Typescript SDK Changes:
+  * `gustoembedded.timeOffPolicies.get()`:  `response.employees.[].balance` **Added**
+  * `gustoembedded.timeOffPolicies.update()`:  `response.employees.[].balance` **Added**
+  * `gustoembedded.timeOffPolicies.getAll()`:  `response.[].employees.[].balance` **Added**
+  * `gustoembedded.timeOffPolicies.create()`:  `response.employees.[].balance` **Added**
+  * `gustoembedded.timeOffPolicies.addEmployees()`:  `response.employees.[].balance` **Added**
+  * `gustoembedded.timeOffPolicies.removeEmployees()`:  `response.employees.[].balance` **Added**
+  * `gustoembedded.timeOffPolicies.updateBalance()`:  `response.employees.[].balance` **Added**
+  * `gustoembedded.timeOffPolicies.deactivate()`:  `response.employees.[].balance` **Added**

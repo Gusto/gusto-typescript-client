@@ -303,7 +303,7 @@ run();
 * [getOnboardingStatus](docs/sdks/contractors/README.md#getonboardingstatus) - Get the contractor's onboarding status
 * [updateOnboardingStatus](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
 * [getAddress](docs/sdks/contractors/README.md#getaddress) - Get a contractor address
-* [updateAddress](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
+* [updateAddress](docs/sdks/contractors/README.md#updateaddress) - Create or update a contractor's address
 * [getV1CompaniesCompanyIdContractorsPaymentDetails](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 
 ### [departments](docs/sdks/departments/README.md)
@@ -707,7 +707,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails`](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 - [`contractorsList`](docs/sdks/contractors/README.md#list) - Get contractors of a company
 - [`contractorsUpdate`](docs/sdks/contractors/README.md#update) - Update a contractor
-- [`contractorsUpdateAddress`](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
+- [`contractorsUpdateAddress`](docs/sdks/contractors/README.md#updateaddress) - Create or update a contractor's address
 - [`contractorsUpdateOnboardingStatus`](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
 - [`departmentsAddPeople`](docs/sdks/departments/README.md#addpeople) - Add people to a department
 - [`departmentsCreate`](docs/sdks/departments/README.md#create) - Create a department
@@ -1003,7 +1003,7 @@ To learn about this feature and how to get started, check
 - [`useContractorsGetOnboardingStatus`](docs/sdks/contractors/README.md#getonboardingstatus) - Get the contractor's onboarding status
 - [`useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails`](docs/sdks/contractors/README.md#getv1companiescompanyidcontractorspaymentdetails) - List contractor payment details
 - [`useContractorsList`](docs/sdks/contractors/README.md#list) - Get contractors of a company
-- [`useContractorsUpdateAddressMutation`](docs/sdks/contractors/README.md#updateaddress) - Update a contractor's address
+- [`useContractorsUpdateAddressMutation`](docs/sdks/contractors/README.md#updateaddress) - Create or update a contractor's address
 - [`useContractorsUpdateMutation`](docs/sdks/contractors/README.md#update) - Update a contractor
 - [`useContractorsUpdateOnboardingStatusMutation`](docs/sdks/contractors/README.md#updateonboardingstatus) - Change the contractor's onboarding status
 - [`useDepartmentsAddPeopleMutation`](docs/sdks/departments/README.md#addpeople) - Add people to a department

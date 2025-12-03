@@ -254,12 +254,16 @@ export class Contractors extends ClientSDK {
   }
 
   /**
-   * Update a contractor's address
+   * Create or update a contractor's address
    *
    * @remarks
    * The address of a contractor is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
    *
    * scope: `contractors:write`
+   *
+   * > 🚧 Contractors can only have one address.
+   * >
+   * > When a contractor is created, an address is created for them by default. Updating the address will replace the existing address.
    */
   async updateAddress(
     request: PutV1ContractorsContractorUuidAddressRequest,
