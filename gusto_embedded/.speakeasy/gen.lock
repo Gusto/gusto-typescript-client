@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: b2d6cdf3fd8281c5fbe2538515a56a76
+  docChecksum: 2662ccb8d281b2927921dc49062f4fdb
   docVersion: "2025-06-15"
   speakeasyVersion: 1.668.0
   generationVersion: 2.770.0
-  releaseVersion: 0.11.1
-  configChecksum: 8f18756515b5eb670ba61268ac169b52
+  releaseVersion: 0.11.2
+  configChecksum: b9d91b794d4baee7f89f1f00ed85ff6c
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
@@ -207,6 +207,8 @@ generatedFiles:
   - docs/models/components/employeecustomfield.md
   - docs/models/components/employeededuction.md
   - docs/models/components/employeefederaltax.md
+  - docs/models/components/employeefederaltaxpre2020.md
+  - docs/models/components/employeefederaltaxrev2020.md
   - docs/models/components/employeehomeaddress.md
   - docs/models/components/employeeonboardingdocument.md
   - docs/models/components/employeeonboardingdocumentsconfig.md
@@ -222,6 +224,9 @@ generatedFiles:
   - docs/models/components/employeepaystubslist.md
   - docs/models/components/employeepaystubslistpaymentmethod.md
   - docs/models/components/employees.md
+  - docs/models/components/employeesection603highearnerstatus.md
+  - docs/models/components/employeesection603highearnerstatuscreaterequest.md
+  - docs/models/components/employeesection603highearnerstatusupdaterequest.md
   - docs/models/components/employeestatetaxanswer.md
   - docs/models/components/employeestatetaxes.md
   - docs/models/components/employeestatetaxeslist.md
@@ -477,7 +482,6 @@ generatedFiles:
   - docs/models/components/verificationtype.md
   - docs/models/components/versionheader.md
   - docs/models/components/veteransday.md
-  - docs/models/components/w4datatype.md
   - docs/models/components/wagetype.md
   - docs/models/components/webhookshealthcheckstatus.md
   - docs/models/components/webhookshealthcheckstatusstatus.md
@@ -824,6 +828,12 @@ generatedFiles:
   - docs/models/operations/getv1employeesemployeeuuidpaystubsheaderxgustoapiversion.md
   - docs/models/operations/getv1employeesemployeeuuidpaystubsrequest.md
   - docs/models/operations/getv1employeesemployeeuuidpaystubsresponse.md
+  - docs/models/operations/getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyearheaderxgustoapiversion.md
+  - docs/models/operations/getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyearrequest.md
+  - docs/models/operations/getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyearresponse.md
+  - docs/models/operations/getv1employeesemployeeuuidsection603highearnerstatusesheaderxgustoapiversion.md
+  - docs/models/operations/getv1employeesemployeeuuidsection603highearnerstatusesrequest.md
+  - docs/models/operations/getv1employeesemployeeuuidsection603highearnerstatusesresponse.md
   - docs/models/operations/getv1employeesheaderxgustoapiversion.md
   - docs/models/operations/getv1employeesrequest.md
   - docs/models/operations/getv1employeesresponse.md
@@ -927,6 +937,9 @@ generatedFiles:
   - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsrequest.md
   - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsrequestbody.md
   - docs/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursementsresponse.md
+  - docs/models/operations/patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyearheaderxgustoapiversion.md
+  - docs/models/operations/patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyearrequest.md
+  - docs/models/operations/patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyearresponse.md
   - docs/models/operations/paymentmethod.md
   - docs/models/operations/paymentstatus.md
   - docs/models/operations/paymentunit.md
@@ -1066,6 +1079,9 @@ generatedFiles:
   - docs/models/operations/postv1employeesemployeeidworkaddressesrequest.md
   - docs/models/operations/postv1employeesemployeeidworkaddressesrequestbody.md
   - docs/models/operations/postv1employeesemployeeidworkaddressesresponse.md
+  - docs/models/operations/postv1employeesemployeeuuidsection603highearnerstatusesheaderxgustoapiversion.md
+  - docs/models/operations/postv1employeesemployeeuuidsection603highearnerstatusesrequest.md
+  - docs/models/operations/postv1employeesemployeeuuidsection603highearnerstatusesresponse.md
   - docs/models/operations/postv1employeesheaderxgustoapiversion.md
   - docs/models/operations/postv1employeesrequest.md
   - docs/models/operations/postv1employeesrequestbody.md
@@ -1547,7 +1563,11 @@ generatedFiles:
   - src/funcs/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.ts
   - src/funcs/employeeBenefitsDelete.ts
   - src/funcs/employeeBenefitsGet.ts
+  - src/funcs/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.ts
+  - src/funcs/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.ts
   - src/funcs/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.ts
+  - src/funcs/employeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.ts
+  - src/funcs/employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses.ts
   - src/funcs/employeeBenefitsRetrieve.ts
   - src/funcs/employeeBenefitsUpdate.ts
   - src/funcs/employeeEmploymentsCreateRehire.ts
@@ -1793,12 +1813,17 @@ generatedFiles:
   - src/models/components/employeebenefitforcompanybenefit.ts
   - src/models/components/employeecustomfield.ts
   - src/models/components/employeefederaltax.ts
+  - src/models/components/employeefederaltaxpre2020.ts
+  - src/models/components/employeefederaltaxrev2020.ts
   - src/models/components/employeehomeaddress.ts
   - src/models/components/employeeonboardingdocument.ts
   - src/models/components/employeeonboardingstatus.ts
   - src/models/components/employeepaymentdetail.ts
   - src/models/components/employeepaymentmethod.ts
   - src/models/components/employeepaystubslist.ts
+  - src/models/components/employeesection603highearnerstatus.ts
+  - src/models/components/employeesection603highearnerstatuscreaterequest.ts
+  - src/models/components/employeesection603highearnerstatusupdaterequest.ts
   - src/models/components/employeestatetaxanswer.ts
   - src/models/components/employeestatetaxeslist.ts
   - src/models/components/employeestatetaxesrequest.ts
@@ -2052,6 +2077,8 @@ generatedFiles:
   - src/models/operations/getv1employeesemployeeidterminations.ts
   - src/models/operations/getv1employeesemployeeidworkaddresses.ts
   - src/models/operations/getv1employeesemployeeuuidpaystubs.ts
+  - src/models/operations/getv1employeesemployeeuuidsection603highearnerstatuses.ts
+  - src/models/operations/getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear.ts
   - src/models/operations/getv1externalpayroll.ts
   - src/models/operations/getv1externalpayrollcalculatetaxes.ts
   - src/models/operations/getv1garnishmentschildsupport.ts
@@ -2078,6 +2105,7 @@ generatedFiles:
   - src/models/operations/getwireinrequestswireinrequestuuid.ts
   - src/models/operations/patchv1companiescompanyidpayrollsidpartnerdisbursements.ts
   - src/models/operations/patchv1contractorpaymentgroupsidpartnerdisbursements.ts
+  - src/models/operations/patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear.ts
   - src/models/operations/postcompaniescompanyuuidholidaypaypolicy.ts
   - src/models/operations/postcompaniescompanyuuidreports.ts
   - src/models/operations/postcompaniescompanyuuidsuspensions.ts
@@ -2118,6 +2146,7 @@ generatedFiles:
   - src/models/operations/postv1employeesemployeeidsalaryestimates.ts
   - src/models/operations/postv1employeesemployeeidterminations.ts
   - src/models/operations/postv1employeesemployeeidworkaddresses.ts
+  - src/models/operations/postv1employeesemployeeuuidsection603highearnerstatuses.ts
   - src/models/operations/postv1externalpayroll.ts
   - src/models/operations/postv1historicalemployees.ts
   - src/models/operations/postv1jobsjobid.ts
@@ -2299,7 +2328,11 @@ generatedFiles:
   - src/react-query/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.ts
   - src/react-query/employeeBenefitsDelete.ts
   - src/react-query/employeeBenefitsGet.ts
+  - src/react-query/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.ts
+  - src/react-query/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.ts
   - src/react-query/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.ts
+  - src/react-query/employeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.ts
+  - src/react-query/employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses.ts
   - src/react-query/employeeBenefitsRetrieve.ts
   - src/react-query/employeeBenefitsUpdate.ts
   - src/react-query/employeeEmploymentsCreateRehire.ts
@@ -4368,7 +4401,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "201":
-          application/json: {"uuid": "9f634ba6-53c8-4290-8751-3ec38c369860", "first_name": "Lela", "last_name": "Graham", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
+          application/json: {"uuid": "9f634ba6-53c8-4290-8751-3ec38c369860", "first_name": "Lela", "last_name": "Graham", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
         "404":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   post-v1-historical_employees:
@@ -4382,7 +4415,7 @@ examples:
         application/json: {"first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "preferred_first_name": "Angel", "date_of_birth": "1995-05-05T00:00:00Z", "ssn": "123456294", "work_address": {"location_uuid": "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a"}, "home_address": {"street_1": "300 3rd Street", "street_2": null, "city": "San Francisco", "state": "CA", "zip": "94107"}, "termination": {"effective_date": "2022-09-15T00:00:00Z"}, "job": {"hire_date": "2018-05-09T00:00:00Z"}, "employee_state_taxes": {"wc_covered": true, "wc_class_code": "20992"}}
       responses:
         "201":
-          application/json: {"uuid": "45116f7a-de06-4b2f-909d-e165750c815e", "first_name": "Darrion", "last_name": "Von", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
+          application/json: {"uuid": "45116f7a-de06-4b2f-909d-e165750c815e", "first_name": "Darrion", "last_name": "Von", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
         "422":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}, {"error_key": "<value>", "category": "<value>"}]}
     Create Historical Employee Example:
@@ -4447,7 +4480,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"uuid": "c069967c-b407-431f-b3ee-0c687b3a2622", "first_name": "Dario", "last_name": "Zulauf", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
+          application/json: {"uuid": "c069967c-b407-431f-b3ee-0c687b3a2622", "first_name": "Dario", "last_name": "Zulauf", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
         "404":
           application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
   put-v1-employees:
@@ -4483,7 +4516,7 @@ examples:
         application/json: {"version": "56d00c178bc7393b2a206ed6a86afcb4", "first_name": "Weezy", "middle_initial": "F", "last_name": "Baby", "email": "tunechi@cashmoneyrecords.com", "date_of_birth": "1991-01-31", "ssn": "824920233", "work_email": "new.partner.work@example.com"}
       responses:
         "200":
-          application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
+          application/json: {"uuid": "2953c680-3178-4466-8441-8947dce42145", "first_name": "Pearl", "last_name": "Volkman", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
         "404":
           application/json: {"errors": []}
   delete-v1-employee:
@@ -4609,7 +4642,7 @@ examples:
         application/json: {"version": "db0edd04aaac4506f7edab03ac855d56", "first_name": "Soren", "middle_initial": "A", "last_name": "Kierkegaard", "date_of_birth": "1995-05-05T00:00:00Z", "ssn": "123456294", "work_address": {"location_uuid": "1da85d35-1910-4d5e-8e94-39e8cdfe8c9a"}, "home_address": {"street_1": "300 3rd Street", "street_2": null, "city": "San Francisco", "state": "CA", "zip": "94107"}, "termination": {"effective_date": "2022-09-15T00:00:00Z"}, "job": {"hire_date": "2018-05-09T00:00:00Z"}, "employee_state_taxes": {"wc_covered": true, "wc_class_code": "20992"}}
       responses:
         "200":
-          application/json: {"uuid": "bbb71476-e905-4ca0-98b7-eae0f22f0ab2", "first_name": "Austyn", "last_name": "Mayer", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check", "current_home_address": {"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}, "all_home_addresses": [{"street_1": "412 Kiera Stravenue", "street_2": "Suite 391", "city": "San Francisco", "state": "CA", "zip": "94107", "country": "USA", "active": true, "id": 3, "effective_from": "2024-01-01", "effective_to": "2025-01-01", "effective_date": "2024-01-01"}]}
+          application/json: {"uuid": "bbb71476-e905-4ca0-98b7-eae0f22f0ab2", "first_name": "Austyn", "last_name": "Mayer", "eligible_paid_time_off": [{"accrual_unit": "Hour", "accrual_method": "unlimited", "accrual_period": "Year"}], "payment_method": "Check"}
     Create Historical Employee Example:
       parameters:
         path:
@@ -5449,7 +5482,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"version": "56a489ce86ed6c1b0f0cecc4050a0b01", "filing_status": "Single", "extra_withholding": "0.0", "two_jobs": true, "dependents_amount": "0.0", "other_income": "0.0", "deductions": "0.0", "w4_data_type": "rev_2020_w4"}
+          application/json: {"version": "56a489ce86ed6c1b0f0cecc4050a0b01", "w4_data_type": "rev_2020_w4", "filing_status": "Single", "extra_withholding": "0.0", "two_jobs": true, "dependents_amount": "0.0", "other_income": "0.0", "deductions": "0.0"}
   put-v1-employees-employee_id-federal_taxes:
     Example:
       parameters:
@@ -5461,7 +5494,7 @@ examples:
         application/json: {"version": "56a489ce86ed6c1b0f0cecc4050a0b01", "filing_status": "Single", "extra_withholding": "0.0", "two_jobs": true, "dependents_amount": "0.0", "other_income": "0.0", "deductions": "0.0", "w4_data_type": "rev_2020_w4"}
       responses:
         "200":
-          application/json: {"version": "56a489ce86ed6c1b0f0cecc4050a0b01", "filing_status": "Single", "extra_withholding": "0.0", "two_jobs": true, "dependents_amount": "0.0", "other_income": "0.0", "deductions": "0.0", "w4_data_type": "rev_2020_w4"}
+          application/json: {"version": "56a489ce86ed6c1b0f0cecc4050a0b01", "w4_data_type": "rev_2020_w4", "filing_status": "Single", "extra_withholding": "0.0", "two_jobs": true, "dependents_amount": "0.0", "other_income": "0.0", "deductions": "0.0"}
     Basic:
       parameters:
         path:
@@ -7625,7 +7658,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c", "balance": "80.0"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37", "balance": "60.0"}]}
+          application/json: {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}
     Hourly Policy:
       parameters:
         path:
@@ -7634,7 +7667,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4", "balance": "56.0"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8", "balance": "84.0"}]}
+          application/json: {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}
   put-time_off_policies-time_off_policy_uuid:
     example:
       parameters:
@@ -7713,7 +7746,7 @@ examples:
           X-Gusto-API-Version: "2025-06-15"
       responses:
         "200":
-          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c", "balance": "80.0"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37", "balance": "60.0"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4", "balance": "56.0"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8", "balance": "84.0"}]}]
+          application/json: [{"uuid": "3f746cd0-dd08-408f-b712-8180c7c621e9", "company_uuid": "de83cff2-8e7a-448e-a28c-14258a9971c3", "name": "Test Vacation Unlimited Policy", "policy_type": "vacation", "accrual_method": "unlimited", "accrual_rate": null, "accrual_rate_unit": null, "paid_out_on_termination": false, "accrual_waiting_period_days": null, "carryover_limit_hours": "<value>", "max_accrual_hours_per_year": "<value>", "max_hours": "<value>", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "05ed3150-591e-4f8b-bfd5-55d478edd2d8"}, {"uuid": "3633ce57-abb7-422f-8c5a-455566618e6a"}, {"uuid": "9b37429c-e540-40fb-86b3-738ca9af65c7"}]}, {"uuid": "2439c13f-f6d7-4a93-af8c-175fd4cc7ce8", "company_uuid": "f5f7b10d-2ddb-42f6-a955-d55320ce5316", "name": "Test Vacation Fixed Policy", "policy_type": "vacation", "accrual_method": "per_anniversary_year", "accrual_rate": "120.0", "accrual_rate_unit": null, "paid_out_on_termination": true, "accrual_waiting_period_days": 0, "carryover_limit_hours": "240.0", "max_accrual_hours_per_year": "120.0", "max_hours": "300.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "de7a5fb3-2e0f-460a-abbf-467fe310bf5c"}, {"uuid": "92af03c7-a833-43ae-bae8-f67007a59b37"}]}, {"uuid": "bd5f354f-12e0-4a5e-ad1f-953bb2685ad4", "company_uuid": "6767445f-5075-4ea4-a7f5-d5b5b93d4d60", "name": "Test Vacation Hourly Policy", "policy_type": "vacation", "accrual_method": "per_hour_paid", "accrual_rate": "4.0", "accrual_rate_unit": "80.0", "paid_out_on_termination": true, "accrual_waiting_period_days": 30, "carryover_limit_hours": "200.0", "max_accrual_hours_per_year": "120.0", "max_hours": "240.0", "complete": true, "version": "f5556bce3d75ec2b62bd11990aa7993a", "is_active": true, "employees": [{"uuid": "1ea2764d-0f1a-4f09-b1d9-3006aecf63c4"}, {"uuid": "a0db19a2-7c8f-42b4-9d4c-2e6246c3d6e8"}]}]
   post-companies-company_uuid-time_off_policies:
     Unlimited Policy:
       parameters:
@@ -10154,15 +10187,81 @@ examples:
           id: "<id>"
         header:
           X-Gusto-API-Version: "2024-04-01"
+  get-v1-employees-employee_uuid-section603_high_earner_statuses:
+    speakeasy-default-get-v1-employees-employee-uuid-section603-high-earner-statuses:
+      parameters:
+        path:
+          employee_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: [{"id": "<id>", "effective_year": 389356, "is_high_earner": false}]
+        "404":
+          application/json: {"errors": []}
+  post-v1-employees-employee_uuid-section603_high_earner_statuses:
+    speakeasy-default-post-v1-employees-employee-uuid-section603-high-earner-statuses:
+      parameters:
+        path:
+          employee_uuid: "<id>"
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"effective_year": 2026, "is_high_earner": true}
+      responses:
+        "201":
+          application/json: {"id": "<id>", "effective_year": 393390, "is_high_earner": true}
+        "404":
+          application/json: {"errors": []}
+  get-v1-employees-employee_uuid-section603_high_earner_statuses-effective_year:
+    speakeasy-default-get-v1-employees-employee-uuid-section603-high-earner-statuses-effective-year:
+      parameters:
+        path:
+          employee_uuid: "<id>"
+          effective_year: 857230
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "effective_year": 122730, "is_high_earner": null}
+        "404":
+          application/json: {"errors": [{"error_key": "<value>", "category": "<value>"}]}
+  patch-v1-employees-employee_uuid-section603_high_earner_statuses-effective_year:
+    speakeasy-default-patch-v1-employees-employee-uuid-section603-high-earner-statuses-effective-year:
+      parameters:
+        path:
+          employee_uuid: "<id>"
+          effective_year: 152322
+        header:
+          X-Gusto-API-Version: "2024-04-01"
+      requestBody:
+        application/json: {"is_high_earner": true}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "effective_year": 754606, "is_high_earner": true}
+        "404":
+          application/json: {"errors": []}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `gustoembedded.payrolls.list()`:  `response.[].submissionBlockers.[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.get()`:  `response.submission_blockers.[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
-  * `gustoembedded.payrolls.cancel()`:  `response.submission_blockers.[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.getList()`:  `response.[].submissionBlockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.create()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.preview()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.get()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
-  * `gustoembedded.contractorPaymentGroups.fund()`:  `response.submission_blockers.[].[].unblockOptions.[].metadata` **Changed** **Breaking** :warning:
+  * `gustoembedded.employeeTaxSetup.getFederalTaxes()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.update()`:  `response.employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.deactivate()`:  `response.employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.updateBalance()`:  `response.employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.employees.list()`:  `response.[].currentHomeAddress` **Changed** **Breaking** :warning:
+  * `gustoembedded.employees.create()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.employees.createHistorical()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.employees.get()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.historicalEmployees.update()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.removeEmployees()`:  `response.employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.get()`:  `response.employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.employeeTaxSetup.updateFederalTaxes()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.addEmployees()`:  `response.employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.employees.update()`:  `response` **Changed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.getAll()`:  `response.[].employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.timeOffPolicies.create()`:  `response.employees.[].balance` **Removed** **Breaking** :warning:
+  * `gustoembedded.employeeBenefits.getV1EmployeesEmployeeUuidSection603HighEarnerStatuses()`: **Added**
+  * `gustoembedded.employeeBenefits.postV1EmployeesEmployeeUuidSection603HighEarnerStatuses()`: **Added**
+  * `gustoembedded.employeeBenefits.patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear()`: **Added**
+  * `gustoembedded.employeeBenefits.getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear()`: **Added**

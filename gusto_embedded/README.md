@@ -345,6 +345,10 @@ run();
 * [delete](docs/sdks/employeebenefits/README.md#delete) - Delete an employee benefit
 * [getYtdBenefitAmountsFromDifferentCompany](docs/sdks/employeebenefits/README.md#getytdbenefitamountsfromdifferentcompany) - Get year-to-date benefit amounts from a different company
 * [createYtdBenefitAmountsFromDifferentCompany](docs/sdks/employeebenefits/README.md#createytdbenefitamountsfromdifferentcompany) - Create year-to-date benefit amounts from a different company
+* [getV1EmployeesEmployeeUuidSection603HighEarnerStatuses](docs/sdks/employeebenefits/README.md#getv1employeesemployeeuuidsection603highearnerstatuses) - Get all Section 603 high earner statuses for an employee
+* [postV1EmployeesEmployeeUuidSection603HighEarnerStatuses](docs/sdks/employeebenefits/README.md#postv1employeesemployeeuuidsection603highearnerstatuses) - Create a Section 603 high earner status
+* [getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear](docs/sdks/employeebenefits/README.md#getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear) - Get a Section 603 high earner status for a specific year
+* [patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear](docs/sdks/employeebenefits/README.md#patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear) - Update a Section 603 high earner status
 
 ### [employeeEmployments](docs/sdks/employeeemployments/README.md)
 
@@ -734,7 +738,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany`](docs/sdks/employeebenefits/README.md#createytdbenefitamountsfromdifferentcompany) - Create year-to-date benefit amounts from a different company
 - [`employeeBenefitsDelete`](docs/sdks/employeebenefits/README.md#delete) - Delete an employee benefit
 - [`employeeBenefitsGet`](docs/sdks/employeebenefits/README.md#get) - Get all benefits for an employee
+- [`employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses`](docs/sdks/employeebenefits/README.md#getv1employeesemployeeuuidsection603highearnerstatuses) - Get all Section 603 high earner statuses for an employee
+- [`employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear`](docs/sdks/employeebenefits/README.md#getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear) - Get a Section 603 high earner status for a specific year
 - [`employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany`](docs/sdks/employeebenefits/README.md#getytdbenefitamountsfromdifferentcompany) - Get year-to-date benefit amounts from a different company
+- [`employeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear`](docs/sdks/employeebenefits/README.md#patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear) - Update a Section 603 high earner status
+- [`employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses`](docs/sdks/employeebenefits/README.md#postv1employeesemployeeuuidsection603highearnerstatuses) - Create a Section 603 high earner status
 - [`employeeBenefitsRetrieve`](docs/sdks/employeebenefits/README.md#retrieve) - Get an employee benefit
 - [`employeeBenefitsUpdate`](docs/sdks/employeebenefits/README.md#update) - Update an employee benefit
 - [`employeeEmploymentsCreateRehire`](docs/sdks/employeeemployments/README.md#createrehire) - Create an employee rehire
@@ -1031,7 +1039,11 @@ To learn about this feature and how to get started, check
 - [`useEmployeeBenefitsCreateYtdBenefitAmountsFromDifferentCompanyMutation`](docs/sdks/employeebenefits/README.md#createytdbenefitamountsfromdifferentcompany) - Create year-to-date benefit amounts from a different company
 - [`useEmployeeBenefitsDeleteMutation`](docs/sdks/employeebenefits/README.md#delete) - Delete an employee benefit
 - [`useEmployeeBenefitsGet`](docs/sdks/employeebenefits/README.md#get) - Get all benefits for an employee
+- [`useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses`](docs/sdks/employeebenefits/README.md#getv1employeesemployeeuuidsection603highearnerstatuses) - Get all Section 603 high earner statuses for an employee
+- [`useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear`](docs/sdks/employeebenefits/README.md#getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear) - Get a Section 603 high earner status for a specific year
 - [`useEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany`](docs/sdks/employeebenefits/README.md#getytdbenefitamountsfromdifferentcompany) - Get year-to-date benefit amounts from a different company
+- [`useEmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutation`](docs/sdks/employeebenefits/README.md#patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear) - Update a Section 603 high earner status
+- [`useEmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutation`](docs/sdks/employeebenefits/README.md#postv1employeesemployeeuuidsection603highearnerstatuses) - Create a Section 603 high earner status
 - [`useEmployeeBenefitsRetrieve`](docs/sdks/employeebenefits/README.md#retrieve) - Get an employee benefit
 - [`useEmployeeBenefitsUpdateMutation`](docs/sdks/employeebenefits/README.md#update) - Update an employee benefit
 - [`useEmployeeEmploymentsCreateRehireMutation`](docs/sdks/employeeemployments/README.md#createrehire) - Create an employee rehire
@@ -1386,12 +1398,12 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 149 of 271 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 271 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 271 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 271 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 271 methods.*
-* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 271 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 153 of 275 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 275 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 275 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 275 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 275 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 275 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

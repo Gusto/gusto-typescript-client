@@ -3,117 +3,34 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  EmployeeFederalTaxPre2020,
+  EmployeeFederalTaxPre2020$inboundSchema,
+} from "./employeefederaltaxpre2020.js";
+import {
+  EmployeeFederalTaxRev2020,
+  EmployeeFederalTaxRev2020$inboundSchema,
+} from "./employeefederaltaxrev2020.js";
 
 /**
- * The version of w4 form.
+ * Federal tax information for an employee. The response structure varies based on the w4_data_type field.
  */
-export const W4DataType = {
-  Pre2020W4: "pre_2020_w4",
-  Rev2020W4: "rev_2020_w4",
-} as const;
-/**
- * The version of w4 form.
- */
-export type W4DataType = ClosedEnum<typeof W4DataType>;
-
-/**
- * Example response
- */
-export type EmployeeFederalTax = {
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version: string;
-  /**
-   * It determines which tax return form an individual will use and is an important factor in computing taxable income. One of:
-   *
-   * @remarks
-   * - Single
-   * - Married
-   * - Head of Household
-   * - Exempt from withholding
-   * - Married, but withhold as Single (does not apply to rev_2020_w4 form)
-   */
-  filingStatus: string | null;
-  /**
-   * An employee can request an additional amount to be withheld from each paycheck.
-   */
-  extraWithholding: string | null;
-  /**
-   * If there are only two jobs (i.e., you and your spouse each have a job, or you have two), you can set it to true.
-   */
-  twoJobs: boolean | null;
-  /**
-   * A dependent is a person other than the taxpayer or spouse who entitles the taxpayer to claim a dependency exemption.
-   */
-  dependentsAmount: string | null;
-  /**
-   * Other income amount.
-   */
-  otherIncome: string | null;
-  /**
-   * Deductions other than the standard deduction to reduce withholding.
-   */
-  deductions: string | null;
-  /**
-   * The version of w4 form.
-   */
-  w4DataType: W4DataType;
-  /**
-   * *does not apply to rev_2020_w4 form*
-   *
-   * @remarks
-   *
-   * An exemption from paying a certain amount of income tax.
-   */
-  federalWithholdingAllowance?: number | undefined;
-  /**
-   * *does not apply to rev_2020_w4 form*
-   *
-   * @remarks
-   *
-   * An additional withholding dollar amount
-   */
-  additionalWithholding?: string | undefined;
-};
-
-/** @internal */
-export const W4DataType$inboundSchema: z.ZodNativeEnum<typeof W4DataType> = z
-  .nativeEnum(W4DataType);
+export type EmployeeFederalTax =
+  | EmployeeFederalTaxPre2020
+  | EmployeeFederalTaxRev2020;
 
 /** @internal */
 export const EmployeeFederalTax$inboundSchema: z.ZodType<
   EmployeeFederalTax,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  version: z.string(),
-  filing_status: z.nullable(z.string()),
-  extra_withholding: z.nullable(z.string()),
-  two_jobs: z.nullable(z.boolean()),
-  dependents_amount: z.nullable(z.string()),
-  other_income: z.nullable(z.string()),
-  deductions: z.nullable(z.string()),
-  w4_data_type: W4DataType$inboundSchema,
-  federal_withholding_allowance: z.number().optional(),
-  additional_withholding: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filing_status": "filingStatus",
-    "extra_withholding": "extraWithholding",
-    "two_jobs": "twoJobs",
-    "dependents_amount": "dependentsAmount",
-    "other_income": "otherIncome",
-    "w4_data_type": "w4DataType",
-    "federal_withholding_allowance": "federalWithholdingAllowance",
-    "additional_withholding": "additionalWithholding",
-  });
-});
+> = z.union([
+  EmployeeFederalTaxPre2020$inboundSchema,
+  EmployeeFederalTaxRev2020$inboundSchema,
+]);
 
 export function employeeFederalTaxFromJSON(
   jsonString: string,
