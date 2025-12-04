@@ -6,7 +6,15 @@ import { employeeBenefitsCreate } from "../funcs/employeeBenefitsCreate.js";
 import { employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany } from "../funcs/employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany.js";
 import { employeeBenefitsDelete } from "../funcs/employeeBenefitsDelete.js";
 import { employeeBenefitsGet } from "../funcs/employeeBenefitsGet.js";
+import { employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses } from "../funcs/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.js";
+import {
+  employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
+} from "../funcs/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.js";
 import { employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany } from "../funcs/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.js";
+import {
+  employeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
+} from "../funcs/employeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.js";
+import { employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses } from "../funcs/employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses.js";
 import { employeeBenefitsRetrieve } from "../funcs/employeeBenefitsRetrieve.js";
 import { employeeBenefitsUpdate } from "../funcs/employeeBenefitsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -27,6 +35,18 @@ import {
   GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
 } from "../models/operations/getv1employeesemployeeidemployeebenefits.js";
 import {
+  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
+  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse,
+} from "../models/operations/getv1employeesemployeeuuidsection603highearnerstatuses.js";
+import {
+  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
+  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse,
+} from "../models/operations/getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear.js";
+import {
+  PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
+  PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse,
+} from "../models/operations/patchv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear.js";
+import {
   PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
   PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
 } from "../models/operations/postemployeeytdbenefitamountsfromdifferentcompany.js";
@@ -34,6 +54,10 @@ import {
   PostV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   PostV1EmployeesEmployeeIdEmployeeBenefitsResponse,
 } from "../models/operations/postv1employeesemployeeidemployeebenefits.js";
+import {
+  PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
+  PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse,
+} from "../models/operations/postv1employeesemployeeuuidsection603highearnerstatuses.js";
 import {
   PutV1EmployeeBenefitsEmployeeBenefitIdRequest,
   PutV1EmployeeBenefitsEmployeeBenefitIdResponse,
@@ -186,6 +210,108 @@ export class EmployeeBenefits extends ClientSDK {
   ): Promise<PostEmployeeYtdBenefitAmountsFromDifferentCompanyResponse> {
     return unwrapAsync(
       employeeBenefitsCreateYtdBenefitAmountsFromDifferentCompany(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Get all Section 603 high earner statuses for an employee
+   *
+   * @remarks
+   * Get all Section 603 high earner statuses for an employee across all years.
+   *
+   * Section 603 of the SECURE 2.0 Act applies to employees aged 50 or older whose prior-year FICA wages exceed the IRS threshold.
+   * These employees are classified as high earners, and their catch-up contributions to pre-tax retirement benefits must be designated as post-tax contributions.
+   *
+   * scope: `employee_benefits:read`
+   */
+  async getV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
+    request: GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
+    options?: RequestOptions,
+  ): Promise<GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse> {
+    return unwrapAsync(
+      employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Create a Section 603 high earner status
+   *
+   * @remarks
+   * Create a Section 603 high earner status for an employee for a specific year.
+   *
+   * Section 603 of the SECURE 2.0 Act applies to employees aged 50 or older whose prior-year FICA wages exceed the IRS threshold.
+   * These employees are classified as high earners, and their catch-up contributions to pre-tax retirement benefits must be designated as post-tax contributions.
+   *
+   * scope: `employee_benefits:write`
+   */
+  async postV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
+    request: PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse> {
+    return unwrapAsync(
+      employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Get a Section 603 high earner status for a specific year
+   *
+   * @remarks
+   * Get a Section 603 high earner status for an employee for a specific year.
+   *
+   * Section 603 of the SECURE 2.0 Act applies to employees aged 50 or older whose prior-year FICA wages exceed the IRS threshold.
+   * These employees are classified as high earners, and their catch-up contributions to pre-tax retirement benefits must be designated as post-tax contributions.
+   *
+   * scope: `employee_benefits:read`
+   */
+  async getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
+    request:
+      GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
+    options?: RequestOptions,
+  ): Promise<
+    GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse
+  > {
+    return unwrapAsync(
+      employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Update a Section 603 high earner status
+   *
+   * @remarks
+   * Update a Section 603 high earner status for an employee for a specific year.
+   *
+   * Section 603 of the SECURE 2.0 Act applies to employees aged 50 or older whose prior-year FICA wages exceed the IRS threshold.
+   * These employees are classified as high earners, and their catch-up contributions to pre-tax retirement benefits must be designated as post-tax contributions.
+   *
+   * scope: `employee_benefits:write`
+   */
+  async patchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
+    request:
+      PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
+    options?: RequestOptions,
+  ): Promise<
+    PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse
+  > {
+    return unwrapAsync(
+      employeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
         this,
         request,
         options,

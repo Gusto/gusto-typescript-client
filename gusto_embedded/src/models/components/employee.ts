@@ -14,10 +14,6 @@ import {
   EmployeeCustomField$inboundSchema,
 } from "./employeecustomfield.js";
 import {
-  EmployeeHomeAddress,
-  EmployeeHomeAddress$inboundSchema,
-} from "./employeehomeaddress.js";
-import {
   FlsaStatusType,
   FlsaStatusType$inboundSchema,
 } from "./flsastatustype.js";
@@ -191,8 +187,6 @@ export type Employee = {
    */
   flsaStatus?: FlsaStatusType | undefined;
   applicableTaxIds?: Array<number> | undefined;
-  currentHomeAddress?: EmployeeHomeAddress | undefined;
-  allHomeAddresses?: Array<EmployeeHomeAddress> | undefined;
 };
 
 /** @internal */
@@ -280,8 +274,6 @@ export const Employee$inboundSchema: z.ZodType<
   hidden_ssn: z.string().optional(),
   flsa_status: FlsaStatusType$inboundSchema.optional(),
   applicable_tax_ids: z.array(z.number()).optional(),
-  current_home_address: EmployeeHomeAddress$inboundSchema.optional(),
-  all_home_addresses: z.array(EmployeeHomeAddress$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
@@ -306,8 +298,6 @@ export const Employee$inboundSchema: z.ZodType<
     "hidden_ssn": "hiddenSsn",
     "flsa_status": "flsaStatus",
     "applicable_tax_ids": "applicableTaxIds",
-    "current_home_address": "currentHomeAddress",
-    "all_home_addresses": "allHomeAddresses",
   });
 });
 

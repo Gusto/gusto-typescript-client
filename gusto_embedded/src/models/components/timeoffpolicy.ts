@@ -23,10 +23,6 @@ export type PolicyType = ClosedEnum<typeof PolicyType>;
 
 export type TimeOffPolicyEmployees = {
   uuid?: string | undefined;
-  /**
-   * Employee's current time off balance. Represented as a float, e.g. "40.0".
-   */
-  balance?: string | undefined;
 };
 
 /**
@@ -94,7 +90,7 @@ export type TimeOffPolicy = {
    */
   isActive: boolean;
   /**
-   * List of employee UUIDs and employee time off balances under a time off policy
+   * List of employee UUIDs under a time off policy
    */
   employees: Array<TimeOffPolicyEmployees>;
 };
@@ -110,7 +106,6 @@ export const TimeOffPolicyEmployees$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   uuid: z.string().optional(),
-  balance: z.string().optional(),
 });
 
 export function timeOffPolicyEmployeesFromJSON(

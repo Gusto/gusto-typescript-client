@@ -17,5 +17,5 @@ let value: LeavingFor = "rippling";
 ## Values
 
 ```typescript
-"accountant" | "adp" | "adp_total_source" | "bamboo_hr" | "bank_or_financial_institution" | "check" | "gusto_com" | "homebase" | "insperity" | "intuit_or_quickbooks" | "justworks" | "manual" | "namely" | "onpay" | "other" | "patriot" | "paychex" | "paycom" | "paylocity" | "rippling" | "square" | "surepayroll" | "trinet" | "zenefits"
+"accountant" | "adp" | "adp_total_source" | "bamboo_hr" | "bank_or_financial_institution" | "check" | "deel" | "gusto_com" | "homebase" | "insperity" | "intuit_or_quickbooks" | "justworks" | "manual" | "namely" | "onpay" | "other" | "oyster" | "patriot" | "paychex" | "paycom" | "paylocity" | "remote" | "rippling" | "square" | "surepayroll" | "trinet" | "velocity_global" | "zenefits"
 ```
