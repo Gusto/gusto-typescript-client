@@ -1,5 +1,4 @@
 # PaymentConfigs
-(*paymentConfigs*)
 
 ## Overview
 

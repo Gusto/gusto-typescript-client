@@ -1,5 +1,4 @@
 # InformationRequests
-(*informationRequests*)
 
 ## Overview
 

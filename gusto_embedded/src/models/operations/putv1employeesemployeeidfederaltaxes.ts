@@ -25,13 +25,21 @@ export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody = {
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
    */
   version: string;
-  filingStatus?: string | undefined;
+  filingStatus: string;
   extraWithholding?: string | null | undefined;
   twoJobs?: boolean | undefined;
   dependentsAmount?: string | undefined;
   otherIncome?: string | undefined;
   deductions?: string | undefined;
-  w4DataType?: string | undefined;
+  w4DataType: string;
+  /**
+   * Only applicable when w4_data_type is 'pre_2020_w4'.
+   */
+  federalWithholdingAllowance?: number | undefined;
+  /**
+   * Only applicable when w4_data_type is 'pre_2020_w4'.
+   */
+  additionalWithholding?: string | undefined;
 };
 
 export type PutV1EmployeesEmployeeIdFederalTaxesRequest = {
@@ -57,13 +65,15 @@ export type PutV1EmployeesEmployeeIdFederalTaxesResponse = {
 /** @internal */
 export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody$Outbound = {
   version: string;
-  filing_status?: string | undefined;
+  filing_status: string;
   extra_withholding?: string | null | undefined;
   two_jobs?: boolean | undefined;
   dependents_amount?: string | undefined;
   other_income?: string | undefined;
   deductions?: string | undefined;
-  w4_data_type?: string | undefined;
+  w4_data_type: string;
+  federal_withholding_allowance?: number | undefined;
+  additional_withholding?: string | undefined;
 };
 
 /** @internal */
@@ -74,13 +84,15 @@ export const PutV1EmployeesEmployeeIdFederalTaxesRequestBody$outboundSchema:
     PutV1EmployeesEmployeeIdFederalTaxesRequestBody
   > = z.object({
     version: z.string(),
-    filingStatus: z.string().optional(),
+    filingStatus: z.string(),
     extraWithholding: z.nullable(z.string()).optional(),
     twoJobs: z.boolean().optional(),
     dependentsAmount: z.string().optional(),
     otherIncome: z.string().optional(),
     deductions: z.string().optional(),
-    w4DataType: z.string().optional(),
+    w4DataType: z.string(),
+    federalWithholdingAllowance: z.number().int().optional(),
+    additionalWithholding: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       filingStatus: "filing_status",
@@ -89,6 +101,8 @@ export const PutV1EmployeesEmployeeIdFederalTaxesRequestBody$outboundSchema:
       dependentsAmount: "dependents_amount",
       otherIncome: "other_income",
       w4DataType: "w4_data_type",
+      federalWithholdingAllowance: "federal_withholding_allowance",
+      additionalWithholding: "additional_withholding",
     });
   });
 

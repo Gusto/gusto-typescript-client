@@ -1,5 +1,4 @@
 # EmployeePaymentMethod
-(*employeePaymentMethod*)
 
 ## Overview
 

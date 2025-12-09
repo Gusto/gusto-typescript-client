@@ -1,5 +1,4 @@
 # HolidayPayPolicies
-(*holidayPayPolicies*)
 
 ## Overview
 

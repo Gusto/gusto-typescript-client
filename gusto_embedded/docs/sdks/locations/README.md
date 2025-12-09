@@ -1,5 +1,4 @@
 # Locations
-(*locations*)
 
 ## Overview
 

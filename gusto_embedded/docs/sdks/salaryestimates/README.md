@@ -1,5 +1,4 @@
 # SalaryEstimates
-(*salaryEstimates*)
 
 ## Overview
 

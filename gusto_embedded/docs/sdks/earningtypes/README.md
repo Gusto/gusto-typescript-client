@@ -1,5 +1,4 @@
 # EarningTypes
-(*earningTypes*)
 
 ## Overview
 

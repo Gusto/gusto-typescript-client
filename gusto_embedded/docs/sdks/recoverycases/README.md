@@ -1,5 +1,4 @@
 # RecoveryCases
-(*recoveryCases*)
 
 ## Overview
 

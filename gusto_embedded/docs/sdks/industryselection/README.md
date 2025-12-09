@@ -1,5 +1,4 @@
 # IndustrySelection
-(*industrySelection*)
 
 ## Overview
 

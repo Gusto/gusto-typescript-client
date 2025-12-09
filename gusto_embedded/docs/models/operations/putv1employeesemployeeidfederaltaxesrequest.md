@@ -9,6 +9,8 @@ let value: PutV1EmployeesEmployeeIdFederalTaxesRequest = {
   employeeUuid: "<id>",
   requestBody: {
     version: "<value>",
+    filingStatus: "<value>",
+    w4DataType: "<value>",
   },
 };
 ```
