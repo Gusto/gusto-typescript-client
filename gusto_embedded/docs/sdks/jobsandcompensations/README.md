@@ -1,5 +1,4 @@
 # JobsAndCompensations
-(*jobsAndCompensations*)
 
 ## Overview
 

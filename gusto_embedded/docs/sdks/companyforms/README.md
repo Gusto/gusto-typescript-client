@@ -1,5 +1,4 @@
 # CompanyForms
-(*companyForms*)
 
 ## Overview
 

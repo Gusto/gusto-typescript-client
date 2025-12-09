@@ -1,5 +1,4 @@
 # Garnishments
-(*garnishments*)
 
 ## Overview
 

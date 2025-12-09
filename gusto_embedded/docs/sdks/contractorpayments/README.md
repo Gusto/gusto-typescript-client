@@ -1,5 +1,4 @@
 # ContractorPayments
-(*contractorPayments*)
 
 ## Overview
 

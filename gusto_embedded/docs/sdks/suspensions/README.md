@@ -1,5 +1,4 @@
-# Suspensions
-(*companies.suspensions*)
+# Companies.Suspensions
 
 ## Overview
 

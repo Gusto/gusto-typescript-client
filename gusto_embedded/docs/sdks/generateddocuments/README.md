@@ -1,5 +1,4 @@
 # GeneratedDocuments
-(*generatedDocuments*)
 
 ## Overview
 

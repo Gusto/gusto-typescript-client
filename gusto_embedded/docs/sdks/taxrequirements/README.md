@@ -1,5 +1,4 @@
 # TaxRequirements
-(*taxRequirements*)
 
 ## Overview
 

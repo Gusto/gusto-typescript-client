@@ -1,5 +1,4 @@
 # Payrolls
-(*payrolls*)
 
 ## Overview
 

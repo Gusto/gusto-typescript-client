@@ -1,5 +1,4 @@
 # ExternalPayrolls
-(*externalPayrolls*)
 
 ## Overview
 

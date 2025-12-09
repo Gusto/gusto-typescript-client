@@ -1,5 +1,4 @@
 # EmployeeTaxSetup
-(*employeeTaxSetup*)
 
 ## Overview
 

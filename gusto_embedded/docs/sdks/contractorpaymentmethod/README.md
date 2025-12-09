@@ -1,5 +1,4 @@
 # ContractorPaymentMethod
-(*contractorPaymentMethod*)
 
 ## Overview
 

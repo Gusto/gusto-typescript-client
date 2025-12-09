@@ -1,5 +1,4 @@
 # ContractorPaymentGroups
-(*contractorPaymentGroups*)
 
 ## Overview
 

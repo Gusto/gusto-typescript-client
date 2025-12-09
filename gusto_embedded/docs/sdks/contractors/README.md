@@ -1,5 +1,4 @@
 # Contractors
-(*contractors*)
 
 ## Overview
 

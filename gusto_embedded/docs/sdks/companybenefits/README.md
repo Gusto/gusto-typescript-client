@@ -1,5 +1,4 @@
 # CompanyBenefits
-(*companyBenefits*)
 
 ## Overview
 

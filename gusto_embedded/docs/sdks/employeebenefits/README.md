@@ -1,5 +1,4 @@
 # EmployeeBenefits
-(*employeeBenefits*)
 
 ## Overview
 

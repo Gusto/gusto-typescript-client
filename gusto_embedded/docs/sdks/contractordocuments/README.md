@@ -1,5 +1,4 @@
 # ContractorDocuments
-(*contractorDocuments*)
 
 ## Overview
 

@@ -1,5 +1,4 @@
 # Departments
-(*departments*)
 
 ## Overview
 

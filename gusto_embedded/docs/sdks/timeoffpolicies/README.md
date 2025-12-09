@@ -1,5 +1,4 @@
 # TimeOffPolicies
-(*timeOffPolicies*)
 
 ## Overview
 

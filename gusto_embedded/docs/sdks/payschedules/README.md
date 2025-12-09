@@ -1,5 +1,4 @@
 # PaySchedules
-(*paySchedules*)
 
 ## Overview
 

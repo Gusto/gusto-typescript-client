@@ -1,5 +1,4 @@
 # FederalTaxDetails
-(*federalTaxDetails*)
 
 ## Overview
 

@@ -1,5 +1,4 @@
 # CompanyAttachments
-(*companyAttachments*)
 
 ## Overview
 
