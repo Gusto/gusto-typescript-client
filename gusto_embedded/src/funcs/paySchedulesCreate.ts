@@ -44,6 +44,12 @@ import { Result } from "../types/fp.js";
  * Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)** to know what schedule is right for your customers.
  *
  * scope: `pay_schedules:write`
+ *
+ * > ℹ️ Pay Schedules may be automatically adjusted
+ * >
+ * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
+ * >
+ * > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
  */
 export function paySchedulesCreate(
   client: GustoEmbeddedCore,

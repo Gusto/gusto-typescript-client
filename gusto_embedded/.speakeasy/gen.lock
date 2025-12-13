@@ -1,26 +1,26 @@
 lockVersion: 2.0.0
 id: f0264e24-cbe2-4074-b157-7a6ba8979508
 management:
-  docChecksum: 20bc9491aad52c62878cb124bf89899a
+  docChecksum: de055795e4539d4cf2caf09987e05a5a
   docVersion: "2025-06-15"
-  speakeasyVersion: 1.672.0
-  generationVersion: 2.774.0
-  releaseVersion: 0.11.3
-  configChecksum: aed1e43745b92e089a0212d3d9e4dd05
+  speakeasyVersion: 1.676.1
+  generationVersion: 2.781.2
+  releaseVersion: 0.11.4
+  configChecksum: 885f30d226402be1a9925e6f5c8e51a8
   repoURL: https://github.com/Gusto/gusto-typescript-client.git
   repoSubDirectory: gusto_embedded
   installationURL: https://gitpkg.now.sh/Gusto/gusto-typescript-client/gusto_embedded
   published: true
 persistentEdits:
-  generation_id: 1f7ceeca-f33b-4d5f-bdeb-b946a3d7533d
-  pristine_commit_hash: f48c907e285de53412aca2b4c5d532de8524cef5
-  pristine_tree_hash: 4eed0ccdaf719c9a072c0eaeae178a6d3f161f3b
+  generation_id: fb2f353f-da72-4e2b-9498-c327073e8591
+  pristine_commit_hash: c7b76f4683e570928677712330e5d60d28abff24
+  pristine_tree_hash: cb5370fdce4ccfa466e8e4978c80c112f467552e
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.26.14
+    core: 3.26.15
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -5651,8 +5651,8 @@ trackedFiles:
     pristine_git_object: 6c480d05bd0c8bc414e4e211d8fd9d586ab19d1c
   docs/sdks/payschedules/README.md:
     id: c0aa724eca5e
-    last_write_checksum: sha1:ff4a4591989831e447c752ff0d296988f3be6a13
-    pristine_git_object: 009b9bbf13a1b05214dc75c2b50fc2c02ade9818
+    last_write_checksum: sha1:054db38f52191518f3e7541c52ac91a32201355c
+    pristine_git_object: 9c9ad275692c7a2765ceeb2030a05da2a64a31d6
   docs/sdks/recoverycases/README.md:
     id: 31e46e1efeef
     last_write_checksum: sha1:3ca89f93d93c1110657017aafb37d81708a5ebcf
@@ -5719,12 +5719,12 @@ trackedFiles:
     pristine_git_object: 49ec91383b0e63e6ed79f53f5bd1b278a8ef84eb
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:acaa14ba9e95f1e661657993e7edd0fd5b879b13
-    pristine_git_object: 13c8bd61856a02113eefa50bc3724b43aeaf562b
+    last_write_checksum: sha1:d85d6f43580dca2fce700f56a8835acf3c54d7e8
+    pristine_git_object: 1e43edb7a1bd0dbdbfe872725991b6064f9ae733
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:0d8f5a5098f721824ca1bdae960ef1ffe894b976
-    pristine_git_object: ec7cac0506550aaecb4572b8770780495c2db744
+    last_write_checksum: sha1:75e019052fe2c1cd95cdc34b50a804f0183d53cd
+    pristine_git_object: 107a7b40cf31500e942f84529ecd4f19038ff015
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:3a89ce46214a969ac38e8f08dfbe693a1a2416f7
@@ -6535,8 +6535,8 @@ trackedFiles:
     pristine_git_object: 3349f15fc60585c003442e1bbf137e406f53876b
   src/funcs/paySchedulesCreate.ts:
     id: cfb44cf05642
-    last_write_checksum: sha1:2a34d538e75664ed7682e5d7733d0b07b1ebcba7
-    pristine_git_object: 8d9071662cb6a289bd396963ad2c1f6b7751c12e
+    last_write_checksum: sha1:b295ddff76949c06444f9ff5729007dd04bc6f65
+    pristine_git_object: 2588adfcd24bc15e26caf802efa3928f949280fb
   src/funcs/paySchedulesGet.ts:
     id: 0815f2d05978
     last_write_checksum: sha1:8a1336e2f167b5072449139b5fa93d8b82a9d4c0
@@ -6567,8 +6567,8 @@ trackedFiles:
     pristine_git_object: f5243a97c28a64c9592d28ef656d30947c18f281
   src/funcs/paySchedulesUpdate.ts:
     id: 7f1acd25002d
-    last_write_checksum: sha1:1ac1cbc6532d059a63959d984756f81c39f7a761
-    pristine_git_object: 6168bd4f4d8602e78291733ceda6c4ebbb9b920c
+    last_write_checksum: sha1:86d2eab11de69ce829b16ec789e46e95e5a5c485
+    pristine_git_object: 8d63bdea4611dbbc9b83f8699fb687d6c976cc31
   src/funcs/paymentConfigsGet.ts:
     id: 6c72875c2b7d
     last_write_checksum: sha1:46dbeeee0fc4c224c58783e5741455dbb0b6d906
@@ -6847,8 +6847,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:71774b169d63afb64282e94ff43cd4cab4bc86a6
-    pristine_git_object: 112f24e75267759049b9c870391699fc6f8132d7
+    last_write_checksum: sha1:57547a3d60109fcfec0cf191c68e8cbbd1fd7816
+    pristine_git_object: 8f5321ec2809b7ecefb37cd0c36893a5c35cd6d9
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -9599,8 +9599,8 @@ trackedFiles:
     pristine_git_object: 73d736159fbe109cdf91505f25b2522c6475a7e0
   src/react-query/paySchedulesCreate.ts:
     id: 83d6718a84ec
-    last_write_checksum: sha1:8c8d44c18b7f5a788c48c203403eeb8fd2dd7231
-    pristine_git_object: 1ade5dea32ac9db86b5443b728c27649733d7166
+    last_write_checksum: sha1:ae878318a068ed0bd0e16da9e0d73bc4cec439a8
+    pristine_git_object: 5a2f488d97906f694819bd1761ecbcbfac674edd
   src/react-query/paySchedulesGet.ts:
     id: e354668eae3b
     last_write_checksum: sha1:4c59dba2c56d3573116001e9e2d01df2d2695cd3
@@ -9631,8 +9631,8 @@ trackedFiles:
     pristine_git_object: 61bda94ef419a357f9d1012bb7c4b3a9078f1a5f
   src/react-query/paySchedulesUpdate.ts:
     id: a1c42801e509
-    last_write_checksum: sha1:0921a2c2b7be0654b24ee99ee3244d70c31b71c9
-    pristine_git_object: 90091d703ab12e71edeea4bbd6ec65d6c3fceaa0
+    last_write_checksum: sha1:bd88416af46460f4c35f04021756399e44ebb657
+    pristine_git_object: fee446c5bd9af9ac2c9848aeedd4a9c5d641883c
   src/react-query/paymentConfigsGet.ts:
     id: 62acd390b3a0
     last_write_checksum: sha1:05fed3493aae980d6dbb459cee80c97fd8df9f4b
@@ -10063,8 +10063,8 @@ trackedFiles:
     pristine_git_object: 631e42ea6f967bf2b6ddaa4fa8d206e660f144be
   src/sdk/payschedules.ts:
     id: c0210b6575b0
-    last_write_checksum: sha1:8a857213b60711b202a2c24b11df5a1b76e09192
-    pristine_git_object: 476aef54f27f9003e8a503bbc674c7bb3bd6187c
+    last_write_checksum: sha1:d8f40a56a77ce2cc8235a469bb625e1bcb5f6a3d
+    pristine_git_object: c37fcadcac893d62efaa74e4e0156d52b5048d41
   src/sdk/recoverycases.ts:
     id: d56bcb6137db
     last_write_checksum: sha1:a7d992d28f03436f47346017b7e66d2b75840623
@@ -17825,7 +17825,6 @@ examples:
           application/json: {"errors": []}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `gustoembedded.employeeTaxSetup.updateFederalTaxes()`: \n  *  `request.requestBody` **Changed** **Breaking** :warning:\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
