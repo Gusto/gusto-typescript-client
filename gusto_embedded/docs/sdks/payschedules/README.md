@@ -25,6 +25,12 @@ Be sure to **[check state laws](https://www.dol.gov/agencies/whd/state/payday)**
 
 scope: `pay_schedules:write`
 
+> ℹ️ Pay Schedules may be automatically adjusted
+>
+> If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
+>
+> See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-pay_schedules" method="post" path="/v1/companies/{company_id}/pay_schedules" -->
@@ -450,6 +456,12 @@ import {
 Updates a pay schedule.
 
 scope: `pay_schedules:write`
+
+> ℹ️ Pay Schedules may be automatically adjusted
+>
+> If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
+>
+> See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
 
 ### Example Usage
 
