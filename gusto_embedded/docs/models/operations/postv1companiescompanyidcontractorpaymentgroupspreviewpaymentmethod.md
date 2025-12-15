@@ -1,18 +1,16 @@
 # PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
 
-Payment method
-
 ## Example Usage
 
 ```typescript
 import { PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod } from "@gusto/embedded-api/models/operations/postv1companiescompanyidcontractorpaymentgroupspreview.js";
 
 let value: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
-  "Direct Deposit";
+  "Check";
 ```
 
 ## Values
 
 ```typescript
-"Direct Deposit" | "Check"
+"Direct Deposit" | "Check" | "Historical Payment"
 ```

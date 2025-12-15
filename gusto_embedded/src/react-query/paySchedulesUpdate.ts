@@ -34,6 +34,12 @@ export type PaySchedulesUpdateMutationData =
  * Updates a pay schedule.
  *
  * scope: `pay_schedules:write`
+ *
+ * > ℹ️ Pay Schedules may be automatically adjusted
+ * >
+ * > If an onboarded company misses their first pay date, Gusto will automatically adjust the pay schedule to the next available pay date.
+ * >
+ * > See [Create a pay schedule](/embedded-payroll/docs/create-a-pay-schedule) for more information.
  */
 export function usePaySchedulesUpdateMutation(
   options?: MutationHookOptions<

@@ -267,8 +267,9 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          paymentMethod: "Direct Deposit",
           wage: 5000,
+          hours: 40,
+          bonus: 500,
           reimbursement: 20,
         },
       ],
@@ -303,8 +304,9 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          paymentMethod: "Direct Deposit",
           wage: 5000,
+          hours: 40,
+          bonus: 500,
           reimbursement: 20,
         },
       ],
