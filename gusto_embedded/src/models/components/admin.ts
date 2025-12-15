@@ -28,6 +28,10 @@ export type Admin = {
    * The last name of the admin.
    */
   lastName?: string | undefined;
+  /**
+   * The phone number of the admin.
+   */
+  phone?: string | undefined;
 };
 
 /** @internal */
@@ -37,6 +41,7 @@ export const Admin$inboundSchema: z.ZodType<Admin, z.ZodTypeDef, unknown> = z
     email: z.string().optional(),
     first_name: z.string().optional(),
     last_name: z.string().optional(),
+    phone: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "first_name": "firstName",

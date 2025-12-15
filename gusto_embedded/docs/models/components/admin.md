@@ -20,3 +20,4 @@ let value: Admin = {
 | `email`                                    | *string*                                   | :heavy_minus_sign:                         | The email of the admin for Gusto's system. |
 | `firstName`                                | *string*                                   | :heavy_minus_sign:                         | The first name of the admin.               |
 | `lastName`                                 | *string*                                   | :heavy_minus_sign:                         | The last name of the admin.                |
+| `phone`                                    | *string*                                   | :heavy_minus_sign:                         | The phone number of the admin.             |

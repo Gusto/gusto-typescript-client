@@ -33,17 +33,12 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAP
     typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewHeaderXGustoAPIVersion
   >;
 
-/**
- * Payment method
- */
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
   {
     DirectDeposit: "Direct Deposit",
     Check: "Check",
+    HistoricalPayment: "Historical Payment",
   } as const;
-/**
- * Payment method
- */
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod =
   ClosedEnum<
     typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
@@ -52,21 +47,26 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments =
   {
     /**
-     * UUID of the contractor
+     * The contractor receiving the payment
      */
     contractorUuid?: string | undefined;
-    /**
-     * Payment method
-     */
     paymentMethod?:
       | PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
       | undefined;
     /**
-     * Wage amount
+     * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
      */
     wage?: number | undefined;
     /**
-     * Reimbursement amount
+     * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
+     */
+    hours?: number | undefined;
+    /**
+     * If the contractor is on an hourly wage, this is the bonus the contractor earned
+     */
+    bonus?: number | undefined;
+    /**
+     * Reimbursed wages for the contractor
      */
     reimbursement?: number | undefined;
   };
@@ -125,8 +125,10 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments$Outbound =
   {
     contractor_uuid?: string | undefined;
-    payment_method?: string | undefined;
+    payment_method: string;
     wage?: number | undefined;
+    hours?: number | undefined;
+    bonus?: number | undefined;
     reimbursement?: number | undefined;
   };
 
@@ -140,8 +142,10 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     contractorUuid: z.string().optional(),
     paymentMethod:
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod$outboundSchema
-        .optional(),
+        .default("Direct Deposit"),
     wage: z.number().optional(),
+    hours: z.number().optional(),
+    bonus: z.number().optional(),
     reimbursement: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
