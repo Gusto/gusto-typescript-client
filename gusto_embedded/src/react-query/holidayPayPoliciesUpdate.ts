@@ -12,20 +12,20 @@ import { holidayPayPoliciesUpdate } from "../funcs/holidayPayPoliciesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  PutCompaniesCompanyUuidHolidayPayPolicyRequest,
-  PutCompaniesCompanyUuidHolidayPayPolicyResponse,
-} from "../models/operations/putcompaniescompanyuuidholidaypaypolicy.js";
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRequest,
+  PutV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+} from "../models/operations/putv1companiescompanyuuidholidaypaypolicy.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type HolidayPayPoliciesUpdateMutationVariables = {
-  request: PutCompaniesCompanyUuidHolidayPayPolicyRequest;
+  request: PutV1CompaniesCompanyUuidHolidayPayPolicyRequest;
   options?: RequestOptions;
 };
 
 export type HolidayPayPoliciesUpdateMutationData =
-  PutCompaniesCompanyUuidHolidayPayPolicyResponse;
+  PutV1CompaniesCompanyUuidHolidayPayPolicyResponse;
 
 /**
  * Update a company's holiday pay policy

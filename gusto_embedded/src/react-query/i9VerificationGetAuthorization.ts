@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { i9VerificationGetAuthorization } from "../funcs/i9VerificationGetAuthorization.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1EmployeesEmployeeIdI9AuthorizationRequest,
-  GetV1EmployeesEmployeeIdI9AuthorizationResponse,
-} from "../models/operations/getv1employeesemployeeidi9authorization.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1EmployeesEmployeeIdI9AuthorizationRequest } from "../models/operations/getv1employeesemployeeidi9authorization.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type I9VerificationGetAuthorizationQueryData =
-  GetV1EmployeesEmployeeIdI9AuthorizationResponse;
+import {
+  buildI9VerificationGetAuthorizationQuery,
+  I9VerificationGetAuthorizationQueryData,
+  prefetchI9VerificationGetAuthorization,
+  queryKeyI9VerificationGetAuthorization,
+} from "./i9VerificationGetAuthorization.core.js";
+export {
+  buildI9VerificationGetAuthorizationQuery,
+  type I9VerificationGetAuthorizationQueryData,
+  prefetchI9VerificationGetAuthorization,
+  queryKeyI9VerificationGetAuthorization,
+};
 
 /**
  * Get an employee's I-9 authorization
@@ -82,19 +81,6 @@ export function useI9VerificationGetAuthorizationSuspense(
   });
 }
 
-export function prefetchI9VerificationGetAuthorization(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildI9VerificationGetAuthorizationQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setI9VerificationGetAuthorizationData(
   client: QueryClient,
   queryKeyBase: [
@@ -140,49 +126,4 @@ export function invalidateAllI9VerificationGetAuthorization(
     ...filters,
     queryKey: ["@gusto/embedded-api", "i9Verification", "getAuthorization"],
   });
-}
-
-export function buildI9VerificationGetAuthorizationQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<I9VerificationGetAuthorizationQueryData>;
-} {
-  return {
-    queryKey: queryKeyI9VerificationGetAuthorization(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function i9VerificationGetAuthorizationQueryFn(
-      ctx,
-    ): Promise<I9VerificationGetAuthorizationQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(i9VerificationGetAuthorization(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyI9VerificationGetAuthorization(
-  employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "i9Verification",
-    "getAuthorization",
-    employeeId,
-    parameters,
-  ];
 }

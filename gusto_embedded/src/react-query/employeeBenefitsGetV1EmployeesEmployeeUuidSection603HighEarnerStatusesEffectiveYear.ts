@@ -5,34 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import {
-  employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
-} from "../funcs/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
-  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse,
 } from "../models/operations/getv1employeesemployeeuuidsection603highearnerstatuseseffectiveyear.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData =
-  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse;
+import {
+  buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQuery,
+  EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData,
+  prefetchEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
+  queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
+} from "./employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.core.js";
+export {
+  buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQuery,
+  type EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData,
+  prefetchEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
+  queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
+};
 
 /**
  * Get a Section 603 high earner status for a specific year
@@ -95,20 +94,6 @@ export function useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarne
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request:
-    GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -177,66 +162,4 @@ export function invalidateAllEmployeeBenefitsGetV1EmployeesEmployeeUuidSection60
       "getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear",
     ],
   });
-}
-
-export function buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQuery(
-  client$: GustoEmbeddedCore,
-  request:
-    GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData
-  >;
-} {
-  return {
-    queryKey:
-      queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
-        request.employeeUuid,
-        request.effectiveYear,
-        { xGustoAPIVersion: request.xGustoAPIVersion },
-      ),
-    queryFn:
-      async function employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryFn(
-        ctx,
-      ): Promise<
-        EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear(
-  employeeUuid: string,
-  effectiveYear: number,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeBenefits",
-    "getV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear",
-    employeeUuid,
-    effectiveYear,
-    parameters,
-  ];
 }

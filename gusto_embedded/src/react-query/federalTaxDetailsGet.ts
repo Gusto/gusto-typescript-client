@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { federalTaxDetailsGet } from "../funcs/federalTaxDetailsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
-  GetV1CompaniesCompanyIdFederalTaxDetailsResponse,
-} from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdFederalTaxDetailsRequest } from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type FederalTaxDetailsGetQueryData =
-  GetV1CompaniesCompanyIdFederalTaxDetailsResponse;
+import {
+  buildFederalTaxDetailsGetQuery,
+  FederalTaxDetailsGetQueryData,
+  prefetchFederalTaxDetailsGet,
+  queryKeyFederalTaxDetailsGet,
+} from "./federalTaxDetailsGet.core.js";
+export {
+  buildFederalTaxDetailsGetQuery,
+  type FederalTaxDetailsGetQueryData,
+  prefetchFederalTaxDetailsGet,
+  queryKeyFederalTaxDetailsGet,
+};
 
 /**
  * Get Federal Tax Details
@@ -78,19 +77,6 @@ export function useFederalTaxDetailsGetSuspense(
   });
 }
 
-export function prefetchFederalTaxDetailsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildFederalTaxDetailsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setFederalTaxDetailsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,49 +119,4 @@ export function invalidateAllFederalTaxDetailsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "federalTaxDetails", "get"],
   });
-}
-
-export function buildFederalTaxDetailsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<FederalTaxDetailsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyFederalTaxDetailsGet(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function federalTaxDetailsGetQueryFn(
-      ctx,
-    ): Promise<FederalTaxDetailsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(federalTaxDetailsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyFederalTaxDetailsGet(
-  companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "federalTaxDetails",
-    "get",
-    companyId,
-    parameters,
-  ];
 }

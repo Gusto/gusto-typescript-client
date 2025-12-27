@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companyBenefitsList } from "../funcs/companyBenefitsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdCompanyBenefitsRequest,
-  GetV1CompaniesCompanyIdCompanyBenefitsResponse,
-} from "../models/operations/getv1companiescompanyidcompanybenefits.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdCompanyBenefitsRequest } from "../models/operations/getv1companiescompanyidcompanybenefits.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompanyBenefitsListQueryData =
-  GetV1CompaniesCompanyIdCompanyBenefitsResponse;
+import {
+  buildCompanyBenefitsListQuery,
+  CompanyBenefitsListQueryData,
+  prefetchCompanyBenefitsList,
+  queryKeyCompanyBenefitsList,
+} from "./companyBenefitsList.core.js";
+export {
+  buildCompanyBenefitsListQuery,
+  type CompanyBenefitsListQueryData,
+  prefetchCompanyBenefitsList,
+  queryKeyCompanyBenefitsList,
+};
 
 /**
  * Get benefits for a company
@@ -86,19 +85,6 @@ export function useCompanyBenefitsListSuspense(
   });
 }
 
-export function prefetchCompanyBenefitsList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdCompanyBenefitsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompanyBenefitsListQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setCompanyBenefitsListData(
   client: QueryClient,
   queryKeyBase: [
@@ -149,55 +135,4 @@ export function invalidateAllCompanyBenefitsList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "companyBenefits", "list"],
   });
-}
-
-export function buildCompanyBenefitsListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdCompanyBenefitsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompanyBenefitsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompanyBenefitsList(request.companyId, {
-      active: request.active,
-      enrollmentCount: request.enrollmentCount,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companyBenefitsListQueryFn(
-      ctx,
-    ): Promise<CompanyBenefitsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companyBenefitsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompanyBenefitsList(
-  companyId: string,
-  parameters: {
-    active?: boolean | undefined;
-    enrollmentCount?: boolean | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "companyBenefits",
-    "list",
-    companyId,
-    parameters,
-  ];
 }

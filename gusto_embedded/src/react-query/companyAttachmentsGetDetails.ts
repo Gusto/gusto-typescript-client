@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companyAttachmentsGetDetails } from "../funcs/companyAttachmentsGetDetails.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesAttachmentRequest,
-  GetV1CompaniesAttachmentResponse,
-} from "../models/operations/getv1companiesattachment.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesAttachmentRequest } from "../models/operations/getv1companiesattachment.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompanyAttachmentsGetDetailsQueryData =
-  GetV1CompaniesAttachmentResponse;
+import {
+  buildCompanyAttachmentsGetDetailsQuery,
+  CompanyAttachmentsGetDetailsQueryData,
+  prefetchCompanyAttachmentsGetDetails,
+  queryKeyCompanyAttachmentsGetDetails,
+} from "./companyAttachmentsGetDetails.core.js";
+export {
+  buildCompanyAttachmentsGetDetailsQuery,
+  type CompanyAttachmentsGetDetailsQueryData,
+  prefetchCompanyAttachmentsGetDetails,
+  queryKeyCompanyAttachmentsGetDetails,
+};
 
 /**
  * Get Company Attachment Details
@@ -78,19 +77,6 @@ export function useCompanyAttachmentsGetDetailsSuspense(
   });
 }
 
-export function prefetchCompanyAttachmentsGetDetails(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesAttachmentRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompanyAttachmentsGetDetailsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setCompanyAttachmentsGetDetailsData(
   client: QueryClient,
   queryKeyBase: [
@@ -135,53 +121,4 @@ export function invalidateAllCompanyAttachmentsGetDetails(
     ...filters,
     queryKey: ["@gusto/embedded-api", "companyAttachments", "getDetails"],
   });
-}
-
-export function buildCompanyAttachmentsGetDetailsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesAttachmentRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompanyAttachmentsGetDetailsQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompanyAttachmentsGetDetails(
-      request.companyId,
-      request.companyAttachmentUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function companyAttachmentsGetDetailsQueryFn(
-      ctx,
-    ): Promise<CompanyAttachmentsGetDetailsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companyAttachmentsGetDetails(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompanyAttachmentsGetDetails(
-  companyId: string,
-  companyAttachmentUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "companyAttachments",
-    "getDetails",
-    companyId,
-    companyAttachmentUuid,
-    parameters,
-  ];
 }

@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { earningTypesList } from "../funcs/earningTypesList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdEarningTypesRequest,
-  GetV1CompaniesCompanyIdEarningTypesResponse,
-} from "../models/operations/getv1companiescompanyidearningtypes.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdEarningTypesRequest } from "../models/operations/getv1companiescompanyidearningtypes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EarningTypesListQueryData =
-  GetV1CompaniesCompanyIdEarningTypesResponse;
+import {
+  buildEarningTypesListQuery,
+  EarningTypesListQueryData,
+  prefetchEarningTypesList,
+  queryKeyEarningTypesList,
+} from "./earningTypesList.core.js";
+export {
+  buildEarningTypesListQuery,
+  type EarningTypesListQueryData,
+  prefetchEarningTypesList,
+  queryKeyEarningTypesList,
+};
 
 /**
  * Get all earning types for a company
@@ -90,19 +89,6 @@ export function useEarningTypesListSuspense(
   });
 }
 
-export function prefetchEarningTypesList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdEarningTypesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEarningTypesListQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEarningTypesListData(
   client: QueryClient,
   queryKeyBase: [
@@ -140,43 +126,4 @@ export function invalidateAllEarningTypesList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "earningTypes", "list"],
   });
-}
-
-export function buildEarningTypesListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdEarningTypesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EarningTypesListQueryData>;
-} {
-  return {
-    queryKey: queryKeyEarningTypesList(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function earningTypesListQueryFn(
-      ctx,
-    ): Promise<EarningTypesListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(earningTypesList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEarningTypesList(
-  companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return ["@gusto/embedded-api", "earningTypes", "list", companyId, parameters];
 }

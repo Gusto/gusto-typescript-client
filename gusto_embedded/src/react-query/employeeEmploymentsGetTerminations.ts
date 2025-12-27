@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeEmploymentsGetTerminations } from "../funcs/employeeEmploymentsGetTerminations.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1EmployeesEmployeeIdTerminationsRequest,
-  GetV1EmployeesEmployeeIdTerminationsResponse,
-} from "../models/operations/getv1employeesemployeeidterminations.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1EmployeesEmployeeIdTerminationsRequest } from "../models/operations/getv1employeesemployeeidterminations.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeEmploymentsGetTerminationsQueryData =
-  GetV1EmployeesEmployeeIdTerminationsResponse;
+import {
+  buildEmployeeEmploymentsGetTerminationsQuery,
+  EmployeeEmploymentsGetTerminationsQueryData,
+  prefetchEmployeeEmploymentsGetTerminations,
+  queryKeyEmployeeEmploymentsGetTerminations,
+} from "./employeeEmploymentsGetTerminations.core.js";
+export {
+  buildEmployeeEmploymentsGetTerminationsQuery,
+  type EmployeeEmploymentsGetTerminationsQueryData,
+  prefetchEmployeeEmploymentsGetTerminations,
+  queryKeyEmployeeEmploymentsGetTerminations,
+};
 
 /**
  * Get terminations for an employee
@@ -84,19 +83,6 @@ export function useEmployeeEmploymentsGetTerminationsSuspense(
   });
 }
 
-export function prefetchEmployeeEmploymentsGetTerminations(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdTerminationsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeEmploymentsGetTerminationsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeeEmploymentsGetTerminationsData(
   client: QueryClient,
   queryKeyBase: [
@@ -142,49 +128,4 @@ export function invalidateAllEmployeeEmploymentsGetTerminations(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeEmployments", "getTerminations"],
   });
-}
-
-export function buildEmployeeEmploymentsGetTerminationsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdTerminationsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeEmploymentsGetTerminationsQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeEmploymentsGetTerminations(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeEmploymentsGetTerminationsQueryFn(
-      ctx,
-    ): Promise<EmployeeEmploymentsGetTerminationsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeEmploymentsGetTerminations(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeEmploymentsGetTerminations(
-  employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeEmployments",
-    "getTerminations",
-    employeeId,
-    parameters,
-  ];
 }

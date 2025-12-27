@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companiesListAdmins } from "../funcs/companiesListAdmins.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdAdminsRequest,
-  GetV1CompaniesCompanyIdAdminsResponse,
-} from "../models/operations/getv1companiescompanyidadmins.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdAdminsRequest } from "../models/operations/getv1companiescompanyidadmins.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompaniesListAdminsQueryData =
-  GetV1CompaniesCompanyIdAdminsResponse;
+import {
+  buildCompaniesListAdminsQuery,
+  CompaniesListAdminsQueryData,
+  prefetchCompaniesListAdmins,
+  queryKeyCompaniesListAdmins,
+} from "./companiesListAdmins.core.js";
+export {
+  buildCompaniesListAdminsQuery,
+  type CompaniesListAdminsQueryData,
+  prefetchCompaniesListAdmins,
+  queryKeyCompaniesListAdmins,
+};
 
 /**
  * Get all the admins at a company
@@ -75,19 +74,6 @@ export function useCompaniesListAdminsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCompaniesListAdmins(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdAdminsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompaniesListAdminsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -141,55 +127,4 @@ export function invalidateAllCompaniesListAdmins(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Companies", "listAdmins"],
   });
-}
-
-export function buildCompaniesListAdminsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdAdminsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompaniesListAdminsQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompaniesListAdmins(request.companyId, {
-      page: request.page,
-      per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companiesListAdminsQueryFn(
-      ctx,
-    ): Promise<CompaniesListAdminsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companiesListAdmins(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompaniesListAdmins(
-  companyId: string,
-  parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Companies",
-    "listAdmins",
-    companyId,
-    parameters,
-  ];
 }

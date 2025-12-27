@@ -5,33 +5,34 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { notificationsGetCompanyNotifications } from "../funcs/notificationsGetCompanyNotifications.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetCompanyNotificationsHeaderXGustoAPIVersion,
   GetCompanyNotificationsRequest,
-  GetCompanyNotificationsResponse,
   Status,
 } from "../models/operations/getcompanynotifications.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type NotificationsGetCompanyNotificationsQueryData =
-  GetCompanyNotificationsResponse;
+import {
+  buildNotificationsGetCompanyNotificationsQuery,
+  NotificationsGetCompanyNotificationsQueryData,
+  prefetchNotificationsGetCompanyNotifications,
+  queryKeyNotificationsGetCompanyNotifications,
+} from "./notificationsGetCompanyNotifications.core.js";
+export {
+  buildNotificationsGetCompanyNotificationsQuery,
+  type NotificationsGetCompanyNotificationsQueryData,
+  prefetchNotificationsGetCompanyNotifications,
+  queryKeyNotificationsGetCompanyNotifications,
+};
 
 /**
  * Get notifications for company
@@ -81,19 +82,6 @@ export function useNotificationsGetCompanyNotificationsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchNotificationsGetCompanyNotifications(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetCompanyNotificationsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildNotificationsGetCompanyNotificationsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -160,62 +148,4 @@ export function invalidateAllNotificationsGetCompanyNotifications(
       "getCompanyNotifications",
     ],
   });
-}
-
-export function buildNotificationsGetCompanyNotificationsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetCompanyNotificationsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<NotificationsGetCompanyNotificationsQueryData>;
-} {
-  return {
-    queryKey: queryKeyNotificationsGetCompanyNotifications(
-      request.companyUuid,
-      {
-        status: request.status,
-        xGustoAPIVersion: request.xGustoAPIVersion,
-        page: request.page,
-        per: request.per,
-      },
-    ),
-    queryFn: async function notificationsGetCompanyNotificationsQueryFn(
-      ctx,
-    ): Promise<NotificationsGetCompanyNotificationsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(notificationsGetCompanyNotifications(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyNotificationsGetCompanyNotifications(
-  companyUuid: string,
-  parameters: {
-    status?: Status | undefined;
-    xGustoAPIVersion?:
-      | GetCompanyNotificationsHeaderXGustoAPIVersion
-      | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Notifications",
-    "getCompanyNotifications",
-    companyUuid,
-    parameters,
-  ];
 }

@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { payrollsGetReceipt } from "../funcs/payrollsGetReceipt.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion,
   GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
-  GetV1PaymentReceiptsPayrollsPayrollUuidResponse,
 } from "../models/operations/getv1paymentreceiptspayrollspayrolluuid.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PayrollsGetReceiptQueryData =
-  GetV1PaymentReceiptsPayrollsPayrollUuidResponse;
+import {
+  buildPayrollsGetReceiptQuery,
+  PayrollsGetReceiptQueryData,
+  prefetchPayrollsGetReceipt,
+  queryKeyPayrollsGetReceipt,
+} from "./payrollsGetReceipt.core.js";
+export {
+  buildPayrollsGetReceiptQuery,
+  type PayrollsGetReceiptQueryData,
+  prefetchPayrollsGetReceipt,
+  queryKeyPayrollsGetReceipt,
+};
 
 /**
  * Get a single payroll receipt
@@ -88,19 +89,6 @@ export function usePayrollsGetReceiptSuspense(
   });
 }
 
-export function prefetchPayrollsGetReceipt(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayrollsGetReceiptQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setPayrollsGetReceiptData(
   client: QueryClient,
   queryKeyBase: [
@@ -151,53 +139,4 @@ export function invalidateAllPayrollsGetReceipt(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Payrolls", "getReceipt"],
   });
-}
-
-export function buildPayrollsGetReceiptQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PayrollsGetReceiptQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayrollsGetReceipt(request.payrollUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function payrollsGetReceiptQueryFn(
-      ctx,
-    ): Promise<PayrollsGetReceiptQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payrollsGetReceipt(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayrollsGetReceipt(
-  payrollUuid: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Payrolls",
-    "getReceipt",
-    payrollUuid,
-    parameters,
-  ];
 }

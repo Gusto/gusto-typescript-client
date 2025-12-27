@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { recoveryCasesGet } from "../funcs/recoveryCasesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetRecoveryCasesRequest,
-  GetRecoveryCasesResponse,
-} from "../models/operations/getrecoverycases.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetRecoveryCasesRequest } from "../models/operations/getrecoverycases.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type RecoveryCasesGetQueryData = GetRecoveryCasesResponse;
+import {
+  buildRecoveryCasesGetQuery,
+  prefetchRecoveryCasesGet,
+  queryKeyRecoveryCasesGet,
+  RecoveryCasesGetQueryData,
+} from "./recoveryCasesGet.core.js";
+export {
+  buildRecoveryCasesGetQuery,
+  prefetchRecoveryCasesGet,
+  queryKeyRecoveryCasesGet,
+  type RecoveryCasesGetQueryData,
+};
 
 /**
  * Get all recovery cases for a company
@@ -77,19 +77,6 @@ export function useRecoveryCasesGetSuspense(
   });
 }
 
-export function prefetchRecoveryCasesGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetRecoveryCasesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildRecoveryCasesGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setRecoveryCasesGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -127,49 +114,4 @@ export function invalidateAllRecoveryCasesGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "recoveryCases", "get"],
   });
-}
-
-export function buildRecoveryCasesGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetRecoveryCasesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<RecoveryCasesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyRecoveryCasesGet(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function recoveryCasesGetQueryFn(
-      ctx,
-    ): Promise<RecoveryCasesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(recoveryCasesGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyRecoveryCasesGet(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "recoveryCases",
-    "get",
-    companyUuid,
-    parameters,
-  ];
 }

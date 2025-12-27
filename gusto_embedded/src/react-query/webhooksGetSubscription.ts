@@ -5,33 +5,34 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { webhooksGetSubscription } from "../funcs/webhooksGetSubscription.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1WebhookSubscriptionUuidRequest,
-  GetV1WebhookSubscriptionUuidResponse,
   GetV1WebhookSubscriptionUuidSecurity,
 } from "../models/operations/getv1webhooksubscriptionuuid.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type WebhooksGetSubscriptionQueryData =
-  GetV1WebhookSubscriptionUuidResponse;
+import {
+  buildWebhooksGetSubscriptionQuery,
+  prefetchWebhooksGetSubscription,
+  queryKeyWebhooksGetSubscription,
+  WebhooksGetSubscriptionQueryData,
+} from "./webhooksGetSubscription.core.js";
+export {
+  buildWebhooksGetSubscriptionQuery,
+  prefetchWebhooksGetSubscription,
+  queryKeyWebhooksGetSubscription,
+  type WebhooksGetSubscriptionQueryData,
+};
 
 /**
  * Get a webhook subscription
@@ -91,21 +92,6 @@ export function useWebhooksGetSubscriptionSuspense(
   });
 }
 
-export function prefetchWebhooksGetSubscription(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  security: GetV1WebhookSubscriptionUuidSecurity,
-  request: GetV1WebhookSubscriptionUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWebhooksGetSubscriptionQuery(
-      client$,
-      security,
-      request,
-    ),
-  });
-}
-
 export function setWebhooksGetSubscriptionData(
   client: QueryClient,
   queryKeyBase: [
@@ -148,51 +134,4 @@ export function invalidateAllWebhooksGetSubscription(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Webhooks", "getSubscription"],
   });
-}
-
-export function buildWebhooksGetSubscriptionQuery(
-  client$: GustoEmbeddedCore,
-  security: GetV1WebhookSubscriptionUuidSecurity,
-  request: GetV1WebhookSubscriptionUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WebhooksGetSubscriptionQueryData>;
-} {
-  return {
-    queryKey: queryKeyWebhooksGetSubscription(request.webhookSubscriptionUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function webhooksGetSubscriptionQueryFn(
-      ctx,
-    ): Promise<WebhooksGetSubscriptionQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(webhooksGetSubscription(
-        client$,
-        security,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWebhooksGetSubscription(
-  webhookSubscriptionUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Webhooks",
-    "getSubscription",
-    webhookSubscriptionUuid,
-    parameters,
-  ];
 }

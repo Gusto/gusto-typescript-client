@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorPaymentGroupsGetList } from "../funcs/contractorPaymentGroupsGetList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-  GetV1CompaniesCompanyIdContractorPaymentGroupsResponse,
 } from "../models/operations/getv1companiescompanyidcontractorpaymentgroups.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorPaymentGroupsGetListQueryData =
-  GetV1CompaniesCompanyIdContractorPaymentGroupsResponse;
+import {
+  buildContractorPaymentGroupsGetListQuery,
+  ContractorPaymentGroupsGetListQueryData,
+  prefetchContractorPaymentGroupsGetList,
+  queryKeyContractorPaymentGroupsGetList,
+} from "./contractorPaymentGroupsGetList.core.js";
+export {
+  buildContractorPaymentGroupsGetListQuery,
+  type ContractorPaymentGroupsGetListQueryData,
+  prefetchContractorPaymentGroupsGetList,
+  queryKeyContractorPaymentGroupsGetList,
+};
 
 /**
  * Get contractor payment groups for a company
@@ -75,19 +76,6 @@ export function useContractorPaymentGroupsGetListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchContractorPaymentGroupsGetList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorPaymentGroupsGetListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -152,61 +140,4 @@ export function invalidateAllContractorPaymentGroupsGetList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "contractorPaymentGroups", "getList"],
   });
-}
-
-export function buildContractorPaymentGroupsGetListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorPaymentGroupsGetListQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorPaymentGroupsGetList(request.companyId, {
-      startDate: request.startDate,
-      endDate: request.endDate,
-      page: request.page,
-      per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function contractorPaymentGroupsGetListQueryFn(
-      ctx,
-    ): Promise<ContractorPaymentGroupsGetListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorPaymentGroupsGetList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorPaymentGroupsGetList(
-  companyId: string,
-  parameters: {
-    startDate?: string | undefined;
-    endDate?: string | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorPaymentGroups",
-    "getList",
-    companyId,
-    parameters,
-  ];
 }

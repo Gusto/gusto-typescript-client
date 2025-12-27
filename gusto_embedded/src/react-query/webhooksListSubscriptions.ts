@@ -5,33 +5,34 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { webhooksListSubscriptions } from "../funcs/webhooksListSubscriptions.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1WebhookSubscriptionsRequest,
-  GetV1WebhookSubscriptionsResponse,
   GetV1WebhookSubscriptionsSecurity,
 } from "../models/operations/getv1webhooksubscriptions.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type WebhooksListSubscriptionsQueryData =
-  GetV1WebhookSubscriptionsResponse;
+import {
+  buildWebhooksListSubscriptionsQuery,
+  prefetchWebhooksListSubscriptions,
+  queryKeyWebhooksListSubscriptions,
+  WebhooksListSubscriptionsQueryData,
+} from "./webhooksListSubscriptions.core.js";
+export {
+  buildWebhooksListSubscriptionsQuery,
+  prefetchWebhooksListSubscriptions,
+  queryKeyWebhooksListSubscriptions,
+  type WebhooksListSubscriptionsQueryData,
+};
 
 /**
  * List webhook subscriptions
@@ -91,21 +92,6 @@ export function useWebhooksListSubscriptionsSuspense(
   });
 }
 
-export function prefetchWebhooksListSubscriptions(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  security: GetV1WebhookSubscriptionsSecurity,
-  request: GetV1WebhookSubscriptionsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWebhooksListSubscriptionsQuery(
-      client$,
-      security,
-      request,
-    ),
-  });
-}
-
 export function setWebhooksListSubscriptionsData(
   client: QueryClient,
   queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
@@ -142,44 +128,4 @@ export function invalidateAllWebhooksListSubscriptions(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Webhooks", "listSubscriptions"],
   });
-}
-
-export function buildWebhooksListSubscriptionsQuery(
-  client$: GustoEmbeddedCore,
-  security: GetV1WebhookSubscriptionsSecurity,
-  request: GetV1WebhookSubscriptionsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WebhooksListSubscriptionsQueryData>;
-} {
-  return {
-    queryKey: queryKeyWebhooksListSubscriptions({
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function webhooksListSubscriptionsQueryFn(
-      ctx,
-    ): Promise<WebhooksListSubscriptionsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(webhooksListSubscriptions(
-        client$,
-        security,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWebhooksListSubscriptions(
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return ["@gusto/embedded-api", "Webhooks", "listSubscriptions", parameters];
 }

@@ -31,7 +31,7 @@ export type EmployeeAddress = {
   city?: string | undefined;
   state?: string | undefined;
   zip?: string | undefined;
-  country?: string | undefined;
+  country: string;
   /**
    * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
    */
