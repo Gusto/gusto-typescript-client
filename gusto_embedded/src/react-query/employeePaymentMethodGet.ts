@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeePaymentMethodGet } from "../funcs/employeePaymentMethodGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1EmployeesEmployeeIdPaymentMethodRequest,
-  GetV1EmployeesEmployeeIdPaymentMethodResponse,
-} from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1EmployeesEmployeeIdPaymentMethodRequest } from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeePaymentMethodGetQueryData =
-  GetV1EmployeesEmployeeIdPaymentMethodResponse;
+import {
+  buildEmployeePaymentMethodGetQuery,
+  EmployeePaymentMethodGetQueryData,
+  prefetchEmployeePaymentMethodGet,
+  queryKeyEmployeePaymentMethodGet,
+} from "./employeePaymentMethodGet.core.js";
+export {
+  buildEmployeePaymentMethodGetQuery,
+  type EmployeePaymentMethodGetQueryData,
+  prefetchEmployeePaymentMethodGet,
+  queryKeyEmployeePaymentMethodGet,
+};
 
 /**
  * Get an employee's payment method
@@ -82,19 +81,6 @@ export function useEmployeePaymentMethodGetSuspense(
   });
 }
 
-export function prefetchEmployeePaymentMethodGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeePaymentMethodGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeePaymentMethodGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -137,49 +123,4 @@ export function invalidateAllEmployeePaymentMethodGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeePaymentMethod", "get"],
   });
-}
-
-export function buildEmployeePaymentMethodGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeePaymentMethodGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeePaymentMethodGet(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeePaymentMethodGetQueryFn(
-      ctx,
-    ): Promise<EmployeePaymentMethodGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeePaymentMethodGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeePaymentMethodGet(
-  employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeePaymentMethod",
-    "get",
-    employeeId,
-    parameters,
-  ];
 }

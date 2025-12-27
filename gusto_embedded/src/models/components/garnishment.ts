@@ -49,7 +49,7 @@ export type Garnishment = {
   /**
    * Whether or not this garnishment is currently active.
    */
-  active?: boolean | undefined;
+  active: boolean;
   /**
    * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".
    */
@@ -65,27 +65,27 @@ export type Garnishment = {
   /**
    * The number of times to apply the garnishment. Ignored if recurring is true.
    */
-  times?: number | null | undefined;
+  times: number | null;
   /**
    * Whether the garnishment should recur indefinitely.
    */
-  recurring?: boolean | undefined;
+  recurring: boolean;
   /**
    * The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".
    */
-  annualMaximum?: string | null | undefined;
+  annualMaximum: string | null;
   /**
    * A maximum total deduction for the lifetime of this garnishment. A null value indicates no maximum.
    */
-  totalAmount?: string | null | undefined;
+  totalAmount: string | null;
   /**
    * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
    */
-  payPeriodMaximum?: string | null | undefined;
+  payPeriodMaximum: string | null;
   /**
    * Whether the amount should be treated as a percentage to be deducted per pay period.
    */
-  deductAsPercentage?: boolean | undefined;
+  deductAsPercentage: boolean;
   /**
    * The specific type of garnishment for court ordered garnishments.
    */

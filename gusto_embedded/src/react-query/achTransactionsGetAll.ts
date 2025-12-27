@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { achTransactionsGetAll } from "../funcs/achTransactionsGetAll.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetAchTransactionsRequest,
-  GetAchTransactionsResponse,
-} from "../models/operations/getachtransactions.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetAchTransactionsRequest } from "../models/operations/getachtransactions.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type AchTransactionsGetAllQueryData = GetAchTransactionsResponse;
+import {
+  AchTransactionsGetAllQueryData,
+  buildAchTransactionsGetAllQuery,
+  prefetchAchTransactionsGetAll,
+  queryKeyAchTransactionsGetAll,
+} from "./achTransactionsGetAll.core.js";
+export {
+  type AchTransactionsGetAllQueryData,
+  buildAchTransactionsGetAllQuery,
+  prefetchAchTransactionsGetAll,
+  queryKeyAchTransactionsGetAll,
+};
 
 /**
  * Get all ACH transactions for a company
@@ -74,19 +74,6 @@ export function useAchTransactionsGetAllSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchAchTransactionsGetAll(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetAchTransactionsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildAchTransactionsGetAllQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -148,63 +135,4 @@ export function invalidateAllAchTransactionsGetAll(
     ...filters,
     queryKey: ["@gusto/embedded-api", "achTransactions", "getAll"],
   });
-}
-
-export function buildAchTransactionsGetAllQuery(
-  client$: GustoEmbeddedCore,
-  request: GetAchTransactionsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<AchTransactionsGetAllQueryData>;
-} {
-  return {
-    queryKey: queryKeyAchTransactionsGetAll(request.companyUuid, {
-      contractorPaymentUuid: request.contractorPaymentUuid,
-      payrollUuid: request.payrollUuid,
-      transactionType: request.transactionType,
-      paymentDirection: request.paymentDirection,
-      page: request.page,
-      per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function achTransactionsGetAllQueryFn(
-      ctx,
-    ): Promise<AchTransactionsGetAllQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(achTransactionsGetAll(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyAchTransactionsGetAll(
-  companyUuid: string,
-  parameters: {
-    contractorPaymentUuid?: string | undefined;
-    payrollUuid?: string | undefined;
-    transactionType?: string | undefined;
-    paymentDirection?: string | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "achTransactions",
-    "getAll",
-    companyUuid,
-    parameters,
-  ];
 }

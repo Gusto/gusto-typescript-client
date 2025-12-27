@@ -5,33 +5,32 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { generatedDocumentsGet } from "../funcs/generatedDocumentsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { DocumentType } from "../models/components/documenttype.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
-  GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse,
-} from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest } from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type GeneratedDocumentsGetQueryData =
-  GetV1GeneratedDocumentsDocumentTypeRequestUuidResponse;
+import {
+  buildGeneratedDocumentsGetQuery,
+  GeneratedDocumentsGetQueryData,
+  prefetchGeneratedDocumentsGet,
+  queryKeyGeneratedDocumentsGet,
+} from "./generatedDocumentsGet.core.js";
+export {
+  buildGeneratedDocumentsGetQuery,
+  type GeneratedDocumentsGetQueryData,
+  prefetchGeneratedDocumentsGet,
+  queryKeyGeneratedDocumentsGet,
+};
 
 /**
  * Get a generated document
@@ -79,19 +78,6 @@ export function useGeneratedDocumentsGetSuspense(
   });
 }
 
-export function prefetchGeneratedDocumentsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGeneratedDocumentsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setGeneratedDocumentsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -136,53 +122,4 @@ export function invalidateAllGeneratedDocumentsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "generatedDocuments", "get"],
   });
-}
-
-export function buildGeneratedDocumentsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<GeneratedDocumentsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyGeneratedDocumentsGet(
-      request.documentType,
-      request.requestUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function generatedDocumentsGetQueryFn(
-      ctx,
-    ): Promise<GeneratedDocumentsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(generatedDocumentsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGeneratedDocumentsGet(
-  documentType: DocumentType,
-  requestUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "generatedDocuments",
-    "get",
-    documentType,
-    requestUuid,
-    parameters,
-  ];
 }

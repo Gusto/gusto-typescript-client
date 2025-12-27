@@ -12,20 +12,20 @@ import { holidayPayPoliciesRemoveEmployees } from "../funcs/holidayPayPoliciesRe
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
-} from "../models/operations/putcompaniescompanyuuidholidaypaypolicyremove.js";
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+} from "../models/operations/putv1companiescompanyuuidholidaypaypolicyremove.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type HolidayPayPoliciesRemoveEmployeesMutationVariables = {
-  request: PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest;
+  request: PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest;
   options?: RequestOptions;
 };
 
 export type HolidayPayPoliciesRemoveEmployeesMutationData =
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse;
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse;
 
 /**
  * Remove employees from a company's holiday pay policy

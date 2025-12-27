@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { informationRequestsGetInformationRequests } from "../funcs/informationRequestsGetInformationRequests.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetInformationRequestsRequest,
-  GetInformationRequestsResponse,
-} from "../models/operations/getinformationrequests.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetInformationRequestsRequest } from "../models/operations/getinformationrequests.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type InformationRequestsGetInformationRequestsQueryData =
-  GetInformationRequestsResponse;
+import {
+  buildInformationRequestsGetInformationRequestsQuery,
+  InformationRequestsGetInformationRequestsQueryData,
+  prefetchInformationRequestsGetInformationRequests,
+  queryKeyInformationRequestsGetInformationRequests,
+} from "./informationRequestsGetInformationRequests.core.js";
+export {
+  buildInformationRequestsGetInformationRequestsQuery,
+  type InformationRequestsGetInformationRequestsQueryData,
+  prefetchInformationRequestsGetInformationRequests,
+  queryKeyInformationRequestsGetInformationRequests,
+};
 
 /**
  * Get all information requests for a company
@@ -85,19 +84,6 @@ export function useInformationRequestsGetInformationRequestsSuspense(
   });
 }
 
-export function prefetchInformationRequestsGetInformationRequests(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetInformationRequestsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildInformationRequestsGetInformationRequestsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setInformationRequestsGetInformationRequestsData(
   client: QueryClient,
   queryKeyBase: [
@@ -148,50 +134,4 @@ export function invalidateAllInformationRequestsGetInformationRequests(
       "getInformationRequests",
     ],
   });
-}
-
-export function buildInformationRequestsGetInformationRequestsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetInformationRequestsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<InformationRequestsGetInformationRequestsQueryData>;
-} {
-  return {
-    queryKey: queryKeyInformationRequestsGetInformationRequests(
-      request.companyUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function informationRequestsGetInformationRequestsQueryFn(
-      ctx,
-    ): Promise<InformationRequestsGetInformationRequestsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(informationRequestsGetInformationRequests(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyInformationRequestsGetInformationRequests(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Information Requests",
-    "getInformationRequests",
-    companyUuid,
-    parameters,
-  ];
 }

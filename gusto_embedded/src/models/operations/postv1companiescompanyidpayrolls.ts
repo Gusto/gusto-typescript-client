@@ -104,6 +104,10 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
    * Enable taxes to be withheld at the IRS's required rate of 22% for federal income taxes. State income taxes will be taxed at the state's supplemental tax rate. Otherwise, we'll sum the entirety of the employee's wages and withhold taxes on the entire amount at the rate for regular wages.
    */
   fixedWithholdingRate?: boolean | undefined;
+  /**
+   * When true, all employees in the payroll will be paid by check and the check date can be set to today or any future business day (rather than requiring ACH lead time). Payment methods cannot be changed on check-only payrolls.
+   */
+  isCheckOnlyPayroll?: boolean | undefined;
 };
 
 export type PostV1CompaniesCompanyIdPayrollsRequest = {
@@ -156,6 +160,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound = {
   withholding_pay_period?: string | undefined;
   skip_regular_deductions?: boolean | undefined;
   fixed_withholding_rate?: boolean | undefined;
+  is_check_only_payroll?: boolean | undefined;
 };
 
 /** @internal */
@@ -175,6 +180,7 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
     withholdingPayPeriod: WithholdingPayPeriod$outboundSchema.optional(),
     skipRegularDeductions: z.boolean().optional(),
     fixedWithholdingRate: z.boolean().optional(),
+    isCheckOnlyPayroll: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       offCycle: "off_cycle",
@@ -187,6 +193,7 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
       withholdingPayPeriod: "withholding_pay_period",
       skipRegularDeductions: "skip_regular_deductions",
       fixedWithholdingRate: "fixed_withholding_rate",
+      isCheckOnlyPayroll: "is_check_only_payroll",
     });
   });
 

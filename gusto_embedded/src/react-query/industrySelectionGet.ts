@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { industrySelectionGet } from "../funcs/industrySelectionGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompanyIndustryRequest,
-  GetV1CompanyIndustryResponse,
-} from "../models/operations/getv1companyindustry.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompanyIndustryRequest } from "../models/operations/getv1companyindustry.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type IndustrySelectionGetQueryData = GetV1CompanyIndustryResponse;
+import {
+  buildIndustrySelectionGetQuery,
+  IndustrySelectionGetQueryData,
+  prefetchIndustrySelectionGet,
+  queryKeyIndustrySelectionGet,
+} from "./industrySelectionGet.core.js";
+export {
+  buildIndustrySelectionGetQuery,
+  type IndustrySelectionGetQueryData,
+  prefetchIndustrySelectionGet,
+  queryKeyIndustrySelectionGet,
+};
 
 /**
  * Get a company industry selection
@@ -77,19 +77,6 @@ export function useIndustrySelectionGetSuspense(
   });
 }
 
-export function prefetchIndustrySelectionGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyIndustryRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildIndustrySelectionGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setIndustrySelectionGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -132,49 +119,4 @@ export function invalidateAllIndustrySelectionGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "industrySelection", "get"],
   });
-}
-
-export function buildIndustrySelectionGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyIndustryRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<IndustrySelectionGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyIndustrySelectionGet(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function industrySelectionGetQueryFn(
-      ctx,
-    ): Promise<IndustrySelectionGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(industrySelectionGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyIndustrySelectionGet(
-  companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "industrySelection",
-    "get",
-    companyId,
-    parameters,
-  ];
 }

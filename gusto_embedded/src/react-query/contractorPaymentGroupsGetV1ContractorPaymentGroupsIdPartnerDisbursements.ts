@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements } from "../funcs/contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion,
   GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
-  GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse,
 } from "../models/operations/getv1contractorpaymentgroupsidpartnerdisbursements.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData =
-  GetV1ContractorPaymentGroupsIdPartnerDisbursementsResponse;
+import {
+  buildContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQuery,
+  ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData,
+  prefetchContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+  queryKeyContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+} from "./contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements.core.js";
+export {
+  buildContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQuery,
+  type ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData,
+  prefetchContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+  queryKeyContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
+};
 
 /**
  * Get partner disbursements for a contractor payment group
@@ -85,19 +86,6 @@ export function useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerD
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -164,62 +152,4 @@ export function invalidateAllContractorPaymentGroupsGetV1ContractorPaymentGroups
       "getV1ContractorPaymentGroupsIdPartnerDisbursements",
     ],
   });
-}
-
-export function buildContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData
-  >;
-} {
-  return {
-    queryKey:
-      queryKeyContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(
-        request.id,
-        { xGustoAPIVersion: request.xGustoAPIVersion },
-      ),
-    queryFn:
-      async function contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryFn(
-        ctx,
-      ): Promise<
-        ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          contractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(
-  id: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorPaymentGroups",
-    "getV1ContractorPaymentGroupsIdPartnerDisbursements",
-    id,
-    parameters,
-  ];
 }

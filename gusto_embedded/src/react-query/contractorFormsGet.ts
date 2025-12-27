@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorFormsGet } from "../funcs/contractorFormsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorFormRequest,
-  GetV1ContractorFormResponse,
-} from "../models/operations/getv1contractorform.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorFormRequest } from "../models/operations/getv1contractorform.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorFormsGetQueryData = GetV1ContractorFormResponse;
+import {
+  buildContractorFormsGetQuery,
+  ContractorFormsGetQueryData,
+  prefetchContractorFormsGet,
+  queryKeyContractorFormsGet,
+} from "./contractorFormsGet.core.js";
+export {
+  buildContractorFormsGetQuery,
+  type ContractorFormsGetQueryData,
+  prefetchContractorFormsGet,
+  queryKeyContractorFormsGet,
+};
 
 /**
  * Get a contractor form
@@ -77,19 +77,6 @@ export function useContractorFormsGetSuspense(
   });
 }
 
-export function prefetchContractorFormsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorFormRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorFormsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorFormsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -134,53 +121,4 @@ export function invalidateAllContractorFormsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "contractorForms", "get"],
   });
-}
-
-export function buildContractorFormsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorFormRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorFormsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorFormsGet(
-      request.contractorUuid,
-      request.formId,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function contractorFormsGetQueryFn(
-      ctx,
-    ): Promise<ContractorFormsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorFormsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorFormsGet(
-  contractorUuid: string,
-  formId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorForms",
-    "get",
-    contractorUuid,
-    formId,
-    parameters,
-  ];
 }

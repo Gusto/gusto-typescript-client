@@ -5,32 +5,32 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companyFormsGetAll } from "../funcs/companyFormsGetAll.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { CompanyFormsSortBy } from "../models/components/companyformssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompanyFormsRequest,
-  GetV1CompanyFormsResponse,
-} from "../models/operations/getv1companyforms.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompanyFormsRequest } from "../models/operations/getv1companyforms.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompanyFormsGetAllQueryData = GetV1CompanyFormsResponse;
+import {
+  buildCompanyFormsGetAllQuery,
+  CompanyFormsGetAllQueryData,
+  prefetchCompanyFormsGetAll,
+  queryKeyCompanyFormsGetAll,
+} from "./companyFormsGetAll.core.js";
+export {
+  buildCompanyFormsGetAllQuery,
+  type CompanyFormsGetAllQueryData,
+  prefetchCompanyFormsGetAll,
+  queryKeyCompanyFormsGetAll,
+};
 
 /**
  * Get all company forms
@@ -75,19 +75,6 @@ export function useCompanyFormsGetAllSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCompanyFormsGetAll(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyFormsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompanyFormsGetAllQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -139,53 +126,4 @@ export function invalidateAllCompanyFormsGetAll(
     ...filters,
     queryKey: ["@gusto/embedded-api", "companyForms", "getAll"],
   });
-}
-
-export function buildCompanyFormsGetAllQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyFormsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompanyFormsGetAllQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompanyFormsGetAll(request.companyId, {
-      sortBy: request.sortBy,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companyFormsGetAllQueryFn(
-      ctx,
-    ): Promise<CompanyFormsGetAllQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companyFormsGetAll(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompanyFormsGetAll(
-  companyId: string,
-  parameters: {
-    sortBy?: CompanyFormsSortBy | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "companyForms",
-    "getAll",
-    companyId,
-    parameters,
-  ];
 }

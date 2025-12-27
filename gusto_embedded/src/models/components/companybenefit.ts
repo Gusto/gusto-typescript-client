@@ -23,6 +23,18 @@ export const Source = {
 export type Source = ClosedEnum<typeof Source>;
 
 /**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export const CatchUpType = {
+  Elective: "elective",
+  Deemed: "deemed",
+} as const;
+/**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export type CatchUpType = ClosedEnum<typeof CatchUpType>;
+
+/**
  * The representation of a company benefit.
  */
 export type CompanyBenefit = {
@@ -49,7 +61,7 @@ export type CompanyBenefit = {
   /**
    * Whether this benefit is active for employee participation. Company benefits may only be deactivated if no employees are actively participating.
    */
-  active?: boolean | undefined;
+  active: boolean;
   /**
    * The description of the company benefit. For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.
    */
@@ -78,11 +90,19 @@ export type CompanyBenefit = {
    * Whether the employer is subject to file W-2 forms for an employee on leave. Only applicable to third party sick pay benefits.
    */
   responsibleForEmployeeW2?: boolean | undefined;
+  /**
+   * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+   */
+  catchUpType?: CatchUpType | null | undefined;
 };
 
 /** @internal */
 export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
   .nativeEnum(Source);
+
+/** @internal */
+export const CatchUpType$inboundSchema: z.ZodNativeEnum<typeof CatchUpType> = z
+  .nativeEnum(CatchUpType);
 
 /** @internal */
 export const CompanyBenefit$inboundSchema: z.ZodType<
@@ -103,6 +123,7 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
   supports_percentage_amounts: z.boolean().optional(),
   responsible_for_employer_taxes: z.boolean().optional(),
   responsible_for_employee_w2: z.boolean().optional(),
+  catch_up_type: z.nullable(CatchUpType$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "enrollment_count": "enrollmentCount",
@@ -112,6 +133,7 @@ export const CompanyBenefit$inboundSchema: z.ZodType<
     "supports_percentage_amounts": "supportsPercentageAmounts",
     "responsible_for_employer_taxes": "responsibleForEmployerTaxes",
     "responsible_for_employee_w2": "responsibleForEmployeeW2",
+    "catch_up_type": "catchUpType",
   });
 });
 
