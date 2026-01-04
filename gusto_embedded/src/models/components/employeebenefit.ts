@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -102,15 +103,15 @@ export type EmployeeBenefit = {
   /**
    * Whether the employee benefit is active.
    */
-  active?: boolean | undefined;
+  active: boolean;
   /**
    * The amount to be deducted, per pay period, from the employee's pay.
    */
-  employeeDeduction?: string | undefined;
+  employeeDeduction: string;
   /**
    * Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
    */
-  deductAsPercentage?: boolean | undefined;
+  deductAsPercentage: boolean;
   /**
    * The maximum employee deduction amount per year. A null value signifies no limit.
    */
@@ -122,7 +123,7 @@ export type EmployeeBenefit = {
   /**
    * Whether the company contribution is elective (aka matching). For "tiered" contribution types, this is always true.
    */
-  elective?: boolean | undefined;
+  elective: boolean;
   /**
    * The maximum company contribution amount per year. A null value signifies no limit.
    */
@@ -140,7 +141,7 @@ export type EmployeeBenefit = {
   /**
    * Whether the employee should use a benefit's "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
    */
-  catchUp?: boolean | null | undefined;
+  catchUp: boolean | null;
   /**
    * Identifier for a 401(k) loan assigned by the 401(k) provider
    */
@@ -152,26 +153,31 @@ export type EmployeeBenefit = {
   /**
    * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
    */
-  deductionReducesTaxableIncome?:
-    | DeductionReducesTaxableIncome
-    | null
-    | undefined;
+  deductionReducesTaxableIncome: DeductionReducesTaxableIncome | null;
   /**
    * The coverage amount as a multiple of the employee's salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.
    */
-  coverageSalaryMultiplier?: string | null | undefined;
+  coverageSalaryMultiplier: string | null;
   /**
    * The amount to be paid, per pay period, by the company. This field will not appear for tiered contribution types.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  companyContribution?: string | undefined;
+  companyContribution: string;
   /**
    * Whether the company_contribution value should be treated as a percentage to be added to each payroll. This field will not appear for tiered contribution types.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  contributeAsPercentage?: boolean | undefined;
+  contributeAsPercentage: boolean;
+  /**
+   * The date the employee benefit will start.
+   */
+  effectiveDate?: RFCDate | undefined;
+  /**
+   * The date the employee benefit will expire. A null value indicates the benefit will not expire.
+   */
+  expirationDate?: RFCDate | null | undefined;
   /**
    * The UUID of the employee to which the benefit belongs.
    */
@@ -290,6 +296,9 @@ export const EmployeeBenefit$inboundSchema: z.ZodType<
   coverage_salary_multiplier: z.nullable(z.string().default("0.00")),
   company_contribution: z.string().default("0.00"),
   contribute_as_percentage: z.boolean().default(false),
+  effective_date: z.string().transform(v => new RFCDate(v)).optional(),
+  expiration_date: z.nullable(z.string().transform(v => new RFCDate(v)))
+    .optional(),
   employee_uuid: z.string().optional(),
   company_benefit_uuid: z.string().optional(),
   uuid: z.string(),
@@ -307,6 +316,8 @@ export const EmployeeBenefit$inboundSchema: z.ZodType<
     "coverage_salary_multiplier": "coverageSalaryMultiplier",
     "company_contribution": "companyContribution",
     "contribute_as_percentage": "contributeAsPercentage",
+    "effective_date": "effectiveDate",
+    "expiration_date": "expirationDate",
     "employee_uuid": "employeeUuid",
     "company_benefit_uuid": "companyBenefitUuid",
   });

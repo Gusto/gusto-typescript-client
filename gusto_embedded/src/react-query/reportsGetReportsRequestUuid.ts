@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { reportsGetReportsRequestUuid } from "../funcs/reportsGetReportsRequestUuid.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetReportsRequestUuidRequest,
-  GetReportsRequestUuidResponse,
-} from "../models/operations/getreportsrequestuuid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetReportsRequestUuidRequest } from "../models/operations/getreportsrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ReportsGetReportsRequestUuidQueryData =
-  GetReportsRequestUuidResponse;
+import {
+  buildReportsGetReportsRequestUuidQuery,
+  prefetchReportsGetReportsRequestUuid,
+  queryKeyReportsGetReportsRequestUuid,
+  ReportsGetReportsRequestUuidQueryData,
+} from "./reportsGetReportsRequestUuid.core.js";
+export {
+  buildReportsGetReportsRequestUuidQuery,
+  prefetchReportsGetReportsRequestUuid,
+  queryKeyReportsGetReportsRequestUuid,
+  type ReportsGetReportsRequestUuidQueryData,
+};
 
 /**
  * Get a report
@@ -82,19 +81,6 @@ export function useReportsGetReportsRequestUuidSuspense(
   });
 }
 
-export function prefetchReportsGetReportsRequestUuid(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetReportsRequestUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildReportsGetReportsRequestUuidQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setReportsGetReportsRequestUuidData(
   client: QueryClient,
   queryKeyBase: [
@@ -137,49 +123,4 @@ export function invalidateAllReportsGetReportsRequestUuid(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Reports", "getReportsRequestUuid"],
   });
-}
-
-export function buildReportsGetReportsRequestUuidQuery(
-  client$: GustoEmbeddedCore,
-  request: GetReportsRequestUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ReportsGetReportsRequestUuidQueryData>;
-} {
-  return {
-    queryKey: queryKeyReportsGetReportsRequestUuid(request.requestUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function reportsGetReportsRequestUuidQueryFn(
-      ctx,
-    ): Promise<ReportsGetReportsRequestUuidQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(reportsGetReportsRequestUuid(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyReportsGetReportsRequestUuid(
-  requestUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Reports",
-    "getReportsRequestUuid",
-    requestUuid,
-    parameters,
-  ];
 }

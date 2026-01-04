@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorsGetOnboardingStatus } from "../funcs/contractorsGetOnboardingStatus.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorsContractorUuidOnboardingStatusRequest,
-  GetV1ContractorsContractorUuidOnboardingStatusResponse,
-} from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorsContractorUuidOnboardingStatusRequest } from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorsGetOnboardingStatusQueryData =
-  GetV1ContractorsContractorUuidOnboardingStatusResponse;
+import {
+  buildContractorsGetOnboardingStatusQuery,
+  ContractorsGetOnboardingStatusQueryData,
+  prefetchContractorsGetOnboardingStatus,
+  queryKeyContractorsGetOnboardingStatus,
+} from "./contractorsGetOnboardingStatus.core.js";
+export {
+  buildContractorsGetOnboardingStatusQuery,
+  type ContractorsGetOnboardingStatusQueryData,
+  prefetchContractorsGetOnboardingStatus,
+  queryKeyContractorsGetOnboardingStatus,
+};
 
 /**
  * Get the contractor's onboarding status
@@ -140,19 +139,6 @@ export function useContractorsGetOnboardingStatusSuspense(
   });
 }
 
-export function prefetchContractorsGetOnboardingStatus(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorsGetOnboardingStatusQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorsGetOnboardingStatusData(
   client: QueryClient,
   queryKeyBase: [
@@ -198,49 +184,4 @@ export function invalidateAllContractorsGetOnboardingStatus(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Contractors", "getOnboardingStatus"],
   });
-}
-
-export function buildContractorsGetOnboardingStatusQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorsGetOnboardingStatusQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorsGetOnboardingStatus(request.contractorUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function contractorsGetOnboardingStatusQueryFn(
-      ctx,
-    ): Promise<ContractorsGetOnboardingStatusQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorsGetOnboardingStatus(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorsGetOnboardingStatus(
-  contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Contractors",
-    "getOnboardingStatus",
-    contractorUuid,
-    parameters,
-  ];
 }

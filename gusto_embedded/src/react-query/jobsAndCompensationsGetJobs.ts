@@ -5,33 +5,34 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { jobsAndCompensationsGetJobs } from "../funcs/jobsAndCompensationsGetJobs.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1EmployeesEmployeeIdJobsQueryParamInclude,
   GetV1EmployeesEmployeeIdJobsRequest,
-  GetV1EmployeesEmployeeIdJobsResponse,
 } from "../models/operations/getv1employeesemployeeidjobs.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type JobsAndCompensationsGetJobsQueryData =
-  GetV1EmployeesEmployeeIdJobsResponse;
+import {
+  buildJobsAndCompensationsGetJobsQuery,
+  JobsAndCompensationsGetJobsQueryData,
+  prefetchJobsAndCompensationsGetJobs,
+  queryKeyJobsAndCompensationsGetJobs,
+} from "./jobsAndCompensationsGetJobs.core.js";
+export {
+  buildJobsAndCompensationsGetJobsQuery,
+  type JobsAndCompensationsGetJobsQueryData,
+  prefetchJobsAndCompensationsGetJobs,
+  queryKeyJobsAndCompensationsGetJobs,
+};
 
 /**
  * Get jobs for an employee
@@ -76,19 +77,6 @@ export function useJobsAndCompensationsGetJobsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchJobsAndCompensationsGetJobs(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdJobsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildJobsAndCompensationsGetJobsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -144,57 +132,4 @@ export function invalidateAllJobsAndCompensationsGetJobs(
     ...filters,
     queryKey: ["@gusto/embedded-api", "jobsAndCompensations", "getJobs"],
   });
-}
-
-export function buildJobsAndCompensationsGetJobsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdJobsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<JobsAndCompensationsGetJobsQueryData>;
-} {
-  return {
-    queryKey: queryKeyJobsAndCompensationsGetJobs(request.employeeId, {
-      page: request.page,
-      per: request.per,
-      include: request.include,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function jobsAndCompensationsGetJobsQueryFn(
-      ctx,
-    ): Promise<JobsAndCompensationsGetJobsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(jobsAndCompensationsGetJobs(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyJobsAndCompensationsGetJobs(
-  employeeId: string,
-  parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    include?: GetV1EmployeesEmployeeIdJobsQueryParamInclude | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "jobsAndCompensations",
-    "getJobs",
-    employeeId,
-    parameters,
-  ];
 }

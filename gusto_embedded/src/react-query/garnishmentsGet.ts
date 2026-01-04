@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { garnishmentsGet } from "../funcs/garnishmentsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1GarnishmentsGarnishmentIdRequest,
-  GetV1GarnishmentsGarnishmentIdResponse,
-} from "../models/operations/getv1garnishmentsgarnishmentid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1GarnishmentsGarnishmentIdRequest } from "../models/operations/getv1garnishmentsgarnishmentid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type GarnishmentsGetQueryData = GetV1GarnishmentsGarnishmentIdResponse;
+import {
+  buildGarnishmentsGetQuery,
+  GarnishmentsGetQueryData,
+  prefetchGarnishmentsGet,
+  queryKeyGarnishmentsGet,
+} from "./garnishmentsGet.core.js";
+export {
+  buildGarnishmentsGetQuery,
+  type GarnishmentsGetQueryData,
+  prefetchGarnishmentsGet,
+  queryKeyGarnishmentsGet,
+};
 
 /**
  * Get a garnishment
@@ -77,19 +77,6 @@ export function useGarnishmentsGetSuspense(
   });
 }
 
-export function prefetchGarnishmentsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1GarnishmentsGarnishmentIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGarnishmentsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setGarnishmentsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -127,47 +114,4 @@ export function invalidateAllGarnishmentsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Garnishments", "get"],
   });
-}
-
-export function buildGarnishmentsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1GarnishmentsGarnishmentIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<GarnishmentsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyGarnishmentsGet(request.garnishmentId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function garnishmentsGetQueryFn(
-      ctx,
-    ): Promise<GarnishmentsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(garnishmentsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGarnishmentsGet(
-  garnishmentId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Garnishments",
-    "get",
-    garnishmentId,
-    parameters,
-  ];
 }

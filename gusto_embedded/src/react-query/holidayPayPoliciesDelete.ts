@@ -12,20 +12,20 @@ import { holidayPayPoliciesDelete } from "../funcs/holidayPayPoliciesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
-  DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
-} from "../models/operations/deletecompaniescompanyuuidholidaypaypolicy.js";
+  DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest,
+  DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+} from "../models/operations/deletev1companiescompanyuuidholidaypaypolicy.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type HolidayPayPoliciesDeleteMutationVariables = {
-  request: DeleteCompaniesCompanyUuidHolidayPayPolicyRequest;
+  request: DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest;
   options?: RequestOptions;
 };
 
 export type HolidayPayPoliciesDeleteMutationData =
-  DeleteCompaniesCompanyUuidHolidayPayPolicyResponse;
+  DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse;
 
 /**
  * Delete a company's holiday pay policy

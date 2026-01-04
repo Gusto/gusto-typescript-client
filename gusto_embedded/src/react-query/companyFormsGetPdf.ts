@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companyFormsGetPdf } from "../funcs/companyFormsGetPdf.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompanyFormPdfRequest,
-  GetV1CompanyFormPdfResponse,
-} from "../models/operations/getv1companyformpdf.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompanyFormPdfRequest } from "../models/operations/getv1companyformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompanyFormsGetPdfQueryData = GetV1CompanyFormPdfResponse;
+import {
+  buildCompanyFormsGetPdfQuery,
+  CompanyFormsGetPdfQueryData,
+  prefetchCompanyFormsGetPdf,
+  queryKeyCompanyFormsGetPdf,
+} from "./companyFormsGetPdf.core.js";
+export {
+  buildCompanyFormsGetPdfQuery,
+  type CompanyFormsGetPdfQueryData,
+  prefetchCompanyFormsGetPdf,
+  queryKeyCompanyFormsGetPdf,
+};
 
 /**
  * Get a company form pdf
@@ -77,19 +77,6 @@ export function useCompanyFormsGetPdfSuspense(
   });
 }
 
-export function prefetchCompanyFormsGetPdf(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyFormPdfRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompanyFormsGetPdfQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setCompanyFormsGetPdfData(
   client: QueryClient,
   queryKeyBase: [
@@ -132,43 +119,4 @@ export function invalidateAllCompanyFormsGetPdf(
     ...filters,
     queryKey: ["@gusto/embedded-api", "companyForms", "getPdf"],
   });
-}
-
-export function buildCompanyFormsGetPdfQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyFormPdfRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompanyFormsGetPdfQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompanyFormsGetPdf(request.formId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companyFormsGetPdfQueryFn(
-      ctx,
-    ): Promise<CompanyFormsGetPdfQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companyFormsGetPdf(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompanyFormsGetPdf(
-  formId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return ["@gusto/embedded-api", "companyForms", "getPdf", formId, parameters];
 }

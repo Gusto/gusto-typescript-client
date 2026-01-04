@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { departmentsGetAll } from "../funcs/departmentsGetAll.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetCompaniesDepartmentsRequest,
-  GetCompaniesDepartmentsResponse,
-} from "../models/operations/getcompaniesdepartments.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetCompaniesDepartmentsRequest } from "../models/operations/getcompaniesdepartments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type DepartmentsGetAllQueryData = GetCompaniesDepartmentsResponse;
+import {
+  buildDepartmentsGetAllQuery,
+  DepartmentsGetAllQueryData,
+  prefetchDepartmentsGetAll,
+  queryKeyDepartmentsGetAll,
+} from "./departmentsGetAll.core.js";
+export {
+  buildDepartmentsGetAllQuery,
+  type DepartmentsGetAllQueryData,
+  prefetchDepartmentsGetAll,
+  queryKeyDepartmentsGetAll,
+};
 
 /**
  * Get all departments of a company
@@ -77,19 +77,6 @@ export function useDepartmentsGetAllSuspense(
   });
 }
 
-export function prefetchDepartmentsGetAll(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesDepartmentsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildDepartmentsGetAllQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setDepartmentsGetAllData(
   client: QueryClient,
   queryKeyBase: [
@@ -127,49 +114,4 @@ export function invalidateAllDepartmentsGetAll(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Departments", "getAll"],
   });
-}
-
-export function buildDepartmentsGetAllQuery(
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesDepartmentsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<DepartmentsGetAllQueryData>;
-} {
-  return {
-    queryKey: queryKeyDepartmentsGetAll(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function departmentsGetAllQueryFn(
-      ctx,
-    ): Promise<DepartmentsGetAllQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(departmentsGetAll(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyDepartmentsGetAll(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Departments",
-    "getAll",
-    companyUuid,
-    parameters,
-  ];
 }

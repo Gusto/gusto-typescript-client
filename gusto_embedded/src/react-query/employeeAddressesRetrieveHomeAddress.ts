@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeAddressesRetrieveHomeAddress } from "../funcs/employeeAddressesRetrieveHomeAddress.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion,
   GetV1HomeAddressesHomeAddressUuidRequest,
-  GetV1HomeAddressesHomeAddressUuidResponse,
 } from "../models/operations/getv1homeaddresseshomeaddressuuid.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeAddressesRetrieveHomeAddressQueryData =
-  GetV1HomeAddressesHomeAddressUuidResponse;
+import {
+  buildEmployeeAddressesRetrieveHomeAddressQuery,
+  EmployeeAddressesRetrieveHomeAddressQueryData,
+  prefetchEmployeeAddressesRetrieveHomeAddress,
+  queryKeyEmployeeAddressesRetrieveHomeAddress,
+} from "./employeeAddressesRetrieveHomeAddress.core.js";
+export {
+  buildEmployeeAddressesRetrieveHomeAddressQuery,
+  type EmployeeAddressesRetrieveHomeAddressQueryData,
+  prefetchEmployeeAddressesRetrieveHomeAddress,
+  queryKeyEmployeeAddressesRetrieveHomeAddress,
+};
 
 /**
  * Get an employee's home address
@@ -84,19 +85,6 @@ export function useEmployeeAddressesRetrieveHomeAddressSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeeAddressesRetrieveHomeAddress(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1HomeAddressesHomeAddressUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeAddressesRetrieveHomeAddressQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -157,54 +145,4 @@ export function invalidateAllEmployeeAddressesRetrieveHomeAddress(
       "retrieveHomeAddress",
     ],
   });
-}
-
-export function buildEmployeeAddressesRetrieveHomeAddressQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1HomeAddressesHomeAddressUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeAddressesRetrieveHomeAddressQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeAddressesRetrieveHomeAddress(
-      request.homeAddressUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function employeeAddressesRetrieveHomeAddressQueryFn(
-      ctx,
-    ): Promise<EmployeeAddressesRetrieveHomeAddressQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeAddressesRetrieveHomeAddress(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeAddressesRetrieveHomeAddress(
-  homeAddressUuid: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeAddresses",
-    "retrieveHomeAddress",
-    homeAddressUuid,
-    parameters,
-  ];
 }

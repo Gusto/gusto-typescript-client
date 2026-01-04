@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { externalPayrollsCalculateTaxes } from "../funcs/externalPayrollsCalculateTaxes.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ExternalPayrollCalculateTaxesRequest,
-  GetV1ExternalPayrollCalculateTaxesResponse,
-} from "../models/operations/getv1externalpayrollcalculatetaxes.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ExternalPayrollCalculateTaxesRequest } from "../models/operations/getv1externalpayrollcalculatetaxes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ExternalPayrollsCalculateTaxesQueryData =
-  GetV1ExternalPayrollCalculateTaxesResponse;
+import {
+  buildExternalPayrollsCalculateTaxesQuery,
+  ExternalPayrollsCalculateTaxesQueryData,
+  prefetchExternalPayrollsCalculateTaxes,
+  queryKeyExternalPayrollsCalculateTaxes,
+} from "./externalPayrollsCalculateTaxes.core.js";
+export {
+  buildExternalPayrollsCalculateTaxesQuery,
+  type ExternalPayrollsCalculateTaxesQueryData,
+  prefetchExternalPayrollsCalculateTaxes,
+  queryKeyExternalPayrollsCalculateTaxes,
+};
 
 /**
  * Get tax suggestions for an external payroll
@@ -82,19 +81,6 @@ export function useExternalPayrollsCalculateTaxesSuspense(
   });
 }
 
-export function prefetchExternalPayrollsCalculateTaxes(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ExternalPayrollCalculateTaxesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildExternalPayrollsCalculateTaxesQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setExternalPayrollsCalculateTaxesData(
   client: QueryClient,
   queryKeyBase: [
@@ -142,53 +128,4 @@ export function invalidateAllExternalPayrollsCalculateTaxes(
     ...filters,
     queryKey: ["@gusto/embedded-api", "externalPayrolls", "calculateTaxes"],
   });
-}
-
-export function buildExternalPayrollsCalculateTaxesQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ExternalPayrollCalculateTaxesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ExternalPayrollsCalculateTaxesQueryData>;
-} {
-  return {
-    queryKey: queryKeyExternalPayrollsCalculateTaxes(
-      request.companyUuid,
-      request.externalPayrollId,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function externalPayrollsCalculateTaxesQueryFn(
-      ctx,
-    ): Promise<ExternalPayrollsCalculateTaxesQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(externalPayrollsCalculateTaxes(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyExternalPayrollsCalculateTaxes(
-  companyUuid: string,
-  externalPayrollId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "externalPayrolls",
-    "calculateTaxes",
-    companyUuid,
-    externalPayrollId,
-    parameters,
-  ];
 }

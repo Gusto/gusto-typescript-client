@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeEmploymentsGetRehire } from "../funcs/employeeEmploymentsGetRehire.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1EmployeesEmployeeIdRehireRequest,
-  GetV1EmployeesEmployeeIdRehireResponse,
-} from "../models/operations/getv1employeesemployeeidrehire.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1EmployeesEmployeeIdRehireRequest } from "../models/operations/getv1employeesemployeeidrehire.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeEmploymentsGetRehireQueryData =
-  GetV1EmployeesEmployeeIdRehireResponse;
+import {
+  buildEmployeeEmploymentsGetRehireQuery,
+  EmployeeEmploymentsGetRehireQueryData,
+  prefetchEmployeeEmploymentsGetRehire,
+  queryKeyEmployeeEmploymentsGetRehire,
+} from "./employeeEmploymentsGetRehire.core.js";
+export {
+  buildEmployeeEmploymentsGetRehireQuery,
+  type EmployeeEmploymentsGetRehireQueryData,
+  prefetchEmployeeEmploymentsGetRehire,
+  queryKeyEmployeeEmploymentsGetRehire,
+};
 
 /**
  * Get an employee rehire
@@ -78,19 +77,6 @@ export function useEmployeeEmploymentsGetRehireSuspense(
   });
 }
 
-export function prefetchEmployeeEmploymentsGetRehire(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdRehireRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeEmploymentsGetRehireQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeeEmploymentsGetRehireData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,49 +119,4 @@ export function invalidateAllEmployeeEmploymentsGetRehire(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeEmployments", "getRehire"],
   });
-}
-
-export function buildEmployeeEmploymentsGetRehireQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdRehireRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeEmploymentsGetRehireQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeEmploymentsGetRehire(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeEmploymentsGetRehireQueryFn(
-      ctx,
-    ): Promise<EmployeeEmploymentsGetRehireQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeEmploymentsGetRehire(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeEmploymentsGetRehire(
-  employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeEmployments",
-    "getRehire",
-    employeeId,
-    parameters,
-  ];
 }

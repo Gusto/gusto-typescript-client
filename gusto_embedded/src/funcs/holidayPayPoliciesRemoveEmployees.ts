@@ -25,11 +25,11 @@ import {
   UnprocessableEntityErrorObject$inboundSchema,
 } from "../models/errors/unprocessableentityerrorobject.js";
 import {
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema,
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
-  PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema,
-} from "../models/operations/putcompaniescompanyuuidholidaypaypolicyremove.js";
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema,
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+  PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema,
+} from "../models/operations/putv1companiescompanyuuidholidaypaypolicyremove.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -43,11 +43,11 @@ import { Result } from "../types/fp.js";
  */
 export function holidayPayPoliciesRemoveEmployees(
   client: GustoEmbeddedCore,
-  request: PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
+  request: PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+    PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -68,12 +68,12 @@ export function holidayPayPoliciesRemoveEmployees(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
+  request: PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+      PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -90,9 +90,8 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema.parse(
-        value,
-      ),
+      PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest$outboundSchema
+        .parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -131,7 +130,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "put-companies-company_uuid-holiday_pay_policy-remove",
+    operationID: "put-v1-companies-company_uuid-holiday_pay_policy-remove",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -174,7 +173,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
+    PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -187,11 +186,11 @@ async function $do(
   >(
     M.json(
       200,
-      PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema,
+      PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse$inboundSchema,
       { key: "Holiday-Pay-Policy" },
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

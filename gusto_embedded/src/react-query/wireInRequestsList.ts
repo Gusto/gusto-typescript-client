@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { wireInRequestsList } from "../funcs/wireInRequestsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetCompaniesCompanyUuidWireInRequestUuidRequest,
-  GetCompaniesCompanyUuidWireInRequestUuidResponse,
-} from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetCompaniesCompanyUuidWireInRequestUuidRequest } from "../models/operations/getcompaniescompanyuuidwireinrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type WireInRequestsListQueryData =
-  GetCompaniesCompanyUuidWireInRequestUuidResponse;
+import {
+  buildWireInRequestsListQuery,
+  prefetchWireInRequestsList,
+  queryKeyWireInRequestsList,
+  WireInRequestsListQueryData,
+} from "./wireInRequestsList.core.js";
+export {
+  buildWireInRequestsListQuery,
+  prefetchWireInRequestsList,
+  queryKeyWireInRequestsList,
+  type WireInRequestsListQueryData,
+};
 
 /**
  * Get all Wire In Requests for a company
@@ -78,19 +77,6 @@ export function useWireInRequestsListSuspense(
   });
 }
 
-export function prefetchWireInRequestsList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWireInRequestsListQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setWireInRequestsListData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,49 +119,4 @@ export function invalidateAllWireInRequestsList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "wireInRequests", "list"],
   });
-}
-
-export function buildWireInRequestsListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidWireInRequestUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WireInRequestsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyWireInRequestsList(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function wireInRequestsListQueryFn(
-      ctx,
-    ): Promise<WireInRequestsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(wireInRequestsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWireInRequestsList(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "wireInRequests",
-    "list",
-    companyUuid,
-    parameters,
-  ];
 }

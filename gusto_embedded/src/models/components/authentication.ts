@@ -19,11 +19,11 @@ export type Authentication = {
   /**
    * The literal string 'bearer'
    */
-  tokenType?: string | undefined;
+  tokenType: string;
   /**
    * The TTL of this token. After this amount of time, you must hit the refresh token endpoint to continue making authenticated requests.
    */
-  expiresIn?: number | undefined;
+  expiresIn: number;
   /**
    * A token that must be passed to the refresh token endpoint to get a new authenticated token.
    */

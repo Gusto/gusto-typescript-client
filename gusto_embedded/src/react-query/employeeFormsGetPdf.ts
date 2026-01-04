@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeFormsGetPdf } from "../funcs/employeeFormsGetPdf.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1EmployeeFormPdfRequest,
-  GetV1EmployeeFormPdfResponse,
-} from "../models/operations/getv1employeeformpdf.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1EmployeeFormPdfRequest } from "../models/operations/getv1employeeformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeFormsGetPdfQueryData = GetV1EmployeeFormPdfResponse;
+import {
+  buildEmployeeFormsGetPdfQuery,
+  EmployeeFormsGetPdfQueryData,
+  prefetchEmployeeFormsGetPdf,
+  queryKeyEmployeeFormsGetPdf,
+} from "./employeeFormsGetPdf.core.js";
+export {
+  buildEmployeeFormsGetPdfQuery,
+  type EmployeeFormsGetPdfQueryData,
+  prefetchEmployeeFormsGetPdf,
+  queryKeyEmployeeFormsGetPdf,
+};
 
 /**
  * Get the employee form pdf
@@ -77,19 +77,6 @@ export function useEmployeeFormsGetPdfSuspense(
   });
 }
 
-export function prefetchEmployeeFormsGetPdf(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeeFormPdfRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeFormsGetPdfQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeeFormsGetPdfData(
   client: QueryClient,
   queryKeyBase: [
@@ -134,51 +121,4 @@ export function invalidateAllEmployeeFormsGetPdf(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeForms", "getPdf"],
   });
-}
-
-export function buildEmployeeFormsGetPdfQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeeFormPdfRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeFormsGetPdfQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeFormsGetPdf(request.employeeId, request.formId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeFormsGetPdfQueryFn(
-      ctx,
-    ): Promise<EmployeeFormsGetPdfQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeFormsGetPdf(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeFormsGetPdf(
-  employeeId: string,
-  formId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeForms",
-    "getPdf",
-    employeeId,
-    formId,
-    parameters,
-  ];
 }
