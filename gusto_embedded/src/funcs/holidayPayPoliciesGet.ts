@@ -21,11 +21,15 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetCompaniesCompanyUuidHolidayPayPolicyRequest,
-  GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema,
-  GetCompaniesCompanyUuidHolidayPayPolicyResponse,
-  GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
-} from "../models/operations/getcompaniescompanyuuidholidaypaypolicy.js";
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
+  GetV1CompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema,
+  GetV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+  GetV1CompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyuuidholidaypaypolicy.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -39,11 +43,12 @@ import { Result } from "../types/fp.js";
  */
 export function holidayPayPoliciesGet(
   client: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+    GetV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -63,12 +68,13 @@ export function holidayPayPoliciesGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+      GetV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -84,7 +90,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      GetCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
+      GetV1CompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
         value,
       ),
     "Input validation failed",
@@ -124,7 +130,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-companies-company_uuid-holiday_pay_policy",
+    operationID: "get-v1-companies-company_uuid-holiday_pay_policy",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -167,7 +173,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    GetCompaniesCompanyUuidHolidayPayPolicyResponse,
+    GetV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -177,10 +184,14 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, GetCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema, {
-      key: "Holiday-Pay-Policy",
-    }),
-    M.fail([404, "4XX"]),
+    M.json(
+      200,
+      GetV1CompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
+      { key: "Holiday-Pay-Policy" },
+    ),
+    M.nil(204, GetV1CompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

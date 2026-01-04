@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { paySchedulesGetAssignments } from "../funcs/paySchedulesGetAssignments.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
-  GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse,
-} from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest } from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PaySchedulesGetAssignmentsQueryData =
-  GetV1CompaniesCompanyIdPaySchedulesAssignmentsResponse;
+import {
+  buildPaySchedulesGetAssignmentsQuery,
+  PaySchedulesGetAssignmentsQueryData,
+  prefetchPaySchedulesGetAssignments,
+  queryKeyPaySchedulesGetAssignments,
+} from "./paySchedulesGetAssignments.core.js";
+export {
+  buildPaySchedulesGetAssignmentsQuery,
+  type PaySchedulesGetAssignmentsQueryData,
+  prefetchPaySchedulesGetAssignments,
+  queryKeyPaySchedulesGetAssignments,
+};
 
 /**
  * Get pay schedule assignments for a company
@@ -78,19 +77,6 @@ export function usePaySchedulesGetAssignmentsSuspense(
   });
 }
 
-export function prefetchPaySchedulesGetAssignments(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPaySchedulesGetAssignmentsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setPaySchedulesGetAssignmentsData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,49 +119,4 @@ export function invalidateAllPaySchedulesGetAssignments(
     ...filters,
     queryKey: ["@gusto/embedded-api", "paySchedules", "getAssignments"],
   });
-}
-
-export function buildPaySchedulesGetAssignmentsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PaySchedulesGetAssignmentsQueryData>;
-} {
-  return {
-    queryKey: queryKeyPaySchedulesGetAssignments(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function paySchedulesGetAssignmentsQueryFn(
-      ctx,
-    ): Promise<PaySchedulesGetAssignmentsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(paySchedulesGetAssignments(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPaySchedulesGetAssignments(
-  companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "paySchedules",
-    "getAssignments",
-    companyId,
-    parameters,
-  ];
 }

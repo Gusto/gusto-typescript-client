@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { paymentConfigsGet } from "../funcs/paymentConfigsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompanyPaymentConfigsRequest,
-  GetV1CompanyPaymentConfigsResponse,
-} from "../models/operations/getv1companypaymentconfigs.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompanyPaymentConfigsRequest } from "../models/operations/getv1companypaymentconfigs.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PaymentConfigsGetQueryData = GetV1CompanyPaymentConfigsResponse;
+import {
+  buildPaymentConfigsGetQuery,
+  PaymentConfigsGetQueryData,
+  prefetchPaymentConfigsGet,
+  queryKeyPaymentConfigsGet,
+} from "./paymentConfigsGet.core.js";
+export {
+  buildPaymentConfigsGetQuery,
+  type PaymentConfigsGetQueryData,
+  prefetchPaymentConfigsGet,
+  queryKeyPaymentConfigsGet,
+};
 
 /**
  * Get a company's payment configs
@@ -77,19 +77,6 @@ export function usePaymentConfigsGetSuspense(
   });
 }
 
-export function prefetchPaymentConfigsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyPaymentConfigsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPaymentConfigsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setPaymentConfigsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -127,49 +114,4 @@ export function invalidateAllPaymentConfigsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "paymentConfigs", "get"],
   });
-}
-
-export function buildPaymentConfigsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyPaymentConfigsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PaymentConfigsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyPaymentConfigsGet(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function paymentConfigsGetQueryFn(
-      ctx,
-    ): Promise<PaymentConfigsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(paymentConfigsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPaymentConfigsGet(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "paymentConfigs",
-    "get",
-    companyUuid,
-    parameters,
-  ];
 }

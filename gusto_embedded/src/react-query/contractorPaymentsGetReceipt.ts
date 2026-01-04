@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorPaymentsGetReceipt } from "../funcs/contractorPaymentsGetReceipt.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
-  GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse,
-} from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest } from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorPaymentsGetReceiptQueryData =
-  GetV1ContractorPaymentsContractorPaymentUuidReceiptResponse;
+import {
+  buildContractorPaymentsGetReceiptQuery,
+  ContractorPaymentsGetReceiptQueryData,
+  prefetchContractorPaymentsGetReceipt,
+  queryKeyContractorPaymentsGetReceipt,
+} from "./contractorPaymentsGetReceipt.core.js";
+export {
+  buildContractorPaymentsGetReceiptQuery,
+  type ContractorPaymentsGetReceiptQueryData,
+  prefetchContractorPaymentsGetReceipt,
+  queryKeyContractorPaymentsGetReceipt,
+};
 
 /**
  * Get a single contractor payment receipt
@@ -92,19 +91,6 @@ export function useContractorPaymentsGetReceiptSuspense(
   });
 }
 
-export function prefetchContractorPaymentsGetReceipt(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorPaymentsGetReceiptQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorPaymentsGetReceiptData(
   client: QueryClient,
   queryKeyBase: [
@@ -147,50 +133,4 @@ export function invalidateAllContractorPaymentsGetReceipt(
     ...filters,
     queryKey: ["@gusto/embedded-api", "contractorPayments", "getReceipt"],
   });
-}
-
-export function buildContractorPaymentsGetReceiptQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorPaymentsGetReceiptQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorPaymentsGetReceipt(
-      request.contractorPaymentUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function contractorPaymentsGetReceiptQueryFn(
-      ctx,
-    ): Promise<ContractorPaymentsGetReceiptQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorPaymentsGetReceipt(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorPaymentsGetReceipt(
-  contractorPaymentUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorPayments",
-    "getReceipt",
-    contractorPaymentUuid,
-    parameters,
-  ];
 }

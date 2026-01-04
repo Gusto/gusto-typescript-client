@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companiesGetCustomFields } from "../funcs/companiesGetCustomFields.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdCustomFieldsRequest,
-  GetV1CompaniesCompanyIdCustomFieldsResponse,
-} from "../models/operations/getv1companiescompanyidcustomfields.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdCustomFieldsRequest } from "../models/operations/getv1companiescompanyidcustomfields.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompaniesGetCustomFieldsQueryData =
-  GetV1CompaniesCompanyIdCustomFieldsResponse;
+import {
+  buildCompaniesGetCustomFieldsQuery,
+  CompaniesGetCustomFieldsQueryData,
+  prefetchCompaniesGetCustomFields,
+  queryKeyCompaniesGetCustomFields,
+} from "./companiesGetCustomFields.core.js";
+export {
+  buildCompaniesGetCustomFieldsQuery,
+  type CompaniesGetCustomFieldsQueryData,
+  prefetchCompaniesGetCustomFields,
+  queryKeyCompaniesGetCustomFields,
+};
 
 /**
  * Get the custom fields of a company
@@ -75,19 +74,6 @@ export function useCompaniesGetCustomFieldsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCompaniesGetCustomFields(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdCustomFieldsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompaniesGetCustomFieldsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -141,55 +127,4 @@ export function invalidateAllCompaniesGetCustomFields(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Companies", "getCustomFields"],
   });
-}
-
-export function buildCompaniesGetCustomFieldsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdCustomFieldsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompaniesGetCustomFieldsQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompaniesGetCustomFields(request.companyId, {
-      page: request.page,
-      per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companiesGetCustomFieldsQueryFn(
-      ctx,
-    ): Promise<CompaniesGetCustomFieldsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companiesGetCustomFields(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompaniesGetCustomFields(
-  companyId: string,
-  parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Companies",
-    "getCustomFields",
-    companyId,
-    parameters,
-  ];
 }

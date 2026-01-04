@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeTaxSetupGetStateTaxes } from "../funcs/employeeTaxSetupGetStateTaxes.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdStateTaxesRequest,
-  GetV1EmployeesEmployeeIdStateTaxesResponse,
 } from "../models/operations/getv1employeesemployeeidstatetaxes.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeTaxSetupGetStateTaxesQueryData =
-  GetV1EmployeesEmployeeIdStateTaxesResponse;
+import {
+  buildEmployeeTaxSetupGetStateTaxesQuery,
+  EmployeeTaxSetupGetStateTaxesQueryData,
+  prefetchEmployeeTaxSetupGetStateTaxes,
+  queryKeyEmployeeTaxSetupGetStateTaxes,
+} from "./employeeTaxSetupGetStateTaxes.core.js";
+export {
+  buildEmployeeTaxSetupGetStateTaxesQuery,
+  type EmployeeTaxSetupGetStateTaxesQueryData,
+  prefetchEmployeeTaxSetupGetStateTaxes,
+  queryKeyEmployeeTaxSetupGetStateTaxes,
+};
 
 /**
  * Get an employee's state taxes
@@ -100,19 +101,6 @@ export function useEmployeeTaxSetupGetStateTaxesSuspense(
   });
 }
 
-export function prefetchEmployeeTaxSetupGetStateTaxes(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdStateTaxesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeTaxSetupGetStateTaxesQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeeTaxSetupGetStateTaxesData(
   client: QueryClient,
   queryKeyBase: [
@@ -163,53 +151,4 @@ export function invalidateAllEmployeeTaxSetupGetStateTaxes(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeTaxSetup", "getStateTaxes"],
   });
-}
-
-export function buildEmployeeTaxSetupGetStateTaxesQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdStateTaxesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeTaxSetupGetStateTaxesQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeTaxSetupGetStateTaxes(request.employeeUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeTaxSetupGetStateTaxesQueryFn(
-      ctx,
-    ): Promise<EmployeeTaxSetupGetStateTaxesQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeTaxSetupGetStateTaxes(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeTaxSetupGetStateTaxes(
-  employeeUuid: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeIdStateTaxesHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeTaxSetup",
-    "getStateTaxes",
-    employeeUuid,
-    parameters,
-  ];
 }

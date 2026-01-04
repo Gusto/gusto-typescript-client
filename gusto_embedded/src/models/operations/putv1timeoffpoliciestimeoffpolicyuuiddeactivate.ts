@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,35 +15,56 @@ import {
   TimeOffPolicy,
   TimeOffPolicy$inboundSchema,
 } from "../components/timeoffpolicy.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion
+  >;
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest = {
   /**
-   * The UUID of the company time off policy
-   */
-  timeOffPolicyUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion
+    | undefined;
+  /**
+   * The UUID of the time off policy
+   */
+  timeOffPolicyUuid: string;
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * OK
+   * successful
    */
   timeOffPolicy?: TimeOffPolicy | undefined;
 };
 
 /** @internal */
+export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$Outbound = {
-  time_off_policy_uuid: string;
   "X-Gusto-API-Version": string;
+  time_off_policy_uuid: string;
 };
 
 /** @internal */
@@ -52,12 +74,14 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest$outboundSche
     z.ZodTypeDef,
     PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1TimeOffPoliciesTimeOffPolicyUuidDeactivateHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      timeOffPolicyUuid: "time_off_policy_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      timeOffPolicyUuid: "time_off_policy_uuid",
     });
   });
 

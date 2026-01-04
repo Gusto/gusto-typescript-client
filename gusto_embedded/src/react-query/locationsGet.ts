@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { locationsGet } from "../funcs/locationsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdLocationsRequest,
-  GetV1CompaniesCompanyIdLocationsResponse,
-} from "../models/operations/getv1companiescompanyidlocations.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdLocationsRequest } from "../models/operations/getv1companiescompanyidlocations.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type LocationsGetQueryData = GetV1CompaniesCompanyIdLocationsResponse;
+import {
+  buildLocationsGetQuery,
+  LocationsGetQueryData,
+  prefetchLocationsGet,
+  queryKeyLocationsGet,
+} from "./locationsGet.core.js";
+export {
+  buildLocationsGetQuery,
+  type LocationsGetQueryData,
+  prefetchLocationsGet,
+  queryKeyLocationsGet,
+};
 
 /**
  * Get company locations
@@ -81,19 +81,6 @@ export function useLocationsGetSuspense(
   });
 }
 
-export function prefetchLocationsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdLocationsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildLocationsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setLocationsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -139,47 +126,4 @@ export function invalidateAllLocationsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Locations", "get"],
   });
-}
-
-export function buildLocationsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdLocationsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<LocationsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyLocationsGet(request.companyId, {
-      page: request.page,
-      per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function locationsGetQueryFn(
-      ctx,
-    ): Promise<LocationsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(locationsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyLocationsGet(
-  companyId: string,
-  parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return ["@gusto/embedded-api", "Locations", "get", companyId, parameters];
 }

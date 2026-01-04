@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { reimbursementsGetV1RecurringReimbursements } from "../funcs/reimbursementsGetV1RecurringReimbursements.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1RecurringReimbursementsHeaderXGustoAPIVersion,
   GetV1RecurringReimbursementsRequest,
-  GetV1RecurringReimbursementsResponse,
 } from "../models/operations/getv1recurringreimbursements.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ReimbursementsGetV1RecurringReimbursementsQueryData =
-  GetV1RecurringReimbursementsResponse;
+import {
+  buildReimbursementsGetV1RecurringReimbursementsQuery,
+  prefetchReimbursementsGetV1RecurringReimbursements,
+  queryKeyReimbursementsGetV1RecurringReimbursements,
+  ReimbursementsGetV1RecurringReimbursementsQueryData,
+} from "./reimbursementsGetV1RecurringReimbursements.core.js";
+export {
+  buildReimbursementsGetV1RecurringReimbursementsQuery,
+  prefetchReimbursementsGetV1RecurringReimbursements,
+  queryKeyReimbursementsGetV1RecurringReimbursements,
+  type ReimbursementsGetV1RecurringReimbursementsQueryData,
+};
 
 /**
  * Get a recurring reimbursement
@@ -82,19 +83,6 @@ export function useReimbursementsGetV1RecurringReimbursementsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchReimbursementsGetV1RecurringReimbursements(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1RecurringReimbursementsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildReimbursementsGetV1RecurringReimbursementsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -156,53 +144,4 @@ export function invalidateAllReimbursementsGetV1RecurringReimbursements(
       "getV1RecurringReimbursements",
     ],
   });
-}
-
-export function buildReimbursementsGetV1RecurringReimbursementsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1RecurringReimbursementsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ReimbursementsGetV1RecurringReimbursementsQueryData>;
-} {
-  return {
-    queryKey: queryKeyReimbursementsGetV1RecurringReimbursements(request.id, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function reimbursementsGetV1RecurringReimbursementsQueryFn(
-      ctx,
-    ): Promise<ReimbursementsGetV1RecurringReimbursementsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(reimbursementsGetV1RecurringReimbursements(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyReimbursementsGetV1RecurringReimbursements(
-  id: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1RecurringReimbursementsHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Reimbursements",
-    "getV1RecurringReimbursements",
-    id,
-    parameters,
-  ];
 }

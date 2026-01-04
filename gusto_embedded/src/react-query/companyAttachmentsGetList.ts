@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companyAttachmentsGetList } from "../funcs/companyAttachmentsGetList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesAttachmentsRequest,
-  GetV1CompaniesAttachmentsResponse,
-} from "../models/operations/getv1companiesattachments.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesAttachmentsRequest } from "../models/operations/getv1companiesattachments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompanyAttachmentsGetListQueryData =
-  GetV1CompaniesAttachmentsResponse;
+import {
+  buildCompanyAttachmentsGetListQuery,
+  CompanyAttachmentsGetListQueryData,
+  prefetchCompanyAttachmentsGetList,
+  queryKeyCompanyAttachmentsGetList,
+} from "./companyAttachmentsGetList.core.js";
+export {
+  buildCompanyAttachmentsGetListQuery,
+  type CompanyAttachmentsGetListQueryData,
+  prefetchCompanyAttachmentsGetList,
+  queryKeyCompanyAttachmentsGetList,
+};
 
 /**
  * Get List of Company Attachments
@@ -78,19 +77,6 @@ export function useCompanyAttachmentsGetListSuspense(
   });
 }
 
-export function prefetchCompanyAttachmentsGetList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesAttachmentsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompanyAttachmentsGetListQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setCompanyAttachmentsGetListData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,49 +119,4 @@ export function invalidateAllCompanyAttachmentsGetList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "companyAttachments", "getList"],
   });
-}
-
-export function buildCompanyAttachmentsGetListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesAttachmentsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompanyAttachmentsGetListQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompanyAttachmentsGetList(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companyAttachmentsGetListQueryFn(
-      ctx,
-    ): Promise<CompanyAttachmentsGetListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companyAttachmentsGetList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompanyAttachmentsGetList(
-  companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "companyAttachments",
-    "getList",
-    companyId,
-    parameters,
-  ];
 }

@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails } from "../funcs/employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
-  GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse,
-} from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest } from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData =
-  GetV1CompaniesCompanyIdEmployeesPaymentDetailsResponse;
+import {
+  buildEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQuery,
+  EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData,
+  prefetchEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+  queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+} from "./employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails.core.js";
+export {
+  buildEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQuery,
+  type EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData,
+  prefetchEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+  queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
+};
 
 /**
  * Get employee payment details for a company
@@ -102,19 +101,6 @@ export function useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsSuspen
   });
 }
 
-export function prefetchEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsData(
   client: QueryClient,
   queryKeyBase: [
@@ -180,69 +166,4 @@ export function invalidateAllEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDet
       "getV1CompaniesCompanyIdEmployeesPaymentDetails",
     ],
   });
-}
-
-export function buildEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData
-  >;
-} {
-  return {
-    queryKey: queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
-      request.companyId,
-      {
-        employeeUuid: request.employeeUuid,
-        payrollUuid: request.payrollUuid,
-        page: request.page,
-        per: request.per,
-        xGustoAPIVersion: request.xGustoAPIVersion,
-      },
-    ),
-    queryFn:
-      async function employeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryFn(
-        ctx,
-      ): Promise<
-        EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
-  companyId: string,
-  parameters: {
-    employeeUuid?: string | undefined;
-    payrollUuid?: string | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Employees",
-    "getV1CompaniesCompanyIdEmployeesPaymentDetails",
-    companyId,
-    parameters,
-  ];
 }

@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { introspectionGetInfo } from "../funcs/introspectionGetInfo.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1TokenInfoRequest,
-  GetV1TokenInfoResponse,
-} from "../models/operations/getv1tokeninfo.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1TokenInfoRequest } from "../models/operations/getv1tokeninfo.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type IntrospectionGetInfoQueryData = GetV1TokenInfoResponse;
+import {
+  buildIntrospectionGetInfoQuery,
+  IntrospectionGetInfoQueryData,
+  prefetchIntrospectionGetInfo,
+  queryKeyIntrospectionGetInfo,
+} from "./introspectionGetInfo.core.js";
+export {
+  buildIntrospectionGetInfoQuery,
+  type IntrospectionGetInfoQueryData,
+  prefetchIntrospectionGetInfo,
+  queryKeyIntrospectionGetInfo,
+};
 
 /**
  * Get info about the current access token
@@ -73,19 +73,6 @@ export function useIntrospectionGetInfoSuspense(
   });
 }
 
-export function prefetchIntrospectionGetInfo(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1TokenInfoRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildIntrospectionGetInfoQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setIntrospectionGetInfoData(
   client: QueryClient,
   queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
@@ -122,42 +109,4 @@ export function invalidateAllIntrospectionGetInfo(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Introspection", "getInfo"],
   });
-}
-
-export function buildIntrospectionGetInfoQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1TokenInfoRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<IntrospectionGetInfoQueryData>;
-} {
-  return {
-    queryKey: queryKeyIntrospectionGetInfo({
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function introspectionGetInfoQueryFn(
-      ctx,
-    ): Promise<IntrospectionGetInfoQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(introspectionGetInfo(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyIntrospectionGetInfo(
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return ["@gusto/embedded-api", "Introspection", "getInfo", parameters];
 }

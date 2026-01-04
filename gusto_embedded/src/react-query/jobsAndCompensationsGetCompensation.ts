@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { jobsAndCompensationsGetCompensation } from "../funcs/jobsAndCompensationsGetCompensation.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompensationsCompensationIdRequest,
-  GetV1CompensationsCompensationIdResponse,
-} from "../models/operations/getv1compensationscompensationid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompensationsCompensationIdRequest } from "../models/operations/getv1compensationscompensationid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type JobsAndCompensationsGetCompensationQueryData =
-  GetV1CompensationsCompensationIdResponse;
+import {
+  buildJobsAndCompensationsGetCompensationQuery,
+  JobsAndCompensationsGetCompensationQueryData,
+  prefetchJobsAndCompensationsGetCompensation,
+  queryKeyJobsAndCompensationsGetCompensation,
+} from "./jobsAndCompensationsGetCompensation.core.js";
+export {
+  buildJobsAndCompensationsGetCompensationQuery,
+  type JobsAndCompensationsGetCompensationQueryData,
+  prefetchJobsAndCompensationsGetCompensation,
+  queryKeyJobsAndCompensationsGetCompensation,
+};
 
 /**
  * Get a compensation
@@ -77,19 +76,6 @@ export function useJobsAndCompensationsGetCompensationSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchJobsAndCompensationsGetCompensation(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompensationsCompensationIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildJobsAndCompensationsGetCompensationQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -142,50 +128,4 @@ export function invalidateAllJobsAndCompensationsGetCompensation(
       "getCompensation",
     ],
   });
-}
-
-export function buildJobsAndCompensationsGetCompensationQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompensationsCompensationIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<JobsAndCompensationsGetCompensationQueryData>;
-} {
-  return {
-    queryKey: queryKeyJobsAndCompensationsGetCompensation(
-      request.compensationId,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function jobsAndCompensationsGetCompensationQueryFn(
-      ctx,
-    ): Promise<JobsAndCompensationsGetCompensationQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(jobsAndCompensationsGetCompensation(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyJobsAndCompensationsGetCompensation(
-  compensationId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "jobsAndCompensations",
-    "getCompensation",
-    compensationId,
-    parameters,
-  ];
 }

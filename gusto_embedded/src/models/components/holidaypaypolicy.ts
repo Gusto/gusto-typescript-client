@@ -68,6 +68,15 @@ export type Thanksgiving = {
   date?: string | undefined;
 };
 
+export type ChristmasDay = {
+  selected?: boolean | undefined;
+  name?: string | undefined;
+  date?: string | undefined;
+};
+
+/**
+ * List of the eleven supported federal holidays and their details
+ */
 export type FederalHolidays = {
   newYearsDay?: NewYearsDay | undefined;
   mlkDay?: MlkDay | undefined;
@@ -79,6 +88,7 @@ export type FederalHolidays = {
   columbusDay?: ColumbusDay | undefined;
   veteransDay?: VeteransDay | undefined;
   thanksgiving?: Thanksgiving | undefined;
+  christmasDay?: ChristmasDay | undefined;
 };
 
 export type HolidayPayPolicyEmployees = {
@@ -100,9 +110,9 @@ export type HolidayPayPolicy = {
   /**
    * List of the eleven supported federal holidays and their details
    */
-  federalHolidays: Array<FederalHolidays>;
+  federalHolidays: FederalHolidays;
   /**
-   * List of employee uuids under a time off policy
+   * List of employee uuids under a holiday pay policy
    */
   employees: Array<HolidayPayPolicyEmployees>;
 };
@@ -315,6 +325,27 @@ export function thanksgivingFromJSON(
 }
 
 /** @internal */
+export const ChristmasDay$inboundSchema: z.ZodType<
+  ChristmasDay,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  selected: z.boolean().optional(),
+  name: z.string().optional(),
+  date: z.string().optional(),
+});
+
+export function christmasDayFromJSON(
+  jsonString: string,
+): SafeParseResult<ChristmasDay, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChristmasDay$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChristmasDay' from JSON`,
+  );
+}
+
+/** @internal */
 export const FederalHolidays$inboundSchema: z.ZodType<
   FederalHolidays,
   z.ZodTypeDef,
@@ -330,6 +361,7 @@ export const FederalHolidays$inboundSchema: z.ZodType<
   columbus_day: z.lazy(() => ColumbusDay$inboundSchema).optional(),
   veterans_day: z.lazy(() => VeteransDay$inboundSchema).optional(),
   thanksgiving: z.lazy(() => Thanksgiving$inboundSchema).optional(),
+  christmas_day: z.lazy(() => ChristmasDay$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "new_years_day": "newYearsDay",
@@ -340,6 +372,7 @@ export const FederalHolidays$inboundSchema: z.ZodType<
     "labor_day": "laborDay",
     "columbus_day": "columbusDay",
     "veterans_day": "veteransDay",
+    "christmas_day": "christmasDay",
   });
 });
 
@@ -380,7 +413,7 @@ export const HolidayPayPolicy$inboundSchema: z.ZodType<
 > = z.object({
   version: z.string(),
   company_uuid: z.string(),
-  federal_holidays: z.array(z.lazy(() => FederalHolidays$inboundSchema)),
+  federal_holidays: z.lazy(() => FederalHolidays$inboundSchema),
   employees: z.array(z.lazy(() => HolidayPayPolicyEmployees$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {

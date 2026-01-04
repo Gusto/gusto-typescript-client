@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { taxRequirementsGetAll } from "../funcs/taxRequirementsGetAll.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyUuidTaxRequirementsRequest,
-  GetV1CompaniesCompanyUuidTaxRequirementsResponse,
-} from "../models/operations/getv1companiescompanyuuidtaxrequirements.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyUuidTaxRequirementsRequest } from "../models/operations/getv1companiescompanyuuidtaxrequirements.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type TaxRequirementsGetAllQueryData =
-  GetV1CompaniesCompanyUuidTaxRequirementsResponse;
+import {
+  buildTaxRequirementsGetAllQuery,
+  prefetchTaxRequirementsGetAll,
+  queryKeyTaxRequirementsGetAll,
+  TaxRequirementsGetAllQueryData,
+} from "./taxRequirementsGetAll.core.js";
+export {
+  buildTaxRequirementsGetAllQuery,
+  prefetchTaxRequirementsGetAll,
+  queryKeyTaxRequirementsGetAll,
+  type TaxRequirementsGetAllQueryData,
+};
 
 /**
  * Get All Tax Requirement States
@@ -78,19 +77,6 @@ export function useTaxRequirementsGetAllSuspense(
   });
 }
 
-export function prefetchTaxRequirementsGetAll(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyUuidTaxRequirementsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildTaxRequirementsGetAllQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setTaxRequirementsGetAllData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,49 +119,4 @@ export function invalidateAllTaxRequirementsGetAll(
     ...filters,
     queryKey: ["@gusto/embedded-api", "taxRequirements", "getAll"],
   });
-}
-
-export function buildTaxRequirementsGetAllQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyUuidTaxRequirementsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<TaxRequirementsGetAllQueryData>;
-} {
-  return {
-    queryKey: queryKeyTaxRequirementsGetAll(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function taxRequirementsGetAllQueryFn(
-      ctx,
-    ): Promise<TaxRequirementsGetAllQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(taxRequirementsGetAll(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyTaxRequirementsGetAll(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "taxRequirements",
-    "getAll",
-    companyUuid,
-    parameters,
-  ];
 }

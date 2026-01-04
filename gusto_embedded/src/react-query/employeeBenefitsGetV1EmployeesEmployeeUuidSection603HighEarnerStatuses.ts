@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses } from "../funcs/employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
-  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse,
 } from "../models/operations/getv1employeesemployeeuuidsection603highearnerstatuses.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData =
-  GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse;
+import {
+  buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQuery,
+  EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData,
+  prefetchEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses,
+  queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses,
+} from "./employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses.core.js";
+export {
+  buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQuery,
+  type EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData,
+  prefetchEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses,
+  queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses,
+};
 
 /**
  * Get all Section 603 high earner statuses for an employee
@@ -91,19 +92,6 @@ export function useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarne
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -170,62 +158,4 @@ export function invalidateAllEmployeeBenefitsGetV1EmployeesEmployeeUuidSection60
       "getV1EmployeesEmployeeUuidSection603HighEarnerStatuses",
     ],
   });
-}
-
-export function buildEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData
-  >;
-} {
-  return {
-    queryKey:
-      queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
-        request.employeeUuid,
-        { xGustoAPIVersion: request.xGustoAPIVersion },
-      ),
-    queryFn:
-      async function employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryFn(
-        ctx,
-      ): Promise<
-        EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          employeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
-  employeeUuid: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeBenefits",
-    "getV1EmployeesEmployeeUuidSection603HighEarnerStatuses",
-    employeeUuid,
-    parameters,
-  ];
 }
