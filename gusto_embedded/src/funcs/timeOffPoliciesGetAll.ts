@@ -21,16 +21,20 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetCompaniesCompanyUuidTimeOffPoliciesRequest,
-  GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema,
-  GetCompaniesCompanyUuidTimeOffPoliciesResponse,
-  GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema,
-} from "../models/operations/getcompaniescompanyuuidtimeoffpolicies.js";
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
+  GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
+  GetV1CompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema,
+  GetV1CompaniesCompanyUuidTimeOffPoliciesResponse,
+  GetV1CompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema,
+} from "../models/operations/getv1companiescompanyuuidtimeoffpolicies.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get all time off policies
+ * Get all time off policies for a company
  *
  * @remarks
  * Get all time off policies for a company
@@ -39,11 +43,12 @@ import { Result } from "../types/fp.js";
  */
 export function timeOffPoliciesGetAll(
   client: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+    GetV1CompaniesCompanyUuidTimeOffPoliciesResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -63,12 +68,13 @@ export function timeOffPoliciesGetAll(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidTimeOffPoliciesRequest,
+  request: GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+      GetV1CompaniesCompanyUuidTimeOffPoliciesResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -84,7 +90,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      GetCompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema.parse(value),
+      GetV1CompaniesCompanyUuidTimeOffPoliciesRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -122,7 +130,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-companies-company_uuid-time_off_policies",
+    operationID: "get-v1-companies-company_uuid-time_off_policies",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -165,7 +173,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    GetCompaniesCompanyUuidTimeOffPoliciesResponse,
+    GetV1CompaniesCompanyUuidTimeOffPoliciesResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -175,10 +184,13 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, GetCompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema, {
-      key: "Time-Off-Policy-List",
-    }),
-    M.fail([404, "4XX"]),
+    M.json(
+      200,
+      GetV1CompaniesCompanyUuidTimeOffPoliciesResponse$inboundSchema,
+      { key: "Time-Off-Policies" },
+    ),
+    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

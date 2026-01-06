@@ -33,7 +33,7 @@ export type Location = {
   city?: string | undefined;
   state?: string | undefined;
   zip?: string | undefined;
-  country?: string | undefined;
+  country: string;
   /**
    * Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
    */

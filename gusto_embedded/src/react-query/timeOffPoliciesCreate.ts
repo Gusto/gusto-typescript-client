@@ -12,20 +12,20 @@ import { timeOffPoliciesCreate } from "../funcs/timeOffPoliciesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  PostCompaniesCompanyUuidTimeOffPoliciesRequest,
-  PostCompaniesCompanyUuidTimeOffPoliciesResponse,
-} from "../models/operations/postcompaniescompanyuuidtimeoffpolicies.js";
+  PostV1CompaniesCompanyUuidTimeOffPoliciesRequest,
+  PostV1CompaniesCompanyUuidTimeOffPoliciesResponse,
+} from "../models/operations/postv1companiescompanyuuidtimeoffpolicies.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesCreateMutationVariables = {
-  request: PostCompaniesCompanyUuidTimeOffPoliciesRequest;
+  request: PostV1CompaniesCompanyUuidTimeOffPoliciesRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesCreateMutationData =
-  PostCompaniesCompanyUuidTimeOffPoliciesResponse;
+  PostV1CompaniesCompanyUuidTimeOffPoliciesResponse;
 
 /**
  * Create a time off policy

@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorPaymentMethodGetBankAccounts } from "../funcs/contractorPaymentMethodGetBankAccounts.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorsContractorUuidBankAccountsRequest,
-  GetV1ContractorsContractorUuidBankAccountsResponse,
-} from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorsContractorUuidBankAccountsRequest } from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorPaymentMethodGetBankAccountsQueryData =
-  GetV1ContractorsContractorUuidBankAccountsResponse;
+import {
+  buildContractorPaymentMethodGetBankAccountsQuery,
+  ContractorPaymentMethodGetBankAccountsQueryData,
+  prefetchContractorPaymentMethodGetBankAccounts,
+  queryKeyContractorPaymentMethodGetBankAccounts,
+} from "./contractorPaymentMethodGetBankAccounts.core.js";
+export {
+  buildContractorPaymentMethodGetBankAccountsQuery,
+  type ContractorPaymentMethodGetBankAccountsQueryData,
+  prefetchContractorPaymentMethodGetBankAccounts,
+  queryKeyContractorPaymentMethodGetBankAccounts,
+};
 
 /**
  * Get all contractor bank accounts
@@ -83,19 +82,6 @@ export function useContractorPaymentMethodGetBankAccountsSuspense(
   });
 }
 
-export function prefetchContractorPaymentMethodGetBankAccounts(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidBankAccountsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorPaymentMethodGetBankAccountsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorPaymentMethodGetBankAccountsData(
   client: QueryClient,
   queryKeyBase: [
@@ -145,50 +131,4 @@ export function invalidateAllContractorPaymentMethodGetBankAccounts(
       "getBankAccounts",
     ],
   });
-}
-
-export function buildContractorPaymentMethodGetBankAccountsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidBankAccountsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorPaymentMethodGetBankAccountsQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorPaymentMethodGetBankAccounts(
-      request.contractorUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function contractorPaymentMethodGetBankAccountsQueryFn(
-      ctx,
-    ): Promise<ContractorPaymentMethodGetBankAccountsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorPaymentMethodGetBankAccounts(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorPaymentMethodGetBankAccounts(
-  contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorPaymentMethod",
-    "getBankAccounts",
-    contractorUuid,
-    parameters,
-  ];
 }

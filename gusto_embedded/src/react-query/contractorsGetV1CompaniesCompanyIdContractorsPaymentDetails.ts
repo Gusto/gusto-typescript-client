@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails } from "../funcs/contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
-  GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse,
 } from "../models/operations/getv1companiescompanyidcontractorspaymentdetails.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData =
-  GetV1CompaniesCompanyIdContractorsPaymentDetailsResponse;
+import {
+  buildContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQuery,
+  ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData,
+  prefetchContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+  queryKeyContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+} from "./contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails.core.js";
+export {
+  buildContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQuery,
+  type ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData,
+  prefetchContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+  queryKeyContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
+};
 
 /**
  * List contractor payment details
@@ -136,19 +137,6 @@ export function useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsSu
   });
 }
 
-export function prefetchContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsData(
   client: QueryClient,
   queryKeyBase: [
@@ -215,68 +203,4 @@ export function invalidateAllContractorsGetV1CompaniesCompanyIdContractorsPaymen
       "getV1CompaniesCompanyIdContractorsPaymentDetails",
     ],
   });
-}
-
-export function buildContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData
-  >;
-} {
-  return {
-    queryKey:
-      queryKeyContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
-        request.companyId,
-        {
-          contractorUuid: request.contractorUuid,
-          contractorPaymentGroupUuid: request.contractorPaymentGroupUuid,
-          xGustoAPIVersion: request.xGustoAPIVersion,
-        },
-      ),
-    queryFn:
-      async function contractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryFn(
-        ctx,
-      ): Promise<
-        ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          contractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
-  companyId: string,
-  parameters: {
-    contractorUuid?: string | undefined;
-    contractorPaymentGroupUuid?: string | undefined;
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Contractors",
-    "getV1CompaniesCompanyIdContractorsPaymentDetails",
-    companyId,
-    parameters,
-  ];
 }

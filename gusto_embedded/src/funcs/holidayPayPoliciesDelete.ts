@@ -21,15 +21,11 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
-import {
-  DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
-  DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema,
-  DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
-  DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
-} from "../models/operations/deletecompaniescompanyuuidholidaypaypolicy.js";
+  DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest,
+  DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema,
+  DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+  DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
+} from "../models/operations/deletev1companiescompanyuuidholidaypaypolicy.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -43,12 +39,11 @@ import { Result } from "../types/fp.js";
  */
 export function holidayPayPoliciesDelete(
   client: GustoEmbeddedCore,
-  request: DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
-    | UnprocessableEntityErrorObject
+    DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -68,13 +63,12 @@ export function holidayPayPoliciesDelete(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: DeleteCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
-      | UnprocessableEntityErrorObject
+      DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse,
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -90,7 +84,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      DeleteCompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
+      DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest$outboundSchema.parse(
         value,
       ),
     "Input validation failed",
@@ -113,7 +107,7 @@ async function $do(
   );
 
   const headers = new Headers(compactMap({
-    Accept: "application/json",
+    Accept: "*/*",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -130,7 +124,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "delete-companies-company_uuid-holiday_pay_policy",
+    operationID: "delete-v1-companies-company_uuid-holiday_pay_policy",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -173,8 +167,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    DeleteCompaniesCompanyUuidHolidayPayPolicyResponse,
-    | UnprocessableEntityErrorObject
+    DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -186,10 +179,9 @@ async function $do(
   >(
     M.nil(
       204,
-      DeleteCompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
+      DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

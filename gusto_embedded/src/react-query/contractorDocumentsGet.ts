@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorDocumentsGet } from "../funcs/contractorDocumentsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorDocumentRequest,
-  GetV1ContractorDocumentResponse,
-} from "../models/operations/getv1contractordocument.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorDocumentRequest } from "../models/operations/getv1contractordocument.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorDocumentsGetQueryData = GetV1ContractorDocumentResponse;
+import {
+  buildContractorDocumentsGetQuery,
+  ContractorDocumentsGetQueryData,
+  prefetchContractorDocumentsGet,
+  queryKeyContractorDocumentsGet,
+} from "./contractorDocumentsGet.core.js";
+export {
+  buildContractorDocumentsGetQuery,
+  type ContractorDocumentsGetQueryData,
+  prefetchContractorDocumentsGet,
+  queryKeyContractorDocumentsGet,
+};
 
 /**
  * Get a contractor document
@@ -77,19 +77,6 @@ export function useContractorDocumentsGetSuspense(
   });
 }
 
-export function prefetchContractorDocumentsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorDocumentRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorDocumentsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorDocumentsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -132,49 +119,4 @@ export function invalidateAllContractorDocumentsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "contractorDocuments", "get"],
   });
-}
-
-export function buildContractorDocumentsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorDocumentRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorDocumentsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorDocumentsGet(request.documentUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function contractorDocumentsGetQueryFn(
-      ctx,
-    ): Promise<ContractorDocumentsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorDocumentsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorDocumentsGet(
-  documentUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorDocuments",
-    "get",
-    documentUuid,
-    parameters,
-  ];
 }

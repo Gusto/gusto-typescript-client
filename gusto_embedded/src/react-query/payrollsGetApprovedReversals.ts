@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { payrollsGetApprovedReversals } from "../funcs/payrollsGetApprovedReversals.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdPayrollReversalsRequest,
-  GetV1CompaniesCompanyIdPayrollReversalsResponse,
-} from "../models/operations/getv1companiescompanyidpayrollreversals.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdPayrollReversalsRequest } from "../models/operations/getv1companiescompanyidpayrollreversals.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PayrollsGetApprovedReversalsQueryData =
-  GetV1CompaniesCompanyIdPayrollReversalsResponse;
+import {
+  buildPayrollsGetApprovedReversalsQuery,
+  PayrollsGetApprovedReversalsQueryData,
+  prefetchPayrollsGetApprovedReversals,
+  queryKeyPayrollsGetApprovedReversals,
+} from "./payrollsGetApprovedReversals.core.js";
+export {
+  buildPayrollsGetApprovedReversalsQuery,
+  type PayrollsGetApprovedReversalsQueryData,
+  prefetchPayrollsGetApprovedReversals,
+  queryKeyPayrollsGetApprovedReversals,
+};
 
 /**
  * Get approved payroll reversals
@@ -75,19 +74,6 @@ export function usePayrollsGetApprovedReversalsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayrollsGetApprovedReversals(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayrollsGetApprovedReversalsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -141,55 +127,4 @@ export function invalidateAllPayrollsGetApprovedReversals(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Payrolls", "getApprovedReversals"],
   });
-}
-
-export function buildPayrollsGetApprovedReversalsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PayrollsGetApprovedReversalsQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayrollsGetApprovedReversals(request.companyId, {
-      page: request.page,
-      per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function payrollsGetApprovedReversalsQueryFn(
-      ctx,
-    ): Promise<PayrollsGetApprovedReversalsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payrollsGetApprovedReversals(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayrollsGetApprovedReversals(
-  companyId: string,
-  parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Payrolls",
-    "getApprovedReversals",
-    companyId,
-    parameters,
-  ];
 }

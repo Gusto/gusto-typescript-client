@@ -18,7 +18,7 @@ export type ContractorAddress = {
   city?: string | null | undefined;
   state?: string | null | undefined;
   zip?: string | null | undefined;
-  country?: string | null | undefined;
+  country: string | null;
   /**
    * The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.
    */

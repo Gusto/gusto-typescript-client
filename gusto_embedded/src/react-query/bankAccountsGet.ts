@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { bankAccountsGet } from "../funcs/bankAccountsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdBankAccountsRequest,
-  GetV1CompaniesCompanyIdBankAccountsResponse,
 } from "../models/operations/getv1companiescompanyidbankaccounts.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type BankAccountsGetQueryData =
-  GetV1CompaniesCompanyIdBankAccountsResponse;
+import {
+  BankAccountsGetQueryData,
+  buildBankAccountsGetQuery,
+  prefetchBankAccountsGet,
+  queryKeyBankAccountsGet,
+} from "./bankAccountsGet.core.js";
+export {
+  type BankAccountsGetQueryData,
+  buildBankAccountsGetQuery,
+  prefetchBankAccountsGet,
+  queryKeyBankAccountsGet,
+};
 
 /**
  * Get all company bank accounts
@@ -75,19 +76,6 @@ export function useBankAccountsGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchBankAccountsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdBankAccountsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildBankAccountsGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -136,45 +124,4 @@ export function invalidateAllBankAccountsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "bankAccounts", "get"],
   });
-}
-
-export function buildBankAccountsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdBankAccountsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<BankAccountsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyBankAccountsGet(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function bankAccountsGetQueryFn(
-      ctx,
-    ): Promise<BankAccountsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(bankAccountsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyBankAccountsGet(
-  companyId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return ["@gusto/embedded-api", "bankAccounts", "get", companyId, parameters];
 }

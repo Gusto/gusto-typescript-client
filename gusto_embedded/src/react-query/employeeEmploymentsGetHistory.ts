@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeEmploymentsGetHistory } from "../funcs/employeeEmploymentsGetHistory.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
-  GetV1EmployeesEmployeeIdEmploymentHistoryResponse,
 } from "../models/operations/getv1employeesemployeeidemploymenthistory.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeEmploymentsGetHistoryQueryData =
-  GetV1EmployeesEmployeeIdEmploymentHistoryResponse;
+import {
+  buildEmployeeEmploymentsGetHistoryQuery,
+  EmployeeEmploymentsGetHistoryQueryData,
+  prefetchEmployeeEmploymentsGetHistory,
+  queryKeyEmployeeEmploymentsGetHistory,
+} from "./employeeEmploymentsGetHistory.core.js";
+export {
+  buildEmployeeEmploymentsGetHistoryQuery,
+  type EmployeeEmploymentsGetHistoryQueryData,
+  prefetchEmployeeEmploymentsGetHistory,
+  queryKeyEmployeeEmploymentsGetHistory,
+};
 
 /**
  * Get employment history for an employee
@@ -75,19 +76,6 @@ export function useEmployeeEmploymentsGetHistorySuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeeEmploymentsGetHistory(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeEmploymentsGetHistoryQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -141,53 +129,4 @@ export function invalidateAllEmployeeEmploymentsGetHistory(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeEmployments", "getHistory"],
   });
-}
-
-export function buildEmployeeEmploymentsGetHistoryQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeEmploymentsGetHistoryQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeEmploymentsGetHistory(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeEmploymentsGetHistoryQueryFn(
-      ctx,
-    ): Promise<EmployeeEmploymentsGetHistoryQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeEmploymentsGetHistory(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeEmploymentsGetHistory(
-  employeeId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeEmployments",
-    "getHistory",
-    employeeId,
-    parameters,
-  ];
 }

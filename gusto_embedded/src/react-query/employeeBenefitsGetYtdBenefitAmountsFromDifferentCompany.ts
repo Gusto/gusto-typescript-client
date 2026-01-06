@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany } from "../funcs/employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
-  GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse,
-} from "../models/operations/getemployeeytdbenefitamountsfromdifferentcompany.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest } from "../models/operations/getemployeeytdbenefitamountsfromdifferentcompany.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData =
-  GetEmployeeYtdBenefitAmountsFromDifferentCompanyResponse;
+import {
+  buildEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQuery,
+  EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData,
+  prefetchEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany,
+  queryKeyEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany,
+} from "./employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany.core.js";
+export {
+  buildEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQuery,
+  type EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData,
+  prefetchEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany,
+  queryKeyEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany,
+};
 
 /**
  * Get year-to-date benefit amounts from a different company
@@ -94,19 +93,6 @@ export function useEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanySuspe
   });
 }
 
-export function prefetchEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyData(
   client: QueryClient,
   queryKeyBase: [
@@ -166,60 +152,4 @@ export function invalidateAllEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCo
       "getYtdBenefitAmountsFromDifferentCompany",
     ],
   });
-}
-
-export function buildEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQuery(
-  client$: GustoEmbeddedCore,
-  request: GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData
-  >;
-} {
-  return {
-    queryKey: queryKeyEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
-      request.employeeId,
-      { taxYear: request.taxYear, xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn:
-      async function employeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryFn(
-        ctx,
-      ): Promise<
-        EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          employeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
-  employeeId: string,
-  parameters: {
-    taxYear?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeBenefits",
-    "getYtdBenefitAmountsFromDifferentCompany",
-    employeeId,
-    parameters,
-  ];
 }

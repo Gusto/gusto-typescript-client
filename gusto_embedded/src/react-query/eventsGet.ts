@@ -5,33 +5,35 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { eventsGet } from "../funcs/eventsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { SortOrder } from "../models/components/sortorder.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetEventsRequest,
-  GetEventsResponse,
   GetEventsSecurity,
 } from "../models/operations/getevents.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EventsGetQueryData = GetEventsResponse;
+import {
+  buildEventsGetQuery,
+  EventsGetQueryData,
+  prefetchEventsGet,
+  queryKeyEventsGet,
+} from "./eventsGet.core.js";
+export {
+  buildEventsGetQuery,
+  type EventsGetQueryData,
+  prefetchEventsGet,
+  queryKeyEventsGet,
+};
 
 /**
  * Get all events
@@ -91,21 +93,6 @@ export function useEventsGetSuspense(
   });
 }
 
-export function prefetchEventsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  security: GetEventsSecurity,
-  request: GetEventsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEventsGetQuery(
-      client$,
-      security,
-      request,
-    ),
-  });
-}
-
 export function setEventsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -153,52 +140,4 @@ export function invalidateAllEventsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Events", "get"],
   });
-}
-
-export function buildEventsGetQuery(
-  client$: GustoEmbeddedCore,
-  security: GetEventsSecurity,
-  request: GetEventsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<EventsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyEventsGet({
-      startingAfterUuid: request.startingAfterUuid,
-      resourceUuid: request.resourceUuid,
-      limit: request.limit,
-      eventType: request.eventType,
-      sortOrder: request.sortOrder,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function eventsGetQueryFn(ctx): Promise<EventsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(eventsGet(
-        client$,
-        security,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEventsGet(
-  parameters: {
-    startingAfterUuid?: string | undefined;
-    resourceUuid?: string | undefined;
-    limit?: string | undefined;
-    eventType?: string | undefined;
-    sortOrder?: SortOrder | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return ["@gusto/embedded-api", "Events", "get", parameters];
 }

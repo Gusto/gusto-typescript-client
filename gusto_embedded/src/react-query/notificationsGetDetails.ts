@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { notificationsGetDetails } from "../funcs/notificationsGetDetails.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetNotificationsNotificationUuidRequest,
-  GetNotificationsNotificationUuidResponse,
-} from "../models/operations/getnotificationsnotificationuuid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetNotificationsNotificationUuidRequest } from "../models/operations/getnotificationsnotificationuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type NotificationsGetDetailsQueryData =
-  GetNotificationsNotificationUuidResponse;
+import {
+  buildNotificationsGetDetailsQuery,
+  NotificationsGetDetailsQueryData,
+  prefetchNotificationsGetDetails,
+  queryKeyNotificationsGetDetails,
+} from "./notificationsGetDetails.core.js";
+export {
+  buildNotificationsGetDetailsQuery,
+  type NotificationsGetDetailsQueryData,
+  prefetchNotificationsGetDetails,
+  queryKeyNotificationsGetDetails,
+};
 
 /**
  * Get a notification's details
@@ -86,19 +85,6 @@ export function useNotificationsGetDetailsSuspense(
   });
 }
 
-export function prefetchNotificationsGetDetails(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetNotificationsNotificationUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildNotificationsGetDetailsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setNotificationsGetDetailsData(
   client: QueryClient,
   queryKeyBase: [
@@ -141,49 +127,4 @@ export function invalidateAllNotificationsGetDetails(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Notifications", "getDetails"],
   });
-}
-
-export function buildNotificationsGetDetailsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetNotificationsNotificationUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<NotificationsGetDetailsQueryData>;
-} {
-  return {
-    queryKey: queryKeyNotificationsGetDetails(request.notificationUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function notificationsGetDetailsQueryFn(
-      ctx,
-    ): Promise<NotificationsGetDetailsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(notificationsGetDetails(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyNotificationsGetDetails(
-  notificationUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Notifications",
-    "getDetails",
-    notificationUuid,
-    parameters,
-  ];
 }

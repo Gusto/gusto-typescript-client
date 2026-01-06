@@ -19,11 +19,11 @@ export type Authentication = {
   /**
    * The literal string 'bearer'
    */
-  tokenType?: string | undefined;
+  tokenType: string;
   /**
    * The TTL of this token. After this amount of time, you must hit the refresh token endpoint to continue making authenticated requests.
    */
-  expiresIn?: number | undefined;
+  expiresIn: number;
   /**
    * A token that must be passed to the refresh token endpoint to get a new authenticated token.
    */
@@ -31,7 +31,7 @@ export type Authentication = {
   /**
    * Datetime for when the new access token is created.
    */
-  createdAt?: string | undefined;
+  createdAt?: number | undefined;
   /**
    * All of the scopes for which the access token provides access.
    */
@@ -48,7 +48,7 @@ export const Authentication$inboundSchema: z.ZodType<
   token_type: z.string().default("bearer"),
   expires_in: z.number().default(7200),
   refresh_token: z.string().optional(),
-  created_at: z.string().optional(),
+  created_at: z.number().optional(),
   scope: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

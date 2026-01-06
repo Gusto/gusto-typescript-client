@@ -46,7 +46,7 @@ export type HomeAddress = {
   city?: string | undefined;
   state?: string | undefined;
   zip?: string | undefined;
-  country?: string | undefined;
+  country: string;
 };
 
 /**

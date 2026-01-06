@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorsGetAddress } from "../funcs/contractorsGetAddress.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorsContractorUuidAddressRequest,
-  GetV1ContractorsContractorUuidAddressResponse,
-} from "../models/operations/getv1contractorscontractoruuidaddress.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorsContractorUuidAddressRequest } from "../models/operations/getv1contractorscontractoruuidaddress.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorsGetAddressQueryData =
-  GetV1ContractorsContractorUuidAddressResponse;
+import {
+  buildContractorsGetAddressQuery,
+  ContractorsGetAddressQueryData,
+  prefetchContractorsGetAddress,
+  queryKeyContractorsGetAddress,
+} from "./contractorsGetAddress.core.js";
+export {
+  buildContractorsGetAddressQuery,
+  type ContractorsGetAddressQueryData,
+  prefetchContractorsGetAddress,
+  queryKeyContractorsGetAddress,
+};
 
 /**
  * Get a contractor address
@@ -78,19 +77,6 @@ export function useContractorsGetAddressSuspense(
   });
 }
 
-export function prefetchContractorsGetAddress(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidAddressRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorsGetAddressQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorsGetAddressData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,49 +119,4 @@ export function invalidateAllContractorsGetAddress(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Contractors", "getAddress"],
   });
-}
-
-export function buildContractorsGetAddressQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidAddressRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorsGetAddressQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorsGetAddress(request.contractorUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function contractorsGetAddressQueryFn(
-      ctx,
-    ): Promise<ContractorsGetAddressQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorsGetAddress(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorsGetAddress(
-  contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Contractors",
-    "getAddress",
-    contractorUuid,
-    parameters,
-  ];
 }

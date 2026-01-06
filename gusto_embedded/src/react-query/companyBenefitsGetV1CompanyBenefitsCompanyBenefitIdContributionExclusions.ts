@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "../funcs/companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
-  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
-} from "../models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest } from "../models/operations/getv1companybenefitscompanybenefitidcontributionexclusions.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData =
-  GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse;
+import {
+  buildCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQuery,
+  CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData,
+  prefetchCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions,
+  queryKeyCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions,
+} from "./companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions.core.js";
+export {
+  buildCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQuery,
+  type CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData,
+  prefetchCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions,
+  queryKeyCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions,
+};
 
 /**
  * Get contribution exclusions for a company benefit
@@ -92,19 +91,6 @@ export function useCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributi
   });
 }
 
-export function prefetchCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsData(
   client: QueryClient,
   queryKeyBase: [
@@ -160,58 +146,4 @@ export function invalidateAllCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitId
       "getV1CompanyBenefitsCompanyBenefitIdContributionExclusions",
     ],
   });
-}
-
-export function buildCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData
-  >;
-} {
-  return {
-    queryKey:
-      queryKeyCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
-        request.companyBenefitId,
-        { xGustoAPIVersion: request.xGustoAPIVersion },
-      ),
-    queryFn:
-      async function companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryFn(
-        ctx,
-      ): Promise<
-        CompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusionsQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          companyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyCompanyBenefitsGetV1CompanyBenefitsCompanyBenefitIdContributionExclusions(
-  companyBenefitId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "companyBenefits",
-    "getV1CompanyBenefitsCompanyBenefitIdContributionExclusions",
-    companyBenefitId,
-    parameters,
-  ];
 }

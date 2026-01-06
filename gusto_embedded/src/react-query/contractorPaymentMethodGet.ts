@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorPaymentMethodGet } from "../funcs/contractorPaymentMethodGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorsContractorUuidPaymentMethodRequest,
-  GetV1ContractorsContractorUuidPaymentMethodResponse,
-} from "../models/operations/getv1contractorscontractoruuidpaymentmethod.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorsContractorUuidPaymentMethodRequest } from "../models/operations/getv1contractorscontractoruuidpaymentmethod.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorPaymentMethodGetQueryData =
-  GetV1ContractorsContractorUuidPaymentMethodResponse;
+import {
+  buildContractorPaymentMethodGetQuery,
+  ContractorPaymentMethodGetQueryData,
+  prefetchContractorPaymentMethodGet,
+  queryKeyContractorPaymentMethodGet,
+} from "./contractorPaymentMethodGet.core.js";
+export {
+  buildContractorPaymentMethodGetQuery,
+  type ContractorPaymentMethodGetQueryData,
+  prefetchContractorPaymentMethodGet,
+  queryKeyContractorPaymentMethodGet,
+};
 
 /**
  * Get a contractor's payment method
@@ -82,19 +81,6 @@ export function useContractorPaymentMethodGetSuspense(
   });
 }
 
-export function prefetchContractorPaymentMethodGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidPaymentMethodRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorPaymentMethodGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorPaymentMethodGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -137,49 +123,4 @@ export function invalidateAllContractorPaymentMethodGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "contractorPaymentMethod", "get"],
   });
-}
-
-export function buildContractorPaymentMethodGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorsContractorUuidPaymentMethodRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorPaymentMethodGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorPaymentMethodGet(request.contractorUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function contractorPaymentMethodGetQueryFn(
-      ctx,
-    ): Promise<ContractorPaymentMethodGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorPaymentMethodGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorPaymentMethodGet(
-  contractorUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorPaymentMethod",
-    "get",
-    contractorUuid,
-    parameters,
-  ];
 }

@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeesGetOnboardingStatus } from "../funcs/employeesGetOnboardingStatus.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdOnboardingStatusRequest,
-  GetV1EmployeesEmployeeIdOnboardingStatusResponse,
 } from "../models/operations/getv1employeesemployeeidonboardingstatus.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeesGetOnboardingStatusQueryData =
-  GetV1EmployeesEmployeeIdOnboardingStatusResponse;
+import {
+  buildEmployeesGetOnboardingStatusQuery,
+  EmployeesGetOnboardingStatusQueryData,
+  prefetchEmployeesGetOnboardingStatus,
+  queryKeyEmployeesGetOnboardingStatus,
+} from "./employeesGetOnboardingStatus.core.js";
+export {
+  buildEmployeesGetOnboardingStatusQuery,
+  type EmployeesGetOnboardingStatusQueryData,
+  prefetchEmployeesGetOnboardingStatus,
+  queryKeyEmployeesGetOnboardingStatus,
+};
 
 /**
  * Get the employee's onboarding status
@@ -150,19 +151,6 @@ export function useEmployeesGetOnboardingStatusSuspense(
   });
 }
 
-export function prefetchEmployeesGetOnboardingStatus(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeesGetOnboardingStatusQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeesGetOnboardingStatusData(
   client: QueryClient,
   queryKeyBase: [
@@ -213,53 +201,4 @@ export function invalidateAllEmployeesGetOnboardingStatus(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Employees", "getOnboardingStatus"],
   });
-}
-
-export function buildEmployeesGetOnboardingStatusQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeesGetOnboardingStatusQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeesGetOnboardingStatus(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeesGetOnboardingStatusQueryFn(
-      ctx,
-    ): Promise<EmployeesGetOnboardingStatusQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeesGetOnboardingStatus(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeesGetOnboardingStatus(
-  employeeId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Employees",
-    "getOnboardingStatus",
-    employeeId,
-    parameters,
-  ];
 }

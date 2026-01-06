@@ -29,7 +29,7 @@ export type PaymentMethodBankAccount = {
    */
   priority?: number | undefined;
   /**
-   * The cents amount allocated for each payment split
+   * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the percentage value (e.g., 60 for 60%).
    */
   splitAmount?: number | null | undefined;
 };

@@ -5,32 +5,34 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { invoicesGet } from "../funcs/invoicesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetInvoicesInvoicePeriodRequest,
-  GetInvoicesInvoicePeriodResponse,
   GetInvoicesInvoicePeriodSecurity,
 } from "../models/operations/getinvoicesinvoiceperiod.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type InvoicesGetQueryData = GetInvoicesInvoicePeriodResponse;
+import {
+  buildInvoicesGetQuery,
+  InvoicesGetQueryData,
+  prefetchInvoicesGet,
+  queryKeyInvoicesGet,
+} from "./invoicesGet.core.js";
+export {
+  buildInvoicesGetQuery,
+  type InvoicesGetQueryData,
+  prefetchInvoicesGet,
+  queryKeyInvoicesGet,
+};
 
 /**
  * Retrieve invoicing data for companies
@@ -90,21 +92,6 @@ export function useInvoicesGetSuspense(
   });
 }
 
-export function prefetchInvoicesGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  security: GetInvoicesInvoicePeriodSecurity,
-  request: GetInvoicesInvoicePeriodRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildInvoicesGetQuery(
-      client$,
-      security,
-      request,
-    ),
-  });
-}
-
 export function setInvoicesGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -152,51 +139,4 @@ export function invalidateAllInvoicesGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Invoices", "get"],
   });
-}
-
-export function buildInvoicesGetQuery(
-  client$: GustoEmbeddedCore,
-  security: GetInvoicesInvoicePeriodSecurity,
-  request: GetInvoicesInvoicePeriodRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<InvoicesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyInvoicesGet(request.invoicePeriod, {
-      page: request.page,
-      per: request.per,
-      companyUuids: request.companyUuids,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function invoicesGetQueryFn(
-      ctx,
-    ): Promise<InvoicesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(invoicesGet(
-        client$,
-        security,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyInvoicesGet(
-  invoicePeriod: string,
-  parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
-    companyUuids?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return ["@gusto/embedded-api", "Invoices", "get", invoicePeriod, parameters];
 }

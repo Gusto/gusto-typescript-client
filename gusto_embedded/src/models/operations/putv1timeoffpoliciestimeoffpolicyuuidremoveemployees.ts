@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,52 +15,70 @@ import {
   TimeOffPolicy,
   TimeOffPolicy$inboundSchema,
 } from "../components/timeoffpolicy.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion
+  >;
+
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees = {
-  uuid?: string | undefined;
+  /**
+   * The UUID of the employee
+   */
+  uuid: string;
 };
 
-/**
- * A list of employee objects containing the employee uuid
- */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody = {
-  employees?:
-    | Array<PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees>
-    | undefined;
+  employees: Array<
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees
+  >;
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest = {
   /**
-   * The UUID of the company time off policy
-   */
-  timeOffPolicyUuid: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion
+    | undefined;
   /**
-   * A list of employee objects containing the employee uuid
+   * The UUID of the time off policy
    */
+  timeOffPolicyUuid: string;
   requestBody: PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody;
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * OK
+   * successful
    */
   timeOffPolicy?: TimeOffPolicy | undefined;
 };
 
 /** @internal */
+export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$Outbound =
   {
-    uuid?: string | undefined;
+    uuid: string;
   };
 
 /** @internal */
@@ -69,7 +88,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$outbo
     z.ZodTypeDef,
     PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees
   > = z.object({
-    uuid: z.string().optional(),
+    uuid: z.string(),
   });
 
 export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployeesToJSON(
@@ -85,11 +104,9 @@ export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployeesToJ
 /** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound =
   {
-    employees?:
-      | Array<
-        PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$Outbound
-      >
-      | undefined;
+    employees: Array<
+      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$Outbound
+    >;
   };
 
 /** @internal */
@@ -103,7 +120,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$out
       z.lazy(() =>
         PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesEmployees$outboundSchema
       ),
-    ).optional(),
+    ),
   });
 
 export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBodyToJSON(
@@ -119,8 +136,8 @@ export function putV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBodyT
 /** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$Outbound =
   {
-    time_off_policy_uuid: string;
     "X-Gusto-API-Version": string;
+    time_off_policy_uuid: string;
     RequestBody:
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$Outbound;
   };
@@ -132,15 +149,17 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest$outboun
     z.ZodTypeDef,
     PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     timeOffPolicyUuid: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequestBody$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      timeOffPolicyUuid: "time_off_policy_uuid",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      timeOffPolicyUuid: "time_off_policy_uuid",
       requestBody: "RequestBody",
     });
   });

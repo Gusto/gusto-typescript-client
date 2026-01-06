@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { RFCDate } from "../../types/rfcdate.js";
 
 /**
  * A single tier of a tiered matching scheme.
@@ -171,6 +172,14 @@ export type EmployeeBenefitForCompanyBenefit = {
    */
   contributeAsPercentage?: boolean | undefined;
   /**
+   * The date the employee benefit will start.
+   */
+  effectiveDate?: RFCDate | undefined;
+  /**
+   * The date the employee benefit will expire. A null value indicates the benefit will not expire.
+   */
+  expirationDate?: RFCDate | null | undefined;
+  /**
    * The UUID of the employee to which the benefit belongs.
    */
   employeeUuid: string;
@@ -299,6 +308,8 @@ export type EmployeeBenefitForCompanyBenefit$Outbound = {
   coverage_salary_multiplier: string | null;
   company_contribution: string;
   contribute_as_percentage: boolean;
+  effective_date?: string | undefined;
+  expiration_date?: string | null | undefined;
   employee_uuid: string;
 };
 
@@ -329,6 +340,9 @@ export const EmployeeBenefitForCompanyBenefit$outboundSchema: z.ZodType<
   coverageSalaryMultiplier: z.nullable(z.string().default("0.00")),
   companyContribution: z.string().default("0.00"),
   contributeAsPercentage: z.boolean().default(false),
+  effectiveDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+  expirationDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString()))
+    .optional(),
   employeeUuid: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -344,6 +358,8 @@ export const EmployeeBenefitForCompanyBenefit$outboundSchema: z.ZodType<
     coverageSalaryMultiplier: "coverage_salary_multiplier",
     companyContribution: "company_contribution",
     contributeAsPercentage: "contribute_as_percentage",
+    effectiveDate: "effective_date",
+    expirationDate: "expiration_date",
     employeeUuid: "employee_uuid",
   });
 });

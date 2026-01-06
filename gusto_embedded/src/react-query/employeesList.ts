@@ -5,32 +5,34 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeesList } from "../funcs/employeesList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdEmployeesRequest,
-  GetV1CompaniesCompanyIdEmployeesResponse,
   Include,
 } from "../models/operations/getv1companiescompanyidemployees.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeesListQueryData = GetV1CompaniesCompanyIdEmployeesResponse;
+import {
+  buildEmployeesListQuery,
+  EmployeesListQueryData,
+  prefetchEmployeesList,
+  queryKeyEmployeesList,
+} from "./employeesList.core.js";
+export {
+  buildEmployeesListQuery,
+  type EmployeesListQueryData,
+  prefetchEmployeesList,
+  queryKeyEmployeesList,
+};
 
 /**
  * Get employees of a company
@@ -75,19 +77,6 @@ export function useEmployeesListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeesList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdEmployeesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeesListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -160,69 +149,4 @@ export function invalidateAllEmployeesList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Employees", "list"],
   });
-}
-
-export function buildEmployeesListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdEmployeesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<EmployeesListQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeesList(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-      locationUuid: request.locationUuid,
-      payrollUuid: request.payrollUuid,
-      searchTerm: request.searchTerm,
-      sortBy: request.sortBy,
-      include: request.include,
-      onboarded: request.onboarded,
-      onboardedActive: request.onboardedActive,
-      terminated: request.terminated,
-      terminatedToday: request.terminatedToday,
-      uuids: request.uuids,
-      page: request.page,
-      per: request.per,
-    }),
-    queryFn: async function employeesListQueryFn(
-      ctx,
-    ): Promise<EmployeesListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeesList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeesList(
-  companyId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion
-      | undefined;
-    locationUuid?: string | undefined;
-    payrollUuid?: string | undefined;
-    searchTerm?: string | undefined;
-    sortBy?: string | undefined;
-    include?: Array<Include> | undefined;
-    onboarded?: boolean | undefined;
-    onboardedActive?: boolean | undefined;
-    terminated?: boolean | undefined;
-    terminatedToday?: boolean | undefined;
-    uuids?: Array<string> | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-  },
-): QueryKey {
-  return ["@gusto/embedded-api", "Employees", "list", companyId, parameters];
 }

@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements } from "../funcs/payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
-  GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse,
 } from "../models/operations/getv1companiescompanyidpayrollsidpartnerdisbursements.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData =
-  GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse;
+import {
+  buildPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQuery,
+  PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData,
+  prefetchPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements,
+  queryKeyPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements,
+} from "./payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.core.js";
+export {
+  buildPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQuery,
+  type PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData,
+  prefetchPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements,
+  queryKeyPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements,
+};
 
 /**
  * Get partner disbursements for a payroll
@@ -85,19 +86,6 @@ export function usePayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -165,65 +153,4 @@ export function invalidateAllPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDis
       "getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements",
     ],
   });
-}
-
-export function buildPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData
-  >;
-} {
-  return {
-    queryKey:
-      queryKeyPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-        request.companyId,
-        request.id,
-        { xGustoAPIVersion: request.xGustoAPIVersion },
-      ),
-    queryFn:
-      async function payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryFn(
-        ctx,
-      ): Promise<
-        PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          payrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
-  companyId: string,
-  id: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Payrolls",
-    "getV1CompaniesCompanyIdPayrollsIdPartnerDisbursements",
-    companyId,
-    id,
-    parameters,
-  ];
 }

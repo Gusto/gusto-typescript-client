@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { payrollsGetPayStub } from "../funcs/payrollsGetPayStub.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion,
   GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
-  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse,
 } from "../models/operations/getv1payrollspayrolluuidemployeesemployeeuuidpaystub.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PayrollsGetPayStubQueryData =
-  GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubResponse;
+import {
+  buildPayrollsGetPayStubQuery,
+  PayrollsGetPayStubQueryData,
+  prefetchPayrollsGetPayStub,
+  queryKeyPayrollsGetPayStub,
+} from "./payrollsGetPayStub.core.js";
+export {
+  buildPayrollsGetPayStubQuery,
+  type PayrollsGetPayStubQueryData,
+  prefetchPayrollsGetPayStub,
+  queryKeyPayrollsGetPayStub,
+};
 
 /**
  * Get an employee pay stub (pdf)
@@ -75,19 +76,6 @@ export function usePayrollsGetPayStubSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayrollsGetPayStub(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayrollsGetPayStubQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -143,57 +131,4 @@ export function invalidateAllPayrollsGetPayStub(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Payrolls", "getPayStub"],
   });
-}
-
-export function buildPayrollsGetPayStubQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PayrollsGetPayStubQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayrollsGetPayStub(
-      request.payrollId,
-      request.employeeId,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function payrollsGetPayStubQueryFn(
-      ctx,
-    ): Promise<PayrollsGetPayStubQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payrollsGetPayStub(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayrollsGetPayStub(
-  payrollId: string,
-  employeeId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1PayrollsPayrollUuidEmployeesEmployeeUuidPayStubHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Payrolls",
-    "getPayStub",
-    payrollId,
-    employeeId,
-    parameters,
-  ];
 }

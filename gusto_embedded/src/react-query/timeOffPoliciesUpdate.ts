@@ -12,20 +12,20 @@ import { timeOffPoliciesUpdate } from "../funcs/timeOffPoliciesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  PutTimeOffPoliciesTimeOffPolicyUuidRequest,
-  PutTimeOffPoliciesTimeOffPolicyUuidResponse,
-} from "../models/operations/puttimeoffpoliciestimeoffpolicyuuid.js";
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidResponse,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuid.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesUpdateMutationVariables = {
-  request: PutTimeOffPoliciesTimeOffPolicyUuidRequest;
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesUpdateMutationData =
-  PutTimeOffPoliciesTimeOffPolicyUuidResponse;
+  PutV1TimeOffPoliciesTimeOffPolicyUuidResponse;
 
 /**
  * Update a time off policy

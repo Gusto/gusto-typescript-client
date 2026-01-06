@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { payrollsGetBlockers } from "../funcs/payrollsGetBlockers.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesPayrollBlockersCompanyUuidRequest,
-  GetV1CompaniesPayrollBlockersCompanyUuidResponse,
-} from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesPayrollBlockersCompanyUuidRequest } from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PayrollsGetBlockersQueryData =
-  GetV1CompaniesPayrollBlockersCompanyUuidResponse;
+import {
+  buildPayrollsGetBlockersQuery,
+  PayrollsGetBlockersQueryData,
+  prefetchPayrollsGetBlockers,
+  queryKeyPayrollsGetBlockers,
+} from "./payrollsGetBlockers.core.js";
+export {
+  buildPayrollsGetBlockersQuery,
+  type PayrollsGetBlockersQueryData,
+  prefetchPayrollsGetBlockers,
+  queryKeyPayrollsGetBlockers,
+};
 
 /**
  * Get all payroll blockers for a company
@@ -82,19 +81,6 @@ export function usePayrollsGetBlockersSuspense(
   });
 }
 
-export function prefetchPayrollsGetBlockers(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayrollsGetBlockersQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setPayrollsGetBlockersData(
   client: QueryClient,
   queryKeyBase: [
@@ -137,49 +123,4 @@ export function invalidateAllPayrollsGetBlockers(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Payrolls", "getBlockers"],
   });
-}
-
-export function buildPayrollsGetBlockersQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PayrollsGetBlockersQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayrollsGetBlockers(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function payrollsGetBlockersQueryFn(
-      ctx,
-    ): Promise<PayrollsGetBlockersQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payrollsGetBlockers(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayrollsGetBlockers(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Payrolls",
-    "getBlockers",
-    companyUuid,
-    parameters,
-  ];
 }

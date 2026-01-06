@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { externalPayrollsGet } from "../funcs/externalPayrollsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompanyExternalPayrollsRequest,
-  GetV1CompanyExternalPayrollsResponse,
-} from "../models/operations/getv1companyexternalpayrolls.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompanyExternalPayrollsRequest } from "../models/operations/getv1companyexternalpayrolls.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ExternalPayrollsGetQueryData = GetV1CompanyExternalPayrollsResponse;
+import {
+  buildExternalPayrollsGetQuery,
+  ExternalPayrollsGetQueryData,
+  prefetchExternalPayrollsGet,
+  queryKeyExternalPayrollsGet,
+} from "./externalPayrollsGet.core.js";
+export {
+  buildExternalPayrollsGetQuery,
+  type ExternalPayrollsGetQueryData,
+  prefetchExternalPayrollsGet,
+  queryKeyExternalPayrollsGet,
+};
 
 /**
  * Get external payrolls for a company
@@ -77,19 +77,6 @@ export function useExternalPayrollsGetSuspense(
   });
 }
 
-export function prefetchExternalPayrollsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyExternalPayrollsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildExternalPayrollsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setExternalPayrollsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -132,49 +119,4 @@ export function invalidateAllExternalPayrollsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "externalPayrolls", "get"],
   });
-}
-
-export function buildExternalPayrollsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyExternalPayrollsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ExternalPayrollsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyExternalPayrollsGet(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function externalPayrollsGetQueryFn(
-      ctx,
-    ): Promise<ExternalPayrollsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(externalPayrollsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyExternalPayrollsGet(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "externalPayrolls",
-    "get",
-    companyUuid,
-    parameters,
-  ];
 }

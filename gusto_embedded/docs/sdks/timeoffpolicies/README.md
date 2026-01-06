@@ -7,11 +7,11 @@
 * [calculateAccruingTimeOffHours](#calculateaccruingtimeoffhours) - Calculate accruing time off hours
 * [get](#get) - Get a time off policy
 * [update](#update) - Update a time off policy
-* [getAll](#getall) - Get all time off policies
+* [getAll](#getall) - Get all time off policies for a company
 * [create](#create) - Create a time off policy
 * [addEmployees](#addemployees) - Add employees to a time off policy
 * [removeEmployees](#removeemployees) - Remove employees from a time off policy
-* [updateBalance](#updatebalance) - Update employee time off hour balances
+* [updateBalance](#updatebalance) - Update employee time off balances
 * [deactivate](#deactivate) - Deactivate a time off policy
 
 ## calculateAccruingTimeOffHours
@@ -137,9 +137,10 @@ Get a time off policy
 
 scope: `time_off_policies:read`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -219,20 +220,21 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetTimeOffPoliciesTimeOffPolicyUuidRequest](../../models/operations/gettimeoffpoliciestimeoffpolicyuuidrequest.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetV1TimeOffPoliciesTimeOffPolicyUuidRequest](../../models/operations/getv1timeoffpoliciestimeoffpolicyuuidrequest.md)                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetTimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/gettimeoffpoliciestimeoffpolicyuuidresponse.md)\>**
+**Promise\<[operations.GetV1TimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/getv1timeoffpoliciestimeoffpolicyuuidresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## update
 
@@ -240,9 +242,10 @@ Update a time off policy
 
 scope: `time_off_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-time_off_policies-time_off_policy_uuid" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -254,16 +257,10 @@ async function run() {
   const result = await gustoEmbedded.timeOffPolicies.update({
     timeOffPolicyUuid: "<id>",
     requestBody: {
-      name: "Hourly Vacation Policy",
-      accrualMethod: "per_hour_paid",
-      accrualRate: "4.0",
-      accrualRateUnit: "80.0",
-      paidOutOnTermination: true,
-      accrualWaitingPeriodDays: 30,
-      carryoverLimitHours: "200.0",
-      maxAccrualHoursPerYear: "120.0",
-      maxHours: "240.0",
-      version: "<value>",
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+      name: "Vacation Policy",
+      policyType: "vacation",
+      accrualMethod: "unlimited",
     },
   });
 
@@ -291,16 +288,10 @@ async function run() {
   const res = await timeOffPoliciesUpdate(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
     requestBody: {
-      name: "Hourly Vacation Policy",
-      accrualMethod: "per_hour_paid",
-      accrualRate: "4.0",
-      accrualRateUnit: "80.0",
-      paidOutOnTermination: true,
-      accrualWaitingPeriodDays: 30,
-      carryoverLimitHours: "200.0",
-      maxAccrualHoursPerYear: "120.0",
-      maxHours: "240.0",
-      version: "<value>",
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+      name: "Vacation Policy",
+      policyType: "vacation",
+      accrualMethod: "unlimited",
     },
   });
   if (res.ok) {
@@ -335,20 +326,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutTimeOffPoliciesTimeOffPolicyUuidRequest](../../models/operations/puttimeoffpoliciestimeoffpolicyuuidrequest.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PutV1TimeOffPoliciesTimeOffPolicyUuidRequest](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuidrequest.md)                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PutTimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/puttimeoffpoliciestimeoffpolicyuuidresponse.md)\>**
+**Promise\<[operations.PutV1TimeOffPoliciesTimeOffPolicyUuidResponse](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuidresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getAll
@@ -357,9 +348,10 @@ Get all time off policies for a company
 
 scope: `time_off_policies:read`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-time_off_policies" method="get" path="/v1/companies/{company_uuid}/time_off_policies" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-time_off_policies" method="get" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -439,20 +431,21 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetCompaniesCompanyUuidTimeOffPoliciesRequest](../../models/operations/getcompaniescompanyuuidtimeoffpoliciesrequest.md)                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyUuidTimeOffPoliciesRequest](../../models/operations/getv1companiescompanyuuidtimeoffpoliciesrequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetCompaniesCompanyUuidTimeOffPoliciesResponse](../../models/operations/getcompaniescompanyuuidtimeoffpoliciesresponse.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyUuidTimeOffPoliciesResponse](../../models/operations/getv1companiescompanyuuidtimeoffpoliciesresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## create
 
@@ -460,9 +453,10 @@ Create a time off policy
 
 scope: `time_off_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-time_off_policies" method="post" path="/v1/companies/{company_uuid}/time_off_policies" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-time_off_policies" method="post" path="/v1/companies/{company_uuid}/time_off_policies" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -473,10 +467,10 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.timeOffPolicies.create({
     companyUuid: "<id>",
-    requestBody: {
-      name: "Unlimited Vacation Policy",
+    timeOffPolicyRequest: {
+      name: "Vacation Policy",
       policyType: "vacation",
-      accrualMethod: "unlimited",
+      accrualMethod: "per_pay_period",
     },
   });
 
@@ -503,10 +497,10 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await timeOffPoliciesCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      name: "Unlimited Vacation Policy",
+    timeOffPolicyRequest: {
+      name: "Vacation Policy",
       policyType: "vacation",
-      accrualMethod: "unlimited",
+      accrualMethod: "per_pay_period",
     },
   });
   if (res.ok) {
@@ -541,20 +535,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostCompaniesCompanyUuidTimeOffPoliciesRequest](../../models/operations/postcompaniescompanyuuidtimeoffpoliciesrequest.md)                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PostV1CompaniesCompanyUuidTimeOffPoliciesRequest](../../models/operations/postv1companiescompanyuuidtimeoffpoliciesrequest.md)                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostCompaniesCompanyUuidTimeOffPoliciesResponse](../../models/operations/postcompaniescompanyuuidtimeoffpoliciesresponse.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyUuidTimeOffPoliciesResponse](../../models/operations/postv1companiescompanyuuidtimeoffpoliciesresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## addEmployees
@@ -563,9 +557,10 @@ Add employees to a time off policy. Employees are required to have at least one 
 
 scope: `time_off_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-version-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -576,7 +571,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.timeOffPolicies.addEmployees({
     timeOffPolicyUuid: "<id>",
-    requestBody: {},
+    requestBody: {
+      employees: [],
+    },
   });
 
   console.log(result);
@@ -602,7 +599,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await timeOffPoliciesAddEmployees(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
-    requestBody: {},
+    requestBody: {
+      employees: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -636,20 +635,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest](../../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployeesrequest.md)           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuidaddemployeesrequest.md)                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse](../../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployeesresponse.md)\>**
+**Promise\<[operations.PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuidaddemployeesresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## removeEmployees
@@ -657,6 +656,7 @@ import {
 Remove employees from a time off policy
 
 scope: `time_off_policies:write`
+
 
 ### Example Usage
 
@@ -671,7 +671,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.timeOffPolicies.removeEmployees({
     timeOffPolicyUuid: "<id>",
-    requestBody: {},
+    requestBody: {
+      employees: [],
+    },
   });
 
   console.log(result);
@@ -697,7 +699,13 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await timeOffPoliciesRemoveEmployees(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
-    requestBody: {},
+    requestBody: {
+      employees: [
+        {
+          uuid: "3bc66430-a419-48da-b519-5d780d44f92a",
+        },
+      ],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -744,18 +752,19 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## updateBalance
 
-Updates time off hours balances for employees for a time off policy
+Updates time off hours balances for employees for a time off policy.
 
 scope: `time_off_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-version-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -766,7 +775,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.timeOffPolicies.updateBalance({
     timeOffPolicyUuid: "<id>",
-    requestBody: {},
+    requestBody: {
+      employees: [],
+    },
   });
 
   console.log(result);
@@ -792,7 +803,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await timeOffPoliciesUpdateBalance(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
-    requestBody: {},
+    requestBody: {
+      employees: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -826,20 +839,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest](../../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalancerequest.md)                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuidbalancerequest.md)                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse](../../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalanceresponse.md)\>**
+**Promise\<[operations.PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse](../../models/operations/putv1timeoffpoliciestimeoffpolicyuuidbalanceresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## deactivate
@@ -847,6 +860,7 @@ import {
 Deactivate a time off policy
 
 scope: `time_off_policies:write`
+
 
 ### Example Usage
 
@@ -932,5 +946,5 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

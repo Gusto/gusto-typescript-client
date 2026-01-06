@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { salaryEstimatesGetV1SalaryEstimatesId } from "../funcs/salaryEstimatesGetV1SalaryEstimatesId.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1SalaryEstimatesIdHeaderXGustoAPIVersion,
   GetV1SalaryEstimatesIdRequest,
-  GetV1SalaryEstimatesIdResponse,
 } from "../models/operations/getv1salaryestimatesid.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type SalaryEstimatesGetV1SalaryEstimatesIdQueryData =
-  GetV1SalaryEstimatesIdResponse;
+import {
+  buildSalaryEstimatesGetV1SalaryEstimatesIdQuery,
+  prefetchSalaryEstimatesGetV1SalaryEstimatesId,
+  queryKeySalaryEstimatesGetV1SalaryEstimatesId,
+  SalaryEstimatesGetV1SalaryEstimatesIdQueryData,
+} from "./salaryEstimatesGetV1SalaryEstimatesId.core.js";
+export {
+  buildSalaryEstimatesGetV1SalaryEstimatesIdQuery,
+  prefetchSalaryEstimatesGetV1SalaryEstimatesId,
+  queryKeySalaryEstimatesGetV1SalaryEstimatesId,
+  type SalaryEstimatesGetV1SalaryEstimatesIdQueryData,
+};
 
 /**
  * Get a salary estimate
@@ -80,19 +81,6 @@ export function useSalaryEstimatesGetV1SalaryEstimatesIdSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchSalaryEstimatesGetV1SalaryEstimatesId(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1SalaryEstimatesIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildSalaryEstimatesGetV1SalaryEstimatesIdQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -153,51 +141,4 @@ export function invalidateAllSalaryEstimatesGetV1SalaryEstimatesId(
       "getV1SalaryEstimatesId",
     ],
   });
-}
-
-export function buildSalaryEstimatesGetV1SalaryEstimatesIdQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1SalaryEstimatesIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<SalaryEstimatesGetV1SalaryEstimatesIdQueryData>;
-} {
-  return {
-    queryKey: queryKeySalaryEstimatesGetV1SalaryEstimatesId(request.uuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function salaryEstimatesGetV1SalaryEstimatesIdQueryFn(
-      ctx,
-    ): Promise<SalaryEstimatesGetV1SalaryEstimatesIdQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(salaryEstimatesGetV1SalaryEstimatesId(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeySalaryEstimatesGetV1SalaryEstimatesId(
-  uuid: string,
-  parameters: {
-    xGustoAPIVersion?: GetV1SalaryEstimatesIdHeaderXGustoAPIVersion | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Salary Estimates",
-    "getV1SalaryEstimatesId",
-    uuid,
-    parameters,
-  ];
 }

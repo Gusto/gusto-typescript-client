@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
-  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse,
-} from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetCompaniesCompanyUuidReportTemplatesReportTypeRequest } from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ReportsGetTemplateQueryData =
-  GetCompaniesCompanyUuidReportTemplatesReportTypeResponse;
+import {
+  buildReportsGetTemplateQuery,
+  prefetchReportsGetTemplate,
+  queryKeyReportsGetTemplate,
+  ReportsGetTemplateQueryData,
+} from "./reportsGetTemplate.core.js";
+export {
+  buildReportsGetTemplateQuery,
+  prefetchReportsGetTemplate,
+  queryKeyReportsGetTemplate,
+  type ReportsGetTemplateQueryData,
+};
 
 /**
  * Get a report template
@@ -78,19 +77,6 @@ export function useReportsGetTemplateSuspense(
   });
 }
 
-export function prefetchReportsGetTemplate(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildReportsGetTemplateQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setReportsGetTemplateData(
   client: QueryClient,
   queryKeyBase: [
@@ -135,53 +121,4 @@ export function invalidateAllReportsGetTemplate(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Reports", "getTemplate"],
   });
-}
-
-export function buildReportsGetTemplateQuery(
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ReportsGetTemplateQueryData>;
-} {
-  return {
-    queryKey: queryKeyReportsGetTemplate(
-      request.companyUuid,
-      request.reportType,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function reportsGetTemplateQueryFn(
-      ctx,
-    ): Promise<ReportsGetTemplateQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(reportsGetTemplate(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyReportsGetTemplate(
-  companyUuid: string,
-  reportType: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Reports",
-    "getTemplate",
-    companyUuid,
-    reportType,
-    parameters,
-  ];
 }

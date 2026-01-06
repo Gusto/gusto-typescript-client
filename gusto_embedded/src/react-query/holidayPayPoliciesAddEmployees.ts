@@ -12,20 +12,20 @@ import { holidayPayPoliciesAddEmployees } from "../funcs/holidayPayPoliciesAddEm
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  PutCompaniesCompanyUuidHolidayPayPolicyAddRequest,
-  PutCompaniesCompanyUuidHolidayPayPolicyAddResponse,
-} from "../models/operations/putcompaniescompanyuuidholidaypaypolicyadd.js";
+  PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequest,
+  PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse,
+} from "../models/operations/putv1companiescompanyuuidholidaypaypolicyadd.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type HolidayPayPoliciesAddEmployeesMutationVariables = {
-  request: PutCompaniesCompanyUuidHolidayPayPolicyAddRequest;
+  request: PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequest;
   options?: RequestOptions;
 };
 
 export type HolidayPayPoliciesAddEmployeesMutationData =
-  PutCompaniesCompanyUuidHolidayPayPolicyAddResponse;
+  PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse;
 
 /**
  * Add employees to a company's holiday pay policy

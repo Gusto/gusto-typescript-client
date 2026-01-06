@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeAddressesGet } from "../funcs/employeeAddressesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdHomeAddressesRequest,
-  GetV1EmployeesEmployeeIdHomeAddressesResponse,
 } from "../models/operations/getv1employeesemployeeidhomeaddresses.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeAddressesGetQueryData =
-  GetV1EmployeesEmployeeIdHomeAddressesResponse;
+import {
+  buildEmployeeAddressesGetQuery,
+  EmployeeAddressesGetQueryData,
+  prefetchEmployeeAddressesGet,
+  queryKeyEmployeeAddressesGet,
+} from "./employeeAddressesGet.core.js";
+export {
+  buildEmployeeAddressesGetQuery,
+  type EmployeeAddressesGetQueryData,
+  prefetchEmployeeAddressesGet,
+  queryKeyEmployeeAddressesGet,
+};
 
 /**
  * Get an employee's home addresses
@@ -79,19 +80,6 @@ export function useEmployeeAddressesGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeeAddressesGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdHomeAddressesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeAddressesGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -145,53 +133,4 @@ export function invalidateAllEmployeeAddressesGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeAddresses", "get"],
   });
-}
-
-export function buildEmployeeAddressesGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdHomeAddressesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeAddressesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeAddressesGet(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeAddressesGetQueryFn(
-      ctx,
-    ): Promise<EmployeeAddressesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeAddressesGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeAddressesGet(
-  employeeId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeAddresses",
-    "get",
-    employeeId,
-    parameters,
-  ];
 }

@@ -5,31 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { locationsRetrieve } from "../funcs/locationsRetrieve.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1LocationsLocationIdRequest,
-  GetV1LocationsLocationIdResponse,
   XGustoAPIVersion,
 } from "../models/operations/getv1locationslocationid.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type LocationsRetrieveQueryData = GetV1LocationsLocationIdResponse;
+import {
+  buildLocationsRetrieveQuery,
+  LocationsRetrieveQueryData,
+  prefetchLocationsRetrieve,
+  queryKeyLocationsRetrieve,
+} from "./locationsRetrieve.core.js";
+export {
+  buildLocationsRetrieveQuery,
+  type LocationsRetrieveQueryData,
+  prefetchLocationsRetrieve,
+  queryKeyLocationsRetrieve,
+};
 
 /**
  * Get a location
@@ -77,19 +79,6 @@ export function useLocationsRetrieveSuspense(
   });
 }
 
-export function prefetchLocationsRetrieve(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1LocationsLocationIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildLocationsRetrieveQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setLocationsRetrieveData(
   client: QueryClient,
   queryKeyBase: [
@@ -127,49 +116,4 @@ export function invalidateAllLocationsRetrieve(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Locations", "retrieve"],
   });
-}
-
-export function buildLocationsRetrieveQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1LocationsLocationIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<LocationsRetrieveQueryData>;
-} {
-  return {
-    queryKey: queryKeyLocationsRetrieve(request.locationId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function locationsRetrieveQueryFn(
-      ctx,
-    ): Promise<LocationsRetrieveQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(locationsRetrieve(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyLocationsRetrieve(
-  locationId: string,
-  parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Locations",
-    "retrieve",
-    locationId,
-    parameters,
-  ];
 }

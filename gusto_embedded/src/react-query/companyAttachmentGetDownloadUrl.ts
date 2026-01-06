@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companyAttachmentGetDownloadUrl } from "../funcs/companyAttachmentGetDownloadUrl.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesAttachmentUrlRequest,
-  GetV1CompaniesAttachmentUrlResponse,
-} from "../models/operations/getv1companiesattachmenturl.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesAttachmentUrlRequest } from "../models/operations/getv1companiesattachmenturl.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompanyAttachmentGetDownloadUrlQueryData =
-  GetV1CompaniesAttachmentUrlResponse;
+import {
+  buildCompanyAttachmentGetDownloadUrlQuery,
+  CompanyAttachmentGetDownloadUrlQueryData,
+  prefetchCompanyAttachmentGetDownloadUrl,
+  queryKeyCompanyAttachmentGetDownloadUrl,
+} from "./companyAttachmentGetDownloadUrl.core.js";
+export {
+  buildCompanyAttachmentGetDownloadUrlQuery,
+  type CompanyAttachmentGetDownloadUrlQueryData,
+  prefetchCompanyAttachmentGetDownloadUrl,
+  queryKeyCompanyAttachmentGetDownloadUrl,
+};
 
 /**
  * Get a temporary url to download the Company Attachment file
@@ -77,19 +76,6 @@ export function useCompanyAttachmentGetDownloadUrlSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCompanyAttachmentGetDownloadUrl(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesAttachmentUrlRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompanyAttachmentGetDownloadUrlQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -140,53 +126,4 @@ export function invalidateAllCompanyAttachmentGetDownloadUrl(
     ...filters,
     queryKey: ["@gusto/embedded-api", "companyAttachment", "getDownloadUrl"],
   });
-}
-
-export function buildCompanyAttachmentGetDownloadUrlQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesAttachmentUrlRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompanyAttachmentGetDownloadUrlQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompanyAttachmentGetDownloadUrl(
-      request.companyId,
-      request.companyAttachmentUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function companyAttachmentGetDownloadUrlQueryFn(
-      ctx,
-    ): Promise<CompanyAttachmentGetDownloadUrlQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companyAttachmentGetDownloadUrl(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompanyAttachmentGetDownloadUrl(
-  companyId: string,
-  companyAttachmentUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "companyAttachment",
-    "getDownloadUrl",
-    companyId,
-    companyAttachmentUuid,
-    parameters,
-  ];
 }

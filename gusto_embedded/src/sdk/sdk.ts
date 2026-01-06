@@ -46,6 +46,7 @@ import { Notifications } from "./notifications.js";
 import { PaymentConfigs } from "./paymentconfigs.js";
 import { Payrolls } from "./payrolls.js";
 import { PaySchedules } from "./payschedules.js";
+import { PeopleBatches } from "./peoplebatches.js";
 import { RecoveryCases } from "./recoverycases.js";
 import { Reimbursements } from "./reimbursements.js";
 import { Reports } from "./reports.js";
@@ -335,5 +336,10 @@ export class GustoEmbedded extends ClientSDK {
   private _reimbursements?: Reimbursements;
   get reimbursements(): Reimbursements {
     return (this._reimbursements ??= new Reimbursements(this._options));
+  }
+
+  private _peopleBatches?: PeopleBatches;
+  get peopleBatches(): PeopleBatches {
+    return (this._peopleBatches ??= new PeopleBatches(this._options));
   }
 }
