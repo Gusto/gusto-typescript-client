@@ -12,7 +12,7 @@ let value: MinimumWage = {
   uuid: "59e47de5-1ac6-48c6-96d8-3e1ff2de405b",
   wage: "<value>",
   wageType: "<value>",
-  effectiveDate: new RFCDate("2023-01-19"),
+  effectiveDate: new RFCDate("2024-01-19"),
   authority: "<value>",
 };
 ```

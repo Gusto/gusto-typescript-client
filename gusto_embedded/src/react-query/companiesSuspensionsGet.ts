@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companiesSuspensionsGet } from "../funcs/companiesSuspensionsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion,
   GetCompaniesCompanyUuidSuspensionsRequest,
-  GetCompaniesCompanyUuidSuspensionsResponse,
 } from "../models/operations/getcompaniescompanyuuidsuspensions.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompaniesSuspensionsGetQueryData =
-  GetCompaniesCompanyUuidSuspensionsResponse;
+import {
+  buildCompaniesSuspensionsGetQuery,
+  CompaniesSuspensionsGetQueryData,
+  prefetchCompaniesSuspensionsGet,
+  queryKeyCompaniesSuspensionsGet,
+} from "./companiesSuspensionsGet.core.js";
+export {
+  buildCompaniesSuspensionsGetQuery,
+  type CompaniesSuspensionsGetQueryData,
+  prefetchCompaniesSuspensionsGet,
+  queryKeyCompaniesSuspensionsGet,
+};
 
 /**
  * Get suspensions for this company
@@ -86,19 +87,6 @@ export function useCompaniesSuspensionsGetSuspense(
   });
 }
 
-export function prefetchCompaniesSuspensionsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidSuspensionsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompaniesSuspensionsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setCompaniesSuspensionsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -144,47 +132,4 @@ export function invalidateAllCompaniesSuspensionsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "suspensions", "get"],
   });
-}
-
-export function buildCompaniesSuspensionsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidSuspensionsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompaniesSuspensionsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompaniesSuspensionsGet(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companiesSuspensionsGetQueryFn(
-      ctx,
-    ): Promise<CompaniesSuspensionsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companiesSuspensionsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompaniesSuspensionsGet(
-  companyUuid: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return ["@gusto/embedded-api", "suspensions", "get", companyUuid, parameters];
 }

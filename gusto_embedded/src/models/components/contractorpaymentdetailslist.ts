@@ -18,14 +18,14 @@ export type ContractorPaymentDetailsListPaymentMethod = ClosedEnum<
 >;
 
 /**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount must be `null` to capture the remainder.
  */
 export const ContractorPaymentDetailsListSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
 /**
- * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount must be `null` to capture the remainder.
  */
 export type ContractorPaymentDetailsListSplitBy = ClosedEnum<
   typeof ContractorPaymentDetailsListSplitBy
@@ -47,7 +47,10 @@ export type Splits = {
    * The order of priority for each payment split, with priority 1 being the first bank account paid. Priority must be unique and sequential.
    */
   priority?: number | undefined;
-  splitAmount?: number | undefined;
+  /**
+   * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the percentage value (e.g., 60 for 60%).
+   */
+  splitAmount?: number | null | undefined;
   accountType?: string | undefined;
 };
 
@@ -57,7 +60,7 @@ export type ContractorPaymentDetailsList = {
   firstName?: string | undefined;
   lastName?: string | undefined;
   /**
-   * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the last split amount must be nil to capture the remainder.
+   * Describes how the payment will be split. If split_by is Percentage, then the split amounts must add up to exactly 100. If split_by is Amount, then the amount represents cents and the last split amount must be `null` to capture the remainder.
    */
   splitBy?: ContractorPaymentDetailsListSplitBy | null | undefined;
   splits?: Array<Splits> | null | undefined;
@@ -82,7 +85,7 @@ export const Splits$inboundSchema: z.ZodType<Splits, z.ZodTypeDef, unknown> = z
     encrypted_account_number: z.nullable(z.string()).optional(),
     routing_number: z.string().optional(),
     priority: z.number().int().optional(),
-    split_amount: z.number().optional(),
+    split_amount: z.nullable(z.number()).optional(),
     account_type: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {

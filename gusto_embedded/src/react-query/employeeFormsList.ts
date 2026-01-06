@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeFormsList } from "../funcs/employeeFormsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1EmployeeFormsRequest,
-  GetV1EmployeeFormsResponse,
-} from "../models/operations/getv1employeeforms.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1EmployeeFormsRequest } from "../models/operations/getv1employeeforms.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeFormsListQueryData = GetV1EmployeeFormsResponse;
+import {
+  buildEmployeeFormsListQuery,
+  EmployeeFormsListQueryData,
+  prefetchEmployeeFormsList,
+  queryKeyEmployeeFormsList,
+} from "./employeeFormsList.core.js";
+export {
+  buildEmployeeFormsListQuery,
+  type EmployeeFormsListQueryData,
+  prefetchEmployeeFormsList,
+  queryKeyEmployeeFormsList,
+};
 
 /**
  * Get all employee forms
@@ -77,19 +77,6 @@ export function useEmployeeFormsListSuspense(
   });
 }
 
-export function prefetchEmployeeFormsList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeeFormsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeFormsListQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setEmployeeFormsListData(
   client: QueryClient,
   queryKeyBase: [
@@ -127,49 +114,4 @@ export function invalidateAllEmployeeFormsList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeForms", "list"],
   });
-}
-
-export function buildEmployeeFormsListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeeFormsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeFormsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeFormsList(request.employeeId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeFormsListQueryFn(
-      ctx,
-    ): Promise<EmployeeFormsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeFormsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeFormsList(
-  employeeId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeForms",
-    "list",
-    employeeId,
-    parameters,
-  ];
 }

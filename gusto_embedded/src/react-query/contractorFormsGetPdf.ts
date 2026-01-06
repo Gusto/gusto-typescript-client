@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { contractorFormsGetPdf } from "../funcs/contractorFormsGetPdf.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1ContractorFormPdfRequest,
-  GetV1ContractorFormPdfResponse,
-} from "../models/operations/getv1contractorformpdf.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1ContractorFormPdfRequest } from "../models/operations/getv1contractorformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ContractorFormsGetPdfQueryData = GetV1ContractorFormPdfResponse;
+import {
+  buildContractorFormsGetPdfQuery,
+  ContractorFormsGetPdfQueryData,
+  prefetchContractorFormsGetPdf,
+  queryKeyContractorFormsGetPdf,
+} from "./contractorFormsGetPdf.core.js";
+export {
+  buildContractorFormsGetPdfQuery,
+  type ContractorFormsGetPdfQueryData,
+  prefetchContractorFormsGetPdf,
+  queryKeyContractorFormsGetPdf,
+};
 
 /**
  * Get the contractor form pdf
@@ -77,19 +77,6 @@ export function useContractorFormsGetPdfSuspense(
   });
 }
 
-export function prefetchContractorFormsGetPdf(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorFormPdfRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildContractorFormsGetPdfQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setContractorFormsGetPdfData(
   client: QueryClient,
   queryKeyBase: [
@@ -134,53 +121,4 @@ export function invalidateAllContractorFormsGetPdf(
     ...filters,
     queryKey: ["@gusto/embedded-api", "contractorForms", "getPdf"],
   });
-}
-
-export function buildContractorFormsGetPdfQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1ContractorFormPdfRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ContractorFormsGetPdfQueryData>;
-} {
-  return {
-    queryKey: queryKeyContractorFormsGetPdf(
-      request.contractorUuid,
-      request.formId,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function contractorFormsGetPdfQueryFn(
-      ctx,
-    ): Promise<ContractorFormsGetPdfQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(contractorFormsGetPdf(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyContractorFormsGetPdf(
-  contractorUuid: string,
-  formId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "contractorForms",
-    "getPdf",
-    contractorUuid,
-    formId,
-    parameters,
-  ];
 }

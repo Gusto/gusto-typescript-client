@@ -548,6 +548,11 @@ run();
 * [previewAssignment](docs/sdks/payschedules/README.md#previewassignment) - Preview pay schedule assignments for a company
 * [assign](docs/sdks/payschedules/README.md#assign) - Assign pay schedules for a company
 
+### [PeopleBatches](docs/sdks/peoplebatches/README.md)
+
+* [postV1CompaniesCompanyIdPeopleBatches](docs/sdks/peoplebatches/README.md#postv1companiescompanyidpeoplebatches) - Create a people batch
+* [getV1PeopleBatchesPeopleBatchUuid](docs/sdks/peoplebatches/README.md#getv1peoplebatchespeoplebatchuuid) - Get a people batch
+
 ### [RecoveryCases](docs/sdks/recoverycases/README.md)
 
 * [get](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
@@ -567,6 +572,7 @@ run();
 * [postPayrollsPayrollUuidReportsGeneralLedger](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
 * [getReportsRequestUuid](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 * [getTemplate](docs/sdks/reports/README.md#gettemplate) - Get a report template
+* [postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
 
 ### [SalaryEstimates](docs/sdks/salaryestimates/README.md)
 
@@ -595,11 +601,11 @@ run();
 * [calculateAccruingTimeOffHours](docs/sdks/timeoffpolicies/README.md#calculateaccruingtimeoffhours) - Calculate accruing time off hours
 * [get](docs/sdks/timeoffpolicies/README.md#get) - Get a time off policy
 * [update](docs/sdks/timeoffpolicies/README.md#update) - Update a time off policy
-* [getAll](docs/sdks/timeoffpolicies/README.md#getall) - Get all time off policies
+* [getAll](docs/sdks/timeoffpolicies/README.md#getall) - Get all time off policies for a company
 * [create](docs/sdks/timeoffpolicies/README.md#create) - Create a time off policy
 * [addEmployees](docs/sdks/timeoffpolicies/README.md#addemployees) - Add employees to a time off policy
 * [removeEmployees](docs/sdks/timeoffpolicies/README.md#removeemployees) - Remove employees from a time off policy
-* [updateBalance](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off hour balances
+* [updateBalance](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off balances
 * [deactivate](docs/sdks/timeoffpolicies/README.md#deactivate) - Deactivate a time off policy
 
 ### [Webhooks](docs/sdks/webhooks/README.md)
@@ -868,6 +874,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`paySchedulesGetUnprocessedTerminationPeriods`](docs/sdks/payschedules/README.md#getunprocessedterminationperiods) - Get termination pay periods for a company
 - [`paySchedulesPreviewAssignment`](docs/sdks/payschedules/README.md#previewassignment) - Preview pay schedule assignments for a company
 - [`paySchedulesUpdate`](docs/sdks/payschedules/README.md#update) - Update a pay schedule
+- [`peopleBatchesGetV1PeopleBatchesPeopleBatchUuid`](docs/sdks/peoplebatches/README.md#getv1peoplebatchespeoplebatchuuid) - Get a people batch
+- [`peopleBatchesPostV1CompaniesCompanyIdPeopleBatches`](docs/sdks/peoplebatches/README.md#postv1companiescompanyidpeoplebatches) - Create a people batch
 - [`recoveryCasesGet`](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
 - [`recoveryCasesRedebit`](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
 - [`reimbursementsDeleteV1RecurringReimbursements`](docs/sdks/reimbursements/README.md#deletev1recurringreimbursements) - Delete a recurring reimbursement
@@ -879,6 +887,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`reportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`reportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
 - [`reportsPostPayrollsPayrollUuidReportsGeneralLedger`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+- [`reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage`](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
 - [`salaryEstimatesGetV1SalaryEstimatesId`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesid) - Get a salary estimate
 - [`salaryEstimatesGetV1SalaryEstimatesOccupations`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesoccupations) - Search for BLS occupations
 - [`salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates`](docs/sdks/salaryestimates/README.md#postv1employeesemployeeidsalaryestimates) - Create a salary estimate for an employee
@@ -897,10 +906,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`timeOffPoliciesCreate`](docs/sdks/timeoffpolicies/README.md#create) - Create a time off policy
 - [`timeOffPoliciesDeactivate`](docs/sdks/timeoffpolicies/README.md#deactivate) - Deactivate a time off policy
 - [`timeOffPoliciesGet`](docs/sdks/timeoffpolicies/README.md#get) - Get a time off policy
-- [`timeOffPoliciesGetAll`](docs/sdks/timeoffpolicies/README.md#getall) - Get all time off policies
+- [`timeOffPoliciesGetAll`](docs/sdks/timeoffpolicies/README.md#getall) - Get all time off policies for a company
 - [`timeOffPoliciesRemoveEmployees`](docs/sdks/timeoffpolicies/README.md#removeemployees) - Remove employees from a time off policy
 - [`timeOffPoliciesUpdate`](docs/sdks/timeoffpolicies/README.md#update) - Update a time off policy
-- [`timeOffPoliciesUpdateBalance`](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off hour balances
+- [`timeOffPoliciesUpdateBalance`](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off balances
 - [`webhooksCreateSubscription`](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 - [`webhooksDeleteSubscription`](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
 - [`webhooksGetSubscription`](docs/sdks/webhooks/README.md#getsubscription) - Get a webhook subscription
@@ -1169,6 +1178,8 @@ To learn about this feature and how to get started, check
 - [`usePaySchedulesGetUnprocessedTerminationPeriods`](docs/sdks/payschedules/README.md#getunprocessedterminationperiods) - Get termination pay periods for a company
 - [`usePaySchedulesPreviewAssignmentMutation`](docs/sdks/payschedules/README.md#previewassignment) - Preview pay schedule assignments for a company
 - [`usePaySchedulesUpdateMutation`](docs/sdks/payschedules/README.md#update) - Update a pay schedule
+- [`usePeopleBatchesGetV1PeopleBatchesPeopleBatchUuid`](docs/sdks/peoplebatches/README.md#getv1peoplebatchespeoplebatchuuid) - Get a people batch
+- [`usePeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutation`](docs/sdks/peoplebatches/README.md#postv1companiescompanyidpeoplebatches) - Create a people batch
 - [`useRecoveryCasesGet`](docs/sdks/recoverycases/README.md#get) - Get all recovery cases for a company
 - [`useRecoveryCasesRedebitMutation`](docs/sdks/recoverycases/README.md#redebit) - Initiate a redebit for a recovery case
 - [`useReimbursementsDeleteV1RecurringReimbursementsMutation`](docs/sdks/reimbursements/README.md#deletev1recurringreimbursements) - Delete a recurring reimbursement
@@ -1180,6 +1191,7 @@ To learn about this feature and how to get started, check
 - [`useReportsGetReportsRequestUuid`](docs/sdks/reports/README.md#getreportsrequestuuid) - Get a report
 - [`useReportsGetTemplate`](docs/sdks/reports/README.md#gettemplate) - Get a report template
 - [`useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation`](docs/sdks/reports/README.md#postpayrollspayrolluuidreportsgeneralledger) - Create a general ledger report
+- [`useReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutation`](docs/sdks/reports/README.md#postv1companiescompanyidreportsemployeesannualficawage) - Create an employees annual FICA wage report
 - [`useSalaryEstimatesGetV1SalaryEstimatesId`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesid) - Get a salary estimate
 - [`useSalaryEstimatesGetV1SalaryEstimatesOccupations`](docs/sdks/salaryestimates/README.md#getv1salaryestimatesoccupations) - Search for BLS occupations
 - [`useSalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutation`](docs/sdks/salaryestimates/README.md#postv1employeesemployeeidsalaryestimates) - Create a salary estimate for an employee
@@ -1198,9 +1210,9 @@ To learn about this feature and how to get started, check
 - [`useTimeOffPoliciesCreateMutation`](docs/sdks/timeoffpolicies/README.md#create) - Create a time off policy
 - [`useTimeOffPoliciesDeactivateMutation`](docs/sdks/timeoffpolicies/README.md#deactivate) - Deactivate a time off policy
 - [`useTimeOffPoliciesGet`](docs/sdks/timeoffpolicies/README.md#get) - Get a time off policy
-- [`useTimeOffPoliciesGetAll`](docs/sdks/timeoffpolicies/README.md#getall) - Get all time off policies
+- [`useTimeOffPoliciesGetAll`](docs/sdks/timeoffpolicies/README.md#getall) - Get all time off policies for a company
 - [`useTimeOffPoliciesRemoveEmployeesMutation`](docs/sdks/timeoffpolicies/README.md#removeemployees) - Remove employees from a time off policy
-- [`useTimeOffPoliciesUpdateBalanceMutation`](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off hour balances
+- [`useTimeOffPoliciesUpdateBalanceMutation`](docs/sdks/timeoffpolicies/README.md#updatebalance) - Update employee time off balances
 - [`useTimeOffPoliciesUpdateMutation`](docs/sdks/timeoffpolicies/README.md#update) - Update a time off policy
 - [`useWebhooksCreateSubscriptionMutation`](docs/sdks/webhooks/README.md#createsubscription) - Create a webhook subscription
 - [`useWebhooksDeleteSubscriptionMutation`](docs/sdks/webhooks/README.md#deletesubscription) - Delete a webhook subscription
@@ -1385,7 +1397,7 @@ run();
 **Primary error:**
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (12)</summary>
+<details><summary>Less common errors (13)</summary>
 
 <br />
 
@@ -1398,12 +1410,13 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 153 of 275 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 275 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 275 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 275 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 275 methods.*
-* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 275 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 158 of 278 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 278 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 278 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 278 methods.*
+* [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 278 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 278 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 278 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

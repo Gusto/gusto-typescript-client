@@ -25,6 +25,32 @@ export type CompanyBenefitWithEmployeeBenefitsSource = ClosedEnum<
 >;
 
 /**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export const CompanyBenefitWithEmployeeBenefitsCatchUpType = {
+  Elective: "elective",
+  Deemed: "deemed",
+} as const;
+/**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export type CompanyBenefitWithEmployeeBenefitsCatchUpType = ClosedEnum<
+  typeof CompanyBenefitWithEmployeeBenefitsCatchUpType
+>;
+
+/**
+ * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
+ */
+export const Action = {
+  Create: "create",
+  Update: "update",
+} as const;
+/**
+ * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
+ */
+export type Action = ClosedEnum<typeof Action>;
+
+/**
  * A single tier of a tiered matching scheme.
  */
 export type CompanyBenefitWithEmployeeBenefitsValueTiers = {
@@ -105,20 +131,35 @@ export type EmployeeBenefits = {
   /**
    * Whether the employee benefit is active.
    */
-  active?: boolean | undefined;
+  active: boolean;
   /**
    * Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
    */
-  deductAsPercentage?: boolean | undefined;
+  deductAsPercentage: boolean;
   /**
    * The amount to be deducted, per pay period, from the employee's pay.
    */
-  employeeDeduction?: string | undefined;
+  employeeDeduction: string;
   /**
    * The value of the company contribution
    */
   companyContribution?: string | undefined;
+  /**
+   * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
+   */
   uuid?: string | undefined;
+  /**
+   * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
+   */
+  action?: Action | undefined;
+  /**
+   * The date when the employee benefit becomes effective. If not provided, the benefit will be effective from 1970-01-01 (unix epoch).
+   */
+  effectiveDate?: string | undefined;
+  /**
+   * The date when the employee benefit expires. If not provided, the benefit will have no expiration date.
+   */
+  expirationDate?: string | undefined;
   /**
    * An object representing the type and value of the company contribution.
    */
@@ -148,7 +189,7 @@ export type CompanyBenefitWithEmployeeBenefits = {
   /**
    * Whether this benefit is active for employee participation. Company benefits may only be deactivated if no employees are actively participating.
    */
-  active?: boolean | undefined;
+  active: boolean;
   /**
    * The description of the company benefit. For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.
    */
@@ -177,6 +218,13 @@ export type CompanyBenefitWithEmployeeBenefits = {
    * Whether the employer is subject to file W-2 forms for an employee on leave. Only applicable to third party sick pay benefits.
    */
   responsibleForEmployeeW2?: boolean | undefined;
+  /**
+   * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+   */
+  catchUpType?:
+    | CompanyBenefitWithEmployeeBenefitsCatchUpType
+    | null
+    | undefined;
   employeeBenefits?: Array<EmployeeBenefits> | undefined;
 };
 
@@ -184,6 +232,15 @@ export type CompanyBenefitWithEmployeeBenefits = {
 export const CompanyBenefitWithEmployeeBenefitsSource$inboundSchema:
   z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsSource> = z
     .nativeEnum(CompanyBenefitWithEmployeeBenefitsSource);
+
+/** @internal */
+export const CompanyBenefitWithEmployeeBenefitsCatchUpType$inboundSchema:
+  z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsCatchUpType> = z
+    .nativeEnum(CompanyBenefitWithEmployeeBenefitsCatchUpType);
+
+/** @internal */
+export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> = z
+  .nativeEnum(Action);
 
 /** @internal */
 export const CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema:
@@ -313,6 +370,9 @@ export const EmployeeBenefits$inboundSchema: z.ZodType<
   employee_deduction: z.string().default("0.00"),
   company_contribution: z.string().optional(),
   uuid: z.string().optional(),
+  action: Action$inboundSchema.optional(),
+  effective_date: z.string().optional(),
+  expiration_date: z.string().optional(),
   contribution: z.lazy(() =>
     CompanyBenefitWithEmployeeBenefitsContribution$inboundSchema
   ).optional(),
@@ -323,6 +383,8 @@ export const EmployeeBenefits$inboundSchema: z.ZodType<
     "deduct_as_percentage": "deductAsPercentage",
     "employee_deduction": "employeeDeduction",
     "company_contribution": "companyContribution",
+    "effective_date": "effectiveDate",
+    "expiration_date": "expirationDate",
   });
 });
 
@@ -354,6 +416,9 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
   supports_percentage_amounts: z.boolean().optional(),
   responsible_for_employer_taxes: z.boolean().optional(),
   responsible_for_employee_w2: z.boolean().optional(),
+  catch_up_type: z.nullable(
+    CompanyBenefitWithEmployeeBenefitsCatchUpType$inboundSchema,
+  ).optional(),
   employee_benefits: z.array(z.lazy(() => EmployeeBenefits$inboundSchema))
     .optional(),
 }).transform((v) => {
@@ -364,6 +429,7 @@ export const CompanyBenefitWithEmployeeBenefits$inboundSchema: z.ZodType<
     "supports_percentage_amounts": "supportsPercentageAmounts",
     "responsible_for_employer_taxes": "responsibleForEmployerTaxes",
     "responsible_for_employee_w2": "responsibleForEmployeeW2",
+    "catch_up_type": "catchUpType",
     "employee_benefits": "employeeBenefits",
   });
 });

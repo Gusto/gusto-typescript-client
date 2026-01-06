@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeTaxSetupGetFederalTaxes } from "../funcs/employeeTaxSetupGetFederalTaxes.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1EmployeesEmployeeIdFederalTaxesRequest,
-  GetV1EmployeesEmployeeIdFederalTaxesResponse,
-} from "../models/operations/getv1employeesemployeeidfederaltaxes.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1EmployeesEmployeeIdFederalTaxesRequest } from "../models/operations/getv1employeesemployeeidfederaltaxes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeTaxSetupGetFederalTaxesQueryData =
-  GetV1EmployeesEmployeeIdFederalTaxesResponse;
+import {
+  buildEmployeeTaxSetupGetFederalTaxesQuery,
+  EmployeeTaxSetupGetFederalTaxesQueryData,
+  prefetchEmployeeTaxSetupGetFederalTaxes,
+  queryKeyEmployeeTaxSetupGetFederalTaxes,
+} from "./employeeTaxSetupGetFederalTaxes.core.js";
+export {
+  buildEmployeeTaxSetupGetFederalTaxesQuery,
+  type EmployeeTaxSetupGetFederalTaxesQueryData,
+  prefetchEmployeeTaxSetupGetFederalTaxes,
+  queryKeyEmployeeTaxSetupGetFederalTaxes,
+};
 
 /**
  * Get an employee's federal taxes
@@ -75,19 +74,6 @@ export function useEmployeeTaxSetupGetFederalTaxesSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeeTaxSetupGetFederalTaxes(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeTaxSetupGetFederalTaxesQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -136,49 +122,4 @@ export function invalidateAllEmployeeTaxSetupGetFederalTaxes(
     ...filters,
     queryKey: ["@gusto/embedded-api", "employeeTaxSetup", "getFederalTaxes"],
   });
-}
-
-export function buildEmployeeTaxSetupGetFederalTaxesQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeTaxSetupGetFederalTaxesQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeTaxSetupGetFederalTaxes(request.employeeUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function employeeTaxSetupGetFederalTaxesQueryFn(
-      ctx,
-    ): Promise<EmployeeTaxSetupGetFederalTaxesQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeTaxSetupGetFederalTaxes(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeTaxSetupGetFederalTaxes(
-  employeeUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeTaxSetup",
-    "getFederalTaxes",
-    employeeUuid,
-    parameters,
-  ];
 }

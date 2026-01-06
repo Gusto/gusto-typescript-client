@@ -5,34 +5,35 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { payrollsGet } from "../funcs/payrollsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
-  GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
   SortBy,
 } from "../models/operations/getv1companiescompanyidpayrollspayrollid.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PayrollsGetQueryData =
-  GetV1CompaniesCompanyIdPayrollsPayrollIdResponse;
+import {
+  buildPayrollsGetQuery,
+  PayrollsGetQueryData,
+  prefetchPayrollsGet,
+  queryKeyPayrollsGet,
+} from "./payrollsGet.core.js";
+export {
+  buildPayrollsGetQuery,
+  type PayrollsGetQueryData,
+  prefetchPayrollsGet,
+  queryKeyPayrollsGet,
+};
 
 /**
  * Get a single payroll
@@ -91,19 +92,6 @@ export function usePayrollsGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayrollsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayrollsGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -166,63 +154,4 @@ export function invalidateAllPayrollsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Payrolls", "get"],
   });
-}
-
-export function buildPayrollsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<PayrollsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayrollsGet(request.companyId, request.payrollId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-      include: request.include,
-      page: request.page,
-      per: request.per,
-      sortBy: request.sortBy,
-    }),
-    queryFn: async function payrollsGetQueryFn(
-      ctx,
-    ): Promise<PayrollsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payrollsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayrollsGet(
-  companyId: string,
-  payrollId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion
-      | undefined;
-    include?:
-      | Array<GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude>
-      | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-    sortBy?: SortBy | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Payrolls",
-    "get",
-    companyId,
-    payrollId,
-    parameters,
-  ];
 }

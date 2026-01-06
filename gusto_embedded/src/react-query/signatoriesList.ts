@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { signatoriesList } from "../funcs/signatoriesList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyUuidSignatoriesRequest,
-  GetV1CompaniesCompanyUuidSignatoriesResponse,
-} from "../models/operations/getv1companiescompanyuuidsignatories.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyUuidSignatoriesRequest } from "../models/operations/getv1companiescompanyuuidsignatories.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type SignatoriesListQueryData =
-  GetV1CompaniesCompanyUuidSignatoriesResponse;
+import {
+  buildSignatoriesListQuery,
+  prefetchSignatoriesList,
+  queryKeySignatoriesList,
+  SignatoriesListQueryData,
+} from "./signatoriesList.core.js";
+export {
+  buildSignatoriesListQuery,
+  prefetchSignatoriesList,
+  queryKeySignatoriesList,
+  type SignatoriesListQueryData,
+};
 
 /**
  * Get all company signatories
@@ -78,19 +77,6 @@ export function useSignatoriesListSuspense(
   });
 }
 
-export function prefetchSignatoriesList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyUuidSignatoriesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildSignatoriesListQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setSignatoriesListData(
   client: QueryClient,
   queryKeyBase: [
@@ -128,47 +114,4 @@ export function invalidateAllSignatoriesList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Signatories", "list"],
   });
-}
-
-export function buildSignatoriesListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyUuidSignatoriesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<SignatoriesListQueryData>;
-} {
-  return {
-    queryKey: queryKeySignatoriesList(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function signatoriesListQueryFn(
-      ctx,
-    ): Promise<SignatoriesListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(signatoriesList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeySignatoriesList(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Signatories",
-    "list",
-    companyUuid,
-    parameters,
-  ];
 }

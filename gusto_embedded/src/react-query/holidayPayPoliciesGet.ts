@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { holidayPayPoliciesGet } from "../funcs/holidayPayPoliciesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
-  GetCompaniesCompanyUuidHolidayPayPolicyRequest,
-  GetCompaniesCompanyUuidHolidayPayPolicyResponse,
-} from "../models/operations/getcompaniescompanyuuidholidaypaypolicy.js";
-import { unwrapAsync } from "../types/fp.js";
+  GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
+} from "../models/operations/getv1companiescompanyuuidholidaypaypolicy.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type HolidayPayPoliciesGetQueryData =
-  GetCompaniesCompanyUuidHolidayPayPolicyResponse;
+import {
+  buildHolidayPayPoliciesGetQuery,
+  HolidayPayPoliciesGetQueryData,
+  prefetchHolidayPayPoliciesGet,
+  queryKeyHolidayPayPoliciesGet,
+} from "./holidayPayPoliciesGet.core.js";
+export {
+  buildHolidayPayPoliciesGetQuery,
+  type HolidayPayPoliciesGetQueryData,
+  prefetchHolidayPayPoliciesGet,
+  queryKeyHolidayPayPoliciesGet,
+};
 
 /**
  * Get a company's holiday pay policy
@@ -41,7 +42,7 @@ export type HolidayPayPoliciesGetQueryData =
  * scope: `holiday_pay_policies:read`
  */
 export function useHolidayPayPoliciesGet(
-  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: QueryHookOptions<HolidayPayPoliciesGetQueryData>,
 ): UseQueryResult<HolidayPayPoliciesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -64,7 +65,7 @@ export function useHolidayPayPoliciesGet(
  * scope: `holiday_pay_policies:read`
  */
 export function useHolidayPayPoliciesGetSuspense(
-  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
+  request: GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   options?: SuspenseQueryHookOptions<HolidayPayPoliciesGetQueryData>,
 ): UseSuspenseQueryResult<HolidayPayPoliciesGetQueryData, Error> {
   const client = useGustoEmbeddedContext();
@@ -78,24 +79,15 @@ export function useHolidayPayPoliciesGetSuspense(
   });
 }
 
-export function prefetchHolidayPayPoliciesGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildHolidayPayPoliciesGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setHolidayPayPoliciesGetData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: HolidayPayPoliciesGetQueryData,
 ): HolidayPayPoliciesGetQueryData | undefined {
@@ -109,7 +101,11 @@ export function invalidateHolidayPayPoliciesGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
@@ -133,49 +129,4 @@ export function invalidateAllHolidayPayPoliciesGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "holidayPayPolicies", "get"],
   });
-}
-
-export function buildHolidayPayPoliciesGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetCompaniesCompanyUuidHolidayPayPolicyRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<HolidayPayPoliciesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyHolidayPayPoliciesGet(request.companyUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function holidayPayPoliciesGetQueryFn(
-      ctx,
-    ): Promise<HolidayPayPoliciesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(holidayPayPoliciesGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyHolidayPayPoliciesGet(
-  companyUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "holidayPayPolicies",
-    "get",
-    companyUuid,
-    parameters,
-  ];
 }

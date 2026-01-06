@@ -5,31 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companiesGet } from "../funcs/companiesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesRequest,
-  GetV1CompaniesResponse,
-} from "../models/operations/getv1companies.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesRequest } from "../models/operations/getv1companies.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompaniesGetQueryData = GetV1CompaniesResponse;
+import {
+  buildCompaniesGetQuery,
+  CompaniesGetQueryData,
+  prefetchCompaniesGet,
+  queryKeyCompaniesGet,
+} from "./companiesGet.core.js";
+export {
+  buildCompaniesGetQuery,
+  type CompaniesGetQueryData,
+  prefetchCompaniesGet,
+  queryKeyCompaniesGet,
+};
 
 /**
  * Get a company
@@ -83,19 +83,6 @@ export function useCompaniesGetSuspense(
   });
 }
 
-export function prefetchCompaniesGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompaniesGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setCompaniesGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -133,41 +120,4 @@ export function invalidateAllCompaniesGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Companies", "get"],
   });
-}
-
-export function buildCompaniesGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<CompaniesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompaniesGet(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companiesGetQueryFn(
-      ctx,
-    ): Promise<CompaniesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companiesGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompaniesGet(
-  companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return ["@gusto/embedded-api", "Companies", "get", companyId, parameters];
 }

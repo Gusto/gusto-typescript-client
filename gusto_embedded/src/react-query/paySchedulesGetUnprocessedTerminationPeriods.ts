@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { paySchedulesGetUnprocessedTerminationPeriods } from "../funcs/paySchedulesGetUnprocessedTerminationPeriods.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
-  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse,
-} from "../models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest } from "../models/operations/getv1companiescompanyidunprocessedterminationpayperiods.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PaySchedulesGetUnprocessedTerminationPeriodsQueryData =
-  GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsResponse;
+import {
+  buildPaySchedulesGetUnprocessedTerminationPeriodsQuery,
+  PaySchedulesGetUnprocessedTerminationPeriodsQueryData,
+  prefetchPaySchedulesGetUnprocessedTerminationPeriods,
+  queryKeyPaySchedulesGetUnprocessedTerminationPeriods,
+} from "./paySchedulesGetUnprocessedTerminationPeriods.core.js";
+export {
+  buildPaySchedulesGetUnprocessedTerminationPeriodsQuery,
+  type PaySchedulesGetUnprocessedTerminationPeriodsQueryData,
+  prefetchPaySchedulesGetUnprocessedTerminationPeriods,
+  queryKeyPaySchedulesGetUnprocessedTerminationPeriods,
+};
 
 /**
  * Get termination pay periods for a company
@@ -92,19 +91,6 @@ export function usePaySchedulesGetUnprocessedTerminationPeriodsSuspense(
   });
 }
 
-export function prefetchPaySchedulesGetUnprocessedTerminationPeriods(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPaySchedulesGetUnprocessedTerminationPeriodsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setPaySchedulesGetUnprocessedTerminationPeriodsData(
   client: QueryClient,
   queryKeyBase: [
@@ -155,50 +141,4 @@ export function invalidateAllPaySchedulesGetUnprocessedTerminationPeriods(
       "getUnprocessedTerminationPeriods",
     ],
   });
-}
-
-export function buildPaySchedulesGetUnprocessedTerminationPeriodsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdUnprocessedTerminationPayPeriodsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PaySchedulesGetUnprocessedTerminationPeriodsQueryData>;
-} {
-  return {
-    queryKey: queryKeyPaySchedulesGetUnprocessedTerminationPeriods(
-      request.companyId,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function paySchedulesGetUnprocessedTerminationPeriodsQueryFn(
-      ctx,
-    ): Promise<PaySchedulesGetUnprocessedTerminationPeriodsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(paySchedulesGetUnprocessedTerminationPeriods(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPaySchedulesGetUnprocessedTerminationPeriods(
-  companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "paySchedules",
-    "getUnprocessedTerminationPeriods",
-    companyId,
-    parameters,
-  ];
 }

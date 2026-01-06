@@ -25,11 +25,11 @@ import {
   UnprocessableEntityErrorObject$inboundSchema,
 } from "../models/errors/unprocessableentityerrorobject.js";
 import {
-  PutTimeOffPoliciesTimeOffPolicyUuidRequest,
-  PutTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema,
-  PutTimeOffPoliciesTimeOffPolicyUuidResponse,
-  PutTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema,
-} from "../models/operations/puttimeoffpoliciestimeoffpolicyuuid.js";
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidResponse,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuid.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -43,11 +43,11 @@ import { Result } from "../types/fp.js";
  */
 export function timeOffPoliciesUpdate(
   client: GustoEmbeddedCore,
-  request: PutTimeOffPoliciesTimeOffPolicyUuidRequest,
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+    PutV1TimeOffPoliciesTimeOffPolicyUuidResponse,
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -68,12 +68,12 @@ export function timeOffPoliciesUpdate(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: PutTimeOffPoliciesTimeOffPolicyUuidRequest,
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+      PutV1TimeOffPoliciesTimeOffPolicyUuidResponse,
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -90,7 +90,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      PutTimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema.parse(value),
+      PutV1TimeOffPoliciesTimeOffPolicyUuidRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -130,7 +130,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "put-time_off_policies-time_off_policy_uuid",
+    operationID: "put-v1-time_off_policies-time_off_policy_uuid",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -173,7 +173,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    PutTimeOffPoliciesTimeOffPolicyUuidResponse,
+    PutV1TimeOffPoliciesTimeOffPolicyUuidResponse,
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -184,11 +184,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, PutTimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema, {
+    M.json(200, PutV1TimeOffPoliciesTimeOffPolicyUuidResponse$inboundSchema, {
       key: "Time-Off-Policy",
     }),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

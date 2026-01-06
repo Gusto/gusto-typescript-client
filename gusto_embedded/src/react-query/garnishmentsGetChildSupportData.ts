@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { garnishmentsGetChildSupportData } from "../funcs/garnishmentsGetChildSupportData.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1GarnishmentsChildSupportRequest,
-  GetV1GarnishmentsChildSupportResponse,
-} from "../models/operations/getv1garnishmentschildsupport.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1GarnishmentsChildSupportRequest } from "../models/operations/getv1garnishmentschildsupport.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type GarnishmentsGetChildSupportDataQueryData =
-  GetV1GarnishmentsChildSupportResponse;
+import {
+  buildGarnishmentsGetChildSupportDataQuery,
+  GarnishmentsGetChildSupportDataQueryData,
+  prefetchGarnishmentsGetChildSupportData,
+  queryKeyGarnishmentsGetChildSupportData,
+} from "./garnishmentsGetChildSupportData.core.js";
+export {
+  buildGarnishmentsGetChildSupportDataQuery,
+  type GarnishmentsGetChildSupportDataQueryData,
+  prefetchGarnishmentsGetChildSupportData,
+  queryKeyGarnishmentsGetChildSupportData,
+};
 
 /**
  * Get child support garnishment data
@@ -78,19 +77,6 @@ export function useGarnishmentsGetChildSupportDataSuspense(
   });
 }
 
-export function prefetchGarnishmentsGetChildSupportData(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1GarnishmentsChildSupportRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGarnishmentsGetChildSupportDataQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setGarnishmentsGetChildSupportDataData(
   client: QueryClient,
   queryKeyBase: [parameters: { xGustoAPIVersion?: VersionHeader | undefined }],
@@ -130,47 +116,4 @@ export function invalidateAllGarnishmentsGetChildSupportData(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Garnishments", "getChildSupportData"],
   });
-}
-
-export function buildGarnishmentsGetChildSupportDataQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1GarnishmentsChildSupportRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<GarnishmentsGetChildSupportDataQueryData>;
-} {
-  return {
-    queryKey: queryKeyGarnishmentsGetChildSupportData({
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function garnishmentsGetChildSupportDataQueryFn(
-      ctx,
-    ): Promise<GarnishmentsGetChildSupportDataQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(garnishmentsGetChildSupportData(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGarnishmentsGetChildSupportData(
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Garnishments",
-    "getChildSupportData",
-    parameters,
-  ];
 }

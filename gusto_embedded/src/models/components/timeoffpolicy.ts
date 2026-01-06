@@ -23,6 +23,10 @@ export type PolicyType = ClosedEnum<typeof PolicyType>;
 
 export type TimeOffPolicyEmployees = {
   uuid?: string | undefined;
+  /**
+   * The time off balance for the employee
+   */
+  balance?: string | undefined;
 };
 
 /**
@@ -68,23 +72,27 @@ export type TimeOffPolicy = {
   /**
    * The max number of hours an employee can carryover from one year to the next
    */
-  carryoverLimitHours?: string | undefined;
+  carryoverLimitHours?: string | null | undefined;
   /**
    * The max number of hours an employee can accrue in a year
    */
-  maxAccrualHoursPerYear?: string | undefined;
+  maxAccrualHoursPerYear?: string | null | undefined;
   /**
    * The max number of hours an employee can accrue
    */
-  maxHours?: string | undefined;
+  maxHours?: string | null | undefined;
+  /**
+   * The date the policy resets. Format MM-DD
+   */
+  policyResetDate?: string | null | undefined;
   /**
    * boolean representing if a policy has completed configuration
    */
   complete?: boolean | undefined;
   /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field. The version will be null if the policy is no longer active.
    */
-  version?: string | undefined;
+  version?: string | null | undefined;
   /**
    * boolean representing if a policy is active or not
    */
@@ -106,6 +114,7 @@ export const TimeOffPolicyEmployees$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   uuid: z.string().optional(),
+  balance: z.string().optional(),
 });
 
 export function timeOffPolicyEmployeesFromJSON(
@@ -133,11 +142,12 @@ export const TimeOffPolicy$inboundSchema: z.ZodType<
   accrual_rate_unit: z.nullable(z.string()).optional(),
   paid_out_on_termination: z.boolean().optional(),
   accrual_waiting_period_days: z.nullable(z.number().int()).optional(),
-  carryover_limit_hours: z.string().optional(),
-  max_accrual_hours_per_year: z.string().optional(),
-  max_hours: z.string().optional(),
+  carryover_limit_hours: z.nullable(z.string()).optional(),
+  max_accrual_hours_per_year: z.nullable(z.string()).optional(),
+  max_hours: z.nullable(z.string()).optional(),
+  policy_reset_date: z.nullable(z.string()).optional(),
   complete: z.boolean().optional(),
-  version: z.string().optional(),
+  version: z.nullable(z.string()).optional(),
   is_active: z.boolean(),
   employees: z.array(z.lazy(() => TimeOffPolicyEmployees$inboundSchema)),
 }).transform((v) => {
@@ -152,6 +162,7 @@ export const TimeOffPolicy$inboundSchema: z.ZodType<
     "carryover_limit_hours": "carryoverLimitHours",
     "max_accrual_hours_per_year": "maxAccrualHoursPerYear",
     "max_hours": "maxHours",
+    "policy_reset_date": "policyResetDate",
     "is_active": "isActive",
   });
 });

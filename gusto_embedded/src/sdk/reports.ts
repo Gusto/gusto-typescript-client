@@ -6,6 +6,7 @@ import { reportsCreateCustom } from "../funcs/reportsCreateCustom.js";
 import { reportsGetReportsRequestUuid } from "../funcs/reportsGetReportsRequestUuid.js";
 import { reportsGetTemplate } from "../funcs/reportsGetTemplate.js";
 import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "../funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+import { reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage } from "../funcs/reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
   GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
@@ -23,6 +24,10 @@ import {
   PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
   PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
 } from "../models/operations/postpayrollspayrolluuidreportsgeneralledger.js";
+import {
+  PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest,
+  PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse,
+} from "../models/operations/postv1companiescompanyidreportsemployeesannualficawage.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Reports extends ClientSDK {
@@ -104,5 +109,30 @@ export class Reports extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Create an employees annual FICA wage report
+   *
+   * @remarks
+   * Generates a report containing annual FICA (Federal Insurance Contributions Act) wage data for all employees in a company over a specified year range.
+   *
+   * This report provides detailed wage information subject to Social Security and Medicare taxes, useful for benefits integrations that need to verify employee earnings for compliance and benefit calculations.
+   *
+   * The report is generated asynchronously. After making this request, you will receive a `request_uuid` which can be used to poll the [Get a report](ref:get-v1-reports-request_uuid) endpoint to check the status and retrieve the report when complete.
+   *
+   * scope: `company_reports:write`
+   */
+  async postV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+    request: PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest,
+    options?: RequestOptions,
+  ): Promise<PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse> {
+    return unwrapAsync(
+      reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 }

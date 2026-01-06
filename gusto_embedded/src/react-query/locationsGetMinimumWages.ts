@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { locationsGetMinimumWages } from "../funcs/locationsGetMinimumWages.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion,
   GetV1LocationsLocationUuidMinimumWagesRequest,
-  GetV1LocationsLocationUuidMinimumWagesResponse,
 } from "../models/operations/getv1locationslocationuuidminimumwages.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type LocationsGetMinimumWagesQueryData =
-  GetV1LocationsLocationUuidMinimumWagesResponse;
+import {
+  buildLocationsGetMinimumWagesQuery,
+  LocationsGetMinimumWagesQueryData,
+  prefetchLocationsGetMinimumWages,
+  queryKeyLocationsGetMinimumWages,
+} from "./locationsGetMinimumWages.core.js";
+export {
+  buildLocationsGetMinimumWagesQuery,
+  type LocationsGetMinimumWagesQueryData,
+  prefetchLocationsGetMinimumWages,
+  queryKeyLocationsGetMinimumWages,
+};
 
 /**
  * Get minimum wages for a location
@@ -75,19 +76,6 @@ export function useLocationsGetMinimumWagesSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchLocationsGetMinimumWages(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1LocationsLocationUuidMinimumWagesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildLocationsGetMinimumWagesQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -143,55 +131,4 @@ export function invalidateAllLocationsGetMinimumWages(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Locations", "getMinimumWages"],
   });
-}
-
-export function buildLocationsGetMinimumWagesQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1LocationsLocationUuidMinimumWagesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<LocationsGetMinimumWagesQueryData>;
-} {
-  return {
-    queryKey: queryKeyLocationsGetMinimumWages(request.locationUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-      effectiveDate: request.effectiveDate,
-    }),
-    queryFn: async function locationsGetMinimumWagesQueryFn(
-      ctx,
-    ): Promise<LocationsGetMinimumWagesQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(locationsGetMinimumWages(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyLocationsGetMinimumWages(
-  locationUuid: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion
-      | undefined;
-    effectiveDate?: string | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Locations",
-    "getMinimumWages",
-    locationUuid,
-    parameters,
-  ];
 }

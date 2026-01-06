@@ -5,36 +5,38 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { payrollsList } from "../funcs/payrollsList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   DateFilterBy,
   GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsRequest,
-  GetV1CompaniesCompanyIdPayrollsResponse,
   PayrollTypes,
   ProcessingStatuses,
   SortOrder,
 } from "../models/operations/getv1companiescompanyidpayrolls.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PayrollsListQueryData = GetV1CompaniesCompanyIdPayrollsResponse;
+import {
+  buildPayrollsListQuery,
+  PayrollsListQueryData,
+  prefetchPayrollsList,
+  queryKeyPayrollsList,
+} from "./payrollsList.core.js";
+export {
+  buildPayrollsListQuery,
+  type PayrollsListQueryData,
+  prefetchPayrollsList,
+  queryKeyPayrollsList,
+};
 
 /**
  * Get all payrolls for a company
@@ -91,19 +93,6 @@ export function usePayrollsListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPayrollsList(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPayrollsListQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -178,69 +167,4 @@ export function invalidateAllPayrollsList(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Payrolls", "list"],
   });
-}
-
-export function buildPayrollsListQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayrollsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<PayrollsListQueryData>;
-} {
-  return {
-    queryKey: queryKeyPayrollsList(request.companyId, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-      processingStatuses: request.processingStatuses,
-      payrollTypes: request.payrollTypes,
-      processed: request.processed,
-      includeOffCycle: request.includeOffCycle,
-      include: request.include,
-      startDate: request.startDate,
-      endDate: request.endDate,
-      dateFilterBy: request.dateFilterBy,
-      page: request.page,
-      per: request.per,
-      sortOrder: request.sortOrder,
-    }),
-    queryFn: async function payrollsListQueryFn(
-      ctx,
-    ): Promise<PayrollsListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(payrollsList(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPayrollsList(
-  companyId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion
-      | undefined;
-    processingStatuses?: Array<ProcessingStatuses> | undefined;
-    payrollTypes?: Array<PayrollTypes> | undefined;
-    processed?: boolean | undefined;
-    includeOffCycle?: boolean | undefined;
-    include?:
-      | Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude>
-      | undefined;
-    startDate?: string | undefined;
-    endDate?: string | undefined;
-    dateFilterBy?: DateFilterBy | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-    sortOrder?: SortOrder | undefined;
-  },
-): QueryKey {
-  return ["@gusto/embedded-api", "Payrolls", "list", companyId, parameters];
 }

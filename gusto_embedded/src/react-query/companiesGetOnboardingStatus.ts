@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { companiesGetOnboardingStatus } from "../funcs/companiesGetOnboardingStatus.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompanyOnboardingStatusRequest,
-  GetV1CompanyOnboardingStatusResponse,
-} from "../models/operations/getv1companyonboardingstatus.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompanyOnboardingStatusRequest } from "../models/operations/getv1companyonboardingstatus.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type CompaniesGetOnboardingStatusQueryData =
-  GetV1CompanyOnboardingStatusResponse;
+import {
+  buildCompaniesGetOnboardingStatusQuery,
+  CompaniesGetOnboardingStatusQueryData,
+  prefetchCompaniesGetOnboardingStatus,
+  queryKeyCompaniesGetOnboardingStatus,
+} from "./companiesGetOnboardingStatus.core.js";
+export {
+  buildCompaniesGetOnboardingStatusQuery,
+  type CompaniesGetOnboardingStatusQueryData,
+  prefetchCompaniesGetOnboardingStatus,
+  queryKeyCompaniesGetOnboardingStatus,
+};
 
 /**
  * Get the company's onboarding status
@@ -77,19 +76,6 @@ export function useCompaniesGetOnboardingStatusSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCompaniesGetOnboardingStatus(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyOnboardingStatusRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCompaniesGetOnboardingStatusQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -141,53 +127,4 @@ export function invalidateAllCompaniesGetOnboardingStatus(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Companies", "getOnboardingStatus"],
   });
-}
-
-export function buildCompaniesGetOnboardingStatusQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompanyOnboardingStatusRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CompaniesGetOnboardingStatusQueryData>;
-} {
-  return {
-    queryKey: queryKeyCompaniesGetOnboardingStatus(request.companyUuid, {
-      additionalSteps: request.additionalSteps,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function companiesGetOnboardingStatusQueryFn(
-      ctx,
-    ): Promise<CompaniesGetOnboardingStatusQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(companiesGetOnboardingStatus(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCompaniesGetOnboardingStatus(
-  companyUuid: string,
-  parameters: {
-    additionalSteps?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Companies",
-    "getOnboardingStatus",
-    companyUuid,
-    parameters,
-  ];
 }

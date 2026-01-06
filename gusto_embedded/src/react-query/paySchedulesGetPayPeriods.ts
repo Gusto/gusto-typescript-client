@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { paySchedulesGetPayPeriods } from "../funcs/paySchedulesGetPayPeriods.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetV1CompaniesCompanyIdPayPeriodsRequest,
-  GetV1CompaniesCompanyIdPayPeriodsResponse,
-} from "../models/operations/getv1companiescompanyidpayperiods.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetV1CompaniesCompanyIdPayPeriodsRequest } from "../models/operations/getv1companiescompanyidpayperiods.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type PaySchedulesGetPayPeriodsQueryData =
-  GetV1CompaniesCompanyIdPayPeriodsResponse;
+import {
+  buildPaySchedulesGetPayPeriodsQuery,
+  PaySchedulesGetPayPeriodsQueryData,
+  prefetchPaySchedulesGetPayPeriods,
+  queryKeyPaySchedulesGetPayPeriods,
+} from "./paySchedulesGetPayPeriods.core.js";
+export {
+  buildPaySchedulesGetPayPeriodsQuery,
+  type PaySchedulesGetPayPeriodsQueryData,
+  prefetchPaySchedulesGetPayPeriods,
+  queryKeyPaySchedulesGetPayPeriods,
+};
 
 /**
  * Get pay periods for a company
@@ -86,19 +85,6 @@ export function usePaySchedulesGetPayPeriodsSuspense(
   });
 }
 
-export function prefetchPaySchedulesGetPayPeriods(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayPeriodsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPaySchedulesGetPayPeriodsQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setPaySchedulesGetPayPeriodsData(
   client: QueryClient,
   queryKeyBase: [
@@ -151,57 +137,4 @@ export function invalidateAllPaySchedulesGetPayPeriods(
     ...filters,
     queryKey: ["@gusto/embedded-api", "paySchedules", "getPayPeriods"],
   });
-}
-
-export function buildPaySchedulesGetPayPeriodsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1CompaniesCompanyIdPayPeriodsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PaySchedulesGetPayPeriodsQueryData>;
-} {
-  return {
-    queryKey: queryKeyPaySchedulesGetPayPeriods(request.companyId, {
-      startDate: request.startDate,
-      endDate: request.endDate,
-      payrollTypes: request.payrollTypes,
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function paySchedulesGetPayPeriodsQueryFn(
-      ctx,
-    ): Promise<PaySchedulesGetPayPeriodsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(paySchedulesGetPayPeriods(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPaySchedulesGetPayPeriods(
-  companyId: string,
-  parameters: {
-    startDate?: string | undefined;
-    endDate?: string | undefined;
-    payrollTypes?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "paySchedules",
-    "getPayPeriods",
-    companyId,
-    parameters,
-  ];
 }

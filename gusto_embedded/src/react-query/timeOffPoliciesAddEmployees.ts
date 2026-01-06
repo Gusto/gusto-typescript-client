@@ -12,20 +12,20 @@ import { timeOffPoliciesAddEmployees } from "../funcs/timeOffPoliciesAddEmployee
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest,
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse,
-} from "../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidaddemployees.js";
+  PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuidaddemployees.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesAddEmployeesMutationVariables = {
-  request: PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest;
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesAddEmployeesMutationData =
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse;
+  PutV1TimeOffPoliciesTimeOffPolicyUuidAddEmployeesResponse;
 
 /**
  * Add employees to a time off policy

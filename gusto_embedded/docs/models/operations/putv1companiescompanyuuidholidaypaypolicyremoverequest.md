@@ -1,0 +1,25 @@
+# PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest
+
+## Example Usage
+
+```typescript
+import { PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest } from "@gusto/embedded-api/models/operations/putv1companiescompanyuuidholidaypaypolicyremove.js";
+
+let value: PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest = {
+  companyUuid: "<id>",
+  requestBody: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    employees: [
+      {},
+    ],
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveHeaderXGustoAPIVersion](../../models/operations/putv1companiescompanyuuidholidaypaypolicyremoveheaderxgustoapiversion.md)                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `requestBody`                                                                                                                                                                                                                | [operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequestBody](../../models/operations/putv1companiescompanyuuidholidaypaypolicyremoverequestbody.md)                                                               | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

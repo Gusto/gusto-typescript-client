@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements } from "../funcs/reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdRecurringReimbursementsRequest,
-  GetV1EmployeesEmployeeIdRecurringReimbursementsResponse,
 } from "../models/operations/getv1employeesemployeeidrecurringreimbursements.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type ReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQueryData =
-  GetV1EmployeesEmployeeIdRecurringReimbursementsResponse;
+import {
+  buildReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQuery,
+  prefetchReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements,
+  queryKeyReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements,
+  ReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQueryData,
+} from "./reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements.core.js";
+export {
+  buildReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQuery,
+  prefetchReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements,
+  queryKeyReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements,
+  type ReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQueryData,
+};
 
 /**
  * Get recurring reimbursements for an employee
@@ -85,19 +86,6 @@ export function useReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdRecurringReimbursementsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -167,68 +155,4 @@ export function invalidateAllReimbursementsGetV1EmployeesEmployeeIdRecurringReim
       "getV1EmployeesEmployeeIdRecurringReimbursements",
     ],
   });
-}
-
-export function buildReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1EmployeesEmployeeIdRecurringReimbursementsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<
-    ReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQueryData
-  >;
-} {
-  return {
-    queryKey:
-      queryKeyReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements(
-        request.employeeId,
-        {
-          xGustoAPIVersion: request.xGustoAPIVersion,
-          page: request.page,
-          per: request.per,
-        },
-      ),
-    queryFn:
-      async function reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQueryFn(
-        ctx,
-      ): Promise<
-        ReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursementsQueryData
-      > {
-        const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-        const mergedOptions = {
-          ...options,
-          fetchOptions: { ...options?.fetchOptions, signal: sig },
-        };
-
-        return unwrapAsync(
-          reimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements(
-            client$,
-            request,
-            mergedOptions,
-          ),
-        );
-      },
-  };
-}
-
-export function queryKeyReimbursementsGetV1EmployeesEmployeeIdRecurringReimbursements(
-  employeeId: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1EmployeesEmployeeIdRecurringReimbursementsHeaderXGustoAPIVersion
-      | undefined;
-    page?: number | undefined;
-    per?: number | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Reimbursements",
-    "getV1EmployeesEmployeeIdRecurringReimbursements",
-    employeeId,
-    parameters,
-  ];
 }

@@ -1,5 +1,7 @@
 # FederalHolidays
 
+List of the eleven supported federal holidays and their details
+
 ## Example Usage
 
 ```typescript
@@ -22,3 +24,4 @@ let value: FederalHolidays = {};
 | `columbusDay`                                                            | [components.ColumbusDay](../../models/components/columbusday.md)         | :heavy_minus_sign:                                                       | N/A                                                                      |
 | `veteransDay`                                                            | [components.VeteransDay](../../models/components/veteransday.md)         | :heavy_minus_sign:                                                       | N/A                                                                      |
 | `thanksgiving`                                                           | [components.Thanksgiving](../../models/components/thanksgiving.md)       | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `christmasDay`                                                           | [components.ChristmasDay](../../models/components/christmasday.md)       | :heavy_minus_sign:                                                       | N/A                                                                      |

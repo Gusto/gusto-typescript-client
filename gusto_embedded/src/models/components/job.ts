@@ -33,7 +33,7 @@ export type Job = {
   /**
    * The title for the job.
    */
-  title?: string | null | undefined;
+  title: string | null;
   /**
    * Whether this is the employee's primary job. The value will be set to true unless an existing job exists for the employee.
    */

@@ -5,32 +5,31 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { wireInRequestsGet } from "../funcs/wireInRequestsGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
-import {
-  GetWireInRequestsWireInRequestUuidRequest,
-  GetWireInRequestsWireInRequestUuidResponse,
-} from "../models/operations/getwireinrequestswireinrequestuuid.js";
-import { unwrapAsync } from "../types/fp.js";
+import { GetWireInRequestsWireInRequestUuidRequest } from "../models/operations/getwireinrequestswireinrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type WireInRequestsGetQueryData =
-  GetWireInRequestsWireInRequestUuidResponse;
+import {
+  buildWireInRequestsGetQuery,
+  prefetchWireInRequestsGet,
+  queryKeyWireInRequestsGet,
+  WireInRequestsGetQueryData,
+} from "./wireInRequestsGet.core.js";
+export {
+  buildWireInRequestsGetQuery,
+  prefetchWireInRequestsGet,
+  queryKeyWireInRequestsGet,
+  type WireInRequestsGetQueryData,
+};
 
 /**
  * Get a single Wire In Request
@@ -78,19 +77,6 @@ export function useWireInRequestsGetSuspense(
   });
 }
 
-export function prefetchWireInRequestsGet(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetWireInRequestsWireInRequestUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWireInRequestsGetQuery(
-      client$,
-      request,
-    ),
-  });
-}
-
 export function setWireInRequestsGetData(
   client: QueryClient,
   queryKeyBase: [
@@ -128,49 +114,4 @@ export function invalidateAllWireInRequestsGet(
     ...filters,
     queryKey: ["@gusto/embedded-api", "wireInRequests", "get"],
   });
-}
-
-export function buildWireInRequestsGetQuery(
-  client$: GustoEmbeddedCore,
-  request: GetWireInRequestsWireInRequestUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WireInRequestsGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyWireInRequestsGet(request.wireInRequestUuid, {
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function wireInRequestsGetQueryFn(
-      ctx,
-    ): Promise<WireInRequestsGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(wireInRequestsGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWireInRequestsGet(
-  wireInRequestUuid: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "wireInRequests",
-    "get",
-    wireInRequestUuid,
-    parameters,
-  ];
 }

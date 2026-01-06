@@ -5,32 +5,33 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { employeeAddressesRetrieveWorkAddress } from "../funcs/employeeAddressesRetrieveWorkAddress.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion,
   GetV1WorkAddressesWorkAddressUuidRequest,
-  GetV1WorkAddressesWorkAddressUuidResponse,
 } from "../models/operations/getv1workaddressesworkaddressuuid.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type EmployeeAddressesRetrieveWorkAddressQueryData =
-  GetV1WorkAddressesWorkAddressUuidResponse;
+import {
+  buildEmployeeAddressesRetrieveWorkAddressQuery,
+  EmployeeAddressesRetrieveWorkAddressQueryData,
+  prefetchEmployeeAddressesRetrieveWorkAddress,
+  queryKeyEmployeeAddressesRetrieveWorkAddress,
+} from "./employeeAddressesRetrieveWorkAddress.core.js";
+export {
+  buildEmployeeAddressesRetrieveWorkAddressQuery,
+  type EmployeeAddressesRetrieveWorkAddressQueryData,
+  prefetchEmployeeAddressesRetrieveWorkAddress,
+  queryKeyEmployeeAddressesRetrieveWorkAddress,
+};
 
 /**
  * Get an employee work address
@@ -80,19 +81,6 @@ export function useEmployeeAddressesRetrieveWorkAddressSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEmployeeAddressesRetrieveWorkAddress(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  request: GetV1WorkAddressesWorkAddressUuidRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEmployeeAddressesRetrieveWorkAddressQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -153,54 +141,4 @@ export function invalidateAllEmployeeAddressesRetrieveWorkAddress(
       "retrieveWorkAddress",
     ],
   });
-}
-
-export function buildEmployeeAddressesRetrieveWorkAddressQuery(
-  client$: GustoEmbeddedCore,
-  request: GetV1WorkAddressesWorkAddressUuidRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EmployeeAddressesRetrieveWorkAddressQueryData>;
-} {
-  return {
-    queryKey: queryKeyEmployeeAddressesRetrieveWorkAddress(
-      request.workAddressUuid,
-      { xGustoAPIVersion: request.xGustoAPIVersion },
-    ),
-    queryFn: async function employeeAddressesRetrieveWorkAddressQueryFn(
-      ctx,
-    ): Promise<EmployeeAddressesRetrieveWorkAddressQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(employeeAddressesRetrieveWorkAddress(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEmployeeAddressesRetrieveWorkAddress(
-  workAddressUuid: string,
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1WorkAddressesWorkAddressUuidHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "employeeAddresses",
-    "retrieveWorkAddress",
-    workAddressUuid,
-    parameters,
-  ];
 }

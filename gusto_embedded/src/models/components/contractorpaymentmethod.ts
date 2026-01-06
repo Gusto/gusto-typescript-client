@@ -28,14 +28,14 @@ export type ContractorPaymentMethodType = ClosedEnum<
 >;
 
 /**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then values are in cents and the last split amount must be `null` to capture the remainder.
  */
 export const ContractorPaymentMethodSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
 /**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last split amount must be nil to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then values are in cents and the last split amount must be `null` to capture the remainder.
  */
 export type ContractorPaymentMethodSplitBy = ClosedEnum<
   typeof ContractorPaymentMethodSplitBy
@@ -54,7 +54,7 @@ export type ContractorPaymentMethod = {
    */
   type?: ContractorPaymentMethodType | null | undefined;
   /**
-   * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last split amount must be nil to capture the remainder.
+   * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then values are in cents and the last split amount must be `null` to capture the remainder.
    */
   splitBy?: ContractorPaymentMethodSplitBy | null | undefined;
   splits?: Array<PaymentMethodBankAccount> | null | undefined;

@@ -12,8 +12,8 @@ let value: SalaryEstimate = {
   employeeUuid: "<id>",
   annualNetRevenue: "<value>",
   zipCode: "65281-1598",
-  createdAt: new Date("2023-12-18T14:52:38.765Z"),
-  updatedAt: new Date("2025-01-15T06:58:43.715Z"),
+  createdAt: new Date("2024-12-17T14:52:38.765Z"),
+  updatedAt: new Date("2026-01-15T06:58:43.715Z"),
   occupations: [
     {
       code: "<value>",

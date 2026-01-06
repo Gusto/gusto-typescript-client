@@ -12,26 +12,26 @@ import { timeOffPoliciesUpdateBalance } from "../funcs/timeOffPoliciesUpdateBala
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
-} from "../models/operations/putversiontimeoffpoliciestimeoffpolicyuuidbalance.js";
+  PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest,
+  PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse,
+} from "../models/operations/putv1timeoffpoliciestimeoffpolicyuuidbalance.js";
 import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
 
 export type TimeOffPoliciesUpdateBalanceMutationVariables = {
-  request: PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceRequest;
+  request: PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceRequest;
   options?: RequestOptions;
 };
 
 export type TimeOffPoliciesUpdateBalanceMutationData =
-  PutVersionTimeOffPoliciesTimeOffPolicyUuidBalanceResponse;
+  PutV1TimeOffPoliciesTimeOffPolicyUuidBalanceResponse;
 
 /**
- * Update employee time off hour balances
+ * Update employee time off balances
  *
  * @remarks
- * Updates time off hours balances for employees for a time off policy
+ * Updates time off hours balances for employees for a time off policy.
  *
  * scope: `time_off_policies:write`
  */

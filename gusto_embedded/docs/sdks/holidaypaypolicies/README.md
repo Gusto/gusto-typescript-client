@@ -17,9 +17,10 @@ Get a company's holiday pay policy
 
 scope: `holiday_pay_policies:read`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-holiday_pay_policy" method="get" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-holiday_pay_policy" method="get" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -99,20 +100,21 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetCompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/getcompaniescompanyuuidholidaypaypolicyrequest.md)                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetV1CompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/getv1companiescompanyuuidholidaypaypolicyrequest.md)                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/getcompaniescompanyuuidholidaypaypolicyresponse.md)\>**
+**Promise\<[operations.GetV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/getv1companiescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## create
 
@@ -120,9 +122,10 @@ Create a holiday pay policy for a company
 
 scope: `holiday_pay_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-holiday_pay_policy" method="post" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-holiday_pay_policy" method="post" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -133,28 +136,6 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.holidayPayPolicies.create({
     companyUuid: "<id>",
-    requestBody: {
-      federalHolidays: {
-        mlkDay: {
-          selected: true,
-        },
-        memorialDay: {
-          selected: true,
-        },
-        independenceDay: {
-          selected: true,
-        },
-        veteransDay: {
-          selected: true,
-        },
-        thanksgiving: {
-          selected: true,
-        },
-        christmasDay: {
-          selected: true,
-        },
-      },
-    },
   });
 
   console.log(result);
@@ -180,28 +161,6 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await holidayPayPoliciesCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      federalHolidays: {
-        mlkDay: {
-          selected: true,
-        },
-        memorialDay: {
-          selected: true,
-        },
-        independenceDay: {
-          selected: true,
-        },
-        veteransDay: {
-          selected: true,
-        },
-        thanksgiving: {
-          selected: true,
-        },
-        christmasDay: {
-          selected: true,
-        },
-      },
-    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -235,20 +194,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostCompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/postcompaniescompanyuuidholidaypaypolicyrequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PostV1CompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/postv1companiescompanyuuidholidaypaypolicyrequest.md)                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/postcompaniescompanyuuidholidaypaypolicyresponse.md)\>**
+**Promise\<[operations.PostV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/postv1companiescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## update
@@ -257,9 +216,10 @@ Update a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-companies-company_uuid-holiday_pay_policy" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-holiday_pay_policy" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -271,27 +231,7 @@ async function run() {
   const result = await gustoEmbedded.holidayPayPolicies.update({
     companyUuid: "<id>",
     requestBody: {
-      version: "1b37938b017c7fd7116bada007072290",
-      federalHolidays: {
-        mlkDay: {
-          selected: true,
-        },
-        memorialDay: {
-          selected: true,
-        },
-        independenceDay: {
-          selected: true,
-        },
-        veteransDay: {
-          selected: true,
-        },
-        thanksgiving: {
-          selected: true,
-        },
-        christmasDay: {
-          selected: true,
-        },
-      },
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
     },
   });
 
@@ -319,27 +259,7 @@ async function run() {
   const res = await holidayPayPoliciesUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
-      version: "1b37938b017c7fd7116bada007072290",
-      federalHolidays: {
-        mlkDay: {
-          selected: true,
-        },
-        memorialDay: {
-          selected: true,
-        },
-        independenceDay: {
-          selected: true,
-        },
-        veteransDay: {
-          selected: true,
-        },
-        thanksgiving: {
-          selected: true,
-        },
-        christmasDay: {
-          selected: true,
-        },
-      },
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
     },
   });
   if (res.ok) {
@@ -374,20 +294,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutCompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/putcompaniescompanyuuidholidaypaypolicyrequest.md)                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/putv1companiescompanyuuidholidaypaypolicyrequest.md)                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PutCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/putcompaniescompanyuuidholidaypaypolicyresponse.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/putv1companiescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## delete
@@ -396,9 +316,10 @@ Delete a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="delete-companies-company_uuid-holiday_pay_policy" method="delete" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
+<!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_uuid-holiday_pay_policy" method="delete" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -467,21 +388,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteCompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/deletecompaniescompanyuuidholidaypaypolicyrequest.md)                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteV1CompaniesCompanyUuidHolidayPayPolicyRequest](../../models/operations/deletev1companiescompanyuuidholidaypaypolicyrequest.md)                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.DeleteCompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/deletecompaniescompanyuuidholidaypaypolicyresponse.md)\>**
+**Promise\<[operations.DeleteV1CompaniesCompanyUuidHolidayPayPolicyResponse](../../models/operations/deletev1companiescompanyuuidholidaypaypolicyresponse.md)\>**
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## addEmployees
 
@@ -489,9 +409,10 @@ Add employees to a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-companies-company_uuid-holiday_pay_policy-add" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/add" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-holiday_pay_policy-add" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/add" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -503,15 +424,8 @@ async function run() {
   const result = await gustoEmbedded.holidayPayPolicies.addEmployees({
     companyUuid: "<id>",
     requestBody: {
-      version: "1b37938b017c7fd7116bada007072290",
-      employees: [
-        {
-          uuid: "1ca3cd25-3eda-48c6-ac88-f0e7fb91a15a",
-        },
-        {
-          uuid: "fe977550-6621-4cfc-b4af-60b6af58c8ef",
-        },
-      ],
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+      employees: [],
     },
   });
 
@@ -539,15 +453,8 @@ async function run() {
   const res = await holidayPayPoliciesAddEmployees(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
-      version: "1b37938b017c7fd7116bada007072290",
-      employees: [
-        {
-          uuid: "1ca3cd25-3eda-48c6-ac88-f0e7fb91a15a",
-        },
-        {
-          uuid: "fe977550-6621-4cfc-b4af-60b6af58c8ef",
-        },
-      ],
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+      employees: [],
     },
   });
   if (res.ok) {
@@ -582,20 +489,20 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutCompaniesCompanyUuidHolidayPayPolicyAddRequest](../../models/operations/putcompaniescompanyuuidholidaypaypolicyaddrequest.md)                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequest](../../models/operations/putv1companiescompanyuuidholidaypaypolicyaddrequest.md)                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PutCompaniesCompanyUuidHolidayPayPolicyAddResponse](../../models/operations/putcompaniescompanyuuidholidaypaypolicyaddresponse.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyUuidHolidayPayPolicyAddResponse](../../models/operations/putv1companiescompanyuuidholidaypaypolicyaddresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## removeEmployees
@@ -604,9 +511,10 @@ Remove employees from a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
 
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-companies-company_uuid-holiday_pay_policy-remove" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/remove" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-holiday_pay_policy-remove" method="put" path="/v1/companies/{company_uuid}/holiday_pay_policy/remove" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -618,14 +526,9 @@ async function run() {
   const result = await gustoEmbedded.holidayPayPolicies.removeEmployees({
     companyUuid: "<id>",
     requestBody: {
-      version: "1b37938b017c7fd7116bada007072290",
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
       employees: [
-        {
-          uuid: "1ca3cd25-3eda-48c6-ac88-f0e7fb91a15a",
-        },
-        {
-          uuid: "fe977550-6621-4cfc-b4af-60b6af58c8ef",
-        },
+        {},
       ],
     },
   });
@@ -654,14 +557,9 @@ async function run() {
   const res = await holidayPayPoliciesRemoveEmployees(gustoEmbedded, {
     companyUuid: "<id>",
     requestBody: {
-      version: "1b37938b017c7fd7116bada007072290",
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
       employees: [
-        {
-          uuid: "1ca3cd25-3eda-48c6-ac88-f0e7fb91a15a",
-        },
-        {
-          uuid: "fe977550-6621-4cfc-b4af-60b6af58c8ef",
-        },
+        {},
       ],
     },
   });
@@ -697,18 +595,18 @@ import {
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveRequest](../../models/operations/putcompaniescompanyuuidholidaypaypolicyremoverequest.md)                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest](../../models/operations/putv1companiescompanyuuidholidaypaypolicyremoverequest.md)                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PutCompaniesCompanyUuidHolidayPayPolicyRemoveResponse](../../models/operations/putcompaniescompanyuuidholidaypaypolicyremoveresponse.md)\>**
+**Promise\<[operations.PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse](../../models/operations/putv1companiescompanyuuidholidaypaypolicyremoveresponse.md)\>**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

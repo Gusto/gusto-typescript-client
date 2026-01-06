@@ -5,33 +5,34 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { GustoEmbeddedCore } from "../core.js";
-import { webhooksGetV1WebhooksHealthCheck } from "../funcs/webhooksGetV1WebhooksHealthCheck.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1WebhooksHealthCheckHeaderXGustoAPIVersion,
   GetV1WebhooksHealthCheckRequest,
-  GetV1WebhooksHealthCheckResponse,
   GetV1WebhooksHealthCheckSecurity,
 } from "../models/operations/getv1webhookshealthcheck.js";
-import { unwrapAsync } from "../types/fp.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
-
-export type WebhooksGetV1WebhooksHealthCheckQueryData =
-  GetV1WebhooksHealthCheckResponse;
+import {
+  buildWebhooksGetV1WebhooksHealthCheckQuery,
+  prefetchWebhooksGetV1WebhooksHealthCheck,
+  queryKeyWebhooksGetV1WebhooksHealthCheck,
+  WebhooksGetV1WebhooksHealthCheckQueryData,
+} from "./webhooksGetV1WebhooksHealthCheck.core.js";
+export {
+  buildWebhooksGetV1WebhooksHealthCheckQuery,
+  prefetchWebhooksGetV1WebhooksHealthCheck,
+  queryKeyWebhooksGetV1WebhooksHealthCheck,
+  type WebhooksGetV1WebhooksHealthCheckQueryData,
+};
 
 /**
  * Get the webhooks health status
@@ -80,21 +81,6 @@ export function useWebhooksGetV1WebhooksHealthCheckSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchWebhooksGetV1WebhooksHealthCheck(
-  queryClient: QueryClient,
-  client$: GustoEmbeddedCore,
-  security: GetV1WebhooksHealthCheckSecurity,
-  request: GetV1WebhooksHealthCheckRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWebhooksGetV1WebhooksHealthCheckQuery(
-      client$,
-      security,
-      request,
-    ),
   });
 }
 
@@ -147,53 +133,4 @@ export function invalidateAllWebhooksGetV1WebhooksHealthCheck(
     ...filters,
     queryKey: ["@gusto/embedded-api", "Webhooks", "getV1WebhooksHealthCheck"],
   });
-}
-
-export function buildWebhooksGetV1WebhooksHealthCheckQuery(
-  client$: GustoEmbeddedCore,
-  security: GetV1WebhooksHealthCheckSecurity,
-  request: GetV1WebhooksHealthCheckRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WebhooksGetV1WebhooksHealthCheckQueryData>;
-} {
-  return {
-    queryKey: queryKeyWebhooksGetV1WebhooksHealthCheck({
-      xGustoAPIVersion: request.xGustoAPIVersion,
-    }),
-    queryFn: async function webhooksGetV1WebhooksHealthCheckQueryFn(
-      ctx,
-    ): Promise<WebhooksGetV1WebhooksHealthCheckQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(webhooksGetV1WebhooksHealthCheck(
-        client$,
-        security,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWebhooksGetV1WebhooksHealthCheck(
-  parameters: {
-    xGustoAPIVersion?:
-      | GetV1WebhooksHealthCheckHeaderXGustoAPIVersion
-      | undefined;
-  },
-): QueryKey {
-  return [
-    "@gusto/embedded-api",
-    "Webhooks",
-    "getV1WebhooksHealthCheck",
-    parameters,
-  ];
 }

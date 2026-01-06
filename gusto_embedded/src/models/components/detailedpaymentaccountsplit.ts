@@ -29,9 +29,9 @@ export type DetailedPaymentAccountSplit = {
    */
   priority?: number | undefined;
   /**
-   * The amount for the split. If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00). If `split_by` is 'Percentage', this is the percentage value (e.g., 60 for 60%).
+   * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the percentage value (e.g., 60 for 60%).
    */
-  splitAmount?: number | undefined;
+  splitAmount?: number | null | undefined;
   /**
    * Ciphertext containing the full bank account number, which must be decrypted using a key provided by Gusto. Only visible with the appropriate `read:account_number` scope (e.g., `employee_payment_methods:read:account_number`).
    */
@@ -48,7 +48,7 @@ export const DetailedPaymentAccountSplit$inboundSchema: z.ZodType<
   hidden_account_number: z.string().optional(),
   name: z.string().optional(),
   priority: z.number().int().optional(),
-  split_amount: z.number().int().optional(),
+  split_amount: z.nullable(z.number().int()).optional(),
   encrypted_account_number: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
