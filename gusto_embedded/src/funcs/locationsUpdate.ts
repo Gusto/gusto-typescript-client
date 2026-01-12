@@ -39,7 +39,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Update a location.
  *
- * scope: `companies.write`
+ * scope: `companies:write`
  */
 export function locationsUpdate(
   client: GustoEmbeddedCore,

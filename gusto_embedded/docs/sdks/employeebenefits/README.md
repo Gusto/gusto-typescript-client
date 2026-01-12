@@ -754,7 +754,6 @@ These employees are classified as high earners, and their catch-up contributions
 
 scope: `employee_benefits:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_uuid-section603_high_earner_statuses" method="get" path="/v1/employees/{employee_uuid}/section603_high_earner_statuses" -->
@@ -862,7 +861,6 @@ These employees are classified as high earners, and their catch-up contributions
 
 scope: `employee_benefits:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_uuid-section603_high_earner_statuses" method="post" path="/v1/employees/{employee_uuid}/section603_high_earner_statuses" -->
@@ -966,7 +964,6 @@ Section 603 of the SECURE 2.0 Act applies to employees aged 50 or older whose pr
 These employees are classified as high earners, and their catch-up contributions to pre-tax retirement benefits must be designated as post-tax contributions.
 
 scope: `employee_benefits:read`
-
 
 ### Example Usage
 
@@ -1078,7 +1075,6 @@ Section 603 of the SECURE 2.0 Act applies to employees aged 50 or older whose pr
 These employees are classified as high earners, and their catch-up contributions to pre-tax retirement benefits must be designated as post-tax contributions.
 
 scope: `employee_benefits:write`
-
 
 ### Example Usage
 

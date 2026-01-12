@@ -3,62 +3,31 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  CreateTokenAuthentication,
+  CreateTokenAuthentication$inboundSchema,
+} from "./createtokenauthentication.js";
+import {
+  RefreshTokenAuthentication,
+  RefreshTokenAuthentication$inboundSchema,
+} from "./refreshtokenauthentication.js";
 
-/**
- * Example response
- */
-export type Authentication = {
-  /**
-   * A new access token that can be used for subsequent authenticated requests
-   */
-  accessToken?: string | undefined;
-  /**
-   * The literal string 'bearer'
-   */
-  tokenType: string;
-  /**
-   * The TTL of this token. After this amount of time, you must hit the refresh token endpoint to continue making authenticated requests.
-   */
-  expiresIn: number;
-  /**
-   * A token that must be passed to the refresh token endpoint to get a new authenticated token.
-   */
-  refreshToken?: string | undefined;
-  /**
-   * Datetime for when the new access token is created.
-   */
-  createdAt?: number | undefined;
-  /**
-   * All of the scopes for which the access token provides access.
-   */
-  scope?: string | undefined;
-};
+export type Authentication =
+  | CreateTokenAuthentication
+  | RefreshTokenAuthentication;
 
 /** @internal */
 export const Authentication$inboundSchema: z.ZodType<
   Authentication,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access_token: z.string().optional(),
-  token_type: z.string().default("bearer"),
-  expires_in: z.number().default(7200),
-  refresh_token: z.string().optional(),
-  created_at: z.number().optional(),
-  scope: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_token": "accessToken",
-    "token_type": "tokenType",
-    "expires_in": "expiresIn",
-    "refresh_token": "refreshToken",
-    "created_at": "createdAt",
-  });
-});
+> = z.union([
+  CreateTokenAuthentication$inboundSchema,
+  RefreshTokenAuthentication$inboundSchema,
+]);
 
 export function authenticationFromJSON(
   jsonString: string,

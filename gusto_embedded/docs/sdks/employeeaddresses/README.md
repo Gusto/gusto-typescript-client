@@ -23,7 +23,6 @@ Supports home address effective dating and courtesy withholding.
 
 scope: `employees:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-home_addresses" method="get" path="/v1/employees/{employee_id}/home_addresses" -->
@@ -129,7 +128,6 @@ The home address of an employee is used to determine certain tax information abo
 Supports home address effective dating and courtesy withholding.
 
 scope: `employees:write`
-
 
 ### Example Usage
 
@@ -246,7 +244,6 @@ Supports home address effective dating and courtesy withholding.
 
 scope: `employees:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-home_addresses-home_address_uuid" method="get" path="/v1/home_addresses/{home_address_uuid}" -->
@@ -352,7 +349,6 @@ The home address of an employee is used to determine certain tax information abo
 Supports home address effective dating and courtesy withholding.
 
 scope: `employees:write`
-
 
 ### Example Usage
 
@@ -469,7 +465,6 @@ Used for deleting an employee's home address. Cannot delete the employee's activ
 
 scope: `employees:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-home_addresses-home_address_uuid" method="delete" path="/v1/home_addresses/{home_address_uuid}" -->
@@ -562,7 +557,6 @@ Returns a list of an employee's work addresses. Each address includes its effect
 date and a boolean signifying if it is the currently active work address.
 
 scope: `employees:read`
-
 
 ### Example Usage
 
@@ -668,7 +662,6 @@ The work address of an employee describes when an employee began working at an a
 
 scope: `employees:manage`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-work_addresses" method="post" path="/v1/employees/{employee_id}/work_addresses" -->
@@ -771,7 +764,6 @@ import {
 The work address of an employee is used for payroll tax purposes.
 
 scope: `employees:read`
-
 
 ### Example Usage
 
@@ -877,7 +869,6 @@ The work address of an employee is used for payroll tax purposes.
 
 scope: `employees:manage`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-work_addresses-work_address_uuid" method="put" path="/v1/work_addresses/{work_address_uuid}" -->
@@ -978,7 +969,6 @@ import {
 Used for deleting an employee's work address. Cannot delete the employee's active work address.
 
 scope: `employees:manage`
-
 
 ### Example Usage
 

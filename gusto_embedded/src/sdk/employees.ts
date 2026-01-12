@@ -89,9 +89,9 @@ export class Employees extends ClientSDK {
    * Create an employee
    *
    * @remarks
-   *         Create an employee.
+   * Create an employee.
    *
-   *         scope: `employees:manage`
+   * scope: `employees:manage`
    */
   async create(
     request: PostV1EmployeesRequest,
@@ -253,8 +253,6 @@ export class Employees extends ClientSDK {
    * # Description
    * Retrieves an employee's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
    *
-   * scope: `employees:read`
-   *
    * ## onboarding_status
    *
    * ### Admin-facilitated onboarding
@@ -289,6 +287,8 @@ export class Employees extends ClientSDK {
    * | `employee_form_signing` | Employee forms (e.g., W4, direct deposit authorization) are generated & signed. |
    * | `file_new_hire_report` | File a new hire report for this employee. |
    * | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
+   *
+   * scope: `employees:read`
    */
   async getOnboardingStatus(
     request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
@@ -305,9 +305,7 @@ export class Employees extends ClientSDK {
    * Update the employee's onboarding status
    *
    * @remarks
-   *         scope: `employees:manage`
-   *
-   *         Updates an employee's onboarding status.
+   * Updates an employee's onboarding status.
    *         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
    *
    *         | Action | current onboarding_status | new onboarding_status |
@@ -317,6 +315,8 @@ export class Employees extends ClientSDK {
    *         | Cancel an employee's self-onboarding | `self_onboarding_invited` or `self_onboarding_pending_invite` | `admin_onboarding_incomplete` |
    *         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
    *         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
+   *
+   * scope: `employees:manage`
    */
   async updateOnboardingStatus(
     request: PutV1EmployeesEmployeeIdOnboardingStatusRequest,

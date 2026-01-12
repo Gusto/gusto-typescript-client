@@ -36,7 +36,6 @@ Notes:
 
 scope: `payrolls:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls" method="get" path="/v1/companies/{company_id}/payrolls" -->
@@ -155,7 +154,6 @@ By default:
 These elections can be overridden with the `skip_regular_deductions` boolean.
 
 scope: `payrolls:run`
-
 
 ### Example Usage
 
@@ -597,7 +595,6 @@ By default the payroll and associated data is deleted synchronously. To request 
 
 scope: `payrolls:run`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_id-payrolls" method="delete" path="/v1/companies/{company_id}/payrolls/{payroll_id}" -->
@@ -793,10 +790,9 @@ Returns a payroll receipt.
 Notes:
 * Hour and dollar amounts are returned as string representations of numeric decimals.
 * Dollar amounts are represented to the cent.
-* If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts).
+* If no data has yet be inserted for a given field, it defaults to "0.00" (for fixed amounts).
 
 scope: `payrolls:read`
-
 
 ### Example Usage
 
@@ -1518,7 +1514,6 @@ Get an employee's pay stub for the specified payroll. By default, an application
 
 scope: `pay_stubs:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-payrolls-payroll_uuid-employees-employee_uuid-pay_stub" method="get" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/pay_stub" -->
@@ -1624,7 +1619,6 @@ import {
 Get an employee's pay stubs
 
 scope: `pay_stubs:read`
-
 
 ### Example Usage
 
@@ -1829,7 +1823,6 @@ Get partner disbursements for a specific payroll.
 
 scope: `partner_disbursements:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-payrolls-id-partner_disbursements" method="get" path="/v1/companies/{company_id}/payrolls/{id}/partner_disbursements" -->
@@ -1935,7 +1928,6 @@ import {
 Update partner disbursements for a specific payroll.
 
 scope: `partner_disbursements:write`
-
 
 ### Example Usage
 

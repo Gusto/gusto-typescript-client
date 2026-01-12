@@ -453,13 +453,13 @@ async function run() {
           uuid: "e88f9436-b74e-49a8-87e9-777b9bfe715e",
           name: "BoA Checking Account",
           priority: 1,
-          splitAmount: 500,
+          splitAmount: 50000,
         },
         {
           uuid: "0d2b7f73-05d6-4184-911d-269edeecc30a",
           name: "Chase Checking Account",
           priority: 2,
-          splitAmount: 1000,
+          splitAmount: 100000,
         },
         {
           uuid: "1531e824-8d9e-4bd8-9f90-0d04608125d7",
@@ -503,13 +503,13 @@ async function run() {
           uuid: "e88f9436-b74e-49a8-87e9-777b9bfe715e",
           name: "BoA Checking Account",
           priority: 1,
-          splitAmount: 500,
+          splitAmount: 50000,
         },
         {
           uuid: "0d2b7f73-05d6-4184-911d-269edeecc30a",
           name: "Chase Checking Account",
           priority: 2,
-          splitAmount: 1000,
+          splitAmount: 100000,
         },
         {
           uuid: "1531e824-8d9e-4bd8-9f90-0d04608125d7",

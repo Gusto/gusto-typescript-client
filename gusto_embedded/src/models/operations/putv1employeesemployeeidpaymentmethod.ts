@@ -34,22 +34,20 @@ export const Type = {
 export type Type = ClosedEnum<typeof Type>;
 
 /**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last `split` amount must be `null` to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount must be `null` to capture the remainder.
  */
 export const SplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
 /**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last `split` amount must be `null` to capture the remainder.
+ * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount must be `null` to capture the remainder.
  */
 export type SplitBy = ClosedEnum<typeof SplitBy>;
 
 export type Splits = {
   /**
-   * The bank account ID
-   *
-   * @remarks
+   * The bank account UUID
    */
   uuid?: string | undefined;
   /**
@@ -61,7 +59,7 @@ export type Splits = {
    */
   priority?: number | undefined;
   /**
-   * The cents amount allocated for each payment split
+   * If `split_by` is 'Amount', this is in cents (e.g., 500 for $5.00) and exactly one account must have a `split_amount` of `null` to capture the remainder. If `split_by` is 'Percentage', this is the percentage value (e.g., 60 for 60%).
    */
   splitAmount?: number | null | undefined;
 };
@@ -76,7 +74,7 @@ export type PutV1EmployeesEmployeeIdPaymentMethodRequestBody = {
    */
   type: Type;
   /**
-   * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then the last `split` amount must be `null` to capture the remainder.
+   * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then amount is in cents and the last `split` amount must be `null` to capture the remainder.
    */
   splitBy?: SplitBy | undefined;
   splits?: Array<Splits> | undefined;

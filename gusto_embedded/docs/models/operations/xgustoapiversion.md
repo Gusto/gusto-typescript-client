@@ -5,13 +5,13 @@ Determines the date-based API version associated with your API call. If none is 
 ## Example Usage
 
 ```typescript
-import { XGustoAPIVersion } from "@gusto/embedded-api/models/operations/getv1locationslocationid.js";
+import { XGustoAPIVersion } from "@gusto/embedded-api/models/operations/oauthaccesstoken.js";
 
-let value: XGustoAPIVersion = "2025-06-15";
+let value: XGustoAPIVersion = "2024-04-01";
 ```
 
 ## Values
 
 ```typescript
-"2025-06-15"
+"2024-04-01"
 ```

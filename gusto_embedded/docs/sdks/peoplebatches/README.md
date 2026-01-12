@@ -15,7 +15,6 @@ The batch is processed asynchronously. Use the returned batch UUID to poll for s
 
 scope: `people_batches:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-people_batches" method="post" path="/v1/companies/{company_id}/people_batches" -->
@@ -121,7 +120,6 @@ Returns the status and results of a people batch.
 Poll this endpoint to check the batch processing status and retrieve results.
 
 scope: `people_batches:read`
-
 
 ### Example Usage
 

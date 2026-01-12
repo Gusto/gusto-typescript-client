@@ -8,7 +8,6 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
@@ -21,31 +20,29 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  RefreshAccessTokenRequest,
-  RefreshAccessTokenRequest$outboundSchema,
-  RefreshAccessTokenResponse,
-  RefreshAccessTokenResponse$inboundSchema,
-} from "../models/operations/refreshaccesstoken.js";
+  OauthAccessTokenRequest,
+  OauthAccessTokenRequest$outboundSchema,
+  OauthAccessTokenResponse,
+  OauthAccessTokenResponse$inboundSchema,
+} from "../models/operations/oauthaccesstoken.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Refresh access token
+ * create or refresh an access token
  *
  * @remarks
- * Exchange a refresh token for a new access token.
+ * Creates or refreshes a system access token
  *
- * The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
- *
- * The `expires_in` value is provided in seconds from when the `access_token` was generated.
+ * scope: ``
  */
-export function introspectionRefreshToken(
+export function introspectionOauthAccessToken(
   client: GustoEmbeddedCore,
-  request: RefreshAccessTokenRequest,
+  request: OauthAccessTokenRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    RefreshAccessTokenResponse,
+    OauthAccessTokenResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -65,12 +62,12 @@ export function introspectionRefreshToken(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: RefreshAccessTokenRequest,
+  request: OauthAccessTokenRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      RefreshAccessTokenResponse,
+      OauthAccessTokenResponse,
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -85,7 +82,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => RefreshAccessTokenRequest$outboundSchema.parse(value),
+    (value) => OauthAccessTokenRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -106,21 +103,15 @@ async function $do(
     ),
   }));
 
-  const secConfig = await extractSecurity(client._options.companyAccessAuth);
-  const securityInput = secConfig == null
-    ? {}
-    : { companyAccessAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
-
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "refresh-access-token",
+    operationID: "oauth-access-token",
     oAuth2Scopes: null,
 
-    resolvedSecurity: requestSecurity,
+    resolvedSecurity: null,
 
-    securitySource: client._options.companyAccessAuth,
+    securitySource: null,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
@@ -128,7 +119,6 @@ async function $do(
   };
 
   const requestRes = client._createRequest(context, {
-    security: requestSecurity,
     method: "POST",
     baseURL: options?.serverURL,
     path: path,
@@ -158,7 +148,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    RefreshAccessTokenResponse,
+    OauthAccessTokenResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -168,7 +158,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, RefreshAccessTokenResponse$inboundSchema, {
+    M.json(200, OauthAccessTokenResponse$inboundSchema, {
       key: "Authentication",
     }),
     M.fail("4XX"),

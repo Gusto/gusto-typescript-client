@@ -137,7 +137,6 @@ Get a time off policy
 
 scope: `time_off_policies:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-time_off_policies-time_off_policy_uuid" method="get" path="/v1/time_off_policies/{time_off_policy_uuid}" -->
@@ -241,7 +240,6 @@ import {
 Update a time off policy
 
 scope: `time_off_policies:write`
-
 
 ### Example Usage
 
@@ -348,7 +346,6 @@ Get all time off policies for a company
 
 scope: `time_off_policies:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-time_off_policies" method="get" path="/v1/companies/{company_uuid}/time_off_policies" -->
@@ -453,7 +450,6 @@ Create a time off policy
 
 scope: `time_off_policies:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-time_off_policies" method="post" path="/v1/companies/{company_uuid}/time_off_policies" -->
@@ -557,7 +553,6 @@ Add employees to a time off policy. Employees are required to have at least one 
 
 scope: `time_off_policies:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-add_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/add_employees" -->
@@ -656,7 +651,6 @@ import {
 Remove employees from a time off policy
 
 scope: `time_off_policies:write`
-
 
 ### Example Usage
 
@@ -761,7 +755,6 @@ Updates time off hours balances for employees for a time off policy.
 
 scope: `time_off_policies:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-balance" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/balance" -->
@@ -860,7 +853,6 @@ import {
 Deactivate a time off policy
 
 scope: `time_off_policies:write`
-
 
 ### Example Usage
 

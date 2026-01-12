@@ -1026,7 +1026,6 @@ For contractors paid by check, only the basic payment method information is retu
 
 scope: `contractor_payment_methods:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractors-payment_details" method="get" path="/v1/companies/{company_id}/contractors/payment_details" -->

@@ -49,6 +49,7 @@ export function buildCompanyBenefitsListQuery(
     queryKey: queryKeyCompanyBenefitsList(request.companyId, {
       active: request.active,
       enrollmentCount: request.enrollmentCount,
+      benefitType: request.benefitType,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function companyBenefitsListQueryFn(
@@ -79,6 +80,7 @@ export function queryKeyCompanyBenefitsList(
   parameters: {
     active?: boolean | undefined;
     enrollmentCount?: boolean | undefined;
+    benefitType?: string | undefined;
     xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {

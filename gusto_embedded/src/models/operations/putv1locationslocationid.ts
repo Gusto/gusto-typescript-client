@@ -17,13 +17,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const HeaderXGustoAPIVersion = {
+export const PutV1LocationsLocationIdHeaderXGustoAPIVersion = {
   TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type HeaderXGustoAPIVersion = ClosedEnum<typeof HeaderXGustoAPIVersion>;
+export type PutV1LocationsLocationIdHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1LocationsLocationIdHeaderXGustoAPIVersion
+>;
 
 export type PutV1LocationsLocationIdRequestBody = {
   /**
@@ -51,7 +53,7 @@ export type PutV1LocationsLocationIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
+  xGustoAPIVersion?: PutV1LocationsLocationIdHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the location
    */
@@ -68,9 +70,9 @@ export type PutV1LocationsLocationIdResponse = {
 };
 
 /** @internal */
-export const HeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
-  typeof HeaderXGustoAPIVersion
-> = z.nativeEnum(HeaderXGustoAPIVersion);
+export const PutV1LocationsLocationIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1LocationsLocationIdHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1LocationsLocationIdHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1LocationsLocationIdRequestBody$Outbound = {
@@ -135,7 +137,10 @@ export const PutV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1LocationsLocationIdRequest
 > = z.object({
-  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    PutV1LocationsLocationIdHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   locationId: z.string(),
   requestBody: z.lazy(() => PutV1LocationsLocationIdRequestBody$outboundSchema),
 }).transform((v) => {

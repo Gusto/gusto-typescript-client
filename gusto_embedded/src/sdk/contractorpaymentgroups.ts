@@ -52,7 +52,7 @@ export class ContractorPaymentGroups extends ClientSDK {
    * @remarks
    * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
    *
-   *  scope: `payrolls:read`
+   * scope: `payrolls:read`
    */
   async getList(
     request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,

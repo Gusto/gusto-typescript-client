@@ -32,7 +32,7 @@ export type LocationsUpdateMutationData = PutV1LocationsLocationIdResponse;
  * @remarks
  * Update a location.
  *
- * scope: `companies.write`
+ * scope: `companies:write`
  */
 export function useLocationsUpdateMutation(
   options?: MutationHookOptions<

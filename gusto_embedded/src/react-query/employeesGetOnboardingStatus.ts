@@ -40,8 +40,6 @@ export {
  * # Description
  * Retrieves an employee's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
  *
- * scope: `employees:read`
- *
  * ## onboarding_status
  *
  * ### Admin-facilitated onboarding
@@ -76,6 +74,8 @@ export {
  * | `employee_form_signing` | Employee forms (e.g., W4, direct deposit authorization) are generated & signed. |
  * | `file_new_hire_report` | File a new hire report for this employee. |
  * | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
+ *
+ * scope: `employees:read`
  */
 export function useEmployeesGetOnboardingStatus(
   request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
@@ -99,8 +99,6 @@ export function useEmployeesGetOnboardingStatus(
  * # Description
  * Retrieves an employee's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
  *
- * scope: `employees:read`
- *
  * ## onboarding_status
  *
  * ### Admin-facilitated onboarding
@@ -135,6 +133,8 @@ export function useEmployeesGetOnboardingStatus(
  * | `employee_form_signing` | Employee forms (e.g., W4, direct deposit authorization) are generated & signed. |
  * | `file_new_hire_report` | File a new hire report for this employee. |
  * | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
+ *
+ * scope: `employees:read`
  */
 export function useEmployeesGetOnboardingStatusSuspense(
   request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,

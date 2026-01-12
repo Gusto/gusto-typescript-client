@@ -456,7 +456,6 @@ The report is generated asynchronously. After making this request, you will rece
 
 scope: `company_reports:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-reports-employees_annual_fica_wage" method="post" path="/v1/companies/{company_id}/reports/employees_annual_fica_wage" -->

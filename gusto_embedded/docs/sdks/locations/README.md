@@ -232,7 +232,6 @@ Get a location.
 
 scope: `companies:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-locations-location_id" method="get" path="/v1/locations/{location_id}" -->
@@ -335,8 +334,7 @@ import {
 
 Update a location.
 
-scope: `companies.write`
-
+scope: `companies:write`
 
 ### Example Usage
 
@@ -448,7 +446,6 @@ import {
 Get minimum wages for a location
 
 scope: `companies:read`
-
 
 ### Example Usage
 

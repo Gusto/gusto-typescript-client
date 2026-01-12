@@ -61,11 +61,11 @@ export class BankAccounts extends ClientSDK {
    * When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
    * After successful verification, the bank account's verification_status is 'verified'.
    *
-   * scope: `company_bank_accounts:write`
-   *
    * >🚧 Warning
    * >
    * > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
+   *
+   * scope: `company_bank_accounts:write`
    */
   async create(
     request: PostV1CompaniesCompanyIdBankAccountsRequest,

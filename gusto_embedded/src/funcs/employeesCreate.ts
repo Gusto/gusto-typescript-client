@@ -37,9 +37,9 @@ import { Result } from "../types/fp.js";
  * Create an employee
  *
  * @remarks
- *         Create an employee.
+ * Create an employee.
  *
- *         scope: `employees:manage`
+ * scope: `employees:manage`
  */
 export function employeesCreate(
   client: GustoEmbeddedCore,

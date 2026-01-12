@@ -17,7 +17,6 @@ Get existing suspension records for this company. A company may have multiple su
 
 scope: `company_suspensions:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-suspensions" method="get" path="/v1/companies/{company_uuid}/suspensions" -->
@@ -121,7 +120,6 @@ import {
 Use this endpoint to suspend a company. After suspension, company will no longer be able to run payroll but will retain access to their information, such as retrieving employee info or retrieving past payrolls.
 
 scope: `company_suspensions:write`
-
 
 ### Example Usage
 

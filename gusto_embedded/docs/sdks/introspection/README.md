@@ -5,7 +5,7 @@
 ### Available Operations
 
 * [getInfo](#getinfo) - Get info about the current access token
-* [refreshToken](#refreshtoken) - Refresh access token
+* [oauthAccessToken](#oauthaccesstoken) - create or refresh an access token
 
 ## getInfo
 
@@ -104,31 +104,26 @@ import {
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## refreshToken
+## oauthAccessToken
 
-Exchange a refresh token for a new access token.
+Creates or refreshes a system access token
 
-The previous `refresh_token` will be revoked on the first usage of the new `access_token`.
-
-The `expires_in` value is provided in seconds from when the `access_token` was generated.
+scope: ``
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="refresh-access-token" method="post" path="/oauth/token" -->
+<!-- UsageSnippet language="typescript" operationID="oauth-access-token" method="post" path="/oauth/token" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
-const gustoEmbedded = new GustoEmbedded({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
+const gustoEmbedded = new GustoEmbedded();
 
 async function run() {
-  const result = await gustoEmbedded.introspection.refreshToken({
+  const result = await gustoEmbedded.introspection.oauthAccessToken({
     requestBody: {
-      clientId: "<id>",
-      clientSecret: "<value>",
-      refreshToken: "<value>",
-      grantType: "<value>",
+      clientId: "qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8",
+      clientSecret: "3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w",
+      grantType: "system_access",
     },
   });
 
@@ -144,28 +139,25 @@ The standalone function version of this method:
 
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
-import { introspectionRefreshToken } from "@gusto/embedded-api/funcs/introspectionRefreshToken.js";
+import { introspectionOauthAccessToken } from "@gusto/embedded-api/funcs/introspectionOauthAccessToken.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const gustoEmbedded = new GustoEmbeddedCore({
-  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
-});
+const gustoEmbedded = new GustoEmbeddedCore();
 
 async function run() {
-  const res = await introspectionRefreshToken(gustoEmbedded, {
+  const res = await introspectionOauthAccessToken(gustoEmbedded, {
     requestBody: {
-      clientId: "<id>",
-      clientSecret: "<value>",
-      refreshToken: "<value>",
-      grantType: "<value>",
+      clientId: "qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8",
+      clientSecret: "3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w",
+      grantType: "system_access",
     },
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("introspectionRefreshToken failed:", res.error);
+    console.log("introspectionOauthAccessToken failed:", res.error);
   }
 }
 
@@ -185,22 +177,22 @@ associated utilities.
 ```tsx
 import {
   // Mutation hook for triggering the API call.
-  useIntrospectionRefreshTokenMutation
-} from "@gusto/embedded-api/react-query/introspectionRefreshToken.js";
+  useIntrospectionOauthAccessTokenMutation
+} from "@gusto/embedded-api/react-query/introspectionOauthAccessToken.js";
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.RefreshAccessTokenRequest](../../models/operations/refreshaccesstokenrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.OauthAccessTokenRequest](../../models/operations/oauthaccesstokenrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.RefreshAccessTokenResponse](../../models/operations/refreshaccesstokenresponse.md)\>**
+**Promise\<[operations.OauthAccessTokenResponse](../../models/operations/oauthaccesstokenresponse.md)\>**
 
 ### Errors
 
