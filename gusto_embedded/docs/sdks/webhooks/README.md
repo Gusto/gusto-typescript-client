@@ -765,8 +765,11 @@ import {
 
 Returns the health status (`healthy`, `unhealthy`, or `unknown`) of the webhooks system based on the last ten minutes of activity.
 
-scope: `webhook_subscriptions:read`
+📘 System Access Authentication
 
+This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+
+scope: `webhook_subscriptions:read`
 
 ### Example Usage
 

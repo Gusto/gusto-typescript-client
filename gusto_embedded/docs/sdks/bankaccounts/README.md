@@ -16,7 +16,6 @@ Returns company bank accounts. Currently, we only support a single default bank 
 
 scope: `company_bank_accounts:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-bank-accounts" method="get" path="/v1/companies/{company_id}/bank_accounts" -->
@@ -124,12 +123,12 @@ Upon being created, two verification deposits are automatically sent to the bank
 When the deposits are successfully transferred, the verification_status changes to 'ready_for_verification', at which point the verify endpoint can be used to verify the bank account.
 After successful verification, the bank account's verification_status is 'verified'.
 
-scope: `company_bank_accounts:write`
 
 >🚧 Warning
 >
 > If a default bank account exists, it will be disabled and the new bank account will replace it as the company's default funding method.
 
+scope: `company_bank_accounts:write`
 
 ### Example Usage
 
@@ -459,7 +458,6 @@ This endpoint disables a company bank account.
 A bank account cannot be disabled if it is used for any unprocessed payments.
 
 scope: `company_bank_accounts:write`
-
 
 ### Example Usage
 

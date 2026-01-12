@@ -12,7 +12,7 @@ import {
 } from "@tanstack/react-query";
 import {
   GetV1LocationsLocationIdRequest,
-  XGustoAPIVersion,
+  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1locationslocationid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -83,7 +83,7 @@ export function setLocationsRetrieveData(
   client: QueryClient,
   queryKeyBase: [
     locationId: string,
-    parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
+    parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
   ],
   data: LocationsRetrieveQueryData,
 ): LocationsRetrieveQueryData | undefined {
@@ -97,7 +97,7 @@ export function invalidateLocationsRetrieve(
   queryKeyBase: TupleToPrefixes<
     [
       locationId: string,
-      parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
+      parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

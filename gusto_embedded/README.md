@@ -476,7 +476,7 @@ run();
 ### [Introspection](docs/sdks/introspection/README.md)
 
 * [getInfo](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
-* [refreshToken](docs/sdks/introspection/README.md#refreshtoken) - Refresh access token
+* [oauthAccessToken](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
 
 ### [Invoices](docs/sdks/invoices/README.md)
 
@@ -824,7 +824,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`industrySelectionUpdate`](docs/sdks/industryselection/README.md#update) - Update a company industry selection
 - [`informationRequestsGetInformationRequests`](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
 - [`introspectionGetInfo`](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
-- [`introspectionRefreshToken`](docs/sdks/introspection/README.md#refreshtoken) - Refresh access token
+- [`introspectionOauthAccessToken`](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
 - [`invoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve invoicing data for companies
 - [`jobsAndCompensationsCreateCompensation`](docs/sdks/jobsandcompensations/README.md#createcompensation) - Create a compensation
 - [`jobsAndCompensationsCreateJob`](docs/sdks/jobsandcompensations/README.md#createjob) - Create a job
@@ -1128,7 +1128,7 @@ To learn about this feature and how to get started, check
 - [`useIndustrySelectionUpdateMutation`](docs/sdks/industryselection/README.md#update) - Update a company industry selection
 - [`useInformationRequestsGetInformationRequests`](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
 - [`useIntrospectionGetInfo`](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
-- [`useIntrospectionRefreshTokenMutation`](docs/sdks/introspection/README.md#refreshtoken) - Refresh access token
+- [`useIntrospectionOauthAccessTokenMutation`](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
 - [`useInvoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve invoicing data for companies
 - [`useJobsAndCompensationsCreateCompensationMutation`](docs/sdks/jobsandcompensations/README.md#createcompensation) - Create a compensation
 - [`useJobsAndCompensationsCreateJobMutation`](docs/sdks/jobsandcompensations/README.md#createjob) - Create a job

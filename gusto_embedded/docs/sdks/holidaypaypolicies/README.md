@@ -17,7 +17,6 @@ Get a company's holiday pay policy
 
 scope: `holiday_pay_policies:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-holiday_pay_policy" method="get" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
@@ -122,7 +121,6 @@ Create a holiday pay policy for a company
 
 scope: `holiday_pay_policies:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_uuid-holiday_pay_policy" method="post" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
@@ -215,7 +213,6 @@ import {
 Update a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
-
 
 ### Example Usage
 
@@ -316,7 +313,6 @@ Delete a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-companies-company_uuid-holiday_pay_policy" method="delete" path="/v1/companies/{company_uuid}/holiday_pay_policy" -->
@@ -408,7 +404,6 @@ import {
 Add employees to a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
-
 
 ### Example Usage
 
@@ -510,7 +505,6 @@ import {
 Remove employees from a company's holiday pay policy
 
 scope: `holiday_pay_policies:write`
-
 
 ### Example Usage
 

@@ -17,8 +17,7 @@
 
 Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
 
- scope: `payrolls:read`
-
+scope: `payrolls:read`
 
 ### Example Usage
 
@@ -127,7 +126,6 @@ import {
 Pay a group of contractors. Information needed depends on the contractor's wage type (hourly vs fixed)
 
 scope: `payrolls:run`
-
 
 ### Example Usage
 
@@ -368,7 +366,6 @@ Returns a contractor payment group with all associated contractor payments.
 
 scope: `payrolls:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payment_groups-contractor_payment_group_id" method="get" path="/v1/contractor_payment_groups/{contractor_payment_group_uuid}" -->
@@ -473,7 +470,6 @@ Cancels a contractor payment group and all associated contractor payments. All c
 
 scope: `payrolls:run`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="delete-v1-contractor_payment_groups-contractor_payment_group_id" method="delete" path="/v1/contractor_payment_groups/{contractor_payment_group_uuid}" -->
@@ -570,7 +566,6 @@ Simulate funding a contractor payment group. Funding only occurs automatically i
 
 scope: `payrolls:run`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-contractor_payment_groups-contractor_payment_group_id-fund" method="put" path="/v1/contractor_payment_groups/{contractor_payment_group_uuid}/fund" -->
@@ -664,7 +659,6 @@ import {
 Get partner disbursements for a specific contractor payment group.
 
 scope: `partner_disbursements:read`
-
 
 ### Example Usage
 
@@ -769,7 +763,6 @@ import {
 Update partner disbursements for a specific contractor payment group.
 
 scope: `partner_disbursements:write`
-
 
 ### Example Usage
 

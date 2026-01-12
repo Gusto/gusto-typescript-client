@@ -237,6 +237,10 @@ export class Webhooks extends ClientSDK {
    * @remarks
    * Returns the health status (`healthy`, `unhealthy`, or `unknown`) of the webhooks system based on the last ten minutes of activity.
    *
+   * 📘 System Access Authentication
+   *
+   * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
+   *
    * scope: `webhook_subscriptions:read`
    */
   async getV1WebhooksHealthCheck(

@@ -242,7 +242,6 @@ Payroll Admins are responsible for filing a new hire report for each Employee. T
 
 scope: `employee_state_taxes:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" -->
@@ -348,7 +347,6 @@ Update attributes relevant for an employee's state taxes.
 As described for the GET endpoint, the answers must be supplied in the effective-dated format, but currently only a single answer will be accepted - `valid_from` and `valid_up_to` must be `"2010-01-01"` and `null` respectively.
 
 scope: `employee_state_taxes:write`
-
 
 ### Example Usage
 

@@ -108,10 +108,10 @@ Query.
 [use-mutation]: https://tanstack.com/query/v5/docs/framework/react/reference/useMutation
 
 ```tsx
-import { useIntrospectionRefreshTokenMutation } from "@gusto/embedded-api/react-query/introspectionRefreshToken.js";
+import { useIntrospectionOauthAccessTokenMutation } from "@gusto/embedded-api/react-query/introspectionOauthAccessToken.js";
 
 export function Example() {
-  const { mutate, status } = useIntrospectionRefreshTokenMutation();
+  const { mutate, status } = useIntrospectionOauthAccessTokenMutation();
 
   return (
     <form
@@ -122,10 +122,9 @@ export function Example() {
 
         mutate({
           requestBody: {
-            clientId: "<id>",
-            clientSecret: "<value>",
-            refreshToken: "<value>",
-            grantType: "<value>",
+            clientId: "qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8",
+            clientSecret: "3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w",
+            grantType: "system_access",
           },
         });
       }}
@@ -143,10 +142,10 @@ Since the underlying SDK handles request timeouts and retries, there are a few
 more options provided by the mutation hooks to control these behaviors.
 
 ```tsx
-import { useIntrospectionRefreshTokenMutation } from "@gusto/embedded-api/react-query/introspectionRefreshToken.js";
+import { useIntrospectionOauthAccessTokenMutation } from "@gusto/embedded-api/react-query/introspectionOauthAccessToken.js";
 
 export function ExampleWithOptions() {
-  const { mutate, status } = useIntrospectionRefreshTokenMutation({
+  const { mutate, status } = useIntrospectionOauthAccessTokenMutation({
     // TanStack Query options:
     networkMode: "online",
     gcTime: 5 * 60 * 1000, // 5 minutes

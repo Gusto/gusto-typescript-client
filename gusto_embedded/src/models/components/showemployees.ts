@@ -91,6 +91,43 @@ export type CurrentEmploymentStatus = ClosedEnum<
 >;
 
 /**
+ * The current status of the member portal invitation.
+ */
+export const ShowEmployeesStatus = {
+  Pending: "pending",
+  Sent: "sent",
+  Verified: "verified",
+  Complete: "complete",
+  Cancelled: "cancelled",
+} as const;
+/**
+ * The current status of the member portal invitation.
+ */
+export type ShowEmployeesStatus = ClosedEnum<typeof ShowEmployeesStatus>;
+
+/**
+ * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
+ */
+export type MemberPortalInvitationStatus = {
+  /**
+   * The current status of the member portal invitation.
+   */
+  status?: ShowEmployeesStatus | undefined;
+  /**
+   * Whether the invitation token has expired.
+   */
+  tokenExpired?: boolean | null | undefined;
+  /**
+   * The date and time when the welcome email was sent.
+   */
+  welcomeEmailSentAt?: Date | null | undefined;
+  /**
+   * The date and time when the password reset was last resent.
+   */
+  lastPasswordResentAt?: Date | null | undefined;
+};
+
+/**
  * The representation of an employee in Gusto.
  */
 export type ShowEmployees = {
@@ -192,6 +229,17 @@ export type ShowEmployees = {
    */
   flsaStatus?: FlsaStatusType | undefined;
   applicableTaxIds?: Array<number> | undefined;
+  /**
+   * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
+   */
+  memberPortalInvitationStatus?:
+    | MemberPortalInvitationStatus
+    | null
+    | undefined;
+  /**
+   * Whether an external partner portal invitation webhook has been sent for this employee. Only included when the include param has the portal_invitations value set.
+   */
+  partnerPortalInvitationSent?: boolean | null | undefined;
   currentHomeAddress?: EmployeeHomeAddress | undefined;
   allHomeAddresses?: Array<EmployeeHomeAddress> | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
@@ -235,6 +283,43 @@ export const PaymentMethod$inboundSchema: z.ZodNativeEnum<
 export const CurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
   typeof CurrentEmploymentStatus
 > = z.nativeEnum(CurrentEmploymentStatus);
+
+/** @internal */
+export const ShowEmployeesStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ShowEmployeesStatus
+> = z.nativeEnum(ShowEmployeesStatus);
+
+/** @internal */
+export const MemberPortalInvitationStatus$inboundSchema: z.ZodType<
+  MemberPortalInvitationStatus,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  status: ShowEmployeesStatus$inboundSchema.optional(),
+  token_expired: z.nullable(z.boolean()).optional(),
+  welcome_email_sent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  last_password_resent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "token_expired": "tokenExpired",
+    "welcome_email_sent_at": "welcomeEmailSentAt",
+    "last_password_resent_at": "lastPasswordResentAt",
+  });
+});
+
+export function memberPortalInvitationStatusFromJSON(
+  jsonString: string,
+): SafeParseResult<MemberPortalInvitationStatus, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MemberPortalInvitationStatus' from JSON`,
+  );
+}
 
 /** @internal */
 export const ShowEmployees$inboundSchema: z.ZodType<
@@ -281,6 +366,10 @@ export const ShowEmployees$inboundSchema: z.ZodType<
     hidden_ssn: z.string().optional(),
     flsa_status: FlsaStatusType$inboundSchema.optional(),
     applicable_tax_ids: z.array(z.number()).optional(),
+    member_portal_invitation_status: z.nullable(
+      z.lazy(() => MemberPortalInvitationStatus$inboundSchema),
+    ).optional(),
+    partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
     current_home_address: EmployeeHomeAddress$inboundSchema.optional(),
     all_home_addresses: z.array(EmployeeHomeAddress$inboundSchema).optional(),
   }).catchall(z.any()),
@@ -310,6 +399,8 @@ export const ShowEmployees$inboundSchema: z.ZodType<
     "hidden_ssn": "hiddenSsn",
     "flsa_status": "flsaStatus",
     "applicable_tax_ids": "applicableTaxIds",
+    "member_portal_invitation_status": "memberPortalInvitationStatus",
+    "partner_portal_invitation_sent": "partnerPortalInvitationSent",
     "current_home_address": "currentHomeAddress",
     "all_home_addresses": "allHomeAddresses",
   });

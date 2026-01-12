@@ -121,7 +121,6 @@ Returns all notifications relevant for the given company.
 
 scope: `notifications:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-company-notifications" method="get" path="/v1/companies/{company_uuid}/notifications" -->

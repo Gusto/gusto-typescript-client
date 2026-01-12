@@ -34,6 +34,10 @@ export type GetV1CompaniesCompanyIdCompanyBenefitsRequest = {
    */
   enrollmentCount?: boolean | undefined;
   /**
+   * Filter by benefit type. Comma-separated list of benefit type IDs, i.e. `?benefit_type=5,105`
+   */
+  benefitType?: string | undefined;
+  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: VersionHeader | undefined;
@@ -52,6 +56,7 @@ export type GetV1CompaniesCompanyIdCompanyBenefitsRequest$Outbound = {
   company_id: string;
   active?: boolean | undefined;
   enrollment_count?: boolean | undefined;
+  benefit_type?: string | undefined;
   "X-Gusto-API-Version": string;
 };
 
@@ -65,11 +70,13 @@ export const GetV1CompaniesCompanyIdCompanyBenefitsRequest$outboundSchema:
     companyId: z.string(),
     active: z.boolean().optional(),
     enrollmentCount: z.boolean().optional(),
+    benefitType: z.string().optional(),
     xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
       companyId: "company_id",
       enrollmentCount: "enrollment_count",
+      benefitType: "benefit_type",
       xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });

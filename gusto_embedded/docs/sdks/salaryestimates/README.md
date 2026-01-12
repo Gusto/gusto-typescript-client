@@ -23,7 +23,6 @@ Only one in-progress salary estimate can exist per employee at a time. If an in-
 
 scope: `salary_estimates:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-salary_estimates" method="post" path="/v1/employees/{employee_id}/salary_estimates" -->
@@ -126,7 +125,6 @@ import {
 Retrieve a salary estimate by its UUID. Returns the estimated salary calculation along with all occupation details, revenue, and location information.
 
 scope: `salary_estimates:read`
-
 
 ### Example Usage
 
@@ -233,7 +231,6 @@ Update an existing salary estimate. You can modify the annual net revenue, ZIP c
 The salary estimate must not be finalized (accepted). Once accepted, salary estimates become read-only for record-keeping purposes.
 
 scope: `salary_estimates:write`
-
 
 ### Example Usage
 
@@ -354,7 +351,6 @@ Once accepted, the salary estimate becomes read-only for record-keeping purposes
 
 scope: `salary_estimates:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-salary_estimates-uuid-accept" method="post" path="/v1/salary_estimates/{uuid}/accept" -->
@@ -454,12 +450,11 @@ Search for Bureau of Labor Statistics (BLS) occupations by name or keyword. This
 
 Returns a list of matching occupations with their codes, titles, and descriptions.
 
-U0001F4D8 System Access Authentication
+📘 System Access Authentication
 
 This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
 
 scope: `salary_estimates:read`
-
 
 ### Example Usage
 

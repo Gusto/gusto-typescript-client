@@ -23,7 +23,6 @@ Get all of the employees, onboarding, active and terminated, for a given company
 
 scope: `employees:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees" method="get" path="/v1/companies/{company_id}/employees" -->
@@ -124,10 +123,9 @@ import {
 
 ## create
 
-        Create an employee.
+Create an employee.
 
-        scope: `employees:manage`
-
+scope: `employees:manage`
 
 ### Example Usage
 
@@ -491,7 +489,6 @@ Get an employee.
 
 scope: `employees:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees" method="get" path="/v1/employees/{employee_id}" -->
@@ -595,7 +592,6 @@ import {
 Update an employee.
 
 scope: `employees:write`
-
 
 ### Example Usage
 
@@ -711,7 +707,6 @@ an onboarded employee is not allowed and will return a 422 response. Please chec
 if you need to terminate an onboarded employee.
 
 scope: `employees:manage`
-
 
 ### Example Usage
 
@@ -1005,7 +1000,6 @@ import {
 # Description
 Retrieves an employee's onboarding status. The data returned helps inform the required onboarding steps and respective completion status.
 
-scope: `employees:read`
 
 ## onboarding_status
 
@@ -1042,6 +1036,7 @@ scope: `employees:read`
 | `file_new_hire_report` | File a new hire report for this employee. |
 | `admin_review` | Admin reviews & confirms employee details (only required for Employee self-onboarding) |
 
+scope: `employees:read`
 
 ### Example Usage
 
@@ -1143,9 +1138,7 @@ import {
 
 ## updateOnboardingStatus
 
-        scope: `employees:manage`
-
-        Updates an employee's onboarding status.
+Updates an employee's onboarding status.
         Below is a list of valid onboarding status changes depending on the intended action to be performed on behalf of the employee.
 
         | Action | current onboarding_status | new onboarding_status |
@@ -1156,6 +1149,7 @@ import {
         | Review an employee's self-onboarded info | `self_onboarding_completed_by_employee` | `self_onboarding_awaiting_admin_review` |
         | Finish an employee's onboarding | `admin_onboarding_incomplete` or `self_onboarding_awaiting_admin_review` | `onboarding_completed` |
 
+scope: `employees:manage`
 
 ### Example Usage
 

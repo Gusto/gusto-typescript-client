@@ -98,7 +98,7 @@ export class Locations extends ClientSDK {
    * @remarks
    * Update a location.
    *
-   * scope: `companies.write`
+   * scope: `companies:write`
    */
   async update(
     request: PutV1LocationsLocationIdRequest,

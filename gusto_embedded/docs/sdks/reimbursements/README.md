@@ -16,7 +16,6 @@ Get all active recurring reimbursements for an employee.
 
 scope: `reimbursements:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-recurring_reimbursements" method="get" path="/v1/employees/{employee_id}/recurring_reimbursements" -->
@@ -121,7 +120,6 @@ Create a recurring reimbursement for an employee.
 
 scope: `reimbursements:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-recurring_reimbursements" method="post" path="/v1/employees/{employee_id}/recurring_reimbursements" -->
@@ -222,7 +220,6 @@ import {
 Get a specific recurring reimbursement.
 
 scope: `reimbursements:read`
-
 
 ### Example Usage
 
@@ -328,7 +325,6 @@ Update a recurring reimbursement.
 
 scope: `reimbursements:write`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="put-v1-recurring_reimbursements" method="put" path="/v1/recurring_reimbursements/{id}" -->
@@ -427,7 +423,6 @@ import {
 Delete (soft delete) a recurring reimbursement for an employee.
 
 scope: `reimbursements:write`
-
 
 ### Example Usage
 

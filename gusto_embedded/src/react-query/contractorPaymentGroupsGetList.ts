@@ -39,7 +39,7 @@ export {
  * @remarks
  * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
  *
- *  scope: `payrolls:read`
+ * scope: `payrolls:read`
  */
 export function useContractorPaymentGroupsGetList(
   request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
@@ -62,7 +62,7 @@ export function useContractorPaymentGroupsGetList(
  * @remarks
  * Returns a list of minimal contractor payment groups within a given time period, including totals but not associated contractor payments.
  *
- *  scope: `payrolls:read`
+ * scope: `payrolls:read`
  */
 export function useContractorPaymentGroupsGetListSuspense(
   request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,

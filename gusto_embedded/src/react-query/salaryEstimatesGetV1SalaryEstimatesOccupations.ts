@@ -42,7 +42,7 @@ export {
  *
  * Returns a list of matching occupations with their codes, titles, and descriptions.
  *
- * U0001F4D8 System Access Authentication
+ * 📘 System Access Authentication
  *
  * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
@@ -78,7 +78,7 @@ export function useSalaryEstimatesGetV1SalaryEstimatesOccupations(
  *
  * Returns a list of matching occupations with their codes, titles, and descriptions.
  *
- * U0001F4D8 System Access Authentication
+ * 📘 System Access Authentication
  *
  * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *

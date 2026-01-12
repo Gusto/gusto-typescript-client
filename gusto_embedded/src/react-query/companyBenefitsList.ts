@@ -92,6 +92,7 @@ export function setCompanyBenefitsListData(
     parameters: {
       active?: boolean | undefined;
       enrollmentCount?: boolean | undefined;
+      benefitType?: string | undefined;
       xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
@@ -110,6 +111,7 @@ export function invalidateCompanyBenefitsList(
       parameters: {
         active?: boolean | undefined;
         enrollmentCount?: boolean | undefined;
+        benefitType?: string | undefined;
         xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]

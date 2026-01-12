@@ -14,7 +14,7 @@ import { RequestOptions } from "../lib/sdks.js";
 import {
   GetV1LocationsLocationIdRequest,
   GetV1LocationsLocationIdResponse,
-  XGustoAPIVersion,
+  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1locationslocationid.js";
 import { unwrapAsync } from "../types/fp.js";
 export type LocationsRetrieveQueryData = GetV1LocationsLocationIdResponse;
@@ -73,7 +73,7 @@ export function buildLocationsRetrieveQuery(
 
 export function queryKeyLocationsRetrieve(
   locationId: string,
-  parameters: { xGustoAPIVersion?: XGustoAPIVersion | undefined },
+  parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

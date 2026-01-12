@@ -86,6 +86,43 @@ export type EmployeeCurrentEmploymentStatus = ClosedEnum<
 >;
 
 /**
+ * The current status of the member portal invitation.
+ */
+export const EmployeeStatus = {
+  Pending: "pending",
+  Sent: "sent",
+  Verified: "verified",
+  Complete: "complete",
+  Cancelled: "cancelled",
+} as const;
+/**
+ * The current status of the member portal invitation.
+ */
+export type EmployeeStatus = ClosedEnum<typeof EmployeeStatus>;
+
+/**
+ * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
+ */
+export type EmployeeMemberPortalInvitationStatus = {
+  /**
+   * The current status of the member portal invitation.
+   */
+  status?: EmployeeStatus | undefined;
+  /**
+   * Whether the invitation token has expired.
+   */
+  tokenExpired?: boolean | null | undefined;
+  /**
+   * The date and time when the welcome email was sent.
+   */
+  welcomeEmailSentAt?: Date | null | undefined;
+  /**
+   * The date and time when the password reset was last resent.
+   */
+  lastPasswordResentAt?: Date | null | undefined;
+};
+
+/**
  * The representation of an employee in Gusto.
  */
 export type Employee = {
@@ -187,6 +224,17 @@ export type Employee = {
    */
   flsaStatus?: FlsaStatusType | undefined;
   applicableTaxIds?: Array<number> | undefined;
+  /**
+   * Member portal invitation status information. Only included when the include param has the portal_invitations value set.
+   */
+  memberPortalInvitationStatus?:
+    | EmployeeMemberPortalInvitationStatus
+    | null
+    | undefined;
+  /**
+   * Whether an external partner portal invitation webhook has been sent for this employee. Only included when the include param has the portal_invitations value set.
+   */
+  partnerPortalInvitationSent?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -227,6 +275,44 @@ export const EmployeePaymentMethod1$inboundSchema: z.ZodNativeEnum<
 export const EmployeeCurrentEmploymentStatus$inboundSchema: z.ZodNativeEnum<
   typeof EmployeeCurrentEmploymentStatus
 > = z.nativeEnum(EmployeeCurrentEmploymentStatus);
+
+/** @internal */
+export const EmployeeStatus$inboundSchema: z.ZodNativeEnum<
+  typeof EmployeeStatus
+> = z.nativeEnum(EmployeeStatus);
+
+/** @internal */
+export const EmployeeMemberPortalInvitationStatus$inboundSchema: z.ZodType<
+  EmployeeMemberPortalInvitationStatus,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  status: EmployeeStatus$inboundSchema.optional(),
+  token_expired: z.nullable(z.boolean()).optional(),
+  welcome_email_sent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  last_password_resent_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "token_expired": "tokenExpired",
+    "welcome_email_sent_at": "welcomeEmailSentAt",
+    "last_password_resent_at": "lastPasswordResentAt",
+  });
+});
+
+export function employeeMemberPortalInvitationStatusFromJSON(
+  jsonString: string,
+): SafeParseResult<EmployeeMemberPortalInvitationStatus, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      EmployeeMemberPortalInvitationStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmployeeMemberPortalInvitationStatus' from JSON`,
+  );
+}
 
 /** @internal */
 export const Employee$inboundSchema: z.ZodType<
@@ -274,6 +360,10 @@ export const Employee$inboundSchema: z.ZodType<
   hidden_ssn: z.string().optional(),
   flsa_status: FlsaStatusType$inboundSchema.optional(),
   applicable_tax_ids: z.array(z.number()).optional(),
+  member_portal_invitation_status: z.nullable(
+    z.lazy(() => EmployeeMemberPortalInvitationStatus$inboundSchema),
+  ).optional(),
+  partner_portal_invitation_sent: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
@@ -298,6 +388,8 @@ export const Employee$inboundSchema: z.ZodType<
     "hidden_ssn": "hiddenSsn",
     "flsa_status": "flsaStatus",
     "applicable_tax_ids": "applicableTaxIds",
+    "member_portal_invitation_status": "memberPortalInvitationStatus",
+    "partner_portal_invitation_sent": "partnerPortalInvitationSent",
   });
 });
 

@@ -831,7 +831,6 @@ Retrieve the employment history for a given employee, which includes termination
 
 scope: `employments:read`
 
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-employment_history" method="get" path="/v1/employees/{employee_id}/employment_history" -->
