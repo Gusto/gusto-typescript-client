@@ -39,6 +39,34 @@ export type InformationRequestStatus = ClosedEnum<
 >;
 
 /**
+ * The type of response to the question
+ */
+export const ResponseType = {
+  Text: "text",
+  Document: "document",
+  Persona: "persona",
+} as const;
+/**
+ * The type of response to the question
+ */
+export type ResponseType = ClosedEnum<typeof ResponseType>;
+
+export type RequiredQuestions = {
+  /**
+   * The UUID of the question
+   */
+  questionUuid?: string | undefined;
+  /**
+   * The text of the question
+   */
+  questionText?: string | undefined;
+  /**
+   * The type of response to the question
+   */
+  responseType?: ResponseType | undefined;
+};
+
+/**
  * Representation of an information request
  */
 export type InformationRequest = {
@@ -62,6 +90,10 @@ export type InformationRequest = {
    * If true, this information request is blocking payroll, and may require response or requires review from our Risk Ops team.
    */
   blockingPayroll?: boolean | undefined;
+  /**
+   * The list of required questions for the information request
+   */
+  requiredQuestions?: Array<RequiredQuestions> | undefined;
 };
 
 /** @internal */
@@ -75,6 +107,37 @@ export const InformationRequestStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(InformationRequestStatus);
 
 /** @internal */
+export const ResponseType$inboundSchema: z.ZodNativeEnum<typeof ResponseType> =
+  z.nativeEnum(ResponseType);
+
+/** @internal */
+export const RequiredQuestions$inboundSchema: z.ZodType<
+  RequiredQuestions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  question_uuid: z.string().optional(),
+  question_text: z.string().optional(),
+  response_type: ResponseType$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "question_uuid": "questionUuid",
+    "question_text": "questionText",
+    "response_type": "responseType",
+  });
+});
+
+export function requiredQuestionsFromJSON(
+  jsonString: string,
+): SafeParseResult<RequiredQuestions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RequiredQuestions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequiredQuestions' from JSON`,
+  );
+}
+
+/** @internal */
 export const InformationRequest$inboundSchema: z.ZodType<
   InformationRequest,
   z.ZodTypeDef,
@@ -85,10 +148,13 @@ export const InformationRequest$inboundSchema: z.ZodType<
   type: z.nullable(InformationRequestType$inboundSchema).optional(),
   status: InformationRequestStatus$inboundSchema.optional(),
   blocking_payroll: z.boolean().optional(),
+  required_questions: z.array(z.lazy(() => RequiredQuestions$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
     "blocking_payroll": "blockingPayroll",
+    "required_questions": "requiredQuestions",
   });
 });
 

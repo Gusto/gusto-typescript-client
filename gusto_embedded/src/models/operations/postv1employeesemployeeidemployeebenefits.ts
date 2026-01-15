@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   EmployeeBenefit,
   EmployeeBenefit$inboundSchema,
@@ -229,6 +230,14 @@ export type PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody = {
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   contributeAsPercentage?: boolean | undefined;
+  /**
+   * The date the employee benefit will start. If not provided, the benefit will be effective from 1970-01-01 (unix epoch).
+   */
+  effectiveDate?: RFCDate | undefined;
+  /**
+   * The date the employee benefit will expire. A null value indicates the benefit will not expire.
+   */
+  expirationDate?: RFCDate | null | undefined;
 };
 
 export type PostV1EmployeesEmployeeIdEmployeeBenefitsRequest = {
@@ -334,6 +343,8 @@ export type PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$Outbound = {
   deduction_reduces_taxable_income?: string | null | undefined;
   company_contribution: string;
   contribute_as_percentage: boolean;
+  effective_date: string;
+  expiration_date: string | null;
 };
 
 /** @internal */
@@ -360,6 +371,12 @@ export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$outboundSchema
     ).optional(),
     companyContribution: z.string().default("0.00"),
     contributeAsPercentage: z.boolean().default(false),
+    effectiveDate: z.instanceof(RFCDate).default(() =>
+      new RFCDate("1970-01-01")
+    ).transform(v => v.toString()),
+    expirationDate: z.nullable(
+      z.instanceof(RFCDate).transform(v => v.toString()),
+    ).default(null),
   }).transform((v) => {
     return remap$(v, {
       companyBenefitUuid: "company_benefit_uuid",
@@ -374,6 +391,8 @@ export const PostV1EmployeesEmployeeIdEmployeeBenefitsRequestBody$outboundSchema
       deductionReducesTaxableIncome: "deduction_reduces_taxable_income",
       companyContribution: "company_contribution",
       contributeAsPercentage: "contribute_as_percentage",
+      effectiveDate: "effective_date",
+      expirationDate: "expiration_date",
     });
   });
 

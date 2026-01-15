@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import {
   EmployeeBenefit,
   EmployeeBenefit$inboundSchema,
@@ -181,6 +182,14 @@ export type PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody = {
    * The maximum employee deduction amount per year. A null value signifies no limit.
    */
   employeeDeductionAnnualMaximum?: string | null | undefined;
+  /**
+   * The date the employee benefit will start.
+   */
+  effectiveDate?: RFCDate | undefined;
+  /**
+   * The date the employee benefit will expire. A null value indicates the benefit will not expire.
+   */
+  expirationDate?: RFCDate | null | undefined;
   /**
    * An object representing the type and value of the company contribution.
    */
@@ -358,6 +367,8 @@ export type PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$Outbound = {
   employee_deduction: string;
   deduct_as_percentage?: boolean | undefined;
   employee_deduction_annual_maximum?: string | null | undefined;
+  effective_date?: string | undefined;
+  expiration_date?: string | null | undefined;
   contribution?:
     | PutV1EmployeeBenefitsEmployeeBenefitIdContribution$Outbound
     | undefined;
@@ -384,6 +395,11 @@ export const PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$outboundSchema:
     employeeDeduction: z.string().default("0.00"),
     deductAsPercentage: z.boolean().optional(),
     employeeDeductionAnnualMaximum: z.nullable(z.string()).optional(),
+    effectiveDate: z.instanceof(RFCDate).transform(v => v.toString())
+      .optional(),
+    expirationDate: z.nullable(
+      z.instanceof(RFCDate).transform(v => v.toString()),
+    ).optional(),
     contribution: z.lazy(() =>
       PutV1EmployeeBenefitsEmployeeBenefitIdContribution$outboundSchema
     ).optional(),
@@ -406,6 +422,8 @@ export const PutV1EmployeeBenefitsEmployeeBenefitIdRequestBody$outboundSchema:
       employeeDeduction: "employee_deduction",
       deductAsPercentage: "deduct_as_percentage",
       employeeDeductionAnnualMaximum: "employee_deduction_annual_maximum",
+      effectiveDate: "effective_date",
+      expirationDate: "expiration_date",
       companyContributionAnnualMaximum: "company_contribution_annual_maximum",
       limitOption: "limit_option",
       catchUp: "catch_up",

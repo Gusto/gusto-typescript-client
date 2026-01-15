@@ -11,7 +11,10 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
-import { GetV1CompanyBenefitsCompanyBenefitIdRequest } from "../models/operations/getv1companybenefitscompanybenefitid.js";
+import {
+  GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude,
+  GetV1CompanyBenefitsCompanyBenefitIdRequest,
+} from "../models/operations/getv1companybenefitscompanybenefitid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -91,6 +94,9 @@ export function setCompanyBenefitsGetData(
     companyBenefitId: string,
     parameters: {
       withEmployeeBenefits?: boolean | undefined;
+      include?:
+        | GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
+        | undefined;
       xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
@@ -108,6 +114,9 @@ export function invalidateCompanyBenefitsGet(
       companyBenefitId: string,
       parameters: {
         withEmployeeBenefits?: boolean | undefined;
+        include?:
+          | GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
+          | undefined;
         xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]

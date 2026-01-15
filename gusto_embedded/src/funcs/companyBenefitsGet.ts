@@ -110,6 +110,7 @@ async function $do(
   );
 
   const query = encodeFormQuery({
+    "include": payload.include,
     "with_employee_benefits": payload.with_employee_benefits,
   });
 

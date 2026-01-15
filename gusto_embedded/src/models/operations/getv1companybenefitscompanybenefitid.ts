@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBenefitWithEmployeeBenefits,
@@ -20,6 +21,25 @@ import {
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Available options:
+ *
+ * @remarks
+ * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.
+ */
+export const GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude = {
+  AllBenefits: "all_benefits",
+} as const;
+/**
+ * Available options:
+ *
+ * @remarks
+ * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.
+ */
+export type GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude = ClosedEnum<
+  typeof GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
+>;
+
 export type GetV1CompanyBenefitsCompanyBenefitIdRequest = {
   /**
    * The UUID of the company benefit
@@ -29,6 +49,13 @@ export type GetV1CompanyBenefitsCompanyBenefitIdRequest = {
    * Whether to return employee benefits associated with the benefit
    */
   withEmployeeBenefits?: boolean | undefined;
+  /**
+   * Available options:
+   *
+   * @remarks
+   * - all_benefits: If with_employee_benefits=true, include all effective dated benefits for each employee instead of only the current benefits.
+   */
+  include?: GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude | undefined;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
@@ -46,9 +73,16 @@ export type GetV1CompanyBenefitsCompanyBenefitIdResponse = {
 };
 
 /** @internal */
+export const GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude
+  > = z.nativeEnum(GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude);
+
+/** @internal */
 export type GetV1CompanyBenefitsCompanyBenefitIdRequest$Outbound = {
   company_benefit_id: string;
   with_employee_benefits?: boolean | undefined;
+  include?: string | undefined;
   "X-Gusto-API-Version": string;
 };
 
@@ -61,6 +95,9 @@ export const GetV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema:
   > = z.object({
     companyBenefitId: z.string(),
     withEmployeeBenefits: z.boolean().optional(),
+    include:
+      GetV1CompanyBenefitsCompanyBenefitIdQueryParamInclude$outboundSchema
+        .optional(),
     xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
