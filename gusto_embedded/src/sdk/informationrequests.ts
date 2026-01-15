@@ -3,11 +3,16 @@
  */
 
 import { informationRequestsGetInformationRequests } from "../funcs/informationRequestsGetInformationRequests.js";
+import { informationRequestsSubmit } from "../funcs/informationRequestsSubmit.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import {
   GetInformationRequestsRequest,
   GetInformationRequestsResponse,
 } from "../models/operations/getinformationrequests.js";
+import {
+  SubmitInformationRequestRequest,
+  SubmitInformationRequestResponse,
+} from "../models/operations/submitinformationrequest.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class InformationRequests extends ClientSDK {
@@ -24,6 +29,27 @@ export class InformationRequests extends ClientSDK {
     options?: RequestOptions,
   ): Promise<GetInformationRequestsResponse> {
     return unwrapAsync(informationRequestsGetInformationRequests(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Submit information request responses
+   *
+   * @remarks
+   * Submit responses to an information request.
+   * Supports both text responses and file uploads (multipart/form-data).
+   * Maximum file size: 120MB.
+   *
+   * scope: `information_requests:write`
+   */
+  async submit(
+    request: SubmitInformationRequestRequest,
+    options?: RequestOptions,
+  ): Promise<SubmitInformationRequestResponse> {
+    return unwrapAsync(informationRequestsSubmit(
       this,
       request,
       options,

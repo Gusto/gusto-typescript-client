@@ -472,6 +472,7 @@ run();
 ### [InformationRequests](docs/sdks/informationrequests/README.md)
 
 * [getInformationRequests](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
+* [submit](docs/sdks/informationrequests/README.md#submit) - Submit information request responses
 
 ### [Introspection](docs/sdks/introspection/README.md)
 
@@ -823,6 +824,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`industrySelectionGet`](docs/sdks/industryselection/README.md#get) - Get a company industry selection
 - [`industrySelectionUpdate`](docs/sdks/industryselection/README.md#update) - Update a company industry selection
 - [`informationRequestsGetInformationRequests`](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
+- [`informationRequestsSubmit`](docs/sdks/informationrequests/README.md#submit) - Submit information request responses
 - [`introspectionGetInfo`](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
 - [`introspectionOauthAccessToken`](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
 - [`invoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve invoicing data for companies
@@ -1127,6 +1129,7 @@ To learn about this feature and how to get started, check
 - [`useIndustrySelectionGet`](docs/sdks/industryselection/README.md#get) - Get a company industry selection
 - [`useIndustrySelectionUpdateMutation`](docs/sdks/industryselection/README.md#update) - Update a company industry selection
 - [`useInformationRequestsGetInformationRequests`](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
+- [`useInformationRequestsSubmitMutation`](docs/sdks/informationrequests/README.md#submit) - Submit information request responses
 - [`useIntrospectionGetInfo`](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
 - [`useIntrospectionOauthAccessTokenMutation`](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
 - [`useInvoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve invoicing data for companies
@@ -1410,13 +1413,13 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 158 of 278 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 278 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 278 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 278 methods.*
-* [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 278 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 278 methods.*
-* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 278 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 163 of 279 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 279 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 279 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 279 methods.*
+* [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 279 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 279 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 279 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

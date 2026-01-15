@@ -39,18 +39,6 @@ export type CompanyBenefitWithEmployeeBenefitsCatchUpType = ClosedEnum<
 >;
 
 /**
- * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
- */
-export const Action = {
-  Create: "create",
-  Update: "update",
-} as const;
-/**
- * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
- */
-export type Action = ClosedEnum<typeof Action>;
-
-/**
  * A single tier of a tiered matching scheme.
  */
 export type CompanyBenefitWithEmployeeBenefitsValueTiers = {
@@ -145,14 +133,6 @@ export type EmployeeBenefits = {
    */
   companyContribution?: string | undefined;
   /**
-   * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-   */
-  uuid?: string | undefined;
-  /**
-   * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
-   */
-  action?: Action | undefined;
-  /**
    * The date when the employee benefit becomes effective. If not provided, the benefit will be effective from 1970-01-01 (unix epoch).
    */
   effectiveDate?: string | undefined;
@@ -237,10 +217,6 @@ export const CompanyBenefitWithEmployeeBenefitsSource$inboundSchema:
 export const CompanyBenefitWithEmployeeBenefitsCatchUpType$inboundSchema:
   z.ZodNativeEnum<typeof CompanyBenefitWithEmployeeBenefitsCatchUpType> = z
     .nativeEnum(CompanyBenefitWithEmployeeBenefitsCatchUpType);
-
-/** @internal */
-export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> = z
-  .nativeEnum(Action);
 
 /** @internal */
 export const CompanyBenefitWithEmployeeBenefitsValueTiers$inboundSchema:
@@ -369,8 +345,6 @@ export const EmployeeBenefits$inboundSchema: z.ZodType<
   deduct_as_percentage: z.boolean().default(false),
   employee_deduction: z.string().default("0.00"),
   company_contribution: z.string().optional(),
-  uuid: z.string().optional(),
-  action: Action$inboundSchema.optional(),
   effective_date: z.string().optional(),
   expiration_date: z.string().optional(),
   contribution: z.lazy(() =>

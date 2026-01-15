@@ -13,6 +13,7 @@ import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude,
   GetV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   GetV1EmployeesEmployeeIdEmployeeBenefitsResponse,
 } from "../models/operations/getv1employeesemployeeidemployeebenefits.js";
@@ -49,6 +50,7 @@ export function buildEmployeeBenefitsGetQuery(
     queryKey: queryKeyEmployeeBenefitsGet(request.employeeId, {
       page: request.page,
       per: request.per,
+      include: request.include,
       xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function employeeBenefitsGetQueryFn(
@@ -79,6 +81,9 @@ export function queryKeyEmployeeBenefitsGet(
   parameters: {
     page?: number | undefined;
     per?: number | undefined;
+    include?:
+      | GetV1EmployeesEmployeeIdEmployeeBenefitsQueryParamInclude
+      | undefined;
     xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
