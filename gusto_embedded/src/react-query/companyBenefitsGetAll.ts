@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1BenefitsRequest } from "../models/operations/getv1benefits.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyBenefitsGetAll,
 };
 
+export type CompanyBenefitsGetAllQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all benefits supported by Gusto
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useCompanyBenefitsGetAll(
   request: GetV1BenefitsRequest,
-  options?: QueryHookOptions<CompanyBenefitsGetAllQueryData>,
-): UseQueryResult<CompanyBenefitsGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyBenefitsGetAllQueryData,
+    CompanyBenefitsGetAllQueryError
+  >,
+): UseQueryResult<
+  CompanyBenefitsGetAllQueryData,
+  CompanyBenefitsGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyBenefitsGetAllQuery(
@@ -68,8 +94,14 @@ export function useCompanyBenefitsGetAll(
  */
 export function useCompanyBenefitsGetAllSuspense(
   request: GetV1BenefitsRequest,
-  options?: SuspenseQueryHookOptions<CompanyBenefitsGetAllQueryData>,
-): UseSuspenseQueryResult<CompanyBenefitsGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyBenefitsGetAllQueryData,
+    CompanyBenefitsGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyBenefitsGetAllQueryData,
+  CompanyBenefitsGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyBenefitsGetAllQuery(

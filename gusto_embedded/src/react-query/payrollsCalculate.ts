@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsCalculate } from "../funcs/payrollsCalculate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody } from "../models/errors/putv1companiescompanyidpayrollspayrollidcalculate.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
@@ -27,6 +38,17 @@ export type PayrollsCalculateMutationVariables = {
 export type PayrollsCalculateMutationData =
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse;
 
+export type PayrollsCalculateMutationError =
+  | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Calculate a payroll
  *
@@ -41,12 +63,12 @@ export type PayrollsCalculateMutationData =
 export function usePayrollsCalculateMutation(
   options?: MutationHookOptions<
     PayrollsCalculateMutationData,
-    Error,
+    PayrollsCalculateMutationError,
     PayrollsCalculateMutationVariables
   >,
 ): UseMutationResult<
   PayrollsCalculateMutationData,
-  Error,
+  PayrollsCalculateMutationError,
   PayrollsCalculateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

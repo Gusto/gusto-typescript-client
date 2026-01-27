@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1TokenInfoRequest } from "../models/operations/getv1tokeninfo.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyIntrospectionGetInfo,
 };
 
+export type IntrospectionGetInfoQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get info about the current access token
  *
@@ -39,8 +59,14 @@ export {
  */
 export function useIntrospectionGetInfo(
   request: GetV1TokenInfoRequest,
-  options?: QueryHookOptions<IntrospectionGetInfoQueryData>,
-): UseQueryResult<IntrospectionGetInfoQueryData, Error> {
+  options?: QueryHookOptions<
+    IntrospectionGetInfoQueryData,
+    IntrospectionGetInfoQueryError
+  >,
+): UseQueryResult<
+  IntrospectionGetInfoQueryData,
+  IntrospectionGetInfoQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildIntrospectionGetInfoQuery(
@@ -60,8 +86,14 @@ export function useIntrospectionGetInfo(
  */
 export function useIntrospectionGetInfoSuspense(
   request: GetV1TokenInfoRequest,
-  options?: SuspenseQueryHookOptions<IntrospectionGetInfoQueryData>,
-): UseSuspenseQueryResult<IntrospectionGetInfoQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    IntrospectionGetInfoQueryData,
+    IntrospectionGetInfoQueryError
+  >,
+): UseSuspenseQueryResult<
+  IntrospectionGetInfoQueryData,
+  IntrospectionGetInfoQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildIntrospectionGetInfoQuery(

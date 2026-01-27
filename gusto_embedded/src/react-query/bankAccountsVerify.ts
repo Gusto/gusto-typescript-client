@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { bankAccountsVerify } from "../funcs/bankAccountsVerify.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
   PutV1CompaniesCompanyIdBankAccountsVerifyResponse,
@@ -26,6 +37,17 @@ export type BankAccountsVerifyMutationVariables = {
 
 export type BankAccountsVerifyMutationData =
   PutV1CompaniesCompanyIdBankAccountsVerifyResponse;
+
+export type BankAccountsVerifyMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Verify a company bank account
@@ -51,12 +73,12 @@ export type BankAccountsVerifyMutationData =
 export function useBankAccountsVerifyMutation(
   options?: MutationHookOptions<
     BankAccountsVerifyMutationData,
-    Error,
+    BankAccountsVerifyMutationError,
     BankAccountsVerifyMutationVariables
   >,
 ): UseMutationResult<
   BankAccountsVerifyMutationData,
-  Error,
+  BankAccountsVerifyMutationError,
   BankAccountsVerifyMutationVariables
 > {
   const client = useGustoEmbeddedContext();

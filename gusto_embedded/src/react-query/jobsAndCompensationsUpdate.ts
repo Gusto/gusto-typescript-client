@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsUpdate } from "../funcs/jobsAndCompensationsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1JobsJobIdRequest,
   PutV1JobsJobIdResponse,
@@ -26,6 +37,17 @@ export type JobsAndCompensationsUpdateMutationVariables = {
 
 export type JobsAndCompensationsUpdateMutationData = PutV1JobsJobIdResponse;
 
+export type JobsAndCompensationsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a job
  *
@@ -37,12 +59,12 @@ export type JobsAndCompensationsUpdateMutationData = PutV1JobsJobIdResponse;
 export function useJobsAndCompensationsUpdateMutation(
   options?: MutationHookOptions<
     JobsAndCompensationsUpdateMutationData,
-    Error,
+    JobsAndCompensationsUpdateMutationError,
     JobsAndCompensationsUpdateMutationVariables
   >,
 ): UseMutationResult<
   JobsAndCompensationsUpdateMutationData,
-  Error,
+  JobsAndCompensationsUpdateMutationError,
   JobsAndCompensationsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

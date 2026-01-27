@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsCreateJob } from "../funcs/jobsAndCompensationsCreateJob.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1JobsJobIdRequest,
   PostV1JobsJobIdResponse,
@@ -26,6 +37,17 @@ export type JobsAndCompensationsCreateJobMutationVariables = {
 
 export type JobsAndCompensationsCreateJobMutationData = PostV1JobsJobIdResponse;
 
+export type JobsAndCompensationsCreateJobMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a job
  *
@@ -37,12 +59,12 @@ export type JobsAndCompensationsCreateJobMutationData = PostV1JobsJobIdResponse;
 export function useJobsAndCompensationsCreateJobMutation(
   options?: MutationHookOptions<
     JobsAndCompensationsCreateJobMutationData,
-    Error,
+    JobsAndCompensationsCreateJobMutationError,
     JobsAndCompensationsCreateJobMutationVariables
   >,
 ): UseMutationResult<
   JobsAndCompensationsCreateJobMutationData,
-  Error,
+  JobsAndCompensationsCreateJobMutationError,
   JobsAndCompensationsCreateJobMutationVariables
 > {
   const client = useGustoEmbeddedContext();

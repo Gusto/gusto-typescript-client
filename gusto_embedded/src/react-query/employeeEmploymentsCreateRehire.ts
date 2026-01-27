@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsCreateRehire } from "../funcs/employeeEmploymentsCreateRehire.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1EmployeesEmployeeIdRehireRequest,
   PostV1EmployeesEmployeeIdRehireResponse,
@@ -27,6 +38,17 @@ export type EmployeeEmploymentsCreateRehireMutationVariables = {
 export type EmployeeEmploymentsCreateRehireMutationData =
   PostV1EmployeesEmployeeIdRehireResponse;
 
+export type EmployeeEmploymentsCreateRehireMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an employee rehire
  *
@@ -38,12 +60,12 @@ export type EmployeeEmploymentsCreateRehireMutationData =
 export function useEmployeeEmploymentsCreateRehireMutation(
   options?: MutationHookOptions<
     EmployeeEmploymentsCreateRehireMutationData,
-    Error,
+    EmployeeEmploymentsCreateRehireMutationError,
     EmployeeEmploymentsCreateRehireMutationVariables
   >,
 ): UseMutationResult<
   EmployeeEmploymentsCreateRehireMutationData,
-  Error,
+  EmployeeEmploymentsCreateRehireMutationError,
   EmployeeEmploymentsCreateRehireMutationVariables
 > {
   const client = useGustoEmbeddedContext();

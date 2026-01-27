@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesRequest } from "../models/operations/getv1companies.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompaniesGet,
 };
 
+export type CompaniesGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a company
  *
@@ -44,8 +64,8 @@ export {
  */
 export function useCompaniesGet(
   request: GetV1CompaniesRequest,
-  options?: QueryHookOptions<CompaniesGetQueryData>,
-): UseQueryResult<CompaniesGetQueryData, Error> {
+  options?: QueryHookOptions<CompaniesGetQueryData, CompaniesGetQueryError>,
+): UseQueryResult<CompaniesGetQueryData, CompaniesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompaniesGetQuery(
@@ -70,8 +90,11 @@ export function useCompaniesGet(
  */
 export function useCompaniesGetSuspense(
   request: GetV1CompaniesRequest,
-  options?: SuspenseQueryHookOptions<CompaniesGetQueryData>,
-): UseSuspenseQueryResult<CompaniesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompaniesGetQueryData,
+    CompaniesGetQueryError
+  >,
+): UseSuspenseQueryResult<CompaniesGetQueryData, CompaniesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompaniesGetQuery(

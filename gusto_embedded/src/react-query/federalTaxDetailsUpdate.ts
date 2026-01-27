@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { federalTaxDetailsUpdate } from "../funcs/federalTaxDetailsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyIdFederalTaxDetailsRequest,
   PutV1CompaniesCompanyIdFederalTaxDetailsResponse,
@@ -27,6 +38,17 @@ export type FederalTaxDetailsUpdateMutationVariables = {
 export type FederalTaxDetailsUpdateMutationData =
   PutV1CompaniesCompanyIdFederalTaxDetailsResponse;
 
+export type FederalTaxDetailsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update Federal Tax Details
  *
@@ -39,12 +61,12 @@ export type FederalTaxDetailsUpdateMutationData =
 export function useFederalTaxDetailsUpdateMutation(
   options?: MutationHookOptions<
     FederalTaxDetailsUpdateMutationData,
-    Error,
+    FederalTaxDetailsUpdateMutationError,
     FederalTaxDetailsUpdateMutationVariables
   >,
 ): UseMutationResult<
   FederalTaxDetailsUpdateMutationData,
-  Error,
+  FederalTaxDetailsUpdateMutationError,
   FederalTaxDetailsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

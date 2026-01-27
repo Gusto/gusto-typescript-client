@@ -11,6 +11,18 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements } from "../funcs/contractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursements.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PatchV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
   PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse,
@@ -28,6 +40,18 @@ export type ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbur
 export type ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationData =
   PatchV1ContractorPaymentGroupsIdPartnerDisbursementsResponse;
 
+export type ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update partner disbursements for a contractor payment group
  *
@@ -39,12 +63,12 @@ export type ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbur
 export function useContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutation(
   options?: MutationHookOptions<
     ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationData,
-    Error,
+    ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationError,
     ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationData,
-  Error,
+  ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationError,
   ContractorPaymentGroupsPatchV1ContractorPaymentGroupsIdPartnerDisbursementsMutationVariables
 > {
   const client = useGustoEmbeddedContext();

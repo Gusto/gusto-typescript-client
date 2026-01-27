@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsCreateCustom } from "../funcs/reportsCreateCustom.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostCompaniesCompanyUuidReportsRequest,
   PostCompaniesCompanyUuidReportsResponse,
@@ -27,6 +38,17 @@ export type ReportsCreateCustomMutationVariables = {
 export type ReportsCreateCustomMutationData =
   PostCompaniesCompanyUuidReportsResponse;
 
+export type ReportsCreateCustomMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a custom report
  *
@@ -38,12 +60,12 @@ export type ReportsCreateCustomMutationData =
 export function useReportsCreateCustomMutation(
   options?: MutationHookOptions<
     ReportsCreateCustomMutationData,
-    Error,
+    ReportsCreateCustomMutationError,
     ReportsCreateCustomMutationVariables
   >,
 ): UseMutationResult<
   ReportsCreateCustomMutationData,
-  Error,
+  ReportsCreateCustomMutationError,
   ReportsCreateCustomMutationVariables
 > {
   const client = useGustoEmbeddedContext();

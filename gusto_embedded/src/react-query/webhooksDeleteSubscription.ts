@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksDeleteSubscription } from "../funcs/webhooksDeleteSubscription.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1WebhookSubscriptionUuidRequest,
   DeleteV1WebhookSubscriptionUuidResponse,
@@ -29,6 +39,16 @@ export type WebhooksDeleteSubscriptionMutationVariables = {
 export type WebhooksDeleteSubscriptionMutationData =
   DeleteV1WebhookSubscriptionUuidResponse;
 
+export type WebhooksDeleteSubscriptionMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete a webhook subscription
  *
@@ -44,12 +64,12 @@ export type WebhooksDeleteSubscriptionMutationData =
 export function useWebhooksDeleteSubscriptionMutation(
   options?: MutationHookOptions<
     WebhooksDeleteSubscriptionMutationData,
-    Error,
+    WebhooksDeleteSubscriptionMutationError,
     WebhooksDeleteSubscriptionMutationVariables
   >,
 ): UseMutationResult<
   WebhooksDeleteSubscriptionMutationData,
-  Error,
+  WebhooksDeleteSubscriptionMutationError,
   WebhooksDeleteSubscriptionMutationVariables
 > {
   const client = useGustoEmbeddedContext();

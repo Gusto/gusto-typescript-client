@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdEarningTypesRequest } from "../models/operations/getv1companiescompanyidearningtypes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEarningTypesList,
 };
 
+export type EarningTypesListQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all earning types for a company
  *
@@ -47,8 +67,11 @@ export {
  */
 export function useEarningTypesList(
   request: GetV1CompaniesCompanyIdEarningTypesRequest,
-  options?: QueryHookOptions<EarningTypesListQueryData>,
-): UseQueryResult<EarningTypesListQueryData, Error> {
+  options?: QueryHookOptions<
+    EarningTypesListQueryData,
+    EarningTypesListQueryError
+  >,
+): UseQueryResult<EarningTypesListQueryData, EarningTypesListQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEarningTypesListQuery(
@@ -76,8 +99,14 @@ export function useEarningTypesList(
  */
 export function useEarningTypesListSuspense(
   request: GetV1CompaniesCompanyIdEarningTypesRequest,
-  options?: SuspenseQueryHookOptions<EarningTypesListQueryData>,
-): UseSuspenseQueryResult<EarningTypesListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EarningTypesListQueryData,
+    EarningTypesListQueryError
+  >,
+): UseSuspenseQueryResult<
+  EarningTypesListQueryData,
+  EarningTypesListQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEarningTypesListQuery(

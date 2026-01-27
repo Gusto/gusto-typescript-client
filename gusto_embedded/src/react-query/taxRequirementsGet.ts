@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyUuidTaxRequirementsStateRequest } from "../models/operations/getv1companiescompanyuuidtaxrequirementsstate.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -30,6 +40,16 @@ export {
   queryKeyTaxRequirementsGet,
   type TaxRequirementsGetQueryData,
 };
+
+export type TaxRequirementsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get State Tax Requirements
@@ -80,8 +100,11 @@ export {
  */
 export function useTaxRequirementsGet(
   request: GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
-  options?: QueryHookOptions<TaxRequirementsGetQueryData>,
-): UseQueryResult<TaxRequirementsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    TaxRequirementsGetQueryData,
+    TaxRequirementsGetQueryError
+  >,
+): UseQueryResult<TaxRequirementsGetQueryData, TaxRequirementsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildTaxRequirementsGetQuery(
@@ -142,8 +165,14 @@ export function useTaxRequirementsGet(
  */
 export function useTaxRequirementsGetSuspense(
   request: GetV1CompaniesCompanyUuidTaxRequirementsStateRequest,
-  options?: SuspenseQueryHookOptions<TaxRequirementsGetQueryData>,
-): UseSuspenseQueryResult<TaxRequirementsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    TaxRequirementsGetQueryData,
+    TaxRequirementsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  TaxRequirementsGetQueryData,
+  TaxRequirementsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildTaxRequirementsGetQuery(

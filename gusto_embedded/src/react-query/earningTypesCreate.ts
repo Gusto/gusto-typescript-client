@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { earningTypesCreate } from "../funcs/earningTypesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdEarningTypesRequest,
   PostV1CompaniesCompanyIdEarningTypesResponse,
@@ -27,6 +38,17 @@ export type EarningTypesCreateMutationVariables = {
 export type EarningTypesCreateMutationData =
   PostV1CompaniesCompanyIdEarningTypesResponse;
 
+export type EarningTypesCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a custom earning type
  *
@@ -40,12 +62,12 @@ export type EarningTypesCreateMutationData =
 export function useEarningTypesCreateMutation(
   options?: MutationHookOptions<
     EarningTypesCreateMutationData,
-    Error,
+    EarningTypesCreateMutationError,
     EarningTypesCreateMutationVariables
   >,
 ): UseMutationResult<
   EarningTypesCreateMutationData,
-  Error,
+  EarningTypesCreateMutationError,
   EarningTypesCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

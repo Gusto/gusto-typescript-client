@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1LocationsLocationUuidMinimumWagesHeaderXGustoAPIVersion,
   GetV1LocationsLocationUuidMinimumWagesRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyLocationsGetMinimumWages,
 };
 
+export type LocationsGetMinimumWagesQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get minimum wages for a location
  *
@@ -43,8 +65,14 @@ export {
  */
 export function useLocationsGetMinimumWages(
   request: GetV1LocationsLocationUuidMinimumWagesRequest,
-  options?: QueryHookOptions<LocationsGetMinimumWagesQueryData>,
-): UseQueryResult<LocationsGetMinimumWagesQueryData, Error> {
+  options?: QueryHookOptions<
+    LocationsGetMinimumWagesQueryData,
+    LocationsGetMinimumWagesQueryError
+  >,
+): UseQueryResult<
+  LocationsGetMinimumWagesQueryData,
+  LocationsGetMinimumWagesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildLocationsGetMinimumWagesQuery(
@@ -66,8 +94,14 @@ export function useLocationsGetMinimumWages(
  */
 export function useLocationsGetMinimumWagesSuspense(
   request: GetV1LocationsLocationUuidMinimumWagesRequest,
-  options?: SuspenseQueryHookOptions<LocationsGetMinimumWagesQueryData>,
-): UseSuspenseQueryResult<LocationsGetMinimumWagesQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    LocationsGetMinimumWagesQueryData,
+    LocationsGetMinimumWagesQueryError
+  >,
+): UseSuspenseQueryResult<
+  LocationsGetMinimumWagesQueryData,
+  LocationsGetMinimumWagesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildLocationsGetMinimumWagesQuery(

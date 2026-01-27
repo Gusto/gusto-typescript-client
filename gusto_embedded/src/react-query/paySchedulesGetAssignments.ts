@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest } from "../models/operations/getv1companiescompanyidpayschedulesassignments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyPaySchedulesGetAssignments,
 };
 
+export type PaySchedulesGetAssignmentsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get pay schedule assignments for a company
  *
@@ -41,8 +61,14 @@ export {
  */
 export function usePaySchedulesGetAssignments(
   request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
-  options?: QueryHookOptions<PaySchedulesGetAssignmentsQueryData>,
-): UseQueryResult<PaySchedulesGetAssignmentsQueryData, Error> {
+  options?: QueryHookOptions<
+    PaySchedulesGetAssignmentsQueryData,
+    PaySchedulesGetAssignmentsQueryError
+  >,
+): UseQueryResult<
+  PaySchedulesGetAssignmentsQueryData,
+  PaySchedulesGetAssignmentsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPaySchedulesGetAssignmentsQuery(
@@ -64,8 +90,14 @@ export function usePaySchedulesGetAssignments(
  */
 export function usePaySchedulesGetAssignmentsSuspense(
   request: GetV1CompaniesCompanyIdPaySchedulesAssignmentsRequest,
-  options?: SuspenseQueryHookOptions<PaySchedulesGetAssignmentsQueryData>,
-): UseSuspenseQueryResult<PaySchedulesGetAssignmentsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PaySchedulesGetAssignmentsQueryData,
+    PaySchedulesGetAssignmentsQueryError
+  >,
+): UseSuspenseQueryResult<
+  PaySchedulesGetAssignmentsQueryData,
+  PaySchedulesGetAssignmentsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPaySchedulesGetAssignmentsQuery(

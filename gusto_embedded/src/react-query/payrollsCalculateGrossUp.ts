@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsCalculateGrossUp } from "../funcs/payrollsCalculateGrossUp.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { PostPayrollsGrossUpPayrollUuidResponseBody } from "../models/errors/postpayrollsgrossuppayrolluuid.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PostPayrollsGrossUpPayrollUuidRequest,
   PostPayrollsGrossUpPayrollUuidResponse,
@@ -27,6 +38,17 @@ export type PayrollsCalculateGrossUpMutationVariables = {
 export type PayrollsCalculateGrossUpMutationData =
   PostPayrollsGrossUpPayrollUuidResponse;
 
+export type PayrollsCalculateGrossUpMutationError =
+  | PostPayrollsGrossUpPayrollUuidResponseBody
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Calculate gross up
  *
@@ -40,12 +62,12 @@ export type PayrollsCalculateGrossUpMutationData =
 export function usePayrollsCalculateGrossUpMutation(
   options?: MutationHookOptions<
     PayrollsCalculateGrossUpMutationData,
-    Error,
+    PayrollsCalculateGrossUpMutationError,
     PayrollsCalculateGrossUpMutationVariables
   >,
 ): UseMutationResult<
   PayrollsCalculateGrossUpMutationData,
-  Error,
+  PayrollsCalculateGrossUpMutationError,
   PayrollsCalculateGrossUpMutationVariables
 > {
   const client = useGustoEmbeddedContext();

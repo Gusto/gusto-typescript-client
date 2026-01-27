@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesHeaderXGustoAPIVersion,
   GetV1EmployeesRequest,
@@ -34,6 +45,17 @@ export {
   queryKeyEmployeesGet,
 };
 
+export type EmployeesGetQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee
  *
@@ -44,8 +66,8 @@ export {
  */
 export function useEmployeesGet(
   request: GetV1EmployeesRequest,
-  options?: QueryHookOptions<EmployeesGetQueryData>,
-): UseQueryResult<EmployeesGetQueryData, Error> {
+  options?: QueryHookOptions<EmployeesGetQueryData, EmployeesGetQueryError>,
+): UseQueryResult<EmployeesGetQueryData, EmployeesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeesGetQuery(
@@ -67,8 +89,11 @@ export function useEmployeesGet(
  */
 export function useEmployeesGetSuspense(
   request: GetV1EmployeesRequest,
-  options?: SuspenseQueryHookOptions<EmployeesGetQueryData>,
-): UseSuspenseQueryResult<EmployeesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeesGetQueryData,
+    EmployeesGetQueryError
+  >,
+): UseSuspenseQueryResult<EmployeesGetQueryData, EmployeesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeesGetQuery(

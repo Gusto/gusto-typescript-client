@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest } from "../models/operations/getv1companiescompanyidpayschedulespayscheduleid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyPaySchedulesGet,
 };
 
+export type PaySchedulesGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a pay schedule
  *
@@ -41,8 +61,11 @@ export {
  */
 export function usePaySchedulesGet(
   request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
-  options?: QueryHookOptions<PaySchedulesGetQueryData>,
-): UseQueryResult<PaySchedulesGetQueryData, Error> {
+  options?: QueryHookOptions<
+    PaySchedulesGetQueryData,
+    PaySchedulesGetQueryError
+  >,
+): UseQueryResult<PaySchedulesGetQueryData, PaySchedulesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPaySchedulesGetQuery(
@@ -64,8 +87,11 @@ export function usePaySchedulesGet(
  */
 export function usePaySchedulesGetSuspense(
   request: GetV1CompaniesCompanyIdPaySchedulesPayScheduleIdRequest,
-  options?: SuspenseQueryHookOptions<PaySchedulesGetQueryData>,
-): UseSuspenseQueryResult<PaySchedulesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PaySchedulesGetQueryData,
+    PaySchedulesGetQueryError
+  >,
+): UseSuspenseQueryResult<PaySchedulesGetQueryData, PaySchedulesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPaySchedulesGetQuery(

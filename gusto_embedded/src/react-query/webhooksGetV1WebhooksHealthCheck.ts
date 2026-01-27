@@ -10,6 +10,16 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1WebhooksHealthCheckHeaderXGustoAPIVersion,
   GetV1WebhooksHealthCheckRequest,
@@ -34,6 +44,16 @@ export {
   type WebhooksGetV1WebhooksHealthCheckQueryData,
 };
 
+export type WebhooksGetV1WebhooksHealthCheckQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get the webhooks health status
  *
@@ -49,8 +69,14 @@ export {
 export function useWebhooksGetV1WebhooksHealthCheck(
   security: GetV1WebhooksHealthCheckSecurity,
   request: GetV1WebhooksHealthCheckRequest,
-  options?: QueryHookOptions<WebhooksGetV1WebhooksHealthCheckQueryData>,
-): UseQueryResult<WebhooksGetV1WebhooksHealthCheckQueryData, Error> {
+  options?: QueryHookOptions<
+    WebhooksGetV1WebhooksHealthCheckQueryData,
+    WebhooksGetV1WebhooksHealthCheckQueryError
+  >,
+): UseQueryResult<
+  WebhooksGetV1WebhooksHealthCheckQueryData,
+  WebhooksGetV1WebhooksHealthCheckQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildWebhooksGetV1WebhooksHealthCheckQuery(
@@ -78,8 +104,14 @@ export function useWebhooksGetV1WebhooksHealthCheck(
 export function useWebhooksGetV1WebhooksHealthCheckSuspense(
   security: GetV1WebhooksHealthCheckSecurity,
   request: GetV1WebhooksHealthCheckRequest,
-  options?: SuspenseQueryHookOptions<WebhooksGetV1WebhooksHealthCheckQueryData>,
-): UseSuspenseQueryResult<WebhooksGetV1WebhooksHealthCheckQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WebhooksGetV1WebhooksHealthCheckQueryData,
+    WebhooksGetV1WebhooksHealthCheckQueryError
+  >,
+): UseSuspenseQueryResult<
+  WebhooksGetV1WebhooksHealthCheckQueryData,
+  WebhooksGetV1WebhooksHealthCheckQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildWebhooksGetV1WebhooksHealthCheckQuery(

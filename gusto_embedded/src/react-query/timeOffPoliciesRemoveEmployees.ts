@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesRemoveEmployees } from "../funcs/timeOffPoliciesRemoveEmployees.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesRequest,
   PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse,
@@ -27,6 +38,17 @@ export type TimeOffPoliciesRemoveEmployeesMutationVariables = {
 export type TimeOffPoliciesRemoveEmployeesMutationData =
   PutV1TimeOffPoliciesTimeOffPolicyUuidRemoveEmployeesResponse;
 
+export type TimeOffPoliciesRemoveEmployeesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Remove employees from a time off policy
  *
@@ -38,12 +60,12 @@ export type TimeOffPoliciesRemoveEmployeesMutationData =
 export function useTimeOffPoliciesRemoveEmployeesMutation(
   options?: MutationHookOptions<
     TimeOffPoliciesRemoveEmployeesMutationData,
-    Error,
+    TimeOffPoliciesRemoveEmployeesMutationError,
     TimeOffPoliciesRemoveEmployeesMutationVariables
   >,
 ): UseMutationResult<
   TimeOffPoliciesRemoveEmployeesMutationData,
-  Error,
+  TimeOffPoliciesRemoveEmployeesMutationError,
   TimeOffPoliciesRemoveEmployeesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

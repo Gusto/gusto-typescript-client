@@ -11,6 +11,17 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import { GetV1EmployeesEmployeeIdRehireRequest } from "../models/operations/getv1employeesemployeeidrehire.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +42,17 @@ export {
   queryKeyEmployeeEmploymentsGetRehire,
 };
 
+export type EmployeeEmploymentsGetRehireQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee rehire
  *
@@ -41,8 +63,14 @@ export {
  */
 export function useEmployeeEmploymentsGetRehire(
   request: GetV1EmployeesEmployeeIdRehireRequest,
-  options?: QueryHookOptions<EmployeeEmploymentsGetRehireQueryData>,
-): UseQueryResult<EmployeeEmploymentsGetRehireQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeEmploymentsGetRehireQueryData,
+    EmployeeEmploymentsGetRehireQueryError
+  >,
+): UseQueryResult<
+  EmployeeEmploymentsGetRehireQueryData,
+  EmployeeEmploymentsGetRehireQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeEmploymentsGetRehireQuery(
@@ -64,8 +92,14 @@ export function useEmployeeEmploymentsGetRehire(
  */
 export function useEmployeeEmploymentsGetRehireSuspense(
   request: GetV1EmployeesEmployeeIdRehireRequest,
-  options?: SuspenseQueryHookOptions<EmployeeEmploymentsGetRehireQueryData>,
-): UseSuspenseQueryResult<EmployeeEmploymentsGetRehireQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeeEmploymentsGetRehireQueryData,
+    EmployeeEmploymentsGetRehireQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeeEmploymentsGetRehireQueryData,
+  EmployeeEmploymentsGetRehireQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeEmploymentsGetRehireQuery(

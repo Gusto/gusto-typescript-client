@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsCancel } from "../funcs/payrollsCancel.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest,
   PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
@@ -27,6 +38,17 @@ export type PayrollsCancelMutationVariables = {
 export type PayrollsCancelMutationData =
   PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse;
 
+export type PayrollsCancelMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Cancel a payroll
  *
@@ -40,12 +62,12 @@ export type PayrollsCancelMutationData =
 export function usePayrollsCancelMutation(
   options?: MutationHookOptions<
     PayrollsCancelMutationData,
-    Error,
+    PayrollsCancelMutationError,
     PayrollsCancelMutationVariables
   >,
 ): UseMutationResult<
   PayrollsCancelMutationData,
-  Error,
+  PayrollsCancelMutationError,
   PayrollsCancelMutationVariables
 > {
   const client = useGustoEmbeddedContext();

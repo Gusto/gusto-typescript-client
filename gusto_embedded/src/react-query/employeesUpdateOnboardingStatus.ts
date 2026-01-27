@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesUpdateOnboardingStatus } from "../funcs/employeesUpdateOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeesEmployeeIdOnboardingStatusRequest,
   PutV1EmployeesEmployeeIdOnboardingStatusResponse,
@@ -26,6 +37,17 @@ export type EmployeesUpdateOnboardingStatusMutationVariables = {
 
 export type EmployeesUpdateOnboardingStatusMutationData =
   PutV1EmployeesEmployeeIdOnboardingStatusResponse;
+
+export type EmployeesUpdateOnboardingStatusMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Update the employee's onboarding status
@@ -47,12 +69,12 @@ export type EmployeesUpdateOnboardingStatusMutationData =
 export function useEmployeesUpdateOnboardingStatusMutation(
   options?: MutationHookOptions<
     EmployeesUpdateOnboardingStatusMutationData,
-    Error,
+    EmployeesUpdateOnboardingStatusMutationError,
     EmployeesUpdateOnboardingStatusMutationVariables
   >,
 ): UseMutationResult<
   EmployeesUpdateOnboardingStatusMutationData,
-  Error,
+  EmployeesUpdateOnboardingStatusMutationError,
   EmployeesUpdateOnboardingStatusMutationVariables
 > {
   const client = useGustoEmbeddedContext();

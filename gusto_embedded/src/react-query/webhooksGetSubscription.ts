@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1WebhookSubscriptionUuidRequest,
   GetV1WebhookSubscriptionUuidSecurity,
@@ -34,6 +44,16 @@ export {
   type WebhooksGetSubscriptionQueryData,
 };
 
+export type WebhooksGetSubscriptionQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a webhook subscription
  *
@@ -49,8 +69,14 @@ export {
 export function useWebhooksGetSubscription(
   security: GetV1WebhookSubscriptionUuidSecurity,
   request: GetV1WebhookSubscriptionUuidRequest,
-  options?: QueryHookOptions<WebhooksGetSubscriptionQueryData>,
-): UseQueryResult<WebhooksGetSubscriptionQueryData, Error> {
+  options?: QueryHookOptions<
+    WebhooksGetSubscriptionQueryData,
+    WebhooksGetSubscriptionQueryError
+  >,
+): UseQueryResult<
+  WebhooksGetSubscriptionQueryData,
+  WebhooksGetSubscriptionQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildWebhooksGetSubscriptionQuery(
@@ -78,8 +104,14 @@ export function useWebhooksGetSubscription(
 export function useWebhooksGetSubscriptionSuspense(
   security: GetV1WebhookSubscriptionUuidSecurity,
   request: GetV1WebhookSubscriptionUuidRequest,
-  options?: SuspenseQueryHookOptions<WebhooksGetSubscriptionQueryData>,
-): UseSuspenseQueryResult<WebhooksGetSubscriptionQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WebhooksGetSubscriptionQueryData,
+    WebhooksGetSubscriptionQueryError
+  >,
+): UseSuspenseQueryResult<
+  WebhooksGetSubscriptionQueryData,
+  WebhooksGetSubscriptionQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildWebhooksGetSubscriptionQuery(

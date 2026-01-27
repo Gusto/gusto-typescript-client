@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1WebhookSubscriptionsRequest,
   GetV1WebhookSubscriptionsSecurity,
@@ -34,6 +44,16 @@ export {
   type WebhooksListSubscriptionsQueryData,
 };
 
+export type WebhooksListSubscriptionsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * List webhook subscriptions
  *
@@ -49,8 +69,14 @@ export {
 export function useWebhooksListSubscriptions(
   security: GetV1WebhookSubscriptionsSecurity,
   request: GetV1WebhookSubscriptionsRequest,
-  options?: QueryHookOptions<WebhooksListSubscriptionsQueryData>,
-): UseQueryResult<WebhooksListSubscriptionsQueryData, Error> {
+  options?: QueryHookOptions<
+    WebhooksListSubscriptionsQueryData,
+    WebhooksListSubscriptionsQueryError
+  >,
+): UseQueryResult<
+  WebhooksListSubscriptionsQueryData,
+  WebhooksListSubscriptionsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildWebhooksListSubscriptionsQuery(
@@ -78,8 +104,14 @@ export function useWebhooksListSubscriptions(
 export function useWebhooksListSubscriptionsSuspense(
   security: GetV1WebhookSubscriptionsSecurity,
   request: GetV1WebhookSubscriptionsRequest,
-  options?: SuspenseQueryHookOptions<WebhooksListSubscriptionsQueryData>,
-): UseSuspenseQueryResult<WebhooksListSubscriptionsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WebhooksListSubscriptionsQueryData,
+    WebhooksListSubscriptionsQueryError
+  >,
+): UseSuspenseQueryResult<
+  WebhooksListSubscriptionsQueryData,
+  WebhooksListSubscriptionsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildWebhooksListSubscriptionsQuery(

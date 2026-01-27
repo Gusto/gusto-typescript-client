@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdPayrollReversalsRequest } from "../models/operations/getv1companiescompanyidpayrollreversals.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyPayrollsGetApprovedReversals,
 };
 
+export type PayrollsGetApprovedReversalsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get approved payroll reversals
  *
@@ -41,8 +61,14 @@ export {
  */
 export function usePayrollsGetApprovedReversals(
   request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
-  options?: QueryHookOptions<PayrollsGetApprovedReversalsQueryData>,
-): UseQueryResult<PayrollsGetApprovedReversalsQueryData, Error> {
+  options?: QueryHookOptions<
+    PayrollsGetApprovedReversalsQueryData,
+    PayrollsGetApprovedReversalsQueryError
+  >,
+): UseQueryResult<
+  PayrollsGetApprovedReversalsQueryData,
+  PayrollsGetApprovedReversalsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPayrollsGetApprovedReversalsQuery(
@@ -64,8 +90,14 @@ export function usePayrollsGetApprovedReversals(
  */
 export function usePayrollsGetApprovedReversalsSuspense(
   request: GetV1CompaniesCompanyIdPayrollReversalsRequest,
-  options?: SuspenseQueryHookOptions<PayrollsGetApprovedReversalsQueryData>,
-): UseSuspenseQueryResult<PayrollsGetApprovedReversalsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PayrollsGetApprovedReversalsQueryData,
+    PayrollsGetApprovedReversalsQueryError
+  >,
+): UseSuspenseQueryResult<
+  PayrollsGetApprovedReversalsQueryData,
+  PayrollsGetApprovedReversalsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPayrollsGetApprovedReversalsQuery(

@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ExternalPayrollCalculateTaxesRequest } from "../models/operations/getv1externalpayrollcalculatetaxes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyExternalPayrollsCalculateTaxes,
 };
 
+export type ExternalPayrollsCalculateTaxesQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get tax suggestions for an external payroll
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useExternalPayrollsCalculateTaxes(
   request: GetV1ExternalPayrollCalculateTaxesRequest,
-  options?: QueryHookOptions<ExternalPayrollsCalculateTaxesQueryData>,
-): UseQueryResult<ExternalPayrollsCalculateTaxesQueryData, Error> {
+  options?: QueryHookOptions<
+    ExternalPayrollsCalculateTaxesQueryData,
+    ExternalPayrollsCalculateTaxesQueryError
+  >,
+): UseQueryResult<
+  ExternalPayrollsCalculateTaxesQueryData,
+  ExternalPayrollsCalculateTaxesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildExternalPayrollsCalculateTaxesQuery(
@@ -68,8 +94,14 @@ export function useExternalPayrollsCalculateTaxes(
  */
 export function useExternalPayrollsCalculateTaxesSuspense(
   request: GetV1ExternalPayrollCalculateTaxesRequest,
-  options?: SuspenseQueryHookOptions<ExternalPayrollsCalculateTaxesQueryData>,
-): UseSuspenseQueryResult<ExternalPayrollsCalculateTaxesQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ExternalPayrollsCalculateTaxesQueryData,
+    ExternalPayrollsCalculateTaxesQueryError
+  >,
+): UseSuspenseQueryResult<
+  ExternalPayrollsCalculateTaxesQueryData,
+  ExternalPayrollsCalculateTaxesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildExternalPayrollsCalculateTaxesQuery(

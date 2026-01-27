@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage } from "../funcs/reportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWage.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageRequest,
   PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse,
@@ -28,6 +39,17 @@ export type ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutatio
 export type ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationData =
   PostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageResponse;
 
+export type ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an employees annual FICA wage report
  *
@@ -43,12 +65,12 @@ export type ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutatio
 export function useReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutation(
   options?: MutationHookOptions<
     ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationData,
-    Error,
+    ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationError,
     ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationVariables
   >,
 ): UseMutationResult<
   ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationData,
-  Error,
+  ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationError,
   ReportsPostV1CompaniesCompanyIdReportsEmployeesAnnualFicaWageMutationVariables
 > {
   const client = useGustoEmbeddedContext();

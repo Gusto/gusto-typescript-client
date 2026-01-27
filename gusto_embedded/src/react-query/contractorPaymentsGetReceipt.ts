@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest } from "../models/operations/getv1contractorpaymentscontractorpaymentuuidreceipt.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorPaymentsGetReceipt,
 };
 
+export type ContractorPaymentsGetReceiptQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a single contractor payment receipt
  *
@@ -48,8 +68,14 @@ export {
  */
 export function useContractorPaymentsGetReceipt(
   request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
-  options?: QueryHookOptions<ContractorPaymentsGetReceiptQueryData>,
-): UseQueryResult<ContractorPaymentsGetReceiptQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorPaymentsGetReceiptQueryData,
+    ContractorPaymentsGetReceiptQueryError
+  >,
+): UseQueryResult<
+  ContractorPaymentsGetReceiptQueryData,
+  ContractorPaymentsGetReceiptQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorPaymentsGetReceiptQuery(
@@ -78,8 +104,14 @@ export function useContractorPaymentsGetReceipt(
  */
 export function useContractorPaymentsGetReceiptSuspense(
   request: GetV1ContractorPaymentsContractorPaymentUuidReceiptRequest,
-  options?: SuspenseQueryHookOptions<ContractorPaymentsGetReceiptQueryData>,
-): UseSuspenseQueryResult<ContractorPaymentsGetReceiptQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorPaymentsGetReceiptQueryData,
+    ContractorPaymentsGetReceiptQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorPaymentsGetReceiptQueryData,
+  ContractorPaymentsGetReceiptQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorPaymentsGetReceiptQuery(

@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeIdHomeAddressesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdHomeAddressesRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyEmployeeAddressesGet,
 };
 
+export type EmployeeAddressesGetQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's home addresses
  *
@@ -45,8 +67,14 @@ export {
  */
 export function useEmployeeAddressesGet(
   request: GetV1EmployeesEmployeeIdHomeAddressesRequest,
-  options?: QueryHookOptions<EmployeeAddressesGetQueryData>,
-): UseQueryResult<EmployeeAddressesGetQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeAddressesGetQueryData,
+    EmployeeAddressesGetQueryError
+  >,
+): UseQueryResult<
+  EmployeeAddressesGetQueryData,
+  EmployeeAddressesGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeAddressesGetQuery(
@@ -70,8 +98,14 @@ export function useEmployeeAddressesGet(
  */
 export function useEmployeeAddressesGetSuspense(
   request: GetV1EmployeesEmployeeIdHomeAddressesRequest,
-  options?: SuspenseQueryHookOptions<EmployeeAddressesGetQueryData>,
-): UseSuspenseQueryResult<EmployeeAddressesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeeAddressesGetQueryData,
+    EmployeeAddressesGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeeAddressesGetQueryData,
+  EmployeeAddressesGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeAddressesGetQuery(

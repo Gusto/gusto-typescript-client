@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1EmployeesEmployeeIdJobsQueryParamInclude,
   GetV1EmployeesEmployeeIdJobsRequest,
@@ -34,6 +44,16 @@ export {
   queryKeyJobsAndCompensationsGetJobs,
 };
 
+export type JobsAndCompensationsGetJobsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get jobs for an employee
  *
@@ -44,8 +64,14 @@ export {
  */
 export function useJobsAndCompensationsGetJobs(
   request: GetV1EmployeesEmployeeIdJobsRequest,
-  options?: QueryHookOptions<JobsAndCompensationsGetJobsQueryData>,
-): UseQueryResult<JobsAndCompensationsGetJobsQueryData, Error> {
+  options?: QueryHookOptions<
+    JobsAndCompensationsGetJobsQueryData,
+    JobsAndCompensationsGetJobsQueryError
+  >,
+): UseQueryResult<
+  JobsAndCompensationsGetJobsQueryData,
+  JobsAndCompensationsGetJobsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildJobsAndCompensationsGetJobsQuery(
@@ -67,8 +93,14 @@ export function useJobsAndCompensationsGetJobs(
  */
 export function useJobsAndCompensationsGetJobsSuspense(
   request: GetV1EmployeesEmployeeIdJobsRequest,
-  options?: SuspenseQueryHookOptions<JobsAndCompensationsGetJobsQueryData>,
-): UseSuspenseQueryResult<JobsAndCompensationsGetJobsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    JobsAndCompensationsGetJobsQueryData,
+    JobsAndCompensationsGetJobsQueryError
+  >,
+): UseSuspenseQueryResult<
+  JobsAndCompensationsGetJobsQueryData,
+  JobsAndCompensationsGetJobsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildJobsAndCompensationsGetJobsQuery(

@@ -12,6 +12,16 @@ import {
 } from "@tanstack/react-query";
 import { SortOrder } from "../models/components/sortorder.js";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetEventsRequest,
   GetEventsSecurity,
@@ -35,6 +45,16 @@ export {
   queryKeyEventsGet,
 };
 
+export type EventsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all events
  *
@@ -50,8 +70,8 @@ export {
 export function useEventsGet(
   security: GetEventsSecurity,
   request: GetEventsRequest,
-  options?: QueryHookOptions<EventsGetQueryData>,
-): UseQueryResult<EventsGetQueryData, Error> {
+  options?: QueryHookOptions<EventsGetQueryData, EventsGetQueryError>,
+): UseQueryResult<EventsGetQueryData, EventsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEventsGetQuery(
@@ -79,8 +99,8 @@ export function useEventsGet(
 export function useEventsGetSuspense(
   security: GetEventsSecurity,
   request: GetEventsRequest,
-  options?: SuspenseQueryHookOptions<EventsGetQueryData>,
-): UseSuspenseQueryResult<EventsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<EventsGetQueryData, EventsGetQueryError>,
+): UseSuspenseQueryResult<EventsGetQueryData, EventsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEventsGetQuery(

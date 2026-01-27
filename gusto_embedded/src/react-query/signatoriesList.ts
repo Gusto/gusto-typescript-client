@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyUuidSignatoriesRequest } from "../models/operations/getv1companiescompanyuuidsignatories.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   type SignatoriesListQueryData,
 };
 
+export type SignatoriesListQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all company signatories
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useSignatoriesList(
   request: GetV1CompaniesCompanyUuidSignatoriesRequest,
-  options?: QueryHookOptions<SignatoriesListQueryData>,
-): UseQueryResult<SignatoriesListQueryData, Error> {
+  options?: QueryHookOptions<
+    SignatoriesListQueryData,
+    SignatoriesListQueryError
+  >,
+): UseQueryResult<SignatoriesListQueryData, SignatoriesListQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildSignatoriesListQuery(
@@ -64,8 +87,11 @@ export function useSignatoriesList(
  */
 export function useSignatoriesListSuspense(
   request: GetV1CompaniesCompanyUuidSignatoriesRequest,
-  options?: SuspenseQueryHookOptions<SignatoriesListQueryData>,
-): UseSuspenseQueryResult<SignatoriesListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    SignatoriesListQueryData,
+    SignatoriesListQueryError
+  >,
+): UseSuspenseQueryResult<SignatoriesListQueryData, SignatoriesListQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildSignatoriesListQuery(

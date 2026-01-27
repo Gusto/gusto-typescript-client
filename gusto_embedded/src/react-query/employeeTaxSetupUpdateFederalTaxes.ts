@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupUpdateFederalTaxes } from "../funcs/employeeTaxSetupUpdateFederalTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeesEmployeeIdFederalTaxesRequest,
   PutV1EmployeesEmployeeIdFederalTaxesResponse,
@@ -27,6 +38,17 @@ export type EmployeeTaxSetupUpdateFederalTaxesMutationVariables = {
 export type EmployeeTaxSetupUpdateFederalTaxesMutationData =
   PutV1EmployeesEmployeeIdFederalTaxesResponse;
 
+export type EmployeeTaxSetupUpdateFederalTaxesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update an employee's federal taxes
  *
@@ -38,12 +60,12 @@ export type EmployeeTaxSetupUpdateFederalTaxesMutationData =
 export function useEmployeeTaxSetupUpdateFederalTaxesMutation(
   options?: MutationHookOptions<
     EmployeeTaxSetupUpdateFederalTaxesMutationData,
-    Error,
+    EmployeeTaxSetupUpdateFederalTaxesMutationError,
     EmployeeTaxSetupUpdateFederalTaxesMutationVariables
   >,
 ): UseMutationResult<
   EmployeeTaxSetupUpdateFederalTaxesMutationData,
-  Error,
+  EmployeeTaxSetupUpdateFederalTaxesMutationError,
   EmployeeTaxSetupUpdateFederalTaxesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

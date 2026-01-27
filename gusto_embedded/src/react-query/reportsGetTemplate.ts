@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetCompaniesCompanyUuidReportTemplatesReportTypeRequest } from "../models/operations/getcompaniescompanyuuidreporttemplatesreporttype.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   type ReportsGetTemplateQueryData,
 };
 
+export type ReportsGetTemplateQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a report template
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useReportsGetTemplate(
   request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
-  options?: QueryHookOptions<ReportsGetTemplateQueryData>,
-): UseQueryResult<ReportsGetTemplateQueryData, Error> {
+  options?: QueryHookOptions<
+    ReportsGetTemplateQueryData,
+    ReportsGetTemplateQueryError
+  >,
+): UseQueryResult<ReportsGetTemplateQueryData, ReportsGetTemplateQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildReportsGetTemplateQuery(
@@ -64,8 +87,14 @@ export function useReportsGetTemplate(
  */
 export function useReportsGetTemplateSuspense(
   request: GetCompaniesCompanyUuidReportTemplatesReportTypeRequest,
-  options?: SuspenseQueryHookOptions<ReportsGetTemplateQueryData>,
-): UseSuspenseQueryResult<ReportsGetTemplateQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ReportsGetTemplateQueryData,
+    ReportsGetTemplateQueryError
+  >,
+): UseSuspenseQueryResult<
+  ReportsGetTemplateQueryData,
+  ReportsGetTemplateQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildReportsGetTemplateQuery(

@@ -13,30 +13,18 @@ import {
   PaymentMethodBankAccount$inboundSchema,
 } from "./paymentmethodbankaccount.js";
 
-/**
- * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
- */
 export const ContractorPaymentMethodType = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
-/**
- * The payment method type. If type is Check, then `split_by` and `splits` do not need to be populated. If type is Direct Deposit, `split_by` and `splits` are required.
- */
 export type ContractorPaymentMethodType = ClosedEnum<
   typeof ContractorPaymentMethodType
 >;
 
-/**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then values are in cents and the last split amount must be `null` to capture the remainder.
- */
 export const ContractorPaymentMethodSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
-/**
- * Describes how the payment will be split. If `split_by` is Percentage, then the `split` amounts must add up to exactly 100. If `split_by` is Amount, then values are in cents and the last split amount must be `null` to capture the remainder.
- */
 export type ContractorPaymentMethodSplitBy = ClosedEnum<
   typeof ContractorPaymentMethodSplitBy
 >;

@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdPaySchedulesRequest } from "../models/operations/getv1companiescompanyidpayschedules.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyPaySchedulesGetAll,
 };
 
+export type PaySchedulesGetAllQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get the pay schedules for a company
  *
@@ -41,8 +61,11 @@ export {
  */
 export function usePaySchedulesGetAll(
   request: GetV1CompaniesCompanyIdPaySchedulesRequest,
-  options?: QueryHookOptions<PaySchedulesGetAllQueryData>,
-): UseQueryResult<PaySchedulesGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    PaySchedulesGetAllQueryData,
+    PaySchedulesGetAllQueryError
+  >,
+): UseQueryResult<PaySchedulesGetAllQueryData, PaySchedulesGetAllQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPaySchedulesGetAllQuery(
@@ -64,8 +87,14 @@ export function usePaySchedulesGetAll(
  */
 export function usePaySchedulesGetAllSuspense(
   request: GetV1CompaniesCompanyIdPaySchedulesRequest,
-  options?: SuspenseQueryHookOptions<PaySchedulesGetAllQueryData>,
-): UseSuspenseQueryResult<PaySchedulesGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PaySchedulesGetAllQueryData,
+    PaySchedulesGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  PaySchedulesGetAllQueryData,
+  PaySchedulesGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPaySchedulesGetAllQuery(

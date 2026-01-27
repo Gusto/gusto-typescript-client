@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorDocumentPdfRequest } from "../models/operations/getv1contractordocumentpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorDocumentsGetPdf,
 };
 
+export type ContractorDocumentsGetPdfQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get the contractor document pdf
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useContractorDocumentsGetPdf(
   request: GetV1ContractorDocumentPdfRequest,
-  options?: QueryHookOptions<ContractorDocumentsGetPdfQueryData>,
-): UseQueryResult<ContractorDocumentsGetPdfQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorDocumentsGetPdfQueryData,
+    ContractorDocumentsGetPdfQueryError
+  >,
+): UseQueryResult<
+  ContractorDocumentsGetPdfQueryData,
+  ContractorDocumentsGetPdfQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorDocumentsGetPdfQuery(
@@ -64,8 +90,14 @@ export function useContractorDocumentsGetPdf(
  */
 export function useContractorDocumentsGetPdfSuspense(
   request: GetV1ContractorDocumentPdfRequest,
-  options?: SuspenseQueryHookOptions<ContractorDocumentsGetPdfQueryData>,
-): UseSuspenseQueryResult<ContractorDocumentsGetPdfQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorDocumentsGetPdfQueryData,
+    ContractorDocumentsGetPdfQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorDocumentsGetPdfQueryData,
+  ContractorDocumentsGetPdfQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorDocumentsGetPdfQuery(

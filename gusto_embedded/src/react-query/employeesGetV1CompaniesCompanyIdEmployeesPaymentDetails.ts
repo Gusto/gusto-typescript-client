@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest } from "../models/operations/getv1companiescompanyidemployeespaymentdetails.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails,
 };
 
+export type EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get employee payment details for a company
  *
@@ -49,11 +69,12 @@ export {
 export function useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
   request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
   options?: QueryHookOptions<
-    EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData
+    EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData,
+    EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryError
   >,
 ): UseQueryResult<
   EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData,
-  Error
+  EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -84,11 +105,12 @@ export function useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails(
 export function useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsSuspense(
   request: GetV1CompaniesCompanyIdEmployeesPaymentDetailsRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData
+    EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData,
+    EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryError
   >,
 ): UseSuspenseQueryResult<
   EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryData,
-  Error
+  EmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetailsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

@@ -10,7 +10,7 @@ export type EmployeeStateTaxesRequestValue = string | number | boolean;
 export type Answers = {
   value: string | number | boolean | null;
   validFrom: string;
-  validUpTo?: any | null | undefined;
+  validUpTo?: string | null | undefined;
 };
 
 export type Questions = {
@@ -51,7 +51,7 @@ export function employeeStateTaxesRequestValueToJSON(
 export type Answers$Outbound = {
   value: string | number | boolean | null;
   valid_from: string;
-  valid_up_to?: any | null | undefined;
+  valid_up_to?: string | null | undefined;
 };
 
 /** @internal */
@@ -62,7 +62,7 @@ export const Answers$outboundSchema: z.ZodType<
 > = z.object({
   value: z.nullable(z.union([z.string(), z.number(), z.boolean()])),
   validFrom: z.string(),
-  validUpTo: z.nullable(z.any()).optional(),
+  validUpTo: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     validFrom: "valid_from",

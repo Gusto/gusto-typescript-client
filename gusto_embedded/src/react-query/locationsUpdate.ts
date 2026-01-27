@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsUpdate } from "../funcs/locationsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1LocationsLocationIdRequest,
   PutV1LocationsLocationIdResponse,
@@ -26,6 +37,17 @@ export type LocationsUpdateMutationVariables = {
 
 export type LocationsUpdateMutationData = PutV1LocationsLocationIdResponse;
 
+export type LocationsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a location
  *
@@ -37,12 +59,12 @@ export type LocationsUpdateMutationData = PutV1LocationsLocationIdResponse;
 export function useLocationsUpdateMutation(
   options?: MutationHookOptions<
     LocationsUpdateMutationData,
-    Error,
+    LocationsUpdateMutationError,
     LocationsUpdateMutationVariables
   >,
 ): UseMutationResult<
   LocationsUpdateMutationData,
-  Error,
+  LocationsUpdateMutationError,
   LocationsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

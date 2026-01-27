@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorsContractorUuidRequest } from "../models/operations/getv1contractorscontractoruuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorsGet,
 };
 
+export type ContractorsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a contractor
  *
@@ -41,8 +61,8 @@ export {
  */
 export function useContractorsGet(
   request: GetV1ContractorsContractorUuidRequest,
-  options?: QueryHookOptions<ContractorsGetQueryData>,
-): UseQueryResult<ContractorsGetQueryData, Error> {
+  options?: QueryHookOptions<ContractorsGetQueryData, ContractorsGetQueryError>,
+): UseQueryResult<ContractorsGetQueryData, ContractorsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorsGetQuery(
@@ -64,8 +84,11 @@ export function useContractorsGet(
  */
 export function useContractorsGetSuspense(
   request: GetV1ContractorsContractorUuidRequest,
-  options?: SuspenseQueryHookOptions<ContractorsGetQueryData>,
-): UseSuspenseQueryResult<ContractorsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorsGetQueryData,
+    ContractorsGetQueryError
+  >,
+): UseSuspenseQueryResult<ContractorsGetQueryData, ContractorsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorsGetQuery(

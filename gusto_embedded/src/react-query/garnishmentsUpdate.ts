@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { garnishmentsUpdate } from "../funcs/garnishmentsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1GarnishmentsGarnishmentIdRequest,
   PutV1GarnishmentsGarnishmentIdResponse,
@@ -27,6 +38,17 @@ export type GarnishmentsUpdateMutationVariables = {
 export type GarnishmentsUpdateMutationData =
   PutV1GarnishmentsGarnishmentIdResponse;
 
+export type GarnishmentsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a garnishment
  *
@@ -38,12 +60,12 @@ export type GarnishmentsUpdateMutationData =
 export function useGarnishmentsUpdateMutation(
   options?: MutationHookOptions<
     GarnishmentsUpdateMutationData,
-    Error,
+    GarnishmentsUpdateMutationError,
     GarnishmentsUpdateMutationVariables
   >,
 ): UseMutationResult<
   GarnishmentsUpdateMutationData,
-  Error,
+  GarnishmentsUpdateMutationError,
   GarnishmentsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

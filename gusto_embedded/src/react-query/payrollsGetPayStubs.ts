@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeUuidPayStubsHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeUuidPayStubsRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyPayrollsGetPayStubs,
 };
 
+export type PayrollsGetPayStubsQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's pay stubs
  *
@@ -43,8 +65,11 @@ export {
  */
 export function usePayrollsGetPayStubs(
   request: GetV1EmployeesEmployeeUuidPayStubsRequest,
-  options?: QueryHookOptions<PayrollsGetPayStubsQueryData>,
-): UseQueryResult<PayrollsGetPayStubsQueryData, Error> {
+  options?: QueryHookOptions<
+    PayrollsGetPayStubsQueryData,
+    PayrollsGetPayStubsQueryError
+  >,
+): UseQueryResult<PayrollsGetPayStubsQueryData, PayrollsGetPayStubsQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPayrollsGetPayStubsQuery(
@@ -66,8 +91,14 @@ export function usePayrollsGetPayStubs(
  */
 export function usePayrollsGetPayStubsSuspense(
   request: GetV1EmployeesEmployeeUuidPayStubsRequest,
-  options?: SuspenseQueryHookOptions<PayrollsGetPayStubsQueryData>,
-): UseSuspenseQueryResult<PayrollsGetPayStubsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PayrollsGetPayStubsQueryData,
+    PayrollsGetPayStubsQueryError
+  >,
+): UseSuspenseQueryResult<
+  PayrollsGetPayStubsQueryData,
+  PayrollsGetPayStubsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPayrollsGetPayStubsQuery(

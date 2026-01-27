@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsSubmit } from "../funcs/payrollsSubmit.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody } from "../models/errors/putv1companiescompanyidpayrollspayrollidsubmit.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
   PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse,
@@ -27,6 +38,17 @@ export type PayrollsSubmitMutationVariables = {
 export type PayrollsSubmitMutationData =
   PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse;
 
+export type PayrollsSubmitMutationError =
+  | PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Submit payroll
  *
@@ -42,12 +64,12 @@ export type PayrollsSubmitMutationData =
 export function usePayrollsSubmitMutation(
   options?: MutationHookOptions<
     PayrollsSubmitMutationData,
-    Error,
+    PayrollsSubmitMutationError,
     PayrollsSubmitMutationVariables
   >,
 ): UseMutationResult<
   PayrollsSubmitMutationData,
-  Error,
+  PayrollsSubmitMutationError,
   PayrollsSubmitMutationVariables
 > {
   const client = useGustoEmbeddedContext();

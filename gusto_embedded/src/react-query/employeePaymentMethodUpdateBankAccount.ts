@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodUpdateBankAccount } from "../funcs/employeePaymentMethodUpdateBankAccount.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeesEmployeeIdBankAccountsRequest,
   PutV1EmployeesEmployeeIdBankAccountsResponse,
@@ -27,6 +38,17 @@ export type EmployeePaymentMethodUpdateBankAccountMutationVariables = {
 export type EmployeePaymentMethodUpdateBankAccountMutationData =
   PutV1EmployeesEmployeeIdBankAccountsResponse;
 
+export type EmployeePaymentMethodUpdateBankAccountMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update an employee bank account
  *
@@ -38,12 +60,12 @@ export type EmployeePaymentMethodUpdateBankAccountMutationData =
 export function useEmployeePaymentMethodUpdateBankAccountMutation(
   options?: MutationHookOptions<
     EmployeePaymentMethodUpdateBankAccountMutationData,
-    Error,
+    EmployeePaymentMethodUpdateBankAccountMutationError,
     EmployeePaymentMethodUpdateBankAccountMutationVariables
   >,
 ): UseMutationResult<
   EmployeePaymentMethodUpdateBankAccountMutationData,
-  Error,
+  EmployeePaymentMethodUpdateBankAccountMutationError,
   EmployeePaymentMethodUpdateBankAccountMutationVariables
 > {
   const client = useGustoEmbeddedContext();

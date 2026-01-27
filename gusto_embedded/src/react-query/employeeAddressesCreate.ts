@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesCreate } from "../funcs/employeeAddressesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1EmployeesEmployeeIdHomeAddressesRequest,
   PostV1EmployeesEmployeeIdHomeAddressesResponse,
@@ -27,6 +38,17 @@ export type EmployeeAddressesCreateMutationVariables = {
 export type EmployeeAddressesCreateMutationData =
   PostV1EmployeesEmployeeIdHomeAddressesResponse;
 
+export type EmployeeAddressesCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an employee's home address
  *
@@ -40,12 +62,12 @@ export type EmployeeAddressesCreateMutationData =
 export function useEmployeeAddressesCreateMutation(
   options?: MutationHookOptions<
     EmployeeAddressesCreateMutationData,
-    Error,
+    EmployeeAddressesCreateMutationError,
     EmployeeAddressesCreateMutationVariables
   >,
 ): UseMutationResult<
   EmployeeAddressesCreateMutationData,
-  Error,
+  EmployeeAddressesCreateMutationError,
   EmployeeAddressesCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

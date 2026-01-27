@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "../funcs/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsRequest,
   PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse,
@@ -28,6 +39,17 @@ export type CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclu
 export type CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationData =
   PutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsResponse;
 
+export type CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update contribution exclusions for a company benefit
  *
@@ -41,12 +63,12 @@ export type CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclu
 export function useCompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutation(
   options?: MutationHookOptions<
     CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationData,
-    Error,
+    CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationError,
     CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationVariables
   >,
 ): UseMutationResult<
   CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationData,
-  Error,
+  CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationError,
   CompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutationVariables
 > {
   const client = useGustoEmbeddedContext();

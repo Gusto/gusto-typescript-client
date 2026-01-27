@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1SalaryEstimatesIdHeaderXGustoAPIVersion,
   GetV1SalaryEstimatesIdRequest,
@@ -33,6 +44,17 @@ export {
   type SalaryEstimatesGetV1SalaryEstimatesIdQueryData,
 };
 
+export type SalaryEstimatesGetV1SalaryEstimatesIdQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a salary estimate
  *
@@ -43,8 +65,14 @@ export {
  */
 export function useSalaryEstimatesGetV1SalaryEstimatesId(
   request: GetV1SalaryEstimatesIdRequest,
-  options?: QueryHookOptions<SalaryEstimatesGetV1SalaryEstimatesIdQueryData>,
-): UseQueryResult<SalaryEstimatesGetV1SalaryEstimatesIdQueryData, Error> {
+  options?: QueryHookOptions<
+    SalaryEstimatesGetV1SalaryEstimatesIdQueryData,
+    SalaryEstimatesGetV1SalaryEstimatesIdQueryError
+  >,
+): UseQueryResult<
+  SalaryEstimatesGetV1SalaryEstimatesIdQueryData,
+  SalaryEstimatesGetV1SalaryEstimatesIdQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildSalaryEstimatesGetV1SalaryEstimatesIdQuery(
@@ -67,11 +95,12 @@ export function useSalaryEstimatesGetV1SalaryEstimatesId(
 export function useSalaryEstimatesGetV1SalaryEstimatesIdSuspense(
   request: GetV1SalaryEstimatesIdRequest,
   options?: SuspenseQueryHookOptions<
-    SalaryEstimatesGetV1SalaryEstimatesIdQueryData
+    SalaryEstimatesGetV1SalaryEstimatesIdQueryData,
+    SalaryEstimatesGetV1SalaryEstimatesIdQueryError
   >,
 ): UseSuspenseQueryResult<
   SalaryEstimatesGetV1SalaryEstimatesIdQueryData,
-  Error
+  SalaryEstimatesGetV1SalaryEstimatesIdQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

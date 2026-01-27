@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reimbursementsPutV1RecurringReimbursements } from "../funcs/reimbursementsPutV1RecurringReimbursements.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1RecurringReimbursementsRequest,
   PutV1RecurringReimbursementsResponse,
@@ -27,6 +38,17 @@ export type ReimbursementsPutV1RecurringReimbursementsMutationVariables = {
 export type ReimbursementsPutV1RecurringReimbursementsMutationData =
   PutV1RecurringReimbursementsResponse;
 
+export type ReimbursementsPutV1RecurringReimbursementsMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a recurring reimbursement
  *
@@ -38,12 +60,12 @@ export type ReimbursementsPutV1RecurringReimbursementsMutationData =
 export function useReimbursementsPutV1RecurringReimbursementsMutation(
   options?: MutationHookOptions<
     ReimbursementsPutV1RecurringReimbursementsMutationData,
-    Error,
+    ReimbursementsPutV1RecurringReimbursementsMutationError,
     ReimbursementsPutV1RecurringReimbursementsMutationVariables
   >,
 ): UseMutationResult<
   ReimbursementsPutV1RecurringReimbursementsMutationData,
-  Error,
+  ReimbursementsPutV1RecurringReimbursementsMutationError,
   ReimbursementsPutV1RecurringReimbursementsMutationVariables
 > {
   const client = useGustoEmbeddedContext();

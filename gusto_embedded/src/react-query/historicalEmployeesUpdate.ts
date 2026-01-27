@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { historicalEmployeesUpdate } from "../funcs/historicalEmployeesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PutV1HistoricalEmployeesRequest,
   PutV1HistoricalEmployeesResponse,
@@ -27,6 +37,16 @@ export type HistoricalEmployeesUpdateMutationVariables = {
 export type HistoricalEmployeesUpdateMutationData =
   PutV1HistoricalEmployeesResponse;
 
+export type HistoricalEmployeesUpdateMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a historical employee
  *
@@ -38,12 +58,12 @@ export type HistoricalEmployeesUpdateMutationData =
 export function useHistoricalEmployeesUpdateMutation(
   options?: MutationHookOptions<
     HistoricalEmployeesUpdateMutationData,
-    Error,
+    HistoricalEmployeesUpdateMutationError,
     HistoricalEmployeesUpdateMutationVariables
   >,
 ): UseMutationResult<
   HistoricalEmployeesUpdateMutationData,
-  Error,
+  HistoricalEmployeesUpdateMutationError,
   HistoricalEmployeesUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

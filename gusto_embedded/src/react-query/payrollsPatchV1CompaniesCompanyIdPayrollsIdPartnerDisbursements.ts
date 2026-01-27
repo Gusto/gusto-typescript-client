@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements } from "../funcs/payrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursements.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
   PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse,
@@ -28,6 +39,17 @@ export type PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutat
 export type PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationData =
   PatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsResponse;
 
+export type PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update partner disbursements for a payroll
  *
@@ -39,12 +61,12 @@ export type PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutat
 export function usePayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutation(
   options?: MutationHookOptions<
     PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationData,
-    Error,
+    PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationError,
     PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationVariables
   >,
 ): UseMutationResult<
   PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationData,
-  Error,
+  PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationError,
   PayrollsPatchV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsMutationVariables
 > {
   const client = useGustoEmbeddedContext();

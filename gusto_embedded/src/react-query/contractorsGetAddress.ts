@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorsContractorUuidAddressRequest } from "../models/operations/getv1contractorscontractoruuidaddress.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorsGetAddress,
 };
 
+export type ContractorsGetAddressQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a contractor address
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useContractorsGetAddress(
   request: GetV1ContractorsContractorUuidAddressRequest,
-  options?: QueryHookOptions<ContractorsGetAddressQueryData>,
-): UseQueryResult<ContractorsGetAddressQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorsGetAddressQueryData,
+    ContractorsGetAddressQueryError
+  >,
+): UseQueryResult<
+  ContractorsGetAddressQueryData,
+  ContractorsGetAddressQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorsGetAddressQuery(
@@ -64,8 +90,14 @@ export function useContractorsGetAddress(
  */
 export function useContractorsGetAddressSuspense(
   request: GetV1ContractorsContractorUuidAddressRequest,
-  options?: SuspenseQueryHookOptions<ContractorsGetAddressQueryData>,
-): UseSuspenseQueryResult<ContractorsGetAddressQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorsGetAddressQueryData,
+    ContractorsGetAddressQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorsGetAddressQueryData,
+  ContractorsGetAddressQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorsGetAddressQuery(

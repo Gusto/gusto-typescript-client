@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { salaryEstimatesPostV1SalaryEstimatesUuidAccept } from "../funcs/salaryEstimatesPostV1SalaryEstimatesUuidAccept.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1SalaryEstimatesUuidAcceptRequest,
   PostV1SalaryEstimatesUuidAcceptResponse,
@@ -27,6 +38,17 @@ export type SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationVariables = {
 export type SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationData =
   PostV1SalaryEstimatesUuidAcceptResponse;
 
+export type SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Accept a salary estimate
  *
@@ -40,12 +62,12 @@ export type SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationData =
 export function useSalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutation(
   options?: MutationHookOptions<
     SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationData,
-    Error,
+    SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationError,
     SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationVariables
   >,
 ): UseMutationResult<
   SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationData,
-  Error,
+  SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationError,
   SalaryEstimatesPostV1SalaryEstimatesUuidAcceptMutationVariables
 > {
   const client = useGustoEmbeddedContext();

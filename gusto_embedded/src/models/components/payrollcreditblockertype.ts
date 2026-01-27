@@ -25,7 +25,7 @@ import {
   PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema,
 } from "./payrollcreditblockerunblockoptionwaitforreversewire.js";
 
-export type PayrollCreditBlockersTypeUnblockOptions =
+export type PayrollCreditBlockerTypeUnblockOptions =
   | PayrollCreditBlockerUnblockOptionSubmitWire
   | PayrollCreditBlockerUnblockOptionSubmitBankScreenshot
   | PayrollCreditBlockerUnblockOptionRespondToHighRiskFraudRfi
@@ -34,7 +34,7 @@ export type PayrollCreditBlockersTypeUnblockOptions =
 /**
  * The status of the credit blocker
  */
-export const PayrollCreditBlockersTypeStatus = {
+export const PayrollCreditBlockerTypeStatus = {
   Unresolved: "unresolved",
   PendingReview: "pending_review",
   Resolved: "resolved",
@@ -43,11 +43,14 @@ export const PayrollCreditBlockersTypeStatus = {
 /**
  * The status of the credit blocker
  */
-export type PayrollCreditBlockersTypeStatus = ClosedEnum<
-  typeof PayrollCreditBlockersTypeStatus
+export type PayrollCreditBlockerTypeStatus = ClosedEnum<
+  typeof PayrollCreditBlockerTypeStatus
 >;
 
-export type PayrollCreditBlockersType = {
+/**
+ * A blocker that prevents payment crediting.
+ */
+export type PayrollCreditBlockerType = {
   /**
    * The type of blocker that's blocking the payment from being credited.
    */
@@ -74,12 +77,12 @@ export type PayrollCreditBlockersType = {
   /**
    * The status of the credit blocker
    */
-  status?: PayrollCreditBlockersTypeStatus | undefined;
+  status?: PayrollCreditBlockerTypeStatus | undefined;
 };
 
 /** @internal */
-export const PayrollCreditBlockersTypeUnblockOptions$inboundSchema: z.ZodType<
-  PayrollCreditBlockersTypeUnblockOptions,
+export const PayrollCreditBlockerTypeUnblockOptions$inboundSchema: z.ZodType<
+  PayrollCreditBlockerTypeUnblockOptions,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -89,30 +92,25 @@ export const PayrollCreditBlockersTypeUnblockOptions$inboundSchema: z.ZodType<
   PayrollCreditBlockerUnblockOptionWaitForReverseWire$inboundSchema,
 ]);
 
-export function payrollCreditBlockersTypeUnblockOptionsFromJSON(
+export function payrollCreditBlockerTypeUnblockOptionsFromJSON(
   jsonString: string,
-): SafeParseResult<
-  PayrollCreditBlockersTypeUnblockOptions,
-  SDKValidationError
-> {
+): SafeParseResult<PayrollCreditBlockerTypeUnblockOptions, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      PayrollCreditBlockersTypeUnblockOptions$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PayrollCreditBlockersTypeUnblockOptions' from JSON`,
+      PayrollCreditBlockerTypeUnblockOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollCreditBlockerTypeUnblockOptions' from JSON`,
   );
 }
 
 /** @internal */
-export const PayrollCreditBlockersTypeStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollCreditBlockersTypeStatus
-> = z.nativeEnum(PayrollCreditBlockersTypeStatus);
+export const PayrollCreditBlockerTypeStatus$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollCreditBlockerTypeStatus
+> = z.nativeEnum(PayrollCreditBlockerTypeStatus);
 
 /** @internal */
-export const PayrollCreditBlockersType$inboundSchema: z.ZodType<
-  PayrollCreditBlockersType,
+export const PayrollCreditBlockerType$inboundSchema: z.ZodType<
+  PayrollCreditBlockerType,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -127,7 +125,7 @@ export const PayrollCreditBlockersType$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   selected_option: z.nullable(z.string()).optional(),
-  status: PayrollCreditBlockersTypeStatus$inboundSchema.optional(),
+  status: PayrollCreditBlockerTypeStatus$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",
@@ -137,12 +135,12 @@ export const PayrollCreditBlockersType$inboundSchema: z.ZodType<
   });
 });
 
-export function payrollCreditBlockersTypeFromJSON(
+export function payrollCreditBlockerTypeFromJSON(
   jsonString: string,
-): SafeParseResult<PayrollCreditBlockersType, SDKValidationError> {
+): SafeParseResult<PayrollCreditBlockerType, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PayrollCreditBlockersType$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollCreditBlockersType' from JSON`,
+    (x) => PayrollCreditBlockerType$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollCreditBlockerType' from JSON`,
   );
 }

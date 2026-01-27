@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBenefit,
@@ -19,6 +20,18 @@ import {
   VersionHeader$outboundSchema,
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export const CatchUpType = {
+  Elective: "elective",
+  Deemed: "deemed",
+} as const;
+/**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export type CatchUpType = ClosedEnum<typeof CatchUpType>;
 
 export type PostV1CompaniesCompanyIdCompanyBenefitsRequestBody = {
   /**
@@ -41,6 +54,10 @@ export type PostV1CompaniesCompanyIdCompanyBenefitsRequestBody = {
    * Whether the employer is subject to file W-2 forms for an employee on leave. Only applicable to third party sick pay benefits.
    */
   responsibleForEmployeeW2?: boolean | undefined;
+  /**
+   * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+   */
+  catchUpType?: CatchUpType | null | undefined;
 };
 
 export type PostV1CompaniesCompanyIdCompanyBenefitsRequest = {
@@ -64,12 +81,17 @@ export type PostV1CompaniesCompanyIdCompanyBenefitsResponse = {
 };
 
 /** @internal */
+export const CatchUpType$outboundSchema: z.ZodNativeEnum<typeof CatchUpType> = z
+  .nativeEnum(CatchUpType);
+
+/** @internal */
 export type PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$Outbound = {
   benefit_type?: number | undefined;
   active: boolean;
   description: string;
   responsible_for_employer_taxes?: boolean | undefined;
   responsible_for_employee_w2?: boolean | undefined;
+  catch_up_type?: string | null | undefined;
 };
 
 /** @internal */
@@ -84,11 +106,13 @@ export const PostV1CompaniesCompanyIdCompanyBenefitsRequestBody$outboundSchema:
     description: z.string(),
     responsibleForEmployerTaxes: z.boolean().optional(),
     responsibleForEmployeeW2: z.boolean().optional(),
+    catchUpType: z.nullable(CatchUpType$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       benefitType: "benefit_type",
       responsibleForEmployerTaxes: "responsible_for_employer_taxes",
       responsibleForEmployeeW2: "responsible_for_employee_w2",
+      catchUpType: "catch_up_type",
     });
   });
 

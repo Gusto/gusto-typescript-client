@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesAcceptTermsOfService } from "../funcs/companiesAcceptTermsOfService.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
@@ -27,6 +38,17 @@ export type CompaniesAcceptTermsOfServiceMutationVariables = {
 export type CompaniesAcceptTermsOfServiceMutationData =
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse;
 
+export type CompaniesAcceptTermsOfServiceMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Accept terms of service for a company user
  *
@@ -39,12 +61,12 @@ export type CompaniesAcceptTermsOfServiceMutationData =
 export function useCompaniesAcceptTermsOfServiceMutation(
   options?: MutationHookOptions<
     CompaniesAcceptTermsOfServiceMutationData,
-    Error,
+    CompaniesAcceptTermsOfServiceMutationError,
     CompaniesAcceptTermsOfServiceMutationVariables
   >,
 ): UseMutationResult<
   CompaniesAcceptTermsOfServiceMutationData,
-  Error,
+  CompaniesAcceptTermsOfServiceMutationError,
   CompaniesAcceptTermsOfServiceMutationVariables
 > {
   const client = useGustoEmbeddedContext();

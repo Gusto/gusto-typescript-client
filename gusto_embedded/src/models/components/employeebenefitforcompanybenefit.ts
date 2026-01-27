@@ -91,18 +91,6 @@ export type EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome =
   >;
 
 /**
- * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
- */
-export const Action = {
-  Create: "create",
-  Update: "update",
-} as const;
-/**
- * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
- */
-export type Action = ClosedEnum<typeof Action>;
-
-/**
  * The representation of an employee benefit for a company benefit.
  */
 export type EmployeeBenefitForCompanyBenefit = {
@@ -195,14 +183,6 @@ export type EmployeeBenefitForCompanyBenefit = {
    * The UUID of the employee to which the benefit belongs.
    */
   employeeUuid: string;
-  /**
-   * The UUID of the employee benefit. Required for updating an effective dated employee benefit.
-   */
-  uuid?: string | undefined;
-  /**
-   * The action to perform on the employee benefit. Required for creating/updating an effective dated employee benefit.
-   */
-  action?: Action | undefined;
 };
 
 /** @internal */
@@ -309,10 +289,6 @@ export const EmployeeBenefitForCompanyBenefitDeductionReducesTaxableIncome$outbo
   );
 
 /** @internal */
-export const Action$outboundSchema: z.ZodNativeEnum<typeof Action> = z
-  .nativeEnum(Action);
-
-/** @internal */
 export type EmployeeBenefitForCompanyBenefit$Outbound = {
   version?: string | undefined;
   active: boolean;
@@ -335,8 +311,6 @@ export type EmployeeBenefitForCompanyBenefit$Outbound = {
   effective_date?: string | undefined;
   expiration_date?: string | null | undefined;
   employee_uuid: string;
-  uuid?: string | undefined;
-  action?: string | undefined;
 };
 
 /** @internal */
@@ -370,8 +344,6 @@ export const EmployeeBenefitForCompanyBenefit$outboundSchema: z.ZodType<
   expirationDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString()))
     .optional(),
   employeeUuid: z.string(),
-  uuid: z.string().optional(),
-  action: Action$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     employeeDeduction: "employee_deduction",

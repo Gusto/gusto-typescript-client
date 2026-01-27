@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorDocumentsSign } from "../funcs/contractorDocumentsSign.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1ContractorDocumentSignRequest,
   PutV1ContractorDocumentSignResponse,
@@ -27,6 +38,17 @@ export type ContractorDocumentsSignMutationVariables = {
 export type ContractorDocumentsSignMutationData =
   PutV1ContractorDocumentSignResponse;
 
+export type ContractorDocumentsSignMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Sign a contractor document
  *
@@ -38,12 +60,12 @@ export type ContractorDocumentsSignMutationData =
 export function useContractorDocumentsSignMutation(
   options?: MutationHookOptions<
     ContractorDocumentsSignMutationData,
-    Error,
+    ContractorDocumentsSignMutationError,
     ContractorDocumentsSignMutationVariables
   >,
 ): UseMutationResult<
   ContractorDocumentsSignMutationData,
-  Error,
+  ContractorDocumentsSignMutationError,
   ContractorDocumentsSignMutationVariables
 > {
   const client = useGustoEmbeddedContext();

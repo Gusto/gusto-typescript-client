@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeIdWorkAddressesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdWorkAddressesRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyEmployeeAddressesGetWorkAddresses,
 };
 
+export type EmployeeAddressesGetWorkAddressesQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's work addresses
  *
@@ -44,8 +66,14 @@ export {
  */
 export function useEmployeeAddressesGetWorkAddresses(
   request: GetV1EmployeesEmployeeIdWorkAddressesRequest,
-  options?: QueryHookOptions<EmployeeAddressesGetWorkAddressesQueryData>,
-): UseQueryResult<EmployeeAddressesGetWorkAddressesQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeAddressesGetWorkAddressesQueryData,
+    EmployeeAddressesGetWorkAddressesQueryError
+  >,
+): UseQueryResult<
+  EmployeeAddressesGetWorkAddressesQueryData,
+  EmployeeAddressesGetWorkAddressesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeAddressesGetWorkAddressesQuery(
@@ -69,9 +97,13 @@ export function useEmployeeAddressesGetWorkAddresses(
 export function useEmployeeAddressesGetWorkAddressesSuspense(
   request: GetV1EmployeesEmployeeIdWorkAddressesRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeeAddressesGetWorkAddressesQueryData
+    EmployeeAddressesGetWorkAddressesQueryData,
+    EmployeeAddressesGetWorkAddressesQueryError
   >,
-): UseSuspenseQueryResult<EmployeeAddressesGetWorkAddressesQueryData, Error> {
+): UseSuspenseQueryResult<
+  EmployeeAddressesGetWorkAddressesQueryData,
+  EmployeeAddressesGetWorkAddressesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeAddressesGetWorkAddressesQuery(

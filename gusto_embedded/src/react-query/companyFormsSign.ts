@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyFormsSign } from "../funcs/companyFormsSign.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompanyFormSignRequest,
   PutV1CompanyFormSignResponse,
@@ -26,6 +37,17 @@ export type CompanyFormsSignMutationVariables = {
 
 export type CompanyFormsSignMutationData = PutV1CompanyFormSignResponse;
 
+export type CompanyFormsSignMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Sign a company form
  *
@@ -37,12 +59,12 @@ export type CompanyFormsSignMutationData = PutV1CompanyFormSignResponse;
 export function useCompanyFormsSignMutation(
   options?: MutationHookOptions<
     CompanyFormsSignMutationData,
-    Error,
+    CompanyFormsSignMutationError,
     CompanyFormsSignMutationVariables
   >,
 ): UseMutationResult<
   CompanyFormsSignMutationData,
-  Error,
+  CompanyFormsSignMutationError,
   CompanyFormsSignMutationVariables
 > {
   const client = useGustoEmbeddedContext();

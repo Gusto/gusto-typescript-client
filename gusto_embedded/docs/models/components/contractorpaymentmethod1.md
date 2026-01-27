@@ -1,7 +1,5 @@
 # ContractorPaymentMethod1
 
-The contractor's payment method.
-
 ## Example Usage
 
 ```typescript

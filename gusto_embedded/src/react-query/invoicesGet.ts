@@ -11,6 +11,17 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetInvoicesInvoicePeriodRequest,
   GetInvoicesInvoicePeriodSecurity,
@@ -34,6 +45,17 @@ export {
   queryKeyInvoicesGet,
 };
 
+export type InvoicesGetQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Retrieve invoicing data for companies
  *
@@ -49,8 +71,8 @@ export {
 export function useInvoicesGet(
   security: GetInvoicesInvoicePeriodSecurity,
   request: GetInvoicesInvoicePeriodRequest,
-  options?: QueryHookOptions<InvoicesGetQueryData>,
-): UseQueryResult<InvoicesGetQueryData, Error> {
+  options?: QueryHookOptions<InvoicesGetQueryData, InvoicesGetQueryError>,
+): UseQueryResult<InvoicesGetQueryData, InvoicesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildInvoicesGetQuery(
@@ -78,8 +100,11 @@ export function useInvoicesGet(
 export function useInvoicesGetSuspense(
   security: GetInvoicesInvoicePeriodSecurity,
   request: GetInvoicesInvoicePeriodRequest,
-  options?: SuspenseQueryHookOptions<InvoicesGetQueryData>,
-): UseSuspenseQueryResult<InvoicesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    InvoicesGetQueryData,
+    InvoicesGetQueryError
+  >,
+): UseSuspenseQueryResult<InvoicesGetQueryData, InvoicesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildInvoicesGetQuery(

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsFinalizeTaxLiabilities } from "../funcs/externalPayrollsFinalizeTaxLiabilities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1TaxLiabilitiesFinishRequest,
   PutV1TaxLiabilitiesFinishResponse,
@@ -27,6 +38,17 @@ export type ExternalPayrollsFinalizeTaxLiabilitiesMutationVariables = {
 export type ExternalPayrollsFinalizeTaxLiabilitiesMutationData =
   PutV1TaxLiabilitiesFinishResponse;
 
+export type ExternalPayrollsFinalizeTaxLiabilitiesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Finalize tax liabilities options and convert into processed payrolls
  *
@@ -38,12 +60,12 @@ export type ExternalPayrollsFinalizeTaxLiabilitiesMutationData =
 export function useExternalPayrollsFinalizeTaxLiabilitiesMutation(
   options?: MutationHookOptions<
     ExternalPayrollsFinalizeTaxLiabilitiesMutationData,
-    Error,
+    ExternalPayrollsFinalizeTaxLiabilitiesMutationError,
     ExternalPayrollsFinalizeTaxLiabilitiesMutationVariables
   >,
 ): UseMutationResult<
   ExternalPayrollsFinalizeTaxLiabilitiesMutationData,
-  Error,
+  ExternalPayrollsFinalizeTaxLiabilitiesMutationError,
   ExternalPayrollsFinalizeTaxLiabilitiesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

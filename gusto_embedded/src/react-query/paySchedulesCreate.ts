@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesCreate } from "../funcs/paySchedulesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdPaySchedulesRequest,
   PostV1CompaniesCompanyIdPaySchedulesResponse,
@@ -26,6 +37,17 @@ export type PaySchedulesCreateMutationVariables = {
 
 export type PaySchedulesCreateMutationData =
   PostV1CompaniesCompanyIdPaySchedulesResponse;
+
+export type PaySchedulesCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Create a new pay schedule
@@ -48,12 +70,12 @@ export type PaySchedulesCreateMutationData =
 export function usePaySchedulesCreateMutation(
   options?: MutationHookOptions<
     PaySchedulesCreateMutationData,
-    Error,
+    PaySchedulesCreateMutationError,
     PaySchedulesCreateMutationVariables
   >,
 ): UseMutationResult<
   PaySchedulesCreateMutationData,
-  Error,
+  PaySchedulesCreateMutationError,
   PaySchedulesCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

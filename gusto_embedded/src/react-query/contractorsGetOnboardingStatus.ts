@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorsContractorUuidOnboardingStatusRequest } from "../models/operations/getv1contractorscontractoruuidonboardingstatus.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -30,6 +40,16 @@ export {
   prefetchContractorsGetOnboardingStatus,
   queryKeyContractorsGetOnboardingStatus,
 };
+
+export type ContractorsGetOnboardingStatusQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get the contractor's onboarding status
@@ -72,8 +92,14 @@ export {
  */
 export function useContractorsGetOnboardingStatus(
   request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
-  options?: QueryHookOptions<ContractorsGetOnboardingStatusQueryData>,
-): UseQueryResult<ContractorsGetOnboardingStatusQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorsGetOnboardingStatusQueryData,
+    ContractorsGetOnboardingStatusQueryError
+  >,
+): UseQueryResult<
+  ContractorsGetOnboardingStatusQueryData,
+  ContractorsGetOnboardingStatusQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorsGetOnboardingStatusQuery(
@@ -126,8 +152,14 @@ export function useContractorsGetOnboardingStatus(
  */
 export function useContractorsGetOnboardingStatusSuspense(
   request: GetV1ContractorsContractorUuidOnboardingStatusRequest,
-  options?: SuspenseQueryHookOptions<ContractorsGetOnboardingStatusQueryData>,
-): UseSuspenseQueryResult<ContractorsGetOnboardingStatusQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorsGetOnboardingStatusQueryData,
+    ContractorsGetOnboardingStatusQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorsGetOnboardingStatusQueryData,
+  ContractorsGetOnboardingStatusQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorsGetOnboardingStatusQuery(

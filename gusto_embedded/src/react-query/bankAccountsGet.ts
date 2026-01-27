@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdBankAccountsRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyBankAccountsGet,
 };
 
+export type BankAccountsGetQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all company bank accounts
  *
@@ -43,8 +65,11 @@ export {
  */
 export function useBankAccountsGet(
   request: GetV1CompaniesCompanyIdBankAccountsRequest,
-  options?: QueryHookOptions<BankAccountsGetQueryData>,
-): UseQueryResult<BankAccountsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    BankAccountsGetQueryData,
+    BankAccountsGetQueryError
+  >,
+): UseQueryResult<BankAccountsGetQueryData, BankAccountsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildBankAccountsGetQuery(
@@ -66,8 +91,11 @@ export function useBankAccountsGet(
  */
 export function useBankAccountsGetSuspense(
   request: GetV1CompaniesCompanyIdBankAccountsRequest,
-  options?: SuspenseQueryHookOptions<BankAccountsGetQueryData>,
-): UseSuspenseQueryResult<BankAccountsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    BankAccountsGetQueryData,
+    BankAccountsGetQueryError
+  >,
+): UseSuspenseQueryResult<BankAccountsGetQueryData, BankAccountsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildBankAccountsGetQuery(

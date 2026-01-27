@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { introspectionOauthAccessToken } from "../funcs/introspectionOauthAccessToken.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   OauthAccessTokenRequest,
   OauthAccessTokenResponse,
@@ -27,6 +37,16 @@ export type IntrospectionOauthAccessTokenMutationVariables = {
 export type IntrospectionOauthAccessTokenMutationData =
   OauthAccessTokenResponse;
 
+export type IntrospectionOauthAccessTokenMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * create or refresh an access token
  *
@@ -38,12 +58,12 @@ export type IntrospectionOauthAccessTokenMutationData =
 export function useIntrospectionOauthAccessTokenMutation(
   options?: MutationHookOptions<
     IntrospectionOauthAccessTokenMutationData,
-    Error,
+    IntrospectionOauthAccessTokenMutationError,
     IntrospectionOauthAccessTokenMutationVariables
   >,
 ): UseMutationResult<
   IntrospectionOauthAccessTokenMutationData,
-  Error,
+  IntrospectionOauthAccessTokenMutationError,
   IntrospectionOauthAccessTokenMutationVariables
 > {
   const client = useGustoEmbeddedContext();

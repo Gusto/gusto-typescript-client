@@ -12,6 +12,16 @@ import {
 } from "@tanstack/react-query";
 import { DocumentType } from "../models/components/documenttype.js";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest } from "../models/operations/getv1generateddocumentsdocumenttyperequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -32,6 +42,16 @@ export {
   queryKeyGeneratedDocumentsGet,
 };
 
+export type GeneratedDocumentsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a generated document
  *
@@ -42,8 +62,14 @@ export {
  */
 export function useGeneratedDocumentsGet(
   request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
-  options?: QueryHookOptions<GeneratedDocumentsGetQueryData>,
-): UseQueryResult<GeneratedDocumentsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    GeneratedDocumentsGetQueryData,
+    GeneratedDocumentsGetQueryError
+  >,
+): UseQueryResult<
+  GeneratedDocumentsGetQueryData,
+  GeneratedDocumentsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildGeneratedDocumentsGetQuery(
@@ -65,8 +91,14 @@ export function useGeneratedDocumentsGet(
  */
 export function useGeneratedDocumentsGetSuspense(
   request: GetV1GeneratedDocumentsDocumentTypeRequestUuidRequest,
-  options?: SuspenseQueryHookOptions<GeneratedDocumentsGetQueryData>,
-): UseSuspenseQueryResult<GeneratedDocumentsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GeneratedDocumentsGetQueryData,
+    GeneratedDocumentsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  GeneratedDocumentsGetQueryData,
+  GeneratedDocumentsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildGeneratedDocumentsGetQuery(

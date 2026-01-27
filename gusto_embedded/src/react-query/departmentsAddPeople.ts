@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsAddPeople } from "../funcs/departmentsAddPeople.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PutAddPeopleToDepartmentRequest,
   PutAddPeopleToDepartmentResponse,
@@ -26,6 +36,16 @@ export type DepartmentsAddPeopleMutationVariables = {
 
 export type DepartmentsAddPeopleMutationData = PutAddPeopleToDepartmentResponse;
 
+export type DepartmentsAddPeopleMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Add people to a department
  *
@@ -37,12 +57,12 @@ export type DepartmentsAddPeopleMutationData = PutAddPeopleToDepartmentResponse;
 export function useDepartmentsAddPeopleMutation(
   options?: MutationHookOptions<
     DepartmentsAddPeopleMutationData,
-    Error,
+    DepartmentsAddPeopleMutationError,
     DepartmentsAddPeopleMutationVariables
   >,
 ): UseMutationResult<
   DepartmentsAddPeopleMutationData,
-  Error,
+  DepartmentsAddPeopleMutationError,
   DepartmentsAddPeopleMutationVariables
 > {
   const client = useGustoEmbeddedContext();

@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1LocationsLocationIdRequest,
   HeaderXGustoAPIVersion,
@@ -33,6 +44,17 @@ export {
   queryKeyLocationsRetrieve,
 };
 
+export type LocationsRetrieveQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a location
  *
@@ -43,8 +65,11 @@ export {
  */
 export function useLocationsRetrieve(
   request: GetV1LocationsLocationIdRequest,
-  options?: QueryHookOptions<LocationsRetrieveQueryData>,
-): UseQueryResult<LocationsRetrieveQueryData, Error> {
+  options?: QueryHookOptions<
+    LocationsRetrieveQueryData,
+    LocationsRetrieveQueryError
+  >,
+): UseQueryResult<LocationsRetrieveQueryData, LocationsRetrieveQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildLocationsRetrieveQuery(
@@ -66,8 +91,14 @@ export function useLocationsRetrieve(
  */
 export function useLocationsRetrieveSuspense(
   request: GetV1LocationsLocationIdRequest,
-  options?: SuspenseQueryHookOptions<LocationsRetrieveQueryData>,
-): UseSuspenseQueryResult<LocationsRetrieveQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    LocationsRetrieveQueryData,
+    LocationsRetrieveQueryError
+  >,
+): UseSuspenseQueryResult<
+  LocationsRetrieveQueryData,
+  LocationsRetrieveQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildLocationsRetrieveQuery(

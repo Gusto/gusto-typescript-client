@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeFormsGenerateW2 } from "../funcs/employeeFormsGenerateW2.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1SandboxGenerateW2Request,
   PostV1SandboxGenerateW2Response,
@@ -27,6 +38,17 @@ export type EmployeeFormsGenerateW2MutationVariables = {
 export type EmployeeFormsGenerateW2MutationData =
   PostV1SandboxGenerateW2Response;
 
+export type EmployeeFormsGenerateW2MutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Generate a W2 form [DEMO]
  *
@@ -42,12 +64,12 @@ export type EmployeeFormsGenerateW2MutationData =
 export function useEmployeeFormsGenerateW2Mutation(
   options?: MutationHookOptions<
     EmployeeFormsGenerateW2MutationData,
-    Error,
+    EmployeeFormsGenerateW2MutationError,
     EmployeeFormsGenerateW2MutationVariables
   >,
 ): UseMutationResult<
   EmployeeFormsGenerateW2MutationData,
-  Error,
+  EmployeeFormsGenerateW2MutationError,
   EmployeeFormsGenerateW2MutationVariables
 > {
   const client = useGustoEmbeddedContext();

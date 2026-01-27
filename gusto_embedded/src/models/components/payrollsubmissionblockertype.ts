@@ -27,18 +27,21 @@ export type UnblockOptions = {
 /**
  * The status of the submission blocker.
  */
-export const PayrollSubmissionBlockersTypeStatus = {
+export const PayrollSubmissionBlockerTypeStatus = {
   Unresolved: "unresolved",
   Resolved: "resolved",
 } as const;
 /**
  * The status of the submission blocker.
  */
-export type PayrollSubmissionBlockersTypeStatus = ClosedEnum<
-  typeof PayrollSubmissionBlockersTypeStatus
+export type PayrollSubmissionBlockerTypeStatus = ClosedEnum<
+  typeof PayrollSubmissionBlockerTypeStatus
 >;
 
-export type PayrollSubmissionBlockersType = {
+/**
+ * A blocker that prevents payment submission.
+ */
+export type PayrollSubmissionBlockerType = {
   /**
    * The type of blocker that's blocking the payment submission.
    */
@@ -58,7 +61,7 @@ export type PayrollSubmissionBlockersType = {
   /**
    * The status of the submission blocker.
    */
-  status?: PayrollSubmissionBlockersTypeStatus | undefined;
+  status?: PayrollSubmissionBlockerTypeStatus | undefined;
 };
 
 /** @internal */
@@ -88,13 +91,13 @@ export function unblockOptionsFromJSON(
 }
 
 /** @internal */
-export const PayrollSubmissionBlockersTypeStatus$inboundSchema: z.ZodNativeEnum<
-  typeof PayrollSubmissionBlockersTypeStatus
-> = z.nativeEnum(PayrollSubmissionBlockersTypeStatus);
+export const PayrollSubmissionBlockerTypeStatus$inboundSchema: z.ZodNativeEnum<
+  typeof PayrollSubmissionBlockerTypeStatus
+> = z.nativeEnum(PayrollSubmissionBlockerTypeStatus);
 
 /** @internal */
-export const PayrollSubmissionBlockersType$inboundSchema: z.ZodType<
-  PayrollSubmissionBlockersType,
+export const PayrollSubmissionBlockerType$inboundSchema: z.ZodType<
+  PayrollSubmissionBlockerType,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -103,7 +106,7 @@ export const PayrollSubmissionBlockersType$inboundSchema: z.ZodType<
   unblock_options: z.array(z.lazy(() => UnblockOptions$inboundSchema))
     .optional(),
   selected_option: z.nullable(z.string()).optional(),
-  status: PayrollSubmissionBlockersTypeStatus$inboundSchema.optional(),
+  status: PayrollSubmissionBlockerTypeStatus$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "blocker_type": "blockerType",
@@ -113,12 +116,12 @@ export const PayrollSubmissionBlockersType$inboundSchema: z.ZodType<
   });
 });
 
-export function payrollSubmissionBlockersTypeFromJSON(
+export function payrollSubmissionBlockerTypeFromJSON(
   jsonString: string,
-): SafeParseResult<PayrollSubmissionBlockersType, SDKValidationError> {
+): SafeParseResult<PayrollSubmissionBlockerType, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PayrollSubmissionBlockersType$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PayrollSubmissionBlockersType' from JSON`,
+    (x) => PayrollSubmissionBlockerType$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PayrollSubmissionBlockerType' from JSON`,
   );
 }

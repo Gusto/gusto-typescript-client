@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesDelete } from "../funcs/employeeAddressesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1HomeAddressesHomeAddressUuidRequest,
   DeleteV1HomeAddressesHomeAddressUuidResponse,
@@ -27,6 +38,17 @@ export type EmployeeAddressesDeleteMutationVariables = {
 export type EmployeeAddressesDeleteMutationData =
   DeleteV1HomeAddressesHomeAddressUuidResponse;
 
+export type EmployeeAddressesDeleteMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an employee's home address
  *
@@ -38,12 +60,12 @@ export type EmployeeAddressesDeleteMutationData =
 export function useEmployeeAddressesDeleteMutation(
   options?: MutationHookOptions<
     EmployeeAddressesDeleteMutationData,
-    Error,
+    EmployeeAddressesDeleteMutationError,
     EmployeeAddressesDeleteMutationVariables
   >,
 ): UseMutationResult<
   EmployeeAddressesDeleteMutationData,
-  Error,
+  EmployeeAddressesDeleteMutationError,
   EmployeeAddressesDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

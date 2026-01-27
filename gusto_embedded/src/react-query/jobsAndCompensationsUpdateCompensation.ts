@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsUpdateCompensation } from "../funcs/jobsAndCompensationsUpdateCompensation.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompensationsCompensationIdRequest,
   PutV1CompensationsCompensationIdResponse,
@@ -27,6 +38,17 @@ export type JobsAndCompensationsUpdateCompensationMutationVariables = {
 export type JobsAndCompensationsUpdateCompensationMutationData =
   PutV1CompensationsCompensationIdResponse;
 
+export type JobsAndCompensationsUpdateCompensationMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a compensation
  *
@@ -38,12 +60,12 @@ export type JobsAndCompensationsUpdateCompensationMutationData =
 export function useJobsAndCompensationsUpdateCompensationMutation(
   options?: MutationHookOptions<
     JobsAndCompensationsUpdateCompensationMutationData,
-    Error,
+    JobsAndCompensationsUpdateCompensationMutationError,
     JobsAndCompensationsUpdateCompensationMutationVariables
   >,
 ): UseMutationResult<
   JobsAndCompensationsUpdateCompensationMutationData,
-  Error,
+  JobsAndCompensationsUpdateCompensationMutationError,
   JobsAndCompensationsUpdateCompensationMutationVariables
 > {
   const client = useGustoEmbeddedContext();

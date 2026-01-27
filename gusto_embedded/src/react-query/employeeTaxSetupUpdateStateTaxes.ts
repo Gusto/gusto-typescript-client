@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeTaxSetupUpdateStateTaxes } from "../funcs/employeeTaxSetupUpdateStateTaxes.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeesEmployeeIdStateTaxesRequest,
   PutV1EmployeesEmployeeIdStateTaxesResponse,
@@ -27,6 +38,17 @@ export type EmployeeTaxSetupUpdateStateTaxesMutationVariables = {
 export type EmployeeTaxSetupUpdateStateTaxesMutationData =
   PutV1EmployeesEmployeeIdStateTaxesResponse;
 
+export type EmployeeTaxSetupUpdateStateTaxesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update an employee's state taxes
  *
@@ -40,12 +62,12 @@ export type EmployeeTaxSetupUpdateStateTaxesMutationData =
 export function useEmployeeTaxSetupUpdateStateTaxesMutation(
   options?: MutationHookOptions<
     EmployeeTaxSetupUpdateStateTaxesMutationData,
-    Error,
+    EmployeeTaxSetupUpdateStateTaxesMutationError,
     EmployeeTaxSetupUpdateStateTaxesMutationVariables
   >,
 ): UseMutationResult<
   EmployeeTaxSetupUpdateStateTaxesMutationData,
-  Error,
+  EmployeeTaxSetupUpdateStateTaxesMutationError,
   EmployeeTaxSetupUpdateStateTaxesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

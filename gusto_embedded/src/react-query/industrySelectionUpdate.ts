@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { industrySelectionUpdate } from "../funcs/industrySelectionUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompanyIndustryRequest,
   PutV1CompanyIndustryResponse,
@@ -26,6 +37,17 @@ export type IndustrySelectionUpdateMutationVariables = {
 
 export type IndustrySelectionUpdateMutationData = PutV1CompanyIndustryResponse;
 
+export type IndustrySelectionUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a company industry selection
  *
@@ -37,12 +59,12 @@ export type IndustrySelectionUpdateMutationData = PutV1CompanyIndustryResponse;
 export function useIndustrySelectionUpdateMutation(
   options?: MutationHookOptions<
     IndustrySelectionUpdateMutationData,
-    Error,
+    IndustrySelectionUpdateMutationError,
     IndustrySelectionUpdateMutationVariables
   >,
 ): UseMutationResult<
   IndustrySelectionUpdateMutationData,
-  Error,
+  IndustrySelectionUpdateMutationError,
   IndustrySelectionUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

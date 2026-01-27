@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetDepartmentRequest } from "../models/operations/getdepartment.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyDepartmentsGet,
 };
 
+export type DepartmentsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a department
  *
@@ -41,8 +61,8 @@ export {
  */
 export function useDepartmentsGet(
   request: GetDepartmentRequest,
-  options?: QueryHookOptions<DepartmentsGetQueryData>,
-): UseQueryResult<DepartmentsGetQueryData, Error> {
+  options?: QueryHookOptions<DepartmentsGetQueryData, DepartmentsGetQueryError>,
+): UseQueryResult<DepartmentsGetQueryData, DepartmentsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildDepartmentsGetQuery(
@@ -64,8 +84,11 @@ export function useDepartmentsGet(
  */
 export function useDepartmentsGetSuspense(
   request: GetDepartmentRequest,
-  options?: SuspenseQueryHookOptions<DepartmentsGetQueryData>,
-): UseSuspenseQueryResult<DepartmentsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    DepartmentsGetQueryData,
+    DepartmentsGetQueryError
+  >,
+): UseSuspenseQueryResult<DepartmentsGetQueryData, DepartmentsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildDepartmentsGetQuery(

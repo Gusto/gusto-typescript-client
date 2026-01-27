@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationEmployerSign } from "../funcs/i9VerificationEmployerSign.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignRequest,
   PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse,
@@ -27,6 +38,17 @@ export type I9VerificationEmployerSignMutationVariables = {
 export type I9VerificationEmployerSignMutationData =
   PutV1EmployeesEmployeeIdI9AuthorizationEmployerSignResponse;
 
+export type I9VerificationEmployerSignMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Employer sign an employee's Form I-9
  *
@@ -38,12 +60,12 @@ export type I9VerificationEmployerSignMutationData =
 export function useI9VerificationEmployerSignMutation(
   options?: MutationHookOptions<
     I9VerificationEmployerSignMutationData,
-    Error,
+    I9VerificationEmployerSignMutationError,
     I9VerificationEmployerSignMutationVariables
   >,
 ): UseMutationResult<
   I9VerificationEmployerSignMutationData,
-  Error,
+  I9VerificationEmployerSignMutationError,
   I9VerificationEmployerSignMutationVariables
 > {
   const client = useGustoEmbeddedContext();

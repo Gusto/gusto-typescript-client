@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsUpdateAddress } from "../funcs/contractorsUpdateAddress.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1ContractorsContractorUuidAddressRequest,
   PutV1ContractorsContractorUuidAddressResponse,
@@ -27,6 +38,17 @@ export type ContractorsUpdateAddressMutationVariables = {
 export type ContractorsUpdateAddressMutationData =
   PutV1ContractorsContractorUuidAddressResponse;
 
+export type ContractorsUpdateAddressMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create or update a contractor's address
  *
@@ -42,12 +64,12 @@ export type ContractorsUpdateAddressMutationData =
 export function useContractorsUpdateAddressMutation(
   options?: MutationHookOptions<
     ContractorsUpdateAddressMutationData,
-    Error,
+    ContractorsUpdateAddressMutationError,
     ContractorsUpdateAddressMutationVariables
   >,
 ): UseMutationResult<
   ContractorsUpdateAddressMutationData,
-  Error,
+  ContractorsUpdateAddressMutationError,
   ContractorsUpdateAddressMutationVariables
 > {
   const client = useGustoEmbeddedContext();

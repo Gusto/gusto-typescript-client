@@ -11,6 +11,18 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsPreview } from "../funcs/contractorPaymentGroupsPreview.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequest,
   PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse,
@@ -27,6 +39,18 @@ export type ContractorPaymentGroupsPreviewMutationVariables = {
 export type ContractorPaymentGroupsPreviewMutationData =
   PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewResponse;
 
+export type ContractorPaymentGroupsPreviewMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Preview a contractor payment group
  *
@@ -39,12 +63,12 @@ export type ContractorPaymentGroupsPreviewMutationData =
 export function useContractorPaymentGroupsPreviewMutation(
   options?: MutationHookOptions<
     ContractorPaymentGroupsPreviewMutationData,
-    Error,
+    ContractorPaymentGroupsPreviewMutationError,
     ContractorPaymentGroupsPreviewMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentGroupsPreviewMutationData,
-  Error,
+  ContractorPaymentGroupsPreviewMutationError,
   ContractorPaymentGroupsPreviewMutationVariables
 > {
   const client = useGustoEmbeddedContext();

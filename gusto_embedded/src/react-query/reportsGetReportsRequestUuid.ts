@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetReportsRequestUuidRequest } from "../models/operations/getreportsrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   type ReportsGetReportsRequestUuidQueryData,
 };
 
+export type ReportsGetReportsRequestUuidQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a report
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useReportsGetReportsRequestUuid(
   request: GetReportsRequestUuidRequest,
-  options?: QueryHookOptions<ReportsGetReportsRequestUuidQueryData>,
-): UseQueryResult<ReportsGetReportsRequestUuidQueryData, Error> {
+  options?: QueryHookOptions<
+    ReportsGetReportsRequestUuidQueryData,
+    ReportsGetReportsRequestUuidQueryError
+  >,
+): UseQueryResult<
+  ReportsGetReportsRequestUuidQueryData,
+  ReportsGetReportsRequestUuidQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildReportsGetReportsRequestUuidQuery(
@@ -68,8 +94,14 @@ export function useReportsGetReportsRequestUuid(
  */
 export function useReportsGetReportsRequestUuidSuspense(
   request: GetReportsRequestUuidRequest,
-  options?: SuspenseQueryHookOptions<ReportsGetReportsRequestUuidQueryData>,
-): UseSuspenseQueryResult<ReportsGetReportsRequestUuidQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ReportsGetReportsRequestUuidQueryData,
+    ReportsGetReportsRequestUuidQueryError
+  >,
+): UseSuspenseQueryResult<
+  ReportsGetReportsRequestUuidQueryData,
+  ReportsGetReportsRequestUuidQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildReportsGetReportsRequestUuidQuery(

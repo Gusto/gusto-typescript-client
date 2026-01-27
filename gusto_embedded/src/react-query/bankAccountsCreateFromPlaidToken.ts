@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { bankAccountsCreateFromPlaidToken } from "../funcs/bankAccountsCreateFromPlaidToken.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1PlaidProcessorTokenRequest,
   PostV1PlaidProcessorTokenResponse,
@@ -26,6 +37,17 @@ export type BankAccountsCreateFromPlaidTokenMutationVariables = {
 
 export type BankAccountsCreateFromPlaidTokenMutationData =
   PostV1PlaidProcessorTokenResponse;
+
+export type BankAccountsCreateFromPlaidTokenMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Create a bank account from a plaid processor token
@@ -45,12 +67,12 @@ export type BankAccountsCreateFromPlaidTokenMutationData =
 export function useBankAccountsCreateFromPlaidTokenMutation(
   options?: MutationHookOptions<
     BankAccountsCreateFromPlaidTokenMutationData,
-    Error,
+    BankAccountsCreateFromPlaidTokenMutationError,
     BankAccountsCreateFromPlaidTokenMutationVariables
   >,
 ): UseMutationResult<
   BankAccountsCreateFromPlaidTokenMutationData,
-  Error,
+  BankAccountsCreateFromPlaidTokenMutationError,
   BankAccountsCreateFromPlaidTokenMutationVariables
 > {
   const client = useGustoEmbeddedContext();

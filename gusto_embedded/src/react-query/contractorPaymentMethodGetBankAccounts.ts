@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorsContractorUuidBankAccountsRequest } from "../models/operations/getv1contractorscontractoruuidbankaccounts.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorPaymentMethodGetBankAccounts,
 };
 
+export type ContractorPaymentMethodGetBankAccountsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all contractor bank accounts
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useContractorPaymentMethodGetBankAccounts(
   request: GetV1ContractorsContractorUuidBankAccountsRequest,
-  options?: QueryHookOptions<ContractorPaymentMethodGetBankAccountsQueryData>,
-): UseQueryResult<ContractorPaymentMethodGetBankAccountsQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorPaymentMethodGetBankAccountsQueryData,
+    ContractorPaymentMethodGetBankAccountsQueryError
+  >,
+): UseQueryResult<
+  ContractorPaymentMethodGetBankAccountsQueryData,
+  ContractorPaymentMethodGetBankAccountsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorPaymentMethodGetBankAccountsQuery(
@@ -65,11 +91,12 @@ export function useContractorPaymentMethodGetBankAccounts(
 export function useContractorPaymentMethodGetBankAccountsSuspense(
   request: GetV1ContractorsContractorUuidBankAccountsRequest,
   options?: SuspenseQueryHookOptions<
-    ContractorPaymentMethodGetBankAccountsQueryData
+    ContractorPaymentMethodGetBankAccountsQueryData,
+    ContractorPaymentMethodGetBankAccountsQueryError
   >,
 ): UseSuspenseQueryResult<
   ContractorPaymentMethodGetBankAccountsQueryData,
-  Error
+  ContractorPaymentMethodGetBankAccountsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { holidayPayPoliciesCreate } from "../funcs/holidayPayPoliciesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyUuidHolidayPayPolicyRequest,
   PostV1CompaniesCompanyUuidHolidayPayPolicyResponse,
@@ -27,6 +38,17 @@ export type HolidayPayPoliciesCreateMutationVariables = {
 export type HolidayPayPoliciesCreateMutationData =
   PostV1CompaniesCompanyUuidHolidayPayPolicyResponse;
 
+export type HolidayPayPoliciesCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a holiday pay policy for a company
  *
@@ -38,12 +60,12 @@ export type HolidayPayPoliciesCreateMutationData =
 export function useHolidayPayPoliciesCreateMutation(
   options?: MutationHookOptions<
     HolidayPayPoliciesCreateMutationData,
-    Error,
+    HolidayPayPoliciesCreateMutationError,
     HolidayPayPoliciesCreateMutationVariables
   >,
 ): UseMutationResult<
   HolidayPayPoliciesCreateMutationData,
-  Error,
+  HolidayPayPoliciesCreateMutationError,
   HolidayPayPoliciesCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

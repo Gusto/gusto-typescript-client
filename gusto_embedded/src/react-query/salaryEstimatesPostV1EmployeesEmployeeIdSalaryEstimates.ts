@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates } from "../funcs/salaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimates.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1EmployeesEmployeeIdSalaryEstimatesRequest,
   PostV1EmployeesEmployeeIdSalaryEstimatesResponse,
@@ -27,6 +38,17 @@ export type SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationVaria
 
 export type SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationData =
   PostV1EmployeesEmployeeIdSalaryEstimatesResponse;
+
+export type SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Create a salary estimate for an employee
@@ -46,12 +68,12 @@ export type SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationData 
 export function useSalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutation(
   options?: MutationHookOptions<
     SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationData,
-    Error,
+    SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationError,
     SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationVariables
   >,
 ): UseMutationResult<
   SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationData,
-  Error,
+  SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationError,
   SalaryEstimatesPostV1EmployeesEmployeeIdSalaryEstimatesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

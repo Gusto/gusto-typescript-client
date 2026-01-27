@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeIdEmploymentHistoryHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyEmployeeEmploymentsGetHistory,
 };
 
+export type EmployeeEmploymentsGetHistoryQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get employment history for an employee
  *
@@ -43,8 +65,14 @@ export {
  */
 export function useEmployeeEmploymentsGetHistory(
   request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
-  options?: QueryHookOptions<EmployeeEmploymentsGetHistoryQueryData>,
-): UseQueryResult<EmployeeEmploymentsGetHistoryQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeEmploymentsGetHistoryQueryData,
+    EmployeeEmploymentsGetHistoryQueryError
+  >,
+): UseQueryResult<
+  EmployeeEmploymentsGetHistoryQueryData,
+  EmployeeEmploymentsGetHistoryQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeEmploymentsGetHistoryQuery(
@@ -66,8 +94,14 @@ export function useEmployeeEmploymentsGetHistory(
  */
 export function useEmployeeEmploymentsGetHistorySuspense(
   request: GetV1EmployeesEmployeeIdEmploymentHistoryRequest,
-  options?: SuspenseQueryHookOptions<EmployeeEmploymentsGetHistoryQueryData>,
-): UseSuspenseQueryResult<EmployeeEmploymentsGetHistoryQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeeEmploymentsGetHistoryQueryData,
+    EmployeeEmploymentsGetHistoryQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeeEmploymentsGetHistoryQueryData,
+  EmployeeEmploymentsGetHistoryQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeEmploymentsGetHistoryQuery(

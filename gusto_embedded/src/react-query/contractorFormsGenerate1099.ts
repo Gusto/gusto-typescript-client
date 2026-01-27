@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorFormsGenerate1099 } from "../funcs/contractorFormsGenerate1099.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1SandboxGenerate1099Request,
   PostV1SandboxGenerate1099Response,
@@ -27,6 +38,17 @@ export type ContractorFormsGenerate1099MutationVariables = {
 export type ContractorFormsGenerate1099MutationData =
   PostV1SandboxGenerate1099Response;
 
+export type ContractorFormsGenerate1099MutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Generate a 1099 form [DEMO]
  *
@@ -42,12 +64,12 @@ export type ContractorFormsGenerate1099MutationData =
 export function useContractorFormsGenerate1099Mutation(
   options?: MutationHookOptions<
     ContractorFormsGenerate1099MutationData,
-    Error,
+    ContractorFormsGenerate1099MutationError,
     ContractorFormsGenerate1099MutationVariables
   >,
 ): UseMutationResult<
   ContractorFormsGenerate1099MutationData,
-  Error,
+  ContractorFormsGenerate1099MutationError,
   ContractorFormsGenerate1099MutationVariables
 > {
   const client = useGustoEmbeddedContext();

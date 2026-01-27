@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "../funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostPayrollsPayrollUuidReportsGeneralLedgerRequest,
   PostPayrollsPayrollUuidReportsGeneralLedgerResponse,
@@ -28,6 +39,17 @@ export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationVariables 
 export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData =
   PostPayrollsPayrollUuidReportsGeneralLedgerResponse;
 
+export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a general ledger report
  *
@@ -41,12 +63,12 @@ export type ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData =
 export function useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation(
   options?: MutationHookOptions<
     ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData,
-    Error,
+    ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError,
     ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationVariables
   >,
 ): UseMutationResult<
   ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationData,
-  Error,
+  ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationError,
   ReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutationVariables
 > {
   const client = useGustoEmbeddedContext();

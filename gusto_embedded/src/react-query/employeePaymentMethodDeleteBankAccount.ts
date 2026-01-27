@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeePaymentMethodDeleteBankAccount } from "../funcs/employeePaymentMethodDeleteBankAccount.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdRequest,
   DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse,
@@ -27,6 +37,16 @@ export type EmployeePaymentMethodDeleteBankAccountMutationVariables = {
 export type EmployeePaymentMethodDeleteBankAccountMutationData =
   DeleteV1EmployeesEmployeeIdBankAccountsBankAccountIdResponse;
 
+export type EmployeePaymentMethodDeleteBankAccountMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an employee bank account
  *
@@ -39,12 +59,12 @@ export type EmployeePaymentMethodDeleteBankAccountMutationData =
 export function useEmployeePaymentMethodDeleteBankAccountMutation(
   options?: MutationHookOptions<
     EmployeePaymentMethodDeleteBankAccountMutationData,
-    Error,
+    EmployeePaymentMethodDeleteBankAccountMutationError,
     EmployeePaymentMethodDeleteBankAccountMutationVariables
   >,
 ): UseMutationResult<
   EmployeePaymentMethodDeleteBankAccountMutationData,
-  Error,
+  EmployeePaymentMethodDeleteBankAccountMutationError,
   EmployeePaymentMethodDeleteBankAccountMutationVariables
 > {
   const client = useGustoEmbeddedContext();

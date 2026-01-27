@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1ContractorPaymentGroupsIdPartnerDisbursementsHeaderXGustoAPIVersion,
   GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements,
 };
 
+export type ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get partner disbursements for a contractor payment group
  *
@@ -44,11 +66,12 @@ export {
 export function useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursements(
   request: GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
   options?: QueryHookOptions<
-    ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData
+    ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData,
+    ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryError
   >,
 ): UseQueryResult<
   ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData,
-  Error
+  ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -72,11 +95,12 @@ export function useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerD
 export function useContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsSuspense(
   request: GetV1ContractorPaymentGroupsIdPartnerDisbursementsRequest,
   options?: SuspenseQueryHookOptions<
-    ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData
+    ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData,
+    ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryError
   >,
 ): UseSuspenseQueryResult<
   ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryData,
-  Error
+  ContractorPaymentGroupsGetV1ContractorPaymentGroupsIdPartnerDisbursementsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

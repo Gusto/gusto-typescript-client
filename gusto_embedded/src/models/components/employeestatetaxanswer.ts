@@ -25,7 +25,7 @@ export type EmployeeStateTaxAnswer = {
   /**
    * The effective end date of the answer - currently always null.
    */
-  validUpTo?: any | null | undefined;
+  validUpTo?: string | null | undefined;
 };
 
 /** @internal */
@@ -50,7 +50,7 @@ export const EmployeeStateTaxAnswer$inboundSchema: z.ZodType<
 > = z.object({
   value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
   valid_from: z.string().optional(),
-  valid_up_to: z.nullable(z.any()).optional(),
+  valid_up_to: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "valid_from": "validFrom",

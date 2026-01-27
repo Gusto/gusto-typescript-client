@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeeFormsRequest } from "../models/operations/getv1employeeforms.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeeFormsList,
 };
 
+export type EmployeeFormsListQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all employee forms
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useEmployeeFormsList(
   request: GetV1EmployeeFormsRequest,
-  options?: QueryHookOptions<EmployeeFormsListQueryData>,
-): UseQueryResult<EmployeeFormsListQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeFormsListQueryData,
+    EmployeeFormsListQueryError
+  >,
+): UseQueryResult<EmployeeFormsListQueryData, EmployeeFormsListQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeFormsListQuery(
@@ -64,8 +87,14 @@ export function useEmployeeFormsList(
  */
 export function useEmployeeFormsListSuspense(
   request: GetV1EmployeeFormsRequest,
-  options?: SuspenseQueryHookOptions<EmployeeFormsListQueryData>,
-): UseSuspenseQueryResult<EmployeeFormsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeeFormsListQueryData,
+    EmployeeFormsListQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeeFormsListQueryData,
+  EmployeeFormsListQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeFormsListQuery(

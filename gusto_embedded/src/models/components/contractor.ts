@@ -64,16 +64,10 @@ export type ContractorOnboardingStatus1 = ClosedEnum<
   typeof ContractorOnboardingStatus1
 >;
 
-/**
- * The contractor's payment method.
- */
 export const ContractorPaymentMethod1 = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
 } as const;
-/**
- * The contractor's payment method.
- */
 export type ContractorPaymentMethod1 = ClosedEnum<
   typeof ContractorPaymentMethod1
 >;

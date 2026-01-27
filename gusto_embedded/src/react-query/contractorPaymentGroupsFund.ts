@@ -11,6 +11,18 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsFund } from "../funcs/contractorPaymentGroupsFund.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundRequest,
   PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse,
@@ -27,6 +39,18 @@ export type ContractorPaymentGroupsFundMutationVariables = {
 export type ContractorPaymentGroupsFundMutationData =
   PutV1ContractorPaymentGroupsContractorPaymentGroupIdFundResponse;
 
+export type ContractorPaymentGroupsFundMutationError =
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Fund a contractor payment group [DEMO]
  *
@@ -41,12 +65,12 @@ export type ContractorPaymentGroupsFundMutationData =
 export function useContractorPaymentGroupsFundMutation(
   options?: MutationHookOptions<
     ContractorPaymentGroupsFundMutationData,
-    Error,
+    ContractorPaymentGroupsFundMutationError,
     ContractorPaymentGroupsFundMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentGroupsFundMutationData,
-  Error,
+  ContractorPaymentGroupsFundMutationError,
   ContractorPaymentGroupsFundMutationVariables
 > {
   const client = useGustoEmbeddedContext();

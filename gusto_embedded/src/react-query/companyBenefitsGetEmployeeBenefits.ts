@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsQueryParamInclude,
   GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
@@ -34,6 +44,16 @@ export {
   queryKeyCompanyBenefitsGetEmployeeBenefits,
 };
 
+export type CompanyBenefitsGetEmployeeBenefitsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all employee benefits for a company benefit
  *
@@ -48,8 +68,14 @@ export {
  */
 export function useCompanyBenefitsGetEmployeeBenefits(
   request: GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
-  options?: QueryHookOptions<CompanyBenefitsGetEmployeeBenefitsQueryData>,
-): UseQueryResult<CompanyBenefitsGetEmployeeBenefitsQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyBenefitsGetEmployeeBenefitsQueryData,
+    CompanyBenefitsGetEmployeeBenefitsQueryError
+  >,
+): UseQueryResult<
+  CompanyBenefitsGetEmployeeBenefitsQueryData,
+  CompanyBenefitsGetEmployeeBenefitsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyBenefitsGetEmployeeBenefitsQuery(
@@ -76,9 +102,13 @@ export function useCompanyBenefitsGetEmployeeBenefits(
 export function useCompanyBenefitsGetEmployeeBenefitsSuspense(
   request: GetV1CompanyBenefitsCompanyBenefitIdEmployeeBenefitsRequest,
   options?: SuspenseQueryHookOptions<
-    CompanyBenefitsGetEmployeeBenefitsQueryData
+    CompanyBenefitsGetEmployeeBenefitsQueryData,
+    CompanyBenefitsGetEmployeeBenefitsQueryError
   >,
-): UseSuspenseQueryResult<CompanyBenefitsGetEmployeeBenefitsQueryData, Error> {
+): UseSuspenseQueryResult<
+  CompanyBenefitsGetEmployeeBenefitsQueryData,
+  CompanyBenefitsGetEmployeeBenefitsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyBenefitsGetEmployeeBenefitsQuery(

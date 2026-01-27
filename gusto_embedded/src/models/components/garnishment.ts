@@ -13,9 +13,6 @@ import {
   GarnishmentChildSupport$inboundSchema,
 } from "./garnishmentchildsupport.js";
 
-/**
- * The specific type of garnishment for court ordered garnishments.
- */
 export const GarnishmentType = {
   ChildSupport: "child_support",
   FederalTaxLien: "federal_tax_lien",
@@ -25,9 +22,6 @@ export const GarnishmentType = {
   FederalLoan: "federal_loan",
   OtherGarnishment: "other_garnishment",
 } as const;
-/**
- * The specific type of garnishment for court ordered garnishments.
- */
 export type GarnishmentType = ClosedEnum<typeof GarnishmentType>;
 
 /**

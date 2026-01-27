@@ -69,16 +69,10 @@ export const VerificationType = {
  */
 export type VerificationType = ClosedEnum<typeof VerificationType>;
 
-/**
- * The Plaid connection status of the bank account. Only applies when verification type is Plaid.
- */
 export const PlaidStatus = {
   Connected: "connected",
   Disconnected: "disconnected",
 } as const;
-/**
- * The Plaid connection status of the bank account. Only applies when verification type is Plaid.
- */
 export type PlaidStatus = ClosedEnum<typeof PlaidStatus>;
 
 /**

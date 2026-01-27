@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesUpdate } from "../funcs/companiesUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesRequest,
   PutV1CompaniesResponse,
@@ -26,6 +37,17 @@ export type CompaniesUpdateMutationVariables = {
 
 export type CompaniesUpdateMutationData = PutV1CompaniesResponse;
 
+export type CompaniesUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a company
  *
@@ -37,12 +59,12 @@ export type CompaniesUpdateMutationData = PutV1CompaniesResponse;
 export function useCompaniesUpdateMutation(
   options?: MutationHookOptions<
     CompaniesUpdateMutationData,
-    Error,
+    CompaniesUpdateMutationError,
     CompaniesUpdateMutationVariables
   >,
 ): UseMutationResult<
   CompaniesUpdateMutationData,
-  Error,
+  CompaniesUpdateMutationError,
   CompaniesUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

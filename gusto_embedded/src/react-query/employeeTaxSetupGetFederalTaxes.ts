@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeesEmployeeIdFederalTaxesRequest } from "../models/operations/getv1employeesemployeeidfederaltaxes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeeTaxSetupGetFederalTaxes,
 };
 
+export type EmployeeTaxSetupGetFederalTaxesQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's federal taxes
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useEmployeeTaxSetupGetFederalTaxes(
   request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
-  options?: QueryHookOptions<EmployeeTaxSetupGetFederalTaxesQueryData>,
-): UseQueryResult<EmployeeTaxSetupGetFederalTaxesQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeTaxSetupGetFederalTaxesQueryData,
+    EmployeeTaxSetupGetFederalTaxesQueryError
+  >,
+): UseQueryResult<
+  EmployeeTaxSetupGetFederalTaxesQueryData,
+  EmployeeTaxSetupGetFederalTaxesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeTaxSetupGetFederalTaxesQuery(
@@ -64,8 +90,14 @@ export function useEmployeeTaxSetupGetFederalTaxes(
  */
 export function useEmployeeTaxSetupGetFederalTaxesSuspense(
   request: GetV1EmployeesEmployeeIdFederalTaxesRequest,
-  options?: SuspenseQueryHookOptions<EmployeeTaxSetupGetFederalTaxesQueryData>,
-): UseSuspenseQueryResult<EmployeeTaxSetupGetFederalTaxesQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeeTaxSetupGetFederalTaxesQueryData,
+    EmployeeTaxSetupGetFederalTaxesQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeeTaxSetupGetFederalTaxesQueryData,
+  EmployeeTaxSetupGetFederalTaxesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeTaxSetupGetFederalTaxesQuery(

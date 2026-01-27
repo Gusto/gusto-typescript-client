@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1GarnishmentsGarnishmentIdRequest } from "../models/operations/getv1garnishmentsgarnishmentid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyGarnishmentsGet,
 };
 
+export type GarnishmentsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a garnishment
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useGarnishmentsGet(
   request: GetV1GarnishmentsGarnishmentIdRequest,
-  options?: QueryHookOptions<GarnishmentsGetQueryData>,
-): UseQueryResult<GarnishmentsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    GarnishmentsGetQueryData,
+    GarnishmentsGetQueryError
+  >,
+): UseQueryResult<GarnishmentsGetQueryData, GarnishmentsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildGarnishmentsGetQuery(
@@ -64,8 +87,11 @@ export function useGarnishmentsGet(
  */
 export function useGarnishmentsGetSuspense(
   request: GetV1GarnishmentsGarnishmentIdRequest,
-  options?: SuspenseQueryHookOptions<GarnishmentsGetQueryData>,
-): UseSuspenseQueryResult<GarnishmentsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GarnishmentsGetQueryData,
+    GarnishmentsGetQueryError
+  >,
+): UseSuspenseQueryResult<GarnishmentsGetQueryData, GarnishmentsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildGarnishmentsGetQuery(

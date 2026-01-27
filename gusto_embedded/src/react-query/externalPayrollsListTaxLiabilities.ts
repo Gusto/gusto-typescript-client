@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1TaxLiabilitiesRequest } from "../models/operations/getv1taxliabilities.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyExternalPayrollsListTaxLiabilities,
 };
 
+export type ExternalPayrollsListTaxLiabilitiesQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get tax liabilities
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useExternalPayrollsListTaxLiabilities(
   request: GetV1TaxLiabilitiesRequest,
-  options?: QueryHookOptions<ExternalPayrollsListTaxLiabilitiesQueryData>,
-): UseQueryResult<ExternalPayrollsListTaxLiabilitiesQueryData, Error> {
+  options?: QueryHookOptions<
+    ExternalPayrollsListTaxLiabilitiesQueryData,
+    ExternalPayrollsListTaxLiabilitiesQueryError
+  >,
+): UseQueryResult<
+  ExternalPayrollsListTaxLiabilitiesQueryData,
+  ExternalPayrollsListTaxLiabilitiesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildExternalPayrollsListTaxLiabilitiesQuery(
@@ -65,9 +91,13 @@ export function useExternalPayrollsListTaxLiabilities(
 export function useExternalPayrollsListTaxLiabilitiesSuspense(
   request: GetV1TaxLiabilitiesRequest,
   options?: SuspenseQueryHookOptions<
-    ExternalPayrollsListTaxLiabilitiesQueryData
+    ExternalPayrollsListTaxLiabilitiesQueryData,
+    ExternalPayrollsListTaxLiabilitiesQueryError
   >,
-): UseSuspenseQueryResult<ExternalPayrollsListTaxLiabilitiesQueryData, Error> {
+): UseSuspenseQueryResult<
+  ExternalPayrollsListTaxLiabilitiesQueryData,
+  ExternalPayrollsListTaxLiabilitiesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildExternalPayrollsListTaxLiabilitiesQuery(

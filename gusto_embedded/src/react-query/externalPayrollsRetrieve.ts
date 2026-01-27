@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ExternalPayrollRequest } from "../models/operations/getv1externalpayroll.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyExternalPayrollsRetrieve,
 };
 
+export type ExternalPayrollsRetrieveQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an external payroll
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useExternalPayrollsRetrieve(
   request: GetV1ExternalPayrollRequest,
-  options?: QueryHookOptions<ExternalPayrollsRetrieveQueryData>,
-): UseQueryResult<ExternalPayrollsRetrieveQueryData, Error> {
+  options?: QueryHookOptions<
+    ExternalPayrollsRetrieveQueryData,
+    ExternalPayrollsRetrieveQueryError
+  >,
+): UseQueryResult<
+  ExternalPayrollsRetrieveQueryData,
+  ExternalPayrollsRetrieveQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildExternalPayrollsRetrieveQuery(
@@ -64,8 +90,14 @@ export function useExternalPayrollsRetrieve(
  */
 export function useExternalPayrollsRetrieveSuspense(
   request: GetV1ExternalPayrollRequest,
-  options?: SuspenseQueryHookOptions<ExternalPayrollsRetrieveQueryData>,
-): UseSuspenseQueryResult<ExternalPayrollsRetrieveQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ExternalPayrollsRetrieveQueryData,
+    ExternalPayrollsRetrieveQueryError
+  >,
+): UseSuspenseQueryResult<
+  ExternalPayrollsRetrieveQueryData,
+  ExternalPayrollsRetrieveQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildExternalPayrollsRetrieveQuery(

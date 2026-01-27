@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsDelete } from "../funcs/externalPayrollsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1ExternalPayrollRequest,
   DeleteV1ExternalPayrollResponse,
@@ -27,6 +37,16 @@ export type ExternalPayrollsDeleteMutationVariables = {
 export type ExternalPayrollsDeleteMutationData =
   DeleteV1ExternalPayrollResponse;
 
+export type ExternalPayrollsDeleteMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an external payroll
  *
@@ -38,12 +58,12 @@ export type ExternalPayrollsDeleteMutationData =
 export function useExternalPayrollsDeleteMutation(
   options?: MutationHookOptions<
     ExternalPayrollsDeleteMutationData,
-    Error,
+    ExternalPayrollsDeleteMutationError,
     ExternalPayrollsDeleteMutationVariables
   >,
 ): UseMutationResult<
   ExternalPayrollsDeleteMutationData,
-  Error,
+  ExternalPayrollsDeleteMutationError,
   ExternalPayrollsDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

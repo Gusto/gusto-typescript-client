@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetRecoveryCasesRequest } from "../models/operations/getrecoverycases.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   type RecoveryCasesGetQueryData,
 };
 
+export type RecoveryCasesGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all recovery cases for a company
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useRecoveryCasesGet(
   request: GetRecoveryCasesRequest,
-  options?: QueryHookOptions<RecoveryCasesGetQueryData>,
-): UseQueryResult<RecoveryCasesGetQueryData, Error> {
+  options?: QueryHookOptions<
+    RecoveryCasesGetQueryData,
+    RecoveryCasesGetQueryError
+  >,
+): UseQueryResult<RecoveryCasesGetQueryData, RecoveryCasesGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildRecoveryCasesGetQuery(
@@ -64,8 +87,14 @@ export function useRecoveryCasesGet(
  */
 export function useRecoveryCasesGetSuspense(
   request: GetRecoveryCasesRequest,
-  options?: SuspenseQueryHookOptions<RecoveryCasesGetQueryData>,
-): UseSuspenseQueryResult<RecoveryCasesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    RecoveryCasesGetQueryData,
+    RecoveryCasesGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  RecoveryCasesGetQueryData,
+  RecoveryCasesGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildRecoveryCasesGetQuery(

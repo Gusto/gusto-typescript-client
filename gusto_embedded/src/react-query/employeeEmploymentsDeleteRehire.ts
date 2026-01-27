@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsDeleteRehire } from "../funcs/employeeEmploymentsDeleteRehire.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1EmployeesEmployeeIdRehireRequest,
   DeleteV1EmployeesEmployeeIdRehireResponse,
@@ -27,6 +38,17 @@ export type EmployeeEmploymentsDeleteRehireMutationVariables = {
 export type EmployeeEmploymentsDeleteRehireMutationData =
   DeleteV1EmployeesEmployeeIdRehireResponse;
 
+export type EmployeeEmploymentsDeleteRehireMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an employee rehire
  *
@@ -38,12 +60,12 @@ export type EmployeeEmploymentsDeleteRehireMutationData =
 export function useEmployeeEmploymentsDeleteRehireMutation(
   options?: MutationHookOptions<
     EmployeeEmploymentsDeleteRehireMutationData,
-    Error,
+    EmployeeEmploymentsDeleteRehireMutationError,
     EmployeeEmploymentsDeleteRehireMutationVariables
   >,
 ): UseMutationResult<
   EmployeeEmploymentsDeleteRehireMutationData,
-  Error,
+  EmployeeEmploymentsDeleteRehireMutationError,
   EmployeeEmploymentsDeleteRehireMutationVariables
 > {
   const client = useGustoEmbeddedContext();

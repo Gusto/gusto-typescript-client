@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesInvite } from "../funcs/signatoriesInvite.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
   PostV1CompaniesCompanyUuidSignatoriesInviteResponse,
@@ -27,6 +38,17 @@ export type SignatoriesInviteMutationVariables = {
 export type SignatoriesInviteMutationData =
   PostV1CompaniesCompanyUuidSignatoriesInviteResponse;
 
+export type SignatoriesInviteMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Invite a signatory
  *
@@ -36,12 +58,12 @@ export type SignatoriesInviteMutationData =
 export function useSignatoriesInviteMutation(
   options?: MutationHookOptions<
     SignatoriesInviteMutationData,
-    Error,
+    SignatoriesInviteMutationError,
     SignatoriesInviteMutationVariables
   >,
 ): UseMutationResult<
   SignatoriesInviteMutationData,
-  Error,
+  SignatoriesInviteMutationError,
   SignatoriesInviteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

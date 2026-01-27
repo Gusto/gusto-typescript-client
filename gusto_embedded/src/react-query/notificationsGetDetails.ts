@@ -11,6 +11,17 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import { GetNotificationsNotificationUuidRequest } from "../models/operations/getnotificationsnotificationuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +42,17 @@ export {
   queryKeyNotificationsGetDetails,
 };
 
+export type NotificationsGetDetailsQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a notification's details
  *
@@ -45,8 +67,14 @@ export {
  */
 export function useNotificationsGetDetails(
   request: GetNotificationsNotificationUuidRequest,
-  options?: QueryHookOptions<NotificationsGetDetailsQueryData>,
-): UseQueryResult<NotificationsGetDetailsQueryData, Error> {
+  options?: QueryHookOptions<
+    NotificationsGetDetailsQueryData,
+    NotificationsGetDetailsQueryError
+  >,
+): UseQueryResult<
+  NotificationsGetDetailsQueryData,
+  NotificationsGetDetailsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildNotificationsGetDetailsQuery(
@@ -72,8 +100,14 @@ export function useNotificationsGetDetails(
  */
 export function useNotificationsGetDetailsSuspense(
   request: GetNotificationsNotificationUuidRequest,
-  options?: SuspenseQueryHookOptions<NotificationsGetDetailsQueryData>,
-): UseSuspenseQueryResult<NotificationsGetDetailsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    NotificationsGetDetailsQueryData,
+    NotificationsGetDetailsQueryError
+  >,
+): UseSuspenseQueryResult<
+  NotificationsGetDetailsQueryData,
+  NotificationsGetDetailsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildNotificationsGetDetailsQuery(

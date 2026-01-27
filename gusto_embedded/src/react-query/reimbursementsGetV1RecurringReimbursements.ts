@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1RecurringReimbursementsHeaderXGustoAPIVersion,
   GetV1RecurringReimbursementsRequest,
@@ -33,6 +44,17 @@ export {
   type ReimbursementsGetV1RecurringReimbursementsQueryData,
 };
 
+export type ReimbursementsGetV1RecurringReimbursementsQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a recurring reimbursement
  *
@@ -44,9 +66,13 @@ export {
 export function useReimbursementsGetV1RecurringReimbursements(
   request: GetV1RecurringReimbursementsRequest,
   options?: QueryHookOptions<
-    ReimbursementsGetV1RecurringReimbursementsQueryData
+    ReimbursementsGetV1RecurringReimbursementsQueryData,
+    ReimbursementsGetV1RecurringReimbursementsQueryError
   >,
-): UseQueryResult<ReimbursementsGetV1RecurringReimbursementsQueryData, Error> {
+): UseQueryResult<
+  ReimbursementsGetV1RecurringReimbursementsQueryData,
+  ReimbursementsGetV1RecurringReimbursementsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildReimbursementsGetV1RecurringReimbursementsQuery(
@@ -69,11 +95,12 @@ export function useReimbursementsGetV1RecurringReimbursements(
 export function useReimbursementsGetV1RecurringReimbursementsSuspense(
   request: GetV1RecurringReimbursementsRequest,
   options?: SuspenseQueryHookOptions<
-    ReimbursementsGetV1RecurringReimbursementsQueryData
+    ReimbursementsGetV1RecurringReimbursementsQueryData,
+    ReimbursementsGetV1RecurringReimbursementsQueryError
   >,
 ): UseSuspenseQueryResult<
   ReimbursementsGetV1RecurringReimbursementsQueryData,
-  Error
+  ReimbursementsGetV1RecurringReimbursementsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

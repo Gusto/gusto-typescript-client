@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetCompaniesDepartmentsRequest } from "../models/operations/getcompaniesdepartments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyDepartmentsGetAll,
 };
 
+export type DepartmentsGetAllQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all departments of a company
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useDepartmentsGetAll(
   request: GetCompaniesDepartmentsRequest,
-  options?: QueryHookOptions<DepartmentsGetAllQueryData>,
-): UseQueryResult<DepartmentsGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    DepartmentsGetAllQueryData,
+    DepartmentsGetAllQueryError
+  >,
+): UseQueryResult<DepartmentsGetAllQueryData, DepartmentsGetAllQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildDepartmentsGetAllQuery(
@@ -64,8 +87,14 @@ export function useDepartmentsGetAll(
  */
 export function useDepartmentsGetAllSuspense(
   request: GetCompaniesDepartmentsRequest,
-  options?: SuspenseQueryHookOptions<DepartmentsGetAllQueryData>,
-): UseSuspenseQueryResult<DepartmentsGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    DepartmentsGetAllQueryData,
+    DepartmentsGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  DepartmentsGetAllQueryData,
+  DepartmentsGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildDepartmentsGetAllQuery(

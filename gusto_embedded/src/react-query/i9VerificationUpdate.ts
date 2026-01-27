@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationUpdate } from "../funcs/i9VerificationUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeesEmployeeIdI9AuthorizationRequest,
   PutV1EmployeesEmployeeIdI9AuthorizationResponse,
@@ -26,6 +37,17 @@ export type I9VerificationUpdateMutationVariables = {
 
 export type I9VerificationUpdateMutationData =
   PutV1EmployeesEmployeeIdI9AuthorizationResponse;
+
+export type I9VerificationUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Create or update an employee's I-9 authorization
@@ -55,12 +77,12 @@ export type I9VerificationUpdateMutationData =
 export function useI9VerificationUpdateMutation(
   options?: MutationHookOptions<
     I9VerificationUpdateMutationData,
-    Error,
+    I9VerificationUpdateMutationError,
     I9VerificationUpdateMutationVariables
   >,
 ): UseMutationResult<
   I9VerificationUpdateMutationData,
-  Error,
+  I9VerificationUpdateMutationError,
   I9VerificationUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

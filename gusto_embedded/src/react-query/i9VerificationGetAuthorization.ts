@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeesEmployeeIdI9AuthorizationRequest } from "../models/operations/getv1employeesemployeeidi9authorization.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyI9VerificationGetAuthorization,
 };
 
+export type I9VerificationGetAuthorizationQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's I-9 authorization
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useI9VerificationGetAuthorization(
   request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
-  options?: QueryHookOptions<I9VerificationGetAuthorizationQueryData>,
-): UseQueryResult<I9VerificationGetAuthorizationQueryData, Error> {
+  options?: QueryHookOptions<
+    I9VerificationGetAuthorizationQueryData,
+    I9VerificationGetAuthorizationQueryError
+  >,
+): UseQueryResult<
+  I9VerificationGetAuthorizationQueryData,
+  I9VerificationGetAuthorizationQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildI9VerificationGetAuthorizationQuery(
@@ -68,8 +94,14 @@ export function useI9VerificationGetAuthorization(
  */
 export function useI9VerificationGetAuthorizationSuspense(
   request: GetV1EmployeesEmployeeIdI9AuthorizationRequest,
-  options?: SuspenseQueryHookOptions<I9VerificationGetAuthorizationQueryData>,
-): UseSuspenseQueryResult<I9VerificationGetAuthorizationQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    I9VerificationGetAuthorizationQueryData,
+    I9VerificationGetAuthorizationQueryError
+  >,
+): UseSuspenseQueryResult<
+  I9VerificationGetAuthorizationQueryData,
+  I9VerificationGetAuthorizationQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildI9VerificationGetAuthorizationQuery(

@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1BenefitsBenefitIdRequest } from "../models/operations/getv1benefitsbenefitid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyBenefitsGetSupported,
 };
 
+export type CompanyBenefitsGetSupportedQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a supported benefit by ID
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useCompanyBenefitsGetSupported(
   request: GetV1BenefitsBenefitIdRequest,
-  options?: QueryHookOptions<CompanyBenefitsGetSupportedQueryData>,
-): UseQueryResult<CompanyBenefitsGetSupportedQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyBenefitsGetSupportedQueryData,
+    CompanyBenefitsGetSupportedQueryError
+  >,
+): UseQueryResult<
+  CompanyBenefitsGetSupportedQueryData,
+  CompanyBenefitsGetSupportedQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyBenefitsGetSupportedQuery(
@@ -68,8 +94,14 @@ export function useCompanyBenefitsGetSupported(
  */
 export function useCompanyBenefitsGetSupportedSuspense(
   request: GetV1BenefitsBenefitIdRequest,
-  options?: SuspenseQueryHookOptions<CompanyBenefitsGetSupportedQueryData>,
-): UseSuspenseQueryResult<CompanyBenefitsGetSupportedQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyBenefitsGetSupportedQueryData,
+    CompanyBenefitsGetSupportedQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyBenefitsGetSupportedQueryData,
+  CompanyBenefitsGetSupportedQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyBenefitsGetSupportedQuery(

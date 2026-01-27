@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1WebhookSubscriptionVerificationTokenUuidRequest,
   GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
@@ -34,6 +44,16 @@ export {
   type WebhooksRequestVerificationTokenQueryData,
 };
 
+export type WebhooksRequestVerificationTokenQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Request the webhook subscription verification_token
  *
@@ -49,8 +69,14 @@ export {
 export function useWebhooksRequestVerificationToken(
   security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
   request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
-  options?: QueryHookOptions<WebhooksRequestVerificationTokenQueryData>,
-): UseQueryResult<WebhooksRequestVerificationTokenQueryData, Error> {
+  options?: QueryHookOptions<
+    WebhooksRequestVerificationTokenQueryData,
+    WebhooksRequestVerificationTokenQueryError
+  >,
+): UseQueryResult<
+  WebhooksRequestVerificationTokenQueryData,
+  WebhooksRequestVerificationTokenQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildWebhooksRequestVerificationTokenQuery(
@@ -78,8 +104,14 @@ export function useWebhooksRequestVerificationToken(
 export function useWebhooksRequestVerificationTokenSuspense(
   security: GetV1WebhookSubscriptionVerificationTokenUuidSecurity,
   request: GetV1WebhookSubscriptionVerificationTokenUuidRequest,
-  options?: SuspenseQueryHookOptions<WebhooksRequestVerificationTokenQueryData>,
-): UseSuspenseQueryResult<WebhooksRequestVerificationTokenQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WebhooksRequestVerificationTokenQueryData,
+    WebhooksRequestVerificationTokenQueryError
+  >,
+): UseSuspenseQueryResult<
+  WebhooksRequestVerificationTokenQueryData,
+  WebhooksRequestVerificationTokenQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildWebhooksRequestVerificationTokenQuery(

@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
   QueryParamFrequency,
@@ -34,6 +44,16 @@ export {
   queryKeyPaySchedulesGetPreview,
 };
 
+export type PaySchedulesGetPreviewQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Preview pay schedule dates
  *
@@ -44,8 +64,14 @@ export {
  */
 export function usePaySchedulesGetPreview(
   request: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
-  options?: QueryHookOptions<PaySchedulesGetPreviewQueryData>,
-): UseQueryResult<PaySchedulesGetPreviewQueryData, Error> {
+  options?: QueryHookOptions<
+    PaySchedulesGetPreviewQueryData,
+    PaySchedulesGetPreviewQueryError
+  >,
+): UseQueryResult<
+  PaySchedulesGetPreviewQueryData,
+  PaySchedulesGetPreviewQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPaySchedulesGetPreviewQuery(
@@ -67,8 +93,14 @@ export function usePaySchedulesGetPreview(
  */
 export function usePaySchedulesGetPreviewSuspense(
   request: GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
-  options?: SuspenseQueryHookOptions<PaySchedulesGetPreviewQueryData>,
-): UseSuspenseQueryResult<PaySchedulesGetPreviewQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PaySchedulesGetPreviewQueryData,
+    PaySchedulesGetPreviewQueryError
+  >,
+): UseSuspenseQueryResult<
+  PaySchedulesGetPreviewQueryData,
+  PaySchedulesGetPreviewQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPaySchedulesGetPreviewQuery(

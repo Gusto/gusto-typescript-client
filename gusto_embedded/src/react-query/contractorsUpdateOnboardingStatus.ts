@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsUpdateOnboardingStatus } from "../funcs/contractorsUpdateOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1ContractorsContractorUuidOnboardingStatusRequest,
   PutV1ContractorsContractorUuidOnboardingStatusResponse,
@@ -26,6 +37,17 @@ export type ContractorsUpdateOnboardingStatusMutationVariables = {
 
 export type ContractorsUpdateOnboardingStatusMutationData =
   PutV1ContractorsContractorUuidOnboardingStatusResponse;
+
+export type ContractorsUpdateOnboardingStatusMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Change the contractor's onboarding status
@@ -48,12 +70,12 @@ export type ContractorsUpdateOnboardingStatusMutationData =
 export function useContractorsUpdateOnboardingStatusMutation(
   options?: MutationHookOptions<
     ContractorsUpdateOnboardingStatusMutationData,
-    Error,
+    ContractorsUpdateOnboardingStatusMutationError,
     ContractorsUpdateOnboardingStatusMutationVariables
   >,
 ): UseMutationResult<
   ContractorsUpdateOnboardingStatusMutationData,
-  Error,
+  ContractorsUpdateOnboardingStatusMutationError,
   ContractorsUpdateOnboardingStatusMutationVariables
 > {
   const client = useGustoEmbeddedContext();

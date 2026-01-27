@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationCreateDocuments } from "../funcs/i9VerificationCreateDocuments.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
   PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse,
@@ -26,6 +37,17 @@ export type I9VerificationCreateDocumentsMutationVariables = {
 
 export type I9VerificationCreateDocumentsMutationData =
   PutV1EmployeesEmployeeIdI9AuthorizationDocumentsResponse;
+
+export type I9VerificationCreateDocumentsMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Create an employee's I-9 authorization verification documents
@@ -44,12 +66,12 @@ export type I9VerificationCreateDocumentsMutationData =
 export function useI9VerificationCreateDocumentsMutation(
   options?: MutationHookOptions<
     I9VerificationCreateDocumentsMutationData,
-    Error,
+    I9VerificationCreateDocumentsMutationError,
     I9VerificationCreateDocumentsMutationVariables
   >,
 ): UseMutationResult<
   I9VerificationCreateDocumentsMutationData,
-  Error,
+  I9VerificationCreateDocumentsMutationError,
   I9VerificationCreateDocumentsMutationVariables
 > {
   const client = useGustoEmbeddedContext();

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesCreateWorkAddress } from "../funcs/employeeAddressesCreateWorkAddress.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1EmployeesEmployeeIdWorkAddressesRequest,
   PostV1EmployeesEmployeeIdWorkAddressesResponse,
@@ -27,6 +38,17 @@ export type EmployeeAddressesCreateWorkAddressMutationVariables = {
 export type EmployeeAddressesCreateWorkAddressMutationData =
   PostV1EmployeesEmployeeIdWorkAddressesResponse;
 
+export type EmployeeAddressesCreateWorkAddressMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an employee work address
  *
@@ -38,12 +60,12 @@ export type EmployeeAddressesCreateWorkAddressMutationData =
 export function useEmployeeAddressesCreateWorkAddressMutation(
   options?: MutationHookOptions<
     EmployeeAddressesCreateWorkAddressMutationData,
-    Error,
+    EmployeeAddressesCreateWorkAddressMutationError,
     EmployeeAddressesCreateWorkAddressMutationVariables
   >,
 ): UseMutationResult<
   EmployeeAddressesCreateWorkAddressMutationData,
-  Error,
+  EmployeeAddressesCreateWorkAddressMutationError,
   EmployeeAddressesCreateWorkAddressMutationVariables
 > {
   const client = useGustoEmbeddedContext();

@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses,
 };
 
+export type EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all Section 603 high earner statuses for an employee
  *
@@ -47,11 +69,12 @@ export {
 export function useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatuses(
   request: GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
   options?: QueryHookOptions<
-    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData,
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryError
   >,
 ): UseQueryResult<
   EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData,
-  Error
+  EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -78,11 +101,12 @@ export function useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarne
 export function useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesSuspense(
   request: GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData,
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryError
   >,
 ): UseSuspenseQueryResult<
   EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryData,
-  Error
+  EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

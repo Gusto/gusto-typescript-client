@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsUpdate } from "../funcs/externalPayrollsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1ExternalPayrollRequest,
   PutV1ExternalPayrollResponse,
@@ -26,6 +37,17 @@ export type ExternalPayrollsUpdateMutationVariables = {
 
 export type ExternalPayrollsUpdateMutationData = PutV1ExternalPayrollResponse;
 
+export type ExternalPayrollsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update an external payroll
  *
@@ -37,12 +59,12 @@ export type ExternalPayrollsUpdateMutationData = PutV1ExternalPayrollResponse;
 export function useExternalPayrollsUpdateMutation(
   options?: MutationHookOptions<
     ExternalPayrollsUpdateMutationData,
-    Error,
+    ExternalPayrollsUpdateMutationError,
     ExternalPayrollsUpdateMutationVariables
   >,
 ): UseMutationResult<
   ExternalPayrollsUpdateMutationData,
-  Error,
+  ExternalPayrollsUpdateMutationError,
   ExternalPayrollsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

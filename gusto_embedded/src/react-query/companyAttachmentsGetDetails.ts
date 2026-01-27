@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesAttachmentRequest } from "../models/operations/getv1companiesattachment.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyAttachmentsGetDetails,
 };
 
+export type CompanyAttachmentsGetDetailsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get Company Attachment Details
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useCompanyAttachmentsGetDetails(
   request: GetV1CompaniesAttachmentRequest,
-  options?: QueryHookOptions<CompanyAttachmentsGetDetailsQueryData>,
-): UseQueryResult<CompanyAttachmentsGetDetailsQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyAttachmentsGetDetailsQueryData,
+    CompanyAttachmentsGetDetailsQueryError
+  >,
+): UseQueryResult<
+  CompanyAttachmentsGetDetailsQueryData,
+  CompanyAttachmentsGetDetailsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyAttachmentsGetDetailsQuery(
@@ -64,8 +90,14 @@ export function useCompanyAttachmentsGetDetails(
  */
 export function useCompanyAttachmentsGetDetailsSuspense(
   request: GetV1CompaniesAttachmentRequest,
-  options?: SuspenseQueryHookOptions<CompanyAttachmentsGetDetailsQueryData>,
-): UseSuspenseQueryResult<CompanyAttachmentsGetDetailsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyAttachmentsGetDetailsQueryData,
+    CompanyAttachmentsGetDetailsQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyAttachmentsGetDetailsQueryData,
+  CompanyAttachmentsGetDetailsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyAttachmentsGetDetailsQuery(

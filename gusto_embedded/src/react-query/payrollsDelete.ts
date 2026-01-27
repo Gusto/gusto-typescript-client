@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsDelete } from "../funcs/payrollsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompaniesCompanyIdPayrollsRequest,
   DeleteV1CompaniesCompanyIdPayrollsResponse,
@@ -27,6 +38,17 @@ export type PayrollsDeleteMutationVariables = {
 export type PayrollsDeleteMutationData =
   DeleteV1CompaniesCompanyIdPayrollsResponse;
 
+export type PayrollsDeleteMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete a payroll
  *
@@ -40,12 +62,12 @@ export type PayrollsDeleteMutationData =
 export function usePayrollsDeleteMutation(
   options?: MutationHookOptions<
     PayrollsDeleteMutationData,
-    Error,
+    PayrollsDeleteMutationError,
     PayrollsDeleteMutationVariables
   >,
 ): UseMutationResult<
   PayrollsDeleteMutationData,
-  Error,
+  PayrollsDeleteMutationError,
   PayrollsDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

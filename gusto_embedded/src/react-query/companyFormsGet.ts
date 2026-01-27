@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompanyFormRequest } from "../models/operations/getv1companyform.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyFormsGet,
 };
 
+export type CompanyFormsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a company form
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useCompanyFormsGet(
   request: GetV1CompanyFormRequest,
-  options?: QueryHookOptions<CompanyFormsGetQueryData>,
-): UseQueryResult<CompanyFormsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyFormsGetQueryData,
+    CompanyFormsGetQueryError
+  >,
+): UseQueryResult<CompanyFormsGetQueryData, CompanyFormsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyFormsGetQuery(
@@ -64,8 +87,11 @@ export function useCompanyFormsGet(
  */
 export function useCompanyFormsGetSuspense(
   request: GetV1CompanyFormRequest,
-  options?: SuspenseQueryHookOptions<CompanyFormsGetQueryData>,
-): UseSuspenseQueryResult<CompanyFormsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyFormsGetQueryData,
+    CompanyFormsGetQueryError
+  >,
+): UseSuspenseQueryResult<CompanyFormsGetQueryData, CompanyFormsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyFormsGetQuery(

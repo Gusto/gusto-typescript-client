@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { informationRequestsSubmit } from "../funcs/informationRequestsSubmit.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   SubmitInformationRequestRequest,
   SubmitInformationRequestResponse,
@@ -27,6 +38,17 @@ export type InformationRequestsSubmitMutationVariables = {
 export type InformationRequestsSubmitMutationData =
   SubmitInformationRequestResponse;
 
+export type InformationRequestsSubmitMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Submit information request responses
  *
@@ -40,12 +62,12 @@ export type InformationRequestsSubmitMutationData =
 export function useInformationRequestsSubmitMutation(
   options?: MutationHookOptions<
     InformationRequestsSubmitMutationData,
-    Error,
+    InformationRequestsSubmitMutationError,
     InformationRequestsSubmitMutationVariables
   >,
 ): UseMutationResult<
   InformationRequestsSubmitMutationData,
-  Error,
+  InformationRequestsSubmitMutationError,
   InformationRequestsSubmitMutationVariables
 > {
   const client = useGustoEmbeddedContext();
