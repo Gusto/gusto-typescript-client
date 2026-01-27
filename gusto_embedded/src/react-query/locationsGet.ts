@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdLocationsRequest } from "../models/operations/getv1companiescompanyidlocations.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyLocationsGet,
 };
 
+export type LocationsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get company locations
  *
@@ -43,8 +63,8 @@ export {
  */
 export function useLocationsGet(
   request: GetV1CompaniesCompanyIdLocationsRequest,
-  options?: QueryHookOptions<LocationsGetQueryData>,
-): UseQueryResult<LocationsGetQueryData, Error> {
+  options?: QueryHookOptions<LocationsGetQueryData, LocationsGetQueryError>,
+): UseQueryResult<LocationsGetQueryData, LocationsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildLocationsGetQuery(
@@ -68,8 +88,11 @@ export function useLocationsGet(
  */
 export function useLocationsGetSuspense(
   request: GetV1CompaniesCompanyIdLocationsRequest,
-  options?: SuspenseQueryHookOptions<LocationsGetQueryData>,
-): UseSuspenseQueryResult<LocationsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    LocationsGetQueryData,
+    LocationsGetQueryError
+  >,
+): UseSuspenseQueryResult<LocationsGetQueryData, LocationsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildLocationsGetQuery(

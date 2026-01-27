@@ -11,6 +11,18 @@ import { GustoEmbeddedCore } from "../core.js";
 import { peopleBatchesPostV1CompaniesCompanyIdPeopleBatches } from "../funcs/peopleBatchesPostV1CompaniesCompanyIdPeopleBatches.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { PostV1CompaniesCompanyIdPeopleBatchesResponseBody } from "../models/errors/postv1companiescompanyidpeoplebatches.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdPeopleBatchesRequest,
   PostV1CompaniesCompanyIdPeopleBatchesResponse,
@@ -28,6 +40,18 @@ export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationVariables 
 export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationData =
   PostV1CompaniesCompanyIdPeopleBatchesResponse;
 
+export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationError =
+  | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a people batch
  *
@@ -41,12 +65,12 @@ export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationData =
 export function usePeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutation(
   options?: MutationHookOptions<
     PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationData,
-    Error,
+    PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationError,
     PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationVariables
   >,
 ): UseMutationResult<
   PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationData,
-  Error,
+  PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationError,
   PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

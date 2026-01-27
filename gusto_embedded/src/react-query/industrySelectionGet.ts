@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompanyIndustryRequest } from "../models/operations/getv1companyindustry.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyIndustrySelectionGet,
 };
 
+export type IndustrySelectionGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a company industry selection
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useIndustrySelectionGet(
   request: GetV1CompanyIndustryRequest,
-  options?: QueryHookOptions<IndustrySelectionGetQueryData>,
-): UseQueryResult<IndustrySelectionGetQueryData, Error> {
+  options?: QueryHookOptions<
+    IndustrySelectionGetQueryData,
+    IndustrySelectionGetQueryError
+  >,
+): UseQueryResult<
+  IndustrySelectionGetQueryData,
+  IndustrySelectionGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildIndustrySelectionGetQuery(
@@ -64,8 +90,14 @@ export function useIndustrySelectionGet(
  */
 export function useIndustrySelectionGetSuspense(
   request: GetV1CompanyIndustryRequest,
-  options?: SuspenseQueryHookOptions<IndustrySelectionGetQueryData>,
-): UseSuspenseQueryResult<IndustrySelectionGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    IndustrySelectionGetQueryData,
+    IndustrySelectionGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  IndustrySelectionGetQueryData,
+  IndustrySelectionGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildIndustrySelectionGetQuery(

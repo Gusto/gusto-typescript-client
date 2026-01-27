@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1PaymentReceiptsPayrollsPayrollUuidHeaderXGustoAPIVersion,
   GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyPayrollsGetReceipt,
 };
 
+export type PayrollsGetReceiptQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a single payroll receipt
  *
@@ -48,8 +70,11 @@ export {
  */
 export function usePayrollsGetReceipt(
   request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
-  options?: QueryHookOptions<PayrollsGetReceiptQueryData>,
-): UseQueryResult<PayrollsGetReceiptQueryData, Error> {
+  options?: QueryHookOptions<
+    PayrollsGetReceiptQueryData,
+    PayrollsGetReceiptQueryError
+  >,
+): UseQueryResult<PayrollsGetReceiptQueryData, PayrollsGetReceiptQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPayrollsGetReceiptQuery(
@@ -76,8 +101,14 @@ export function usePayrollsGetReceipt(
  */
 export function usePayrollsGetReceiptSuspense(
   request: GetV1PaymentReceiptsPayrollsPayrollUuidRequest,
-  options?: SuspenseQueryHookOptions<PayrollsGetReceiptQueryData>,
-): UseSuspenseQueryResult<PayrollsGetReceiptQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PayrollsGetReceiptQueryData,
+    PayrollsGetReceiptQueryError
+  >,
+): UseSuspenseQueryResult<
+  PayrollsGetReceiptQueryData,
+  PayrollsGetReceiptQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPayrollsGetReceiptQuery(

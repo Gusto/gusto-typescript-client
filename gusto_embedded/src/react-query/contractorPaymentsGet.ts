@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest } from "../models/operations/getv1companiescompanyidcontractorpaymentcontractorpayment.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorPaymentsGet,
 };
 
+export type ContractorPaymentsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a single contractor payment
  *
@@ -40,8 +60,14 @@ export {
  */
 export function useContractorPaymentsGet(
   request: GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
-  options?: QueryHookOptions<ContractorPaymentsGetQueryData>,
-): UseQueryResult<ContractorPaymentsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorPaymentsGetQueryData,
+    ContractorPaymentsGetQueryError
+  >,
+): UseQueryResult<
+  ContractorPaymentsGetQueryData,
+  ContractorPaymentsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorPaymentsGetQuery(
@@ -62,8 +88,14 @@ export function useContractorPaymentsGet(
  */
 export function useContractorPaymentsGetSuspense(
   request: GetV1CompaniesCompanyIdContractorPaymentContractorPaymentRequest,
-  options?: SuspenseQueryHookOptions<ContractorPaymentsGetQueryData>,
-): UseSuspenseQueryResult<ContractorPaymentsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorPaymentsGetQueryData,
+    ContractorPaymentsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorPaymentsGetQueryData,
+  ContractorPaymentsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorPaymentsGetQuery(

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesCreateAdmin } from "../funcs/companiesCreateAdmin.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdAdminsRequest,
   PostV1CompaniesCompanyIdAdminsResponse,
@@ -27,6 +38,17 @@ export type CompaniesCreateAdminMutationVariables = {
 export type CompaniesCreateAdminMutationData =
   PostV1CompaniesCompanyIdAdminsResponse;
 
+export type CompaniesCreateAdminMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an admin for the company
  *
@@ -39,12 +61,12 @@ export type CompaniesCreateAdminMutationData =
 export function useCompaniesCreateAdminMutation(
   options?: MutationHookOptions<
     CompaniesCreateAdminMutationData,
-    Error,
+    CompaniesCreateAdminMutationError,
     CompaniesCreateAdminMutationVariables
   >,
 ): UseMutationResult<
   CompaniesCreateAdminMutationData,
-  Error,
+  CompaniesCreateAdminMutationError,
   CompaniesCreateAdminMutationVariables
 > {
   const client = useGustoEmbeddedContext();

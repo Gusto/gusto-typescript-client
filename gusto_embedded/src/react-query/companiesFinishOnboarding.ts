@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesFinishOnboarding } from "../funcs/companiesFinishOnboarding.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompanyFinishOnboardingRequest,
   GetV1CompanyFinishOnboardingResponse,
@@ -26,6 +37,17 @@ export type CompaniesFinishOnboardingMutationVariables = {
 
 export type CompaniesFinishOnboardingMutationData =
   GetV1CompanyFinishOnboardingResponse;
+
+export type CompaniesFinishOnboardingMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Finish company onboarding
@@ -50,12 +72,12 @@ export type CompaniesFinishOnboardingMutationData =
 export function useCompaniesFinishOnboardingMutation(
   options?: MutationHookOptions<
     CompaniesFinishOnboardingMutationData,
-    Error,
+    CompaniesFinishOnboardingMutationError,
     CompaniesFinishOnboardingMutationVariables
   >,
 ): UseMutationResult<
   CompaniesFinishOnboardingMutationData,
-  Error,
+  CompaniesFinishOnboardingMutationError,
   CompaniesFinishOnboardingMutationVariables
 > {
   const client = useGustoEmbeddedContext();

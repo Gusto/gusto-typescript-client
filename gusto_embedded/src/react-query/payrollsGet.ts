@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdPayrollsPayrollIdHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude,
@@ -35,6 +46,17 @@ export {
   queryKeyPayrollsGet,
 };
 
+export type PayrollsGetQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a single payroll
  *
@@ -52,8 +74,8 @@ export {
  */
 export function usePayrollsGet(
   request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
-  options?: QueryHookOptions<PayrollsGetQueryData>,
-): UseQueryResult<PayrollsGetQueryData, Error> {
+  options?: QueryHookOptions<PayrollsGetQueryData, PayrollsGetQueryError>,
+): UseQueryResult<PayrollsGetQueryData, PayrollsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPayrollsGetQuery(
@@ -82,8 +104,11 @@ export function usePayrollsGet(
  */
 export function usePayrollsGetSuspense(
   request: GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
-  options?: SuspenseQueryHookOptions<PayrollsGetQueryData>,
-): UseSuspenseQueryResult<PayrollsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PayrollsGetQueryData,
+    PayrollsGetQueryError
+  >,
+): UseSuspenseQueryResult<PayrollsGetQueryData, PayrollsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPayrollsGetQuery(

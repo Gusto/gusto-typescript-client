@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompanyPaymentConfigsRequest } from "../models/operations/getv1companypaymentconfigs.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyPaymentConfigsGet,
 };
 
+export type PaymentConfigsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a company's payment configs
  *
@@ -41,8 +61,11 @@ export {
  */
 export function usePaymentConfigsGet(
   request: GetV1CompanyPaymentConfigsRequest,
-  options?: QueryHookOptions<PaymentConfigsGetQueryData>,
-): UseQueryResult<PaymentConfigsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    PaymentConfigsGetQueryData,
+    PaymentConfigsGetQueryError
+  >,
+): UseQueryResult<PaymentConfigsGetQueryData, PaymentConfigsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPaymentConfigsGetQuery(
@@ -64,8 +87,14 @@ export function usePaymentConfigsGet(
  */
 export function usePaymentConfigsGetSuspense(
   request: GetV1CompanyPaymentConfigsRequest,
-  options?: SuspenseQueryHookOptions<PaymentConfigsGetQueryData>,
-): UseSuspenseQueryResult<PaymentConfigsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PaymentConfigsGetQueryData,
+    PaymentConfigsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  PaymentConfigsGetQueryData,
+  PaymentConfigsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPaymentConfigsGetQuery(

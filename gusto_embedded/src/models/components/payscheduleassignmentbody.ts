@@ -6,18 +6,12 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
-/**
- * The pay schedule assignment type.
- */
 export const PayScheduleAssignmentBodyType = {
   Single: "single",
   HourlySalaried: "hourly_salaried",
   ByEmployee: "by_employee",
   ByDepartment: "by_department",
 } as const;
-/**
- * The pay schedule assignment type.
- */
 export type PayScheduleAssignmentBodyType = ClosedEnum<
   typeof PayScheduleAssignmentBodyType
 >;

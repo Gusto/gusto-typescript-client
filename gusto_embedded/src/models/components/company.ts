@@ -66,18 +66,12 @@ export const CompanyStatus = {
  */
 export type CompanyStatus = ClosedEnum<typeof CompanyStatus>;
 
-/**
- * The pay schedule assignment type.
- */
 export const PayScheduleType = {
   Single: "single",
   HourlySalaried: "hourly_salaried",
   ByEmployee: "by_employee",
   ByDepartment: "by_department",
 } as const;
-/**
- * The pay schedule assignment type.
- */
 export type PayScheduleType = ClosedEnum<typeof PayScheduleType>;
 
 /**

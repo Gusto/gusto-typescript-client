@@ -1,7 +1,5 @@
 # GarnishmentType
 
-The specific type of garnishment for court ordered garnishments.
-
 ## Example Usage
 
 ```typescript

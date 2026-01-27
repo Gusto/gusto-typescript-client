@@ -17,4 +17,4 @@ let value: Answers = {
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | `value`                                     | *components.EmployeeStateTaxesRequestValue* | :heavy_check_mark:                          | N/A                                         |
 | `validFrom`                                 | *string*                                    | :heavy_check_mark:                          | N/A                                         |
-| `validUpTo`                                 | *any*                                       | :heavy_minus_sign:                          | N/A                                         |
+| `validUpTo`                                 | *string*                                    | :heavy_minus_sign:                          | N/A                                         |

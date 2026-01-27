@@ -255,10 +255,8 @@ async function run() {
   const result = await gustoEmbedded.timeOffPolicies.update({
     timeOffPolicyUuid: "<id>",
     requestBody: {
-      version: "56d00c178bc7393b2a206ed6a86afcb4",
       name: "Vacation Policy",
-      policyType: "vacation",
-      accrualMethod: "unlimited",
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
     },
   });
 
@@ -286,10 +284,8 @@ async function run() {
   const res = await timeOffPoliciesUpdate(gustoEmbedded, {
     timeOffPolicyUuid: "<id>",
     requestBody: {
-      version: "56d00c178bc7393b2a206ed6a86afcb4",
       name: "Vacation Policy",
-      policyType: "vacation",
-      accrualMethod: "unlimited",
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
     },
   });
   if (res.ok) {
@@ -938,5 +934,5 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

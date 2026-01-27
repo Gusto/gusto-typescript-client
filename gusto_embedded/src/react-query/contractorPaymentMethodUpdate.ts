@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentMethodUpdate } from "../funcs/contractorPaymentMethodUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1ContractorsContractorIdPaymentMethodRequest,
   PutV1ContractorsContractorIdPaymentMethodResponse,
@@ -27,6 +38,17 @@ export type ContractorPaymentMethodUpdateMutationVariables = {
 export type ContractorPaymentMethodUpdateMutationData =
   PutV1ContractorsContractorIdPaymentMethodResponse;
 
+export type ContractorPaymentMethodUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a contractor's payment method
  *
@@ -39,12 +61,12 @@ export type ContractorPaymentMethodUpdateMutationData =
 export function useContractorPaymentMethodUpdateMutation(
   options?: MutationHookOptions<
     ContractorPaymentMethodUpdateMutationData,
-    Error,
+    ContractorPaymentMethodUpdateMutationError,
     ContractorPaymentMethodUpdateMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentMethodUpdateMutationData,
-  Error,
+  ContractorPaymentMethodUpdateMutationError,
   ContractorPaymentMethodUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

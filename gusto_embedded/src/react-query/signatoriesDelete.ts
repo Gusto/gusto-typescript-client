@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { signatoriesDelete } from "../funcs/signatoriesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidRequest,
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
@@ -27,6 +37,16 @@ export type SignatoriesDeleteMutationVariables = {
 export type SignatoriesDeleteMutationData =
   DeleteV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse;
 
+export type SignatoriesDeleteMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete a signatory
  *
@@ -38,12 +58,12 @@ export type SignatoriesDeleteMutationData =
 export function useSignatoriesDeleteMutation(
   options?: MutationHookOptions<
     SignatoriesDeleteMutationData,
-    Error,
+    SignatoriesDeleteMutationError,
     SignatoriesDeleteMutationVariables
   >,
 ): UseMutationResult<
   SignatoriesDeleteMutationData,
-  Error,
+  SignatoriesDeleteMutationError,
   SignatoriesDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

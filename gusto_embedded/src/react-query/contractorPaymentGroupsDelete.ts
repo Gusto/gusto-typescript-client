@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsDelete } from "../funcs/contractorPaymentGroupsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdRequest,
   DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse,
@@ -27,6 +38,17 @@ export type ContractorPaymentGroupsDeleteMutationVariables = {
 export type ContractorPaymentGroupsDeleteMutationData =
   DeleteV1ContractorPaymentGroupsContractorPaymentGroupIdResponse;
 
+export type ContractorPaymentGroupsDeleteMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Cancel a contractor payment group
  *
@@ -38,12 +60,12 @@ export type ContractorPaymentGroupsDeleteMutationData =
 export function useContractorPaymentGroupsDeleteMutation(
   options?: MutationHookOptions<
     ContractorPaymentGroupsDeleteMutationData,
-    Error,
+    ContractorPaymentGroupsDeleteMutationError,
     ContractorPaymentGroupsDeleteMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentGroupsDeleteMutationData,
-  Error,
+  ContractorPaymentGroupsDeleteMutationError,
   ContractorPaymentGroupsDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

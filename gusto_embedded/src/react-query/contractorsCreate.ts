@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsCreate } from "../funcs/contractorsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyUuidContractorsRequest,
   PostV1CompaniesCompanyUuidContractorsResponse,
@@ -27,6 +38,17 @@ export type ContractorsCreateMutationVariables = {
 export type ContractorsCreateMutationData =
   PostV1CompaniesCompanyUuidContractorsResponse;
 
+export type ContractorsCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a contractor
  *
@@ -38,12 +60,12 @@ export type ContractorsCreateMutationData =
 export function useContractorsCreateMutation(
   options?: MutationHookOptions<
     ContractorsCreateMutationData,
-    Error,
+    ContractorsCreateMutationError,
     ContractorsCreateMutationVariables
   >,
 ): UseMutationResult<
   ContractorsCreateMutationData,
-  Error,
+  ContractorsCreateMutationError,
   ContractorsCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

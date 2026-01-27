@@ -8,10 +8,8 @@ import { PutV1TimeOffPoliciesTimeOffPolicyUuidRequest } from "@gusto/embedded-ap
 let value: PutV1TimeOffPoliciesTimeOffPolicyUuidRequest = {
   timeOffPolicyUuid: "<id>",
   requestBody: {
-    version: "56d00c178bc7393b2a206ed6a86afcb4",
     name: "Vacation Policy",
-    policyType: "sick",
-    accrualMethod: "per_hour_paid_no_overtime",
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
   },
 };
 ```

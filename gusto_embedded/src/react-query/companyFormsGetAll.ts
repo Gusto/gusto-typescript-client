@@ -12,6 +12,16 @@ import {
 } from "@tanstack/react-query";
 import { CompanyFormsSortBy } from "../models/components/companyformssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompanyFormsRequest } from "../models/operations/getv1companyforms.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -32,6 +42,16 @@ export {
   queryKeyCompanyFormsGetAll,
 };
 
+export type CompanyFormsGetAllQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all company forms
  *
@@ -42,8 +62,11 @@ export {
  */
 export function useCompanyFormsGetAll(
   request: GetV1CompanyFormsRequest,
-  options?: QueryHookOptions<CompanyFormsGetAllQueryData>,
-): UseQueryResult<CompanyFormsGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyFormsGetAllQueryData,
+    CompanyFormsGetAllQueryError
+  >,
+): UseQueryResult<CompanyFormsGetAllQueryData, CompanyFormsGetAllQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyFormsGetAllQuery(
@@ -65,8 +88,14 @@ export function useCompanyFormsGetAll(
  */
 export function useCompanyFormsGetAllSuspense(
   request: GetV1CompanyFormsRequest,
-  options?: SuspenseQueryHookOptions<CompanyFormsGetAllQueryData>,
-): UseSuspenseQueryResult<CompanyFormsGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyFormsGetAllQueryData,
+    CompanyFormsGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyFormsGetAllQueryData,
+  CompanyFormsGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyFormsGetAllQuery(

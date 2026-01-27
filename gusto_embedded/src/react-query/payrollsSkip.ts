@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsSkip } from "../funcs/payrollsSkip.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { PostCompaniesPayrollSkipCompanyUuidResponseBody } from "../models/errors/postcompaniespayrollskipcompanyuuid.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PostCompaniesPayrollSkipCompanyUuidRequest,
   PostCompaniesPayrollSkipCompanyUuidResponse,
@@ -27,6 +38,17 @@ export type PayrollsSkipMutationVariables = {
 export type PayrollsSkipMutationData =
   PostCompaniesPayrollSkipCompanyUuidResponse;
 
+export type PayrollsSkipMutationError =
+  | PostCompaniesPayrollSkipCompanyUuidResponseBody
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Skip a payroll
  *
@@ -40,12 +62,12 @@ export type PayrollsSkipMutationData =
 export function usePayrollsSkipMutation(
   options?: MutationHookOptions<
     PayrollsSkipMutationData,
-    Error,
+    PayrollsSkipMutationError,
     PayrollsSkipMutationVariables
   >,
 ): UseMutationResult<
   PayrollsSkipMutationData,
-  Error,
+  PayrollsSkipMutationError,
   PayrollsSkipMutationVariables
 > {
   const client = useGustoEmbeddedContext();

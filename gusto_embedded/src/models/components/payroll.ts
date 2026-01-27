@@ -16,9 +16,9 @@ import {
   PayrollCompanyTaxesType$inboundSchema,
 } from "./payrollcompanytaxestype.js";
 import {
-  PayrollCreditBlockersType,
-  PayrollCreditBlockersType$inboundSchema,
-} from "./payrollcreditblockerstype.js";
+  PayrollCreditBlockerType,
+  PayrollCreditBlockerType$inboundSchema,
+} from "./payrollcreditblockertype.js";
 import {
   PayrollPaymentSpeedChangedType,
   PayrollPaymentSpeedChangedType$inboundSchema,
@@ -36,9 +36,9 @@ import {
   PayrollProcessingRequest$inboundSchema,
 } from "./payrollprocessingrequest.js";
 import {
-  PayrollSubmissionBlockersType,
-  PayrollSubmissionBlockersType$inboundSchema,
-} from "./payrollsubmissionblockerstype.js";
+  PayrollSubmissionBlockerType,
+  PayrollSubmissionBlockerType$inboundSchema,
+} from "./payrollsubmissionblockertype.js";
 import {
   PayrollTaxesType,
   PayrollTaxesType$inboundSchema,
@@ -145,11 +145,11 @@ export type Payroll = {
   /**
    * Only included for processed or calculated payrolls
    */
-  submissionBlockers?: Array<PayrollSubmissionBlockersType> | undefined;
+  submissionBlockers?: Array<PayrollSubmissionBlockerType> | undefined;
   /**
    * Only included for processed payrolls
    */
-  creditBlockers?: Array<PayrollCreditBlockersType> | undefined;
+  creditBlockers?: Array<PayrollCreditBlockerType> | undefined;
   processingRequest?: PayrollProcessingRequest | null | undefined;
   /**
    * Will money movement for the payroll be performed by the partner rather than by Gusto?
@@ -191,10 +191,9 @@ export const Payroll$inboundSchema: z.ZodType<Payroll, z.ZodTypeDef, unknown> =
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ).optional(),
-    submission_blockers: z.array(PayrollSubmissionBlockersType$inboundSchema)
+    submission_blockers: z.array(PayrollSubmissionBlockerType$inboundSchema)
       .optional(),
-    credit_blockers: z.array(PayrollCreditBlockersType$inboundSchema)
-      .optional(),
+    credit_blockers: z.array(PayrollCreditBlockerType$inboundSchema).optional(),
     processing_request: z.nullable(PayrollProcessingRequest$inboundSchema)
       .optional(),
     partner_owned_disbursement: z.nullable(z.boolean()).optional(),

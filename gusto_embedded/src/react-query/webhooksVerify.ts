@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksVerify } from "../funcs/webhooksVerify.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1VerifyWebhookSubscriptionUuidRequest,
   PutV1VerifyWebhookSubscriptionUuidResponse,
@@ -29,6 +40,17 @@ export type WebhooksVerifyMutationVariables = {
 export type WebhooksVerifyMutationData =
   PutV1VerifyWebhookSubscriptionUuidResponse;
 
+export type WebhooksVerifyMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Verify the webhook subscription
  *
@@ -46,12 +68,12 @@ export type WebhooksVerifyMutationData =
 export function useWebhooksVerifyMutation(
   options?: MutationHookOptions<
     WebhooksVerifyMutationData,
-    Error,
+    WebhooksVerifyMutationError,
     WebhooksVerifyMutationVariables
   >,
 ): UseMutationResult<
   WebhooksVerifyMutationData,
-  Error,
+  WebhooksVerifyMutationError,
   WebhooksVerifyMutationVariables
 > {
   const client = useGustoEmbeddedContext();

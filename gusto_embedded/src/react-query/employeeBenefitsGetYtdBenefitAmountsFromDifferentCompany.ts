@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest } from "../models/operations/getemployeeytdbenefitamountsfromdifferentcompany.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany,
 };
 
+export type EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get year-to-date benefit amounts from a different company
  *
@@ -45,11 +65,12 @@ export {
 export function useEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
   request: GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
   options?: QueryHookOptions<
-    EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData
+    EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData,
+    EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryError
   >,
 ): UseQueryResult<
   EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData,
-  Error
+  EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -76,11 +97,12 @@ export function useEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompany(
 export function useEmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanySuspense(
   request: GetEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData
+    EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData,
+    EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryError
   >,
 ): UseSuspenseQueryResult<
   EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryData,
-  Error
+  EmployeeBenefitsGetYtdBenefitAmountsFromDifferentCompanyQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

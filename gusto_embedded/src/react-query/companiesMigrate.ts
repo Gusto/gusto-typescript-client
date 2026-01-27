@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesMigrate } from "../funcs/companiesMigrate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
   PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
@@ -27,6 +38,17 @@ export type CompaniesMigrateMutationVariables = {
 export type CompaniesMigrateMutationData =
   PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse;
 
+export type CompaniesMigrateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Migrate company to embedded payroll
  *
@@ -40,12 +62,12 @@ export type CompaniesMigrateMutationData =
 export function useCompaniesMigrateMutation(
   options?: MutationHookOptions<
     CompaniesMigrateMutationData,
-    Error,
+    CompaniesMigrateMutationError,
     CompaniesMigrateMutationVariables
   >,
 ): UseMutationResult<
   CompaniesMigrateMutationData,
-  Error,
+  CompaniesMigrateMutationError,
   CompaniesMigrateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

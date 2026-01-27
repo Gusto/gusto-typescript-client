@@ -27,16 +27,10 @@ export type EmployeePaymentMethodType = ClosedEnum<
   typeof EmployeePaymentMethodType
 >;
 
-/**
- * Describes how the payment will be split. If `split_by` is Percentage, then the split amounts must add up to exactly 100. If `split_by` is Amount, then the last split `amount` must be `null` to capture the remainder.
- */
 export const EmployeePaymentMethodSplitBy = {
   Amount: "Amount",
   Percentage: "Percentage",
 } as const;
-/**
- * Describes how the payment will be split. If `split_by` is Percentage, then the split amounts must add up to exactly 100. If `split_by` is Amount, then the last split `amount` must be `null` to capture the remainder.
- */
 export type EmployeePaymentMethodSplitBy = ClosedEnum<
   typeof EmployeePaymentMethodSplitBy
 >;

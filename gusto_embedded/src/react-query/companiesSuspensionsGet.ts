@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetCompaniesCompanyUuidSuspensionsHeaderXGustoAPIVersion,
   GetCompaniesCompanyUuidSuspensionsRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyCompaniesSuspensionsGet,
 };
 
+export type CompaniesSuspensionsGetQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get suspensions for this company
  *
@@ -47,8 +69,14 @@ export {
  */
 export function useCompaniesSuspensionsGet(
   request: GetCompaniesCompanyUuidSuspensionsRequest,
-  options?: QueryHookOptions<CompaniesSuspensionsGetQueryData>,
-): UseQueryResult<CompaniesSuspensionsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    CompaniesSuspensionsGetQueryData,
+    CompaniesSuspensionsGetQueryError
+  >,
+): UseQueryResult<
+  CompaniesSuspensionsGetQueryData,
+  CompaniesSuspensionsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompaniesSuspensionsGetQuery(
@@ -74,8 +102,14 @@ export function useCompaniesSuspensionsGet(
  */
 export function useCompaniesSuspensionsGetSuspense(
   request: GetCompaniesCompanyUuidSuspensionsRequest,
-  options?: SuspenseQueryHookOptions<CompaniesSuspensionsGetQueryData>,
-): UseSuspenseQueryResult<CompaniesSuspensionsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompaniesSuspensionsGetQueryData,
+    CompaniesSuspensionsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompaniesSuspensionsGetQueryData,
+  CompaniesSuspensionsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompaniesSuspensionsGetQuery(

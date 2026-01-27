@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsRemovePeople } from "../funcs/departmentsRemovePeople.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PutRemovePeopleFromDepartmentRequest,
   PutRemovePeopleFromDepartmentResponse,
@@ -27,6 +37,16 @@ export type DepartmentsRemovePeopleMutationVariables = {
 export type DepartmentsRemovePeopleMutationData =
   PutRemovePeopleFromDepartmentResponse;
 
+export type DepartmentsRemovePeopleMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Remove people from a department
  *
@@ -38,12 +58,12 @@ export type DepartmentsRemovePeopleMutationData =
 export function useDepartmentsRemovePeopleMutation(
   options?: MutationHookOptions<
     DepartmentsRemovePeopleMutationData,
-    Error,
+    DepartmentsRemovePeopleMutationError,
     DepartmentsRemovePeopleMutationVariables
   >,
 ): UseMutationResult<
   DepartmentsRemovePeopleMutationData,
-  Error,
+  DepartmentsRemovePeopleMutationError,
   DepartmentsRemovePeopleMutationVariables
 > {
   const client = useGustoEmbeddedContext();

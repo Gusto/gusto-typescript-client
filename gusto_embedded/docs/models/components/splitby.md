@@ -1,7 +1,5 @@
 # SplitBy
 
-How the payment is split. This field is applicable when `payment_method` is "Direct Deposit".
-
 ## Example Usage
 
 ```typescript

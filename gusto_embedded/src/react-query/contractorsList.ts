@@ -12,6 +12,16 @@ import {
 } from "@tanstack/react-query";
 import { ContractorsSortBy } from "../models/components/contractorssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyUuidContractorsRequest } from "../models/operations/getv1companiescompanyuuidcontractors.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -32,6 +42,16 @@ export {
   queryKeyContractorsList,
 };
 
+export type ContractorsListQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get contractors of a company
  *
@@ -42,8 +62,11 @@ export {
  */
 export function useContractorsList(
   request: GetV1CompaniesCompanyUuidContractorsRequest,
-  options?: QueryHookOptions<ContractorsListQueryData>,
-): UseQueryResult<ContractorsListQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorsListQueryData,
+    ContractorsListQueryError
+  >,
+): UseQueryResult<ContractorsListQueryData, ContractorsListQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorsListQuery(
@@ -65,8 +88,11 @@ export function useContractorsList(
  */
 export function useContractorsListSuspense(
   request: GetV1CompaniesCompanyUuidContractorsRequest,
-  options?: SuspenseQueryHookOptions<ContractorsListQueryData>,
-): UseSuspenseQueryResult<ContractorsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorsListQueryData,
+    ContractorsListQueryError
+  >,
+): UseSuspenseQueryResult<ContractorsListQueryData, ContractorsListQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorsListQuery(

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { departmentsCreate } from "../funcs/departmentsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostDepartmentsRequest,
   PostDepartmentsResponse,
@@ -26,6 +37,17 @@ export type DepartmentsCreateMutationVariables = {
 
 export type DepartmentsCreateMutationData = PostDepartmentsResponse;
 
+export type DepartmentsCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a department
  *
@@ -37,12 +59,12 @@ export type DepartmentsCreateMutationData = PostDepartmentsResponse;
 export function useDepartmentsCreateMutation(
   options?: MutationHookOptions<
     DepartmentsCreateMutationData,
-    Error,
+    DepartmentsCreateMutationError,
     DepartmentsCreateMutationVariables
   >,
 ): UseMutationResult<
   DepartmentsCreateMutationData,
-  Error,
+  DepartmentsCreateMutationError,
   DepartmentsCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

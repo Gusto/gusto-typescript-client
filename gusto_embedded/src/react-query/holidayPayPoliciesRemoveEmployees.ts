@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { holidayPayPoliciesRemoveEmployees } from "../funcs/holidayPayPoliciesRemoveEmployees.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveRequest,
   PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse,
@@ -27,6 +38,17 @@ export type HolidayPayPoliciesRemoveEmployeesMutationVariables = {
 export type HolidayPayPoliciesRemoveEmployeesMutationData =
   PutV1CompaniesCompanyUuidHolidayPayPolicyRemoveResponse;
 
+export type HolidayPayPoliciesRemoveEmployeesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Remove employees from a company's holiday pay policy
  *
@@ -38,12 +60,12 @@ export type HolidayPayPoliciesRemoveEmployeesMutationData =
 export function useHolidayPayPoliciesRemoveEmployeesMutation(
   options?: MutationHookOptions<
     HolidayPayPoliciesRemoveEmployeesMutationData,
-    Error,
+    HolidayPayPoliciesRemoveEmployeesMutationError,
     HolidayPayPoliciesRemoveEmployeesMutationVariables
   >,
 ): UseMutationResult<
   HolidayPayPoliciesRemoveEmployeesMutationData,
-  Error,
+  HolidayPayPoliciesRemoveEmployeesMutationError,
   HolidayPayPoliciesRemoveEmployeesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { externalPayrollsUpdateTaxLiabilities } from "../funcs/externalPayrollsUpdateTaxLiabilities.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1TaxLiabilitiesRequest,
   PutV1TaxLiabilitiesResponse,
@@ -27,6 +38,17 @@ export type ExternalPayrollsUpdateTaxLiabilitiesMutationVariables = {
 export type ExternalPayrollsUpdateTaxLiabilitiesMutationData =
   PutV1TaxLiabilitiesResponse;
 
+export type ExternalPayrollsUpdateTaxLiabilitiesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update tax liabilities
  *
@@ -38,12 +60,12 @@ export type ExternalPayrollsUpdateTaxLiabilitiesMutationData =
 export function useExternalPayrollsUpdateTaxLiabilitiesMutation(
   options?: MutationHookOptions<
     ExternalPayrollsUpdateTaxLiabilitiesMutationData,
-    Error,
+    ExternalPayrollsUpdateTaxLiabilitiesMutationError,
     ExternalPayrollsUpdateTaxLiabilitiesMutationVariables
   >,
 ): UseMutationResult<
   ExternalPayrollsUpdateTaxLiabilitiesMutationData,
-  Error,
+  ExternalPayrollsUpdateTaxLiabilitiesMutationError,
   ExternalPayrollsUpdateTaxLiabilitiesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

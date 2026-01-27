@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeesEmployeeIdPaymentMethodRequest } from "../models/operations/getv1employeesemployeeidpaymentmethod.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeePaymentMethodGet,
 };
 
+export type EmployeePaymentMethodGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's payment method
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useEmployeePaymentMethodGet(
   request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
-  options?: QueryHookOptions<EmployeePaymentMethodGetQueryData>,
-): UseQueryResult<EmployeePaymentMethodGetQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeePaymentMethodGetQueryData,
+    EmployeePaymentMethodGetQueryError
+  >,
+): UseQueryResult<
+  EmployeePaymentMethodGetQueryData,
+  EmployeePaymentMethodGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeePaymentMethodGetQuery(
@@ -68,8 +94,14 @@ export function useEmployeePaymentMethodGet(
  */
 export function useEmployeePaymentMethodGetSuspense(
   request: GetV1EmployeesEmployeeIdPaymentMethodRequest,
-  options?: SuspenseQueryHookOptions<EmployeePaymentMethodGetQueryData>,
-): UseSuspenseQueryResult<EmployeePaymentMethodGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeePaymentMethodGetQueryData,
+    EmployeePaymentMethodGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeePaymentMethodGetQueryData,
+  EmployeePaymentMethodGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeePaymentMethodGetQuery(

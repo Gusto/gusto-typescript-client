@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { jobsAndCompensationsDelete } from "../funcs/jobsAndCompensationsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1JobsJobIdRequest,
   DeleteV1JobsJobIdResponse,
@@ -26,6 +36,16 @@ export type JobsAndCompensationsDeleteMutationVariables = {
 
 export type JobsAndCompensationsDeleteMutationData = DeleteV1JobsJobIdResponse;
 
+export type JobsAndCompensationsDeleteMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an individual job
  *
@@ -37,12 +57,12 @@ export type JobsAndCompensationsDeleteMutationData = DeleteV1JobsJobIdResponse;
 export function useJobsAndCompensationsDeleteMutation(
   options?: MutationHookOptions<
     JobsAndCompensationsDeleteMutationData,
-    Error,
+    JobsAndCompensationsDeleteMutationError,
     JobsAndCompensationsDeleteMutationVariables
   >,
 ): UseMutationResult<
   JobsAndCompensationsDeleteMutationData,
-  Error,
+  JobsAndCompensationsDeleteMutationError,
   JobsAndCompensationsDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

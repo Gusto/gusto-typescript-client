@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetVersionEmployeesTimeOffActivitiesRequest } from "../models/operations/getversionemployeestimeoffactivities.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeesGetTimeOffActivities,
 };
 
+export type EmployeesGetTimeOffActivitiesQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get employee time off activities
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useEmployeesGetTimeOffActivities(
   request: GetVersionEmployeesTimeOffActivitiesRequest,
-  options?: QueryHookOptions<EmployeesGetTimeOffActivitiesQueryData>,
-): UseQueryResult<EmployeesGetTimeOffActivitiesQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeesGetTimeOffActivitiesQueryData,
+    EmployeesGetTimeOffActivitiesQueryError
+  >,
+): UseQueryResult<
+  EmployeesGetTimeOffActivitiesQueryData,
+  EmployeesGetTimeOffActivitiesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeesGetTimeOffActivitiesQuery(
@@ -64,8 +90,14 @@ export function useEmployeesGetTimeOffActivities(
  */
 export function useEmployeesGetTimeOffActivitiesSuspense(
   request: GetVersionEmployeesTimeOffActivitiesRequest,
-  options?: SuspenseQueryHookOptions<EmployeesGetTimeOffActivitiesQueryData>,
-): UseSuspenseQueryResult<EmployeesGetTimeOffActivitiesQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeesGetTimeOffActivitiesQueryData,
+    EmployeesGetTimeOffActivitiesQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeesGetTimeOffActivitiesQueryData,
+  EmployeesGetTimeOffActivitiesQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeesGetTimeOffActivitiesQuery(

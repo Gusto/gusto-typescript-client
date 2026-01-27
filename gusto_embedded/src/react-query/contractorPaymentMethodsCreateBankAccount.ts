@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentMethodsCreateBankAccount } from "../funcs/contractorPaymentMethodsCreateBankAccount.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1ContractorsContractorUuidBankAccountsRequest,
   PostV1ContractorsContractorUuidBankAccountsResponse,
@@ -27,6 +38,17 @@ export type ContractorPaymentMethodsCreateBankAccountMutationVariables = {
 export type ContractorPaymentMethodsCreateBankAccountMutationData =
   PostV1ContractorsContractorUuidBankAccountsResponse;
 
+export type ContractorPaymentMethodsCreateBankAccountMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a contractor bank account
  *
@@ -40,12 +62,12 @@ export type ContractorPaymentMethodsCreateBankAccountMutationData =
 export function useContractorPaymentMethodsCreateBankAccountMutation(
   options?: MutationHookOptions<
     ContractorPaymentMethodsCreateBankAccountMutationData,
-    Error,
+    ContractorPaymentMethodsCreateBankAccountMutationError,
     ContractorPaymentMethodsCreateBankAccountMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentMethodsCreateBankAccountMutationData,
-  Error,
+  ContractorPaymentMethodsCreateBankAccountMutationError,
   ContractorPaymentMethodsCreateBankAccountMutationVariables
 > {
   const client = useGustoEmbeddedContext();

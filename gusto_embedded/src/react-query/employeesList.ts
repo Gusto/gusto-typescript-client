@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdEmployeesHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdEmployeesRequest,
@@ -34,6 +45,17 @@ export {
   queryKeyEmployeesList,
 };
 
+export type EmployeesListQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get employees of a company
  *
@@ -44,8 +66,8 @@ export {
  */
 export function useEmployeesList(
   request: GetV1CompaniesCompanyIdEmployeesRequest,
-  options?: QueryHookOptions<EmployeesListQueryData>,
-): UseQueryResult<EmployeesListQueryData, Error> {
+  options?: QueryHookOptions<EmployeesListQueryData, EmployeesListQueryError>,
+): UseQueryResult<EmployeesListQueryData, EmployeesListQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeesListQuery(
@@ -67,8 +89,11 @@ export function useEmployeesList(
  */
 export function useEmployeesListSuspense(
   request: GetV1CompaniesCompanyIdEmployeesRequest,
-  options?: SuspenseQueryHookOptions<EmployeesListQueryData>,
-): UseSuspenseQueryResult<EmployeesListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeesListQueryData,
+    EmployeesListQueryError
+  >,
+): UseSuspenseQueryResult<EmployeesListQueryData, EmployeesListQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeesListQuery(

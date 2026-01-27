@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1GarnishmentsChildSupportRequest } from "../models/operations/getv1garnishmentschildsupport.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyGarnishmentsGetChildSupportData,
 };
 
+export type GarnishmentsGetChildSupportDataQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get child support garnishment data
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useGarnishmentsGetChildSupportData(
   request: GetV1GarnishmentsChildSupportRequest,
-  options?: QueryHookOptions<GarnishmentsGetChildSupportDataQueryData>,
-): UseQueryResult<GarnishmentsGetChildSupportDataQueryData, Error> {
+  options?: QueryHookOptions<
+    GarnishmentsGetChildSupportDataQueryData,
+    GarnishmentsGetChildSupportDataQueryError
+  >,
+): UseQueryResult<
+  GarnishmentsGetChildSupportDataQueryData,
+  GarnishmentsGetChildSupportDataQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildGarnishmentsGetChildSupportDataQuery(
@@ -64,8 +90,14 @@ export function useGarnishmentsGetChildSupportData(
  */
 export function useGarnishmentsGetChildSupportDataSuspense(
   request: GetV1GarnishmentsChildSupportRequest,
-  options?: SuspenseQueryHookOptions<GarnishmentsGetChildSupportDataQueryData>,
-): UseSuspenseQueryResult<GarnishmentsGetChildSupportDataQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GarnishmentsGetChildSupportDataQueryData,
+    GarnishmentsGetChildSupportDataQueryError
+  >,
+): UseSuspenseQueryResult<
+  GarnishmentsGetChildSupportDataQueryData,
+  GarnishmentsGetChildSupportDataQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildGarnishmentsGetChildSupportDataQuery(

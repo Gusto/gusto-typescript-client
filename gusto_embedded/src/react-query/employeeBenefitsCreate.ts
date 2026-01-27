@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsCreate } from "../funcs/employeeBenefitsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1EmployeesEmployeeIdEmployeeBenefitsRequest,
   PostV1EmployeesEmployeeIdEmployeeBenefitsResponse,
@@ -27,6 +38,17 @@ export type EmployeeBenefitsCreateMutationVariables = {
 export type EmployeeBenefitsCreateMutationData =
   PostV1EmployeesEmployeeIdEmployeeBenefitsResponse;
 
+export type EmployeeBenefitsCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an employee benefit
  *
@@ -40,12 +62,12 @@ export type EmployeeBenefitsCreateMutationData =
 export function useEmployeeBenefitsCreateMutation(
   options?: MutationHookOptions<
     EmployeeBenefitsCreateMutationData,
-    Error,
+    EmployeeBenefitsCreateMutationError,
     EmployeeBenefitsCreateMutationVariables
   >,
 ): UseMutationResult<
   EmployeeBenefitsCreateMutationData,
-  Error,
+  EmployeeBenefitsCreateMutationError,
   EmployeeBenefitsCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

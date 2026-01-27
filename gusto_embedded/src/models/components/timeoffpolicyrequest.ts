@@ -39,7 +39,7 @@ export const AccrualMethod = {
 export type AccrualMethod = ClosedEnum<typeof AccrualMethod>;
 
 /**
- * Request body for creating or updating a time off policy
+ * Request body for creating a time off policy
  */
 export type TimeOffPolicyRequest = {
   /**
@@ -59,7 +59,7 @@ export type TimeOffPolicyRequest = {
    */
   accrualRate?: string | null | undefined;
   /**
-   * The number of hours an employee has to work or be paid for to accrue the number of hours set in the accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime, per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g. "40.0".. Represented as a float, e.g. "40.0".
+   * The number of hours an employee has to work or be paid for to accrue the number of hours set in the accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime, per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g. "40.0".
    */
   accrualRateUnit?: string | null | undefined;
   /**

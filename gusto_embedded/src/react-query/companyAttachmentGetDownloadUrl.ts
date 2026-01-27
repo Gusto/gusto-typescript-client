@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesAttachmentUrlRequest } from "../models/operations/getv1companiesattachmenturl.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyAttachmentGetDownloadUrl,
 };
 
+export type CompanyAttachmentGetDownloadUrlQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a temporary url to download the Company Attachment file
  *
@@ -42,8 +62,14 @@ export {
  */
 export function useCompanyAttachmentGetDownloadUrl(
   request: GetV1CompaniesAttachmentUrlRequest,
-  options?: QueryHookOptions<CompanyAttachmentGetDownloadUrlQueryData>,
-): UseQueryResult<CompanyAttachmentGetDownloadUrlQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyAttachmentGetDownloadUrlQueryData,
+    CompanyAttachmentGetDownloadUrlQueryError
+  >,
+): UseQueryResult<
+  CompanyAttachmentGetDownloadUrlQueryData,
+  CompanyAttachmentGetDownloadUrlQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyAttachmentGetDownloadUrlQuery(
@@ -66,8 +92,14 @@ export function useCompanyAttachmentGetDownloadUrl(
  */
 export function useCompanyAttachmentGetDownloadUrlSuspense(
   request: GetV1CompaniesAttachmentUrlRequest,
-  options?: SuspenseQueryHookOptions<CompanyAttachmentGetDownloadUrlQueryData>,
-): UseSuspenseQueryResult<CompanyAttachmentGetDownloadUrlQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyAttachmentGetDownloadUrlQueryData,
+    CompanyAttachmentGetDownloadUrlQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyAttachmentGetDownloadUrlQueryData,
+  CompanyAttachmentGetDownloadUrlQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyAttachmentGetDownloadUrlQuery(

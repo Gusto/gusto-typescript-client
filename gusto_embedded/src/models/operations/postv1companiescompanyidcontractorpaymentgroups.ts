@@ -33,6 +33,37 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersio
     typeof PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion
   >;
 
+export type Options = {
+  /**
+   * The type of option
+   */
+  type?: string | undefined;
+  /**
+   * Message for the option
+   */
+  message?: string | undefined;
+};
+
+export type PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers =
+  {
+    /**
+     * The type of blocker that is blocking the payment submission
+     */
+    blockerType?: string | undefined;
+    /**
+     * The unblock option selected to resolve the submission blocker
+     */
+    selectedOption?: string | null | undefined;
+    /**
+     * Optional message related to the blocker
+     */
+    message?: string | undefined;
+    /**
+     * Optional array of additional options for the blocker
+     */
+    options?: Array<Options> | undefined;
+  };
+
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
@@ -78,6 +109,12 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
    * Required token used to make contractor payment group creation idempotent. String must be unique for each group you intend to create.
    */
   creationToken: string;
+  /**
+   * Optional array of submission blockers with selected unblock options. Returned from the preview endpoint and can be submitted with selected_option to resolve blockers.
+   */
+  submissionBlockers?:
+    | Array<PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers>
+    | undefined;
   contractorPayments: Array<ContractorPayments>;
 };
 
@@ -110,6 +147,63 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersi
   > = z.nativeEnum(
     PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion,
   );
+
+/** @internal */
+export type Options$Outbound = {
+  type?: string | undefined;
+  message?: string | undefined;
+};
+
+/** @internal */
+export const Options$outboundSchema: z.ZodType<
+  Options$Outbound,
+  z.ZodTypeDef,
+  Options
+> = z.object({
+  type: z.string().optional(),
+  message: z.string().optional(),
+});
+
+export function optionsToJSON(options: Options): string {
+  return JSON.stringify(Options$outboundSchema.parse(options));
+}
+
+/** @internal */
+export type PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$Outbound =
+  {
+    blocker_type?: string | undefined;
+    selected_option?: string | null | undefined;
+    message?: string | undefined;
+    options?: Array<Options$Outbound> | undefined;
+  };
+
+/** @internal */
+export const PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$outboundSchema:
+  z.ZodType<
+    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$Outbound,
+    z.ZodTypeDef,
+    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers
+  > = z.object({
+    blockerType: z.string().optional(),
+    selectedOption: z.nullable(z.string()).optional(),
+    message: z.string().optional(),
+    options: z.array(z.lazy(() => Options$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      blockerType: "blocker_type",
+      selectedOption: "selected_option",
+    });
+  });
+
+export function postV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockersToJSON(
+  postV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers:
+    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers,
+): string {
+  return JSON.stringify(
+    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$outboundSchema
+      .parse(postV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers),
+  );
+}
 
 /** @internal */
 export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$outboundSchema:
@@ -163,6 +257,11 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound 
   {
     check_date: string;
     creation_token: string;
+    submission_blockers?:
+      | Array<
+        PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$Outbound
+      >
+      | undefined;
     contractor_payments: Array<ContractorPayments$Outbound>;
   };
 
@@ -175,6 +274,11 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outbound
   > = z.object({
     checkDate: z.instanceof(RFCDate).transform(v => v.toString()),
     creationToken: z.string(),
+    submissionBlockers: z.array(
+      z.lazy(() =>
+        PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$outboundSchema
+      ),
+    ).optional(),
     contractorPayments: z.array(
       z.lazy(() => ContractorPayments$outboundSchema),
     ),
@@ -182,6 +286,7 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outbound
     return remap$(v, {
       checkDate: "check_date",
       creationToken: "creation_token",
+      submissionBlockers: "submission_blockers",
       contractorPayments: "contractor_payments",
     });
   });

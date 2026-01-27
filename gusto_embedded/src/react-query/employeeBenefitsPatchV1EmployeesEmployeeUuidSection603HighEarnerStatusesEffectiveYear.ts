@@ -13,6 +13,17 @@ import {
 } from "../funcs/employeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
   PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse,
@@ -31,6 +42,17 @@ export type EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStat
 export type EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationData =
   PatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearResponse;
 
+export type EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a Section 603 high earner status
  *
@@ -45,12 +67,12 @@ export type EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStat
 export function useEmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutation(
   options?: MutationHookOptions<
     EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationData,
-    Error,
+    EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationError,
     EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationVariables
   >,
 ): UseMutationResult<
   EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationData,
-  Error,
+  EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationError,
   EmployeeBenefitsPatchV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearMutationVariables
 > {
   const client = useGustoEmbeddedContext();

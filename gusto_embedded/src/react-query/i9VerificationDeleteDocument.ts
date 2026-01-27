@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { i9VerificationDeleteDocument } from "../funcs/i9VerificationDeleteDocument.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdRequest,
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse,
@@ -27,6 +37,16 @@ export type I9VerificationDeleteDocumentMutationVariables = {
 export type I9VerificationDeleteDocumentMutationData =
   DeleteV1EmployeesEmployeeIdI9AuthorizationDocumentsDocumentIdResponse;
 
+export type I9VerificationDeleteDocumentMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an employee's I-9 verification document
  *
@@ -38,12 +58,12 @@ export type I9VerificationDeleteDocumentMutationData =
 export function useI9VerificationDeleteDocumentMutation(
   options?: MutationHookOptions<
     I9VerificationDeleteDocumentMutationData,
-    Error,
+    I9VerificationDeleteDocumentMutationError,
     I9VerificationDeleteDocumentMutationVariables
   >,
 ): UseMutationResult<
   I9VerificationDeleteDocumentMutationData,
-  Error,
+  I9VerificationDeleteDocumentMutationError,
   I9VerificationDeleteDocumentMutationVariables
 > {
   const client = useGustoEmbeddedContext();

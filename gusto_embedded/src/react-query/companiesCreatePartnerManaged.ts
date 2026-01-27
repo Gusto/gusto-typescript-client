@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesCreatePartnerManaged } from "../funcs/companiesCreatePartnerManaged.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1PartnerManagedCompaniesRequest,
   PostV1PartnerManagedCompaniesResponse,
@@ -28,6 +39,17 @@ export type CompaniesCreatePartnerManagedMutationVariables = {
 
 export type CompaniesCreatePartnerManagedMutationData =
   PostV1PartnerManagedCompaniesResponse;
+
+export type CompaniesCreatePartnerManagedMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Create a partner managed company
@@ -49,12 +71,12 @@ export type CompaniesCreatePartnerManagedMutationData =
 export function useCompaniesCreatePartnerManagedMutation(
   options?: MutationHookOptions<
     CompaniesCreatePartnerManagedMutationData,
-    Error,
+    CompaniesCreatePartnerManagedMutationError,
     CompaniesCreatePartnerManagedMutationVariables
   >,
 ): UseMutationResult<
   CompaniesCreatePartnerManagedMutationData,
-  Error,
+  CompaniesCreatePartnerManagedMutationError,
   CompaniesCreatePartnerManagedMutationVariables
 > {
   const client = useGustoEmbeddedContext();

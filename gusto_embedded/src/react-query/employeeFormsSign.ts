@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeFormsSign } from "../funcs/employeeFormsSign.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1EmployeeFormSignRequest,
   PutV1EmployeeFormSignResponse,
@@ -26,6 +37,17 @@ export type EmployeeFormsSignMutationVariables = {
 
 export type EmployeeFormsSignMutationData = PutV1EmployeeFormSignResponse;
 
+export type EmployeeFormsSignMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Sign an employee form
  *
@@ -40,12 +62,12 @@ export type EmployeeFormsSignMutationData = PutV1EmployeeFormSignResponse;
 export function useEmployeeFormsSignMutation(
   options?: MutationHookOptions<
     EmployeeFormsSignMutationData,
-    Error,
+    EmployeeFormsSignMutationError,
     EmployeeFormsSignMutationVariables
   >,
 ): UseMutationResult<
   EmployeeFormsSignMutationData,
-  Error,
+  EmployeeFormsSignMutationError,
   EmployeeFormsSignMutationVariables
 > {
   const client = useGustoEmbeddedContext();

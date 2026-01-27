@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsCreateTermination } from "../funcs/employeeEmploymentsCreateTermination.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1EmployeesEmployeeIdTerminationsRequest,
   PostV1EmployeesEmployeeIdTerminationsResponse,
@@ -27,6 +38,17 @@ export type EmployeeEmploymentsCreateTerminationMutationVariables = {
 export type EmployeeEmploymentsCreateTerminationMutationData =
   PostV1EmployeesEmployeeIdTerminationsResponse;
 
+export type EmployeeEmploymentsCreateTerminationMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an employee termination
  *
@@ -40,12 +62,12 @@ export type EmployeeEmploymentsCreateTerminationMutationData =
 export function useEmployeeEmploymentsCreateTerminationMutation(
   options?: MutationHookOptions<
     EmployeeEmploymentsCreateTerminationMutationData,
-    Error,
+    EmployeeEmploymentsCreateTerminationMutationError,
     EmployeeEmploymentsCreateTerminationMutationVariables
   >,
 ): UseMutationResult<
   EmployeeEmploymentsCreateTerminationMutationData,
-  Error,
+  EmployeeEmploymentsCreateTerminationMutationError,
   EmployeeEmploymentsCreateTerminationMutationVariables
 > {
   const client = useGustoEmbeddedContext();

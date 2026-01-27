@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetWireInRequestsWireInRequestUuidRequest } from "../models/operations/getwireinrequestswireinrequestuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   type WireInRequestsGetQueryData,
 };
 
+export type WireInRequestsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a single Wire In Request
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useWireInRequestsGet(
   request: GetWireInRequestsWireInRequestUuidRequest,
-  options?: QueryHookOptions<WireInRequestsGetQueryData>,
-): UseQueryResult<WireInRequestsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    WireInRequestsGetQueryData,
+    WireInRequestsGetQueryError
+  >,
+): UseQueryResult<WireInRequestsGetQueryData, WireInRequestsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildWireInRequestsGetQuery(
@@ -64,8 +87,14 @@ export function useWireInRequestsGet(
  */
 export function useWireInRequestsGetSuspense(
   request: GetWireInRequestsWireInRequestUuidRequest,
-  options?: SuspenseQueryHookOptions<WireInRequestsGetQueryData>,
-): UseSuspenseQueryResult<WireInRequestsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WireInRequestsGetQueryData,
+    WireInRequestsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  WireInRequestsGetQueryData,
+  WireInRequestsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildWireInRequestsGetQuery(

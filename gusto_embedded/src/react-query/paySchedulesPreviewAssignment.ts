@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paySchedulesPreviewAssignment } from "../funcs/paySchedulesPreviewAssignment.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewRequest,
   PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse,
@@ -27,6 +38,17 @@ export type PaySchedulesPreviewAssignmentMutationVariables = {
 export type PaySchedulesPreviewAssignmentMutationData =
   PostV1CompaniesCompanyIdPaySchedulesAssignmentPreviewResponse;
 
+export type PaySchedulesPreviewAssignmentMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Preview pay schedule assignments for a company
  *
@@ -38,12 +60,12 @@ export type PaySchedulesPreviewAssignmentMutationData =
 export function usePaySchedulesPreviewAssignmentMutation(
   options?: MutationHookOptions<
     PaySchedulesPreviewAssignmentMutationData,
-    Error,
+    PaySchedulesPreviewAssignmentMutationError,
     PaySchedulesPreviewAssignmentMutationVariables
   >,
 ): UseMutationResult<
   PaySchedulesPreviewAssignmentMutationData,
-  Error,
+  PaySchedulesPreviewAssignmentMutationError,
   PaySchedulesPreviewAssignmentMutationVariables
 > {
   const client = useGustoEmbeddedContext();

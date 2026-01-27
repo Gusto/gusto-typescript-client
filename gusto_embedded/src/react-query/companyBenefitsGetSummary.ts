@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1BenefitsCompanyBenefitIdSummaryRequest } from "../models/operations/getv1benefitscompanybenefitidsummary.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyBenefitsGetSummary,
 };
 
+export type CompanyBenefitsGetSummaryQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get company benefit summary by company benefit id.
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useCompanyBenefitsGetSummary(
   request: GetV1BenefitsCompanyBenefitIdSummaryRequest,
-  options?: QueryHookOptions<CompanyBenefitsGetSummaryQueryData>,
-): UseQueryResult<CompanyBenefitsGetSummaryQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyBenefitsGetSummaryQueryData,
+    CompanyBenefitsGetSummaryQueryError
+  >,
+): UseQueryResult<
+  CompanyBenefitsGetSummaryQueryData,
+  CompanyBenefitsGetSummaryQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyBenefitsGetSummaryQuery(
@@ -68,8 +94,14 @@ export function useCompanyBenefitsGetSummary(
  */
 export function useCompanyBenefitsGetSummarySuspense(
   request: GetV1BenefitsCompanyBenefitIdSummaryRequest,
-  options?: SuspenseQueryHookOptions<CompanyBenefitsGetSummaryQueryData>,
-): UseSuspenseQueryResult<CompanyBenefitsGetSummaryQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyBenefitsGetSummaryQueryData,
+    CompanyBenefitsGetSummaryQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyBenefitsGetSummaryQueryData,
+  CompanyBenefitsGetSummaryQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyBenefitsGetSummaryQuery(

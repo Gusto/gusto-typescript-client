@@ -62,31 +62,27 @@ export const AccrualMethod = {
 export type AccrualMethod = ClosedEnum<typeof AccrualMethod>;
 
 /**
- * Request body for creating or updating a time off policy
+ * Request body for updating a time off policy
  */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody = {
   /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version: string;
-  /**
    * Name of the time off policy
    */
-  name: string;
+  name?: string | undefined;
   /**
    * Type of the time off policy. Currently only "vacation" and "sick" are supported
    */
-  policyType: PolicyType;
+  policyType?: PolicyType | undefined;
   /**
    * Accrual method of the time off policy
    */
-  accrualMethod: AccrualMethod;
+  accrualMethod?: AccrualMethod | undefined;
   /**
    * The rate at which the time off hours will accrue for an employee on the policy. Represented as a float, e.g. "40.0".
    */
   accrualRate?: string | null | undefined;
   /**
-   * The number of hours an employee has to work or be paid for to accrue the number of hours set in the accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime, per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g. "40.0".. Represented as a float, e.g. "40.0".
+   * The number of hours an employee has to work or be paid for to accrue the number of hours set in the accrual rate. Only used for hourly policies (per_hour_paid, per_hour_paid_no_overtime, per_hour_work, per_hour_worked_no_overtime). Represented as a float, e.g. "40.0".
    */
   accrualRateUnit?: string | null | undefined;
   /**
@@ -117,6 +113,10 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody = {
    * boolean representing if a policy has completed configuration
    */
   complete?: boolean | undefined;
+  /**
+   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   */
+  version: string;
 };
 
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRequest = {
@@ -158,10 +158,9 @@ export const AccrualMethod$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export type PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody$Outbound = {
-  version: string;
-  name: string;
-  policy_type: string;
-  accrual_method: string;
+  name?: string | undefined;
+  policy_type?: string | undefined;
+  accrual_method?: string | undefined;
   accrual_rate?: string | null | undefined;
   accrual_rate_unit?: string | null | undefined;
   paid_out_on_termination?: boolean | undefined;
@@ -171,6 +170,7 @@ export type PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody$Outbound = {
   max_hours?: string | null | undefined;
   policy_reset_date?: string | null | undefined;
   complete?: boolean | undefined;
+  version: string;
 };
 
 /** @internal */
@@ -180,10 +180,9 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody$outboundSchema:
     z.ZodTypeDef,
     PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody
   > = z.object({
-    version: z.string(),
-    name: z.string(),
-    policyType: PolicyType$outboundSchema,
-    accrualMethod: AccrualMethod$outboundSchema,
+    name: z.string().optional(),
+    policyType: PolicyType$outboundSchema.optional(),
+    accrualMethod: AccrualMethod$outboundSchema.optional(),
     accrualRate: z.nullable(z.string()).optional(),
     accrualRateUnit: z.nullable(z.string()).optional(),
     paidOutOnTermination: z.boolean().optional(),
@@ -193,6 +192,7 @@ export const PutV1TimeOffPoliciesTimeOffPolicyUuidRequestBody$outboundSchema:
     maxHours: z.nullable(z.string()).optional(),
     policyResetDate: z.nullable(z.string()).optional(),
     complete: z.boolean().optional(),
+    version: z.string(),
   }).transform((v) => {
     return remap$(v, {
       policyType: "policy_type",

@@ -13,18 +13,12 @@ import {
   PayScheduleAssignmentEmployeeChange$inboundSchema,
 } from "./payscheduleassignmentemployeechange.js";
 
-/**
- * The pay schedule assignment type.
- */
 export const PayScheduleAssignmentPreviewType = {
   Single: "single",
   HourlySalaried: "hourly_salaried",
   ByEmployee: "by_employee",
   ByDepartment: "by_department",
 } as const;
-/**
- * The pay schedule assignment type.
- */
 export type PayScheduleAssignmentPreviewType = ClosedEnum<
   typeof PayScheduleAssignmentPreviewType
 >;

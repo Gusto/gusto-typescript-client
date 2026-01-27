@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentGroupsCreate } from "../funcs/contractorPaymentGroupsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdContractorPaymentGroupsRequest,
   PostV1CompaniesCompanyIdContractorPaymentGroupsResponse,
@@ -27,6 +38,17 @@ export type ContractorPaymentGroupsCreateMutationVariables = {
 export type ContractorPaymentGroupsCreateMutationData =
   PostV1CompaniesCompanyIdContractorPaymentGroupsResponse;
 
+export type ContractorPaymentGroupsCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a contractor payment group
  *
@@ -38,12 +60,12 @@ export type ContractorPaymentGroupsCreateMutationData =
 export function useContractorPaymentGroupsCreateMutation(
   options?: MutationHookOptions<
     ContractorPaymentGroupsCreateMutationData,
-    Error,
+    ContractorPaymentGroupsCreateMutationError,
     ContractorPaymentGroupsCreateMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentGroupsCreateMutationData,
-  Error,
+  ContractorPaymentGroupsCreateMutationError,
   ContractorPaymentGroupsCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

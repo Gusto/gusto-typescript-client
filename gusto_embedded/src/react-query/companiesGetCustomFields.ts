@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdCustomFieldsRequest } from "../models/operations/getv1companiescompanyidcustomfields.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompaniesGetCustomFields,
 };
 
+export type CompaniesGetCustomFieldsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get the custom fields of a company
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useCompaniesGetCustomFields(
   request: GetV1CompaniesCompanyIdCustomFieldsRequest,
-  options?: QueryHookOptions<CompaniesGetCustomFieldsQueryData>,
-): UseQueryResult<CompaniesGetCustomFieldsQueryData, Error> {
+  options?: QueryHookOptions<
+    CompaniesGetCustomFieldsQueryData,
+    CompaniesGetCustomFieldsQueryError
+  >,
+): UseQueryResult<
+  CompaniesGetCustomFieldsQueryData,
+  CompaniesGetCustomFieldsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompaniesGetCustomFieldsQuery(
@@ -64,8 +90,14 @@ export function useCompaniesGetCustomFields(
  */
 export function useCompaniesGetCustomFieldsSuspense(
   request: GetV1CompaniesCompanyIdCustomFieldsRequest,
-  options?: SuspenseQueryHookOptions<CompaniesGetCustomFieldsQueryData>,
-): UseSuspenseQueryResult<CompaniesGetCustomFieldsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompaniesGetCustomFieldsQueryData,
+    CompaniesGetCustomFieldsQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompaniesGetCustomFieldsQueryData,
+  CompaniesGetCustomFieldsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompaniesGetCustomFieldsQuery(

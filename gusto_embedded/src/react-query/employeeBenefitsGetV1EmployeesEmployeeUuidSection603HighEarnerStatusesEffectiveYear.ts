@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYear,
 };
 
+export type EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a Section 603 high earner status for a specific year
  *
@@ -48,11 +70,12 @@ export function useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarne
   request:
     GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
   options?: QueryHookOptions<
-    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData,
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryError
   >,
 ): UseQueryResult<
   EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData,
-  Error
+  EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -80,11 +103,12 @@ export function useEmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarne
   request:
     GetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData,
+    EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryError
   >,
 ): UseSuspenseQueryResult<
   EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryData,
-  Error
+  EmployeeBenefitsGetV1EmployeesEmployeeUuidSection603HighEarnerStatusesEffectiveYearQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

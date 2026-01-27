@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses } from "../funcs/employeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatuses.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesRequest,
   PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse,
@@ -28,6 +39,17 @@ export type EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatu
 export type EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationData =
   PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse;
 
+export type EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a Section 603 high earner status
  *
@@ -42,12 +64,12 @@ export type EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatu
 export function useEmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutation(
   options?: MutationHookOptions<
     EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationData,
-    Error,
+    EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationError,
     EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationVariables
   >,
 ): UseMutationResult<
   EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationData,
-  Error,
+  EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationError,
   EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationVariables
 > {
   const client = useGustoEmbeddedContext();

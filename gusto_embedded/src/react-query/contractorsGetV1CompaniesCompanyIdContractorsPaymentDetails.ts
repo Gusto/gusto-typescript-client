@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdContractorsPaymentDetailsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
@@ -32,6 +43,17 @@ export {
   prefetchContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
   queryKeyContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails,
 };
+
+export type ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * List contractor payment details
@@ -68,11 +90,12 @@ export {
 export function useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
   request: GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
   options?: QueryHookOptions<
-    ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData
+    ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData,
+    ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryError
   >,
 ): UseQueryResult<
   ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData,
-  Error
+  ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -120,11 +143,12 @@ export function useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetails(
 export function useContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsSuspense(
   request: GetV1CompaniesCompanyIdContractorsPaymentDetailsRequest,
   options?: SuspenseQueryHookOptions<
-    ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData
+    ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData,
+    ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryError
   >,
 ): UseSuspenseQueryResult<
   ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryData,
-  Error
+  ContractorsGetV1CompaniesCompanyIdContractorsPaymentDetailsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesCreate } from "../funcs/timeOffPoliciesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyUuidTimeOffPoliciesRequest,
   PostV1CompaniesCompanyUuidTimeOffPoliciesResponse,
@@ -27,6 +38,17 @@ export type TimeOffPoliciesCreateMutationVariables = {
 export type TimeOffPoliciesCreateMutationData =
   PostV1CompaniesCompanyUuidTimeOffPoliciesResponse;
 
+export type TimeOffPoliciesCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a time off policy
  *
@@ -38,12 +60,12 @@ export type TimeOffPoliciesCreateMutationData =
 export function useTimeOffPoliciesCreateMutation(
   options?: MutationHookOptions<
     TimeOffPoliciesCreateMutationData,
-    Error,
+    TimeOffPoliciesCreateMutationError,
     TimeOffPoliciesCreateMutationVariables
   >,
 ): UseMutationResult<
   TimeOffPoliciesCreateMutationData,
-  Error,
+  TimeOffPoliciesCreateMutationError,
   TimeOffPoliciesCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

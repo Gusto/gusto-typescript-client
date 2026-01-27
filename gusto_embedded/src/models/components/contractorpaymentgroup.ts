@@ -13,13 +13,13 @@ import {
   ContractorPaymentForGroup$inboundSchema,
 } from "./contractorpaymentforgroup.js";
 import {
-  PayrollCreditBlockersType,
-  PayrollCreditBlockersType$inboundSchema,
-} from "./payrollcreditblockerstype.js";
+  PayrollCreditBlockerType,
+  PayrollCreditBlockerType$inboundSchema,
+} from "./payrollcreditblockertype.js";
 import {
-  PayrollSubmissionBlockersType,
-  PayrollSubmissionBlockersType$inboundSchema,
-} from "./payrollsubmissionblockerstype.js";
+  PayrollSubmissionBlockerType,
+  PayrollSubmissionBlockerType$inboundSchema,
+} from "./payrollsubmissionblockertype.js";
 
 /**
  * The status of the contractor payment group.  Will be `Funded` if all payments that should be funded (i.e. have `Direct Deposit` for payment method) are funded.  A group can have status `Funded` while having associated payments that have status `Unfunded`, i.e. payment with `Check` payment method.
@@ -93,11 +93,11 @@ export type ContractorPaymentGroup = {
   /**
    * List of submission blockers for the contractor payment group.
    */
-  submissionBlockers?: Array<Array<PayrollSubmissionBlockersType>> | undefined;
+  submissionBlockers?: Array<PayrollSubmissionBlockerType> | undefined;
   /**
    * List of credit blockers for the contractor payment group.
    */
-  creditBlockers?: Array<Array<PayrollCreditBlockersType>> | undefined;
+  creditBlockers?: Array<PayrollCreditBlockerType> | undefined;
   totals?: ContractorPaymentGroupTotals | undefined;
   contractorPayments?: Array<ContractorPaymentForGroup> | undefined;
 };
@@ -150,11 +150,9 @@ export const ContractorPaymentGroup$inboundSchema: z.ZodType<
   status: ContractorPaymentGroupStatus$inboundSchema.optional(),
   creation_token: z.nullable(z.string()).optional(),
   partner_owned_disbursement: z.nullable(z.boolean()).optional(),
-  submission_blockers: z.array(
-    z.array(PayrollSubmissionBlockersType$inboundSchema),
-  ).optional(),
-  credit_blockers: z.array(z.array(PayrollCreditBlockersType$inboundSchema))
+  submission_blockers: z.array(PayrollSubmissionBlockerType$inboundSchema)
     .optional(),
+  credit_blockers: z.array(PayrollCreditBlockerType$inboundSchema).optional(),
   totals: z.lazy(() => ContractorPaymentGroupTotals$inboundSchema).optional(),
   contractor_payments: z.array(ContractorPaymentForGroup$inboundSchema)
     .optional(),

@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesPayrollBlockersCompanyUuidRequest } from "../models/operations/getv1companiespayrollblockerscompanyuuid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyPayrollsGetBlockers,
 };
 
+export type PayrollsGetBlockersQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all payroll blockers for a company
  *
@@ -43,8 +63,11 @@ export {
  */
 export function usePayrollsGetBlockers(
   request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
-  options?: QueryHookOptions<PayrollsGetBlockersQueryData>,
-): UseQueryResult<PayrollsGetBlockersQueryData, Error> {
+  options?: QueryHookOptions<
+    PayrollsGetBlockersQueryData,
+    PayrollsGetBlockersQueryError
+  >,
+): UseQueryResult<PayrollsGetBlockersQueryData, PayrollsGetBlockersQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPayrollsGetBlockersQuery(
@@ -68,8 +91,14 @@ export function usePayrollsGetBlockers(
  */
 export function usePayrollsGetBlockersSuspense(
   request: GetV1CompaniesPayrollBlockersCompanyUuidRequest,
-  options?: SuspenseQueryHookOptions<PayrollsGetBlockersQueryData>,
-): UseSuspenseQueryResult<PayrollsGetBlockersQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PayrollsGetBlockersQueryData,
+    PayrollsGetBlockersQueryError
+  >,
+): UseSuspenseQueryResult<
+  PayrollsGetBlockersQueryData,
+  PayrollsGetBlockersQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPayrollsGetBlockersQuery(

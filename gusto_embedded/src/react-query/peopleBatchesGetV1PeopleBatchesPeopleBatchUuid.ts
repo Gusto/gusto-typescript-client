@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1PeopleBatchesPeopleBatchUuidHeaderXGustoAPIVersion,
   GetV1PeopleBatchesPeopleBatchUuidRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyPeopleBatchesGetV1PeopleBatchesPeopleBatchUuid,
 };
 
+export type PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a people batch
  *
@@ -46,11 +68,12 @@ export {
 export function usePeopleBatchesGetV1PeopleBatchesPeopleBatchUuid(
   request: GetV1PeopleBatchesPeopleBatchUuidRequest,
   options?: QueryHookOptions<
-    PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryData
+    PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryData,
+    PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryError
   >,
 ): UseQueryResult<
   PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryData,
-  Error
+  PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -76,11 +99,12 @@ export function usePeopleBatchesGetV1PeopleBatchesPeopleBatchUuid(
 export function usePeopleBatchesGetV1PeopleBatchesPeopleBatchUuidSuspense(
   request: GetV1PeopleBatchesPeopleBatchUuidRequest,
   options?: SuspenseQueryHookOptions<
-    PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryData
+    PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryData,
+    PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryError
   >,
 ): UseSuspenseQueryResult<
   PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryData,
-  Error
+  PeopleBatchesGetV1PeopleBatchesPeopleBatchUuidQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

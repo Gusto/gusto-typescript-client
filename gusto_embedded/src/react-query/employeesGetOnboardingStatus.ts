@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1EmployeesEmployeeIdOnboardingStatusHeaderXGustoAPIVersion,
   GetV1EmployeesEmployeeIdOnboardingStatusRequest,
@@ -32,6 +43,17 @@ export {
   prefetchEmployeesGetOnboardingStatus,
   queryKeyEmployeesGetOnboardingStatus,
 };
+
+export type EmployeesGetOnboardingStatusQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get the employee's onboarding status
@@ -79,8 +101,14 @@ export {
  */
 export function useEmployeesGetOnboardingStatus(
   request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
-  options?: QueryHookOptions<EmployeesGetOnboardingStatusQueryData>,
-): UseQueryResult<EmployeesGetOnboardingStatusQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeesGetOnboardingStatusQueryData,
+    EmployeesGetOnboardingStatusQueryError
+  >,
+): UseQueryResult<
+  EmployeesGetOnboardingStatusQueryData,
+  EmployeesGetOnboardingStatusQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeesGetOnboardingStatusQuery(
@@ -138,8 +166,14 @@ export function useEmployeesGetOnboardingStatus(
  */
 export function useEmployeesGetOnboardingStatusSuspense(
   request: GetV1EmployeesEmployeeIdOnboardingStatusRequest,
-  options?: SuspenseQueryHookOptions<EmployeesGetOnboardingStatusQueryData>,
-): UseSuspenseQueryResult<EmployeesGetOnboardingStatusQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeesGetOnboardingStatusQueryData,
+    EmployeesGetOnboardingStatusQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeesGetOnboardingStatusQueryData,
+  EmployeesGetOnboardingStatusQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeesGetOnboardingStatusQuery(

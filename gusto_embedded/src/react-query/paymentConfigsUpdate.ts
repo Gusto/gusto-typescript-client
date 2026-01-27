@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { paymentConfigsUpdate } from "../funcs/paymentConfigsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompanyPaymentConfigsRequest,
   PutV1CompanyPaymentConfigsResponse,
@@ -27,6 +38,17 @@ export type PaymentConfigsUpdateMutationVariables = {
 export type PaymentConfigsUpdateMutationData =
   PutV1CompanyPaymentConfigsResponse;
 
+export type PaymentConfigsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a company's payment configs
  *
@@ -38,12 +60,12 @@ export type PaymentConfigsUpdateMutationData =
 export function usePaymentConfigsUpdateMutation(
   options?: MutationHookOptions<
     PaymentConfigsUpdateMutationData,
-    Error,
+    PaymentConfigsUpdateMutationError,
     PaymentConfigsUpdateMutationVariables
   >,
 ): UseMutationResult<
   PaymentConfigsUpdateMutationData,
-  Error,
+  PaymentConfigsUpdateMutationError,
   PaymentConfigsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

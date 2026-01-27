@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyAttachmentsCreate } from "../funcs/companyAttachmentsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesAttachmentRequest,
   PostV1CompaniesAttachmentResponse,
@@ -27,6 +38,17 @@ export type CompanyAttachmentsCreateMutationVariables = {
 export type CompanyAttachmentsCreateMutationData =
   PostV1CompaniesAttachmentResponse;
 
+export type CompanyAttachmentsCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create Company Attachment and Upload File
  *
@@ -40,12 +62,12 @@ export type CompanyAttachmentsCreateMutationData =
 export function useCompanyAttachmentsCreateMutation(
   options?: MutationHookOptions<
     CompanyAttachmentsCreateMutationData,
-    Error,
+    CompanyAttachmentsCreateMutationError,
     CompanyAttachmentsCreateMutationVariables
   >,
 ): UseMutationResult<
   CompanyAttachmentsCreateMutationData,
-  Error,
+  CompanyAttachmentsCreateMutationError,
   CompanyAttachmentsCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

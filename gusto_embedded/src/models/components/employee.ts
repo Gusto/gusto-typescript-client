@@ -68,9 +68,6 @@ export const EmployeePaymentMethod1 = {
  */
 export type EmployeePaymentMethod1 = ClosedEnum<typeof EmployeePaymentMethod1>;
 
-/**
- * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
- */
 export const EmployeeCurrentEmploymentStatus = {
   FullTime: "full_time",
   PartTimeUnderTwentyHours: "part_time_under_twenty_hours",
@@ -78,9 +75,6 @@ export const EmployeeCurrentEmploymentStatus = {
   Variable: "variable",
   Seasonal: "seasonal",
 } as const;
-/**
- * The current employment status of the employee. Full-time employees work 30+ hours per week. Part-time employees are split into two groups: those that work 20-29 hours a week, and those that work under 20 hours a week. Variable employees have hours that vary each week. Seasonal employees are hired for 6 months of the year or less.
- */
 export type EmployeeCurrentEmploymentStatus = ClosedEnum<
   typeof EmployeeCurrentEmploymentStatus
 >;

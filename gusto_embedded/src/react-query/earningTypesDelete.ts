@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { earningTypesDelete } from "../funcs/earningTypesDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidRequest,
   DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse,
@@ -27,6 +37,16 @@ export type EarningTypesDeleteMutationVariables = {
 export type EarningTypesDeleteMutationData =
   DeleteV1CompaniesCompanyIdEarningTypesEarningTypeUuidResponse;
 
+export type EarningTypesDeleteMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Deactivate an earning type
  *
@@ -38,12 +58,12 @@ export type EarningTypesDeleteMutationData =
 export function useEarningTypesDeleteMutation(
   options?: MutationHookOptions<
     EarningTypesDeleteMutationData,
-    Error,
+    EarningTypesDeleteMutationError,
     EarningTypesDeleteMutationVariables
   >,
 ): UseMutationResult<
   EarningTypesDeleteMutationData,
-  Error,
+  EarningTypesDeleteMutationError,
   EarningTypesDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

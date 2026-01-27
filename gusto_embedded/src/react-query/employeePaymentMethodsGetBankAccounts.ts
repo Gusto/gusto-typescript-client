@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeesEmployeeIdBankAccountsRequest } from "../models/operations/getv1employeesemployeeidbankaccounts.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeePaymentMethodsGetBankAccounts,
 };
 
+export type EmployeePaymentMethodsGetBankAccountsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all employee bank accounts
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useEmployeePaymentMethodsGetBankAccounts(
   request: GetV1EmployeesEmployeeIdBankAccountsRequest,
-  options?: QueryHookOptions<EmployeePaymentMethodsGetBankAccountsQueryData>,
-): UseQueryResult<EmployeePaymentMethodsGetBankAccountsQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeePaymentMethodsGetBankAccountsQueryData,
+    EmployeePaymentMethodsGetBankAccountsQueryError
+  >,
+): UseQueryResult<
+  EmployeePaymentMethodsGetBankAccountsQueryData,
+  EmployeePaymentMethodsGetBankAccountsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeePaymentMethodsGetBankAccountsQuery(
@@ -65,11 +91,12 @@ export function useEmployeePaymentMethodsGetBankAccounts(
 export function useEmployeePaymentMethodsGetBankAccountsSuspense(
   request: GetV1EmployeesEmployeeIdBankAccountsRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeePaymentMethodsGetBankAccountsQueryData
+    EmployeePaymentMethodsGetBankAccountsQueryData,
+    EmployeePaymentMethodsGetBankAccountsQueryError
   >,
 ): UseSuspenseQueryResult<
   EmployeePaymentMethodsGetBankAccountsQueryData,
-  Error
+  EmployeePaymentMethodsGetBankAccountsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

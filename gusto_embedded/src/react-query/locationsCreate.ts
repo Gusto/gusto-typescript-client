@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsCreate } from "../funcs/locationsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1CompaniesCompanyIdLocationsRequest,
   PostV1CompaniesCompanyIdLocationsResponse,
@@ -27,6 +38,17 @@ export type LocationsCreateMutationVariables = {
 export type LocationsCreateMutationData =
   PostV1CompaniesCompanyIdLocationsResponse;
 
+export type LocationsCreateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a company location
  *
@@ -40,12 +62,12 @@ export type LocationsCreateMutationData =
 export function useLocationsCreateMutation(
   options?: MutationHookOptions<
     LocationsCreateMutationData,
-    Error,
+    LocationsCreateMutationError,
     LocationsCreateMutationVariables
   >,
 ): UseMutationResult<
   LocationsCreateMutationData,
-  Error,
+  LocationsCreateMutationError,
   LocationsCreateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

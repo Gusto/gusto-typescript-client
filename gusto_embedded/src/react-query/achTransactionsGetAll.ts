@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetAchTransactionsRequest } from "../models/operations/getachtransactions.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyAchTransactionsGetAll,
 };
 
+export type AchTransactionsGetAllQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all ACH transactions for a company
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useAchTransactionsGetAll(
   request: GetAchTransactionsRequest,
-  options?: QueryHookOptions<AchTransactionsGetAllQueryData>,
-): UseQueryResult<AchTransactionsGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    AchTransactionsGetAllQueryData,
+    AchTransactionsGetAllQueryError
+  >,
+): UseQueryResult<
+  AchTransactionsGetAllQueryData,
+  AchTransactionsGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildAchTransactionsGetAllQuery(
@@ -64,8 +90,14 @@ export function useAchTransactionsGetAll(
  */
 export function useAchTransactionsGetAllSuspense(
   request: GetAchTransactionsRequest,
-  options?: SuspenseQueryHookOptions<AchTransactionsGetAllQueryData>,
-): UseSuspenseQueryResult<AchTransactionsGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    AchTransactionsGetAllQueryData,
+    AchTransactionsGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  AchTransactionsGetAllQueryData,
+  AchTransactionsGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildAchTransactionsGetAllQuery(

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { payrollsUpdate } from "../funcs/payrollsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyIdPayrollsRequest,
   PutV1CompaniesCompanyIdPayrollsResponse,
@@ -27,6 +38,17 @@ export type PayrollsUpdateMutationVariables = {
 export type PayrollsUpdateMutationData =
   PutV1CompaniesCompanyIdPayrollsResponse;
 
+export type PayrollsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a payroll by ID
  *
@@ -42,12 +64,12 @@ export type PayrollsUpdateMutationData =
 export function usePayrollsUpdateMutation(
   options?: MutationHookOptions<
     PayrollsUpdateMutationData,
-    Error,
+    PayrollsUpdateMutationError,
     PayrollsUpdateMutationVariables
   >,
 ): UseMutationResult<
   PayrollsUpdateMutationData,
-  Error,
+  PayrollsUpdateMutationError,
   PayrollsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

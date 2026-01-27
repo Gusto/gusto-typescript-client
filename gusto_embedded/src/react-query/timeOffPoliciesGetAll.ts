@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyUuidTimeOffPoliciesHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
@@ -33,6 +44,17 @@ export {
   type TimeOffPoliciesGetAllQueryData,
 };
 
+export type TimeOffPoliciesGetAllQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all time off policies for a company
  *
@@ -43,8 +65,14 @@ export {
  */
 export function useTimeOffPoliciesGetAll(
   request: GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
-  options?: QueryHookOptions<TimeOffPoliciesGetAllQueryData>,
-): UseQueryResult<TimeOffPoliciesGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    TimeOffPoliciesGetAllQueryData,
+    TimeOffPoliciesGetAllQueryError
+  >,
+): UseQueryResult<
+  TimeOffPoliciesGetAllQueryData,
+  TimeOffPoliciesGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildTimeOffPoliciesGetAllQuery(
@@ -66,8 +94,14 @@ export function useTimeOffPoliciesGetAll(
  */
 export function useTimeOffPoliciesGetAllSuspense(
   request: GetV1CompaniesCompanyUuidTimeOffPoliciesRequest,
-  options?: SuspenseQueryHookOptions<TimeOffPoliciesGetAllQueryData>,
-): UseSuspenseQueryResult<TimeOffPoliciesGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    TimeOffPoliciesGetAllQueryData,
+    TimeOffPoliciesGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  TimeOffPoliciesGetAllQueryData,
+  TimeOffPoliciesGetAllQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildTimeOffPoliciesGetAllQuery(

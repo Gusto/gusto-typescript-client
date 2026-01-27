@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { recoveryCasesRedebit } from "../funcs/recoveryCasesRedebit.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   RedebitRecoveryCaseRequest,
   RedebitRecoveryCaseResponse,
@@ -25,6 +36,17 @@ export type RecoveryCasesRedebitMutationVariables = {
 };
 
 export type RecoveryCasesRedebitMutationData = RedebitRecoveryCaseResponse;
+
+export type RecoveryCasesRedebitMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Initiate a redebit for a recovery case
@@ -41,12 +63,12 @@ export type RecoveryCasesRedebitMutationData = RedebitRecoveryCaseResponse;
 export function useRecoveryCasesRedebitMutation(
   options?: MutationHookOptions<
     RecoveryCasesRedebitMutationData,
-    Error,
+    RecoveryCasesRedebitMutationError,
     RecoveryCasesRedebitMutationVariables
   >,
 ): UseMutationResult<
   RecoveryCasesRedebitMutationData,
-  Error,
+  RecoveryCasesRedebitMutationError,
   RecoveryCasesRedebitMutationVariables
 > {
   const client = useGustoEmbeddedContext();

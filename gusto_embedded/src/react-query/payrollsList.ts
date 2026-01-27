@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DateFilterBy,
   GetV1CompaniesCompanyIdPayrollsHeaderXGustoAPIVersion,
@@ -38,6 +49,17 @@ export {
   queryKeyPayrollsList,
 };
 
+export type PayrollsListQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all payrolls for a company
  *
@@ -54,8 +76,8 @@ export {
  */
 export function usePayrollsList(
   request: GetV1CompaniesCompanyIdPayrollsRequest,
-  options?: QueryHookOptions<PayrollsListQueryData>,
-): UseQueryResult<PayrollsListQueryData, Error> {
+  options?: QueryHookOptions<PayrollsListQueryData, PayrollsListQueryError>,
+): UseQueryResult<PayrollsListQueryData, PayrollsListQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildPayrollsListQuery(
@@ -83,8 +105,11 @@ export function usePayrollsList(
  */
 export function usePayrollsListSuspense(
   request: GetV1CompaniesCompanyIdPayrollsRequest,
-  options?: SuspenseQueryHookOptions<PayrollsListQueryData>,
-): UseSuspenseQueryResult<PayrollsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PayrollsListQueryData,
+    PayrollsListQueryError
+  >,
+): UseSuspenseQueryResult<PayrollsListQueryData, PayrollsListQueryError> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildPayrollsListQuery(

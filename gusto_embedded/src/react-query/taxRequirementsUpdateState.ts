@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { taxRequirementsUpdateState } from "../funcs/taxRequirementsUpdateState.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyUuidTaxRequirementsStateRequest,
   PutV1CompaniesCompanyUuidTaxRequirementsStateResponse,
@@ -27,6 +38,17 @@ export type TaxRequirementsUpdateStateMutationVariables = {
 export type TaxRequirementsUpdateStateMutationData =
   PutV1CompaniesCompanyUuidTaxRequirementsStateResponse;
 
+export type TaxRequirementsUpdateStateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update State Tax Requirements
  *
@@ -38,12 +60,12 @@ export type TaxRequirementsUpdateStateMutationData =
 export function useTaxRequirementsUpdateStateMutation(
   options?: MutationHookOptions<
     TaxRequirementsUpdateStateMutationData,
-    Error,
+    TaxRequirementsUpdateStateMutationError,
     TaxRequirementsUpdateStateMutationVariables
   >,
 ): UseMutationResult<
   TaxRequirementsUpdateStateMutationData,
-  Error,
+  TaxRequirementsUpdateStateMutationError,
   TaxRequirementsUpdateStateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

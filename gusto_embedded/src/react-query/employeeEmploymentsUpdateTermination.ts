@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsUpdateTermination } from "../funcs/employeeEmploymentsUpdateTermination.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1TerminationsEmployeeIdRequest,
   PutV1TerminationsEmployeeIdResponse,
@@ -27,6 +38,17 @@ export type EmployeeEmploymentsUpdateTerminationMutationVariables = {
 export type EmployeeEmploymentsUpdateTerminationMutationData =
   PutV1TerminationsEmployeeIdResponse;
 
+export type EmployeeEmploymentsUpdateTerminationMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update an employee termination
  *
@@ -40,12 +62,12 @@ export type EmployeeEmploymentsUpdateTerminationMutationData =
 export function useEmployeeEmploymentsUpdateTerminationMutation(
   options?: MutationHookOptions<
     EmployeeEmploymentsUpdateTerminationMutationData,
-    Error,
+    EmployeeEmploymentsUpdateTerminationMutationError,
     EmployeeEmploymentsUpdateTerminationMutationVariables
   >,
 ): UseMutationResult<
   EmployeeEmploymentsUpdateTerminationMutationData,
-  Error,
+  EmployeeEmploymentsUpdateTerminationMutationError,
   EmployeeEmploymentsUpdateTerminationMutationVariables
 > {
   const client = useGustoEmbeddedContext();

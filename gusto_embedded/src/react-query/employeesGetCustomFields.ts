@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeesEmployeeIdCustomFieldsRequest } from "../models/operations/getv1employeesemployeeidcustomfields.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeesGetCustomFields,
 };
 
+export type EmployeesGetCustomFieldsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's custom fields
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useEmployeesGetCustomFields(
   request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
-  options?: QueryHookOptions<EmployeesGetCustomFieldsQueryData>,
-): UseQueryResult<EmployeesGetCustomFieldsQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeesGetCustomFieldsQueryData,
+    EmployeesGetCustomFieldsQueryError
+  >,
+): UseQueryResult<
+  EmployeesGetCustomFieldsQueryData,
+  EmployeesGetCustomFieldsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeesGetCustomFieldsQuery(
@@ -64,8 +90,14 @@ export function useEmployeesGetCustomFields(
  */
 export function useEmployeesGetCustomFieldsSuspense(
   request: GetV1EmployeesEmployeeIdCustomFieldsRequest,
-  options?: SuspenseQueryHookOptions<EmployeesGetCustomFieldsQueryData>,
-): UseSuspenseQueryResult<EmployeesGetCustomFieldsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeesGetCustomFieldsQueryData,
+    EmployeesGetCustomFieldsQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeesGetCustomFieldsQueryData,
+  EmployeesGetCustomFieldsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeesGetCustomFieldsQuery(

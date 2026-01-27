@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeesEmployeeIdTerminationsRequest } from "../models/operations/getv1employeesemployeeidterminations.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeeEmploymentsGetTerminations,
 };
 
+export type EmployeeEmploymentsGetTerminationsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get terminations for an employee
  *
@@ -43,8 +63,14 @@ export {
  */
 export function useEmployeeEmploymentsGetTerminations(
   request: GetV1EmployeesEmployeeIdTerminationsRequest,
-  options?: QueryHookOptions<EmployeeEmploymentsGetTerminationsQueryData>,
-): UseQueryResult<EmployeeEmploymentsGetTerminationsQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeEmploymentsGetTerminationsQueryData,
+    EmployeeEmploymentsGetTerminationsQueryError
+  >,
+): UseQueryResult<
+  EmployeeEmploymentsGetTerminationsQueryData,
+  EmployeeEmploymentsGetTerminationsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeEmploymentsGetTerminationsQuery(
@@ -69,9 +95,13 @@ export function useEmployeeEmploymentsGetTerminations(
 export function useEmployeeEmploymentsGetTerminationsSuspense(
   request: GetV1EmployeesEmployeeIdTerminationsRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeeEmploymentsGetTerminationsQueryData
+    EmployeeEmploymentsGetTerminationsQueryData,
+    EmployeeEmploymentsGetTerminationsQueryError
   >,
-): UseSuspenseQueryResult<EmployeeEmploymentsGetTerminationsQueryData, Error> {
+): UseSuspenseQueryResult<
+  EmployeeEmploymentsGetTerminationsQueryData,
+  EmployeeEmploymentsGetTerminationsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeEmploymentsGetTerminationsQuery(

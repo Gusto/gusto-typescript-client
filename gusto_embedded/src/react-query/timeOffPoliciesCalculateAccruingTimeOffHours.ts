@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { timeOffPoliciesCalculateAccruingTimeOffHours } from "../funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest,
   PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
@@ -26,6 +37,17 @@ export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationVariables = {
 
 export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationData =
   PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse;
+
+export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Calculate accruing time off hours
@@ -46,12 +68,12 @@ export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationData =
 export function useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation(
   options?: MutationHookOptions<
     TimeOffPoliciesCalculateAccruingTimeOffHoursMutationData,
-    Error,
+    TimeOffPoliciesCalculateAccruingTimeOffHoursMutationError,
     TimeOffPoliciesCalculateAccruingTimeOffHoursMutationVariables
   >,
 ): UseMutationResult<
   TimeOffPoliciesCalculateAccruingTimeOffHoursMutationData,
-  Error,
+  TimeOffPoliciesCalculateAccruingTimeOffHoursMutationError,
   TimeOffPoliciesCalculateAccruingTimeOffHoursMutationVariables
 > {
   const client = useGustoEmbeddedContext();

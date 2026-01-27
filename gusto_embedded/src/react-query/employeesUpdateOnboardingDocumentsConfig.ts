@@ -11,6 +11,16 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeesUpdateOnboardingDocumentsConfig } from "../funcs/employeesUpdateOnboardingDocumentsConfig.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest,
   PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
@@ -27,6 +37,16 @@ export type EmployeesUpdateOnboardingDocumentsConfigMutationVariables = {
 export type EmployeesUpdateOnboardingDocumentsConfigMutationData =
   PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse;
 
+export type EmployeesUpdateOnboardingDocumentsConfigMutationError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update an employee's onboarding documents config
  *
@@ -38,12 +58,12 @@ export type EmployeesUpdateOnboardingDocumentsConfigMutationData =
 export function useEmployeesUpdateOnboardingDocumentsConfigMutation(
   options?: MutationHookOptions<
     EmployeesUpdateOnboardingDocumentsConfigMutationData,
-    Error,
+    EmployeesUpdateOnboardingDocumentsConfigMutationError,
     EmployeesUpdateOnboardingDocumentsConfigMutationVariables
   >,
 ): UseMutationResult<
   EmployeesUpdateOnboardingDocumentsConfigMutationData,
-  Error,
+  EmployeesUpdateOnboardingDocumentsConfigMutationError,
   EmployeesUpdateOnboardingDocumentsConfigMutationVariables
 > {
   const client = useGustoEmbeddedContext();

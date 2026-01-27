@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdFederalTaxDetailsRequest } from "../models/operations/getv1companiescompanyidfederaltaxdetails.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyFederalTaxDetailsGet,
 };
 
+export type FederalTaxDetailsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get Federal Tax Details
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useFederalTaxDetailsGet(
   request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
-  options?: QueryHookOptions<FederalTaxDetailsGetQueryData>,
-): UseQueryResult<FederalTaxDetailsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    FederalTaxDetailsGetQueryData,
+    FederalTaxDetailsGetQueryError
+  >,
+): UseQueryResult<
+  FederalTaxDetailsGetQueryData,
+  FederalTaxDetailsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildFederalTaxDetailsGetQuery(
@@ -64,8 +90,14 @@ export function useFederalTaxDetailsGet(
  */
 export function useFederalTaxDetailsGetSuspense(
   request: GetV1CompaniesCompanyIdFederalTaxDetailsRequest,
-  options?: SuspenseQueryHookOptions<FederalTaxDetailsGetQueryData>,
-): UseSuspenseQueryResult<FederalTaxDetailsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    FederalTaxDetailsGetQueryData,
+    FederalTaxDetailsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  FederalTaxDetailsGetQueryData,
+  FederalTaxDetailsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildFederalTaxDetailsGetQuery(

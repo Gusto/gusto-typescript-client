@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId } from "../funcs/bankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountId.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdRequest,
   DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse,
@@ -28,6 +39,17 @@ export type BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutat
 export type BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationData =
   DeleteV1CompaniesCompanyIdBankAccountsBankAccountIdResponse;
 
+export type BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete a company bank account
  *
@@ -41,12 +63,12 @@ export type BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutat
 export function useBankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutation(
   options?: MutationHookOptions<
     BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationData,
-    Error,
+    BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationError,
     BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationVariables
   >,
 ): UseMutationResult<
   BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationData,
-  Error,
+  BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationError,
   BankAccountsDeleteV1CompaniesCompanyIdBankAccountsBankAccountIdMutationVariables
 > {
   const client = useGustoEmbeddedContext();

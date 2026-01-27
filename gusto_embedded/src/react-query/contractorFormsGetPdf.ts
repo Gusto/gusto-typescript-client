@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorFormPdfRequest } from "../models/operations/getv1contractorformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorFormsGetPdf,
 };
 
+export type ContractorFormsGetPdfQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get the contractor form pdf
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useContractorFormsGetPdf(
   request: GetV1ContractorFormPdfRequest,
-  options?: QueryHookOptions<ContractorFormsGetPdfQueryData>,
-): UseQueryResult<ContractorFormsGetPdfQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorFormsGetPdfQueryData,
+    ContractorFormsGetPdfQueryError
+  >,
+): UseQueryResult<
+  ContractorFormsGetPdfQueryData,
+  ContractorFormsGetPdfQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorFormsGetPdfQuery(
@@ -64,8 +90,14 @@ export function useContractorFormsGetPdf(
  */
 export function useContractorFormsGetPdfSuspense(
   request: GetV1ContractorFormPdfRequest,
-  options?: SuspenseQueryHookOptions<ContractorFormsGetPdfQueryData>,
-): UseSuspenseQueryResult<ContractorFormsGetPdfQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorFormsGetPdfQueryData,
+    ContractorFormsGetPdfQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorFormsGetPdfQueryData,
+  ContractorFormsGetPdfQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorFormsGetPdfQuery(

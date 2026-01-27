@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentsFund } from "../funcs/contractorPaymentsFund.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1ContractorPaymentsContractorPaymentUuidFundRequest,
   GetV1ContractorPaymentsContractorPaymentUuidFundResponse,
@@ -27,6 +38,17 @@ export type ContractorPaymentsFundMutationVariables = {
 export type ContractorPaymentsFundMutationData =
   GetV1ContractorPaymentsContractorPaymentUuidFundResponse;
 
+export type ContractorPaymentsFundMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Fund a contractor payment [DEMO]
  *
@@ -42,12 +64,12 @@ export type ContractorPaymentsFundMutationData =
 export function useContractorPaymentsFundMutation(
   options?: MutationHookOptions<
     ContractorPaymentsFundMutationData,
-    Error,
+    ContractorPaymentsFundMutationError,
     ContractorPaymentsFundMutationVariables
   >,
 ): UseMutationResult<
   ContractorPaymentsFundMutationData,
-  Error,
+  ContractorPaymentsFundMutationError,
   ContractorPaymentsFundMutationVariables
 > {
   const client = useGustoEmbeddedContext();

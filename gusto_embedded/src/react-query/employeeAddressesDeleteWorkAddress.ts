@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeAddressesDeleteWorkAddress } from "../funcs/employeeAddressesDeleteWorkAddress.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1WorkAddressesWorkAddressUuidRequest,
   DeleteV1WorkAddressesWorkAddressUuidResponse,
@@ -27,6 +38,17 @@ export type EmployeeAddressesDeleteWorkAddressMutationVariables = {
 export type EmployeeAddressesDeleteWorkAddressMutationData =
   DeleteV1WorkAddressesWorkAddressUuidResponse;
 
+export type EmployeeAddressesDeleteWorkAddressMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an employee's work address
  *
@@ -38,12 +60,12 @@ export type EmployeeAddressesDeleteWorkAddressMutationData =
 export function useEmployeeAddressesDeleteWorkAddressMutation(
   options?: MutationHookOptions<
     EmployeeAddressesDeleteWorkAddressMutationData,
-    Error,
+    EmployeeAddressesDeleteWorkAddressMutationError,
     EmployeeAddressesDeleteWorkAddressMutationVariables
   >,
 ): UseMutationResult<
   EmployeeAddressesDeleteWorkAddressMutationData,
-  Error,
+  EmployeeAddressesDeleteWorkAddressMutationError,
   EmployeeAddressesDeleteWorkAddressMutationVariables
 > {
   const client = useGustoEmbeddedContext();

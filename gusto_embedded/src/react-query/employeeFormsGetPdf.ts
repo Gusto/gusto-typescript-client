@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeeFormPdfRequest } from "../models/operations/getv1employeeformpdf.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeeFormsGetPdf,
 };
 
+export type EmployeeFormsGetPdfQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get the employee form pdf
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useEmployeeFormsGetPdf(
   request: GetV1EmployeeFormPdfRequest,
-  options?: QueryHookOptions<EmployeeFormsGetPdfQueryData>,
-): UseQueryResult<EmployeeFormsGetPdfQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeFormsGetPdfQueryData,
+    EmployeeFormsGetPdfQueryError
+  >,
+): UseQueryResult<EmployeeFormsGetPdfQueryData, EmployeeFormsGetPdfQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeFormsGetPdfQuery(
@@ -64,8 +87,14 @@ export function useEmployeeFormsGetPdf(
  */
 export function useEmployeeFormsGetPdfSuspense(
   request: GetV1EmployeeFormPdfRequest,
-  options?: SuspenseQueryHookOptions<EmployeeFormsGetPdfQueryData>,
-): UseSuspenseQueryResult<EmployeeFormsGetPdfQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeeFormsGetPdfQueryData,
+    EmployeeFormsGetPdfQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeeFormsGetPdfQueryData,
+  EmployeeFormsGetPdfQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeFormsGetPdfQuery(

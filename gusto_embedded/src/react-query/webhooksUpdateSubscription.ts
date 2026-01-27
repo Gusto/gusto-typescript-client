@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { webhooksUpdateSubscription } from "../funcs/webhooksUpdateSubscription.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1WebhookSubscriptionUuidRequest,
   PutV1WebhookSubscriptionUuidResponse,
@@ -29,6 +40,17 @@ export type WebhooksUpdateSubscriptionMutationVariables = {
 export type WebhooksUpdateSubscriptionMutationData =
   PutV1WebhookSubscriptionUuidResponse;
 
+export type WebhooksUpdateSubscriptionMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a webhook subscription
  *
@@ -44,12 +66,12 @@ export type WebhooksUpdateSubscriptionMutationData =
 export function useWebhooksUpdateSubscriptionMutation(
   options?: MutationHookOptions<
     WebhooksUpdateSubscriptionMutationData,
-    Error,
+    WebhooksUpdateSubscriptionMutationError,
     WebhooksUpdateSubscriptionMutationVariables
   >,
 ): UseMutationResult<
   WebhooksUpdateSubscriptionMutationData,
-  Error,
+  WebhooksUpdateSubscriptionMutationError,
   WebhooksUpdateSubscriptionMutationVariables
 > {
   const client = useGustoEmbeddedContext();

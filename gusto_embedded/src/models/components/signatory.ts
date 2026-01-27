@@ -9,33 +9,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * |   |   |
- *
- * @remarks
- * |---|---|
- * |__Status__| __Description__ |
- * | Pass | Signatory can sign all forms |
- * | Fail | Signatory cannot sign forms |
- * | Skipped | Signatory cannot sign Form 8655 until the form is manually uploaded as wet-signed |
- * | null | Identity verification process has not been completed |
- */
 export const IdentityVerificationStatus = {
   Pass: "Pass",
   Fail: "Fail",
   Skipped: "Skipped",
 } as const;
-/**
- * |   |   |
- *
- * @remarks
- * |---|---|
- * |__Status__| __Description__ |
- * | Pass | Signatory can sign all forms |
- * | Fail | Signatory cannot sign forms |
- * | Skipped | Signatory cannot sign Form 8655 until the form is manually uploaded as wet-signed |
- * | null | Identity verification process has not been completed |
- */
 export type IdentityVerificationStatus = ClosedEnum<
   typeof IdentityVerificationStatus
 >;

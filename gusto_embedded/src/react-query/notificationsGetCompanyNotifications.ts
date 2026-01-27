@@ -10,6 +10,16 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   GetCompanyNotificationsHeaderXGustoAPIVersion,
   GetCompanyNotificationsRequest,
@@ -34,6 +44,16 @@ export {
   queryKeyNotificationsGetCompanyNotifications,
 };
 
+export type NotificationsGetCompanyNotificationsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get notifications for company
  *
@@ -44,8 +64,14 @@ export {
  */
 export function useNotificationsGetCompanyNotifications(
   request: GetCompanyNotificationsRequest,
-  options?: QueryHookOptions<NotificationsGetCompanyNotificationsQueryData>,
-): UseQueryResult<NotificationsGetCompanyNotificationsQueryData, Error> {
+  options?: QueryHookOptions<
+    NotificationsGetCompanyNotificationsQueryData,
+    NotificationsGetCompanyNotificationsQueryError
+  >,
+): UseQueryResult<
+  NotificationsGetCompanyNotificationsQueryData,
+  NotificationsGetCompanyNotificationsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildNotificationsGetCompanyNotificationsQuery(
@@ -68,11 +94,12 @@ export function useNotificationsGetCompanyNotifications(
 export function useNotificationsGetCompanyNotificationsSuspense(
   request: GetCompanyNotificationsRequest,
   options?: SuspenseQueryHookOptions<
-    NotificationsGetCompanyNotificationsQueryData
+    NotificationsGetCompanyNotificationsQueryData,
+    NotificationsGetCompanyNotificationsQueryError
   >,
 ): UseSuspenseQueryResult<
   NotificationsGetCompanyNotificationsQueryData,
-  Error
+  NotificationsGetCompanyNotificationsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyUuidHolidayPayPolicyHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyHolidayPayPoliciesGet,
 };
 
+export type HolidayPayPoliciesGetQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get a company's holiday pay policy
  *
@@ -43,8 +65,14 @@ export {
  */
 export function useHolidayPayPoliciesGet(
   request: GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
-  options?: QueryHookOptions<HolidayPayPoliciesGetQueryData>,
-): UseQueryResult<HolidayPayPoliciesGetQueryData, Error> {
+  options?: QueryHookOptions<
+    HolidayPayPoliciesGetQueryData,
+    HolidayPayPoliciesGetQueryError
+  >,
+): UseQueryResult<
+  HolidayPayPoliciesGetQueryData,
+  HolidayPayPoliciesGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildHolidayPayPoliciesGetQuery(
@@ -66,8 +94,14 @@ export function useHolidayPayPoliciesGet(
  */
 export function useHolidayPayPoliciesGetSuspense(
   request: GetV1CompaniesCompanyUuidHolidayPayPolicyRequest,
-  options?: SuspenseQueryHookOptions<HolidayPayPoliciesGetQueryData>,
-): UseSuspenseQueryResult<HolidayPayPoliciesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    HolidayPayPoliciesGetQueryData,
+    HolidayPayPoliciesGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  HolidayPayPoliciesGetQueryData,
+  HolidayPayPoliciesGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildHolidayPayPoliciesGetQuery(

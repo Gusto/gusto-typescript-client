@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1BenefitsBenefitsIdRequirementsRequest } from "../models/operations/getv1benefitsbenefitsidrequirements.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyBenefitsGetRequirements,
 };
 
+export type CompanyBenefitsGetRequirementsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get benefit fields requirements by ID
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useCompanyBenefitsGetRequirements(
   request: GetV1BenefitsBenefitsIdRequirementsRequest,
-  options?: QueryHookOptions<CompanyBenefitsGetRequirementsQueryData>,
-): UseQueryResult<CompanyBenefitsGetRequirementsQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyBenefitsGetRequirementsQueryData,
+    CompanyBenefitsGetRequirementsQueryError
+  >,
+): UseQueryResult<
+  CompanyBenefitsGetRequirementsQueryData,
+  CompanyBenefitsGetRequirementsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyBenefitsGetRequirementsQuery(
@@ -64,8 +90,14 @@ export function useCompanyBenefitsGetRequirements(
  */
 export function useCompanyBenefitsGetRequirementsSuspense(
   request: GetV1BenefitsBenefitsIdRequirementsRequest,
-  options?: SuspenseQueryHookOptions<CompanyBenefitsGetRequirementsQueryData>,
-): UseSuspenseQueryResult<CompanyBenefitsGetRequirementsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyBenefitsGetRequirementsQueryData,
+    CompanyBenefitsGetRequirementsQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyBenefitsGetRequirementsQueryData,
+  CompanyBenefitsGetRequirementsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyBenefitsGetRequirementsQuery(

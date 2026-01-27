@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest } from "../models/operations/getv1employeesemployeeidi9authorizationdocuments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyI9VerificationGetDocuments,
 };
 
+export type I9VerificationGetDocumentsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's I-9 verification documents
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useI9VerificationGetDocuments(
   request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
-  options?: QueryHookOptions<I9VerificationGetDocumentsQueryData>,
-): UseQueryResult<I9VerificationGetDocumentsQueryData, Error> {
+  options?: QueryHookOptions<
+    I9VerificationGetDocumentsQueryData,
+    I9VerificationGetDocumentsQueryError
+  >,
+): UseQueryResult<
+  I9VerificationGetDocumentsQueryData,
+  I9VerificationGetDocumentsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildI9VerificationGetDocumentsQuery(
@@ -64,8 +90,14 @@ export function useI9VerificationGetDocuments(
  */
 export function useI9VerificationGetDocumentsSuspense(
   request: GetV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest,
-  options?: SuspenseQueryHookOptions<I9VerificationGetDocumentsQueryData>,
-): UseSuspenseQueryResult<I9VerificationGetDocumentsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    I9VerificationGetDocumentsQueryData,
+    I9VerificationGetDocumentsQueryError
+  >,
+): UseSuspenseQueryResult<
+  I9VerificationGetDocumentsQueryData,
+  I9VerificationGetDocumentsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildI9VerificationGetDocumentsQuery(

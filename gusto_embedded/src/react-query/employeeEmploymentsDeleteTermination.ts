@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { employeeEmploymentsDeleteTermination } from "../funcs/employeeEmploymentsDeleteTermination.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1EmployeesEmployeeIdTerminationsRequest,
   DeleteV1EmployeesEmployeeIdTerminationsResponse,
@@ -27,6 +38,17 @@ export type EmployeeEmploymentsDeleteTerminationMutationVariables = {
 export type EmployeeEmploymentsDeleteTerminationMutationData =
   DeleteV1EmployeesEmployeeIdTerminationsResponse;
 
+export type EmployeeEmploymentsDeleteTerminationMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete an employee termination
  *
@@ -38,12 +60,12 @@ export type EmployeeEmploymentsDeleteTerminationMutationData =
 export function useEmployeeEmploymentsDeleteTerminationMutation(
   options?: MutationHookOptions<
     EmployeeEmploymentsDeleteTerminationMutationData,
-    Error,
+    EmployeeEmploymentsDeleteTerminationMutationError,
     EmployeeEmploymentsDeleteTerminationMutationVariables
   >,
 ): UseMutationResult<
   EmployeeEmploymentsDeleteTerminationMutationData,
-  Error,
+  EmployeeEmploymentsDeleteTerminationMutationError,
   EmployeeEmploymentsDeleteTerminationMutationVariables
 > {
   const client = useGustoEmbeddedContext();

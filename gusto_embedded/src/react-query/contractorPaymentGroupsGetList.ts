@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyContractorPaymentGroupsGetList,
 };
 
+export type ContractorPaymentGroupsGetListQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get contractor payment groups for a company
  *
@@ -43,8 +65,14 @@ export {
  */
 export function useContractorPaymentGroupsGetList(
   request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-  options?: QueryHookOptions<ContractorPaymentGroupsGetListQueryData>,
-): UseQueryResult<ContractorPaymentGroupsGetListQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorPaymentGroupsGetListQueryData,
+    ContractorPaymentGroupsGetListQueryError
+  >,
+): UseQueryResult<
+  ContractorPaymentGroupsGetListQueryData,
+  ContractorPaymentGroupsGetListQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorPaymentGroupsGetListQuery(
@@ -66,8 +94,14 @@ export function useContractorPaymentGroupsGetList(
  */
 export function useContractorPaymentGroupsGetListSuspense(
   request: GetV1CompaniesCompanyIdContractorPaymentGroupsRequest,
-  options?: SuspenseQueryHookOptions<ContractorPaymentGroupsGetListQueryData>,
-): UseSuspenseQueryResult<ContractorPaymentGroupsGetListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorPaymentGroupsGetListQueryData,
+    ContractorPaymentGroupsGetListQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorPaymentGroupsGetListQueryData,
+  ContractorPaymentGroupsGetListQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorPaymentGroupsGetListQuery(

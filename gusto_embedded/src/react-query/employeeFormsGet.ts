@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1EmployeeFormRequest } from "../models/operations/getv1employeeform.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyEmployeeFormsGet,
 };
 
+export type EmployeeFormsGetQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee form
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useEmployeeFormsGet(
   request: GetV1EmployeeFormRequest,
-  options?: QueryHookOptions<EmployeeFormsGetQueryData>,
-): UseQueryResult<EmployeeFormsGetQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeFormsGetQueryData,
+    EmployeeFormsGetQueryError
+  >,
+): UseQueryResult<EmployeeFormsGetQueryData, EmployeeFormsGetQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeFormsGetQuery(
@@ -64,8 +87,14 @@ export function useEmployeeFormsGet(
  */
 export function useEmployeeFormsGetSuspense(
   request: GetV1EmployeeFormRequest,
-  options?: SuspenseQueryHookOptions<EmployeeFormsGetQueryData>,
-): UseSuspenseQueryResult<EmployeeFormsGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EmployeeFormsGetQueryData,
+    EmployeeFormsGetQueryError
+  >,
+): UseSuspenseQueryResult<
+  EmployeeFormsGetQueryData,
+  EmployeeFormsGetQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildEmployeeFormsGetQuery(

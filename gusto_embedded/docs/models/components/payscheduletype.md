@@ -1,7 +1,5 @@
 # PayScheduleType
 
-The pay schedule assignment type.
-
 ## Example Usage
 
 ```typescript

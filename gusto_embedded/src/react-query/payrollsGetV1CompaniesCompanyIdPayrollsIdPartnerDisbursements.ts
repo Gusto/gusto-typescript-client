@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyPayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements,
 };
 
+export type PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get partner disbursements for a payroll
  *
@@ -44,11 +66,12 @@ export {
 export function usePayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements(
   request: GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
   options?: QueryHookOptions<
-    PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData
+    PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData,
+    PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryError
   >,
 ): UseQueryResult<
   PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData,
-  Error
+  PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useQuery({
@@ -72,11 +95,12 @@ export function usePayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursements
 export function usePayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsSuspense(
   request: GetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsRequest,
   options?: SuspenseQueryHookOptions<
-    PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData
+    PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData,
+    PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryError
   >,
 ): UseSuspenseQueryResult<
   PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryData,
-  Error
+  PayrollsGetV1CompaniesCompanyIdPayrollsIdPartnerDisbursementsQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

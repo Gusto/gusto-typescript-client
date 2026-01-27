@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsDelete } from "../funcs/companyBenefitsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody } from "../models/errors/deletev1companybenefitscompanybenefitid.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
   DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
@@ -26,6 +37,17 @@ export type CompanyBenefitsDeleteMutationVariables = {
 
 export type CompanyBenefitsDeleteMutationData =
   DeleteV1CompanyBenefitsCompanyBenefitIdResponse;
+
+export type CompanyBenefitsDeleteMutationError =
+  | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Delete a company benefit
@@ -43,12 +65,12 @@ export type CompanyBenefitsDeleteMutationData =
 export function useCompanyBenefitsDeleteMutation(
   options?: MutationHookOptions<
     CompanyBenefitsDeleteMutationData,
-    Error,
+    CompanyBenefitsDeleteMutationError,
     CompanyBenefitsDeleteMutationVariables
   >,
 ): UseMutationResult<
   CompanyBenefitsDeleteMutationData,
-  Error,
+  CompanyBenefitsDeleteMutationError,
   CompanyBenefitsDeleteMutationVariables
 > {
   const client = useGustoEmbeddedContext();

@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { salaryEstimatesPutV1SalaryEstimatesId } from "../funcs/salaryEstimatesPutV1SalaryEstimatesId.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1SalaryEstimatesIdRequest,
   PutV1SalaryEstimatesIdResponse,
@@ -27,6 +38,17 @@ export type SalaryEstimatesPutV1SalaryEstimatesIdMutationVariables = {
 export type SalaryEstimatesPutV1SalaryEstimatesIdMutationData =
   PutV1SalaryEstimatesIdResponse;
 
+export type SalaryEstimatesPutV1SalaryEstimatesIdMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a salary estimate
  *
@@ -40,12 +62,12 @@ export type SalaryEstimatesPutV1SalaryEstimatesIdMutationData =
 export function useSalaryEstimatesPutV1SalaryEstimatesIdMutation(
   options?: MutationHookOptions<
     SalaryEstimatesPutV1SalaryEstimatesIdMutationData,
-    Error,
+    SalaryEstimatesPutV1SalaryEstimatesIdMutationError,
     SalaryEstimatesPutV1SalaryEstimatesIdMutationVariables
   >,
 ): UseMutationResult<
   SalaryEstimatesPutV1SalaryEstimatesIdMutationData,
-  Error,
+  SalaryEstimatesPutV1SalaryEstimatesIdMutationError,
   SalaryEstimatesPutV1SalaryEstimatesIdMutationVariables
 > {
   const client = useGustoEmbeddedContext();

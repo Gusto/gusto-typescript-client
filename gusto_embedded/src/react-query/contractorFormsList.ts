@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1ContractorFormsRequest } from "../models/operations/getv1contractorforms.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyContractorFormsList,
 };
 
+export type ContractorFormsListQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all contractor forms
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useContractorFormsList(
   request: GetV1ContractorFormsRequest,
-  options?: QueryHookOptions<ContractorFormsListQueryData>,
-): UseQueryResult<ContractorFormsListQueryData, Error> {
+  options?: QueryHookOptions<
+    ContractorFormsListQueryData,
+    ContractorFormsListQueryError
+  >,
+): UseQueryResult<ContractorFormsListQueryData, ContractorFormsListQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildContractorFormsListQuery(
@@ -64,8 +87,14 @@ export function useContractorFormsList(
  */
 export function useContractorFormsListSuspense(
   request: GetV1ContractorFormsRequest,
-  options?: SuspenseQueryHookOptions<ContractorFormsListQueryData>,
-): UseSuspenseQueryResult<ContractorFormsListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ContractorFormsListQueryData,
+    ContractorFormsListQueryError
+  >,
+): UseSuspenseQueryResult<
+  ContractorFormsListQueryData,
+  ContractorFormsListQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildContractorFormsListQuery(

@@ -10,6 +10,17 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1HomeAddressesHomeAddressUuidHeaderXGustoAPIVersion,
   GetV1HomeAddressesHomeAddressUuidRequest,
@@ -33,6 +44,17 @@ export {
   queryKeyEmployeeAddressesRetrieveHomeAddress,
 };
 
+export type EmployeeAddressesRetrieveHomeAddressQueryError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get an employee's home address
  *
@@ -45,8 +67,14 @@ export {
  */
 export function useEmployeeAddressesRetrieveHomeAddress(
   request: GetV1HomeAddressesHomeAddressUuidRequest,
-  options?: QueryHookOptions<EmployeeAddressesRetrieveHomeAddressQueryData>,
-): UseQueryResult<EmployeeAddressesRetrieveHomeAddressQueryData, Error> {
+  options?: QueryHookOptions<
+    EmployeeAddressesRetrieveHomeAddressQueryData,
+    EmployeeAddressesRetrieveHomeAddressQueryError
+  >,
+): UseQueryResult<
+  EmployeeAddressesRetrieveHomeAddressQueryData,
+  EmployeeAddressesRetrieveHomeAddressQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildEmployeeAddressesRetrieveHomeAddressQuery(
@@ -71,11 +99,12 @@ export function useEmployeeAddressesRetrieveHomeAddress(
 export function useEmployeeAddressesRetrieveHomeAddressSuspense(
   request: GetV1HomeAddressesHomeAddressUuidRequest,
   options?: SuspenseQueryHookOptions<
-    EmployeeAddressesRetrieveHomeAddressQueryData
+    EmployeeAddressesRetrieveHomeAddressQueryData,
+    EmployeeAddressesRetrieveHomeAddressQueryError
   >,
 ): UseSuspenseQueryResult<
   EmployeeAddressesRetrieveHomeAddressQueryData,
-  Error
+  EmployeeAddressesRetrieveHomeAddressQueryError
 > {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({

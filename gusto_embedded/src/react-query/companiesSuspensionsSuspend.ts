@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesSuspensionsSuspend } from "../funcs/companiesSuspensionsSuspend.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { CompanySuspensionCreationErrors } from "../models/errors/companysuspensioncreationerrors.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
   PostCompaniesCompanyUuidSuspensionsRequest,
   PostCompaniesCompanyUuidSuspensionsResponse,
@@ -27,6 +38,17 @@ export type CompaniesSuspensionsSuspendMutationVariables = {
 export type CompaniesSuspensionsSuspendMutationData =
   PostCompaniesCompanyUuidSuspensionsResponse;
 
+export type CompaniesSuspensionsSuspendMutationError =
+  | CompanySuspensionCreationErrors
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Suspend a company's account
  *
@@ -38,12 +60,12 @@ export type CompaniesSuspensionsSuspendMutationData =
 export function useCompaniesSuspensionsSuspendMutation(
   options?: MutationHookOptions<
     CompaniesSuspensionsSuspendMutationData,
-    Error,
+    CompaniesSuspensionsSuspendMutationError,
     CompaniesSuspensionsSuspendMutationVariables
   >,
 ): UseMutationResult<
   CompaniesSuspensionsSuspendMutationData,
-  Error,
+  CompaniesSuspensionsSuspendMutationError,
   CompaniesSuspensionsSuspendMutationVariables
 > {
   const client = useGustoEmbeddedContext();

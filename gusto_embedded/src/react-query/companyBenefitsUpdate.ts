@@ -11,6 +11,17 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsUpdate } from "../funcs/companyBenefitsUpdate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompanyBenefitsCompanyBenefitIdRequest,
   PutV1CompanyBenefitsCompanyBenefitIdResponse,
@@ -27,6 +38,17 @@ export type CompanyBenefitsUpdateMutationVariables = {
 export type CompanyBenefitsUpdateMutationData =
   PutV1CompanyBenefitsCompanyBenefitIdResponse;
 
+export type CompanyBenefitsUpdateMutationError =
+  | UnprocessableEntityErrorObject
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update a company benefit
  *
@@ -42,12 +64,12 @@ export type CompanyBenefitsUpdateMutationData =
 export function useCompanyBenefitsUpdateMutation(
   options?: MutationHookOptions<
     CompanyBenefitsUpdateMutationData,
-    Error,
+    CompanyBenefitsUpdateMutationError,
     CompanyBenefitsUpdateMutationVariables
   >,
 ): UseMutationResult<
   CompanyBenefitsUpdateMutationData,
-  Error,
+  CompanyBenefitsUpdateMutationError,
   CompanyBenefitsUpdateMutationVariables
 > {
   const client = useGustoEmbeddedContext();

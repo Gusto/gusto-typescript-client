@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompanyOnboardingStatusRequest } from "../models/operations/getv1companyonboardingstatus.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompaniesGetOnboardingStatus,
 };
 
+export type CompaniesGetOnboardingStatusQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get the company's onboarding status
  *
@@ -42,8 +62,14 @@ export {
  */
 export function useCompaniesGetOnboardingStatus(
   request: GetV1CompanyOnboardingStatusRequest,
-  options?: QueryHookOptions<CompaniesGetOnboardingStatusQueryData>,
-): UseQueryResult<CompaniesGetOnboardingStatusQueryData, Error> {
+  options?: QueryHookOptions<
+    CompaniesGetOnboardingStatusQueryData,
+    CompaniesGetOnboardingStatusQueryError
+  >,
+): UseQueryResult<
+  CompaniesGetOnboardingStatusQueryData,
+  CompaniesGetOnboardingStatusQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompaniesGetOnboardingStatusQuery(
@@ -66,8 +92,14 @@ export function useCompaniesGetOnboardingStatus(
  */
 export function useCompaniesGetOnboardingStatusSuspense(
   request: GetV1CompanyOnboardingStatusRequest,
-  options?: SuspenseQueryHookOptions<CompaniesGetOnboardingStatusQueryData>,
-): UseSuspenseQueryResult<CompaniesGetOnboardingStatusQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompaniesGetOnboardingStatusQueryData,
+    CompaniesGetOnboardingStatusQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompaniesGetOnboardingStatusQueryData,
+  CompaniesGetOnboardingStatusQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompaniesGetOnboardingStatusQuery(

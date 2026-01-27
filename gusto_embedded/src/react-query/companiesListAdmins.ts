@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesCompanyIdAdminsRequest } from "../models/operations/getv1companiescompanyidadmins.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompaniesListAdmins,
 };
 
+export type CompaniesListAdminsQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get all the admins at a company
  *
@@ -41,8 +61,11 @@ export {
  */
 export function useCompaniesListAdmins(
   request: GetV1CompaniesCompanyIdAdminsRequest,
-  options?: QueryHookOptions<CompaniesListAdminsQueryData>,
-): UseQueryResult<CompaniesListAdminsQueryData, Error> {
+  options?: QueryHookOptions<
+    CompaniesListAdminsQueryData,
+    CompaniesListAdminsQueryError
+  >,
+): UseQueryResult<CompaniesListAdminsQueryData, CompaniesListAdminsQueryError> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompaniesListAdminsQuery(
@@ -64,8 +87,14 @@ export function useCompaniesListAdmins(
  */
 export function useCompaniesListAdminsSuspense(
   request: GetV1CompaniesCompanyIdAdminsRequest,
-  options?: SuspenseQueryHookOptions<CompaniesListAdminsQueryData>,
-): UseSuspenseQueryResult<CompaniesListAdminsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompaniesListAdminsQueryData,
+    CompaniesListAdminsQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompaniesListAdminsQueryData,
+  CompaniesListAdminsQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompaniesListAdminsQuery(

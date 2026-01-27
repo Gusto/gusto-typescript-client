@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyBenefit,
@@ -20,6 +21,20 @@ import {
 } from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export const PutV1CompanyBenefitsCompanyBenefitIdCatchUpType = {
+  Elective: "elective",
+  Deemed: "deemed",
+} as const;
+/**
+ * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+ */
+export type PutV1CompanyBenefitsCompanyBenefitIdCatchUpType = ClosedEnum<
+  typeof PutV1CompanyBenefitsCompanyBenefitIdCatchUpType
+>;
+
 export type PutV1CompanyBenefitsCompanyBenefitIdRequestBody = {
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/versioning#object-layer) for information on how to use this field.
@@ -33,6 +48,13 @@ export type PutV1CompanyBenefitsCompanyBenefitIdRequestBody = {
    * The description of the company benefit. For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.
    */
   description?: string | undefined;
+  /**
+   * The type of catch-up contribution for this benefit, as required by Section 603 of the SECURE 2.0 Act. Only applicable to pre-tax 401(k) and 403(b) benefits.
+   */
+  catchUpType?:
+    | PutV1CompanyBenefitsCompanyBenefitIdCatchUpType
+    | null
+    | undefined;
 };
 
 export type PutV1CompanyBenefitsCompanyBenefitIdRequest = {
@@ -56,10 +78,16 @@ export type PutV1CompanyBenefitsCompanyBenefitIdResponse = {
 };
 
 /** @internal */
+export const PutV1CompanyBenefitsCompanyBenefitIdCatchUpType$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1CompanyBenefitsCompanyBenefitIdCatchUpType> = z
+    .nativeEnum(PutV1CompanyBenefitsCompanyBenefitIdCatchUpType);
+
+/** @internal */
 export type PutV1CompanyBenefitsCompanyBenefitIdRequestBody$Outbound = {
   version: string;
   active?: boolean | undefined;
   description?: string | undefined;
+  catch_up_type?: string | null | undefined;
 };
 
 /** @internal */
@@ -72,6 +100,13 @@ export const PutV1CompanyBenefitsCompanyBenefitIdRequestBody$outboundSchema:
     version: z.string(),
     active: z.boolean().optional(),
     description: z.string().optional(),
+    catchUpType: z.nullable(
+      PutV1CompanyBenefitsCompanyBenefitIdCatchUpType$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      catchUpType: "catch_up_type",
+    });
   });
 
 export function putV1CompanyBenefitsCompanyBenefitIdRequestBodyToJSON(

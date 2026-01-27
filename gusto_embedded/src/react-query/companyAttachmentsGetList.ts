@@ -11,6 +11,16 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { VersionHeader } from "../models/components/versionheader.js";
+import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { GetV1CompaniesAttachmentsRequest } from "../models/operations/getv1companiesattachments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -31,6 +41,16 @@ export {
   queryKeyCompanyAttachmentsGetList,
 };
 
+export type CompanyAttachmentsGetListQueryError =
+  | GustoEmbeddedError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Get List of Company Attachments
  *
@@ -41,8 +61,14 @@ export {
  */
 export function useCompanyAttachmentsGetList(
   request: GetV1CompaniesAttachmentsRequest,
-  options?: QueryHookOptions<CompanyAttachmentsGetListQueryData>,
-): UseQueryResult<CompanyAttachmentsGetListQueryData, Error> {
+  options?: QueryHookOptions<
+    CompanyAttachmentsGetListQueryData,
+    CompanyAttachmentsGetListQueryError
+  >,
+): UseQueryResult<
+  CompanyAttachmentsGetListQueryData,
+  CompanyAttachmentsGetListQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useQuery({
     ...buildCompanyAttachmentsGetListQuery(
@@ -64,8 +90,14 @@ export function useCompanyAttachmentsGetList(
  */
 export function useCompanyAttachmentsGetListSuspense(
   request: GetV1CompaniesAttachmentsRequest,
-  options?: SuspenseQueryHookOptions<CompanyAttachmentsGetListQueryData>,
-): UseSuspenseQueryResult<CompanyAttachmentsGetListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CompanyAttachmentsGetListQueryData,
+    CompanyAttachmentsGetListQueryError
+  >,
+): UseSuspenseQueryResult<
+  CompanyAttachmentsGetListQueryData,
+  CompanyAttachmentsGetListQueryError
+> {
   const client = useGustoEmbeddedContext();
   return useSuspenseQuery({
     ...buildCompanyAttachmentsGetListQuery(
