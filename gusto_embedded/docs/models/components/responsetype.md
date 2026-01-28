@@ -7,11 +7,11 @@ The type of response to the question
 ```typescript
 import { ResponseType } from "@gusto/embedded-api/models/components/informationrequest.js";
 
-let value: ResponseType = "persona";
+let value: ResponseType = "radio_button";
 ```
 
 ## Values
 
 ```typescript
-"text" | "document" | "persona"
+"text" | "document" | "persona" | "radio_button"
 ```
