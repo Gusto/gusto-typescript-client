@@ -45,6 +45,7 @@ export const ResponseType = {
   Text: "text",
   Document: "document",
   Persona: "persona",
+  RadioButton: "radio_button",
 } as const;
 /**
  * The type of response to the question

@@ -98,87 +98,8 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>gustoembedded.contractorPaymentGroups.fund()</code>: <code>response</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️
-
-<ul>
-<li><code>creditBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>submissionBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-</ul></li>
-<li><code>gustoembedded.employeeTaxSetup.getStateTaxes()</code>:  <code>response.[].questions[].answers[].validUpTo</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>gustoembedded.payrolls.generatePrintableChecks()</code>:  <code>response.startingCheckNumber</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>gustoembedded.companyBenefits.updateEmployeeBenefits()</code>:
-
-<ul>
-<li><code>request.requestBody.employeeBenefits[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️
-
-<ul>
-<li><code>action</code> <strong>Removed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>uuid</code> <strong>Removed</strong> <strong>Breaking</strong> ⚠️</li>
-</ul></li>
-</ul></li>
-<li><code>gustoembedded.contractorPaymentGroups.preview()</code>: <code>response</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️
-
-<ul>
-<li><code>creditBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>submissionBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-</ul></li>
-<li><code>gustoembedded.contractorPaymentGroups.getList()</code>: <code>response.[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️
-
-<ul>
-<li><code>creditBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>submissionBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-</ul></li>
-<li><code>gustoembedded.contractorPaymentGroups.get()</code>: <code>response</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️
-
-<ul>
-<li><code>creditBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>submissionBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-</ul></li>
-<li><code>gustoembedded.contractorPaymentGroups.create()</code>:
-
-<ul>
-<li><code>request.requestBody.submissionBlockers</code> <strong>Added</strong></li>
-<li><code>response</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️
-
-<ul>
-<li><code>creditBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>submissionBlockers[]</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-</ul></li>
-</ul></li>
-<li><code>gustoembedded.employeeTaxSetup.updateStateTaxes()</code>:
-
-<ul>
-<li><code>request.employeeStateTaxesRequest.states[].questions[].answers[].validUpTo</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-<li><code>response.[].questions[].answers[].validUpTo</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
-</ul></li>
-<li><code>gustoembedded.companyBenefits.update()</code>:
-
-<ul>
-<li><code>request.requestBody.catchUpType</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>gustoembedded.companyBenefits.create()</code>:
-
-<ul>
-<li><code>request.requestBody.catchUpType</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>gustoembedded.companyBenefits.get()</code>: <code>response.employeeBenefits[]</code> <strong>Changed</strong>
-
-<ul>
-<li><code>action</code> <strong>Added</strong></li>
-<li><code>uuid</code> <strong>Added</strong></li>
-</ul></li>
-<li><code>gustoembedded.timeOffPolicies.deactivate()</code>:  <code>error.status[422]</code> <strong>Added</strong></li>
-<li><code>gustoembedded.timeOffPolicies.update()</code>:
-
-<ul>
-<li><code>request.requestBody</code> <strong>Changed</strong>
-
-<ul>
-<li><code>accrualMethod</code> <strong>Changed</strong></li>
-<li><code>name</code> <strong>Changed</strong></li>
-<li><code>policyType</code> <strong>Changed</strong></li>
-</ul></li>
-</ul></li>
+<li><code>gustoembedded.informationRequests.getInformationRequests()</code>:  <code>response.[].requiredQuestions[].responseType.enum(radioButton)</code> <strong>Added</strong> <strong>Breaking</strong> ⚠️</li>
+<li><code>gustoembedded.informationRequests.submit()</code>:  <code>response.requiredQuestions[].responseType.enum(radioButton)</code> <strong>Added</strong> <strong>Breaking</strong> ⚠️</li>
 </ul>
 </body>
 </html>
