@@ -47,7 +47,7 @@ export type RecoveryCase = {
   /**
    * Date when funds were originally debited from the company's bank account
    */
-  originalDebitDate?: string | undefined;
+  originalDebitDate?: string | null | undefined;
   /**
    * Check date for the associated payroll or contractor payments
    */
@@ -85,7 +85,7 @@ export const RecoveryCase$inboundSchema: z.ZodType<
   company_uuid: z.string().optional(),
   status: RecoveryCaseStatus$inboundSchema.optional(),
   latest_error_code: z.string().optional(),
-  original_debit_date: z.string().optional(),
+  original_debit_date: z.nullable(z.string()).optional(),
   check_date: z.string().optional(),
   payroll_uuid: z.string().optional(),
   contractor_payment_uuids: z.nullable(z.array(z.string())).optional(),

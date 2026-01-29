@@ -108,8 +108,6 @@ import {
 
 Creates or refreshes a system access token
 
-scope: ``
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="oauth-access-token" method="post" path="/oauth/token" -->

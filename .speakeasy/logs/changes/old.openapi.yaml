@@ -23502,6 +23502,7 @@ components:
                                     - text
                                     - document
                                     - persona
+                                    - radio_button
         Recovery-Case:
             type: object
             x-examples:

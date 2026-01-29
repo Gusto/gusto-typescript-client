@@ -14,7 +14,7 @@ import {
 import {
   PayrollShow,
   PayrollShow$inboundSchema,
-} from "../components/payrollshow.js";
+} from "../components/payroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
