@@ -33,8 +33,6 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Creates or refreshes a system access token
- *
- * scope: ``
  */
 export function introspectionOauthAccessToken(
   client: GustoEmbeddedCore,

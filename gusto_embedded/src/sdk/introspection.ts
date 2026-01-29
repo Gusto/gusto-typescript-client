@@ -38,8 +38,6 @@ export class Introspection extends ClientSDK {
    *
    * @remarks
    * Creates or refreshes a system access token
-   *
-   * scope: ``
    */
   async oauthAccessToken(
     request: OauthAccessTokenRequest,

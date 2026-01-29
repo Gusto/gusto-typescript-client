@@ -52,8 +52,6 @@ export type IntrospectionOauthAccessTokenMutationError =
  *
  * @remarks
  * Creates or refreshes a system access token
- *
- * scope: ``
  */
 export function useIntrospectionOauthAccessTokenMutation(
   options?: MutationHookOptions<

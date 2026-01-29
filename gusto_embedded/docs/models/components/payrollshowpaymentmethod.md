@@ -5,7 +5,7 @@ The employee's compensation payment method. Is *only* `Historical` when retrievi
 ## Example Usage
 
 ```typescript
-import { PayrollShowPaymentMethod } from "@gusto/embedded-api/models/components/payrollshow.js";
+import { PayrollShowPaymentMethod } from "@gusto/embedded-api/models/components/payroll.js";
 
 let value: PayrollShowPaymentMethod = "Direct Deposit";
 ```

@@ -1,11 +1,9 @@
 # OffCycleReasonType
 
-The off-cycle reason. Only included for off-cycle payrolls.
-
 ## Example Usage
 
 ```typescript
-import { OffCycleReasonType } from "@gusto/embedded-api/models/components/offcyclereasontype.js";
+import { OffCycleReasonType } from "@gusto/embedded-api/models/components/payroll.js";
 
 let value: OffCycleReasonType = "Transition from old pay schedule";
 ```
