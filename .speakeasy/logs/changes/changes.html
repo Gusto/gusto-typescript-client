@@ -98,7 +98,12 @@
 <body><h2 id="typescript-sdk-changes">Typescript SDK Changes:</h2>
 
 <ul>
-<li><code>gustoembedded.recoveryCases.get()</code>:  <code>response.[].originalDebitDate</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
+<li><code>gustoembedded.companies.migrate()</code>:  <code>error</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
+<li><code>gustoembedded.recoveryCases.get()</code>:  <code>response.[].latestErrorCode</code> <strong>Changed</strong> <strong>Breaking</strong> ⚠️</li>
+<li><code>gustoembedded.wireInRequests.get()</code>:  <code>response.paymentType.enum(contractorPaymentGroup)</code> <strong>Added</strong> <strong>Breaking</strong> ⚠️</li>
+<li><code>gustoembedded.wireInRequests.submit()</code>:  <code>response.paymentType.enum(contractorPaymentGroup)</code> <strong>Added</strong> <strong>Breaking</strong> ⚠️</li>
+<li><code>gustoembedded.wireInRequests.list()</code>:  <code>response.[].paymentType.enum(contractorPaymentGroup)</code> <strong>Added</strong> <strong>Breaking</strong> ⚠️</li>
+<li><code>gustoembedded.companies.getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness()</code>: <strong>Added</strong></li>
 </ul>
 </body>
 </html>

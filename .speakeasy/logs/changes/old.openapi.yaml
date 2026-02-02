@@ -134,10 +134,7 @@ paths:
             summary: create or refresh an access token
             operationId: oauth-access-token
             security: []
-            description: |-
-                Creates or refreshes a system access token
-
-                scope: ``
+            description: Creates or refreshes a system access token
             x-gusto-integration-type:
                 - embedded
                 - app-integrations
@@ -20310,23 +20307,23 @@ components:
             description: Datetime for when the resource was created.
             readOnly: true
         Off-Cycle-Reason-Type:
-            type:
-                - string
-                - 'null'
+            anyOf:
+                - type: string
+                  enum:
+                    - Adhoc
+                    - Benefit reversal
+                    - Bonus
+                    - Correction
+                    - Dismissed employee
+                    - Hired employee
+                    - Wage correction
+                    - Tax reconciliation
+                    - Reversal
+                    - Disability insurance distribution
+                    - Transition from old pay schedule
+                - type: 'null'
             description: The off-cycle reason. Only included for off-cycle payrolls.
             readOnly: true
-            enum:
-                - Adhoc
-                - Benefit reversal
-                - Bonus
-                - Correction
-                - Dismissed employee
-                - Hired employee
-                - Wage correction
-                - Tax reconciliation
-                - Reversal
-                - Disability insurance distribution
-                - Transition from old pay schedule
         Auto-Pilot-Type:
             type: boolean
             description: Indicates whether the payroll is an auto pilot payroll
@@ -23538,7 +23535,9 @@ components:
                     type: string
                     description: The latest bank error code for the recovery case. See [this doc](https://docs.gusto.com/embedded-payroll/docs/ach-codes-and-transaction-types) for a list of common ACH return codes.
                 original_debit_date:
-                    type: string
+                    type:
+                        - string
+                        - 'null'
                     description: Date when funds were originally debited from the company's bank account
                 check_date:
                     type: string

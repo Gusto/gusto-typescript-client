@@ -8,6 +8,7 @@
 * [get](#get) - Get a company
 * [update](#update) - Update a company
 * [migrate](#migrate) - Migrate company to embedded payroll
+* [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 * [acceptTermsOfService](#accepttermsofservice) - Accept terms of service for a company user
 * [retrieveTermsOfService](#retrievetermsofservice) - Retrieve terms of service status for a company user
 * [createAdmin](#createadmin) - Create an admin for the company
@@ -450,10 +451,114 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.UnprocessableEntityErrorObject1 | 422                                    | application/json                       |
+| errors.MigrationBlocker                | 422                                    | application/json                       |
+| errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
+
+## getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness
+
+Check if an existing Gusto customer is ready to be migrated to embedded payroll. This endpoint returns blockers and warnings associated with migrating the company and is recommended to be called before attempting to migrate a company.
+
+scope: `partner_managed_companies:read`
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-partner-managed-companies-company-uuid-migration_readiness" method="get" path="/v1/partner_managed_companies/{company_uuid}/migration_readiness" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companies.getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness({
+    companyUuid: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness } from "@gusto/embedded-api/funcs/companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(gustoEmbedded, {
+    companyUuid: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness,
+  useCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness,
+  invalidateAllCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness,
+} from "@gusto/embedded-api/react-query/companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest](../../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadinessrequest.md)     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse](../../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadinessresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## acceptTermsOfService
 

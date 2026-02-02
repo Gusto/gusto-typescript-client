@@ -18,12 +18,12 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody,
+  PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema,
+} from "../models/errors/putv1partnermanagedcompaniescompanyuuidmigrate.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest$outboundSchema,
@@ -50,7 +50,7 @@ export function companiesMigrate(
 ): APIPromise<
   Result<
     PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-    | UnprocessableEntityErrorObject
+    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -76,7 +76,7 @@ async function $do(
   [
     Result<
       PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-      | UnprocessableEntityErrorObject
+      | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -176,7 +176,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
-    | UnprocessableEntityErrorObject
+    | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -191,7 +191,10 @@ async function $do(
       PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse$inboundSchema,
       { key: "object" },
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(
+      422,
+      PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody$inboundSchema,
+    ),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

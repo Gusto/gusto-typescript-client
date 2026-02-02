@@ -43,7 +43,7 @@ export type RecoveryCase = {
   /**
    * The latest bank error code for the recovery case. See [this doc](https://docs.gusto.com/embedded-payroll/docs/ach-codes-and-transaction-types) for a list of common ACH return codes.
    */
-  latestErrorCode?: string | undefined;
+  latestErrorCode?: string | null | undefined;
   /**
    * Date when funds were originally debited from the company's bank account
    */
@@ -84,7 +84,7 @@ export const RecoveryCase$inboundSchema: z.ZodType<
   uuid: z.string(),
   company_uuid: z.string().optional(),
   status: RecoveryCaseStatus$inboundSchema.optional(),
-  latest_error_code: z.string().optional(),
+  latest_error_code: z.nullable(z.string()).optional(),
   original_debit_date: z.nullable(z.string()).optional(),
   check_date: z.string().optional(),
   payroll_uuid: z.string().optional(),
