@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Errors } from "@gusto/embedded-api/models/errors/payrollblockerserror.js";
+import { Errors } from "@gusto/embedded-api/models/errors/migrationblocker.js";
 
 let value: Errors = {};
 ```
@@ -12,7 +12,7 @@ let value: Errors = {};
 
 | Field                                              | Type                                               | Required                                           | Description                                        |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `errorKey`                                         | *string*                                           | :heavy_minus_sign:                                 | The string "base"                                  |
-| `category`                                         | *string*                                           | :heavy_minus_sign:                                 | The string "payroll_blocker"                       |
-| `message`                                          | *string*                                           | :heavy_minus_sign:                                 | Human readable description of the payroll blocker  |
+| `errorKey`                                         | *string*                                           | :heavy_minus_sign:                                 | Error key                                          |
+| `category`                                         | *string*                                           | :heavy_minus_sign:                                 | Error category                                     |
+| `message`                                          | *string*                                           | :heavy_minus_sign:                                 | Blocker message                                    |
 | `metadata`                                         | [errors.Metadata](../../models/errors/metadata.md) | :heavy_minus_sign:                                 | N/A                                                |

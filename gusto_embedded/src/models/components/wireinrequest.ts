@@ -28,6 +28,7 @@ export type WireInRequestStatus = ClosedEnum<typeof WireInRequestStatus>;
  */
 export const PaymentType = {
   Payroll: "Payroll",
+  ContractorPaymentGroup: "ContractorPaymentGroup",
 } as const;
 /**
  * Type of payment for the wire in

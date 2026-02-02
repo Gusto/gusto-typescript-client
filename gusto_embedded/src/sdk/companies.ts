@@ -9,6 +9,7 @@ import { companiesFinishOnboarding } from "../funcs/companiesFinishOnboarding.js
 import { companiesGet } from "../funcs/companiesGet.js";
 import { companiesGetCustomFields } from "../funcs/companiesGetCustomFields.js";
 import { companiesGetOnboardingStatus } from "../funcs/companiesGetOnboardingStatus.js";
+import { companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness } from "../funcs/companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness.js";
 import { companiesListAdmins } from "../funcs/companiesListAdmins.js";
 import { companiesMigrate } from "../funcs/companiesMigrate.js";
 import { companiesRetrieveTermsOfService } from "../funcs/companiesRetrieveTermsOfService.js";
@@ -34,6 +35,10 @@ import {
   GetV1CompanyOnboardingStatusRequest,
   GetV1CompanyOnboardingStatusResponse,
 } from "../models/operations/getv1companyonboardingstatus.js";
+import {
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest,
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse,
+} from "../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
 import {
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest,
   PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceResponse,
@@ -158,6 +163,29 @@ export class Companies extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Check company migration readiness
+   *
+   * @remarks
+   * Check if an existing Gusto customer is ready to be migrated to embedded payroll. This endpoint returns blockers and warnings associated with migrating the company and is recommended to be called before attempting to migrate a company.
+   *
+   * scope: `partner_managed_companies:read`
+   */
+  async getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(
+    request: GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest,
+    options?: RequestOptions,
+  ): Promise<
+    GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse
+  > {
+    return unwrapAsync(
+      companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 
   /**

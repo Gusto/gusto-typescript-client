@@ -21,6 +21,8 @@
 
 Get all of the employees, onboarding, active and terminated, for a given company.
 
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
 scope: `employees:read`
 
 ### Example Usage
@@ -486,6 +488,8 @@ import {
 ## get
 
 Get an employee.
+
+Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
 
 scope: `employees:read`
 

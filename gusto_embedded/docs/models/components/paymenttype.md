@@ -13,5 +13,5 @@ let value: PaymentType = "Payroll";
 ## Values
 
 ```typescript
-"Payroll"
+"Payroll" | "ContractorPaymentGroup"
 ```

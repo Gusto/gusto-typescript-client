@@ -19,9 +19,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody } from "../models/errors/putv1partnermanagedcompaniescompanyuuidmigrate.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest,
   PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse,
@@ -39,7 +39,7 @@ export type CompaniesMigrateMutationData =
   PutV1PartnerManagedCompaniesCompanyUuidMigrateResponse;
 
 export type CompaniesMigrateMutationError =
-  | UnprocessableEntityErrorObject
+  | PutV1PartnerManagedCompaniesCompanyUuidMigrateResponseBody
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

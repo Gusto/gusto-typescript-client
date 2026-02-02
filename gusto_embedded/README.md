@@ -203,6 +203,7 @@ run();
 * [get](docs/sdks/companies/README.md#get) - Get a company
 * [update](docs/sdks/companies/README.md#update) - Update a company
 * [migrate](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
+* [getV1PartnerManagedCompaniesCompanyUuidMigrationReadiness](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 * [acceptTermsOfService](docs/sdks/companies/README.md#accepttermsofservice) - Accept terms of service for a company user
 * [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
 * [createAdmin](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
@@ -657,6 +658,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companiesGet`](docs/sdks/companies/README.md#get) - Get a company
 - [`companiesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 - [`companiesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+- [`companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`companiesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`companiesMigrate`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 - [`companiesRetrieveTermsOfService`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
@@ -962,6 +964,7 @@ To learn about this feature and how to get started, check
 - [`useCompaniesGet`](docs/sdks/companies/README.md#get) - Get a company
 - [`useCompaniesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 - [`useCompaniesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+- [`useCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`useCompaniesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
 - [`useCompaniesRetrieveTermsOfServiceMutation`](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
@@ -1400,7 +1403,7 @@ run();
 **Primary error:**
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (13)</summary>
+<details><summary>Less common errors (14)</summary>
 
 <br />
 
@@ -1413,13 +1416,14 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 163 of 279 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 279 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 4 of 279 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 279 methods.*
-* [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 279 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 279 methods.*
-* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 279 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 162 of 280 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 5 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 280 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 280 methods.*
+* [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 280 methods.*
+* [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*
+* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 280 methods.*
+* [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 280 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

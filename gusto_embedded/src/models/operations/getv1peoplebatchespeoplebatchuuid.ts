@@ -75,9 +75,9 @@ export type GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus = ClosedEnum<
   typeof GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus
 >;
 
-export type GetV1PeopleBatchesPeopleBatchUuidErrors = {};
+export type GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors = {};
 
-export type Errors = {
+export type GetV1PeopleBatchesPeopleBatchUuidErrors = {
   /**
    * The key identifying the error source
    */
@@ -93,7 +93,10 @@ export type Errors = {
   /**
    * Nested errors for sub-operations
    */
-  errors?: Array<GetV1PeopleBatchesPeopleBatchUuidErrors> | null | undefined;
+  errors?:
+    | Array<GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors>
+    | null
+    | undefined;
 };
 
 export type Results = {
@@ -124,7 +127,7 @@ export type Results = {
   /**
    * Errors encountered while processing this batch item
    */
-  errors?: Array<Errors> | null | undefined;
+  errors?: Array<GetV1PeopleBatchesPeopleBatchUuidErrors> | null | undefined;
 };
 
 export type Exclusions = {
@@ -229,11 +232,48 @@ export const GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus$inboundSchema:
     z.nativeEnum(GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus);
 
 /** @internal */
+export const GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors$inboundSchema:
+  z.ZodType<
+    GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({});
+
+export function getV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrorsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetV1PeopleBatchesPeopleBatchUuidErrors$inboundSchema: z.ZodType<
   GetV1PeopleBatchesPeopleBatchUuidErrors,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  error_key: z.string().optional(),
+  category: z.string().optional(),
+  message: z.nullable(z.string()).optional(),
+  errors: z.nullable(
+    z.array(z.lazy(() =>
+      GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors$inboundSchema
+    )),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "error_key": "errorKey",
+  });
+});
 
 export function getV1PeopleBatchesPeopleBatchUuidErrorsFromJSON(
   jsonString: string,
@@ -252,33 +292,6 @@ export function getV1PeopleBatchesPeopleBatchUuidErrorsFromJSON(
 }
 
 /** @internal */
-export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
-  .object({
-    error_key: z.string().optional(),
-    category: z.string().optional(),
-    message: z.nullable(z.string()).optional(),
-    errors: z.nullable(
-      z.array(
-        z.lazy(() => GetV1PeopleBatchesPeopleBatchUuidErrors$inboundSchema),
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "error_key": "errorKey",
-    });
-  });
-
-export function errorsFromJSON(
-  jsonString: string,
-): SafeParseResult<Errors, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Errors' from JSON`,
-  );
-}
-
-/** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
   z.object({
     external_id: z.string().optional(),
@@ -288,7 +301,11 @@ export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
     idx: z.number().int().optional(),
     uuid: z.string().optional(),
     employee_uuid: z.string().optional(),
-    errors: z.nullable(z.array(z.lazy(() => Errors$inboundSchema))).optional(),
+    errors: z.nullable(
+      z.array(
+        z.lazy(() => GetV1PeopleBatchesPeopleBatchUuidErrors$inboundSchema),
+      ),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "external_id": "externalId",

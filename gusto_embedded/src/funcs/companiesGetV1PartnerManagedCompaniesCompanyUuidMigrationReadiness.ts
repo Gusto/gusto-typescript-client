@@ -3,7 +3,7 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -21,36 +21,29 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
-import {
-  GetV1EmployeesRequest,
-  GetV1EmployeesRequest$outboundSchema,
-  GetV1EmployeesResponse,
-  GetV1EmployeesResponse$inboundSchema,
-} from "../models/operations/getv1employees.js";
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest,
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest$outboundSchema,
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse,
+  GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse$inboundSchema,
+} from "../models/operations/getv1partnermanagedcompaniescompanyuuidmigrationreadiness.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get an employee
+ * Check company migration readiness
  *
  * @remarks
- * Get an employee.
+ * Check if an existing Gusto customer is ready to be migrated to embedded payroll. This endpoint returns blockers and warnings associated with migrating the company and is recommended to be called before attempting to migrate a company.
  *
- * Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
- *
- * scope: `employees:read`
+ * scope: `partner_managed_companies:read`
  */
-export function employeesGet(
+export function companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness(
   client: GustoEmbeddedCore,
-  request: GetV1EmployeesRequest,
+  request: GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetV1EmployeesResponse,
-    | UnprocessableEntityErrorObject
+    GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -70,13 +63,12 @@ export function employeesGet(
 
 async function $do(
   client: GustoEmbeddedCore,
-  request: GetV1EmployeesRequest,
+  request: GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetV1EmployeesResponse,
-      | UnprocessableEntityErrorObject
+      GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse,
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -91,7 +83,9 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => GetV1EmployeesRequest$outboundSchema.parse(value),
+    (value) =>
+      GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessRequest$outboundSchema
+        .parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -101,17 +95,15 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    employee_id: encodeSimple("employee_id", payload.employee_id, {
+    company_uuid: encodeSimple("company_uuid", payload.company_uuid, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v1/employees/{employee_id}")(pathParams);
-
-  const query = encodeFormQuery({
-    "include": payload.include,
-  }, { explode: false });
+  const path = pathToFunc(
+    "/v1/partner_managed_companies/{company_uuid}/migration_readiness",
+  )(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -131,7 +123,8 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-v1-employees",
+    operationID:
+      "get-v1-partner-managed-companies-company-uuid-migration_readiness",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -149,7 +142,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -175,8 +167,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    GetV1EmployeesResponse,
-    | UnprocessableEntityErrorObject
+    GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse,
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -186,9 +177,12 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, GetV1EmployeesResponse$inboundSchema, { key: "Employee" }),
-    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail("4XX"),
+    M.json(
+      200,
+      GetV1PartnerManagedCompaniesCompanyUuidMigrationReadinessResponse$inboundSchema,
+      { key: "object" },
+    ),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

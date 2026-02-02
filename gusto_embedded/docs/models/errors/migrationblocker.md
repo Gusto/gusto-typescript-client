@@ -1,0 +1,18 @@
+# MigrationBlocker
+
+Migration blocker that blocks company migration
+
+## Example Usage
+
+```typescript
+import { MigrationBlocker } from "@gusto/embedded-api/models/errors/migrationblocker.js";
+
+// No examples available for this model
+```
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `errors`                                                           | [errors.Errors](../../models/errors/errors.md)[]                   | :heavy_minus_sign:                                                 | N/A                                                                |
+| `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |
