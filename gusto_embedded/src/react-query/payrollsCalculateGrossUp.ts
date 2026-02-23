@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import { PostPayrollsGrossUpPayrollUuidResponseBody } from "../models/errors/postpayrollsgrossuppayrolluuid.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostPayrollsGrossUpPayrollUuidRequest,
   PostPayrollsGrossUpPayrollUuidResponse,
@@ -39,7 +40,8 @@ export type PayrollsCalculateGrossUpMutationData =
   PostPayrollsGrossUpPayrollUuidResponse;
 
 export type PayrollsCalculateGrossUpMutationError =
-  | PostPayrollsGrossUpPayrollUuidResponseBody
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -50,7 +52,7 @@ export type PayrollsCalculateGrossUpMutationError =
   | SDKValidationError;
 
 /**
- * Calculate gross up
+ * Calculate gross up for a payroll
  *
  * @remarks
  * Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only applicable to off-cycle unprocessed payrolls.

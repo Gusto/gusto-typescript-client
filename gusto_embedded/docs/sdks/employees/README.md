@@ -27,7 +27,7 @@ scope: `employees:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees" method="get" path="/v1/companies/{company_id}/employees" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees" method="get" path="/v1/companies/{company_id}/employees" example="test_example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -118,10 +118,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
@@ -129,9 +129,9 @@ Create an employee.
 
 scope: `employees:manage`
 
-### Example Usage
+### Example Usage: request_example_1
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-employees" method="post" path="/v1/companies/{company_id}/employees" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees" method="post" path="/v1/companies/{company_id}/employees" example="request_example_1" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -203,6 +203,72 @@ import {
   useEmployeesCreateMutation
 } from "@gusto/embedded-api/react-query/employeesCreate.js";
 ```
+### Example Usage: test_example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees" method="post" path="/v1/companies/{company_id}/employees" example="test_example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.create({
+    companyId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesCreate } from "@gusto/embedded-api/funcs/employeesCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesCreate(gustoEmbedded, {
+    companyId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesCreateMutation
+} from "@gusto/embedded-api/react-query/employeesCreate.js";
+```
 
 ### Parameters
 
@@ -221,7 +287,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getV1CompaniesCompanyIdEmployeesPaymentDetails
@@ -239,7 +306,7 @@ Base scope: `employee_payment_methods:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees-payment_details" method="get" path="/v1/companies/{company_id}/employees/payment_details" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-employees-payment_details" method="get" path="/v1/companies/{company_id}/employees/payment_details" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -340,9 +407,201 @@ Create a historical employee, an employee that was previously dismissed from the
 
 scope: `employees:manage`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.createHistorical({
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesCreateHistorical(gustoEmbedded, {
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreateHistorical failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesCreateHistoricalMutation
+} from "@gusto/embedded-api/react-query/employeesCreateHistorical.js";
+```
+### Example Usage: Create Historical Employee Example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Create Historical Employee Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.createHistorical({
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesCreateHistorical(gustoEmbedded, {
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreateHistorical failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesCreateHistoricalMutation
+} from "@gusto/embedded-api/react-query/employeesCreateHistorical.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -464,6 +723,198 @@ import {
   useEmployeesCreateHistoricalMutation
 } from "@gusto/embedded-api/react-query/employeesCreateHistorical.js";
 ```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.createHistorical({
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesCreateHistorical(gustoEmbedded, {
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreateHistorical failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesCreateHistoricalMutation
+} from "@gusto/embedded-api/react-query/employeesCreateHistorical.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-historical_employees" method="post" path="/v1/companies/{company_uuid}/historical_employees" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.createHistorical({
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesCreateHistorical } from "@gusto/embedded-api/funcs/employeesCreateHistorical.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesCreateHistorical(gustoEmbedded, {
+    companyUuid: "<id>",
+    historicalEmployeeBody: {
+      firstName: "Martin",
+      lastName: "Flatley",
+      dateOfBirth: "1991-02-20",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "New Alysonfield",
+        state: "Arizona",
+        zip: "00061-3612",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesCreateHistorical failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesCreateHistoricalMutation
+} from "@gusto/embedded-api/react-query/employeesCreateHistorical.js";
+```
 
 ### Parameters
 
@@ -495,7 +946,7 @@ scope: `employees:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-employees" method="get" path="/v1/employees/{employee_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees" method="get" path="/v1/employees/{employee_id}" example="test_example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -586,10 +1037,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -597,9 +1048,9 @@ Update an employee.
 
 scope: `employees:write`
 
-### Example Usage
+### Example Usage: request_example_1
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees" method="put" path="/v1/employees/{employee_id}" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees" method="put" path="/v1/employees/{employee_id}" example="request_example_1" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -683,6 +1134,78 @@ import {
   useEmployeesUpdateMutation
 } from "@gusto/embedded-api/react-query/employeesUpdate.js";
 ```
+### Example Usage: test_example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees" method="put" path="/v1/employees/{employee_id}" example="test_example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.update({
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesUpdate } from "@gusto/embedded-api/funcs/employeesUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesUpdate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesUpdateMutation
+} from "@gusto/embedded-api/react-query/employeesUpdate.js";
+```
 
 ### Parameters
 
@@ -701,7 +1224,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 409, 422                         | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 409, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## delete
@@ -796,7 +1320,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getCustomFields
@@ -807,7 +1332,7 @@ scope: `employees:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-custom_fields" method="get" path="/v1/employees/{employee_id}/custom_fields" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-custom_fields" method="get" path="/v1/employees/{employee_id}/custom_fields" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -910,7 +1435,7 @@ scope: `employees:manage`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_documents_config" method="put" path="/v1/employees/{employee_id}/onboarding_documents_config" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_documents_config" method="put" path="/v1/employees/{employee_id}/onboarding_documents_config" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1045,7 +1570,7 @@ scope: `employees:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-onboarding_status" method="get" path="/v1/employees/{employee_id}/onboarding_status" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-onboarding_status" method="get" path="/v1/employees/{employee_id}/onboarding_status" example="test_example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1136,10 +1661,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateOnboardingStatus
 
@@ -1156,9 +1681,9 @@ Updates an employee's onboarding status.
 
 scope: `employees:manage`
 
-### Example Usage
+### Example Usage: request_example_1
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_status" method="put" path="/v1/employees/{employee_id}/onboarding_status" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_status" method="put" path="/v1/employees/{employee_id}/onboarding_status" example="request_example_1" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1228,6 +1753,78 @@ import {
   useEmployeesUpdateOnboardingStatusMutation
 } from "@gusto/embedded-api/react-query/employeesUpdateOnboardingStatus.js";
 ```
+### Example Usage: test_example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-onboarding_status" method="put" path="/v1/employees/{employee_id}/onboarding_status" example="test_example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employees.updateOnboardingStatus({
+    employeeId: "<id>",
+    requestBody: {
+      onboardingStatus: "self_onboarding_invited",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeesUpdateOnboardingStatus } from "@gusto/embedded-api/funcs/employeesUpdateOnboardingStatus.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeesUpdateOnboardingStatus(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      onboardingStatus: "self_onboarding_invited",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeesUpdateOnboardingStatus failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeesUpdateOnboardingStatusMutation
+} from "@gusto/embedded-api/react-query/employeesUpdateOnboardingStatus.js";
+```
 
 ### Parameters
 
@@ -1246,7 +1843,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getTimeOffActivities
@@ -1257,7 +1855,7 @@ scope: `employee_time_off_activities:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-version-employees-time_off_activities" method="get" path="/v1/employees/{employee_uuid}/time_off_activities" -->
+<!-- UsageSnippet language="typescript" operationID="get-version-employees-time_off_activities" method="get" path="/v1/employees/{employee_uuid}/time_off_activities" example="example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

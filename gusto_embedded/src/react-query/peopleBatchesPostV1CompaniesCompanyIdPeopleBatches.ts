@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { PostV1CompaniesCompanyIdPeopleBatchesResponseBody } from "../models/errors/postv1companiescompanyidpeoplebatches.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -41,6 +42,7 @@ export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationData =
   PostV1CompaniesCompanyIdPeopleBatchesResponse;
 
 export type PeopleBatchesPostV1CompaniesCompanyIdPeopleBatchesMutationError =
+  | NotFoundErrorObject
   | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError

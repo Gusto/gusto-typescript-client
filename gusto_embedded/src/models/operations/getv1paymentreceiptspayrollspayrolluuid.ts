@@ -47,7 +47,7 @@ export type GetV1PaymentReceiptsPayrollsPayrollUuidRequest = {
 export type GetV1PaymentReceiptsPayrollsPayrollUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * successful
+   * Successful
    */
   payrollReceipt?: PayrollReceipt | undefined;
 };

@@ -17,7 +17,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-documents" method="get" path="/v1/contractors/{contractor_uuid}/documents" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-documents" method="get" path="/v1/contractors/{contractor_uuid}/documents" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -120,7 +120,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document" method="get" path="/v1/documents/{document_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document" method="get" path="/v1/documents/{document_uuid}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -223,7 +223,7 @@ scope: `contractor_documents:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document-pdf" method="get" path="/v1/documents/{document_uuid}/pdf" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor-document-pdf" method="get" path="/v1/documents/{document_uuid}/pdf" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -324,9 +324,231 @@ Sign a contractor document.
 
 scope: `contractor_documents:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorDocuments.sign({
+    documentUuid: "<id>",
+    requestBody: {
+      fields: [],
+      agree: false,
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorDocumentsSign } from "@gusto/embedded-api/funcs/contractorDocumentsSign.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorDocumentsSign(gustoEmbedded, {
+    documentUuid: "<id>",
+    requestBody: {
+      fields: [],
+      agree: false,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorDocumentsSign failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorDocumentsSignMutation
+} from "@gusto/embedded-api/react-query/contractorDocumentsSign.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorDocuments.sign({
+    documentUuid: "<id>",
+    requestBody: {
+      fields: [],
+      agree: false,
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorDocumentsSign } from "@gusto/embedded-api/funcs/contractorDocumentsSign.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorDocumentsSign(gustoEmbedded, {
+    documentUuid: "<id>",
+    requestBody: {
+      fields: [],
+      agree: false,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorDocumentsSign failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorDocumentsSignMutation
+} from "@gusto/embedded-api/react-query/contractorDocumentsSign.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorDocuments.sign({
+    documentUuid: "<id>",
+    requestBody: {
+      fields: [],
+      agree: false,
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorDocumentsSign } from "@gusto/embedded-api/funcs/contractorDocumentsSign.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorDocumentsSign(gustoEmbedded, {
+    documentUuid: "<id>",
+    requestBody: {
+      fields: [],
+      agree: false,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorDocumentsSign failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorDocumentsSignMutation
+} from "@gusto/embedded-api/react-query/contractorDocumentsSign.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-contractor-document-sign" method="put" path="/v1/documents/{document_uuid}/sign" example="Resource" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

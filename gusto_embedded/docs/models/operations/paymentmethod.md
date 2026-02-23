@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PaymentMethod } from "@gusto/embedded-api/models/operations/postv1companiescompanyidcontractorpayments.js";
+import { PaymentMethod } from "@gusto/embedded-api/models/operations/postv1companiescompanyidcontractorpaymentgroups.js";
 
 let value: PaymentMethod = "Historical Payment";
 ```

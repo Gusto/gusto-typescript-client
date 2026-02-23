@@ -12,9 +12,109 @@ Update a historical employee, an employee that was previously dismissed from the
 
 scope: `employees:manage`
 
-### Example Usage
+### Example Usage: Create Historical Employee Example
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" example="Create Historical Employee Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.historicalEmployees.update({
+    companyUuid: "<id>",
+    historicalEmployeeUuid: "<id>",
+    requestBody: {
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+      firstName: "Leanna",
+      lastName: "Swaniawski",
+      dateOfBirth: "1977-07-17",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "Port Mitchell",
+        state: "Kentucky",
+        zip: "85765",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { historicalEmployeesUpdate } from "@gusto/embedded-api/funcs/historicalEmployeesUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await historicalEmployeesUpdate(gustoEmbedded, {
+    companyUuid: "<id>",
+    historicalEmployeeUuid: "<id>",
+    requestBody: {
+      version: "56d00c178bc7393b2a206ed6a86afcb4",
+      firstName: "Leanna",
+      lastName: "Swaniawski",
+      dateOfBirth: "1977-07-17",
+      ssn: "<value>",
+      workAddress: {},
+      homeAddress: {
+        street1: "<value>",
+        city: "Port Mitchell",
+        state: "Kentucky",
+        zip: "85765",
+      },
+      termination: {},
+      job: {},
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("historicalEmployeesUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useHistoricalEmployeesUpdateMutation
+} from "@gusto/embedded-api/react-query/historicalEmployeesUpdate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-historical_employees" method="put" path="/v1/companies/{company_uuid}/historical_employees/{historical_employee_uuid}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";

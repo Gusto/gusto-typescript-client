@@ -5,7 +5,7 @@ The action to perform on the employee benefit. Required for creating/updating an
 ## Example Usage
 
 ```typescript
-import { Action } from "@gusto/embedded-api/models/components/companybenefitwithemployeebenefits.js";
+import { Action } from "@gusto/embedded-api/models/components/employeebenefitforcompanybenefit.js";
 
 let value: Action = "update";
 ```

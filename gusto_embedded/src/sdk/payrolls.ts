@@ -332,7 +332,7 @@ export class Payrolls extends ClientSDK {
   }
 
   /**
-   * Calculate gross up
+   * Calculate gross up for a payroll
    *
    * @remarks
    * Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only applicable to off-cycle unprocessed payrolls.
@@ -359,9 +359,10 @@ export class Payrolls extends ClientSDK {
    * Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
    *
    * This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with *include=taxes,benefits,deductions* params.
-   * In v2023-04-01, *show_calculation=true* is no longer required.
    *
    * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
+   *
+   * scope: `payrolls:run`
    */
   async calculate(
     request: PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
@@ -402,6 +403,7 @@ export class Payrolls extends ClientSDK {
    *
    * @remarks
    * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+   *
    * - `processed` is `true`
    * - Current time is earlier than 4pm PT on the `payroll_deadline`
    *

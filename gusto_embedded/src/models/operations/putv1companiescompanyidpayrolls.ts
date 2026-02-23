@@ -56,7 +56,7 @@ export type PutV1CompaniesCompanyIdPayrollsRequest = {
 export type PutV1CompaniesCompanyIdPayrollsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * successful
+   * Successful
    */
   payrollPrepared?: PayrollPrepared | undefined;
 };

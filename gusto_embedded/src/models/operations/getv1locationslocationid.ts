@@ -17,19 +17,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const HeaderXGustoAPIVersion = {
+export const GetV1LocationsLocationIdHeaderXGustoAPIVersion = {
   TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type HeaderXGustoAPIVersion = ClosedEnum<typeof HeaderXGustoAPIVersion>;
+export type GetV1LocationsLocationIdHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1LocationsLocationIdHeaderXGustoAPIVersion
+>;
 
 export type GetV1LocationsLocationIdRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined;
+  xGustoAPIVersion?: GetV1LocationsLocationIdHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the location
    */
@@ -45,9 +47,9 @@ export type GetV1LocationsLocationIdResponse = {
 };
 
 /** @internal */
-export const HeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
-  typeof HeaderXGustoAPIVersion
-> = z.nativeEnum(HeaderXGustoAPIVersion);
+export const GetV1LocationsLocationIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1LocationsLocationIdHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1LocationsLocationIdHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1LocationsLocationIdRequest$Outbound = {
@@ -61,7 +63,10 @@ export const GetV1LocationsLocationIdRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetV1LocationsLocationIdRequest
 > = z.object({
-  xGustoAPIVersion: HeaderXGustoAPIVersion$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    GetV1LocationsLocationIdHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   locationId: z.string(),
 }).transform((v) => {
   return remap$(v, {

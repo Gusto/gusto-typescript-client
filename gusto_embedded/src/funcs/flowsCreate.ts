@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -39,6 +43,22 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Generate a link to access a pre-built workflow in Gusto white-label UI. For security, all generated flows will expire within 1 hour of inactivity or 24 hours from creation time, whichever comes first.
  *
+ * You can see a list of all possible flow types in our [Flow Types](https://docs.gusto.com/embedded-payroll/docs/flow-types) guide.
+ *
+ * You can also mix and match flow_types in the same category to create custom flows suitable for your needs.
+ *
+ * For instance, to create a custom onboarding flow that only includes `add_addresses`, `add_employees`, and `sign_all_forms` steps, simply stitch those flow_types together into a comma delimited string:
+ *
+ * ```json
+ * {
+ *   "flow_type": "add_addresses,add_employees,sign_all_forms"
+ * }
+ * ```
+ *
+ * Please be mindful of data dependencies in each step to achieve the best user experience.
+ *
+ * For more information and in-depth guides review the [Getting Started](https://docs.gusto.com/embedded-payroll/docs/flows-getting-started) guide for flows.
+ *
  * scope: `flows:write`
  */
 export function flowsCreate(
@@ -48,6 +68,7 @@ export function flowsCreate(
 ): APIPromise<
   Result<
     PostV1CompanyFlowsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +95,7 @@ async function $do(
   [
     Result<
       PostV1CompanyFlowsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -96,7 +118,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Create-Flow-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_uuid: encodeSimple("company_uuid", payload.company_uuid, {
@@ -170,6 +194,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompanyFlowsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -181,8 +206,9 @@ async function $do(
     | SDKValidationError
   >(
     M.json(201, PostV1CompanyFlowsResponse$inboundSchema, { key: "Flow" }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -1,6 +1,6 @@
 # AmountType
 
-The amount type of the deduction for the pay period.
+The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
 
 ## Example Usage
 

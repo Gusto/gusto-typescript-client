@@ -5,27 +5,49 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Event, Event$inboundSchema } from "../components/event.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  SortOrder,
-  SortOrder$outboundSchema,
-} from "../components/sortorder.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEventsSecurity = {
   systemAccessAuth: string;
 };
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetEventsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetEventsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetEventsHeaderXGustoAPIVersion
+>;
+
+/**
+ * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
+ */
+export const QueryParamSortOrder = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
+ */
+export type QueryParamSortOrder = ClosedEnum<typeof QueryParamSortOrder>;
+
 export type GetEventsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: GetEventsHeaderXGustoAPIVersion | undefined;
   /**
    * A cursor for pagination. Returns all events occuring after the specified UUID (exclusive). Events are sorted according to the provided sort_order param.
    */
@@ -45,17 +67,13 @@ export type GetEventsRequest = {
   /**
    * A string indicating whether to sort resulting events in ascending (asc) or descending (desc) chronological order. Events are sorted by their `timestamp`. Defaults to asc if left empty.
    */
-  sortOrder?: SortOrder | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  sortOrder?: QueryParamSortOrder | undefined;
 };
 
 export type GetEventsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   eventList?: Array<Event> | undefined;
 };
@@ -87,13 +105,23 @@ export function getEventsSecurityToJSON(
 }
 
 /** @internal */
+export const GetEventsHeaderXGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
+  typeof GetEventsHeaderXGustoAPIVersion
+> = z.nativeEnum(GetEventsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const QueryParamSortOrder$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamSortOrder
+> = z.nativeEnum(QueryParamSortOrder);
+
+/** @internal */
 export type GetEventsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   starting_after_uuid?: string | undefined;
   resource_uuid?: string | undefined;
   limit?: string | undefined;
   event_type?: string | undefined;
   sort_order?: string | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -102,19 +130,21 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEventsRequest
 > = z.object({
+  xGustoAPIVersion: GetEventsHeaderXGustoAPIVersion$outboundSchema.default(
+    "2024-04-01",
+  ),
   startingAfterUuid: z.string().optional(),
   resourceUuid: z.string().optional(),
   limit: z.string().optional(),
   eventType: z.string().optional(),
-  sortOrder: SortOrder$outboundSchema.optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  sortOrder: QueryParamSortOrder$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
+    xGustoAPIVersion: "X-Gusto-API-Version",
     startingAfterUuid: "starting_after_uuid",
     resourceUuid: "resource_uuid",
     eventType: "event_type",
     sortOrder: "sort_order",
-    xGustoAPIVersion: "X-Gusto-API-Version",
   });
 });
 

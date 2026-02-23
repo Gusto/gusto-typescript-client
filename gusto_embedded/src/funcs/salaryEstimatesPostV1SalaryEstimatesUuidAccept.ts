@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -50,6 +54,7 @@ export function salaryEstimatesPostV1SalaryEstimatesUuidAccept(
 ): APIPromise<
   Result<
     PostV1SalaryEstimatesUuidAcceptResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -76,6 +81,7 @@ async function $do(
   [
     Result<
       PostV1SalaryEstimatesUuidAcceptResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -173,6 +179,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1SalaryEstimatesUuidAcceptResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -186,7 +193,8 @@ async function $do(
     M.json(200, PostV1SalaryEstimatesUuidAcceptResponse$inboundSchema, {
       key: "Salary-Estimate",
     }),
-    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

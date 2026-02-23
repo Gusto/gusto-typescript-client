@@ -7,129 +7,71 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { RFCDate } from "../../types/rfcdate.js";
 import {
   ContractorPayment,
   ContractorPayment$inboundSchema,
 } from "../components/contractorpayment.js";
 import {
+  ContractorPaymentBody,
+  ContractorPaymentBody$Outbound,
+  ContractorPaymentBody$outboundSchema,
+} from "../components/contractorpaymentbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const PaymentMethod = {
-  DirectDeposit: "Direct Deposit",
-  Check: "Check",
-  HistoricalPayment: "Historical Payment",
-} as const;
-export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
-
-export type PostV1CompaniesCompanyIdContractorPaymentsRequestBody = {
-  /**
-   * The contractor receiving the payment
-   */
-  contractorUuid: string;
-  /**
-   * Date of contractor payment
-   */
-  date: RFCDate;
-  paymentMethod?: PaymentMethod | undefined;
-  /**
-   * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
-   */
-  wage?: number | undefined;
-  /**
-   * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
-   */
-  hours?: number | undefined;
-  /**
-   * If the contractor is on an hourly wage, this is the bonus the contractor earned
-   */
-  bonus?: number | undefined;
-  /**
-   * Reimbursed wages for the contractor
-   */
-  reimbursement?: number | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+  >;
 
 export type PostV1CompaniesCompanyIdContractorPaymentsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompaniesCompanyIdContractorPaymentsRequestBody;
+  contractorPaymentBody: ContractorPaymentBody;
 };
 
 export type PostV1CompaniesCompanyIdContractorPaymentsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * successful
    */
   contractorPayment?: ContractorPayment | undefined;
 };
 
 /** @internal */
-export const PaymentMethod$outboundSchema: z.ZodNativeEnum<
-  typeof PaymentMethod
-> = z.nativeEnum(PaymentMethod);
-
-/** @internal */
-export type PostV1CompaniesCompanyIdContractorPaymentsRequestBody$Outbound = {
-  contractor_uuid: string;
-  date: string;
-  payment_method: string;
-  wage?: number | undefined;
-  hours?: number | undefined;
-  bonus?: number | undefined;
-  reimbursement?: number | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdContractorPaymentsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdContractorPaymentsRequestBody
-  > = z.object({
-    contractorUuid: z.string(),
-    date: z.instanceof(RFCDate).transform(v => v.toString()),
-    paymentMethod: PaymentMethod$outboundSchema.default("Direct Deposit"),
-    wage: z.number().optional(),
-    hours: z.number().optional(),
-    bonus: z.number().optional(),
-    reimbursement: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contractorUuid: "contractor_uuid",
-      paymentMethod: "payment_method",
-    });
-  });
-
-export function postV1CompaniesCompanyIdContractorPaymentsRequestBodyToJSON(
-  postV1CompaniesCompanyIdContractorPaymentsRequestBody:
-    PostV1CompaniesCompanyIdContractorPaymentsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdContractorPaymentsRequestBody$outboundSchema.parse(
-      postV1CompaniesCompanyIdContractorPaymentsRequestBody,
-    ),
+export const PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostV1CompaniesCompanyIdContractorPaymentsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyIdContractorPaymentsRequestBody$Outbound;
+  company_id: string;
+  "Contractor-Payment-Body": ContractorPaymentBody$Outbound;
 };
 
 /** @internal */
@@ -139,16 +81,16 @@ export const PostV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema:
     z.ZodTypeDef,
     PostV1CompaniesCompanyIdContractorPaymentsRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     companyId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1CompaniesCompanyIdContractorPaymentsRequestBody$outboundSchema
-    ),
+    contractorPaymentBody: ContractorPaymentBody$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      companyId: "company_id",
+      contractorPaymentBody: "Contractor-Payment-Body",
     });
   });
 

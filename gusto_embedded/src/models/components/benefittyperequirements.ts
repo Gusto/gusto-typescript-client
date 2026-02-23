@@ -20,7 +20,7 @@ export type EmployeeDeduction = {
   required?: boolean | undefined;
   editable?: boolean | undefined;
   defaultValue?: DefaultValue | undefined;
-  choices?: Array<string> | undefined;
+  choices?: Array<string> | null | undefined;
 };
 
 export type BenefitTypeRequirementsDefaultValue = {
@@ -204,7 +204,7 @@ export const EmployeeDeduction$inboundSchema: z.ZodType<
   required: z.boolean().optional(),
   editable: z.boolean().optional(),
   default_value: z.lazy(() => DefaultValue$inboundSchema).optional(),
-  choices: z.array(z.string()).optional(),
+  choices: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "default_value": "defaultValue",

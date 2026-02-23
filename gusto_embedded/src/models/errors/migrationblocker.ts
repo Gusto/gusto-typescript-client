@@ -20,7 +20,7 @@ export type Metadata = {
   key?: string | undefined;
 };
 
-export type Errors = {
+export type MigrationBlockerErrors = {
   /**
    * Error key
    */
@@ -40,7 +40,7 @@ export type Errors = {
  * Migration blocker that blocks company migration
  */
 export type MigrationBlockerData = {
-  errors?: Array<Errors> | undefined;
+  errors?: Array<MigrationBlockerErrors> | undefined;
   httpMeta: HTTPMetadata;
 };
 
@@ -48,7 +48,7 @@ export type MigrationBlockerData = {
  * Migration blocker that blocks company migration
  */
 export class MigrationBlocker extends GustoEmbeddedError {
-  errors?: Array<Errors> | undefined;
+  errors?: Array<MigrationBlockerErrors> | undefined;
 
   /** The original data that was passed to this error instance. */
   data$: MigrationBlockerData;
@@ -88,25 +88,28 @@ export function metadataFromJSON(
 }
 
 /** @internal */
-export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
-  .object({
-    error_key: z.string().optional(),
-    category: z.string().optional(),
-    message: z.string().optional(),
-    metadata: z.lazy(() => Metadata$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "error_key": "errorKey",
-    });
+export const MigrationBlockerErrors$inboundSchema: z.ZodType<
+  MigrationBlockerErrors,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  error_key: z.string().optional(),
+  category: z.string().optional(),
+  message: z.string().optional(),
+  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "error_key": "errorKey",
   });
+});
 
-export function errorsFromJSON(
+export function migrationBlockerErrorsFromJSON(
   jsonString: string,
-): SafeParseResult<Errors, SDKValidationError> {
+): SafeParseResult<MigrationBlockerErrors, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Errors' from JSON`,
+    (x) => MigrationBlockerErrors$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MigrationBlockerErrors' from JSON`,
   );
 }
 
@@ -116,7 +119,8 @@ export const MigrationBlocker$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
+  errors: z.array(z.lazy(() => MigrationBlockerErrors$inboundSchema))
+    .optional(),
   HttpMeta: HTTPMetadata$inboundSchema,
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
