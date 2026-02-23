@@ -11,12 +11,18 @@ permissions:
       - main
     paths:
       - gusto_embedded/.speakeasy/gen.lock
+      - gusto_embedded_v2025_11_15/.speakeasy/gen.lock
   workflow_dispatch: {}
 jobs:
   publish:
+    strategy:
+      matrix:
+        target:
+          - gusto-embedded
+          - gusto-embedded-v2025-11-15
     uses: Gusto/sdk-generation-action/.github/workflows/sdk-publish.yaml@main
     with:
-      target: gusto-embedded
+      target: ${{ matrix.target }}
       runs-on: "{\"group\": \"gusto-ubuntu-default\"}"
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
