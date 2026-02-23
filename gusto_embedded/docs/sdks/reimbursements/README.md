@@ -109,10 +109,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## postV1EmployeesEmployeeIdRecurringReimbursements
 
@@ -210,10 +210,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404, 422                   | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getV1RecurringReimbursements
 
@@ -314,10 +314,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## putV1RecurringReimbursements
 
@@ -413,10 +413,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 409, 422                         | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404, 409, 422              | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## deleteV1RecurringReimbursements
 
@@ -506,7 +506,7 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |

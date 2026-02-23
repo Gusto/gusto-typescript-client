@@ -13,6 +13,10 @@ export type PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata = {
    * UUID of the information request
    */
   informationRequestUuid: string;
+  /**
+   * Last 4 digits of the bank account number for the bank screenshot RFI
+   */
+  bankAccountLastFourDigits?: string | null | undefined;
 };
 
 /**
@@ -38,9 +42,11 @@ export const PayrollCreditBlockerUnblockOptionSubmitBankScreenshotMetadata$inbou
     unknown
   > = z.object({
     information_request_uuid: z.string(),
+    bank_account_last_four_digits: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "information_request_uuid": "informationRequestUuid",
+      "bank_account_last_four_digits": "bankAccountLastFourDigits",
     });
   });
 

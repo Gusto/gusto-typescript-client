@@ -134,7 +134,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
 export type GetV1CompaniesCompanyIdPayrollsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * successful
+   * Successful
    */
   payrollList?: Array<Payroll> | undefined;
 };

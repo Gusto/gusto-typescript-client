@@ -108,6 +108,7 @@ export class Companies extends ClientSDK {
    *
    * @remarks
    * Get a company.
+   *
    * The employees:read scope is required to return home_address and non-work locations.
    * The company_admin:read scope is required to return primary_payroll_admin.
    * The signatories:read scope is required to return primary_signatory.

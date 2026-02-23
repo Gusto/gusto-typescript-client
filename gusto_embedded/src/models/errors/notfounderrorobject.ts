@@ -3,11 +3,26 @@
  */
 
 import * as z from "zod/v3";
-import {
-  EntityErrorObject,
-  EntityErrorObject$inboundSchema,
-} from "../components/entityerrorobject.js";
+import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import { GustoEmbeddedError } from "./gustoembeddederror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
+
+export type Errors = {
+  /**
+   * Specifies where the error occurs. Typically this key identifies the attribute/parameter related to the error.
+   */
+  errorKey: string;
+  /**
+   * Specifies the type of error. The category provides error groupings and can be used to build custom error handling in your integration.
+   */
+  category: string;
+  /**
+   * Provides details about the error - generally this message can be surfaced to an end user.
+   */
+  message?: string | undefined;
+};
 
 /**
  * Not Found
@@ -17,7 +32,7 @@ import { GustoEmbeddedError } from "./gustoembeddederror.js";
  * The requested resource does not exist. Make sure the provided ID/UUID is valid.
  */
 export type NotFoundErrorObjectData = {
-  errors: Array<EntityErrorObject>;
+  errors: Array<Errors>;
 };
 
 /**
@@ -28,7 +43,7 @@ export type NotFoundErrorObjectData = {
  * The requested resource does not exist. Make sure the provided ID/UUID is valid.
  */
 export class NotFoundErrorObject extends GustoEmbeddedError {
-  errors: Array<EntityErrorObject>;
+  errors: Array<Errors>;
 
   /** The original data that was passed to this error instance. */
   data$: NotFoundErrorObjectData;
@@ -49,12 +64,34 @@ export class NotFoundErrorObject extends GustoEmbeddedError {
 }
 
 /** @internal */
+export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
+  .object({
+    error_key: z.string(),
+    category: z.string(),
+    message: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "error_key": "errorKey",
+    });
+  });
+
+export function errorsFromJSON(
+  jsonString: string,
+): SafeParseResult<Errors, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Errors' from JSON`,
+  );
+}
+
+/** @internal */
 export const NotFoundErrorObject$inboundSchema: z.ZodType<
   NotFoundErrorObject,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errors: z.array(EntityErrorObject$inboundSchema),
+  errors: z.array(z.lazy(() => Errors$inboundSchema)),
   request$: z.instanceof(Request),
   response$: z.instanceof(Response),
   body$: z.string(),

@@ -18,8 +18,16 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest,
   PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSchema,
@@ -49,6 +57,8 @@ export function payrollsPrepare(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse,
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -74,6 +84,8 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse,
+      | NotFoundErrorObject
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -169,7 +181,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -184,6 +196,8 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse,
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -198,7 +212,9 @@ async function $do(
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse$inboundSchema,
       { key: "Payroll-Prepared" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -12,9 +12,9 @@ import { locationsRetrieve } from "../funcs/locationsRetrieve.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import {
+  GetV1LocationsLocationIdHeaderXGustoAPIVersion,
   GetV1LocationsLocationIdRequest,
   GetV1LocationsLocationIdResponse,
-  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1locationslocationid.js";
 import { unwrapAsync } from "../types/fp.js";
 export type LocationsRetrieveQueryData = GetV1LocationsLocationIdResponse;
@@ -73,7 +73,11 @@ export function buildLocationsRetrieveQuery(
 
 export function queryKeyLocationsRetrieve(
   locationId: string,
-  parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
+  parameters: {
+    xGustoAPIVersion?:
+      | GetV1LocationsLocationIdHeaderXGustoAPIVersion
+      | undefined;
+  },
 ): QueryKey {
   return [
     "@gusto/embedded-api",

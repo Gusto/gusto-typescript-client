@@ -27,7 +27,7 @@ export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody = {
   version: string;
   filingStatus: string;
   extraWithholding?: string | null | undefined;
-  twoJobs?: boolean | undefined;
+  twoJobs?: boolean | null | undefined;
   dependentsAmount?: string | undefined;
   otherIncome?: string | undefined;
   deductions?: string | undefined;
@@ -67,7 +67,7 @@ export type PutV1EmployeesEmployeeIdFederalTaxesRequestBody$Outbound = {
   version: string;
   filing_status: string;
   extra_withholding?: string | null | undefined;
-  two_jobs?: boolean | undefined;
+  two_jobs?: boolean | null | undefined;
   dependents_amount?: string | undefined;
   other_income?: string | undefined;
   deductions?: string | undefined;
@@ -86,7 +86,7 @@ export const PutV1EmployeesEmployeeIdFederalTaxesRequestBody$outboundSchema:
     version: z.string(),
     filingStatus: z.string(),
     extraWithholding: z.nullable(z.string()).optional(),
-    twoJobs: z.boolean().optional(),
+    twoJobs: z.nullable(z.boolean()).optional(),
     dependentsAmount: z.string().optional(),
     otherIncome: z.string().optional(),
     deductions: z.string().optional(),

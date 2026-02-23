@@ -51,7 +51,7 @@ export type PostCompaniesPayrollSkipCompanyUuidRequestBody = {
   /**
    * An array of employees. This field is only applicable to new hire payroll and termination payroll
    */
-  employeeUuids?: Array<string> | undefined;
+  employeeUuids?: Array<string> | null | undefined;
 };
 
 export type PostCompaniesPayrollSkipCompanyUuidRequest = {
@@ -80,7 +80,7 @@ export type PostCompaniesPayrollSkipCompanyUuidRequestBody$Outbound = {
   start_date?: string | undefined;
   end_date?: string | undefined;
   pay_schedule_uuid?: string | undefined;
-  employee_uuids?: Array<string> | undefined;
+  employee_uuids?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -94,7 +94,7 @@ export const PostCompaniesPayrollSkipCompanyUuidRequestBody$outboundSchema:
     startDate: z.string().optional(),
     endDate: z.string().optional(),
     payScheduleUuid: z.string().optional(),
-    employeeUuids: z.array(z.string()).optional(),
+    employeeUuids: z.nullable(z.array(z.string())).optional(),
   }).transform((v) => {
     return remap$(v, {
       payrollType: "payroll_type",

@@ -19,11 +19,15 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import {
-  PostPayrollsGrossUpPayrollUuidResponseBody,
-  PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema,
-} from "../models/errors/postpayrollsgrossuppayrolluuid.js";
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PostPayrollsGrossUpPayrollUuidRequest,
   PostPayrollsGrossUpPayrollUuidRequest$outboundSchema,
@@ -34,7 +38,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Calculate gross up
+ * Calculate gross up for a payroll
  *
  * @remarks
  * Calculates gross up earnings for an employee's payroll, given net earnings. This endpoint is only applicable to off-cycle unprocessed payrolls.
@@ -50,7 +54,8 @@ export function payrollsCalculateGrossUp(
 ): APIPromise<
   Result<
     PostPayrollsGrossUpPayrollUuidResponse,
-    | PostPayrollsGrossUpPayrollUuidResponseBody
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -76,7 +81,8 @@ async function $do(
   [
     Result<
       PostPayrollsGrossUpPayrollUuidResponse,
-      | PostPayrollsGrossUpPayrollUuidResponseBody
+      | NotFoundErrorObject
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -99,7 +105,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Payroll-Gross-Up-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     payroll_uuid: encodeSimple("payroll_uuid", payload.payroll_uuid, {
@@ -173,7 +181,8 @@ async function $do(
 
   const [result] = await M.match<
     PostPayrollsGrossUpPayrollUuidResponse,
-    | PostPayrollsGrossUpPayrollUuidResponseBody
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -184,10 +193,11 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, PostPayrollsGrossUpPayrollUuidResponse$inboundSchema, {
-      key: "Gross-Up-Pay",
+      key: "Payroll-Gross-Up-Response",
     }),
-    M.jsonErr(422, PostPayrollsGrossUpPayrollUuidResponseBody$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

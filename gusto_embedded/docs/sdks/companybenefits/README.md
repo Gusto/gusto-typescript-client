@@ -28,9 +28,225 @@ When the application has the `company_benefits:write:benefit_type_limited` data 
 
 scope: `company_benefits:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-company_benefits" method="post" path="/v1/companies/{company_id}/company_benefits" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-company_benefits" method="post" path="/v1/companies/{company_id}/company_benefits" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.create({
+    companyId: "<id>",
+    requestBody: {
+      description: "hm pfft surge beyond",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsCreate } from "@gusto/embedded-api/funcs/companyBenefitsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    requestBody: {
+      description: "hm pfft surge beyond",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsCreateMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsCreate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-company_benefits" method="post" path="/v1/companies/{company_id}/company_benefits" example="Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.create({
+    companyId: "<id>",
+    requestBody: {
+      description: "hm pfft surge beyond",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsCreate } from "@gusto/embedded-api/funcs/companyBenefitsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    requestBody: {
+      description: "hm pfft surge beyond",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsCreateMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsCreate.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-company_benefits" method="post" path="/v1/companies/{company_id}/company_benefits" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.create({
+    companyId: "<id>",
+    requestBody: {
+      description: "hm pfft surge beyond",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsCreate } from "@gusto/embedded-api/funcs/companyBenefitsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    requestBody: {
+      description: "hm pfft surge beyond",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsCreateMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsCreate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-company_benefits" method="post" path="/v1/companies/{company_id}/company_benefits" example="Resource" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -133,7 +349,7 @@ scope: `company_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-company_benefits" method="get" path="/v1/companies/{company_id}/company_benefits" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-company_benefits" method="get" path="/v1/companies/{company_id}/company_benefits" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -240,7 +456,7 @@ scope: `company_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-company_benefits-company_benefit_id" method="get" path="/v1/company_benefits/{company_benefit_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-company_benefits-company_benefit_id" method="get" path="/v1/company_benefits/{company_benefit_id}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -345,9 +561,81 @@ When the application has the `company_benefits:write:benefit_type_limited` data 
 
 scope: `company_benefits:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id" method="put" path="/v1/company_benefits/{company_benefit_id}" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id" method="put" path="/v1/company_benefits/{company_benefit_id}" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.update({
+    companyBenefitId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsUpdate } from "@gusto/embedded-api/funcs/companyBenefitsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsUpdate(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsUpdateMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsUpdate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id" method="put" path="/v1/company_benefits/{company_benefit_id}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -390,6 +678,150 @@ async function run() {
     requestBody: {
       version: "98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872",
       active: false,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsUpdateMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsUpdate.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id" method="put" path="/v1/company_benefits/{company_benefit_id}" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.update({
+    companyBenefitId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsUpdate } from "@gusto/embedded-api/funcs/companyBenefitsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsUpdate(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsUpdateMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsUpdate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id" method="put" path="/v1/company_benefits/{company_benefit_id}" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.update({
+    companyBenefitId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsUpdate } from "@gusto/embedded-api/funcs/companyBenefitsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsUpdate(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      version: "<value>",
     },
   });
   if (res.ok) {
@@ -533,10 +965,10 @@ import {
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| errors.DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody | 422                                                        | application/json                                           |
-| errors.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getAll
 
@@ -548,7 +980,7 @@ scope: `benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-benefits" method="get" path="/v1/benefits" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-benefits" method="get" path="/v1/benefits" example="Supported Benefits" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -649,7 +1081,7 @@ scope: `benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-benefits-benefit_id" method="get" path="/v1/benefits/{benefit_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-benefits-benefit_id" method="get" path="/v1/benefits/{benefit_id}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -754,7 +1186,7 @@ scope: `company_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-benefits-company_benefit_id-summary" method="get" path="/v1/company_benefits/{company_benefit_id}/summary" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-benefits-company_benefit_id-summary" method="get" path="/v1/company_benefits/{company_benefit_id}/summary" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -865,7 +1297,7 @@ scope: `employee_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-company_benefits-company_benefit_id-employee_benefits" method="get" path="/v1/company_benefits/{company_benefit_id}/employee_benefits" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-company_benefits-company_benefit_id-employee_benefits" method="get" path="/v1/company_benefits/{company_benefit_id}/employee_benefits" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -972,9 +1404,95 @@ When the application has the `employee_benefits:write:benefit_type_limited` data
 
 scope: `employee_benefits:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-employee_benefits" method="put" path="/v1/company_benefits/{company_benefit_id}/employee_benefits" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-employee_benefits" method="put" path="/v1/company_benefits/{company_benefit_id}/employee_benefits" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.updateEmployeeBenefits({
+    companyBenefitId: "<id>",
+    requestBody: {
+      employeeBenefits: [
+        {
+          employeeUuid: "<id>",
+        },
+        {
+          employeeUuid: "<id>",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsUpdateEmployeeBenefits } from "@gusto/embedded-api/funcs/companyBenefitsUpdateEmployeeBenefits.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsUpdateEmployeeBenefits(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      employeeBenefits: [
+        {
+          employeeUuid: "<id>",
+        },
+        {
+          employeeUuid: "<id>",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdateEmployeeBenefits failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsUpdateEmployeeBenefitsMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsUpdateEmployeeBenefits.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-employee_benefits" method="put" path="/v1/company_benefits/{company_benefit_id}/employee_benefits" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1056,6 +1574,178 @@ import {
   useCompanyBenefitsUpdateEmployeeBenefitsMutation
 } from "@gusto/embedded-api/react-query/companyBenefitsUpdateEmployeeBenefits.js";
 ```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-employee_benefits" method="put" path="/v1/company_benefits/{company_benefit_id}/employee_benefits" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.updateEmployeeBenefits({
+    companyBenefitId: "<id>",
+    requestBody: {
+      employeeBenefits: [
+        {
+          employeeUuid: "<id>",
+        },
+        {
+          employeeUuid: "<id>",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsUpdateEmployeeBenefits } from "@gusto/embedded-api/funcs/companyBenefitsUpdateEmployeeBenefits.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsUpdateEmployeeBenefits(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      employeeBenefits: [
+        {
+          employeeUuid: "<id>",
+        },
+        {
+          employeeUuid: "<id>",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdateEmployeeBenefits failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsUpdateEmployeeBenefitsMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsUpdateEmployeeBenefits.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-employee_benefits" method="put" path="/v1/company_benefits/{company_benefit_id}/employee_benefits" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.updateEmployeeBenefits({
+    companyBenefitId: "<id>",
+    requestBody: {
+      employeeBenefits: [
+        {
+          employeeUuid: "<id>",
+        },
+        {
+          employeeUuid: "<id>",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsUpdateEmployeeBenefits } from "@gusto/embedded-api/funcs/companyBenefitsUpdateEmployeeBenefits.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsUpdateEmployeeBenefits(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      employeeBenefits: [
+        {
+          employeeUuid: "<id>",
+        },
+        {
+          employeeUuid: "<id>",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsUpdateEmployeeBenefits failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsUpdateEmployeeBenefitsMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsUpdateEmployeeBenefits.js";
+```
 
 ### Parameters
 
@@ -1085,7 +1775,7 @@ scope: `benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-benefits-benefits_id-requirements" method="get" path="/v1/benefits/{benefit_id}/requirements" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-benefits-benefits_id-requirements" method="get" path="/v1/benefits/{benefit_id}/requirements" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1190,7 +1880,7 @@ scope: `company_benefits:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-company_benefits-company_benefit_id-contribution_exclusions" method="get" path="/v1/company_benefits/{company_benefit_id}/contribution_exclusions" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-company_benefits-company_benefit_id-contribution_exclusions" method="get" path="/v1/company_benefits/{company_benefit_id}/contribution_exclusions" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1293,9 +1983,93 @@ Currently this endpoint only works for 401-k and Roth 401-k benefit types.
 
 scope: `company_benefits:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-contribution_exclusions" method="put" path="/v1/company_benefits/{company_benefit_id}/contribution_exclusions" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-contribution_exclusions" method="put" path="/v1/company_benefits/{company_benefit_id}/contribution_exclusions" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.putV1CompanyBenefitsCompanyBenefitIdContributionExclusions({
+    companyBenefitId: "<id>",
+    requestBody: {
+      contributionExclusions: [
+        {
+          contributionUuid: "<id>",
+          contributionType: "<value>",
+          excluded: true,
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "@gusto/embedded-api/funcs/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      contributionExclusions: [
+        {
+          contributionUuid: "<id>",
+          contributionType: "<value>",
+          excluded: true,
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-contribution_exclusions" method="put" path="/v1/company_benefits/{company_benefit_id}/contribution_exclusions" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -1365,6 +2139,174 @@ async function run() {
         {
           contributionUuid: "082e1f6c-5b55-11f0-bb42-ab7136ba04e2",
           contributionType: "Regular",
+          excluded: true,
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-contribution_exclusions" method="put" path="/v1/company_benefits/{company_benefit_id}/contribution_exclusions" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.putV1CompanyBenefitsCompanyBenefitIdContributionExclusions({
+    companyBenefitId: "<id>",
+    requestBody: {
+      contributionExclusions: [
+        {
+          contributionUuid: "<id>",
+          contributionType: "<value>",
+          excluded: true,
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "@gusto/embedded-api/funcs/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      contributionExclusions: [
+        {
+          contributionUuid: "<id>",
+          contributionType: "<value>",
+          excluded: true,
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCompanyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusionsMutation
+} from "@gusto/embedded-api/react-query/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-company_benefits-company_benefit_id-contribution_exclusions" method="put" path="/v1/company_benefits/{company_benefit_id}/contribution_exclusions" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.companyBenefits.putV1CompanyBenefitsCompanyBenefitIdContributionExclusions({
+    companyBenefitId: "<id>",
+    requestBody: {
+      contributionExclusions: [
+        {
+          contributionUuid: "<id>",
+          contributionType: "<value>",
+          excluded: true,
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions } from "@gusto/embedded-api/funcs/companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await companyBenefitsPutV1CompanyBenefitsCompanyBenefitIdContributionExclusions(gustoEmbedded, {
+    companyBenefitId: "<id>",
+    requestBody: {
+      contributionExclusions: [
+        {
+          contributionUuid: "<id>",
+          contributionType: "<value>",
           excluded: true,
         },
       ],

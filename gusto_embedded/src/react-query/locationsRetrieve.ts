@@ -18,12 +18,12 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
+  GetV1LocationsLocationIdHeaderXGustoAPIVersion,
   GetV1LocationsLocationIdRequest,
-  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1locationslocationid.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -45,7 +45,7 @@ export {
 };
 
 export type LocationsRetrieveQueryError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -114,7 +114,11 @@ export function setLocationsRetrieveData(
   client: QueryClient,
   queryKeyBase: [
     locationId: string,
-    parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1LocationsLocationIdHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: LocationsRetrieveQueryData,
 ): LocationsRetrieveQueryData | undefined {
@@ -128,7 +132,11 @@ export function invalidateLocationsRetrieve(
   queryKeyBase: TupleToPrefixes<
     [
       locationId: string,
-      parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1LocationsLocationIdHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

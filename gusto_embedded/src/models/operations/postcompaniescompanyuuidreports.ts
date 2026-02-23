@@ -231,7 +231,7 @@ export type PostCompaniesCompanyUuidReportsRequestBody = {
   /**
    * Employees to filter by
    */
-  employeeUuids?: Array<string> | undefined;
+  employeeUuids?: Array<string> | null | undefined;
   /**
    * Departments to filter by
    */
@@ -303,7 +303,7 @@ export type PostCompaniesCompanyUuidReportsRequestBody$Outbound = {
   payment_method?: string | undefined;
   employment_type?: string | undefined;
   employment_status?: string | undefined;
-  employee_uuids?: Array<string> | undefined;
+  employee_uuids?: Array<string> | null | undefined;
   department_uuids?: Array<string> | undefined;
   work_address_uuids?: Array<string> | undefined;
 };
@@ -331,7 +331,7 @@ export const PostCompaniesCompanyUuidReportsRequestBody$outboundSchema:
     employmentType: EmploymentType$outboundSchema.optional(),
     employmentStatus:
       PostCompaniesCompanyUuidReportsEmploymentStatus$outboundSchema.optional(),
-    employeeUuids: z.array(z.string()).optional(),
+    employeeUuids: z.nullable(z.array(z.string())).optional(),
     departmentUuids: z.array(z.string()).optional(),
     workAddressUuids: z.array(z.string()).optional(),
   }).transform((v) => {

@@ -28,7 +28,7 @@ export const XGustoAPIVersion = {
  */
 export type XGustoAPIVersion = ClosedEnum<typeof XGustoAPIVersion>;
 
-export type RequestBody2 = {
+export type SystemAccessTokenRequest = {
   /**
    * Your client ID
    */
@@ -43,7 +43,7 @@ export type RequestBody2 = {
   grantType: "system_access";
 };
 
-export type One = {
+export type RefreshTokenRequest = {
   /**
    * Your client ID
    */
@@ -63,14 +63,16 @@ export type One = {
   redirectUri?: string | undefined;
 };
 
-export type OauthAccessTokenRequestBody = One | RequestBody2;
+export type OauthAccessTokenRequestBody =
+  | RefreshTokenRequest
+  | SystemAccessTokenRequest;
 
 export type OauthAccessTokenRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?: XGustoAPIVersion | undefined;
-  requestBody: One | RequestBody2;
+  requestBody: RefreshTokenRequest | SystemAccessTokenRequest;
 };
 
 export type OauthAccessTokenResponse = {
@@ -87,17 +89,17 @@ export const XGustoAPIVersion$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(XGustoAPIVersion);
 
 /** @internal */
-export type RequestBody2$Outbound = {
+export type SystemAccessTokenRequest$Outbound = {
   client_id: string;
   client_secret: string;
   grant_type: "system_access";
 };
 
 /** @internal */
-export const RequestBody2$outboundSchema: z.ZodType<
-  RequestBody2$Outbound,
+export const SystemAccessTokenRequest$outboundSchema: z.ZodType<
+  SystemAccessTokenRequest$Outbound,
   z.ZodTypeDef,
-  RequestBody2
+  SystemAccessTokenRequest
 > = z.object({
   clientId: z.string(),
   clientSecret: z.string(),
@@ -110,12 +112,16 @@ export const RequestBody2$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBody2ToJSON(requestBody2: RequestBody2): string {
-  return JSON.stringify(RequestBody2$outboundSchema.parse(requestBody2));
+export function systemAccessTokenRequestToJSON(
+  systemAccessTokenRequest: SystemAccessTokenRequest,
+): string {
+  return JSON.stringify(
+    SystemAccessTokenRequest$outboundSchema.parse(systemAccessTokenRequest),
+  );
 }
 
 /** @internal */
-export type One$Outbound = {
+export type RefreshTokenRequest$Outbound = {
   client_id: string;
   client_secret: string;
   grant_type: "refresh_token";
@@ -124,31 +130,38 @@ export type One$Outbound = {
 };
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .object({
-    clientId: z.string(),
-    clientSecret: z.string(),
-    grantType: z.literal("refresh_token"),
-    refreshToken: z.string(),
-    redirectUri: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      clientId: "client_id",
-      clientSecret: "client_secret",
-      grantType: "grant_type",
-      refreshToken: "refresh_token",
-      redirectUri: "redirect_uri",
-    });
+export const RefreshTokenRequest$outboundSchema: z.ZodType<
+  RefreshTokenRequest$Outbound,
+  z.ZodTypeDef,
+  RefreshTokenRequest
+> = z.object({
+  clientId: z.string(),
+  clientSecret: z.string(),
+  grantType: z.literal("refresh_token"),
+  refreshToken: z.string(),
+  redirectUri: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    clientId: "client_id",
+    clientSecret: "client_secret",
+    grantType: "grant_type",
+    refreshToken: "refresh_token",
+    redirectUri: "redirect_uri",
   });
+});
 
-export function oneToJSON(one: One): string {
-  return JSON.stringify(One$outboundSchema.parse(one));
+export function refreshTokenRequestToJSON(
+  refreshTokenRequest: RefreshTokenRequest,
+): string {
+  return JSON.stringify(
+    RefreshTokenRequest$outboundSchema.parse(refreshTokenRequest),
+  );
 }
 
 /** @internal */
 export type OauthAccessTokenRequestBody$Outbound =
-  | One$Outbound
-  | RequestBody2$Outbound;
+  | RefreshTokenRequest$Outbound
+  | SystemAccessTokenRequest$Outbound;
 
 /** @internal */
 export const OauthAccessTokenRequestBody$outboundSchema: z.ZodType<
@@ -156,8 +169,8 @@ export const OauthAccessTokenRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OauthAccessTokenRequestBody
 > = z.union([
-  z.lazy(() => One$outboundSchema),
-  z.lazy(() => RequestBody2$outboundSchema),
+  z.lazy(() => RefreshTokenRequest$outboundSchema),
+  z.lazy(() => SystemAccessTokenRequest$outboundSchema),
 ]);
 
 export function oauthAccessTokenRequestBodyToJSON(
@@ -173,7 +186,7 @@ export function oauthAccessTokenRequestBodyToJSON(
 /** @internal */
 export type OauthAccessTokenRequest$Outbound = {
   "X-Gusto-API-Version": string;
-  RequestBody: One$Outbound | RequestBody2$Outbound;
+  RequestBody: RefreshTokenRequest$Outbound | SystemAccessTokenRequest$Outbound;
 };
 
 /** @internal */
@@ -184,8 +197,8 @@ export const OauthAccessTokenRequest$outboundSchema: z.ZodType<
 > = z.object({
   xGustoAPIVersion: XGustoAPIVersion$outboundSchema.default("2024-04-01"),
   requestBody: z.union([
-    z.lazy(() => One$outboundSchema),
-    z.lazy(() => RequestBody2$outboundSchema),
+    z.lazy(() => RefreshTokenRequest$outboundSchema),
+    z.lazy(() => SystemAccessTokenRequest$outboundSchema),
   ]),
 }).transform((v) => {
   return remap$(v, {

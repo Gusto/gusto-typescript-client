@@ -128,6 +128,7 @@ export class ContractorPayments extends ClientSDK {
    *
    * @remarks
    * Returns a single contractor payment.
+   *
    * scope: `payrolls:read`
    */
   async get(

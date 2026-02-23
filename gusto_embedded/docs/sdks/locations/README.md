@@ -18,9 +18,89 @@ Since all company locations are subsets of locations, retrieving or updating an 
 
 scope: `companies:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-locations" method="post" path="/v1/companies/{company_id}/locations" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-locations" method="post" path="/v1/companies/{company_id}/locations" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.locations.create({
+    companyId: "<id>",
+    requestBody: {
+      phoneNumber: "841-814-9427 x9355",
+      street1: "<value>",
+      city: "Chynastad",
+      state: "Wisconsin",
+      zip: "88336",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { locationsCreate } from "@gusto/embedded-api/funcs/locationsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await locationsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    requestBody: {
+      phoneNumber: "841-814-9427 x9355",
+      street1: "<value>",
+      city: "Chynastad",
+      state: "Wisconsin",
+      zip: "88336",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useLocationsCreateMutation
+} from "@gusto/embedded-api/react-query/locationsCreate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-locations" method="post" path="/v1/companies/{company_id}/locations" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -100,6 +180,166 @@ import {
   useLocationsCreateMutation
 } from "@gusto/embedded-api/react-query/locationsCreate.js";
 ```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-locations" method="post" path="/v1/companies/{company_id}/locations" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.locations.create({
+    companyId: "<id>",
+    requestBody: {
+      phoneNumber: "841-814-9427 x9355",
+      street1: "<value>",
+      city: "Chynastad",
+      state: "Wisconsin",
+      zip: "88336",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { locationsCreate } from "@gusto/embedded-api/funcs/locationsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await locationsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    requestBody: {
+      phoneNumber: "841-814-9427 x9355",
+      street1: "<value>",
+      city: "Chynastad",
+      state: "Wisconsin",
+      zip: "88336",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useLocationsCreateMutation
+} from "@gusto/embedded-api/react-query/locationsCreate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-locations" method="post" path="/v1/companies/{company_id}/locations" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.locations.create({
+    companyId: "<id>",
+    requestBody: {
+      phoneNumber: "841-814-9427 x9355",
+      street1: "<value>",
+      city: "Chynastad",
+      state: "Wisconsin",
+      zip: "88336",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { locationsCreate } from "@gusto/embedded-api/funcs/locationsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await locationsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    requestBody: {
+      phoneNumber: "841-814-9427 x9355",
+      street1: "<value>",
+      city: "Chynastad",
+      state: "Wisconsin",
+      zip: "88336",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useLocationsCreateMutation
+} from "@gusto/embedded-api/react-query/locationsCreate.js";
+```
 
 ### Parameters
 
@@ -131,7 +371,7 @@ scope: `companies:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-locations" method="get" path="/v1/companies/{company_id}/locations" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-locations" method="get" path="/v1/companies/{company_id}/locations" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -234,7 +474,7 @@ scope: `companies:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-locations-location_id" method="get" path="/v1/locations/{location_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-locations-location_id" method="get" path="/v1/locations/{location_id}" example="test_example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -325,10 +565,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -336,9 +576,9 @@ Update a location.
 
 scope: `companies:write`
 
-### Example Usage
+### Example Usage: request_example_1
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-locations-location_id" method="put" path="/v1/locations/{location_id}" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-locations-location_id" method="put" path="/v1/locations/{location_id}" example="request_example_1" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -420,6 +660,78 @@ import {
   useLocationsUpdateMutation
 } from "@gusto/embedded-api/react-query/locationsUpdate.js";
 ```
+### Example Usage: test_example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-locations-location_id" method="put" path="/v1/locations/{location_id}" example="test_example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.locations.update({
+    locationId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { locationsUpdate } from "@gusto/embedded-api/funcs/locationsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await locationsUpdate(gustoEmbedded, {
+    locationId: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("locationsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useLocationsUpdateMutation
+} from "@gusto/embedded-api/react-query/locationsUpdate.js";
+```
 
 ### Parameters
 
@@ -438,7 +750,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 409, 422                         | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 409, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getMinimumWages
@@ -449,7 +762,7 @@ scope: `companies:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-locations-location_uuid-minimum_wages" method="get" path="/v1/locations/{location_uuid}/minimum_wages" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-locations-location_uuid-minimum_wages" method="get" path="/v1/locations/{location_uuid}/minimum_wages" example="test_example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -542,7 +855,7 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |

@@ -7,113 +7,61 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import {
+  CreateFlowRequest,
+  CreateFlowRequest$Outbound,
+  CreateFlowRequest$outboundSchema,
+} from "../components/createflowrequest.js";
 import { Flow, Flow$inboundSchema } from "../components/flow.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * the type of target entity applicable to the flow. This field is optional for company flows, please refer to the flow_types table above for more details.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const EntityType = {
-  Company: "Company",
-  Employee: "Employee",
+export const PostV1CompanyFlowsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
 } as const;
 /**
- * the type of target entity applicable to the flow. This field is optional for company flows, please refer to the flow_types table above for more details.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type EntityType = ClosedEnum<typeof EntityType>;
-
-export type PostV1CompanyFlowsRequestBody = {
-  /**
-   * flow type
-   */
-  flowType: string;
-  /**
-   * UUID of the target entity applicable to the flow. This field is optional for company flows, please refer to the flow_types table above for more details.
-   */
-  entityUuid?: string | undefined;
-  /**
-   * the type of target entity applicable to the flow. This field is optional for company flows, please refer to the flow_types table above for more details.
-   */
-  entityType?: EntityType | undefined;
-  /**
-   * Optional configuration object that varies based on the flow_type. This can contain arbitrary key-value pairs specific to the flow being generated (e.g., { "provider": "guideline" }).
-   */
-  options?: { [k: string]: any } | undefined;
-};
+export type PostV1CompanyFlowsHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostV1CompanyFlowsHeaderXGustoAPIVersion
+>;
 
 export type PostV1CompanyFlowsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?: PostV1CompanyFlowsHeaderXGustoAPIVersion | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1CompanyFlowsRequestBody;
+  createFlowRequest: CreateFlowRequest;
 };
 
 export type PostV1CompanyFlowsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
   flow?: Flow | undefined;
 };
 
 /** @internal */
-export const EntityType$outboundSchema: z.ZodNativeEnum<typeof EntityType> = z
-  .nativeEnum(EntityType);
-
-/** @internal */
-export type PostV1CompanyFlowsRequestBody$Outbound = {
-  flow_type: string;
-  entity_uuid?: string | undefined;
-  entity_type?: string | undefined;
-  options?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const PostV1CompanyFlowsRequestBody$outboundSchema: z.ZodType<
-  PostV1CompanyFlowsRequestBody$Outbound,
-  z.ZodTypeDef,
-  PostV1CompanyFlowsRequestBody
-> = z.object({
-  flowType: z.string(),
-  entityUuid: z.string().optional(),
-  entityType: EntityType$outboundSchema.optional(),
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    flowType: "flow_type",
-    entityUuid: "entity_uuid",
-    entityType: "entity_type",
-  });
-});
-
-export function postV1CompanyFlowsRequestBodyToJSON(
-  postV1CompanyFlowsRequestBody: PostV1CompanyFlowsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompanyFlowsRequestBody$outboundSchema.parse(
-      postV1CompanyFlowsRequestBody,
-    ),
-  );
-}
+export const PostV1CompanyFlowsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostV1CompanyFlowsHeaderXGustoAPIVersion> = z
+    .nativeEnum(PostV1CompanyFlowsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompanyFlowsRequest$Outbound = {
-  company_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompanyFlowsRequestBody$Outbound;
+  company_uuid: string;
+  "Create-Flow-Request": CreateFlowRequest$Outbound;
 };
 
 /** @internal */
@@ -122,14 +70,15 @@ export const PostV1CompanyFlowsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompanyFlowsRequest
 > = z.object({
+  xGustoAPIVersion: PostV1CompanyFlowsHeaderXGustoAPIVersion$outboundSchema
+    .default("2024-04-01"),
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PostV1CompanyFlowsRequestBody$outboundSchema),
+  createFlowRequest: CreateFlowRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyUuid: "company_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyUuid: "company_uuid",
+    createFlowRequest: "Create-Flow-Request",
   });
 });
 

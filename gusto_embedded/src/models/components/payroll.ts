@@ -177,6 +177,9 @@ export type Payroll = {
   partnerOwnedDisbursement?: boolean | null | undefined;
 };
 
+/**
+ * A prepared payroll
+ */
 export type PayrollPrepared = {
   /**
    * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on time.  If payroll has not been run by the deadline, a prepare request will update both the check date and deadline to reflect the soonest employees can be paid and the deadline by which the payroll must be run in order for said check date to be met.
@@ -336,16 +339,34 @@ export type PayrollShowPaidTimeOff = {
   finalPayoutUnusedHoursInput?: string | undefined;
 };
 
+/**
+ * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+ */
 export const PayrollShowAmountType = {
   Fixed: "fixed",
   Percent: "percent",
 } as const;
+/**
+ * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+ */
 export type PayrollShowAmountType = ClosedEnum<typeof PayrollShowAmountType>;
 
 export type PayrollShowDeductions = {
+  /**
+   * The name of the deduction.
+   */
   name?: string | undefined;
+  /**
+   * The amount of the deduction for the pay period.
+   */
   amount?: number | undefined;
+  /**
+   * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
+   */
   amountType?: PayrollShowAmountType | undefined;
+  /**
+   * The UUID of the deduction. Only present for calculated or processed payrolls.
+   */
   uuid?: string | undefined;
 };
 
@@ -560,6 +581,69 @@ export type PayrollShow = {
    */
   partnerOwnedDisbursement?: boolean | null | undefined;
   employeeCompensations?: Array<EmployeeCompensations> | undefined;
+};
+
+/**
+ * A payroll that has been transitioned back to unprocessed state after cancellation.
+ */
+export type UnprocessedPayroll = {
+  /**
+   * A timestamp that is the deadline for the payroll to be run in order for employees to be paid on time.  If payroll has not been run by the deadline, a prepare request will update both the check date and deadline to reflect the soonest employees can be paid and the deadline by which the payroll must be run in order for said check date to be met.
+   */
+  payrollDeadline?: Date | undefined;
+  /**
+   * The date on which employees will be paid for the payroll.
+   */
+  checkDate?: string | undefined;
+  /**
+   * Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated. Additionally, a payroll is not guaranteed to be processed just because the payroll deadline has passed. Late payrolls are not uncommon. Conversely, users may choose to run payroll before the payroll deadline.
+   */
+  processed?: boolean | undefined;
+  /**
+   * The date at which the payroll was processed. Null if the payroll isn't processed yet.
+   */
+  processedDate?: string | null | undefined;
+  /**
+   * A timestamp of the last valid payroll calculation. Null if there isn't a valid calculation.
+   */
+  calculatedAt?: Date | null | undefined;
+  /**
+   * The UUID of the payroll.
+   */
+  uuid?: string | undefined;
+  /**
+   * The UUID of the payroll.
+   */
+  payrollUuid?: string | undefined;
+  /**
+   * The UUID of the company for the payroll.
+   */
+  companyUuid?: string | undefined;
+  /**
+   * Indicates whether the payroll is an off-cycle payroll
+   */
+  offCycle?: boolean | undefined;
+  /**
+   * The off-cycle reason. Only included for off-cycle payrolls.
+   */
+  offCycleReason?: OffCycleReasonType | null | undefined;
+  /**
+   * Indicates whether the payroll is an auto pilot payroll
+   */
+  autoPilot?: boolean | undefined;
+  /**
+   * Indicates whether the payroll is an external payroll
+   */
+  external?: boolean | undefined;
+  payPeriod?: PayrollPayPeriodType | undefined;
+  /**
+   * Datetime for when the resource was created.
+   */
+  createdAt?: Date | undefined;
+  /**
+   * Will money movement for the payroll be performed by the partner rather than by Gusto?
+   */
+  partnerOwnedDisbursement?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -1047,5 +1131,58 @@ export function payrollShowFromJSON(
     jsonString,
     (x) => PayrollShow$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PayrollShow' from JSON`,
+  );
+}
+
+/** @internal */
+export const UnprocessedPayroll$inboundSchema: z.ZodType<
+  UnprocessedPayroll,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  payroll_deadline: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  check_date: z.string().optional(),
+  processed: z.boolean().optional(),
+  processed_date: z.nullable(z.string()).optional(),
+  calculated_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  uuid: z.string().optional(),
+  payroll_uuid: z.string().optional(),
+  company_uuid: z.string().optional(),
+  off_cycle: z.boolean().optional(),
+  off_cycle_reason: z.nullable(OffCycleReasonType$inboundSchema).optional(),
+  auto_pilot: z.boolean().optional(),
+  external: z.boolean().optional(),
+  pay_period: PayrollPayPeriodType$inboundSchema.optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  partner_owned_disbursement: z.nullable(z.boolean()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "payroll_deadline": "payrollDeadline",
+    "check_date": "checkDate",
+    "processed_date": "processedDate",
+    "calculated_at": "calculatedAt",
+    "payroll_uuid": "payrollUuid",
+    "company_uuid": "companyUuid",
+    "off_cycle": "offCycle",
+    "off_cycle_reason": "offCycleReason",
+    "auto_pilot": "autoPilot",
+    "pay_period": "payPeriod",
+    "created_at": "createdAt",
+    "partner_owned_disbursement": "partnerOwnedDisbursement",
+  });
+});
+
+export function unprocessedPayrollFromJSON(
+  jsonString: string,
+): SafeParseResult<UnprocessedPayroll, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnprocessedPayroll$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnprocessedPayroll' from JSON`,
   );
 }

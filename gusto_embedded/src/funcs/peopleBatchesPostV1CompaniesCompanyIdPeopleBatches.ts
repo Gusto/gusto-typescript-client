@@ -19,6 +19,10 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
+import {
   PostV1CompaniesCompanyIdPeopleBatchesResponseBody,
   PostV1CompaniesCompanyIdPeopleBatchesResponseBody$inboundSchema,
 } from "../models/errors/postv1companiescompanyidpeoplebatches.js";
@@ -54,6 +58,7 @@ export function peopleBatchesPostV1CompaniesCompanyIdPeopleBatches(
 ): APIPromise<
   Result<
     PostV1CompaniesCompanyIdPeopleBatchesResponse,
+    | NotFoundErrorObject
     | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
@@ -81,6 +86,7 @@ async function $do(
   [
     Result<
       PostV1CompaniesCompanyIdPeopleBatchesResponse,
+      | NotFoundErrorObject
       | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
@@ -181,6 +187,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompaniesCompanyIdPeopleBatchesResponse,
+    | NotFoundErrorObject
     | PostV1CompaniesCompanyIdPeopleBatchesResponseBody
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
@@ -195,11 +202,12 @@ async function $do(
     M.json(201, PostV1CompaniesCompanyIdPeopleBatchesResponse$inboundSchema, {
       key: "object",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(
       409,
       PostV1CompaniesCompanyIdPeopleBatchesResponseBody$inboundSchema,
     ),
-    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
