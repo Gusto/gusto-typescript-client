@@ -18,7 +18,7 @@ scope: `invoices:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-invoices-invoice-period" method="get" path="/v1/invoices/{invoice_period}" -->
+<!-- UsageSnippet language="typescript" operationID="get-invoices-invoice-period" method="get" path="/v1/invoices/{invoice_period}" example="example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

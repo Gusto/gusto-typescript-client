@@ -56,7 +56,7 @@ scope: `company_tax_requirements:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements-state" method="get" path="/v1/companies/{company_uuid}/tax_requirements/{state}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements-state" method="get" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Example Tax Requirements for GA" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -159,9 +159,79 @@ Update State Tax Requirements
 
 scope: `company_tax_requirements:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.taxRequirements.updateState({
+    companyUuid: "<id>",
+    state: "West Virginia",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await taxRequirementsUpdateState(gustoEmbedded, {
+    companyUuid: "<id>",
+    state: "West Virginia",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("taxRequirementsUpdateState failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTaxRequirementsUpdateStateMutation
+} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -309,6 +379,146 @@ import {
   useTaxRequirementsUpdateStateMutation
 } from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
 ```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.taxRequirements.updateState({
+    companyUuid: "<id>",
+    state: "Maryland",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await taxRequirementsUpdateState(gustoEmbedded, {
+    companyUuid: "<id>",
+    state: "Maryland",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("taxRequirementsUpdateState failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTaxRequirementsUpdateStateMutation
+} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-companies-company_uuid-tax_requirements-state" method="put" path="/v1/companies/{company_uuid}/tax_requirements/{state}" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.taxRequirements.updateState({
+    companyUuid: "<id>",
+    state: "Vermont",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { taxRequirementsUpdateState } from "@gusto/embedded-api/funcs/taxRequirementsUpdateState.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await taxRequirementsUpdateState(gustoEmbedded, {
+    companyUuid: "<id>",
+    state: "Vermont",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("taxRequirementsUpdateState failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTaxRequirementsUpdateStateMutation
+} from "@gusto/embedded-api/react-query/taxRequirementsUpdateState.js";
+```
 
 ### Parameters
 
@@ -338,7 +548,7 @@ scope: `company_tax_requirements:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements" method="get" path="/v1/companies/{company_uuid}/tax_requirements" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_uuid-tax_requirements" method="get" path="/v1/companies/{company_uuid}/tax_requirements" example="Company with requirements in CA and GA" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

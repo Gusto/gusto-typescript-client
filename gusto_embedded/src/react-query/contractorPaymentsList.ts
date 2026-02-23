@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdContractorPaymentsRequest } from "../models/operations/getv1companiescompanyidcontractorpayments.js";
+import {
+  GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdContractorPaymentsRequest,
+} from "../models/operations/getv1companiescompanyidcontractorpayments.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ContractorPaymentsListQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -114,13 +118,15 @@ export function setContractorPaymentsListData(
   queryKeyBase: [
     companyId: string,
     parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+        | undefined;
       startDate: string;
       endDate: string;
       contractorUuid?: string | undefined;
       groupByDate?: boolean | undefined;
       page?: number | undefined;
       per?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
   data: ContractorPaymentsListQueryData,
@@ -136,13 +142,15 @@ export function invalidateContractorPaymentsList(
     [
       companyId: string,
       parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+          | undefined;
         startDate: string;
         endDate: string;
         contractorUuid?: string | undefined;
         groupByDate?: boolean | undefined;
         page?: number | undefined;
         per?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
   >,

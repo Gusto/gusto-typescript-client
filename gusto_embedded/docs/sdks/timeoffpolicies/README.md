@@ -19,18 +19,19 @@
 Returns a list of accruing time off for each time off policy associated with the employee.
 
 Factors affecting the accrued hours:
-  * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
-  * how many hours of work during this pay period
-  * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
-  * company pay schedule frequency (for per pay period)
+
+- the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
+- how many hours of work during this pay period
+- how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
+- company pay schedule frequency (for per pay period)
 
 If none of the parameters is passed in, the accrued time off hour will be 0.
 
 scope: `payrolls:read`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Basic" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -42,12 +43,82 @@ async function run() {
   const result = await gustoEmbedded.timeOffPolicies.calculateAccruingTimeOffHours({
     payrollId: "<id>",
     employeeId: "<id>",
-    requestBody: {
-      regularHoursWorked: 30.25,
-      overtimeHoursWorked: 10,
-      doubleOvertimeHoursWorked: 0,
-      ptoHoursUsed: 5.5,
-      sickHoursUsed: 0,
+    payrollCalculateAccruingTimeOffHoursRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await timeOffPoliciesCalculateAccruingTimeOffHours(gustoEmbedded, {
+    payrollId: "<id>",
+    employeeId: "<id>",
+    payrollCalculateAccruingTimeOffHoursRequest: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesCalculateAccruingTimeOffHours failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.timeOffPolicies.calculateAccruingTimeOffHours({
+    payrollId: "<id>",
+    employeeId: "<id>",
+    payrollCalculateAccruingTimeOffHoursRequest: {
+      regularHoursWorked: "30.25",
+      overtimeHoursWorked: "10",
+      doubleOvertimeHoursWorked: "0",
+      ptoHoursUsed: "5.5",
+      sickHoursUsed: "0",
     },
   });
 
@@ -75,13 +146,153 @@ async function run() {
   const res = await timeOffPoliciesCalculateAccruingTimeOffHours(gustoEmbedded, {
     payrollId: "<id>",
     employeeId: "<id>",
-    requestBody: {
-      regularHoursWorked: 30.25,
-      overtimeHoursWorked: 10,
-      doubleOvertimeHoursWorked: 0,
-      ptoHoursUsed: 5.5,
-      sickHoursUsed: 0,
+    payrollCalculateAccruingTimeOffHoursRequest: {
+      regularHoursWorked: "30.25",
+      overtimeHoursWorked: "10",
+      doubleOvertimeHoursWorked: "0",
+      ptoHoursUsed: "5.5",
+      sickHoursUsed: "0",
     },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesCalculateAccruingTimeOffHours failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.timeOffPolicies.calculateAccruingTimeOffHours({
+    payrollId: "<id>",
+    employeeId: "<id>",
+    payrollCalculateAccruingTimeOffHoursRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await timeOffPoliciesCalculateAccruingTimeOffHours(gustoEmbedded, {
+    payrollId: "<id>",
+    employeeId: "<id>",
+    payrollCalculateAccruingTimeOffHoursRequest: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesCalculateAccruingTimeOffHours failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesCalculateAccruingTimeOffHoursMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-payrolls-payroll_id-calculate_accruing_time_off_hours" method="post" path="/v1/payrolls/{payroll_id}/employees/{employee_id}/calculate_accruing_time_off_hours" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.timeOffPolicies.calculateAccruingTimeOffHours({
+    payrollId: "<id>",
+    employeeId: "<id>",
+    payrollCalculateAccruingTimeOffHoursRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesCalculateAccruingTimeOffHours } from "@gusto/embedded-api/funcs/timeOffPoliciesCalculateAccruingTimeOffHours.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await timeOffPoliciesCalculateAccruingTimeOffHours(gustoEmbedded, {
+    payrollId: "<id>",
+    employeeId: "<id>",
+    payrollCalculateAccruingTimeOffHoursRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -128,6 +339,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -230,10 +442,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -333,7 +545,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## getAll
@@ -435,10 +648,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
@@ -540,7 +753,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## addEmployees
@@ -639,7 +853,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## removeEmployees
@@ -648,9 +863,241 @@ Remove employees from a time off policy
 
 scope: `time_off_policies:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.timeOffPolicies.removeEmployees({
+    timeOffPolicyUuid: "<id>",
+    requestBody: {
+      employees: [],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await timeOffPoliciesRemoveEmployees(gustoEmbedded, {
+    timeOffPolicyUuid: "<id>",
+    requestBody: {
+      employees: [
+        {
+          uuid: "3bc66430-a419-48da-b519-5d780d44f92a",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesRemoveEmployees failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesRemoveEmployeesMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.timeOffPolicies.removeEmployees({
+    timeOffPolicyUuid: "<id>",
+    requestBody: {
+      employees: [
+        {
+          uuid: "3bc66430-a419-48da-b519-5d780d44f92a",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await timeOffPoliciesRemoveEmployees(gustoEmbedded, {
+    timeOffPolicyUuid: "<id>",
+    requestBody: {
+      employees: [
+        {
+          uuid: "3bc66430-a419-48da-b519-5d780d44f92a",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesRemoveEmployees failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesRemoveEmployeesMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.timeOffPolicies.removeEmployees({
+    timeOffPolicyUuid: "<id>",
+    requestBody: {
+      employees: [],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { timeOffPoliciesRemoveEmployees } from "@gusto/embedded-api/funcs/timeOffPoliciesRemoveEmployees.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await timeOffPoliciesRemoveEmployees(gustoEmbedded, {
+    timeOffPolicyUuid: "<id>",
+    requestBody: {
+      employees: [
+        {
+          uuid: "3bc66430-a419-48da-b519-5d780d44f92a",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("timeOffPoliciesRemoveEmployees failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useTimeOffPoliciesRemoveEmployeesMutation
+} from "@gusto/embedded-api/react-query/timeOffPoliciesRemoveEmployees.js";
+```
+### Example Usage: example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-remove_employees" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/remove_employees" example="example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -742,7 +1189,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## updateBalance
@@ -841,7 +1289,8 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## deactivate
@@ -852,7 +1301,7 @@ scope: `time_off_policies:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-deactivate" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/deactivate" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-time_off_policies-time_off_policy_uuid-deactivate" method="put" path="/v1/time_off_policies/{time_off_policy_uuid}/deactivate" example="example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -934,5 +1383,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

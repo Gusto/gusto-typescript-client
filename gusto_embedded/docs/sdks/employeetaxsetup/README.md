@@ -17,7 +17,7 @@ Get attributes relevant for an employee's federal taxes.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-federal_taxes" method="get" path="/v1/employees/{employee_uuid}/federal_taxes" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-federal_taxes" method="get" path="/v1/employees/{employee_uuid}/federal_taxes" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -118,9 +118,85 @@ Update attributes relevant for an employee's federal taxes.
 
 scope: `employee_federal_taxes:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.updateFederalTaxes({
+    employeeUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+      filingStatus: "<value>",
+      w4DataType: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateFederalTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupUpdateFederalTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+      filingStatus: "<value>",
+      w4DataType: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateFederalTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeeTaxSetupUpdateFederalTaxesMutation
+} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -204,6 +280,158 @@ import {
   useEmployeeTaxSetupUpdateFederalTaxesMutation
 } from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
 ```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.updateFederalTaxes({
+    employeeUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+      filingStatus: "<value>",
+      w4DataType: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateFederalTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupUpdateFederalTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+      filingStatus: "<value>",
+      w4DataType: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateFederalTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeeTaxSetupUpdateFederalTaxesMutation
+} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-federal_taxes" method="put" path="/v1/employees/{employee_uuid}/federal_taxes" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.updateFederalTaxes({
+    employeeUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+      filingStatus: "<value>",
+      w4DataType: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupUpdateFederalTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateFederalTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupUpdateFederalTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+      filingStatus: "<value>",
+      w4DataType: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateFederalTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeeTaxSetupUpdateFederalTaxesMutation
+} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateFederalTaxes.js";
+```
 
 ### Parameters
 
@@ -242,9 +470,86 @@ Payroll Admins are responsible for filing a new hire report for each Employee. T
 
 scope: `employee_state_taxes:read`
 
-### Example Usage
+### Example Usage: Employee-State-Taxes-List-Example
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-List-Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.getStateTaxes({
+    employeeUuid: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupGetStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupGetStateTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupGetStateTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupGetStateTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useEmployeeTaxSetupGetStateTaxes,
+  useEmployeeTaxSetupGetStateTaxesSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchEmployeeTaxSetupGetStateTaxes,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateEmployeeTaxSetupGetStateTaxes,
+  invalidateAllEmployeeTaxSetupGetStateTaxes,
+} from "@gusto/embedded-api/react-query/employeeTaxSetupGetStateTaxes.js";
+```
+### Example Usage: test_example
+
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-state_taxes" method="get" path="/v1/employees/{employee_uuid}/state_taxes" example="test_example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -335,10 +640,10 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateStateTaxes
 
@@ -348,9 +653,193 @@ As described for the GET endpoint, the answers must be supplied in the effective
 
 scope: `employee_state_taxes:write`
 
-### Example Usage
+### Example Usage: Employee-State-Taxes-Error-Response
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-Error-Response" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.updateStateTaxes({
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupUpdateStateTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateStateTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeeTaxSetupUpdateStateTaxesMutation
+} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+```
+### Example Usage: Employee-State-Taxes-List-Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-List-Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.updateStateTaxes({
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupUpdateStateTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+        {
+          state: "North Dakota",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateStateTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeeTaxSetupUpdateStateTaxesMutation
+} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+```
+### Example Usage: Employee-State-Taxes-Update-Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="Employee-State-Taxes-Update-Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -512,6 +1001,182 @@ import {
   useEmployeeTaxSetupUpdateStateTaxesMutation
 } from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
 ```
+### Example Usage: request_example_1
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="request_example_1" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.updateStateTaxes({
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [
+        {
+          state: "CA",
+          questions: [
+            {
+              key: "filing_status",
+              answers: [
+                {
+                  value: "M",
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupUpdateStateTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [
+        {
+          state: "CA",
+          questions: [
+            {
+              key: "filing_status",
+              answers: [
+                {
+                  value: "M",
+                  validFrom: "2010-01-01",
+                  validUpTo: null,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateStateTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeeTaxSetupUpdateStateTaxesMutation
+} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+```
+### Example Usage: test_example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-state_taxes" method="put" path="/v1/employees/{employee_uuid}/state_taxes" example="test_example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeeTaxSetup.updateStateTaxes({
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeeTaxSetupUpdateStateTaxes } from "@gusto/embedded-api/funcs/employeeTaxSetupUpdateStateTaxes.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeeTaxSetupUpdateStateTaxes(gustoEmbedded, {
+    employeeUuid: "<id>",
+    employeeStateTaxesRequest: {
+      states: [],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeeTaxSetupUpdateStateTaxes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeeTaxSetupUpdateStateTaxesMutation
+} from "@gusto/embedded-api/react-query/employeeTaxSetupUpdateStateTaxes.js";
+```
 
 ### Parameters
 
@@ -530,5 +1195,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

@@ -1,5 +1,7 @@
 # PayrollPrepared
 
+A prepared payroll
+
 ## Example Usage
 
 ```typescript

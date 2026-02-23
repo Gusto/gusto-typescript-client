@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import { PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody } from "../models/errors/putv1companiescompanyidpayrollspayrollidcalculate.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
@@ -39,7 +40,8 @@ export type PayrollsCalculateMutationData =
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse;
 
 export type PayrollsCalculateMutationError =
-  | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,9 +58,10 @@ export type PayrollsCalculateMutationError =
  * Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
  *
  * This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with *include=taxes,benefits,deductions* params.
- * In v2023-04-01, *show_calculation=true* is no longer required.
  *
  * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
+ *
+ * scope: `payrolls:run`
  */
 export function usePayrollsCalculateMutation(
   options?: MutationHookOptions<

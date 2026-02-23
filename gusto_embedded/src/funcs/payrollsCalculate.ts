@@ -19,11 +19,15 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import {
-  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody,
-  PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody$inboundSchema,
-} from "../models/errors/putv1companiescompanyidpayrollspayrollidcalculate.js";
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest,
   PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSchema,
@@ -40,9 +44,10 @@ import { Result } from "../types/fp.js";
  * Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
  *
  * This calculation is asynchronous and a successful request responds with a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with *include=taxes,benefits,deductions* params.
- * In v2023-04-01, *show_calculation=true* is no longer required.
  *
  * If the company is blocked from running payroll due to issues like incomplete setup, missing information or other compliance issues, the response will be 422 Unprocessable Entity with a categorization of the blockers as described in the error responses.
+ *
+ * scope: `payrolls:run`
  */
 export function payrollsCalculate(
   client: GustoEmbeddedCore,
@@ -51,7 +56,8 @@ export function payrollsCalculate(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
-    | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -77,7 +83,8 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
-      | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+      | NotFoundErrorObject
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -180,7 +187,8 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse,
-    | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -194,11 +202,9 @@ async function $do(
       202,
       PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse$inboundSchema,
     ),
-    M.jsonErr(
-      422,
-      PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponseBody$inboundSchema,
-    ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

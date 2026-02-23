@@ -1,7 +1,5 @@
 # OnboardingStatus
 
-The current onboarding status of the employee
-
 ## Example Usage
 
 ```typescript

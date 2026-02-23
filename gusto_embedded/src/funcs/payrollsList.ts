@@ -18,12 +18,12 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import {
-  UnprocessableEntityErrorObject,
-  UnprocessableEntityErrorObject$inboundSchema,
-} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdPayrollsRequest,
   GetV1CompaniesCompanyIdPayrollsRequest$outboundSchema,
@@ -54,7 +54,7 @@ export function payrollsList(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdPayrollsResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -80,7 +80,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdPayrollsResponse,
-      | UnprocessableEntityErrorObject
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -195,7 +195,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdPayrollsResponse,
-    | UnprocessableEntityErrorObject
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -208,7 +208,7 @@ async function $do(
     M.json(200, GetV1CompaniesCompanyIdPayrollsResponse$inboundSchema, {
       key: "Payroll-List",
     }),
-    M.jsonErr(404, UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

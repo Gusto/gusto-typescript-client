@@ -19,9 +19,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import { PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody } from "../models/errors/putv1companiescompanyidpayrollspayrollidsubmit.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest,
   PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse,
@@ -39,7 +40,8 @@ export type PayrollsSubmitMutationData =
   PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse;
 
 export type PayrollsSubmitMutationError =
-  | PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponseBody
+  | NotFoundErrorObject
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

@@ -21,6 +21,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   DeleteV1ExternalPayrollRequest,
   DeleteV1ExternalPayrollRequest$outboundSchema,
   DeleteV1ExternalPayrollResponse,
@@ -44,6 +48,7 @@ export function externalPayrollsDelete(
 ): APIPromise<
   Result<
     DeleteV1ExternalPayrollResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       DeleteV1ExternalPayrollResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -109,7 +115,7 @@ async function $do(
   )(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "*/*",
+    Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
       "X-Gusto-API-Version",
       payload["X-Gusto-API-Version"],
@@ -155,7 +161,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -170,6 +176,7 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1ExternalPayrollResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -180,6 +187,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, DeleteV1ExternalPayrollResponse$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

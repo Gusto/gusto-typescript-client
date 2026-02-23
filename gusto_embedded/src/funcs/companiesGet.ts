@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -34,6 +38,7 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Get a company.
+ *
  * The employees:read scope is required to return home_address and non-work locations.
  * The company_admin:read scope is required to return primary_payroll_admin.
  * The signatories:read scope is required to return primary_signatory.
@@ -47,6 +52,7 @@ export function companiesGet(
 ): APIPromise<
   Result<
     GetV1CompaniesResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -72,6 +78,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -166,6 +173,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -176,7 +184,8 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1CompaniesResponse$inboundSchema, { key: "Company" }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

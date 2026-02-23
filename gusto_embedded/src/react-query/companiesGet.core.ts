@@ -11,10 +11,10 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesGet } from "../funcs/companiesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1CompaniesRequest,
   GetV1CompaniesResponse,
+  HeaderXGustoAPIVersion,
 } from "../models/operations/getv1companies.js";
 import { unwrapAsync } from "../types/fp.js";
 export type CompaniesGetQueryData = GetV1CompaniesResponse;
@@ -71,7 +71,7 @@ export function buildCompaniesGetQuery(
 
 export function queryKeyCompaniesGet(
   companyId: string,
-  parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+  parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
 ): QueryKey {
   return ["@gusto/embedded-api", "Companies", "get", companyId, parameters];
 }

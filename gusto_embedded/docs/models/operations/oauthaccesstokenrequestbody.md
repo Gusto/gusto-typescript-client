@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.One`
+### `operations.RefreshTokenRequest`
 
 ```typescript
-const value: operations.One = {
+const value: operations.RefreshTokenRequest = {
   clientId: "qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8",
   clientSecret: "3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w",
   grantType: "refresh_token",
@@ -14,10 +14,10 @@ const value: operations.One = {
 };
 ```
 
-### `operations.RequestBody2`
+### `operations.SystemAccessTokenRequest`
 
 ```typescript
-const value: operations.RequestBody2 = {
+const value: operations.SystemAccessTokenRequest = {
   clientId: "qr6L_9FRkbMVL_GdwvrMW6Ef8tcU6NUxjWpOfqXqOG8",
   clientSecret: "3aQSHRB3596nZhm6NdNBELZ1u9xbZmvCrKpBhbZYq6w",
   grantType: "system_access",

@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -48,6 +52,7 @@ export function contractorPaymentsCreate(
 ): APIPromise<
   Result<
     PostV1CompaniesCompanyIdContractorPaymentsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +79,7 @@ async function $do(
   [
     Result<
       PostV1CompaniesCompanyIdContractorPaymentsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -99,7 +105,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Contractor-Payment-Body"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -175,6 +183,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompaniesCompanyIdContractorPaymentsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -190,8 +199,9 @@ async function $do(
       PostV1CompaniesCompanyIdContractorPaymentsResponse$inboundSchema,
       { key: "Contractor-Payment" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

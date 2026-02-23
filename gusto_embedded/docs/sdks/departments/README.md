@@ -18,9 +18,77 @@ Create a department
 
 scope: `departments:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" -->
+<!-- UsageSnippet language="typescript" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.departments.create({
+    companyUuid: "<id>",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsCreate } from "@gusto/embedded-api/funcs/departmentsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await departmentsCreate(gustoEmbedded, {
+    companyUuid: "<id>",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("departmentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsCreateMutation
+} from "@gusto/embedded-api/react-query/departmentsCreate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -90,6 +158,142 @@ import {
   useDepartmentsCreateMutation
 } from "@gusto/embedded-api/react-query/departmentsCreate.js";
 ```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.departments.create({
+    companyUuid: "<id>",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsCreate } from "@gusto/embedded-api/funcs/departmentsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await departmentsCreate(gustoEmbedded, {
+    companyUuid: "<id>",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("departmentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsCreateMutation
+} from "@gusto/embedded-api/react-query/departmentsCreate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-departments" method="post" path="/v1/companies/{company_uuid}/departments" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.departments.create({
+    companyUuid: "<id>",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsCreate } from "@gusto/embedded-api/funcs/departmentsCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await departmentsCreate(gustoEmbedded, {
+    companyUuid: "<id>",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("departmentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsCreateMutation
+} from "@gusto/embedded-api/react-query/departmentsCreate.js";
+```
 
 ### Parameters
 
@@ -119,7 +323,7 @@ scope: `departments:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-companies-departments" method="get" path="/v1/companies/{company_uuid}/departments" -->
+<!-- UsageSnippet language="typescript" operationID="get-companies-departments" method="get" path="/v1/companies/{company_uuid}/departments" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -223,7 +427,7 @@ scope: `departments:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-department" method="get" path="/v1/departments/{department_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="get-department" method="get" path="/v1/departments/{department_uuid}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -324,9 +528,81 @@ Update a department
 
 scope: `departments:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.departments.update({
+    departmentUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsUpdate } from "@gusto/embedded-api/funcs/departmentsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await departmentsUpdate(gustoEmbedded, {
+    departmentUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("departmentsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsUpdateMutation
+} from "@gusto/embedded-api/react-query/departmentsUpdate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -369,6 +645,150 @@ async function run() {
     requestBody: {
       version: "db0edd04aaac4506f7edab03ac855d56",
       title: "Backup Dancer",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("departmentsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsUpdateMutation
+} from "@gusto/embedded-api/react-query/departmentsUpdate.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.departments.update({
+    departmentUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsUpdate } from "@gusto/embedded-api/funcs/departmentsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await departmentsUpdate(gustoEmbedded, {
+    departmentUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("departmentsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useDepartmentsUpdateMutation
+} from "@gusto/embedded-api/react-query/departmentsUpdate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-departments" method="put" path="/v1/departments/{department_uuid}" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.departments.update({
+    departmentUuid: "<id>",
+    requestBody: {
+      version: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { departmentsUpdate } from "@gusto/embedded-api/funcs/departmentsUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await departmentsUpdate(gustoEmbedded, {
+    departmentUuid: "<id>",
+    requestBody: {
+      version: "<value>",
     },
   });
   if (res.ok) {
@@ -522,7 +942,7 @@ scope: `departments:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-add-people-to-department" method="put" path="/v1/departments/{department_uuid}/add" -->
+<!-- UsageSnippet language="typescript" operationID="put-add-people-to-department" method="put" path="/v1/departments/{department_uuid}/add" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -617,7 +1037,7 @@ scope: `departments:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-remove-people-from-department" method="put" path="/v1/departments/{department_uuid}/remove" -->
+<!-- UsageSnippet language="typescript" operationID="put-remove-people-from-department" method="put" path="/v1/departments/{department_uuid}/remove" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

@@ -10,10 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import {
-  DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody,
-  DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema,
-} from "../models/errors/deletev1companybenefitscompanybenefitid.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -24,6 +20,10 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
   DeleteV1CompanyBenefitsCompanyBenefitIdRequest$outboundSchema,
@@ -53,7 +53,7 @@ export function companyBenefitsDelete(
 ): APIPromise<
   Result<
     DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-    | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -79,7 +79,7 @@ async function $do(
   [
     Result<
       DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-      | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -180,7 +180,7 @@ async function $do(
 
   const [result] = await M.match<
     DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
-    | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -191,10 +191,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, DeleteV1CompanyBenefitsCompanyBenefitIdResponse$inboundSchema),
-    M.jsonErr(
-      422,
-      DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody$inboundSchema,
-    ),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

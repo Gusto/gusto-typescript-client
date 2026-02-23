@@ -49,7 +49,7 @@ export type I9Authorization = {
   /**
    * The UUID of the Form associated with this I-9 authorization. Use this with "Employee Forms" API endpoints.
    */
-  formUuid?: string | undefined;
+  formUuid?: string | null | undefined;
   /**
    * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
    */
@@ -61,19 +61,19 @@ export type I9Authorization = {
   /**
    * The document's document type
    */
-  documentType?: I9AuthorizationDocumentType | undefined;
+  documentType?: I9AuthorizationDocumentType | null | undefined;
   /**
    * Whether or not a `document_number` exists for this document.
    */
-  hasDocumentNumber?: boolean | undefined;
+  hasDocumentNumber?: boolean | null | undefined;
   /**
    * The document's expiration date
    */
-  expirationDate?: string | undefined;
+  expirationDate?: string | null | undefined;
   /**
    * The document's country of issuance
    */
-  country?: string | undefined;
+  country?: string | null | undefined;
   /**
    * Whether the employer has signed the Form I-9
    */
@@ -85,11 +85,11 @@ export type I9Authorization = {
   /**
    * Any additional notes
    */
-  additionalInfo?: string | undefined;
+  additionalInfo?: string | null | undefined;
   /**
    * Whether an alternative procedure authorized by DHS to examine documents was used
    */
-  altProcedure?: boolean | undefined;
+  altProcedure?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -109,17 +109,18 @@ export const I9Authorization$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   uuid: z.string(),
-  form_uuid: z.string().optional(),
+  form_uuid: z.nullable(z.string()).optional(),
   version: z.string(),
   authorization_status: AuthorizationStatus$inboundSchema,
-  document_type: I9AuthorizationDocumentType$inboundSchema.optional(),
-  has_document_number: z.boolean().optional(),
-  expiration_date: z.string().optional(),
-  country: z.string().optional(),
+  document_type: z.nullable(I9AuthorizationDocumentType$inboundSchema)
+    .optional(),
+  has_document_number: z.nullable(z.boolean()).optional(),
+  expiration_date: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string()).optional(),
   employer_signed: z.boolean(),
   employee_signed: z.boolean(),
-  additional_info: z.string().optional(),
-  alt_procedure: z.boolean().optional(),
+  additional_info: z.nullable(z.string()).optional(),
+  alt_procedure: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "form_uuid": "formUuid",

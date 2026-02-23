@@ -5,18 +5,36 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion
+  >;
+
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -25,10 +43,6 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest = {
    * The UUID of the payroll
    */
   payrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse = {
@@ -36,11 +50,19 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateResponse = {
 };
 
 /** @internal */
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     company_id: string;
     payroll_id: string;
-    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -50,14 +72,16 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest$outboundSc
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1CompaniesCompanyIdPayrollsPayrollIdCalculateHeaderXGustoAPIVersion$outboundSchema
+        .default("2024-04-01"),
     companyId: z.string(),
     payrollId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       payrollId: "payroll_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

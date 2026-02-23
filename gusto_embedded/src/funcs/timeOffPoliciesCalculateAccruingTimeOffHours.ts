@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -40,10 +44,11 @@ import { Result } from "../types/fp.js";
  * Returns a list of accruing time off for each time off policy associated with the employee.
  *
  * Factors affecting the accrued hours:
- *   * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
- *   * how many hours of work during this pay period
- *   * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
- *   * company pay schedule frequency (for per pay period)
+ *
+ * - the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
+ * - how many hours of work during this pay period
+ * - how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
+ * - company pay schedule frequency (for per pay period)
  *
  * If none of the parameters is passed in, the accrued time off hour will be 0.
  *
@@ -56,6 +61,7 @@ export function timeOffPoliciesCalculateAccruingTimeOffHours(
 ): APIPromise<
   Result<
     PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -82,6 +88,7 @@ async function $do(
   [
     Result<
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -106,7 +113,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["Payroll-Calculate-Accruing-Time-Off-Hours-Request"],
+    { explode: true },
+  );
 
   const pathParams = {
     employee_id: encodeSimple("employee_id", payload.employee_id, {
@@ -172,7 +183,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["422", "4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -187,6 +198,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -200,8 +212,9 @@ async function $do(
     M.json(
       200,
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboundSchema,
-      { key: "Accruing-Time-Off-Hour-Object" },
+      { key: "Payroll-Calculate-Accruing-Time-Off-Hours-Response" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

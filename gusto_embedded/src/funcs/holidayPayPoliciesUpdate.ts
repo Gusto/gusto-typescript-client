@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -48,6 +52,7 @@ export function holidayPayPoliciesUpdate(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +79,7 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -175,6 +181,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyUuidHolidayPayPolicyResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -190,7 +197,8 @@ async function $do(
       PutV1CompaniesCompanyUuidHolidayPayPolicyResponse$inboundSchema,
       { key: "Holiday-Pay-Policy" },
     ),
-    M.jsonErr([404, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -42,15 +42,13 @@ export type BatchAction = ClosedEnum<typeof BatchAction>;
 /**
  * The type of entity to create
  */
-export const PostV1CompaniesCompanyIdPeopleBatchesEntityType = {
+export const EntityType = {
   Employee: "employee",
 } as const;
 /**
  * The type of entity to create
  */
-export type PostV1CompaniesCompanyIdPeopleBatchesEntityType = ClosedEnum<
-  typeof PostV1CompaniesCompanyIdPeopleBatchesEntityType
->;
+export type EntityType = ClosedEnum<typeof EntityType>;
 
 export type Person = {
   /**
@@ -306,7 +304,7 @@ export type Batch = {
   /**
    * The type of entity to create
    */
-  entityType: PostV1CompaniesCompanyIdPeopleBatchesEntityType;
+  entityType: EntityType;
   person: Person;
   /**
    * Home address for the employee
@@ -402,9 +400,8 @@ export const BatchAction$outboundSchema: z.ZodNativeEnum<typeof BatchAction> = z
   .nativeEnum(BatchAction);
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPeopleBatchesEntityType$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesEntityType> = z
-    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesEntityType);
+export const EntityType$outboundSchema: z.ZodNativeEnum<typeof EntityType> = z
+  .nativeEnum(EntityType);
 
 /** @internal */
 export type Person$Outbound = {
@@ -704,7 +701,7 @@ export const Batch$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Batch
 > = z.object({
-  entityType: PostV1CompaniesCompanyIdPeopleBatchesEntityType$outboundSchema,
+  entityType: EntityType$outboundSchema,
   person: z.lazy(() => Person$outboundSchema),
   homeAddress: z.lazy(() =>
     PostV1CompaniesCompanyIdPeopleBatchesHomeAddress$outboundSchema
