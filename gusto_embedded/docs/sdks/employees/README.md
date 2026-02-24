@@ -12,7 +12,7 @@
 * [update](#update) - Update an employee.
 * [delete](#delete) - Delete an onboarding employee
 * [getCustomFields](#getcustomfields) - Get an employee's custom fields
-* [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+* [updateOnboardingDocumentsConfig](#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 * [getOnboardingStatus](#getonboardingstatus) - Get the employee's onboarding status
 * [updateOnboardingStatus](#updateonboardingstatus) - Update the employee's onboarding status
 * [getTimeOffActivities](#gettimeoffactivities) - Get employee time off activities
@@ -1430,6 +1430,12 @@ import {
 ## updateOnboardingDocumentsConfig
 
 Indicate whether to include the Form I-9 for an employee during the onboarding process.
+If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+
+scope: `employees:manage`
+
+## Related guides
+- [Employee onboarding](doc:employee-onboarding)
 
 scope: `employees:manage`
 
@@ -1446,7 +1452,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.employees.updateOnboardingDocumentsConfig({
     employeeId: "<id>",
-    requestBody: {
+    employeeOnboardingDocumentsConfigRequest: {
       i9Document: true,
     },
   });
@@ -1474,7 +1480,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await employeesUpdateOnboardingDocumentsConfig(gustoEmbedded, {
     employeeId: "<id>",
-    requestBody: {
+    employeeOnboardingDocumentsConfigRequest: {
       i9Document: true,
     },
   });
@@ -1521,9 +1527,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getOnboardingStatus
 

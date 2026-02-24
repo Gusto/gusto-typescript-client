@@ -146,10 +146,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -184,10 +184,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -238,10 +238,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -276,10 +276,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -330,10 +330,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -368,10 +368,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -422,10 +422,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -460,10 +460,10 @@ async function run() {
       creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
     },
@@ -542,10 +542,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),
@@ -579,10 +579,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),
@@ -632,10 +632,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),
@@ -669,10 +669,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),
@@ -722,10 +722,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),
@@ -759,10 +759,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),
@@ -812,10 +812,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),
@@ -849,10 +849,10 @@ async function run() {
     requestBody: {
       contractorPayments: [
         {
-          wage: 5000,
-          hours: 40,
-          bonus: 500,
-          reimbursement: 20,
+          wage: "5000",
+          hours: "40",
+          bonus: "500",
+          reimbursement: "20",
         },
       ],
       checkDate: new RFCDate("2020-01-01"),

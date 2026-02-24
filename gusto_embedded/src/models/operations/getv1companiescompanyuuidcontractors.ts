@@ -11,10 +11,6 @@ import {
   Contractor$inboundSchema,
 } from "../components/contractor.js";
 import {
-  ContractorsSortBy,
-  ContractorsSortBy$outboundSchema,
-} from "../components/contractorssortby.js";
-import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
@@ -42,9 +38,9 @@ export type GetV1CompaniesCompanyUuidContractorsRequest = {
    */
   searchTerm?: string | undefined;
   /**
-   * Sort contractors. Options: type, onboarding_status, name, created_at
+   * Sort contractors. Options: type, onboarding_status, name, created_at (optionally with :asc or :desc suffix)
    */
-  sortBy?: ContractorsSortBy | undefined;
+  sortBy?: string | undefined;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
@@ -80,7 +76,7 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     page: z.number().int().optional(),
     per: z.number().int().optional(),
     searchTerm: z.string().optional(),
-    sortBy: ContractorsSortBy$outboundSchema.optional(),
+    sortBy: z.string().optional(),
     xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {

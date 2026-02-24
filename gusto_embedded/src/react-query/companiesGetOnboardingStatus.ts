@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompanyOnboardingStatusRequest } from "../models/operations/getv1companyonboardingstatus.js";
+import {
+  GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion,
+  GetV1CompanyOnboardingStatusRequest,
+} from "../models/operations/getv1companyonboardingstatus.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompaniesGetOnboardingStatusQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,11 +56,16 @@ export type CompaniesGetOnboardingStatusQueryError =
   | SDKValidationError;
 
 /**
- * Get the company's onboarding status
+ * Get company onboarding status
  *
  * @remarks
- * Get company's onboarding status.
- * The data returned helps inform the required onboarding steps and respective completion status.
+ * Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+ * required onboarding steps with their respective completion state.
+ *
+ * scope: `company_onboarding_status:read`
+ *
+ * ### Related guides
+ * - [Company onboarding and setup](doc:company-onboarding)
  *
  * scope: `company_onboarding_status:read`
  */
@@ -82,11 +91,16 @@ export function useCompaniesGetOnboardingStatus(
 }
 
 /**
- * Get the company's onboarding status
+ * Get company onboarding status
  *
  * @remarks
- * Get company's onboarding status.
- * The data returned helps inform the required onboarding steps and respective completion status.
+ * Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+ * required onboarding steps with their respective completion state.
+ *
+ * scope: `company_onboarding_status:read`
+ *
+ * ### Related guides
+ * - [Company onboarding and setup](doc:company-onboarding)
  *
  * scope: `company_onboarding_status:read`
  */
@@ -117,7 +131,9 @@ export function setCompaniesGetOnboardingStatusData(
     companyUuid: string,
     parameters: {
       additionalSteps?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      xGustoAPIVersion?:
+        | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
+        | undefined;
     },
   ],
   data: CompaniesGetOnboardingStatusQueryData,
@@ -134,7 +150,9 @@ export function invalidateCompaniesGetOnboardingStatus(
       companyUuid: string,
       parameters: {
         additionalSteps?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        xGustoAPIVersion?:
+          | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
+          | undefined;
       },
     ]
   >,

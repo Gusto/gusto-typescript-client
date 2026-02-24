@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyOnboardingStatus,
@@ -14,11 +15,20 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
+>;
 
 export type GetV1CompanyOnboardingStatusRequest = {
   /**
@@ -26,22 +36,29 @@ export type GetV1CompanyOnboardingStatusRequest = {
    */
   companyUuid: string;
   /**
-   * Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
+   * Comma-delimited string of additional onboarding steps to include. Currently only supports the value "external_payroll".
    */
   additionalSteps?: string | undefined;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1CompanyOnboardingStatusResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   companyOnboardingStatus?: CompanyOnboardingStatus | undefined;
 };
+
+/** @internal */
+export const GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1CompanyOnboardingStatusRequest$Outbound = {
@@ -58,7 +75,10 @@ export const GetV1CompanyOnboardingStatusRequest$outboundSchema: z.ZodType<
 > = z.object({
   companyUuid: z.string(),
   additionalSteps: z.string().optional(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion$outboundSchema.default(
+      "2024-04-01",
+    ),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

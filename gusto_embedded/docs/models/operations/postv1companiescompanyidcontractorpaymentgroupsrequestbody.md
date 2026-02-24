@@ -11,10 +11,10 @@ let value: PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
   creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
   contractorPayments: [
     {
-      wage: 5000,
-      hours: 40,
-      bonus: 500,
-      reimbursement: 20,
+      wage: "5000.0",
+      hours: "40.0",
+      bonus: "500.0",
+      reimbursement: "20.0",
     },
   ],
 };

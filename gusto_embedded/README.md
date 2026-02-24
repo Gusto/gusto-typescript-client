@@ -208,7 +208,7 @@ run();
 * [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
 * [createAdmin](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 * [listAdmins](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
-* [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+* [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 
@@ -393,7 +393,7 @@ run();
 * [update](docs/sdks/employees/README.md#update) - Update an employee.
 * [delete](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
 * [getCustomFields](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
-* [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+* [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 * [getOnboardingStatus](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
 * [updateOnboardingStatus](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 * [getTimeOffActivities](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
@@ -500,7 +500,7 @@ run();
 ### [Locations](docs/sdks/locations/README.md)
 
 * [create](docs/sdks/locations/README.md#create) - Create a company location
-* [get](docs/sdks/locations/README.md#get) - Get company locations
+* [get](docs/sdks/locations/README.md#get) - Get all company locations
 * [retrieve](docs/sdks/locations/README.md#retrieve) - Get a location
 * [update](docs/sdks/locations/README.md#update) - Update a location
 * [getMinimumWages](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
@@ -657,7 +657,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companiesFinishOnboarding`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 - [`companiesGet`](docs/sdks/companies/README.md#get) - Get a company
 - [`companiesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
-- [`companiesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+- [`companiesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 - [`companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`companiesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`companiesMigrate`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
@@ -784,7 +784,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails`](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 - [`employeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
 - [`employeesUpdate`](docs/sdks/employees/README.md#update) - Update an employee.
-- [`employeesUpdateOnboardingDocumentsConfig`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+- [`employeesUpdateOnboardingDocumentsConfig`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 - [`employeesUpdateOnboardingStatus`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 - [`employeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
 - [`employeeTaxSetupGetStateTaxes`](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
@@ -841,7 +841,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`jobsAndCompensationsUpdate`](docs/sdks/jobsandcompensations/README.md#update) - Update a job
 - [`jobsAndCompensationsUpdateCompensation`](docs/sdks/jobsandcompensations/README.md#updatecompensation) - Update a compensation
 - [`locationsCreate`](docs/sdks/locations/README.md#create) - Create a company location
-- [`locationsGet`](docs/sdks/locations/README.md#get) - Get company locations
+- [`locationsGet`](docs/sdks/locations/README.md#get) - Get all company locations
 - [`locationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`locationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`locationsUpdate`](docs/sdks/locations/README.md#update) - Update a location
@@ -963,7 +963,7 @@ To learn about this feature and how to get started, check
 - [`useCompaniesFinishOnboardingMutation`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 - [`useCompaniesGet`](docs/sdks/companies/README.md#get) - Get a company
 - [`useCompaniesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
-- [`useCompaniesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+- [`useCompaniesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 - [`useCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`useCompaniesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
@@ -1090,7 +1090,7 @@ To learn about this feature and how to get started, check
 - [`useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails`](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 - [`useEmployeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
 - [`useEmployeesUpdateMutation`](docs/sdks/employees/README.md#update) - Update an employee.
-- [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+- [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 - [`useEmployeesUpdateOnboardingStatusMutation`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 - [`useEmployeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
 - [`useEmployeeTaxSetupGetStateTaxes`](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
@@ -1147,7 +1147,7 @@ To learn about this feature and how to get started, check
 - [`useJobsAndCompensationsUpdateCompensationMutation`](docs/sdks/jobsandcompensations/README.md#updatecompensation) - Update a compensation
 - [`useJobsAndCompensationsUpdateMutation`](docs/sdks/jobsandcompensations/README.md#update) - Update a job
 - [`useLocationsCreateMutation`](docs/sdks/locations/README.md#create) - Create a company location
-- [`useLocationsGet`](docs/sdks/locations/README.md#get) - Get company locations
+- [`useLocationsGet`](docs/sdks/locations/README.md#get) - Get all company locations
 - [`useLocationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`useLocationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`useLocationsUpdateMutation`](docs/sdks/locations/README.md#update) - Update a location
@@ -1416,8 +1416,8 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 139 of 280 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 91 of 280 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 141 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 96 of 280 methods.*
 * [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
 * [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 280 methods.*
 * [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*

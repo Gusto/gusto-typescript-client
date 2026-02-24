@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -30,11 +34,16 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get the company's onboarding status
+ * Get company onboarding status
  *
  * @remarks
- * Get company's onboarding status.
- * The data returned helps inform the required onboarding steps and respective completion status.
+ * Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+ * required onboarding steps with their respective completion state.
+ *
+ * scope: `company_onboarding_status:read`
+ *
+ * ### Related guides
+ * - [Company onboarding and setup](doc:company-onboarding)
  *
  * scope: `company_onboarding_status:read`
  */
@@ -45,6 +54,7 @@ export function companiesGetOnboardingStatus(
 ): APIPromise<
   Result<
     GetV1CompanyOnboardingStatusResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -70,6 +80,7 @@ async function $do(
   [
     Result<
       GetV1CompanyOnboardingStatusResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -171,6 +182,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompanyOnboardingStatusResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -183,7 +195,8 @@ async function $do(
     M.json(200, GetV1CompanyOnboardingStatusResponse$inboundSchema, {
       key: "Company-Onboarding-Status",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
