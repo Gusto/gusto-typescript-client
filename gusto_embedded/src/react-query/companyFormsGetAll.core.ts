@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyFormsGetAll } from "../funcs/companyFormsGetAll.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { CompanyFormsSortBy } from "../models/components/companyformssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import {
   GetV1CompanyFormsRequest,
@@ -76,7 +75,7 @@ export function buildCompanyFormsGetAllQuery(
 export function queryKeyCompanyFormsGetAll(
   companyId: string,
   parameters: {
-    sortBy?: CompanyFormsSortBy | undefined;
+    sortBy?: string | undefined;
     xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {

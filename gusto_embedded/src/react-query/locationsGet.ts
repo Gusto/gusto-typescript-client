@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyIdLocationsRequest } from "../models/operations/getv1companiescompanyidlocations.js";
+import {
+  GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyIdLocationsRequest,
+} from "../models/operations/getv1companiescompanyidlocations.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type LocationsGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,12 +56,19 @@ export type LocationsGetQueryError =
   | SDKValidationError;
 
 /**
- * Get company locations
+ * Get all company locations
  *
  * @remarks
- * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+ * Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+ * addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
- * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+ * Since all company locations are subsets of locations, use the Locations endpoints to
+ * [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+ *
+ * scope: `companies:read`
+ *
+ * ## Related guides
+ * - [Company locations and addresses](doc:company-locations)
  *
  * scope: `companies:read`
  */
@@ -77,12 +88,19 @@ export function useLocationsGet(
 }
 
 /**
- * Get company locations
+ * Get all company locations
  *
  * @remarks
- * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+ * Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+ * addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
- * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+ * Since all company locations are subsets of locations, use the Locations endpoints to
+ * [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+ *
+ * scope: `companies:read`
+ *
+ * ## Related guides
+ * - [Company locations and addresses](doc:company-locations)
  *
  * scope: `companies:read`
  */
@@ -109,9 +127,9 @@ export function setLocationsGetData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      page?: number | undefined;
-      per?: number | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
+        | undefined;
     },
   ],
   data: LocationsGetQueryData,
@@ -127,9 +145,9 @@ export function invalidateLocationsGet(
     [
       companyId: string,
       parameters: {
-        page?: number | undefined;
-        per?: number | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
+          | undefined;
       },
     ]
   >,

@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -30,10 +34,16 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update an employee's onboarding documents config
+ * Update employee onboarding documents config
  *
  * @remarks
  * Indicate whether to include the Form I-9 for an employee during the onboarding process.
+ * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+ *
+ * scope: `employees:manage`
+ *
+ * ## Related guides
+ * - [Employee onboarding](doc:employee-onboarding)
  *
  * scope: `employees:manage`
  */
@@ -44,6 +54,7 @@ export function employeesUpdateOnboardingDocumentsConfig(
 ): APIPromise<
   Result<
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +80,7 @@ async function $do(
   [
     Result<
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -92,7 +104,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["Employee-Onboarding-Documents-Config-Request"],
+    { explode: true },
+  );
 
   const pathParams = {
     employee_id: encodeSimple("employee_id", payload.employee_id, {
@@ -168,6 +184,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -182,7 +199,8 @@ async function $do(
       PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse$inboundSchema,
       { key: "Employee-Onboarding-Document" },
     ),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

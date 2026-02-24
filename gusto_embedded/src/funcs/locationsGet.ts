@@ -3,7 +3,7 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -30,12 +34,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get company locations
+ * Get all company locations
  *
  * @remarks
- * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+ * Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+ * addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
- * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+ * Since all company locations are subsets of locations, use the Locations endpoints to
+ * [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+ *
+ * scope: `companies:read`
+ *
+ * ## Related guides
+ * - [Company locations and addresses](doc:company-locations)
  *
  * scope: `companies:read`
  */
@@ -46,6 +57,7 @@ export function locationsGet(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdLocationsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -71,6 +83,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdLocationsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -103,11 +116,6 @@ async function $do(
   };
 
   const path = pathToFunc("/v1/companies/{company_id}/locations")(pathParams);
-
-  const query = encodeFormQuery({
-    "page": payload.page,
-    "per": payload.per,
-  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -145,7 +153,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -172,6 +179,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdLocationsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -182,9 +190,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1CompaniesCompanyIdLocationsResponse$inboundSchema, {
-      key: "Location-List",
+      key: "Company-Locations-List",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

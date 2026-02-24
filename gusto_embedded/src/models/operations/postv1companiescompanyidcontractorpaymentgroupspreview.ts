@@ -56,19 +56,19 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPaym
     /**
      * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
      */
-    wage?: number | undefined;
+    wage?: string | undefined;
     /**
      * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
      */
-    hours?: number | undefined;
+    hours?: string | undefined;
     /**
      * If the contractor is on an hourly wage, this is the bonus the contractor earned
      */
-    bonus?: number | undefined;
+    bonus?: string | undefined;
     /**
      * Reimbursed wages for the contractor
      */
-    reimbursement?: number | undefined;
+    reimbursement?: string | undefined;
   };
 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody =
@@ -126,10 +126,10 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPaym
   {
     contractor_uuid?: string | undefined;
     payment_method: string;
-    wage?: number | undefined;
-    hours?: number | undefined;
-    bonus?: number | undefined;
-    reimbursement?: number | undefined;
+    wage?: string | undefined;
+    hours?: string | undefined;
+    bonus?: string | undefined;
+    reimbursement?: string | undefined;
   };
 
 /** @internal */
@@ -143,10 +143,10 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPay
     paymentMethod:
       PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewPaymentMethod$outboundSchema
         .default("Direct Deposit"),
-    wage: z.number().optional(),
-    hours: z.number().optional(),
-    bonus: z.number().optional(),
-    reimbursement: z.number().optional(),
+    wage: z.string().optional(),
+    hours: z.string().optional(),
+    bonus: z.string().optional(),
+    reimbursement: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       contractorUuid: "contractor_uuid",

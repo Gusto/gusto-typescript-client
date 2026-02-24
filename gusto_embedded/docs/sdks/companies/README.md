@@ -13,7 +13,7 @@
 * [retrieveTermsOfService](#retrievetermsofservice) - Retrieve terms of service status for a company user
 * [createAdmin](#createadmin) - Create an admin for the company
 * [listAdmins](#listadmins) - Get all the admins at a company
-* [getOnboardingStatus](#getonboardingstatus) - Get the company's onboarding status
+* [getOnboardingStatus](#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](#finishonboarding) - Finish company onboarding
 * [getCustomFields](#getcustomfields) - Get the custom fields of a company
 
@@ -2343,8 +2343,13 @@ import {
 
 ## getOnboardingStatus
 
-Get company's onboarding status.
-The data returned helps inform the required onboarding steps and respective completion status.
+Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+required onboarding steps with their respective completion state.
+
+scope: `company_onboarding_status:read`
+
+### Related guides
+- [Company onboarding and setup](doc:company-onboarding)
 
 scope: `company_onboarding_status:read`
 
@@ -2443,17 +2448,22 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## finishOnboarding
 
-Finalize a given company's onboarding process.
+Finalize a company's onboarding process.
+
+scope: `companies:write`
 
 ### Approve a company in demo
-After a company is finished onboarding, Gusto requires an additional step to review and approve that company. The company onboarding status is `"onboarding_completed": false`, until the API call is made to finish company onboarding.
-In production environments, this step is required for risk-analysis purposes.
+
+After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
+The company onboarding status is "onboarding_completed": false, until the API call is made to finish company
+onboarding. In production environments, this step is required for risk-analysis purposes.
 
 We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
 
@@ -2462,6 +2472,9 @@ PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
 
 # Response: Company object, with company_status: 'Approved'
 ```
+
+### Related guides
+- [Company onboarding and setup](doc:company-onboarding)
 
 scope: `companies:write`
 
@@ -2549,6 +2562,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 

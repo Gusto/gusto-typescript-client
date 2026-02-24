@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { CompanyFormsSortBy } from "../models/components/companyformssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
@@ -112,7 +111,7 @@ export function setCompanyFormsGetAllData(
   queryKeyBase: [
     companyId: string,
     parameters: {
-      sortBy?: CompanyFormsSortBy | undefined;
+      sortBy?: string | undefined;
       xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
@@ -129,7 +128,7 @@ export function invalidateCompanyFormsGetAll(
     [
       companyId: string,
       parameters: {
-        sortBy?: CompanyFormsSortBy | undefined;
+        sortBy?: string | undefined;
         xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
