@@ -5,19 +5,40 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import { Payroll, Payroll$inboundSchema } from "../components/payroll.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  UnprocessedPayroll,
+  UnprocessedPayroll$inboundSchema,
+} from "../components/payroll.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion
+  >;
+
 export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -26,26 +47,30 @@ export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest = {
    * The UUID of the payroll
    */
   payrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  payroll?: Payroll | undefined;
+  unprocessedPayroll?: UnprocessedPayroll | undefined;
 };
+
+/** @internal */
+export const PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     company_id: string;
     payroll_id: string;
-    "X-Gusto-API-Version": string;
   };
 
 /** @internal */
@@ -55,14 +80,16 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest$outboundSc
     z.ZodTypeDef,
     PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutApiv1CompaniesCompanyIdPayrollsPayrollIdCancelHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
     payrollId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       payrollId: "payroll_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 
@@ -84,11 +111,11 @@ export const PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSc
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    Payroll: Payroll$inboundSchema.optional(),
+    "Unprocessed-Payroll": UnprocessedPayroll$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Payroll": "payroll",
+      "Unprocessed-Payroll": "unprocessedPayroll",
     });
   });
 

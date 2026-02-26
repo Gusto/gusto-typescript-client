@@ -1,0 +1,18 @@
+# ContractorPaymentGroupPartnerDisbursementsDisbursement
+
+## Example Usage
+
+```typescript
+import { ContractorPaymentGroupPartnerDisbursementsDisbursement } from "openapi/models";
+
+let value: ContractorPaymentGroupPartnerDisbursementsDisbursement = {};
+```
+
+## Fields
+
+| Field                                                                                                                                        | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contractorPaymentUuid`                                                                                                                      | *string*                                                                                                                                     | :heavy_minus_sign:                                                                                                                           | The UUID of the contractor payment                                                                                                           |
+| `contractorUuid`                                                                                                                             | *string*                                                                                                                                     | :heavy_minus_sign:                                                                                                                           | The UUID of the contractor                                                                                                                   |
+| `paymentMethod`                                                                                                                              | [models.ContractorPaymentGroupPartnerDisbursementsPaymentMethod](../models/contractor-payment-group-partner-disbursements-payment-method.md) | :heavy_minus_sign:                                                                                                                           | The payment method for the disbursement                                                                                                      |
+| `paymentStatus`                                                                                                                              | [models.ContractorPaymentGroupPartnerDisbursementsPaymentStatus](../models/contractor-payment-group-partner-disbursements-payment-status.md) | :heavy_minus_sign:                                                                                                                           | The status of the payment                                                                                                                    |

@@ -5,7 +5,7 @@
 ### Available Operations
 
 * [getInfo](#getinfo) - Get info about the current access token
-* [oauthAccessToken](#oauthaccesstoken) - create or refresh an access token
+* [oauthAccessToken](#oauthaccesstoken) - Create a System Access Token or Refresh an Access Token
 
 ## getInfo
 
@@ -13,7 +13,7 @@ Returns scope and resource information associated with the current access token.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-token-info" method="get" path="/v1/token_info" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-token-info" method="get" path="/v1/token_info" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -106,7 +106,7 @@ import {
 
 ## oauthAccessToken
 
-Creates or refreshes a system access token
+Creates a system access token or refreshes an oauth access token
 
 ### Example Usage
 

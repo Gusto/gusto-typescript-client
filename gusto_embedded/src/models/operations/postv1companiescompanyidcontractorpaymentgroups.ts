@@ -44,60 +44,54 @@ export type Options = {
   message?: string | undefined;
 };
 
-export type PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers =
-  {
-    /**
-     * The type of blocker that is blocking the payment submission
-     */
-    blockerType?: string | undefined;
-    /**
-     * The unblock option selected to resolve the submission blocker
-     */
-    selectedOption?: string | null | undefined;
-    /**
-     * Optional message related to the blocker
-     */
-    message?: string | undefined;
-    /**
-     * Optional array of additional options for the blocker
-     */
-    options?: Array<Options> | undefined;
-  };
+export type SubmissionBlockers = {
+  /**
+   * The type of blocker that is blocking the payment submission
+   */
+  blockerType?: string | undefined;
+  /**
+   * The unblock option selected to resolve the submission blocker
+   */
+  selectedOption?: string | null | undefined;
+  /**
+   * Optional message related to the blocker
+   */
+  message?: string | undefined;
+  /**
+   * Optional array of additional options for the blocker
+   */
+  options?: Array<Options> | undefined;
+};
 
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod = {
+export const PaymentMethod = {
   DirectDeposit: "Direct Deposit",
   Check: "Check",
   HistoricalPayment: "Historical Payment",
 } as const;
-export type PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod =
-  ClosedEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod
-  >;
+export type PaymentMethod = ClosedEnum<typeof PaymentMethod>;
 
 export type ContractorPayments = {
   /**
    * The contractor receiving the payment
    */
   contractorUuid?: string | undefined;
-  paymentMethod?:
-    | PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod
-    | undefined;
+  paymentMethod?: PaymentMethod | undefined;
   /**
    * If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
    */
-  wage?: number | undefined;
+  wage?: string | undefined;
   /**
    * If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
    */
-  hours?: number | undefined;
+  hours?: string | undefined;
   /**
    * If the contractor is on an hourly wage, this is the bonus the contractor earned
    */
-  bonus?: number | undefined;
+  bonus?: string | undefined;
   /**
    * Reimbursed wages for the contractor
    */
-  reimbursement?: number | undefined;
+  reimbursement?: string | undefined;
 };
 
 export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
@@ -112,9 +106,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody = {
   /**
    * Optional array of submission blockers with selected unblock options. Returned from the preview endpoint and can be submitted with selected_option to resolve blockers.
    */
-  submissionBlockers?:
-    | Array<PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers>
-    | undefined;
+  submissionBlockers?: Array<SubmissionBlockers> | undefined;
   contractorPayments: Array<ContractorPayments>;
 };
 
@@ -169,58 +161,51 @@ export function optionsToJSON(options: Options): string {
 }
 
 /** @internal */
-export type PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$Outbound =
-  {
-    blocker_type?: string | undefined;
-    selected_option?: string | null | undefined;
-    message?: string | undefined;
-    options?: Array<Options$Outbound> | undefined;
-  };
+export type SubmissionBlockers$Outbound = {
+  blocker_type?: string | undefined;
+  selected_option?: string | null | undefined;
+  message?: string | undefined;
+  options?: Array<Options$Outbound> | undefined;
+};
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers
-  > = z.object({
-    blockerType: z.string().optional(),
-    selectedOption: z.nullable(z.string()).optional(),
-    message: z.string().optional(),
-    options: z.array(z.lazy(() => Options$outboundSchema)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      blockerType: "blocker_type",
-      selectedOption: "selected_option",
-    });
+export const SubmissionBlockers$outboundSchema: z.ZodType<
+  SubmissionBlockers$Outbound,
+  z.ZodTypeDef,
+  SubmissionBlockers
+> = z.object({
+  blockerType: z.string().optional(),
+  selectedOption: z.nullable(z.string()).optional(),
+  message: z.string().optional(),
+  options: z.array(z.lazy(() => Options$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    blockerType: "blocker_type",
+    selectedOption: "selected_option",
   });
+});
 
-export function postV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockersToJSON(
-  postV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers:
-    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers,
+export function submissionBlockersToJSON(
+  submissionBlockers: SubmissionBlockers,
 ): string {
   return JSON.stringify(
-    PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$outboundSchema
-      .parse(postV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers),
+    SubmissionBlockers$outboundSchema.parse(submissionBlockers),
   );
 }
 
 /** @internal */
-export const PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$outboundSchema:
-  z.ZodNativeEnum<
-    typeof PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod
-  > = z.nativeEnum(
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod,
-  );
+export const PaymentMethod$outboundSchema: z.ZodNativeEnum<
+  typeof PaymentMethod
+> = z.nativeEnum(PaymentMethod);
 
 /** @internal */
 export type ContractorPayments$Outbound = {
   contractor_uuid?: string | undefined;
   payment_method: string;
-  wage?: number | undefined;
-  hours?: number | undefined;
-  bonus?: number | undefined;
-  reimbursement?: number | undefined;
+  wage?: string | undefined;
+  hours?: string | undefined;
+  bonus?: string | undefined;
+  reimbursement?: string | undefined;
 };
 
 /** @internal */
@@ -230,13 +215,11 @@ export const ContractorPayments$outboundSchema: z.ZodType<
   ContractorPayments
 > = z.object({
   contractorUuid: z.string().optional(),
-  paymentMethod:
-    PostV1CompaniesCompanyIdContractorPaymentGroupsPaymentMethod$outboundSchema
-      .default("Direct Deposit"),
-  wage: z.number().optional(),
-  hours: z.number().optional(),
-  bonus: z.number().optional(),
-  reimbursement: z.number().optional(),
+  paymentMethod: PaymentMethod$outboundSchema.default("Direct Deposit"),
+  wage: z.string().optional(),
+  hours: z.string().optional(),
+  bonus: z.string().optional(),
+  reimbursement: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     contractorUuid: "contractor_uuid",
@@ -257,11 +240,7 @@ export type PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$Outbound 
   {
     check_date: string;
     creation_token: string;
-    submission_blockers?:
-      | Array<
-        PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$Outbound
-      >
-      | undefined;
+    submission_blockers?: Array<SubmissionBlockers$Outbound> | undefined;
     contractor_payments: Array<ContractorPayments$Outbound>;
   };
 
@@ -274,11 +253,8 @@ export const PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody$outbound
   > = z.object({
     checkDate: z.instanceof(RFCDate).transform(v => v.toString()),
     creationToken: z.string(),
-    submissionBlockers: z.array(
-      z.lazy(() =>
-        PostV1CompaniesCompanyIdContractorPaymentGroupsSubmissionBlockers$outboundSchema
-      ),
-    ).optional(),
+    submissionBlockers: z.array(z.lazy(() => SubmissionBlockers$outboundSchema))
+      .optional(),
     contractorPayments: z.array(
       z.lazy(() => ContractorPayments$outboundSchema),
     ),

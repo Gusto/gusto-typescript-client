@@ -13,6 +13,10 @@ export type PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata = {
    * ID of the reverse wire detail
    */
   reverseWireDetailId?: number | null | undefined;
+  /**
+   * Last 4 digits of the bank account number for the reverse wire
+   */
+  bankAccountLastFourDigits?: string | null | undefined;
 };
 
 /**
@@ -38,9 +42,11 @@ export const PayrollCreditBlockerUnblockOptionWaitForReverseWireMetadata$inbound
     unknown
   > = z.object({
     reverse_wire_detail_id: z.nullable(z.number().int()).optional(),
+    bank_account_last_four_digits: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "reverse_wire_detail_id": "reverseWireDetailId",
+      "bank_account_last_four_digits": "bankAccountLastFourDigits",
     });
   });
 

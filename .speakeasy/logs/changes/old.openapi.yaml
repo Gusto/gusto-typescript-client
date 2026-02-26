@@ -405,7 +405,13 @@ paths:
                                         enum:
                                             - success
                 '422':
-                    "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+                    description: Unprocessable Entity
+                    content:
+                        application/json:
+                            schema:
+                                oneOf:
+                                    - "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+                                    - "$ref": "#/components/schemas/Migration-Blocker"
                 '404':
                     "$ref": "#/components/responses/Not-Found-Error-Object"
             requestBody:
@@ -429,6 +435,41 @@ paths:
                                 - ip_address
                                 - external_user_id
             x-speakeasy-name-override: migrate
+    "/v1/partner_managed_companies/{company_uuid}/migration_readiness":
+        get:
+            x-gusto-integration-type:
+                - embedded
+            summary: Check company migration readiness
+            operationId: get-v1-partner-managed-companies-company-uuid-migration_readiness
+            tags:
+                - Companies
+            description: |-
+                Check if an existing Gusto customer is ready to be migrated to embedded payroll. This endpoint returns blockers and warnings associated with migrating the company and is recommended to be called before attempting to migrate a company.
+
+                scope: `partner_managed_companies:read`
+            parameters:
+                - "$ref": "#/components/parameters/company_uuid"
+                - "$ref": "#/components/parameters/VersionHeader"
+            responses:
+                '200':
+                    description: Example response
+                    content:
+                        application/json:
+                            schema:
+                                description: ''
+                                allOf:
+                                    - type: object
+                                      properties:
+                                        ready_to_migrate:
+                                            type: boolean
+                                            description: Indicates if the company is ready to be migrated.
+                                        company_uuid:
+                                            type: string
+                                            description: The company UUID
+                                    - "$ref": "#/components/schemas/Migration-Blocker"
+                                    - "$ref": "#/components/schemas/Migration-Warning"
+                '404':
+                    "$ref": "#/components/responses/Not-Found-Error-Object"
     "/v1/partner_managed_companies/{company_uuid}/accept_terms_of_service":
         post:
             x-gusto-integration-type:
@@ -2642,6 +2683,8 @@ paths:
             description: |-
                 Get all of the employees, onboarding, active and terminated, for a given company.
 
+                Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
                 scope: `employees:read`
             tags:
                 - Employees
@@ -2703,7 +2746,7 @@ paths:
                             - custom_fields
                             - portal_invitations
                         x-enumDescriptions:
-                            all_compensations: Include all effective dated compensations for each job instead of only the current compensation
+                            all_compensations: Include all effective dated compensations for each job instead of only the current compensation. Requires `compensations:read` scope.
                             all_home_addresses: Include all home addresses that have been associated to this employee
                             company_name: Include the name of the company that the employee is associated with
                             current_home_address: Include the employee's current home address
@@ -3255,6 +3298,8 @@ paths:
             description: |-
                 Get an employee.
 
+                Note: Compensation data (pay rate, payment unit, and related fields) represents sensitive employee pay information. When retrieving employee job data, these fields (`rate`, `payment_unit`, `current_compensation_uuid`, `compensations`) are only returned when the `compensations:read` scope is included. This allows you to access employee and job metadata without exposing pay rates.
+
                 scope: `employees:read`
             tags:
                 - Employees
@@ -3292,7 +3337,7 @@ paths:
                             - custom_fields
                             - portal_invitations
                         x-enumDescriptions:
-                            all_compensations: Include all effective dated compensations for each job instead of only the current compensation
+                            all_compensations: Include all effective dated compensations for each job instead of only the current compensation. Requires `compensations:read` scope.
                             all_home_addresses: Include all home addresses that have been associated to this employee
                             company_name: Include the name of the company that the employee is associated with
                             current_home_address: Include the employee's current home address
@@ -19107,6 +19152,54 @@ components:
                                     key:
                                         type: string
                                         description: A categorization of the payroll blocker, e.g. "geocode_error"
+        Migration-Blocker:
+            description: Migration blocker that blocks company migration
+            type: object
+            properties:
+                errors:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            error_key:
+                                type: string
+                                description: Error key
+                            category:
+                                type: string
+                                description: Error category
+                            message:
+                                type: string
+                                description: Blocker message
+                            metadata:
+                                type: object
+                                properties:
+                                    key:
+                                        type: string
+                                        description: A categorization of the migration blocker, e.g. "migrated_company"
+        Migration-Warning:
+            description: Migration warning that does not block company migration
+            type: object
+            properties:
+                warnings:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            error_key:
+                                type: string
+                                description: Error key
+                            category:
+                                type: string
+                                description: Error category
+                            message:
+                                type: string
+                                description: Warning message
+                            metadata:
+                                type: object
+                                properties:
+                                    key:
+                                        type: string
+                                        description: A categorization of the migration warning, e.g. "marijuana_related_business"
         Authentication:
             description: ''
             type: object
@@ -23532,7 +23625,9 @@ components:
                         - recovered
                         - lost
                 latest_error_code:
-                    type: string
+                    type:
+                        - string
+                        - 'null'
                     description: The latest bank error code for the recovery case. See [this doc](https://docs.gusto.com/embedded-payroll/docs/ach-codes-and-transaction-types) for a list of common ACH return codes.
                 original_debit_date:
                     type:
@@ -23715,6 +23810,7 @@ components:
                     description: Type of payment for the wire in
                     enum:
                         - Payroll
+                        - ContractorPaymentGroup
                 payment_uuid:
                     type: string
                     description: Unique identifier of the payment

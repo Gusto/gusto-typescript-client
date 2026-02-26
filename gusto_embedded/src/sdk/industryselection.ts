@@ -20,7 +20,7 @@ export class IndustrySelection extends ClientSDK {
    * Get a company industry selection
    *
    * @remarks
-   * Get industry selection for the company.
+   * Returns the industry classification for a company, including NAICS code, SIC codes, and industry title.
    *
    * scope: `companies:read`
    */
@@ -39,7 +39,13 @@ export class IndustrySelection extends ClientSDK {
    * Update a company industry selection
    *
    * @remarks
-   * Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
+   * Update the industry classification for a company by passing in a [NAICS code](https://www.naics.com).
+   *
+   * Optionally provide an industry title and [SIC codes](https://siccode.com/). If you do not provide SIC codes,
+   * we will use the NAICS code to perform an internal lookup.
+   *
+   * Our UI leverages [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry
+   * classification codes.
    *
    * scope: `companies:write`
    */

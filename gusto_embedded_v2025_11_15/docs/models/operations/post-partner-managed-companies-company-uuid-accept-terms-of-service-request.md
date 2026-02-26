@@ -1,0 +1,24 @@
+# PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest
+
+## Example Usage
+
+```typescript
+import { PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest } from "openapi/models/operations";
+
+let value: PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequest = {
+  companyUuid: "<id>",
+  body: {
+    email: "Selena76@hotmail.com",
+    ipAddress: "11.124.154.127",
+    externalUserId: "<id>",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [models.VersionHeader](../../models/version-header.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PostPartnerManagedCompaniesCompanyUuidAcceptTermsOfServiceRequestBody](../../models/operations/post-partner-managed-companies-company-uuid-accept-terms-of-service-request-body.md)                              | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

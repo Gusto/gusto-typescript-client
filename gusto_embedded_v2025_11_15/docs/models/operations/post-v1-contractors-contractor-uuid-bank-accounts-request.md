@@ -1,0 +1,25 @@
+# PostV1ContractorsContractorUuidBankAccountsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1ContractorsContractorUuidBankAccountsRequest } from "openapi/models/operations";
+
+let value: PostV1ContractorsContractorUuidBankAccountsRequest = {
+  contractorUuid: "<id>",
+  body: {
+    name: "<value>",
+    routingNumber: "<value>",
+    accountNumber: "<value>",
+    accountType: "Checking",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contractorUuid`                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the contractor                                                                                                                                                                                                   |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [models.VersionHeader](../../models/version-header.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PostV1ContractorsContractorUuidBankAccountsRequestBody](../../models/operations/post-v1-contractors-contractor-uuid-bank-accounts-request-body.md)                                                               | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

@@ -1,0 +1,40 @@
+# HistoricalEmployeeBody
+
+## Example Usage
+
+```typescript
+import { HistoricalEmployeeBody } from "openapi/models";
+
+let value: HistoricalEmployeeBody = {
+  firstName: "Jessie",
+  lastName: "Boehm",
+  dateOfBirth: "1998-03-30",
+  ssn: "<value>",
+  workAddress: {},
+  homeAddress: {
+    street1: "<value>",
+    city: "West Heatherville",
+    state: "North Dakota",
+    zip: "12580",
+  },
+  termination: {},
+  job: {},
+};
+```
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `firstName`                                                                                    | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `middleInitial`                                                                                | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `lastName`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `preferredFirstName`                                                                           | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `dateOfBirth`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `ssn`                                                                                          | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `workAddress`                                                                                  | [models.WorkAddress](../models/work-address.md)                                                | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `homeAddress`                                                                                  | [models.HistoricalEmployeeBodyHomeAddress](../models/historical-employee-body-home-address.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `termination`                                                                                  | [models.HistoricalEmployeeBodyTermination](../models/historical-employee-body-termination.md)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `email`                                                                                        | *string*                                                                                       | :heavy_minus_sign:                                                                             | Optional. If provided, the email address will be saved to the employee.                        |
+| `job`                                                                                          | [models.HistoricalEmployeeBodyJob](../models/historical-employee-body-job.md)                  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `employeeStateTaxes`                                                                           | [models.EmployeeStateTaxes](../models/employee-state-taxes.md)                                 | :heavy_minus_sign:                                                                             | N/A                                                                                            |

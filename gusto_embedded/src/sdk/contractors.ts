@@ -190,7 +190,7 @@ export class Contractors extends ClientSDK {
    * | `basic_details` | Add individual contractor's first name, last name, social security number or Business name and EIN depending on the contractor type |
    * | `add_address` | Add contractor address. |
    * | `compensation_details` | Add contractor compensation. |
-   * | `payment_details` | Set up contractor's direct deposit or set to check. |
+   * | `payment_details` | (optional) Set up contractor's direct deposit or set to check. |
    * | `sign_documents` | Contractor forms (e.g., W9) are generated & signed. |
    * | `file_new_hire_report` | Contractor new hire report is generated. |
    */

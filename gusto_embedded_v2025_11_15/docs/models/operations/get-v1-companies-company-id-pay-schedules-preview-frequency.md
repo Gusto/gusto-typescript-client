@@ -1,0 +1,18 @@
+# GetV1CompaniesCompanyIdPaySchedulesPreviewFrequency
+
+The frequency that employees on this pay schedule are paid with Gusto.
+
+## Example Usage
+
+```typescript
+import { GetV1CompaniesCompanyIdPaySchedulesPreviewFrequency } from "openapi/models/operations";
+
+let value: GetV1CompaniesCompanyIdPaySchedulesPreviewFrequency =
+  "Every other week";
+```
+
+## Values
+
+```typescript
+"Every week" | "Every other week" | "Twice per month" | "Monthly"
+```

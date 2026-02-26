@@ -5,85 +5,78 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   EmployeeOnboardingDocument,
   EmployeeOnboardingDocument$inboundSchema,
 } from "../components/employeeonboardingdocument.js";
 import {
+  EmployeeOnboardingDocumentsConfigRequest,
+  EmployeeOnboardingDocumentsConfigRequest$Outbound,
+  EmployeeOnboardingDocumentsConfigRequest$outboundSchema,
+} from "../components/employeeonboardingdocumentsconfigrequest.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody = {
-  /**
-   * Whether to include Form I-9 for an employee during onboarding
-   */
-  i9Document?: boolean | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion
+  >;
 
 export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody;
+  employeeOnboardingDocumentsConfigRequest?:
+    | EmployeeOnboardingDocumentsConfigRequest
+    | undefined;
 };
 
 export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   employeeOnboardingDocument?: EmployeeOnboardingDocument | undefined;
 };
 
 /** @internal */
-export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$Outbound =
-  {
-    i9_document?: boolean | undefined;
-  };
-
-/** @internal */
-export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody
-  > = z.object({
-    i9Document: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      i9Document: "i9_document",
-    });
-  });
-
-export function putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBodyToJSON(
-  putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody:
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outboundSchema
-      .parse(putV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody),
+export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$Outbound =
   {
-    employee_id: string;
     "X-Gusto-API-Version": string;
-    RequestBody:
-      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$Outbound;
+    employee_id: string;
+    "Employee-Onboarding-Documents-Config-Request"?:
+      | EmployeeOnboardingDocumentsConfigRequest$Outbound
+      | undefined;
   };
 
 /** @internal */
@@ -93,16 +86,18 @@ export const PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest$outboundSc
     z.ZodTypeDef,
     PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PutV1EmployeesEmployeeIdOnboardingDocumentsConfigRequestBody$outboundSchema
-    ),
+    employeeOnboardingDocumentsConfigRequest:
+      EmployeeOnboardingDocumentsConfigRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      employeeId: "employee_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      employeeId: "employee_id",
+      employeeOnboardingDocumentsConfigRequest:
+        "Employee-Onboarding-Documents-Config-Request",
     });
   });
 

@@ -5,90 +5,68 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  GrossUpPay,
-  GrossUpPay$inboundSchema,
-} from "../components/grossuppay.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PayrollGrossUpRequest,
+  PayrollGrossUpRequest$Outbound,
+  PayrollGrossUpRequest$outboundSchema,
+} from "../components/payrollgrossuprequest.js";
+import {
+  PayrollGrossUpResponse,
+  PayrollGrossUpResponse$inboundSchema,
+} from "../components/payrollgrossupresponse.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PostPayrollsGrossUpPayrollUuidRequestBody = {
-  /**
-   * Employee UUID
-   */
-  employeeUuid: string;
-  /**
-   * Employee net earnings
-   */
-  netPay: string;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion
+>;
 
 export type PostPayrollsGrossUpPayrollUuidRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the payroll
    */
   payrollUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostPayrollsGrossUpPayrollUuidRequestBody;
+  payrollGrossUpRequest: PayrollGrossUpRequest;
 };
 
 export type PostPayrollsGrossUpPayrollUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  grossUpPay?: GrossUpPay | undefined;
+  payrollGrossUpResponse?: PayrollGrossUpResponse | undefined;
 };
 
 /** @internal */
-export type PostPayrollsGrossUpPayrollUuidRequestBody$Outbound = {
-  employee_uuid: string;
-  net_pay: string;
-};
-
-/** @internal */
-export const PostPayrollsGrossUpPayrollUuidRequestBody$outboundSchema:
-  z.ZodType<
-    PostPayrollsGrossUpPayrollUuidRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostPayrollsGrossUpPayrollUuidRequestBody
-  > = z.object({
-    employeeUuid: z.string(),
-    netPay: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      employeeUuid: "employee_uuid",
-      netPay: "net_pay",
-    });
-  });
-
-export function postPayrollsGrossUpPayrollUuidRequestBodyToJSON(
-  postPayrollsGrossUpPayrollUuidRequestBody:
-    PostPayrollsGrossUpPayrollUuidRequestBody,
-): string {
-  return JSON.stringify(
-    PostPayrollsGrossUpPayrollUuidRequestBody$outboundSchema.parse(
-      postPayrollsGrossUpPayrollUuidRequestBody,
-    ),
-  );
-}
+export const PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion> =
+    z.nativeEnum(PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostPayrollsGrossUpPayrollUuidRequest$Outbound = {
-  payroll_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostPayrollsGrossUpPayrollUuidRequestBody$Outbound;
+  payroll_uuid: string;
+  "Payroll-Gross-Up-Request": PayrollGrossUpRequest$Outbound;
 };
 
 /** @internal */
@@ -97,16 +75,17 @@ export const PostPayrollsGrossUpPayrollUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostPayrollsGrossUpPayrollUuidRequest
 > = z.object({
+  xGustoAPIVersion:
+    PostPayrollsGrossUpPayrollUuidHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   payrollUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PostPayrollsGrossUpPayrollUuidRequestBody$outboundSchema
-  ),
+  payrollGrossUpRequest: PayrollGrossUpRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    payrollUuid: "payroll_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    payrollUuid: "payroll_uuid",
+    payrollGrossUpRequest: "Payroll-Gross-Up-Request",
   });
 });
 
@@ -127,11 +106,11 @@ export const PostPayrollsGrossUpPayrollUuidResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Gross-Up-Pay": GrossUpPay$inboundSchema.optional(),
+  "Payroll-Gross-Up-Response": PayrollGrossUpResponse$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
-    "Gross-Up-Pay": "grossUpPay",
+    "Payroll-Gross-Up-Response": "payrollGrossUpResponse",
   });
 });
 

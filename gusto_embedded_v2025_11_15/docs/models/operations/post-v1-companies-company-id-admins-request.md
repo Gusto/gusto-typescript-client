@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyIdAdminsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdAdminsRequest } from "openapi/models/operations";
+
+let value: PostV1CompaniesCompanyIdAdminsRequest = {
+  companyId: "<id>",
+  body: {
+    firstName: "Gudrun",
+    lastName: "Fahey",
+    email: "Vesta_Bogan70@gmail.com",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyId`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [models.VersionHeader](../../models/version-header.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PostV1CompaniesCompanyIdAdminsRequestBody](../../models/operations/post-v1-companies-company-id-admins-request-body.md)                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

@@ -1,0 +1,18 @@
+# PostV1CompaniesCompanyIdPeopleBatchesError
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdPeopleBatchesError } from "openapi/models/operations";
+
+let value: PostV1CompaniesCompanyIdPeopleBatchesError = {};
+```
+
+## Fields
+
+| Field                                                                                                                                       | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `errorKey`                                                                                                                                  | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `category`                                                                                                                                  | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `message`                                                                                                                                   | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `metadata`                                                                                                                                  | [operations.PostV1CompaniesCompanyIdPeopleBatchesMetadata](../../models/operations/post-v1-companies-company-id-people-batches-metadata.md) | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |

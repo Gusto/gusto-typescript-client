@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
@@ -14,24 +15,49 @@ import {
   PayrollPrepared,
   PayrollPrepared$inboundSchema,
 } from "../components/payroll.js";
-import {
-  PayrollPrepareSortBy,
-  PayrollPrepareSortBy$outboundSchema,
-} from "../components/payrollpreparesortby.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion
+  >;
+
+/**
+ * Sort employee compensations by name
+ */
+export const QueryParamSortBy = {
+  FirstName: "first_name",
+  LastName: "last_name",
+} as const;
+/**
+ * Sort employee compensations by name
+ */
+export type QueryParamSortBy = ClosedEnum<typeof QueryParamSortBy>;
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody = {
   /**
    * An array of employee UUIDs. If passed, only those employees payroll items will be prepared.
    */
-  employeeUuids?: Array<string> | undefined;
+  employeeUuids?: Array<string> | null | undefined;
 };
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -49,13 +75,9 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
    */
   per?: number | undefined;
   /**
-   * Sort employee compenstations by name. Options: first_name, last_name
+   * Sort employee compensations by name
    */
-  sortBy?: PayrollPrepareSortBy | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  sortBy?: QueryParamSortBy | undefined;
   requestBody?:
     | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody
     | undefined;
@@ -64,15 +86,28 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * A prepared payroll
+   * Successful
    */
   payrollPrepared?: PayrollPrepared | undefined;
 };
 
 /** @internal */
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
+export const QueryParamSortBy$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamSortBy
+> = z.nativeEnum(QueryParamSortBy);
+
+/** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound =
   {
-    employee_uuids?: Array<string> | undefined;
+    employee_uuids?: Array<string> | null | undefined;
   };
 
 /** @internal */
@@ -82,7 +117,7 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outbound
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody
   > = z.object({
-    employeeUuids: z.array(z.string()).optional(),
+    employeeUuids: z.nullable(z.array(z.string())).optional(),
   }).transform((v) => {
     return remap$(v, {
       employeeUuids: "employee_uuids",
@@ -101,12 +136,12 @@ export function putV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBodyToJSON
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   payroll_id: string;
   page?: number | undefined;
   per?: number | undefined;
   sort_by?: string | undefined;
-  "X-Gusto-API-Version": string;
   RequestBody?:
     | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound
     | undefined;
@@ -119,21 +154,23 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
     payrollId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    sortBy: PayrollPrepareSortBy$outboundSchema.optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+    sortBy: QueryParamSortBy$outboundSchema.optional(),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       payrollId: "payroll_id",
       sortBy: "sort_by",
-      xGustoAPIVersion: "X-Gusto-API-Version",
       requestBody: "RequestBody",
     });
   });

@@ -1,0 +1,24 @@
+# PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest
+
+## Example Usage
+
+```typescript
+import { PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest } from "openapi/models/operations";
+
+let value: PutV1PartnerManagedCompaniesCompanyUuidMigrateRequest = {
+  companyUuid: "<id>",
+  body: {
+    email: "Matt_Johns38@gmail.com",
+    ipAddress: "1bad:0b2a:cd03:1e9d:f15e:d9ef:94e8:c754",
+    externalUserId: "<id>",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [models.VersionHeader](../../models/version-header.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PutV1PartnerManagedCompaniesCompanyUuidMigrateRequestBody](../../models/operations/put-v1-partner-managed-companies-company-uuid-migrate-request-body.md)                                                        | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

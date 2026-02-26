@@ -5,36 +5,48 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PayrollSubmissionBlockerRequestType,
+  PayrollSubmissionBlockerRequestType$Outbound,
+  PayrollSubmissionBlockerRequestType$outboundSchema,
+} from "../components/payrollsubmissionblockerrequesttype.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type SubmissionBlockers = {
-  /**
-   * The type of submission_blocker that is blocking the payment.
-   */
-  blockerType?: string | undefined;
-  /**
-   * The selected option to unblock the payment's submission_blocker.
-   */
-  selectedOption?: string | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion
+  >;
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody = {
   /**
    * An array of submission_blockers, each with a selected unblock option.
    */
-  submissionBlockers?: Array<SubmissionBlockers> | undefined;
+  submissionBlockers?: Array<PayrollSubmissionBlockerRequestType> | undefined;
 };
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -43,11 +55,9 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest = {
    * The UUID of the payroll
    */
   payrollId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody;
+  requestBody?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody
+    | undefined;
 };
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse = {
@@ -55,38 +65,19 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitResponse = {
 };
 
 /** @internal */
-export type SubmissionBlockers$Outbound = {
-  blocker_type?: string | undefined;
-  selected_option?: string | undefined;
-};
-
-/** @internal */
-export const SubmissionBlockers$outboundSchema: z.ZodType<
-  SubmissionBlockers$Outbound,
-  z.ZodTypeDef,
-  SubmissionBlockers
-> = z.object({
-  blockerType: z.string().optional(),
-  selectedOption: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    blockerType: "blocker_type",
-    selectedOption: "selected_option",
-  });
-});
-
-export function submissionBlockersToJSON(
-  submissionBlockers: SubmissionBlockers,
-): string {
-  return JSON.stringify(
-    SubmissionBlockers$outboundSchema.parse(submissionBlockers),
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$Outbound =
   {
-    submission_blockers?: Array<SubmissionBlockers$Outbound> | undefined;
+    submission_blockers?:
+      | Array<PayrollSubmissionBlockerRequestType$Outbound>
+      | undefined;
   };
 
 /** @internal */
@@ -96,8 +87,9 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$outboundS
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody
   > = z.object({
-    submissionBlockers: z.array(z.lazy(() => SubmissionBlockers$outboundSchema))
-      .optional(),
+    submissionBlockers: z.array(
+      PayrollSubmissionBlockerRequestType$outboundSchema,
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       submissionBlockers: "submission_blockers",
@@ -116,11 +108,12 @@ export function putV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBodyToJSON(
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   payroll_id: string;
-  "X-Gusto-API-Version": string;
-  RequestBody:
-    PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$Outbound;
+  RequestBody?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -130,17 +123,19 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest$outboundSchem
     z.ZodTypeDef,
     PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequest
   > = z.object({
+    xGustoAPIVersion:
+      PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
     payrollId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdSubmitRequestBody$outboundSchema
-    ),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       payrollId: "payroll_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
       requestBody: "RequestBody",
     });
   });

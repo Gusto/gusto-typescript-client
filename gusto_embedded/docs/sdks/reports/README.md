@@ -16,9 +16,303 @@ Create a custom report for a company. This endpoint initiates creating a custom 
 
 scope: `company_reports:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" -->
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.reports.createCustom({
+    companyUuid: "<id>",
+    requestBody: {
+      columns: [
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
+      ],
+      groupings: [
+        "work_address_state",
+      ],
+      fileType: "json",
+      startDate: new RFCDate("2024-01-01"),
+      endDate: new RFCDate("2024-04-01"),
+      dismissedStartDate: new RFCDate("2024-01-01"),
+      dismissedEndDate: new RFCDate("2024-04-01"),
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsCreateCustom } from "@gusto/embedded-api/funcs/reportsCreateCustom.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await reportsCreateCustom(gustoEmbedded, {
+    companyUuid: "<id>",
+    requestBody: {
+      columns: [
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
+      ],
+      groupings: [
+        "work_address_state",
+      ],
+      fileType: "json",
+      startDate: new RFCDate("2024-01-01"),
+      endDate: new RFCDate("2024-04-01"),
+      dismissedStartDate: new RFCDate("2024-01-01"),
+      dismissedEndDate: new RFCDate("2024-04-01"),
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsCreateCustom failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsCreateCustomMutation
+} from "@gusto/embedded-api/react-query/reportsCreateCustom.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.reports.createCustom({
+    companyUuid: "<id>",
+    requestBody: {
+      columns: [
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
+      ],
+      groupings: [
+        "work_address_state",
+      ],
+      fileType: "json",
+      startDate: new RFCDate("2024-01-01"),
+      endDate: new RFCDate("2024-04-01"),
+      dismissedStartDate: new RFCDate("2024-01-01"),
+      dismissedEndDate: new RFCDate("2024-04-01"),
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsCreateCustom } from "@gusto/embedded-api/funcs/reportsCreateCustom.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await reportsCreateCustom(gustoEmbedded, {
+    companyUuid: "<id>",
+    requestBody: {
+      columns: [
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
+      ],
+      groupings: [
+        "work_address_state",
+      ],
+      fileType: "json",
+      startDate: new RFCDate("2024-01-01"),
+      endDate: new RFCDate("2024-04-01"),
+      dismissedStartDate: new RFCDate("2024-01-01"),
+      dismissedEndDate: new RFCDate("2024-04-01"),
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsCreateCustom failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsCreateCustomMutation
+} from "@gusto/embedded-api/react-query/reportsCreateCustom.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.reports.createCustom({
+    companyUuid: "<id>",
+    requestBody: {
+      columns: [
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
+      ],
+      groupings: [
+        "work_address_state",
+      ],
+      fileType: "json",
+      startDate: new RFCDate("2024-01-01"),
+      endDate: new RFCDate("2024-04-01"),
+      dismissedStartDate: new RFCDate("2024-01-01"),
+      dismissedEndDate: new RFCDate("2024-04-01"),
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsCreateCustom } from "@gusto/embedded-api/funcs/reportsCreateCustom.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await reportsCreateCustom(gustoEmbedded, {
+    companyUuid: "<id>",
+    requestBody: {
+      columns: [
+        "total_time_off_earnings",
+        "employer_additional_taxes",
+        "employer_cost",
+      ],
+      groupings: [
+        "work_address_state",
+      ],
+      fileType: "json",
+      startDate: new RFCDate("2024-01-01"),
+      endDate: new RFCDate("2024-04-01"),
+      dismissedStartDate: new RFCDate("2024-01-01"),
+      dismissedEndDate: new RFCDate("2024-04-01"),
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsCreateCustom failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsCreateCustomMutation
+} from "@gusto/embedded-api/react-query/reportsCreateCustom.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-companies-company_uuid-reports" method="post" path="/v1/companies/{company_uuid}/reports" example="Resource" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -143,9 +437,225 @@ Use the `request_uuid` in the response with the [report GET endpoint](../referen
 
 scope: `company_reports:write` OR `company_reports:write:general_ledger`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" -->
+<!-- UsageSnippet language="typescript" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "@gusto/embedded-api/funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsPostPayrollsPayrollUuidReportsGeneralLedger failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation
+} from "@gusto/embedded-api/react-query/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "@gusto/embedded-api/funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsPostPayrollsPayrollUuidReportsGeneralLedger failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation
+} from "@gusto/embedded-api/react-query/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.reports.postPayrollsPayrollUuidReportsGeneralLedger({
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { reportsPostPayrollsPayrollUuidReportsGeneralLedger } from "@gusto/embedded-api/funcs/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await reportsPostPayrollsPayrollUuidReportsGeneralLedger(gustoEmbedded, {
+    payrollUuid: "<id>",
+    requestBody: {
+      aggregation: "default",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsPostPayrollsPayrollUuidReportsGeneralLedger failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useReportsPostPayrollsPayrollUuidReportsGeneralLedgerMutation
+} from "@gusto/embedded-api/react-query/reportsPostPayrollsPayrollUuidReportsGeneralLedger.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-payrolls-payroll_uuid-reports-general_ledger" method="post" path="/v1/payrolls/{payroll_uuid}/reports/general_ledger" example="Resource" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -246,7 +756,7 @@ scope: `company_reports:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-reports-request_uuid" method="get" path="/v1/reports/{request_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="get-reports-request_uuid" method="get" path="/v1/reports/{request_uuid}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -349,7 +859,7 @@ scope: `company_reports:write`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-report-templates-report_type" method="get" path="/v1/companies/{company_uuid}/report_templates/{report_type}" -->
+<!-- UsageSnippet language="typescript" operationID="get-companies-company_uuid-report-templates-report_type" method="get" path="/v1/companies/{company_uuid}/report_templates/{report_type}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -548,5 +1058,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 404, 422                              | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

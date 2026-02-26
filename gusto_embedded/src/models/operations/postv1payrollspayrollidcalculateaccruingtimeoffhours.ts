@@ -5,45 +5,45 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  AccruingTimeOffHourObject,
-  AccruingTimeOffHourObject$inboundSchema,
-} from "../components/accruingtimeoffhourobject.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
+  PayrollCalculateAccruingTimeOffHoursRequest,
+  PayrollCalculateAccruingTimeOffHoursRequest$Outbound,
+  PayrollCalculateAccruingTimeOffHoursRequest$outboundSchema,
+} from "../components/payrollcalculateaccruingtimeoffhoursrequest.js";
+import {
+  PayrollCalculateAccruingTimeOffHoursResponse,
+  PayrollCalculateAccruingTimeOffHoursResponse$inboundSchema,
+} from "../components/payrollcalculateaccruingtimeoffhoursresponse.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody = {
-  /**
-   * regular hours worked in this pay period
-   */
-  regularHoursWorked?: number | undefined;
-  /**
-   * overtime hours worked in this pay period
-   */
-  overtimeHoursWorked?: number | undefined;
-  /**
-   * double overtime hours worked in this pay period
-   */
-  doubleOvertimeHoursWorked?: number | undefined;
-  /**
-   * paid time off hours used in this pay period
-   */
-  ptoHoursUsed?: number | undefined;
-  /**
-   * sick hours used in this pay period
-   */
-  sickHoursUsed?: number | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion =
+  {
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+  } as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion
+  >;
 
 export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the payroll
    */
@@ -52,71 +52,38 @@ export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest = {
    * The UUID of the employee
    */
   employeeId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody;
+  payrollCalculateAccruingTimeOffHoursRequest?:
+    | PayrollCalculateAccruingTimeOffHoursRequest
+    | undefined;
 };
 
 export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  accruingTimeOffHourObject?: AccruingTimeOffHourObject | undefined;
+  payrollCalculateAccruingTimeOffHoursResponse?:
+    | PayrollCalculateAccruingTimeOffHoursResponse
+    | undefined;
 };
 
 /** @internal */
-export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$Outbound =
-  {
-    regular_hours_worked?: number | undefined;
-    overtime_hours_worked?: number | undefined;
-    double_overtime_hours_worked?: number | undefined;
-    pto_hours_used?: number | undefined;
-    sick_hours_used?: number | undefined;
-  };
-
-/** @internal */
-export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody
-  > = z.object({
-    regularHoursWorked: z.number().optional(),
-    overtimeHoursWorked: z.number().optional(),
-    doubleOvertimeHoursWorked: z.number().optional(),
-    ptoHoursUsed: z.number().optional(),
-    sickHoursUsed: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      regularHoursWorked: "regular_hours_worked",
-      overtimeHoursWorked: "overtime_hours_worked",
-      doubleOvertimeHoursWorked: "double_overtime_hours_worked",
-      ptoHoursUsed: "pto_hours_used",
-      sickHoursUsed: "sick_hours_used",
-    });
-  });
-
-export function postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBodyToJSON(
-  postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody:
-    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$outboundSchema
-      .parse(postV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody),
+export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion,
   );
-}
 
 /** @internal */
 export type PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$Outbound =
   {
+    "X-Gusto-API-Version": string;
     payroll_id: string;
     employee_id: string;
-    "X-Gusto-API-Version": string;
-    RequestBody:
-      PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$Outbound;
+    "Payroll-Calculate-Accruing-Time-Off-Hours-Request"?:
+      | PayrollCalculateAccruingTimeOffHoursRequest$Outbound
+      | undefined;
   };
 
 /** @internal */
@@ -126,18 +93,20 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$outboun
     z.ZodTypeDef,
     PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest
   > = z.object({
+    xGustoAPIVersion:
+      PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     payrollId: z.string(),
     employeeId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-    requestBody: z.lazy(() =>
-      PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequestBody$outboundSchema
-    ),
+    payrollCalculateAccruingTimeOffHoursRequest:
+      PayrollCalculateAccruingTimeOffHoursRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       payrollId: "payroll_id",
       employeeId: "employee_id",
-      xGustoAPIVersion: "X-Gusto-API-Version",
-      requestBody: "RequestBody",
+      payrollCalculateAccruingTimeOffHoursRequest:
+        "Payroll-Calculate-Accruing-Time-Off-Hours-Request",
     });
   });
 
@@ -159,12 +128,13 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse$inboun
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Accruing-Time-Off-Hour-Object": AccruingTimeOffHourObject$inboundSchema
-      .optional(),
+    "Payroll-Calculate-Accruing-Time-Off-Hours-Response":
+      PayrollCalculateAccruingTimeOffHoursResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Accruing-Time-Off-Hour-Object": "accruingTimeOffHourObject",
+      "Payroll-Calculate-Accruing-Time-Off-Hours-Response":
+        "payrollCalculateAccruingTimeOffHoursResponse",
     });
   });
 

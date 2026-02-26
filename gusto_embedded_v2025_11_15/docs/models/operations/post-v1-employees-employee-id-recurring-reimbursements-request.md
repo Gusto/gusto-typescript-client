@@ -1,0 +1,24 @@
+# PostV1EmployeesEmployeeIdRecurringReimbursementsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1EmployeesEmployeeIdRecurringReimbursementsRequest } from "openapi/models/operations";
+
+let value: PostV1EmployeesEmployeeIdRecurringReimbursementsRequest = {
+  employeeId: "<id>",
+  body: {
+    description:
+      "duh preclude unearth dishonor bravely freely mouser oof only but",
+    amount: 464.55,
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1EmployeesEmployeeIdRecurringReimbursementsXGustoAPIVersion](../../models/operations/post-v1-employees-employee-id-recurring-reimbursements-x-gusto-api-version.md)                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `employeeId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `body`                                                                                                                                                                                                                       | [operations.PostV1EmployeesEmployeeIdRecurringReimbursementsRequestBody](../../models/operations/post-v1-employees-employee-id-recurring-reimbursements-request-body.md)                                                     | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

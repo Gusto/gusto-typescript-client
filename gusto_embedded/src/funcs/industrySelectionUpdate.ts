@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,7 +41,13 @@ import { Result } from "../types/fp.js";
  * Update a company industry selection
  *
  * @remarks
- * Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
+ * Update the industry classification for a company by passing in a [NAICS code](https://www.naics.com).
+ *
+ * Optionally provide an industry title and [SIC codes](https://siccode.com/). If you do not provide SIC codes,
+ * we will use the NAICS code to perform an internal lookup.
+ *
+ * Our UI leverages [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry
+ * classification codes.
  *
  * scope: `companies:write`
  */
@@ -48,6 +58,7 @@ export function industrySelectionUpdate(
 ): APIPromise<
   Result<
     PutV1CompanyIndustryResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +85,7 @@ async function $do(
   [
     Result<
       PutV1CompanyIndustryResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -96,7 +108,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON(
+    "body",
+    payload["Company-Industry-Selection-Required-Body"],
+    { explode: true },
+  );
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -172,6 +188,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompanyIndustryResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -185,8 +202,9 @@ async function $do(
     M.json(201, PutV1CompanyIndustryResponse$inboundSchema, {
       key: "Industry",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

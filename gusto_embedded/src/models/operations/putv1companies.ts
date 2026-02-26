@@ -5,17 +5,27 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { Company, Company$inboundSchema } from "../components/company.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompaniesHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompaniesHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1CompaniesHeaderXGustoAPIVersion
+>;
 
 export type PutV1CompaniesRequestBody = {
   /**
@@ -32,17 +42,23 @@ export type PutV1CompaniesRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?: PutV1CompaniesHeaderXGustoAPIVersion | undefined;
   requestBody: PutV1CompaniesRequestBody;
 };
 
 export type PutV1CompaniesResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   company?: Company | undefined;
 };
+
+/** @internal */
+export const PutV1CompaniesHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1CompaniesHeaderXGustoAPIVersion> = z.nativeEnum(
+    PutV1CompaniesHeaderXGustoAPIVersion,
+  );
 
 /** @internal */
 export type PutV1CompaniesRequestBody$Outbound = {
@@ -84,7 +100,9 @@ export const PutV1CompaniesRequest$outboundSchema: z.ZodType<
   PutV1CompaniesRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion: PutV1CompaniesHeaderXGustoAPIVersion$outboundSchema.default(
+    "2025-06-15",
+  ),
   requestBody: z.lazy(() => PutV1CompaniesRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

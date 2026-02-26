@@ -11,12 +11,12 @@ import { GustoEmbeddedCore } from "../core.js";
 import { eventsGet } from "../funcs/eventsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { SortOrder } from "../models/components/sortorder.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetEventsHeaderXGustoAPIVersion,
   GetEventsRequest,
   GetEventsResponse,
   GetEventsSecurity,
+  QueryParamSortOrder,
 } from "../models/operations/getevents.js";
 import { unwrapAsync } from "../types/fp.js";
 export type EventsGetQueryData = GetEventsResponse;
@@ -49,12 +49,12 @@ export function buildEventsGetQuery(
 } {
   return {
     queryKey: queryKeyEventsGet({
+      xGustoAPIVersion: request.xGustoAPIVersion,
       startingAfterUuid: request.startingAfterUuid,
       resourceUuid: request.resourceUuid,
       limit: request.limit,
       eventType: request.eventType,
       sortOrder: request.sortOrder,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function eventsGetQueryFn(ctx): Promise<EventsGetQueryData> {
       const sig = combineSignals(
@@ -80,12 +80,12 @@ export function buildEventsGetQuery(
 
 export function queryKeyEventsGet(
   parameters: {
+    xGustoAPIVersion?: GetEventsHeaderXGustoAPIVersion | undefined;
     startingAfterUuid?: string | undefined;
     resourceUuid?: string | undefined;
     limit?: string | undefined;
     eventType?: string | undefined;
-    sortOrder?: SortOrder | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    sortOrder?: QueryParamSortOrder | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Events", "get", parameters];

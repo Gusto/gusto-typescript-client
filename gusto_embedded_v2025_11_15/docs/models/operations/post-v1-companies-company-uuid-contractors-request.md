@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyUuidContractorsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyUuidContractorsRequest } from "openapi/models/operations";
+
+let value: PostV1CompaniesCompanyUuidContractorsRequest = {
+  companyUuid: "<id>",
+  body: {
+    wageType: "Fixed",
+    startDate: "2020-01-11",
+    hourlyRate: "40.0",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [models.VersionHeader](../../models/version-header.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PostV1CompaniesCompanyUuidContractorsRequestBody](../../models/operations/post-v1-companies-company-uuid-contractors-request-body.md)                                                                            | :heavy_check_mark:                                                                                                                                                                                                           | Create an individual or business contractor.                                                                                                                                                                                 |

@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyIdPaySchedulesRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdPaySchedulesRequest } from "openapi/models/operations";
+
+let value: PostV1CompaniesCompanyIdPaySchedulesRequest = {
+  companyId: "<id>",
+  body: {
+    frequency: "Every week",
+    anchorPayDate: "2020-05-15",
+    anchorEndOfPayPeriod: "2020-05-08",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyId`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [models.VersionHeader](../../models/version-header.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PostV1CompaniesCompanyIdPaySchedulesRequestBody](../../models/operations/post-v1-companies-company-id-pay-schedules-request-body.md)                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

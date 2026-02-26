@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -38,6 +42,7 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+ *
  * - `processed` is `true`
  * - Current time is earlier than 4pm PT on the `payroll_deadline`
  *
@@ -50,6 +55,7 @@ export function payrollsCancel(
 ): APIPromise<
   Result<
     PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -76,6 +82,7 @@ async function $do(
   [
     Result<
       PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -179,6 +186,7 @@ async function $do(
 
   const [result] = await M.match<
     PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -192,10 +200,11 @@ async function $do(
     M.json(
       200,
       PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse$inboundSchema,
-      { key: "Payroll" },
+      { key: "Unprocessed-Payroll" },
     ),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

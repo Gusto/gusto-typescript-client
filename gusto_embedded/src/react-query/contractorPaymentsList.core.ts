@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorPaymentsList } from "../funcs/contractorPaymentsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdContractorPaymentsRequest,
   GetV1CompaniesCompanyIdContractorPaymentsResponse,
 } from "../models/operations/getv1companiescompanyidcontractorpayments.js";
@@ -47,13 +47,13 @@ export function buildContractorPaymentsListQuery(
 } {
   return {
     queryKey: queryKeyContractorPaymentsList(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       startDate: request.startDate,
       endDate: request.endDate,
       contractorUuid: request.contractorUuid,
       groupByDate: request.groupByDate,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function contractorPaymentsListQueryFn(
       ctx,
@@ -81,13 +81,15 @@ export function buildContractorPaymentsListQuery(
 export function queryKeyContractorPaymentsList(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+      | undefined;
     startDate: string;
     endDate: string;
     contractorUuid?: string | undefined;
     groupByDate?: boolean | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return [

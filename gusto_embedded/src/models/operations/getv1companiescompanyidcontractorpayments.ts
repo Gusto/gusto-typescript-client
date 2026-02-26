@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   ContractorPaymentSummary,
@@ -18,13 +19,29 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion =
+  ClosedEnum<
+    typeof GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+  >;
+
 export type GetV1CompaniesCompanyIdContractorPaymentsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
@@ -53,10 +70,6 @@ export type GetV1CompaniesCompanyIdContractorPaymentsRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 /**
@@ -78,7 +91,16 @@ export type GetV1CompaniesCompanyIdContractorPaymentsResponse = {
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion
+  > = z.nativeEnum(
+    GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion,
+  );
+
+/** @internal */
 export type GetV1CompaniesCompanyIdContractorPaymentsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_id: string;
   start_date: string;
   end_date: string;
@@ -86,7 +108,6 @@ export type GetV1CompaniesCompanyIdContractorPaymentsRequest$Outbound = {
   group_by_date?: boolean | undefined;
   page?: number | undefined;
   per?: number | undefined;
-  "X-Gusto-API-Version": string;
 };
 
 /** @internal */
@@ -96,6 +117,9 @@ export const GetV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdContractorPaymentsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyIdContractorPaymentsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyId: z.string(),
     startDate: z.string(),
     endDate: z.string(),
@@ -103,15 +127,14 @@ export const GetV1CompaniesCompanyIdContractorPaymentsRequest$outboundSchema:
     groupByDate: z.boolean().optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyId: "company_id",
       startDate: "start_date",
       endDate: "end_date",
       contractorUuid: "contractor_uuid",
       groupByDate: "group_by_date",
-      xGustoAPIVersion: "X-Gusto-API-Version",
     });
   });
 

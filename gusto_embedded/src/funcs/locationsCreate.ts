@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,9 +41,11 @@ import { Result } from "../types/fp.js";
  * Create a company location
  *
  * @remarks
- * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+ * Create a company location, which represents any address associated with a company: mailing
+ * addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
- * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+ * Since all company locations are subsets of locations, use the Locations endpoints to
+ * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
  *
  * scope: `companies:write`
  */
@@ -50,6 +56,7 @@ export function locationsCreate(
 ): APIPromise<
   Result<
     PostV1CompaniesCompanyIdLocationsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -76,6 +83,7 @@ async function $do(
   [
     Result<
       PostV1CompaniesCompanyIdLocationsResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -99,7 +107,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Company-Location-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_id: encodeSimple("company_id", payload.company_id, {
@@ -173,6 +183,7 @@ async function $do(
 
   const [result] = await M.match<
     PostV1CompaniesCompanyIdLocationsResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -186,8 +197,9 @@ async function $do(
     M.json(201, PostV1CompaniesCompanyIdLocationsResponse$inboundSchema, {
       key: "Location",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

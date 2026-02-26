@@ -1,0 +1,22 @@
+# InformationRequest
+
+Representation of an information request
+
+## Example Usage
+
+```typescript
+import { InformationRequest } from "openapi/models";
+
+let value: InformationRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `uuid`                                                                                                                     | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | Unique identifier of an information request                                                                                |
+| `companyUuid`                                                                                                              | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | Unique identifier of the company to which the information requests belongs                                                 |
+| `type`                                                                                                                     | [models.InformationRequestType](../models/information-request-type.md)                                                     | :heavy_minus_sign:                                                                                                         | The type of information request                                                                                            |
+| `status`                                                                                                                   | [models.InformationRequestStatus](../models/information-request-status.md)                                                 | :heavy_minus_sign:                                                                                                         | The status of the information request                                                                                      |
+| `blockingPayroll`                                                                                                          | *boolean*                                                                                                                  | :heavy_minus_sign:                                                                                                         | If true, this information request is blocking payroll, and may require response or requires review from our Risk Ops team. |
+| `requiredQuestions`                                                                                                        | [models.RequiredQuestion](../models/required-question.md)[]                                                                | :heavy_minus_sign:                                                                                                         | The list of required questions for the information request                                                                 |

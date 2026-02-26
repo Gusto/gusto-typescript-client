@@ -6,10 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import {
-  CompanyFormsSortBy,
-  CompanyFormsSortBy$outboundSchema,
-} from "../components/companyformssortby.js";
 import { Form, Form$inboundSchema } from "../components/form.js";
 import {
   HTTPMetadata,
@@ -27,9 +23,9 @@ export type GetV1CompanyFormsRequest = {
    */
   companyId: string;
   /**
-   * Sort company forms. Options: name, year, quarter, draft, document_content_type
+   * Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at (optionally with :asc or :desc suffix)
    */
-  sortBy?: CompanyFormsSortBy | undefined;
+  sortBy?: string | undefined;
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
@@ -58,7 +54,7 @@ export const GetV1CompanyFormsRequest$outboundSchema: z.ZodType<
   GetV1CompanyFormsRequest
 > = z.object({
   companyId: z.string(),
-  sortBy: CompanyFormsSortBy$outboundSchema.optional(),
+  sortBy: z.string().optional(),
   xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
 }).transform((v) => {
   return remap$(v, {

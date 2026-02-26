@@ -82,14 +82,14 @@ export type PayrollEmployeeCompensationsTypePaidTimeOff = {
 };
 
 /**
- * The amount type of the deduction for the pay period.
+ * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
  */
 export const AmountType = {
   Fixed: "fixed",
   Percent: "percent",
 } as const;
 /**
- * The amount type of the deduction for the pay period.
+ * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
  */
 export type AmountType = ClosedEnum<typeof AmountType>;
 
@@ -106,11 +106,11 @@ export type Deductions = {
    */
   amount?: number | undefined;
   /**
-   * The amount type of the deduction for the pay period.
+   * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
    */
   amountType?: AmountType | undefined;
   /**
-   * The UUID of the deduction. This parameter is optional and can be provided in order to update an existing deduction.
+   * The UUID of the deduction. Only present for calculated or processed payrolls.
    */
   uuid?: string | undefined;
 };

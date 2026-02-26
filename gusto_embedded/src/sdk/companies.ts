@@ -108,6 +108,7 @@ export class Companies extends ClientSDK {
    *
    * @remarks
    * Get a company.
+   *
    * The employees:read scope is required to return home_address and non-work locations.
    * The company_admin:read scope is required to return primary_payroll_admin.
    * The signatories:read scope is required to return primary_signatory.
@@ -272,11 +273,11 @@ export class Companies extends ClientSDK {
   }
 
   /**
-   * Get the company's onboarding status
+   * Get company onboarding status
    *
    * @remarks
-   * Get company's onboarding status.
-   * The data returned helps inform the required onboarding steps and respective completion status.
+   * Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+   * required onboarding steps with their respective completion state.
    *
    * scope: `company_onboarding_status:read`
    */
@@ -295,11 +296,13 @@ export class Companies extends ClientSDK {
    * Finish company onboarding
    *
    * @remarks
-   * Finalize a given company's onboarding process.
+   * Finalize a company's onboarding process.
    *
    * ### Approve a company in demo
-   * After a company is finished onboarding, Gusto requires an additional step to review and approve that company. The company onboarding status is `"onboarding_completed": false`, until the API call is made to finish company onboarding.
-   * In production environments, this step is required for risk-analysis purposes.
+   *
+   * After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
+   * The company onboarding status is "onboarding_completed": false, until the API call is made to finish company
+   * onboarding. In production environments, this step is required for risk-analysis purposes.
    *
    * We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
    *

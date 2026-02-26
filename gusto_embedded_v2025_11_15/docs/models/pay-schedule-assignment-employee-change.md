@@ -1,0 +1,20 @@
+# PayScheduleAssignmentEmployeeChange
+
+## Example Usage
+
+```typescript
+import { PayScheduleAssignmentEmployeeChange } from "openapi/models";
+
+let value: PayScheduleAssignmentEmployeeChange = {};
+```
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `employeeUuid`                                                                                                | *string*                                                                                                      | :heavy_minus_sign:                                                                                            | The UUID of the employee.                                                                                     |
+| `firstName`                                                                                                   | *string*                                                                                                      | :heavy_minus_sign:                                                                                            | The employee's first name.                                                                                    |
+| `lastName`                                                                                                    | *string*                                                                                                      | :heavy_minus_sign:                                                                                            | The employee's last name.                                                                                     |
+| `payFrequency`                                                                                                | *string*                                                                                                      | :heavy_minus_sign:                                                                                            | New pay schedule frequency and name.                                                                          |
+| `firstPayPeriod`                                                                                              | [models.PayScheduleAssignmentPayPeriod](../models/pay-schedule-assignment-pay-period.md)                      | :heavy_minus_sign:                                                                                            | Pay schedule assignment first pay period information.                                                         |
+| `transitionPayPeriod`                                                                                         | [models.PayScheduleAssignmentTransitionPayPeriod](../models/pay-schedule-assignment-transition-pay-period.md) | :heavy_minus_sign:                                                                                            | Pay schedule assignment transition pay period information.                                                    |

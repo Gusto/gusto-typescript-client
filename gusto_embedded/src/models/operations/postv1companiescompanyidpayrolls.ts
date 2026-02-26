@@ -87,7 +87,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody = {
   /**
    * A list of employee uuids to include on the payroll.
    */
-  employeeUuids?: Array<string> | undefined;
+  employeeUuids?: Array<string> | null | undefined;
   /**
    * Payment date.
    */
@@ -127,7 +127,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequest = {
 export type PostV1CompaniesCompanyIdPayrollsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * successful
+   * Successful
    */
   payrollPrepared?: PayrollPrepared | undefined;
 };
@@ -155,7 +155,7 @@ export type PostV1CompaniesCompanyIdPayrollsRequestBody$Outbound = {
   start_date: string;
   end_date: string;
   pay_schedule_uuid?: string | undefined;
-  employee_uuids?: Array<string> | undefined;
+  employee_uuids?: Array<string> | null | undefined;
   check_date?: string | undefined;
   withholding_pay_period?: string | undefined;
   skip_regular_deductions?: boolean | undefined;
@@ -175,7 +175,7 @@ export const PostV1CompaniesCompanyIdPayrollsRequestBody$outboundSchema:
     startDate: z.instanceof(RFCDate).transform(v => v.toString()),
     endDate: z.instanceof(RFCDate).transform(v => v.toString()),
     payScheduleUuid: z.string().optional(),
-    employeeUuids: z.array(z.string()).optional(),
+    employeeUuids: z.nullable(z.array(z.string())).optional(),
     checkDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
     withholdingPayPeriod: WithholdingPayPeriod$outboundSchema.optional(),
     skipRegularDeductions: z.boolean().optional(),

@@ -18,7 +18,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFiveMinus11Minus15: "2025-11-15",
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -42,15 +42,13 @@ export type BatchAction = ClosedEnum<typeof BatchAction>;
 /**
  * The type of entity to create
  */
-export const PostV1CompaniesCompanyIdPeopleBatchesEntityType = {
+export const EntityType = {
   Employee: "employee",
 } as const;
 /**
  * The type of entity to create
  */
-export type PostV1CompaniesCompanyIdPeopleBatchesEntityType = ClosedEnum<
-  typeof PostV1CompaniesCompanyIdPeopleBatchesEntityType
->;
+export type EntityType = ClosedEnum<typeof EntityType>;
 
 export type Person = {
   /**
@@ -306,7 +304,7 @@ export type Batch = {
   /**
    * The type of entity to create
    */
-  entityType: PostV1CompaniesCompanyIdPeopleBatchesEntityType;
+  entityType: EntityType;
   person: Person;
   /**
    * Home address for the employee
@@ -402,9 +400,8 @@ export const BatchAction$outboundSchema: z.ZodNativeEnum<typeof BatchAction> = z
   .nativeEnum(BatchAction);
 
 /** @internal */
-export const PostV1CompaniesCompanyIdPeopleBatchesEntityType$outboundSchema:
-  z.ZodNativeEnum<typeof PostV1CompaniesCompanyIdPeopleBatchesEntityType> = z
-    .nativeEnum(PostV1CompaniesCompanyIdPeopleBatchesEntityType);
+export const EntityType$outboundSchema: z.ZodNativeEnum<typeof EntityType> = z
+  .nativeEnum(EntityType);
 
 /** @internal */
 export type Person$Outbound = {
@@ -704,7 +701,7 @@ export const Batch$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Batch
 > = z.object({
-  entityType: PostV1CompaniesCompanyIdPeopleBatchesEntityType$outboundSchema,
+  entityType: EntityType$outboundSchema,
   person: z.lazy(() => Person$outboundSchema),
   homeAddress: z.lazy(() =>
     PostV1CompaniesCompanyIdPeopleBatchesHomeAddress$outboundSchema
@@ -782,7 +779,7 @@ export const PostV1CompaniesCompanyIdPeopleBatchesRequest$outboundSchema:
     companyId: z.string(),
     xGustoAPIVersion:
       PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion$outboundSchema
-        .default("2025-11-15"),
+        .default("2025-06-15"),
     requestBody: z.lazy(() =>
       PostV1CompaniesCompanyIdPeopleBatchesRequestBody$outboundSchema
     ),

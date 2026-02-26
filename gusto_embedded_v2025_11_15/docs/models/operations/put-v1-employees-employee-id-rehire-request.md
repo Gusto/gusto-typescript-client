@@ -1,0 +1,25 @@
+# PutV1EmployeesEmployeeIdRehireRequest
+
+## Example Usage
+
+```typescript
+import { PutV1EmployeesEmployeeIdRehireRequest } from "openapi/models/operations";
+
+let value: PutV1EmployeesEmployeeIdRehireRequest = {
+  employeeId: "<id>",
+  body: {
+    version: "56d00c178bc7393b2a206ed6a86afcb4",
+    effectiveDate: "<value>",
+    fileNewHireReport: true,
+    workLocationUuid: "<id>",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `employeeId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [models.VersionHeader](../../models/version-header.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `body`                                                                                                                                                                                                                       | [operations.PutV1EmployeesEmployeeIdRehireRequestBody](../../models/operations/put-v1-employees-employee-id-rehire-request-body.md)                                                                                          | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

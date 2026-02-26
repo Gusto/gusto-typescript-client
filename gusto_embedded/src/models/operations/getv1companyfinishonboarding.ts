@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   CompanyOnboardingStatus,
@@ -14,11 +15,20 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion = ClosedEnum<
+  typeof GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion
+>;
 
 export type GetV1CompanyFinishOnboardingRequest = {
   /**
@@ -28,16 +38,23 @@ export type GetV1CompanyFinishOnboardingRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
+  xGustoAPIVersion?:
+    | GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion
+    | undefined;
 };
 
 export type GetV1CompanyFinishOnboardingResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Success
    */
   companyOnboardingStatus?: CompanyOnboardingStatus | undefined;
 };
+
+/** @internal */
+export const GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion> = z
+    .nativeEnum(GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion);
 
 /** @internal */
 export type GetV1CompanyFinishOnboardingRequest$Outbound = {
@@ -52,7 +69,10 @@ export const GetV1CompanyFinishOnboardingRequest$outboundSchema: z.ZodType<
   GetV1CompanyFinishOnboardingRequest
 > = z.object({
   companyUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
+  xGustoAPIVersion:
+    GetV1CompanyFinishOnboardingHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
 }).transform((v) => {
   return remap$(v, {
     companyUuid: "company_uuid",

@@ -35,9 +35,11 @@ export class Locations extends ClientSDK {
    * Create a company location
    *
    * @remarks
-   * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+   * Create a company location, which represents any address associated with a company: mailing
+   * addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
    *
-   * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+   * Since all company locations are subsets of locations, use the Locations endpoints to
+   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
    *
    * scope: `companies:write`
    */
@@ -53,12 +55,14 @@ export class Locations extends ClientSDK {
   }
 
   /**
-   * Get company locations
+   * Get all company locations
    *
    * @remarks
-   * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+   * Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+   * addresses, or work locations. A single address may serve multiple, or all, purposes.
    *
-   * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+   * Since all company locations are subsets of locations, use the Locations endpoints to
+   * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
    *
    * scope: `companies:read`
    */

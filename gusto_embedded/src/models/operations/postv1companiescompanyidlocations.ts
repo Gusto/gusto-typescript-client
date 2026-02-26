@@ -5,114 +5,65 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import {
+  CompanyLocationRequest,
+  CompanyLocationRequest$Outbound,
+  CompanyLocationRequest$outboundSchema,
+} from "../components/companylocationrequest.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import { Location, Location$inboundSchema } from "../components/location.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Create a company location.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type PostV1CompaniesCompanyIdLocationsRequestBody = {
-  phoneNumber: string;
-  street1: string;
-  street2?: string | null | undefined;
-  city: string;
-  state: string;
-  zip: string;
-  /**
-   * Specify if this location is the company's mailing address.
-   */
-  mailingAddress?: boolean | undefined;
-  /**
-   * Specify if this location is the company's filing address.
-   */
-  filingAddress?: boolean | undefined;
-};
+export const PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion>;
 
 export type PostV1CompaniesCompanyIdLocationsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  /**
-   * Create a company location.
-   */
-  requestBody: PostV1CompaniesCompanyIdLocationsRequestBody;
+  companyLocationRequest: CompanyLocationRequest;
 };
 
 export type PostV1CompaniesCompanyIdLocationsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
   location?: Location | undefined;
 };
 
 /** @internal */
-export type PostV1CompaniesCompanyIdLocationsRequestBody$Outbound = {
-  phone_number: string;
-  street_1: string;
-  street_2?: string | null | undefined;
-  city: string;
-  state: string;
-  zip: string;
-  mailing_address?: boolean | undefined;
-  filing_address?: boolean | undefined;
-};
-
-/** @internal */
-export const PostV1CompaniesCompanyIdLocationsRequestBody$outboundSchema:
-  z.ZodType<
-    PostV1CompaniesCompanyIdLocationsRequestBody$Outbound,
-    z.ZodTypeDef,
-    PostV1CompaniesCompanyIdLocationsRequestBody
-  > = z.object({
-    phoneNumber: z.string(),
-    street1: z.string(),
-    street2: z.nullable(z.string()).optional(),
-    city: z.string(),
-    state: z.string(),
-    zip: z.string(),
-    mailingAddress: z.boolean().optional(),
-    filingAddress: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      phoneNumber: "phone_number",
-      street1: "street_1",
-      street2: "street_2",
-      mailingAddress: "mailing_address",
-      filingAddress: "filing_address",
-    });
-  });
-
-export function postV1CompaniesCompanyIdLocationsRequestBodyToJSON(
-  postV1CompaniesCompanyIdLocationsRequestBody:
-    PostV1CompaniesCompanyIdLocationsRequestBody,
-): string {
-  return JSON.stringify(
-    PostV1CompaniesCompanyIdLocationsRequestBody$outboundSchema.parse(
-      postV1CompaniesCompanyIdLocationsRequestBody,
-    ),
-  );
-}
+export const PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
+  > = z.nativeEnum(PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PostV1CompaniesCompanyIdLocationsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PostV1CompaniesCompanyIdLocationsRequestBody$Outbound;
+  company_id: string;
+  "Company-Location-Request": CompanyLocationRequest$Outbound;
 };
 
 /** @internal */
@@ -121,16 +72,16 @@ export const PostV1CompaniesCompanyIdLocationsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV1CompaniesCompanyIdLocationsRequest
 > = z.object({
+  xGustoAPIVersion:
+    PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion$outboundSchema
+      .default("2025-06-15"),
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PostV1CompaniesCompanyIdLocationsRequestBody$outboundSchema
-  ),
+  companyLocationRequest: CompanyLocationRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyId: "company_id",
+    companyLocationRequest: "Company-Location-Request",
   });
 });
 

@@ -1,0 +1,25 @@
+# PostCompaniesCompanyUuidSuspensionsRequest
+
+## Example Usage
+
+```typescript
+import { PostCompaniesCompanyUuidSuspensionsRequest } from "openapi/models/operations";
+
+let value: PostCompaniesCompanyUuidSuspensionsRequest = {
+  companyUuid: "<id>",
+  body: {
+    fileQuarterlyForms: true,
+    fileYearlyForms: false,
+    reconcileTaxMethod: "pay_taxes",
+    reason: "shutting_down",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostCompaniesCompanyUuidSuspensionsXGustoAPIVersion](../../models/operations/post-companies-company-uuid-suspensions-x-gusto-api-version.md)                                                                     | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyUuid`                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `body`                                                                                                                                                                                                                       | [operations.PostCompaniesCompanyUuidSuspensionsRequestBody](../../models/operations/post-companies-company-uuid-suspensions-request-body.md)                                                                                 | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

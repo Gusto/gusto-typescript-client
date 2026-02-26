@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type LocationsCreateMutationData =
   PostV1CompaniesCompanyIdLocationsResponse;
 
 export type LocationsCreateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -53,9 +55,11 @@ export type LocationsCreateMutationError =
  * Create a company location
  *
  * @remarks
- * Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+ * Create a company location, which represents any address associated with a company: mailing
+ * addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
- * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+ * Since all company locations are subsets of locations, use the Locations endpoints to
+ * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
  *
  * scope: `companies:write`
  */

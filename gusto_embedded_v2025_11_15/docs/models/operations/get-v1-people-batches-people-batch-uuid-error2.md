@@ -1,0 +1,18 @@
+# GetV1PeopleBatchesPeopleBatchUuidError2
+
+## Example Usage
+
+```typescript
+import { GetV1PeopleBatchesPeopleBatchUuidError2 } from "openapi/models/operations";
+
+let value: GetV1PeopleBatchesPeopleBatchUuidError2 = {};
+```
+
+## Fields
+
+| Field                                                                                                                             | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `errorKey`                                                                                                                        | *string*                                                                                                                          | :heavy_minus_sign:                                                                                                                | The key identifying the error source                                                                                              |
+| `category`                                                                                                                        | *string*                                                                                                                          | :heavy_minus_sign:                                                                                                                | The error category                                                                                                                |
+| `message`                                                                                                                         | *string*                                                                                                                          | :heavy_minus_sign:                                                                                                                | Human-readable error message                                                                                                      |
+| `errors`                                                                                                                          | [operations.GetV1PeopleBatchesPeopleBatchUuidError1](../../models/operations/get-v1-people-batches-people-batch-uuid-error1.md)[] | :heavy_minus_sign:                                                                                                                | Nested errors for sub-operations                                                                                                  |

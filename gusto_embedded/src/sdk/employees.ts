@@ -232,10 +232,14 @@ export class Employees extends ClientSDK {
   }
 
   /**
-   * Update an employee's onboarding documents config
+   * Update employee onboarding documents config
    *
    * @remarks
    * Indicate whether to include the Form I-9 for an employee during the onboarding process.
+   * If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+   *
+   * ## Related guides
+   * - [Employee onboarding](doc:employee-onboarding)
    *
    * scope: `employees:manage`
    */

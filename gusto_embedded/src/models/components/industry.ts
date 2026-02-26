@@ -8,12 +8,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Example response
- */
 export type Industry = {
   /**
-   * Company uuid
+   * Company UUID
    */
   companyUuid?: string | undefined;
   /**
@@ -21,7 +18,7 @@ export type Industry = {
    */
   naicsCode?: string | null | undefined;
   /**
-   * A list of Standard Industrial Classification (SIC) codes, which are four digit number that categorize the industries that companies belong to based on their business activities.
+   * A list of Standard Industrial Classification (SIC) codes, which are four digit numbers that categorize the industries that companies belong to based on their business activities. If sic_codes is not passed in, we will perform an internal lookup with `naics_code`.
    */
   sicCodes?: Array<string> | undefined;
   /**

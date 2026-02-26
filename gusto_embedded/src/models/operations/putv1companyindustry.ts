@@ -5,32 +5,32 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import {
+  CompanyIndustrySelectionRequiredBody,
+  CompanyIndustrySelectionRequiredBody$Outbound,
+  CompanyIndustrySelectionRequiredBody$outboundSchema,
+} from "../components/companyindustryselectionrequiredbody.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
 import { Industry, Industry$inboundSchema } from "../components/industry.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type PutV1CompanyIndustryRequestBody = {
-  /**
-   * Industry title
-   */
-  title?: string | undefined;
-  /**
-   * North American Industry Classification System (NAICS) is used to classify businesses with a six digit number based on the primary type of work the business performs
-   */
-  naicsCode: string;
-  /**
-   * A list of Standard Industrial Classification (SIC) codes, which are four digit number that categorize the industries that companies belong to based on their business activities. If sic_codes is not passed in, we will perform an internal lookup with naics_code.
-   */
-  sicCodes?: Array<string> | undefined;
-};
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const PutV1CompanyIndustryHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type PutV1CompanyIndustryHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1CompanyIndustryHeaderXGustoAPIVersion
+>;
 
 export type PutV1CompanyIndustryRequest = {
   /**
@@ -40,56 +40,29 @@ export type PutV1CompanyIndustryRequest = {
   /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1CompanyIndustryRequestBody;
+  xGustoAPIVersion?: PutV1CompanyIndustryHeaderXGustoAPIVersion | undefined;
+  companyIndustrySelectionRequiredBody: CompanyIndustrySelectionRequiredBody;
 };
 
 export type PutV1CompanyIndustryResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Created
    */
   industry?: Industry | undefined;
 };
 
 /** @internal */
-export type PutV1CompanyIndustryRequestBody$Outbound = {
-  title?: string | undefined;
-  naics_code: string;
-  sic_codes?: Array<string> | undefined;
-};
-
-/** @internal */
-export const PutV1CompanyIndustryRequestBody$outboundSchema: z.ZodType<
-  PutV1CompanyIndustryRequestBody$Outbound,
-  z.ZodTypeDef,
-  PutV1CompanyIndustryRequestBody
-> = z.object({
-  title: z.string().optional(),
-  naicsCode: z.string(),
-  sicCodes: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    naicsCode: "naics_code",
-    sicCodes: "sic_codes",
-  });
-});
-
-export function putV1CompanyIndustryRequestBodyToJSON(
-  putV1CompanyIndustryRequestBody: PutV1CompanyIndustryRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1CompanyIndustryRequestBody$outboundSchema.parse(
-      putV1CompanyIndustryRequestBody,
-    ),
-  );
-}
+export const PutV1CompanyIndustryHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1CompanyIndustryHeaderXGustoAPIVersion> = z
+    .nativeEnum(PutV1CompanyIndustryHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1CompanyIndustryRequest$Outbound = {
   company_id: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1CompanyIndustryRequestBody$Outbound;
+  "Company-Industry-Selection-Required-Body":
+    CompanyIndustrySelectionRequiredBody$Outbound;
 };
 
 /** @internal */
@@ -99,13 +72,16 @@ export const PutV1CompanyIndustryRequest$outboundSchema: z.ZodType<
   PutV1CompanyIndustryRequest
 > = z.object({
   companyId: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() => PutV1CompanyIndustryRequestBody$outboundSchema),
+  xGustoAPIVersion: PutV1CompanyIndustryHeaderXGustoAPIVersion$outboundSchema
+    .default("2025-06-15"),
+  companyIndustrySelectionRequiredBody:
+    CompanyIndustrySelectionRequiredBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     companyId: "company_id",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    companyIndustrySelectionRequiredBody:
+      "Company-Industry-Selection-Required-Body",
   });
 });
 

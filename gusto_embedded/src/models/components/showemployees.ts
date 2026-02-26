@@ -29,9 +29,6 @@ import { Job, Job$inboundSchema } from "./job.js";
 import { PaidTimeOff, PaidTimeOff$inboundSchema } from "./paidtimeoff.js";
 import { Termination, Termination$inboundSchema } from "./termination.js";
 
-/**
- * The current onboarding status of the employee
- */
 export const OnboardingStatus = {
   OnboardingCompleted: "onboarding_completed",
   AdminOnboardingIncomplete: "admin_onboarding_incomplete",
@@ -42,9 +39,6 @@ export const OnboardingStatus = {
   SelfOnboardingCompletedByEmployee: "self_onboarding_completed_by_employee",
   SelfOnboardingAwaitingAdminReview: "self_onboarding_awaiting_admin_review",
 } as const;
-/**
- * The current onboarding status of the employee
- */
 export type OnboardingStatus = ClosedEnum<typeof OnboardingStatus>;
 
 /**
