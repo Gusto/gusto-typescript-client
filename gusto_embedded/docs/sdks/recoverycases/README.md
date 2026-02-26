@@ -15,7 +15,7 @@ scope: `recovery_cases:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-recovery-cases" method="get" path="/v1/companies/{company_uuid}/recovery_cases" -->
+<!-- UsageSnippet language="typescript" operationID="get-recovery-cases" method="get" path="/v1/companies/{company_uuid}/recovery_cases" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

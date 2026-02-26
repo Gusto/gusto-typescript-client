@@ -1,0 +1,19 @@
+# PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody
+
+## Example Usage
+
+```typescript
+import { PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody } from "@gusto/embedded-api-v2025-11-15/models/operations/putv1companiescompanyuuidholidaypaypolicyadd.js";
+
+let value: PutV1CompaniesCompanyUuidHolidayPayPolicyAddRequestBody = {
+  version: "56d00c178bc7393b2a206ed6a86afcb4",
+  employees: [],
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                             | Type                                                                                                                                                              | Required                                                                                                                                                          | Description                                                                                                                                                       | Example                                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `version`                                                                                                                                                         | *string*                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                | The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field. | 56d00c178bc7393b2a206ed6a86afcb4                                                                                                                                  |
+| `employees`                                                                                                                                                       | [operations.PutV1CompaniesCompanyUuidHolidayPayPolicyAddEmployees](../../models/operations/putv1companiescompanyuuidholidaypaypolicyaddemployees.md)[]            | :heavy_check_mark:                                                                                                                                                | An array of employee objects, each containing an employee_uuid.                                                                                                   |                                                                                                                                                                   |

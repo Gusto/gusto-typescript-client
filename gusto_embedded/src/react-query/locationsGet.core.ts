@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { locationsGet } from "../funcs/locationsGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyIdLocationsRequest,
   GetV1CompaniesCompanyIdLocationsResponse,
 } from "../models/operations/getv1companiescompanyidlocations.js";
@@ -44,9 +44,9 @@ export function buildLocationsGetQuery(
 } {
   return {
     queryKey: queryKeyLocationsGet(request.companyId, {
+      xGustoAPIVersion: request.xGustoAPIVersion,
       page: request.page,
       per: request.per,
-      xGustoAPIVersion: request.xGustoAPIVersion,
     }),
     queryFn: async function locationsGetQueryFn(
       ctx,
@@ -74,9 +74,11 @@ export function buildLocationsGetQuery(
 export function queryKeyLocationsGet(
   companyId: string,
   parameters: {
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
+      | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Locations", "get", companyId, parameters];

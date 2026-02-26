@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationData =
   PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursResponse;
 
 export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -56,10 +58,11 @@ export type TimeOffPoliciesCalculateAccruingTimeOffHoursMutationError =
  * Returns a list of accruing time off for each time off policy associated with the employee.
  *
  * Factors affecting the accrued hours:
- *   * the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
- *   * how many hours of work during this pay period
- *   * how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
- *   * company pay schedule frequency (for per pay period)
+ *
+ * - the time off policy accrual method (whether they get pay per hour worked, per hour paid, with / without overtime, accumulate time off based on pay period / calendar year / anniversary)
+ * - how many hours of work during this pay period
+ * - how many hours of PTO / sick hours taken during this pay period (for per hour paid policies only)
+ * - company pay schedule frequency (for per pay period)
  *
  * If none of the parameters is passed in, the accrued time off hour will be 0.
  *

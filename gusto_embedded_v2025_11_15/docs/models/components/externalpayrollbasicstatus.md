@@ -1,0 +1,17 @@
+# ExternalPayrollBasicStatus
+
+The status of the external payroll. The status will be `unprocessed` when the external payroll is created and transition to `processed` once tax liabilities are entered and finalized.  Once in the `processed` status all actions that can edit an external payroll will be disabled.
+
+## Example Usage
+
+```typescript
+import { ExternalPayrollBasicStatus } from "@gusto/embedded-api-v2025-11-15/models/components/externalpayrollbasic.js";
+
+let value: ExternalPayrollBasicStatus = "unprocessed";
+```
+
+## Values
+
+```typescript
+"unprocessed" | "processed"
+```

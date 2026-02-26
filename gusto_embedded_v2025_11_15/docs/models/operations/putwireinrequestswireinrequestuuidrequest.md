@@ -1,0 +1,24 @@
+# PutWireInRequestsWireInRequestUuidRequest
+
+## Example Usage
+
+```typescript
+import { PutWireInRequestsWireInRequestUuidRequest } from "@gusto/embedded-api-v2025-11-15/models/operations/putwireinrequestswireinrequestuuid.js";
+
+let value: PutWireInRequestsWireInRequestUuidRequest = {
+  wireInRequestUuid: "<id>",
+  requestBody: {
+    dateSent: "<value>",
+    bankName: "<value>",
+    amountSent: "<value>",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `wireInRequestUuid`                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the Wire In Request                                                                                                                                                                                              |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [components.VersionHeader](../../models/components/versionheader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [operations.PutWireInRequestsWireInRequestUuidRequestBody](../../models/operations/putwireinrequestswireinrequestuuidrequestbody.md)                                                                                         | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

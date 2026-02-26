@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -38,6 +39,7 @@ export type IndustrySelectionUpdateMutationVariables = {
 export type IndustrySelectionUpdateMutationData = PutV1CompanyIndustryResponse;
 
 export type IndustrySelectionUpdateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -52,7 +54,13 @@ export type IndustrySelectionUpdateMutationError =
  * Update a company industry selection
  *
  * @remarks
- * Update the company industry selection by passing in industry classification codes: [NAICS code](https://www.naics.com), [SICS code](https://siccode.com/) and industry title. Our UI is leveraging [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry classification codes.
+ * Update the industry classification for a company by passing in a [NAICS code](https://www.naics.com).
+ *
+ * Optionally provide an industry title and [SIC codes](https://siccode.com/). If you do not provide SIC codes,
+ * we will use the NAICS code to perform an internal lookup.
+ *
+ * Our UI leverages [Middesk API](https://docs.middesk.com/reference/introduction) to determine industry
+ * classification codes.
  *
  * scope: `companies:write`
  */

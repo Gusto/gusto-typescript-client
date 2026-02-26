@@ -19,9 +19,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1RecurringReimbursementsRequest,
   DeleteV1RecurringReimbursementsResponse,
@@ -39,7 +39,7 @@ export type ReimbursementsDeleteV1RecurringReimbursementsMutationData =
   DeleteV1RecurringReimbursementsResponse;
 
 export type ReimbursementsDeleteV1RecurringReimbursementsMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

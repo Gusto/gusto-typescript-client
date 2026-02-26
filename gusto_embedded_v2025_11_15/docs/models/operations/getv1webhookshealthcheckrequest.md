@@ -1,0 +1,15 @@
+# GetV1WebhooksHealthCheckRequest
+
+## Example Usage
+
+```typescript
+import { GetV1WebhooksHealthCheckRequest } from "@gusto/embedded-api-v2025-11-15/models/operations/getv1webhookshealthcheck.js";
+
+let value: GetV1WebhooksHealthCheckRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.GetV1WebhooksHealthCheckHeaderXGustoAPIVersion](../../models/operations/getv1webhookshealthcheckheaderxgustoapiversion.md)                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |

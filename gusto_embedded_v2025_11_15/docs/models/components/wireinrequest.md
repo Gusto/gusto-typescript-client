@@ -1,0 +1,33 @@
+# WireInRequest
+
+Representation of a wire in request
+
+## Example Usage
+
+```typescript
+import { WireInRequest } from "@gusto/embedded-api-v2025-11-15/models/components/wireinrequest.js";
+
+let value: WireInRequest = {};
+```
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `uuid`                                                                           | *string*                                                                         | :heavy_minus_sign:                                                               | Unique identifier of a wire in request                                           |
+| `status`                                                                         | [components.WireInRequestStatus](../../models/components/wireinrequeststatus.md) | :heavy_minus_sign:                                                               | Status of the wire in                                                            |
+| `originationBank`                                                                | *string*                                                                         | :heavy_minus_sign:                                                               | Name of bank receiving the wire in                                               |
+| `originationBankAddress`                                                         | *string*                                                                         | :heavy_minus_sign:                                                               | Address of bank receiving the wire in                                            |
+| `recipientName`                                                                  | *string*                                                                         | :heavy_minus_sign:                                                               | Name of the recipient of the wire In                                             |
+| `recipientAddress`                                                               | *string*                                                                         | :heavy_minus_sign:                                                               | Address of the recipient of the wire in                                          |
+| `recipientAccountNumber`                                                         | *string*                                                                         | :heavy_minus_sign:                                                               | Recipient bank account number                                                    |
+| `recipientRoutingNumber`                                                         | *string*                                                                         | :heavy_minus_sign:                                                               | Recipient bank routing number                                                    |
+| `additionalNotes`                                                                | *string*                                                                         | :heavy_minus_sign:                                                               | Notes for the wire in request                                                    |
+| `bankName`                                                                       | *string*                                                                         | :heavy_minus_sign:                                                               | Name of the bank initiating the wire in                                          |
+| `dateSent`                                                                       | *string*                                                                         | :heavy_minus_sign:                                                               | Date the wire in was sent                                                        |
+| `uniqueTrackingCode`                                                             | *string*                                                                         | :heavy_minus_sign:                                                               | Include in note with bank to track payment                                       |
+| `paymentType`                                                                    | [components.PaymentType](../../models/components/paymenttype.md)                 | :heavy_minus_sign:                                                               | Type of payment for the wire in                                                  |
+| `paymentUuid`                                                                    | *string*                                                                         | :heavy_minus_sign:                                                               | Unique identifier of the payment                                                 |
+| `amountSent`                                                                     | *string*                                                                         | :heavy_minus_sign:                                                               | Amount sent through wire in                                                      |
+| `requestedAmount`                                                                | *string*                                                                         | :heavy_minus_sign:                                                               | Requested amount for the payment                                                 |
+| `wireInDeadline`                                                                 | *string*                                                                         | :heavy_minus_sign:                                                               | Deadline to submit the wire in                                                   |

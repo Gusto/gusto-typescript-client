@@ -1,0 +1,24 @@
+# PostV1EmployeesEmployeeIdSalaryEstimatesRequest
+
+## Example Usage
+
+```typescript
+import { PostV1EmployeesEmployeeIdSalaryEstimatesRequest } from "@gusto/embedded-api-v2025-11-15/models/operations/postv1employeesemployeeidsalaryestimates.js";
+
+let value: PostV1EmployeesEmployeeIdSalaryEstimatesRequest = {
+  employeeId: "<id>",
+  requestBody: {
+    annualNetRevenue: 500000,
+    zipCode: "94107",
+    occupations: [],
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1EmployeesEmployeeIdSalaryEstimatesHeaderXGustoAPIVersion](../../models/operations/postv1employeesemployeeidsalaryestimatesheaderxgustoapiversion.md)                                                       | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `employeeId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `requestBody`                                                                                                                                                                                                                | [operations.PostV1EmployeesEmployeeIdSalaryEstimatesRequestBody](../../models/operations/postv1employeesemployeeidsalaryestimatesrequestbody.md)                                                                             | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

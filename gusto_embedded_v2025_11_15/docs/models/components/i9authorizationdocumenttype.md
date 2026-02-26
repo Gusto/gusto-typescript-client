@@ -1,0 +1,17 @@
+# I9AuthorizationDocumentType
+
+The document's document type
+
+## Example Usage
+
+```typescript
+import { I9AuthorizationDocumentType } from "@gusto/embedded-api-v2025-11-15/models/components/i9authorization.js";
+
+let value: I9AuthorizationDocumentType = "form_i94";
+```
+
+## Values
+
+```typescript
+"uscis_alien_registration_number" | "form_i94" | "foreign_passport"
+```

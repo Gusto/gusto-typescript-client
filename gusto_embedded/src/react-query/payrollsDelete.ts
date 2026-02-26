@@ -19,9 +19,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompaniesCompanyIdPayrollsRequest,
   DeleteV1CompaniesCompanyIdPayrollsResponse,
@@ -39,7 +39,7 @@ export type PayrollsDeleteMutationData =
   DeleteV1CompaniesCompanyIdPayrollsResponse;
 
 export type PayrollsDeleteMutationError =
-  | UnprocessableEntityErrorObject
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

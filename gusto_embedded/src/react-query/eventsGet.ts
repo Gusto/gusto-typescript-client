@@ -10,8 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SortOrder } from "../models/components/sortorder.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -22,9 +20,12 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
+  GetEventsHeaderXGustoAPIVersion,
   GetEventsRequest,
   GetEventsSecurity,
+  QueryParamSortOrder,
 } from "../models/operations/getevents.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -46,6 +47,7 @@ export {
 };
 
 export type EventsGetQueryError =
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -61,9 +63,9 @@ export type EventsGetQueryError =
  * @remarks
  * Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `events:read`
  */
@@ -90,9 +92,9 @@ export function useEventsGet(
  * @remarks
  * Fetch all events, going back up to 30 days, that your partner application has the required scopes for. Note that a partner does NOT have to have verified webhook subscriptions in order to utilize this endpoint.
  *
- * > 📘 System Access Authentication
- * >
- * > This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access).
+ * 📘 System Access Authentication
+ *
+ * This endpoint uses the [Bearer Auth scheme with the system-level access token in the HTTP Authorization header](https://docs.gusto.com/embedded-payroll/docs/system-access)
  *
  * scope: `events:read`
  */
@@ -117,12 +119,12 @@ export function setEventsGetData(
   client: QueryClient,
   queryKeyBase: [
     parameters: {
+      xGustoAPIVersion?: GetEventsHeaderXGustoAPIVersion | undefined;
       startingAfterUuid?: string | undefined;
       resourceUuid?: string | undefined;
       limit?: string | undefined;
       eventType?: string | undefined;
-      sortOrder?: SortOrder | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      sortOrder?: QueryParamSortOrder | undefined;
     },
   ],
   data: EventsGetQueryData,
@@ -136,12 +138,12 @@ export function invalidateEventsGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [parameters: {
+      xGustoAPIVersion?: GetEventsHeaderXGustoAPIVersion | undefined;
       startingAfterUuid?: string | undefined;
       resourceUuid?: string | undefined;
       limit?: string | undefined;
       eventType?: string | undefined;
-      sortOrder?: SortOrder | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      sortOrder?: QueryParamSortOrder | undefined;
     }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

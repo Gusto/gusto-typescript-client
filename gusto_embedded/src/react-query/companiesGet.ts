@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesRequest } from "../models/operations/getv1companies.js";
+import {
+  GetV1CompaniesRequest,
+  HeaderXGustoAPIVersion,
+} from "../models/operations/getv1companies.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type CompaniesGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -56,6 +60,7 @@ export type CompaniesGetQueryError =
  *
  * @remarks
  * Get a company.
+ *
  * The employees:read scope is required to return home_address and non-work locations.
  * The company_admin:read scope is required to return primary_payroll_admin.
  * The signatories:read scope is required to return primary_signatory.
@@ -82,6 +87,7 @@ export function useCompaniesGet(
  *
  * @remarks
  * Get a company.
+ *
  * The employees:read scope is required to return home_address and non-work locations.
  * The company_admin:read scope is required to return primary_payroll_admin.
  * The signatories:read scope is required to return primary_signatory.
@@ -110,7 +116,7 @@ export function setCompaniesGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
   ],
   data: CompaniesGetQueryData,
 ): CompaniesGetQueryData | undefined {
@@ -124,7 +130,7 @@ export function invalidateCompaniesGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: { xGustoAPIVersion?: HeaderXGustoAPIVersion | undefined },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

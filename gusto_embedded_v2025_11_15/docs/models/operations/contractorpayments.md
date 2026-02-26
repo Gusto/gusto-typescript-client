@@ -1,0 +1,25 @@
+# ContractorPayments
+
+## Example Usage
+
+```typescript
+import { ContractorPayments } from "@gusto/embedded-api-v2025-11-15/models/operations/postv1companiescompanyidcontractorpaymentgroups.js";
+
+let value: ContractorPayments = {
+  wage: "5000.0",
+  hours: "40.0",
+  bonus: "500.0",
+  reimbursement: "20.0",
+};
+```
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         | Example                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `contractorUuid`                                                                                                    | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | The contractor receiving the payment                                                                                |                                                                                                                     |
+| `paymentMethod`                                                                                                     | [operations.PaymentMethod](../../models/operations/paymentmethod.md)                                                | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |                                                                                                                     |
+| `wage`                                                                                                              | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked | 5000.0                                                                                                              |
+| `hours`                                                                                                             | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment      | 40.0                                                                                                                |
+| `bonus`                                                                                                             | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | If the contractor is on an hourly wage, this is the bonus the contractor earned                                     | 500.0                                                                                                               |
+| `reimbursement`                                                                                                     | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | Reimbursed wages for the contractor                                                                                 | 20.0                                                                                                                |

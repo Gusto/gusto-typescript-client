@@ -1,17 +1,17 @@
 # EntityType
 
-the type of target entity applicable to the flow. This field is optional for company flows, please refer to the flow_types table above for more details.
+The type of entity to create
 
 ## Example Usage
 
 ```typescript
-import { EntityType } from "@gusto/embedded-api/models/operations/postv1companyflows.js";
+import { EntityType } from "@gusto/embedded-api/models/operations/postv1companiescompanyidpeoplebatches.js";
 
-let value: EntityType = "Company";
+let value: EntityType = "employee";
 ```
 
 ## Values
 
 ```typescript
-"Company" | "Employee"
+"employee"
 ```

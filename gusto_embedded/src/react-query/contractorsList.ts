@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { ContractorsSortBy } from "../models/components/contractorssortby.js";
 import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
@@ -112,7 +111,7 @@ export function setContractorsListData(
       page?: number | undefined;
       per?: number | undefined;
       searchTerm?: string | undefined;
-      sortBy?: ContractorsSortBy | undefined;
+      sortBy?: string | undefined;
       xGustoAPIVersion?: VersionHeader | undefined;
     },
   ],
@@ -132,7 +131,7 @@ export function invalidateContractorsList(
         page?: number | undefined;
         per?: number | undefined;
         searchTerm?: string | undefined;
-        sortBy?: ContractorsSortBy | undefined;
+        sortBy?: string | undefined;
         xGustoAPIVersion?: VersionHeader | undefined;
       },
     ]
