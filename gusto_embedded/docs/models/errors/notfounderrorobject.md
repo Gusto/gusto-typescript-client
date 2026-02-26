@@ -14,6 +14,6 @@ import { NotFoundErrorObject } from "@gusto/embedded-api/models/errors/notfounde
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `errors`                                                                       | [components.EntityErrorObject](../../models/components/entityerrorobject.md)[] | :heavy_check_mark:                                                             | N/A                                                                            |
+| Field                                            | Type                                             | Required                                         | Description                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| `errors`                                         | [errors.Errors](../../models/errors/errors.md)[] | :heavy_check_mark:                               | N/A                                              |

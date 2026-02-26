@@ -7,11 +7,11 @@ Determines the date-based API version associated with your API call. If none is 
 ```typescript
 import { DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion } from "@gusto/embedded-api/models/operations/deletev1recurringreimbursements.js";
 
-let value: DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion = "2024-04-01";
+let value: DeleteV1RecurringReimbursementsHeaderXGustoAPIVersion = "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```

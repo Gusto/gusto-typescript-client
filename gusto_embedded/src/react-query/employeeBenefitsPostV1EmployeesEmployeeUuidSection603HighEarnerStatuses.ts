@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -40,6 +41,7 @@ export type EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatu
   PostV1EmployeesEmployeeUuidSection603HighEarnerStatusesResponse;
 
 export type EmployeeBenefitsPostV1EmployeesEmployeeUuidSection603HighEarnerStatusesMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError

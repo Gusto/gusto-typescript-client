@@ -208,7 +208,7 @@ run();
 * [retrieveTermsOfService](docs/sdks/companies/README.md#retrievetermsofservice) - Retrieve terms of service status for a company user
 * [createAdmin](docs/sdks/companies/README.md#createadmin) - Create an admin for the company
 * [listAdmins](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
-* [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+* [getOnboardingStatus](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 * [finishOnboarding](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 * [getCustomFields](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
 
@@ -393,7 +393,7 @@ run();
 * [update](docs/sdks/employees/README.md#update) - Update an employee.
 * [delete](docs/sdks/employees/README.md#delete) - Delete an onboarding employee
 * [getCustomFields](docs/sdks/employees/README.md#getcustomfields) - Get an employee's custom fields
-* [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+* [updateOnboardingDocumentsConfig](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 * [getOnboardingStatus](docs/sdks/employees/README.md#getonboardingstatus) - Get the employee's onboarding status
 * [updateOnboardingStatus](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 * [getTimeOffActivities](docs/sdks/employees/README.md#gettimeoffactivities) - Get employee time off activities
@@ -478,7 +478,7 @@ run();
 ### [Introspection](docs/sdks/introspection/README.md)
 
 * [getInfo](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
-* [oauthAccessToken](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
+* [oauthAccessToken](docs/sdks/introspection/README.md#oauthaccesstoken) - Create a System Access Token or Refresh an Access Token
 
 ### [Invoices](docs/sdks/invoices/README.md)
 
@@ -500,7 +500,7 @@ run();
 ### [Locations](docs/sdks/locations/README.md)
 
 * [create](docs/sdks/locations/README.md#create) - Create a company location
-* [get](docs/sdks/locations/README.md#get) - Get company locations
+* [get](docs/sdks/locations/README.md#get) - Get all company locations
 * [retrieve](docs/sdks/locations/README.md#retrieve) - Get a location
 * [update](docs/sdks/locations/README.md#update) - Update a location
 * [getMinimumWages](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
@@ -527,7 +527,7 @@ run();
 * [getReceipt](docs/sdks/payrolls/README.md#getreceipt) - Get a single payroll receipt
 * [getBlockers](docs/sdks/payrolls/README.md#getblockers) - Get all payroll blockers for a company
 * [skip](docs/sdks/payrolls/README.md#skip) - Skip a payroll
-* [calculateGrossUp](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up
+* [calculateGrossUp](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
 * [calculate](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
 * [submit](docs/sdks/payrolls/README.md#submit) - Submit payroll
 * [cancel](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
@@ -657,7 +657,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companiesFinishOnboarding`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 - [`companiesGet`](docs/sdks/companies/README.md#get) - Get a company
 - [`companiesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
-- [`companiesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+- [`companiesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 - [`companiesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`companiesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`companiesMigrate`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
@@ -784,7 +784,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`employeesGetV1CompaniesCompanyIdEmployeesPaymentDetails`](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 - [`employeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
 - [`employeesUpdate`](docs/sdks/employees/README.md#update) - Update an employee.
-- [`employeesUpdateOnboardingDocumentsConfig`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+- [`employeesUpdateOnboardingDocumentsConfig`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 - [`employeesUpdateOnboardingStatus`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 - [`employeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
 - [`employeeTaxSetupGetStateTaxes`](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
@@ -828,7 +828,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`informationRequestsGetInformationRequests`](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
 - [`informationRequestsSubmit`](docs/sdks/informationrequests/README.md#submit) - Submit information request responses
 - [`introspectionGetInfo`](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
-- [`introspectionOauthAccessToken`](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
+- [`introspectionOauthAccessToken`](docs/sdks/introspection/README.md#oauthaccesstoken) - Create a System Access Token or Refresh an Access Token
 - [`invoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve invoicing data for companies
 - [`jobsAndCompensationsCreateCompensation`](docs/sdks/jobsandcompensations/README.md#createcompensation) - Create a compensation
 - [`jobsAndCompensationsCreateJob`](docs/sdks/jobsandcompensations/README.md#createjob) - Create a job
@@ -841,7 +841,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`jobsAndCompensationsUpdate`](docs/sdks/jobsandcompensations/README.md#update) - Update a job
 - [`jobsAndCompensationsUpdateCompensation`](docs/sdks/jobsandcompensations/README.md#updatecompensation) - Update a compensation
 - [`locationsCreate`](docs/sdks/locations/README.md#create) - Create a company location
-- [`locationsGet`](docs/sdks/locations/README.md#get) - Get company locations
+- [`locationsGet`](docs/sdks/locations/README.md#get) - Get all company locations
 - [`locationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`locationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`locationsUpdate`](docs/sdks/locations/README.md#update) - Update a location
@@ -850,7 +850,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`paymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`paymentConfigsUpdate`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
 - [`payrollsCalculate`](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
-- [`payrollsCalculateGrossUp`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up
+- [`payrollsCalculateGrossUp`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
 - [`payrollsCancel`](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
 - [`payrollsCreateOffCycle`](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
 - [`payrollsDelete`](docs/sdks/payrolls/README.md#delete) - Delete a payroll
@@ -963,7 +963,7 @@ To learn about this feature and how to get started, check
 - [`useCompaniesFinishOnboardingMutation`](docs/sdks/companies/README.md#finishonboarding) - Finish company onboarding
 - [`useCompaniesGet`](docs/sdks/companies/README.md#get) - Get a company
 - [`useCompaniesGetCustomFields`](docs/sdks/companies/README.md#getcustomfields) - Get the custom fields of a company
-- [`useCompaniesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get the company's onboarding status
+- [`useCompaniesGetOnboardingStatus`](docs/sdks/companies/README.md#getonboardingstatus) - Get company onboarding status
 - [`useCompaniesGetV1PartnerManagedCompaniesCompanyUuidMigrationReadiness`](docs/sdks/companies/README.md#getv1partnermanagedcompaniescompanyuuidmigrationreadiness) - Check company migration readiness
 - [`useCompaniesListAdmins`](docs/sdks/companies/README.md#listadmins) - Get all the admins at a company
 - [`useCompaniesMigrateMutation`](docs/sdks/companies/README.md#migrate) - Migrate company to embedded payroll
@@ -1090,7 +1090,7 @@ To learn about this feature and how to get started, check
 - [`useEmployeesGetV1CompaniesCompanyIdEmployeesPaymentDetails`](docs/sdks/employees/README.md#getv1companiescompanyidemployeespaymentdetails) - Get employee payment details for a company
 - [`useEmployeesList`](docs/sdks/employees/README.md#list) - Get employees of a company
 - [`useEmployeesUpdateMutation`](docs/sdks/employees/README.md#update) - Update an employee.
-- [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update an employee's onboarding documents config
+- [`useEmployeesUpdateOnboardingDocumentsConfigMutation`](docs/sdks/employees/README.md#updateonboardingdocumentsconfig) - Update employee onboarding documents config
 - [`useEmployeesUpdateOnboardingStatusMutation`](docs/sdks/employees/README.md#updateonboardingstatus) - Update the employee's onboarding status
 - [`useEmployeeTaxSetupGetFederalTaxes`](docs/sdks/employeetaxsetup/README.md#getfederaltaxes) - Get an employee's federal taxes
 - [`useEmployeeTaxSetupGetStateTaxes`](docs/sdks/employeetaxsetup/README.md#getstatetaxes) - Get an employee's state taxes
@@ -1134,7 +1134,7 @@ To learn about this feature and how to get started, check
 - [`useInformationRequestsGetInformationRequests`](docs/sdks/informationrequests/README.md#getinformationrequests) - Get all information requests for a company
 - [`useInformationRequestsSubmitMutation`](docs/sdks/informationrequests/README.md#submit) - Submit information request responses
 - [`useIntrospectionGetInfo`](docs/sdks/introspection/README.md#getinfo) - Get info about the current access token
-- [`useIntrospectionOauthAccessTokenMutation`](docs/sdks/introspection/README.md#oauthaccesstoken) - create or refresh an access token
+- [`useIntrospectionOauthAccessTokenMutation`](docs/sdks/introspection/README.md#oauthaccesstoken) - Create a System Access Token or Refresh an Access Token
 - [`useInvoicesGet`](docs/sdks/invoices/README.md#get) - Retrieve invoicing data for companies
 - [`useJobsAndCompensationsCreateCompensationMutation`](docs/sdks/jobsandcompensations/README.md#createcompensation) - Create a compensation
 - [`useJobsAndCompensationsCreateJobMutation`](docs/sdks/jobsandcompensations/README.md#createjob) - Create a job
@@ -1147,7 +1147,7 @@ To learn about this feature and how to get started, check
 - [`useJobsAndCompensationsUpdateCompensationMutation`](docs/sdks/jobsandcompensations/README.md#updatecompensation) - Update a compensation
 - [`useJobsAndCompensationsUpdateMutation`](docs/sdks/jobsandcompensations/README.md#update) - Update a job
 - [`useLocationsCreateMutation`](docs/sdks/locations/README.md#create) - Create a company location
-- [`useLocationsGet`](docs/sdks/locations/README.md#get) - Get company locations
+- [`useLocationsGet`](docs/sdks/locations/README.md#get) - Get all company locations
 - [`useLocationsGetMinimumWages`](docs/sdks/locations/README.md#getminimumwages) - Get minimum wages for a location
 - [`useLocationsRetrieve`](docs/sdks/locations/README.md#retrieve) - Get a location
 - [`useLocationsUpdateMutation`](docs/sdks/locations/README.md#update) - Update a location
@@ -1155,7 +1155,7 @@ To learn about this feature and how to get started, check
 - [`useNotificationsGetDetails`](docs/sdks/notifications/README.md#getdetails) - Get a notification's details
 - [`usePaymentConfigsGet`](docs/sdks/paymentconfigs/README.md#get) - Get a company's payment configs
 - [`usePaymentConfigsUpdateMutation`](docs/sdks/paymentconfigs/README.md#update) - Update a company's payment configs
-- [`usePayrollsCalculateGrossUpMutation`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up
+- [`usePayrollsCalculateGrossUpMutation`](docs/sdks/payrolls/README.md#calculategrossup) - Calculate gross up for a payroll
 - [`usePayrollsCalculateMutation`](docs/sdks/payrolls/README.md#calculate) - Calculate a payroll
 - [`usePayrollsCancelMutation`](docs/sdks/payrolls/README.md#cancel) - Cancel a payroll
 - [`usePayrollsCreateOffCycleMutation`](docs/sdks/payrolls/README.md#createoffcycle) - Create an off-cycle payroll
@@ -1403,7 +1403,7 @@ run();
 **Primary error:**
 * [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (14)</summary>
+<details><summary>Less common errors (13)</summary>
 
 <br />
 
@@ -1416,13 +1416,12 @@ run();
 
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
-* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 162 of 280 methods.*
-* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 5 of 280 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Status code `404`. Applicable to 4 of 280 methods.*
-* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 4 of 280 methods.*
+* [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 141 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 96 of 280 methods.*
+* [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
 * [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 280 methods.*
 * [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*
-* [`DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody`](./src/models/errors/deletev1companybenefitscompanybenefitidresponsebody.ts): Unprocessable Entity. Status code `422`. Applicable to 1 of 280 methods.*
+* [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 280 methods.*
 * [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 280 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
@@ -1498,19 +1497,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "@gusto/embedded-api/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {

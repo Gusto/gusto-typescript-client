@@ -1,0 +1,23 @@
+# RefreshTokenAuthentication
+
+## Example Usage
+
+```typescript
+import { RefreshTokenAuthentication } from "@gusto/embedded-api-v2025-11-15/models/components/refreshtokenauthentication.js";
+
+let value: RefreshTokenAuthentication = {
+  accessToken: "<value>",
+  createdAt: 9970.56,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `accessToken`                                                                                                                        | *string*                                                                                                                             | :heavy_check_mark:                                                                                                                   | A new access token that can be used for subsequent authenticated requests                                                            |
+| `tokenType`                                                                                                                          | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | The literal string 'Bearer'                                                                                                          |
+| `expiresIn`                                                                                                                          | *number*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | The TTL of this token. After this amount of time, you must hit the refresh token endpoint to continue making authenticated requests. |
+| `createdAt`                                                                                                                          | *number*                                                                                                                             | :heavy_check_mark:                                                                                                                   | Datetime for when the new access token is created.                                                                                   |
+| `refreshToken`                                                                                                                       | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | A token that must be passed to the refresh token endpoint to get a new authenticated token.                                          |
+| `scope`                                                                                                                              | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | All of the scopes for which the access token provides access.                                                                        |

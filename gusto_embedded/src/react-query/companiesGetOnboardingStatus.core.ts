@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companiesGetOnboardingStatus } from "../funcs/companiesGetOnboardingStatus.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion,
   GetV1CompanyOnboardingStatusRequest,
   GetV1CompanyOnboardingStatusResponse,
 } from "../models/operations/getv1companyonboardingstatus.js";
@@ -77,7 +77,9 @@ export function queryKeyCompaniesGetOnboardingStatus(
   companyUuid: string,
   parameters: {
     additionalSteps?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    xGustoAPIVersion?:
+      | GetV1CompanyOnboardingStatusHeaderXGustoAPIVersion
+      | undefined;
   },
 ): QueryKey {
   return [

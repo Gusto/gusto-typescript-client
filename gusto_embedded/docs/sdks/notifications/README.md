@@ -19,7 +19,7 @@ scope: `notifications:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-notifications-notification_uuid" method="get" path="/v1/notifications/{notification_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="get-notifications-notification_uuid" method="get" path="/v1/notifications/{notification_uuid}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -123,7 +123,7 @@ scope: `notifications:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-company-notifications" method="get" path="/v1/companies/{company_uuid}/notifications" -->
+<!-- UsageSnippet language="typescript" operationID="get-company-notifications" method="get" path="/v1/companies/{company_uuid}/notifications" example="test_example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 

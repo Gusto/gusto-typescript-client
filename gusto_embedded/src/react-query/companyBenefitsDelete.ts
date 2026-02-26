@@ -11,7 +11,6 @@ import { GustoEmbeddedCore } from "../core.js";
 import { companyBenefitsDelete } from "../funcs/companyBenefitsDelete.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody } from "../models/errors/deletev1companybenefitscompanybenefitid.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -22,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   DeleteV1CompanyBenefitsCompanyBenefitIdRequest,
   DeleteV1CompanyBenefitsCompanyBenefitIdResponse,
@@ -39,7 +39,7 @@ export type CompanyBenefitsDeleteMutationData =
   DeleteV1CompanyBenefitsCompanyBenefitIdResponse;
 
 export type CompanyBenefitsDeleteMutationError =
-  | DeleteV1CompanyBenefitsCompanyBenefitIdResponseBody
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

@@ -1,0 +1,28 @@
+# PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest
+
+## Example Usage
+
+```typescript
+import { PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest } from "@gusto/embedded-api-v2025-11-15/models/operations/putv1employeesemployeeidi9authorizationdocuments.js";
+
+let value: PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequest = {
+  employeeId: "<id>",
+  requestBody: {
+    documents: [
+      {
+        documentType: "<value>",
+        documentTitle: "<value>",
+        issuingAuthority: "<value>",
+      },
+    ],
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `employeeId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the employee                                                                                                                                                                                                     |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [components.VersionHeader](../../models/components/versionheader.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [operations.PutV1EmployeesEmployeeIdI9AuthorizationDocumentsRequestBody](../../models/operations/putv1employeesemployeeidi9authorizationdocumentsrequestbody.md)                                                             | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

@@ -1,0 +1,18 @@
+# PutV1ContractorsContractorUuidWageType
+
+The contractor’s wage type.
+
+
+## Example Usage
+
+```typescript
+import { PutV1ContractorsContractorUuidWageType } from "@gusto/embedded-api-v2025-11-15/models/operations/putv1contractorscontractoruuid.js";
+
+let value: PutV1ContractorsContractorUuidWageType = "Hourly";
+```
+
+## Values
+
+```typescript
+"Fixed" | "Hourly"
+```

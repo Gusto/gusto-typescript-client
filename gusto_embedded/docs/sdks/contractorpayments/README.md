@@ -26,7 +26,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payments-contractor_payment_uuid-receipt" method="get" path="/v1/contractor_payments/{contractor_payment_uuid}/receipt" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payments-contractor_payment_uuid-receipt" method="get" path="/v1/contractor_payments/{contractor_payment_uuid}/receipt" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -133,7 +133,7 @@ scope: `payrolls:run`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payments-contractor_payment_uuid-fund" method="put" path="/v1/contractor_payments/{contractor_payment_uuid}/fund" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-contractor_payments-contractor_payment_uuid-fund" method="put" path="/v1/contractor_payments/{contractor_payment_uuid}/fund" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -224,9 +224,9 @@ Pay a contractor. Information needed depends on the contractor's wage type (hour
 
 scope: `payrolls:run`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payments" method="post" path="/v1/companies/{company_id}/contractor_payments" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payments" method="post" path="/v1/companies/{company_id}/contractor_payments" example="Basic" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
@@ -238,13 +238,13 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractorPayments.create({
     companyId: "<id>",
-    requestBody: {
+    contractorPaymentBody: {
       contractorUuid: "<id>",
       date: new RFCDate("2020-01-01"),
-      wage: 5000,
-      hours: 40,
-      bonus: 500,
-      reimbursement: 20,
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
     },
   });
 
@@ -272,13 +272,265 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorPaymentsCreate(gustoEmbedded, {
     companyId: "<id>",
-    requestBody: {
+    contractorPaymentBody: {
       contractorUuid: "<id>",
       date: new RFCDate("2020-01-01"),
-      wage: 5000,
-      hours: 40,
-      bonus: 500,
-      reimbursement: 20,
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorPaymentsCreateMutation
+} from "@gusto/embedded-api/react-query/contractorPaymentsCreate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payments" method="post" path="/v1/companies/{company_id}/contractor_payments" example="Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPayments.create({
+    companyId: "<id>",
+    contractorPaymentBody: {
+      contractorUuid: "<id>",
+      date: new RFCDate("2020-01-01"),
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorPaymentsCreate } from "@gusto/embedded-api/funcs/contractorPaymentsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    contractorPaymentBody: {
+      contractorUuid: "<id>",
+      date: new RFCDate("2020-01-01"),
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorPaymentsCreateMutation
+} from "@gusto/embedded-api/react-query/contractorPaymentsCreate.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payments" method="post" path="/v1/companies/{company_id}/contractor_payments" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPayments.create({
+    companyId: "<id>",
+    contractorPaymentBody: {
+      contractorUuid: "<id>",
+      date: new RFCDate("2020-01-01"),
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorPaymentsCreate } from "@gusto/embedded-api/funcs/contractorPaymentsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    contractorPaymentBody: {
+      contractorUuid: "<id>",
+      date: new RFCDate("2020-01-01"),
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contractorPaymentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useContractorPaymentsCreateMutation
+} from "@gusto/embedded-api/react-query/contractorPaymentsCreate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-companies-company_id-contractor_payments" method="post" path="/v1/companies/{company_id}/contractor_payments" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.contractorPayments.create({
+    companyId: "<id>",
+    contractorPaymentBody: {
+      contractorUuid: "<id>",
+      date: new RFCDate("2020-01-01"),
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { contractorPaymentsCreate } from "@gusto/embedded-api/funcs/contractorPaymentsCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contractorPaymentsCreate(gustoEmbedded, {
+    companyId: "<id>",
+    contractorPaymentBody: {
+      contractorUuid: "<id>",
+      date: new RFCDate("2020-01-01"),
+      wage: "5000",
+      hours: "40",
+      bonus: "500",
+      reimbursement: "20",
     },
   });
   if (res.ok) {
@@ -326,6 +578,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -337,7 +590,7 @@ scope: `payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractor_payments" method="get" path="/v1/companies/{company_id}/contractor_payments" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractor_payments" method="get" path="/v1/companies/{company_id}/contractor_payments" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -432,18 +685,20 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
 Returns a single contractor payment.
+
 scope: `payrolls:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractor_payment-contractor-payment" method="get" path="/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-companies-company_id-contractor_payment-contractor-payment" method="get" path="/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -536,9 +791,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete
 
@@ -632,5 +888,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

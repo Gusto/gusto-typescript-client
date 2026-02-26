@@ -1,0 +1,22 @@
+# LimitOption
+
+Some benefits require additional information to determine
+their limit.
+
+`Family` or `Individual`: Applicable to HSA benefit.
+
+`Joint Filing or Single` or `Married and Filing Separately`: Applicable to Dependent Care FSA benefit.
+
+## Example Usage
+
+```typescript
+import { LimitOption } from "@gusto/embedded-api-v2025-11-15/models/operations/postv1employeesemployeeidemployeebenefits.js";
+
+let value: LimitOption = "Family";
+```
+
+## Values
+
+```typescript
+"Family" | "Individual" | "Joint Filing or Single" | "Married and Filing Separately"
+```

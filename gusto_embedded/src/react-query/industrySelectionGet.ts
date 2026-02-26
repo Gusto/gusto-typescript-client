@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompanyIndustryRequest } from "../models/operations/getv1companyindustry.js";
+import {
+  GetV1CompanyIndustryHeaderXGustoAPIVersion,
+  GetV1CompanyIndustryRequest,
+} from "../models/operations/getv1companyindustry.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type IndustrySelectionGetQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -55,7 +59,7 @@ export type IndustrySelectionGetQueryError =
  * Get a company industry selection
  *
  * @remarks
- * Get industry selection for the company.
+ * Returns the industry classification for a company, including NAICS code, SIC codes, and industry title.
  *
  * scope: `companies:read`
  */
@@ -84,7 +88,7 @@ export function useIndustrySelectionGet(
  * Get a company industry selection
  *
  * @remarks
- * Get industry selection for the company.
+ * Returns the industry classification for a company, including NAICS code, SIC codes, and industry title.
  *
  * scope: `companies:read`
  */
@@ -113,7 +117,9 @@ export function setIndustrySelectionGetData(
   client: QueryClient,
   queryKeyBase: [
     companyId: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?: GetV1CompanyIndustryHeaderXGustoAPIVersion | undefined;
+    },
   ],
   data: IndustrySelectionGetQueryData,
 ): IndustrySelectionGetQueryData | undefined {
@@ -127,7 +133,11 @@ export function invalidateIndustrySelectionGet(
   queryKeyBase: TupleToPrefixes<
     [
       companyId: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompanyIndustryHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

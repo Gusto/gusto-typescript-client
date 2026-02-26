@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyIdPeopleBatchesRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdPeopleBatchesRequest } from "@gusto/embedded-api-v2025-11-15/models/operations/postv1companiescompanyidpeoplebatches.js";
+
+let value: PostV1CompaniesCompanyIdPeopleBatchesRequest = {
+  companyId: "<id>",
+  requestBody: {
+    idempotencyKey: "550e8400-e29b-41d4-a716-446655440000",
+    batchAction: "create",
+    batch: [],
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyId`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompaniesCompanyIdPeopleBatchesHeaderXGustoAPIVersion](../../models/operations/postv1companiescompanyidpeoplebatchesheaderxgustoapiversion.md)                                                             | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `requestBody`                                                                                                                                                                                                                | [operations.PostV1CompaniesCompanyIdPeopleBatchesRequestBody](../../models/operations/postv1companiescompanyidpeoplebatchesrequestbody.md)                                                                                   | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

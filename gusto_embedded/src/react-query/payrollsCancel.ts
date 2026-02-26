@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type PayrollsCancelMutationData =
   PutApiV1CompaniesCompanyIdPayrollsPayrollIdCancelResponse;
 
 export type PayrollsCancelMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -54,6 +56,7 @@ export type PayrollsCancelMutationError =
  *
  * @remarks
  * Transitions a `processed` payroll back to the `unprocessed` state. A payroll can be canceled if it meets both criteria:
+ *
  * - `processed` is `true`
  * - Current time is earlier than 4pm PT on the `payroll_deadline`
  *

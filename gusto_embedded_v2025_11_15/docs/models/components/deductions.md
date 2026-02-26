@@ -1,0 +1,20 @@
+# Deductions
+
+An array of deductions for the employee.
+
+## Example Usage
+
+```typescript
+import { Deductions } from "@gusto/embedded-api-v2025-11-15/models/components/payrollemployeecompensationstype.js";
+
+let value: Deductions = {};
+```
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                  | *string*                                                                                                | :heavy_minus_sign:                                                                                      | The name of the deduction.                                                                              |
+| `amount`                                                                                                | *number*                                                                                                | :heavy_minus_sign:                                                                                      | The amount of the deduction for the pay period.                                                         |
+| `amountType`                                                                                            | [components.AmountType](../../models/components/amounttype.md)                                          | :heavy_minus_sign:                                                                                      | The amount type of the deduction for the pay period. Only present for calculated or processed payrolls. |
+| `uuid`                                                                                                  | *string*                                                                                                | :heavy_minus_sign:                                                                                      | The UUID of the deduction. Only present for calculated or processed payrolls.                           |

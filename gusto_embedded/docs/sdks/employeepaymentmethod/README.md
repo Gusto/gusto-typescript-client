@@ -18,9 +18,87 @@ the employee's payment method.
 
 scope: `employee_payment_methods:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" -->
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.create({
+    employeeId: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Checking",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodCreate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Checking",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodCreateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -66,6 +144,162 @@ async function run() {
       name: "BoA Checking Account",
       routingNumber: "266905059",
       accountNumber: "5809431207",
+      accountType: "Checking",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodCreateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.create({
+    employeeId: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Checking",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodCreate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Checking",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodCreateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodCreate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="post-v1-employees-employee_id-bank_accounts" method="post" path="/v1/employees/{employee_id}/bank_accounts" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.create({
+    employeeId: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Checking",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodCreate } from "@gusto/embedded-api/funcs/employeePaymentMethodCreate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodCreate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
       accountType: "Checking",
     },
   });
@@ -208,9 +442,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## updateBankAccount
 
@@ -218,9 +453,89 @@ Updates an employee bank account.
 
 scope: `employee_payment_methods:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.updateBankAccount({
+    employeeId: "<id>",
+    bankAccountUuid: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Savings",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdateBankAccount.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdateBankAccount(gustoEmbedded, {
+    employeeId: "<id>",
+    bankAccountUuid: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Savings",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdateBankAccount failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateBankAccountMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -298,6 +613,166 @@ import {
   useEmployeePaymentMethodUpdateBankAccountMutation
 } from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
 ```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.updateBankAccount({
+    employeeId: "<id>",
+    bankAccountUuid: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Savings",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdateBankAccount.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdateBankAccount(gustoEmbedded, {
+    employeeId: "<id>",
+    bankAccountUuid: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Savings",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdateBankAccount failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateBankAccountMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-bank_accounts" method="put" path="/v1/employees/{employee_id}/bank_accounts/{bank_account_uuid}" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.updateBankAccount({
+    employeeId: "<id>",
+    bankAccountUuid: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Savings",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdateBankAccount } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdateBankAccount.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdateBankAccount(gustoEmbedded, {
+    employeeId: "<id>",
+    bankAccountUuid: "<id>",
+    requestBody: {
+      name: "<value>",
+      routingNumber: "<value>",
+      accountNumber: "<value>",
+      accountType: "Savings",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdateBankAccount failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateBankAccountMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdateBankAccount.js";
+```
 
 ### Parameters
 
@@ -329,7 +804,7 @@ scope: `employee_payment_methods:read`
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-payment_method" method="get" path="/v1/employees/{employee_id}/payment_method" -->
+<!-- UsageSnippet language="typescript" operationID="get-v1-employees-employee_id-payment_method" method="get" path="/v1/employees/{employee_id}/payment_method" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -431,9 +906,305 @@ bank account will also update the employee's payment method.
 
 scope: `employee_payment_methods:write`
 
-### Example Usage
+### Example Usage: Basic
 
-<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" -->
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Basic" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.update({
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+```
+### Example Usage: Example
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Example" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.update({
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+```
+### Example Usage: Nested
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Nested" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.update({
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+```
+### Example Usage: Resource
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="Resource" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.update({
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      version: "<value>",
+      type: "Direct Deposit",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+```
+### Example Usage: example-1
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="example-1" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
 
@@ -518,6 +1289,184 @@ async function run() {
           splitAmount: null,
         },
       ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+```
+### Example Usage: example-2
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="example-2" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.update({
+    employeeId: "<id>",
+    requestBody: {
+      version: "63859768485e218ccf8a449bb60f14ed",
+      type: "Direct Deposit",
+      splitBy: "Percentage",
+      splits: [
+        {
+          uuid: "e88f9436-b74e-49a8-87e9-777b9bfe715e",
+          name: "BoA Checking Account",
+          priority: 1,
+          splitAmount: 60,
+        },
+        {
+          uuid: "0d2b7f73-05d6-4184-911d-269edeecc30a",
+          name: "Chase Checking Account",
+          priority: 2,
+          splitAmount: 40,
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      version: "63859768485e218ccf8a449bb60f14ed",
+      type: "Direct Deposit",
+      splitBy: "Percentage",
+      splits: [
+        {
+          uuid: "e88f9436-b74e-49a8-87e9-777b9bfe715e",
+          name: "BoA Checking Account",
+          priority: 1,
+          splitAmount: 60,
+        },
+        {
+          uuid: "0d2b7f73-05d6-4184-911d-269edeecc30a",
+          name: "Chase Checking Account",
+          priority: 2,
+          splitAmount: 40,
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("employeePaymentMethodUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useEmployeePaymentMethodUpdateMutation
+} from "@gusto/embedded-api/react-query/employeePaymentMethodUpdate.js";
+```
+### Example Usage: example-3
+
+<!-- UsageSnippet language="typescript" operationID="put-v1-employees-employee_id-payment_method" method="put" path="/v1/employees/{employee_id}/payment_method" example="example-3" -->
+```typescript
+import { GustoEmbedded } from "@gusto/embedded-api";
+
+const gustoEmbedded = new GustoEmbedded({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gustoEmbedded.employeePaymentMethod.update({
+    employeeId: "<id>",
+    requestBody: {
+      version: "63859768485e218ccf8a449bb60f14ed",
+      type: "Check",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
+import { employeePaymentMethodUpdate } from "@gusto/embedded-api/funcs/employeePaymentMethodUpdate.js";
+
+// Use `GustoEmbeddedCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const gustoEmbedded = new GustoEmbeddedCore({
+  companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await employeePaymentMethodUpdate(gustoEmbedded, {
+    employeeId: "<id>",
+    requestBody: {
+      version: "63859768485e218ccf8a449bb60f14ed",
+      type: "Check",
     },
   });
   if (res.ok) {

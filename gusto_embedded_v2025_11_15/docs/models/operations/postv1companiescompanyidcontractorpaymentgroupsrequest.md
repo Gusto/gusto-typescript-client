@@ -1,0 +1,25 @@
+# PostV1CompaniesCompanyIdContractorPaymentGroupsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdContractorPaymentGroupsRequest } from "@gusto/embedded-api-v2025-11-15/models/operations/postv1companiescompanyidcontractorpaymentgroups.js";
+import { RFCDate } from "@gusto/embedded-api-v2025-11-15/types/rfcdate.js";
+
+let value: PostV1CompaniesCompanyIdContractorPaymentGroupsRequest = {
+  companyId: "<id>",
+  requestBody: {
+    checkDate: new RFCDate("2020-01-01"),
+    creationToken: "1d532d13-8f61-4a57-ad3c-b5fac1c6e05e",
+    contractorPayments: [],
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompaniesCompanyIdContractorPaymentGroupsHeaderXGustoAPIVersion](../../models/operations/postv1companiescompanyidcontractorpaymentgroupsheaderxgustoapiversion.md)                                         | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyId`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `requestBody`                                                                                                                                                                                                                | [operations.PostV1CompaniesCompanyIdContractorPaymentGroupsRequestBody](../../models/operations/postv1companiescompanyidcontractorpaymentgroupsrequestbody.md)                                                               | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |

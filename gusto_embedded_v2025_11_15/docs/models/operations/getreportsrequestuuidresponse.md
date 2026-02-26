@@ -1,0 +1,16 @@
+# GetReportsRequestUuidResponse
+
+## Example Usage
+
+```typescript
+import { GetReportsRequestUuidResponse } from "@gusto/embedded-api-v2025-11-15/models/operations/getreportsrequestuuid.js";
+
+let value: GetReportsRequestUuidResponse = {};
+```
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |
+| `report`                                                           | [components.Report](../../models/components/report.md)             | :heavy_minus_sign:                                                 | Example response                                                   |

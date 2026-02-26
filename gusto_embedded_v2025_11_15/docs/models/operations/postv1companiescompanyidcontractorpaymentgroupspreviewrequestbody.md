@@ -1,0 +1,18 @@
+# PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody } from "@gusto/embedded-api-v2025-11-15/models/operations/postv1companiescompanyidcontractorpaymentgroupspreview.js";
+
+let value: PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewRequestBody = {
+  contractorPayments: [],
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                        | Type                                                                                                                                                                                         | Required                                                                                                                                                                                     | Description                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contractorPayments`                                                                                                                                                                         | [operations.PostV1CompaniesCompanyIdContractorPaymentGroupsPreviewContractorPayments](../../models/operations/postv1companiescompanyidcontractorpaymentgroupspreviewcontractorpayments.md)[] | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |
+| `checkDate`                                                                                                                                                                                  | [RFCDate](../../types/rfcdate.md)                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                           | Date when payments should be processed                                                                                                                                                       |

@@ -1,0 +1,17 @@
+# PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse
+
+## Example Usage
+
+```typescript
+import { PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse } from "@gusto/embedded-api-v2025-11-15/models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofservice.js";
+
+let value:
+  PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                      | Type                                                                                                                                                                                       | Required                                                                                                                                                                                   | Description                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `httpMeta`                                                                                                                                                                                 | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                                                                                         | :heavy_check_mark:                                                                                                                                                                         | N/A                                                                                                                                                                                        |
+| `object`                                                                                                                                                                                   | [operations.PostPartnerManagedCompaniesCompanyUuidRetrieveTermsOfServiceResponseBody](../../models/operations/postpartnermanagedcompaniescompanyuuidretrievetermsofserviceresponsebody.md) | :heavy_minus_sign:                                                                                                                                                                         | Example response                                                                                                                                                                           |

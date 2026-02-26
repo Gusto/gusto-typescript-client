@@ -1,0 +1,24 @@
+# PostV1CompaniesCompanyIdBankAccountsRequest
+
+## Example Usage
+
+```typescript
+import { PostV1CompaniesCompanyIdBankAccountsRequest } from "@gusto/embedded-api-v2025-11-15/models/operations/postv1companiescompanyidbankaccounts.js";
+
+let value: PostV1CompaniesCompanyIdBankAccountsRequest = {
+  companyId: "<id>",
+  companyBankAccountRequest: {
+    routingNumber: "<value>",
+    accountNumber: "<value>",
+    accountType: "Checking",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `companyId`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                           | The UUID of the company                                                                                                                                                                                                      |
+| `xGustoAPIVersion`                                                                                                                                                                                                           | [operations.PostV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion](../../models/operations/postv1companiescompanyidbankaccountsheaderxgustoapiversion.md)                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used. |
+| `companyBankAccountRequest`                                                                                                                                                                                                  | [components.CompanyBankAccountRequest](../../models/components/companybankaccountrequest.md)                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                          |
