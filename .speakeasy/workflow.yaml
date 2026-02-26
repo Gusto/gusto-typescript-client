@@ -1,6 +1,17 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
+    GustoEmbedded-OAS-v2025-11-15:
+        inputs:
+            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2025-11-15.embedded.yaml
+              authHeader: Authorization
+              authSecret: $openapi_doc_auth_token
+        overlays:
+            - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/.speakeasy/speakeasy-modifications-overlay.yaml
+              authHeader: Authorization
+              authSecret: $openapi_doc_auth_token
+        registry:
+            location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
     GustoEmbedded-OAS:
         inputs:
             - location: https://raw.githubusercontent.com/Gusto/Gusto-Partner-API/refs/heads/main/generated/embedded/api.v2025-06-15.embedded.yaml
@@ -13,6 +24,18 @@ sources:
         registry:
             location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas
 targets:
+    gusto-embedded-v2025-11-15:
+        target: typescript
+        source: GustoEmbedded-OAS
+        output: ./gusto_embedded_v2025_11_15
+        publish:
+            npm:
+                token: $npm_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/gusto/ruby-sdk/gusto-embedded-oas-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
     gusto-embedded:
         target: typescript
         source: GustoEmbedded-OAS
