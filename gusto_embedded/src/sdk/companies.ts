@@ -280,11 +280,6 @@ export class Companies extends ClientSDK {
    * required onboarding steps with their respective completion state.
    *
    * scope: `company_onboarding_status:read`
-   *
-   * ### Related guides
-   * - [Company onboarding and setup](doc:company-onboarding)
-   *
-   * scope: `company_onboarding_status:read`
    */
   async getOnboardingStatus(
     request: GetV1CompanyOnboardingStatusRequest,
@@ -303,8 +298,6 @@ export class Companies extends ClientSDK {
    * @remarks
    * Finalize a company's onboarding process.
    *
-   * scope: `companies:write`
-   *
    * ### Approve a company in demo
    *
    * After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
@@ -318,9 +311,6 @@ export class Companies extends ClientSDK {
    *
    * # Response: Company object, with company_status: 'Approved'
    * ```
-   *
-   * ### Related guides
-   * - [Company onboarding and setup](doc:company-onboarding)
    *
    * scope: `companies:write`
    */

@@ -41,11 +41,6 @@ import { Result } from "../types/fp.js";
  * required onboarding steps with their respective completion state.
  *
  * scope: `company_onboarding_status:read`
- *
- * ### Related guides
- * - [Company onboarding and setup](doc:company-onboarding)
- *
- * scope: `company_onboarding_status:read`
  */
 export function companiesGetOnboardingStatus(
   client: GustoEmbeddedCore,

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   Contractor,
@@ -14,17 +15,69 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion =
+  ClosedEnum<typeof GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion>;
+
+/**
+ * Sort contractors. Options: type, onboarding_status, name, created_at
+ */
+export const SortBy = {
+  Type: "type",
+  OnboardingStatus: "onboarding_status",
+  Name: "name",
+  CreatedAt: "created_at",
+} as const;
+/**
+ * Sort contractors. Options: type, onboarding_status, name, created_at
+ */
+export type SortBy = ClosedEnum<typeof SortBy>;
+
 export type GetV1CompaniesCompanyUuidContractorsRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the company
    */
   companyUuid: string;
+  /**
+   * A string to search for in the object's names
+   */
+  searchTerm?: string | undefined;
+  /**
+   * Sort contractors. Options: type, onboarding_status, name, created_at
+   */
+  sortBy?: SortBy | undefined;
+  /**
+   * Filters contractors by those who have completed onboarding
+   */
+  onboarded?: boolean | undefined;
+  /**
+   * Filters contractors who are ready to work (onboarded AND active today)
+   */
+  onboardedActive?: boolean | undefined;
+  /**
+   * Filters contractors by those who have been or are scheduled to be dismissed
+   */
+  terminated?: boolean | undefined;
+  /**
+   * Filters contractors by those who have been dismissed and whose dismissal is in effect today (excludes active and scheduled to be dismissed)
+   */
+  terminatedToday?: boolean | undefined;
   /**
    * The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
    */
@@ -33,36 +86,38 @@ export type GetV1CompaniesCompanyUuidContractorsRequest = {
    * Number of objects per page. For majority of endpoints will default to 25
    */
   per?: number | undefined;
-  /**
-   * A string to search for in the object's names
-   */
-  searchTerm?: string | undefined;
-  /**
-   * Sort contractors. Options: type, onboarding_status, name, created_at (optionally with :asc or :desc suffix)
-   */
-  sortBy?: string | undefined;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type GetV1CompaniesCompanyUuidContractorsResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
-  contractorList?: Array<Contractor> | undefined;
+  contractors?: Array<Contractor> | undefined;
 };
 
 /** @internal */
+export const GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion
+  > = z.nativeEnum(GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion);
+
+/** @internal */
+export const SortBy$outboundSchema: z.ZodNativeEnum<typeof SortBy> = z
+  .nativeEnum(SortBy);
+
+/** @internal */
 export type GetV1CompaniesCompanyUuidContractorsRequest$Outbound = {
+  "X-Gusto-API-Version": string;
   company_uuid: string;
-  page?: number | undefined;
-  per?: number | undefined;
   search_term?: string | undefined;
   sort_by?: string | undefined;
-  "X-Gusto-API-Version": string;
+  onboarded?: boolean | undefined;
+  onboarded_active?: boolean | undefined;
+  terminated?: boolean | undefined;
+  terminated_today?: boolean | undefined;
+  page?: number | undefined;
+  per?: number | undefined;
 };
 
 /** @internal */
@@ -72,18 +127,26 @@ export const GetV1CompaniesCompanyUuidContractorsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyUuidContractorsRequest
   > = z.object({
+    xGustoAPIVersion:
+      GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     companyUuid: z.string(),
+    searchTerm: z.string().optional(),
+    sortBy: SortBy$outboundSchema.optional(),
+    onboarded: z.boolean().optional(),
+    onboardedActive: z.boolean().optional(),
+    terminated: z.boolean().optional(),
+    terminatedToday: z.boolean().optional(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    searchTerm: z.string().optional(),
-    sortBy: z.string().optional(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
+      xGustoAPIVersion: "X-Gusto-API-Version",
       companyUuid: "company_uuid",
       searchTerm: "search_term",
       sortBy: "sort_by",
-      xGustoAPIVersion: "X-Gusto-API-Version",
+      onboardedActive: "onboarded_active",
+      terminatedToday: "terminated_today",
     });
   });
 
@@ -106,11 +169,11 @@ export const GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema:
     unknown
   > = z.object({
     HttpMeta: HTTPMetadata$inboundSchema,
-    "Contractor-List": z.array(Contractor$inboundSchema).optional(),
+    Contractors: z.array(Contractor$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Contractor-List": "contractorList",
+      "Contractors": "contractors",
     });
   });
 

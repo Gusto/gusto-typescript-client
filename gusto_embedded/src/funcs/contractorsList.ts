@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -44,6 +48,7 @@ export function contractorsList(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyUuidContractorsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyUuidContractorsResponse,
+      | NotFoundErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -105,10 +111,14 @@ async function $do(
   );
 
   const query = encodeFormQuery({
+    "onboarded": payload.onboarded,
+    "onboarded_active": payload.onboarded_active,
     "page": payload.page,
     "per": payload.per,
     "search_term": payload.search_term,
     "sort_by": payload.sort_by,
+    "terminated": payload.terminated,
+    "terminated_today": payload.terminated_today,
   });
 
   const headers = new Headers(compactMap({
@@ -174,6 +184,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyUuidContractorsResponse,
+    | NotFoundErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -184,9 +195,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1CompaniesCompanyUuidContractorsResponse$inboundSchema, {
-      key: "Contractor-List",
+      key: "Contractors",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

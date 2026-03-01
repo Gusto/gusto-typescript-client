@@ -119,11 +119,11 @@ export class Contractors extends ClientSDK {
    * @remarks
    * Update a contractor.
    *
-   * scope: `contractors:write`
-   *
    * > 🚧 Warning
    * >
-   * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual
+   * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual
+   *
+   * scope: `contractors:write`
    */
   async update(
     request: PutV1ContractorsContractorUuidRequest,

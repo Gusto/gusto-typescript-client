@@ -21,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
   QueryParamFrequency,
@@ -45,6 +46,7 @@ export {
 };
 
 export type PaySchedulesGetPreviewQueryError =
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

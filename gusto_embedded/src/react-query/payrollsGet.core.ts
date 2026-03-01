@@ -16,7 +16,7 @@ import {
   GetV1CompaniesCompanyIdPayrollsPayrollIdQueryParamInclude,
   GetV1CompaniesCompanyIdPayrollsPayrollIdRequest,
   GetV1CompaniesCompanyIdPayrollsPayrollIdResponse,
-  SortBy,
+  QueryParamSortBy,
 } from "../models/operations/getv1companiescompanyidpayrollspayrollid.js";
 import { unwrapAsync } from "../types/fp.js";
 export type PayrollsGetQueryData =
@@ -88,7 +88,7 @@ export function queryKeyPayrollsGet(
       | undefined;
     page?: number | undefined;
     per?: number | undefined;
-    sortBy?: SortBy | undefined;
+    sortBy?: QueryParamSortBy | undefined;
   },
 ): QueryKey {
   return [

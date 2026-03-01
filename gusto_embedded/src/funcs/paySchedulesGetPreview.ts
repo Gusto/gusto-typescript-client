@@ -21,6 +21,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetV1CompaniesCompanyIdPaySchedulesPreviewRequest,
   GetV1CompaniesCompanyIdPaySchedulesPreviewRequest$outboundSchema,
   GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
@@ -44,6 +48,7 @@ export function paySchedulesGetPreview(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -69,6 +74,7 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -162,7 +168,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -177,6 +183,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdPaySchedulesPreviewResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -191,6 +198,7 @@ async function $do(
       GetV1CompaniesCompanyIdPaySchedulesPreviewResponse$inboundSchema,
       { key: "object" },
     ),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
