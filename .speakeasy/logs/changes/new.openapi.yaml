@@ -144,8 +144,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       requestBody:
@@ -343,8 +343,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       responses:
@@ -387,8 +387,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       requestBody:
@@ -919,8 +919,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       responses:
@@ -969,8 +969,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       responses:
@@ -1305,11 +1305,6 @@ paths:
         required onboarding steps with their respective completion state.
 
         scope: `company_onboarding_status:read`
-
-        ### Related guides
-        - [Company onboarding and setup](doc:company-onboarding)
-
-        scope: `company_onboarding_status:read`
       x-gusto-integration-type:
         - embedded
       operationId: get-v1-company-onboarding-status
@@ -1333,8 +1328,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       responses:
@@ -1360,8 +1355,6 @@ paths:
       description: |-
         Finalize a company's onboarding process.
 
-        scope: `companies:write`
-
         ### Approve a company in demo
 
         After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
@@ -1375,9 +1368,6 @@ paths:
 
         # Response: Company object, with company_status: 'Approved'
         ```
-
-        ### Related guides
-        - [Company onboarding and setup](doc:company-onboarding)
 
         scope: `companies:write`
       x-gusto-integration-type:
@@ -1397,8 +1387,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       x-gusto-rswag: true
       responses:
@@ -1486,8 +1476,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -1534,12 +1524,7 @@ paths:
         addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
 
         Since all company locations are subsets of locations, use the Locations endpoints to
-        [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
-
-        scope: `companies:write`
-
-        ## Related guides
-        - [Company locations and addresses](doc:company-locations)
+        [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
 
         scope: `companies:write`
       x-gusto-integration-type:
@@ -1576,8 +1561,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -1603,12 +1588,7 @@ paths:
         addresses, or work locations. A single address may serve multiple, or all, purposes.
 
         Since all company locations are subsets of locations, use the Locations endpoints to
-        [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
-
-        scope: `companies:read`
-
-        ## Related guides
-        - [Company locations and addresses](doc:company-locations)
+        [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
 
         scope: `companies:read`
       x-gusto-integration-type:
@@ -1620,8 +1600,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -1630,6 +1610,18 @@ paths:
           required: true
           schema:
             type: string
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page. For majority of endpoints will default to 25
+          schema:
+            type: integer
       x-gusto-rswag: true
       responses:
         '200':
@@ -2257,6 +2249,8 @@ paths:
           "$ref": "#/components/responses/External-Payroll-Tax-Suggestions-List"
         '404':
           "$ref": "#/components/responses/Not-Found-Error-Object"
+        '422':
+          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
       x-speakeasy-group: externalPayrolls
       x-speakeasy-name-override: calculateTaxes
   "/v1/companies/{company_uuid}/external_payrolls/tax_liabilities":
@@ -2614,6 +2608,8 @@ paths:
                     description: A list of dates for bank closures
                     items:
                       type: string
+        '422':
+          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
       operationId: get-v1-companies-company_id-pay_schedules-preview
       description: |-
         Provides a preview of a pay schedule with the specified parameters for the next 18 months.
@@ -3090,9 +3086,11 @@ paths:
                 last_name:
                   type: string
                 email:
-                  type: string
+                  type:
+                    - string
+                    - 'null'
                   format: email
-                  description: The employee's personal email address.
+                  description: The employee's personal email address. Required if self_onboarding is true.
                 work_email:
                   type: string
                   format: email
@@ -3798,6 +3796,8 @@ paths:
           description: No Content
         '404':
           "$ref": "#/components/responses/Employment-Not-Found-Error-Object"
+        '422':
+          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
       description: |-
         Delete an employee termination.
 
@@ -4118,7 +4118,10 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Employee-Address"
         '422':
-          description: unprocessable entity
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
               schema:
@@ -4256,7 +4259,10 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
-          description: unprocessable entity
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
               schema:
@@ -4331,7 +4337,10 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
-          description: unprocessable entity
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
               schema:
@@ -4655,8 +4664,6 @@ paths:
         Indicate whether to include the Form I-9 for an employee during the onboarding process.
         If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
 
-        scope: `employees:manage`
-
         ## Related guides
         - [Employee onboarding](doc:employee-onboarding)
 
@@ -4671,8 +4678,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -5058,7 +5065,10 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Not-Found-Error-Object"
         '422':
-          description: unprocessable entity
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
           content:
             application/json:
               schema:
@@ -5976,59 +5986,74 @@ paths:
       x-speakeasy-name-override: delete
   "/v1/companies/{company_uuid}/contractors":
     post:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Create an individual or business contractor.
+
+        scope: `contractors:manage`
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Create a contractor
       tags:
         - Contractors
+      x-gusto-rswag: true
       responses:
         '201':
-          "$ref": "#/components/responses/Created-Contractor-Object"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Contractor"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
-        '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: post-v1-companies-company_uuid-contractors
-      description: |-
-        Create an individual or business contractor.
+          description: |
+            Unprocessable Entity
 
-        scope: `contractors:manage`
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
+        '404':
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: post-v1-companies-company_uuid-contractors
       parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_uuid
+          in: path
+          required: true
+          description: The UUID of the company
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              allOf:
-                - "$ref": "#/components/schemas/Contractor-Body"
-                - required:
-                    - type
-                    - wage_type
-                    - start_date
-            examples:
-              Create an Individual contractor:
-                value:
-                  type: Individual
-                  wage_type: Fixed
-                  first_name: Johnson
-                  last_name: Johnson
-                  start_date: '2020-04-01'
-                  self_onboarding: true
-                  email: johnson@johnson.com
-                  file_new_hire_report: true,
-                  work_state: CA
-              Create a Business contractor:
-                value:
-                  type: Business
-                  wage_type: Fixed
-                  business_name: Johnson-Johnson Contractors
-                  start_date: '2020-04-01'
-        description: Create an individual or business contractor.
+              "$ref": "#/components/schemas/Contractor-Create-Request-Body"
       x-speakeasy-name-override: create
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get all contractors, active and inactive, individual and business, for a company.
+
+        scope: `contractors:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
@@ -6036,114 +6061,251 @@ paths:
       tags:
         - Contractors
       parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - "$ref": "#/components/parameters/pageParam"
-        - "$ref": "#/components/parameters/perParam"
-        - "$ref": "#/components/parameters/search_term"
-        - "$ref": "#/components/parameters/contractors_sort_by"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_uuid
+          in: path
+          required: true
+          description: The UUID of the company
+          schema:
+            type: string
+        - name: search_term
+          in: query
+          required: false
+          description: A string to search for in the object's names
+          schema:
+            type: string
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - type
+              - onboarding_status
+              - name
+              - created_at
+          description: 'Sort contractors. Options: type, onboarding_status, name, created_at'
+        - name: onboarded
+          in: query
+          required: false
+          description: Filters contractors by those who have completed onboarding
+          schema:
+            type: boolean
+        - name: onboarded_active
+          in: query
+          required: false
+          description: Filters contractors who are ready to work (onboarded AND active today)
+          schema:
+            type: boolean
+        - name: terminated
+          in: query
+          required: false
+          description: Filters contractors by those who have been or are scheduled to be dismissed
+          schema:
+            type: boolean
+        - name: terminated_today
+          in: query
+          required: false
+          description: Filters contractors by those who have been dismissed and whose dismissal is in effect today (excludes active and scheduled to be dismissed)
+          schema:
+            type: boolean
+        - name: page
+          in: query
+          required: false
+          description: The page that is requested. When unspecified, will load all objects unless endpoint forces pagination.
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Number of objects per page. For majority of endpoints will default to 25
+          schema:
+            type: integer
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Contractor-List"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Contractor"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-companies-company_uuid-contractors
-      description: |-
-        Get all contractors, active and inactive, individual and business, for a company.
+          description: |
+            Not Found
 
-        scope: `contractors:read`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-companies-company_uuid-contractors
       x-speakeasy-name-override: list
   "/v1/contractors/{contractor_uuid}":
     get:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Get a contractor.
+
+        scope: `contractors:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Get a contractor
       tags:
         - Contractors
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Contractor-Object"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Contractor"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-      operationId: get-v1-contractors-contractor_uuid
-      description: |-
-        Get a contractor.
+          description: |
+            Not Found
 
-        scope: `contractors:read`
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+      operationId: get-v1-contractors-contractor_uuid
       parameters:
-        - "$ref": "#/components/parameters/contractor_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: contractor_uuid
+          in: path
+          description: The UUID of the contractor
+          required: true
+          schema:
+            type: string
       x-speakeasy-name-override: get
     put:
+      security:
+        - CompanyAccessAuth: []
+      description: "Update a contractor.\n\n> \U0001F6A7 Warning\n>\n> Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual\n\nscope: `contractors:write`"
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Update a contractor
       tags:
         - Contractors
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Contractor-Object"
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Contractor"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: put-v1-contractors-contractor_uuid
       parameters:
-        - "$ref": "#/components/parameters/contractor_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
-      description: "Update a contractor.\n\nscope: `contractors:write`\n\n> \U0001F6A7 Warning\n>\n> Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: contractor_uuid
+          in: path
+          description: The UUID of the contractor
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              allOf:
-                - "$ref": "#/components/schemas/Versionable-Required"
-                - "$ref": "#/components/schemas/Contractor-Body"
-            examples:
-              Update an Individual Contractor:
-                value:
-                  version: b48c46abfed1487b873b442334b3c4ff
-                  start_date: '2021-01-01'
-                  first_name: Chanel
-                  last_name: Boyle
-                  middle_initial: X
-                  wage_type: Hourly
-                  hourly_rate: '20.00'
-                  is_active: true
-              Update a Business Contractor:
-                value:
-                  version: b48c46abfed1487b873b442334b3c4ff
-                  start_date: '2020-01-11'
-                  business_name: Contracting Solutions
-                  ein: '991113334'
-                  wage_type: Fixed
-                  is_active: false
-        description: ''
+              "$ref": "#/components/schemas/Contractor-Update-Request-Body"
       x-speakeasy-name-override: update
     delete:
-      x-gusto-integration-type:
-        - embedded
-      summary: Delete a contractor
-      operationId: delete-v1-contractors-contractor_uuid
-      responses:
-        '204':
-          description: No Content
-        '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
-        '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+      security:
+        - CompanyAccessAuth: []
       description: |-
         A contractor can only be deleted when there are no contractor payments.
 
         scope: `contractors:manage`
+      x-gusto-integration-type:
+        - embedded
+      summary: Delete a contractor
+      operationId: delete-v1-contractors-contractor_uuid
+      x-gusto-rswag: true
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: |
+            Not Found
+
+            The requested resource does not exist. Make sure the provided UUID is valid.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
+        '422':
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
       tags:
         - Contractors
       parameters:
-        - "$ref": "#/components/parameters/contractor_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2025-06-15'
+            default: '2025-06-15'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: contractor_uuid
+          in: path
+          description: The UUID of the contractor
+          required: true
+          schema:
+            type: string
       x-speakeasy-name-override: delete
   "/v1/contractors/{contractor_uuid}/bank_accounts":
     post:
@@ -7583,8 +7745,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -7740,8 +7902,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_id
           in: path
@@ -7874,8 +8036,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: payroll_uuid
           in: path
@@ -8006,8 +8168,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -8065,8 +8227,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -8138,8 +8300,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -8200,8 +8362,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -8256,8 +8418,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -8343,8 +8505,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -8401,8 +8563,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -11766,8 +11928,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -11816,8 +11978,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -11874,8 +12036,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -11922,8 +12084,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -11980,8 +12142,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -12055,8 +12217,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -12281,8 +12443,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -12336,8 +12498,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -12394,8 +12556,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -12440,8 +12602,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -12510,8 +12672,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -12580,8 +12742,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_uuid
           in: path
@@ -12669,8 +12831,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -12743,8 +12905,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: time_off_policy_uuid
           in: path
@@ -12801,8 +12963,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: starting_after_uuid
           in: query
@@ -13560,8 +13722,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -13667,8 +13829,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: uuid
           in: path
@@ -13712,8 +13874,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: uuid
           in: path
@@ -13821,8 +13983,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: uuid
           in: path
@@ -13881,8 +14043,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: search
           in: query
@@ -13928,8 +14090,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -14008,8 +14170,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: employee_id
           in: path
@@ -14093,8 +14255,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -14159,8 +14321,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -14250,8 +14412,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: id
           in: path
@@ -14297,8 +14459,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       security:
         - CompanyAccessAuth: []
@@ -14343,8 +14505,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       security:
         - CompanyAccessAuth: []
@@ -14414,8 +14576,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       security:
         - CompanyAccessAuth: []
@@ -14472,8 +14634,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       security:
         - CompanyAccessAuth: []
@@ -14529,8 +14691,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2025-11-15'
-            default: '2025-11-15'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       security:
         - CompanyAccessAuth: []
@@ -14871,8 +15033,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2025-11-15'
-            default: '2025-11-15'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
       security:
         - CompanyAccessAuth: []
@@ -15021,8 +15183,8 @@ paths:
           schema:
             type: string
             enum:
-              - '2024-04-01'
-            default: '2024-04-01'
+              - '2025-06-15'
+            default: '2025-06-15'
           description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
         - name: company_id
           in: path
@@ -18882,16 +19044,118 @@ components:
             - 'null'
           description: The contractor's department in the company.
           readOnly: true
+        department_title:
+          type:
+            - string
+            - 'null'
+          description: The title of the contractor's department.
+          readOnly: true
         dismissal_date:
           type:
             - string
             - 'null'
           description: The contractor's dismissal date.
           readOnly: true
+        upcoming_employment:
+          type:
+            - object
+            - 'null'
+          description: The contractor's upcoming employment details, if a rehire is scheduled.
+          readOnly: true
+          properties:
+            start_date:
+              type: string
+              description: The start date of the upcoming employment.
+            setup_status:
+              type:
+                - string
+                - 'null'
+              description: The setup status of the upcoming employment.
+        dismissal_cancellation_eligible:
+          type: boolean
+          description: Whether the contractor's pending dismissal can be cancelled.
+          readOnly: true
+        rehire_cancellation_eligible:
+          type: boolean
+          description: Whether the contractor's pending rehire can be cancelled.
+          readOnly: true
       x-tags:
         - Contractors
       required:
         - uuid
+      x-examples:
+        Individual Contractor:
+          uuid: c9fc1ad3-c107-4e7b-aa21-2dd4b00a7a07
+          company_uuid: b7457fec-3b76-43bb-9c6e-69cca4688942
+          wage_type: Hourly
+          start_date: '2022-01-01'
+          is_active: true
+          version: 63859768485e218ccf8a449bb60f14ed
+          type: Individual
+          first_name: Kory
+          last_name: Gottlieb
+          middle_initial: P
+          business_name:
+          ein:
+          has_ein: false
+          has_ssn: true
+          department_uuid: 56260b3d-c375-415c-b77a-75d99f717193
+          email: keira.west@mckenzie.org
+          file_new_hire_report: true
+          work_state: FL
+          onboarded: true
+          onboarding_status: onboarding_completed
+          address:
+            street_1: 621 Jast Row
+            street_2: Apt. 281
+            city: Coral Springs
+            state: FL
+            zip: '33065'
+            country: USA
+          hourly_rate: '60.00'
+          payment_method: Direct Deposit
+          department: Engineering
+          department_title: Engineering
+          dismissal_date:
+          upcoming_employment:
+          dismissal_cancellation_eligible: false
+          rehire_cancellation_eligible: false
+        Business Contractor:
+          uuid: c7c0659c-21a6-4b4e-b74c-9252576fc68c
+          company_uuid: 0ec4ae6e-e436-460d-b63c-94a14503d16f
+          wage_type: Fixed
+          start_date: '2022-01-01'
+          is_active: true
+          version: 8aab307f1e8ed788697f8986346af559
+          type: Business
+          first_name:
+          last_name:
+          middle_initial:
+          business_name: Labadie-Stroman
+          ein: XX-XXX0001
+          has_ein: true
+          has_ssn: false
+          email: jonatan@kerluke.info
+          file_new_hire_report: false
+          work_state:
+          onboarded: true
+          onboarding_status: onboarding_completed
+          address:
+            street_1: 1625 Bednar Center
+            street_2: Apt. 480
+            city: Port Charlotte
+            state: FL
+            zip: '33954'
+            country: USA
+          hourly_rate: '0.00'
+          payment_method: Direct Deposit
+          department_uuid:
+          department:
+          department_title:
+          dismissal_date:
+          upcoming_employment:
+          dismissal_cancellation_eligible: false
+          rehire_cancellation_eligible: false
     Contractor-Onboarding-Status:
       description: The representation of an contractor's onboarding status.
       type: object
@@ -27788,6 +28052,54 @@ components:
           i9_document: true
         disable_i9:
           i9_document: false
+    Contractor-Update-Request-Body:
+      description: Request body for updating a contractor.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/Versionable-Required"
+        - "$ref": "#/components/schemas/Contractor-Body"
+      x-examples:
+        update_individual_contractor:
+          version: b48c46abfed1487b873b442334b3c4ff
+          start_date: '2021-01-01'
+          first_name: Chanel
+          last_name: Boyle
+          middle_initial: X
+          wage_type: Hourly
+          hourly_rate: '20.00'
+          is_active: true
+        update_business_contractor:
+          version: b48c46abfed1487b873b442334b3c4ff
+          start_date: '2020-01-11'
+          business_name: Contracting Solutions
+          ein: '991113334'
+          wage_type: Fixed
+          is_active: false
+    Contractor-Create-Request-Body:
+      description: Request body for creating a contractor.
+      type: object
+      required:
+        - type
+        - wage_type
+        - start_date
+      allOf:
+        - "$ref": "#/components/schemas/Contractor-Body"
+      x-examples:
+        create_individual_contractor:
+          type: Individual
+          wage_type: Fixed
+          first_name: Johnson
+          last_name: Johnson
+          start_date: '2020-04-01'
+          self_onboarding: true
+          email: johnson@johnson.com
+          file_new_hire_report: true
+          work_state: CA
+        create_business_contractor:
+          type: Business
+          wage_type: Fixed
+          business_name: Johnson-Johnson Contractors
+          start_date: '2020-04-01'
   securitySchemes:
     CompanyAccessAuth:
       type: http

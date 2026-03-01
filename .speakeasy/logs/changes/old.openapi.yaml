@@ -1282,6 +1282,8 @@ paths:
           description: No Content
         '404':
           "$ref": "#/components/responses/Not-Found-Error-Object"
+        '422':
+          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
       description: |-
         Delete a company signatory.
 
@@ -1295,47 +1297,76 @@ paths:
       x-speakeasy-name-override: delete
   "/v1/companies/{company_uuid}/onboarding_status":
     get:
-      x-gusto-integration-type:
-        - embedded
-      summary: Get the company's onboarding status
-      operationId: get-v1-company-onboarding-status
-      parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - schema:
-            type: string
-            example: external_payroll
-          in: query
-          name: additional_steps
-          description: Comma delimited string indicating whether to include any additional steps of onboarding. Currently only supports the value "external_payroll".
-        - "$ref": "#/components/parameters/VersionHeader"
+      summary: Get company onboarding status
+      security:
+        - CompanyAccessAuth: []
       description: |-
-        Get company's onboarding status.
-        The data returned helps inform the required onboarding steps and respective completion status.
+        Retrieves a company's onboarding status, including whether onboarding is complete and the list of
+        required onboarding steps with their respective completion state.
 
         scope: `company_onboarding_status:read`
+
+        ### Related guides
+        - [Company onboarding and setup](doc:company-onboarding)
+
+        scope: `company_onboarding_status:read`
+      x-gusto-integration-type:
+        - embedded
+      operationId: get-v1-company-onboarding-status
+      parameters:
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          example: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          required: true
+          schema:
+            type: string
+        - name: additional_steps
+          in: query
+          required: false
+          example: external_payroll
+          description: Comma-delimited string of additional onboarding steps to include. Currently only supports the value "external_payroll".
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2024-04-01'
+            default: '2024-04-01'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Company-Onboarding-Status-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Company-Onboarding-Status"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       tags:
         - Companies
       x-speakeasy-name-override: getOnboardingStatus
   "/v1/companies/{company_uuid}/finish_onboarding":
     put:
-      x-gusto-integration-type:
-        - embedded
-      summary: Finish company onboarding
-      operationId: get-v1-company-finish-onboarding
-      parameters:
-        - "$ref": "#/components/parameters/company_uuid"
-        - "$ref": "#/components/parameters/VersionHeader"
+      security:
+        - CompanyAccessAuth: []
       description: |-
-        Finalize a given company's onboarding process.
+        Finalize a company's onboarding process.
+
+        scope: `companies:write`
 
         ### Approve a company in demo
-        After a company is finished onboarding, Gusto requires an additional step to review and approve that company. The company onboarding status is `"onboarding_completed": false`, until the API call is made to finish company onboarding.
-        In production environments, this step is required for risk-analysis purposes.
+
+        After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
+        The company onboarding status is "onboarding_completed": false, until the API call is made to finish company
+        onboarding. In production environments, this step is required for risk-analysis purposes.
 
         We provide the endpoint `PUT '/v1/companies/{company_uuid}/approve'` to facilitate company approvals in the demo environment.
 
@@ -1345,14 +1376,53 @@ paths:
         # Response: Company object, with company_status: 'Approved'
         ```
 
+        ### Related guides
+        - [Company onboarding and setup](doc:company-onboarding)
+
         scope: `companies:write`
+      x-gusto-integration-type:
+        - embedded
+      summary: Finish company onboarding
+      operationId: get-v1-company-finish-onboarding
+      parameters:
+        - name: company_uuid
+          in: path
+          description: The UUID of the company
+          example: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          required: true
+          schema:
+            type: string
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2024-04-01'
+            default: '2024-04-01'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Company-Onboarding-Status-Finish-Onboarding-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Company-Onboarding-Status"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       tags:
         - Companies
       x-speakeasy-name-override: finishOnboarding
@@ -1457,98 +1527,124 @@ paths:
       x-speakeasy-name-override: create
   "/v1/companies/{company_id}/locations":
     post:
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Create a company location, which represents any address associated with a company: mailing
+        addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
+
+        Since all company locations are subsets of locations, use the Locations endpoints to
+        [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+
+        scope: `companies:write`
+
+        ## Related guides
+        - [Company locations and addresses](doc:company-locations)
+
+        scope: `companies:write`
       x-gusto-integration-type:
         - embedded
         - app-integrations
       summary: Create a company location
+      x-gusto-rswag: true
       responses:
         '201':
-          "$ref": "#/components/responses/Location-Object"
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Location"
         '422':
-          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
+          description: |
+            Unprocessable Entity
+
+            This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Unprocessable-Entity-Error-Object"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: post-v1-companies-company_id-locations
-      description: |-
-        Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
-
-        Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
-
-        scope: `companies:write`
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2024-04-01'
+            default: '2024-04-01'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                phone_number:
-                  type: string
-                  pattern: "[0-9]{10}"
-                street_1:
-                  type: string
-                street_2:
-                  type:
-                    - string
-                    - 'null'
-                city:
-                  type: string
-                state:
-                  type: string
-                zip:
-                  type: string
-                mailing_address:
-                  type: boolean
-                  description: Specify if this location is the company's mailing address.
-                filing_address:
-                  type: boolean
-                  description: Specify if this location is the company's filing address.
-              required:
-                - phone_number
-                - street_1
-                - city
-                - state
-                - zip
-            examples:
-              Example:
-                value:
-                  phone_number: '8009360383'
-                  street_1: 425 2nd Street
-                  street_2: Suite 602
-                  city: San Francisco
-                  state: CA
-                  zip: '94107'
-                  country: USA
-        description: Create a company location.
+              "$ref": "#/components/schemas/Company-Location-Request"
       tags:
         - Locations
       x-speakeasy-name-override: create
     get:
+      summary: Get all company locations
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Retrieves all company locations (addresses) associated with a company: mailing addresses, filing
+        addresses, or work locations. A single address may serve multiple, or all, purposes.
+
+        Since all company locations are subsets of locations, use the Locations endpoints to
+        [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
+
+        scope: `companies:read`
+
+        ## Related guides
+        - [Company locations and addresses](doc:company-locations)
+
+        scope: `companies:read`
       x-gusto-integration-type:
         - embedded
         - app-integrations
-      summary: Get company locations
       parameters:
-        - "$ref": "#/components/parameters/company_id"
-        - "$ref": "#/components/parameters/pageParam"
-        - "$ref": "#/components/parameters/perParam"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2024-04-01'
+            default: '2024-04-01'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: company_id
+          in: path
+          description: The UUID of the company
+          example: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          required: true
+          schema:
+            type: string
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Location-List"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Company-Locations-List"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: get-v1-companies-company_id-locations
-      description: |-
-        Company locations represent all addresses associated with a company. These can be filing addresses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
-
-        Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
-
-        scope: `companies:read`
       tags:
         - Locations
       x-speakeasy-name-override: get
@@ -4552,38 +4648,59 @@ paths:
       x-speakeasy-name-override: getCustomFields
   "/v1/employees/{employee_id}/onboarding_documents_config":
     put:
+      summary: Update employee onboarding documents config
+      security:
+        - CompanyAccessAuth: []
+      description: |-
+        Indicate whether to include the Form I-9 for an employee during the onboarding process.
+        If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
+
+        scope: `employees:manage`
+
+        ## Related guides
+        - [Employee onboarding](doc:employee-onboarding)
+
+        scope: `employees:manage`
       x-gusto-integration-type:
         - embedded
-      summary: Update an employee's onboarding documents config
       tags:
         - Employees
       parameters:
-        - "$ref": "#/components/parameters/employee_id"
-        - "$ref": "#/components/parameters/VersionHeader"
+        - name: X-Gusto-API-Version
+          in: header
+          schema:
+            type: string
+            enum:
+              - '2024-04-01'
+            default: '2024-04-01'
+          description: Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+        - name: employee_id
+          in: path
+          required: true
+          description: The UUID of the employee
+          example: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          schema:
+            type: string
+      x-gusto-rswag: true
       responses:
         '200':
-          "$ref": "#/components/responses/Employee-Onboarding-Documents-Object"
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Employee-Onboarding-Document"
         '404':
-          "$ref": "#/components/responses/Not-Found-Error-Object"
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Not-Found-Error-Object"
       operationId: put-v1-employees-employee_id-onboarding_documents_config
-      description: |-
-        Indicate whether to include the Form I-9 for an employee during the onboarding process.
-
-        scope: `employees:manage`
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                i9_document:
-                  type: boolean
-                  description: Whether to include Form I-9 for an employee during onboarding
-            examples:
-              Example:
-                value:
-                  i9_document: true
+              "$ref": "#/components/schemas/Employee-Onboarding-Documents-Config-Request"
       x-speakeasy-name-override: updateOnboardingDocumentsConfig
   "/v1/employees/{employee_id}/onboarding_status":
     get:
@@ -6016,6 +6133,8 @@ paths:
           description: No Content
         '404':
           "$ref": "#/components/responses/Not-Found-Error-Object"
+        '422':
+          "$ref": "#/components/responses/Unprocessable-Entity-Error-Object"
       description: |-
         A contractor can only be deleted when there are no contractor payments.
 
@@ -6822,6 +6941,12 @@ paths:
                   description: The updated onboarding status for the contractor
                   default: onboarding_completed
                   enum:
+                    - admin_onboarding_incomplete
+                    - admin_onboarding_review
+                    - self_onboarding_not_invited
+                    - self_onboarding_invited
+                    - self_onboarding_started
+                    - self_onboarding_review
                     - onboarding_completed
               required:
                 - onboarding_status
@@ -8108,7 +8233,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
+                anyOf:
                   - "$ref": "#/components/schemas/Contractor-Payment-Summary"
                   - "$ref": "#/components/schemas/Contractor-Payment-Summary-By-Dates"
         '404':
@@ -8487,20 +8612,24 @@ paths:
                           - Historical Payment
                         default: Direct Deposit
                       wage:
-                        type: number
+                        type: string
+                        format: float
                         description: If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
-                        example: 5000
+                        example: '5000.0'
                       hours:
-                        type: number
-                        example: 40
+                        type: string
+                        format: float
+                        example: '40.0'
                         description: If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
                       bonus:
-                        type: number
-                        example: 500
+                        type: string
+                        format: float
+                        example: '500.0'
                         description: If the contractor is on an hourly wage, this is the bonus the contractor earned
                       reimbursement:
-                        type: number
-                        example: 20
+                        type: string
+                        format: float
+                        example: '20.0'
                         description: Reimbursed wages for the contractor
         required: true
       x-speakeasy-group: contractorPaymentGroups
@@ -8585,20 +8714,24 @@ paths:
                           - Historical Payment
                         default: Direct Deposit
                       wage:
-                        type: number
+                        type: string
+                        format: float
                         description: If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked
-                        example: 5000
+                        example: '5000.0'
                       hours:
-                        type: number
-                        example: 40
+                        type: string
+                        format: float
+                        example: '40.0'
                         description: If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment
                       bonus:
-                        type: number
-                        example: 500
+                        type: string
+                        format: float
+                        example: '500.0'
                         description: If the contractor is on an hourly wage, this is the bonus the contractor earned
                       reimbursement:
-                        type: number
-                        example: 20
+                        type: string
+                        format: float
+                        example: '20.0'
                         description: Reimbursed wages for the contractor
                 check_date:
                   type: string
@@ -15098,15 +15231,10 @@ components:
       name: sort_by
       in: query
       required: false
-      description: 'Sort company forms. Options: name, year, quarter, draft, document_content_type'
+      description: 'Sort company forms. Options: name, year, quarter, draft, document_content_type, created_at (optionally with :asc or :desc suffix)'
       schema:
         type: string
-        enum:
-          - name
-          - year
-          - quarter
-          - draft
-          - document_content_type
+        pattern: "^(name|year|quarter|draft|document_content_type|created_at)(:(asc|desc))?$"
     company_id:
       name: company_id
       in: path
@@ -15153,14 +15281,10 @@ components:
       name: sort_by
       in: query
       required: false
-      description: 'Sort contractors. Options: type, onboarding_status, name, created_at'
+      description: 'Sort contractors. Options: type, onboarding_status, name, created_at (optionally with :asc or :desc suffix)'
       schema:
         type: string
-        enum:
-          - type
-          - onboarding_status
-          - name
-          - created_at
+        pattern: "^(type|onboarding_status|name|created_at)(:(asc|desc))?$"
     department_uuid:
       name: department_uuid
       in: path
@@ -16295,7 +16419,7 @@ components:
           street_1: 300 3rd Street
           street_2: Apartment 318
           city: San Francisco
-          state: CO
+          state: CA
           zip: '94107'
           country: USA
           active: true
@@ -16612,12 +16736,30 @@ components:
         - uuid
     Employee-Onboarding-Document:
       type: object
-      description: Configuration for an employee onboarding documents during onboarding
+      description: Configuration for which onboarding documents (e.g. Form I-9) are required for an employee during onboarding.
       properties:
-        i9_document:
-          type: string
-          description: Whether to include Form I-9 for an employee during onboarding
+        uuid:
+          type:
+            - string
+            - 'null'
+          description: The UUID of the onboarding documents config record. Null when no config has been saved yet.
           readOnly: true
+        i9_document:
+          type: boolean
+          description: |
+            Whether to include Form I-9 for this employee during onboarding.
+            When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
+          readOnly: true
+      x-examples:
+        config_with_i9:
+          uuid: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          i9_document: true
+        config_without_i9:
+          uuid: 7b1d0df1-6403-4a06-8768-c1dd7d24d27a
+          i9_document: false
+        config_not_yet_saved:
+          uuid:
+          i9_document: false
     I9-Authorization:
       type: object
       description: An employee's I-9 authorization
@@ -19630,6 +19772,28 @@ components:
             - error_key: request
               category: not_found
               message: The requested resource was not found.
+        finish_onboarding_incomplete:
+          errors:
+            - error_key: base
+              category: invalid_operation
+              message: Company is not ready to exit onboarding.
+        company_location_validation:
+          errors:
+            - error_key: street_1
+              category: invalid_attribute_value
+              message: Must include a street address
+            - error_key: city
+              category: invalid_attribute_value
+              message: Must include a city
+            - error_key: state
+              category: invalid_attribute_value
+              message: State is in the wrong format
+            - error_key: zip
+              category: invalid_attribute_value
+              message: Please enter a valid zip code (e.g. 12345).
+            - error_key: phone_number
+              category: invalid_attribute_value
+              message: Phone number must be 10 digits
         conflict:
           errors:
             - error_key: request
@@ -27510,6 +27674,120 @@ components:
             timestamp: 1686784994
       items:
         "$ref": "#/components/schemas/Event"
+    Company-Location-Request:
+      type: object
+      description: Request body for creating a company location (company address).
+      properties:
+        street_1:
+          type: string
+          description: Street address line 1.
+          example: 300 3rd Street
+        street_2:
+          type:
+            - string
+            - 'null'
+          description: Street address line 2.
+          example: Apartment 318
+        city:
+          type: string
+          description: City.
+          example: San Francisco
+        state:
+          type: string
+          description: State code (e.g. CA). Must be a valid two-letter state code.
+          example: CA
+        zip:
+          type: string
+          description: ZIP code. Must be a valid US zip (e.g. 12345 or 12345-6789).
+          example: '94107'
+        country:
+          type: string
+          description: Country code. Defaults to USA.
+          default: USA
+          example: USA
+        phone_number:
+          type: string
+          description: Phone number. Must be 10 digits.
+          pattern: "[0-9]{10}"
+          example: '8009360383'
+        mailing_address:
+          type: boolean
+          description: Specify if this location is the company's mailing address.
+        filing_address:
+          type: boolean
+          description: Specify if this location is the company's filing address.
+      required:
+        - phone_number
+        - street_1
+        - city
+        - state
+        - zip
+      x-examples:
+        typical_location:
+          street_1: 300 3rd Street
+          street_2: Apartment 318
+          city: San Francisco
+          state: CA
+          zip: '94107'
+          country: USA
+          phone_number: '8009360383'
+          mailing_address: false
+          filing_address: false
+    Company-Locations-List:
+      type: array
+      x-examples:
+        success_status:
+          - uuid: 04552eb9-7829-4b18-ae96-6983552948df
+            version: 7d9753112507b9dda4fb97910f39b06e
+            company_uuid: 6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb
+            phone_number: 5825710808
+            street_1: 412 Kiera Stravenue
+            street_2: Suite 391
+            city: San Francisco
+            state: CA
+            zip: 94107
+            country: USA
+            mailing_address: false
+            filing_address: false
+            created_at:
+              "$ref": "#/components/schemas/Created-At-Type"
+            updated_at: '2023-09-12T16:42:25.000-07:00'
+            active: true
+            inactive: false
+          - uuid: fa94a2fd-11a8-4024-87ff-85c587d9d2b4
+            version: 15e6b9680e00f3122729e64e3cef3224
+            company_uuid: 6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb
+            phone_number: 2866070827
+            street_1: 644 Fay Vista
+            street_2: Suite 842
+            city: Richmond
+            state: VA
+            zip: 23218
+            country: USA,
+            mailing_address: true
+            filing_address: false
+            created_at:
+              "$ref": "#/components/schemas/Created-At-Type"
+            updated_at: '2023-09-12T16:42:25.000-07:00'
+            active: true
+            inactive: false
+      items:
+        "$ref": "#/components/schemas/Location"
+    Employee-Onboarding-Documents-Config-Request:
+      type: object
+      description: Request body for updating an employee's onboarding documents configuration.
+      properties:
+        i9_document:
+          type: boolean
+          default: false
+          description: |
+            Whether to include Form I-9 for this employee during onboarding.
+            When true, the employee will be prompted to complete Form I-9 as part of their onboarding.
+      x-examples:
+        enable_i9:
+          i9_document: true
+        disable_i9:
+          i9_document: false
   securitySchemes:
     CompanyAccessAuth:
       type: http

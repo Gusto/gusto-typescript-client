@@ -1,11 +1,11 @@
 # QueryParamSortBy
 
-Sort employee compensations by name
+Field to sort employee compensations by
 
 ## Example Usage
 
 ```typescript
-import { QueryParamSortBy } from "@gusto/embedded-api/models/operations/putv1companiescompanyidpayrollspayrollidprepare.js";
+import { QueryParamSortBy } from "@gusto/embedded-api/models/operations/getv1companiescompanyidpayrollspayrollid.js";
 
 let value: QueryParamSortBy = "first_name";
 ```

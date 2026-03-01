@@ -45,6 +45,8 @@ export function buildLocationsGetQuery(
   return {
     queryKey: queryKeyLocationsGet(request.companyId, {
       xGustoAPIVersion: request.xGustoAPIVersion,
+      page: request.page,
+      per: request.per,
     }),
     queryFn: async function locationsGetQueryFn(
       ctx,
@@ -75,6 +77,8 @@ export function queryKeyLocationsGet(
     xGustoAPIVersion?:
       | GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
       | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
   },
 ): QueryKey {
   return ["@gusto/embedded-api", "Locations", "get", companyId, parameters];

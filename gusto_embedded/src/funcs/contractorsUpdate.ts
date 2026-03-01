@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -39,11 +43,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Update a contractor.
  *
- * scope: `contractors:write`
- *
  * > 🚧 Warning
  * >
- * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual
+ * > Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual
+ *
+ * scope: `contractors:write`
  */
 export function contractorsUpdate(
   client: GustoEmbeddedCore,
@@ -52,6 +56,7 @@ export function contractorsUpdate(
 ): APIPromise<
   Result<
     PutV1ContractorsContractorUuidResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -78,6 +83,7 @@ async function $do(
   [
     Result<
       PutV1ContractorsContractorUuidResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -101,7 +107,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Contractor-Update-Request-Body"], {
+    explode: true,
+  });
 
   const pathParams = {
     contractor_uuid: encodeSimple("contractor_uuid", payload.contractor_uuid, {
@@ -175,6 +183,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1ContractorsContractorUuidResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -188,8 +197,9 @@ async function $do(
     M.json(200, PutV1ContractorsContractorUuidResponse$inboundSchema, {
       key: "Contractor",
     }),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
     M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -12,252 +12,61 @@ import {
   Contractor$inboundSchema,
 } from "../components/contractor.js";
 import {
+  ContractorUpdateRequestBody,
+  ContractorUpdateRequestBody$Outbound,
+  ContractorUpdateRequestBody$outboundSchema,
+} from "../components/contractorupdaterequestbody.js";
+import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The contractor type.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export const PutV1ContractorsContractorUuidType = {
-  Individual: "Individual",
-  Business: "Business",
+export const PutV1ContractorsContractorUuidHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
- * The contractor type.
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
-export type PutV1ContractorsContractorUuidType = ClosedEnum<
-  typeof PutV1ContractorsContractorUuidType
+export type PutV1ContractorsContractorUuidHeaderXGustoAPIVersion = ClosedEnum<
+  typeof PutV1ContractorsContractorUuidHeaderXGustoAPIVersion
 >;
-
-/**
- * The contractor’s wage type.
- *
- * @remarks
- */
-export const PutV1ContractorsContractorUuidWageType = {
-  Fixed: "Fixed",
-  Hourly: "Hourly",
-} as const;
-/**
- * The contractor’s wage type.
- *
- * @remarks
- */
-export type PutV1ContractorsContractorUuidWageType = ClosedEnum<
-  typeof PutV1ContractorsContractorUuidWageType
->;
-
-export type PutV1ContractorsContractorUuidRequestBody = {
-  /**
-   * The current version of the object. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version: string;
-  /**
-   * The contractor type.
-   */
-  type?: PutV1ContractorsContractorUuidType | undefined;
-  /**
-   * The contractor’s wage type.
-   *
-   * @remarks
-   */
-  wageType?: PutV1ContractorsContractorUuidWageType | undefined;
-  /**
-   * The day when the contractor will start working for the company.
-   *
-   * @remarks
-   */
-  startDate?: string | undefined;
-  /**
-   * The contractor’s hourly rate. This attribute is required if the wage_type is `Hourly`.
-   */
-  hourlyRate?: string | undefined;
-  /**
-   * Whether the contractor or the payroll admin will complete onboarding in Gusto.
-   *
-   * @remarks
-   * Self-onboarding is recommended so that contractors receive Gusto accounts.
-   * If self_onboarding is true, then email is required.
-   */
-  selfOnboarding?: boolean | undefined;
-  /**
-   * The contractor’s email address.
-   */
-  email?: string | undefined;
-  /**
-   * The contractor’s first name.
-   *
-   * @remarks
-   * This attribute is required for `Individual` contractors and will be ignored for `Business` contractors.
-   */
-  firstName?: string | undefined;
-  /**
-   * The contractor’s last name.
-   *
-   * @remarks
-   * This attribute is required for `Individual` contractors and will be ignored for `Business` contractors.
-   */
-  lastName?: string | undefined;
-  /**
-   * The contractor’s middle initial.
-   *
-   * @remarks
-   * This attribute is optional for `Individual` contractors and will be ignored for `Business` contractors.
-   */
-  middleInitial?: string | undefined;
-  /**
-   * The boolean flag indicating whether Gusto will file a new hire report for the contractor.
-   *
-   * @remarks
-   * This attribute is optional for `Individual` contractors and will be ignored for `Business` contractors.
-   */
-  fileNewHireReport?: boolean | undefined;
-  /**
-   * State where the contractor will be conducting the majority of their work for the company.
-   *
-   * @remarks
-   * This value is used when generating the new hire report.
-   * This attribute is required for `Individual` contractors if `file_new_hire_report` is true and will be ignored for `Business` contractors.
-   */
-  workState?: string | null | undefined;
-  /**
-   * This attribute is optional for `Individual` contractors and will be ignored for `Business` contractors.
-   *
-   * @remarks
-   * Social security number is needed to file the annual 1099 tax form.
-   */
-  ssn?: string | undefined;
-  /**
-   * The name of the contractor business. This attribute is required for `Business` contractors and will be ignored for `Individual` contractors.
-   */
-  businessName?: string | undefined;
-  /**
-   * The employer identification number of the contractor business.
-   *
-   * @remarks
-   * This attribute is optional for `Business` contractors and will be ignored for `Individual` contractors.
-   */
-  ein?: string | undefined;
-  /**
-   * The status of the contractor. If the contractor's start date is in the future, updating this field to true means we are setting the start date to today.
-   */
-  isActive?: boolean | undefined;
-};
 
 export type PutV1ContractorsContractorUuidRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | PutV1ContractorsContractorUuidHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the contractor
    */
   contractorUuid: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
-  requestBody: PutV1ContractorsContractorUuidRequestBody;
+  contractorUpdateRequestBody: ContractorUpdateRequestBody;
 };
 
 export type PutV1ContractorsContractorUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
-   * Example response
+   * Successful
    */
   contractor?: Contractor | undefined;
 };
 
 /** @internal */
-export const PutV1ContractorsContractorUuidType$outboundSchema: z.ZodNativeEnum<
-  typeof PutV1ContractorsContractorUuidType
-> = z.nativeEnum(PutV1ContractorsContractorUuidType);
-
-/** @internal */
-export const PutV1ContractorsContractorUuidWageType$outboundSchema:
-  z.ZodNativeEnum<typeof PutV1ContractorsContractorUuidWageType> = z.nativeEnum(
-    PutV1ContractorsContractorUuidWageType,
-  );
-
-/** @internal */
-export type PutV1ContractorsContractorUuidRequestBody$Outbound = {
-  version: string;
-  type: string;
-  wage_type?: string | undefined;
-  start_date?: string | undefined;
-  hourly_rate?: string | undefined;
-  self_onboarding: boolean;
-  email?: string | undefined;
-  first_name?: string | undefined;
-  last_name?: string | undefined;
-  middle_initial?: string | undefined;
-  file_new_hire_report: boolean;
-  work_state?: string | null | undefined;
-  ssn?: string | undefined;
-  business_name?: string | undefined;
-  ein?: string | undefined;
-  is_active?: boolean | undefined;
-};
-
-/** @internal */
-export const PutV1ContractorsContractorUuidRequestBody$outboundSchema:
-  z.ZodType<
-    PutV1ContractorsContractorUuidRequestBody$Outbound,
-    z.ZodTypeDef,
-    PutV1ContractorsContractorUuidRequestBody
-  > = z.object({
-    version: z.string(),
-    type: PutV1ContractorsContractorUuidType$outboundSchema.default(
-      "Individual",
-    ),
-    wageType: PutV1ContractorsContractorUuidWageType$outboundSchema.optional(),
-    startDate: z.string().optional(),
-    hourlyRate: z.string().optional(),
-    selfOnboarding: z.boolean().default(false),
-    email: z.string().optional(),
-    firstName: z.string().optional(),
-    lastName: z.string().optional(),
-    middleInitial: z.string().optional(),
-    fileNewHireReport: z.boolean().default(false),
-    workState: z.nullable(z.string()).optional(),
-    ssn: z.string().optional(),
-    businessName: z.string().optional(),
-    ein: z.string().optional(),
-    isActive: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      wageType: "wage_type",
-      startDate: "start_date",
-      hourlyRate: "hourly_rate",
-      selfOnboarding: "self_onboarding",
-      firstName: "first_name",
-      lastName: "last_name",
-      middleInitial: "middle_initial",
-      fileNewHireReport: "file_new_hire_report",
-      workState: "work_state",
-      businessName: "business_name",
-      isActive: "is_active",
-    });
-  });
-
-export function putV1ContractorsContractorUuidRequestBodyToJSON(
-  putV1ContractorsContractorUuidRequestBody:
-    PutV1ContractorsContractorUuidRequestBody,
-): string {
-  return JSON.stringify(
-    PutV1ContractorsContractorUuidRequestBody$outboundSchema.parse(
-      putV1ContractorsContractorUuidRequestBody,
-    ),
-  );
-}
+export const PutV1ContractorsContractorUuidHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<typeof PutV1ContractorsContractorUuidHeaderXGustoAPIVersion> =
+    z.nativeEnum(PutV1ContractorsContractorUuidHeaderXGustoAPIVersion);
 
 /** @internal */
 export type PutV1ContractorsContractorUuidRequest$Outbound = {
-  contractor_uuid: string;
   "X-Gusto-API-Version": string;
-  RequestBody: PutV1ContractorsContractorUuidRequestBody$Outbound;
+  contractor_uuid: string;
+  "Contractor-Update-Request-Body": ContractorUpdateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -266,16 +75,17 @@ export const PutV1ContractorsContractorUuidRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutV1ContractorsContractorUuidRequest
 > = z.object({
+  xGustoAPIVersion:
+    PutV1ContractorsContractorUuidHeaderXGustoAPIVersion$outboundSchema.default(
+      "2025-06-15",
+    ),
   contractorUuid: z.string(),
-  xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
-  requestBody: z.lazy(() =>
-    PutV1ContractorsContractorUuidRequestBody$outboundSchema
-  ),
+  contractorUpdateRequestBody: ContractorUpdateRequestBody$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    contractorUuid: "contractor_uuid",
     xGustoAPIVersion: "X-Gusto-API-Version",
-    requestBody: "RequestBody",
+    contractorUuid: "contractor_uuid",
+    contractorUpdateRequestBody: "Contractor-Update-Request-Body",
   });
 });
 

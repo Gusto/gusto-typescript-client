@@ -22,7 +22,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -35,14 +35,17 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersio
 /**
  * Sort employee compensations by name
  */
-export const QueryParamSortBy = {
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy = {
   FirstName: "first_name",
   LastName: "last_name",
 } as const;
 /**
  * Sort employee compensations by name
  */
-export type QueryParamSortBy = ClosedEnum<typeof QueryParamSortBy>;
+export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy =
+  ClosedEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy
+  >;
 
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody = {
   /**
@@ -77,7 +80,9 @@ export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest = {
   /**
    * Sort employee compensations by name
    */
-  sortBy?: QueryParamSortBy | undefined;
+  sortBy?:
+    | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy
+    | undefined;
   requestBody?:
     | PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody
     | undefined;
@@ -100,9 +105,12 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersi
   );
 
 /** @internal */
-export const QueryParamSortBy$outboundSchema: z.ZodNativeEnum<
-  typeof QueryParamSortBy
-> = z.nativeEnum(QueryParamSortBy);
+export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy
+  > = z.nativeEnum(
+    PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy,
+  );
 
 /** @internal */
 export type PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$Outbound =
@@ -156,12 +164,14 @@ export const PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequest$outboundSche
   > = z.object({
     xGustoAPIVersion:
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareHeaderXGustoAPIVersion$outboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     companyId: z.string(),
     payrollId: z.string(),
     page: z.number().int().optional(),
     per: z.number().int().optional(),
-    sortBy: QueryParamSortBy$outboundSchema.optional(),
+    sortBy:
+      PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareQueryParamSortBy$outboundSchema
+        .optional(),
     requestBody: z.lazy(() =>
       PutV1CompaniesCompanyIdPayrollsPayrollIdPrepareRequestBody$outboundSchema
     ).optional(),

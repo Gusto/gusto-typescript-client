@@ -63,12 +63,7 @@ export type LocationsGetQueryError =
  * addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
  * Since all company locations are subsets of locations, use the Locations endpoints to
- * [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
- *
- * scope: `companies:read`
- *
- * ## Related guides
- * - [Company locations and addresses](doc:company-locations)
+ * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
  *
  * scope: `companies:read`
  */
@@ -95,12 +90,7 @@ export function useLocationsGet(
  * addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
  * Since all company locations are subsets of locations, use the Locations endpoints to
- * [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
- *
- * scope: `companies:read`
- *
- * ## Related guides
- * - [Company locations and addresses](doc:company-locations)
+ * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
  *
  * scope: `companies:read`
  */
@@ -130,6 +120,8 @@ export function setLocationsGetData(
       xGustoAPIVersion?:
         | GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
         | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
     },
   ],
   data: LocationsGetQueryData,
@@ -148,6 +140,8 @@ export function invalidateLocationsGet(
         xGustoAPIVersion?:
           | GetV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion
           | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
       },
     ]
   >,

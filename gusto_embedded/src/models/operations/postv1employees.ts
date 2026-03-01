@@ -33,9 +33,9 @@ export type PostV1EmployeesRequestBody = {
   middleInitial?: string | undefined;
   lastName: string;
   /**
-   * The employee's personal email address.
+   * The employee's personal email address. Required if self_onboarding is true.
    */
-  email?: string | undefined;
+  email?: string | null | undefined;
   /**
    * The employee's work email address.
    */
@@ -80,7 +80,7 @@ export type PostV1EmployeesRequestBody$Outbound = {
   first_name: string;
   middle_initial?: string | undefined;
   last_name: string;
-  email?: string | undefined;
+  email?: string | null | undefined;
   work_email?: string | undefined;
   date_of_birth?: string | undefined;
   ssn?: string | undefined;
@@ -97,7 +97,7 @@ export const PostV1EmployeesRequestBody$outboundSchema: z.ZodType<
   firstName: z.string(),
   middleInitial: z.string().optional(),
   lastName: z.string(),
-  email: z.string().optional(),
+  email: z.nullable(z.string()).optional(),
   workEmail: z.string().optional(),
   dateOfBirth: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   ssn: z.string().optional(),

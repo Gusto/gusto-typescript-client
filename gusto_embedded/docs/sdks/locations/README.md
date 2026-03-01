@@ -16,12 +16,7 @@ Create a company location, which represents any address associated with a compan
 addresses, filing addresses, or work locations. A single address may serve multiple, or all, purposes.
 
 Since all company locations are subsets of locations, use the Locations endpoints to
-[retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
-
-scope: `companies:write`
-
-## Related guides
-- [Company locations and addresses](doc:company-locations)
+[get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
 
 scope: `companies:write`
 
@@ -375,12 +370,7 @@ Retrieves all company locations (addresses) associated with a company: mailing a
 addresses, or work locations. A single address may serve multiple, or all, purposes.
 
 Since all company locations are subsets of locations, use the Locations endpoints to
-[retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
-
-scope: `companies:read`
-
-## Related guides
-- [Company locations and addresses](doc:company-locations)
+[get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
 
 scope: `companies:read`
 
