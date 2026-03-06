@@ -3,7 +3,7 @@
  */
 
 import { GustoEmbeddedCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -41,12 +41,7 @@ import { Result } from "../types/fp.js";
  * addresses, or work locations. A single address may serve multiple, or all, purposes.
  *
  * Since all company locations are subsets of locations, use the Locations endpoints to
- * [retrieve](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
- *
- * scope: `companies:read`
- *
- * ## Related guides
- * - [Company locations and addresses](doc:company-locations)
+ * [get](ref:get-v1-locations-location_id) or [update](ref:put-v1-locations-location_id) an individual record.
  *
  * scope: `companies:read`
  */
@@ -117,6 +112,11 @@ async function $do(
 
   const path = pathToFunc("/v1/companies/{company_id}/locations")(pathParams);
 
+  const query = encodeFormQuery({
+    "page": payload.page,
+    "per": payload.per,
+  });
+
   const headers = new Headers(compactMap({
     Accept: "application/json",
     "X-Gusto-API-Version": encodeSimple(
@@ -153,6 +153,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,

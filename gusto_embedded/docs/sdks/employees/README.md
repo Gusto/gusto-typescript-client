@@ -1432,8 +1432,6 @@ import {
 Indicate whether to include the Form I-9 for an employee during the onboarding process.
 If included, the employee will be prompted to complete Form I-9 as part of their onboarding.
 
-scope: `employees:manage`
-
 ## Related guides
 - [Employee onboarding](doc:employee-onboarding)
 

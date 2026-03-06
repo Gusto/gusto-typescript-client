@@ -21,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
 import { GetV1ExternalPayrollCalculateTaxesRequest } from "../models/operations/getv1externalpayrollcalculatetaxes.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
@@ -42,6 +43,7 @@ export {
 };
 
 export type ExternalPayrollsCalculateTaxesQueryError =
+  | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError

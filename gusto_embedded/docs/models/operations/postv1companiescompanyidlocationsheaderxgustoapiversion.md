@@ -8,11 +8,11 @@ Determines the date-based API version associated with your API call. If none is 
 import { PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion } from "@gusto/embedded-api/models/operations/postv1companiescompanyidlocations.js";
 
 let value: PostV1CompaniesCompanyIdLocationsHeaderXGustoAPIVersion =
-  "2024-04-01";
+  "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```

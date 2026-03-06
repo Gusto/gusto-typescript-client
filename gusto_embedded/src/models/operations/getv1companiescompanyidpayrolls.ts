@@ -102,7 +102,7 @@ export type GetV1CompaniesCompanyIdPayrollsRequest = {
    */
   includeOffCycle?: boolean | undefined;
   /**
-   * Include the requested attribute in the response. The risk_blockers option will include submission_blockers and credit_blockers if applicable. The reversals option will include reversal payroll UUIDs if applicable. In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the values, i.e. `?include=totals,payroll_status_meta`. Results are paginated, with a maximum page size of 100 payrolls.
+   * Include the requested attribute in the response. The risk_blockers option will include submission_blockers and credit_blockers if applicable. The reversals option will include reversal payroll UUIDs if applicable. In v2023-04-01 totals are no longer included by default. For multiple attributes comma separate the values, i.e. `?include=totals,payroll_status_meta`.
    */
   include?: Array<GetV1CompaniesCompanyIdPayrollsQueryParamInclude> | undefined;
   /**

@@ -21,6 +21,10 @@ import {
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
+import {
   GetV1ExternalPayrollCalculateTaxesRequest,
   GetV1ExternalPayrollCalculateTaxesRequest$outboundSchema,
   GetV1ExternalPayrollCalculateTaxesResponse,
@@ -46,6 +50,7 @@ export function externalPayrollsCalculateTaxes(
 ): APIPromise<
   Result<
     GetV1ExternalPayrollCalculateTaxesResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -71,6 +76,7 @@ async function $do(
   [
     Result<
       GetV1ExternalPayrollCalculateTaxesResponse,
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -158,7 +164,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -173,6 +179,7 @@ async function $do(
 
   const [result] = await M.match<
     GetV1ExternalPayrollCalculateTaxesResponse,
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -185,6 +192,7 @@ async function $do(
     M.json(200, GetV1ExternalPayrollCalculateTaxesResponse$inboundSchema, {
       key: "External-Payroll-Tax-Suggestions-List",
     }),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
     M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

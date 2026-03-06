@@ -43,8 +43,6 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Finalize a company's onboarding process.
  *
- * scope: `companies:write`
- *
  * ### Approve a company in demo
  *
  * After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
@@ -58,9 +56,6 @@ import { Result } from "../types/fp.js";
  *
  * # Response: Company object, with company_status: 'Approved'
  * ```
- *
- * ### Related guides
- * - [Company onboarding and setup](doc:company-onboarding)
  *
  * scope: `companies:write`
  */

@@ -2348,11 +2348,6 @@ required onboarding steps with their respective completion state.
 
 scope: `company_onboarding_status:read`
 
-### Related guides
-- [Company onboarding and setup](doc:company-onboarding)
-
-scope: `company_onboarding_status:read`
-
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="get-v1-company-onboarding-status" method="get" path="/v1/companies/{company_uuid}/onboarding_status" example="Example" -->
@@ -2457,8 +2452,6 @@ import {
 
 Finalize a company's onboarding process.
 
-scope: `companies:write`
-
 ### Approve a company in demo
 
 After a company is finished onboarding, Gusto requires an additional step to review and approve that company.
@@ -2472,9 +2465,6 @@ PUT '/v1/companies/89771af8-b964-472e-8064-554dfbcb56d9/approve'
 
 # Response: Company object, with company_status: 'Approved'
 ```
-
-### Related guides
-- [Company onboarding and setup](doc:company-onboarding)
 
 scope: `companies:write`
 

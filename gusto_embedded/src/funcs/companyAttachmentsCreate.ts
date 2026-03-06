@@ -118,6 +118,18 @@ async function $do(
       || "application/octet-stream";
     const blob = new Blob([buffer], { type: contentType });
     appendForm(body, "document", blob, payload.RequestBody.document.fileName);
+  } else if (payload.RequestBody.document.content instanceof Uint8Array) {
+    const contentType =
+      getContentTypeFromFileName(payload.RequestBody.document.fileName)
+      || "application/octet-stream";
+    appendForm(
+      body,
+      "document",
+      new Blob([new Uint8Array(payload.RequestBody.document.content).buffer], {
+        type: contentType,
+      }),
+      payload.RequestBody.document.fileName,
+    );
   } else {
     const contentType =
       getContentTypeFromFileName(payload.RequestBody.document.fileName)

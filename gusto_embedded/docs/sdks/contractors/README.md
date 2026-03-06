@@ -34,7 +34,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.create({
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -64,7 +64,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -110,7 +110,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.create({
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -140,7 +140,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -186,7 +186,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.create({
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       type: "Business",
       wageType: "Fixed",
       startDate: "2020-04-01",
@@ -217,7 +217,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       type: "Business",
       wageType: "Fixed",
       startDate: "2020-04-01",
@@ -264,7 +264,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.create({
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-04-01",
       selfOnboarding: true,
@@ -298,7 +298,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-04-01",
       selfOnboarding: true,
@@ -348,7 +348,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.create({
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -378,7 +378,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -424,7 +424,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.create({
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -454,7 +454,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -500,7 +500,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.create({
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -530,7 +530,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    contractorCreateRequestBody: {
       wageType: "Fixed",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -581,6 +581,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -683,9 +684,10 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
@@ -863,19 +865,20 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
 Update a contractor.
 
-scope: `contractors:write`
-
 > 🚧 Warning
 >
-> Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won’t recognize and file two separate 1099s if they simply change from business to individual
+> Watch out when changing a contractor's type (when the contractor is finished onboarding). Specifically, changing contractor type can be dangerous since Gusto won't recognize and file two separate 1099s if they simply change from business to individual
+
+scope: `contractors:write`
 
 ### Example Usage: Basic
 
@@ -890,7 +893,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.update({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -920,7 +923,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsUpdate(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -966,7 +969,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.update({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -996,7 +999,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsUpdate(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -1042,7 +1045,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.update({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -1072,7 +1075,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsUpdate(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -1118,7 +1121,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.update({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -1148,7 +1151,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsUpdate(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -1194,7 +1197,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.update({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -1224,7 +1227,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsUpdate(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "56d00c178bc7393b2a206ed6a86afcb4",
       startDate: "2020-01-11",
       hourlyRate: "40.0",
@@ -1270,7 +1273,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.update({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "b48c46abfed1487b873b442334b3c4ff",
       wageType: "Fixed",
       startDate: "2020-01-11",
@@ -1303,7 +1306,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsUpdate(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "b48c46abfed1487b873b442334b3c4ff",
       wageType: "Fixed",
       startDate: "2020-01-11",
@@ -1352,7 +1355,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.contractors.update({
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "b48c46abfed1487b873b442334b3c4ff",
       wageType: "Hourly",
       startDate: "2021-01-01",
@@ -1387,7 +1390,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await contractorsUpdate(gustoEmbedded, {
     contractorUuid: "<id>",
-    requestBody: {
+    contractorUpdateRequestBody: {
       version: "b48c46abfed1487b873b442334b3c4ff",
       wageType: "Hourly",
       startDate: "2021-01-01",
@@ -1443,6 +1446,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
@@ -1536,6 +1540,7 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 

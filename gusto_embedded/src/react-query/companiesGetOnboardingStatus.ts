@@ -63,11 +63,6 @@ export type CompaniesGetOnboardingStatusQueryError =
  * required onboarding steps with their respective completion state.
  *
  * scope: `company_onboarding_status:read`
- *
- * ### Related guides
- * - [Company onboarding and setup](doc:company-onboarding)
- *
- * scope: `company_onboarding_status:read`
  */
 export function useCompaniesGetOnboardingStatus(
   request: GetV1CompanyOnboardingStatusRequest,
@@ -96,11 +91,6 @@ export function useCompaniesGetOnboardingStatus(
  * @remarks
  * Retrieves a company's onboarding status, including whether onboarding is complete and the list of
  * required onboarding steps with their respective completion state.
- *
- * scope: `company_onboarding_status:read`
- *
- * ### Related guides
- * - [Company onboarding and setup](doc:company-onboarding)
  *
  * scope: `company_onboarding_status:read`
  */

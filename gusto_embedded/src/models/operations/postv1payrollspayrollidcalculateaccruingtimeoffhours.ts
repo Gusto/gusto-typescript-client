@@ -27,7 +27,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion =
   {
-    TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+    TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
   } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -95,7 +95,7 @@ export const PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursRequest$outboun
   > = z.object({
     xGustoAPIVersion:
       PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion$outboundSchema
-        .default("2024-04-01"),
+        .default("2025-06-15"),
     payrollId: z.string(),
     employeeId: z.string(),
     payrollCalculateAccruingTimeOffHoursRequest:

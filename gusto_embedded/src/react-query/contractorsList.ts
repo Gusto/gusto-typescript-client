@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyUuidContractorsRequest } from "../models/operations/getv1companiescompanyuuidcontractors.js";
+import {
+  GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyUuidContractorsRequest,
+} from "../models/operations/getv1companiescompanyuuidcontractors.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type ContractorsListQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -108,11 +112,17 @@ export function setContractorsListData(
   queryKeyBase: [
     companyUuid: string,
     parameters: {
-      page?: number | undefined;
-      per?: number | undefined;
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion
+        | undefined;
       searchTerm?: string | undefined;
       sortBy?: string | undefined;
-      xGustoAPIVersion?: VersionHeader | undefined;
+      onboarded?: boolean | undefined;
+      onboardedActive?: boolean | undefined;
+      terminated?: boolean | undefined;
+      terminatedToday?: boolean | undefined;
+      page?: number | undefined;
+      per?: number | undefined;
     },
   ],
   data: ContractorsListQueryData,
@@ -128,11 +138,17 @@ export function invalidateContractorsList(
     [
       companyUuid: string,
       parameters: {
-        page?: number | undefined;
-        per?: number | undefined;
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion
+          | undefined;
         searchTerm?: string | undefined;
         sortBy?: string | undefined;
-        xGustoAPIVersion?: VersionHeader | undefined;
+        onboarded?: boolean | undefined;
+        onboardedActive?: boolean | undefined;
+        terminated?: boolean | undefined;
+        terminatedToday?: boolean | undefined;
+        page?: number | undefined;
+        per?: number | undefined;
       },
     ]
   >,

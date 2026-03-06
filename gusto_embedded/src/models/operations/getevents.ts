@@ -22,7 +22,7 @@ export type GetEventsSecurity = {
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
  */
 export const GetEventsHeaderXGustoAPIVersion = {
-  TwoThousandAndTwentyFourMinus04Minus01: "2024-04-01",
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
 } as const;
 /**
  * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
@@ -131,7 +131,7 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
   GetEventsRequest
 > = z.object({
   xGustoAPIVersion: GetEventsHeaderXGustoAPIVersion$outboundSchema.default(
-    "2024-04-01",
+    "2025-06-15",
   ),
   startingAfterUuid: z.string().optional(),
   resourceUuid: z.string().optional(),
