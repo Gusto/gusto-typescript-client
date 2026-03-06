@@ -56,7 +56,7 @@ export type PutV1TaxLiabilitiesResponse = {
   /**
    * Example response
    */
-  taxLiabilitiesList?: Array<Array<TaxLiabilitiesSelections>> | undefined;
+  taxLiabilitiesList?: Array<TaxLiabilitiesSelections> | undefined;
 };
 
 /** @internal */
@@ -159,9 +159,8 @@ export const PutV1TaxLiabilitiesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  "Tax-Liabilities-List": z.array(
-    z.array(TaxLiabilitiesSelections$inboundSchema),
-  ).optional(),
+  "Tax-Liabilities-List": z.array(TaxLiabilitiesSelections$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",

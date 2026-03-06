@@ -11,8 +11,8 @@ import { GustoEmbeddedCore } from "../core.js";
 import { contractorsList } from "../funcs/contractorsList.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { VersionHeader } from "../models/components/versionheader.js";
 import {
+  GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion,
   GetV1CompaniesCompanyUuidContractorsRequest,
   GetV1CompaniesCompanyUuidContractorsResponse,
 } from "../models/operations/getv1companiescompanyuuidcontractors.js";
@@ -45,11 +45,15 @@ export function buildContractorsListQuery(
 } {
   return {
     queryKey: queryKeyContractorsList(request.companyUuid, {
-      page: request.page,
-      per: request.per,
+      xGustoAPIVersion: request.xGustoAPIVersion,
       searchTerm: request.searchTerm,
       sortBy: request.sortBy,
-      xGustoAPIVersion: request.xGustoAPIVersion,
+      onboarded: request.onboarded,
+      onboardedActive: request.onboardedActive,
+      terminated: request.terminated,
+      terminatedToday: request.terminatedToday,
+      page: request.page,
+      per: request.per,
     }),
     queryFn: async function contractorsListQueryFn(
       ctx,
@@ -77,11 +81,17 @@ export function buildContractorsListQuery(
 export function queryKeyContractorsList(
   companyUuid: string,
   parameters: {
-    page?: number | undefined;
-    per?: number | undefined;
+    xGustoAPIVersion?:
+      | GetV1CompaniesCompanyUuidContractorsHeaderXGustoAPIVersion
+      | undefined;
     searchTerm?: string | undefined;
     sortBy?: string | undefined;
-    xGustoAPIVersion?: VersionHeader | undefined;
+    onboarded?: boolean | undefined;
+    onboardedActive?: boolean | undefined;
+    terminated?: boolean | undefined;
+    terminatedToday?: boolean | undefined;
+    page?: number | undefined;
+    per?: number | undefined;
   },
 ): QueryKey {
   return [

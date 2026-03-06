@@ -9,11 +9,11 @@ import { GetV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAP
 
 let value:
   GetV1CompaniesCompanyIdContractorPaymentContractorPaymentHeaderXGustoAPIVersion =
-    "2024-04-01";
+    "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```

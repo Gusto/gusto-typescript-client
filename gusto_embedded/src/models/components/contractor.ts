@@ -12,14 +12,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
-export const WageType = {
+export const ContractorWageType = {
   Fixed: "Fixed",
   Hourly: "Hourly",
 } as const;
 /**
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
-export type WageType = ClosedEnum<typeof WageType>;
+export type ContractorWageType = ClosedEnum<typeof ContractorWageType>;
 
 /**
  * The contractor's type, either "Individual" or "Business".
@@ -73,6 +73,20 @@ export type ContractorPaymentMethod1 = ClosedEnum<
 >;
 
 /**
+ * The contractor's upcoming employment details, if a rehire is scheduled.
+ */
+export type UpcomingEmployment = {
+  /**
+   * The start date of the upcoming employment.
+   */
+  startDate?: string | undefined;
+  /**
+   * The setup status of the upcoming employment.
+   */
+  setupStatus?: string | null | undefined;
+};
+
+/**
  * The representation of a contractor (individual or business) in Gusto.
  */
 export type Contractor = {
@@ -87,7 +101,7 @@ export type Contractor = {
   /**
    * The contractor's wage type, either "Fixed" or "Hourly".
    */
-  wageType?: WageType | undefined;
+  wageType?: ContractorWageType | undefined;
   /**
    * The status of the contractor with the company.
    */
@@ -176,14 +190,31 @@ export type Contractor = {
    */
   department?: string | null | undefined;
   /**
+   * The title of the contractor's department.
+   */
+  departmentTitle?: string | null | undefined;
+  /**
    * The contractor's dismissal date.
    */
   dismissalDate?: string | null | undefined;
+  /**
+   * The contractor's upcoming employment details, if a rehire is scheduled.
+   */
+  upcomingEmployment?: UpcomingEmployment | null | undefined;
+  /**
+   * Whether the contractor's pending dismissal can be cancelled.
+   */
+  dismissalCancellationEligible?: boolean | undefined;
+  /**
+   * Whether the contractor's pending rehire can be cancelled.
+   */
+  rehireCancellationEligible?: boolean | undefined;
 };
 
 /** @internal */
-export const WageType$inboundSchema: z.ZodNativeEnum<typeof WageType> = z
-  .nativeEnum(WageType);
+export const ContractorWageType$inboundSchema: z.ZodNativeEnum<
+  typeof ContractorWageType
+> = z.nativeEnum(ContractorWageType);
 
 /** @internal */
 export const ContractorType$inboundSchema: z.ZodNativeEnum<
@@ -227,6 +258,31 @@ export const ContractorPaymentMethod1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ContractorPaymentMethod1);
 
 /** @internal */
+export const UpcomingEmployment$inboundSchema: z.ZodType<
+  UpcomingEmployment,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  start_date: z.string().optional(),
+  setup_status: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_date": "startDate",
+    "setup_status": "setupStatus",
+  });
+});
+
+export function upcomingEmploymentFromJSON(
+  jsonString: string,
+): SafeParseResult<UpcomingEmployment, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpcomingEmployment$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpcomingEmployment' from JSON`,
+  );
+}
+
+/** @internal */
 export const Contractor$inboundSchema: z.ZodType<
   Contractor,
   z.ZodTypeDef,
@@ -234,7 +290,7 @@ export const Contractor$inboundSchema: z.ZodType<
 > = z.object({
   uuid: z.string(),
   company_uuid: z.string().optional(),
-  wage_type: WageType$inboundSchema.optional(),
+  wage_type: ContractorWageType$inboundSchema.optional(),
   is_active: z.boolean().default(true),
   version: z.string().optional(),
   type: ContractorType$inboundSchema.optional(),
@@ -256,7 +312,13 @@ export const Contractor$inboundSchema: z.ZodType<
   has_ssn: z.boolean().optional(),
   department_uuid: z.nullable(z.string()).optional(),
   department: z.nullable(z.string()).optional(),
+  department_title: z.nullable(z.string()).optional(),
   dismissal_date: z.nullable(z.string()).optional(),
+  upcoming_employment: z.nullable(
+    z.lazy(() => UpcomingEmployment$inboundSchema),
+  ).optional(),
+  dismissal_cancellation_eligible: z.boolean().optional(),
+  rehire_cancellation_eligible: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "company_uuid": "companyUuid",
@@ -275,7 +337,11 @@ export const Contractor$inboundSchema: z.ZodType<
     "payment_method": "paymentMethod",
     "has_ssn": "hasSsn",
     "department_uuid": "departmentUuid",
+    "department_title": "departmentTitle",
     "dismissal_date": "dismissalDate",
+    "upcoming_employment": "upcomingEmployment",
+    "dismissal_cancellation_eligible": "dismissalCancellationEligible",
+    "rehire_cancellation_eligible": "rehireCancellationEligible",
   });
 });
 

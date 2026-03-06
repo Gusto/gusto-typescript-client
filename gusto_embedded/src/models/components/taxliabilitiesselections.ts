@@ -24,7 +24,7 @@ export type PossibleLiabilities = {
 };
 
 /**
- * Example response
+ * The representation of tax liabilities selections.
  */
 export type TaxLiabilitiesSelections = {
   /**

@@ -9,11 +9,11 @@ import { PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVers
 
 let value:
   PostV1PayrollsPayrollIdCalculateAccruingTimeOffHoursHeaderXGustoAPIVersion =
-    "2024-04-01";
+    "2025-06-15";
 ```
 
 ## Values
 
 ```typescript
-"2024-04-01"
+"2025-06-15"
 ```
