@@ -155,13 +155,14 @@ export class JobsAndCompensations extends ClientSDK {
    * Get compensations for a job
    *
    * @remarks
-   * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. By default the API returns only the current compensation - see the `include` query parameter for retrieving all compensations.
+   * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
    *
-   * Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same `job_uuid` as another will fail with a relevant error.
+   * *Note: Currently the API does not support creating multiple compensations per job - creating a compensation with the same job_uuid as another will fail with a relevant error.*
    *
-   * Use `flsa_status` to determine if an employee is eligible for overtime.
+   * Use `flsa_status` to determine if an employee is eligible for overtime
+   * By default the API returns only the current compensation - use the `include` parameter to return all compensations.
    *
-   * scope: `jobs:read`
+   * scope: `compensations:read`
    */
   async getCompensations(
     request: GetV1JobsJobIdCompensationsRequest,
@@ -180,7 +181,14 @@ export class JobsAndCompensations extends ClientSDK {
    * @remarks
    * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
    *
-   * scope: `jobs:write`
+   * ### Prerequisites
+   * Before calling this endpoint:
+   * 1. A [job](ref:post-v1-jobs-job_id) must exist for the employee
+   *
+   * ### Webhooks
+   * - `employee_job_compensation.created`: Fires when a compensation is successfully created
+   *
+   * scope: `compensations:write`
    */
   async createCompensation(
     request: PostV1CompensationsCompensationIdRequest,
@@ -199,7 +207,7 @@ export class JobsAndCompensations extends ClientSDK {
    * @remarks
    * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
    *
-   * scope: `jobs:read`
+   * scope: `compensations:read`
    */
   async getCompensation(
     request: GetV1CompensationsCompensationIdRequest,
@@ -218,7 +226,10 @@ export class JobsAndCompensations extends ClientSDK {
    * @remarks
    * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
    *
-   * scope: `jobs:write`
+   * ### Webhooks
+   * - `employee_job_compensation.updated`: Fires when a compensation is successfully updated
+   *
+   * scope: `compensations:write`
    */
   async updateCompensation(
     request: PutV1CompensationsCompensationIdRequest,
@@ -237,7 +248,10 @@ export class JobsAndCompensations extends ClientSDK {
    * @remarks
    * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
    *
-   * scope: `jobs:write`
+   * ### Webhooks
+   * - `employee_job_compensation.destroyed`: Fires when a compensation is successfully deleted
+   *
+   * scope: `compensations:write`
    */
   async deleteCompensation(
     request: DeleteV1CompensationsCompensationIdRequest,

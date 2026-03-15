@@ -24,7 +24,7 @@ export type PayrollEmployeeCompensationsTypePaymentMethod = ClosedEnum<
   typeof PayrollEmployeeCompensationsTypePaymentMethod
 >;
 
-export type FixedCompensations = {
+export type PayrollEmployeeCompensationsTypeFixedCompensations = {
   /**
    * The name of the compensation. This also serves as the unique, immutable identifier for this compensation.
    */
@@ -39,7 +39,7 @@ export type FixedCompensations = {
   jobUuid?: string | undefined;
 };
 
-export type HourlyCompensations = {
+export type PayrollEmployeeCompensationsTypeHourlyCompensations = {
   /**
    * The name of the compensation. This also serves as the unique, immutable identifier for this compensation.
    */
@@ -81,6 +81,25 @@ export type PayrollEmployeeCompensationsTypePaidTimeOff = {
   finalPayoutUnusedHoursInput?: string | undefined;
 };
 
+export type PayrollEmployeeCompensationsTypeReimbursements = {
+  /**
+   * The dollar amount of the reimbursement for the pay period.
+   */
+  amount: string;
+  /**
+   * The description of the reimbursement. Null for unnamed reimbursements.
+   */
+  description: string | null;
+  /**
+   * The UUID of the reimbursement. Null for unnamed reimbursements. This field is only available for unprocessed payrolls.
+   */
+  uuid?: string | null | undefined;
+  /**
+   * Whether the reimbursement is recurring. This field is only available for unprocessed payrolls.
+   */
+  recurring?: boolean | undefined;
+};
+
 /**
  * The amount type of the deduction for the pay period. Only present for calculated or processed payrolls.
  */
@@ -93,9 +112,6 @@ export const AmountType = {
  */
 export type AmountType = ClosedEnum<typeof AmountType>;
 
-/**
- * An array of deductions for the employee.
- */
 export type Deductions = {
   /**
    * The name of the deduction.
@@ -115,25 +131,6 @@ export type Deductions = {
   uuid?: string | undefined;
 };
 
-export type Reimbursements = {
-  /**
-   * The dollar amount of the reimbursement for the pay period.
-   */
-  amount: string;
-  /**
-   * The description of the reimbursement. Null for unnamed reimbursements.
-   */
-  description: string | null;
-  /**
-   * The UUID of the reimbursement. Null for unnamed reimbursements. This field is only available for unprocessed payrolls.
-   */
-  uuid?: string | null | undefined;
-  /**
-   * Whether the reimbursement is recurring. This field is only available for unprocessed payrolls.
-   */
-  recurring?: boolean | undefined;
-};
-
 export type PayrollEmployeeCompensationsType = {
   /**
    * The UUID of the employee.
@@ -143,10 +140,6 @@ export type PayrollEmployeeCompensationsType = {
    * This employee will be excluded (skipped) from payroll calculation and will not be paid for the payroll. Cancelling a payroll would reset all employees' excluded back to false.
    */
   excluded?: boolean | undefined;
-  /**
-   * The current version of this employee compensation. This field is only available for prepared payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
-   */
-  version?: string | undefined;
   /**
    * The first name of the employee. Requires `employees:read` scope.
    */
@@ -185,20 +178,33 @@ export type PayrollEmployeeCompensationsType = {
   /**
    * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been processed, only fixed compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active fixed compensations are returned.
    */
-  fixedCompensations?: Array<FixedCompensations> | undefined;
+  fixedCompensations?:
+    | Array<PayrollEmployeeCompensationsTypeFixedCompensations>
+    | undefined;
   /**
    * An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours. If this payroll has been processed, only hourly compensations with a value greater than 0.00 are returned. For an unprocessed payroll, all active hourly compensations are returned.
    */
-  hourlyCompensations?: Array<HourlyCompensations> | undefined;
+  hourlyCompensations?:
+    | Array<PayrollEmployeeCompensationsTypeHourlyCompensations>
+    | undefined;
   /**
    * An array of all paid time off the employee is eligible for this pay period.
    */
   paidTimeOff?: Array<PayrollEmployeeCompensationsTypePaidTimeOff> | undefined;
-  deductions?: Array<Deductions> | undefined;
   /**
    * An array of reimbursements for the employee.
    */
-  reimbursements?: Array<Reimbursements> | undefined;
+  reimbursements?:
+    | Array<PayrollEmployeeCompensationsTypeReimbursements>
+    | undefined;
+  /**
+   * The current version of this employee compensation. This field is only available for prepared payrolls. See the [versioning guide](https://docs.gusto.com/embedded-payroll/docs/idempotency) for information on how to use this field.
+   */
+  version?: any | undefined;
+  /**
+   * An array of deductions for the employee. This field is included by default for regular payrolls in version `v2025-06-15` and later.
+   */
+  deductions?: Array<Deductions> | undefined;
 };
 
 /** @internal */
@@ -207,57 +213,71 @@ export const PayrollEmployeeCompensationsTypePaymentMethod$inboundSchema:
     .nativeEnum(PayrollEmployeeCompensationsTypePaymentMethod);
 
 /** @internal */
-export const FixedCompensations$inboundSchema: z.ZodType<
-  FixedCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  amount: z.string().optional(),
-  job_uuid: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_uuid": "jobUuid",
+export const PayrollEmployeeCompensationsTypeFixedCompensations$inboundSchema:
+  z.ZodType<
+    PayrollEmployeeCompensationsTypeFixedCompensations,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string().optional(),
+    amount: z.string().optional(),
+    job_uuid: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "job_uuid": "jobUuid",
+    });
   });
-});
 
-export function fixedCompensationsFromJSON(
+export function payrollEmployeeCompensationsTypeFixedCompensationsFromJSON(
   jsonString: string,
-): SafeParseResult<FixedCompensations, SDKValidationError> {
+): SafeParseResult<
+  PayrollEmployeeCompensationsTypeFixedCompensations,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => FixedCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FixedCompensations' from JSON`,
+    (x) =>
+      PayrollEmployeeCompensationsTypeFixedCompensations$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PayrollEmployeeCompensationsTypeFixedCompensations' from JSON`,
   );
 }
 
 /** @internal */
-export const HourlyCompensations$inboundSchema: z.ZodType<
-  HourlyCompensations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  hours: z.string().optional(),
-  amount: z.string().optional(),
-  job_uuid: z.string().optional(),
-  compensation_multiplier: z.number().optional(),
-  flsa_status: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_uuid": "jobUuid",
-    "compensation_multiplier": "compensationMultiplier",
-    "flsa_status": "flsaStatus",
+export const PayrollEmployeeCompensationsTypeHourlyCompensations$inboundSchema:
+  z.ZodType<
+    PayrollEmployeeCompensationsTypeHourlyCompensations,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string().optional(),
+    hours: z.string().optional(),
+    amount: z.string().optional(),
+    job_uuid: z.string().optional(),
+    compensation_multiplier: z.number().optional(),
+    flsa_status: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "job_uuid": "jobUuid",
+      "compensation_multiplier": "compensationMultiplier",
+      "flsa_status": "flsaStatus",
+    });
   });
-});
 
-export function hourlyCompensationsFromJSON(
+export function payrollEmployeeCompensationsTypeHourlyCompensationsFromJSON(
   jsonString: string,
-): SafeParseResult<HourlyCompensations, SDKValidationError> {
+): SafeParseResult<
+  PayrollEmployeeCompensationsTypeHourlyCompensations,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => HourlyCompensations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'HourlyCompensations' from JSON`,
+    (x) =>
+      PayrollEmployeeCompensationsTypeHourlyCompensations$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PayrollEmployeeCompensationsTypeHourlyCompensations' from JSON`,
   );
 }
 
@@ -294,6 +314,35 @@ export function payrollEmployeeCompensationsTypePaidTimeOffFromJSON(
 }
 
 /** @internal */
+export const PayrollEmployeeCompensationsTypeReimbursements$inboundSchema:
+  z.ZodType<
+    PayrollEmployeeCompensationsTypeReimbursements,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    amount: z.string(),
+    description: z.nullable(z.string()),
+    uuid: z.nullable(z.string()).optional(),
+    recurring: z.boolean().optional(),
+  });
+
+export function payrollEmployeeCompensationsTypeReimbursementsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PayrollEmployeeCompensationsTypeReimbursements,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PayrollEmployeeCompensationsTypeReimbursements$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PayrollEmployeeCompensationsTypeReimbursements' from JSON`,
+  );
+}
+
+/** @internal */
 export const AmountType$inboundSchema: z.ZodNativeEnum<typeof AmountType> = z
   .nativeEnum(AmountType);
 
@@ -324,28 +373,6 @@ export function deductionsFromJSON(
 }
 
 /** @internal */
-export const Reimbursements$inboundSchema: z.ZodType<
-  Reimbursements,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  amount: z.string(),
-  description: z.nullable(z.string()),
-  uuid: z.nullable(z.string()).optional(),
-  recurring: z.boolean().optional(),
-});
-
-export function reimbursementsFromJSON(
-  jsonString: string,
-): SafeParseResult<Reimbursements, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Reimbursements$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Reimbursements' from JSON`,
-  );
-}
-
-/** @internal */
 export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
   PayrollEmployeeCompensationsType,
   z.ZodTypeDef,
@@ -353,7 +380,6 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
 > = z.object({
   employee_uuid: z.string().optional(),
   excluded: z.boolean().optional(),
-  version: z.string().optional(),
   first_name: z.nullable(z.string()).optional(),
   preferred_first_name: z.nullable(z.string()).optional(),
   last_name: z.nullable(z.string()).optional(),
@@ -364,16 +390,24 @@ export const PayrollEmployeeCompensationsType$inboundSchema: z.ZodType<
     PayrollEmployeeCompensationsTypePaymentMethod$inboundSchema,
   ).optional(),
   memo: z.nullable(z.string()).optional(),
-  fixed_compensations: z.array(z.lazy(() => FixedCompensations$inboundSchema))
-    .optional(),
-  hourly_compensations: z.array(z.lazy(() => HourlyCompensations$inboundSchema))
-    .optional(),
+  fixed_compensations: z.array(
+    z.lazy(() =>
+      PayrollEmployeeCompensationsTypeFixedCompensations$inboundSchema
+    ),
+  ).optional(),
+  hourly_compensations: z.array(
+    z.lazy(() =>
+      PayrollEmployeeCompensationsTypeHourlyCompensations$inboundSchema
+    ),
+  ).optional(),
   paid_time_off: z.array(
     z.lazy(() => PayrollEmployeeCompensationsTypePaidTimeOff$inboundSchema),
   ).optional(),
+  reimbursements: z.array(
+    z.lazy(() => PayrollEmployeeCompensationsTypeReimbursements$inboundSchema),
+  ).optional(),
+  version: z.any().optional(),
   deductions: z.array(z.lazy(() => Deductions$inboundSchema)).optional(),
-  reimbursements: z.array(z.lazy(() => Reimbursements$inboundSchema))
-    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "employee_uuid": "employeeUuid",

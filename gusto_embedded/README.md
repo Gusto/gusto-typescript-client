@@ -587,7 +587,7 @@ run();
 ### [Signatories](docs/sdks/signatories/README.md)
 
 * [create](docs/sdks/signatories/README.md#create) - Create a signatory
-* [list](docs/sdks/signatories/README.md#list) - Get all company signatories
+* [list](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 * [invite](docs/sdks/signatories/README.md#invite) - Invite a signatory
 * [update](docs/sdks/signatories/README.md#update) - Update a signatory
 * [delete](docs/sdks/signatories/README.md#delete) - Delete a signatory
@@ -900,7 +900,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`signatoriesCreate`](docs/sdks/signatories/README.md#create) - Create a signatory
 - [`signatoriesDelete`](docs/sdks/signatories/README.md#delete) - Delete a signatory
 - [`signatoriesInvite`](docs/sdks/signatories/README.md#invite) - Invite a signatory
-- [`signatoriesList`](docs/sdks/signatories/README.md#list) - Get all company signatories
+- [`signatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`signatoriesUpdate`](docs/sdks/signatories/README.md#update) - Update a signatory
 - [`taxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
 - [`taxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
@@ -1206,7 +1206,7 @@ To learn about this feature and how to get started, check
 - [`useSignatoriesCreateMutation`](docs/sdks/signatories/README.md#create) - Create a signatory
 - [`useSignatoriesDeleteMutation`](docs/sdks/signatories/README.md#delete) - Delete a signatory
 - [`useSignatoriesInviteMutation`](docs/sdks/signatories/README.md#invite) - Invite a signatory
-- [`useSignatoriesList`](docs/sdks/signatories/README.md#list) - Get all company signatories
+- [`useSignatoriesList`](docs/sdks/signatories/README.md#list) - Get the signatories for a company
 - [`useSignatoriesUpdateMutation`](docs/sdks/signatories/README.md#update) - Update a signatory
 - [`useTaxRequirementsGet`](docs/sdks/taxrequirements/README.md#get) - Get State Tax Requirements
 - [`useTaxRequirementsGetAll`](docs/sdks/taxrequirements/README.md#getall) - Get All Tax Requirement States
@@ -1417,9 +1417,9 @@ run();
 
 **Inherit from [`GustoEmbeddedError`](./src/models/errors/gustoembeddederror.ts)**:
 * [`UnprocessableEntityErrorObject`](./src/models/errors/unprocessableentityerrorobject.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Applicable to 143 of 280 methods.*
-* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 101 of 280 methods.*
+* [`NotFoundErrorObject`](./src/models/errors/notfounderrorobject.ts): Not Found     The requested resource does not exist. Make sure the provided ID/UUID is valid. Applicable to 116 of 280 methods.*
 * [`UnprocessableEntityErrorObject1`](./src/models/errors/unprocessableentityerrorobject1.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 2 of 280 methods.*
-* [`PostV1CompaniesCompanyIdPeopleBatchesResponseBody`](./src/models/errors/postv1companiescompanyidpeoplebatchesresponsebody.ts): conflict - idempotency key already used. Status code `409`. Applicable to 1 of 280 methods.*
+* [`PeopleBatchConflictError`](./src/models/errors/peoplebatchconflicterror.ts): Error response when a people batch idempotency key conflict occurs. Status code `409`. Applicable to 1 of 280 methods.*
 * [`MigrationBlocker`](./src/models/errors/migrationblocker.ts): Migration blocker that blocks company migration. Status code `422`. Applicable to 1 of 280 methods.*
 * [`PayrollBlockersError`](./src/models/errors/payrollblockerserror.ts): Payroll Blockers Error  For detailed information, see the [Payroll Blockers guide](https://docs.gusto.com/embedded-payroll/docs/payroll-blockers). Status code `422`. Applicable to 1 of 280 methods.*
 * [`CompanySuspensionCreationErrors`](./src/models/errors/companysuspensioncreationerrors.ts): Unprocessable Entity    This may happen when the body of your request contains errors such as `invalid_attribute_value`, or the request fails due to an `invalid_operation`. See the [Errors Categories](https://docs.gusto.com/embedded-payroll/docs/error-categories) guide for more details. Status code `422`. Applicable to 1 of 280 methods.*

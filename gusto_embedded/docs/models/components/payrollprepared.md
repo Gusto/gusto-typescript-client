@@ -1,6 +1,6 @@
 # PayrollPrepared
 
-A prepared payroll
+The response from preparing a payroll for update. Contains refreshed employee compensations, updated payroll dates, and version information needed for subsequent payroll updates.
 
 ## Example Usage
 

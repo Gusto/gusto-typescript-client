@@ -31,15 +31,15 @@ export type GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion =
 
 export type GetV1CompaniesCompanyIdBankAccountsRequest = {
   /**
-   * The UUID of the company
-   */
-  companyId: string;
-  /**
    * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
    */
   xGustoAPIVersion?:
     | GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion
     | undefined;
+  /**
+   * The UUID of the company
+   */
+  companyId: string;
 };
 
 export type GetV1CompaniesCompanyIdBankAccountsResponse = {
@@ -58,8 +58,8 @@ export const GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundS
 
 /** @internal */
 export type GetV1CompaniesCompanyIdBankAccountsRequest$Outbound = {
-  company_id: string;
   "X-Gusto-API-Version": string;
+  company_id: string;
 };
 
 /** @internal */
@@ -69,14 +69,14 @@ export const GetV1CompaniesCompanyIdBankAccountsRequest$outboundSchema:
     z.ZodTypeDef,
     GetV1CompaniesCompanyIdBankAccountsRequest
   > = z.object({
-    companyId: z.string(),
     xGustoAPIVersion:
       GetV1CompaniesCompanyIdBankAccountsHeaderXGustoAPIVersion$outboundSchema
         .default("2025-06-15"),
+    companyId: z.string(),
   }).transform((v) => {
     return remap$(v, {
-      companyId: "company_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      companyId: "company_id",
     });
   });
 

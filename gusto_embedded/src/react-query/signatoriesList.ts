@@ -10,7 +10,6 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { VersionHeader } from "../models/components/versionheader.js";
 import { GustoEmbeddedError } from "../models/errors/gustoembeddederror.js";
 import {
   ConnectionError,
@@ -19,9 +18,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { GetV1CompaniesCompanyUuidSignatoriesRequest } from "../models/operations/getv1companiescompanyuuidsignatories.js";
+import {
+  GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion,
+  GetV1CompaniesCompanyUuidSignatoriesRequest,
+} from "../models/operations/getv1companiescompanyuuidsignatories.js";
 import { useGustoEmbeddedContext } from "./_context.js";
 import {
   QueryHookOptions,
@@ -42,6 +45,7 @@ export {
 };
 
 export type SignatoriesListQueryError =
+  | NotFoundErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
   | ConnectionError
@@ -52,10 +56,13 @@ export type SignatoriesListQueryError =
   | SDKValidationError;
 
 /**
- * Get all company signatories
+ * Get the signatories for a company
  *
  * @remarks
- * Returns company signatories. Currently we only support a single signatory per company.
+ * Returns the signatories for a company. A company has at most one signatory.
+ *
+ * ## Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:read`
  */
@@ -78,10 +85,13 @@ export function useSignatoriesList(
 }
 
 /**
- * Get all company signatories
+ * Get the signatories for a company
  *
  * @remarks
- * Returns company signatories. Currently we only support a single signatory per company.
+ * Returns the signatories for a company. A company has at most one signatory.
+ *
+ * ## Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:read`
  */
@@ -107,7 +117,11 @@ export function setSignatoriesListData(
   client: QueryClient,
   queryKeyBase: [
     companyUuid: string,
-    parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+    parameters: {
+      xGustoAPIVersion?:
+        | GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion
+        | undefined;
+    },
   ],
   data: SignatoriesListQueryData,
 ): SignatoriesListQueryData | undefined {
@@ -121,7 +135,11 @@ export function invalidateSignatoriesList(
   queryKeyBase: TupleToPrefixes<
     [
       companyUuid: string,
-      parameters: { xGustoAPIVersion?: VersionHeader | undefined },
+      parameters: {
+        xGustoAPIVersion?:
+          | GetV1CompaniesCompanyUuidSignatoriesHeaderXGustoAPIVersion
+          | undefined;
+      },
     ]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,

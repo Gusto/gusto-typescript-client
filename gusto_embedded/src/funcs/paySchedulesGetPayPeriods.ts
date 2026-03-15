@@ -18,8 +18,16 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import {
+  UnprocessableEntityErrorObject,
+  UnprocessableEntityErrorObject$inboundSchema,
+} from "../models/errors/unprocessableentityerrorobject.js";
 import {
   GetV1CompaniesCompanyIdPayPeriodsRequest,
   GetV1CompaniesCompanyIdPayPeriodsRequest$outboundSchema,
@@ -33,11 +41,13 @@ import { Result } from "../types/fp.js";
  * Get pay periods for a company
  *
  * @remarks
- * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
+ * Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened.
  *
- * By default, this endpoint returns pay periods starting from 6 months ago to the date today.  Use the `start_date` and `end_date` parameters to change the scope of the response.  End dates can be up to 3 months in the future and there is no limit on start dates.
+ * To begin submitting information for a given payroll, we need to agree on the time period.
  *
- * Starting in version '2023-04-01', the eligible_employees attribute was removed from the response.  The eligible employees for a payroll are determined by the employee_compensations returned from the payrolls#prepare endpoint.
+ * By default, this endpoint returns pay periods starting from 6 months ago to the date today. Use the `start_date` and `end_date` parameters to change the scope of the response. End dates can be up to 3 months in the future and there is no limit on start dates.
+ *
+ * Starting in version 2023-04-01, the `eligible_employees` attribute was removed from the response. The eligible employees for a payroll are determined by the employee_compensations returned from the [PUT /v1/companies/{company_id}/payrolls/{payroll_id}/prepare](ref:put-v1-companies-company_id-payrolls-payroll_id-prepare) endpoint.
  *
  * scope: `payrolls:read`
  */
@@ -48,6 +58,8 @@ export function paySchedulesGetPayPeriods(
 ): APIPromise<
   Result<
     GetV1CompaniesCompanyIdPayPeriodsResponse,
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -73,6 +85,8 @@ async function $do(
   [
     Result<
       GetV1CompaniesCompanyIdPayPeriodsResponse,
+      | NotFoundErrorObject
+      | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
       | ConnectionError
@@ -160,7 +174,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -175,6 +189,8 @@ async function $do(
 
   const [result] = await M.match<
     GetV1CompaniesCompanyIdPayPeriodsResponse,
+    | NotFoundErrorObject
+    | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
     | ConnectionError
@@ -185,9 +201,11 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, GetV1CompaniesCompanyIdPayPeriodsResponse$inboundSchema, {
-      key: "Pay-Period-List",
+      key: "Pay-Periods",
     }),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -35,9 +35,15 @@ export class Signatories extends ClientSDK {
    * Create a signatory
    *
    * @remarks
-   * Create a company signatory with complete information.
-   * A signatory can legally sign forms once the identity verification process is successful.
-   * The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+   * Creates a company signatory with complete information. The company must not already have a signatory.
+   *
+   * A signatory can legally sign forms once the identity verification process is successful. The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+   *
+   * ### Webhooks
+   * - `signatory.created`: Fires when a signatory is successfully created.
+   *
+   * ### Related guides
+   * - [Signatory Events](doc:signatory-events)
    *
    * scope: `signatories:manage`
    */
@@ -53,10 +59,13 @@ export class Signatories extends ClientSDK {
   }
 
   /**
-   * Get all company signatories
+   * Get the signatories for a company
    *
    * @remarks
-   * Returns company signatories. Currently we only support a single signatory per company.
+   * Returns the signatories for a company. A company has at most one signatory.
+   *
+   * ## Related guides
+   * - [Signatory Events](doc:signatory-events)
    *
    * scope: `signatories:read`
    */
@@ -75,7 +84,12 @@ export class Signatories extends ClientSDK {
    * Invite a signatory
    *
    * @remarks
-   * Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+   * Creates a signatory with minimal information. This signatory can be invited to provide more information through the [Update a signatory](ref:put-v1-companies-company_uuid-signatories-signatory_uuid) endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+   *
+   * ## Related guides
+   * - [Signatory Events](doc:signatory-events)
+   *
+   * scope: `signatories:manage`
    */
   async invite(
     request: PostV1CompaniesCompanyUuidSignatoriesInviteRequest,
@@ -92,7 +106,10 @@ export class Signatories extends ClientSDK {
    * Update a signatory
    *
    * @remarks
-   * Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+   * Updates a signatory that has been either invited or created. If the signatory has been created with minimal information through the [Invite a signatory](ref:post-v1-companies-company_uuid-signatories-invite) endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+   *
+   * ## Related guides
+   * - [Signatory Events](doc:signatory-events)
    *
    * scope: `signatories:write`
    */
@@ -111,7 +128,10 @@ export class Signatories extends ClientSDK {
    * Delete a signatory
    *
    * @remarks
-   * Delete a company signatory.
+   * Deletes a company signatory.
+   *
+   * ## Related guides
+   * - [Signatory Events](doc:signatory-events)
    *
    * scope: `signatories:manage`
    */

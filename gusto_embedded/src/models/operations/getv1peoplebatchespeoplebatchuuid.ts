@@ -11,6 +11,10 @@ import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
+import {
+  PeopleBatchResults,
+  PeopleBatchResults$inboundSchema,
+} from "../components/peoplebatchresults.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -38,142 +42,12 @@ export type GetV1PeopleBatchesPeopleBatchUuidRequest = {
     | undefined;
 };
 
-export const GetV1PeopleBatchesPeopleBatchUuidStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  PartialSuccess: "partial_success",
-} as const;
-export type GetV1PeopleBatchesPeopleBatchUuidStatus = ClosedEnum<
-  typeof GetV1PeopleBatchesPeopleBatchUuidStatus
->;
-
-/**
- * The type of person created
- */
-export const Role = {
-  Employee: "employee",
-} as const;
-/**
- * The type of person created
- */
-export type Role = ClosedEnum<typeof Role>;
-
-/**
- * The status of this batch item
- */
-export const GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus = {
-  Success: "success",
-  PartialSuccess: "partial_success",
-  Failed: "failed",
-} as const;
-/**
- * The status of this batch item
- */
-export type GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus = ClosedEnum<
-  typeof GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus
->;
-
-export type GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors = {};
-
-export type GetV1PeopleBatchesPeopleBatchUuidErrors = {
-  /**
-   * The key identifying the error source
-   */
-  errorKey?: string | undefined;
-  /**
-   * The error category
-   */
-  category?: string | undefined;
-  /**
-   * Human-readable error message
-   */
-  message?: string | null | undefined;
-  /**
-   * Nested errors for sub-operations
-   */
-  errors?:
-    | Array<GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors>
-    | null
-    | undefined;
-};
-
-export type Results = {
-  /**
-   * The external ID provided in the batch request
-   */
-  externalId?: string | undefined;
-  /**
-   * The type of person created
-   */
-  role?: Role | undefined;
-  /**
-   * The status of this batch item
-   */
-  status?: GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus | undefined;
-  /**
-   * The index of this item in the original batch request
-   */
-  idx?: number | undefined;
-  /**
-   * The UUID of the created person
-   */
-  uuid?: string | undefined;
-  /**
-   * The UUID of the created employee (if role is employee)
-   */
-  employeeUuid?: string | undefined;
-  /**
-   * Errors encountered while processing this batch item
-   */
-  errors?: Array<GetV1PeopleBatchesPeopleBatchUuidErrors> | null | undefined;
-};
-
-export type Exclusions = {
-  /**
-   * The external ID of the excluded item(s)
-   */
-  externalId?: string | undefined;
-  /**
-   * The reason code for exclusion
-   */
-  reasonCode?: string | undefined;
-  /**
-   * Human-readable explanation for exclusion
-   */
-  message?: string | undefined;
-  /**
-   * Number of items affected by this exclusion
-   */
-  itemCount?: number | undefined;
-};
-
-/**
- * successful
- */
-export type GetV1PeopleBatchesPeopleBatchUuidResponseBody = {
-  uuid?: string | undefined;
-  idempotencyKey?: string | undefined;
-  status?: GetV1PeopleBatchesPeopleBatchUuidStatus | undefined;
-  submittedAt?: Date | undefined;
-  completedAt?: Date | null | undefined;
-  submittedItems?: number | null | undefined;
-  processedItems?: number | undefined;
-  excludedItems?: number | undefined;
-  results?: Array<Results> | undefined;
-  /**
-   * Items excluded from processing due to validation errors
-   */
-  exclusions?: Array<Exclusions> | null | undefined;
-};
-
 export type GetV1PeopleBatchesPeopleBatchUuidResponse = {
   httpMeta: HTTPMetadata;
   /**
    * successful
    */
-  object?: GetV1PeopleBatchesPeopleBatchUuidResponseBody | undefined;
+  peopleBatchResults?: PeopleBatchResults | undefined;
 };
 
 /** @internal */
@@ -217,202 +91,17 @@ export function getV1PeopleBatchesPeopleBatchUuidRequestToJSON(
 }
 
 /** @internal */
-export const GetV1PeopleBatchesPeopleBatchUuidStatus$inboundSchema:
-  z.ZodNativeEnum<typeof GetV1PeopleBatchesPeopleBatchUuidStatus> = z
-    .nativeEnum(GetV1PeopleBatchesPeopleBatchUuidStatus);
-
-/** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
-
-/** @internal */
-export const GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus$inboundSchema:
-  z.ZodNativeEnum<typeof GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus> =
-    z.nativeEnum(GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus);
-
-/** @internal */
-export const GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors$inboundSchema:
-  z.ZodType<
-    GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({});
-
-export function getV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrorsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1PeopleBatchesPeopleBatchUuidErrors$inboundSchema: z.ZodType<
-  GetV1PeopleBatchesPeopleBatchUuidErrors,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  error_key: z.string().optional(),
-  category: z.string().optional(),
-  message: z.nullable(z.string()).optional(),
-  errors: z.nullable(
-    z.array(z.lazy(() =>
-      GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesErrors$inboundSchema
-    )),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "error_key": "errorKey",
-  });
-});
-
-export function getV1PeopleBatchesPeopleBatchUuidErrorsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1PeopleBatchesPeopleBatchUuidErrors,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1PeopleBatchesPeopleBatchUuidErrors$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1PeopleBatchesPeopleBatchUuidErrors' from JSON`,
-  );
-}
-
-/** @internal */
-export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
-  z.object({
-    external_id: z.string().optional(),
-    role: Role$inboundSchema.optional(),
-    status: GetV1PeopleBatchesPeopleBatchUuidPeopleBatchesStatus$inboundSchema
-      .optional(),
-    idx: z.number().int().optional(),
-    uuid: z.string().optional(),
-    employee_uuid: z.string().optional(),
-    errors: z.nullable(
-      z.array(
-        z.lazy(() => GetV1PeopleBatchesPeopleBatchUuidErrors$inboundSchema),
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "external_id": "externalId",
-      "employee_uuid": "employeeUuid",
-    });
-  });
-
-export function resultsFromJSON(
-  jsonString: string,
-): SafeParseResult<Results, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Results$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Results' from JSON`,
-  );
-}
-
-/** @internal */
-export const Exclusions$inboundSchema: z.ZodType<
-  Exclusions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  external_id: z.string().optional(),
-  reason_code: z.string().optional(),
-  message: z.string().optional(),
-  item_count: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "external_id": "externalId",
-    "reason_code": "reasonCode",
-    "item_count": "itemCount",
-  });
-});
-
-export function exclusionsFromJSON(
-  jsonString: string,
-): SafeParseResult<Exclusions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Exclusions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Exclusions' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetV1PeopleBatchesPeopleBatchUuidResponseBody$inboundSchema:
-  z.ZodType<
-    GetV1PeopleBatchesPeopleBatchUuidResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    uuid: z.string().optional(),
-    idempotency_key: z.string().optional(),
-    status: GetV1PeopleBatchesPeopleBatchUuidStatus$inboundSchema.optional(),
-    submitted_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    completed_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    submitted_items: z.nullable(z.number().int()).optional(),
-    processed_items: z.number().int().optional(),
-    excluded_items: z.number().int().optional(),
-    results: z.array(z.lazy(() => Results$inboundSchema)).optional(),
-    exclusions: z.nullable(z.array(z.lazy(() => Exclusions$inboundSchema)))
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "idempotency_key": "idempotencyKey",
-      "submitted_at": "submittedAt",
-      "completed_at": "completedAt",
-      "submitted_items": "submittedItems",
-      "processed_items": "processedItems",
-      "excluded_items": "excludedItems",
-    });
-  });
-
-export function getV1PeopleBatchesPeopleBatchUuidResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetV1PeopleBatchesPeopleBatchUuidResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetV1PeopleBatchesPeopleBatchUuidResponseBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetV1PeopleBatchesPeopleBatchUuidResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetV1PeopleBatchesPeopleBatchUuidResponse$inboundSchema: z.ZodType<
   GetV1PeopleBatchesPeopleBatchUuidResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   HttpMeta: HTTPMetadata$inboundSchema,
-  object: z.lazy(() =>
-    GetV1PeopleBatchesPeopleBatchUuidResponseBody$inboundSchema
-  ).optional(),
+  "People-Batch-Results": PeopleBatchResults$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "HttpMeta": "httpMeta",
+    "People-Batch-Results": "peopleBatchResults",
   });
 });
 

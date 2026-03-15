@@ -9,7 +9,10 @@
 
 ## get
 
-Get payment speed configurations for the company and fast payment limit (1-day is only applicable to partners that opt in).
+Get payment speed configurations for the company: payment speed (1-day, 2-day, or 4-day ACH), fast payment limit, partner-owned disbursement setting, and earned fast ACH blockers when applicable. 1-day is only available to partners that opt in.
+
+### Related guides
+- [Payroll Processing Speeds](doc:2-day-vs-4-day)
 
 scope: `company_payment_configs:read`
 
@@ -106,13 +109,20 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
-Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
+Update payment speed, fast payment limit, and/or partner-owned disbursement for a company.
+
+At least one of `payment_speed`, `fast_payment_limit`, or `partner_owned_disbursement` is required.
+1-day payment speed is only applicable to partners that opt in. 1-day is not allowed when AutoPilot is enabled.
+
+### Related guides
+- [Payroll Processing Speeds](doc:2-day-vs-4-day)
 
 scope: `company_payment_configs:write`
 
@@ -129,9 +139,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.paymentConfigs.update({
     companyUuid: "<id>",
-    requestBody: {
-      fastPaymentLimit: "<value>",
-    },
+    paymentConfigsUpdateRequest: {},
   });
 
   console.log(result);
@@ -157,9 +165,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await paymentConfigsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      fastPaymentLimit: "<value>",
-    },
+    paymentConfigsUpdateRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -201,10 +207,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.paymentConfigs.update({
     companyUuid: "<id>",
-    requestBody: {
-      fastPaymentLimit: "5000",
-      paymentSpeed: "2-day",
-    },
+    paymentConfigsUpdateRequest: {},
   });
 
   console.log(result);
@@ -230,10 +233,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await paymentConfigsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      fastPaymentLimit: "5000",
-      paymentSpeed: "2-day",
-    },
+    paymentConfigsUpdateRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -275,9 +275,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.paymentConfigs.update({
     companyUuid: "<id>",
-    requestBody: {
-      paymentSpeed: "4-day",
-    },
+    paymentConfigsUpdateRequest: {},
   });
 
   console.log(result);
@@ -303,9 +301,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await paymentConfigsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      paymentSpeed: "4-day",
-    },
+    paymentConfigsUpdateRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -347,9 +343,7 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.paymentConfigs.update({
     companyUuid: "<id>",
-    requestBody: {
-      fastPaymentLimit: "<value>",
-    },
+    paymentConfigsUpdateRequest: {},
   });
 
   console.log(result);
@@ -375,9 +369,7 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await paymentConfigsUpdate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      fastPaymentLimit: "<value>",
-    },
+    paymentConfigsUpdateRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -424,5 +416,6 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

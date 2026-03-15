@@ -3,6 +3,7 @@
 Available options:
 - all_compensations: Include all effective dated compensations for each job instead of only the current compensation
 
+
 ## Example Usage
 
 ```typescript

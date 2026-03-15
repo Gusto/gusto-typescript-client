@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type PaymentConfigsUpdateMutationData =
   PutV1CompanyPaymentConfigsResponse;
 
 export type PaymentConfigsUpdateMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -53,7 +55,13 @@ export type PaymentConfigsUpdateMutationError =
  * Update a company's payment configs
  *
  * @remarks
- * Update payment speed and fast payment limit for a company. At least one of `payment_speed` or `fast_payment_limit` parameters is required. 1-day option is only applicable to partners that opt in.
+ * Update payment speed, fast payment limit, and/or partner-owned disbursement for a company.
+ *
+ * At least one of `payment_speed`, `fast_payment_limit`, or `partner_owned_disbursement` is required.
+ * 1-day payment speed is only applicable to partners that opt in. 1-day is not allowed when AutoPilot is enabled.
+ *
+ * ### Related guides
+ * - [Payroll Processing Speeds](doc:2-day-vs-4-day)
  *
  * scope: `company_payment_configs:write`
  */

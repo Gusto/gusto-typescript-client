@@ -5,16 +5,22 @@
 ### Available Operations
 
 * [create](#create) - Create a signatory
-* [list](#list) - Get all company signatories
+* [list](#list) - Get the signatories for a company
 * [invite](#invite) - Invite a signatory
 * [update](#update) - Update a signatory
 * [delete](#delete) - Delete a signatory
 
 ## create
 
-Create a company signatory with complete information.
-A signatory can legally sign forms once the identity verification process is successful.
-The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+Creates a company signatory with complete information. The company must not already have a signatory.
+
+A signatory can legally sign forms once the identity verification process is successful. The signatory should be an officer, owner, general partner or LLC member manager, plan administrator, fiduciary, or an authorized representative who is designated to sign agreements on the company's behalf. An officer is the president, vice president, treasurer, chief accounting officer, etc. There can only be a single primary signatory in a company.
+
+### Webhooks
+- `signatory.created`: Fires when a signatory is successfully created.
+
+### Related guides
+- [Signatory Events](doc:signatory-events)
 
 scope: `signatories:manage`
 
@@ -23,6 +29,7 @@ scope: `signatories:manage`
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-signatories" method="post" path="/v1/companies/{company_uuid}/signatories" example="Basic" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -31,14 +38,14 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.create({
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -61,6 +68,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { signatoriesCreate } from "@gusto/embedded-api/funcs/signatoriesCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -71,14 +79,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -119,6 +127,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-signatories" method="post" path="/v1/companies/{company_uuid}/signatories" example="Example" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -127,14 +136,14 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.create({
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -157,6 +166,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { signatoriesCreate } from "@gusto/embedded-api/funcs/signatoriesCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -167,14 +177,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -215,6 +225,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-signatories" method="post" path="/v1/companies/{company_uuid}/signatories" example="Nested" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -223,14 +234,14 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.create({
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -253,6 +264,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { signatoriesCreate } from "@gusto/embedded-api/funcs/signatoriesCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -263,14 +275,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -311,6 +323,7 @@ import {
 <!-- UsageSnippet language="typescript" operationID="post-v1-company-signatories" method="post" path="/v1/companies/{company_uuid}/signatories" example="Resource" -->
 ```typescript
 import { GustoEmbedded } from "@gusto/embedded-api";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 const gustoEmbedded = new GustoEmbedded({
   companyAccessAuth: process.env["GUSTOEMBEDDED_COMPANY_ACCESS_AUTH"] ?? "",
@@ -319,14 +332,14 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.create({
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -349,6 +362,7 @@ The standalone function version of this method:
 ```typescript
 import { GustoEmbeddedCore } from "@gusto/embedded-api/core.js";
 import { signatoriesCreate } from "@gusto/embedded-api/funcs/signatoriesCreate.js";
+import { RFCDate } from "@gusto/embedded-api/types/rfcdate.js";
 
 // Use `GustoEmbeddedCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -359,14 +373,14 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesCreate(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
-      ssn: "<value>",
+    signatoryCreateRequest: {
       firstName: "Ed",
       lastName: "Reichert",
-      email: "Shanny62@hotmail.com",
       title: "<value>",
       phone: "1-346-396-8392 x69356",
-      birthday: "<value>",
+      birthday: new RFCDate("<value>"),
+      email: "Shanny62@hotmail.com",
+      ssn: "<value>",
       homeAddress: {
         street1: "<value>",
         city: "East Clydefield",
@@ -420,12 +434,16 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## list
 
-Returns company signatories. Currently we only support a single signatory per company.
+Returns the signatories for a company. A company has at most one signatory.
+
+## Related guides
+- [Signatory Events](doc:signatory-events)
 
 scope: `signatories:read`
 
@@ -522,13 +540,19 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## invite
 
-Create a signatory with minimal information. This signatory can be invited to provide more information through the `PUT /v1/companies/{company_uuid}/signatories/{signatory_uuid}` endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+Creates a signatory with minimal information. This signatory can be invited to provide more information through the [Update a signatory](ref:put-v1-companies-company_uuid-signatories-signatory_uuid) endpoint. This will start the identity verification process and allow the signatory to be verified to sign documents.
+
+## Related guides
+- [Signatory Events](doc:signatory-events)
+
+scope: `signatories:manage`
 
 ### Example Usage: Basic
 
@@ -543,7 +567,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.invite({
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Madelyn",
+      lastName: "Littel",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -571,7 +597,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesInvite(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Fatima",
+      lastName: "Ruecker",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -615,7 +643,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.invite({
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Mac",
+      lastName: "Hudson",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -643,7 +673,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesInvite(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Justen",
+      lastName: "Schaefer",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -687,7 +719,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.invite({
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Carli",
+      lastName: "Mitchell",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -715,7 +749,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesInvite(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Toby",
+      lastName: "Christiansen",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -759,7 +795,9 @@ const gustoEmbedded = new GustoEmbedded({
 async function run() {
   const result = await gustoEmbedded.signatories.invite({
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Declan",
+      lastName: "Will",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -787,7 +825,9 @@ const gustoEmbedded = new GustoEmbeddedCore({
 async function run() {
   const res = await signatoriesInvite(gustoEmbedded, {
     companyUuid: "<id>",
-    requestBody: {
+    signatoryInviteRequest: {
+      firstName: "Garett",
+      lastName: "Cummerata",
       email: "Kamron.Nikolaus@yahoo.com",
     },
   });
@@ -836,12 +876,16 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
 | errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## update
 
-Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+Updates a signatory that has been either invited or created. If the signatory has been created with minimal information through the [Invite a signatory](ref:post-v1-companies-company_uuid-signatories-invite) endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+
+## Related guides
+- [Signatory Events](doc:signatory-events)
 
 scope: `signatories:write`
 
@@ -859,7 +903,9 @@ async function run() {
   const result = await gustoEmbedded.signatories.update({
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
 
   console.log(result);
@@ -886,7 +932,9 @@ async function run() {
   const res = await signatoriesUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -929,7 +977,9 @@ async function run() {
   const result = await gustoEmbedded.signatories.update({
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
 
   console.log(result);
@@ -956,7 +1006,9 @@ async function run() {
   const res = await signatoriesUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -999,7 +1051,9 @@ async function run() {
   const result = await gustoEmbedded.signatories.update({
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
 
   console.log(result);
@@ -1026,7 +1080,9 @@ async function run() {
   const res = await signatoriesUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1069,7 +1125,9 @@ async function run() {
   const result = await gustoEmbedded.signatories.update({
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
 
   console.log(result);
@@ -1096,7 +1154,9 @@ async function run() {
   const res = await signatoriesUpdate(gustoEmbedded, {
     companyUuid: "<id>",
     signatoryUuid: "<id>",
-    requestBody: {},
+    signatoryUpdateRequest: {
+      version: "<value>",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1143,12 +1203,16 @@ import {
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
+| errors.NotFoundErrorObject            | 404                                   | application/json                      |
+| errors.UnprocessableEntityErrorObject | 409, 422                              | application/json                      |
 | errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## delete
 
-Delete a company signatory.
+Deletes a company signatory.
+
+## Related guides
+- [Signatory Events](doc:signatory-events)
 
 scope: `signatories:manage`
 
@@ -1236,7 +1300,7 @@ import {
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.UnprocessableEntityErrorObject | 422                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.NotFoundErrorObject | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |

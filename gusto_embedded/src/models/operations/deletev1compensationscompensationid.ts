@@ -5,26 +5,37 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import {
   HTTPMetadata,
   HTTPMetadata$inboundSchema,
 } from "../components/httpmetadata.js";
-import {
-  VersionHeader,
-  VersionHeader$outboundSchema,
-} from "../components/versionheader.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export const DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion = {
+  TwoThousandAndTwentyFiveMinus06Minus15: "2025-06-15",
+} as const;
+/**
+ * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+ */
+export type DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion =
+  ClosedEnum<typeof DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion>;
+
 export type DeleteV1CompensationsCompensationIdRequest = {
+  /**
+   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
+   */
+  xGustoAPIVersion?:
+    | DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion
+    | undefined;
   /**
    * The UUID of the compensation
    */
   compensationId: string;
-  /**
-   * Determines the date-based API version associated with your API call. If none is provided, your application's [minimum API version](https://docs.gusto.com/embedded-payroll/docs/api-versioning#minimum-api-version) is used.
-   */
-  xGustoAPIVersion?: VersionHeader | undefined;
 };
 
 export type DeleteV1CompensationsCompensationIdResponse = {
@@ -32,9 +43,15 @@ export type DeleteV1CompensationsCompensationIdResponse = {
 };
 
 /** @internal */
+export const DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion
+  > = z.nativeEnum(DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion);
+
+/** @internal */
 export type DeleteV1CompensationsCompensationIdRequest$Outbound = {
-  compensation_id: string;
   "X-Gusto-API-Version": string;
+  compensation_id: string;
 };
 
 /** @internal */
@@ -44,12 +61,14 @@ export const DeleteV1CompensationsCompensationIdRequest$outboundSchema:
     z.ZodTypeDef,
     DeleteV1CompensationsCompensationIdRequest
   > = z.object({
+    xGustoAPIVersion:
+      DeleteV1CompensationsCompensationIdHeaderXGustoAPIVersion$outboundSchema
+        .default("2025-06-15"),
     compensationId: z.string(),
-    xGustoAPIVersion: VersionHeader$outboundSchema.default("2025-06-15"),
   }).transform((v) => {
     return remap$(v, {
-      compensationId: "compensation_id",
       xGustoAPIVersion: "X-Gusto-API-Version",
+      compensationId: "compensation_id",
     });
   });
 

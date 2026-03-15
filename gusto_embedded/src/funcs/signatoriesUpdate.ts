@@ -18,6 +18,10 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import {
+  NotFoundErrorObject,
+  NotFoundErrorObject$inboundSchema,
+} from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
@@ -37,7 +41,10 @@ import { Result } from "../types/fp.js";
  * Update a signatory
  *
  * @remarks
- * Update a signatory that has been either invited or created. If the signatory has been created with minimal information through the `POST /v1/companies/{company_uuid}/signatories/invite` endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+ * Updates a signatory that has been either invited or created. If the signatory has been created with minimal information through the [Invite a signatory](ref:post-v1-companies-company_uuid-signatories-invite) endpoint, then the first update must contain all attributes specified in the request body in order to start the identity verification process.
+ *
+ * ## Related guides
+ * - [Signatory Events](doc:signatory-events)
  *
  * scope: `signatories:write`
  */
@@ -48,6 +55,7 @@ export function signatoriesUpdate(
 ): APIPromise<
   Result<
     PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -74,6 +82,7 @@ async function $do(
   [
     Result<
       PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+      | NotFoundErrorObject
       | UnprocessableEntityErrorObject
       | GustoEmbeddedError
       | ResponseValidationError
@@ -98,7 +107,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload["Signatory-Update-Request"], {
+    explode: true,
+  });
 
   const pathParams = {
     company_uuid: encodeSimple("company_uuid", payload.company_uuid, {
@@ -163,7 +174,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["404", "409", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -178,6 +189,7 @@ async function $do(
 
   const [result] = await M.match<
     PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse,
+    | NotFoundErrorObject
     | UnprocessableEntityErrorObject
     | GustoEmbeddedError
     | ResponseValidationError
@@ -193,8 +205,9 @@ async function $do(
       PutV1CompaniesCompanyUuidSignatoriesSignatoryUuidResponse$inboundSchema,
       { key: "Signatory" },
     ),
-    M.jsonErr(422, UnprocessableEntityErrorObject$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.jsonErr(404, NotFoundErrorObject$inboundSchema),
+    M.jsonErr([409, 422], UnprocessableEntityErrorObject$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { NotFoundErrorObject } from "../models/errors/notfounderrorobject.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { UnprocessableEntityErrorObject } from "../models/errors/unprocessableentityerrorobject.js";
@@ -39,6 +40,7 @@ export type JobsAndCompensationsDeleteCompensationMutationData =
   DeleteV1CompensationsCompensationIdResponse;
 
 export type JobsAndCompensationsDeleteCompensationMutationError =
+  | NotFoundErrorObject
   | UnprocessableEntityErrorObject
   | GustoEmbeddedError
   | ResponseValidationError
@@ -55,7 +57,10 @@ export type JobsAndCompensationsDeleteCompensationMutationError =
  * @remarks
  * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`. This endpoint deletes a compensation for a job that hasn't been processed on payroll.
  *
- * scope: `jobs:write`
+ * ### Webhooks
+ * - `employee_job_compensation.destroyed`: Fires when a compensation is successfully deleted
+ *
+ * scope: `compensations:write`
  */
 export function useJobsAndCompensationsDeleteCompensationMutation(
   options?: MutationHookOptions<
